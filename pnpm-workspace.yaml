@@ -1,0 +1,8 @@
+allowBuilds:
+  '@logicflow/core': true
+  '@parcel/watcher': true
+  '@vue-office/docx': true
+  '@vue-office/excel': true
+  '@vue-office/pdf': true
+  esbuild: true
+  vue-demi: true
