@@ -1,0 +1,73 @@
+/* Xly 文件上传 Dark 模式 */
+html.dark {
+  // ===================== xly-upload =====================
+  .xly-upload__item {
+    background: var(--el-bg-color);
+    border-color: var(--el-border-color);
+
+    &:hover {
+      border-color: var(--el-border-color-light);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    &--error {
+      background: rgba(245, 108, 108, 0.05);
+    }
+  }
+
+  .xly-upload__file-icon {
+    background: var(--el-fill-color-lighter);
+  }
+
+  .xly-upload__file-name {
+    color: var(--el-text-color-primary);
+  }
+
+  .xly-upload__file-size {
+    color: var(--el-text-color-secondary);
+  }
+
+  .xly-upload__progress {
+    background: linear-gradient(
+      to top,
+      rgba(30, 30, 30, 0.98),
+      rgba(30, 30, 30, 0.95)
+    );
+  }
+
+  .xly-upload__progress-bar {
+    background: var(--el-fill-color);
+  }
+
+  .xly-upload__trigger {
+    background: var(--el-fill-color-lighter);
+    border-color: var(--el-border-color);
+
+    &:hover,
+    &.is-dragover {
+      background: rgba(79, 110, 247, 0.1);
+      border-color: var(--el-color-primary);
+    }
+  }
+
+  .xly-upload__trigger-icon {
+    background: var(--el-bg-color);
+    box-shadow: 0 2px 8px rgba(79, 110, 247, 0.25);
+  }
+
+  .xly-upload__trigger-text .primary {
+    color: var(--el-text-color-primary);
+  }
+
+  .xly-upload__trigger-text .secondary {
+    color: var(--el-text-color-secondary);
+  }
+
+  .xly-upload__tip {
+    color: var(--el-text-color-secondary);
+  }
+
+  .xly-upload__badge {
+    box-shadow: 0 2px 4px rgba(52, 199, 89, 0.4);
+  }
+}

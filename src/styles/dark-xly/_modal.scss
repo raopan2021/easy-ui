@@ -1,0 +1,39 @@
+/* Xly 弹窗 Dark 模式 */
+html.dark {
+  // ===================== xly-modal =====================
+  .xly-modal-mask {
+    background-color: rgba(0, 0, 0, 0.65);
+  }
+
+  .xly-modal {
+    background-color: var(--el-bg-color-overlay);
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.4),
+      0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .xly-modal__title {
+    color: var(--el-text-color-primary);
+  }
+
+  .xly-modal__close {
+    color: var(--el-text-color-secondary);
+
+    &:hover {
+      background-color: var(--el-fill-color-light);
+      color: var(--el-text-color-regular);
+    }
+
+    &:active {
+      background-color: var(--el-fill-color);
+    }
+  }
+
+  .xly-modal__body {
+    color: var(--el-text-color-regular);
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--el-border-color-lighter);
+    }
+  }
+}

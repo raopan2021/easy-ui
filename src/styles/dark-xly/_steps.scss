@@ -1,0 +1,66 @@
+/* Xly 步骤条 Dark 模式 */
+html.dark {
+  // ===================== xly-steps =====================
+  .xly-step {
+    --step-wait: var(--el-text-color-placeholder);
+    --step-wait-bg: var(--el-fill-color-light);
+    --step-text: var(--el-text-color-primary);
+    --step-text-secondary: var(--el-text-color-secondary);
+    --step-desc: var(--el-text-color-placeholder);
+  }
+
+  .xly-step__icon {
+    background: var(--el-bg-color);
+    border-color: var(--el-border-color-darker);
+    color: var(--el-text-color-placeholder);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  }
+
+  .xly-step__icon.is-process {
+    border-color: var(--step-primary, #4f6ef7);
+    background: var(--step-primary, #4f6ef7);
+    color: #fff;
+  }
+
+  .xly-step__icon.is-success,
+  .xly-step__icon.is-finish {
+    border-color: var(--step-success, #10b981);
+    background: var(--step-success, #10b981);
+    color: #fff;
+  }
+
+  .xly-step__icon.is-error {
+    border-color: var(--step-error, #ef4444);
+    background: var(--step-error, #ef4444);
+    color: #fff;
+  }
+
+  .xly-step__title {
+    color: var(--step-text-secondary);
+  }
+
+  .xly-step__title.is-process {
+    color: var(--step-primary, #4f6ef7);
+  }
+
+  .xly-step__title.is-success,
+  .xly-step__title.is-finish {
+    color: var(--step-text);
+  }
+
+  .xly-step__title.is-error {
+    color: var(--step-error, #ef4444);
+  }
+
+  .xly-step__description {
+    color: var(--step-desc);
+  }
+
+  .xly-step__line {
+    background: var(--step-wait-bg);
+  }
+
+  .xly-step:hover .xly-step__title {
+    color: var(--step-text);
+  }
+}

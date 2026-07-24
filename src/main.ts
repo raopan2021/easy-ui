@@ -1,4 +1,7 @@
 import '../src/styles/theme.css'
+// 导入公共样式
+import "../src/style/index.scss";
+
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
