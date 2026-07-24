@@ -62,7 +62,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, useSlots, VNode, Fragment, Comment, Text } from 'vue'
+import { computed, useSlots, Fragment, Comment, Text } from 'vue'
+import type { VNode } from 'vue'
 import XlyIcon from '@/components/xly-icon/index.vue'
 
 const props = withDefaults(defineProps<{

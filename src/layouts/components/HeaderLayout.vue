@@ -29,6 +29,11 @@
         <span v-if="messageUnreadCount > 0" class="header__badge">{{ messageUnreadCount > 99 ? '99+' : messageUnreadCount }}</span>
       </button>
 
+      <!-- 主题切换：跟随系统 / 浅色 / 深色 -->
+      <button class="header__action-btn" :title="themeTitle" @click="themeStore.toggleMode()">
+        <XlyIcon :name="themeIcon" :size="18" />
+      </button>
+
       <!-- 布局切换 -->
       <button class="header__action-btn" title="切换布局" @click="showLayoutDrawer = true">
         <XlyIcon name="el:Operation" :size="18" />
@@ -100,10 +105,24 @@ import MenuLayoutDrawer from './MenuLayoutDrawer.vue'
 import HorizontalMenu from './HorizontalMenu.vue'
 import { useUserStore } from '@/stores/user'
 import { useMenuLayoutStore } from '@/stores/menuLayout'
+import { useThemeStore } from '@/stores/theme'
 
 const router = useRouter()
 const userStore = useUserStore()
 const menuLayoutStore = useMenuLayoutStore()
+const themeStore = useThemeStore()
+
+// 主题按钮图标与提示：auto=显示器 / light=太阳 / dark=月亮
+const themeIcon = computed(() => {
+  if (themeStore.mode === 'light') return 'el:Sunny'
+  if (themeStore.mode === 'dark') return 'el:Moon'
+  return 'el:Monitor'
+})
+const themeTitle = computed(() => {
+  if (themeStore.mode === 'light') return '当前：浅色（点击切换深色）'
+  if (themeStore.mode === 'dark') return '当前：深色（点击切换跟随系统）'
+  return '当前：跟随系统（点击切换浅色）'
+})
 const showUserMenu = ref(false)
 const showMessageDrawer = ref(false)
 const showLayoutDrawer = ref(false)

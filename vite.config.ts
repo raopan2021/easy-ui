@@ -8,7 +8,7 @@ import Components from 'unplugin-vue-components/vite'
 import viteCompression from 'vite-plugin-compression'
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [
     vue(),
     // 自动按需导入 API
@@ -42,30 +42,85 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  css: {
+    // 使用 Lightning CSS 替代 PostCSS 作为 CSS 转换引擎，提升热更新与打包阶段的 CSS 处理速度
+    transformer: 'lightningcss',
+    lightningcss: {
+      // 与 build.target: "esnext" 保持一致，仅对现代浏览器未支持的语法做降级
+      targets: {
+        chrome: 111,
+        edge: 111,
+        firefox: 128,
+        safari: 16,
+      },
+    },
+  },
   server: {
     port: 3000,
-    open: true
+    open: true,
+    // 预热文件以提前转换和缓存结果，降低启动期间的初始页面加载时长
+    warmup: {
+      clientFiles: ['./index.html', './src/{views,components,layouts}/*'],
+    },
+  },
+  optimizeDeps: {
+    // Vite 8: 排除 unplugin-auto-import 虚拟模块，避免 Rolldown 预构建时丢失注入
+    exclude: ['unimport'],
+  },
+  esbuild: {
+    // 生产构建移除 console 与 debugger
+    drop: mode === 'production' ? ['console', 'debugger'] : [],
   },
   build: {
+    // https://vite.dev/guide/build.html#browser-compatibility
+    target: 'esnext',
+    // lightningcss 作为 transformer 时，其 minify 对裸声明块存在误判，
+    // 故 minify 改用 esbuild（同样高速，且对裸声明兼容）
+    cssMinify: 'esbuild',
+    // 生产环境 JS 压缩：使用 esbuild（稳定且高速），并移除 console/debugger
+    minify: 'esbuild',
     outDir: 'dist',
-    sourcemap: true,
-    // 代码分割优化
-    rollupOptions: {
+    // 生产环境关闭 sourcemap：减小产物体积并显著降低构建内存占用（与参考项目一致）
+    sourcemap: false,
+    reportCompressedSize: false, // 关闭 gzip 体积计算，加快构建
+    // Vite 8 默认使用 Rolldown 打包器，rollupOptions 迁移为 rolldownOptions
+    rolldownOptions: {
+      // 屏蔽 @vueuse/core 的纯标注注释警告（第三方包，不影响构建）
+      onwarn(warning, defaultHandler) {
+        if (/@vueuse\/core/.test(warning.id || '') && warning.message.includes('PURE')) return
+        defaultHandler(warning)
+      },
+      // 静态资源分类打包
       output: {
-        // 分离vendor chunks
-        manualChunks: {
-          // 第三方库分离
-          'vue-vendor': ['vue', 'vue-router'],
-          'element-plus': ['element-plus', '@element-plus/icons-vue'],
-          'utils-vendor': ['@vueuse/core', 'axios'],
+        // 代码分割产生的异步 chunk 文件命名（如路由懒加载拆出的 JS）
+        chunkFileNames(chunkInfo) {
+          // manualChunks 分离的第三方库不加 hash，其余加 hash
+          const manualNames = ['vue-vendor', 'element-plus']
+          return manualNames.includes(chunkInfo.name)
+            ? 'static/js/[name].js'
+            : 'static/js/[name]-[hash].js'
         },
-        // 优化chunk文件名
-        chunkFileNames: 'chunks/[name]-[hash].js',
-        entryFileNames: 'entries/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]',
+        // 入口文件打包后的命名
+        entryFileNames: 'static/js/[name]-[hash].js',
+        // 静态资源（CSS、图片、字体等）的命名
+        assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
+        // 分离第三方库，充分利用浏览器缓存
+        // Vite 8: manualChunks 对象形式已移除，改用函数形式
+        manualChunks(id: string) {
+          if (id.includes('node_modules')) {
+            // vue 运行时核心：每个页面都依赖，体积稳定，单独分包利于浏览器长期缓存
+            if (/[/\\]node_modules[/\\](vue|vue-router|pinia|@vue)[/\\]/.test(id)) {
+              return 'vue-vendor'
+            }
+            // element-plus 及其图标库
+            if (/[/\\]node_modules[/\\](element-plus|@element-plus)[/\\]/.test(id)) {
+              return 'element-plus'
+            }
+          }
+        },
       },
     },
     // 调整chunk大小警告限制
-    chunkSizeWarningLimit: 1000,
+    chunkSizeWarningLimit: 1500,
   },
-})
+}))

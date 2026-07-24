@@ -31,6 +31,22 @@
   <!-- 图标 -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="shortcut icon" href="/favicon.ico">
+
+  <!-- 主题防闪白：在首屏渲染前根据持久化偏好/系统偏好预设 html.dark，避免 FOUC -->
+  <script>
+    (function () {
+      try {
+        var KEY = 'ease-ui-theme-mode';
+        var mode = localStorage.getItem(KEY) || 'auto';
+        var systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var isDark = mode === 'dark' || (mode === 'auto' && systemDark);
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+          document.documentElement.style.colorScheme = 'dark';
+        }
+      } catch (e) {}
+    })();
+  </script>
   <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
   <script>LA.init({id:"3PTus2j8ARauVeX9",ck:"3PTus2j8ARauVeX9",autoTrack:true,hashMode:true})</script>
   <script>LA.init({id:"3PZZvyfjAYKik1UU",ck:"3PZZvyfjAYKik1UU",autoTrack:true,hashMode:true,screenRecord:true})</script>

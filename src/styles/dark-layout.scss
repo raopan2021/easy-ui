@@ -1,0 +1,116 @@
+/**
+ * 本项目实际布局的暗色适配
+ *
+ * 说明：布局组件（HeaderLayout / VerticalSidebar / FixedSidebar / layouts/index 等）
+ * 大量使用了硬编码的浅色 SCSS 变量（编译期常量），无法被 html.dark 运行时覆盖。
+ * 这里针对这些真实类名，在暗色模式下统一覆盖背景、文字、边框等，使布局跟随主题切换。
+ */
+
+html.dark {
+  /* ============ 顶部 Header ============ */
+  .header {
+    background-color: #1d1e1f;
+
+    .header__title {
+      color: rgb(255 255 255 / 90%);
+    }
+
+    .header__username,
+    .header__user-dropdown-name {
+      color: rgb(255 255 255 / 85%);
+    }
+
+    .header__action-btn {
+      color: rgb(255 255 255 / 65%);
+
+      &:hover {
+        background: rgb(255 255 255 / 8%);
+        color: rgb(255 255 255 / 90%);
+      }
+    }
+
+    .header__user:hover {
+      background: rgb(255 255 255 / 8%);
+    }
+  }
+
+  /* 用户下拉菜单 */
+  .header__user-dropdown {
+    background: #1d1e1f;
+    box-shadow: 0 8px 30px rgb(0 0 0 / 45%), 0 2px 8px rgb(0 0 0 / 35%);
+  }
+
+  .header__user-dropdown-email {
+    color: rgb(255 255 255 / 45%);
+  }
+
+  .header__user-dropdown-divider {
+    background: rgb(255 255 255 / 10%);
+  }
+
+  .header__user-dropdown-item {
+    color: rgb(255 255 255 / 70%);
+
+    &:hover {
+      background: rgb(255 255 255 / 8%);
+      color: rgb(255 255 255 / 90%);
+    }
+  }
+
+  /* ============ 整体布局容器 ============ */
+  .layout-body {
+    background-color: #020409;
+  }
+
+  .layout-main {
+    background-color: #141414;
+  }
+
+  /* ============ 侧边栏 ============ */
+  .vertical-sidebar,
+  .horizontal-menu {
+    background: #1d1e1f;
+  }
+
+  .sidebar-menu-left,
+  .sidebar-menu-right {
+    background-color: #1d1e1f;
+  }
+
+  .sidebar-menu-item {
+    color: rgb(255 255 255 / 70%);
+
+    &:hover {
+      background-color: rgb(255 255 255 / 8%) !important;
+    }
+
+    &.is-active {
+      color: var(--el-color-primary);
+    }
+  }
+
+  .sidebar-menu-item-text {
+    color: inherit;
+  }
+
+  /* 水平菜单弹出面板 */
+  .horizontal-menu {
+    .horizontal-submenu,
+    .horizontal-submenu-panel {
+      background: #1d1e1f;
+    }
+  }
+
+  /* ============ 布局切换抽屉里的选项卡 ============ */
+  .layout-item {
+    background: #262727;
+
+    &:hover {
+      background: #303030;
+    }
+
+    &.is-active {
+      background: #2a2f45;
+    }
+  }
+}

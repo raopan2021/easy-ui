@@ -1,6 +1,6 @@
-import '../src/styles/theme.css'
+import '@/styles/theme.css'
 // 导入公共样式
-import "../src/style/index.scss";
+import '@/styles/index.scss'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -10,7 +10,6 @@ import { createPinia } from 'pinia'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
-import 'element-plus/dist/index.css'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 
 // xly 全局服务安装
@@ -18,6 +17,8 @@ import { setupXly } from '@/utils/xly'
 
 // XlyWatermark 全局指令注册
 import { setupWatermarkDirective } from '@/components/xly-watermark/directive'
+
+import { useThemeStore } from '@/stores/theme'
 
 import App from './App.vue'
 import router from './router'
@@ -32,6 +33,9 @@ app.use(ElementPlus, { locale: zhCn });
 
 app.use(createPinia())
 app.use(router)
+
+// 初始化主题（订阅系统偏好并同步 <html> 的 dark class）
+useThemeStore()
 
 // 全局安装 xly 服务（消息提示、加载等）
 setupXly(app)
