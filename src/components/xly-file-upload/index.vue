@@ -8,28 +8,15 @@
       <!-- ----------------------------------------
            上传按钮（放在最上面）
       ---------------------------------------- -->
-      <div
-        v-if="!disabled && !isMaxReached"
-        class="xly-upload__trigger"
-        :class="{ 'is-dragover': isDragover }"
-        @click="handleTriggerClick"
-        @dragover.prevent="isDragover = true"
-        @dragleave.prevent="isDragover = false"
-        @drop.prevent="handleDrop"
-      >
+      <div v-if="!disabled && !isMaxReached" class="xly-upload__trigger" :class="{ 'is-dragover': isDragover }"
+        @click="handleTriggerClick" @dragover.prevent="isDragover = true" @dragleave.prevent="isDragover = false"
+        @drop.prevent="handleDrop">
         <!-- 自定义触发区域插槽 -->
         <slot name="trigger">
           <div class="xly-upload__trigger-inner">
             <!-- 图标 -->
             <div class="xly-upload__trigger-icon">
-              <svg
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="17 8 12 3 7 8" />
                 <line x1="12" y1="3" x2="12" y2="15" />
@@ -48,12 +35,9 @@
            已上传文件列表
       ---------------------------------------- -->
       <TransitionGroup name="xly-upload-fade">
-        <div
-          v-for="(item, index) in fileList"
-          :key="item.id"
-          class="xly-upload__item"
-          :class="[`xly-upload__item--${item.status}`]"
-        >
+        <div v-for="(item, index) in fileList" :key="item.id" class="xly-upload__item"
+          :class="[`xly-upload__item--${item.status}`, { 'xly-upload__item--just-uploaded': item.justUploaded }]"
+          @animationend="item.justUploaded = false">
           <!-- 文件图标 -->
           <div class="xly-upload__file-icon">
             <component :is="getFileIcon(item)" />
@@ -62,9 +46,9 @@
           <!-- 文件信息 -->
           <div class="xly-upload__file-info">
             <span class="xly-upload__file-name" :title="item.name">{{ item.name }}</span>
-            <span v-if="item.size" class="xly-upload__file-size">{{
-              formatFileSize(item.size)
-            }}</span>
+            <span v-if="item.size" class="xly-upload__file-size">
+              {{ formatFileSize(item.size) }}
+            </span>
           </div>
 
           <!-- 上传进度 -->
@@ -76,41 +60,27 @@
           </div>
 
           <!-- 操作按钮 -->
-          <div v-if="!disabled && item.status !== 'uploading'" class="xly-upload__actions">
+          <div v-if="item.status !== 'uploading'" class="xly-upload__actions">
+            <!-- 预览 -->
+            <button v-if="item.url && downloadable" class="xly-upload__btn xly-upload__btn--preview" title="预览"
+              @click.stop="handlePreview(item)">
+              <el-icon>
+                <View />
+              </el-icon>
+            </button>
             <!-- 下载 -->
-            <button
-              v-if="item.url && downloadable"
-              class="xly-upload__btn xly-upload__btn--download"
-              title="下载"
-              @click.stop="handleDownload(item)"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                width="14"
-                height="14"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
+            <button v-if="item.url && downloadable" class="xly-upload__btn xly-upload__btn--download" title="下载"
+              @click.stop="handleDownload(item)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="7 10 12 15 17 10" />
                 <line x1="12" y1="15" x2="12" y2="3" />
               </svg>
             </button>
             <!-- 删除 -->
-            <button
-              class="xly-upload__btn xly-upload__btn--delete"
-              title="删除"
-              @click.stop="handleRemove(index)"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                width="14"
-                height="14"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
+            <button v-if="!disabled" class="xly-upload__btn xly-upload__btn--delete" title="删除"
+              @click.stop="handleRemove(index)">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="3 6 5 6 21 6" />
                 <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
                 <path d="M10 11v6M14 11v6" />
@@ -120,29 +90,15 @@
           </div>
 
           <!-- 成功状态角标 -->
-          <div v-if="item.status === 'success'" class="xly-upload__badge">
-            <svg
-              viewBox="0 0 12 12"
-              width="10"
-              height="10"
-              fill="none"
-              stroke="#fff"
-              stroke-width="2"
-            >
+          <div v-if="!disabled && item.status === 'success'" class="xly-upload__badge">
+            <svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke="#fff" stroke-width="2">
               <polyline points="2 6 5 9 10 3" />
             </svg>
           </div>
 
           <!-- 错误标签 -->
-          <div v-if="item.status === 'error'" class="xly-upload__error-tag">
-            <svg
-              viewBox="0 0 24 24"
-              width="12"
-              height="12"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
+          <div v-if="!disabled && item.status === 'error'" class="xly-upload__error-tag">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="10" />
               <line x1="15" y1="9" x2="9" y2="15" />
               <line x1="9" y1="9" x2="15" y2="15" />
@@ -161,60 +117,32 @@
     </div>
 
     <!-- 隐藏的文件输入框 -->
-    <input
-      ref="inputRef"
-      type="file"
-      :accept="accept"
-      :multiple="multiple && (limit === undefined || limit > 1)"
-      class="xly-upload__input"
-      @change="handleInputChange"
-    />
+    <input ref="inputRef" type="file" :accept="accept" :multiple="multiple && (limit === undefined || limit > 1)"
+      class="xly-upload__input" @change="handleInputChange" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, h, ref, watch } from 'vue'
+import { ElMessage } from "element-plus";
+import { View } from '@element-plus/icons-vue'
+import { uploadFile as uploadFileApi, deleteFile as deleteFileApi } from '@/api/file'
+import { deleteArchiveAndFile } from '@/api/system/archive'
+import { previewFile, downloadFile } from '@/utils/file'
 
 // ============================================================
 // 🔧 上传配置区（修改这里自定义上传逻辑）
 // ============================================================
 
 /**
- * 上传模式：
- * - local：本地上传（base64，纯前端预览，无需后端接口）
- * - network：网络上传（需要后端接口）
+ * 如何从响应中提取文件 URL？
+ * 支持点号分隔路径（自动兼容）：
+ * - 'url'           → response: { url: '...' }
+ * - 'data'          → response: { data: '...' }
+ * - 'data.url'      → response: { data: { url: '...' } }
+ * - 'data.filePath' → response: { data: { filePath: '...' } }
  */
-const UPLOAD_MODE: 'local' | 'network' = 'local'
-
-/**
- * 网络上传配置（mode = 'network' 时生效）
- * ⚠️ 修改这里的配置来自定义你的上传接口
- * 此配置仅为参考示例，请根据实际业务需求进行修改
- */
-const NETWORK_CONFIG = {
-  /** 上传接口地址 */
-  url: '/api/upload/file',
-  /** 请求方法 */
-  method: 'POST' as const,
-  /** 上传字段名（FormData 的 key） */
-  fieldName: 'file',
-  /** 请求头 */
-  headers: {
-    // 'Authorization': 'Bearer xxx',
-  },
-  /** 额外表单参数 */
-  data: {
-    // 'scene': 'document',
-  },
-  /**
-   * 如何从响应中提取文件 URL？
-   * 支持三种路径写法（自动兼容）：
-   * - 'url'          → response: { url: '...' }
-   * - 'data'         → response: { data: '...' }
-   * - 'data.url'     → response: { data: { url: '...' } }
-   */
-  responseUrlPath: 'data',
-}
+const RESPONSE_URL_PATH = 'data.filePath'
 
 // ============================================================
 // 类型定义
@@ -243,7 +171,7 @@ export interface UploadFileItem {
   name: string
   /** 文件地址 */
   url: string
-  /** 文件大小（KB） */
+  /** 文件大小（字节） */
   size?: number
   /** 上传状态 */
   status?: UploadStatus
@@ -251,6 +179,8 @@ export interface UploadFileItem {
   percent?: number
   /** 原始文件对象 */
   raw?: File
+  /** 刚上传成功（触发闪烁动画，动画结束后自动清除） */
+  justUploaded?: boolean
 }
 
 // ============================================================
@@ -286,6 +216,9 @@ interface Props {
   maxSize?: number
   /** 单文件最小尺寸（KB），默认 0 */
   minSize?: number
+
+  /** 自动使用接口上传 */
+  autoNetworkUpload?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -298,6 +231,7 @@ const props = withDefaults(defineProps<Props>(), {
   triggerText: '',
   listType: 'horizontal',
   minSize: 0,
+  autoNetworkUpload: true,
 })
 
 // ============================================================
@@ -487,16 +421,16 @@ function getFileIcon(item: UploadFileItem) {
 // ============================================================
 
 /**
- * 格式化文件大小（KB 为单位）
- * @param sizeKB - 文件大小（KB）
+ * 格式化文件大小（字节为单位）
+ * @param bytes - 文件大小（字节）
  * @returns 格式化后的字符串，如 "2.5 MB"
  */
-function formatFileSize(sizeKB: number | undefined): string {
-  if (sizeKB === undefined || sizeKB === 0) return '0 B'
+function formatFileSize(bytes: number | undefined): string {
+  if (bytes === undefined || bytes === 0) return '0 B'
   const k = 1024
-  if (sizeKB < k) return `${sizeKB} KB`
-  const i = Math.floor(Math.log(sizeKB) / Math.log(k))
-  return `${(sizeKB / Math.pow(k, i)).toFixed(i > 1 ? 1 : 0)} ${['KB', 'MB', 'GB', 'TB'][i]}`
+  if (bytes < k) return `${bytes} B`
+  const i = Math.floor(Math.log(bytes) / Math.log(k))
+  return `${(bytes / Math.pow(k, i)).toFixed(i > 1 ? 1 : 0)} ${['B', 'KB', 'MB', 'GB', 'TB'][i]}`
 }
 
 // ============================================================
@@ -522,11 +456,11 @@ function validateFile(file: File): string | null {
   // 校验最小尺寸（转换为 KB）
   const sizeKB = file.size / 1024
   if (props.minSize && sizeKB < props.minSize) {
-    return `文件不能小于 ${formatFileSize(props.minSize)}`
+    return `文件不能小于 ${formatFileSize(props.minSize * 1024)}`
   }
   // 校验最大尺寸（转换为 KB）
   if (props.maxSize && sizeKB > props.maxSize) {
-    return `文件不能超过 ${formatFileSize(props.maxSize)}`
+    return `文件不能超过 ${formatFileSize(props.maxSize * 1024)}`
   }
   return null
 }
@@ -536,6 +470,16 @@ function validateFile(file: File): string | null {
 // ============================================================
 
 /**
+ * 判断文件项是否为有效项
+ * - 自动上传模式：必须有 url（已上传到服务器）
+ * - 非自动上传模式：必须有 id（仅本地暂存，等待父组件处理 raw 文件）
+ * @param f - 文件项
+ */
+function isValidItem(f: UploadFileItem): boolean {
+  return props.autoNetworkUpload ? Boolean(f.url) : Boolean(f.id)
+}
+
+/**
  * 将外部 modelValue 解析为对象数组
  * @param val - 外部传入的值
  * @returns 解析后的对象数组
@@ -543,11 +487,11 @@ function validateFile(file: File): string | null {
 function parseModelValue(val: UploadFileItem[] | string | undefined): UploadFileItem[] {
   if (!val) return []
   // 数组直接返回
-  if (Array.isArray(val)) return val.filter((f) => f.url)
+  if (Array.isArray(val)) return val.filter(isValidItem)
   // JSON 字符串解析
   try {
     const parsed = JSON.parse(val)
-    return Array.isArray(parsed) ? parsed.filter((f: UploadFileItem) => f.url) : []
+    return Array.isArray(parsed) ? parsed.filter(isValidItem) : []
   } catch {
     return []
   }
@@ -559,7 +503,7 @@ function parseModelValue(val: UploadFileItem[] | string | undefined): UploadFile
  * @returns 序列化后的值
  */
 function serializeValue(items: UploadFileItem[]): UploadFileItem[] | string {
-  const successItems = items.filter((f) => f.status !== 'error' && f.url)
+  const successItems = items.filter((f) => f.status !== 'error' && isValidItem(f))
   if (props.valueMode === 'string') {
     return JSON.stringify(successItems)
   }
@@ -571,12 +515,11 @@ watch(
   () => props.modelValue,
   (val) => {
     const items = parseModelValue(val)
-    // 比较 ID 是否相同，避免不必要的更新
+    // 比较 ID 列表（保持原始顺序），避免不必要的更新
     const currentIds = fileList.value
-      .filter((f) => f.url && f.status === 'success')
+      .filter((f) => f.status === 'success' && isValidItem(f))
       .map((f) => f.id)
-      .sort()
-    const newIds = items.map((f) => f.id).sort()
+    const newIds = items.map((f) => f.id)
     const isSame =
       currentIds.length === newIds.length && currentIds.every((id, i) => id === newIds[i])
     if (isSame) return
@@ -593,7 +536,9 @@ watch(
  * 向外 emit 更新
  */
 function emitUpdate() {
-  const successItems = fileList.value.filter((f) => f.status === 'success' && f.url)
+  const successItems = fileList.value.filter(
+    (f) => f.status === 'success' && isValidItem(f),
+  )
   emit('update:modelValue', serializeValue(successItems))
   emit('change', [...fileList.value])
 }
@@ -662,6 +607,7 @@ async function uploadFile(file: File) {
   // 内置校验
   const validateError = validateFile(file)
   if (validateError) {
+    ElMessage.warning(validateError);
     emit('validate-error', validateError, file)
     return
   }
@@ -672,7 +618,7 @@ async function uploadFile(file: File) {
     id,
     name: file.name,
     url: '',
-    size: Math.round(file.size / 1024), // 转换为 KB
+    size: file.size, // 字节
     status: 'uploading',
     percent: 0,
     raw: file,
@@ -681,12 +627,17 @@ async function uploadFile(file: File) {
 
   const item = fileList.value.find((f) => f.id === id)!
 
-  // 根据 mode 选择上传方式
-  if (UPLOAD_MODE === 'network') {
-    networkUpload({ file, item })
-  } else {
-    defaultLocalUpload({ file, item })
+  // 非自动上传模式：仅本地暂存，直接标记为成功，保留 raw 供父组件处理
+  if (!props.autoNetworkUpload) {
+    item.status = 'success'
+    item.percent = 100
+    ElMessage.success(`${item.name} 添加成功`)
+    emit('success', { ...item })
+    emitUpdate()
+    return
   }
+
+  networkUpload({ file, item })
 }
 
 /**
@@ -695,91 +646,46 @@ async function uploadFile(file: File) {
  */
 async function networkUpload(opts: { file: File; item: UploadFileItem }) {
   const { file, item } = opts
-  const { url, method, fieldName, headers, data, responseUrlPath } = NETWORK_CONFIG
-
-  // 构建 FormData
-  const formData = new FormData()
-  formData.append(fieldName, file)
-  Object.entries(data).forEach(([key, value]) => {
-    formData.append(key, value)
-  })
+  const responseUrlPath = RESPONSE_URL_PATH
 
   try {
-    const res = await fetch(url, {
-      method,
-      headers,
-      body: formData,
+    const response = await uploadFileApi(file, (percent) => {
+      item.percent = percent
     })
 
-    if (!res.ok) throw new Error(`上传失败: ${res.status}`)
+    // 业务状态码检查
+    if (response.retCode !== undefined && response.retCode !== 0) {
+      throw new Error(`上传失败(retCode=${response.retCode})`)
+    }
 
-    const response = await res.json()
-
-    // 从响应中提取 URL（兼容三种写法）
-    let fileUrl: string
-    if (responseUrlPath === 'url') {
-      fileUrl = response.url
-    } else if (responseUrlPath === 'data') {
-      fileUrl = response.data
-    } else if (responseUrlPath === 'data.url') {
-      fileUrl = response.data?.url
-    } else {
-      fileUrl = (response as any)[responseUrlPath]
+    // 从响应中提取 URL（支持点号分隔路径，如 'data.filePath'）
+    let fileUrl: any = response
+    for (const key of responseUrlPath.split('.')) {
+      fileUrl = fileUrl?.[key]
     }
 
     if (!fileUrl) throw new Error('响应中未找到文件地址')
 
+    // 提取嵌套的 data 对象（兼容 { retCode, data: { ... } } 结构）
+    const fileData: Record<string, any> = (response as any).data || response
+
     // 更新文件信息
-    item.id = response.id || item.id
-    item.name = response.name || item.name
     item.url = fileUrl
-    if (response.size !== undefined) item.size = response.size
+    item.name = fileData.fileName || fileData.name || item.name
+    item.size = fileData.fileSize ?? fileData.size ?? item.size
+    if (fileData.fileMd5) (item as any).fileMd5 = fileData.fileMd5
     item.status = 'success'
     item.percent = 100
+    item.justUploaded = true
 
+    ElMessage.success(`${item.name} 上传成功`)
     emit('success', { ...item })
     emitUpdate()
   } catch (error) {
     item.status = 'error'
+    ElMessage.error(`${item.name} 上传失败`)
     emit('error', error as Error, { ...item })
   }
-}
-
-/**
- * 本地上传：模拟进度 + FileReader 读取 base64
- * @param opts - 上传参数
- */
-function defaultLocalUpload(opts: { file: File; item: UploadFileItem }) {
-  const { file, item } = opts
-
-  // 模拟上传进度
-  let progress = 0
-  const timer = setInterval(() => {
-    progress += Math.random() * 30
-    if (progress >= 90) {
-      clearInterval(timer)
-      item.percent = 90
-    } else {
-      item.percent = Math.floor(progress)
-    }
-  }, 80)
-
-  // 读取文件为 base64
-  const reader = new FileReader()
-  reader.onload = (e) => {
-    clearInterval(timer)
-    item.url = e.target?.result as string
-    item.status = 'success'
-    item.percent = 100
-    emit('success', { ...item })
-    emitUpdate()
-  }
-  reader.onerror = () => {
-    clearInterval(timer)
-    item.status = 'error'
-    emit('error', new Error('读取文件失败'), { ...item })
-  }
-  reader.readAsDataURL(file)
 }
 
 // ============================================================
@@ -790,10 +696,45 @@ function defaultLocalUpload(opts: { file: File; item: UploadFileItem }) {
  * 删除文件
  * @param index - 文件索引
  */
-function handleRemove(index: number) {
-  const removed = fileList.value.splice(index, 1)[0]
-  emit('remove', removed, [...fileList.value])
-  emitUpdate()
+async function handleRemove(index: number) {
+  const item = fileList.value[index]
+  if (!item) return
+
+  // 1. 删除服务器上的文件（始终调用）
+  if (item.url) {
+    try {
+      await deleteFileApi(item.url)
+
+      // 2. 删除档案记录（id 不以 "upload" 开头时调用，说明是已保存到项目的附件）
+      if (item.id && !item.id.startsWith('upload')) {
+        try {
+          await deleteArchiveAndFile(item.id)
+        } catch (e) {
+          // 删除失败不阻塞本地移除
+        }
+      }
+
+      // 3. 删除本地页面文件
+      const removed = fileList.value.splice(index, 1)[0]
+      ElMessage.success(`${removed.name} 已删除`)
+      emit('remove', removed, [...fileList.value])
+      emitUpdate()
+    } catch (e) {
+      ElMessage.error(`${item.name} 删除失败`)
+    }
+  }
+}
+
+// ============================================================
+// 预览文件
+// ============================================================
+
+/**
+ * 预览文件
+ * @param item - 文件项
+ */
+async function handlePreview(item: UploadFileItem) {
+  await previewFile(item.url, item.name)
 }
 
 // ============================================================
@@ -805,18 +746,7 @@ function handleRemove(index: number) {
  * @param item - 文件项
  */
 function handleDownload(item: UploadFileItem) {
-  if (!item.url) return
-
-  // base64 文件创建下载链接
-  if (item.url.startsWith('data:')) {
-    const link = document.createElement('a')
-    link.href = item.url
-    link.download = item.name
-    link.click()
-  } else if (item.url.startsWith('http')) {
-    // 网络 URL 新窗口打开
-    window.open(item.url, '_blank')
-  }
+  downloadFile(item.url, item.name)
 }
 
 // ============================================================
@@ -848,6 +778,7 @@ $primary-light: rgba($primary, 0.08);
 $primary-hover: #6b85f8; // 比 primary 亮 15% 的颜色
 $danger: #ff3b30;
 $success: #34c759;
+$success-light: rgba($success, 0.08);
 $border: #ebeef5;
 $border-dark: #d3d6dc; // 比 border 深 15%
 $text: #303133;
@@ -862,8 +793,8 @@ $radius: 8px;
   width: 100%;
 
   &.is-disabled {
-    pointer-events: none;
-    opacity: 0.6;
+    // pointer-events: none;
+    // opacity: 0.6;
   }
 }
 
@@ -871,8 +802,8 @@ $radius: 8px;
 // 文件列表
 // ============================================================
 .xly-upload__list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 12px;
 }
 
@@ -905,6 +836,10 @@ $radius: 8px;
     .xly-upload__badge {
       opacity: 1;
     }
+  }
+
+  &--just-uploaded {
+    animation: xly-upload-flash 3s ease;
   }
 
   &--uploading {
@@ -1006,7 +941,6 @@ $radius: 8px;
 .xly-upload__actions {
   display: flex;
   gap: 4px;
-  opacity: 0;
   transition: opacity 0.2s ease;
 }
 
@@ -1020,6 +954,16 @@ $radius: 8px;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s ease;
+
+  &--preview {
+    background: $success-light;
+    color: $success;
+
+    &:hover {
+      background: $success;
+      color: #fff;
+    }
+  }
 
   &--download {
     background: $primary-light;
@@ -1082,6 +1026,7 @@ $radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
+  grid-column: 1 / -1;
   padding: 24px;
   border: 2px dashed $border;
   border-radius: $radius;
@@ -1181,5 +1126,59 @@ $radius: 8px;
 .xly-upload-fade-leave-to {
   opacity: 0;
   transform: translateX(8px);
+}
+
+// ============================================================
+// 上传成功闪烁动画（浅色/暗色通用）
+// ============================================================
+@keyframes xly-upload-flash {
+  0% {
+    box-shadow: 0 0 0 0 rgba($success, 0);
+    border-color: rgba($border, 1);
+    background: var(--el-bg-color);
+    transform: scale(1);
+  }
+
+  12% {
+    box-shadow: 0 0 0 10px rgba($success, 0.55), 0 0 30px rgba($success, 0.4), 0 0 60px rgba($success, 0.18);
+    border-color: $success;
+    background: rgba($success, 0.2);
+    transform: scale(1.02);
+  }
+
+  28% {
+    box-shadow: 0 0 0 3px rgba($success, 0.3);
+    border-color: rgba($success, 0.5);
+    background: var(--el-bg-color);
+    transform: scale(1);
+  }
+
+  44% {
+    box-shadow: 0 0 0 8px rgba($success, 0.45), 0 0 24px rgba($success, 0.3), 0 0 48px rgba($success, 0.12);
+    border-color: $success;
+    background: rgba($success, 0.16);
+    transform: scale(1.015);
+  }
+
+  58% {
+    box-shadow: 0 0 0 2px rgba($success, 0.22);
+    border-color: rgba($success, 0.45);
+    background: var(--el-bg-color);
+    transform: scale(1);
+  }
+
+  76% {
+    box-shadow: 0 0 0 6px rgba($success, 0.42), 0 0 18px rgba($success, 0.22);
+    border-color: $success;
+    background: rgba($success, 0.1);
+    transform: scale(1.01);
+  }
+
+  100% {
+    box-shadow: none;
+    border-color: rgba($success, 0.3);
+    background: var(--el-bg-color);
+    transform: scale(1);
+  }
 }
 </style>

@@ -1,12 +1,12 @@
 <template>
-  <form class="xly-form" :class="[`xly-form--${size}`, { 'is-inline': inline }]" @submit.prevent>
+  <form class="xly-form" :class="[`xly-form--${size}`, { 'is-inline': inline, 'is-label-top': labelPosition === 'top' }]" @submit.prevent>
     <slot />
   </form>
 </template>
 
 <script setup lang="ts">
 import { computed, provide, ref } from 'vue'
-import type { FormRule, Rule } from './utils'
+import type { Rule } from './utils'
 import { validateForm } from './utils'
 
 defineOptions({ name: 'XlyForm' })
@@ -15,6 +15,8 @@ export interface FormProps {
   model: Record<string, any>
   rules?: Record<string, Rule[]>
   labelWidth?: string
+  /** 标签位置：right-标签右对齐居左，left-标签左对齐居左，top-标签在顶部 */
+  labelPosition?: 'left' | 'right' | 'top'
   /** 栅格占位（共 24 栏），设置后所有 FormItem 默认使用该值，常用 6/8/12 */
   span?: number
   size?: 'large' | 'default' | 'small'
@@ -25,6 +27,7 @@ export interface FormProps {
 const props = withDefaults(defineProps<FormProps>(), {
   rules: () => ({}),
   labelWidth: undefined,
+  labelPosition: 'left',
   span: undefined,
   size: 'default',
   inline: false,
@@ -134,6 +137,7 @@ const activeSpan = computed(() => {
 // provide 给子组件 FormItem 使用
 provide('xlyFormContext', {
   labelWidth: props.labelWidth,
+  labelPosition: props.labelPosition,
   span: activeSpan,
   modelValue: props.model,
   errors,
@@ -154,11 +158,13 @@ defineExpose({ validate, validateField, resetFields, clearValidate, submit })
       font-size: 15px;
     }
   }
+
   &--default {
     .xly-form-item__label {
       font-size: 14px;
     }
   }
+
   &--small {
     .xly-form-item__label {
       font-size: 13px;

@@ -56,10 +56,10 @@ const rowClasses = computed(() => [
 
 const rowStyle = computed(() => {
   const style: Record<string, string> = {}
-  const h = gutterValue.value.horizontal
-  if (h > 0) {
-    style.marginLeft = `-${h / 2}px`
-    style.marginRight = `-${h / 2}px`
+  const horizontalGutter = gutterValue.value.horizontal
+  if (horizontalGutter > 0) {
+    style.marginLeft = `-${horizontalGutter / 2}px`
+    style.marginRight = `-${horizontalGutter / 2}px`
   }
   return style
 })

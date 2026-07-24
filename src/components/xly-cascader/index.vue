@@ -250,6 +250,7 @@ const emit = defineEmits<{
 const triggerRef = ref<HTMLElement | null>(null)
 const panelRef = ref<HTMLElement | null>(null)
 const searchRef = ref<HTMLInputElement | null>(null)
+const panelHeight = ref(300)
 const tagsContainerRef = ref<HTMLElement | null>(null)
 const tagRefs = ref<(HTMLElement | null)[]>([])
 const panelVisible = ref(false)
@@ -525,10 +526,10 @@ const panelStyle = computed(() => {
   if (!triggerRef.value) return {}
   const rect = triggerRef.value.getBoundingClientRect()
   const spaceBelow = window.innerHeight - rect.bottom
-  const dropH = 300
-  if (spaceBelow < dropH) {
+  const ph = panelHeight.value
+  if (spaceBelow < ph) {
     return {
-      top: `${rect.top - dropH - 4}px`,
+      top: `${Math.max(4, rect.top - ph - 4)}px`,
       left: `${rect.left}px`,
       minWidth: `${rect.width}px`,
     }
@@ -551,6 +552,10 @@ function togglePanel() {
     // 恢复选中状态对应的展开路径
     restoreExpandedPath()
     nextTick(() => {
+      if (panelRef.value) {
+        panelHeight.value = panelRef.value.offsetHeight
+        tick.value++
+      }
       if (props.filterable) searchRef.value?.focus()
     })
   } else {

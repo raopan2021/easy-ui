@@ -5,86 +5,92 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, ref } from 'vue'
-import { type GutterInjection, ROW_GUTTER_KEY } from '@/components/xly-row/types'
+import { computed, inject, ref } from "vue";
+import {
+  type GutterInjection,
+  ROW_GUTTER_KEY
+} from "@/components/xly-row/types";
 
-defineOptions({ name: 'XlyCol' })
+defineOptions({ name: "XlyCol" });
 
 interface ColProps {
   /** 栅格占位格数（0-24） */
-  span?: number
+  span?: number;
   /** 栅格左侧间隔格数 */
-  offset?: number
+  offset?: number;
   /** 栅格向右移动格数 */
-  push?: number
+  push?: number;
   /** 栅格向左移动格数 */
-  pull?: number
+  pull?: number;
   /** <768px 响应式栅格数或配置 */
-  xs?: number | ColBreakpoint
+  xs?: number | ColBreakpoint;
   /** ≥768px 响应式栅格数或配置 */
-  sm?: number | ColBreakpoint
+  sm?: number | ColBreakpoint;
   /** ≥992px 响应式栅格数或配置 */
-  md?: number | ColBreakpoint
+  md?: number | ColBreakpoint;
   /** ≥1200px 响应式栅格数或配置 */
-  lg?: number | ColBreakpoint
+  lg?: number | ColBreakpoint;
   /** ≥1920px 响应式栅格数或配置 */
-  xl?: number | ColBreakpoint
+  xl?: number | ColBreakpoint;
 }
 
 interface ColBreakpoint {
-  span?: number
-  offset?: number
-  push?: number
-  pull?: number
+  span?: number;
+  offset?: number;
+  push?: number;
+  pull?: number;
 }
 
 const props = withDefaults(defineProps<ColProps>(), {
   span: 24,
   offset: undefined,
   push: undefined,
-  pull: undefined,
-})
+  pull: undefined
+});
 
 // 从 Row 注入的 gutter
-const gutter = inject<GutterInjection>(ROW_GUTTER_KEY, ref({ horizontal: 0, vertical: 0 }))
+const gutter = inject<GutterInjection>(
+  ROW_GUTTER_KEY,
+  ref({ horizontal: 0, vertical: 0 })
+);
 
 const colClasses = computed(() => {
-  const classes: string[] = [`xly-col--${props.span}`]
+  const classes: string[] = [`xly-col--${props.span}`];
 
-  if (props.offset) classes.push(`xly-col--offset-${props.offset}`)
-  if (props.push) classes.push(`xly-col--push-${props.push}`)
-  if (props.pull) classes.push(`xly-col--pull-${props.pull}`)
+  if (props.offset) classes.push(`xly-col--offset-${props.offset}`);
+  if (props.push) classes.push(`xly-col--push-${props.push}`);
+  if (props.pull) classes.push(`xly-col--pull-${props.pull}`);
 
   // 响应式
-  const breakpoints: (keyof ColProps)[] = ['xs', 'sm', 'md', 'lg', 'xl']
+  const breakpoints: (keyof ColProps)[] = ["xs", "sm", "md", "lg", "xl"];
   for (const bp of breakpoints) {
-    const val = props[bp]
-    if (typeof val === 'number') {
-      classes.push(`xly-col--${bp}-${val}`)
-    } else if (val && typeof val === 'object') {
-      if (val.span) classes.push(`xly-col--${bp}-${val.span}`)
-      if (val.offset) classes.push(`xly-col--${bp}-offset-${val.offset}`)
-      if (val.push) classes.push(`xly-col--${bp}-push-${val.push}`)
-      if (val.pull) classes.push(`xly-col--${bp}-pull-${val.pull}`)
+    const val = props[bp];
+    if (typeof val === "number") {
+      classes.push(`xly-col--${bp}-${val}`);
+    } else if (val && typeof val === "object") {
+      if (val.span) classes.push(`xly-col--${bp}-${val.span}`);
+      if (val.offset) classes.push(`xly-col--${bp}-offset-${val.offset}`);
+      if (val.push) classes.push(`xly-col--${bp}-push-${val.push}`);
+      if (val.pull) classes.push(`xly-col--${bp}-pull-${val.pull}`);
     }
   }
 
-  return classes
-})
+  return classes;
+});
 
 const colStyle = computed(() => {
-  const style: Record<string, string> = {}
-  const h = gutter.value.horizontal
-  if (h > 0) {
-    style.paddingLeft = `${h / 2}px`
-    style.paddingRight = `${h / 2}px`
+  const style: Record<string, string> = {};
+  const horizontalGutter = gutter.value.horizontal;
+  if (horizontalGutter > 0) {
+    style.paddingLeft = `${horizontalGutter / 2}px`;
+    style.paddingRight = `${horizontalGutter / 2}px`;
   }
-  return style
-})
+  return style;
+});
 </script>
 
 <style scoped lang="scss">
-@use 'sass:math';
+@use "sass:math";
 .xly-col {
   box-sizing: border-box;
   position: relative;

@@ -1,7 +1,7 @@
 <template>
   <div class="xly-time-range-picker" :class="[`xly-time-range-picker--${size}`, { 'is-disabled': disabled }]">
     <!-- 开始时间选择器 -->
-    <div class="time-range-picker__start">
+    <div class="xly-time-range-picker__start">
       <XlyTimePicker
         :model-value="start"
         :placeholder="startPlaceholder || '开始时间'"
@@ -15,10 +15,10 @@
     </div>
 
     <!-- 分隔符 -->
-    <span class="time-range-picker__separator">{{ separator }}</span>
+    <span class="xly-time-range-picker__separator">{{ separator }}</span>
 
     <!-- 结束时间选择器 -->
-    <div class="time-range-picker__end">
+    <div class="xly-time-range-picker__end">
       <XlyTimePicker
         :model-value="end"
         :placeholder="endPlaceholder || '结束时间'"

@@ -1,7 +1,10 @@
 <template>
-  <div class="xly-table" :class="tableClass">
+  <div ref="tableRootRef" class="xly-table" :class="tableClass">
     <!-- 工具栏（左侧或右侧有内容时才显示） -->
-    <div v-if="toolbarLeftVisible || toolbarRightVisible" class="xly-table__toolbar">
+    <div
+      v-if="toolbarLeftVisible || toolbarRightVisible"
+      class="xly-table__toolbar"
+    >
       <!-- 左侧区域：始终渲染，flex:1 填充空间，左侧无内容时右侧按钮靠左 -->
       <div class="xly-table__toolbar-left">
         <span v-if="title" class="xly-table__title">{{ title }}</span>
@@ -59,9 +62,15 @@
             <!-- 树形展开列 -->
             <th v-if="tree" class="xly-table__th xly-table__th--tree-expand" />
             <!-- 普通展开列 -->
-            <th v-else-if="expandable" class="xly-table__th xly-table__th--expand" />
+            <th
+              v-else-if="expandable"
+              class="xly-table__th xly-table__th--expand"
+            />
             <!-- 选择列 - 多选模式 -->
-            <th v-if="selectable && selectionMode === 'multiple'" class="xly-table__th xly-table__th--selection">
+            <th
+              v-if="selectable && selectionMode === 'multiple'"
+              class="xly-table__th xly-table__th--selection"
+            >
               <label class="xly-table__checkbox">
                 <input
                   type="checkbox"
@@ -73,7 +82,10 @@
               </label>
             </th>
             <!-- 选择列 - 单选模式 -->
-            <th v-if="selectable && selectionMode === 'single'" class="xly-table__th xly-table__th--selection" />
+            <th
+              v-if="selectable && selectionMode === 'single'"
+              class="xly-table__th xly-table__th--selection"
+            />
             <!-- 序号列 -->
             <th v-if="showIndex" class="xly-table__th xly-table__th--index">
               {{ indexLabel }}
@@ -87,7 +99,9 @@
                 col.align ? `xly-table__th--${col.align}` : '',
                 col.sortable ? 'is-sortable' : '',
                 sortState.key === col.prop ? 'is-sorted' : '',
-                col.fixed ? `xly-table__th--fixed xly-table__th--fixed-${col.fixed}` : '',
+                col.fixed
+                  ? `xly-table__th--fixed xly-table__th--fixed-${col.fixed}`
+                  : ''
               ]"
               :style="getColStyle(col)"
               @click="col.sortable ? handleSort(col.prop) : undefined"
@@ -98,7 +112,8 @@
                   <svg
                     class="xly-table__sort-icon"
                     :class="{
-                      'is-active': sortState.key === col.prop && sortState.order === 'asc',
+                      'is-active':
+                        sortState.key === col.prop && sortState.order === 'asc'
                     }"
                     viewBox="0 0 24 24"
                     width="1em"
@@ -109,7 +124,8 @@
                   <svg
                     class="xly-table__sort-icon"
                     :class="{
-                      'is-active': sortState.key === col.prop && sortState.order === 'desc',
+                      'is-active':
+                        sortState.key === col.prop && sortState.order === 'desc'
                     }"
                     viewBox="0 0 24 24"
                     width="1em"
@@ -124,8 +140,19 @@
             <th
               v-if="$slots.action"
               class="xly-table__th xly-table__th--action"
-              :class="actionFixed ? `xly-table__th--fixed xly-table__th--fixed-${actionFixed}` : ''"
-              :style="actionFixed ? { [actionFixed]: '0px', width: actionWidth ? `${actionWidth}px` : '120px' } : {}"
+              :class="
+                actionFixed
+                  ? `xly-table__th--fixed xly-table__th--fixed-${actionFixed}`
+                  : ''
+              "
+              :style="
+                actionFixed
+                  ? {
+                      [actionFixed]: '0px',
+                      width: actionWidth ? `${actionWidth}px` : '120px'
+                    }
+                  : {}
+              "
             >
               {{ actionLabel }}
             </th>
@@ -134,67 +161,7 @@
 
         <!-- 表体 -->
         <tbody class="xly-table__tbody">
-          <!-- 加载状态 -->
-          <tr v-if="loading" class="xly-table__loading-row">
-            <td :colspan="totalColCount">
-              <div class="xly-table__loading">
-                <div class="xly-table__loading-spinner">
-                  <div
-                    v-for="i in 5"
-                    :key="i"
-                    class="xly-table__loading-bar"
-                    :style="{ animationDelay: `${i * 0.1}s` }"
-                  ></div>
-                </div>
-                <span v-if="loadingText" class="xly-table__loading-text">{{ loadingText }}</span>
-              </div>
-            </td>
-          </tr>
-
-          <!-- 空状态 -->
-          <tr v-else-if="displayData.length === 0" class="xly-table__empty-row">
-            <td :colspan="totalColCount">
-              <div class="xly-table__empty">
-                <slot name="empty">
-                  <svg
-                    viewBox="0 0 80 60"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="xly-table__empty-icon"
-                  >
-                    <rect
-                      x="4"
-                      y="10"
-                      width="72"
-                      height="46"
-                      rx="4"
-                      fill="#f5f7fa"
-                      stroke="#e2e4ed"
-                      stroke-width="1.5"
-                    />
-                    <rect
-                      x="4"
-                      y="10"
-                      width="72"
-                      height="14"
-                      rx="4"
-                      fill="#eef0f6"
-                      stroke="#e2e4ed"
-                      stroke-width="1.5"
-                    />
-                    <rect x="14" y="32" width="26" height="4" rx="2" fill="#dde0ea" />
-                    <rect x="14" y="42" width="18" height="4" rx="2" fill="#dde0ea" />
-                    <rect x="46" y="32" width="20" height="4" rx="2" fill="#dde0ea" />
-                    <rect x="46" y="42" width="12" height="4" rx="2" fill="#dde0ea" />
-                  </svg>
-                  <p class="xly-table__empty-text">{{ emptyText }}</p>
-                </slot>
-              </div>
-            </td>
-          </tr>
-
           <!-- 数据行 -->
-          <template v-else>
             <!-- 树形模式渲染 -->
             <template v-if="tree">
               <template v-for="node in treeFlatData" :key="node.key">
@@ -203,28 +170,60 @@
                   :class="{
                     'is-selected': isRowSelected(node.row),
                     'is-tree-node': true,
-                    'is-tree-expanded': node.expanded,
+                    'is-tree-expanded': node.expanded
                   }"
-                  @click="handleTreeNodeClick(node.row); handleRowClick(node.row, 0)"
+                  @click="
+                    handleTreeNodeClick(node.row);
+                    handleRowClick(node.row, 0);
+                  "
                 >
                   <!-- 树形展开列（只在第一列前显示） -->
                   <td class="xly-table__td xly-table__td--tree-expand">
                     <span
                       v-if="node.hasChildren"
                       class="xly-table__tree-icon"
-                      :class="{ 'is-expanded': node.expanded, 'is-loading': node.loading }"
+                      :class="{
+                        'is-expanded': node.expanded,
+                        'is-loading': node.loading
+                      }"
                       @click.stop="toggleTreeExpand(node.row)"
                     >
-                      <svg v-if="!node.loading" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                      <svg
+                        v-if="!node.loading"
+                        viewBox="0 0 24 24"
+                        width="16"
+                        height="16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
                         <polyline points="9 18 15 12 9 6" />
                       </svg>
-                      <svg v-else class="xly-table__loading-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10" stroke-dasharray="60" stroke-dashoffset="20" />
+                      <svg
+                        v-else
+                        class="xly-table__loading-icon"
+                        viewBox="0 0 24 24"
+                        width="16"
+                        height="16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <circle
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke-dasharray="60"
+                          stroke-dashoffset="20"
+                        />
                       </svg>
                     </span>
                   </td>
                   <!-- 选择列 - 多选模式 -->
-                  <td v-if="selectable && selectionMode === 'multiple'" class="xly-table__td xly-table__td--selection">
+                  <td
+                    v-if="selectable && selectionMode === 'multiple'"
+                    class="xly-table__td xly-table__td--selection"
+                  >
                     <label class="xly-table__checkbox" @click.stop>
                       <input
                         type="checkbox"
@@ -235,8 +234,14 @@
                     </label>
                   </td>
                   <!-- 选择列 - 单选模式 -->
-                  <td v-if="selectable && selectionMode === 'single'" class="xly-table__td xly-table__td--selection">
-                    <label class="xly-table__radio" @click.stop="handleRowSelect(node.row)">
+                  <td
+                    v-if="selectable && selectionMode === 'single'"
+                    class="xly-table__td xly-table__td--selection"
+                  >
+                    <label
+                      class="xly-table__radio"
+                      @click.stop="handleRowSelect(node.row)"
+                    >
                       <span
                         class="xly-table__radio-inner"
                         :class="{ 'is-checked': isRowSelected(node.row) }"
@@ -244,7 +249,10 @@
                     </label>
                   </td>
                   <!-- 序号列 -->
-                  <td v-if="showIndex" class="xly-table__td xly-table__td--index">
+                  <td
+                    v-if="showIndex"
+                    class="xly-table__td xly-table__td--index"
+                  >
                     {{ node.treeIndex }}
                   </td>
                   <!-- 数据列 -->
@@ -254,8 +262,10 @@
                     class="xly-table__td"
                     :class="[
                       col.align ? `xly-table__td--${col.align}` : '',
-                      col.fixed ? `xly-table__td--fixed xly-table__td--fixed-${col.fixed}` : '',
-                      colIndex === 0 ? 'xly-table__td--tree-first' : '',
+                      col.fixed
+                        ? `xly-table__td--fixed xly-table__td--fixed-${col.fixed}`
+                        : '',
+                      colIndex === 0 ? 'xly-table__td--tree-first' : ''
                     ]"
                     :style="getColStyle(col)"
                   >
@@ -263,11 +273,18 @@
                     <template v-if="colIndex === 0">
                       <span
                         class="xly-table__tree-indent"
-                        :style="{ paddingLeft: `${node.level * treeIndentSize}px` }"
+                        :style="{
+                          paddingLeft: `${node.level * treeIndentSize}px`
+                        }"
                       />
                       <slot
                         :name="`col-${col.prop}`"
-                        v-bind="{ row: node.row, col, value: getCellValue(node.row, col.prop), index: 0 }"
+                        v-bind="{
+                          row: node.row,
+                          col,
+                          value: getCellValue(node.row, col.prop),
+                          index: 0
+                        }"
                       >
                         <span
                           class="xly-table__cell-text"
@@ -279,7 +296,12 @@
                     <template v-else>
                       <slot
                         :name="`col-${col.prop}`"
-                        v-bind="{ row: node.row, col, value: getCellValue(node.row, col.prop), index: 0 }"
+                        v-bind="{
+                          row: node.row,
+                          col,
+                          value: getCellValue(node.row, col.prop),
+                          index: 0
+                        }"
                       >
                         <span
                           class="xly-table__cell-text"
@@ -293,8 +315,19 @@
                   <td
                     v-if="$slots.action"
                     class="xly-table__td xly-table__td--action"
-                    :class="actionFixed ? `xly-table__td--fixed xly-table__td--fixed-${actionFixed}` : ''"
-                    :style="actionFixed ? { [actionFixed]: '0px', width: actionWidth ? `${actionWidth}px` : '120px' } : {}"
+                    :class="
+                      actionFixed
+                        ? `xly-table__td--fixed xly-table__td--fixed-${actionFixed}`
+                        : ''
+                    "
+                    :style="
+                      actionFixed
+                        ? {
+                            [actionFixed]: '0px',
+                            width: actionWidth ? `${actionWidth}px` : '120px'
+                          }
+                        : {}
+                    "
                   >
                     <slot name="action" v-bind="{ row: node.row, index: 0 }" />
                   </td>
@@ -311,25 +344,47 @@
                   :class="{
                     'is-selected': isRowSelected(item.row),
                     'is-stripe': stripe && item.index % 2 === 1,
-                    'is-clickable': rowClickable || expandable,
+                    'is-clickable': rowClickable || expandable
                   }"
-                  :style="{ cursor: expandable ? 'pointer' : rowClickable ? 'pointer' : 'default' }"
-                  @click="handleExpandClick(item.row, item.index); handleRowClick(item.row, item.index)"
+                  :style="{
+                    cursor: expandable
+                      ? 'pointer'
+                      : rowClickable
+                        ? 'pointer'
+                        : 'default'
+                  }"
+                  @click="
+                    handleExpandClick(item.row, item.index);
+                    handleRowClick(item.row, item.index);
+                  "
                 >
                   <!-- 展开列 -->
-                  <td v-if="expandable" class="xly-table__td xly-table__td--expand">
+                  <td
+                    v-if="expandable"
+                    class="xly-table__td xly-table__td--expand"
+                  >
                     <span
                       class="xly-table__expand-icon"
                       :class="{ 'is-expanded': item.expanded }"
                       @click.stop="toggleRowExpand(item.row, item.index)"
                     >
-                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="16"
+                        height="16"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
                         <polyline points="9 18 15 12 9 6" />
                       </svg>
                     </span>
                   </td>
                   <!-- 选择列 - 多选模式 -->
-                  <td v-if="selectable && selectionMode === 'multiple'" class="xly-table__td xly-table__td--selection">
+                  <td
+                    v-if="selectable && selectionMode === 'multiple'"
+                    class="xly-table__td xly-table__td--selection"
+                  >
                     <label class="xly-table__checkbox" @click.stop>
                       <input
                         type="checkbox"
@@ -340,8 +395,14 @@
                     </label>
                   </td>
                   <!-- 选择列 - 单选模式 -->
-                  <td v-if="selectable && selectionMode === 'single'" class="xly-table__td xly-table__td--selection">
-                    <label class="xly-table__radio" @click.stop="handleRowSelect(item.row)">
+                  <td
+                    v-if="selectable && selectionMode === 'single'"
+                    class="xly-table__td xly-table__td--selection"
+                  >
+                    <label
+                      class="xly-table__radio"
+                      @click.stop="handleRowSelect(item.row)"
+                    >
                       <span
                         class="xly-table__radio-inner"
                         :class="{ 'is-checked': isRowSelected(item.row) }"
@@ -349,7 +410,10 @@
                     </label>
                   </td>
                   <!-- 序号列 -->
-                  <td v-if="showIndex" class="xly-table__td xly-table__td--index">
+                  <td
+                    v-if="showIndex"
+                    class="xly-table__td xly-table__td--index"
+                  >
                     {{ getRowIndex(item.index) }}
                   </td>
                   <!-- 数据列 -->
@@ -359,22 +423,34 @@
                     class="xly-table__td"
                     :class="[
                       col.align ? `xly-table__td--${col.align}` : '',
-                      col.fixed ? `xly-table__td--fixed xly-table__td--fixed-${col.fixed}` : '',
+                      col.fixed
+                        ? `xly-table__td--fixed xly-table__td--fixed-${col.fixed}`
+                        : ''
                     ]"
                     :style="getColStyle(col)"
                   >
                     <slot
                       :name="`col-${col.prop}`"
-                      v-bind="{ row: item.row, col, value: getCellValue(item.row, col.prop), index: item.index }"
+                      v-bind="{
+                        row: item.row,
+                        col,
+                        value: getCellValue(item.row, col.prop),
+                        index: item.index
+                      }"
                     >
                       <span
                         class="xly-table__cell-text"
                         :class="{ 'is-ellipsis': col.ellipsis }"
                         @mouseenter="
                           col.ellipsis &&
-                          showCellTooltip($event, String(getCellValue(item.row, col.prop) ?? ''))
+                          showCellTooltip(
+                            $event,
+                            String(getCellValue(item.row, col.prop) ?? '')
+                          )
                         "
-                        @mousemove="col.ellipsis && updateTooltipPosition($event)"
+                        @mousemove="
+                          col.ellipsis && updateTooltipPosition($event)
+                        "
                         @mouseleave="col.ellipsis && hideCellTooltip()"
                         >{{ formatCell(item.row, col) }}</span
                       >
@@ -384,10 +460,24 @@
                   <td
                     v-if="$slots.action"
                     class="xly-table__td xly-table__td--action"
-                    :class="actionFixed ? `xly-table__td--fixed xly-table__td--fixed-${actionFixed}` : ''"
-                    :style="actionFixed ? { [actionFixed]: '0px', width: actionWidth ? `${actionWidth}px` : '120px' } : {}"
+                    :class="
+                      actionFixed
+                        ? `xly-table__td--fixed xly-table__td--fixed-${actionFixed}`
+                        : ''
+                    "
+                    :style="
+                      actionFixed
+                        ? {
+                            [actionFixed]: '0px',
+                            width: actionWidth ? `${actionWidth}px` : '120px'
+                          }
+                        : {}
+                    "
                   >
-                    <slot name="action" v-bind="{ row: item.row, index: item.index }" />
+                    <slot
+                      name="action"
+                      v-bind="{ row: item.row, index: item.index }"
+                    />
                   </td>
                 </tr>
 
@@ -397,23 +487,34 @@
                   class="xly-table__expand-row"
                 >
                   <td :colspan="totalColCount" class="xly-table__expand-cell">
-                    <slot name="expand" v-bind="{ row: item.row, index: item.index }" />
+                    <slot
+                      name="expand"
+                      v-bind="{ row: item.row, index: item.index }"
+                    />
                   </td>
                 </tr>
               </template>
             </template>
-          </template>
         </tbody>
 
         <!-- 合计行（不支持选择/选中） -->
         <tfoot v-if="hasSummary" class="xly-table__tfoot">
           <tr class="xly-table__summary-row">
             <!-- 树形/展开占位列 -->
-            <td v-if="tree || expandable" class="xly-table__td xly-table__td--summary-placeholder" />
+            <td
+              v-if="tree || expandable"
+              class="xly-table__td xly-table__td--summary-placeholder"
+            />
             <!-- 选择列占位：合计行不参与选择，显示为空格占位 -->
-            <td v-if="selectable" class="xly-table__td xly-table__td--summary-placeholder xly-table__td--no-select" />
+            <td
+              v-if="selectable"
+              class="xly-table__td xly-table__td--summary-placeholder xly-table__td--no-select"
+            />
             <!-- 序号列 → 显示"合计"标签 -->
-            <td v-if="showIndex" class="xly-table__td xly-table__td--summary-label">
+            <td
+              v-if="showIndex"
+              class="xly-table__td xly-table__td--summary-label"
+            >
               {{ summaryLabel }}
             </td>
             <!-- 数据列 -->
@@ -423,28 +524,56 @@
               class="xly-table__td xly-table__td--summary"
               :class="[
                 col.align ? `xly-table__td--${col.align}` : '',
-                col.fixed ? `xly-table__td--fixed xly-table__td--fixed-${col.fixed}` : '',
+                col.fixed
+                  ? `xly-table__td--fixed xly-table__td--fixed-${col.fixed}`
+                  : ''
               ]"
               :style="getColStyle(col)"
             >
               <!-- 没有序号列时，第一列显示合计标签 -->
               <template v-if="!showIndex && colIdx === 0">
                 <span class="xly-table__summary-title">{{ summaryLabel }}</span>
-                <span v-if="summaryRow[col.prop]?.value" class="xly-table__summary-sep"> / </span>
+                <span
+                  v-if="summaryRow[col.prop]?.value"
+                  class="xly-table__summary-sep"
+                >
+                  /
+                </span>
                 <template v-if="summaryRow[col.prop]?.value">
                   <span
-                    v-if="summaryMixed && (summaryRow[col.prop].type === 'sum' || summaryRow[col.prop].type === 'avg')"
-                    :class="['xly-table__summary-badge', `xly-table__summary-badge--${summaryRow[col.prop].type}`]"
-                  >{{ summaryRow[col.prop].type === 'sum' ? '合计' : '均值' }}</span>
+                    v-if="
+                      summaryMixed &&
+                      (summaryRow[col.prop].type === 'sum' ||
+                        summaryRow[col.prop].type === 'avg')
+                    "
+                    :class="[
+                      'xly-table__summary-badge',
+                      `xly-table__summary-badge--${summaryRow[col.prop].type}`
+                    ]"
+                    >{{
+                      summaryRow[col.prop].type === "sum" ? "合计" : "均值"
+                    }}</span
+                  >
                   <span>{{ summaryRow[col.prop].value }}</span>
                 </template>
               </template>
               <template v-else>
-                <template v-if="summaryRow[col.prop]?.type === 'sum' || summaryRow[col.prop]?.type === 'avg'">
+                <template
+                  v-if="
+                    summaryRow[col.prop]?.type === 'sum' ||
+                    summaryRow[col.prop]?.type === 'avg'
+                  "
+                >
                   <span
                     v-if="summaryMixed"
-                    :class="['xly-table__summary-badge', `xly-table__summary-badge--${summaryRow[col.prop].type}`]"
-                  >{{ summaryRow[col.prop].type === 'sum' ? '合计' : '均值' }}</span>
+                    :class="[
+                      'xly-table__summary-badge',
+                      `xly-table__summary-badge--${summaryRow[col.prop].type}`
+                    ]"
+                    >{{
+                      summaryRow[col.prop].type === "sum" ? "合计" : "均值"
+                    }}</span
+                  >
                   <span>{{ summaryRow[col.prop].value }}</span>
                 </template>
                 <template v-else>
@@ -455,6 +584,93 @@
           </tr>
         </tfoot>
       </table>
+
+      <!-- 加载状态 - 始终显示（首次加载 / 刷新均用相同动画） -->
+      <div
+        v-if="loading"
+        class="xly-table__empty"
+        :class="{ 'xly-table__loading-overlay': displayData.length > 0 }"
+      >
+        <div class="xly-table__loading">
+          <div class="xly-table__loading-spinner">
+            <div
+              v-for="i in 5"
+              :key="i"
+              class="xly-table__loading-bar"
+              :style="{ animationDelay: `${i * 0.1}s` }"
+            />
+          </div>
+          <span v-if="loadingText" class="xly-table__loading-text">{{
+            loadingText
+          }}</span>
+        </div>
+      </div>
+
+      <!-- 空状态 - 放在表格外，避免因列过多滚动出视口 -->
+      <div v-if="!loading && displayData.length === 0" class="xly-table__empty">
+        <slot name="empty">
+          <svg
+            viewBox="0 0 80 60"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            class="xly-table__empty-icon"
+          >
+            <rect
+              x="4"
+              y="10"
+              width="72"
+              height="46"
+              rx="4"
+              fill="#f5f7fa"
+              stroke="#e2e4ed"
+              stroke-width="1.5"
+            />
+            <rect
+              x="4"
+              y="10"
+              width="72"
+              height="14"
+              rx="4"
+              fill="#eef0f6"
+              stroke="#e2e4ed"
+              stroke-width="1.5"
+            />
+            <rect
+              x="14"
+              y="32"
+              width="26"
+              height="4"
+              rx="2"
+              fill="#dde0ea"
+            />
+            <rect
+              x="14"
+              y="42"
+              width="18"
+              height="4"
+              rx="2"
+              fill="#dde0ea"
+            />
+            <rect
+              x="46"
+              y="32"
+              width="20"
+              height="4"
+              rx="2"
+              fill="#dde0ea"
+            />
+            <rect
+              x="46"
+              y="42"
+              width="12"
+              height="4"
+              rx="2"
+              fill="#dde0ea"
+            />
+          </svg>
+          <p class="xly-table__empty-text">{{ emptyText }}</p>
+        </slot>
+      </div>
     </div>
 
     <!-- 分页 -->
@@ -491,7 +707,10 @@
           v-for="p in pageNumbers"
           :key="p"
           class="xly-table__page-btn"
-          :class="{ 'is-current': p === currentPage, 'is-ellipsis': p === '...' }"
+          :class="{
+            'is-current': p === currentPage,
+            'is-ellipsis': p === '...'
+          }"
           :disabled="typeof p === 'string'"
           @click="typeof p === 'number' && handlePageChange(p)"
         >
@@ -531,7 +750,9 @@
           @keyup.enter="handleJumpPageEnter"
         />
         <span>页</span>
-        <button class="xly-table__pagination-go" @click="handleJumpPage">Go</button>
+        <button class="xly-table__pagination-go" @click="handleJumpPage">
+          Go
+        </button>
       </div>
 
       <!-- 每页条数选择 -->
@@ -555,7 +776,10 @@
       <div class="xly-table__column-settings-panel" @click.stop>
         <div class="xly-table__column-settings-header">
           <h3>列设置</h3>
-          <button class="xly-table__column-settings-close" @click="showColumnSettingsPanel = false">
+          <button
+            class="xly-table__column-settings-close"
+            @click="showColumnSettingsPanel = false"
+          >
             <svg
               viewBox="0 0 24 24"
               width="20"
@@ -566,30 +790,32 @@
               stroke-linecap="round"
               stroke-linejoin="round"
             >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </button>
         </div>
         <div class="xly-table__column-settings-body">
           <div
-            class="xly-table__column-settings-item"
             v-for="(col, index) in localColumns"
             :key="col.prop"
+            class="xly-table__column-settings-item"
             :draggable="isColumnDraggable(col) && props.columnDraggable"
+            :class="{
+              'is-dragging': dragState.draggingIndex === index,
+              'is-drag-over': dragState.dragOverIndex === index,
+              'is-disabled': !isColumnDraggable(col) || !props.columnDraggable
+            }"
             @dragstart="handleDragStart($event, index)"
             @dragover="handleDragOver($event, index)"
             @drop="handleDrop($event, index)"
             @dragend="handleDragEnd"
-            :class="{
-              'is-dragging': dragState.draggingIndex === index,
-              'is-drag-over': dragState.dragOverIndex === index,
-              'is-disabled': !isColumnDraggable(col) || !props.columnDraggable,
-            }"
           >
             <div
               class="xly-table__column-settings-drag-handle"
-              :class="{ 'is-disabled': !isColumnDraggable(col) || !props.columnDraggable }"
+              :class="{
+                'is-disabled': !isColumnDraggable(col) || !props.columnDraggable
+              }"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -601,12 +827,12 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
               >
-                <line x1="8" y1="6" x2="8" y2="6"></line>
-                <line x1="8" y1="12" x2="8" y2="12"></line>
-                <line x1="8" y1="18" x2="8" y2="18"></line>
-                <line x1="16" y1="6" x2="16" y2="6"></line>
-                <line x1="16" y1="12" x2="16" y2="12"></line>
-                <line x1="16" y1="18" x2="16" y2="18"></line>
+                <line x1="8" y1="6" x2="8" y2="6" />
+                <line x1="8" y1="12" x2="8" y2="12" />
+                <line x1="8" y1="18" x2="8" y2="18" />
+                <line x1="16" y1="6" x2="16" y2="6" />
+                <line x1="16" y1="12" x2="16" y2="12" />
+                <line x1="16" y1="18" x2="16" y2="18" />
               </svg>
             </div>
             <label class="xly-table__column-settings-label">
@@ -620,7 +846,10 @@
           </div>
         </div>
         <div class="xly-table__column-settings-footer">
-          <button class="xly-table__column-settings-btn--reset" @click="resetColumnVisibility">
+          <button
+            class="xly-table__column-settings-btn--reset"
+            @click="resetColumnVisibility"
+          >
             重置
           </button>
           <button
@@ -649,171 +878,173 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref, useSlots, watch } from 'vue'
-import XlySelect from '@/components/xly-select/index.vue'
-import XlyButton from '@/components/xly-button/index.vue'
-import XlyIcon from '@/components/xly-icon/index.vue'
+import { computed, onMounted, onUnmounted, reactive, ref, useSlots, watch } from "vue";
+import XlySelect from "@/components/xly-select/index.vue";
+import XlyButton from "@/components/xly-button/index.vue";
+import XlyIcon from "@/components/xly-icon/index.vue";
 
-defineOptions({ name: 'XlyTable' })
+defineOptions({ name: "XlyTable" });
 
-const slots = useSlots()
+const slots = useSlots();
 
 /* ====================================================
    Ellipsis Tooltip
 ==================================================== */
 const tooltipState = reactive({
   visible: false,
-  content: '',
+  content: "",
   x: 0,
-  y: 0,
-})
+  y: 0
+});
 
 function showCellTooltip(event: MouseEvent, content: string) {
-  tooltipState.content = content
-  tooltipState.x = event.clientX
-  tooltipState.y = event.clientY
-  tooltipState.visible = true
+  tooltipState.content = content;
+  tooltipState.x = event.clientX;
+  tooltipState.y = event.clientY;
+  tooltipState.visible = true;
 }
 
 function hideCellTooltip() {
-  tooltipState.visible = false
+  tooltipState.visible = false;
 }
 
 function updateTooltipPosition(event: MouseEvent) {
-  tooltipState.x = event.clientX
-  tooltipState.y = event.clientY
+  tooltipState.x = event.clientX;
+  tooltipState.y = event.clientY;
 }
 
 /* ====================================================
    类型定义
 ==================================================== */
-export type TableAlign = 'left' | 'center' | 'right'
-export type SortOrder = 'asc' | 'desc' | null
+export type TableAlign = "left" | "center" | "right";
+export type SortOrder = "asc" | "desc" | null;
 
 export interface TableColumn {
   /** 列唯一标识，也是数据字段的 key */
-  prop: string
+  prop: string;
   /** 列标题 */
-  name: string
+  name: string;
   /** 列宽度 */
-  width?: number | string
+  width?: number | string;
   /** 最小宽度 */
-  minWidth?: number | string
+  minWidth?: number | string;
   /** 文字对齐 */
-  align?: TableAlign
+  align?: TableAlign;
   /** 是否可排序 */
-  sortable?: boolean
+  sortable?: boolean;
   /** 超出文字是否省略 */
-  ellipsis?: boolean
+  ellipsis?: boolean;
   /** 自定义格式化函数 */
-  formatter?: (row: Record<string, any>, value: any) => string
+  formatter?: (row: Record<string, any>, value: any) => string;
   /** 是否显示该列 */
-  visible?: boolean
+  visible?: boolean;
   /** 列固定位置：'left' | 'right' | undefined */
-  fixed?: 'left' | 'right'
+  fixed?: "left" | "right";
   /** 是否可拖动排序 */
-  drag?: boolean
+  drag?: boolean;
   /** 列内容前缀 */
-  prefix?: string
+  prefix?: string;
   /** 列内容后缀 */
-  suffix?: string
+  suffix?: string;
   /** 合计方式：'sum' 求和 | 'avg' 平均值 | false 不参与合计（默认不参与） */
-  summary?: 'sum' | 'avg' | false
+  summary?: "sum" | "avg" | false;
   /** 合计行该列显示的自定义文字（优先于 summary 计算值） */
-  summaryText?: string
+  summaryText?: string;
 }
 
 export interface TableProps {
   /** 表格数据 */
-  data?: Record<string, any>[]
+  data?: Record<string, any>[];
   /** 列配置 */
-  columns?: TableColumn[]
+  columns?: TableColumn[];
   /** 表格标题 */
-  title?: string
+  title?: string;
   /** 是否加载中 */
-  loading?: boolean
+  loading?: boolean;
   /** 加载文字 */
-  loadingText?: string
+  loadingText?: string;
   /** 空数据文字 */
-  emptyText?: string
+  emptyText?: string;
   /** 是否显示斑马纹 */
-  stripe?: boolean
+  stripe?: boolean;
   /** 是否显示边框 */
-  border?: boolean
+  border?: boolean;
   /** 是否可选中行 */
-  selectable?: boolean
+  selectable?: boolean;
   /** 是否显示序号 */
-  showIndex?: boolean
+  showIndex?: boolean;
   /** 序号列标题 */
-  indexLabel?: string
+  indexLabel?: string;
   /** 操作列标题 */
-  actionLabel?: string
+  actionLabel?: string;
   /** 表格最大高度（超出滚动） */
-  maxHeight?: number | string
+  maxHeight?: number | string;
   /** 行 key 字段 */
-  rowKey?: string
+  rowKey?: string;
   /** 行是否可点击 */
-  rowClickable?: boolean
+  rowClickable?: boolean;
   /** 是否显示分页 */
-  pagination?: boolean
+  pagination?: boolean;
   /** 总数据量（服务端分页） */
-  total?: number
+  total?: number;
   /** 当前页码 */
-  page?: number
+  page?: number;
   /** 每页条数 */
-  pageSize?: number
+  pageSize?: number;
   /** 是否显示每页条数选择 */
-  showPageSize?: boolean
+  showPageSize?: boolean;
   /** 每页条数选项 */
-  pageSizeOptions?: number[]
+  pageSizeOptions?: number[];
   /** 紧凑模式 */
-  compact?: boolean
+  compact?: boolean;
   /** 悬停行高亮 */
-  highlight?: boolean
+  highlight?: boolean;
   /** 分页位置 */
-  paginationPosition?: 'left' | 'center' | 'right'
+  paginationPosition?: "left" | "center" | "right";
   /** 是否显示页码输入框 */
-  showPageInput?: boolean
+  showPageInput?: boolean;
   /** 是否显示列设置按钮 */
-  showColumnSettings?: boolean
+  showColumnSettings?: boolean;
   /** 是否允许列拖动排序（默认 true） */
-  columnDraggable?: boolean
+  columnDraggable?: boolean;
   /** 是否显示刷新按钮 */
-  showRefresh?: boolean
+  showRefresh?: boolean;
   /** 是否显示导出按钮 */
-  showExport?: boolean
+  showExport?: boolean;
   /** 选择模式：multiple 多选，single 单选 */
-  selectionMode?: 'multiple' | 'single'
+  selectionMode?: "multiple" | "single";
   /** 是否支持展开行 */
-  expandable?: boolean
+  expandable?: boolean;
   /** 展开触发方式：icon 点击图标展开，click 点击任意位置展开 */
-  expandTrigger?: 'icon' | 'click'
+  expandTrigger?: "icon" | "click";
   /** 默认展开的行索引数组 */
-  defaultExpandedRows?: number[]
+  defaultExpandedRows?: number[];
   /** 是否启用树形数据模式 */
-  tree?: boolean
+  tree?: boolean;
   /** 树形数据子节点字段名 */
-  treeChildrenKey?: string
+  treeChildrenKey?: string;
   /** 树形缩进宽度（px） */
-  treeIndentSize?: number
+  treeIndentSize?: number;
   /** 是否懒加载（配合 load 方法使用） */
-  lazy?: boolean
+  lazy?: boolean;
   /** 懒加载方法：(row) => Promise<children[]> */
-  load?: (row: Record<string, any>) => Promise<Record<string, any>[]>
-  /** 树形数据的唯一标识字段（建议使用 id） */
-  rowKey?: string
+  load?: (row: Record<string, any>) => Promise<Record<string, any>[]>;
   /** 默认展开的行的 key 数组 */
-  defaultExpandedKeys?: (string | number)[]
+  defaultExpandedKeys?: (string | number)[];
   /** 是否默认展开全部 */
-  defaultExpandAll?: boolean
+  defaultExpandAll?: boolean;
   /** 是否显示合计行 */
-  showSummary?: boolean
+  showSummary?: boolean;
   /** 合计行首列（或首个非数据列）显示的文字，默认"合计" */
-  summaryLabel?: string
+  summaryLabel?: string;
   /** 操作列固定位置：'left' | 'right' */
-  actionFixed?: 'left' | 'right'
+  actionFixed?: "left" | "right";
   /** 操作列宽度 */
-  actionWidth?: number
+  actionWidth?: number;
+  /** 自动计算 maxHeight 填满剩余高度（默认 false，开启后忽略 maxHeight 属性） */
+  autoHeight?: boolean;
+  /** 自动高度计算时的额外偏移量（px），用于顶部其他元素占位 */
+  autoHeightOffset?: number;
 }
 
 /* ====================================================
@@ -822,14 +1053,14 @@ export interface TableProps {
 const props = withDefaults(defineProps<TableProps>(), {
   data: () => [],
   columns: () => [],
-  loadingText: '加载中...',
-  emptyText: '暂无数据',
+  loadingText: "加载中...",
+  emptyText: "暂无数据",
   stripe: false,
   border: false,
   selectable: false,
   showIndex: true,
-  indexLabel: '#',
-  actionLabel: '操作',
+  indexLabel: "#",
+  actionLabel: "操作",
   rowClickable: false,
   pagination: true,
   total: 0,
@@ -839,51 +1070,53 @@ const props = withDefaults(defineProps<TableProps>(), {
   pageSizeOptions: () => [10, 20, 50, 100],
   compact: false,
   highlight: true,
-  paginationPosition: 'right',
+  paginationPosition: "right",
   showPageInput: true,
   showColumnSettings: false,
   columnDraggable: true,
   showRefresh: false,
   showExport: false,
-  selectionMode: 'multiple',
+  selectionMode: "multiple",
   expandable: false,
-  expandTrigger: 'icon',
+  expandTrigger: "icon",
   defaultExpandedRows: () => [],
   tree: false,
-  treeChildrenKey: 'children',
+  treeChildrenKey: "children",
   treeIndentSize: 24,
   lazy: false,
-  rowKey: 'id',
+  rowKey: "id",
   defaultExpandedKeys: () => [],
   defaultExpandAll: false,
   showSummary: false,
-  summaryLabel: '合计',
-})
+  summaryLabel: "合计",
+  autoHeight: true,
+  autoHeightOffset: 0
+});
 
 const emit = defineEmits<{
-  (e: 'selection-change', rows: Record<string, any>[]): void
-  (e: 'row-click', row: Record<string, any>, index: number): void
-  (e: 'sort-change', key: string, order: SortOrder): void
-  (e: 'page-change', page: number): void
-  (e: 'page-size-change', pageSize: number): void
-  (e: 'column-order-change', columns: TableColumn[]): void
-  (e: 'refresh'): void
-  (e: 'export'): void
+  (e: "selection-change", rows: Record<string, any>[]): void;
+  (e: "row-click", row: Record<string, any>, index: number): void;
+  (e: "sort-change", key: string, order: SortOrder): void;
+  (e: "page-change", page: number): void;
+  (e: "page-size-change", pageSize: number): void;
+  (e: "column-order-change", columns: TableColumn[]): void;
+  (e: "refresh"): void;
+  (e: "export"): void;
   /** 展开状态变化 */
-  (e: 'expand-change', row: Record<string, any>, expanded: boolean): void
+  (e: "expand-change", row: Record<string, any>, expanded: boolean): void;
   /** 树形节点展开/收起 */
-  (e: 'tree-expand', row: Record<string, any>, expanded: boolean): void
-}>()
+  (e: "tree-expand", row: Record<string, any>, expanded: boolean): void;
+}>();
 
 /* ====================================================
    刷新 & 导出
 ==================================================== */
 function handleRefresh() {
-  emit('refresh')
+  emit("refresh");
 }
 
 function handleExport() {
-  emit('export')
+  emit("export");
 }
 
 /* ====================================================
@@ -891,38 +1124,122 @@ function handleExport() {
 ==================================================== */
 // 左侧是否有内容可显示
 const toolbarLeftVisible = computed(() => {
-  return !!(props.title || slots.toolbar || slots['toolbar-left'])
-})
+  return !!(props.title || slots.toolbar || slots["toolbar-left"]);
+});
 
 // 右侧是否有内容可显示
 const toolbarRightVisible = computed(() => {
-  return !!(props.showRefresh || props.showExport || props.showColumnSettings || slots['toolbar-right'])
-})
+  return !!(
+    props.showRefresh ||
+    props.showExport ||
+    props.showColumnSettings ||
+    slots["toolbar-right"]
+  );
+});
 
 /* ====================================================
    样式
 ==================================================== */
 const tableClass = computed(() => ({
-  'xly-table--border': props.border,
-  'xly-table--stripe': props.stripe,
-  'xly-table--compact': props.compact,
-  'xly-table--highlight': props.highlight,
-  'xly-table--loading': props.loading,
-}))
+  "xly-table--border": props.border,
+  "xly-table--stripe": props.stripe,
+  "xly-table--compact": props.compact,
+  "xly-table--highlight": props.highlight,
+  "xly-table--loading": props.loading
+}));
 
 const containerStyle = computed(() => {
+  // 自动高度模式
+  if (props.autoHeight) {
+    const h = computedMaxHeight.value;
+    if (h > 0) {
+      return {
+        maxHeight: `${h}px`,
+        overflowY: "auto" as const,
+        overflowX: "auto" as const
+      };
+    }
+    return { overflowX: "auto" as const };
+  }
+
   if (!props.maxHeight) {
     // 没有 maxHeight 时，只需要横向滚动
     return {
-      overflowX: 'auto' as const,
-    }
+      overflowX: "auto" as const
+    };
   }
   return {
-    maxHeight: typeof props.maxHeight === 'number' ? `${props.maxHeight}px` : props.maxHeight,
-    overflowY: 'auto' as const,
-    overflowX: 'auto' as const,
+    maxHeight:
+      typeof props.maxHeight === "number"
+        ? `${props.maxHeight}px`
+        : props.maxHeight,
+    overflowY: "auto" as const,
+    overflowX: "auto" as const
+  };
+});
+
+/* ====================================================
+   自动高度（autoHeight）
+   计算：viewport 高度 - 表格顶部偏移 - 工具栏 - 分页 - 边距
+==================================================== */
+// 根元素 ref
+const tableRootRef = ref<HTMLElement>();
+
+// 工具栏高度预估：padding 16*2 + 内容 ~36px + border-bottom 1px ≈ 69px
+const TOOLBAR_HEIGHT = 69;
+// 分页高度预估：padding 20*2 + 内容 ~36px + border-top 1px ≈ 77px
+const PAGINATION_HEIGHT = 77;
+
+const computedMaxHeight = ref(0);
+
+function calcAutoMaxHeight() {
+  if (!props.autoHeight || !tableRootRef.value) {
+    computedMaxHeight.value = 0;
+    return;
   }
-})
+
+  const rect = tableRootRef.value.getBoundingClientRect();
+  const viewportHeight = window.innerHeight;
+
+  // 表格顶部到视口顶部的距离
+  let consumedHeight = rect.top;
+
+  // 工具栏
+  if (toolbarLeftVisible.value || toolbarRightVisible.value) {
+    consumedHeight += TOOLBAR_HEIGHT;
+  }
+
+  // 分页（有数据且分页开启时才计入）
+  if (props.pagination && total.value > 0) {
+    consumedHeight += PAGINATION_HEIGHT;
+  }
+
+  // 额外偏移 + 底部留白 16px
+  consumedHeight += (props.autoHeightOffset ?? 0) + 10;
+
+  const h = viewportHeight - consumedHeight;
+  computedMaxHeight.value = Math.max(120, h);
+}
+
+let resizeObserver: ResizeObserver | null = null;
+
+onMounted(() => {
+  if (props.autoHeight) {
+    calcAutoMaxHeight();
+    // 监听窗口尺寸变化
+    window.addEventListener("resize", calcAutoMaxHeight);
+    // 监听根元素尺寸变化（如工具栏隐显、分页隐显）
+    if (tableRootRef.value) {
+      resizeObserver = new ResizeObserver(() => calcAutoMaxHeight());
+      resizeObserver.observe(tableRootRef.value);
+    }
+  }
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", calcAutoMaxHeight);
+  resizeObserver?.disconnect();
+});
 
 /* ====================================================
    列配置工具
@@ -931,13 +1248,17 @@ const containerStyle = computed(() => {
 // 获取列的实际宽度（用于动态计算）
 function getColumnActualWidth(col: TableColumn): number {
   if (col.width) {
-    return typeof col.width === 'number' ? col.width : parseInt(col.width as string, 10)
+    return typeof col.width === "number"
+      ? col.width
+      : parseInt(col.width as string, 10);
   }
   // 如果没有设置宽度，使用 minWidth 或默认值
   if (col.minWidth) {
-    return typeof col.minWidth === 'number' ? col.minWidth : parseInt(col.minWidth as string, 10)
+    return typeof col.minWidth === "number"
+      ? col.minWidth
+      : parseInt(col.minWidth as string, 10);
   }
-  return 0 // 0 表示 auto
+  return 0; // 0 表示 auto
 }
 
 /**
@@ -948,57 +1269,60 @@ function getColumnActualWidth(col: TableColumn): number {
  * 固定列偏移只在同方向的固定列之间累加。
  */
 const fixedOffsets = computed<Record<string, number>>(() => {
-  const offsets: Record<string, number> = {}
-  const cols = visibleColumns.value
+  const offsets: Record<string, number> = {};
+  const cols = visibleColumns.value;
 
   // ---- fixed-left：从左到右，在 fixed-left 列之间累加偏移 ----
-  let leftOffset = 0
+  let leftOffset = 0;
   for (const col of cols) {
-    if (col.fixed === 'left') {
-      offsets[col.prop] = leftOffset
-      leftOffset += getColumnActualWidth(col)
+    if (col.fixed === "left") {
+      offsets[col.prop] = leftOffset;
+      leftOffset += getColumnActualWidth(col);
     }
   }
 
   // ---- fixed-right：从右到左，在 fixed-right 列之间累加偏移 ----
-  let rightOffset = 0
+  let rightOffset = 0;
   for (let i = cols.length - 1; i >= 0; i--) {
-    const col = cols[i]
-    if (col.fixed === 'right') {
-      offsets[col.prop] = rightOffset
-      rightOffset += getColumnActualWidth(col)
+    const col = cols[i];
+    if (col.fixed === "right") {
+      offsets[col.prop] = rightOffset;
+      rightOffset += getColumnActualWidth(col);
     }
   }
 
-  return offsets
-})
+  return offsets;
+});
 
 function getColStyle(col: TableColumn) {
-  const style: Record<string, string> = {}
+  const style: Record<string, string> = {};
   if (col.width) {
-    style.width = typeof col.width === 'number' ? `${col.width}px` : col.width
-    style.maxWidth = style.width // 限制最大宽度，确保 ellipsis 生效
+    style.width = typeof col.width === "number" ? `${col.width}px` : col.width;
+    style.maxWidth = style.width; // 限制最大宽度，确保 ellipsis 生效
   } else {
     // 没传 width 时给个默认最小宽度，防止列被压缩
     style.minWidth = col.minWidth
-      ? (typeof col.minWidth === 'number' ? `${col.minWidth}px` : col.minWidth)
-      : '120px'
+      ? typeof col.minWidth === "number"
+        ? `${col.minWidth}px`
+        : col.minWidth
+      : "120px";
   }
   if (col.minWidth)
-    style.minWidth = typeof col.minWidth === 'number' ? `${col.minWidth}px` : col.minWidth
+    style.minWidth =
+      typeof col.minWidth === "number" ? `${col.minWidth}px` : col.minWidth;
 
   // 固定列：注入 left / right 偏移，确保多列固定时不互相遮挡
-  if (col.fixed === 'left') {
-    style.left = `${fixedOffsets.value[col.prop] ?? 0}px`
-  } else if (col.fixed === 'right') {
-    style.right = `${fixedOffsets.value[col.prop] ?? 0}px`
+  if (col.fixed === "left") {
+    style.left = `${fixedOffsets.value[col.prop] ?? 0}px`;
+  } else if (col.fixed === "right") {
+    style.right = `${fixedOffsets.value[col.prop] ?? 0}px`;
   }
 
-  return style
+  return style;
 }
 
 // 本地列配置（用于响应式修改）
-const localColumns = ref<TableColumn[]>([])
+const localColumns = ref<TableColumn[]>([]);
 
 // 监听 props.columns 变化，同步到本地
 // 注意：不使用 deep: true，避免内部拖拽排序/visible 修改触发重置
@@ -1006,123 +1330,125 @@ const localColumns = ref<TableColumn[]>([])
 watch(
   () => {
     // 只监听列的 prop 列表和列数，而不深度监听每个列的属性变化
-    return props.columns.map((c) => c.prop).join(',') + ':' + props.columns.length
+    return (
+      props.columns.map(c => c.prop).join(",") + ":" + props.columns.length
+    );
   },
   () => {
-    localColumns.value = [...props.columns.map((col) => ({ ...col }))]
+    localColumns.value = [...props.columns.map(col => ({ ...col }))];
   },
-  { immediate: true },
-)
+  { immediate: true }
+);
 
 // 可见列计算属性
 const visibleColumns = computed(() => {
-  return localColumns.value.filter((col) => col.visible !== false)
-})
+  return localColumns.value.filter(col => col.visible !== false);
+});
 
 // 列设置面板状态
-const showColumnSettingsPanel = ref(false)
+const showColumnSettingsPanel = ref(false);
 
 // 拖动状态
 const dragState = ref({
   draggingIndex: -1,
-  dragOverIndex: -1,
-})
+  dragOverIndex: -1
+});
 
 // 判断列是否可拖动
 function isColumnDraggable(col: TableColumn) {
   // 如果列明确设置了 drag，使用该设置；否则默认为 true
-  return col.drag !== false
+  return col.drag !== false;
 }
 
 // 拖动开始
 function handleDragStart(event: DragEvent, index: number) {
-  dragState.value.draggingIndex = index
+  dragState.value.draggingIndex = index;
   if (event.dataTransfer) {
-    event.dataTransfer.effectAllowed = 'move'
-    event.dataTransfer.setData('text/plain', String(index))
+    event.dataTransfer.effectAllowed = "move";
+    event.dataTransfer.setData("text/plain", String(index));
   }
 }
 
 // 拖动经过
 function handleDragOver(event: DragEvent, index: number) {
-  event.preventDefault()
+  event.preventDefault();
   if (dragState.value.draggingIndex !== index) {
-    dragState.value.dragOverIndex = index
+    dragState.value.dragOverIndex = index;
   }
 }
 
 // 放置
 function handleDrop(event: DragEvent, targetIndex: number) {
-  event.preventDefault()
-  const sourceIndex = dragState.value.draggingIndex
+  event.preventDefault();
+  const sourceIndex = dragState.value.draggingIndex;
 
   if (sourceIndex === -1 || sourceIndex === targetIndex) {
-    return
+    return;
   }
 
   // 交换列位置
-  const [removed] = localColumns.value.splice(sourceIndex, 1)
-  localColumns.value.splice(targetIndex, 0, removed)
+  const [removed] = localColumns.value.splice(sourceIndex, 1);
+  localColumns.value.splice(targetIndex, 0, removed);
 
   // 更新父组件的列配置
-  emit('column-order-change', [...localColumns.value])
+  emit("column-order-change", [...localColumns.value]);
 
-  dragState.value.draggingIndex = -1
-  dragState.value.dragOverIndex = -1
+  dragState.value.draggingIndex = -1;
+  dragState.value.dragOverIndex = -1;
 }
 
 // 拖动结束
 function handleDragEnd() {
-  dragState.value.draggingIndex = -1
-  dragState.value.dragOverIndex = -1
+  dragState.value.draggingIndex = -1;
+  dragState.value.dragOverIndex = -1;
 }
 
 // 保存原始可见性配置，用于重置
-const originalColumnVisibility = ref<Record<string, boolean>>({})
+const originalColumnVisibility = ref<Record<string, boolean>>({});
 
 // 初始化时保存原始配置
 watch(
   () => props.columns,
-  (cols) => {
+  cols => {
     originalColumnVisibility.value = cols.reduce(
       (acc, col) => {
-        acc[col.prop] = col.visible !== false
-        return acc
+        acc[col.prop] = col.visible !== false;
+        return acc;
       },
-      {} as Record<string, boolean>,
-    )
+      {} as Record<string, boolean>
+    );
   },
-  { immediate: true },
-)
+  { immediate: true }
+);
 
 // 切换列显示/隐藏
 function handleColumnVisibleChange(prop: string, event: Event) {
-  const target = event.target as HTMLInputElement
-  const col = localColumns.value.find((c) => c.prop === prop)
+  const target = event.target as HTMLInputElement;
+  const col = localColumns.value.find(c => c.prop === prop);
   if (col) {
-    col.visible = target.checked
+    col.visible = target.checked;
   }
 }
 
 // 重置列可见性
 function resetColumnVisibility() {
-  localColumns.value.forEach((col) => {
-    col.visible = originalColumnVisibility.value[col.prop] !== false
-  })
+  localColumns.value.forEach(col => {
+    col.visible = originalColumnVisibility.value[col.prop] !== false;
+  });
 }
 
 /* ====================================================
    总列数（用于 colspan）
 ==================================================== */
 const totalColCount = computed(() => {
-  let count = visibleColumns.value.length
+  let count = visibleColumns.value.length;
   // 树形模式下有树展开列，否则有普通展开列
-  if (props.tree) count++
-  else if (props.expandable) count++
-  if (props.selectable) count++
-  if (props.showIndex) count++
-  return count
-})
+  if (props.tree) count++;
+  else if (props.expandable) count++;
+  if (props.selectable) count++;
+  if (props.showIndex) count++;
+  return count;
+});
 
 /* ====================================================
    合计行
@@ -1137,168 +1463,185 @@ const totalColCount = computed(() => {
  */
 interface SummaryCell {
   /** 计算类型：'sum' | 'avg' | 'custom' | '' */
-  type: 'sum' | 'avg' | 'custom' | ''
+  type: "sum" | "avg" | "custom" | "";
   /** 显示的文字 */
-  value: string
+  value: string;
 }
 
 const summaryRow = computed<Record<string, SummaryCell>>(() => {
-  const result: Record<string, SummaryCell> = {}
-  if (!props.showSummary) return result
+  const result: Record<string, SummaryCell> = {};
+  if (!props.showSummary) return result;
 
-  const rows = props.data ?? []
+  const rows = props.data ?? [];
 
   for (const col of visibleColumns.value) {
     // 优先使用用户自定义文字
     if (col.summaryText !== undefined) {
-      result[col.prop] = { type: 'custom', value: col.summaryText }
-      continue
+      result[col.prop] = { type: "custom", value: col.summaryText };
+      continue;
     }
 
-    if (col.summary === 'sum') {
+    if (col.summary === "sum") {
       const total = rows.reduce((acc, row) => {
-        const v = parseFloat(row[col.prop])
-        return acc + (isNaN(v) ? 0 : v)
-      }, 0)
-      const value = Number.isInteger(total) ? String(total) : total.toFixed(2)
-      result[col.prop] = { type: 'sum', value }
-    } else if (col.summary === 'avg') {
+        const v = parseFloat(row[col.prop]);
+        return acc + (isNaN(v) ? 0 : v);
+      }, 0);
+      const value = Number.isInteger(total) ? String(total) : total.toFixed(2);
+      result[col.prop] = { type: "sum", value };
+    } else if (col.summary === "avg") {
       if (rows.length === 0) {
-        result[col.prop] = { type: 'avg', value: '-' }
+        result[col.prop] = { type: "avg", value: "-" };
       } else {
         const total = rows.reduce((acc, row) => {
-          const v = parseFloat(row[col.prop])
-          return acc + (isNaN(v) ? 0 : v)
-        }, 0)
-        const avg = total / rows.length
-        const value = Number.isInteger(avg) ? String(avg) : avg.toFixed(2)
-        result[col.prop] = { type: 'avg', value }
+          const v = parseFloat(row[col.prop]);
+          return acc + (isNaN(v) ? 0 : v);
+        }, 0);
+        const avg = total / rows.length;
+        const value = Number.isInteger(avg) ? String(avg) : avg.toFixed(2);
+        result[col.prop] = { type: "avg", value };
       }
     } else {
-      result[col.prop] = { type: '', value: '' }
+      result[col.prop] = { type: "", value: "" };
     }
   }
 
-  return result
-})
+  return result;
+});
 
 /** 合计行是否有任何列设置了 summary 或 summaryText */
 const hasSummary = computed(() => {
-  if (!props.showSummary) return false
+  if (!props.showSummary) return false;
   return visibleColumns.value.some(
-    (col) => col.summary === 'sum' || col.summary === 'avg' || col.summaryText !== undefined,
-  )
-})
+    col =>
+      col.summary === "sum" ||
+      col.summary === "avg" ||
+      col.summaryText !== undefined
+  );
+});
 
 /** 是否同时存在 sum 和 avg 列 —— 混用时才显示类型标签 */
 const summaryMixed = computed(() => {
-  const cols = visibleColumns.value
-  return cols.some((c) => c.summary === 'sum') && cols.some((c) => c.summary === 'avg')
-})
+  const cols = visibleColumns.value;
+  return (
+    cols.some(c => c.summary === "sum") && cols.some(c => c.summary === "avg")
+  );
+});
 
 // 计算表格最小宽度（所有列宽度之和 + 额外列宽度），确保列宽不被压缩
 const tableMinWidth = computed(() => {
-  let total = 0
+  let total = 0;
   for (const col of visibleColumns.value) {
-    total += getColumnActualWidth(col)
+    total += getColumnActualWidth(col);
   }
   // 额外列：展开列/树展开列、选择列、序号列
-  if (props.tree || props.expandable) total += 32
-  if (props.selectable) total += 56
-  if (props.showIndex) total += 56
+  if (props.tree || props.expandable) total += 32;
+  if (props.selectable) total += 56;
+  if (props.showIndex) total += 56;
   // 操作列预估宽度
-  if (slots.action) total += 120
-  return total > 0 ? `${total}px` : undefined
-})
+  if (slots.action) total += 120;
+  return total > 0 ? `${total}px` : undefined;
+});
 
 /* ====================================================
    数据处理 & 排序
 ==================================================== */
-const sortState = ref<{ key: string; order: SortOrder }>({ key: '', order: null })
+const sortState = ref<{ key: string; order: SortOrder }>({
+  key: "",
+  order: null
+});
 
 function handleSort(key: string) {
   if (sortState.value.key !== key) {
-    sortState.value = { key, order: 'asc' }
-  } else if (sortState.value.order === 'asc') {
-    sortState.value = { key, order: 'desc' }
+    sortState.value = { key, order: "asc" };
+  } else if (sortState.value.order === "asc") {
+    sortState.value = { key, order: "desc" };
   } else {
-    sortState.value = { key: '', order: null }
+    sortState.value = { key: "", order: null };
   }
-  emit('sort-change', sortState.value.key, sortState.value.order)
+  emit("sort-change", sortState.value.key, sortState.value.order);
 }
 
 const sortedData = computed(() => {
-  const { key, order } = sortState.value
-  if (!key || !order) return [...props.data]
+  const { key, order } = sortState.value;
+  if (!key || !order) return [...props.data];
 
   return [...props.data].sort((a, b) => {
-    const va = a[key]
-    const vb = b[key]
-    if (va == null && vb == null) return 0
-    if (va == null) return 1
-    if (vb == null) return -1
-    if (typeof va === 'number' && typeof vb === 'number') {
-      return order === 'asc' ? va - vb : vb - va
+    const va = a[key];
+    const vb = b[key];
+    if (va == null && vb == null) return 0;
+    if (va == null) return 1;
+    if (vb == null) return -1;
+    if (typeof va === "number" && typeof vb === "number") {
+      return order === "asc" ? va - vb : vb - va;
     }
-    const sa = String(va)
-    const sb = String(vb)
-    return order === 'asc' ? sa.localeCompare(sb) : sb.localeCompare(sa)
-  })
-})
+    const sa = String(va);
+    const sb = String(vb);
+    return order === "asc" ? sa.localeCompare(sb) : sb.localeCompare(sa);
+  });
+});
 
 /* ====================================================
    分页（前端分页）
 ==================================================== */
-const currentPage = ref(props.page)
-const currentPageSize = ref(props.pageSize)
+const currentPage = ref(props.page);
+const currentPageSize = ref(props.pageSize);
 
 watch(
   () => props.page,
-  (v) => {
-    currentPage.value = v
-  },
-)
+  v => {
+    currentPage.value = v;
+  }
+);
 watch(
   () => props.pageSize,
-  (v) => {
-    currentPageSize.value = v
-  },
-)
+  v => {
+    currentPageSize.value = v;
+  }
+);
 
 // 如果传入了 total（服务端分页），直接用 total；否则用数据长度
-const total = computed(() => (props.total > 0 ? props.total : sortedData.value.length))
-const totalPages = computed(() => Math.max(1, Math.ceil(total.value / currentPageSize.value)))
+const total = computed(() =>
+  props.total > 0 ? props.total : sortedData.value.length
+);
+const totalPages = computed(() =>
+  Math.max(1, Math.ceil(total.value / currentPageSize.value))
+);
 
 const displayData = computed(() => {
   // 服务端分页：直接显示当前 data
-  if (props.total > 0) return sortedData.value
+  if (props.total > 0) return sortedData.value;
   // 前端分页
-  if (!props.pagination) return sortedData.value
-  const start = (currentPage.value - 1) * currentPageSize.value
-  return sortedData.value.slice(start, start + currentPageSize.value)
-})
+  if (!props.pagination) return sortedData.value;
+  const start = (currentPage.value - 1) * currentPageSize.value;
+  return sortedData.value.slice(start, start + currentPageSize.value);
+});
 
 // 展开行处理后的数据
 const displayDataWithExpand = computed(() => {
-  const result: Array<{ row: Record<string, any>; index: number; key: string | number; expanded: boolean }> = []
+  const result: Array<{
+    row: Record<string, any>;
+    index: number;
+    key: string | number;
+    expanded: boolean;
+  }> = [];
   displayData.value.forEach((row, index) => {
-    const key = props.rowKey ? row[props.rowKey] : index
-    const expanded = expandedRows.value.has(index)
-    result.push({ row, index, key, expanded })
-  })
-  return result
-})
+    const key = props.rowKey ? row[props.rowKey] : index;
+    const expanded = expandedRows.value.has(index);
+    result.push({ row, index, key, expanded });
+  });
+  return result;
+});
 
 // 树形数据扁平化处理
 interface TreeNode {
-  row: Record<string, any>
-  level: number
-  index: number  // 一级数据中的索引（用于排序）
-  treeIndex: string  // 带层级的序号字符串，如 "1", "1-2", "1-2-1"
-  expanded: boolean
-  loading: boolean
-  hasChildren: boolean
-  key: string | number
+  row: Record<string, any>;
+  level: number;
+  index: number; // 一级数据中的索引（用于排序）
+  treeIndex: string; // 带层级的序号字符串，如 "1", "1-2", "1-2-1"
+  expanded: boolean;
+  loading: boolean;
+  hasChildren: boolean;
+  key: string | number;
 }
 
 const treeFlatData = computed<TreeNode[]>(() => {
@@ -1308,444 +1651,458 @@ const treeFlatData = computed<TreeNode[]>(() => {
       row,
       level: 0,
       index,
-      treeIndex: String(index + 1),  // 普通模式：1, 2, 3...
+      treeIndex: String(index + 1), // 普通模式：1, 2, 3...
       expanded: false,
       loading: false,
       hasChildren: false,
-      key: props.rowKey ? row[props.rowKey] : index,
-    }))
+      key: props.rowKey ? row[props.rowKey] : index
+    }));
   }
 
-  const result: TreeNode[] = []
-  const childrenKey = props.treeChildrenKey
+  const result: TreeNode[] = [];
+  const childrenKey = props.treeChildrenKey;
 
   // 顶层节点计数器（从1开始，用于显示序号1,2,3...）
-  let topLevelCounter = 0
+  let topLevelCounter = 0;
 
-  function traverse(rows: Record<string, any>[], level: number, parentTreeIndex?: string) {
+  function traverse(
+    rows: Record<string, any>[],
+    level: number,
+    parentTreeIndex?: string
+  ) {
     rows.forEach((row, idx) => {
-      const key = getTreeRowKey(row)
-      const children = row[childrenKey] as Record<string, any>[] | undefined
-      const hasChildren = Array.isArray(children) && children.length > 0
-      const expanded = !!treeExpandedKeys.value[key]
-      const loading = !!loadingKeys.value[key]
-      const isConfirmedLeaf = !!confirmedLeafKeys.value[key]
+      const key = getTreeRowKey(row);
+      const children = row[childrenKey] as Record<string, any>[] | undefined;
+      const hasChildren = Array.isArray(children) && children.length > 0;
+      const expanded = !!treeExpandedKeys.value[key];
+      const loading = !!loadingKeys.value[key];
+      const isConfirmedLeaf = !!confirmedLeafKeys.value[key];
 
       // 判断是否显示展开图标：
       // 1. 有子节点数据
       // 2. 懒加载模式且未确认是叶子节点（未加载过或加载过有数据）
       // 3. 非懒加载模式且无数据则不显示
-      const showExpandIcon = hasChildren || (props.lazy && props.load && !isConfirmedLeaf)
+      const showExpandIcon =
+        hasChildren || (props.lazy && props.load && !isConfirmedLeaf);
 
       // 序号索引（用于 getRowIndex 计算）
-      let nodeIndex: number
-      let treeIndex: string
+      let nodeIndex: number;
+      let treeIndex: string;
 
       if (level === 0) {
         // 顶层节点：1, 2, 3...
-        nodeIndex = ++topLevelCounter
-        treeIndex = String(nodeIndex)
+        nodeIndex = ++topLevelCounter;
+        treeIndex = String(nodeIndex);
       } else {
         // 子节点：从 row._childNum 获取兄弟中的序号
-        const childNum = (row as any)._childNum ?? (idx + 1)
-        nodeIndex = (row as any)._parentIndex ?? 0
-        treeIndex = parentTreeIndex ? `${parentTreeIndex}-${childNum}` : String(childNum)
+        const childNum = (row as any)._childNum ?? idx + 1;
+        nodeIndex = (row as any)._parentIndex ?? 0;
+        treeIndex = parentTreeIndex
+          ? `${parentTreeIndex}-${childNum}`
+          : String(childNum);
       }
 
       result.push({
         row,
         level,
         index: nodeIndex,
-        treeIndex,  // 带层级的序号字符串，如 "1", "1-2", "1-2-1"
+        treeIndex, // 带层级的序号字符串，如 "1", "1-2", "1-2-1"
         expanded,
         loading,
         hasChildren: showExpandIcon,
-        key,
-      })
+        key
+      });
 
       // 如果已展开且有子节点，递归处理子节点
       if (expanded && hasChildren) {
         // 为子节点设置父节点信息
         children.forEach((child, childIdx) => {
-          ;(child as any)._parentIndex = nodeIndex
-          ;(child as any)._childNum = childIdx + 1
-          ;(child as any)._parentTreeIndex = treeIndex
-        })
-        traverse(children, level + 1, treeIndex)
+          (child as any)._parentIndex = nodeIndex;
+          (child as any)._childNum = childIdx + 1;
+          (child as any)._parentTreeIndex = treeIndex;
+        });
+        traverse(children, level + 1, treeIndex);
       }
-    })
+    });
   }
 
-  traverse(displayData.value, 0)
-  return result
-})
+  traverse(displayData.value, 0);
+  return result;
+});
 
 // 每页条数选择器的选项
 const pageSizeSelectOptions = computed(() => {
-  return props.pageSizeOptions.map((size) => ({
+  return props.pageSizeOptions.map(size => ({
     value: size,
-    label: `${size}条/页`,
-  }))
-})
+    label: `${size}条/页`
+  }));
+});
 
 function handlePageChange(page: number) {
-  if (page < 1 || page > totalPages.value) return
-  currentPage.value = page
-  emit('page-change', page)
+  if (page < 1 || page > totalPages.value) return;
+  currentPage.value = page;
+  emit("page-change", page);
 }
 
 function handlePageSizeChange(size: number) {
-  currentPageSize.value = size
-  currentPage.value = 1
-  emit('page-size-change', size)
+  currentPageSize.value = size;
+  currentPage.value = 1;
+  emit("page-size-change", size);
 }
 
 const pageNumbers = computed(() => {
-  const total = totalPages.value
-  const current = currentPage.value
-  const pages: (number | '...')[] = []
+  const total = totalPages.value;
+  const current = currentPage.value;
+  const pages: (number | "...")[] = [];
 
-  if (total === 0) return pages
+  if (total === 0) return pages;
 
   // 总页数少，全部显示
   if (total <= 7) {
-    for (let i = 1; i <= total; i++) pages.push(i)
-    return pages
+    for (let i = 1; i <= total; i++) pages.push(i);
+    return pages;
   }
 
   // 始终显示第一页
-  pages.push(1)
+  pages.push(1);
 
   // 如果当前页离第一页较远，显示省略号
   if (current > 3) {
-    pages.push('...')
+    pages.push("...");
   } else {
     // 当前页靠近开头，显示 2 到 current+1
     for (let i = 2; i <= Math.min(3, current + 1); i++) {
-      if (!pages.includes(i)) pages.push(i)
+      if (!pages.includes(i)) pages.push(i);
     }
   }
 
   // 显示当前页附近的页码
-  const start = Math.max(2, current - 1)
-  const end = Math.min(total - 1, current + 1)
+  const start = Math.max(2, current - 1);
+  const end = Math.min(total - 1, current + 1);
   for (let i = start; i <= end; i++) {
-    if (!pages.includes(i)) pages.push(i)
+    if (!pages.includes(i)) pages.push(i);
   }
 
   // 如果当前页离最后一页较远，显示省略号
   if (current < total - 2) {
-    pages.push('...')
+    pages.push("...");
   } else {
     // 当前页靠近结尾，显示 total-2 到 total-1
     for (let i = Math.max(total - 2, current); i < total; i++) {
-      if (!pages.includes(i)) pages.push(i)
+      if (!pages.includes(i)) pages.push(i);
     }
   }
 
   // 始终显示最后一页
-  if (!pages.includes(total)) pages.push(total)
+  if (!pages.includes(total)) pages.push(total);
 
-  return pages
-})
+  return pages;
+});
 
-const jumpPageInput = ref<number>(currentPage.value)
+const jumpPageInput = ref<number>(currentPage.value);
 watch(
   () => currentPage.value,
-  (newVal) => {
-    jumpPageInput.value = newVal
-  },
-)
+  newVal => {
+    jumpPageInput.value = newVal;
+  }
+);
 
 function handleJumpPage() {
-  const page = Number(jumpPageInput.value)
+  const page = Number(jumpPageInput.value);
   if (page >= 1 && page <= totalPages.value && page !== currentPage.value) {
-    handlePageChange(page)
+    handlePageChange(page);
   } else {
-    jumpPageInput.value = currentPage.value
+    jumpPageInput.value = currentPage.value;
   }
 }
 
 function handleJumpPageEnter(e: KeyboardEvent) {
-  if (e.key === 'Enter') {
-    handleJumpPage()
+  if (e.key === "Enter") {
+    handleJumpPage();
   }
 }
 
 /* ====================================================
    行选择
 ==================================================== */
-const selectedRows = ref<Record<string, any>[]>([])
+const selectedRows = ref<Record<string, any>[]>([]);
 // 使用 Map 存储: key → row，key 为行唯一标识
-const selectedMap = ref<Map<any, Record<string, any>>>(new Map())
+const selectedMap = ref<Map<any, Record<string, any>>>(new Map());
 
 // 获取行的唯一标识 key
 function getRowKey(row: Record<string, any>) {
-  return props.rowKey ? row[props.rowKey] : row
+  return props.rowKey ? row[props.rowKey] : row;
 }
 
 function isRowSelected(row: Record<string, any>) {
-  return selectedMap.value.has(getRowKey(row))
+  return selectedMap.value.has(getRowKey(row));
 }
 
 // 用于全选的数据源：树形模式下用 treeFlatData，普通模式下用 displayData
 const selectableData = computed(() => {
   if (props.tree) {
     // 树形模式：使用所有已扁平化的节点
-    return treeFlatData.value.map(node => node.row)
+    return treeFlatData.value.map(node => node.row);
   }
-  return displayData.value
-})
+  return displayData.value;
+});
 
 const isAllSelected = computed(
-  () => selectableData.value.length > 0 && selectableData.value.every((r) => selectedMap.value.has(getRowKey(r))),
-)
+  () =>
+    selectableData.value.length > 0 &&
+    selectableData.value.every(r => selectedMap.value.has(getRowKey(r)))
+);
 const isIndeterminate = computed(
-  () => selectableData.value.some((r) => selectedMap.value.has(getRowKey(r))) && !isAllSelected.value,
-)
+  () =>
+    selectableData.value.some(r => selectedMap.value.has(getRowKey(r))) &&
+    !isAllSelected.value
+);
 
 function handleSelectAll(e: Event) {
-  const isChecked = (e.target as HTMLInputElement).checked
+  const isChecked = (e.target as HTMLInputElement).checked;
   if (isChecked) {
-    selectableData.value.forEach((r) => {
-      const key = getRowKey(r)
+    selectableData.value.forEach(r => {
+      const key = getRowKey(r);
       if (!selectedMap.value.has(key)) {
-        selectedMap.value.set(key, r)
+        selectedMap.value.set(key, r);
       }
-    })
+    });
   } else {
-    selectableData.value.forEach((r) => {
-      selectedMap.value.delete(getRowKey(r))
-    })
+    selectableData.value.forEach(r => {
+      selectedMap.value.delete(getRowKey(r));
+    });
   }
-  selectedRows.value = [...selectedMap.value.values()]
-  emit('selection-change', [...selectedRows.value])
+  selectedRows.value = [...selectedMap.value.values()];
+  emit("selection-change", [...selectedRows.value]);
 }
 
 function handleRowSelect(row: Record<string, any>) {
-  const key = getRowKey(row)
+  const key = getRowKey(row);
   if (selectedMap.value.has(key)) {
-    selectedMap.value.delete(key)
+    selectedMap.value.delete(key);
   } else {
-    if (props.selectionMode === 'single') {
-      selectedMap.value.clear()
+    if (props.selectionMode === "single") {
+      selectedMap.value.clear();
     }
-    selectedMap.value.set(key, row)
+    selectedMap.value.set(key, row);
   }
-  selectedRows.value = [...selectedMap.value.values()]
-  emit('selection-change', [...selectedRows.value])
+  selectedRows.value = [...selectedMap.value.values()];
+  emit("selection-change", [...selectedRows.value]);
 }
 
 /* ====================================================
    行点击
 ==================================================== */
 function handleRowClick(row: Record<string, any>, index: number) {
-  if (!props.rowClickable) return
-  emit('row-click', row, index)
+  if (!props.rowClickable) return;
+  emit("row-click", row, index);
 }
 
 /* ====================================================
    展开行
 ==================================================== */
 // 展开状态 Map
-const expandedRows = ref<Set<number>>(new Set())
+const expandedRows = ref<Set<number>>(new Set());
 
 // 检查 expand 插槽是否存在
-const hasExpandSlot = computed(() => !!slots.expand)
+const hasExpandSlot = computed(() => !!slots.expand);
 
 // 监听默认展开行
 watch(
   () => props.defaultExpandedRows,
-  (rows) => {
-    expandedRows.value = new Set(rows)
+  rows => {
+    expandedRows.value = new Set(rows);
   },
-  { immediate: true },
-)
+  { immediate: true }
+);
 
 // 判断行是否展开
 function isRowExpanded(index: number) {
-  return expandedRows.value.has(index)
+  return expandedRows.value.has(index);
 }
 
 // 切换展开状态
 function toggleRowExpand(row: Record<string, any>, index: number) {
-  const expanded = !expandedRows.value.has(index)
+  const expanded = !expandedRows.value.has(index);
   if (expanded) {
-    expandedRows.value.add(index)
+    expandedRows.value.add(index);
   } else {
-    expandedRows.value.delete(index)
+    expandedRows.value.delete(index);
   }
   // 触发 emit
-  emit('expand-change', row, expanded)
+  emit("expand-change", row, expanded);
 }
 
 // 处理展开行点击
 function handleExpandClick(row: Record<string, any>, index: number) {
-  if (props.expandTrigger === 'click') {
-    toggleRowExpand(row, index)
+  if (props.expandTrigger === "click") {
+    toggleRowExpand(row, index);
   }
 }
 
 // 展开所有行
 function expandAll() {
   displayData.value.forEach((_, index) => {
-    expandedRows.value.add(index)
-  })
+    expandedRows.value.add(index);
+  });
 }
 
 // 收起所有行
 function collapseAll() {
-  expandedRows.value.clear()
+  expandedRows.value.clear();
 }
 
 /* ====================================================
    树形数据
 ==================================================== */
 // 树形展开状态 - 使用普通对象，避免 Map/Set 的深层响应式追踪问题
-const treeExpandedKeys = ref<Record<string, boolean>>({})
+const treeExpandedKeys = ref<Record<string, boolean>>({});
 
 // 懒加载中的节点
-const loadingKeys = ref<Record<string, boolean>>({})
+const loadingKeys = ref<Record<string, boolean>>({});
 
 // 已确认的叶子节点（懒加载后返回空数据的节点）
-const confirmedLeafKeys = ref<Record<string, boolean>>({})
+const confirmedLeafKeys = ref<Record<string, boolean>>({});
 
 // 获取行的唯一标识
 function getTreeRowKey(row: Record<string, any>): string {
-  const key = props.rowKey ? row[props.rowKey] : JSON.stringify(row)
-  return String(key)
+  const key = props.rowKey ? row[props.rowKey] : JSON.stringify(row);
+  return String(key);
 }
 
 // 检查节点是否有子节点
 function hasTreeChildren(row: Record<string, any>): boolean {
-  const children = row[props.treeChildrenKey]
-  return Array.isArray(children) && children.length > 0
+  const children = row[props.treeChildrenKey];
+  return Array.isArray(children) && children.length > 0;
 }
 
 // 判断行是否展开
 function isTreeExpanded(row: Record<string, any>): boolean {
-  const key = getTreeRowKey(row)
-  return !!treeExpandedKeys.value[key]
+  const key = getTreeRowKey(row);
+  return !!treeExpandedKeys.value[key];
 }
 
 // 切换树节点展开状态
 async function toggleTreeExpand(row: Record<string, any>) {
-  const key = getTreeRowKey(row)
-  const expanded = !treeExpandedKeys.value[key]
-  const childrenKey = props.treeChildrenKey
-  const hasChildren = row[childrenKey] && Array.isArray(row[childrenKey]) && row[childrenKey].length > 0
+  const key = getTreeRowKey(row);
+  const expanded = !treeExpandedKeys.value[key];
+  const childrenKey = props.treeChildrenKey;
+  const hasChildren =
+    row[childrenKey] &&
+    Array.isArray(row[childrenKey]) &&
+    row[childrenKey].length > 0;
 
   if (expanded) {
     // 展开时，先设置展开状态（避免异步竞态）
-    treeExpandedKeys.value = { ...treeExpandedKeys.value, [key]: true }
+    treeExpandedKeys.value = { ...treeExpandedKeys.value, [key]: true };
 
     // 检查是否需要懒加载
     if (props.lazy && props.load && !hasChildren) {
       // 显示 loading 状态
-      loadingKeys.value = { ...loadingKeys.value, [key]: true }
+      loadingKeys.value = { ...loadingKeys.value, [key]: true };
       try {
-        const children = await props.load(row)
+        const children = await props.load(row);
         // 如果返回空数组，说明是叶子节点
         if (!children || children.length === 0) {
-          confirmedLeafKeys.value = { ...confirmedLeafKeys.value, [key]: true }
+          confirmedLeafKeys.value = { ...confirmedLeafKeys.value, [key]: true };
           // 收起该节点（叶子节点不需要展开）
-          const { [key]: _, ...rest } = treeExpandedKeys.value
-          treeExpandedKeys.value = rest
+          const { [key]: _, ...rest } = treeExpandedKeys.value;
+          treeExpandedKeys.value = rest;
         }
       } catch (err) {
-        console.error('懒加载失败:', err)
+        console.error("懒加载失败:", err);
         // 加载失败，收起该节点
-        const { [key]: _, ...rest } = treeExpandedKeys.value
-        treeExpandedKeys.value = rest
+        const { [key]: _, ...rest } = treeExpandedKeys.value;
+        treeExpandedKeys.value = rest;
       } finally {
         // 清除 loading 状态
-        const { [key]: _, ...rest } = loadingKeys.value
-        loadingKeys.value = rest
+        const { [key]: _, ...rest } = loadingKeys.value;
+        loadingKeys.value = rest;
       }
     }
   } else {
     // 收起 - 移除该 key
-    const { [key]: _, ...rest } = treeExpandedKeys.value
-    treeExpandedKeys.value = rest
+    const { [key]: _, ...rest } = treeExpandedKeys.value;
+    treeExpandedKeys.value = rest;
   }
 
-  emit('tree-expand', row, expanded)
+  emit("tree-expand", row, expanded);
 }
 
 // 处理树节点点击
 function handleTreeNodeClick(row: Record<string, any>) {
   // 只有有子节点或支持懒加载的行才能展开
   if (hasTreeChildren(row) || (props.lazy && props.load)) {
-    toggleTreeExpand(row)
+    toggleTreeExpand(row);
   }
 }
 
 // 判断节点是否正在加载
 function isTreeLoading(row: Record<string, any>): boolean {
-  const key = getTreeRowKey(row)
-  return !!loadingKeys.value[key]
+  const key = getTreeRowKey(row);
+  return !!loadingKeys.value[key];
 }
 
 // 展开指定行（根据 key）
 function expandRow(row: Record<string, any>) {
-  const key = getTreeRowKey(row)
-  treeExpandedKeys.value = { ...treeExpandedKeys.value, [key]: true }
+  const key = getTreeRowKey(row);
+  treeExpandedKeys.value = { ...treeExpandedKeys.value, [key]: true };
 }
 
 // 收起指定行
 function collapseRow(row: Record<string, any>) {
-  const key = getTreeRowKey(row)
-  const { [key]: _, ...rest } = treeExpandedKeys.value
-  treeExpandedKeys.value = rest
+  const key = getTreeRowKey(row);
+  const { [key]: _, ...rest } = treeExpandedKeys.value;
+  treeExpandedKeys.value = rest;
 }
 
 // 展开全部树节点
 function expandAllTree() {
-  const newKeys: Record<string, boolean> = {}
+  const newKeys: Record<string, boolean> = {};
 
   function traverse(rows: Record<string, any>[]) {
-    rows.forEach((row) => {
-      const key = getTreeRowKey(row)
-      newKeys[key] = true
-      const children = row[props.treeChildrenKey]
+    rows.forEach(row => {
+      const key = getTreeRowKey(row);
+      newKeys[key] = true;
+      const children = row[props.treeChildrenKey];
       if (Array.isArray(children) && children.length > 0) {
-        traverse(children)
+        traverse(children);
       }
-    })
+    });
   }
 
-  traverse(props.data)
-  treeExpandedKeys.value = newKeys
+  traverse(props.data);
+  treeExpandedKeys.value = newKeys;
 }
 
 // 收起全部树节点
 function collapseAllTree() {
-  treeExpandedKeys.value = {}
+  treeExpandedKeys.value = {};
 }
 
 // 初始化树形数据展开状态
 watch(
   () => props.data,
-  (data) => {
+  data => {
     if (props.tree && props.defaultExpandAll) {
-      expandAllTree()
+      expandAllTree();
     } else if (props.tree && props.defaultExpandedKeys.length > 0) {
-      const newKeys: Record<string, boolean> = {}
-      props.defaultExpandedKeys.forEach((key) => {
-        newKeys[String(key)] = true
-      })
-      treeExpandedKeys.value = newKeys
+      const newKeys: Record<string, boolean> = {};
+      props.defaultExpandedKeys.forEach(key => {
+        newKeys[String(key)] = true;
+      });
+      treeExpandedKeys.value = newKeys;
     }
   },
-  { immediate: true, deep: true },
-)
+  { immediate: true, deep: true }
+);
 
 /* ====================================================
    行序号
 ==================================================== */
 function getRowIndex(rowIndex: number) {
-  if (!props.pagination) return rowIndex + 1
-  return (currentPage.value - 1) * currentPageSize.value + rowIndex + 1
+  if (!props.pagination) return rowIndex + 1;
+  return (currentPage.value - 1) * currentPageSize.value + rowIndex + 1;
 }
 
 /* ====================================================
@@ -1753,31 +2110,31 @@ function getRowIndex(rowIndex: number) {
 ==================================================== */
 function getCellValue(row: Record<string, any>, prop: string) {
   // 支持 "a.b.c" 嵌套路径
-  return prop.split('.').reduce((obj: any, k) => obj?.[k], row)
+  return prop.split(".").reduce((obj: any, k) => obj?.[k], row);
 }
 
 function formatCell(row: Record<string, any>, col: TableColumn) {
-  const value = getCellValue(row, col.prop)
-  if (col.formatter) return col.formatter(row, value)
-  if (value == null) return '—'
+  const value = getCellValue(row, col.prop);
+  if (col.formatter) return col.formatter(row, value);
+  if (value == null) return "—";
 
-  const formattedValue = String(value)
-  const prefix = col.prefix || ''
-  const suffix = col.suffix || ''
+  const formattedValue = String(value);
+  const prefix = col.prefix || "";
+  const suffix = col.suffix || "";
 
-  return `${prefix}${formattedValue}${suffix}`
+  return `${prefix}${formattedValue}${suffix}`;
 }
 
 /* ====================================================
    暴露方法
 ==================================================== */
 function clearSelection() {
-  selectedRows.value = []
-  emit('selection-change', [])
+  selectedRows.value = [];
+  emit("selection-change", []);
 }
 
 function getSelection() {
-  return [...selectedRows.value]
+  return [...selectedRows.value];
 }
 
 defineExpose({
@@ -1790,8 +2147,8 @@ defineExpose({
   collapseRow,
   expandAllTree,
   collapseAllTree,
-  isTreeExpanded,
-})
+  isTreeExpanded
+});
 </script>
 
 <style scoped lang="scss">
@@ -1827,8 +2184,8 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: $shadow-sm;
   font-size: 13px;
   font-family:
-    -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'PingFang SC',
-    'Hiragino Sans GB', sans-serif;
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI",
+    "PingFang SC", "Hiragino Sans GB", sans-serif;
   letter-spacing: 0;
   line-height: 1.5;
   overflow: hidden;
@@ -1895,11 +2252,13 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 
 /* ========== 容器 ========== */
 .xly-table__container {
+  position: relative;
   overflow-x: auto;
   overflow-y: auto;
   background: #fff;
   scrollbar-width: thin;
   scrollbar-color: #c7d1df transparent;
+  min-height: 200px;
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -1954,6 +2313,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   &--center {
     text-align: center;
   }
+
   &--right {
     text-align: right;
   }
@@ -1975,6 +2335,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   &.is-sortable {
     cursor: pointer;
     transition: $transition;
+
     &:hover {
       color: $primary;
       background: $bg-hover;
@@ -2060,6 +2421,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   &--center {
     text-align: center;
   }
+
   &--right {
     text-align: right;
   }
@@ -2101,7 +2463,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   width: 18px;
   height: 18px;
 
-  input[type='checkbox'] {
+  input[type="checkbox"] {
     position: absolute;
     opacity: 0;
     width: 0;
@@ -2120,7 +2482,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: none;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       display: none;
       left: 5px;
@@ -2137,6 +2499,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   input:checked ~ .xly-table__checkbox-inner {
     background: $primary;
     border-color: $primary;
+
     &::after {
       display: block;
     }
@@ -2145,6 +2508,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   input:indeterminate ~ .xly-table__checkbox-inner {
     background: $primary;
     border-color: $primary;
+
     &::after {
       display: block;
       top: 7px;
@@ -2178,7 +2542,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       display: none;
       left: 50%;
@@ -2193,6 +2557,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     &.is-checked {
       background: $primary;
       border-color: $primary;
+
       &::after {
         display: block;
       }
@@ -2211,7 +2576,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   align-items: center;
   justify-content: center;
   gap: 16px;
-  padding: 60px 20px;
+  padding: 0;
   color: $text-secondary;
 }
 
@@ -2241,20 +2606,33 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     transform: scaleY(0.4);
     opacity: 0.4;
   }
+
   50% {
     transform: scaleY(1);
     opacity: 1;
   }
 }
 
-/* ========== 空状态 ========== */
+/* ========== 空 / 加载状态 ========== */
 .xly-table__empty {
+  position: sticky;
+  left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 80px 20px;
   gap: 16px;
+  box-sizing: border-box;
+}
+
+// 加载时已有数据 → 绝对定位覆盖，隐藏旧数据
+.xly-table__loading-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(2px);
 }
 
 .xly-table__empty-icon {
@@ -2448,6 +2826,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -2471,6 +2850,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -2579,7 +2959,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   user-select: none;
   flex: 1;
 
-  input[type='checkbox'] {
+  input[type="checkbox"] {
     width: 16px;
     height: 16px;
     accent-color: $primary;
@@ -2650,7 +3030,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 .xly-table__th--fixed,
 .xly-table__td--fixed {
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     bottom: 0;
@@ -2868,6 +3248,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -2910,5 +3291,353 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   > :deep(*:first-child) {
     margin: 0;
   }
+}
+</style>
+
+<!-- ========== Dark Mode Overrides ========== -->
+<style lang="scss">
+html.dark .xly-table {
+  background: var(--el-bg-color);
+  border-color: var(--el-border-color);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.32);
+  }
+}
+
+/* Toolbar */
+html.dark .xly-table__toolbar {
+  background: var(--el-bg-color);
+  border-bottom-color: var(--el-border-color-light);
+}
+
+html.dark .xly-table__title {
+  color: var(--el-text-color-primary);
+}
+
+/* Container & Scrollbar */
+html.dark .xly-table__container {
+  background: var(--el-bg-color);
+  scrollbar-color: var(--el-border-color-lighter) transparent;
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--el-border-color-lighter);
+  }
+}
+
+/* Table Head */
+html.dark .xly-table__th {
+  color: var(--el-text-color-primary);
+  background: var(--el-fill-color-lighter);
+  border-bottom-color: var(--el-border-color);
+}
+
+html.dark .xly-table__th--selection,
+html.dark .xly-table__th--index,
+html.dark .xly-table__th--expand,
+html.dark .xly-table__th--tree-expand {
+  color: var(--el-text-color-secondary);
+}
+
+html.dark .xly-table__th.is-sortable:hover {
+  color: var(--el-color-primary);
+  background: var(--el-fill-color-light);
+}
+
+html.dark .xly-table__th.is-sorted {
+  color: var(--el-color-primary);
+  background: rgba(79, 110, 247, 0.12);
+}
+
+html.dark .xly-table__sort-icon {
+  color: var(--el-text-color-disabled);
+
+  &.is-active {
+    color: var(--el-color-primary);
+  }
+}
+
+/* Rows */
+html.dark .xly-table__tr.is-stripe > .xly-table__td {
+  background: var(--el-fill-color-lighter);
+}
+
+html.dark .xly-table__tr.is-selected > .xly-table__td {
+  background: rgba(79, 110, 247, 0.15) !important;
+}
+
+html.dark
+  .xly-table--highlight
+  .xly-table__tbody
+  .xly-table__tr:hover
+  > .xly-table__td {
+  background: var(--el-fill-color-light);
+}
+
+html.dark .xly-table__tr.is-tree-node:hover > td {
+  background: var(--el-fill-color-light);
+}
+
+/* Cells */
+html.dark .xly-table__td {
+  color: var(--el-text-color-regular);
+  border-bottom-color: var(--el-border-color-light);
+  background: var(--el-bg-color);
+}
+
+html.dark .xly-table__td--selection,
+html.dark .xly-table__td--index,
+html.dark .xly-table__td--expand {
+  color: var(--el-text-color-secondary);
+}
+
+/* Fixed columns */
+html.dark .xly-table__td--fixed {
+  background: var(--el-bg-color);
+}
+
+html.dark .xly-table__th--fixed {
+  background: var(--el-fill-color-lighter);
+}
+
+html.dark .xly-table__th--fixed::after,
+html.dark .xly-table__td--fixed::after {
+  background: var(--el-border-color-light);
+}
+
+html.dark .xly-table__th--fixed-left,
+html.dark .xly-table__td--fixed-left {
+  box-shadow: 6px 0 12px rgba(0, 0, 0, 0.25);
+}
+
+html.dark .xly-table__th--fixed-right,
+html.dark .xly-table__td--fixed-right {
+  box-shadow: -6px 0 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Checkbox & Radio */
+html.dark .xly-table__checkbox .xly-table__checkbox-inner {
+  border-color: var(--el-border-color);
+  background: var(--el-fill-color);
+}
+
+html.dark .xly-table__radio .xly-table__radio-inner {
+  border-color: var(--el-border-color);
+  background: var(--el-fill-color);
+}
+
+/* Loading */
+html.dark .xly-table__loading {
+  color: var(--el-text-color-secondary);
+}
+
+html.dark .xly-table__loading-text {
+  color: var(--el-text-color-secondary);
+}
+
+/* Empty State */
+html.dark .xly-table__empty-text {
+  color: var(--el-text-color-secondary);
+}
+
+html.dark .xly-table__empty-icon rect {
+  fill: var(--el-fill-color);
+  stroke: var(--el-border-color);
+}
+
+html.dark .xly-table__empty-icon rect:nth-child(2) {
+  fill: var(--el-fill-color-lighter);
+  stroke: var(--el-border-color);
+}
+
+html.dark .xly-table__empty-icon rect:nth-child(3),
+html.dark .xly-table__empty-icon rect:nth-child(4),
+html.dark .xly-table__empty-icon rect:nth-child(5),
+html.dark .xly-table__empty-icon rect:nth-child(6),
+html.dark .xly-table__empty-icon rect:nth-child(7) {
+  fill: var(--el-border-color-lighter);
+}
+
+/* Pagination */
+html.dark .xly-table__pagination {
+  background: var(--el-bg-color);
+  border-top-color: var(--el-border-color-light);
+}
+
+html.dark .xly-table__pagination-total {
+  color: var(--el-text-color-secondary);
+}
+
+html.dark .xly-table__page-btn {
+  border-color: var(--el-border-color-light);
+  background: var(--el-fill-color);
+  color: var(--el-text-color-regular);
+
+  &:hover:not(:disabled):not(.is-current):not(.is-ellipsis) {
+    border-color: var(--el-color-primary);
+    color: var(--el-color-primary);
+    background: rgba(79, 110, 247, 0.12);
+  }
+}
+
+html.dark .xly-table__page-btn.is-current {
+  background: var(--el-color-primary);
+  border-color: var(--el-color-primary);
+}
+
+html.dark .xly-table__page-btn.is-ellipsis {
+  color: var(--el-text-color-secondary);
+}
+
+html.dark .xly-table__pagination-input {
+  border-color: var(--el-border-color-light);
+  color: var(--el-text-color-regular);
+  background: var(--el-fill-color);
+}
+
+html.dark .xly-table__pagination-go {
+  border-color: var(--el-border-color-light);
+  background: var(--el-fill-color);
+  color: var(--el-text-color-regular);
+}
+
+html.dark .xly-table__pagination-go:hover {
+  border-color: var(--el-color-primary);
+  color: var(--el-color-primary);
+  background: rgba(79, 110, 247, 0.1);
+}
+
+/* Column Settings */
+html.dark .xly-table__column-settings-overlay {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+html.dark .xly-table__column-settings-panel {
+  background: var(--el-bg-color-overlay);
+  border-color: var(--el-border-color);
+}
+
+html.dark .xly-table__column-settings-header {
+  background: var(--el-bg-color-overlay);
+  border-bottom-color: var(--el-border-color-light);
+}
+
+html.dark .xly-table__column-settings-header h3 {
+  color: var(--el-text-color-primary);
+}
+
+html.dark .xly-table__column-settings-close {
+  color: var(--el-text-color-secondary);
+}
+
+html.dark .xly-table__column-settings-close:hover {
+  background: var(--el-fill-color);
+  color: var(--el-text-color-regular);
+}
+
+html.dark .xly-table__column-settings-body {
+  background: var(--el-bg-color-overlay);
+}
+
+html.dark .xly-table__column-settings-item:hover:not(.is-disabled) {
+  background: var(--el-fill-color);
+}
+
+html.dark .xly-table__column-settings-item.is-drag-over {
+  background: rgba(79, 110, 247, 0.12);
+}
+
+html.dark .xly-table__column-settings-drag-handle {
+  color: var(--el-text-color-disabled);
+}
+
+html.dark .xly-table__column-settings-label {
+  color: var(--el-text-color-regular);
+}
+
+html.dark .xly-table__column-settings-footer {
+  border-top-color: var(--el-border-color-light);
+}
+
+html.dark .xly-table__column-settings-btn--reset {
+  background: var(--el-fill-color);
+  color: var(--el-text-color-regular);
+  border-color: var(--el-border-color-light);
+}
+
+html.dark .xly-table__column-settings-btn--confirm {
+  box-shadow: none;
+}
+
+/* Expand Row */
+html.dark .xly-table__expand-row {
+  background: var(--el-fill-color-lighter);
+}
+
+html.dark .xly-table__expand-row td {
+  border-bottom-color: var(--el-border-color-light);
+}
+
+html.dark .xly-table__expand-cell {
+  background: var(--el-fill-color-extra-light);
+}
+
+/* Expand & Tree Icons */
+html.dark .xly-table__expand-icon {
+  color: var(--el-text-color-secondary);
+}
+
+html.dark .xly-table__expand-icon:hover {
+  color: var(--el-color-primary);
+  background: rgba(79, 110, 247, 0.12);
+}
+
+html.dark .xly-table__tree-icon {
+  color: var(--el-text-color-secondary);
+}
+
+html.dark .xly-table__tree-icon:hover {
+  color: var(--el-color-primary);
+  background: rgba(79, 110, 247, 0.12);
+}
+
+/* Summary Row */
+html.dark .xly-table__summary-row {
+  --xly-table-summary-bg: var(--el-fill-color-lighter);
+  border-top-color: var(--el-border-color);
+}
+
+html.dark .xly-table__summary-row .xly-table__td {
+  color: var(--el-text-color-primary);
+}
+
+html.dark .xly-table__td--summary-label {
+  color: var(--el-text-color-secondary);
+}
+
+html.dark .xly-table__summary-title {
+  color: var(--el-text-color-secondary);
+}
+
+html.dark .xly-table__summary-sep {
+  color: var(--el-text-color-secondary);
+}
+
+/* Summary Badges */
+html.dark .xly-table__summary-badge--sum {
+  color: #5b8dd9;
+  background: rgba(91, 141, 217, 0.15);
+}
+
+html.dark .xly-table__summary-badge--avg {
+  color: #4ecca0;
+  background: rgba(78, 204, 160, 0.15);
+}
+
+/* Tooltip */
+html.dark .xly-table__tooltip {
+  background: rgba(30, 30, 30, 0.95);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
 }
 </style>

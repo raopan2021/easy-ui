@@ -279,10 +279,10 @@ function scrollToAllLists() {
 }
 
 function formatOutput(): string {
-  const h = String(panelHours.value).padStart(2, '0')
-  const m = String(panelMinutes.value).padStart(2, '0')
-  if (props.showSeconds) return `${h}:${m}:${String(panelSeconds.value).padStart(2, '0')}`
-  return `${h}:${m}`
+  const hh = String(panelHours.value).padStart(2, '0')
+  const mm = String(panelMinutes.value).padStart(2, '0')
+  if (props.showSeconds) return `${hh}:${mm}:${String(panelSeconds.value).padStart(2, '0')}`
+  return `${hh}:${mm}`
 }
 
 function setNow() {
@@ -344,12 +344,12 @@ function getUnitMax(unit: 'hours' | 'minutes' | 'seconds') {
 
 /** 将面板值同步到所有输入框 DOM */
 function syncInputsFromValues() {
-  const h = hoursInputRef.value
-  const m = minutesInputRef.value
-  const s = secondsInputRef.value
-  if (h) h.value = String(panelHours.value).padStart(2, '0')
-  if (m) m.value = String(panelMinutes.value).padStart(2, '0')
-  if (s) s.value = String(panelSeconds.value).padStart(2, '0')
+  const hh = hoursInputRef.value
+  const mm = minutesInputRef.value
+  const ss = secondsInputRef.value
+  if (hh) hh.value = String(panelHours.value).padStart(2, '0')
+  if (mm) mm.value = String(panelMinutes.value).padStart(2, '0')
+  if (ss) ss.value = String(panelSeconds.value).padStart(2, '0')
 }
 
 /** 输入事件：只过滤非数字、限制2位，不干预光标 */
@@ -401,9 +401,9 @@ function adjustInput(unit: 'hours' | 'minutes' | 'seconds', delta: number) {
 
 /** Enter 键跳转到下一个输入框 */
 function focusNextInput(unit: 'hours' | 'minutes' | 'seconds') {
-  const ref = getInputRef(unit)
+  const targetRef = getInputRef(unit)
   nextTick(() => {
-    if (ref.value) ref.value.focus()
+    if (targetRef.value) targetRef.value.focus()
   })
 }
 

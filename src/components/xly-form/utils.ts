@@ -33,11 +33,18 @@
 
 export type ValidatorFn = (value: any, formData?: Record<string, any>) => string | true | Promise<string | true>
 
+export interface FormItemContext {
+  /** 触发当前 FormItem 的字段校验 */
+  validateField: (trigger?: 'change' | 'blur') => Promise<boolean>
+  /** 字段名 */
+  prop: string
+}
+
 export interface FormRule {
   /** 校验函数，返回 true 表示通过，返回字符串表示错误信息 */
   validator: ValidatorFn
-  /** 是否在 blur 时触发，默认 false */
-  trigger?: 'blur' | 'change'
+  /** 校验触发时机：blur 失焦、change 值变化，未指定则在任意主动触发时均校验 */
+  trigger?: 'blur' | 'change' | ['blur', 'change']
   /** 是否为必填规则（用于显示星号） */
   required?: boolean
 }
@@ -69,7 +76,7 @@ export function required(message = '此项为必填项'): FormRule {
       }
       return true
     },
-    trigger: 'blur',
+    trigger: 'change',
     required: true,
   }
 }
@@ -143,6 +150,55 @@ export function max(max: number, message?: string): FormRule {
   }
 }
 
+/** 数值范围校验选项 */
+export interface RangeOptions {
+  /** 最小值 */
+  min?: number
+  /** 最大值 */
+  max?: number
+  /** 最小值是否包含等于，默认 true（大于等于） */
+  minInclusive?: boolean
+  /** 最大值是否包含等于，默认 true（小于等于） */
+  maxInclusive?: boolean
+  /** 不满足最小值时的错误提示 */
+  minMessage?: string
+  /** 不满足最大值时的错误提示 */
+  maxMessage?: string
+  /** 非数字时的错误提示（后备） */
+  message?: string
+}
+
+/** 数值范围校验：支持分别控制上下界的开闭区间与错误提示（空值跳过，由 required 处理） */
+export function numRange(options: RangeOptions): FormRule {
+  const {
+    min,
+    max,
+    minInclusive = true,
+    maxInclusive = true,
+    minMessage,
+    maxMessage,
+    message,
+  } = options
+
+  return {
+    validator: (v) => {
+      if (v === '' || v === undefined || v === null) return true
+      const num = Number(v)
+      if (isNaN(num)) return message || '请输入有效的数字'
+      if (min !== undefined) {
+        const valid = minInclusive ? num >= min : num > min
+        if (!valid) return minMessage || (minInclusive ? `不能小于 ${min}` : `必须大于 ${min}`)
+      }
+      if (max !== undefined) {
+        const valid = maxInclusive ? num <= max : num < max
+        if (!valid) return maxMessage || (maxInclusive ? `不能超过 ${max}` : `必须小于 ${max}`)
+      }
+      return true
+    },
+    trigger: 'change',
+  }
+}
+
 /** 正则匹配 */
 export function pattern(regex: RegExp, message = '格式不正确'): FormRule {
   return {
@@ -164,7 +220,7 @@ export function url(message = '请输入正确的 URL'): FormRule {
 }
 
 /** 自定义校验 */
-export function custom(fn: (value: any, formData?: Record<string, any>) => string | true | Promise<string | true>, trigger: 'blur' | 'change' = 'change'): FormRule {
+export function custom(fn: (value: any, formData?: Record<string, any>) => string | true | Promise<string | true>, trigger: 'change' = 'change'): FormRule {
   return { validator: fn, trigger }
 }
 

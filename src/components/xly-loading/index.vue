@@ -1,79 +1,53 @@
 <template>
-  <div 
-    v-if="visible" 
-    class="xly-loading-wrapper"
-    :class="wrapperClasses"
-    :style="wrapperStyle"
-  >
+  <div v-if="visible" class="xly-loading-wrapper" :class="wrapperClasses" :style="wrapperStyle">
     <!-- 遮罩层 -->
-    <div 
-      v-if="mask" 
-      class="xly-loading-mask"
-      :style="maskStyle"
-    ></div>
-    
+    <div v-if="mask" class="xly-loading-mask" :style="maskStyle"></div>
+
     <!-- 加载内容区域 -->
     <div class="xly-loading-content" :style="contentStyle">
       <!-- 加载动画 -->
       <div class="xly-loading-spinner" :class="spinnerClasses" :style="spinnerStyle">
-        <!-- 旋转圆圈 -->
-        <template v-if="type === 'spinner'">
-          <div class="spinner-circle">
-            <div 
-              v-for="i in 8" 
-              :key="i" 
-              class="spinner-dot"
-              :style="getDotStyle(i)"
-            ></div>
+
+        <!-- 加载状态 - 竖条波浪效果（参照 xly-table__loading） -->
+        <template v-if="type === 'wave1'">
+          <div class="wave1-container">
+            <div class="wave1-spinner">
+              <div v-for="i in 5" :key="i" class="wave1-bar"
+                :style="{ animationDelay: `${i * 0.1}s`, backgroundColor: color }" />
+            </div>
           </div>
         </template>
-        
+
+        <!-- 旋转圆圈 -->
+        <template v-else-if="type === 'spinner'">
+          <div class="spinner-circle">
+            <div v-for="i in 8" :key="i" class="spinner-dot" :style="getDotStyle(i)"></div>
+          </div>
+        </template>
+
         <!-- 波浪效果 -->
         <template v-else-if="type === 'wave'">
           <div class="wave-container">
-            <div 
-              v-for="i in 5" 
-              :key="i" 
-              class="wave-bar"
-              :style="getWaveStyle(i)"
-            ></div>
+            <div v-for="i in 5" :key="i" class="wave-bar" :style="getWaveStyle(i)"></div>
           </div>
         </template>
-        
+
         <!-- 脉冲效果 -->
         <template v-else-if="type === 'pulse'">
           <div class="pulse-circle"></div>
         </template>
-        
+
         <!-- 环形进度 -->
         <template v-else-if="type === 'ring'">
           <div class="ring-container">
             <svg class="ring-svg" viewBox="0 0 50 50">
-              <circle 
-                class="ring-bg" 
-                cx="25" 
-                cy="25" 
-                r="20" 
-                :stroke="backgroundColor"
-                stroke-width="4"
-                fill="none"
-              />
-              <circle 
-                class="ring-progress" 
-                cx="25" 
-                cy="25" 
-                r="20" 
-                :stroke="color"
-                stroke-width="4"
-                fill="none"
-                stroke-linecap="round"
-                :stroke-dasharray="circumference"
-                :stroke-dashoffset="progressOffset"
-              />
+              <circle class="ring-bg" cx="25" cy="25" r="20" :stroke="backgroundColor" stroke-width="4" fill="none" />
+              <circle class="ring-progress" cx="25" cy="25" r="20" :stroke="color" stroke-width="4" fill="none"
+                stroke-linecap="round" :stroke-dasharray="circumference" :stroke-dashoffset="progressOffset" />
             </svg>
           </div>
         </template>
-        
+
         <!-- 默认双点动画 -->
         <template v-else>
           <div class="default-spinner">
@@ -82,16 +56,12 @@
           </div>
         </template>
       </div>
-      
+
       <!-- 加载文本 -->
-      <div 
-        v-if="text" 
-        class="xly-loading-text"
-        :style="{ color: textColor }"
-      >
+      <div v-if="text" class="xly-loading-text" :style="{ color: textColor }">
         {{ text }}
       </div>
-      
+
       <!-- 自定义插槽内容 -->
       <div v-if="$slots.default" class="xly-loading-custom">
         <slot></slot>
@@ -111,7 +81,7 @@ export interface LoadingProps {
   /** 是否显示加载 */
   modelValue?: boolean
   /** 加载类型: spinner-旋转点 | wave-波浪 | pulse-脉冲 | ring-环形进度 | default-双点 */
-  type?: 'spinner' | 'wave' | 'pulse' | 'ring' | 'default'
+  type?: 'spinner' | 'wave' | 'wave1' | 'pulse' | 'ring' | 'default'
   /** 加载文本 */
   text?: string
   /** 是否显示遮罩 */
@@ -142,13 +112,13 @@ export interface LoadingProps {
 
 const props = withDefaults(defineProps<LoadingProps>(), {
   modelValue: false,
-  type: 'spinner',
+  type: 'wave1',
   text: '',
   mask: true,
-  maskColor: 'rgba(255, 255, 255, 0.3)',
+  maskColor: 'var(--el-mask-color, rgba(255, 255, 255, 0.3))',
   color: '#4f6ef7',
   backgroundColor: 'transparent',
-  textColor: '#1f2937',
+  textColor: 'var(--el-text-color-primary)',
   size: 'medium',
   fullscreen: false,
   lock: false,
@@ -303,7 +273,7 @@ defineExpose({
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  
+
   &.is-fullscreen {
     position: fixed;
     top: 0;
@@ -312,7 +282,7 @@ defineExpose({
     height: 100vh;
     z-index: 9999;
   }
-  
+
   &.is-container-fullscreen {
     position: absolute;
     top: 0;
@@ -321,7 +291,7 @@ defineExpose({
     height: 100%;
     z-index: 1000;
   }
-  
+
   &.is-overlay-mode {
     position: absolute;
     top: 0;
@@ -330,7 +300,7 @@ defineExpose({
     height: 100%;
     z-index: 2000;
   }
-  
+
   &.is-lock {
     touch-action: none;
   }
@@ -355,12 +325,18 @@ defineExpose({
   justify-content: center;
   gap: 12px;
   z-index: 1;
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--el-bg-color-overlay, rgba(255, 255, 255, 0.9));
   backdrop-filter: blur(10px);
   padding: 20px;
   border-radius: 12px;
-  border: 1px solid rgba(226, 232, 240, 0.8);
+  border: 1px solid var(--el-border-color-lighter, rgba(226, 232, 240, 0.8));
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+html.dark {
+  .xly-loading-content {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  }
 }
 
 // 旋转圆圈动画
@@ -368,7 +344,7 @@ defineExpose({
   position: relative;
   width: 100%;
   height: 100%;
-  
+
   .spinner-dot {
     position: absolute;
     top: 0;
@@ -387,6 +363,7 @@ defineExpose({
     opacity: 1;
     transform: rotate(0deg);
   }
+
   100% {
     opacity: 0.2;
     transform: rotate(360deg);
@@ -400,7 +377,7 @@ defineExpose({
   justify-content: center;
   height: 100%;
   gap: 2px;
-  
+
   .wave-bar {
     width: 4px;
     height: 100%;
@@ -411,11 +388,77 @@ defineExpose({
 }
 
 @keyframes wave {
-  0%, 40%, 100% {
+
+  0%,
+  40%,
+  100% {
     transform: scaleY(0.4);
   }
+
   20% {
     transform: scaleY(1);
+  }
+}
+
+// wave1 竖条波浪效果（参照 xly-table__loading）
+// 去除 xly-loading-content 的卡片装饰，保持与 xly-table__loading 一致的干净外观
+.xly-loading--wave1 {
+  .xly-loading-content {
+    background: transparent;
+    backdrop-filter: none;
+    padding: 0;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    gap: 16px;
+  }
+
+  .xly-loading-text {
+    font-size: 14px;
+    color: var(--el-text-color-secondary);
+  }
+}
+
+.wave1-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  .wave1-spinner {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .wave1-bar {
+    width: 4px;
+    height: 28px;
+    border-radius: 2px;
+    background: var(--spinner-color);
+    animation: wave1-anim 1s ease-in-out infinite;
+    opacity: 0.6;
+  }
+
+  .wave1-text {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  @keyframes wave1-anim {
+
+    0%,
+    100% {
+      transform: scaleY(0.4);
+      opacity: 0.4;
+    }
+
+    50% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
   }
 }
 
@@ -433,6 +476,7 @@ defineExpose({
     transform: scale(0);
     opacity: 1;
   }
+
   100% {
     transform: scale(1);
     opacity: 0;
@@ -443,17 +487,17 @@ defineExpose({
 .ring-container {
   width: 100%;
   height: 100%;
-  
+
   .ring-svg {
     width: 100%;
     height: 100%;
     transform: rotate(-90deg);
   }
-  
+
   .ring-bg {
     stroke: var(--spinner-bg-color);
   }
-  
+
   .ring-progress {
     transition: stroke-dashoffset 0.3s ease;
   }
@@ -464,8 +508,9 @@ defineExpose({
   position: relative;
   width: 100%;
   height: 100%;
-  
-  .dot1, .dot2 {
+
+  .dot1,
+  .dot2 {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -476,17 +521,20 @@ defineExpose({
     transform: translate(-50%, -50%);
     animation: bounce 2s infinite ease-in-out;
   }
-  
+
   .dot2 {
     animation-delay: -1s;
   }
 }
 
 @keyframes bounce {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(-50%, -50%) scale(0);
     opacity: 0.5;
   }
+
   50% {
     transform: translate(-50%, -50%) scale(1);
     opacity: 1;
@@ -509,7 +557,7 @@ defineExpose({
     width: 24px;
     height: 24px;
   }
-  
+
   .xly-loading-text {
     font-size: 12px;
   }
@@ -527,7 +575,7 @@ defineExpose({
     width: 48px;
     height: 48px;
   }
-  
+
   .xly-loading-text {
     font-size: 16px;
   }
@@ -536,7 +584,7 @@ defineExpose({
 // 过渡动画
 .xly-loading-wrapper {
   transition: opacity 0.3s ease;
-  
+
   &:not(.is-visible) {
     opacity: 0;
     pointer-events: none;

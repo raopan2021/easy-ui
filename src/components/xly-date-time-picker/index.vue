@@ -418,12 +418,12 @@ function getUnitMax(unit: 'hours' | 'minutes' | 'seconds') {
 /** 将面板值同步到所有输入框 DOM（输入中时跳过，避免覆盖用户正在输入的内容） */
 function syncInputsFromValues() {
   if (isManualInputting.value) return
-  const h = hoursInputRef.value
-  const m = minutesInputRef.value
-  const s = secondsInputRef.value
-  if (h) h.value = String(panelHours.value).padStart(2, '0')
-  if (m) m.value = String(panelMinutes.value).padStart(2, '0')
-  if (s) s.value = String(panelSeconds.value).padStart(2, '0')
+  const hh = hoursInputRef.value
+  const mm = minutesInputRef.value
+  const ss = secondsInputRef.value
+  if (hh) hh.value = String(panelHours.value).padStart(2, '0')
+  if (mm) mm.value = String(panelMinutes.value).padStart(2, '0')
+  if (ss) ss.value = String(panelSeconds.value).padStart(2, '0')
 }
 
 /** 滚动到指定单元的列表位置（不触发 onScroll 的同步） */
@@ -485,9 +485,9 @@ function adjustInput(unit: 'hours' | 'minutes' | 'seconds', delta: number) {
 
 /** Enter 键跳转到下一个输入框 */
 function focusNextInput(unit: 'hours' | 'minutes' | 'seconds') {
-  const ref = getInputRef(unit)
+  const targetRef = getInputRef(unit)
   nextTick(() => {
-    if (ref.value) ref.value.focus()
+    if (targetRef.value) targetRef.value.focus()
   })
 }
 
@@ -578,22 +578,22 @@ function formatOutput(): string {
   const y = panelYear.value
   const mo = String(panelMonth.value + 1).padStart(2, '0')
   const d = String(panelDay.value).padStart(2, '0')
-  const h = String(panelHours.value).padStart(2, '0')
+  const hh = String(panelHours.value).padStart(2, '0')
   const mi = String(panelMinutes.value).padStart(2, '0')
-  const s = String(panelSeconds.value).padStart(2, '0')
+  const ss = String(panelSeconds.value).padStart(2, '0')
 
   if (props.format) {
     return props.format
       .replace('YYYY', String(y))
       .replace('MM', mo)
       .replace('DD', d)
-      .replace('HH', h)
+      .replace('HH', hh)
       .replace('mm', mi)
-      .replace('ss', s)
+      .replace('ss', ss)
   }
 
-  if (props.showSeconds) return `${y}-${mo}-${d} ${h}:${mi}:${s}`
-  return `${y}-${mo}-${d} ${h}:${mi}`
+  if (props.showSeconds) return `${y}-${mo}-${d} ${hh}:${mi}:${ss}`
+  return `${y}-${mo}-${d} ${hh}:${mi}`
 }
 
 function confirm() {

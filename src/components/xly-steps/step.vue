@@ -96,32 +96,32 @@ const stepCount = inject<Ref<number>>('xly-steps-count')
 const stepStyle = computed(() => {
   const color = stepsData.value?.color
   if (!color) return {}
-  
+
   const style: Record<string, string> = {}
-  
+
   if (color.primary) {
     style['--step-primary'] = color.primary
     style['--step-primary-light'] = hexToRgba(color.primary, 0.15)
     style['--step-shadow-primary'] = hexToRgba(color.primary, 0.25)
   }
-  
+
   if (color.success) {
     style['--step-success'] = color.success
     style['--step-success-light'] = hexToRgba(color.success, 0.15)
     style['--step-shadow-success'] = hexToRgba(color.success, 0.25)
   }
-  
+
   if (color.error) {
     style['--step-error'] = color.error
     style['--step-error-light'] = hexToRgba(color.error, 0.15)
     style['--step-shadow-error'] = hexToRgba(color.error, 0.25)
   }
-  
+
   if (color.wait) {
     style['--step-wait'] = color.wait
     style['--step-wait-bg'] = hexToRgba(color.wait, 0.2)
   }
-  
+
   return style
 })
 
@@ -129,7 +129,7 @@ const stepStyle = computed(() => {
 function hexToRgba(hex: string, alpha: number): string {
   const cleanHex = hex.replace('#', '')
   let r: number, g: number, b: number
-  
+
   if (cleanHex.length === 3) {
     r = parseInt(cleanHex[0] + cleanHex[0], 16)
     g = parseInt(cleanHex[1] + cleanHex[1], 16)
@@ -139,7 +139,7 @@ function hexToRgba(hex: string, alpha: number): string {
     g = parseInt(cleanHex.substring(2, 4), 16)
     b = parseInt(cleanHex.substring(4, 6), 16)
   }
-  
+
   return `rgba(${r}, ${g}, ${b}, ${alpha})`
 }
 

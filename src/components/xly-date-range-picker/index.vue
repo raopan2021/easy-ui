@@ -1,7 +1,7 @@
 <template>
   <div class="xly-date-range-picker" :class="[`xly-date-range-picker--${size}`, { 'is-disabled': disabled }]">
     <!-- 开始日期选择器 -->
-    <div class="date-range-picker__start">
+    <div class="xly-date-range-picker__start">
       <XlyDatePicker
         :model-value="start"
         :placeholder="startPlaceholder || '开始日期'"
@@ -16,10 +16,10 @@
     </div>
 
     <!-- 分隔符 -->
-    <span class="date-range-picker__separator">{{ separator }}</span>
+    <span class="xly-date-range-picker__separator">{{ separator }}</span>
 
     <!-- 结束日期选择器 -->
-    <div class="date-range-picker__end">
+    <div class="xly-date-range-picker__end">
       <XlyDatePicker
         :model-value="end"
         :placeholder="endPlaceholder || '结束日期'"

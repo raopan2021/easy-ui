@@ -139,6 +139,12 @@ const rows = computed(() => {
   let currentCols = 0
   items.value.forEach((item) => {
     const span = Math.min(item.span, props.column)
+    // 当前行放不下此 item（且当前行非空），先结束当前行再开新行
+    if (currentRow.length > 0 && currentCols + span > props.column) {
+      result.push(currentRow)
+      currentRow = []
+      currentCols = 0
+    }
     currentRow.push({ ...item, span })
     currentCols += span
     if (currentCols >= props.column) {
@@ -162,6 +168,10 @@ const totalRows = computed(() => {
   let col = 0
   let rowCount = 0
   items.value.forEach(item => {
+    if (col > 0 && col + item.span > props.column) {
+      rowCount++
+      col = 0
+    }
     col += item.span
     if (col >= props.column) {
       rowCount++
@@ -178,6 +188,10 @@ const itemRowIndex = computed(() => {
   let col = 0
   let row = 0
   items.value.forEach(item => {
+    if (col > 0 && col + item.span > props.column) {
+      row++
+      col = 0
+    }
     result.push(row)
     col += item.span
     if (col >= props.column) {
@@ -193,6 +207,9 @@ const itemColIndex = computed(() => {
   const result: number[] = []
   let col = 0
   items.value.forEach(item => {
+    if (col > 0 && col + item.span > props.column) {
+      col = 0
+    }
     result.push(col)
     col += item.span
     if (col >= props.column) col = 0
@@ -291,7 +308,6 @@ $radius-sm: 8px;
 
   &__table {
     width: 100%;
-    border-collapse: collapse;
     table-layout: auto;
   }
 
@@ -320,6 +336,7 @@ $radius-sm: 8px;
     word-break: break-word;
     vertical-align: middle;
     font-weight: 400;
+    min-width: 120px;
   }
 
   // ─── 垂直布局 ────────────────────────────────────────────────
@@ -402,22 +419,19 @@ $radius-sm: 8px;
   // ─── 水平 · 无边框 ───────────────────────────────────────────
   &--horizontal:not(.is-bordered) {
     .xly-descriptions__body {
-      border: 1px solid $c-border-subtle;
+      border: none;
       border-radius: $radius-sm;
       overflow: hidden;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
     }
 
     .xly-descriptions__label {
-      background: $c-bg-label;
-      border-right: 1px solid $c-border-subtle;
+      // background: $c-bg-label;
       min-width: 120px;
     }
 
     .xly-descriptions__row {
-      &:not(:last-child) td { border-bottom: 1px solid $c-border-subtle; }
-      &:nth-child(even) .xly-descriptions__content { background: $c-bg-stripe; }
-      td + td + td { border-left: 1px solid $c-border-subtle; }
+      // &:nth-child(even) .xly-descriptions__content { background: $c-bg-stripe; }
     }
   }
 
@@ -445,16 +459,13 @@ $radius-sm: 8px;
   // ─── 垂直 · 无边框 ───────────────────────────────────────────
   &--vertical:not(.is-bordered) {
     .xly-descriptions__body {
-      border: 1px solid $c-border-subtle;
+      border: none;
       border-radius: $radius-sm;
       overflow: hidden;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
     }
 
     .xly-descriptions__item {
-      border-right: 1px solid $c-border-subtle;
-      border-bottom: 1px solid $c-border-subtle;
-
       &.is-last-col  { border-right: none; }
       &.is-last-row  { border-bottom: none; }
     }

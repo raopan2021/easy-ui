@@ -86,18 +86,18 @@ function generateTileUrl(): string {
   const ratio = window.devicePixelRatio || 1
 
   const w = props.width
-  const h = props.height
+  const heightVal = props.height
   const gapX = props.gapX
   const gapY = props.gapY
 
   // canvas 尺寸 = 水印尺寸 + 间距
   canvas.width = (w + gapX) * ratio
-  canvas.height = (h + gapY) * ratio
+  canvas.height = (heightVal + gapY) * ratio
   ctx.scale(ratio, ratio)
 
   // 移动到 tile 中心并旋转
   const tileCenterX = w / 2
-  const tileCenterY = h / 2
+  const tileCenterY = heightVal / 2
   ctx.translate(tileCenterX + (props.offset.x || 0), tileCenterY + (props.offset.y || 0))
   ctx.rotate((props.rotate * Math.PI) / 180)
 
@@ -106,7 +106,7 @@ function generateTileUrl(): string {
   if (props.image) {
     // 图片水印 — 同步绘制已有缓存的图片，或用占位
     const imgW = props.imageWidth
-    const imgH = h
+    const imgH = heightVal
     ctx.drawImage(createPlaceholderImage(imgW, imgH), -imgW / 2, -imgH / 2, imgW, imgH)
   } else {
     // 文字水印
@@ -151,16 +151,16 @@ async function generateTileUrlAsync(): Promise<string> {
   const ratio = window.devicePixelRatio || 1
 
   const w = props.width
-  const h = props.height
+  const heightVal = props.height
   const gapX = props.gapX
   const gapY = props.gapY
 
   canvas.width = (w + gapX) * ratio
-  canvas.height = (h + gapY) * ratio
+  canvas.height = (heightVal + gapY) * ratio
   ctx.scale(ratio, ratio)
 
   const tileCenterX = w / 2
-  const tileCenterY = h / 2
+  const tileCenterY = heightVal / 2
   ctx.translate(tileCenterX + (props.offset.x || 0), tileCenterY + (props.offset.y || 0))
   ctx.rotate((props.rotate * Math.PI) / 180)
   ctx.globalAlpha = props.opacity

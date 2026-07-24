@@ -90,9 +90,9 @@ function drawBarcode(): void {
 
     // 让 SVG 按属性宽高显示（style 覆盖，防止被 scoped 样式影响）
     const w = svgEl.getAttribute('width')
-    const h = svgEl.getAttribute('height')
-    if (w && h) {
-      svgEl.style.cssText = `width:${w}px;height:${h}px;background:${props.background};display:block`
+    const heightAttr = svgEl.getAttribute('height')
+    if (w && heightAttr) {
+      svgEl.style.cssText = `width:${w}px;height:${heightAttr}px;background:${props.background};display:block`
     }
 
     // 触发完成事件

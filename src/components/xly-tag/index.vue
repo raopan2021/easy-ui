@@ -8,19 +8,27 @@
   >
     <!-- 前置图标 -->
     <span v-if="icon" class="xly-tag__icon">
-      <el-icon><component :is="icon" /></el-icon>
+      <el-icon>
+        <component :is="icon" />
+      </el-icon>
     </span>
 
     <!-- 标签文字 -->
-    <span class="xly-tag__text"><slot /></span>
+    <span class="xly-tag__text">
+      <slot />
+    </span>
 
     <!-- 关闭按钮 -->
-    <span
-      v-if="closable"
-      class="xly-tag__close"
-      @click.stop="handleClose"
-    >
-      <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+    <span v-if="closable" class="xly-tag__close" @click.stop="handleClose">
+      <svg
+        viewBox="0 0 24 24"
+        width="1em"
+        height="1em"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+      >
         <line x1="18" y1="6" x2="6" y2="18" />
         <line x1="6" y1="6" x2="18" y2="18" />
       </svg>
@@ -29,113 +37,119 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed } from "vue";
 
-defineOptions({ name: 'XlyTag' })
+defineOptions({ name: "XlyTag" });
 
-export type TagType = 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'info'
-export type TagSize = 'large' | 'default' | 'small'
-export type TagEffect = 'light' | 'plain' | 'dark'
+export type TagType =
+  | "default"
+  | "primary"
+  | "success"
+  | "warning"
+  | "danger"
+  | "info";
+export type TagSize = "large" | "default" | "small";
+export type TagEffect = "light" | "plain" | "dark";
 
 export interface TagProps {
   /** 标签类型 */
-  type?: TagType
+  type?: TagType;
   /** 标签尺寸 */
-  size?: TagSize
+  size?: TagSize;
   /** 主题效果 */
-  effect?: TagEffect
+  effect?: TagEffect;
   /** 是否可关闭 */
-  closable?: boolean
+  closable?: boolean;
   /** 是否为圆角胶囊形 */
-  round?: boolean
+  round?: boolean;
   /** 是否可点击（带 hover 效果） */
-  clickable?: boolean
+  clickable?: boolean;
   /** 前置图标（Element Plus 图标名） */
-  icon?: string
+  icon?: string;
   /** 自定义颜色（覆盖 type） */
-  color?: string
+  color?: string;
   /** 是否禁用 */
-  disabled?: boolean
+  disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<TagProps>(), {
-  type: 'default',
-  size: 'default',
-  effect: 'light',
+  type: "default",
+  size: "default",
+  effect: "light",
   closable: false,
   round: false,
   clickable: false,
-  disabled: false,
-})
+  disabled: false
+});
 
 const emit = defineEmits<{
-  (e: 'close', event: MouseEvent): void
-  (e: 'click', event: MouseEvent): void
-}>()
+  (e: "close", event: MouseEvent): void;
+  (e: "click", event: MouseEvent): void;
+}>();
 
-const visible = ref(true)
+const visible = ref(true);
 
 const tagClass = computed(() => [
   `xly-tag--${props.type}`,
   `xly-tag--${props.size}`,
   `xly-tag--${props.effect}`,
   {
-    'is-round': props.round,
-    'is-closable': props.closable,
-    'is-clickable': props.clickable && !props.disabled,
-    'is-disabled': props.disabled,
-  },
-])
+    "is-round": props.round,
+    "is-closable": props.closable,
+    "is-clickable": props.clickable && !props.disabled,
+    "is-disabled": props.disabled
+  }
+]);
 
 const tagStyle = computed(() => {
-  if (!props.color) return {}
+  if (!props.color) return {};
   // 自定义颜色：根据 effect 生成相应样式
-  const color = props.color
-  if (props.effect === 'dark') {
+  const color = props.color;
+  if (props.effect === "dark") {
     return {
       backgroundColor: color,
       borderColor: color,
-      color: '#fff',
-    }
+      color: "#fff"
+    };
   }
-  if (props.effect === 'plain') {
+  if (props.effect === "plain") {
     return {
-      backgroundColor: 'transparent',
+      backgroundColor: "transparent",
       borderColor: color,
-      color,
-    }
+      color
+    };
   }
   // light
   return {
     backgroundColor: `${color}1a`,
     borderColor: `${color}40`,
-    color,
-  }
-})
+    color
+  };
+});
 
 function handleClick(e: MouseEvent) {
-  if (props.disabled) return
+  if (props.disabled) return;
   if (props.clickable) {
-    emit('click', e)
+    emit("click", e);
   }
 }
 
 function handleClose(e: MouseEvent) {
-  if (props.disabled) return
-  emit('close', e)
-  visible.value = false
+  if (props.disabled) return;
+  emit("close", e);
+  visible.value = false;
 }
 
 /** 重置显示状态（外部调用） */
 function show() {
-  visible.value = true
+  visible.value = true;
 }
 
-defineExpose({ show })
+defineExpose({ show });
 </script>
 
 <style scoped lang="scss">
-@use 'sass:color';
+@use "sass:color";
 
 /* ========== 设计令牌 ========== */
 $radius: 6px;
@@ -144,35 +158,35 @@ $transition: all 0.2s ease;
 
 /* ========== 类型色板 ========== */
 // default
-$default-text:   #606266;
-$default-bg:     #f4f4f5;
+$default-text: #606266;
+$default-bg: #f4f4f5;
 $default-border: #e9e9eb;
 $default-dark-bg: #909399;
 
 // primary
-$primary:        #4f6ef7;
-$primary-light-bg:   rgba(79, 110, 247, 0.1);
+$primary: #4f6ef7;
+$primary-light-bg: rgba(79, 110, 247, 0.1);
 $primary-light-border: rgba(79, 110, 247, 0.25);
 
 // success
-$success:        #34c759;
-$success-light-bg:   rgba(52, 199, 89, 0.1);
+$success: #34c759;
+$success-light-bg: rgba(52, 199, 89, 0.1);
 $success-light-border: rgba(52, 199, 89, 0.25);
 
 // warning
-$warning:        #f5a623;
-$warning-light-bg:   rgba(245, 166, 35, 0.1);
+$warning: #f5a623;
+$warning-light-bg: rgba(245, 166, 35, 0.1);
 $warning-light-border: rgba(245, 166, 35, 0.25);
 
 // danger
-$danger:         #ff3b30;
-$danger-light-bg:    rgba(255, 59, 48, 0.1);
+$danger: #ff3b30;
+$danger-light-bg: rgba(255, 59, 48, 0.1);
 $danger-light-border: rgba(255, 59, 48, 0.25);
 
 // info
-$info:           #8e8ea0;
-$info-light-bg:      rgba(142, 142, 160, 0.1);
-$info-light-border:  rgba(142, 142, 160, 0.25);
+$info: #8e8ea0;
+$info-light-bg: rgba(142, 142, 160, 0.1);
+$info-light-border: rgba(142, 142, 160, 0.25);
 
 /* ========== 基础样式 ========== */
 .xly-tag {
@@ -230,24 +244,40 @@ $info-light-border:  rgba(142, 142, 160, 0.25);
       background-color: $default-bg;
       border-color: $default-border;
 
-      &.is-clickable:hover { background-color: color.adjust($default-bg, $lightness: -4%); }
+      &.is-clickable:hover {
+        background-color: color.adjust($default-bg, $lightness: -4%);
+      }
     }
+
     &.xly-tag--plain {
       color: $default-text;
       background-color: transparent;
       border-color: $default-border;
 
-      &.is-clickable:hover { background-color: $default-bg; }
+      &.is-clickable:hover {
+        background-color: $default-bg;
+      }
     }
+
     &.xly-tag--dark {
       color: #fff;
       background-color: $default-dark-bg;
       border-color: $default-dark-bg;
 
-      &.is-clickable:hover { background-color: color.adjust($default-dark-bg, $lightness: -8%); border-color: color.adjust($default-dark-bg, $lightness: -8%); }
+      &.is-clickable:hover {
+        background-color: color.adjust($default-dark-bg, $lightness: -8%);
+        border-color: color.adjust($default-dark-bg, $lightness: -8%);
+      }
     }
 
-    .xly-tag__close { color: color.adjust($default-text, $lightness: 10%); &:hover { color: $default-text; background-color: rgba(0,0,0,0.08); } }
+    .xly-tag__close {
+      color: color.adjust($default-text, $lightness: 10%);
+
+      &:hover {
+        color: $default-text;
+        background-color: rgba(0, 0, 0, 0.08);
+      }
+    }
   }
 
   /* ====================================================
@@ -259,24 +289,40 @@ $info-light-border:  rgba(142, 142, 160, 0.25);
       background-color: $primary-light-bg;
       border-color: $primary-light-border;
 
-      &.is-clickable:hover { background-color: rgba(79, 110, 247, 0.18); }
+      &.is-clickable:hover {
+        background-color: rgba(79, 110, 247, 0.18);
+      }
     }
+
     &.xly-tag--plain {
       color: $primary;
       background-color: transparent;
       border-color: $primary;
 
-      &.is-clickable:hover { background-color: $primary-light-bg; }
+      &.is-clickable:hover {
+        background-color: $primary-light-bg;
+      }
     }
+
     &.xly-tag--dark {
       color: #fff;
       background-color: $primary;
       border-color: $primary;
 
-      &.is-clickable:hover { background-color: color.adjust($primary, $lightness: -8%); border-color: color.adjust($primary, $lightness: -8%); }
+      &.is-clickable:hover {
+        background-color: color.adjust($primary, $lightness: -8%);
+        border-color: color.adjust($primary, $lightness: -8%);
+      }
     }
 
-    .xly-tag__close { color: color.change($primary, $alpha: 0.7); &:hover { color: $primary; background-color: color.change($primary, $alpha: 0.12); } }
+    .xly-tag__close {
+      color: color.change($primary, $alpha: 0.7);
+
+      &:hover {
+        color: $primary;
+        background-color: color.change($primary, $alpha: 0.12);
+      }
+    }
   }
 
   /* ====================================================
@@ -288,24 +334,40 @@ $info-light-border:  rgba(142, 142, 160, 0.25);
       background-color: $success-light-bg;
       border-color: $success-light-border;
 
-      &.is-clickable:hover { background-color: rgba(52, 199, 89, 0.18); }
+      &.is-clickable:hover {
+        background-color: rgba(52, 199, 89, 0.18);
+      }
     }
+
     &.xly-tag--plain {
       color: $success;
       background-color: transparent;
       border-color: $success;
 
-      &.is-clickable:hover { background-color: $success-light-bg; }
+      &.is-clickable:hover {
+        background-color: $success-light-bg;
+      }
     }
+
     &.xly-tag--dark {
       color: #fff;
       background-color: $success;
       border-color: $success;
 
-      &.is-clickable:hover { background-color: color.adjust($success, $lightness: -8%); border-color: color.adjust($success, $lightness: -8%); }
+      &.is-clickable:hover {
+        background-color: color.adjust($success, $lightness: -8%);
+        border-color: color.adjust($success, $lightness: -8%);
+      }
     }
 
-    .xly-tag__close { color: color.change($success, $alpha: 0.7); &:hover { color: $success; background-color: color.change($success, $alpha: 0.12); } }
+    .xly-tag__close {
+      color: color.change($success, $alpha: 0.7);
+
+      &:hover {
+        color: $success;
+        background-color: color.change($success, $alpha: 0.12);
+      }
+    }
   }
 
   /* ====================================================
@@ -317,24 +379,40 @@ $info-light-border:  rgba(142, 142, 160, 0.25);
       background-color: $warning-light-bg;
       border-color: $warning-light-border;
 
-      &.is-clickable:hover { background-color: rgba(245, 166, 35, 0.18); }
+      &.is-clickable:hover {
+        background-color: rgba(245, 166, 35, 0.18);
+      }
     }
+
     &.xly-tag--plain {
       color: $warning;
       background-color: transparent;
       border-color: $warning;
 
-      &.is-clickable:hover { background-color: $warning-light-bg; }
+      &.is-clickable:hover {
+        background-color: $warning-light-bg;
+      }
     }
+
     &.xly-tag--dark {
       color: #fff;
       background-color: $warning;
       border-color: $warning;
 
-      &.is-clickable:hover { background-color: color.adjust($warning, $lightness: -8%); border-color: color.adjust($warning, $lightness: -8%); }
+      &.is-clickable:hover {
+        background-color: color.adjust($warning, $lightness: -8%);
+        border-color: color.adjust($warning, $lightness: -8%);
+      }
     }
 
-    .xly-tag__close { color: color.change($warning, $alpha: 0.7); &:hover { color: $warning; background-color: color.change($warning, $alpha: 0.12); } }
+    .xly-tag__close {
+      color: color.change($warning, $alpha: 0.7);
+
+      &:hover {
+        color: $warning;
+        background-color: color.change($warning, $alpha: 0.12);
+      }
+    }
   }
 
   /* ====================================================
@@ -346,24 +424,40 @@ $info-light-border:  rgba(142, 142, 160, 0.25);
       background-color: $danger-light-bg;
       border-color: $danger-light-border;
 
-      &.is-clickable:hover { background-color: rgba(255, 59, 48, 0.18); }
+      &.is-clickable:hover {
+        background-color: rgba(255, 59, 48, 0.18);
+      }
     }
+
     &.xly-tag--plain {
       color: $danger;
       background-color: transparent;
       border-color: $danger;
 
-      &.is-clickable:hover { background-color: $danger-light-bg; }
+      &.is-clickable:hover {
+        background-color: $danger-light-bg;
+      }
     }
+
     &.xly-tag--dark {
       color: #fff;
       background-color: $danger;
       border-color: $danger;
 
-      &.is-clickable:hover { background-color: color.adjust($danger, $lightness: -8%); border-color: color.adjust($danger, $lightness: -8%); }
+      &.is-clickable:hover {
+        background-color: color.adjust($danger, $lightness: -8%);
+        border-color: color.adjust($danger, $lightness: -8%);
+      }
     }
 
-    .xly-tag__close { color: color.change($danger, $alpha: 0.7); &:hover { color: $danger; background-color: color.change($danger, $alpha: 0.12); } }
+    .xly-tag__close {
+      color: color.change($danger, $alpha: 0.7);
+
+      &:hover {
+        color: $danger;
+        background-color: color.change($danger, $alpha: 0.12);
+      }
+    }
   }
 
   /* ====================================================
@@ -375,24 +469,40 @@ $info-light-border:  rgba(142, 142, 160, 0.25);
       background-color: $info-light-bg;
       border-color: $info-light-border;
 
-      &.is-clickable:hover { background-color: rgba(142, 142, 160, 0.18); }
+      &.is-clickable:hover {
+        background-color: rgba(142, 142, 160, 0.18);
+      }
     }
+
     &.xly-tag--plain {
       color: $info;
       background-color: transparent;
       border-color: $info;
 
-      &.is-clickable:hover { background-color: $info-light-bg; }
+      &.is-clickable:hover {
+        background-color: $info-light-bg;
+      }
     }
+
     &.xly-tag--dark {
       color: #fff;
       background-color: $info;
       border-color: $info;
 
-      &.is-clickable:hover { background-color: color.adjust($info, $lightness: -8%); border-color: color.adjust($info, $lightness: -8%); }
+      &.is-clickable:hover {
+        background-color: color.adjust($info, $lightness: -8%);
+        border-color: color.adjust($info, $lightness: -8%);
+      }
     }
 
-    .xly-tag__close { color: color.change($info, $alpha: 0.7); &:hover { color: $info; background-color: color.change($info, $alpha: 0.12); } }
+    .xly-tag__close {
+      color: color.change($info, $alpha: 0.7);
+
+      &:hover {
+        color: $info;
+        background-color: color.change($info, $alpha: 0.12);
+      }
+    }
   }
 }
 

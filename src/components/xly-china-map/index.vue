@@ -402,8 +402,8 @@ const computedWidth = computed(() => {
 })
 
 const computedHeight = computed(() => {
-  const h = props.height
-  return typeof h === 'number' ? `${h}px` : h
+  const heightVal = props.height
+  return typeof heightVal === 'number' ? `${heightVal}px` : heightVal
 })
 
 // 名称映射：简称 -> 完整名称

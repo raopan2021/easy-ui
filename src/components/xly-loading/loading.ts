@@ -44,12 +44,12 @@ const activeLoadings = new Map<string | HTMLElement, LoadingInstance>()
  */
 function createLoading(options: LoadingOptions = {}): LoadingInstance {
   const { target, ...props } = options
-  
+
   // 确定挂载目标
   let mountTarget: HTMLElement = document.body
   let isFullscreen = true
   let isContainerFullscreen = false
-  
+
   if (target) {
     if (typeof target === 'string') {
       const el = document.querySelector(target)
@@ -119,13 +119,13 @@ function createLoading(options: LoadingOptions = {}): LoadingInstance {
   // 创建实例对象
   const instance: LoadingInstance = {
     closed: false,
-    
+
     close() {
       if (instance.closed) return
       instance.closed = true
-      
+
       visible.value = false
-      
+
       // 延迟卸载，等待动画完成
       setTimeout(() => {
         app.unmount()
@@ -140,13 +140,13 @@ function createLoading(options: LoadingOptions = {}): LoadingInstance {
         })
       }, 300)
     },
-    
+
     setProgress(val: number) {
       if (!instance.closed) {
         progress.value = Math.max(0, Math.min(100, val))
       }
     },
-    
+
     setText(val: string) {
       if (!instance.closed) {
         text.value = val
@@ -162,24 +162,24 @@ function createLoading(options: LoadingOptions = {}): LoadingInstance {
 
 /**
  * 全局 Loading API
- * 
+ *
  * 使用方式：
  * ```ts
  * import { XlyLoading } from '@/components/xly-loading'
- * 
+ *
  * // 全屏加载
  * const loading = XlyLoading.open({ text: '加载中...' })
  * loading.close()
- * 
+ *
  * // 容器内加载
  * const loading = XlyLoading.open({
  *   target: '.my-container',  // 或 document.querySelector('.my-container')
  *   text: '数据加载中...'
  * })
- * 
+ *
  * // 更新进度
  * loading.setProgress(50)
- * 
+ *
  * // 更新文本
  * loading.setText('处理中...')
  * ```
@@ -191,17 +191,17 @@ export const XlyLoading = {
    */
   open(options: LoadingOptions | string = {}): LoadingInstance {
     const opts: LoadingOptions = typeof options === 'string' ? { text: options } : options
-    
+
     // 如果目标容器已有 loading，先关闭
     const key = opts.target || document.body
     const existing = activeLoadings.get(key)
     if (existing && !existing.closed) {
       existing.close()
     }
-    
+
     return createLoading(opts)
   },
-  
+
   /**
    * 关闭指定目标的 Loading
    * @param target 目标容器选择器或元素，不传则关闭全屏 loading
@@ -213,7 +213,7 @@ export const XlyLoading = {
       instance.close()
     }
   },
-  
+
   /**
    * 关闭所有 Loading
    */
@@ -225,7 +225,7 @@ export const XlyLoading = {
     })
     activeLoadings.clear()
   },
-  
+
   /**
    * 快捷方法：全屏加载
    * @param text 加载文本
@@ -233,7 +233,7 @@ export const XlyLoading = {
   fullscreen(text?: string) {
     return this.open({ text, fullscreen: true })
   },
-  
+
   /**
    * 快捷方法：容器内加载
    * @param target 目标容器
@@ -255,10 +255,10 @@ export const XlyLoading = {
 export function setupXlyLoading(app: App) {
   // 挂载到全局属性
   app.config.globalProperties.$loading = XlyLoading
-  
+
   // 提供注入
   app.provide('__XLY_LOADING__', XlyLoading)
-  
+
   // mixin 让模板中可以直接访问
   app.mixin({
     computed: {

@@ -412,8 +412,8 @@ function clear() {
 
   const dpr = window.devicePixelRatio || 1
   const w = canvas.width / dpr
-  const h = canvas.height / dpr
-  context.clearRect(0, 0, w, h)
+  const heightVal = canvas.height / dpr
+  context.clearRect(0, 0, w, heightVal)
 
   history.length = 0
   canUndo.value = false

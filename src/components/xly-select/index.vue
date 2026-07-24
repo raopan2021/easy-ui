@@ -1,17 +1,7 @@
 <template>
-  <div
-    class="xly-select"
-    :class="[`xly-select--${size}`, { 'is-disabled': disabled, 'is-focus': visible }]"
-  >
+  <div class="xly-select" :class="[`xly-select--${size}`, { 'is-disabled': disabled, 'is-focus': visible }]">
     <!-- 触发器 -->
-    <div
-      ref="triggerRef"
-      class="xly-select__wrapper"
-      :class="{ 'is-hover': hovering && !disabled }"
-      @click="toggleDropdown"
-      @mouseenter="hovering = true"
-      @mouseleave="hovering = false"
-    >
+    <div ref="triggerRef" class="xly-select__wrapper" :class="{ 'is-hover': hovering && !disabled }" @click="toggleDropdown" @mouseenter="hovering = true" @mouseleave="hovering = false">
       <!-- 前缀 -->
       <span v-if="$slots.prefix || prefixIcon" class="xly-select__prefix">
         <slot name="prefix" />
@@ -23,7 +13,7 @@
         <span
           v-for="(label, i) in visibleLabels"
           :key="i"
-          :ref="(el) => setTagRef(el, i)"
+          :ref="el => setTagRef(el, i)"
           class="xly-select__tag"
         >
           {{ label }}
@@ -31,9 +21,7 @@
             <XlyIcon name="el:Close" :size="12" />
           </span>
         </span>
-        <span v-if="hiddenCount > 0" class="xly-select__tag xly-select__tag--count"
-          >+{{ hiddenCount }}</span
-        >
+        <span v-if="hiddenCount > 0" class="xly-select__tag xly-select__tag--count">+{{ hiddenCount }}</span>
       </div>
 
       <!-- 选中值显示 -->
@@ -44,11 +32,7 @@
       <!-- 后缀 -->
       <span class="xly-select__suffix">
         <!-- 清除 -->
-        <span
-          v-if="clearable && hasValue && !disabled"
-          class="xly-select__clear"
-          @click.stop="clear"
-        >
+        <span v-if="clearable && hasValue && !disabled" class="xly-select__clear" @click.stop="clear">
           <XlyIcon name="el:Close" />
         </span>
         <!-- 自定义后缀 -->
@@ -66,11 +50,10 @@
           v-if="visible"
           ref="dropdownRef"
           class="xly-select__dropdown"
-          :class="{ 'is-placement-top': isPlacementTop }"
           :style="dropdownStyle"
         >
           <!-- 搜索框 -->
-          <div v-if="filterable" class="xly-select__search">
+          <div v-if="effectiveFilterable" class="xly-select__search">
             <input
               ref="searchRef"
               v-model="searchQuery"
@@ -107,17 +90,9 @@
                 <XlyIcon v-if="isSelected(option[valueKey])" name="el:Check" />
               </span>
               <!-- 默认选项内容 -->
-              <span v-if="!slots.option" class="xly-select__option-label">{{
-                option[labelKey]
-              }}</span>
+              <span v-if="!slots.option" class="xly-select__option-label">{{ option[labelKey] }}</span>
               <!-- 自定义选项插槽 -->
-              <slot
-                v-else
-                name="option"
-                :option="option"
-                :index="idx"
-                :selected="isSelected(option[valueKey])"
-              ></slot>
+              <slot v-else name="option" :option="option" :index="idx" :selected="isSelected(option[valueKey])"></slot>
             </div>
             <div v-if="filteredOptions.length === 0" class="xly-select__empty">
               {{ props.loading ? '加载中...' : '暂无数据' }}
@@ -166,7 +141,7 @@ export interface SelectProps {
   /** 是否启用远程搜索，需配合 remoteMethod 使用 */
   remote?: boolean
   /** 远程搜索方法，接收搜索关键字作为参数 */
-  remoteMethod?: (query: string) => SelectOption[] | Promise<SelectOption[]> | void
+  remoteMethod?: (query: string) => void
   /** 是否显示加载中状态 */
   loading?: boolean
   /** 远程搜索防抖延迟（毫秒），默认 300 */
@@ -182,8 +157,8 @@ const props = withDefaults(defineProps<SelectProps>(), {
   options: () => [],
   placeholder: '请选择',
   disabled: false,
-  clearable: false,
-  filterable: false,
+  clearable: true,
+  filterable: undefined as boolean | undefined,
   allowCreate: false,
   multiple: false,
   maxTagCount: 3,
@@ -223,18 +198,14 @@ const hovering = ref(false)
 const hoverIndex = ref(-1)
 const searchQuery = ref('')
 const tick = ref(0)
+const dropHeight = ref(280)
 const remoteOptions = ref<SelectOption[]>([])
 const visibleLabelCount = ref(0)
-const hiddenCount = computed(() =>
-  Math.max(0, selectedLabels.value.length - visibleLabelCount.value),
-)
+const hiddenCount = computed(() => Math.max(0, selectedLabels.value.length - visibleLabelCount.value))
 // 手动创建的选项，用于 allow-create 模式，确保新建值在列表和标签中可见
 const createdOptions = ref<SelectOption[]>([])
 let debounceTimer: ReturnType<typeof setTimeout> | null = null
 let calcTimeout: ReturnType<typeof setTimeout> | null = null
-
-// 记录下拉框弹出方向（向上/向下），用于动画和样式
-const isPlacementTop = ref(false)
 
 // 判断是否为基础数组（非对象数组）
 const isSimpleArray = computed(() => {
@@ -251,12 +222,19 @@ const normalizedOptions = computed<SelectOption[]>(() => {
     return props.options as SelectOption[]
   }
   // 基础数组转换为 { label, value } 格式
-  return (props.options as string[]).map((item) => ({
+  return (props.options as string[]).map(item => ({
     [props.labelKey]: item,
     [props.valueKey]: item,
   }))
 })
 
+// 有效的 filterable：用户未显式设置时，选项 ≥5 自动开启搜索
+const effectiveFilterable = computed(() => {
+  if (props.filterable !== undefined) return props.filterable;
+  return normalizedOptions.value.length >= 5;
+})
+
+const isMultiple = computed(() => props.multiple)
 const hasValue = computed(() => {
   if (props.multiple) {
     const val = props.modelValue
@@ -276,7 +254,7 @@ const internalValue = computed<(string | number | boolean)[]>(() => {
   const val = props.modelValue
   if (Array.isArray(val)) return val
   if (typeof val === 'string' && val.trim() !== '') {
-    return val.split(props.separator).map((v) => v.trim())
+    return val.split(props.separator).map(v => v.trim())
   }
   return []
 })
@@ -284,7 +262,7 @@ const internalValue = computed<(string | number | boolean)[]>(() => {
 // 将内部数组转换为 modelValue（根据 valueType）
 const formatModelValue = (arr: (string | number | boolean)[]): any => {
   if (!props.multiple) {
-    return arr.length ? arr[0] : undefined
+    return arr[0] || undefined
   }
 
   if (props.valueType === 'string') {
@@ -295,27 +273,20 @@ const formatModelValue = (arr: (string | number | boolean)[]): any => {
 
 // 合并静态选项、远程选项和手动创建的选项，用于查找选中标签和过滤列表
 const allOptions = computed(() => {
-  if (props.remote && props.filterable) {
-    const merged = [...normalizedOptions.value, ...remoteOptions.value, ...createdOptions.value]
-    const seen = new Set()
-    return merged.filter((option) => {
-      const key = option[props.valueKey]
-      if (seen.has(key)) return false
-      seen.add(key)
-      return true
-    })
+  if (props.remote && effectiveFilterable.value) {
+    return [...remoteOptions.value, ...createdOptions.value]
   }
   return [...normalizedOptions.value, ...createdOptions.value]
 })
 
 const selectedLabels = computed(() => {
   if (props.multiple) {
-    return internalValue.value.map((v) => {
-      const opt = allOptions.value.find((o) => o[props.valueKey] === v)
+    return internalValue.value.map(v => {
+      const opt = allOptions.value.find(o => o[props.valueKey] === v)
       return opt?.[props.labelKey] || String(v)
     })
   }
-  const opt = allOptions.value.find((o) => o[props.valueKey] === props.modelValue)
+  const opt = allOptions.value.find(o => o[props.valueKey] === props.modelValue)
   // 如果找不到对应选项，显示传入的值本身
   if (opt) return [opt[props.labelKey]]
   if (props.modelValue !== undefined && props.modelValue !== null && props.modelValue !== '') {
@@ -336,9 +307,9 @@ const visibleLabels = computed(() => {
 const filteredOptions = computed(() => {
   const opts = allOptions.value
   if (opts.length > 0) {
-    if (!props.filterable || !searchQuery.value) return opts
+    if (!effectiveFilterable.value || !searchQuery.value) return opts
     const q = searchQuery.value.toLowerCase()
-    return opts.filter((o) => String(o[props.labelKey]).toLowerCase().includes(q))
+    return opts.filter(o => String(o[props.labelKey]).toLowerCase().includes(q))
   }
   return []
 })
@@ -347,7 +318,9 @@ const filteredOptions = computed(() => {
 const isQueryExisting = computed(() => {
   if (!searchQuery.value) return true
   const q = searchQuery.value
-  return allOptions.value.some((o) => o[props.labelKey] === q || o[props.valueKey] === q)
+  return allOptions.value.some(
+    o => o[props.labelKey] === q || o[props.valueKey] === q
+  )
 })
 
 const dropdownStyle = computed(() => {
@@ -357,16 +330,11 @@ const dropdownStyle = computed(() => {
   if (!triggerRef.value) return {}
   const rect = triggerRef.value.getBoundingClientRect()
   const spaceBelow = window.innerHeight - rect.bottom
-  const spaceAbove = rect.top
-  // 下拉框最大高度：默认 274px 列表 + 约 46px 搜索框 + 8px padding
-  const maxDropH = 328
+  const dh = dropHeight.value
 
-  if (spaceBelow < maxDropH) {
-    // 向上展开：底部贴紧输入框顶部，高度由内容自适应，但不超过上方可用空间
-    isPlacementTop.value = true
-    const maxHeight = Math.min(maxDropH, spaceAbove - 8)
+  if (spaceBelow < dh) {
     return {
-      bottom: `${window.innerHeight - rect.top + 4}px`,
+      top: `${Math.max(4, rect.top - dh - 4)}px`,
       left: `${rect.left}px`,
       minWidth: `${rect.width}px`,
     }
@@ -455,13 +423,20 @@ function calculateVisibleLabels() {
   }, 0)
 }
 
+
+
+
 function toggleDropdown() {
   if (props.disabled) return
   visible.value = !visible.value
   if (visible.value) {
     tick.value++
     nextTick(() => {
-      if (props.filterable) searchRef.value?.focus()
+      if (dropdownRef.value) {
+        dropHeight.value = dropdownRef.value.offsetHeight
+        tick.value++
+      }
+      if (effectiveFilterable.value) searchRef.value?.focus()
     })
   } else {
     searchQuery.value = ''
@@ -498,7 +473,7 @@ function handleCreateOption() {
   // 如果选项已存在，不创建，直接选中
   if (isQueryExisting.value) {
     const existingOption = allOptions.value.find(
-      (o) => o[props.labelKey] === query || o[props.valueKey] === query,
+      o => o[props.labelKey] === query || o[props.valueKey] === query
     )
     if (existingOption) {
       selectOption(existingOption)
@@ -541,8 +516,8 @@ function removeTag(visibleIndex: number) {
   if (!visibleLabelValue) return
 
   // 直接使用 visibleLabelValue 来查找对应的值
-  const originalIndex = current.findIndex((v) => {
-    const opt = allOptions.value.find((o) => o && o[props.valueKey] === v)
+  const originalIndex = current.findIndex(v => {
+    const opt = allOptions.value.find(o => o && o[props.valueKey] === v)
     return opt && opt[props.labelKey] === visibleLabelValue
   })
 
@@ -598,15 +573,11 @@ watch(searchQuery, (val) => {
   }
 })
 
-watch(
-  () => [selectedLabels.value, visible.value],
-  () => {
-    nextTick(() => {
-      calculateVisibleLabels()
-    })
-  },
-  { deep: true },
-)
+watch(() => [selectedLabels.value, visible.value], () => {
+  nextTick(() => {
+    calculateVisibleLabels()
+  })
+}, { deep: true })
 
 onMounted(() => {
   document.addEventListener('mousedown', handleClickOutside)
@@ -622,12 +593,7 @@ onBeforeUnmount(() => {
 })
 
 // 暴露 remoteOptions 供外部更新远程搜索结果
-defineExpose({
-  blur: () => {
-    visible.value = false
-  },
-  remoteOptions,
-})
+defineExpose({ blur: () => { visible.value = false }, remoteOptions })
 </script>
 
 <style scoped lang="scss">
@@ -648,24 +614,12 @@ $transition: all 0.2s ease;
   width: 100%;
   position: relative;
 
-  &--large &__wrapper {
-    height: 44px;
-  }
-  &--large &__value {
-    font-size: 15px;
-  }
-  &--default &__wrapper {
-    height: 36px;
-  }
-  &--default &__value {
-    font-size: 14px;
-  }
-  &--small &__wrapper {
-    height: 30px;
-  }
-  &--small &__value {
-    font-size: 13px;
-  }
+  &--large &__wrapper { height: 44px; }
+  &--large &__value { font-size: 15px; }
+  &--default &__wrapper { height: 36px; }
+  &--default &__value { font-size: 14px; }
+  &--small &__wrapper { height: 30px; }
+  &--small &__value { font-size: 13px; }
 
   &__wrapper {
     width: 100%;
@@ -680,9 +634,7 @@ $transition: all 0.2s ease;
     user-select: none;
     box-sizing: border-box;
 
-    &.is-hover:not(.is-disabled) {
-      border-color: $border-hover;
-    }
+    &.is-hover:not(.is-disabled) { border-color: $border-hover; }
   }
 
   &.is-focus &__wrapper {
@@ -710,9 +662,7 @@ $transition: all 0.2s ease;
     white-space: nowrap;
     color: $text-color;
 
-    &.is-placeholder {
-      color: $text-placeholder;
-    }
+    &.is-placeholder { color: $text-placeholder; }
   }
 
   &__tags {
@@ -749,9 +699,7 @@ $transition: all 0.2s ease;
     border-radius: 50%;
     transition: background 0.15s;
 
-    &:hover {
-      background: rgba(79, 110, 247, 0.15);
-    }
+    &:hover { background: rgba(79, 110, 247, 0.15); }
   }
 
   &__suffix {
@@ -768,16 +716,12 @@ $transition: all 0.2s ease;
     cursor: pointer;
     border-radius: 50%;
     transition: color 0.15s;
-    &:hover {
-      color: $text-color;
-    }
+    &:hover { color: $text-color; }
   }
 
   &__arrow {
     transition: transform 0.2s ease;
-    &.is-reverse {
-      transform: rotate(180deg);
-    }
+    &.is-reverse { transform: rotate(180deg); }
   }
 }
 
@@ -799,9 +743,7 @@ $radius: 8px;
   background: #fff;
   border: 1px solid $border-color;
   border-radius: $radius;
-  box-shadow:
-    0 6px 16px rgba(0, 0, 0, 0.08),
-    0 3px 6px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08), 0 3px 6px rgba(0, 0, 0, 0.06);
   overflow: hidden;
 }
 
@@ -824,12 +766,8 @@ $radius: 8px;
   transition: border-color 0.2s;
   box-sizing: border-box;
 
-  &:focus {
-    border-color: $primary;
-  }
-  &::placeholder {
-    color: $text-placeholder;
-  }
+  &:focus { border-color: $primary; }
+  &::placeholder { color: $text-placeholder; }
 }
 
 .xly-select__search-btn {
@@ -844,9 +782,7 @@ $radius: 8px;
   transition: background 0.2s;
   white-space: nowrap;
 
-  &:hover:not(:disabled) {
-    background: #4056d6;
-  }
+  &:hover:not(:disabled) { background: #4056d6; }
   &:disabled {
     background: #d3d4dd;
     cursor: not-allowed;
@@ -869,24 +805,11 @@ $radius: 8px;
   cursor: pointer;
   transition: background 0.15s;
 
-  &:hover,
-  &.is-hover {
-    background: $primary-light;
-  }
-  &.is-selected {
-    color: $primary;
-    font-weight: 500;
-  }
-  &.is-disabled {
-    color: $disabled-color;
-    cursor: not-allowed;
-  }
+  &:hover, &.is-hover { background: $primary-light; }
+  &.is-selected { color: $primary; font-weight: 500; }
+  &.is-disabled { color: $disabled-color; cursor: not-allowed; }
 
-  &-check {
-    width: 16px;
-    display: inline-flex;
-    justify-content: center;
-  }
+  &-check { width: 16px; display: inline-flex; justify-content: center; }
 }
 
 .xly-select__empty {
@@ -898,24 +821,12 @@ $radius: 8px;
 
 .xly-select-zoom-enter-active,
 .xly-select-zoom-leave-active {
-  transition:
-    opacity 140ms cubic-bezier(0.16, 1, 0.3, 1),
-    transform 140ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.15s ease, transform 0.15s ease;
   transform-origin: top center;
 }
 .xly-select-zoom-enter-from,
 .xly-select-zoom-leave-to {
   opacity: 0;
   transform: scaleY(0.9) translateY(-4px);
-}
-
-/* 向上展开时，动画原点改为底部 */
-.xly-select__dropdown.is-placement-top .xly-select-zoom-enter-active,
-.xly-select__dropdown.is-placement-top .xly-select-zoom-leave-active {
-  transform-origin: bottom center;
-}
-.xly-select__dropdown.is-placement-top .xly-select-zoom-enter-from,
-.xly-select__dropdown.is-placement-top .xly-select-zoom-leave-to {
-  transform: scaleY(0.9) translateY(4px);
 }
 </style>
