@@ -594,13 +594,13 @@ const handleSearch = (data: any) => {
 .doc-title {
   font-size: 26px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
   letter-spacing: -0.3px;
 }
 .doc-desc {
   font-size: 14px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   margin: 0;
   line-height: 1.6;
 }
@@ -610,19 +610,19 @@ const handleSearch = (data: any) => {
 .doc-section__title {
   font-size: 18px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #f2f3f7;
+  border-bottom: 1px solid var(--el-border-color-lighter);
 }
 .doc-section__desc {
   font-size: 14px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   margin: 0 0 16px;
   line-height: 1.6;
   code {
-    background: #f5f6fa;
-    color: #4f6ef7;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 13px;
@@ -630,10 +630,10 @@ const handleSearch = (data: any) => {
   }
 }
 .doc-preview {
-  border: 1px solid #f2f3f7;
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 12px;
   overflow: hidden;
-  background: #fff;
+  background: var(--el-bg-color-overlay);
 }
 .doc-preview__body {
   display: flex;
@@ -643,8 +643,8 @@ const handleSearch = (data: any) => {
   padding: 24px;
 }
 .doc-code {
-  border-top: 1px solid #f2f3f7;
-  background: #fafbfd;
+  border-top: 1px solid var(--el-border-color-lighter);
+  background: var(--el-fill-color-light);
   padding: 16px 20px;
   overflow-x: auto;
   pre {
@@ -655,14 +655,14 @@ const handleSearch = (data: any) => {
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
     font-size: 13px;
     line-height: 1.7;
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
     white-space: pre;
   }
 }
 .doc-subtitle {
   font-size: 15px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 20px 0 10px;
 }
 .doc-table {
@@ -676,20 +676,20 @@ const handleSearch = (data: any) => {
   td {
     text-align: left;
     padding: 10px 14px;
-    border-bottom: 1px solid #f2f3f7;
+    border-bottom: 1px solid var(--el-border-color-lighter);
     white-space: nowrap;
   }
   th {
-    background: #fafbfd;
+    background: var(--el-fill-color-light);
     font-weight: 600;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
   }
   td {
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
   }
   code {
-    background: #f5f6fa;
-    color: #4f6ef7;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 13px;
@@ -700,7 +700,7 @@ const handleSearch = (data: any) => {
   .doc-api__title {
     font-size: 16px;
     font-weight: 600;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
     margin: 24px 0 12px;
   }
 }

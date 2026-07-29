@@ -192,14 +192,14 @@ const lineStatus = computed(() => {
 <style scoped>
 /* ========== CSS 变量（默认值） ========== */
 .xly-step {
-  --step-primary: #4f6ef7;
+  --step-primary: var(--el-color-primary);
   --step-primary-light: #eef1ff;
-  --step-success: #10b981;
+  --step-success: var(--el-color-success);
   --step-success-light: #d1fae5;
-  --step-error: #ef4444;
+  --step-error: var(--el-color-danger);
   --step-error-light: #fee2e2;
   --step-wait: #d1d5db;
-  --step-wait-bg: #f3f4f6;
+  --step-wait-bg: var(--el-fill-color-light);
   --step-text: #1f2937;
   --step-text-secondary: #6b7280;
   --step-desc: #9ca3af;
@@ -258,7 +258,7 @@ const lineStatus = computed(() => {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border: 2px solid var(--step-wait);
   color: var(--step-wait);
-  background: #fff;
+  background: var(--el-bg-color);
   z-index: 2;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }

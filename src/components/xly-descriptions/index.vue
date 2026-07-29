@@ -503,3 +503,34 @@ $radius-sm: 8px;
   }
 }
 </style>
+
+<style lang="scss">
+/* ========== Dark Mode ========== */
+html.dark .xly-descriptions__body {
+  background: var(--el-bg-color);
+}
+html.dark .xly-descriptions__body tbody {
+  background: transparent;
+}
+html.dark .xly-descriptions__label {
+  color: var(--el-text-color-regular) !important;
+}
+html.dark .xly-descriptions__content {
+  color: var(--el-text-color-primary) !important;
+}
+html.dark .xly-descriptions__title {
+  color: var(--el-text-color-primary);
+}
+html.dark .xly-descriptions--horizontal.is-bordered .xly-descriptions__body,
+html.dark .xly-descriptions--vertical.is-bordered .xly-descriptions__body,
+html.dark .xly-descriptions--horizontal.is-bordered .xly-descriptions__label,
+html.dark .xly-descriptions--vertical.is-bordered .xly-descriptions__item {
+  border-color: var(--el-border-color);
+}
+html.dark .xly-descriptions__label--vertical .label-text {
+  color: var(--el-text-color-regular);
+}
+html.dark .xly-descriptions__extra {
+  color: var(--el-text-color-secondary);
+}
+</style>

@@ -350,28 +350,28 @@ const selectMulti = ref<(string | number)[]>([])
 
 <style scoped lang="scss">
 .doc-header { margin-bottom: 32px; }
-.doc-title { font-size: 28px; font-weight: 700; color: #1a1a2e; margin: 0 0 8px; }
+.doc-title { font-size: 28px; font-weight: 700; color: var(--el-text-color-primary); margin: 0 0 8px; }
 .doc-desc {
-  font-size: 14px; color: #8e8ea0; line-height: 1.6; margin: 0;
-  code { padding: 2px 6px; background: #f0f2f5; border-radius: 4px; font-size: 13px; color: #4f6ef7; font-family: 'Menlo','Monaco','Courier New',monospace; }
+  font-size: 14px; color: var(--el-text-color-secondary); line-height: 1.6; margin: 0;
+  code { padding: 2px 6px; background: var(--el-fill-color-light); border-radius: 4px; font-size: 13px; color: var(--el-color-primary); font-family: 'Menlo','Monaco','Courier New',monospace; }
 }
 .doc-section { margin-bottom: 40px; }
-.doc-section__title { font-size: 20px; font-weight: 600; color: #1a1a2e; margin: 0 0 8px; }
+.doc-section__title { font-size: 20px; font-weight: 600; color: var(--el-text-color-primary); margin: 0 0 8px; }
 .doc-section__desc {
-  font-size: 14px; color: #6b7280; line-height: 1.6; margin: 0 0 16px;
-  code { padding: 2px 6px; background: #f0f2f5; border-radius: 4px; font-size: 13px; color: #4f6ef7; font-family: 'Menlo','Monaco','Courier New',monospace; }
+  font-size: 14px; color: var(--el-text-color-secondary); line-height: 1.6; margin: 0 0 16px;
+  code { padding: 2px 6px; background: var(--el-fill-color-light); border-radius: 4px; font-size: 13px; color: var(--el-color-primary); font-family: 'Menlo','Monaco','Courier New',monospace; }
 }
 .doc-preview { border: 1px solid #e2e4ed; border-radius: 12px; overflow: hidden; }
 .doc-preview__body { padding: 24px; }
 .doc-code {
-  border-top: 1px solid #e2e4ed; padding: 16px; background: #fafbfc;
+  border-top: 1px solid #e2e4ed; padding: 16px; background: var(--el-fill-color-light);
   pre { margin: 0; overflow-x: auto; }
-  code { font-size: 13px; line-height: 1.6; color: #4a4a6a; font-family: 'Menlo','Monaco','Courier New',monospace; }
+  code { font-size: 13px; line-height: 1.6; color: var(--el-text-color-regular); font-family: 'Menlo','Monaco','Courier New',monospace; }
 }
 
 .form-demo-card {
   max-width: 520px;
-  background: #fff;
+  background: var(--el-bg-color-overlay);
   border: 1px solid #e2e4ed;
   border-radius: 12px;
   padding: 24px;
@@ -402,7 +402,7 @@ const selectMulti = ref<(string | number)[]>([])
   flex-shrink: 0;
   width: 80px;
   font-size: 13px;
-  color: #6b7280;
+  color: var(--el-text-color-secondary);
   text-align: right;
 }
 
@@ -419,8 +419,8 @@ const selectMulti = ref<(string | number)[]>([])
 .doc-table {
   width: 100%; border-collapse: collapse; font-size: 14px;
   th, td { padding: 10px 16px; text-align: left; border-bottom: 1px solid #e2e4ed; }
-  th { background: #f8f9fb; font-weight: 600; color: #1a1a2e; white-space: nowrap; }
-  td { color: #4a4a6a; }
-  code { padding: 2px 6px; background: #f0f2f5; border-radius: 4px; font-size: 13px; color: #4f6ef7; font-family: 'Menlo','Monaco','Courier New',monospace; }
+  th { background: #f8f9fb; font-weight: 600; color: var(--el-text-color-primary); white-space: nowrap; }
+  td { color: var(--el-text-color-regular); }
+  code { padding: 2px 6px; background: var(--el-fill-color-light); border-radius: 4px; font-size: 13px; color: var(--el-color-primary); font-family: 'Menlo','Monaco','Courier New',monospace; }
 }
 </style>

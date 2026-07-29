@@ -623,14 +623,14 @@ const multiYearData: MapDataSet[] = [
     .doc-title {
       font-size: 26px;
       font-weight: 700;
-      color: #1a1a2e;
+      color: var(--el-text-color-primary);
       letter-spacing: -0.3px;
       margin: 0 0 8px;
     }
 
     .doc-desc {
       font-size: 14px;
-      color: #8e8ea0;
+      color: var(--el-text-color-secondary);
       margin: 0;
       line-height: 1.6;
     }
@@ -642,9 +642,9 @@ const multiYearData: MapDataSet[] = [
     &__title {
       font-size: 18px;
       font-weight: 600;
-      color: #1a1a2e;
+      color: var(--el-text-color-primary);
       padding-bottom: 10px;
-      border-bottom: 1px solid #f2f3f7;
+      border-bottom: 1px solid var(--el-border-color-lighter);
       margin: 0 0 16px;
     }
 
@@ -657,12 +657,12 @@ const multiYearData: MapDataSet[] = [
 
     &__desc {
       font-size: 14px;
-      color: #6b7280;
+      color: var(--el-text-color-secondary);
       margin: 0 0 14px;
       line-height: 1.6;
 
       code {
-        background: #f3f4f6;
+        background: var(--el-fill-color-light);
         color: #6366f1;
         border-radius: 4px;
         padding: 1px 5px;
@@ -673,19 +673,19 @@ const multiYearData: MapDataSet[] = [
   }
 
   .doc-preview {
-    border: 1px solid #f2f3f7;
+    border: 1px solid var(--el-border-color-lighter);
     border-radius: 12px;
     overflow: hidden;
 
     &__body {
       padding: 24px;
-      background: #fff;
+      background: var(--el-bg-color-overlay);
     }
   }
 
   .doc-code {
-    background: #fafbfd;
-    border-top: 1px solid #f2f3f7;
+    background: var(--el-fill-color-light);
+    border-top: 1px solid var(--el-border-color-lighter);
     padding: 14px 18px;
 
     pre {
@@ -694,7 +694,7 @@ const multiYearData: MapDataSet[] = [
 
       code {
         font-size: 12.5px;
-        color: #4a4a6a;
+        color: var(--el-text-color-regular);
         font-family: 'Fira Code', 'Cascadia Code', Consolas, monospace;
         line-height: 1.6;
         white-space: pre;
@@ -705,7 +705,7 @@ const multiYearData: MapDataSet[] = [
   .doc-result {
     margin-top: 10px;
     font-size: 13px;
-    color: #6b7280;
+    color: var(--el-text-color-secondary);
 
     &__label {
       font-weight: 500;
@@ -713,7 +713,7 @@ const multiYearData: MapDataSet[] = [
     }
 
     code {
-      background: #f3f4f6;
+      background: var(--el-fill-color-light);
       color: #6366f1;
       border-radius: 4px;
       padding: 2px 8px;
@@ -735,17 +735,17 @@ const multiYearData: MapDataSet[] = [
 
     &__label {
       font-size: 13px;
-      color: #6b7280;
+      color: var(--el-text-color-secondary);
       font-weight: 500;
     }
 
     &__btn {
       padding: 5px 14px;
-      border: 1px solid #e5e7eb;
-      background: #fff;
+      border: 1px solid var(--el-border-color-lighter);
+      background: var(--el-bg-color-overlay);
       border-radius: 6px;
       font-size: 13px;
-      color: #6b7280;
+      color: var(--el-text-color-secondary);
       cursor: pointer;
       transition: all 0.2s ease;
 
@@ -768,18 +768,18 @@ const multiYearData: MapDataSet[] = [
     font-size: 13px;
 
     th {
-      background: #fafbfd;
-      color: #1a1a2e;
+      background: var(--el-fill-color-light);
+      color: var(--el-text-color-primary);
       font-weight: 600;
       padding: 10px 14px;
       text-align: left;
-      border-bottom: 1px solid #f2f3f7;
+      border-bottom: 1px solid var(--el-border-color-lighter);
     }
 
     td {
-      color: #4a4a6a;
+      color: var(--el-text-color-regular);
       padding: 10px 14px;
-      border-bottom: 1px solid #f9fafb;
+      border-bottom: 1px solid var(--el-border-color-lighter);
       vertical-align: top;
       line-height: 1.5;
 
@@ -797,8 +797,8 @@ const multiYearData: MapDataSet[] = [
 
   .doc-details {
     margin-top: 16px;
-    background: #fafbfd;
-    border: 1px solid #f2f3f7;
+    background: var(--el-fill-color-light);
+    border: 1px solid var(--el-border-color-lighter);
     border-radius: 8px;
     overflow: hidden;
 
@@ -818,12 +818,12 @@ const multiYearData: MapDataSet[] = [
     pre {
       margin: 0;
       padding: 14px;
-      border-top: 1px solid #f2f3f7;
+      border-top: 1px solid var(--el-border-color-lighter);
       overflow-x: auto;
 
       code {
         font-size: 12px;
-        color: #4a4a6a;
+        color: var(--el-text-color-regular);
         font-family: 'Fira Code', monospace;
         line-height: 1.5;
       }

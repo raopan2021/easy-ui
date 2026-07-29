@@ -320,12 +320,9 @@ defineExpose({ onTabsChange: () => nextTick(() => { updateScrollState(); scrollT
 <style scoped lang="scss">
 $xly-blue: #4f6ef7;
 $xly-blue-light: #eef1ff;
-$text-primary: #1f2937;
-$text-secondary: #4b5563;
-$text-muted: #9ca3af;
+
 $border: #e5e7eb;
-$border-active: #c7d2fe;
-$bg-hover: #f3f4f6;
+
 $bg-active: #fff;
 $radius: 6px;
 $transition: all 0.15s ease;
@@ -334,7 +331,7 @@ $transition: all 0.15s ease;
   display: flex;
   align-items: center;
   height: 46px;
-  background: #fff;
+  background: var(--el-bg-color);
   border-bottom: 1px solid $border;
   padding: 0 8px;
   flex-shrink: 0;
@@ -367,14 +364,14 @@ $transition: all 0.15s ease;
   border: none;
   border-radius: 5px;
   background: transparent;
-  color: $text-muted;
+  color: var(--el-text-color-placeholder);
   cursor: pointer;
   flex-shrink: 0;
   transition: $transition;
 
   &:hover {
-    background: $bg-hover;
-    color: $text-primary;
+    background: var(--el-fill-color-light);
+    color: var(--el-text-color-primary);
   }
 
   &:active {
@@ -393,11 +390,11 @@ $transition: all 0.15s ease;
   border: 1px solid $border;
   border-radius: $radius;
   font-size: 13px;
-  color: $text-secondary;
+  color: var(--el-text-color-secondary);
   cursor: pointer;
   user-select: none;
   transition: $transition;
-  background: #fff;
+  background: var(--el-bg-color);
   flex-shrink: 0;
   max-width: 160px;
 
@@ -428,14 +425,14 @@ $transition: all 0.15s ease;
 
     &:hover {
       background: #fee2e2;
-      color: #ef4444;
+      color: var(--el-color-danger);
     }
   }
 
   // 悬浮态
   &:hover:not(.is-active) {
     border-color: #d1d5db;
-    color: $text-primary;
+    color: var(--el-text-color-primary);
 
     .worktab-item__close {
       opacity: 0.6;
@@ -452,12 +449,12 @@ $transition: all 0.15s ease;
 
     .worktab-item__close {
       opacity: 0.5;
-      color: $text-muted;
+      color: var(--el-text-color-placeholder);
 
       &:hover {
         opacity: 1;
         background: #fee2e2;
-        color: #ef4444;
+        color: var(--el-color-danger);
       }
     }
   }
@@ -493,13 +490,13 @@ $transition: all 0.15s ease;
   border: none;
   border-radius: 5px;
   background: transparent;
-  color: $text-muted;
+  color: var(--el-text-color-placeholder);
   cursor: pointer;
   transition: $transition;
 
   &:hover {
-    background: $bg-hover;
-    color: $text-primary;
+    background: var(--el-fill-color-light);
+    color: var(--el-text-color-primary);
   }
 
   &:active {
@@ -526,7 +523,7 @@ $transition: all 0.15s ease;
   z-index: 3000;
   min-width: 146px;
   padding: 5px;
-  background: #fff;
+  background: var(--el-bg-color);
   border: 1px solid $border;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -538,14 +535,14 @@ $transition: all 0.15s ease;
     height: 32px;
     padding: 0 10px;
     font-size: 13px;
-    color: $text-secondary;
+    color: var(--el-text-color-secondary);
     cursor: pointer;
     border-radius: 5px;
     transition: $transition;
     white-space: nowrap;
 
     svg {
-      color: $text-muted;
+      color: var(--el-text-color-placeholder);
       flex-shrink: 0;
       transition: $transition;
     }
@@ -558,7 +555,7 @@ $transition: all 0.15s ease;
     }
 
     &.is-disabled {
-      color: #d1d5db;
+      color: var(--el-text-color-placeholder);
       cursor: not-allowed;
       svg { color: #d1d5db; }
     }
@@ -575,4 +572,51 @@ $transition: all 0.15s ease;
 .ctx-fade-leave-active { transition: all 0.08s ease; }
 .ctx-fade-enter-from   { opacity: 0; transform: scale(0.95) translateY(-3px); }
 .ctx-fade-leave-to     { opacity: 0; transform: scale(0.95); }
+</style>
+
+<style lang="scss">
+html.dark .xly-worktab {
+  border-bottom-color: var(--el-border-color);
+}
+html.dark .xly-worktab__scroll-btn,
+html.dark .xly-worktab__action-btn {
+  color: var(--el-text-color-secondary);
+}
+html.dark .xly-worktab__scroll-btn:hover,
+html.dark .xly-worktab__action-btn:hover {
+  color: var(--el-text-color-primary);
+  background: var(--el-fill-color-light);
+}
+html.dark .xly-worktab__item {
+  color: var(--el-text-color-regular);
+  border-color: var(--el-border-color);
+}
+html.dark .xly-worktab__item:hover:not(.is-active) {
+  border-color: var(--el-border-color-darker);
+  color: var(--el-text-color-primary);
+}
+html.dark .xly-worktab__item--close:hover {
+  background: rgba(239, 68, 68, 0.15);
+}
+html.dark .xly-worktab__divider {
+  background: var(--el-border-color);
+}
+html.dark .xly-worktab__ctx {
+  background: var(--el-bg-color-overlay);
+  border-color: var(--el-border-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+html.dark .xly-worktab__ctx__item {
+  color: var(--el-text-color-regular);
+}
+html.dark .xly-worktab__ctx__item svg {
+  color: var(--el-text-color-secondary);
+}
+html.dark .xly-worktab__ctx__item:hover:not(.is-disabled) {
+  background: rgba(79, 110, 247, 0.12);
+  color: var(--el-color-primary);
+}
+html.dark .xly-worktab__ctx__divider {
+  background: var(--el-border-color);
+}
 </style>

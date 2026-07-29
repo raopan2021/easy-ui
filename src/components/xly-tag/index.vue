@@ -160,33 +160,33 @@ $transition: all 0.2s ease;
 // default
 $default-text: #606266;
 $default-bg: #f4f4f5;
-$default-border: #e9e9eb;
+$default-border: var(--el-border-color);
 $default-dark-bg: #909399;
 
 // primary
-$primary: #4f6ef7;
-$primary-light-bg: rgba(79, 110, 247, 0.1);
-$primary-light-border: rgba(79, 110, 247, 0.25);
+
+$primary-light-bg: var(--el-fill-color-light);
+$primary-light-border: var(--el-border-color-lighter);
 
 // success
-$success: #34c759;
-$success-light-bg: rgba(52, 199, 89, 0.1);
-$success-light-border: rgba(52, 199, 89, 0.25);
+
+$success-light-bg: var(--el-fill-color-light);
+$success-light-border: var(--el-border-color-lighter);
 
 // warning
-$warning: #f5a623;
-$warning-light-bg: rgba(245, 166, 35, 0.1);
-$warning-light-border: rgba(245, 166, 35, 0.25);
+
+$warning-light-bg: var(--el-fill-color-light);
+$warning-light-border: var(--el-border-color-lighter);
 
 // danger
-$danger: #ff3b30;
-$danger-light-bg: rgba(255, 59, 48, 0.1);
-$danger-light-border: rgba(255, 59, 48, 0.25);
+
+$danger-light-bg: var(--el-fill-color-light);
+$danger-light-border: var(--el-border-color-lighter);
 
 // info
-$info: #8e8ea0;
-$info-light-bg: rgba(142, 142, 160, 0.1);
-$info-light-border: rgba(142, 142, 160, 0.25);
+
+$info-light-bg: var(--el-fill-color-light);
+$info-light-border: var(--el-border-color-lighter);
 
 /* ========== 基础样式 ========== */
 .xly-tag {
@@ -275,7 +275,7 @@ $info-light-border: rgba(142, 142, 160, 0.25);
 
       &:hover {
         color: $default-text;
-        background-color: rgba(0, 0, 0, 0.08);
+        background-color: var(--el-fill-color-light);
       }
     }
   }
@@ -285,7 +285,7 @@ $info-light-border: rgba(142, 142, 160, 0.25);
   ==================================================== */
   &--primary {
     &.xly-tag--light {
-      color: $primary;
+      color: var(--el-color-primary);
       background-color: $primary-light-bg;
       border-color: $primary-light-border;
 
@@ -295,9 +295,9 @@ $info-light-border: rgba(142, 142, 160, 0.25);
     }
 
     &.xly-tag--plain {
-      color: $primary;
+      color: var(--el-color-primary);
       background-color: transparent;
-      border-color: $primary;
+      border-color: var(--el-color-primary);
 
       &.is-clickable:hover {
         background-color: $primary-light-bg;
@@ -306,21 +306,21 @@ $info-light-border: rgba(142, 142, 160, 0.25);
 
     &.xly-tag--dark {
       color: #fff;
-      background-color: $primary;
-      border-color: $primary;
+      background-color: var(--el-color-primary);
+      border-color: var(--el-color-primary);
 
       &.is-clickable:hover {
-        background-color: color.adjust($primary, $lightness: -8%);
-        border-color: color.adjust($primary, $lightness: -8%);
+        background-color: var(--el-color-primary-dark-2, #2e4cc7);
+        border-color: var(--el-color-primary-dark-2, #2e4cc7);
       }
     }
 
     .xly-tag__close {
-      color: color.change($primary, $alpha: 0.7);
+      color: color-mix(in srgb, var(--el-color-primary) 70%, transparent);
 
       &:hover {
-        color: $primary;
-        background-color: color.change($primary, $alpha: 0.12);
+        color: var(--el-color-primary);
+        background-color: color-mix(in srgb, var(--el-color-primary) 12%, transparent);
       }
     }
   }
@@ -330,7 +330,7 @@ $info-light-border: rgba(142, 142, 160, 0.25);
   ==================================================== */
   &--success {
     &.xly-tag--light {
-      color: $success;
+      color: var(--el-color-success);
       background-color: $success-light-bg;
       border-color: $success-light-border;
 
@@ -340,9 +340,9 @@ $info-light-border: rgba(142, 142, 160, 0.25);
     }
 
     &.xly-tag--plain {
-      color: $success;
+      color: var(--el-color-success);
       background-color: transparent;
-      border-color: $success;
+      border-color: var(--el-color-success);
 
       &.is-clickable:hover {
         background-color: $success-light-bg;
@@ -351,21 +351,21 @@ $info-light-border: rgba(142, 142, 160, 0.25);
 
     &.xly-tag--dark {
       color: #fff;
-      background-color: $success;
-      border-color: $success;
+      background-color: var(--el-color-success);
+      border-color: var(--el-color-success);
 
       &.is-clickable:hover {
-        background-color: color.adjust($success, $lightness: -8%);
-        border-color: color.adjust($success, $lightness: -8%);
+        background-color: var(--el-color-success-dark-2, #067948);
+        border-color: var(--el-color-success-dark-2, #067948);
       }
     }
 
     .xly-tag__close {
-      color: color.change($success, $alpha: 0.7);
+      color: color-mix(in srgb, var(--el-color-success) 70%, transparent);
 
       &:hover {
-        color: $success;
-        background-color: color.change($success, $alpha: 0.12);
+        color: var(--el-color-success);
+        background-color: color-mix(in srgb, var(--el-color-success) 12%, transparent);
       }
     }
   }
@@ -375,7 +375,7 @@ $info-light-border: rgba(142, 142, 160, 0.25);
   ==================================================== */
   &--warning {
     &.xly-tag--light {
-      color: $warning;
+      color: var(--el-color-warning);
       background-color: $warning-light-bg;
       border-color: $warning-light-border;
 
@@ -385,9 +385,9 @@ $info-light-border: rgba(142, 142, 160, 0.25);
     }
 
     &.xly-tag--plain {
-      color: $warning;
+      color: var(--el-color-warning);
       background-color: transparent;
-      border-color: $warning;
+      border-color: var(--el-color-warning);
 
       &.is-clickable:hover {
         background-color: $warning-light-bg;
@@ -396,21 +396,21 @@ $info-light-border: rgba(142, 142, 160, 0.25);
 
     &.xly-tag--dark {
       color: #fff;
-      background-color: $warning;
-      border-color: $warning;
+      background-color: var(--el-color-warning);
+      border-color: var(--el-color-warning);
 
       &.is-clickable:hover {
-        background-color: color.adjust($warning, $lightness: -8%);
-        border-color: color.adjust($warning, $lightness: -8%);
+        background-color: var(--el-color-warning-dark-2, #a77707);
+        border-color: var(--el-color-warning-dark-2, #a77707);
       }
     }
 
     .xly-tag__close {
-      color: color.change($warning, $alpha: 0.7);
+      color: color-mix(in srgb, var(--el-color-warning) 70%, transparent);
 
       &:hover {
-        color: $warning;
-        background-color: color.change($warning, $alpha: 0.12);
+        color: var(--el-color-warning);
+        background-color: color-mix(in srgb, var(--el-color-warning) 12%, transparent);
       }
     }
   }
@@ -420,7 +420,7 @@ $info-light-border: rgba(142, 142, 160, 0.25);
   ==================================================== */
   &--danger {
     &.xly-tag--light {
-      color: $danger;
+      color: var(--el-color-danger);
       background-color: $danger-light-bg;
       border-color: $danger-light-border;
 
@@ -430,9 +430,9 @@ $info-light-border: rgba(142, 142, 160, 0.25);
     }
 
     &.xly-tag--plain {
-      color: $danger;
+      color: var(--el-color-danger);
       background-color: transparent;
-      border-color: $danger;
+      border-color: var(--el-color-danger);
 
       &.is-clickable:hover {
         background-color: $danger-light-bg;
@@ -441,21 +441,21 @@ $info-light-border: rgba(142, 142, 160, 0.25);
 
     &.xly-tag--dark {
       color: #fff;
-      background-color: $danger;
-      border-color: $danger;
+      background-color: var(--el-color-danger);
+      border-color: var(--el-color-danger);
 
       &.is-clickable:hover {
-        background-color: color.adjust($danger, $lightness: -8%);
-        border-color: color.adjust($danger, $lightness: -8%);
+        background-color: var(--el-color-danger-dark-2, #b83125);
+        border-color: var(--el-color-danger-dark-2, #b83125);
       }
     }
 
     .xly-tag__close {
-      color: color.change($danger, $alpha: 0.7);
+      color: color-mix(in srgb, var(--el-color-danger) 70%, transparent);
 
       &:hover {
-        color: $danger;
-        background-color: color.change($danger, $alpha: 0.12);
+        color: var(--el-color-danger);
+        background-color: color-mix(in srgb, var(--el-color-danger) 12%, transparent);
       }
     }
   }
@@ -465,7 +465,7 @@ $info-light-border: rgba(142, 142, 160, 0.25);
   ==================================================== */
   &--info {
     &.xly-tag--light {
-      color: $info;
+      color: var(--el-color-info);
       background-color: $info-light-bg;
       border-color: $info-light-border;
 
@@ -475,9 +475,9 @@ $info-light-border: rgba(142, 142, 160, 0.25);
     }
 
     &.xly-tag--plain {
-      color: $info;
+      color: var(--el-color-info);
       background-color: transparent;
-      border-color: $info;
+      border-color: var(--el-color-info);
 
       &.is-clickable:hover {
         background-color: $info-light-bg;
@@ -486,21 +486,21 @@ $info-light-border: rgba(142, 142, 160, 0.25);
 
     &.xly-tag--dark {
       color: #fff;
-      background-color: $info;
-      border-color: $info;
+      background-color: var(--el-color-info);
+      border-color: var(--el-color-info);
 
       &.is-clickable:hover {
-        background-color: color.adjust($info, $lightness: -8%);
-        border-color: color.adjust($info, $lightness: -8%);
+        background-color: var(--el-color-info-dark-2, #727279);
+        border-color: var(--el-color-info-dark-2, #727279);
       }
     }
 
     .xly-tag__close {
-      color: color.change($info, $alpha: 0.7);
+      color: color-mix(in srgb, var(--el-color-info) 70%, transparent);
 
       &:hover {
-        color: $info;
-        background-color: color.change($info, $alpha: 0.12);
+        color: var(--el-color-info);
+        background-color: color-mix(in srgb, var(--el-color-info) 12%, transparent);
       }
     }
   }
@@ -544,5 +544,22 @@ $info-light-border: rgba(142, 142, 160, 0.25);
     height: 18px;
     font-size: 11px;
   }
+}
+</style>
+
+<style lang="scss">
+/* ========== Dark Mode ========== */
+html.dark .xly-tag--default.xly-tag--light {
+  color: var(--el-text-color-secondary);
+  background-color: var(--el-fill-color);
+  border-color: var(--el-border-color);
+}
+html.dark .xly-tag--default.xly-tag--dark {
+  background-color: #666;
+  border-color: #666;
+}
+html.dark .xly-tag--default.xly-tag--plain {
+  color: var(--el-text-color-secondary);
+  border-color: var(--el-border-color);
 }
 </style>

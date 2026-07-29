@@ -423,9 +423,6 @@ function calculateVisibleLabels() {
   }, 0)
 }
 
-
-
-
 function toggleDropdown() {
   if (props.disabled) return
   visible.value = !visible.value
@@ -597,15 +594,15 @@ defineExpose({ blur: () => { visible.value = false }, remoteOptions })
 </script>
 
 <style scoped lang="scss">
-$primary: #4f6ef7;
+
 $primary-light: rgba(79, 110, 247, 0.08);
-$border-color: #e2e4ed;
-$border-focus: #4f6ef7;
-$border-hover: #c8cbd8;
-$disabled-bg: #f5f7fa;
-$disabled-color: #a8abb2;
-$text-color: #4a4a6a;
-$text-placeholder: #c0c4cc;
+$border-color: var(--el-border-color);
+$border-focus: var(--el-color-primary);
+$border-hover: var(--el-border-color-hover);
+$disabled-bg: var(--el-fill-color-light);
+$disabled-color: var(--el-text-color-placeholder);
+$text-color: var(--el-text-color-regular);
+$text-placeholder: var(--el-text-color-placeholder);
 $radius: 8px;
 $transition: all 0.2s ease;
 
@@ -626,7 +623,7 @@ $transition: all 0.2s ease;
     display: inline-flex;
     align-items: center;
     padding: 0 12px;
-    background-color: #fff;
+    background-color: var(--el-bg-color);
     border: 1px solid $border-color;
     border-radius: $radius;
     cursor: pointer;
@@ -681,7 +678,7 @@ $transition: all 0.2s ease;
     gap: 2px;
     padding: 1px 6px;
     background: $primary-light;
-    color: $primary;
+    color: var(--el-color-primary);
     border-radius: 4px;
     font-size: 12px;
     white-space: nowrap;
@@ -729,18 +726,18 @@ $transition: all 0.2s ease;
 </style>
 
 <style lang="scss">
-$primary: #4f6ef7;
+
 $primary-light: rgba(79, 110, 247, 0.08);
-$border-color: #e2e4ed;
-$disabled-color: #a8abb2;
-$text-color: #4a4a6a;
-$text-placeholder: #c0c4cc;
+$border-color: var(--el-border-color);
+$disabled-color: var(--el-text-color-placeholder);
+$text-color: var(--el-text-color-regular);
+$text-placeholder: var(--el-text-color-placeholder);
 $radius: 8px;
 
 .xly-select__dropdown {
   position: fixed;
   z-index: 2000;
-  background: #fff;
+  background: var(--el-bg-color);
   border: 1px solid $border-color;
   border-radius: $radius;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08), 0 3px 6px rgba(0, 0, 0, 0.06);
@@ -766,14 +763,14 @@ $radius: 8px;
   transition: border-color 0.2s;
   box-sizing: border-box;
 
-  &:focus { border-color: $primary; }
+  &:focus { border-color: var(--el-color-primary); }
   &::placeholder { color: $text-placeholder; }
 }
 
 .xly-select__search-btn {
   padding: 0 12px;
   height: 30px;
-  background: $primary;
+  background: var(--el-color-primary);
   color: #fff;
   border: none;
   border-radius: 6px;
@@ -805,8 +802,8 @@ $radius: 8px;
   cursor: pointer;
   transition: background 0.15s;
 
-  &:hover, &.is-hover { background: $primary-light; }
-  &.is-selected { color: $primary; font-weight: 500; }
+  &:hover, &.is-hover { background: rgba(79, 110, 247, 0.08); }
+  &.is-selected { color: var(--el-color-primary); font-weight: 500; }
   &.is-disabled { color: $disabled-color; cursor: not-allowed; }
 
   &-check { width: 16px; display: inline-flex; justify-content: center; }
@@ -829,4 +826,18 @@ $radius: 8px;
   opacity: 0;
   transform: scaleY(0.9) translateY(-4px);
 }
+</style>
+
+<style lang="scss">
+/* ========== Dark Mode ========== */
+html.dark .xly-select__tags { color: var(--el-text-color-regular); }
+html.dark .xly-select__placeholder { color: var(--el-text-color-placeholder); }
+html.dark .xly-select__empty { color: var(--el-text-color-secondary); }
+html.dark .xly-select__dropdown__item.is-hover { background: var(--el-fill-color-light); }
+html.dark .xly-select__dropdown__item.is-selected { color: var(--el-color-primary); }
+html.dark .xly-select .xly-tag--info { background: var(--el-fill-color); border-color: var(--el-border-color); }
+html.dark .xly-select__dropdown__item { color: var(--el-text-color-regular); }
+html.dark .xly-select__dropdown__item.is-disabled { color: var(--el-text-color-disabled); }
+html.dark .xly-select__arrow.is-reverse { color: var(--el-text-color-placeholder); }
+html.dark .xly-select__arrow-suffix-wrap :deep(.el-input__wrapper) { background-color: var(--el-fill-color-light); }
 </style>

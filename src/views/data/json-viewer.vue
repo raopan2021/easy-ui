@@ -143,7 +143,7 @@
       </div>
       <div class="doc-tip">
         <strong>去除工具栏：</strong>如不需要工具栏，找到组件模板中带注释 <code>&lt;!-- 🔌</code> 的代码块，删除对应行即可。具体位置：
-        <pre style="margin: 8px 0; padding: 10px 14px; background: #f5f7fa; border-radius: 6px; font-size: 12px; overflow-x: auto;">
+        <pre style="margin: 8px 0; padding: 10px 14px; background: var(--el-fill-color-light); border-radius: 6px; font-size: 12px; overflow-x: auto;">
 <span style="color:#50a3f5;">&lt;!-- 🔌 复制功能：如不需要，删除以下一行 --&gt;</span>
 &lt;span v-if="showCopy" class="xly-json-viewer__btn" ...&gt;
 
@@ -422,7 +422,7 @@ const pageData = ref({
     display: inline-block;
     margin-bottom: 8px;
     font-size: 13px;
-    color: #8e8ea0;
+    color: var(--el-text-color-secondary);
   }
 
   .xly-json-viewer {
@@ -433,45 +433,45 @@ const pageData = ref({
 
 .doc-section { margin-bottom: 32px; }
 .doc-section__title {
-  font-size: 18px; font-weight: 600; color: #1a1a2e;
-  margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid #f2f3f7;
+  font-size: 18px; font-weight: 600; color: var(--el-text-color-primary);
+  margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--el-border-color-lighter);
 }
 .doc-section__desc {
-  font-size: 14px; color: #8e8ea0; margin: 0 0 16px; line-height: 1.6;
+  font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 16px; line-height: 1.6;
   code {
-    background: #f5f6fa; color: #4f6ef7; padding: 2px 6px;
+    background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px;
     border-radius: 4px; font-size: 13px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
   }
 }
 
 .doc-preview {
-  border: 1px solid #f2f3f7; border-radius: 12px;
-  overflow: hidden; background: #fff;
+  border: 1px solid var(--el-border-color-lighter); border-radius: 12px;
+  overflow: hidden; background: var(--el-bg-color-overlay);
 }
 .doc-preview__body {
   display: flex; flex-wrap: wrap; align-items: center;
   gap: 12px; padding: 24px;
 }
 .doc-code {
-  border-top: 1px solid #f2f3f7; background: #fafbfd;
+  border-top: 1px solid var(--el-border-color-lighter); background: var(--el-fill-color-light);
   padding: 16px 20px; overflow-x: auto;
   pre { margin: 0; padding: 0; }
   code {
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
-    font-size: 13px; line-height: 1.7; color: #4a4a6a; white-space: pre;
+    font-size: 13px; line-height: 1.7; color: var(--el-text-color-regular); white-space: pre;
   }
 }
 
-.doc-subtitle { font-size: 15px; font-weight: 600; color: #1a1a2e; margin: 20px 0 10px; }
+.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
 
 .doc-table { overflow-x: auto;
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid #f2f3f7; white-space: nowrap; }
-  th { background: #fafbfd; font-weight: 600; color: #1a1a2e; }
-  td { color: #4a4a6a; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); white-space: nowrap; }
+  th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); }
+  td { color: var(--el-text-color-regular); }
   code {
-    background: #f5f6fa; color: #4f6ef7; padding: 2px 6px;
+    background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px;
     border-radius: 4px; font-size: 13px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
   }
@@ -479,7 +479,7 @@ const pageData = ref({
 
 .doc-tip {
   margin-top: 12px; padding: 12px 16px;
-  background: #f0f9ff; border: 1px solid #e0f2fe; border-radius: 8px;
+  background: var(--el-color-primary-light-9); border: 1px solid #e0f2fe; border-radius: 8px;
   font-size: 13px; color: #0369a1; line-height: 1.6;
 }
 </style>

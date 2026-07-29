@@ -519,22 +519,22 @@ async function onInteractConfirm(data: { dataURL: string; blob: Blob | null }) {
 .doc-title {
   font-size: 28px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
 }
 
 .doc-desc {
   font-size: 14px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   line-height: 1.6;
   margin: 0;
 
   code {
     padding: 2px 6px;
-    background: #f0f2f5;
+    background: var(--el-fill-color-light);
     border-radius: 4px;
     font-size: 13px;
-    color: #4f6ef7;
+    color: var(--el-color-primary);
     font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
   }
 }
@@ -546,12 +546,12 @@ async function onInteractConfirm(data: { dataURL: string; blob: Blob | null }) {
   gap: 12px;
   margin-top: 12px;
   padding: 12px 16px;
-  background: #f0f2f5;
+  background: var(--el-fill-color-light);
   border-radius: 8px;
   font-size: 14px;
 
   &__label {
-    color: #6b7280;
+    color: var(--el-text-color-secondary);
     font-weight: 500;
   }
 
@@ -572,22 +572,22 @@ async function onInteractConfirm(data: { dataURL: string; blob: Blob | null }) {
 .doc-section__title {
   font-size: 20px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
 }
 
 .doc-section__desc {
   font-size: 14px;
-  color: #6b7280;
+  color: var(--el-text-color-secondary);
   line-height: 1.6;
   margin: 0 0 16px;
 
   code {
     padding: 2px 6px;
-    background: #f0f2f5;
+    background: var(--el-fill-color-light);
     border-radius: 4px;
     font-size: 13px;
-    color: #4f6ef7;
+    color: var(--el-color-primary);
     font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
   }
 }
@@ -609,7 +609,7 @@ async function onInteractConfirm(data: { dataURL: string; blob: Blob | null }) {
 .doc-code {
   border-top: 1px solid #e2e4ed;
   padding: 16px;
-  background: #fafbfc;
+  background: var(--el-fill-color-light);
 
   pre {
     margin: 0;
@@ -619,7 +619,7 @@ async function onInteractConfirm(data: { dataURL: string; blob: Blob | null }) {
   code {
     font-size: 13px;
     line-height: 1.6;
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
     font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
   }
 }
@@ -650,7 +650,7 @@ async function onInteractConfirm(data: { dataURL: string; blob: Blob | null }) {
 
   span {
     font-size: 13px;
-    color: #6b7280;
+    color: var(--el-text-color-secondary);
   }
 }
 
@@ -705,7 +705,7 @@ async function onInteractConfirm(data: { dataURL: string; blob: Blob | null }) {
     flex-direction: column;
     align-items: center;
     gap: 4px;
-    color: #999;
+    color: var(--el-text-color-placeholder);
     font-size: 12px;
   }
 
@@ -722,7 +722,7 @@ async function onInteractConfirm(data: { dataURL: string; blob: Blob | null }) {
   align-items: center;
   gap: 12px;
   font-size: 13px;
-  color: #6b7280;
+  color: var(--el-text-color-secondary);
 
   img {
     max-height: 60px;
@@ -757,20 +757,20 @@ async function onInteractConfirm(data: { dataURL: string; blob: Blob | null }) {
   th {
     background: #f8f9fb;
     font-weight: 600;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
     white-space: nowrap;
   }
 
   td {
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
   }
 
   code {
     padding: 2px 6px;
-    background: #f0f2f5;
+    background: var(--el-fill-color-light);
     border-radius: 4px;
     font-size: 13px;
-    color: #4f6ef7;
+    color: var(--el-color-primary);
     font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
   }
 }

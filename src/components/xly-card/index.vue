@@ -87,45 +87,20 @@ const cardStyle = computed(() => {
 
 <style scoped lang="scss">
 /* ========== 现代设计系统 ========== */
-
-/* 色彩体系 - 清新明亮 */
-$bg-white: #ffffff;
-$bg-light: #fafbfc;
-$bg-subtle: #f4f5f7;
-
-$text-primary: #1a1a1a;
-$text-regular: #4a4a4a;
-$text-secondary: #71717a;
-$text-muted: #a1a1aa;
-
-$border-color: #e4e4e7;
-$border-light: #f1f1f4;
-
-/* 主题色 */
-$primary: #3b82f6;
-$primary-light: #eff6ff;
-$success: #10b981;
-$success-light: #ecfdf5;
-$warning: #f59e0b;
-$warning-light: #fffbeb;
-$danger: #ef4444;
-$danger-light: #fef2f2;
-
-/* 阴影 - 柔和现代 */
-$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
-$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
-$shadow-hover: 0 8px 16px -4px rgba(0, 0, 0, 0.1), 0 4px 8px -2px rgba(0, 0, 0, 0.06);
-
+/* 颜色通过 var(--el-*) 统一，自动兼容 dark 模式 */
 /* 圆角 */
 $radius: 10px;
 $radius-sm: 6px;
 
+/* 阴影 - 柔和现代（rgba(0,0,0,x) 在 dark 下自然淡化，符合预期） */
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+$shadow-hover: 0 8px 16px -4px rgba(0, 0, 0, 0.1), 0 4px 8px -2px rgba(0, 0, 0, 0.06);
+
 /* ========== 卡片主体 ========== */
 .xly-card {
   position: relative;
-  background: $bg-white;
-  color: $text-regular;
+  background: var(--el-bg-color);
+  color: var(--el-text-color-regular);
   box-sizing: border-box;
   overflow: hidden;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -137,7 +112,7 @@ $radius-sm: 6px;
 
   /* 边框 */
   &.is-bordered {
-    border: 1px solid $border-light;
+    border: 1px solid var(--el-border-color-light);
   }
 
   /* 悬浮效果 */
@@ -147,7 +122,7 @@ $radius-sm: 6px;
     &:hover {
       transform: translateY(-3px);
       box-shadow: $shadow-hover;
-      border-color: #e5e5e8; // darken($border-light, 5%) → $border-light=#f1f1f4
+      border-color: var(--el-border-color);
     }
   }
 
@@ -176,11 +151,7 @@ $radius-sm: 6px;
   align-items: center;
   justify-content: space-between;
   padding: 16px 18px;
-  border-bottom: 1px solid $border-light;
-
-  .xly-card--shadow-never & {
-    border-bottom: 1px solid $border-light;
-  }
+  border-bottom: 1px solid var(--el-border-color-light);
 }
 
 .xly-card__title {
@@ -189,11 +160,11 @@ $radius-sm: 6px;
   gap: 8px;
   font-size: 15px;
   font-weight: 600;
-  color: $text-primary;
+  color: var(--el-text-color-primary);
   line-height: 1.4;
 
   > .xly-icon {
-    color: $primary;
+    color: var(--el-color-primary);
     flex-shrink: 0;
   }
 }
@@ -209,22 +180,18 @@ $radius-sm: 6px;
   padding: 18px;
   font-size: 14px;
   line-height: 1.6;
-  color: $text-regular;
+  color: var(--el-text-color-regular);
 }
 
 /* ========== 卡片底部 ========== */
 .xly-card__footer {
   padding: 14px 18px;
-  border-top: 1px solid $border-light;
+  border-top: 1px solid var(--el-border-color-light);
   font-size: 13px;
-  color: $text-secondary;
+  color: var(--el-text-color-secondary);
 
   &:empty {
     display: none;
-  }
-
-  .xly-card--shadow-never & {
-    border-top: 1px solid $border-light;
   }
 }
 </style>

@@ -551,14 +551,14 @@ defineOptions({ name: 'XlyWorktabDoc' })
 .doc-title {
   font-size: 26px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
   letter-spacing: -0.3px;
 }
 
 .doc-desc {
   font-size: 14px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   margin: 0;
   line-height: 1.6;
 }
@@ -570,21 +570,21 @@ defineOptions({ name: 'XlyWorktabDoc' })
 .doc-section__title {
   font-size: 18px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #f2f3f7;
+  border-bottom: 1px solid var(--el-border-color-lighter);
 }
 
 .doc-section__desc {
   font-size: 14px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   margin: 0 0 16px;
   line-height: 1.6;
 
   code {
-    background: #f5f6fa;
-    color: #4f6ef7;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 13px;
@@ -595,7 +595,7 @@ defineOptions({ name: 'XlyWorktabDoc' })
 .doc-subtitle {
   font-size: 15px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 20px 0 10px;
 }
 
@@ -612,23 +612,23 @@ defineOptions({ name: 'XlyWorktabDoc' })
   th, td {
     text-align: left;
     padding: 10px 14px;
-    border-bottom: 1px solid #f2f3f7;
+    border-bottom: 1px solid var(--el-border-color-lighter);
     white-space: nowrap;
   }
 
   th {
-    background: #fafbfd;
+    background: var(--el-fill-color-light);
     font-weight: 600;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
   }
 
   td {
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
   }
 
   code {
-    background: #f5f6fa;
-    color: #4f6ef7;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 13px;
@@ -637,9 +637,9 @@ defineOptions({ name: 'XlyWorktabDoc' })
 }
 
 .doc-code {
-  border: 1px solid #f2f3f7;
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 12px;
-  background: #fafbfd;
+  background: var(--el-fill-color-light);
   padding: 16px 20px;
   overflow-x: auto;
   margin-bottom: 16px;
@@ -653,7 +653,7 @@ defineOptions({ name: 'XlyWorktabDoc' })
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
     font-size: 13px;
     line-height: 1.7;
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
     white-space: pre;
   }
 }
@@ -691,26 +691,26 @@ defineOptions({ name: 'XlyWorktabDoc' })
   display: flex;
   gap: 12px;
   padding: 12px 16px;
-  background: #fafbfd;
+  background: var(--el-fill-color-light);
   border-radius: 8px;
-  border: 1px solid #f2f3f7;
+  border: 1px solid var(--el-border-color-lighter);
 
   &__label {
     font-size: 13px;
     font-weight: 600;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
     white-space: nowrap;
     min-width: 110px;
   }
 
   &__desc {
     font-size: 13px;
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
     line-height: 1.6;
 
     code {
-      background: #f5f6fa;
-      color: #4f6ef7;
+      background: var(--el-fill-color-light);
+      color: var(--el-color-primary);
       padding: 2px 6px;
       border-radius: 4px;
       font-size: 12px;

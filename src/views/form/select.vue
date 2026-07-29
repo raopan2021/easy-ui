@@ -30,12 +30,12 @@
             <XlySelect v-model="val15" :options="simpleCityOptions" placeholder="基础数组" />
           </div>
           <div style="width: 300px">
-            <span style="font-size: 13px; color: #8e8ea0"
+            <span style="font-size: 13px; color: var(--el-text-color-secondary)"
               >对象数组当前值：{{ val1 ?? '未选择' }}</span
             >
           </div>
           <div style="width: 300px">
-            <span style="font-size: 13px; color: #8e8ea0"
+            <span style="font-size: 13px; color: var(--el-text-color-secondary)"
               >基础数组当前值：{{ val15 ?? '未选择' }}</span
             >
           </div>
@@ -124,7 +124,7 @@ const simpleOptions = ['北京', '上海', '广州', '深圳']
             />
           </div>
           <div style="width: 300px">
-            <span style="font-size: 13px; color: #8e8ea0">当前值：{{ val14 ?? '未选择' }}</span>
+            <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ val14 ?? '未选择' }}</span>
           </div>
         </div>
       </div>
@@ -166,7 +166,7 @@ function handleCreate(newValue) {
               allow-create
             />
           </div>
-          <div style="font-size: 13px; color: #8e8ea0">当前值：{{ JSON.stringify(val4) }}</div>
+          <div style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ JSON.stringify(val4) }}</div>
         </div>
       </div>
       <div class="doc-code">
@@ -197,7 +197,7 @@ function handleCreate(newValue) {
               clearable
             />
           </div>
-          <span style="font-size: 13px; color: #8e8ea0"
+          <span style="font-size: 13px; color: var(--el-text-color-secondary)"
             >当前值（数组）：{{ JSON.stringify(val10) }}</span
           >
 
@@ -211,7 +211,7 @@ function handleCreate(newValue) {
               clearable
             />
           </div>
-          <span style="font-size: 13px; color: #8e8ea0">当前值（字符串）：{{ val11 }}</span>
+          <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值（字符串）：{{ val11 }}</span>
 
           <div style="width: 400px">
             <XlySelect
@@ -224,7 +224,7 @@ function handleCreate(newValue) {
               clearable
             />
           </div>
-          <span style="font-size: 13px; color: #8e8ea0">当前值（分号分隔）：{{ val12 }}</span>
+          <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值（分号分隔）：{{ val12 }}</span>
         </div>
       </div>
       <div class="doc-code">
@@ -360,7 +360,7 @@ function isItemDisabled(option: any) {
               clearable
             />
           </div>
-          <div style="font-size: 13px; color: #8e8ea0">当前值：{{ val7 ?? '未选择' }}</div>
+          <div style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ val7 ?? '未选择' }}</div>
         </div>
       </div>
       <div class="doc-code">
@@ -426,7 +426,7 @@ const userOptions = [
               clearable
             />
           </div>
-          <div style="font-size: 13px; color: #8e8ea0">当前值：{{ val8 ?? '未选择' }}</div>
+          <div style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ val8 ?? '未选择' }}</div>
         </div>
       </div>
       <div class="doc-code">
@@ -480,7 +480,7 @@ function handleSearch(query: string) {
               </template>
             </XlySelect>
           </div>
-          <span style="font-size: 13px; color: #8e8ea0">当前值：{{ val9 ?? '未选择' }}</span>
+          <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ val9 ?? '未选择' }}</span>
         </div>
       </div>
       <div class="doc-code">
@@ -643,7 +643,7 @@ function handleSearch(query: string) {
       </div>
 
       <h3 class="doc-subtitle">options 数组格式</h3>
-      <p style="font-size: 14px; color: #8e8ea0; margin: 0 0 10px; line-height: 1.6">
+      <p style="font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 10px; line-height: 1.6">
         <code>options</code> 属性支持两种格式：
       </p>
       <div class="doc-table">
@@ -674,7 +674,7 @@ function handleSearch(query: string) {
       </div>
 
       <h3 class="doc-subtitle">SelectOption（对象数组时的选项对象）</h3>
-      <p style="font-size: 14px; color: #8e8ea0; margin: 0 0 10px; line-height: 1.6">
+      <p style="font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 10px; line-height: 1.6">
         当使用对象数组格式时，选项对象支持任意字段，默认通过 <code>label</code> 和
         <code>value</code> 取值，可通过 <code>labelKey</code> / <code>valueKey</code> 自定义。
         <code>disabled</code> 字段为固定保留字段，设为 <code>true</code> 可禁用该选项。
@@ -903,13 +903,13 @@ const codeExample = `&lt;XlySelect v-model="value" :options="options"&gt;
 .doc-title {
   font-size: 26px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
   letter-spacing: -0.3px;
 }
 .doc-desc {
   font-size: 14px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   margin: 0;
   line-height: 1.6;
 }
@@ -919,19 +919,19 @@ const codeExample = `&lt;XlySelect v-model="value" :options="options"&gt;
 .doc-section__title {
   font-size: 18px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #f2f3f7;
+  border-bottom: 1px solid var(--el-border-color-lighter);
 }
 .doc-section__desc {
   font-size: 14px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   margin: 0 0 16px;
   line-height: 1.6;
   code {
-    background: #f5f6fa;
-    color: #4f6ef7;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 13px;
@@ -941,15 +941,15 @@ const codeExample = `&lt;XlySelect v-model="value" :options="options"&gt;
 
 .doc-section__list {
   font-size: 14px;
-  color: #4a4a6a;
+  color: var(--el-text-color-regular);
   margin: 0 0 16px;
   padding-left: 20px;
   line-height: 1.8;
   li {
     margin-bottom: 8px;
     code {
-      background: #f5f6fa;
-      color: #4f6ef7;
+      background: var(--el-fill-color-light);
+      color: var(--el-color-primary);
       padding: 2px 6px;
       border-radius: 4px;
       font-size: 13px;
@@ -958,10 +958,10 @@ const codeExample = `&lt;XlySelect v-model="value" :options="options"&gt;
   }
 }
 .doc-preview {
-  border: 1px solid #f2f3f7;
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 12px;
   overflow: hidden;
-  background: #fff;
+  background: var(--el-bg-color-overlay);
 }
 .doc-preview__body {
   display: flex;
@@ -971,8 +971,8 @@ const codeExample = `&lt;XlySelect v-model="value" :options="options"&gt;
   padding: 24px;
 }
 .doc-code {
-  border-top: 1px solid #f2f3f7;
-  background: #fafbfd;
+  border-top: 1px solid var(--el-border-color-lighter);
+  background: var(--el-fill-color-light);
   padding: 16px 20px;
   overflow-x: auto;
   pre {
@@ -983,14 +983,14 @@ const codeExample = `&lt;XlySelect v-model="value" :options="options"&gt;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
     font-size: 13px;
     line-height: 1.7;
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
     white-space: pre;
   }
 }
 .doc-subtitle {
   font-size: 15px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 20px 0 10px;
 }
 .doc-table {
@@ -1004,20 +1004,20 @@ const codeExample = `&lt;XlySelect v-model="value" :options="options"&gt;
   td {
     text-align: left;
     padding: 10px 14px;
-    border-bottom: 1px solid #f2f3f7;
+    border-bottom: 1px solid var(--el-border-color-lighter);
     white-space: nowrap;
   }
   th {
-    background: #fafbfd;
+    background: var(--el-fill-color-light);
     font-weight: 600;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
   }
   td {
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
   }
   code {
-    background: #f5f6fa;
-    color: #4f6ef7;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 13px;
@@ -1043,12 +1043,12 @@ const codeExample = `&lt;XlySelect v-model="value" :options="options"&gt;
     font-weight: 500;
 
     &.urgent {
-      background: #ff4d4f;
+      background: var(--el-color-danger);
       color: white;
     }
 
     &.important {
-      background: #fa8c16;
+      background: var(--el-color-warning);
       color: white;
     }
 
@@ -1060,7 +1060,7 @@ const codeExample = `&lt;XlySelect v-model="value" :options="options"&gt;
 
   .check-mark {
     margin-left: auto;
-    color: #4f6ef7;
+    color: var(--el-color-primary);
     font-weight: bold;
   }
 }

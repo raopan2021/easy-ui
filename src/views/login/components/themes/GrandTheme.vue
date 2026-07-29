@@ -378,7 +378,7 @@ function handleSubmit() {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #10b981;
+  background: var(--el-color-success);
   box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
   animation: dot-blink 2s ease-in-out infinite;
 }
@@ -602,7 +602,7 @@ function handleSubmit() {
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  color: #f87171;
+  color: var(--el-color-danger);
   background: rgba(248, 113, 113, 0.08);
   border: 1px solid rgba(248, 113, 113, 0.2);
   border-radius: 8px;

@@ -97,14 +97,9 @@ const isActuallyDisabled = computed(() => props.disabled || groupDisabled.value)
 </script>
 
 <style scoped lang="scss">
-$primary: #4f6ef7;
+
 $primary-light: rgba(79, 110, 247, 0.08);
-$disabled-color: #a8abb2;
-$disabled-bg: #f5f7fa;
-$text-color: #4a4a6a;
-$text-placeholder: #c0c4cc;
-$border-color: #e2e4ed;
-$border-hover: #c8cbd8;
+
 $radius: 4px;
 $transition: all 0.2s ease;
 
@@ -116,7 +111,7 @@ $transition: all 0.2s ease;
   user-select: none;
   outline: none;
   font-size: 14px;
-  color: $text-color;
+  color: var(--el-text-color-regular);
   transition: $transition;
 
   // 尺寸
@@ -158,32 +153,32 @@ $transition: all 0.2s ease;
 
   &.is-disabled {
     cursor: not-allowed;
-    color: $disabled-color;
+    color: var(--el-text-color-disabled);
 
     .xly-radio__inner {
-      background: $disabled-bg;
-      border-color: $border-color;
+      background: var(--el-fill-color-light);
+      border-color: var(--el-border-color);
       cursor: not-allowed;
     }
 
     .xly-radio__dot {
-      background: $disabled-color;
+      background: var(--el-text-color-disabled);
     }
   }
 
   &.is-bordered {
     padding: 8px 16px;
-    border: 1px solid $border-color;
+    border: 1px solid var(--el-border-color);
     border-radius: $radius;
     transition: $transition;
 
     &.is-checked {
-      border-color: $primary;
+      border-color: var(--el-color-primary);
     }
 
     &.is-disabled {
-      border-color: $border-color;
-      background: $disabled-bg;
+      border-color: var(--el-border-color);
+      background: var(--el-fill-color-light);
     }
   }
 }
@@ -203,9 +198,9 @@ $transition: all 0.2s ease;
   justify-content: center;
   width: 16px;
   height: 16px;
-  border: 2px solid $border-color;
+  border: 2px solid var(--el-border-color);
   border-radius: 50%;
-  background: #fff;
+  background: var(--el-bg-color);
   transition: $transition;
   flex-shrink: 0;
 }
@@ -215,7 +210,7 @@ $transition: all 0.2s ease;
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: $primary;
+  background: var(--el-color-primary);
   flex-shrink: 0;
   transform: scale(0);
   transition: transform 0.15s ease;
@@ -232,10 +227,34 @@ $transition: all 0.2s ease;
 
 // 状态
 .xly-radio.is-checked .xly-radio__inner {
-  border-color: $primary;
+  border-color: var(--el-color-primary);
 }
 
 .xly-radio:not(.is-disabled):hover .xly-radio__inner {
-  border-color: $primary;
+  border-color: var(--el-color-primary);
+}
+</style>
+
+<style lang="scss">
+/* ========== Dark Mode ========== */
+html.dark .xly-radio.is-bordered {
+  border-color: var(--el-border-color);
+  background-color: var(--el-bg-color);
+}
+html.dark .xly-radio.is-bordered.is-checked {
+  border-color: var(--el-color-primary);
+}
+html.dark .xly-radio.is-bordered.is-disabled {
+  border-color: var(--el-border-color);
+  background-color: var(--el-fill-color);
+}
+html.dark .xly-radio__inner {
+  border-color: var(--el-border-color);
+}
+html.dark .xly-radio.is-checked .xly-radio__inner {
+  border-color: var(--el-color-primary);
+}
+html.dark .xly-radio:not(.is-disabled):hover .xly-radio__inner {
+  border-color: var(--el-color-primary);
 }
 </style>

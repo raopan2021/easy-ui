@@ -64,14 +64,11 @@ const dividerStyle = computed(() => {
 
 <style scoped lang="scss">
 /* ========== 设计令牌 ========== */
-$border-color: #e8e8e8;
-$text-color: #8e8ea0;
-$text-primary: #1a1a2e;
 
 /* ========== 基础分割线 ========== */
 .xly-divider {
   position: relative;
-  background-color: $border-color;
+  background-color: var(--el-border-color);
   border: none;
   margin: 0;
   box-sizing: border-box;
@@ -79,7 +76,7 @@ $text-primary: #1a1a2e;
   &--horizontal {
     display: block;
     width: 100%;
-    border-top: 1px solid $border-color;
+    border-top: 1px solid var(--el-border-color);
     margin: 20px 0;
   }
 
@@ -88,7 +85,7 @@ $text-primary: #1a1a2e;
     width: 1px;
     height: 1em;
     vertical-align: middle;
-    border-right: 1px solid $border-color;
+    border-right: 1px solid var(--el-border-color);
     margin: 0 16px;
   }
 
@@ -102,9 +99,9 @@ $text-primary: #1a1a2e;
   position: absolute;
   display: inline-block;
   padding: 0 16px;
-  background-color: #fff;
+  background-color: var(--el-bg-color);
   font-size: 14px;
-  color: $text-color;
+  color: var(--el-text-color-regular);
   line-height: 1;
   transform: translateY(-50%);
   white-space: nowrap;
@@ -124,7 +121,7 @@ $text-primary: #1a1a2e;
 
   &--plain {
     background-color: transparent;
-    color: $text-primary;
+    color: var(--el-text-color-primary);
     font-weight: 500;
   }
 }
@@ -142,5 +139,18 @@ $text-primary: #1a1a2e;
   top: auto;
   left: auto;
   right: auto;
+}
+</style>
+
+<style lang="scss">
+html.dark .xly-divider {
+  border-color: var(--el-border-color);
+}
+html.dark .xly-divider__text {
+  color: var(--el-text-color-secondary);
+  background-color: var(--el-bg-color);
+}
+html.dark .xly-divider__text--plain {
+  color: var(--el-text-color-primary);
 }
 </style>

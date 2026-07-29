@@ -424,7 +424,7 @@ onBeforeUnmount(() => {
 .xly-image-cropper {
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: var(--el-bg-color);
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid #e0e0e0;
@@ -434,7 +434,7 @@ onBeforeUnmount(() => {
     align-items: center;
     gap: 8px;
     padding: 12px 16px;
-    background: #fafafa;
+    background: var(--el-fill-color-light);
     border-bottom: 1px solid #e8e8e8;
     flex-shrink: 0;
   }
@@ -448,7 +448,7 @@ onBeforeUnmount(() => {
   &__sep {
     width: 1px;
     height: 28px;
-    background: #e0e0e0;
+    background: var(--el-border-color-lighter);
     margin: 0 4px;
     flex-shrink: 0;
   }
@@ -461,8 +461,8 @@ onBeforeUnmount(() => {
     padding: 6px 10px;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
-    background: #fff;
-    color: #555;
+    background: var(--el-bg-color);
+    color: var(--el-text-color-secondary);
     cursor: pointer;
     transition: all 0.2s;
     font-size: 11px;
@@ -470,16 +470,16 @@ onBeforeUnmount(() => {
     min-width: 52px;
 
     svg {
-      stroke: #666;
+      stroke: var(--el-text-color-secondary);
     }
 
     &:hover {
-      border-color: #4f6ef7;
-      color: #4f6ef7;
+      border-color: var(--el-color-primary);
+      color: var(--el-color-primary);
       background: #f0f2ff;
 
       svg {
-        stroke: #4f6ef7;
+        stroke: var(--el-color-primary);
       }
     }
 
@@ -488,19 +488,19 @@ onBeforeUnmount(() => {
     }
 
     &--reset {
-      color: #999;
+      color: var(--el-text-color-placeholder);
 
       svg {
-        stroke: #999;
+        stroke: var(--el-text-color-placeholder);
       }
 
       &:hover {
-        border-color: #ff4d4f;
-        color: #ff4d4f;
+        border-color: var(--el-color-danger);
+        color: var(--el-color-danger);
         background: #fff1f0;
 
         svg {
-          stroke: #ff4d4f;
+          stroke: var(--el-color-danger);
         }
       }
     }
@@ -510,7 +510,7 @@ onBeforeUnmount(() => {
     position: relative;
     width: 100%;
     height: 400px;
-    background: #f0f0f0;
+    background: var(--el-border-color-lighter);
     overflow: hidden;
 
     :deep(.cropper-modal) {
@@ -523,7 +523,7 @@ onBeforeUnmount(() => {
 
     :deep(.cropper-line),
     :deep(.cropper-point) {
-      background-color: #4f6ef7;
+      background-color: var(--el-color-primary);
     }
 
     :deep(.cropper-point) {
@@ -558,10 +558,22 @@ onBeforeUnmount(() => {
     justify-content: flex-end;
     gap: 8px;
     padding: 12px 16px;
-    background: #fafafa;
+    background: var(--el-fill-color-light);
     border-top: 1px solid #e8e8e8;
     flex-shrink: 0;
   }
 }
 </style>
 
+<style lang="scss">
+/* ========== Dark Mode ========== */
+html.dark .xly-image-cropper__btn:hover {
+  background: rgba(79, 110, 247, 0.12);
+}
+html.dark .xly-image-cropper__btn--reset:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+html.dark .xly-image-cropper__view {
+  background: #333;
+}
+</style>

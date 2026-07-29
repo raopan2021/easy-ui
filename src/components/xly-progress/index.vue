@@ -245,8 +245,6 @@ $primary-color: #4f6ef7;
 $success-color: #67c23a;
 $warning-color: #e6a23c;
 $danger-color: #f56c6c;
-$track-color: #e8e8e8;
-$text-color: #4b5563;
 
 /* ========== 基础进度条 ========== */
 .xly-progress {
@@ -272,7 +270,7 @@ $text-color: #4b5563;
 /* ========== 轨道（线性） ========== */
 .xly-progress__track {
   flex: 1;
-  background-color: $track-color;
+  background-color: var(--el-fill-color-lighter);
   border-radius: 999px;
   overflow: hidden;
   position: relative;
@@ -362,7 +360,7 @@ $text-color: #4b5563;
   align-items: center;
   gap: 4px;
   font-size: 14px;
-  color: $text-color;
+  color: var(--el-text-color-regular);
   font-weight: 500;
   white-space: nowrap;
   min-width: 40px;
@@ -390,20 +388,29 @@ $text-color: #4b5563;
     font-size: 16px;
 
     .xly-progress--status-success & {
-      color: $success-color;
+      color: var(--el-color-success)-color;
     }
 
     .xly-progress--status-exception & {
-      color: $danger-color;
+      color: var(--el-color-danger)-color;
     }
 
     .xly-progress--status-warning & {
-      color: $warning-color;
+      color: var(--el-color-warning)-color;
     }
   }
 
   .xly-progress__percentage {
     font-variant-numeric: tabular-nums;
   }
+}
+</style>
+
+<style lang="scss">
+html.dark .xly-progress__track {
+  background-color: #404040;
+}
+html.dark .xly-progress__text {
+  color: var(--el-text-color-regular);
 }
 </style>

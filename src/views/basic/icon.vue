@@ -277,22 +277,22 @@ function copyIconName(name: string) {
 .doc-title {
   font-size: 28px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
 }
 
 .doc-desc {
   font-size: 14px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   line-height: 1.6;
   margin: 0;
 
   code {
     padding: 2px 6px;
-    background: #f0f2f5;
+    background: var(--el-fill-color-light);
     border-radius: 4px;
     font-size: 13px;
-    color: #4f6ef7;
+    color: var(--el-color-primary);
     font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
   }
 }
@@ -304,22 +304,22 @@ function copyIconName(name: string) {
 .doc-section__title {
   font-size: 20px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
 }
 
 .doc-section__desc {
   font-size: 14px;
-  color: #6b7280;
+  color: var(--el-text-color-secondary);
   line-height: 1.6;
   margin: 0 0 16px;
 
   code {
     padding: 2px 6px;
-    background: #f0f2f5;
+    background: var(--el-fill-color-light);
     border-radius: 4px;
     font-size: 13px;
-    color: #4f6ef7;
+    color: var(--el-color-primary);
     font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
   }
 }
@@ -342,7 +342,7 @@ function copyIconName(name: string) {
 .doc-code {
   border-top: 1px solid #e2e4ed;
   padding: 16px;
-  background: #fafbfc;
+  background: var(--el-fill-color-light);
 
   pre {
     margin: 0;
@@ -352,7 +352,7 @@ function copyIconName(name: string) {
   code {
     font-size: 13px;
     line-height: 1.6;
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
     font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
   }
 }
@@ -386,7 +386,7 @@ function copyIconName(name: string) {
 
   &__label {
     font-size: 11px;
-    color: #8e8ea0;
+    color: var(--el-text-color-secondary);
     text-align: center;
     word-break: break-all;
     line-height: 1.2;
@@ -412,7 +412,7 @@ function copyIconName(name: string) {
 
     span {
       font-size: 12px;
-      color: #8e8ea0;
+      color: var(--el-text-color-secondary);
     }
   }
 }
@@ -421,7 +421,7 @@ function copyIconName(name: string) {
 .empty-tip {
   width: 100%;
   text-align: center;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   font-size: 14px;
   padding: 16px;
 }

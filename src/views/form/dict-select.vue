@@ -417,14 +417,14 @@ const propsList = [
   .doc-title {
     font-size: 26px;
     font-weight: 700;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
     letter-spacing: -0.3px;
     margin: 0 0 10px;
   }
 
   .doc-desc {
     font-size: 14px;
-    color: #8e8ea0;
+    color: var(--el-text-color-secondary);
     margin: 0;
     line-height: 1.7;
   }
@@ -436,9 +436,9 @@ const propsList = [
   .doc-section__title {
     font-size: 18px;
     font-weight: 600;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
     padding-bottom: 10px;
-    border-bottom: 1px solid #f2f3f7;
+    border-bottom: 1px solid var(--el-border-color-lighter);
     margin: 0 0 18px;
   }
 
@@ -449,16 +449,16 @@ const propsList = [
     line-height: 1.8;
 
     code {
-      background: #f4f4f5;
+      background: var(--el-fill-color-light);
       border-radius: 4px;
       padding: 1px 5px;
       font-size: 12px;
-      color: #4f6ef7;
+      color: var(--el-color-primary);
     }
   }
 
   .doc-preview {
-    border: 1px solid #f2f3f7;
+    border: 1px solid var(--el-border-color-lighter);
     border-radius: 12px;
     overflow: hidden;
   }
@@ -475,10 +475,10 @@ const propsList = [
 
   .preview-value {
     font-size: 13px;
-    color: #8e8ea0;
+    color: var(--el-text-color-secondary);
 
     code {
-      color: #4f6ef7;
+      color: var(--el-color-primary);
       background: #f0f2ff;
       border-radius: 4px;
       padding: 1px 6px;
@@ -486,15 +486,15 @@ const propsList = [
   }
 
   .doc-code {
-    background: #fafbfd;
-    border-top: 1px solid #f2f3f7;
+    background: var(--el-fill-color-light);
+    border-top: 1px solid var(--el-border-color-lighter);
     padding: 16px 20px;
 
     pre {
       margin: 0;
       font-size: 13px;
       line-height: 1.6;
-      color: #4a4a6a;
+      color: var(--el-text-color-regular);
       white-space: pre-wrap;
       word-break: break-all;
       font-family: 'JetBrains Mono', 'Fira Code', monospace;
@@ -509,25 +509,25 @@ const propsList = [
     font-size: 13px;
 
     th {
-      background: #fafbfd;
-      color: #1a1a2e;
+      background: var(--el-fill-color-light);
+      color: var(--el-text-color-primary);
       font-weight: 600;
       padding: 12px 16px;
       text-align: left;
-      border-bottom: 1px solid #f2f3f7;
+      border-bottom: 1px solid var(--el-border-color-lighter);
     }
 
     td {
-      color: #4a4a6a;
+      color: var(--el-text-color-regular);
       padding: 11px 16px;
       border-bottom: 1px solid #f8f8fb;
 
       code {
-        background: #f4f4f5;
+        background: var(--el-fill-color-light);
         border-radius: 4px;
         padding: 1px 5px;
         font-size: 12px;
-        color: #4f6ef7;
+        color: var(--el-color-primary);
       }
     }
 

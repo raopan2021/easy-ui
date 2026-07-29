@@ -805,26 +805,26 @@ watch(() => props.data, () => { nextTick(() => { scrollToToday() }) }, { deep: t
 // 现代极简配色 - 苹果/Figma风格
 $xly-primary: #5e5ce6;       // 靛蓝紫
 $xly-primary-light: #7b7aff;
-$xly-primary-bg: rgba(94, 92, 230, 0.08);
+$xly-primary-bg: var(--el-color-primary-light-9);
 $xly-success: #30d158;       // 翠绿
 $xly-success-light: #4be075;
-$xly-success-bg: rgba(48, 209, 88, 0.1);
+$xly-success-bg: var(--el-color-success-light-9);
 $xly-warning: #ff9f0a;       // 琥珀橙
 $xly-warning-light: #ffb340;
-$xly-warning-bg: rgba(255, 159, 10, 0.1);
+$xly-warning-bg: var(--el-color-warning-light-9);
 $xly-danger: #ff453a;        // 珊瑚红
 $xly-danger-light: #ff6961;
-$xly-danger-bg: rgba(255, 69, 58, 0.1);
+$xly-danger-bg: var(--el-color-danger-light-9);
 $xly-info: #64d2ff;          // 天蓝
 $xly-info-light: #8bdbff;
-$xly-info-bg: rgba(100, 210, 255, 0.1);
-$xly-border: #e5e5ea;
-$xly-border-light: #f2f2f7;
-$xly-bg: #ffffff;
-$xly-bg-subtle: #f5f5f7;
-$xly-text: #1c1c1e;
-$xly-text-secondary: #636366;
-$xly-text-tertiary: #aeaeb2;
+$xly-info-bg: var(--el-color-info-light-9);
+$xly-border: var(--el-border-color);
+$xly-border-light: var(--el-border-color-lighter);
+$xly-bg: var(--el-fill-color-light);
+$xly-bg-subtle: var(--el-fill-color-light);
+$xly-text: var(--el-text-color-regular);
+$xly-text-secondary: var(--el-text-color-secondary);
+$xly-text-tertiary: var(--el-text-color-regular);
 
 .xly-gantt {
   display: flex;
@@ -890,7 +890,7 @@ $xly-text-tertiary: #aeaeb2;
 
       &:hover:not(.is-active) {
         color: $xly-text;
-        background: rgba(0, 0, 0, 0.04);
+        background: var(--el-fill-color-light);
       }
     }
   }

@@ -260,14 +260,9 @@ $radius: 6px;
 $radius-round: 100px;
 $transition: all 0.2s ease;
 
-$default-text:   #606266;
-$default-bg:     #f4f4f5;
-$default-border: #e9e9eb;
-$primary:        #4f6ef7;
-$success:        #34c759;
-$warning:        #f5a623;
-$danger:         #ff3b30;
-$info:           #8e8ea0;
+$default-text:   var(--el-text-color-regular);
+$default-bg:     var(--el-fill-color-light);
+$default-border: var(--el-border-color);
 
 .xly-dict-tag__single,
 .xly-dict-tag__multiple {
@@ -334,35 +329,55 @@ $info:           #8e8ea0;
   }
   /* --- primary --- */
   &--primary {
-    &.xly-tag--light { color: $primary; background-color: rgba(79,110,247,.1); border-color: rgba(79,110,247,.25); }
-    &.xly-tag--plain { color: $primary; background-color: transparent; border-color: $primary; }
-    &.xly-tag--dark  { color: #fff; background-color: $primary; border-color: $primary; }
+    &.xly-tag--light { color: var(--el-color-primary); background-color: rgba(79,110,247,.1); border-color: rgba(79,110,247,.25); }
+    &.xly-tag--plain { color: var(--el-color-primary); background-color: transparent; border-color: var(--el-color-primary); }
+    &.xly-tag--dark  { color: #fff; background-color: var(--el-color-primary); border-color: var(--el-color-primary); }
   }
   /* --- success --- */
   &--success {
-    &.xly-tag--light { color: $success; background-color: rgba(52,199,89,.1); border-color: rgba(52,199,89,.25); }
-    &.xly-tag--plain { color: $success; background-color: transparent; border-color: $success; }
-    &.xly-tag--dark  { color: #fff; background-color: $success; border-color: $success; }
+    &.xly-tag--light { color: var(--el-color-success); background-color: rgba(52,199,89,.1); border-color: rgba(52,199,89,.25); }
+    &.xly-tag--plain { color: var(--el-color-success); background-color: transparent; border-color: var(--el-color-success); }
+    &.xly-tag--dark  { color: #fff; background-color: var(--el-color-success); border-color: var(--el-color-success); }
   }
   /* --- warning --- */
   &--warning {
-    &.xly-tag--light { color: $warning; background-color: rgba(245,166,35,.1); border-color: rgba(245,166,35,.25); }
-    &.xly-tag--plain { color: $warning; background-color: transparent; border-color: $warning; }
-    &.xly-tag--dark  { color: #fff; background-color: $warning; border-color: $warning; }
+    &.xly-tag--light { color: var(--el-color-warning); background-color: rgba(245,166,35,.1); border-color: rgba(245,166,35,.25); }
+    &.xly-tag--plain { color: var(--el-color-warning); background-color: transparent; border-color: var(--el-color-warning); }
+    &.xly-tag--dark  { color: #fff; background-color: var(--el-color-warning); border-color: var(--el-color-warning); }
   }
   /* --- danger --- */
   &--danger {
-    &.xly-tag--light { color: $danger; background-color: rgba(255,59,48,.1); border-color: rgba(255,59,48,.25); }
-    &.xly-tag--plain { color: $danger; background-color: transparent; border-color: $danger; }
-    &.xly-tag--dark  { color: #fff; background-color: $danger; border-color: $danger; }
+    &.xly-tag--light { color: var(--el-color-danger); background-color: rgba(255,59,48,.1); border-color: rgba(255,59,48,.25); }
+    &.xly-tag--plain { color: var(--el-color-danger); background-color: transparent; border-color: var(--el-color-danger); }
+    &.xly-tag--dark  { color: #fff; background-color: var(--el-color-danger); border-color: var(--el-color-danger); }
   }
   /* --- info --- */
   &--info {
-    &.xly-tag--light { color: $info; background-color: rgba(142,142,160,.1); border-color: rgba(142,142,160,.25); }
-    &.xly-tag--plain { color: $info; background-color: transparent; border-color: $info; }
-    &.xly-tag--dark  { color: #fff; background-color: $info; border-color: $info; }
+    &.xly-tag--light { color: var(--el-color-info); background-color: rgba(142,142,160,.1); border-color: rgba(142,142,160,.25); }
+    &.xly-tag--plain { color: var(--el-color-info); background-color: transparent; border-color: var(--el-color-info); }
+    &.xly-tag--dark  { color: #fff; background-color: var(--el-color-info); border-color: var(--el-color-info); }
   }
 }
 
 .xly-tag__text { line-height: 1; }
+</style>
+
+<style lang="scss">
+/* ========== Dark Mode ========== */
+html.dark .xly-dict-tag__fallback {
+  color: var(--el-text-color-regular);
+}
+html.dark .xly-tag--default.xly-tag--light {
+  color: var(--el-text-color-secondary);
+  background-color: var(--el-fill-color);
+  border-color: var(--el-border-color);
+}
+html.dark .xly-tag--default.xly-tag--dark {
+  background-color: #666;
+  border-color: #666;
+}
+html.dark .xly-tag--default.xly-tag--plain {
+  color: var(--el-text-color-secondary);
+  border-color: var(--el-border-color);
+}
 </style>

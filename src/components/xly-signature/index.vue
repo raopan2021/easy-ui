@@ -462,15 +462,10 @@ defineExpose({
 @use 'sass:color';
 
 /* ========== 设计令牌 ========== */
-$primary: #4f6ef7;
-$primary-hover: #3b57d4;
-$text-primary: #1a1a1a;
-$text-secondary: #6b7280;
-$text-muted: #9ca3af;
 $border: #e4e4e7;
-$border-light: #f1f1f4;
+
 $bg: #f4f5f7;
-$bg-hover: #eef0f3;
+
 $radius: 8px;
 $transition: all 0.2s ease;
 
@@ -500,7 +495,7 @@ $transition: all 0.2s ease;
   align-items: center;
   justify-content: space-between;
   padding: 8px 12px;
-  border-bottom: 1px solid $border-light;
+  border-bottom: 1px solid var(--el-border-color-light);
   background: #fafbfc;
   gap: 8px;
   min-height: 40px;
@@ -538,7 +533,7 @@ $transition: all 0.2s ease;
 
 .xly-signature__pen-label {
   font-size: 12px;
-  color: $text-muted;
+  color: var(--el-text-color-placeholder);
   white-space: nowrap;
 }
 
@@ -561,19 +556,19 @@ $transition: all 0.2s ease;
   transition: $transition;
 
   &:hover {
-    background: $bg-hover;
+    background: var(--el-fill-color-light);
   }
 
   &.is-active {
-    background: rgba($primary, 0.1);
-    border-color: $primary;
+    background: rgba(var(--el-color-primary), 0.1);
+    border-color: var(--el-color-primary);
   }
 }
 
 .xly-signature__pen-dot {
   display: block;
   border-radius: 50%;
-  background: $text-primary;
+  background: var(--el-text-color-primary);
 }
 
 .xly-signature__color-btn {
@@ -590,8 +585,8 @@ $transition: all 0.2s ease;
   }
 
   &.is-active {
-    border-color: $primary;
-    box-shadow: 0 0 0 2px rgba($primary, 0.2);
+    border-color: var(--el-color-primary);
+    box-shadow: 0 0 0 2px rgba(var(--el-color-primary), 0.2);
   }
 }
 
@@ -604,16 +599,16 @@ $transition: all 0.2s ease;
   border: 1px solid $border;
   border-radius: 6px;
   background: #fff;
-  color: $text-secondary;
+  color: var(--el-text-color-secondary);
   font-size: 13px;
   cursor: pointer;
   transition: $transition;
   white-space: nowrap;
 
   &:hover:not(:disabled) {
-    border-color: $primary;
-    color: $primary;
-    background: rgba($primary, 0.04);
+    border-color: var(--el-color-primary);
+    color: var(--el-color-primary);
+    background: rgba(var(--el-color-primary), 0.04);
   }
 
   &:disabled {
@@ -622,19 +617,19 @@ $transition: all 0.2s ease;
   }
 
   &--primary {
-    background: $primary;
-    border-color: $primary;
+    background: var(--el-color-primary);
+    border-color: var(--el-color-primary);
     color: #fff;
 
     &:hover:not(:disabled) {
-      background: $primary-hover;
-      border-color: $primary-hover;
+      background: var(--el-color-primary)-hover;
+      border-color: var(--el-color-primary)-hover;
       color: #fff;
     }
 
     &:disabled {
-      background: color.adjust($primary, $saturation: -20%, $lightness: 25%);
-      border-color: color.adjust($primary, $saturation: -20%, $lightness: 25%);
+      background: linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)), var(--el-color-primary);
+      border-color: linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.05)), var(--el-color-primary);
       color: #fff;
     }
   }
@@ -665,12 +660,34 @@ $transition: all 0.2s ease;
   justify-content: center;
   gap: 8px;
   pointer-events: none;
-  color: $text-muted;
+  color: var(--el-text-color-placeholder);
   transition: opacity 0.3s;
 }
 
 .xly-signature__placeholder-text {
   font-size: 14px;
   user-select: none;
+}
+</style>
+
+<style lang="scss">
+/* ========== Dark Mode ========== */
+html.dark .xly-signature {
+  border-color: var(--el-border-color);
+  background: var(--el-bg-color);
+}
+html.dark .xly-signature__toolbar {
+  background: var(--el-fill-color-light);
+  border-bottom-color: var(--el-border-color);
+}
+html.dark .xly-signature__pen-btn:hover {
+  background: var(--el-fill-color);
+}
+html.dark .xly-signature__tool-btn {
+  background: var(--el-bg-color);
+  border-color: var(--el-border-color);
+}
+html.dark .xly-signature__tool-btn:hover:not(:disabled) {
+  background: rgba(79, 110, 247, 0.1);
 }
 </style>

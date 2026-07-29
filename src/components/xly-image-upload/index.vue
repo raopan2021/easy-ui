@@ -701,10 +701,8 @@ defineExpose({
 
 <style scoped lang="scss">
 // ---- 设计令牌 ----
-$primary: #4f6ef7;
-$danger: #ff3b30;
-$success: #34c759;
-$border: #e4e7f0;
+
+$border: var(--el-border-color);
 $radius: 8px;
 $transition: all 0.2s ease;
 
@@ -745,11 +743,11 @@ $transition: all 0.2s ease;
   }
 
   &--uploading {
-    border-color: $primary;
+    border-color: var(--el-color-primary);
   }
 
   &--error {
-    border-color: $danger;
+    border-color: var(--el-color-danger);
   }
 }
 
@@ -838,7 +836,7 @@ $transition: all 0.2s ease;
   }
 
   &--danger:hover {
-    background: rgba($danger, 0.6);
+    background: var(--el-fill-color-light);
   }
 }
 
@@ -849,7 +847,7 @@ $transition: all 0.2s ease;
   right: 0;
   width: 18px;
   height: 18px;
-  background: $success;
+  background: var(--el-color-success);
   border-radius: 4px 0 0 0;
   display: flex;
   align-items: center;
@@ -860,7 +858,7 @@ $transition: all 0.2s ease;
 .xly-upload__trigger {
   border: 1.5px dashed $border;
   border-radius: $radius;
-  background: #fafbfd;
+  background: var(--el-fill-color-light);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -870,9 +868,9 @@ $transition: all 0.2s ease;
 
   &:hover,
   &.is-dragover {
-    border-color: $primary;
-    background: rgba($primary, 0.04);
-    color: $primary;
+    border-color: var(--el-color-primary);
+    background: var(--el-color-primary-light-9);
+    color: var(--el-color-primary);
   }
 }
 
@@ -881,12 +879,12 @@ $transition: all 0.2s ease;
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  color: #c0c4cc;
+  color: var(--el-text-color-placeholder);
   transition: color 0.2s;
 
   .xly-upload__trigger:hover &,
   .xly-upload__trigger.is-dragover & {
-    color: $primary;
+    color: var(--el-color-primary);
   }
 }
 
@@ -904,7 +902,7 @@ $transition: all 0.2s ease;
 .xly-upload__tip {
   margin-top: 8px;
   font-size: 12px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   line-height: 1.5;
 }
 

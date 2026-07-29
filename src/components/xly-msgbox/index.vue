@@ -285,25 +285,15 @@ import { computed } from "vue";
 @use "sass:color";
 
 /* ========== 设计令牌 ========== */
-$color-primary: #4f6ef7;
-$color-success: #2ea44f;
-$color-warning: #d48806;
-$color-danger: #cf222e;
-$color-info: #4f6ef7;
 
-$bg-dialog: #ffffff;
+$bg-dialog: var(--el-fill-color-light);
 $radius-dialog: 12px;
 $shadow-dialog:
   0 8px 40px rgba(0, 0, 0, 0.14),
   0 2px 8px rgba(0, 0, 0, 0.06);
 
-$text-primary: #1a1a2e;
-$text-secondary: #4a4a5a;
-$text-muted: #8888a0;
-
-$border-color: #e4e6f0;
-$bg-input: #f5f6fa;
-$bg-input-focus: #ffffff;
+$bg-input: var(--el-fill-color-light);
+$bg-input-focus: var(--el-fill-color-light);
 
 /* ========== 遮罩层 ========== */
 .xly-msgbox-overlay {
@@ -342,15 +332,15 @@ $bg-input-focus: #ffffff;
   border-radius: 6px;
   background: transparent;
   cursor: pointer;
-  color: $text-muted;
+  color: var(--el-text-color-placeholder);
   z-index: 1;
   transition:
     background 0.15s,
     color 0.15s;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.06);
-    color: $text-secondary;
+    background: var(--el-fill-color-light);
+    color: var(--el-text-color-secondary);
   }
 }
 
@@ -381,19 +371,19 @@ $bg-input-focus: #ffffff;
   }
 
   &--success {
-    color: $color-success;
+    color: var(--el-color-success);
   }
 
   &--warning {
-    color: $color-warning;
+    color: var(--el-color-warning);
   }
 
   &--danger {
-    color: $color-danger;
+    color: var(--el-color-danger);
   }
 
   &--info {
-    color: $color-info;
+    color: var(--el-color-info);
   }
 }
 
@@ -401,7 +391,7 @@ $bg-input-focus: #ffffff;
 .xly-msgbox__title {
   font-size: 16px;
   font-weight: 600;
-  color: $text-primary;
+  color: var(--el-text-color-primary);
   line-height: 1.4;
 }
 
@@ -414,7 +404,7 @@ $bg-input-focus: #ffffff;
   margin: 0;
   font-size: 14px;
   line-height: 1.7;
-  color: $text-secondary;
+  color: var(--el-text-color-secondary);
   word-break: break-word;
 }
 
@@ -432,9 +422,9 @@ $bg-input-focus: #ffffff;
   height: 38px;
   padding: 0 12px;
   font-size: 14px;
-  color: $text-primary;
+  color: var(--el-text-color-primary);
   background: $bg-input;
-  border: 1.5px solid $border-color;
+  border: 1.5px solid var(--el-border-color);
   border-radius: 8px;
   outline: none;
   transition:
@@ -444,17 +434,17 @@ $bg-input-focus: #ffffff;
   font-family: inherit;
 
   &::placeholder {
-    color: $text-muted;
+    color: var(--el-text-color-placeholder);
   }
 
   &:focus {
     background: $bg-input-focus;
-    border-color: $color-primary;
+    border-color: var(--el-color-primary);
     box-shadow: 0 0 0 3px rgba(79, 110, 247, 0.12);
   }
 
   &--error {
-    border-color: $color-danger !important;
+    border-color: var(--el-color-danger) !important;
     box-shadow: 0 0 0 3px rgba(207, 34, 46, 0.1) !important;
   }
 
@@ -468,7 +458,7 @@ $bg-input-focus: #ffffff;
 
 .xly-msgbox__input-error {
   font-size: 12px;
-  color: $color-danger;
+  color: var(--el-color-danger);
   line-height: 1.4;
 }
 
@@ -502,8 +492,8 @@ $bg-input-focus: #ffffff;
 
   &--cancel {
     background: #f5f6fa;
-    color: $text-secondary;
-    border-color: $border-color;
+    color: var(--el-text-color-secondary);
+    border-color: var(--el-border-color);
 
     &:hover:not(:disabled) {
       background: #ebedf5;
@@ -516,27 +506,27 @@ $bg-input-focus: #ffffff;
   }
 
   &--confirm {
-    background: $color-primary;
+    background: var(--el-color-primary);
     color: #ffffff;
-    border-color: $color-primary;
+    border-color: var(--el-color-primary);
 
     &:hover:not(:disabled) {
-      background: color.adjust($color-primary, $lightness: -6%);
-      border-color: color.adjust($color-primary, $lightness: -6%);
+      background: linear-gradient(rgba(0,0,0,0.06), rgba(0,0,0,0.06)), var(--el-color-primary);
+      border-color: linear-gradient(rgba(0,0,0,0.06), rgba(0,0,0,0.06)), var(--el-color-primary);
     }
 
     &:active:not(:disabled) {
-      background: color.adjust($color-primary, $lightness: -12%);
+      background: linear-gradient(rgba(0,0,0,0.12), rgba(0,0,0,0.12)), var(--el-color-primary);
     }
   }
 
   &--danger {
-    background: $color-danger !important;
-    border-color: $color-danger !important;
+    background: var(--el-color-danger) !important;
+    border-color: var(--el-color-danger) !important;
 
     &:hover:not(:disabled) {
-      background: color.adjust($color-danger, $lightness: -6%) !important;
-      border-color: color.adjust($color-danger, $lightness: -6%) !important;
+      background: linear-gradient(rgba(0,0,0,0.06), rgba(0,0,0,0.06)), var(--el-color-danger) !important;
+      border-color: linear-gradient(rgba(0,0,0,0.06), rgba(0,0,0,0.06)), var(--el-color-danger) !important;
     }
   }
 }
@@ -546,7 +536,7 @@ $bg-input-focus: #ffffff;
   width: 13px;
   height: 13px;
   border: 2px solid rgba(255, 255, 255, 0.4);
-  border-top-color: #ffffff;
+  border-top-color: var(--el-bg-color);
   border-radius: 50%;
   animation: xly-msgbox-spin 0.6s linear infinite;
   flex-shrink: 0;

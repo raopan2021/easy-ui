@@ -378,16 +378,6 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped lang="scss">
-$primary: #4f6ef7;
-$primary-light: rgba(79, 110, 247, 0.08);
-$primary-light-hover: rgba(79, 110, 247, 0.15);
-$border-color: #e2e4ed;
-$border-focus: #4f6ef7;
-$border-hover: #c8cbd8;
-$disabled-bg: #f5f7fa;
-$disabled-color: #a8abb2;
-$text-color: #4a4a6a;
-$text-placeholder: #c0c4cc;
 $radius: 8px;
 $transition: all 0.2s ease;
 
@@ -408,21 +398,21 @@ $transition: all 0.2s ease;
   display: inline-flex;
   align-items: center;
   padding: 0 12px;
-  background: #fff;
-  border: 1px solid $border-color;
+  background: var(--el-bg-color);
+  border: 1px solid var(--el-border-color);
   border-radius: $radius;
   cursor: pointer;
   transition: $transition;
 
-  &.is-hover:not(.is-disabled) { border-color: $border-hover; }
-  &.is-focus { border-color: $border-focus; box-shadow: 0 0 0 2px $primary-light; }
+  &.is-hover:not(.is-disabled) { border-color: var(--el-border-color-darker); }
+  &.is-focus { border-color: var(--el-color-primary); box-shadow: 0 0 0 2px rgba(79, 110, 247, 0.08); }
 }
 
 .xly-date-picker__prefix {
   display: inline-flex;
   align-items: center;
   margin-right: 6px;
-  color: $text-placeholder;
+  color: var(--el-text-color-placeholder);
   flex-shrink: 0;
 }
 
@@ -431,39 +421,32 @@ $transition: all 0.2s ease;
   border: none;
   outline: none;
   background: transparent;
-  color: $text-color;
+  color: var(--el-text-color-regular);
   cursor: pointer;
   font-family: inherit;
 
-  &::placeholder { color: $text-placeholder; }
+  &::placeholder { color: var(--el-text-color-placeholder); }
 }
 
 .xly-date-picker__clear {
   display: inline-flex;
   cursor: pointer;
-  color: $text-placeholder;
+  color: var(--el-text-color-placeholder);
   border-radius: 50%;
-  &:hover { color: $text-color; }
+  &:hover { color: var(--el-text-color-regular); }
 }
 
 // ========== 触发器样式（scoped）==========
 .xly-date-picker__clear {
   display: inline-flex;
   cursor: pointer;
-  color: $text-placeholder;
+  color: var(--el-text-color-placeholder);
   border-radius: 50%;
-  &:hover { color: $text-color; }
+  &:hover { color: var(--el-text-color-regular); }
 }
 </style>
 
 <style lang="scss">
-$primary: #4f6ef7;
-$primary-light: rgba(79, 110, 247, 0.08);
-$primary-light-hover: rgba(79, 110, 247, 0.15);
-$border-color: #e2e4ed;
-$disabled-color: #a8abb2;
-$text-color: #4a4a6a;
-$text-placeholder: #c0c4cc;
 $radius: 8px;
 
 // ========== 选择面板（Teleport 到 body，不能 scoped）==========
@@ -471,8 +454,8 @@ $radius: 8px;
   position: fixed;
   z-index: 2000;
   width: 300px;
-  background: #fff;
-  border: 1px solid $border-color;
+  background: var(--el-bg-color);
+  border: 1px solid var(--el-border-color);
   border-radius: $radius;
   box-shadow: 0 6px 16px rgba(0,0,0,0.08), 0 3px 6px rgba(0,0,0,0.06);
   padding: 8px;
@@ -489,23 +472,23 @@ $radius: 8px;
 .xly-date-panel__nav {
   display: inline-flex;
   cursor: pointer;
-  color: $text-color;
+  color: var(--el-text-color-regular);
   padding: 4px;
   border-radius: 4px;
   transition: background 0.15s;
-  &:hover { background: $primary-light; }
+  &:hover { background: rgba(79, 110, 247, 0.08); }
 }
 
 .xly-date-panel__title {
   font-size: 15px;
   font-weight: 600;
-  color: $text-color;
+  color: var(--el-text-color-regular);
   padding: 2px 8px;
   border-radius: 4px;
 
   &.is-title-clickable {
     cursor: pointer;
-    &:hover { background: $primary-light; }
+    &:hover { background: rgba(79, 110, 247, 0.08); }
   }
 }
 
@@ -513,12 +496,12 @@ $radius: 8px;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   padding: 4px 0;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid var(--el-border-color);
 
   span {
     text-align: center;
     font-size: 12px;
-    color: $text-placeholder;
+    color: var(--el-text-color-placeholder);
     font-weight: 500;
     padding: 4px 0;
   }
@@ -542,15 +525,15 @@ $radius: 8px;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.15s;
-  color: $text-color;
+  color: var(--el-text-color-regular);
 
-  &:hover:not(.is-other):not(.is-selected) { background: $primary-light; }
-  &.is-other { color: $disabled-color; }
-  &.is-today { color: $primary; font-weight: 600; }
-  &.is-selected { background: $primary; color: #fff; font-weight: 500; }
-  &.is-range-start { border-radius: 6px 0 0 6px; background: $primary-light-hover; }
-  &.is-range-end { border-radius: 0 6px 6px 0; background: $primary-light-hover; }
-  &.is-in-range { background: $primary-light; border-radius: 0; }
+  &:hover:not(.is-other):not(.is-selected) { background: rgba(79, 110, 247, 0.08); }
+  &.is-other { color: var(--el-text-color-disabled); }
+  &.is-today { color: var(--el-color-primary); font-weight: 600; }
+  &.is-selected { background: var(--el-color-primary); color: #fff; font-weight: 500; }
+  &.is-range-start { border-radius: 6px 0 0 6px; background: rgba(79, 110, 247, 0.15); }
+  &.is-range-end { border-radius: 0 6px 6px 0; background: rgba(79, 110, 247, 0.15); }
+  &.is-in-range { background: rgba(79, 110, 247, 0.08); border-radius: 0; }
 }
 
 .xly-date-panel__month-grid {
@@ -569,11 +552,11 @@ $radius: 8px;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.15s;
-  color: $text-color;
+  color: var(--el-text-color-regular);
 
-  &:hover:not(.is-selected) { background: $primary-light; }
-  &.is-current { color: $primary; font-weight: 600; }
-  &.is-selected { background: $primary; color: #fff; }
+  &:hover:not(.is-selected) { background: rgba(79, 110, 247, 0.08); }
+  &.is-current { color: var(--el-color-primary); font-weight: 600; }
+  &.is-selected { background: var(--el-color-primary); color: #fff; }
 }
 
 .xly-date-panel__year-grid {
@@ -592,11 +575,11 @@ $radius: 8px;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.15s;
-  color: $text-color;
+  color: var(--el-text-color-regular);
 
-  &:hover:not(.is-selected) { background: $primary-light; }
-  &.is-current { color: $primary; font-weight: 600; }
-  &.is-selected { background: $primary; color: #fff; }
+  &:hover:not(.is-selected) { background: rgba(79, 110, 247, 0.08); }
+  &.is-current { color: var(--el-color-primary); font-weight: 600; }
+  &.is-selected { background: var(--el-color-primary); color: #fff; }
 }
 
 .xly-date-picker-fade-enter-active,
@@ -608,5 +591,20 @@ $radius: 8px;
 .xly-date-picker-fade-leave-to {
   opacity: 0;
   transform: scaleY(0.95) translateY(-4px);
+}
+
+/* ========== Dark Mode ========== */
+html.dark .xly-date-panel__day.is-other {
+  color: var(--el-text-color-placeholder);
+}
+html.dark .xly-date-panel__day:hover:not(.is-other):not(.is-selected) {
+  background: rgba(79, 110, 247, 0.12);
+}
+html.dark .xly-date-panel__month-cell:hover:not(.is-selected),
+html.dark .xly-date-panel__year-cell:hover:not(.is-selected) {
+  background: rgba(79, 110, 247, 0.12);
+}
+html.dark .xly-date-picker__panel {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0.3);
 }
 </style>

@@ -368,8 +368,8 @@ function getFileIconComponent(url: string) { return ICON_MAP[getFileType(url)] ?
 </script>
 
 <style scoped lang="scss">
-$primary: #4f46e5; $text-primary: #1a1a2e; $text-secondary: #4a4a6a; $text-muted: #8e8ea0;
-$border: #f2f3f7; $bg: #fff; $bg-hover: #f8f9ff; $radius: 10px;
+$primary: #4f46e5; $text-primary: #1a1a2e; $text-secondary: #4a4a6a; $text-placeholder: #8e8ea0;
+$border: var(--el-border-color); $bg: #fff; $bg-light: #f8f9ff; $radius: 10px;
 $shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(0, 0, 0, 0.06); $transition: 0.2s ease;
 $color-pdf: #ef4444; $color-word: #2563eb; $color-excel: #16a34a; $color-ppt: #ea580c;
 $color-image: #7c3aed; $color-video: #0891b2; $color-file: #64748b;
@@ -381,29 +381,29 @@ $color-image: #7c3aed; $color-video: #0891b2; $color-file: #64748b;
 .xly-file-preview { display: flex; flex-direction: column; gap: 6px; }
 .xly-file-preview__list { display: flex; flex-direction: column; gap: 4px; }
 .xly-file-preview__item { display: flex; align-items: center; gap: 10px; padding: 8px 12px; border-radius: $radius; border: 1px solid $border; background: $bg; cursor: pointer; transition: all $transition; user-select: none;
-  &:hover { background: $bg-hover; border-color: rgba($primary, 0.3); box-shadow: 0 2px 8px rgba($primary, 0.08); .xly-file-preview__btn { opacity: 1; color: $primary; } } }
-.xly-file-preview__icon { flex-shrink: 0; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: $text-muted; background: #f1f5f9; svg { width: 18px; height: 18px; }
+  &:hover { background: var(--el-fill-color-light); border-color: rgba(var(--el-color-primary), 0.3); box-shadow: 0 2px 8px rgba(var(--el-color-primary), 0.08); .xly-file-preview__btn { opacity: 1; color: var(--el-color-primary); } } }
+.xly-file-preview__icon { flex-shrink: 0; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--el-text-color-placeholder); background: #f1f5f9; svg { width: 18px; height: 18px; }
   @include tc(pdf, $color-pdf); @include tc(word, $color-word); @include tc(excel, $color-excel); @include tc(ppt, $color-ppt); @include tc(image, $color-image); @include tc(video, $color-video); @include tc(file, $color-file); }
 .xly-file-preview__info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
-.xly-file-preview__name { font-size: 13px; font-weight: 500; color: $text-primary; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.xly-file-preview__size { font-size: 12px; color: $text-muted; }
-.xly-file-preview__btn { flex-shrink: 0; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border: none; background: transparent; border-radius: 6px; cursor: pointer; color: $text-muted; opacity: 0; transition: all $transition; &:hover { background: rgba($primary, 0.08); } }
-.xly-file-preview__empty { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 32px 16px; color: $text-muted; font-size: 13px; svg { opacity: 0.4; } }
+.xly-file-preview__name { font-size: 13px; font-weight: 500; color: var(--el-text-color-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.xly-file-preview__size { font-size: 12px; color: var(--el-text-color-placeholder); }
+.xly-file-preview__btn { flex-shrink: 0; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border: none; background: transparent; border-radius: 6px; cursor: pointer; color: var(--el-text-color-placeholder); opacity: 0; transition: all $transition; &:hover { background: rgba(var(--el-color-primary), 0.08); } }
+.xly-file-preview__empty { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 32px 16px; color: var(--el-text-color-placeholder); font-size: 13px; svg { opacity: 0.4; } }
 
 .xly-fp-mask { position: fixed; inset: 0; z-index: 2100; background: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(2px); }
 .xly-fp-dialog { width: min(92vw, 1100px); height: min(90vh, 800px); background: $bg; border-radius: 16px; box-shadow: $shadow; display: flex; flex-direction: column; overflow: hidden; position: relative; }
 .xly-fp-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; border-bottom: 1px solid $border; flex-shrink: 0; gap: 12px; z-index: 10; }
 .xly-fp-header__left { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
-.xly-fp-header__icon { flex-shrink: 0; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: $text-muted; background: #f1f5f9; svg { width: 18px; height: 18px; }
+.xly-fp-header__icon { flex-shrink: 0; width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--el-text-color-placeholder); background: #f1f5f9; svg { width: 18px; height: 18px; }
   @include tc(pdf, $color-pdf); @include tc(word, $color-word); @include tc(excel, $color-excel); @include tc(ppt, $color-ppt); @include tc(image, $color-image); @include tc(video, $color-video); @include tc(file, $color-file); }
 .xly-fp-header__info { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
-.xly-fp-header__name { font-size: 14px; font-weight: 600; color: $text-primary; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 500px; }
-.xly-fp-header__size { font-size: 12px; color: $text-muted; }
+.xly-fp-header__name { font-size: 14px; font-weight: 600; color: var(--el-text-color-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 500px; }
+.xly-fp-header__size { font-size: 12px; color: var(--el-text-color-placeholder); }
 .xly-fp-header__actions { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
 .xly-fp-nav { display: flex; align-items: center; gap: 2px; margin-right: 8px; padding: 0 4px; border-right: 1px solid $border; }
-.xly-fp-nav__btn { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border: none; background: transparent; border-radius: 6px; cursor: pointer; color: $text-secondary; transition: all $transition; &:hover:not(:disabled) { background: $bg-hover; color: $primary; } &:disabled { opacity: 0.3; cursor: not-allowed; } }
-.xly-fp-nav__text { font-size: 12px; color: $text-muted; padding: 0 6px; white-space: nowrap; }
-.xly-fp-action-btn { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border: none; background: transparent; border-radius: 8px; cursor: pointer; color: $text-secondary; text-decoration: none; transition: all $transition; &:hover { background: $bg-hover; color: $primary; } }
+.xly-fp-nav__btn { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border: none; background: transparent; border-radius: 6px; cursor: pointer; color: var(--el-text-color-secondary); transition: all $transition; &:hover:not(:disabled) { background: var(--el-fill-color-light); color: var(--el-color-primary); } &:disabled { opacity: 0.3; cursor: not-allowed; } }
+.xly-fp-nav__text { font-size: 12px; color: var(--el-text-color-placeholder); padding: 0 6px; white-space: nowrap; }
+.xly-fp-action-btn { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border: none; background: transparent; border-radius: 8px; cursor: pointer; color: var(--el-text-color-secondary); text-decoration: none; transition: all $transition; &:hover { background: var(--el-fill-color-light); color: var(--el-color-primary); } }
 .xly-fp-close:hover { background: #fef2f2 !important; color: #ef4444 !important; }
 
 .xly-fp-body { flex: 1; position: relative; overflow: hidden; background: #f8fafc; }
@@ -426,8 +426,8 @@ $color-image: #7c3aed; $color-video: #0891b2; $color-file: #64748b;
   height: 100% !important;
 }
 
-.xly-fp-loading { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: $text-muted; font-size: 14px; background: rgba(248, 250, 252, 0.92); z-index: 10; }
-.xly-fp-loading__spinner { width: 32px; height: 32px; border: 3px solid $border; border-top-color: $primary; border-radius: 50%; animation: fp-spin 0.8s linear infinite; }
+.xly-fp-loading { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; color: var(--el-text-color-placeholder); font-size: 14px; background: rgba(248, 250, 252, 0.92); z-index: 10; }
+.xly-fp-loading__spinner { width: 32px; height: 32px; border: 3px solid $border; border-top-color: var(--el-color-primary); border-radius: 50%; animation: fp-spin 0.8s linear infinite; }
 @keyframes fp-spin { to { transform: rotate(360deg); } }
 
 .xly-fp-image-wrap { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 20px; background: repeating-conic-gradient(#e2e8f0 0% 25%, transparent 0% 50%) 0 0 / 16px 16px; }
@@ -436,14 +436,14 @@ $color-image: #7c3aed; $color-video: #0891b2; $color-file: #64748b;
 .xly-fp-video { max-width: 100%; max-height: 100%; }
 
 .xly-fp-unsupported { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 40px; text-align: center; }
-.xly-fp-unsupported__icon { width: 72px; height: 72px; border-radius: 16px; display: flex; align-items: center; justify-content: center; background: #f1f5f9; color: $text-muted; svg { width: 36px; height: 36px; }
+.xly-fp-unsupported__icon { width: 72px; height: 72px; border-radius: 16px; display: flex; align-items: center; justify-content: center; background: #f1f5f9; color: var(--el-text-color-placeholder); svg { width: 36px; height: 36px; }
   @include tc(pdf, $color-pdf); @include tc(word, $color-word); @include tc(excel, $color-excel); @include tc(ppt, $color-ppt); @include tc(image, $color-image); @include tc(video, $color-video); @include tc(file, $color-file); }
-.xly-fp-unsupported__title { font-size: 16px; font-weight: 600; color: $text-primary; margin: 0; }
-.xly-fp-unsupported__desc { font-size: 13px; color: $text-muted; line-height: 1.6; margin: 0; code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: $text-secondary; } }
+.xly-fp-unsupported__title { font-size: 16px; font-weight: 600; color: var(--el-text-color-primary); margin: 0; }
+.xly-fp-unsupported__desc { font-size: 13px; color: var(--el-text-color-placeholder); line-height: 1.6; margin: 0; code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: monospace; color: var(--el-text-color-secondary); } }
 .xly-fp-unsupported__actions { display: flex; gap: 8px; margin-top: 4px; }
-.xly-fp-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; border: 1px solid $border; background: $bg; color: $text-secondary; cursor: pointer; text-decoration: none; transition: all $transition;
-  &:hover { border-color: rgba($primary, 0.4); color: $primary; }
-  &--primary { background: $primary; border-color: $primary; color: #fff; &:hover { background: #4540d4; color: #fff; } } }
+.xly-fp-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; border: 1px solid $border; background: $bg; color: var(--el-text-color-secondary); cursor: pointer; text-decoration: none; transition: all $transition;
+  &:hover { border-color: rgba(var(--el-color-primary), 0.4); color: var(--el-color-primary); }
+  &--primary { background: var(--el-color-primary); border-color: var(--el-color-primary); color: #fff; &:hover { background: #4540d4; color: #fff; } } }
 
 .xly-fp-fade-enter-active { transition: opacity 0.25s ease; }
 .xly-fp-fade-leave-active { transition: opacity 0.2s ease; }

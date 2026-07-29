@@ -459,11 +459,11 @@ defineExpose({
   text-align: right;
   font-size: 14px;
   font-weight: 500;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
 }
 
 .xly-super-form__required {
-  color: #f56c6c;
+  color: var(--el-color-danger);
   margin-right: 2px;
 }
 
@@ -475,7 +475,7 @@ defineExpose({
 
 .xly-super-form__error {
   font-size: 12px;
-  color: #f56c6c;
+  color: var(--el-color-danger);
   margin-top: 4px;
   line-height: 1.4;
 }

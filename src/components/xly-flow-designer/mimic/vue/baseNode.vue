@@ -397,7 +397,7 @@ function handleLeave() {
 
 .handler-text {
   font-size: 13px;
-  color: #333;
+  color: var(--el-text-color-primary);
   font-weight: 400;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -405,7 +405,7 @@ function handleLeave() {
 }
 
 .edit-indicator {
-  color: #999;
+  color: var(--el-text-color-placeholder);
   display: flex;
   align-items: center;
   opacity: 0;
@@ -420,7 +420,7 @@ function handleLeave() {
 
 .node-name-input {
   flex: 1;
-  color: #000000;
+  color: var(--el-text-color-primary);
 }
 
 .node-name-input :deep(.el-input__inner) {
@@ -433,7 +433,7 @@ function handleLeave() {
     inset 0 1px 2px rgba(0, 0, 0, 0.05),
     0 1px 1px rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
-  color: #000000;
+  color: var(--el-text-color-primary);
 }
 
 .node-name-input :deep(.el-input__inner:focus) {

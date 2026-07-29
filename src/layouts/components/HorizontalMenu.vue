@@ -128,17 +128,17 @@ function handleGrandClick(grand: MenuItem, child: MenuItem) {
 </script>
 
 <style scoped lang="scss">
-$primary: #4f6ef7;
-$text-primary: #1a1a2e;
-$text-secondary: #4a4a6a;
-$bg-hover: #f0f4ff;
+$primary: var(--el-color-primary);
+$text-primary: var(--el-text-color-primary);
+$text-secondary: var(--el-text-color-secondary);
+$bg-hover: var(--el-color-primary-light-9);
 
 .horizontal-menu {
   display: flex;
   align-items: center;
   height: 100%;
   padding: 0 24px;
-  background: #eef1f8;
+  background: var(--el-fill-color-light);
 
   &__item {
     position: relative;
@@ -177,7 +177,7 @@ $bg-hover: #f0f4ff;
     top: 100%;
     left: 0;
     min-width: 180px;
-    background: #fff;
+    background: var(--el-bg-color);
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     padding: 6px;
@@ -221,7 +221,7 @@ $bg-hover: #f0f4ff;
     top: 0;
     left: 100%;
     min-width: 160px;
-    background: #fff;
+    background: var(--el-bg-color);
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     padding: 6px;

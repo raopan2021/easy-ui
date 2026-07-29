@@ -287,7 +287,7 @@ function starStyle(i: number) {
 
 .orbit-dot {
   position: absolute; width: 8px; height: 8px; border-radius: 50%;
-  &--1 { top: 12px; left: 50%; transform: translateX(-50%); background: #4f6ef7; box-shadow: 0 0 8px #4f6ef7; animation: dot-orbit 8s linear infinite; }
+  &--1 { top: 12px; left: 50%; transform: translateX(-50%); background: var(--el-color-primary); box-shadow: 0 0 8px #4f6ef7; animation: dot-orbit 8s linear infinite; }
   &--2 { bottom: 8px; left: 50%; transform: translateX(-50%); background: #a855f7; box-shadow: 0 0 8px #a855f7; animation: dot-orbit 12s linear infinite reverse; }
 }
 @keyframes dot-orbit {
@@ -455,7 +455,7 @@ function starStyle(i: number) {
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  color: #f87171;
+  color: var(--el-color-danger);
   background: rgba(248,113,113,0.08);
   border: 1px solid rgba(248,113,113,0.2);
   border-radius: 8px;

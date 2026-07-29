@@ -12,7 +12,7 @@
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px;">
           <div style="display: flex; align-items: center; gap: 12px;">
             <XlyRate v-model="val1" />
-            <span style="font-size: 14px; color: #4a4a6a;">{{ val1 }} 分</span>
+            <span style="font-size: 14px; color: var(--el-text-color-regular);">{{ val1 }} 分</span>
           </div>
         </div>
       </div>
@@ -26,7 +26,7 @@
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px;">
           <div style="display: flex; align-items: center; gap: 12px;">
             <XlyRate v-model="val2" allow-half />
-            <span style="font-size: 14px; color: #4a4a6a;">{{ val2 }} 分</span>
+            <span style="font-size: 14px; color: var(--el-text-color-regular);">{{ val2 }} 分</span>
           </div>
         </div>
       </div>
@@ -40,15 +40,15 @@
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 16px;">
           <div style="display: flex; align-items: center; gap: 16px;">
             <XlyRate v-model="val3" color="#4f6ef7" />
-            <span style="font-size: 13px; color: #8e8ea0;">主题蓝</span>
+            <span style="font-size: 13px; color: var(--el-text-color-secondary);">主题蓝</span>
           </div>
           <div style="display: flex; align-items: center; gap: 16px;">
             <XlyRate v-model="val3" color="#f56c6c" />
-            <span style="font-size: 13px; color: #8e8ea0;">警告红</span>
+            <span style="font-size: 13px; color: var(--el-text-color-secondary);">警告红</span>
           </div>
           <div style="display: flex; align-items: center; gap: 16px;">
             <XlyRate v-model="val3" color="#67c23a" />
-            <span style="font-size: 13px; color: #8e8ea0;">成功绿</span>
+            <span style="font-size: 13px; color: var(--el-text-color-secondary);">成功绿</span>
           </div>
         </div>
       </div>
@@ -143,25 +143,25 @@ const val7 = ref(3)
 <style scoped lang="scss">
 .component-doc { padding: 8px 0 40px; }
 .doc-header { margin-bottom: 36px; }
-.doc-title { font-size: 26px; font-weight: 700; color: #1a1a2e; margin: 0 0 8px; letter-spacing: -0.3px; }
-.doc-desc { font-size: 14px; color: #8e8ea0; margin: 0; line-height: 1.6; }
+.doc-title { font-size: 26px; font-weight: 700; color: var(--el-text-color-primary); margin: 0 0 8px; letter-spacing: -0.3px; }
+.doc-desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0; line-height: 1.6; }
 .doc-section { margin-bottom: 32px; }
-.doc-section__title { font-size: 18px; font-weight: 600; color: #1a1a2e; margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid #f2f3f7; }
-.doc-section__desc { font-size: 14px; color: #8e8ea0; margin: 0 0 16px; line-height: 1.6;
-  code { background: #f5f6fa; color: #4f6ef7; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; }
+.doc-section__title { font-size: 18px; font-weight: 600; color: var(--el-text-color-primary); margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--el-border-color-lighter); }
+.doc-section__desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 16px; line-height: 1.6;
+  code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; }
 }
-.doc-preview { border: 1px solid #f2f3f7; border-radius: 12px; overflow: hidden; background: #fff; }
+.doc-preview { border: 1px solid var(--el-border-color-lighter); border-radius: 12px; overflow: hidden; background: var(--el-bg-color-overlay); }
 .doc-preview__body { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 24px; }
-.doc-code { border-top: 1px solid #f2f3f7; background: #fafbfd; padding: 16px 20px; overflow-x: auto;
+.doc-code { border-top: 1px solid var(--el-border-color-lighter); background: var(--el-fill-color-light); padding: 16px 20px; overflow-x: auto;
   pre { margin: 0; padding: 0; }
-  code { font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 13px; line-height: 1.7; color: #4a4a6a; white-space: pre; }
+  code { font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 13px; line-height: 1.7; color: var(--el-text-color-regular); white-space: pre; }
 }
-.doc-subtitle { font-size: 15px; font-weight: 600; color: #1a1a2e; margin: 20px 0 10px; }
+.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
 .doc-table { overflow-x: auto;
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid #f2f3f7; white-space: nowrap; }
-  th { background: #fafbfd; font-weight: 600; color: #1a1a2e; }
-  td { color: #4a4a6a; }
-  code { background: #f5f6fa; color: #4f6ef7; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); white-space: nowrap; }
+  th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); }
+  td { color: var(--el-text-color-regular); }
+  code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; }
 }
 </style>

@@ -361,13 +361,13 @@ function handleClick() {
 .doc-title {
   font-size: 22px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
 }
 
 .doc-desc {
   font-size: 14px;
-  color: #71717a;
+  color: var(--el-text-color-secondary);
   margin: 0;
 }
 
@@ -379,20 +379,20 @@ function handleClick() {
 .doc-section__title {
   font-size: 15px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
   padding-bottom: 8px;
-  border-bottom: 1px solid #e4e4e7;
+  border-bottom: 1px solid var(--el-border-color-lighter);
 }
 
 .doc-section__desc {
   font-size: 14px;
-  color: #71717a;
+  color: var(--el-text-color-secondary);
   margin: 0 0 14px;
 
   code {
-    background: #f4f5f7;
-    color: #3b82f6;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 13px;
@@ -401,10 +401,10 @@ function handleClick() {
 
 /* ========== 预览区域 ========== */
 .doc-preview {
-  border: 1px solid #e4e4e7;
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 10px;
   overflow: hidden;
-  background: #fff;
+  background: var(--el-bg-color-overlay);
 }
 
 .doc-preview__body {
@@ -415,8 +415,8 @@ function handleClick() {
 }
 
 .doc-code {
-  border-top: 1px solid #e4e4e7;
-  background: #fafbfc;
+  border-top: 1px solid var(--el-border-color-lighter);
+  background: var(--el-fill-color-light);
   padding: 12px 16px;
 
   pre {
@@ -426,7 +426,7 @@ function handleClick() {
   code {
     font-family: 'SF Mono', Consolas, monospace;
     font-size: 13px;
-    color: #4a4a4a;
+    color: var(--el-text-color-regular);
   }
 }
 
@@ -444,22 +444,22 @@ function handleClick() {
   td {
     text-align: left;
     padding: 10px 12px;
-    border-bottom: 1px solid #e4e4e7;
+    border-bottom: 1px solid var(--el-border-color-lighter);
   }
 
   th {
-    background: #fafbfc;
+    background: var(--el-fill-color-light);
     font-weight: 500;
-    color: #1a1a1a;
+    color: var(--el-text-color-primary);
   }
 
   td {
-    color: #4a4a4a;
+    color: var(--el-text-color-regular);
   }
 
   code {
-    background: #f4f5f7;
-    color: #3b82f6;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 12px;

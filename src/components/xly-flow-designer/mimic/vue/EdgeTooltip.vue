@@ -92,7 +92,7 @@ const handleClick = (item: { icon: string; label: string }) => {
 <style scoped>
 /* ====== 弹出面板容器 ====== */
 .edge-tooltip {
-  background: #ffffff;
+  background: var(--el-bg-color);
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 12px;
   box-shadow:
@@ -170,7 +170,7 @@ const handleClick = (item: { icon: string; label: string }) => {
 
 .tooltip-desc {
   font-size: 12px;
-  color: #86909c;
+  color: var(--el-text-color-placeholder);
   line-height: 18px;
 }
 </style>

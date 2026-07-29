@@ -460,12 +460,12 @@ async function copyCode(code: string) {
 </script>
 
 <style scoped lang="scss">
-$primary: #4f6ef7;
-$text-primary: #1a1a2e;
-$text-secondary: #4a4a6a;
-$text-default: #8e8ea0;
-$bg-code: #f8f9fc;
-$border-color: #e8e9ef;
+$primary: var(--el-color-primary);
+$text-primary: var(--el-text-color-primary);
+$text-secondary: var(--el-text-color-regular);
+$text-default: var(--el-text-color-secondary);
+$bg-code: var(--el-fill-color-light);
+$border-color: var(--el-border-color-lighter);
 
 .menu-doc {
   margin: 0 auto;
@@ -512,12 +512,12 @@ $border-color: #e8e9ef;
 
     &:hover {
       color: $primary;
-      background: rgba($primary, 0.08);
+      background: var(--el-color-primary-light-9);
     }
 
     &.active {
       color: $primary;
-      background: rgba($primary, 0.12);
+      background: var(--el-color-primary-light-8);
       font-weight: 500;
     }
   }
@@ -581,7 +581,7 @@ $border-color: #e8e9ef;
     justify-content: space-between;
     align-items: center;
     padding: 10px 16px;
-    background: rgba($primary, 0.06);
+    background: var(--el-color-primary-light-9);
     border-bottom: 1px solid $border-color;
   }
 
@@ -595,7 +595,7 @@ $border-color: #e8e9ef;
     padding: 4px 10px;
     font-size: 12px;
     color: $text-secondary;
-    background: #fff;
+    background: var(--el-bg-color-overlay);
     border: 1px solid $border-color;
     border-radius: 4px;
     cursor: pointer;
@@ -682,11 +682,11 @@ $border-color: #e8e9ef;
   margin: 16px 0;
 
   &--warning {
-    background: rgba(245, 159, 11, 0.1);
-    border: 1px solid rgba(245, 159, 11, 0.3);
+    background: var(--el-color-warning-light-9);
+    border: 1px solid var(--el-color-warning-light-5);
 
     .tip__icon {
-      color: #f59e0b;
+      color: var(--el-color-warning);
     }
   }
 

@@ -456,14 +456,11 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped lang="scss">
-$primary: #4f6ef7;
+
 $primary-light: rgba(79, 110, 247, 0.08);
-$border-color: #e2e4ed;
+
 $border-focus: #4f6ef7;
-$border-hover: #c8cbd8;
-$disabled-color: #a8abb2;
-$text-color: #4a4a6a;
-$text-placeholder: #c0c4cc;
+
 $radius: 8px;
 $transition: all 0.2s ease;
 
@@ -496,18 +493,18 @@ $transition: all 0.2s ease;
   display: inline-flex;
   align-items: center;
   padding: 0 12px;
-  background: #fff;
-  border: 1px solid $border-color;
+  background: var(--el-bg-color);
+  border: 1px solid var(--el-border-color);
   border-radius: $radius;
   cursor: pointer;
   transition: $transition;
 
   &.is-hover:not(.is-disabled) {
-    border-color: $border-hover;
+    border-color: var(--el-border-color-darker);
   }
   &.is-focus {
     border-color: $border-focus;
-    box-shadow: 0 0 0 2px $primary-light;
+    box-shadow: 0 0 0 2px rgba(79, 110, 247, 0.08);
   }
 }
 
@@ -515,7 +512,7 @@ $transition: all 0.2s ease;
   display: inline-flex;
   align-items: center;
   margin-right: 6px;
-  color: $text-placeholder;
+  color: var(--el-text-color-placeholder);
   flex-shrink: 0;
 }
 
@@ -524,31 +521,29 @@ $transition: all 0.2s ease;
   border: none;
   outline: none;
   background: transparent;
-  color: $text-color;
+  color: var(--el-text-color-regular);
   cursor: pointer;
   font-family: inherit;
   &::placeholder {
-    color: $text-placeholder;
+    color: var(--el-text-color-placeholder);
   }
 }
 
 .xly-time-picker__clear {
   display: inline-flex;
   cursor: pointer;
-  color: $text-placeholder;
+  color: var(--el-text-color-placeholder);
   border-radius: 50%;
   &:hover {
-    color: $text-color;
+    color: var(--el-text-color-regular);
   }
 }
 </style>
 
 <style lang="scss">
-$primary: #4f6ef7;
+
 $primary-light: rgba(79, 110, 247, 0.08);
-$border-color: #e2e4ed;
-$text-color: #4a4a6a;
-$text-placeholder: #c0c4cc;
+
 $radius: 8px;
 
 // ========== 时间面板（Teleport 到 body，不能 scoped）==========
@@ -556,8 +551,8 @@ $radius: 8px;
   position: fixed;
   z-index: 2000;
   width: auto;
-  background: #fff;
-  border: 1px solid $border-color;
+  background: var(--el-bg-color);
+  border: 1px solid var(--el-border-color);
   border-radius: $radius;
   box-shadow:
     0 4px 20px rgba(0, 0, 0, 0.08),
@@ -583,8 +578,8 @@ $radius: 8px;
   font-size: 16px;
   font-weight: 600;
   font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
-  color: $text-color;
-  background: #f5f7fa;
+  color: var(--el-text-color-regular);
+  background: var(--el-fill-color-light);
   border: 1px solid transparent;
   border-radius: 6px;
   outline: none;
@@ -592,8 +587,8 @@ $radius: 8px;
   transition: all 0.15s;
 
   &:focus {
-    background: #fff;
-    border-color: $primary;
+    background: var(--el-bg-color);
+    border-color: var(--el-color-primary);
     box-shadow: 0 0 0 2px rgba(79, 110, 247, 0.12);
   }
 }
@@ -601,7 +596,7 @@ $radius: 8px;
 .xly-time-panel__input-sep {
   font-size: 16px;
   font-weight: 600;
-  color: $text-placeholder;
+  color: var(--el-text-color-placeholder);
   margin: 0 2px;
 }
 
@@ -637,7 +632,7 @@ $radius: 8px;
   justify-content: center;
   font-size: 16px;
   font-weight: 500;
-  color: $text-placeholder;
+  color: var(--el-text-color-placeholder);
   width: 16px;
   flex-shrink: 0;
 }
@@ -663,7 +658,7 @@ $radius: 8px;
   justify-content: center;
   height: 32px;
   font-size: 13px;
-  color: $text-color;
+  color: var(--el-text-color-regular);
   cursor: pointer;
   transition:
     color 0.15s,
@@ -675,7 +670,7 @@ $radius: 8px;
   padding-left: 25px;
 
   &.is-selected {
-    color: $primary;
+    color: var(--el-color-primary);
     font-weight: 600;
     font-size: 14px;
   }
@@ -693,7 +688,7 @@ $radius: 8px;
   padding: 4px 12px;
   border: none;
   background: transparent;
-  color: $text-color;
+  color: var(--el-text-color-regular);
   font-size: 13px;
   font-weight: 500;
   border-radius: 4px;
@@ -702,18 +697,18 @@ $radius: 8px;
   line-height: 1.5;
 
   &--now {
-    color: $text-placeholder;
+    color: var(--el-text-color-placeholder);
     &:hover {
-      color: $primary;
+      color: var(--el-color-primary);
     }
   }
 
   &--primary {
     background: transparent;
-    color: $primary;
+    color: var(--el-color-primary);
     font-weight: 500;
     &:hover {
-      background: $primary;
+      background: var(--el-color-primary);
       color: #fff;
     }
   }
@@ -730,5 +725,18 @@ $radius: 8px;
 .xly-time-picker-fade-leave-to {
   opacity: 0;
   transform: scaleY(0.95) translateY(-4px);
+}
+</style>
+
+<style lang="scss">
+/* ========== Dark Mode ========== */
+html.dark .xly-time-panel__input-area {
+  border-bottom-color: var(--el-border-color);
+}
+html.dark .xly-time-panel__body::before {
+  background: rgba(79, 110, 247, 0.12);
+}
+html.dark .xly-time-picker__panel {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), 0 0 1px rgba(0, 0, 0, 0.3);
 }
 </style>

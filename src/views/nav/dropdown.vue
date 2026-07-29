@@ -342,13 +342,13 @@ function handleItemClick(name: string) {
 .doc-title {
   font-size: 26px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
   letter-spacing: -0.3px;
 }
 .doc-desc {
   font-size: 14px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   margin: 0;
   line-height: 1.6;
 }
@@ -358,26 +358,26 @@ function handleItemClick(name: string) {
 .doc-section__title {
   font-size: 18px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #f2f3f7;
+  border-bottom: 1px solid var(--el-border-color-lighter);
 }
 .doc-section__desc {
   font-size: 14px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   margin: 0 0 16px;
   line-height: 1.6;
 }
 .doc-subtitle {
   font-size: 16px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 12px;
 }
 .doc-preview {
-  background-color: #fff;
-  border: 1px solid #f2f3f7;
+  background-color: var(--el-bg-color-overlay);
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 8px;
 }
 .doc-preview__body {
@@ -388,7 +388,7 @@ function handleItemClick(name: string) {
 }
 .doc-code {
   margin-top: 12px;
-  background-color: #f5f6fa;
+  background-color: var(--el-fill-color-light);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -399,17 +399,17 @@ function handleItemClick(name: string) {
   font-size: 13px;
   line-height: 1.5;
   font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
-  color: #1a1a2e;
-  background-color: #f5f6fa;
+  color: var(--el-text-color-primary);
+  background-color: var(--el-fill-color-light);
 }
-.doc-subtitle { font-size: 15px; font-weight: 600; color: #1a1a2e; margin: 20px 0 10px; }
+.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
 .doc-table { overflow-x: auto;
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid #f2f3f7; white-space: nowrap; }
-  th { background: #fafbfd; font-weight: 600; color: #1a1a2e; }
-  td { color: #4a4a6a; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); white-space: nowrap; }
+  th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); }
+  td { color: var(--el-text-color-regular); }
   code {
-    background: #f5f6fa; color: #4f6ef7; padding: 2px 6px;
+    background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px;
     border-radius: 4px; font-size: 13px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
   }
@@ -422,11 +422,11 @@ function handleItemClick(name: string) {
   font-size: 14px;
   color: #606266;
   padding: 6px 12px;
-  border: 1px solid #dcdfe6;
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 6px;
   transition: all 0.2s;
   &:hover {
-    color: #4f6ef7;
+    color: var(--el-color-primary);
     border-color: #4f6ef7;
   }
 }

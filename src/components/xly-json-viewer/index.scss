@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 // 基础变量
 $border-radius: 4px;
 
@@ -46,14 +48,14 @@ $themes: (
   font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
   font-size: 13px;
   line-height: 1.6;
-  border: 1px solid map-get(map-get($themes, light), border);
+  border: 1px solid map.get(map.get($themes, light), border);
   border-radius: 8px;
   overflow: hidden;
-  background: map-get(map-get($themes, light), bg);
+  background: map.get(map.get($themes, light), bg);
 
   &--dark {
-    border-color: map-get(map-get($themes, dark), border);
-    background: map-get(map-get($themes, dark), bg);
+    border-color: map.get(map.get($themes, dark), border);
+    background: map.get(map.get($themes, dark), bg);
   }
 
   // 工具栏
@@ -62,12 +64,12 @@ $themes: (
     justify-content: space-between;
     align-items: center;
     padding: 8px 12px;
-    background: map-get(map-get($themes, light), toolbar-bg);
-    border-bottom: 1px solid map-get(map-get($themes, light), border);
+    background: map.get(map.get($themes, light), toolbar-bg);
+    border-bottom: 1px solid map.get(map.get($themes, light), border);
 
     .xly-json-viewer--dark & {
-      background: map-get(map-get($themes, dark), toolbar-bg);
-      border-bottom-color: map-get(map-get($themes, dark), border);
+      background: map.get(map.get($themes, dark), toolbar-bg);
+      border-bottom-color: map.get(map.get($themes, dark), border);
     }
   }
 
@@ -84,22 +86,22 @@ $themes: (
     gap: 4px;
     padding: 4px 10px;
     font-size: 12px;
-    color: map-get(map-get($themes, light), text);
-    background: map-get(map-get($themes, light), toolbar-btn-bg);
+    color: map.get(map.get($themes, light), text);
+    background: map.get(map.get($themes, light), toolbar-btn-bg);
     border-radius: 4px;
     cursor: pointer;
     transition: all 0.2s;
 
     .xly-json-viewer--dark & {
-      color: map-get(map-get($themes, dark), text);
-      background: map-get(map-get($themes, dark), toolbar-btn-bg);
+      color: map.get(map.get($themes, dark), text);
+      background: map.get(map.get($themes, dark), toolbar-btn-bg);
     }
 
     &:hover {
-      background: map-get(map-get($themes, light), toolbar-btn-hover);
+      background: map.get(map.get($themes, light), toolbar-btn-hover);
 
       .xly-json-viewer--dark & {
-        background: map-get(map-get($themes, dark), toolbar-btn-hover);
+        background: map.get(map.get($themes, dark), toolbar-btn-hover);
       }
     }
 
@@ -112,10 +114,10 @@ $themes: (
   &__content {
     overflow: auto;
     max-height: v-bind('props.maxHeight || "none"');
-    background: map-get(map-get($themes, light), content-bg);
+    background: map.get(map.get($themes, light), content-bg);
 
     .xly-json-viewer--dark & {
-      background: map-get(map-get($themes, dark), content-bg);
+      background: map.get(map.get($themes, dark), content-bg);
     }
   }
 
@@ -129,11 +131,11 @@ $themes: (
   &__empty {
     padding: 24px;
     text-align: center;
-    color: map-get(map-get($themes, light), text-secondary);
+    color: map.get(map.get($themes, light), text-secondary);
     font-size: 14px;
 
     .xly-json-viewer--dark & {
-      color: map-get(map-get($themes, dark), text-secondary);
+      color: map.get(map.get($themes, dark), text-secondary);
     }
   }
 }
@@ -145,39 +147,39 @@ $themes: (
 
 // 基础值
 .json-value {
-  &--light { color: map-get(map-get($themes, light), text); }
-  &--dark { color: map-get(map-get($themes, dark), text); }
+  &--light { color: map.get(map.get($themes, light), text); }
+  &--dark { color: map.get(map.get($themes, dark), text); }
 }
 
 .json-string {
-  color: map-get(map-get($themes, light), string);
-  .xly-json-viewer--dark & { color: map-get(map-get($themes, dark), string); }
+  color: map.get(map.get($themes, light), string);
+  .xly-json-viewer--dark & { color: map.get(map.get($themes, dark), string); }
 }
 
 .json-number {
-  color: map-get(map-get($themes, light), number);
-  .xly-json-viewer--dark & { color: map-get(map-get($themes, dark), number); }
+  color: map.get(map.get($themes, light), number);
+  .xly-json-viewer--dark & { color: map.get(map.get($themes, dark), number); }
 }
 
 .json-boolean {
-  color: map-get(map-get($themes, light), boolean);
-  .xly-json-viewer--dark & { color: map-get(map-get($themes, dark), boolean); }
+  color: map.get(map.get($themes, light), boolean);
+  .xly-json-viewer--dark & { color: map.get(map.get($themes, dark), boolean); }
 }
 
 .json-null {
-  color: map-get(map-get($themes, light), null);
-  .xly-json-viewer--dark & { color: map-get(map-get($themes, dark), null); }
+  color: map.get(map.get($themes, light), null);
+  .xly-json-viewer--dark & { color: map.get(map.get($themes, dark), null); }
 }
 
 .json-primitive {
-  color: map-get(map-get($themes, light), text);
-  .xly-json-viewer--dark & { color: map-get(map-get($themes, dark), text); }
+  color: map.get(map.get($themes, light), text);
+  .xly-json-viewer--dark & { color: map.get(map.get($themes, dark), text); }
 }
 
 // 括号（根节点强制靠左）
 .json-bracket {
-  color: map-get(map-get($themes, light), bracket);
-  .xly-json-viewer--dark & { color: map-get(map-get($themes, dark), bracket); }
+  color: map.get(map.get($themes, light), bracket);
+  .xly-json-viewer--dark & { color: map.get(map.get($themes, dark), bracket); }
 }
 
 // 占位符（用于根节点对齐）
@@ -188,19 +190,19 @@ $themes: (
 
 // 键名
 .json-key {
-  color: map-get(map-get($themes, light), key);
-  &--light { color: map-get(map-get($themes, light), key); }
-  &--dark { color: map-get(map-get($themes, dark), key); }
-  .xly-json-viewer--dark & { color: map-get(map-get($themes, dark), key); }
+  color: map.get(map.get($themes, light), key);
+  &--light { color: map.get(map.get($themes, light), key); }
+  &--dark { color: map.get(map.get($themes, dark), key); }
+  .xly-json-viewer--dark & { color: map.get(map.get($themes, dark), key); }
 }
 
 // 折叠信息
 .json-collapsed {
-  color: map-get(map-get($themes, light), collapsed);
+  color: map.get(map.get($themes, light), collapsed);
   font-style: italic;
-  &--light { color: map-get(map-get($themes, light), collapsed); }
-  &--dark { color: map-get(map-get($themes, dark), collapsed); }
-  .xly-json-viewer--dark & { color: map-get(map-get($themes, dark), collapsed); }
+  &--light { color: map.get(map.get($themes, light), collapsed); }
+  &--dark { color: map.get(map.get($themes, dark), collapsed); }
+  .xly-json-viewer--dark & { color: map.get(map.get($themes, dark), collapsed); }
 }
 
 // 折叠/展开箭头
@@ -211,17 +213,17 @@ $themes: (
   text-align: center;
   cursor: pointer;
   user-select: none;
-  color: map-get(map-get($themes, light), text-secondary);
+  color: map.get(map.get($themes, light), text-secondary);
   font-size: 10px;
   vertical-align: middle;
 
   .xly-json-viewer--dark & {
-    color: map-get(map-get($themes, dark), text-secondary);
+    color: map.get(map.get($themes, dark), text-secondary);
   }
 
   &:hover {
-    color: map-get(map-get($themes, light), text);
-    .xly-json-viewer--dark & { color: map-get(map-get($themes, dark), text); }
+    color: map.get(map.get($themes, light), text);
+    .xly-json-viewer--dark & { color: map.get(map.get($themes, dark), text); }
   }
 }
 
@@ -233,14 +235,14 @@ $themes: (
 // 冒号
 .json-colon {
   .xly-json-viewer--dark & {
-    color: map-get(map-get($themes, dark), text);
+    color: map.get(map.get($themes, dark), text);
   }
 }
 
 // 逗号
 .json-comma {
   .xly-json-viewer--dark & {
-    color: map-get(map-get($themes, dark), text);
+    color: map.get(map.get($themes, dark), text);
   }
 }
 

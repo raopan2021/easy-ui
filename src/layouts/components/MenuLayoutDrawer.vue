@@ -102,9 +102,9 @@ function handleSelect(key: MenuLayout) {
 </script>
 
 <style scoped lang="scss">
-$primary: #4f6ef7;
-$text-primary: #1a1a2e;
-$text-default: #8e8ea0;
+$primary: var(--el-color-primary);
+$text-primary: var(--el-text-color-primary);
+$text-default: var(--el-text-color-placeholder);
 
 .layout-selector {
   display: flex;
@@ -117,19 +117,19 @@ $text-default: #8e8ea0;
   align-items: center;
   gap: 14px;
   padding: 14px;
-  background: #fafafa;
+  background: var(--el-fill-color-light);
   border: 2px solid transparent;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s;
 
   &:hover {
-    background: #f0f4ff;
-    border-color: rgba($primary, 0.2);
+    background: var(--el-color-primary-light-9);
+    border-color: var(--el-color-primary-light-9);
   }
 
   &.active {
-    background: #eaeffd;
+    background: var(--el-color-primary-light-9);
     border-color: $primary;
   }
 
@@ -168,7 +168,7 @@ $text-default: #8e8ea0;
 
   &__menu-line {
     height: 4px;
-    background: rgba(0, 0, 0, 0.1);
+    background: var(--el-fill-color-light);
     border-radius: 2px;
 
     &:first-child {

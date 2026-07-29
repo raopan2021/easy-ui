@@ -201,7 +201,7 @@ function handleSubmit() {
 .t-classic__card {
   display: flex;
   width: 100%; max-width: 920px; min-height: 540px;
-  background: #fff;
+  background: var(--el-bg-color-overlay);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 30px 60px -12px rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.03);
@@ -279,8 +279,8 @@ function handleSubmit() {
 }
 
 .form-header { margin-bottom: 32px; }
-.form-title  { font-size: 26px; font-weight: 700; color: #1a1a2e; margin: 0 0 7px; }
-.form-sub    { font-size: 13px; color: #9ca3af; margin: 0; }
+.form-title  { font-size: 26px; font-weight: 700; color: var(--el-text-color-primary); margin: 0 0 7px; }
+.form-sub    { font-size: 13px; color: var(--el-text-color-placeholder); margin: 0; }
 
 /* ========== 内联表单样式 ========== */
 .classic-form { display: flex; flex-direction: column; gap: 0; }
@@ -291,7 +291,7 @@ function handleSubmit() {
   display: block;
   font-size: 13px;
   font-weight: 600;
-  color: #374151;
+  color: var(--el-text-color-regular);
   margin-bottom: 8px;
 }
 
@@ -305,27 +305,27 @@ function handleSubmit() {
   position: absolute;
   left: 14px;
   width: 16px; height: 16px;
-  color: #9ca3af;
+  color: var(--el-text-color-placeholder);
   pointer-events: none;
 }
 
 .cf-input {
   width: 100%;
   height: 48px;
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
+  background: var(--el-fill-color-light);
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 10px;
   padding: 0 14px 0 42px;
   font-size: 14px;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   outline: none;
   transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
 
-  &::placeholder { color: #d1d5db; }
+  &::placeholder { color: var(--el-text-color-placeholder); }
 
   &:focus {
     border-color: #4f6ef7;
-    background: #fff;
+    background: var(--el-bg-color-overlay);
     box-shadow: 0 0 0 3px rgba(79,110,247,0.1);
   }
 }
@@ -342,10 +342,10 @@ function handleSubmit() {
   background: none;
   border: none;
   cursor: pointer;
-  color: #9ca3af;
+  color: var(--el-text-color-placeholder);
   border-radius: 6px;
   transition: color 0.2s;
-  &:hover { color: #6b7280; }
+  &:hover { color: var(--el-text-color-secondary); }
 }
 
 .cf-error {
@@ -353,8 +353,8 @@ function handleSubmit() {
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  color: #ef4444;
-  background: #fef2f2;
+  color: var(--el-color-danger);
+  background: var(--el-color-danger-light-9);
   border: 1px solid #fecaca;
   border-radius: 8px;
   padding: 8px 12px;
@@ -442,7 +442,7 @@ function handleSubmit() {
   gap: 5px;
   margin-top: 12px;
   font-size: 11px;
-  color: #9ca3af;
+  color: var(--el-text-color-placeholder);
 }
 
 /* 全局底部版权 */
@@ -455,9 +455,9 @@ function handleSubmit() {
   justify-content: center;
   gap: 10px;
   font-size: 11px;
-  color: #9ca3af;
+  color: var(--el-text-color-placeholder);
   z-index: 10;
-  .footer-dot { color: #d1d5db; }
+  .footer-dot { color: var(--el-text-color-placeholder); }
   a { color: inherit; text-decoration: none; &:hover { text-decoration: underline; } }
 }
 

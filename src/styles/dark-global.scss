@@ -1,0 +1,154 @@
+/* ============================================================
+ *  全局 Dark Mode 样式 —— 已从组件中内联的不在此处
+ *  包含：页面级样式 + 无法内联的跨组件共享样式
+ * ============================================================ */
+html.dark {
+  /* ===== 部门树 ===== */
+  .xly-dept-tree {
+    background: var(--el-bg-color);
+    border-color: var(--el-border-color);
+
+    &__node-label {
+      color: var(--el-text-color-regular);
+    }
+    &__node:hover > .xly-dept-tree__node-label {
+      background: var(--el-fill-color-light);
+    }
+    &__node.is-active > .xly-dept-tree__node-label {
+      background: var(--el-fill-color-light);
+      color: var(--el-color-primary);
+    }
+
+    .el-tree-node__content:hover {
+      background-color: var(--el-fill-color-light);
+    }
+    .el-tree-node.is-current > .el-tree-node__content {
+      background-color: var(--el-fill-color-light);
+    }
+  }
+
+  /* ===== 甘特图 ===== */
+  .xly-gantt {
+    background: var(--el-bg-color);
+
+    &__header {
+      background: var(--el-fill-color-light);
+      border-color: var(--el-border-color);
+    }
+
+    &__sidebar-header {
+      background: var(--el-fill-color-light);
+      border-color: var(--el-border-color);
+    }
+
+    &__sidebar-cell {
+      border-color: var(--el-border-color);
+      color: var(--el-text-color-regular);
+    }
+
+    &__cell {
+      border-color: var(--el-border-color-lighter);
+    }
+
+    &__bar {
+      color: #fff;
+    }
+
+    &__today-line {
+      background: var(--el-color-danger);
+    }
+
+    &__header-cell {
+      border-color: var(--el-border-color);
+      color: var(--el-text-color-secondary);
+    }
+
+    &__header-cell--today {
+      background: rgba(239, 68, 68, 0.1);
+    }
+  }
+
+  /* ===== 聊天 ===== */
+  .xly-chat {
+    &__message--assistant {
+      background: var(--el-fill-color-lighter);
+    }
+
+    &__avatar {
+      background: var(--el-fill-color);
+    }
+
+    &__message-content {
+      background: var(--el-bg-color-overlay);
+      border-color: var(--el-border-color);
+    }
+  }
+
+  .xly-chat-input {
+    background: var(--el-fill-color-lighter);
+    border-color: var(--el-border-color);
+
+    &__textarea {
+      color: var(--el-text-color-primary);
+      background: transparent;
+    }
+
+    &__textarea::placeholder {
+      color: var(--el-text-color-placeholder);
+    }
+
+    &__send-btn {
+      color: var(--el-text-color-secondary);
+    }
+  }
+
+  /* ===== 文档演示页 ===== */
+  .doc-header {
+    background: var(--el-bg-color);
+    border-bottom-color: var(--el-border-color);
+  }
+  .doc-header__title {
+    color: var(--el-text-color-primary);
+  }
+  .doc-header__desc {
+    color: var(--el-text-color-secondary);
+  }
+  .doc-section {
+    background: var(--el-bg-color);
+    border-color: var(--el-border-color);
+  }
+  .doc-section__title {
+    color: var(--el-text-color-primary);
+  }
+  .doc-preview {
+    background: var(--el-fill-color-lighter);
+    border-color: var(--el-border-color-light);
+  }
+  .doc-table {
+    background: var(--el-bg-color);
+  }
+  .doc-code {
+    pre {
+      background: var(--el-fill-color);
+    }
+    code {
+      color: var(--el-text-color-regular);
+    }
+  }
+
+  /* ===== 登录页 ===== */
+  .login-container {
+    background: #1a1a2e;
+  }
+  .login-form {
+    background: var(--el-bg-color);
+    border-color: var(--el-border-color);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+  .login-title {
+    color: var(--el-text-color-primary);
+  }
+  .login-subtitle {
+    color: var(--el-text-color-secondary);
+  }
+}

@@ -766,7 +766,7 @@ async function handleLazyLoad(row) {
             border
             :page-size="8"
           />
-          <p style="font-size: 13px; color: #8e8ea0; margin-top: 12px">
+          <p style="font-size: 13px; color: var(--el-text-color-secondary); margin-top: 12px">
             💡 提示：横向滚动表格查看固定列效果
           </p>
         </div>
@@ -813,7 +813,7 @@ const columns = [
               :page-size="10"
             />
           </div>
-          <p style="font-size: 13px; color: #8e8ea0; margin-top: 12px">
+          <p style="font-size: 13px; color: var(--el-text-color-secondary); margin-top: 12px">
             💡 提示：点击右上角"列设置"按钮可控制列的显示/隐藏，横向滚动查看更多列
           </p>
         </div>
@@ -888,7 +888,7 @@ const columns = [
               </template>
             </xly-table>
           </div>
-          <p style="font-size: 13px; color: #8e8ea0">
+          <p style="font-size: 13px; color: var(--el-text-color-secondary)">
             💡 提示：横向滚动表格，操作列始终固定在右侧
           </p>
         </div>
@@ -1975,13 +1975,13 @@ const enhancedBigData = bigData.map((item, i) => ({
 .doc-title {
   font-size: 26px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
   letter-spacing: -0.3px;
 }
 .doc-desc {
   font-size: 14px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   margin: 0;
   line-height: 1.6;
 }
@@ -1992,19 +1992,19 @@ const enhancedBigData = bigData.map((item, i) => ({
 .doc-section__title {
   font-size: 18px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #f2f3f7;
+  border-bottom: 1px solid var(--el-border-color-lighter);
 }
 .doc-section__desc {
   font-size: 14px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   margin: 0 0 16px;
   line-height: 1.6;
   code {
-    background: #f5f6fa;
-    color: #4f6ef7;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 13px;
@@ -2013,9 +2013,9 @@ const enhancedBigData = bigData.map((item, i) => ({
 }
 
 .doc-preview {
-  border: 1px solid #f2f3f7;
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 12px;
-  background: #fff;
+  background: var(--el-bg-color-overlay);
 }
 .doc-preview__body {
   display: flex;
@@ -2025,8 +2025,8 @@ const enhancedBigData = bigData.map((item, i) => ({
   padding: 24px;
 }
 .doc-code {
-  border-top: 1px solid #f2f3f7;
-  background: #fafbfd;
+  border-top: 1px solid var(--el-border-color-lighter);
+  background: var(--el-fill-color-light);
   padding: 16px 20px;
   overflow-x: auto;
   pre {
@@ -2037,7 +2037,7 @@ const enhancedBigData = bigData.map((item, i) => ({
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
     font-size: 13px;
     line-height: 1.7;
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
     white-space: pre;
   }
 }
@@ -2045,7 +2045,7 @@ const enhancedBigData = bigData.map((item, i) => ({
 .doc-subtitle {
   font-size: 15px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 20px 0 10px;
 }
 .doc-table {
@@ -2059,20 +2059,20 @@ const enhancedBigData = bigData.map((item, i) => ({
   td {
     text-align: left;
     padding: 10px 14px;
-    border-bottom: 1px solid #f2f3f7;
+    border-bottom: 1px solid var(--el-border-color-lighter);
   }
   th {
-    background: #fafbfd;
+    background: var(--el-fill-color-light);
     font-weight: 600;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
     white-space: nowrap;
   }
   td {
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
   }
   code {
-    background: #f5f6fa;
-    color: #4f6ef7;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 13px;
@@ -2082,7 +2082,7 @@ const enhancedBigData = bigData.map((item, i) => ({
 
 .size-label {
   font-size: 12px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   margin: 0 0 8px;
   font-weight: 500;
   font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
@@ -2090,7 +2090,7 @@ const enhancedBigData = bigData.map((item, i) => ({
 
 .selection-hint {
   font-size: 13px;
-  color: #4a4a6a;
+  color: var(--el-text-color-regular);
   padding: 8px 12px;
   background: #f0f3fe;
   border-radius: 6px;
@@ -2099,25 +2099,25 @@ const enhancedBigData = bigData.map((item, i) => ({
 
 .sort-hint {
   font-size: 13px;
-  color: #4a4a6a;
+  color: var(--el-text-color-regular);
   padding: 8px 12px;
-  background: #fafbfd;
+  background: var(--el-fill-color-light);
   border-radius: 6px;
   border: 1px solid #e2e4ed;
   strong {
-    color: #4f6ef7;
+    color: var(--el-color-primary);
   }
 }
 
 .pagination-hint {
   font-size: 13px;
-  color: #4a4a6a;
+  color: var(--el-text-color-regular);
   padding: 8px 12px;
-  background: #fafbfd;
+  background: var(--el-fill-color-light);
   border-radius: 6px;
   border: 1px solid #e2e4ed;
   strong {
-    color: #4f6ef7;
+    color: var(--el-color-primary);
   }
 }
 
@@ -2130,7 +2130,7 @@ const enhancedBigData = bigData.map((item, i) => ({
 .progress-bar {
   flex: 1;
   height: 6px;
-  background: #f2f3f7;
+  background: var(--el-fill-color-light);
   border-radius: 3px;
   overflow: hidden;
 }
@@ -2141,7 +2141,7 @@ const enhancedBigData = bigData.map((item, i) => ({
 }
 .progress-value {
   font-size: 12px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   min-width: 34px;
   text-align: right;
 }
@@ -2161,7 +2161,7 @@ const enhancedBigData = bigData.map((item, i) => ({
   transition: all 0.15s;
 
   &--edit {
-    color: #4f6ef7;
+    color: var(--el-color-primary);
     border-color: rgba(79, 110, 247, 0.3);
     background: rgba(79, 110, 247, 0.06);
     &:hover {
@@ -2185,16 +2185,16 @@ const enhancedBigData = bigData.map((item, i) => ({
   font-size: 13px;
   cursor: pointer;
   border: 1px solid #e2e4ed;
-  background: #fff;
-  color: #4a4a6a;
+  background: var(--el-bg-color-overlay);
+  color: var(--el-text-color-regular);
   transition: all 0.15s;
   &:hover {
     border-color: #4f6ef7;
-    color: #4f6ef7;
+    color: var(--el-color-primary);
   }
 
   &--primary {
-    background: #4f6ef7;
+    background: var(--el-color-primary);
     border-color: #4f6ef7;
     color: #fff;
     &:hover {
@@ -2221,7 +2221,7 @@ const enhancedBigData = bigData.map((item, i) => ({
 
 .children-title {
   font-size: 12px;
-  color: #909399;
+  color: var(--el-text-color-placeholder);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -2241,13 +2241,13 @@ const enhancedBigData = bigData.map((item, i) => ({
   align-items: center;
   gap: 16px;
   padding: 8px 12px;
-  background: #fff;
+  background: var(--el-bg-color-overlay);
   border-radius: 4px;
   font-size: 13px;
 
   .child-name {
     flex: 1;
-    color: #303133;
+    color: var(--el-text-color-regular);
   }
 
   .child-manager {
@@ -2258,7 +2258,7 @@ const enhancedBigData = bigData.map((item, i) => ({
 
   .child-progress {
     width: 70px;
-    color: #4f6ef7;
+    color: var(--el-color-primary);
     text-align: right;
     font-weight: 500;
     font-size: 12px;
@@ -2267,13 +2267,13 @@ const enhancedBigData = bigData.map((item, i) => ({
 
 .children-empty {
   font-size: 13px;
-  color: #c0c4cc;
+  color: var(--el-text-color-placeholder);
   padding: 8px 12px;
 }
 
 .expand-hint {
   font-size: 13px;
-  color: #4a4a6a;
+  color: var(--el-text-color-regular);
   padding: 8px 12px;
   background: #f0f3fe;
   border-radius: 6px;
@@ -2282,7 +2282,7 @@ const enhancedBigData = bigData.map((item, i) => ({
 
 .tree-hint {
   font-size: 13px;
-  color: #4a4a6a;
+  color: var(--el-text-color-regular);
   padding: 8px 12px;
   background: #f0f3fe;
   border-radius: 6px;

@@ -194,9 +194,7 @@ provide<FormItemContext>('xlyFormItemContext', {
 </script>
 
 <style scoped lang="scss">
-$danger: #f56c6c;
-$text-secondary: #6b7280;
-$text-placeholder: #8e8ea0;
+
 $transition: all 0.2s ease;
 
 .xly-form-item {
@@ -230,19 +228,19 @@ $transition: all 0.2s ease;
 
   &.is-error {
     :deep(.xly-input__wrapper) {
-      border-color: $danger !important;
-      box-shadow: 0 0 0 1px $danger inset !important;
+      border-color: var(--el-color-danger) !important;
+      box-shadow: 0 0 0 1px var(--el-color-danger) inset !important;
     }
     :deep(.xly-select .xly-select__wrapper) {
-      border-color: $danger !important;
-      box-shadow: 0 0 0 1px $danger inset !important;
+      border-color: var(--el-color-danger) !important;
+      box-shadow: 0 0 0 1px var(--el-color-danger) inset !important;
     }
   }
 
   &.is-required {
     .xly-form-item__label-text::before {
       content: '*';
-      color: $danger;
+      color: var(--el-color-danger);
       margin-right: 4px;
     }
   }
@@ -258,7 +256,7 @@ $transition: all 0.2s ease;
 
 .xly-form-item__label-text {
   font-size: 14px;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   font-weight: 500;
   line-height: 1.4;
 }
@@ -279,7 +277,7 @@ $transition: all 0.2s ease;
 
 .xly-form-item__error {
   font-size: 12px;
-  color: $danger;
+  color: var(--el-color-danger);
   line-height: 1.4;
   margin-top: 4px;
   word-break: break-all;
@@ -291,7 +289,7 @@ $transition: all 0.2s ease;
 
 .xly-form-item__tip {
   font-size: 12px;
-  color: $text-placeholder;
+  color: var(--el-text-color-placeholder);
   line-height: 1.4;
   margin-top: 4px;
 }
@@ -303,5 +301,18 @@ $transition: all 0.2s ease;
 .xly-form-error-fade-enter-from,
 .xly-form-error-fade-leave-to {
   opacity: 0;
+}
+</style>
+
+<style lang="scss">
+/* ========== Dark Mode ========== */
+html.dark .xly-form-item__label {
+  color: var(--el-text-color-regular);
+}
+html.dark .xly-form-item .label-desc {
+  color: var(--el-text-color-placeholder);
+}
+html.dark .is-required .xly-form-item__label::before {
+  color: var(--el-color-danger);
 }
 </style>

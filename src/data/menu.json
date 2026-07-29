@@ -560,17 +560,23 @@
           {
             "id": "9-3-1",
             "name": "功能权限",
-            "key": "func-permission"
+            "key": "func-permission",
+            "path": "/system/menu-permission/func",
+            "component": "system/func-permission"
           },
           {
             "id": "9-3-2",
             "name": "数据权限",
-            "key": "data-permission"
+            "key": "data-permission",
+            "path": "/system/menu-permission/data",
+            "component": "system/data-permission"
           },
           {
             "id": "9-3-3",
             "name": "字段权限",
-            "key": "field-permission"
+            "key": "field-permission",
+            "path": "/system/menu-permission/field",
+            "component": "system/field-permission"
           }
         ]
       },
@@ -582,17 +588,23 @@
           {
             "id": "9-4-1",
             "name": "部门设置",
-            "key": "dept-setting"
+            "key": "dept-setting",
+            "path": "/system/org-management/dept",
+            "component": "system/dept-setting"
           },
           {
             "id": "9-4-2",
             "name": "岗位设置",
-            "key": "post-setting"
+            "key": "post-setting",
+            "path": "/system/org-management/post",
+            "component": "system/post-setting"
           },
           {
             "id": "9-4-3",
             "name": "人员管理",
-            "key": "person-management"
+            "key": "person-management",
+            "path": "/system/org-management/person",
+            "component": "system/person-management"
           }
         ]
       },
@@ -604,12 +616,16 @@
           {
             "id": "9-5-1",
             "name": "参数配置",
-            "key": "param-config"
+            "key": "param-config",
+            "path": "/system/system-param/config",
+            "component": "system/param-config"
           },
           {
             "id": "9-5-2",
             "name": "字典管理",
-            "key": "dict-management"
+            "key": "dict-management",
+            "path": "/system/system-param/dict",
+            "component": "system/dict-management"
           }
         ]
       },

@@ -397,14 +397,14 @@ const pdfCode = `<!-- PDF 使用 @vue-office/pdf Canvas 渲染 -->
 .doc-title {
   font-size: 26px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   letter-spacing: -0.3px;
   margin: 0 0 10px;
 }
 
 .doc-desc {
   font-size: 14px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   line-height: 1.7;
   margin: 0;
 }
@@ -416,9 +416,9 @@ const pdfCode = `<!-- PDF 使用 @vue-office/pdf Canvas 渲染 -->
 .doc-section__title {
   font-size: 18px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   padding-bottom: 10px;
-  border-bottom: 1px solid #f2f3f7;
+  border-bottom: 1px solid var(--el-border-color-lighter);
   margin: 0 0 16px;
   display: flex;
   align-items: center;
@@ -436,37 +436,37 @@ const pdfCode = `<!-- PDF 使用 @vue-office/pdf Canvas 渲染 -->
 
 .doc-section__desc {
   font-size: 14px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   line-height: 1.7;
   margin: 0 0 12px;
 
   code {
     background: #f1f5f9;
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
     padding: 1px 5px;
     border-radius: 3px;
     font-size: 12.5px;
   }
 
   strong {
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
   }
 }
 
 .doc-preview {
-  border: 1px solid #f2f3f7;
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 12px;
   overflow: hidden;
 }
 
 .doc-preview__body {
   padding: 20px;
-  background: #fff;
+  background: var(--el-bg-color-overlay);
 }
 
 .doc-code {
-  background: #fafbfd;
-  border-top: 1px solid #f2f3f7;
+  background: var(--el-fill-color-light);
+  border-top: 1px solid var(--el-border-color-lighter);
   padding: 16px 20px;
 
   pre {
@@ -476,7 +476,7 @@ const pdfCode = `<!-- PDF 使用 @vue-office/pdf Canvas 渲染 -->
     code {
       font-family: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
       font-size: 12.5px;
-      color: #4a4a6a;
+      color: var(--el-text-color-regular);
       line-height: 1.6;
       white-space: pre;
     }
@@ -485,7 +485,7 @@ const pdfCode = `<!-- PDF 使用 @vue-office/pdf Canvas 渲染 -->
 
 .doc-table-wrap {
   overflow-x: auto;
-  border: 1px solid #f2f3f7;
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 12px;
 }
 
@@ -495,19 +495,19 @@ const pdfCode = `<!-- PDF 使用 @vue-office/pdf Canvas 渲染 -->
   font-size: 13px;
 
   th {
-    background: #fafbfd;
-    color: #1a1a2e;
+    background: var(--el-fill-color-light);
+    color: var(--el-text-color-primary);
     font-weight: 600;
     padding: 10px 16px;
     text-align: left;
-    border-bottom: 1px solid #f2f3f7;
+    border-bottom: 1px solid var(--el-border-color-lighter);
     white-space: nowrap;
   }
 
   td {
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
     padding: 10px 16px;
-    border-bottom: 1px solid #f2f3f7;
+    border-bottom: 1px solid var(--el-border-color-lighter);
     line-height: 1.5;
 
     &:last-child {
@@ -516,7 +516,7 @@ const pdfCode = `<!-- PDF 使用 @vue-office/pdf Canvas 渲染 -->
 
     code {
       background: #f1f5f9;
-      color: #4a4a6a;
+      color: var(--el-text-color-regular);
       padding: 1px 5px;
       border-radius: 3px;
       font-size: 12px;
@@ -533,14 +533,14 @@ const pdfCode = `<!-- PDF 使用 @vue-office/pdf Canvas 渲染 -->
   display: flex;
   gap: 12px;
   padding: 14px 16px;
-  background: #eff6ff;
+  background: var(--el-color-primary-light-9);
   border: 1px solid #bfdbfe;
   border-radius: 10px;
 }
 
 .office-notice__icon {
   flex-shrink: 0;
-  color: #2563eb;
+  color: var(--el-color-primary);
   margin-top: 1px;
 }
 

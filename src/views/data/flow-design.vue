@@ -607,14 +607,14 @@ const saveFlow = (flowData: any) => {
 .doc-title {
   font-size: 26px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
   letter-spacing: -0.3px;
 }
 
 .doc-desc {
   font-size: 14px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   margin: 0;
   line-height: 1.7;
 }
@@ -626,10 +626,10 @@ const saveFlow = (flowData: any) => {
 .doc-section__title {
   font-size: 18px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #f2f3f7;
+  border-bottom: 1px solid var(--el-border-color-lighter);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -646,13 +646,13 @@ const saveFlow = (flowData: any) => {
 
 .doc-section__desc {
   font-size: 14px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   margin: 0 0 16px;
   line-height: 1.7;
 
   code {
-    background: #f5f6fa;
-    color: #4f6ef7;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 13px;
@@ -663,15 +663,15 @@ const saveFlow = (flowData: any) => {
 .doc-subtitle {
   font-size: 15px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 24px 0 10px;
 }
 
 .doc-preview {
-  border: 1px solid #f2f3f7;
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 12px;
   overflow: hidden;
-  background: #fff;
+  background: var(--el-bg-color-overlay);
 }
 
 .doc-preview__body {
@@ -685,8 +685,8 @@ const saveFlow = (flowData: any) => {
 }
 
 .doc-code {
-  border-top: 1px solid #f2f3f7;
-  background: #fafbfd;
+  border-top: 1px solid var(--el-border-color-lighter);
+  background: var(--el-fill-color-light);
   padding: 16px 20px;
   overflow-x: auto;
 
@@ -699,7 +699,7 @@ const saveFlow = (flowData: any) => {
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
     font-size: 13px;
     line-height: 1.7;
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
     white-space: pre;
   }
 }
@@ -717,28 +717,28 @@ const saveFlow = (flowData: any) => {
   td {
     text-align: left;
     padding: 10px 14px;
-    border-bottom: 1px solid #f2f3f7;
+    border-bottom: 1px solid var(--el-border-color-lighter);
   }
 
   th {
-    background: #fafbfd;
+    background: var(--el-fill-color-light);
     font-weight: 600;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
     font-size: 13px;
   }
 
   td {
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
   }
 
   code {
-    background: #fafbfd;
-    color: #1677ff;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
     padding: 1px 6px;
     border-radius: 4px;
     font-size: 12px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
-    border: 1px solid #e8eaed;
+    border: 1px solid var(--el-border-color-lighter);
   }
 }
 
@@ -750,9 +750,9 @@ const saveFlow = (flowData: any) => {
 }
 
 .customize-card {
-  border: 1px solid #f2f3f7;
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 10px;
-  background: #fff;
+  background: var(--el-bg-color-overlay);
   overflow: hidden;
   transition: border-color 0.2s;
 
@@ -765,8 +765,8 @@ const saveFlow = (flowData: any) => {
     align-items: center;
     gap: 10px;
     padding: 12px 16px;
-    background: #fafbfd;
-    border-bottom: 1px solid #f2f3f7;
+    background: var(--el-fill-color-light);
+    border-bottom: 1px solid var(--el-border-color-lighter);
   }
 
   &__step {
@@ -775,7 +775,7 @@ const saveFlow = (flowData: any) => {
     height: 22px;
     border-radius: 6px;
     background: #e6f4ff;
-    color: #1677ff;
+    color: var(--el-color-primary);
     font-size: 12px;
     font-weight: 700;
     display: flex;
@@ -788,24 +788,24 @@ const saveFlow = (flowData: any) => {
     min-width: 0;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
     font-size: 12.5px;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     background: #f1f5f9;
     padding: 2px 8px;
     border-radius: 4px;
-    border: 1px solid #e8eaed;
+    border: 1px solid var(--el-border-color-lighter);
   }
 
   &__line {
     flex-shrink: 0;
     font-size: 12px;
-    color: #8e8ea0;
-    background: #fff;
+    color: var(--el-text-color-secondary);
+    background: var(--el-bg-color-overlay);
     padding: 2px 8px;
     border-radius: 4px;
-    border: 1px solid #e8eaed;
+    border: 1px solid var(--el-border-color-lighter);
   }
 
   &__body {
@@ -814,7 +814,7 @@ const saveFlow = (flowData: any) => {
 
   &__desc {
     font-size: 13.5px;
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
     margin: 0 0 12px;
     line-height: 1.5;
   }
@@ -823,7 +823,7 @@ const saveFlow = (flowData: any) => {
 // ── 设计器容器 ──
 .designer-wrap {
   height: 600px;
-  border: 1px solid #e8eaed;
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -833,11 +833,11 @@ const saveFlow = (flowData: any) => {
   display: inline-block;
   font-size: 11px;
   font-weight: 600;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  background: #fafbfd;
-  border: 1px solid #e8eaed;
+  background: var(--el-fill-color-light);
+  border: 1px solid var(--el-border-color-lighter);
   padding: 1px 8px;
   border-radius: 20px;
   margin-bottom: 12px;
@@ -858,7 +858,7 @@ const saveFlow = (flowData: any) => {
   align-items: center;
   gap: 10px;
   font-size: 13px;
-  color: #4a4a6a;
+  color: var(--el-text-color-regular);
   line-height: 1.5;
 }
 
@@ -872,7 +872,7 @@ const saveFlow = (flowData: any) => {
 
   &.primary {
     background: #e6f4ff;
-    color: #1677ff;
+    color: var(--el-color-primary);
     border: 1px solid #91caff;
   }
 
@@ -895,8 +895,8 @@ const saveFlow = (flowData: any) => {
   align-items: flex-start;
   gap: 12px;
   padding: 14px 16px;
-  background: #fafbfd;
-  border: 1px solid #f2f3f7;
+  background: var(--el-fill-color-light);
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 8px;
   transition: all 0.2s;
 
@@ -910,15 +910,15 @@ const saveFlow = (flowData: any) => {
     width: 32px;
     height: 32px;
     border-radius: 8px;
-    background: #f2f3f7;
-    color: #8e8ea0;
+    background: var(--el-fill-color-light);
+    color: var(--el-text-color-secondary);
     display: flex;
     align-items: center;
     justify-content: center;
 
     &.primary {
       background: #e6f4ff;
-      color: #1677ff;
+      color: var(--el-color-primary);
     }
   }
 
@@ -931,14 +931,14 @@ const saveFlow = (flowData: any) => {
     display: block;
     font-size: 13px;
     font-weight: 600;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
     margin-bottom: 2px;
   }
 
   &__desc {
     display: block;
     font-size: 12px;
-    color: #8e8ea0;
+    color: var(--el-text-color-secondary);
     line-height: 1.4;
   }
 }
@@ -946,8 +946,8 @@ const saveFlow = (flowData: any) => {
 // ── 节点配置卡片 ──
 .node-config-card {
   padding: 16px;
-  background: #fafbfd;
-  border: 1px solid #f2f3f7;
+  background: var(--el-fill-color-light);
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 10px;
 
   &__tabs {
@@ -955,18 +955,18 @@ const saveFlow = (flowData: any) => {
     gap: 16px;
     margin-bottom: 14px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #f2f3f7;
+    border-bottom: 1px solid var(--el-border-color-lighter);
   }
 }
 
 .tab {
   font-size: 13px;
   font-weight: 500;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   cursor: default;
 
   &.active {
-    color: #1677ff;
+    color: var(--el-color-primary);
     font-weight: 600;
   }
 }
@@ -981,13 +981,13 @@ const saveFlow = (flowData: any) => {
 
   li {
     font-size: 13px;
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
     line-height: 1.5;
   }
 
   code {
     background: #f1f5f9;
-    color: #1677ff;
+    color: var(--el-color-primary);
     padding: 1px 6px;
     border-radius: 4px;
     font-size: 12px;

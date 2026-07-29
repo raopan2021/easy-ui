@@ -417,30 +417,30 @@ const currentColorConfig = computed(() => {
 
 .doc-header { margin-bottom: 36px; }
 .doc-title {
-  font-size: 26px; font-weight: 700; color: #1a1a2e;
+  font-size: 26px; font-weight: 700; color: var(--el-text-color-primary);
   margin: 0 0 8px; letter-spacing: -0.3px;
 }
 .doc-desc {
-  font-size: 14px; color: #8e8ea0; margin: 0; line-height: 1.6;
+  font-size: 14px; color: var(--el-text-color-secondary); margin: 0; line-height: 1.6;
 }
 
 .doc-section { margin-bottom: 32px; }
 .doc-section__title {
-  font-size: 18px; font-weight: 600; color: #1a1a2e;
-  margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid #f2f3f7;
+  font-size: 18px; font-weight: 600; color: var(--el-text-color-primary);
+  margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--el-border-color-lighter);
 }
 .doc-section__desc {
-  font-size: 14px; color: #8e8ea0; margin: 0 0 16px; line-height: 1.6;
+  font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 16px; line-height: 1.6;
   code {
-    background: #f5f6fa; color: #4f6ef7; padding: 2px 6px;
+    background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px;
     border-radius: 4px; font-size: 13px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
   }
 }
 
 .doc-preview {
-  border: 1px solid #f2f3f7; border-radius: 12px;
-  overflow: hidden; background: #fff;
+  border: 1px solid var(--el-border-color-lighter); border-radius: 12px;
+  overflow: hidden; background: var(--el-bg-color-overlay);
 }
 .doc-preview__body {
   display: flex; flex-wrap: wrap; align-items: center;
@@ -451,23 +451,23 @@ const currentColorConfig = computed(() => {
   align-items: stretch;
 }
 .doc-code {
-  border-top: 1px solid #f2f3f7; background: #fafbfd;
+  border-top: 1px solid var(--el-border-color-lighter); background: var(--el-fill-color-light);
   padding: 16px 20px; overflow-x: auto;
   pre { margin: 0; padding: 0; }
   code {
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
-    font-size: 13px; line-height: 1.7; color: #4a4a6a; white-space: pre;
+    font-size: 13px; line-height: 1.7; color: var(--el-text-color-regular); white-space: pre;
   }
 }
 
-.doc-subtitle { font-size: 15px; font-weight: 600; color: #1a1a2e; margin: 20px 0 10px; }
+.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
 .doc-table { overflow-x: auto;
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid #f2f3f7; white-space: nowrap; }
-  th { background: #fafbfd; font-weight: 600; color: #1a1a2e; }
-  td { color: #4a4a6a; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); white-space: nowrap; }
+  th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); }
+  td { color: var(--el-text-color-regular); }
   code {
-    background: #f5f6fa; color: #4f6ef7; padding: 2px 6px;
+    background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px;
     border-radius: 4px; font-size: 13px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
   }
@@ -481,12 +481,12 @@ const currentColorConfig = computed(() => {
   justify-content: center;
   gap: 16px;
   padding-top: 24px;
-  border-top: 1px solid #f3f4f6;
+  border-top: 1px solid var(--el-border-color-lighter);
 }
 
 .step-indicator {
   font-size: 14px;
-  color: #6b7280;
+  color: var(--el-text-color-secondary);
   font-weight: 500;
   min-width: 100px;
   text-align: center;
@@ -501,14 +501,14 @@ const currentColorConfig = computed(() => {
   font-weight: 500;
   border: 1px solid #d1d5db;
   border-radius: 8px;
-  background: #fff;
-  color: #374151;
+  background: var(--el-bg-color-overlay);
+  color: var(--el-text-color-regular);
   cursor: pointer;
   transition: all 0.2s;
   
   &:hover:not(:disabled) { 
     border-color: #4f6ef7; 
-    color: #4f6ef7;
+    color: var(--el-color-primary);
     background: #f5f6ff;
   }
   
@@ -519,7 +519,7 @@ const currentColorConfig = computed(() => {
 }
 
 .demo-btn--primary {
-  background: #4f6ef7;
+  background: var(--el-color-primary);
   border-color: #4f6ef7;
   color: #fff;
   
@@ -556,16 +556,16 @@ const currentColorConfig = computed(() => {
   padding: 6px 12px;
   font-size: 13px;
   font-weight: 500;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 20px;
-  background: #fff;
-  color: #374151;
+  background: var(--el-bg-color-overlay);
+  color: var(--el-text-color-regular);
   cursor: pointer;
   transition: all 0.2s;
   
   &:hover {
     border-color: #d1d5db;
-    background: #f9fafb;
+    background: var(--el-fill-color-light);
   }
   
   &.is-active {

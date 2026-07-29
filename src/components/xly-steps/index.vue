@@ -123,3 +123,22 @@ provide('xly-steps-count', stepCount)
   flex-direction: column;
 }
 </style>
+
+<style lang="scss">
+/* ========== Dark Mode ========== */
+html.dark .xly-steps__line { background-color: var(--el-border-color); }
+html.dark .xly-steps__line--active { background-color: var(--el-color-primary); }
+html.dark .xly-steps__number {
+  background-color: var(--el-fill-color);
+  border-color: var(--el-border-color);
+  color: var(--el-text-color-secondary);
+}
+html.dark .xly-steps__step.is-process .xly-steps__number {
+  border-color: var(--el-color-primary); color: #fff;
+  background-color: var(--el-color-primary);
+}
+html.dark .xly-steps__step.is-finish .xly-steps__number {
+  border-color: var(--el-color-primary); color: var(--el-color-primary);
+  background-color: var(--el-color-primary-light-9);
+}
+</style>

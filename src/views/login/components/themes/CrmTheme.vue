@@ -64,19 +64,19 @@ const handleLogin = () => formRef.value?.validate(valid => valid && emit('submit
 .login-layout { display: flex; height: 100vh; }
 .brand-panel { width: 45%; background: #1c1917; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
 .brand-content { position: relative; z-index: 2; text-align: center; padding: 0 40px; }
-.brand-logo { width: 68px; height: 68px; margin: 0 auto 28px; color: #f87171; }
+.brand-logo { width: 68px; height: 68px; margin: 0 auto 28px; color: var(--el-color-danger); }
 .brand-logo svg { width: 100%; height: 100%; }
 .brand-title { font-size: 26px; font-weight: 700; color: #fafaf9; margin: 0 0 10px; letter-spacing: 4px; }
 .brand-sub { font-size: 12px; color: #57534e; margin: 0 0 32px; letter-spacing: 1px; text-transform: uppercase; }
-.brand-divider { width: 40px; height: 2px; background: #ef4444; margin: 0 auto 28px; }
+.brand-divider { width: 40px; height: 2px; background: var(--el-color-danger); margin: 0 auto 28px; }
 .brand-slogan { font-size: 13px; color: #78716c; margin: 0; letter-spacing: 3px; }
 .geo-accent { position: absolute; inset: 0; pointer-events: none; }
 .grid-lines { position: absolute; inset: 20px; border: 1px solid rgba(239,68,68,0.06); }
-.form-panel { flex: 1; display: flex; align-items: center; justify-content: center; background: #fafaf9; }
+.form-panel { flex: 1; display: flex; align-items: center; justify-content: center; background: var(--el-fill-color-light); }
 .form-card { width: 380px; }
 .form-header { margin-bottom: 36px; }
-.form-header h2 { font-size: 26px; font-weight: 700; color: #1c1917; margin: 0 0 10px; }
-.form-header p { font-size: 14px; color: #a8a29e; margin: 0; }
+.form-header h2 { font-size: 26px; font-weight: 700; color: var(--el-text-color-primary); margin: 0 0 10px; }
+.form-header p { font-size: 14px; color: var(--el-text-color-secondary); margin: 0; }
 :deep(.el-input__wrapper) { border-radius: 6px; }
 .submit-btn { width: 100%; height: 44px; font-size: 15px; border-radius: 6px; }
 .test-hint { text-align: center; font-size: 12px; color: #d6d3d1; margin: 12px 0 0; }

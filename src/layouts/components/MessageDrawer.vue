@@ -403,15 +403,15 @@ function handleClear() {
 }
 
 // ========== 设计令牌 ==========
-$bg-hover: #f5f7fa;
-$text-primary: #1a1a2e;
-$text-secondary: #4a4a6a;
-$text-default: #8e8ea0;
-$primary: #4f6ef7;
-$success: #34d399;
-$warning: #fbbf24;
-$danger: #f87171;
-$border-color: #f2f3f7;
+$bg-hover: var(--el-fill-color-light);
+$text-primary: var(--el-text-color-primary);
+$text-secondary: var(--el-text-color-secondary);
+$text-default: var(--el-text-color-placeholder);
+$primary: var(--el-color-primary);
+$success: var(--el-color-success);
+$warning: var(--el-color-warning);
+$danger: var(--el-color-danger);
+$border-color: var(--el-border-color);
 
 // ========== 分类标签 ==========
 .message-tabs {
@@ -442,8 +442,8 @@ $border-color: #f2f3f7;
 
   &.is-active {
     color: $primary;
-    background: rgba($primary, 0.08);
-    border-color: rgba($primary, 0.2);
+    background: var(--el-color-primary-light-9);
+    border-color: var(--el-color-primary-light-9);
   }
 
   &__count {
@@ -471,7 +471,7 @@ $border-color: #f2f3f7;
     width: 4px;
   }
   &::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.08);
+    background: var(--el-fill-color-light);
     border-radius: 4px;
   }
 }
@@ -497,7 +497,7 @@ $border-color: #f2f3f7;
   }
 
   &.is-unread {
-    background: rgba($primary, 0.03);
+    background: var(--el-color-primary-light-9);
   }
 
   &__icon {
@@ -511,17 +511,17 @@ $border-color: #f2f3f7;
 
     &--system {
       color: $primary;
-      background: rgba($primary, 0.1);
+      background: var(--el-color-primary-light-9);
     }
 
     &--notice {
       color: $success;
-      background: rgba($success, 0.1);
+      background: var(--el-fill-color-light);
     }
 
     &--task {
       color: $warning;
-      background: rgba($warning, 0.1);
+      background: var(--el-fill-color-light);
     }
   }
 
@@ -600,7 +600,7 @@ $border-color: #f2f3f7;
     }
 
     &:hover {
-      background: #ebedf2;
+      background: var(--el-fill-color);
       color: $text-primary;
     }
   }

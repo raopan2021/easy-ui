@@ -1147,7 +1147,7 @@ watch(
 
 <style scoped lang="scss">
 /* ========== 设计令牌 ========== */
-$color-primary: #00a1d6;
+
 $color-primary-light: #00c8ff;
 $color-primary-dark: #007bb0;
 $color-white: #ffffff;
@@ -1211,7 +1211,7 @@ $transition-normal: 0.25s;
       background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
 
       .xly-icon {
-        color: rgba($color-white, 0.3);
+        color: var(--el-fill-color-light);
       }
     }
   }
@@ -1226,12 +1226,12 @@ $transition-normal: 0.25s;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba($color-primary, 0.9);
+    background: var(--el-color-primary-light-9);
     border-radius: 50%;
     color: $color-white;
     transition: all $transition-normal;
     box-shadow:
-      0 4px 16px rgba($color-primary, 0.4),
+      0 4px 16px rgba(var(--el-color-primary), 0.4),
       0 8px 32px rgba(0, 0, 0, 0.3);
 
     svg {
@@ -1240,9 +1240,9 @@ $transition-normal: 0.25s;
 
     &:hover {
       transform: translate(-50%, -50%) scale(1.08);
-      background: $color-primary;
+      background: var(--el-color-primary);
       box-shadow:
-        0 6px 20px rgba($color-primary, 0.5),
+        0 6px 20px rgba(var(--el-color-primary), 0.5),
         0 12px 40px rgba(0, 0, 0, 0.35);
     }
   }
@@ -1297,20 +1297,20 @@ $transition-normal: 0.25s;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba($color-primary, 0.9);
+    background: var(--el-color-primary-light-9);
     border-radius: 50%;
     color: $color-white;
     cursor: pointer;
     transition: all $transition-normal;
     box-shadow:
-      0 4px 16px rgba($color-primary, 0.4),
+      0 4px 16px rgba(var(--el-color-primary), 0.4),
       0 8px 32px rgba(0, 0, 0, 0.3);
 
     &:hover {
       transform: translate(-50%, -50%) scale(1.08);
-      background: $color-primary;
+      background: var(--el-color-primary);
       box-shadow:
-        0 6px 20px rgba($color-primary, 0.5),
+        0 6px 20px rgba(var(--el-color-primary), 0.5),
         0 12px 40px rgba(0, 0, 0, 0.35);
     }
 
@@ -1408,12 +1408,12 @@ $transition-normal: 0.25s;
     transition: all $transition-fast;
 
     &:hover {
-      background: rgba($color-white, 0.15);
+      background: var(--el-fill-color-light);
     }
 
     &.is-active {
-      color: $color-primary;
-      background: rgba($color-primary, 0.2);
+      color: var(--el-color-primary);
+      background: var(--el-color-primary-light-9);
     }
 
     .xly-video__btn-text {
@@ -1434,7 +1434,7 @@ $transition-normal: 0.25s;
     transition: all $transition-fast;
 
     &:hover {
-      color: $color-primary;
+      color: var(--el-color-primary);
     }
   }
 
@@ -1461,7 +1461,7 @@ $transition-normal: 0.25s;
   &__progress {
     position: relative;
     height: 4px;
-    background: rgba($color-white, 0.2);
+    background: var(--el-fill-color-light);
     border-radius: 2px;
     transition: height $transition-fast;
 
@@ -1480,7 +1480,7 @@ $transition-normal: 0.25s;
     top: 0;
     left: 0;
     height: 100%;
-    background: rgba($color-white, 0.3);
+    background: var(--el-fill-color-light);
     border-radius: 2px;
   }
 
@@ -1489,7 +1489,7 @@ $transition-normal: 0.25s;
     top: 0;
     left: 0;
     height: 100%;
-    background: $color-primary;
+    background: var(--el-color-primary);
     border-radius: 2px;
   }
 
@@ -1513,7 +1513,7 @@ $transition-normal: 0.25s;
     transform: translateY(-50%);
     width: 3px;
     height: 3px;
-    background: $color-primary;
+    background: var(--el-color-primary);
     border-radius: 50%;
     opacity: 0.7;
     cursor: pointer;
@@ -1539,7 +1539,7 @@ $transition-normal: 0.25s;
       font-weight: 500;
 
       &:hover {
-        background: rgba($color-white, 0.15);
+        background: var(--el-fill-color-light);
       }
     }
 
@@ -1579,12 +1579,12 @@ $transition-normal: 0.25s;
 
       &:hover {
         color: $color-white;
-        background: rgba($color-white, 0.1);
+        background: var(--el-fill-color-light);
       }
 
       &.is-active {
-        color: $color-primary;
-        background: rgba($color-primary, 0.15);
+        color: var(--el-color-primary);
+        background: var(--el-color-primary-light-9);
         font-weight: 600;
       }
     }
@@ -1610,8 +1610,8 @@ $transition-normal: 0.25s;
       transition: all $transition-fast;
 
       &:hover {
-        color: $color-primary;
-        background: rgba($color-white, 0.1);
+        color: var(--el-color-primary);
+        background: var(--el-fill-color-light);
       }
     }
 
@@ -1626,7 +1626,7 @@ $transition-normal: 0.25s;
       position: relative;
       width: 100%;
       height: 4px;
-      background: rgba($color-white, 0.2);
+      background: var(--el-fill-color-light);
       border-radius: 2px;
       cursor: pointer;
       transition: height $transition-fast;
@@ -1647,7 +1647,7 @@ $transition-normal: 0.25s;
       left: 0;
       transform: translateY(-50%);
       height: 100%;
-      background: $color-primary;
+      background: var(--el-color-primary);
       border-radius: 2px;
       transition: width 0.05s;
     }
@@ -1659,7 +1659,7 @@ $transition-normal: 0.25s;
       transform: translate(-50%, -50%) scale(0);
       width: 14px;
       height: 14px;
-      background: #fff;
+      background: var(--el-bg-color);
       border-radius: 50%;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
       cursor: grab;
@@ -1778,7 +1778,7 @@ $transition-normal: 0.25s;
 
 /* ========== 弹幕工具栏（播放器下方）- 完全按B站图片 ========== */
 .xly-video__danmaku-bar {
-  background: #fff;
+  background: var(--el-bg-color);
   border-radius: 0 0 8px 8px;
   border: 1px solid #e3e5e7;
   border-top: none;
@@ -1844,7 +1844,7 @@ $transition-normal: 0.25s;
   transition: all 0.2s;
 
   &:focus-within {
-    background: #fff;
+    background: var(--el-bg-color);
     box-shadow: 0 0 0 2px #00a1d6;
   }
 }
@@ -1932,7 +1932,7 @@ $transition-normal: 0.25s;
   transition: background 0.2s;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.05);
+    background: var(--el-fill-color-light);
   }
 }
 
@@ -1950,7 +1950,7 @@ $transition-normal: 0.25s;
   right: 0;
   margin-bottom: 8px;
   padding: 8px;
-  background: #fff;
+  background: var(--el-bg-color);
   border-radius: 8px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   display: grid;
@@ -1990,5 +1990,38 @@ $transition-normal: 0.25s;
 .fade-leave-to {
   opacity: 0;
   transform: translateY(4px);
+}
+</style>
+
+<style lang="scss">
+/* ========== 视频播放器 Dark Mode ========== */
+html.dark .xly-video {
+  background: #111;
+}
+html.dark .xly-video__danmaku-bar {
+  background: var(--el-bg-color);
+  border-color: var(--el-border-color);
+}
+html.dark .xly-video__danmaku-input-area {
+  background: var(--el-fill-color-light);
+}
+html.dark .xly-video__danmaku-input {
+  color: var(--el-text-color-primary);
+}
+html.dark .xly-video__danmaku-input::placeholder {
+  color: var(--el-text-color-placeholder);
+}
+html.dark .xly-video__danmaku-icon-btn {
+  color: var(--el-text-color-secondary);
+}
+html.dark .xly-video__danmaku-info {
+  color: var(--el-text-color-secondary);
+}
+html.dark .xly-video__danmaku-tip {
+  color: var(--el-text-color-secondary);
+}
+html.dark .xly-video__danmaku-send:disabled {
+  background: var(--el-fill-color);
+  color: var(--el-text-color-disabled);
 }
 </style>

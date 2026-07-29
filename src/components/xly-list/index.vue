@@ -96,6 +96,8 @@ export interface ListProps {
   loading?: boolean
   /** 悬停效果 */
   hoverable?: boolean
+  /** 指针样式（cursor: pointer） */
+  clickable?: boolean
   /** 最大高度 */
   maxHeight?: string
   /** 头部内容 */
@@ -116,6 +118,7 @@ const props = withDefaults(defineProps<ListProps>(), {
   emptyText: '暂无数据',
   loading: false,
   hoverable: false,
+  clickable: false,
   maxHeight: '',
   header: '',
   footer: '',
@@ -158,8 +161,8 @@ function isImageUrl(url: string): boolean {
   padding: 12px 16px;
   font-size: 14px;
   font-weight: 600;
-  color: #1a1a2e;
-  background: #fafbfd;
+  color: var(--el-text-color-primary);
+  background: var(--el-fill-color-light);
   border-bottom: 1px solid #f2f3f7;
 }
 
@@ -173,7 +176,7 @@ function isImageUrl(url: string): boolean {
   justify-content: center;
   gap: 8px;
   padding: 32px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   font-size: 14px;
 }
 
@@ -182,7 +185,7 @@ function isImageUrl(url: string): boolean {
   align-items: center;
   justify-content: center;
   padding: 32px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   font-size: 14px;
 }
 
@@ -202,7 +205,7 @@ function isImageUrl(url: string): boolean {
   }
 
   &.xly-list__item--hoverable:hover {
-    background: #f5f7fa;
+    background: var(--el-fill-color-light);
   }
 
   &.xly-list__item--clickable {
@@ -217,12 +220,12 @@ function isImageUrl(url: string): boolean {
   border-radius: 50%;
   overflow: hidden;
   margin-right: 12px;
-  background: #f0f2f5;
+  background: var(--el-fill-color-light);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 16px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
 
   img {
     width: 100%;
@@ -238,7 +241,7 @@ function isImageUrl(url: string): boolean {
 
 .xly-list__item-title {
   font-size: 14px;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   line-height: 1.5;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -247,7 +250,7 @@ function isImageUrl(url: string): boolean {
 
 .xly-list__item-desc {
   font-size: 13px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   line-height: 1.5;
   margin-top: 4px;
   overflow: hidden;
@@ -258,15 +261,15 @@ function isImageUrl(url: string): boolean {
 .xly-list__item-extra {
   flex-shrink: 0;
   margin-left: 12px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   font-size: 13px;
 }
 
 .xly-list__footer {
   padding: 12px 16px;
   font-size: 14px;
-  color: #8e8ea0;
-  background: #fafbfd;
+  color: var(--el-text-color-secondary);
+  background: var(--el-fill-color-light);
   border-top: 1px solid #f2f3f7;
 }
 </style>

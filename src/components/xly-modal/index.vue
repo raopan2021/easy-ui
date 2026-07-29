@@ -35,7 +35,7 @@
               <slot name="footer">
                 <div class="xly-modal__footer-actions">
                   <XlyButton type="text" @click="handleCancel">{{ cancelText }}</XlyButton>
-                  <XlyButton type="primary" :loading="confirmLoading" @click="handleConfirm">
+                  <XlyButton v-if="showConfirm" type="primary" :loading="confirmLoading" @click="handleConfirm">
                     {{ confirmText }}
                   </XlyButton>
                 </div>
@@ -52,7 +52,7 @@
 import { computed, ref, watch } from 'vue'
 import XlyButton from '@/components/xly-button/index.vue'
 
-defineOptions({ name: 'XlyModal' })
+defineOptions({ name: 'XlyModal', inheritAttrs: false })
 
 type ModalSize = 'small' | 'default' | 'large' | 'fullscreen'
 type ModalTransition = 'zoom' | 'slide-up' | 'slide-down' | 'fade'
@@ -82,6 +82,8 @@ const props = withDefaults(defineProps<{
   showFooter?: boolean
   /** 是否显示遮罩层 */
   showMask?: boolean
+  /** 是否显示确认按钮 */
+  showConfirm?: boolean
   /** 确认按钮文字 */
   confirmText?: string
   /** 取消按钮文字 */
@@ -107,6 +109,7 @@ const props = withDefaults(defineProps<{
   showHeader: true,
   showFooter: true,
   showMask: true,
+  showConfirm: true,
   confirmText: '确定',
   cancelText: '取消',
   confirmLoading: false,
@@ -268,11 +271,7 @@ watch(
 <style scoped lang="scss">
 /* ========== 设计令牌 ========== */
 $bg-mask: rgba(0, 0, 0, 0.45);
-$bg-body: #fff;
-$text-primary: #1a1a2e;
-$text-secondary: #4a4a6a;
-$text-default: #8e8ea0;
-$border-color: #f2f3f7;
+
 $radius: 14px;
 $shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(0, 0, 0, 0.06);
 $transition-fast: 0.2s ease;
@@ -282,7 +281,7 @@ $transition-fast: 0.2s ease;
   position: fixed;
   inset: 0;
   z-index: 2000;
-  background-color: $bg-mask;
+  background-color: rgba(0, 0, 0, 0.45);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -298,7 +297,7 @@ $transition-fast: 0.2s ease;
 /* ========== 弹窗主体 ========== */
 .xly-modal {
   position: relative;
-  background-color: $bg-body;
+  background-color: var(--el-bg-color);
   border-radius: $radius;
   box-shadow: $shadow;
   box-sizing: border-box;
@@ -325,7 +324,7 @@ $transition-fast: 0.2s ease;
 .xly-modal__title {
   font-size: 17px;
   font-weight: 600;
-  color: $text-primary;
+  color: var(--el-text-color-primary);
   line-height: 1.4;
   flex: 1;
   min-width: 0;
@@ -341,17 +340,17 @@ $transition-fast: 0.2s ease;
   background: transparent;
   border-radius: 8px;
   cursor: pointer;
-  color: $text-default;
+  color: var(--el-text-color-regular);
   transition: all $transition-fast;
   flex-shrink: 0;
   margin: -4px -4px -4px 8px;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-    color: $text-secondary;
+    background-color: var(--el-fill-color-light);
+    color: var(--el-text-color-secondary);
   }
   &:active {
-    background-color: rgba(0, 0, 0, 0.08);
+    background-color: var(--el-fill-color-light);
   }
 }
 
@@ -359,7 +358,7 @@ $transition-fast: 0.2s ease;
 .xly-modal__body {
   padding: 4px 24px 20px;
   font-size: 14px;
-  color: $text-secondary;
+  color: var(--el-text-color-secondary);
   line-height: 1.7;
   overflow-y: auto;
   flex: 1;
@@ -369,7 +368,7 @@ $transition-fast: 0.2s ease;
     width: 4px;
   }
   &::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.08);
+    background: var(--el-fill-color-light);
     border-radius: 4px;
   }
 }

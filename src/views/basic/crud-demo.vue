@@ -448,6 +448,6 @@ onMounted(() => {
 .crud-demo {
   padding: 24px;
   min-height: 100%;
-  background: #f5f7fa;
+  background: var(--el-fill-color-light);
 }
 </style>

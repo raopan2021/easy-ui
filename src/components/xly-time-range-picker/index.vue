@@ -109,7 +109,7 @@ const handleEndChange = (value: string) => {
   }
 
   &__separator {
-    color: #909399;
+    color: var(--el-text-color-placeholder);
     font-size: 14px;
     flex-shrink: 0;
     user-select: none;

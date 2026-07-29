@@ -379,13 +379,13 @@ import XlyIcon from '@/components/xly-icon/index.vue'
 .doc-title {
   font-size: 22px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
 }
 
 .doc-desc {
   font-size: 14px;
-  color: #71717a;
+  color: var(--el-text-color-secondary);
   margin: 0;
 }
 
@@ -396,20 +396,20 @@ import XlyIcon from '@/components/xly-icon/index.vue'
 .doc-section__title {
   font-size: 15px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
   padding-bottom: 8px;
-  border-bottom: 1px solid #e4e4e7;
+  border-bottom: 1px solid var(--el-border-color-lighter);
 }
 
 .doc-section__desc {
   font-size: 14px;
-  color: #71717a;
+  color: var(--el-text-color-secondary);
   margin: 0 0 14px;
 
   code {
-    background: #f4f5f7;
-    color: #3b82f6;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 13px;
@@ -419,15 +419,15 @@ import XlyIcon from '@/components/xly-icon/index.vue'
 .doc-subtitle {
   font-size: 14px;
   font-weight: 500;
-  color: #4a4a4a;
+  color: var(--el-text-color-regular);
   margin: 24px 0 12px;
 }
 
 .doc-preview {
-  border: 1px solid #e4e4e7;
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 10px;
   overflow: hidden;
-  background: #fff;
+  background: var(--el-bg-color-overlay);
 }
 
 .doc-preview__body {
@@ -438,8 +438,8 @@ import XlyIcon from '@/components/xly-icon/index.vue'
 }
 
 .doc-code {
-  border-top: 1px solid #e4e4e7;
-  background: #fafbfc;
+  border-top: 1px solid var(--el-border-color-lighter);
+  background: var(--el-fill-color-light);
   padding: 12px 16px;
 
   pre {
@@ -449,7 +449,7 @@ import XlyIcon from '@/components/xly-icon/index.vue'
   code {
     font-family: 'SF Mono', Consolas, monospace;
     font-size: 13px;
-    color: #4a4a4a;
+    color: var(--el-text-color-regular);
   }
 }
 
@@ -466,22 +466,22 @@ import XlyIcon from '@/components/xly-icon/index.vue'
   td {
     text-align: left;
     padding: 10px 12px;
-    border-bottom: 1px solid #e4e4e7;
+    border-bottom: 1px solid var(--el-border-color-lighter);
   }
 
   th {
-    background: #fafbfc;
+    background: var(--el-fill-color-light);
     font-weight: 500;
-    color: #1a1a1a;
+    color: var(--el-text-color-primary);
   }
 
   td {
-    color: #4a4a4a;
+    color: var(--el-text-color-regular);
   }
 
   code {
-    background: #f4f5f7;
-    color: #3b82f6;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 12px;
@@ -501,13 +501,13 @@ import XlyIcon from '@/components/xly-icon/index.vue'
 .header-title {
   font-weight: 600;
   font-size: 15px;
-  color: #1a1a1a;
+  color: var(--el-text-color-primary);
 }
 
 .base-text {
   margin: 0 0 16px;
   line-height: 1.6;
-  color: #4a4a4a;
+  color: var(--el-text-color-regular);
   font-size: 14px;
 }
 
@@ -531,11 +531,11 @@ import XlyIcon from '@/components/xly-icon/index.vue'
 }
 
 .label {
-  color: #a1a1aa;
+  color: var(--el-text-color-placeholder);
 }
 
 .value {
-  color: #4a4a4a;
+  color: var(--el-text-color-regular);
 }
 
 .info-item {
@@ -546,11 +546,11 @@ import XlyIcon from '@/components/xly-icon/index.vue'
 }
 
 .info-label {
-  color: #a1a1aa;
+  color: var(--el-text-color-placeholder);
 }
 
 .info-value {
-  color: #4a4a4a;
+  color: var(--el-text-color-regular);
 }
 
 .footer-actions {
@@ -560,7 +560,7 @@ import XlyIcon from '@/components/xly-icon/index.vue'
 
 .demo-text {
   font-size: 13px;
-  color: #a1a1aa;
+  color: var(--el-text-color-placeholder);
   text-align: center;
 
   &.muted {
@@ -575,28 +575,28 @@ import XlyIcon from '@/components/xly-icon/index.vue'
   border-radius: 4px;
 
   &-success {
-    background: #ecfdf5;
-    color: #10b981;
+    background: var(--el-color-success-light-9);
+    color: var(--el-color-success);
   }
 
   &-primary {
-    background: #eff6ff;
-    color: #3b82f6;
+    background: var(--el-color-primary-light-9);
+    color: var(--el-color-primary);
   }
 
   &-warning {
-    background: #fffbeb;
-    color: #f59e0b;
+    background: var(--el-color-warning-light-9);
+    color: var(--el-color-warning);
   }
 
   &-danger {
-    background: #fef2f2;
-    color: #ef4444;
+    background: var(--el-color-danger-light-9);
+    color: var(--el-color-danger);
   }
 
   &-muted {
-    background: #f4f5f7;
-    color: #71717a;
+    background: var(--el-fill-color-light);
+    color: var(--el-text-color-secondary);
   }
 }
 
@@ -624,7 +624,7 @@ import XlyIcon from '@/components/xly-icon/index.vue'
 
 .stat-label {
   font-size: 13px;
-  color: #71717a;
+  color: var(--el-text-color-secondary);
 }
 
 .trend {
@@ -632,18 +632,18 @@ import XlyIcon from '@/components/xly-icon/index.vue'
   font-weight: 500;
 
   &.up {
-    color: #10b981;
+    color: var(--el-color-success);
   }
 
   &.down {
-    color: #ef4444;
+    color: var(--el-color-danger);
   }
 }
 
 .stat-value {
   font-size: 24px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--el-text-color-primary);
   font-variant-numeric: tabular-nums;
   line-height: 1.2;
   margin-top: 4px;
@@ -651,7 +651,7 @@ import XlyIcon from '@/components/xly-icon/index.vue'
 
 .stat-bottom {
   font-size: 12px;
-  color: #a1a1aa;
+  color: var(--el-text-color-placeholder);
   margin-top: 4px;
 }
 
@@ -664,8 +664,8 @@ import XlyIcon from '@/components/xly-icon/index.vue'
 
 .task-count {
   font-size: 12px;
-  color: #71717a;
-  background: #f4f5f7;
+  color: var(--el-text-color-secondary);
+  background: var(--el-fill-color-light);
   padding: 2px 10px;
   border-radius: 10px;
 }
@@ -685,18 +685,18 @@ import XlyIcon from '@/components/xly-icon/index.vue'
 
 .task-text {
   flex: 1;
-  color: #4a4a4a;
+  color: var(--el-text-color-regular);
 }
 
 .icon-success {
-  color: #10b981;
+  color: var(--el-color-success);
 }
 
 .icon-primary {
-  color: #3b82f6;
+  color: var(--el-color-primary);
 }
 
 .icon-muted {
-  color: #a1a1aa;
+  color: var(--el-text-color-placeholder);
 }
 </style>

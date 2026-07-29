@@ -170,14 +170,8 @@ watch(
 
 <style scoped lang="scss">
 /* ========== 设计令牌 ========== */
-$bg-mask: rgba(0, 0, 0, 0.45);
-$bg-body: #fff;
-$text-primary: #1a1a2e;
-$text-secondary: #4a4a6a;
-$text-default: #8e8ea0;
-$border-color: #f2f3f7;
 $radius: 14px;
-$shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(0, 0, 0, 0.06);
+$shadow: var(--el-box-shadow);
 $transition-fast: 0.2s ease;
 
 /* ========== 遮罩层 ========== */
@@ -185,7 +179,7 @@ $transition-fast: 0.2s ease;
   position: fixed;
   inset: 0;
   z-index: 2000;
-  background-color: $bg-mask;
+  background-color: rgba(0, 0, 0, 0.45);
   overflow: hidden;
   transition: background-color 0.25s ease;
 
@@ -197,7 +191,7 @@ $transition-fast: 0.2s ease;
 /* ========== 抽屉主体 ========== */
 .xly-drawer {
   position: absolute;
-  background-color: $bg-body;
+  background-color: var(--el-bg-color);
   box-shadow: $shadow;
   display: flex;
   flex-direction: column;
@@ -245,7 +239,7 @@ $transition-fast: 0.2s ease;
 .xly-drawer__title {
   font-size: 17px;
   font-weight: 600;
-  color: $text-primary;
+  color: var(--el-text-color-primary);
   line-height: 1.4;
   flex: 1;
   min-width: 0;
@@ -261,17 +255,17 @@ $transition-fast: 0.2s ease;
   background: transparent;
   border-radius: 8px;
   cursor: pointer;
-  color: $text-default;
+  color: var(--el-text-color-regular);
   transition: all $transition-fast;
   flex-shrink: 0;
   margin: -4px -4px -4px 8px;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-    color: $text-secondary;
+    background-color: var(--el-fill-color-light);
+    color: var(--el-text-color-secondary);
   }
   &:active {
-    background-color: rgba(0, 0, 0, 0.08);
+    background-color: var(--el-fill-color-light);
   }
 }
 
@@ -279,7 +273,7 @@ $transition-fast: 0.2s ease;
 .xly-drawer__body {
   padding: 4px 24px 20px;
   font-size: 14px;
-  color: $text-secondary;
+  color: var(--el-text-color-secondary);
   line-height: 1.7;
   overflow-y: auto;
   flex: 1;
@@ -289,7 +283,7 @@ $transition-fast: 0.2s ease;
     width: 4px;
   }
   &::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.08);
+    background: var(--el-fill-color-light);
     border-radius: 4px;
   }
 }
@@ -298,7 +292,7 @@ $transition-fast: 0.2s ease;
 .xly-drawer__footer {
   padding: 12px 24px 20px;
   flex-shrink: 0;
-  border-top: 1px solid $border-color;
+  border-top: 1px solid var(--el-border-color);
 }
 
 /* ========== 动画 ========== */

@@ -175,12 +175,12 @@ onUnmounted(() => {
 
 <style scoped lang="scss">
 /* ========== 设计令牌 ========== */
-$header-height: 100px;
-$header-bg: #eef1f8;
-$text-primary: #1a1a2e;
-$text-secondary: #4a4a6a;
-$text-default: #8e8ea0;
-$primary: #4f6ef7;
+$header-height: 60px;
+$header-bg: var(--el-fill-color-lighter);
+$text-primary: var(--el-text-color-primary);
+$text-secondary: var(--el-text-color-secondary);
+$text-default: var(--el-text-color-placeholder);
+$primary: var(--el-color-primary);
 $radius: 10px;
 
 /* ========== Header ========== */
@@ -262,7 +262,7 @@ $radius: 10px;
   transition: all 0.18s ease;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.04);
+    background: var(--el-fill-color-light);
     color: $text-primary;
   }
 
@@ -282,7 +282,7 @@ $radius: 10px;
   font-size: 10px;
   font-weight: 600;
   color: #fff;
-  background: #f53f3f;
+  background: var(--el-color-danger);
   border-radius: 8px;
   line-height: 16px;
   text-align: center;
@@ -301,7 +301,7 @@ $radius: 10px;
   transition: background-color 0.18s ease;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.04);
+    background: var(--el-fill-color-light);
   }
 }
 
@@ -340,7 +340,7 @@ $radius: 10px;
   right: 28px;
   margin-top: 8px;
   width: 220px;
-  background: #fff;
+  background: var(--el-bg-color);
   border-radius: 12px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
   padding: 6px;
@@ -378,7 +378,7 @@ $radius: 10px;
 
 .header__user-dropdown-divider {
   height: 1px;
-  background: #f0f1f5;
+  background: var(--el-fill-color-light);
   margin: 4px 0;
 }
 
@@ -401,7 +401,7 @@ $radius: 10px;
   &--danger {
     &:hover {
       background: rgba(245, 63, 63, 0.06);
-      color: #f53f3f;
+      color: var(--el-color-danger);
     }
   }
 }

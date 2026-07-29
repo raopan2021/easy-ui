@@ -835,16 +835,10 @@ defineExpose({
 // ============================================================
 // 样式变量
 // ============================================================
-$primary: #4f6ef7;
-$primary-light: rgba($primary, 0.08);
-$primary-hover: #6b85f8; // 比 primary 亮 15% 的颜色
-$danger: #ff3b30;
-$success: #34c759;
-$success-light: rgba($success, 0.08);
+
 $border: #ebeef5;
-$border-dark: #d3d6dc; // 比 border 深 15%
 $text: #303133;
-$text-secondary: #909399;
+
 $radius: 8px;
 
 // ============================================================
@@ -878,13 +872,13 @@ $radius: 8px;
   align-items: center;
   gap: 14px;
   padding: 14px 16px;
-  background: #fff;
+  background: var(--el-bg-color);
   border: 1px solid $border;
   border-radius: $radius;
   transition: all 0.2s ease;
 
   &:hover {
-    border-color: $border-dark;
+    border-color: var(--el-border-color-darker);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 
     .xly-upload__actions {
@@ -893,7 +887,7 @@ $radius: 8px;
   }
 
   &--success {
-    border-color: rgba($success, 0.3);
+    border-color: var(--el-fill-color-light);
 
     .xly-upload__badge {
       opacity: 1;
@@ -905,12 +899,12 @@ $radius: 8px;
   }
 
   &--uploading {
-    border-color: rgba($primary, 0.5);
+    border-color: var(--el-color-primary-light-9);
   }
 
   &--error {
-    border-color: rgba($danger, 0.5);
-    background: rgba($danger, 0.02);
+    border-color: var(--el-fill-color-light);
+    background: var(--el-fill-color-light);
   }
 }
 
@@ -924,7 +918,7 @@ $radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fafbfd;
+  background: var(--el-fill-color-light);
   border-radius: 6px;
 
   svg {
@@ -955,7 +949,7 @@ $radius: 8px;
 
 .xly-upload__file-size {
   font-size: 12px;
-  color: $text-secondary;
+  color: var(--el-text-color-secondary);
 }
 
 // ============================================================
@@ -977,14 +971,14 @@ $radius: 8px;
 .xly-upload__progress-bar {
   flex: 1;
   height: 4px;
-  background: #f0f2f5;
+  background: var(--el-fill-color-light);
   border-radius: 2px;
   overflow: hidden;
 }
 
 .xly-upload__progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, $primary, $primary-hover);
+  background: linear-gradient(90deg, var(--el-color-primary), var(--el-color-primary)-hover);
   border-radius: 2px;
   transition: width 0.3s ease;
 }
@@ -992,7 +986,7 @@ $radius: 8px;
 .xly-upload__progress-text {
   font-size: 12px;
   font-weight: 500;
-  color: $primary;
+  color: var(--el-color-primary);
   min-width: 36px;
   text-align: right;
 }
@@ -1018,31 +1012,31 @@ $radius: 8px;
   transition: all 0.2s ease;
 
   &--preview {
-    background: $success-light;
-    color: $success;
+    background: var(--el-color-success)-light;
+    color: var(--el-color-success);
 
     &:hover {
-      background: $success;
+      background: var(--el-color-success);
       color: #fff;
     }
   }
 
   &--download {
-    background: $primary-light;
-    color: $primary;
+    background: rgba(79, 110, 247, 0.08);
+    color: var(--el-color-primary);
 
     &:hover {
-      background: $primary;
+      background: var(--el-color-primary);
       color: #fff;
     }
   }
 
   &--delete {
-    background: rgba($danger, 0.08);
-    color: $danger;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-danger);
 
     &:hover {
-      background: $danger;
+      background: var(--el-color-danger);
       color: #fff;
     }
   }
@@ -1057,14 +1051,14 @@ $radius: 8px;
   right: -6px;
   width: 20px;
   height: 20px;
-  background: $success;
+  background: var(--el-color-success);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   transition: opacity 0.2s ease;
-  box-shadow: 0 2px 4px rgba($success, 0.3);
+  box-shadow: 0 2px 4px rgba(var(--el-color-success), 0.3);
 }
 
 // ============================================================
@@ -1075,8 +1069,8 @@ $radius: 8px;
   align-items: center;
   gap: 4px;
   font-size: 12px;
-  color: $danger;
-  background: rgba($danger, 0.08);
+  color: var(--el-color-danger);
+  background: var(--el-fill-color-light);
   padding: 4px 10px;
   border-radius: 4px;
 }
@@ -1092,23 +1086,23 @@ $radius: 8px;
   padding: 24px;
   border: 2px dashed $border;
   border-radius: $radius;
-  background: #fafbfd;
+  background: var(--el-fill-color-light);
   cursor: pointer;
   transition: all 0.25s ease;
 
   &:hover,
   &.is-dragover {
-    border-color: $primary;
-    background: $primary-light;
+    border-color: var(--el-color-primary);
+    background: rgba(79, 110, 247, 0.08);
 
     .xly-upload__trigger-icon {
-      background: $primary;
+      background: var(--el-color-primary);
       color: #fff;
       transform: translateY(-2px);
     }
 
     .xly-upload__trigger-text .primary {
-      color: $primary;
+      color: var(--el-color-primary);
     }
   }
 }
@@ -1125,10 +1119,10 @@ $radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
+  background: var(--el-bg-color);
   border-radius: 12px;
-  color: $primary;
-  box-shadow: 0 2px 8px rgba($primary, 0.15);
+  color: var(--el-color-primary);
+  box-shadow: 0 2px 8px rgba(var(--el-color-primary), 0.15);
   transition: all 0.25s ease;
 
   svg {
@@ -1151,7 +1145,7 @@ $radius: 8px;
 
   .secondary {
     font-size: 13px;
-    color: $text-secondary;
+    color: var(--el-text-color-secondary);
   }
 }
 
@@ -1168,7 +1162,7 @@ $radius: 8px;
 .xly-upload__tip {
   margin-top: 10px;
   font-size: 12px;
-  color: $text-secondary;
+  color: var(--el-text-color-secondary);
   line-height: 1.5;
 }
 
@@ -1195,52 +1189,84 @@ $radius: 8px;
 // ============================================================
 @keyframes xly-upload-flash {
   0% {
-    box-shadow: 0 0 0 0 rgba($success, 0);
-    border-color: rgba($border, 1);
+    box-shadow: 0 0 0 0 rgba(var(--el-color-success), 0);
+    border-color: var(--el-fill-color-light);
     background: var(--el-bg-color);
     transform: scale(1);
   }
 
   12% {
-    box-shadow: 0 0 0 10px rgba($success, 0.55), 0 0 30px rgba($success, 0.4), 0 0 60px rgba($success, 0.18);
-    border-color: $success;
-    background: rgba($success, 0.2);
+    box-shadow: 0 0 0 10px rgba(var(--el-color-success), 0.55), 0 0 30px rgba(var(--el-color-success), 0.4), 0 0 60px rgba(var(--el-color-success), 0.18);
+    border-color: var(--el-color-success);
+    background: var(--el-fill-color-light);
     transform: scale(1.02);
   }
 
   28% {
-    box-shadow: 0 0 0 3px rgba($success, 0.3);
-    border-color: rgba($success, 0.5);
+    box-shadow: 0 0 0 3px rgba(var(--el-color-success), 0.3);
+    border-color: var(--el-fill-color-light);
     background: var(--el-bg-color);
     transform: scale(1);
   }
 
   44% {
-    box-shadow: 0 0 0 8px rgba($success, 0.45), 0 0 24px rgba($success, 0.3), 0 0 48px rgba($success, 0.12);
-    border-color: $success;
-    background: rgba($success, 0.16);
+    box-shadow: 0 0 0 8px rgba(var(--el-color-success), 0.45), 0 0 24px rgba(var(--el-color-success), 0.3), 0 0 48px rgba(var(--el-color-success), 0.12);
+    border-color: var(--el-color-success);
+    background: var(--el-fill-color-light);
     transform: scale(1.015);
   }
 
   58% {
-    box-shadow: 0 0 0 2px rgba($success, 0.22);
-    border-color: rgba($success, 0.45);
+    box-shadow: 0 0 0 2px rgba(var(--el-color-success), 0.22);
+    border-color: var(--el-fill-color-light);
     background: var(--el-bg-color);
     transform: scale(1);
   }
 
   76% {
-    box-shadow: 0 0 0 6px rgba($success, 0.42), 0 0 18px rgba($success, 0.22);
-    border-color: $success;
-    background: rgba($success, 0.1);
+    box-shadow: 0 0 0 6px rgba(var(--el-color-success), 0.42), 0 0 18px rgba(var(--el-color-success), 0.22);
+    border-color: var(--el-color-success);
+    background: var(--el-fill-color-light);
     transform: scale(1.01);
   }
 
   100% {
     box-shadow: none;
-    border-color: rgba($success, 0.3);
+    border-color: var(--el-fill-color-light);
     background: var(--el-bg-color);
     transform: scale(1);
   }
+}
+</style>
+
+<style lang="scss">
+html.dark .xly-upload__item {
+  background: var(--el-bg-color);
+  border-color: var(--el-border-color);
+}
+html.dark .xly-upload__item:hover {
+  border-color: var(--el-border-color-darker);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+html.dark .xly-upload__trigger {
+  background: var(--el-fill-color-lighter);
+  border-color: var(--el-border-color-darker);
+}
+html.dark .xly-upload__trigger:hover,
+html.dark .xly-upload__trigger.is-dragover {
+  background: rgba(79, 110, 247, 0.1);
+}
+html.dark .xly-upload__file-name {
+  color: var(--el-text-color-primary);
+}
+html.dark .xly-upload__file-size,
+html.dark .xly-upload__tip {
+  color: var(--el-text-color-secondary);
+}
+html.dark .xly-upload__trigger-text .primary {
+  color: var(--el-text-color-primary);
+}
+html.dark .xly-upload__trigger-text .secondary {
+  color: var(--el-text-color-secondary);
 }
 </style>

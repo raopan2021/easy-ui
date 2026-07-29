@@ -594,14 +594,14 @@ function handleDocSubmit() {
 .doc-title {
   font-size: 26px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
   letter-spacing: -0.3px;
 }
 
 .doc-desc {
   font-size: 14px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   margin: 0;
   line-height: 1.6;
 }
@@ -613,28 +613,28 @@ function handleDocSubmit() {
 .doc-section__title {
   font-size: 18px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
   padding-bottom: 10px;
-  border-bottom: 1px solid #f2f3f7;
+  border-bottom: 1px solid var(--el-border-color-lighter);
 }
 
 .doc-subsection__title {
   font-size: 15px;
   font-weight: 600;
-  color: #4a4a6a;
+  color: var(--el-text-color-regular);
   margin: 24px 0 12px;
 }
 
 .doc-section__desc {
   font-size: 14px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   margin: 0 0 16px;
   line-height: 1.6;
 
   code {
-    background: #f5f6fa;
-    color: #4f6ef7;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 13px;
@@ -643,14 +643,14 @@ function handleDocSubmit() {
 }
 
 .doc-preview {
-  border: 1px solid #f2f3f7;
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 12px;
   overflow: hidden;
-  background: #fff;
+  background: var(--el-bg-color-overlay);
 
   &--noborder {
     border: none;
-    background: #fafbfd;
+    background: var(--el-fill-color-light);
   }
 }
 
@@ -663,8 +663,8 @@ function handleDocSubmit() {
 }
 
 .doc-code {
-  border-top: 1px solid #f2f3f7;
-  background: #fafbfd;
+  border-top: 1px solid var(--el-border-color-lighter);
+  background: var(--el-fill-color-light);
   padding: 16px 20px;
   overflow-x: auto;
 
@@ -677,7 +677,7 @@ function handleDocSubmit() {
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
     font-size: 13px;
     line-height: 1.7;
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
     white-space: pre;
   }
 }
@@ -685,7 +685,7 @@ function handleDocSubmit() {
 .doc-subtitle {
   font-size: 15px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 20px 0 10px;
 }
 
@@ -702,23 +702,23 @@ function handleDocSubmit() {
   td {
     text-align: left;
     padding: 10px 14px;
-    border-bottom: 1px solid #f2f3f7;
+    border-bottom: 1px solid var(--el-border-color-lighter);
   }
 
   th {
-    background: #fafbfd;
+    background: var(--el-fill-color-light);
     font-weight: 600;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
     white-space: nowrap;
   }
 
   td {
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
   }
 
   code {
-    background: #f5f6fa;
-    color: #4f6ef7;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 13px;
@@ -732,20 +732,20 @@ function handleDocSubmit() {
   align-items: flex-start;
   gap: 8px;
   padding: 8px 12px;
-  background: #f5f6fa;
+  background: var(--el-fill-color-light);
   border-radius: 6px;
   margin-top: 10px;
   font-size: 12px;
 }
 
 .demo-value-label {
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   flex-shrink: 0;
   line-height: 1.5;
 }
 
 .demo-value-content {
-  color: #4f6ef7;
+  color: var(--el-color-primary);
   font-family: 'SF Mono', Consolas, monospace;
   word-break: break-all;
   line-height: 1.5;
@@ -774,13 +774,13 @@ function handleDocSubmit() {
 
 .demo-vmodel-label {
   font-size: 13px;
-  color: #4a4a6a;
+  color: var(--el-text-color-regular);
   font-weight: 500;
 }
 
 .demo-label {
   font-size: 13px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   margin-bottom: 8px;
 }
 
@@ -801,7 +801,7 @@ function handleDocSubmit() {
 .demo-form-label {
   width: 72px;
   font-size: 14px;
-  color: #4a4a6a;
+  color: var(--el-text-color-regular);
   flex-shrink: 0;
   padding-top: 6px;
   text-align: right;
@@ -818,7 +818,7 @@ function handleDocSubmit() {
   border: 1px solid #e4e7f0;
   border-radius: 6px;
   font-size: 14px;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   outline: none;
   width: 240px;
   transition: border-color 0.2s;
@@ -828,7 +828,7 @@ function handleDocSubmit() {
   }
 
   &::placeholder {
-    color: #c0c4cc;
+    color: var(--el-text-color-placeholder);
   }
 }
 
@@ -850,14 +850,14 @@ function handleDocSubmit() {
 
   &__icon {
     flex-shrink: 0;
-    color: #4f6ef7;
+    color: var(--el-color-primary);
     padding-top: 1px;
   }
 
   &__body {
     flex: 1;
     font-size: 14px;
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
     line-height: 1.7;
 
     p {
@@ -870,7 +870,7 @@ function handleDocSubmit() {
 
     code {
       background: rgba(79, 110, 247, 0.1);
-      color: #4f6ef7;
+      color: var(--el-color-primary);
       padding: 1px 5px;
       border-radius: 3px;
       font-size: 13px;
@@ -880,7 +880,7 @@ function handleDocSubmit() {
 
   &__title {
     font-weight: 600;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
     margin-bottom: 8px;
     font-size: 14px;
   }
@@ -888,7 +888,7 @@ function handleDocSubmit() {
 
 .doc-code--standalone {
   border-top: none !important;
-  border: 1px solid #f2f3f7;
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 8px;
   margin: 10px 0;
 }

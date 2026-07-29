@@ -104,56 +104,22 @@ function handleClick(event: MouseEvent) {
 
 <style scoped lang="scss">
 /* ========== 设计令牌 ========== */
-$primary: #4f6ef7;
-$primary-hover: #3d5ce5;
-$primary-active: #2f4bd6;
-$primary-light: rgba(79, 110, 247, 0.08);
-$primary-light-hover: rgba(79, 110, 247, 0.15);
-$primary-light-link-hover: rgba(79, 110, 247, 0.65);
 
-$success: #34c759;
-$success-hover: #2eb84e;
-$success-active: #27a343;
-$success-light: rgba(52, 199, 89, 0.08);
-$success-light-hover: rgba(52, 199, 89, 0.15);
+$text-hover: var(--el-color-primary);
+$text-active: var(--el-color-primary);
+$text-light-hover: var(--el-fill-color-light);
+$text-light-link-hover: var(--el-fill-color-light);
 $success-light-link-hover: rgba(52, 199, 89, 0.65);
-
-$warning: #f5a623;
-$warning-hover: #e09510;
-$warning-active: #c98200;
-$warning-light: rgba(245, 166, 35, 0.08);
-$warning-light-hover: rgba(245, 166, 35, 0.15);
 $warning-light-link-hover: rgba(245, 166, 35, 0.65);
-
-$danger: #f56c6c;
-$danger-hover: #e85858;
-$danger-active: #d64545;
-$danger-light: rgba(245, 108, 108, 0.08);
-$danger-light-hover: rgba(245, 108, 108, 0.15);
 $danger-light-link-hover: rgba(245, 108, 108, 0.65);
-
-$info: #8e8ea0;
-$info-hover: #7d7d90;
-$info-active: #6c6c7f;
-$info-light: rgba(142, 142, 160, 0.08);
-$info-light-hover: rgba(142, 142, 160, 0.15);
 $info-light-link-hover: rgba(142, 142, 160, 0.65);
 
-$text-color: #4a4a6a;
-$text-hover: #4f6ef7;
-$text-active: #2f4bd6;
-$text-light-hover: rgba(79, 110, 247, 0.06);
-$text-light-link-hover: rgba(79, 110, 247, 0.65);
-
 // link 样式文字颜色（使用主题色，不是白色）
-$link-primary: $primary;
-$link-success: $success;
-$link-warning: $warning;
-$link-danger: $danger;
-$link-info: $info;
-
-$border-color: #e2e4ed;
-$border-hover: #c8cbd8;
+$link-primary: var(--el-color-primary);
+$link-success: var(--el-color-success);
+$link-warning: var(--el-color-warning);
+$link-danger: var(--el-color-danger);
+$link-info: var(--el-color-info);
 
 $radius: 8px;
 $radius-round: 999px;
@@ -285,18 +251,18 @@ $size-small-loading-size: 14px;
 
   /* ---------- Primary ---------- */
   &--primary {
-    background-color: $primary;
+    background-color: var(--el-color-primary);
     color: #fff;
-    border-color: $primary;
+    border-color: var(--el-color-primary);
 
     &:hover:not(.is-loading):not(.is-disabled) {
-      background-color: $primary-hover;
-      border-color: $primary-hover;
+      background-color: var(--el-color-primary)-hover;
+      border-color: var(--el-color-primary)-hover;
       box-shadow: 0 4px 12px rgba(79, 110, 247, 0.3);
     }
     &:active:not(.is-loading):not(.is-disabled) {
-      background-color: $primary-active;
-      border-color: $primary-active;
+      background-color: var(--el-color-primary)-active;
+      border-color: var(--el-color-primary)-active;
     }
 
     // Primary + Link 组合
@@ -309,24 +275,24 @@ $size-small-loading-size: 14px;
       background-color: transparent;
       border-color: transparent;
       box-shadow: none;
-      color: $primary-light-link-hover;
+      color: rgba(79, 110, 247, 0.08)-link-hover;
     }
   }
 
   /* ---------- Success ---------- */
   &--success {
-    background-color: $success;
+    background-color: var(--el-color-success);
     color: #fff;
-    border-color: $success;
+    border-color: var(--el-color-success);
 
     &:hover:not(.is-loading):not(.is-disabled) {
-      background-color: $success-hover;
-      border-color: $success-hover;
+      background-color: var(--el-color-success)-hover;
+      border-color: var(--el-color-success)-hover;
       box-shadow: 0 4px 12px rgba(52, 199, 89, 0.3);
     }
     &:active:not(.is-loading):not(.is-disabled) {
-      background-color: $success-active;
-      border-color: $success-active;
+      background-color: var(--el-color-success)-active;
+      border-color: var(--el-color-success)-active;
     }
 
     &.is-link {
@@ -344,18 +310,18 @@ $size-small-loading-size: 14px;
 
   /* ---------- Warning ---------- */
   &--warning {
-    background-color: $warning;
+    background-color: var(--el-color-warning);
     color: #fff;
-    border-color: $warning;
+    border-color: var(--el-color-warning);
 
     &:hover:not(.is-loading):not(.is-disabled) {
-      background-color: $warning-hover;
-      border-color: $warning-hover;
+      background-color: var(--el-color-warning)-hover;
+      border-color: var(--el-color-warning)-hover;
       box-shadow: 0 4px 12px rgba(245, 166, 35, 0.3);
     }
     &:active:not(.is-loading):not(.is-disabled) {
-      background-color: $warning-active;
-      border-color: $warning-active;
+      background-color: var(--el-color-warning)-active;
+      border-color: var(--el-color-warning)-active;
     }
 
     &.is-link {
@@ -373,18 +339,18 @@ $size-small-loading-size: 14px;
 
   /* ---------- Danger ---------- */
   &--danger {
-    background-color: $danger;
+    background-color: var(--el-color-danger);
     color: #fff;
-    border-color: $danger;
+    border-color: var(--el-color-danger);
 
     &:hover:not(.is-loading):not(.is-disabled) {
-      background-color: $danger-hover;
-      border-color: $danger-hover;
+      background-color: var(--el-color-danger)-hover;
+      border-color: var(--el-color-danger)-hover;
       box-shadow: 0 4px 12px rgba(245, 108, 108, 0.3);
     }
     &:active:not(.is-loading):not(.is-disabled) {
-      background-color: $danger-active;
-      border-color: $danger-active;
+      background-color: var(--el-color-danger)-active;
+      border-color: var(--el-color-danger)-active;
     }
 
     &.is-link {
@@ -402,18 +368,18 @@ $size-small-loading-size: 14px;
 
   /* ---------- Info ---------- */
   &--info {
-    background-color: $info;
+    background-color: var(--el-color-info);
     color: #fff;
-    border-color: $info;
+    border-color: var(--el-color-info);
 
     &:hover:not(.is-loading):not(.is-disabled) {
-      background-color: $info-hover;
-      border-color: $info-hover;
+      background-color: var(--el-color-info)-hover;
+      border-color: var(--el-color-info)-hover;
       box-shadow: 0 4px 12px rgba(142, 142, 160, 0.3);
     }
     &:active:not(.is-loading):not(.is-disabled) {
-      background-color: $info-active;
-      border-color: $info-active;
+      background-color: var(--el-color-info)-active;
+      border-color: var(--el-color-info)-active;
     }
 
     &.is-link {
@@ -432,7 +398,7 @@ $size-small-loading-size: 14px;
   /* ---------- Text ---------- */
   &--text {
     background-color: transparent;
-    color: $text-color;
+    color: var(--el-text-color-regular);
     border-color: transparent;
     padding-left: 8px;
     padding-right: 8px;
@@ -449,15 +415,15 @@ $size-small-loading-size: 14px;
   /* ---------- Ghost ---------- */
   &--ghost {
     background-color: transparent;
-    color: $primary;
-    border-color: $primary;
+    color: var(--el-color-primary);
+    border-color: var(--el-color-primary);
 
     &:hover:not(.is-loading):not(.is-disabled) {
-      background-color: $primary-light;
-      border-color: $primary-hover;
+      background-color: rgba(79, 110, 247, 0.08);
+      border-color: var(--el-color-primary)-hover;
     }
     &:active:not(.is-loading):not(.is-disabled) {
-      background-color: $primary-light-hover;
+      background-color: rgba(79, 110, 247, 0.15);
     }
   }
 }
@@ -483,5 +449,19 @@ $size-small-loading-size: 14px;
 
 .xly-button__content {
   line-height: 1;
+}
+</style>
+
+<style lang="scss">
+/* ========== Dark Mode ========== */
+html.dark .xly-button.is-plain:not(.is-disabled) {
+  border-color: var(--el-border-color);
+  color: var(--el-text-color-regular);
+  background: var(--el-bg-color);
+}
+html.dark .xly-button.is-plain:not(.is-disabled):hover {
+  border-color: var(--el-color-primary);
+  color: var(--el-color-primary);
+  background: var(--el-color-primary-light-9);
 }
 </style>

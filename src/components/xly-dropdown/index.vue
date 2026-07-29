@@ -208,4 +208,11 @@ defineExpose({ show, hide, toggle })
   opacity: 0;
   transform: translateY(-4px);
 }
+
+/* ========== Dark Mode ========== */
+html.dark .xly-dropdown-menu {
+  background: var(--el-bg-color-overlay);
+  border-color: var(--el-border-color);
+  box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.3), 0 3px 6px -4px rgba(0, 0, 0, 0.4);
+}
 </style>

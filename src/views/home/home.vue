@@ -102,13 +102,13 @@ function compPath(group: typeof componentGroups[0], key: string) {
 
 <style scoped lang="scss">
 /* === Tokens === */
-$black: #09090b;
-$text-1: #18181b;
-$text-2: #71717a;
-$text-3: #a1a1aa;
-$border: #e4e4e7;
-$bg-subtle: #fafafa;
-$accent: #18181b;
+$black: var(--el-text-color-primary);
+$text-1: var(--el-text-color-primary);
+$text-2: var(--el-text-color-secondary);
+$text-3: var(--el-text-color-placeholder);
+$border: var(--el-border-color-lighter);
+$bg-subtle: var(--el-fill-color-lighter);
+$accent: var(--el-color-primary);
 
 /* === Base === */
 .home {
@@ -139,7 +139,7 @@ $accent: #18181b;
   font-size: 13px;
   color: $text-2;
   margin-bottom: 24px;
-  background: #fff;
+  background: var(--el-bg-color-overlay);
   border: 1px solid $border;
   padding: 5px 14px;
   border-radius: 100px;
@@ -149,7 +149,7 @@ $accent: #18181b;
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #22c55e;
+  background: var(--el-color-success);
 }
 
 .hero-title {
@@ -162,7 +162,7 @@ $accent: #18181b;
 }
 
 .hero-accent {
-  background: linear-gradient(135deg, $black 0%, #52525b 100%);
+  background: linear-gradient(135deg, var(--el-text-color-primary) 0%, var(--el-text-color-secondary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -204,7 +204,7 @@ $accent: #18181b;
   align-items: center;
   gap: 7px;
   padding: 9px 18px;
-  background: #fff;
+  background: var(--el-bg-color-overlay);
   color: $text-1;
   border: 1px solid $border;
   border-radius: 8px;
@@ -234,7 +234,7 @@ $accent: #18181b;
 }
 
 .feature-card {
-  background: #fff;
+  background: var(--el-bg-color-overlay);
   padding: 28px 28px;
 
   h3 {
@@ -316,7 +316,7 @@ $accent: #18181b;
 
   &:hover {
     border-color: $border;
-    background: #fff;
+    background: var(--el-bg-color-overlay);
     color: $accent;
   }
 }

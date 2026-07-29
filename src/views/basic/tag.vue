@@ -481,53 +481,53 @@ function removeTagByValue(list: string[], tag: string) {
 
 .doc-header { margin-bottom: 36px; }
 .doc-title {
-  font-size: 26px; font-weight: 700; color: #1a1a2e;
+  font-size: 26px; font-weight: 700; color: var(--el-text-color-primary);
   margin: 0 0 8px; letter-spacing: -0.3px;
 }
 .doc-desc {
-  font-size: 14px; color: #8e8ea0; margin: 0; line-height: 1.6;
+  font-size: 14px; color: var(--el-text-color-secondary); margin: 0; line-height: 1.6;
 }
 
 .doc-section { margin-bottom: 32px; }
 .doc-section__title {
-  font-size: 18px; font-weight: 600; color: #1a1a2e;
-  margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid #f2f3f7;
+  font-size: 18px; font-weight: 600; color: var(--el-text-color-primary);
+  margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--el-border-color-lighter);
 }
 .doc-section__desc {
-  font-size: 14px; color: #8e8ea0; margin: 0 0 16px; line-height: 1.6;
+  font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 16px; line-height: 1.6;
   code {
-    background: #f5f6fa; color: #4f6ef7; padding: 2px 6px;
+    background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px;
     border-radius: 4px; font-size: 13px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
   }
 }
 
 .doc-preview {
-  border: 1px solid #f2f3f7; border-radius: 12px;
-  overflow: hidden; background: #fff;
+  border: 1px solid var(--el-border-color-lighter); border-radius: 12px;
+  overflow: hidden; background: var(--el-bg-color-overlay);
 }
 .doc-preview__body {
   display: flex; flex-wrap: wrap; align-items: center;
   gap: 10px; padding: 24px;
 }
 .doc-code {
-  border-top: 1px solid #f2f3f7; background: #fafbfd;
+  border-top: 1px solid var(--el-border-color-lighter); background: var(--el-fill-color-light);
   padding: 16px 20px; overflow-x: auto;
   pre { margin: 0; padding: 0; }
   code {
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
-    font-size: 13px; line-height: 1.7; color: #4a4a6a; white-space: pre;
+    font-size: 13px; line-height: 1.7; color: var(--el-text-color-regular); white-space: pre;
   }
 }
 
-.doc-subtitle { font-size: 15px; font-weight: 600; color: #1a1a2e; margin: 20px 0 10px; }
+.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
 .doc-table { overflow-x: auto;
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid #f2f3f7; }
-  th { background: #fafbfd; font-weight: 600; color: #1a1a2e; white-space: nowrap; }
-  td { color: #4a4a6a; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); }
+  th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); white-space: nowrap; }
+  td { color: var(--el-text-color-regular); }
   code {
-    background: #f5f6fa; color: #4f6ef7; padding: 2px 6px;
+    background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px;
     border-radius: 4px; font-size: 13px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
   }
@@ -542,7 +542,7 @@ function removeTagByValue(list: string[], tag: string) {
 
 .effect-label {
   font-size: 12px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   font-weight: 500;
   min-width: 36px;
   font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
@@ -550,17 +550,17 @@ function removeTagByValue(list: string[], tag: string) {
 
 .empty-hint {
   font-size: 13px;
-  color: #c0c4cc;
+  color: var(--el-text-color-placeholder);
 }
 
 .click-hint {
   font-size: 13px;
-  color: #4a4a6a;
+  color: var(--el-text-color-regular);
   padding: 6px 12px;
-  background: #f5f7fa;
+  background: var(--el-fill-color-light);
   border-radius: 6px;
 
-  strong { color: #4f6ef7; }
+  strong { color: var(--el-color-primary); }
 }
 
 /* 动态编辑输入框 */
@@ -571,12 +571,12 @@ function removeTagByValue(list: string[], tag: string) {
   height: 28px;
   padding: 0 10px;
   font-size: 13px;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   border: 1px solid #4f6ef7;
   border-radius: 6px;
   outline: none;
   width: 100px;
-  background: #fff;
+  background: var(--el-bg-color-overlay);
   transition: box-shadow 0.2s;
 
   &:focus {

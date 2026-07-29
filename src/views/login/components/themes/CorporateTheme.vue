@@ -705,7 +705,7 @@ $dark-card: #111422;
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  color: #f87171;
+  color: var(--el-color-danger);
   background: rgba(248, 113, 113, 0.08);
   border: 1px solid rgba(248, 113, 113, 0.2);
   border-radius: 6px;
@@ -745,7 +745,7 @@ $dark-card: #111422;
   letter-spacing: 3px;
   position: relative;
   overflow: hidden;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   background: linear-gradient(135deg, $gold-dark, $gold, $gold-light);
   transition:
     transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),

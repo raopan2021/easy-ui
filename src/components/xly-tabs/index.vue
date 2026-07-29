@@ -252,14 +252,9 @@ watch(() => props.type, () => {
 
 <style scoped lang="scss">
 /* ========== 设计令牌 ========== */
-$primary: #4f6ef7;
+
 $primary-hover: #3d5ce5;
-$text-primary: #1a1a2e;
-$text-secondary: #4a4a6a;
-$text-default: #8e8ea0;
-$text-disabled: #c0c4cc;
-$border-color: #e2e4ed;
-$border-hover: #c8cbd8;
+
 $bg-card: #f5f7fa;
 $bg-segment: #f2f3f7;
 $radius: 8px;
@@ -299,7 +294,7 @@ $size-small-gap: 16px;
   &.is-sticky {
     position: sticky;
     z-index: 10;
-    background-color: #fff;
+    background-color: var(--el-bg-color);
   }
 }
 
@@ -337,7 +332,7 @@ $size-small-gap: 16px;
   height: 28px;
   border-radius: 50%;
   cursor: pointer;
-  color: $text-default;
+  color: var(--el-text-color-regular);
   transition: $transition;
   flex-shrink: 0;
   border: none;
@@ -345,8 +340,8 @@ $size-small-gap: 16px;
   font-size: 16px;
 
   &:hover {
-    color: $text-primary;
-    background-color: rgba(0, 0, 0, 0.06);
+    color: var(--el-text-color-primary);
+    background-color: var(--el-fill-color-light);
   }
 }
 
@@ -366,7 +361,7 @@ $size-small-gap: 16px;
   padding: $size-default-padding;
   height: $size-default-height;
   font-size: $size-default-font;
-  color: $text-secondary;
+  color: var(--el-text-color-secondary);
   cursor: pointer;
   transition: $transition;
   user-select: none;
@@ -390,11 +385,11 @@ $size-small-gap: 16px;
   }
 
   &:hover:not(.is-active):not(.is-disabled) {
-    color: $primary;
+    color: var(--el-color-primary);
   }
 
   &.is-disabled {
-    color: $text-disabled;
+    color: var(--el-text-color-disabled);
     cursor: not-allowed;
   }
 }
@@ -403,7 +398,7 @@ $size-small-gap: 16px;
 .xly-tabs--line {
   .xly-tabs__nav {
     gap: $size-default-gap;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid var(--el-border-color);
 
     .xly-tabs--large & {
       gap: $size-large-gap;
@@ -414,7 +409,7 @@ $size-small-gap: 16px;
   }
 
   .xly-tabs__item.is-active {
-    color: $primary;
+    color: var(--el-color-primary);
   }
 
   .xly-tabs__active-bar {
@@ -432,7 +427,7 @@ $size-small-gap: 16px;
 /* ========== Card 类型 ========== */
 .xly-tabs--card {
   .xly-tabs__nav {
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid var(--el-border-color);
     gap: 4px;
   }
 
@@ -450,9 +445,9 @@ $size-small-gap: 16px;
     }
 
     &.is-active {
-      background-color: #fff;
-      border-color: $border-color;
-      color: $primary;
+      background-color: var(--el-bg-color);
+      border-color: var(--el-border-color);
+      color: var(--el-color-primary);
     }
 
     &:hover:not(.is-active):not(.is-disabled) {
@@ -474,16 +469,16 @@ $size-small-gap: 16px;
   .xly-tabs__item {
     border-radius: $radius-sm;
     justify-content: center;
-    color: $text-secondary;
+    color: var(--el-text-color-secondary);
 
     &.is-active {
-      background-color: #fff;
-      color: $primary;
+      background-color: var(--el-bg-color);
+      color: var(--el-color-primary);
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
     }
 
     &:hover:not(.is-active):not(.is-disabled) {
-      color: $text-primary;
+      color: var(--el-text-color-primary);
     }
   }
 }
@@ -500,5 +495,26 @@ $size-small-gap: 16px;
   flex: 1;
   padding: 16px 0;
   overflow: hidden;
+}
+</style>
+
+<style lang="scss">
+/* ========== Dark Mode ========== */
+html.dark .xly-tabs__nav {
+  border-bottom-color: var(--el-border-color);
+}
+html.dark .xly-tabs--card .xly-tabs__nav {
+  border-bottom-color: var(--el-border-color);
+}
+html.dark .xly-tabs--card .xly-tabs__item.is-active {
+  border-color: var(--el-border-color);
+}
+html.dark .xly-tabs--card .xly-tabs__item:hover:not(.is-active):not(.is-disabled),
+html.dark .xly-tabs--segment .xly-tabs__item:hover:not(.is-active):not(.is-disabled) {
+  background-color: var(--el-fill-color-light);
+}
+html.dark .xly-tabs__nav-btn:hover {
+  color: var(--el-color-primary);
+  background-color: var(--el-fill-color-light);
 }
 </style>

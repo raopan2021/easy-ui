@@ -385,22 +385,22 @@ const directiveOptions = {
 .doc-title {
   font-size: 28px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
 }
 
 .doc-desc {
   font-size: 14px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   line-height: 1.6;
   margin: 0;
 
   code {
     padding: 2px 6px;
-    background: #f0f2f5;
+    background: var(--el-fill-color-light);
     border-radius: 4px;
     font-size: 13px;
-    color: #4f6ef7;
+    color: var(--el-color-primary);
     font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
   }
 }
@@ -412,22 +412,22 @@ const directiveOptions = {
 .doc-section__title {
   font-size: 20px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
 }
 
 .doc-section__desc {
   font-size: 14px;
-  color: #6b7280;
+  color: var(--el-text-color-secondary);
   line-height: 1.6;
   margin: 0 0 16px;
 
   code {
     padding: 2px 6px;
-    background: #f0f2f5;
+    background: var(--el-fill-color-light);
     border-radius: 4px;
     font-size: 13px;
-    color: #4f6ef7;
+    color: var(--el-color-primary);
     font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
   }
 }
@@ -449,7 +449,7 @@ const directiveOptions = {
 .doc-code {
   border-top: 1px solid #e2e4ed;
   padding: 16px;
-  background: #fafbfc;
+  background: var(--el-fill-color-light);
 
   pre {
     margin: 0;
@@ -459,7 +459,7 @@ const directiveOptions = {
   code {
     font-size: 13px;
     line-height: 1.6;
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
     font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
   }
 }
@@ -476,7 +476,7 @@ const directiveOptions = {
   p {
     margin: 0 0 8px;
     font-size: 14px;
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
     line-height: 1.6;
 
     &:last-child {
@@ -488,7 +488,7 @@ const directiveOptions = {
       background: #e8eaf0;
       border-radius: 4px;
       font-size: 13px;
-      color: #4f6ef7;
+      color: var(--el-color-primary);
       font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
     }
   }
@@ -513,7 +513,7 @@ const directiveOptions = {
 
   &__label {
     font-size: 13px;
-    color: #6b7280;
+    color: var(--el-text-color-secondary);
     text-align: center;
   }
 }
@@ -544,20 +544,20 @@ const directiveOptions = {
   th {
     background: #f8f9fb;
     font-weight: 600;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
     white-space: nowrap;
   }
 
   td {
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
   }
 
   code {
     padding: 2px 6px;
-    background: #f0f2f5;
+    background: var(--el-fill-color-light);
     border-radius: 4px;
     font-size: 13px;
-    color: #4f6ef7;
+    color: var(--el-color-primary);
     font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
   }
 }

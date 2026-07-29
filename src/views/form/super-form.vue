@@ -811,7 +811,7 @@ const fields = [
 .doc-title {
   font-size: 24px;
   font-weight: 600;
-  color: #303133;
+  color: var(--el-text-color-regular);
   margin: 0 0 12px;
 }
 
@@ -824,7 +824,7 @@ const fields = [
 
 .doc-section {
   margin-bottom: 48px;
-  background: #fff;
+  background: var(--el-bg-color-overlay);
   border-radius: 8px;
   padding: 24px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
@@ -833,10 +833,10 @@ const fields = [
 .doc-section__title {
   font-size: 18px;
   font-weight: 600;
-  color: #303133;
+  color: var(--el-text-color-regular);
   margin: 0 0 20px;
   padding-bottom: 12px;
-  border-bottom: 1px solid #ebeef5;
+  border-bottom: 1px solid var(--el-border-color-lighter);
 }
 
 .doc-preview {
@@ -849,7 +849,7 @@ const fields = [
 }
 
 .doc-code {
-  background: #f5f7fa;
+  background: var(--el-fill-color-light);
   border-radius: 6px;
   padding: 16px;
   overflow-x: auto;
@@ -860,7 +860,7 @@ const fields = [
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
   font-size: 13px;
   line-height: 1.6;
-  color: #333;
+  color: var(--el-text-color-regular);
 }
 
 .doc-code code {
@@ -878,13 +878,13 @@ const fields = [
 .doc-table td {
   padding: 12px;
   text-align: left;
-  border-bottom: 1px solid #ebeef5;
+  border-bottom: 1px solid var(--el-border-color-lighter);
 }
 
 .doc-table th {
-  background: #f5f7fa;
+  background: var(--el-fill-color-light);
   font-weight: 600;
-  color: #303133;
+  color: var(--el-text-color-regular);
 }
 
 .doc-table td {
@@ -892,17 +892,17 @@ const fields = [
 }
 
 .doc-table code {
-  background: #f5f7fa;
+  background: var(--el-fill-color-light);
   padding: 2px 6px;
   border-radius: 4px;
   font-size: 13px;
-  color: #409eff;
+  color: var(--el-color-primary);
 }
 
 .doc-subtitle {
   font-size: 16px;
   font-weight: 600;
-  color: #303133;
+  color: var(--el-text-color-regular);
   margin: 24px 0 16px;
 }
 
@@ -920,7 +920,7 @@ const fields = [
 </style>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import XlySuperForm from '@/components/xly-super-form/index.vue'
 import XlyButton from '@/components/xly-button/index.vue'
 import { useFormFields } from '@/components/xly-super-form/useFormFields'
@@ -946,7 +946,7 @@ const {
 
 // v-model 双向绑定
 const vmodelForm = ref()
-const vmodelData = reactive({
+const vmodelData = ref({
   name: '',
   dept: null as number | null,
 })
@@ -968,15 +968,15 @@ async function submitVmodel() {
   const valid = await vmodelForm.value?.validate()
   if (!valid) return
   console.log('getFormData():', vmodelForm.value?.getFormData())
-  console.log('v-model 数据:', vmodelData)
+  console.log('v-model 数据:', vmodelData.value)
 }
 function resetVmodel() {
-  vmodelData.name = ''
-  vmodelData.dept = null
+  vmodelData.value.name = ''
+  vmodelData.value.dept = null
 }
 function fillVmodel() {
-  vmodelData.name = '张三'
-  vmodelData.dept = 1
+  vmodelData.value.name = '张三'
+  vmodelData.value.dept = 1
 }
 
 // 输入类

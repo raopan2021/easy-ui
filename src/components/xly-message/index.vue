@@ -82,21 +82,21 @@ defineExpose(XlyMsg)
 
 <style scoped lang="scss">
 /* ========== 设计令牌 ========== */
-$bg-white: #ffffff;
-$bg-success: rgba(52, 199, 89, 0.08);
-$bg-warning: rgba(255, 159, 10, 0.08);
-$bg-danger: rgba(245, 108, 108, 0.08);
-$bg-info: rgba(79, 110, 247, 0.08);
-$text-primary: #1a1a2e;
-$text-success: #2ea44f;
-$text-warning: #d48806;
-$text-danger: #cf222e;
-$text-info: #4f6ef7;
-$text-muted: #6e6e80;
-$border-success: rgba(52, 199, 89, 0.25);
-$border-warning: rgba(255, 159, 10, 0.25);
-$border-danger: rgba(245, 108, 108, 0.25);
-$border-info: rgba(79, 110, 247, 0.25);
+$bg-white: var(--el-bg-color);
+$bg-success: var(--el-color-success-light-9);
+$bg-warning: var(--el-color-warning-light-9);
+$bg-danger: var(--el-color-danger-light-9);
+$bg-info: var(--el-color-info-light-9);
+$text-primary: var(--el-text-color-primary);
+$text-success: var(--el-color-success);
+$text-warning: var(--el-color-warning);
+$text-danger: var(--el-color-danger);
+$text-info: var(--el-color-info);
+$text-muted: var(--el-text-color-secondary);
+$border-success: var(--el-color-success-light-5);
+$border-warning: var(--el-color-warning-light-5);
+$border-danger: var(--el-color-danger-light-5);
+$border-info: var(--el-color-info-light-5);
 $progress-success: #34c759;
 $progress-warning: #ff9f0a;
 $progress-danger: #f56c6c;
@@ -273,7 +273,7 @@ $transition-fast: 0.2s ease;
   transition: all $transition-fast;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.06);
+    background-color: var(--el-fill-color-light);
     color: $text-muted;
   }
 }

@@ -425,12 +425,12 @@ watch(previewVisible, (val) => {
 
 <style scoped lang="scss">
 /* ========== 设计令牌 ========== */
-$color-primary: #4f6ef7;
+
 $color-white: #ffffff;
 $color-black: #000000;
-$color-text-regular: #4a4a6a;
+$color-text-regular: var(--el-text-color-regular);
 $color-bg-mask: rgba(0, 0, 0, 0.7);
-$color-border: #e8e8f0;
+$color-border: var(--el-border-color);
 $radius-base: 8px;
 
 /* ========== 图片组件 ========== */
@@ -537,7 +537,7 @@ $radius-base: 8px;
       padding: 8px;
 
       &:hover {
-        color: $color-primary;
+        color: var(--el-color-primary);
         background: rgba(255, 255, 255, 0.1);
       }
     }
@@ -651,7 +651,7 @@ $radius-base: 8px;
       min-width: 36px;
 
       &:hover {
-        color: $color-primary;
+        color: var(--el-color-primary);
         background: rgba(255, 255, 255, 0.1);
       }
     }

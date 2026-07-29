@@ -650,14 +650,8 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped lang="scss">
-$primary: #4f6ef7;
-$primary-light: rgba(79, 110, 247, 0.08);
-$border-color: #e2e4ed;
-$border-focus: #4f6ef7;
-$border-hover: #c8cbd8;
-$disabled-color: #a8abb2;
-$text-color: #4a4a6a;
-$text-placeholder: #c0c4cc;
+
+$border-focus: var(--el-color-primary);
 $radius: 8px;
 $transition: all 0.2s ease;
 
@@ -678,21 +672,21 @@ $transition: all 0.2s ease;
   display: inline-flex;
   align-items: center;
   padding: 0 12px;
-  background: #fff;
-  border: 1px solid $border-color;
+  background: var(--el-bg-color);
+  border: 1px solid var(--el-border-color);
   border-radius: $radius;
   cursor: pointer;
   transition: $transition;
 
-  &.is-hover:not(.is-disabled) { border-color: $border-hover; }
-  &.is-focus { border-color: $border-focus; box-shadow: 0 0 0 2px $primary-light; }
+  &.is-hover:not(.is-disabled) { border-color: var(--el-border-color-darker); }
+  &.is-focus { border-color: $border-focus; box-shadow: 0 0 0 2px rgba(79, 110, 247, 0.08); }
 }
 
 .xly-date-time-picker__prefix {
   display: inline-flex;
   align-items: center;
   margin-right: 6px;
-  color: $text-placeholder;
+  color: var(--el-text-color-placeholder);
   flex-shrink: 0;
 }
 
@@ -701,38 +695,32 @@ $transition: all 0.2s ease;
   border: none;
   outline: none;
   background: transparent;
-  color: $text-color;
+  color: var(--el-text-color-regular);
   cursor: pointer;
   font-family: inherit;
 
-  &::placeholder { color: $text-placeholder; }
+  &::placeholder { color: var(--el-text-color-placeholder); }
 }
 
 .xly-date-time-picker__clear {
   display: inline-flex;
   cursor: pointer;
-  color: $text-placeholder;
+  color: var(--el-text-color-placeholder);
   border-radius: 50%;
-  &:hover { color: $text-color; }
+  &:hover { color: var(--el-text-color-regular); }
 }
 </style>
 
 <style lang="scss">
-$primary: #4f6ef7;
-$primary-light: rgba(79, 110, 247, 0.08);
-$primary-light-hover: rgba(79, 110, 247, 0.15);
-$border-color: #e2e4ed;
-$disabled-color: #a8abb2;
-$text-color: #4a4a6a;
-$text-placeholder: #c0c4cc;
+
 $radius: 8px;
 
 .xly-date-time-picker__panel {
   position: fixed;
   z-index: 2000;
   display: flex;
-  background: #fff;
-  border: 1px solid $border-color;
+  background: var(--el-bg-color);
+  border: 1px solid var(--el-border-color);
   border-radius: $radius;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08), 0 3px 6px rgba(0, 0, 0, 0.06);
   overflow: hidden;
@@ -741,7 +729,7 @@ $radius: 8px;
 
 // 日期区
 .xly-dtp__date-section {
-  border-right: 1px solid $border-color;
+  border-right: 1px solid var(--el-border-color);
   padding: 8px;
 }
 
@@ -755,33 +743,33 @@ $radius: 8px;
 .xly-dtp-date__nav {
   display: inline-flex;
   cursor: pointer;
-  color: $text-color;
+  color: var(--el-text-color-regular);
   padding: 4px;
   border-radius: 4px;
   transition: background 0.15s;
-  &:hover { background: $primary-light; }
+  &:hover { background: rgba(79, 110, 247, 0.08); }
 }
 
 .xly-dtp-date__title {
   font-size: 15px;
   font-weight: 600;
-  color: $text-color;
+  color: var(--el-text-color-regular);
   padding: 2px 8px;
   border-radius: 4px;
   cursor: pointer;
-  &:hover { background: $primary-light; }
+  &:hover { background: rgba(79, 110, 247, 0.08); }
 }
 
 .xly-dtp-date__weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   padding: 4px 0;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid var(--el-border-color);
 
   span {
     text-align: center;
     font-size: 12px;
-    color: $text-placeholder;
+    color: var(--el-text-color-placeholder);
     font-weight: 500;
     padding: 4px 0;
   }
@@ -805,12 +793,12 @@ $radius: 8px;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.15s;
-  color: $text-color;
+  color: var(--el-text-color-regular);
 
-  &:hover:not(.is-other):not(.is-selected) { background: $primary-light; }
-  &.is-other { color: $disabled-color; }
-  &.is-today { color: $primary; font-weight: 600; }
-  &.is-selected { background: $primary; color: #fff; font-weight: 500; }
+  &:hover:not(.is-other):not(.is-selected) { background: rgba(79, 110, 247, 0.08); }
+  &.is-other { color: var(--el-text-color-disabled); }
+  &.is-today { color: var(--el-color-primary); font-weight: 600; }
+  &.is-selected { background: var(--el-color-primary); color: #fff; font-weight: 500; }
 }
 
 .xly-dtp-date__year-grid {
@@ -829,11 +817,11 @@ $radius: 8px;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.15s;
-  color: $text-color;
+  color: var(--el-text-color-regular);
 
-  &:hover:not(.is-selected) { background: $primary-light; }
-  &.is-current { color: $primary; font-weight: 600; }
-  &.is-selected { background: $primary; color: #fff; }
+  &:hover:not(.is-selected) { background: rgba(79, 110, 247, 0.08); }
+  &.is-current { color: var(--el-color-primary); font-weight: 600; }
+  &.is-selected { background: var(--el-color-primary); color: #fff; }
 }
 
 // 时间区
@@ -862,8 +850,8 @@ $radius: 8px;
   font-size: 16px;
   font-weight: 600;
   font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
-  color: $text-color;
-  background: #f5f7fa;
+  color: var(--el-text-color-regular);
+  background: var(--el-fill-color-light);
   border: 1px solid transparent;
   border-radius: 6px;
   outline: none;
@@ -871,8 +859,8 @@ $radius: 8px;
   transition: all 0.15s;
 
   &:focus {
-    background: #fff;
-    border-color: $primary;
+    background: var(--el-bg-color);
+    border-color: var(--el-color-primary);
     box-shadow: 0 0 0 2px rgba(79, 110, 247, 0.12);
   }
 }
@@ -880,7 +868,7 @@ $radius: 8px;
 .xly-dtp-time__input-sep {
   font-size: 16px;
   font-weight: 600;
-  color: $text-placeholder;
+  color: var(--el-text-color-placeholder);
   margin: 0 2px;
 }
 
@@ -916,7 +904,7 @@ $radius: 8px;
   justify-content: center;
   font-size: 16px;
   font-weight: 500;
-  color: $text-placeholder;
+  color: var(--el-text-color-placeholder);
   width: 12px;
   flex-shrink: 0;
 }
@@ -940,7 +928,7 @@ $radius: 8px;
   justify-content: center;
   height: 32px;
   font-size: 13px;
-  color: $text-color;
+  color: var(--el-text-color-regular);
   cursor: pointer;
   transition: color 0.15s, font-size 0.15s, font-weight 0.15s;
   scroll-snap-align: start;
@@ -949,7 +937,7 @@ $radius: 8px;
   padding-left: 10px;
 
   &.is-selected {
-    color: $primary;
+    color: var(--el-color-primary);
     font-weight: 600;
     font-size: 14px;
   }
@@ -961,14 +949,14 @@ $radius: 8px;
   justify-content: space-between;
   align-items: center;
   padding: 4px 8px;
-  border-top: 1px solid $border-color;
+  border-top: 1px solid var(--el-border-color);
 }
 
 .xly-dtp__btn {
   padding: 4px 12px;
   border: none;
   background: transparent;
-  color: $text-color;
+  color: var(--el-text-color-regular);
   font-size: 13px;
   font-weight: 500;
   border-radius: 4px;
@@ -977,15 +965,15 @@ $radius: 8px;
   line-height: 1.5;
 
   &--now {
-    color: $text-placeholder;
-    &:hover { color: $primary; }
+    color: var(--el-text-color-placeholder);
+    &:hover { color: var(--el-color-primary); }
   }
 
   &--primary {
     background: transparent;
-    color: $primary;
+    color: var(--el-color-primary);
     font-weight: 500;
-    &:hover { background: $primary; color: #fff; }
+    &:hover { background: var(--el-color-primary); color: #fff; }
   }
 }
 

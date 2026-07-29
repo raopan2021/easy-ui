@@ -117,7 +117,7 @@ $corner-radius: 20px;
   position: relative;
 
   &--horizontal {
-    background-color: #eef1f8;
+    background-color: var(--el-fill-color-light);
   }
 }
 
@@ -136,7 +136,7 @@ $corner-radius: 20px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
+  background-color: var(--el-bg-color);
   border-top-left-radius: $corner-radius;
 
   /* 美化滚动条 */
@@ -144,7 +144,7 @@ $corner-radius: 20px;
     width: 6px;
   }
   .layout-content::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.1);
+    background: var(--el-fill-color-light);
     border-radius: 3px;
   }
   .layout-content::-webkit-scrollbar-track {

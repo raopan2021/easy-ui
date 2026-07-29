@@ -745,3 +745,39 @@ const tableRows = computed<TableRow[]>(() => {
   border-radius: 3px;
 }
 </style>
+
+<style lang="scss">
+/* ========== Dark Mode ========== */
+html.dark .permission-table th {
+  background: var(--el-fill-color);
+  color: var(--el-text-color-regular);
+}
+html.dark .permission-table tbody tr:hover {
+  background: var(--el-fill-color-light);
+}
+html.dark .cell-module {
+  background: var(--el-fill-color);
+}
+html.dark .permission-table.is-bordered {
+  border-color: var(--el-border-color);
+}
+html.dark .permission-table th,
+html.dark .permission-table td {
+  border-color: var(--el-border-color);
+}
+html.dark .permission-table {
+  background: var(--el-bg-color);
+}
+html.dark .selected-info {
+  background: var(--el-fill-color);
+}
+html.dark :deep(.el-checkbox__label) {
+  color: var(--el-text-color-regular);
+}
+html.dark .selected-title {
+  color: var(--el-text-color-primary);
+}
+html.dark .selected-count {
+  color: var(--el-text-color-secondary);
+}
+</style>

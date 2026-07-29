@@ -258,41 +258,41 @@ function formatDataUrlSize(dataUrl: string): string {
 
 /* ========== 页面头部 ========== */
 .doc-header { margin-bottom: 32px; }
-.doc-title { font-size: 22px; font-weight: 600; color: #1a1a1a; margin: 0 0 8px; }
-.doc-desc { font-size: 14px; color: #71717a; margin: 0; }
+.doc-title { font-size: 22px; font-weight: 600; color: var(--el-text-color-primary); margin: 0 0 8px; }
+.doc-desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0; }
 
 /* ========== 章节 ========== */
 .doc-section { margin-bottom: 28px; }
-.doc-section__title { font-size: 15px; font-weight: 600; color: #1a1a1a; margin: 0 0 8px; padding-bottom: 8px; border-bottom: 1px solid #e4e4e7; }
-.doc-section__desc { font-size: 14px; color: #71717a; margin: 0 0 14px;
-  code { background: #f4f5f7; color: #3b82f6; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+.doc-section__title { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 0 0 8px; padding-bottom: 8px; border-bottom: 1px solid var(--el-border-color-lighter); }
+.doc-section__desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 14px;
+  code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 13px; }
 }
-.doc-subtitle { font-size: 14px; font-weight: 500; color: #4a4a4a; margin: 24px 0 12px; }
+.doc-subtitle { font-size: 14px; font-weight: 500; color: var(--el-text-color-regular); margin: 24px 0 12px; }
 
 /* ========== 预览区 ========== */
-.doc-preview { border: 1px solid #e4e4e7; border-radius: 10px; overflow: hidden; background: #fff; }
+.doc-preview { border: 1px solid var(--el-border-color-lighter); border-radius: 10px; overflow: hidden; background: var(--el-bg-color-overlay); }
 .doc-preview__body { display: flex; flex-wrap: wrap; gap: 16px; padding: 20px; }
-.doc-code { border-top: 1px solid #e4e4e7; background: #fafbfc; padding: 12px 16px;
+.doc-code { border-top: 1px solid var(--el-border-color-lighter); background: var(--el-fill-color-light); padding: 12px 16px;
   pre { margin: 0; }
-  code { font-family: 'SF Mono', Consolas, monospace; font-size: 13px; color: #4a4a4a; }
+  code { font-family: 'SF Mono', Consolas, monospace; font-size: 13px; color: var(--el-text-color-regular); }
 }
 
 /* ========== 表格 ========== */
 .doc-table { overflow-x: auto;
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #e4e4e7; }
-  th { background: #fafbfc; font-weight: 500; color: #1a1a1a; }
-  td { color: #4a4a4a; }
-  code { background: #f4f5f7; color: #3b82f6; padding: 2px 6px; border-radius: 4px; font-size: 12px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--el-border-color-lighter); }
+  th { background: var(--el-fill-color-light); font-weight: 500; color: var(--el-text-color-primary); }
+  td { color: var(--el-text-color-regular); }
+  code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 12px; }
 }
 
 /* ========== 签名演示区 ========== */
 .sig-demo {
   width: 100%;
-  border: 1px solid #e4e4e7;
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 10px;
   overflow: hidden;
-  background: #fff;
+  background: var(--el-bg-color-overlay);
 
   &--dark {
     background: #0f172a;
@@ -304,7 +304,7 @@ function formatDataUrlSize(dataUrl: string): string {
   display: flex;
   gap: 8px;
   padding: 12px;
-  border-top: 1px solid #e4e4e7;
+  border-top: 1px solid var(--el-border-color-lighter);
 }
 
 .sig-action-btn {
@@ -312,18 +312,18 @@ function formatDataUrlSize(dataUrl: string): string {
   align-items: center;
   gap: 4px;
   padding: 6px 14px;
-  border: 1px solid #e4e4e7;
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 6px;
-  background: #fff;
-  color: #6b7280;
+  background: var(--el-bg-color-overlay);
+  color: var(--el-text-color-secondary);
   font-size: 13px;
   cursor: pointer;
   transition: all 0.2s;
 
-  &:hover { border-color: #4f6ef7; color: #4f6ef7; }
+  &:hover { border-color: #4f6ef7; color: var(--el-color-primary); }
 
   &--primary {
-    background: #4f6ef7;
+    background: var(--el-color-primary);
     border-color: #4f6ef7;
     color: #fff;
 
@@ -342,15 +342,15 @@ function formatDataUrlSize(dataUrl: string): string {
 
 .sig-preview__img {
   max-width: 400px;
-  border: 1px dashed #e4e4e7;
+  border: 1px dashed var(--el-border-color-lighter);
   border-radius: 8px;
-  background: #fafafa;
+  background: var(--el-fill-color-light);
   padding: 8px;
 }
 
 .sig-preview__size {
   font-size: 13px;
-  color: #9ca3af;
+  color: var(--el-text-color-placeholder);
   margin: 0;
 }
 </style>

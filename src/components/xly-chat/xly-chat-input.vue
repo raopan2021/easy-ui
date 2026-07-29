@@ -308,10 +308,10 @@ defineExpose({
 <style scoped lang="scss">
 $xly-primary: #4f6ef7;
 $xly-primary-hover: #4056d6;
-$xly-border: #e2e4ed;
-$xly-bg: #f5f6fa;
-$xly-text: #1a1a2e;
-$xly-text-secondary: #8e8ea0;
+$xly-border: var(--el-border-color);
+$xly-bg: var(--el-fill-color-light);
+$xly-text: var(--el-text-color-regular);
+$xly-text-secondary: var(--el-text-color-secondary);
 $xly-radius: 12px;
 
 .xly-chat-input {
@@ -325,7 +325,7 @@ $xly-radius: 12px;
   flex-wrap: wrap;
   gap: 8px;
   padding: 12px;
-  background: #fafbfd;
+  background: var(--el-fill-color-light);
   border-radius: $xly-radius;
   border: 1px solid $xly-border;
 }
@@ -337,7 +337,7 @@ $xly-radius: 12px;
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid $xly-border;
-  background: #fff;
+  background: var(--el-bg-color);
 
   img {
     width: 100%;
@@ -401,7 +401,7 @@ $xly-radius: 12px;
   align-items: flex-end;
   gap: 8px;
   padding: 12px;
-  background: #fff;
+  background: var(--el-bg-color);
   border: 1px solid $xly-border;
   border-radius: $xly-radius;
   transition: border-color 0.2s, box-shadow 0.2s;

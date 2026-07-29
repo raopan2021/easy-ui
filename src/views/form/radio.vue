@@ -19,7 +19,7 @@
             <XlyRadio v-model="val1" label="2">选项二</XlyRadio>
             <XlyRadio v-model="val1" label="3">选项三</XlyRadio>
           </div>
-          <span style="font-size: 13px; color: #8e8ea0">当前值：{{ val1 ?? '未选择' }}</span>
+          <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ val1 ?? '未选择' }}</span>
         </div>
       </div>
       <div class="doc-code">
@@ -44,7 +44,7 @@
             <XlyRadio label="guangzhou">广州</XlyRadio>
             <XlyRadio label="shenzhen">深圳</XlyRadio>
           </XlyRadioGroup>
-          <span style="font-size: 13px; color: #8e8ea0">当前值：{{ val2 ?? '未选择' }}</span>
+          <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ val2 ?? '未选择' }}</span>
         </div>
       </div>
       <div class="doc-code">
@@ -147,7 +147,7 @@
             <XlyRadio v-model="boolVal" :label="true">布尔 true</XlyRadio>
             <XlyRadio v-model="boolVal" :label="false">布尔 false</XlyRadio>
           </div>
-          <span style="font-size: 13px; color: #8e8ea0">
+          <span style="font-size: 13px; color: var(--el-text-color-secondary)">
             数字值：{{ typeVal ?? '未选择' }}，布尔值：{{ boolVal ?? '未选择' }}
           </span>
         </div>
@@ -180,23 +180,23 @@ const boolVal = ref<string | number | boolean>()
 <style>
 .component-doc {  padding: 8px 0 40px; }
 .doc-header { margin-bottom: 36px; }
-.doc-title { font-size: 26px; font-weight: 700; color: #1a1a2e; margin: 0 0 8px; letter-spacing: -0.3px; }
-.doc-desc { font-size: 14px; color: #8e8ea0; margin: 0; line-height: 1.6; }
+.doc-title { font-size: 26px; font-weight: 700; color: var(--el-text-color-primary); margin: 0 0 8px; letter-spacing: -0.3px; }
+.doc-desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0; line-height: 1.6; }
 .doc-section { margin-bottom: 32px; }
-.doc-section__title { font-size: 18px; font-weight: 600; color: #1a1a2e; margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid #f2f3f7; }
-.doc-section__desc { font-size: 14px; color: #8e8ea0; margin: 0 0 16px; line-height: 1.6;
-  code { background: #f5f6fa; color: #4f6ef7; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; }
+.doc-section__title { font-size: 18px; font-weight: 600; color: var(--el-text-color-primary); margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--el-border-color-lighter); }
+.doc-section__desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 16px; line-height: 1.6;
+  code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; }
 }
-.doc-preview { border: 1px solid #f2f3f7; border-radius: 12px; overflow: hidden; background: #fff; }
+.doc-preview { border: 1px solid var(--el-border-color-lighter); border-radius: 12px; overflow: hidden; background: var(--el-bg-color-overlay); }
 .doc-preview__body { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 24px; }
-.doc-code { border-top: 1px solid #f2f3f7; background: #fafbfd; padding: 16px 20px; overflow-x: auto;
+.doc-code { border-top: 1px solid var(--el-border-color-lighter); background: var(--el-fill-color-light); padding: 16px 20px; overflow-x: auto;
   pre { margin: 0; padding: 0; }
-  code { font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 13px; line-height: 1.7; color: #4a4a6a; white-space: pre; }
+  code { font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 13px; line-height: 1.7; color: var(--el-text-color-regular); white-space: pre; }
 }
-.doc-subtitle { font-size: 15px; font-weight: 600; color: #1a1a2e; margin: 20px 0 10px; }
+.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
 .doc-table { overflow-x: auto;
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid #f2f3f7; white-space: nowrap; }
-  th { background: #fafbfd; font-weight: 600; color: #1a1a2e; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); white-space: nowrap; }
+  th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); }
 }
 </style>

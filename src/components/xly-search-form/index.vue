@@ -355,7 +355,7 @@ onMounted(() => {
 <style scoped lang="scss">
 .xly-search-form {
   width: 100%;
-  background: #fff;
+  background: var(--el-bg-color);
   border-radius: 8px;
   border: 1px solid #e2e4ed;
   transition: all 0.3s ease;
@@ -404,5 +404,16 @@ onMounted(() => {
       }
     }
   }
+}
+</style>
+
+<style lang="scss">
+/* ========== Dark Mode ========== */
+html.dark .xly-search-form {
+  background: var(--el-bg-color);
+  border-color: var(--el-border-color);
+}
+html.dark .xly-search-form__title {
+  color: var(--el-text-color-primary);
 }
 </style>

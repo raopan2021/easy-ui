@@ -702,17 +702,17 @@ const avatarImages = ref<string[]>([])
 <style scoped lang="scss">
 .upload-doc { padding: 8px 0 40px; }
 .doc-header { margin-bottom: 36px; }
-.doc-title { font-size: 26px; font-weight: 700; color: #1a1a2e; margin: 0 0 8px; letter-spacing: -0.3px; }
-.doc-desc { font-size: 14px; color: #8e8ea0; margin: 0; line-height: 1.6; }
+.doc-title { font-size: 26px; font-weight: 700; color: var(--el-text-color-primary); margin: 0 0 8px; letter-spacing: -0.3px; }
+.doc-desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0; line-height: 1.6; }
 .doc-section { margin-bottom: 32px; }
-.doc-section__title { font-size: 18px; font-weight: 600; color: #1a1a2e; margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid #f2f3f7; }
-.doc-subsection__title { font-size: 15px; font-weight: 600; color: #4a4a6a; margin: 24px 0 12px; }
-.doc-section__desc { font-size: 14px; color: #8e8ea0; margin: 0 0 16px; line-height: 1.6; code { background: #f5f6fa; color: #4f6ef7; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; } }
-.doc-preview { border: 1px solid #f2f3f7; border-radius: 12px; overflow: hidden; background: #fff; &--noborder { border: none; background: #fafbfd; } }
+.doc-section__title { font-size: 18px; font-weight: 600; color: var(--el-text-color-primary); margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--el-border-color-lighter); }
+.doc-subsection__title { font-size: 15px; font-weight: 600; color: var(--el-text-color-regular); margin: 24px 0 12px; }
+.doc-section__desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 16px; line-height: 1.6; code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; } }
+.doc-preview { border: 1px solid var(--el-border-color-lighter); border-radius: 12px; overflow: hidden; background: var(--el-bg-color-overlay); &--noborder { border: none; background: var(--el-fill-color-light); } }
 .doc-preview__body { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 24px; }
-.doc-code { border-top: 1px solid #f2f3f7; background: #fafbfd; padding: 16px 20px; overflow-x: auto; pre { margin: 0; padding: 0; } code { font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 13px; line-height: 1.7; color: #4a4a6a; white-space: pre; } }
-.doc-subtitle { font-size: 15px; font-weight: 600; color: #1a1a2e; margin: 20px 0 10px; }
-.doc-table { overflow-x: auto; table { width: 100%; border-collapse: collapse; font-size: 14px; } th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid #f2f3f7; } th { background: #fafbfd; font-weight: 600; color: #1a1a2e; white-space: nowrap; } td { color: #4a4a6a; } code { background: #f5f6fa; color: #4f6ef7; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; } }
+.doc-code { border-top: 1px solid var(--el-border-color-lighter); background: var(--el-fill-color-light); padding: 16px 20px; overflow-x: auto; pre { margin: 0; padding: 0; } code { font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 13px; line-height: 1.7; color: var(--el-text-color-regular); white-space: pre; } }
+.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
+.doc-table { overflow-x: auto; table { width: 100%; border-collapse: collapse; font-size: 14px; } th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); } th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); white-space: nowrap; } td { color: var(--el-text-color-regular); } code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; } }
 
 // 当前值展示
 .demo-value-display {
@@ -720,20 +720,20 @@ const avatarImages = ref<string[]>([])
   align-items: flex-start;
   gap: 8px;
   padding: 8px 12px;
-  background: #f5f6fa;
+  background: var(--el-fill-color-light);
   border-radius: 6px;
   margin-top: 10px;
   font-size: 12px;
 }
 
 .demo-value-label {
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   flex-shrink: 0;
   line-height: 1.5;
 }
 
 .demo-value-content {
-  color: #4f6ef7;
+  color: var(--el-color-primary);
   font-family: 'SF Mono', Consolas, monospace;
   word-break: break-all;
   line-height: 1.5;
@@ -761,13 +761,13 @@ const avatarImages = ref<string[]>([])
 
 .demo-vmodel-label {
   font-size: 13px;
-  color: #4a4a6a;
+  color: var(--el-text-color-regular);
   font-weight: 500;
 }
 
 .demo-label {
   font-size: 13px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   margin-bottom: 8px;
 }
 
@@ -781,14 +781,14 @@ const avatarImages = ref<string[]>([])
   border: 1px solid rgba(79, 110, 247, 0.2);
   border-radius: 8px;
   font-size: 13px;
-  color: #4a4a6a;
+  color: var(--el-text-color-regular);
   width: 100%;
   box-sizing: border-box;
   margin-bottom: 4px;
 
   code {
     background: rgba(79, 110, 247, 0.1);
-    color: #4f6ef7;
+    color: var(--el-color-primary);
     padding: 1px 5px;
     border-radius: 3px;
     font-size: 12px;
@@ -813,7 +813,7 @@ const avatarImages = ref<string[]>([])
 .demo-form-label {
   width: 72px;
   font-size: 14px;
-  color: #4a4a6a;
+  color: var(--el-text-color-regular);
   flex-shrink: 0;
   padding-top: 6px;
   text-align: right;
@@ -830,7 +830,7 @@ const avatarImages = ref<string[]>([])
   border: 1px solid #e4e7f0;
   border-radius: 6px;
   font-size: 14px;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   outline: none;
   width: 240px;
   transition: border-color 0.2s;
@@ -839,7 +839,7 @@ const avatarImages = ref<string[]>([])
     border-color: #4f6ef7;
   }
 
-  &::placeholder { color: #c0c4cc; }
+  &::placeholder { color: var(--el-text-color-placeholder); }
 }
 
 .demo-form-actions {
@@ -879,7 +879,7 @@ const avatarImages = ref<string[]>([])
   height: 80px;
   border-radius: 50%;
   border: 2px dashed #e4e7f0;
-  background: #fafbfd;
+  background: var(--el-fill-color-light);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -893,7 +893,7 @@ const avatarImages = ref<string[]>([])
 
 .demo-avatar-title {
   font-size: 14px;
-  color: #4a4a6a;
+  color: var(--el-text-color-regular);
   font-weight: 500;
 }
 
@@ -909,14 +909,14 @@ const avatarImages = ref<string[]>([])
 
   &__icon {
     flex-shrink: 0;
-    color: #4f6ef7;
+    color: var(--el-color-primary);
     padding-top: 1px;
   }
 
   &__body {
     flex: 1;
     font-size: 14px;
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
     line-height: 1.7;
 
     p {
@@ -926,7 +926,7 @@ const avatarImages = ref<string[]>([])
 
     code {
       background: rgba(79, 110, 247, 0.1);
-      color: #4f6ef7;
+      color: var(--el-color-primary);
       padding: 1px 5px;
       border-radius: 3px;
       font-size: 13px;
@@ -936,7 +936,7 @@ const avatarImages = ref<string[]>([])
 
   &__title {
     font-weight: 600;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
     margin-bottom: 8px;
     font-size: 14px;
   }
@@ -944,7 +944,7 @@ const avatarImages = ref<string[]>([])
 
 .doc-code--standalone {
   border-top: none !important;
-  border: 1px solid #f2f3f7;
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 8px;
   margin: 10px 0;
 }

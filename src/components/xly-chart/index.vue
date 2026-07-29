@@ -2285,12 +2285,12 @@ watch(() => props.labels, () => { scrollOffsetX.value = 0 }, { deep: true })
 </script>
 
 <style scoped lang="scss">
-$text-primary: #1a1a1a;
-$text-regular: #4a4a4a;
-$text-secondary: #71717a;
-$text-muted: #a1a1aa;
-$border-color: #e4e4e7;
-$bg-white: #ffffff;
+$text-primary: var(--el-text-color-primary);
+$text-regular: var(--el-text-color-regular);
+$text-secondary: var(--el-text-color-secondary);
+$text-muted: var(--el-text-color-secondary);
+$border-color: var(--el-border-color);
+$bg-white: var(--el-bg-color);
 
 .xly-chart {
   position: relative;
@@ -2369,7 +2369,7 @@ $bg-white: #ffffff;
   outline: none;
 
   &:hover {
-    background: #f4f5f7;
+    background: var(--el-fill-color-light);
     color: $text-primary;
     border-color: #d9d9db; // darken($border-color, 5%) → $border-color=#e4e4e7
   }
@@ -2408,7 +2408,7 @@ $bg-white: #ffffff;
   white-space: nowrap;
 
   &:hover {
-    background: #f4f5f7;
+    background: var(--el-fill-color-light);
     color: $text-primary;
   }
   &:active {
@@ -2537,7 +2537,7 @@ $bg-white: #ffffff;
 
 // 触发竖线
 .xly-chart__tooltip-line {
-  stroke: #d1d5db;
+  stroke: var(--el-text-color-placeholder);
   stroke-width: 1;
   stroke-dasharray: 4 3;
   pointer-events: none;
@@ -2657,7 +2657,7 @@ $bg-white: #ffffff;
   transition: fill 0.15s;
 
   &:hover {
-    fill: #a1a1aa;
+    fill: var(--el-text-color-placeholder);
   }
 }
 

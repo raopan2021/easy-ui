@@ -15,7 +15,7 @@
           <div style="width: 300px;">
             <XlyCascader v-model="val1" :options="areaOptions" placeholder="请选择地区" />
           </div>
-          <span style="font-size: 13px; color: #8e8ea0;">选中值：{{ JSON.stringify(val1) }}</span>
+          <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ JSON.stringify(val1) }}</span>
         </div>
       </div>
       <div class="doc-code">
@@ -66,7 +66,7 @@ const options = [
               clearable
             />
           </div>
-          <span style="font-size: 13px; color: #8e8ea0;">选中值：{{ JSON.stringify(val3) }}</span>
+          <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ JSON.stringify(val3) }}</span>
         </div>
       </div>
       <div class="doc-code">
@@ -93,7 +93,7 @@ const options = [
               clearable
             />
           </div>
-          <span style="font-size: 13px; color: #8e8ea0;">当前值（二维数组）：{{ JSON.stringify(val10) }}</span>
+          <span style="font-size: 13px; color: var(--el-text-color-secondary);">当前值（二维数组）：{{ JSON.stringify(val10) }}</span>
 
           <div style="width: 400px;">
             <XlyCascader
@@ -105,7 +105,7 @@ const options = [
               clearable
             />
           </div>
-          <span style="font-size: 13px; color: #8e8ea0;">当前值（字符串）：{{ val11 }}</span>
+          <span style="font-size: 13px; color: var(--el-text-color-secondary);">当前值（字符串）：{{ val11 }}</span>
 
           <div style="width: 400px;">
             <XlyCascader
@@ -118,7 +118,7 @@ const options = [
               clearable
             />
           </div>
-          <span style="font-size: 13px; color: #8e8ea0;">当前值（分号分隔）：{{ val12 }}</span>
+          <span style="font-size: 13px; color: var(--el-text-color-secondary);">当前值（分号分隔）：{{ val12 }}</span>
         </div>
       </div>
       <div class="doc-code">
@@ -205,7 +205,7 @@ const value = ref("zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu")
           <div style="width: 300px;">
             <XlyCascader v-model="val7" :options="areaOptions" placeholder="可选中任意层级" check-strictly clearable  filterable multiple/>
           </div>
-          <span style="font-size: 13px; color: #8e8ea0;">选中值：{{ JSON.stringify(val7) }}</span>
+          <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ JSON.stringify(val7) }}</span>
         </div>
       </div>
       <div class="doc-code">
@@ -231,7 +231,7 @@ const value = ref("zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu")
               clearable
             />
           </div>
-          <span style="font-size: 13px; color: #8e8ea0;">选中值：{{ JSON.stringify(val8) }}</span>
+          <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ JSON.stringify(val8) }}</span>
         </div>
       </div>
       <div class="doc-code">
@@ -277,7 +277,7 @@ const options = [
               clearable
             />
           </div>
-          <span style="font-size: 13px; color: #8e8ea0;">选中值：{{ JSON.stringify(val9) }}</span>
+          <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ JSON.stringify(val9) }}</span>
         </div>
       </div>
       <div class="doc-code">
@@ -567,25 +567,25 @@ const customFieldOptions = [
 <style scoped lang="scss">
 .component-doc { padding: 8px 0 40px; }
 .doc-header { margin-bottom: 36px; }
-.doc-title { font-size: 26px; font-weight: 700; color: #1a1a2e; margin: 0 0 8px; letter-spacing: -0.3px; }
-.doc-desc { font-size: 14px; color: #8e8ea0; margin: 0; line-height: 1.6; }
+.doc-title { font-size: 26px; font-weight: 700; color: var(--el-text-color-primary); margin: 0 0 8px; letter-spacing: -0.3px; }
+.doc-desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0; line-height: 1.6; }
 .doc-section { margin-bottom: 32px; }
-.doc-section__title { font-size: 18px; font-weight: 600; color: #1a1a2e; margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid #f2f3f7; }
-.doc-section__desc { font-size: 14px; color: #8e8ea0; margin: 0 0 16px; line-height: 1.6;
-  code { background: #f5f6fa; color: #4f6ef7; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; }
+.doc-section__title { font-size: 18px; font-weight: 600; color: var(--el-text-color-primary); margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--el-border-color-lighter); }
+.doc-section__desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 16px; line-height: 1.6;
+  code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; }
 }
-.doc-preview { border: 1px solid #f2f3f7; border-radius: 12px; overflow: hidden; background: #fff; }
+.doc-preview { border: 1px solid var(--el-border-color-lighter); border-radius: 12px; overflow: hidden; background: var(--el-bg-color-overlay); }
 .doc-preview__body { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 24px; }
-.doc-code { border-top: 1px solid #f2f3f7; background: #fafbfd; padding: 16px 20px; overflow-x: auto;
+.doc-code { border-top: 1px solid var(--el-border-color-lighter); background: var(--el-fill-color-light); padding: 16px 20px; overflow-x: auto;
   pre { margin: 0; padding: 0; }
-  code { font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 13px; line-height: 1.7; color: #4a4a6a; white-space: pre; }
+  code { font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 13px; line-height: 1.7; color: var(--el-text-color-regular); white-space: pre; }
 }
-.doc-subtitle { font-size: 15px; font-weight: 600; color: #1a1a2e; margin: 20px 0 10px; }
+.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
 .doc-table { overflow-x: auto;
   table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid #f2f3f7; white-space: nowrap; }
-  th { background: #fafbfd; font-weight: 600; color: #1a1a2e; }
-  td { color: #4a4a6a; }
-  code { background: #f5f6fa; color: #4f6ef7; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); white-space: nowrap; }
+  th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); }
+  td { color: var(--el-text-color-regular); }
+  code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; }
 }
 </style>

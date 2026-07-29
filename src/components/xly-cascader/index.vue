@@ -864,15 +864,15 @@ defineExpose({ blur: () => { panelVisible.value = false }, remoteOptions })
 </script>
 
 <style scoped lang="scss">
-$primary: #4f6ef7;
+
 $primary-light: rgba(79, 110, 247, 0.08);
-$border-color: #e2e4ed;
-$border-focus: #4f6ef7;
-$border-hover: #c8cbd8;
-$disabled-bg: #f5f7fa;
-$disabled-color: #a8abb2;
-$text-color: #4a4a6a;
-$text-placeholder: #c0c4cc;
+$border-color: var(--el-border-color);
+$border-focus: var(--el-color-primary);
+$border-hover: var(--el-border-color-hover);
+$disabled-bg: var(--el-fill-color-light);
+$disabled-color: var(--el-text-color-placeholder);
+$text-color: var(--el-text-color-regular);
+$text-placeholder: var(--el-text-color-placeholder);
 $radius: 8px;
 $transition: all 0.2s ease;
 
@@ -895,7 +895,7 @@ $transition: all 0.2s ease;
     display: inline-flex;
     align-items: center;
     padding: 0 12px;
-    background-color: #fff;
+    background-color: var(--el-bg-color);
     border: 1px solid $border-color;
     border-radius: $radius;
     cursor: pointer;
@@ -908,7 +908,7 @@ $transition: all 0.2s ease;
 
   &.is-focus &__wrapper {
     border-color: $border-focus;
-    box-shadow: 0 0 0 2px $primary-light;
+    box-shadow: 0 0 0 2px rgba(79, 110, 247, 0.08);
   }
 
   &__value {
@@ -936,8 +936,8 @@ $transition: all 0.2s ease;
     align-items: center;
     gap: 2px;
     padding: 1px 6px;
-    background: $primary-light;
-    color: $primary;
+    background: rgba(79, 110, 247, 0.08);
+    color: var(--el-color-primary);
     border-radius: 4px;
     font-size: 12px;
     white-space: nowrap;
@@ -984,18 +984,18 @@ $transition: all 0.2s ease;
 </style>
 
 <style lang="scss">
-$primary: #4f6ef7;
+
 $primary-light: rgba(79, 110, 247, 0.08);
-$border-color: #e2e4ed;
-$disabled-color: #a8abb2;
-$text-color: #4a4a6a;
-$text-placeholder: #c0c4cc;
+$border-color: var(--el-border-color);
+$disabled-color: var(--el-text-color-placeholder);
+$text-color: var(--el-text-color-regular);
+$text-placeholder: var(--el-text-color-placeholder);
 $radius: 8px;
 
 .xly-cascader__panel {
   position: fixed;
   z-index: 2000;
-  background: #fff;
+  background: var(--el-bg-color);
   border: 1px solid $border-color;
   border-radius: $radius;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08), 0 3px 6px rgba(0, 0, 0, 0.06);
@@ -1019,7 +1019,7 @@ $radius: 8px;
   transition: border-color 0.2s;
   box-sizing: border-box;
 
-  &:focus { border-color: $primary; }
+  &:focus { border-color: var(--el-color-primary); }
   &::placeholder { color: $text-placeholder; }
 }
 
@@ -1039,8 +1039,8 @@ $radius: 8px;
   cursor: pointer;
   transition: background 0.15s;
 
-  &:hover { background: $primary-light; }
-  &.is-selected { color: $primary; font-weight: 500; }
+  &:hover { background: rgba(79, 110, 247, 0.08); }
+  &.is-selected { color: var(--el-color-primary); font-weight: 500; }
 }
 
 .xly-cascader__search-check {
@@ -1087,8 +1087,8 @@ $radius: 8px;
   cursor: pointer;
   transition: background 0.15s;
 
-  &:hover:not(.is-disabled) { background: $primary-light; }
-  &.is-active { color: $primary; font-weight: 500; }
+  &:hover:not(.is-disabled) { background: rgba(79, 110, 247, 0.08); }
+  &.is-active { color: var(--el-color-primary); font-weight: 500; }
   &.is-disabled { color: $disabled-color; cursor: not-allowed; }
 }
 
@@ -1106,12 +1106,12 @@ $radius: 8px;
   color: #fff;
 
   &:hover {
-    border-color: $primary;
+    border-color: var(--el-color-primary);
   }
 
   &:has(.xly-icon) {
-    background: $primary;
-    border-color: $primary;
+    background: var(--el-color-primary);
+    border-color: var(--el-color-primary);
   }
 }
 
@@ -1128,7 +1128,7 @@ $radius: 8px;
 }
 
 .xly-cascader__menu-loading {
-  color: $primary;
+  color: var(--el-color-primary);
   font-size: 12px;
 }
 
@@ -1148,5 +1148,39 @@ $radius: 8px;
 .xly-cascader-zoom-leave-to {
   opacity: 0;
   transform: scaleY(0.9) translateY(-4px);
+}
+</style>
+
+<style lang="scss">
+/* ========== Dark Mode ========== */
+html.dark .xly-cascader__placeholder { color: var(--el-text-color-placeholder); }
+html.dark .xly-cascader__label { color: var(--el-text-color-primary); }
+html.dark .xly-cascader__clear { color: var(--el-text-color-secondary); }
+html.dark .xly-cascader__arrow.is-reverse { color: var(--el-text-color-placeholder); }
+html.dark .xly-cascader__menu {
+  background: var(--el-bg-color-overlay);
+  border-color: var(--el-border-color);
+  box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.2);
+}
+html.dark .xly-cascader__node__label { color: var(--el-text-color-regular); }
+html.dark .xly-cascader__node:hover:not(.is-disabled) { background: var(--el-fill-color-light); }
+html.dark .xly-cascader__node.is-active:not(.is-disabled) {
+  background: var(--el-fill-color-light);
+  color: var(--el-color-primary);
+}
+html.dark .xly-cascader__node.is-disabled .xly-cascader__node__label {
+  color: var(--el-text-color-disabled);
+}
+html.dark .xly-cascader__menu-search {
+  background: var(--el-bg-color);
+  border-bottom-color: var(--el-border-color);
+}
+html.dark .xly-cascader__menu-search .search-input {
+  background: var(--el-fill-color-lighter);
+  color: var(--el-text-color-primary);
+}
+html.dark .xly-cascader__menu-tag {
+  background: var(--el-fill-color-lighter);
+  border-color: var(--el-border-color);
 }
 </style>

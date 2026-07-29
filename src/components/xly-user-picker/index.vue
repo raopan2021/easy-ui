@@ -780,3 +780,51 @@ defineExpose({
   }
 }
 </style>
+
+<style lang="scss">
+html.dark .xly-user-picker__selected {
+  background: var(--el-fill-color);
+  border-color: var(--el-border-color);
+}
+html.dark .xly-user-picker__selected:hover {
+  border-color: var(--el-color-primary);
+}
+html.dark .xly-user-picker__tag {
+  background: var(--el-fill-color-lighter);
+}
+html.dark .xly-user-picker__tag:hover {
+  background: var(--el-fill-color);
+}
+html.dark .xly-user-picker__name {
+  color: var(--el-text-color-primary);
+}
+html.dark .xly-user-picker__extra {
+  color: var(--el-text-color-secondary);
+}
+html.dark .xly-user-picker__dialog {
+  background: var(--el-bg-color-overlay);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+html.dark .xly-user-picker__header {
+  border-bottom-color: var(--el-border-color-light);
+}
+html.dark .xly-user-picker__header h3 {
+  color: var(--el-text-color-primary);
+}
+html.dark .xly-user-picker__search {
+  background: var(--el-fill-color-lighter);
+}
+html.dark .xly-user-picker__item:hover {
+  background: var(--el-fill-color-light);
+}
+html.dark .xly-user-picker__footer {
+  border-top-color: var(--el-border-color-light);
+  background: var(--el-fill-color-lighter);
+}
+html.dark .xly-user-picker__item-name {
+  color: var(--el-text-color-primary);
+}
+html.dark .xly-user-picker__item-extra {
+  color: var(--el-text-color-secondary);
+}
+</style>

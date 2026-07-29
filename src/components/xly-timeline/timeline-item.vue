@@ -100,13 +100,9 @@ const nodeIconSize = computed(() => {
 
 <style scoped lang="scss">
 /* ========== 设计令牌 ========== */
-$color-primary: #4f6ef7;
-$color-success: #67c23a;
-$color-warning: #e6a23c;
-$color-danger: #f56c6c;
-$color-default: #c0c4cc;
-$color-text-secondary: #4a4a6a;
-$color-text-placeholder: #8e8ea0;
+
+$color-text-secondary: var(--el-text-color-secondary);
+$color-text-placeholder: var(--el-text-color-placeholder);
 
 /* ========== 时间线项 ========== */
 .xly-timeline-item {
@@ -138,33 +134,33 @@ $color-text-placeholder: #8e8ea0;
 
   &--wait {
     .xly-timeline-item__node--wait {
-      background-color: #fff;
-      border-color: $color-default;
-      color: $color-default;
+      background-color: var(--el-bg-color);
+      border-color: var(--el-text-color-placeholder);
+      color: var(--el-text-color-placeholder);
     }
   }
 
   &--process {
     .xly-timeline-item__node--process {
-      background-color: $color-primary;
-      border-color: $color-primary;
+      background-color: var(--el-color-primary);
+      border-color: var(--el-color-primary);
       color: #fff;
-      box-shadow: 0 0 0 4px rgba($color-primary, 0.2);
+      box-shadow: 0 0 0 4px rgba(var(--el-color-primary), 0.2);
     }
   }
 
   &--finish {
     .xly-timeline-item__node--finish {
-      background-color: $color-success;
-      border-color: $color-success;
+      background-color: var(--el-color-success);
+      border-color: var(--el-color-success);
       color: #fff;
     }
   }
 
   &--error {
     .xly-timeline-item__node--error {
-      background-color: $color-danger;
-      border-color: $color-danger;
+      background-color: var(--el-color-danger);
+      border-color: var(--el-color-danger);
       color: #fff;
     }
   }
@@ -173,7 +169,7 @@ $color-text-placeholder: #8e8ea0;
 /* ========== 连接线 ========== */
 .xly-timeline-item__line {
   position: absolute;
-  background-color: $color-default;
+  background-color: var(--el-text-color-placeholder);
 
   .xly-timeline-item--vertical & {
     left: 11px;
@@ -190,19 +186,19 @@ $color-text-placeholder: #8e8ea0;
   }
 
   .xly-timeline-item--wait & {
-    background-color: $color-default;
+    background-color: var(--el-text-color-placeholder);
   }
 
   .xly-timeline-item--process & {
-    background: linear-gradient(to bottom, $color-primary, $color-default);
+    background: linear-gradient(to bottom, var(--el-color-primary), var(--el-text-color-placeholder));
   }
 
   .xly-timeline-item--finish & {
-    background-color: $color-success;
+    background-color: var(--el-color-success);
   }
 
   .xly-timeline-item--error & {
-    background-color: $color-danger;
+    background-color: var(--el-color-danger);
   }
 }
 
@@ -216,32 +212,32 @@ $color-text-placeholder: #8e8ea0;
   height: 24px;
   border-radius: 50%;
   border: 2px solid;
-  background-color: #fff;
+  background-color: var(--el-bg-color);
   flex-shrink: 0;
   z-index: 1;
   transition: all 0.3s ease;
 
   &--wait {
-    background-color: #fff;
-    border-color: $color-default;
-    color: $color-default;
+    background-color: var(--el-bg-color);
+    border-color: var(--el-text-color-placeholder);
+    color: var(--el-text-color-placeholder);
   }
 
   &--process {
-    background-color: $color-primary;
-    border-color: $color-primary;
+    background-color: var(--el-color-primary);
+    border-color: var(--el-color-primary);
     color: #fff;
   }
 
   &--finish {
-    background-color: $color-success;
-    border-color: $color-success;
+    background-color: var(--el-color-success);
+    border-color: var(--el-color-success);
     color: #fff;
   }
 
   &--error {
-    background-color: $color-danger;
-    border-color: $color-danger;
+    background-color: var(--el-color-danger);
+    border-color: var(--el-color-danger);
     color: #fff;
   }
 }

@@ -436,17 +436,10 @@ defineExpose({ focus, blur, select, inputRef })
 </script>
 
 <style scoped lang="scss">
-$primary: #4f6ef7;
-$primary-light: rgba(79, 110, 247, 0.08);
-$border-color: #e2e4ed;
-$border-focus: #4f6ef7;
-$border-hover: #c8cbd8;
-$disabled-bg: #f5f7fa;
-$disabled-color: #a8abb2;
-$text-color: #4a4a6a;
-$text-placeholder: #c0c4cc;
+
+$border-focus: var(--el-color-primary);
 $radius: 8px;
-$danger: #f56c6c;
+
 $transition: all 0.2s ease;
 
 .xly-input {
@@ -501,9 +494,9 @@ $transition: all 0.2s ease;
     align-items: center;
     justify-content: center;
     padding: 0 12px;
-    background-color: #f5f7fa;
-    color: $text-color;
-    border: 1px solid $border-color;
+    background-color: var(--el-fill-color-light);
+    color: var(--el-text-color-regular);
+    border: 1px solid var(--el-border-color);
     white-space: nowrap;
     font-weight: 500;
   }
@@ -528,24 +521,24 @@ $transition: all 0.2s ease;
     display: inline-flex;
     align-items: center;
     padding: 0 12px;
-    background-color: #fff;
-    border: 1px solid $border-color;
+    background-color: var(--el-bg-color);
+    border: 1px solid var(--el-border-color);
     border-radius: $radius;
     transition: $transition;
     box-sizing: border-box;
     cursor: text;
 
     &.is-hover:not(.is-disabled) {
-      border-color: $border-hover;
+      border-color: var(--el-border-color-darker);
     }
 
     &.is-focus:not(.is-disabled) {
       border-color: $border-focus;
-      box-shadow: 0 0 0 2px $primary-light;
+      box-shadow: 0 0 0 2px rgba(79, 110, 247, 0.08);
     }
 
     &.is-disabled {
-      background-color: $disabled-bg;
+      background-color: var(--el-fill-color-light);
       cursor: not-allowed;
     }
 
@@ -576,16 +569,16 @@ $transition: all 0.2s ease;
     border: none;
     outline: none;
     background: transparent;
-    color: $text-color;
+    color: var(--el-text-color-regular);
     font-family: inherit;
     box-sizing: border-box;
 
     &::placeholder {
-      color: $text-placeholder;
+      color: var(--el-text-color-placeholder);
     }
 
     &:disabled {
-      color: $disabled-color;
+      color: var(--el-text-color-disabled);
       cursor: not-allowed;
     }
 
@@ -608,7 +601,7 @@ $transition: all 0.2s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: $text-placeholder;
+    color: var(--el-text-color-placeholder);
     transition: color $transition;
     flex-shrink: 0;
   }
@@ -626,13 +619,13 @@ $transition: all 0.2s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: $text-placeholder;
+    color: var(--el-text-color-placeholder);
     cursor: pointer;
     transition: color $transition;
     border-radius: 50%;
 
     &:hover {
-      color: $text-color;
+      color: var(--el-text-color-regular);
     }
   }
 
@@ -641,7 +634,7 @@ $transition: all 0.2s ease;
     flex-shrink: 0;
     margin-left: 8px;
     font-size: 12px;
-    color: $text-placeholder;
+    color: var(--el-text-color-placeholder);
 
     // textarea 模式下的字数统计
     .is-textarea & {
@@ -656,5 +649,31 @@ $transition: all 0.2s ease;
       pointer-events: none;
     }
   }
+}
+</style>
+
+<style lang="scss">
+/* ========== Dark Mode ========== */
+html.dark .xly-input:not(.is-disabled) .xly-input__inner {
+  color: var(--el-text-color-primary);
+}
+html.dark .xly-input__inner::placeholder {
+  color: var(--el-text-color-placeholder);
+}
+html.dark .xly-input__prefix,
+html.dark .xly-input__suffix {
+  color: var(--el-text-color-placeholder);
+}
+html.dark .xly-input__count {
+  color: var(--el-text-color-secondary);
+}
+html.dark .xly-textarea__inner {
+  color: var(--el-text-color-primary);
+}
+html.dark .xly-textarea__inner::placeholder {
+  color: var(--el-text-color-placeholder);
+}
+html.dark .xly-input__inner--password {
+  color: var(--el-text-color-secondary);
 }
 </style>

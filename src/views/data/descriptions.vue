@@ -381,13 +381,13 @@ import XlyButton from '@/components/xly-button/index.vue'
 .doc-title {
   font-size: 22px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
 }
 
 .doc-desc {
   font-size: 14px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   margin: 0;
   line-height: 1.6;
 }
@@ -399,41 +399,41 @@ import XlyButton from '@/components/xly-button/index.vue'
 .doc-section__title {
   font-size: 15px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 0 0 8px;
   padding-bottom: 8px;
-  border-bottom: 1px solid #f2f3f7;
+  border-bottom: 1px solid var(--el-border-color-lighter);
 }
 
 .doc-section__desc {
   font-size: 14px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   margin: 0 0 14px;
   line-height: 1.6;
 
   code {
-    background: #fafbfd;
-    color: #1677ff;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 13px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
-    border: 1px solid #e8eaed;
+    border: 1px solid var(--el-border-color-lighter);
   }
 }
 
 .doc-subtitle {
   font-size: 14px;
   font-weight: 500;
-  color: #4a4a6a;
+  color: var(--el-text-color-regular);
   margin: 24px 0 12px;
 }
 
 .doc-preview {
-  border: 1px solid #e8eaed;
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 12px;
   overflow: hidden;
-  background: #fff;
+  background: var(--el-bg-color-overlay);
 }
 
 .doc-preview__body {
@@ -447,8 +447,8 @@ import XlyButton from '@/components/xly-button/index.vue'
 }
 
 .doc-code {
-  border-top: 1px solid #f2f3f7;
-  background: #fafbfd;
+  border-top: 1px solid var(--el-border-color-lighter);
+  background: var(--el-fill-color-light);
   padding: 16px 20px;
   overflow-x: auto;
 
@@ -458,7 +458,7 @@ import XlyButton from '@/components/xly-button/index.vue'
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
     font-size: 13px;
     line-height: 1.7;
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
     white-space: pre;
   }
 }
@@ -475,26 +475,26 @@ import XlyButton from '@/components/xly-button/index.vue'
   th, td {
     text-align: left;
     padding: 10px 14px;
-    border-bottom: 1px solid #f2f3f7;
+    border-bottom: 1px solid var(--el-border-color-lighter);
   }
 
   th {
-    background: #fafbfd;
+    background: var(--el-fill-color-light);
     font-weight: 600;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
     font-size: 13px;
   }
 
-  td { color: #4a4a6a; }
+  td { color: var(--el-text-color-regular); }
 
   code {
-    background: #fafbfd;
-    color: #1677ff;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
     padding: 1px 6px;
     border-radius: 4px;
     font-size: 12px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
-    border: 1px solid #e8eaed;
+    border: 1px solid var(--el-border-color-lighter);
   }
 }
 
@@ -503,11 +503,11 @@ import XlyButton from '@/components/xly-button/index.vue'
   display: inline-block;
   font-size: 11px;
   font-weight: 600;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  background: #fafbfd;
-  border: 1px solid #e8eaed;
+  background: var(--el-fill-color-light);
+  border: 1px solid var(--el-border-color-lighter);
   padding: 1px 8px;
   border-radius: 20px;
   margin-bottom: 10px;
@@ -554,7 +554,7 @@ import XlyButton from '@/components/xly-button/index.vue'
   border-radius: 4px;
   letter-spacing: 0.02em;
 
-  &.blue   { background: #e6f4ff; color: #1677ff; border: 1px solid #91caff; }
+  &.blue   { background: #e6f4ff; color: var(--el-color-primary); border: 1px solid #91caff; }
   &.green  { background: #f6ffed; color: #389e0d; border: 1px solid #b7eb8f; }
   &.orange { background: #fff7e6; color: #d46b08; border: 1px solid #ffd591; }
   &.purple { background: #f9f0ff; color: #531dab; border: 1px solid #d3adf7; }
@@ -567,12 +567,12 @@ import XlyButton from '@/components/xly-button/index.vue'
   gap: 3px;
 }
 
-.star-on  { color: #fa8c16; }
+.star-on  { color: var(--el-color-warning); }
 .star-off { color: #d9d9d9; }
 
 .rating-text {
   font-size: 12px;
-  color: #8e8ea0;
+  color: var(--el-text-color-secondary);
   margin-left: 6px;
   font-weight: 500;
 }
@@ -590,10 +590,10 @@ import XlyButton from '@/components/xly-button/index.vue'
   gap: 7px;
   font-weight: 600;
   font-size: 15px;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
 }
 
-.custom-title__icon { color: #1677ff; }
+.custom-title__icon { color: var(--el-color-primary); }
 
 .extra-group {
   display: flex;
@@ -604,10 +604,10 @@ import XlyButton from '@/components/xly-button/index.vue'
 .metric-value {
   font-size: 20px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   letter-spacing: -0.5px;
   line-height: 1.3;
 
-  &.revenue { color: #1677ff; }
+  &.revenue { color: var(--el-color-primary); }
 }
 </style>

@@ -435,10 +435,9 @@ defineExpose({
 
 <style scoped lang="scss">
 /* ========== 设计令牌 ========== */
-$primary: #4f6ef7;
-$primary-light: rgba(79, 110, 247, 0.25);
-$arrow-bg: rgba(0, 0, 0, 0.25);
-$arrow-hover-bg: rgba(0, 0, 0, 0.45);
+
+$arrow-bg: var(--el-fill-color-light);
+$arrow-hover-bg: var(--el-fill-color-light);
 $dot-color: rgba(255, 255, 255, 0.5);
 $dot-active-color: #ffffff;
 $transition: all 0.3s ease;
@@ -694,7 +693,7 @@ $transition: all 0.3s ease;
 
     &.is-active {
       background: $dot-active-color;
-      box-shadow: 0 0 8px $primary-light;
+      box-shadow: 0 0 8px rgba(79, 110, 247, 0.08);
       transform: scale(1.2);
     }
   }

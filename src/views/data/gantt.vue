@@ -1019,14 +1019,14 @@ const columns = [
   .doc-title {
     font-size: 26px;
     font-weight: 700;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
     letter-spacing: -0.3px;
     margin-bottom: 8px;
   }
 
   .doc-desc {
     font-size: 14px;
-    color: #8e8ea0;
+    color: var(--el-text-color-secondary);
   }
 }
 
@@ -1036,20 +1036,20 @@ const columns = [
   &__title {
     font-size: 18px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #f2f3f7;
-    color: #1a1a2e;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+    color: var(--el-text-color-primary);
     margin-bottom: 16px;
   }
 
   &__subtitle {
     font-size: 15px;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
     margin: 24px 0 12px;
   }
 
   &__desc {
     font-size: 14px;
-    color: #8e8ea0;
+    color: var(--el-text-color-secondary);
     margin-bottom: 12px;
 
     code {
@@ -1062,7 +1062,7 @@ const columns = [
 }
 
 .doc-preview {
-  border: 1px solid #f2f3f7;
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 12px;
@@ -1078,8 +1078,8 @@ const columns = [
 }
 
 .doc-code {
-  background: #fafbfd;
-  border-top: 1px solid #f2f3f7;
+  background: var(--el-fill-color-light);
+  border-top: 1px solid var(--el-border-color-lighter);
   padding: 16px;
   overflow-x: auto;
 
@@ -1089,24 +1089,24 @@ const columns = [
     code {
       font-size: 13px;
       line-height: 1.6;
-      color: #4a4a6a;
+      color: var(--el-text-color-regular);
     }
   }
 }
 
 .doc-result {
   padding: 12px 16px;
-  background: #f5f7fa;
+  background: var(--el-fill-color-light);
   border-radius: 6px;
   font-size: 13px;
 
   &__label {
-    color: #8e8ea0;
+    color: var(--el-text-color-secondary);
     margin-right: 8px;
   }
 
   code {
-    color: #4f6ef7;
+    color: var(--el-color-primary);
   }
 }
 
@@ -1116,18 +1116,18 @@ const columns = [
   font-size: 13px;
 
   th {
-    background: #fafbfd;
-    color: #1a1a2e;
+    background: var(--el-fill-color-light);
+    color: var(--el-text-color-primary);
     font-weight: 600;
     text-align: left;
     padding: 12px 16px;
-    border-bottom: 1px solid #f2f3f7;
+    border-bottom: 1px solid var(--el-border-color-lighter);
   }
 
   td {
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
     padding: 12px 16px;
-    border-bottom: 1px solid #f2f3f7;
+    border-bottom: 1px solid var(--el-border-color-lighter);
   }
 
   tr:last-child td {
@@ -1163,6 +1163,6 @@ const columns = [
   align-items: center;
   gap: 6px;
   font-size: 13px;
-  color: #4a4a6a;
+  color: var(--el-text-color-regular);
 }
 </style>

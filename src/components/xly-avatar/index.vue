@@ -124,9 +124,9 @@ function handleError(e: Event) {
 
 <style scoped lang="scss">
 /* ========== 设计令牌 ========== */
-$bg-default: #e8e8ed;
-$text-default: #909399;
-$text-primary: #1a1a2e;
+$bg-default: var(--el-fill-color-light);
+$text-default: var(--el-text-color-regular);
+$text-primary: var(--el-text-color-primary);
 
 /* ========== 基础头像 ========== */
 .xly-avatar {

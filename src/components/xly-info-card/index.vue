@@ -243,12 +243,6 @@ $bg-success: rgba(16, 185, 129, 0.15);
 $bg-warning: rgba(245, 158, 11, 0.15);
 $bg-danger: rgba(239, 68, 68, 0.15);
 
-$text-primary: #e4e4e7;
-$text-secondary: #a1a1aa;
-$text-muted: #71717a;
-
-$border-color: rgba(255, 255, 255, 0.08);
-
 $radius: 10px;
 $radius-image: 6px;
 
@@ -259,14 +253,14 @@ $radius-image: 6px;
   gap: 14px;
   padding: 14px 16px;
   background: $bg-default;
-  color: $text-primary;
+  color: var(--el-text-color-primary);
   box-sizing: border-box;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: $radius;
 
   /* 边框 */
   &.is-bordered {
-    border: 1px solid $border-color;
+    border: 1px solid var(--el-border-color);
   }
 
   /* 可点击 */
@@ -332,13 +326,13 @@ $radius-image: 6px;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: $text-primary;
+  color: var(--el-text-color-primary);
 }
 
 .xly-info-card__title {
   font-size: 15px;
   font-weight: 600;
-  color: $text-primary;
+  color: var(--el-text-color-primary);
   line-height: 1.4;
   white-space: nowrap;
   overflow: hidden;
@@ -357,7 +351,7 @@ $radius-image: 6px;
 
   &--default {
     background: rgba(255, 255, 255, 0.1);
-    color: $text-secondary;
+    color: var(--el-text-color-secondary);
   }
 
   &--primary {
@@ -393,20 +387,20 @@ $radius-image: 6px;
   align-items: center;
   gap: 6px;
   font-size: 13px;
-  color: $text-secondary;
+  color: var(--el-text-color-secondary);
   line-height: 1.4;
 }
 
 .xly-info-card__desc-icon {
   flex-shrink: 0;
-  color: $text-muted;
+  color: var(--el-text-color-placeholder);
 }
 
 .xly-info-card__desc-dot {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: $text-muted;
+  background: var(--el-text-color-placeholder);
   flex-shrink: 0;
 }
 

@@ -69,10 +69,10 @@ function goBack() {
 </script>
 
 <style scoped lang="scss">
-$primary: #4f6ef7;
-$text-primary: #1a1a2e;
-$text-secondary: #4a4a6a;
-$text-default: #8e8ea0;
+$primary: var(--el-color-primary);
+$text-primary: var(--el-text-color-primary);
+$text-secondary: var(--el-text-color-regular);
+$text-default: var(--el-text-color-secondary);
 
 .exception-page {
   display: flex;

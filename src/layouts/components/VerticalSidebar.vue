@@ -132,18 +132,18 @@ function handleGrandClick(grand: MenuItem, child: MenuItem, parent: MenuItem) {
 </script>
 
 <style scoped lang="scss">
-$primary: #4f6ef7;
-$text-primary: #303133;
-$text-regular: #606266;
-$text-secondary: #909399;
-$bg-hover: #f5f6fa;
-$border-color: #ebeef5;
+$primary: var(--el-color-primary);
+$text-primary: var(--el-text-color-primary);
+$text-regular: var(--el-text-color-regular);
+$text-secondary: var(--el-text-color-secondary);
+$bg-hover: var(--el-fill-color-light);
+$border-color: var(--el-border-color-lighter);
 
 .vertical-sidebar {
   width: 200px;
   min-width: 200px;
   height: 100%;
-  background: #eef1f8;
+  background: var(--el-fill-color-light);
   border-right: 1px solid $border-color;
   flex-shrink: 0;
   overflow-y: auto;
@@ -152,7 +152,7 @@ $border-color: #ebeef5;
     width: 4px;
   }
   &::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.1);
+    background: var(--el-fill-color-light);
     border-radius: 2px;
   }
 
@@ -183,7 +183,7 @@ $border-color: #ebeef5;
 
     &.active {
       color: $primary;
-      background: rgba($primary, 0.1);
+      background: var(--el-color-primary-light-9);
 
       .vertical-sidebar__icon {
         color: $primary;
@@ -242,7 +242,7 @@ $border-color: #ebeef5;
 
     &.active {
       color: $primary;
-      background: rgba($primary, 0.1);
+      background: var(--el-color-primary-light-9);
       font-weight: 500;
     }
   }
@@ -267,7 +267,7 @@ $border-color: #ebeef5;
 
     &.active {
       color: $primary;
-      background: rgba($primary, 0.1);
+      background: var(--el-color-primary-light-9);
       font-weight: 500;
     }
 
@@ -303,7 +303,7 @@ $border-color: #ebeef5;
 
     &.active {
       color: $primary;
-      background: rgba($primary, 0.1);
+      background: var(--el-color-primary-light-9);
       font-weight: 500;
     }
   }

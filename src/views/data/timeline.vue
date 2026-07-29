@@ -436,17 +436,17 @@ import XlyTag from '@/components/xly-tag/index.vue'
 <style scoped lang="scss">
 .timeline-doc { padding: 8px 0 40px; }
 .doc-header { margin-bottom: 36px; }
-.doc-title { font-size: 26px; font-weight: 700; color: #1a1a2e; margin: 0 0 8px; letter-spacing: -0.3px; }
-.doc-desc { font-size: 14px; color: #8e8ea0; margin: 0; line-height: 1.6; }
+.doc-title { font-size: 26px; font-weight: 700; color: var(--el-text-color-primary); margin: 0 0 8px; letter-spacing: -0.3px; }
+.doc-desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0; line-height: 1.6; }
 .doc-section { margin-bottom: 32px; }
-.doc-section__title { font-size: 18px; font-weight: 600; color: #1a1a2e; margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid #f2f3f7; }
-.doc-subsection__title { font-size: 15px; font-weight: 600; color: #4a4a6a; margin: 24px 0 12px; }
-.doc-section__desc { font-size: 14px; color: #8e8ea0; margin: 0 0 16px; line-height: 1.6; code { background: #f5f6fa; color: #4f6ef7; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; } }
-.doc-preview { border: 1px solid #f2f3f7; border-radius: 12px; overflow: hidden; background: #fff; &--noborder { border: none; background: #fafbfd; } }
+.doc-section__title { font-size: 18px; font-weight: 600; color: var(--el-text-color-primary); margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--el-border-color-lighter); }
+.doc-subsection__title { font-size: 15px; font-weight: 600; color: var(--el-text-color-regular); margin: 24px 0 12px; }
+.doc-section__desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 16px; line-height: 1.6; code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; } }
+.doc-preview { border: 1px solid var(--el-border-color-lighter); border-radius: 12px; overflow: hidden; background: var(--el-bg-color-overlay); &--noborder { border: none; background: var(--el-fill-color-light); } }
 .doc-preview__body { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 16px; padding: 24px; }
-.doc-code { border-top: 1px solid #f2f3f7; background: #fafbfd; padding: 16px 20px; overflow-x: auto; pre { margin: 0; padding: 0; } code { font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 13px; line-height: 1.7; color: #4a4a6a; white-space: pre; } }
-.doc-subtitle { font-size: 15px; font-weight: 600; color: #1a1a2e; margin: 20px 0 10px; }
-.doc-table { overflow-x: auto; table { width: 100%; border-collapse: collapse; font-size: 14px; } th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid #f2f3f7; white-space: nowrap; } th { background: #fafbfd; font-weight: 600; color: #1a1a2e; } td { color: #4a4a6a; } code { background: #f5f6fa; color: #4f6ef7; padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; } }
+.doc-code { border-top: 1px solid var(--el-border-color-lighter); background: var(--el-fill-color-light); padding: 16px 20px; overflow-x: auto; pre { margin: 0; padding: 0; } code { font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 13px; line-height: 1.7; color: var(--el-text-color-regular); white-space: pre; } }
+.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
+.doc-table { overflow-x: auto; table { width: 100%; border-collapse: collapse; font-size: 14px; } th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); white-space: nowrap; } th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); } td { color: var(--el-text-color-regular); } code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; } }
 
 // 业务场景样式
 .custom-timestamp {
@@ -455,12 +455,12 @@ import XlyTag from '@/components/xly-tag/index.vue'
   gap: 2px;
   .date {
     font-size: 13px;
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
     font-weight: 500;
   }
   .time {
     font-size: 12px;
-    color: #8e8ea0;
+    color: var(--el-text-color-secondary);
   }
 }
 
@@ -473,10 +473,10 @@ import XlyTag from '@/components/xly-tag/index.vue'
     justify-content: space-between;
     margin-bottom: 20px;
     padding-bottom: 12px;
-    border-bottom: 1px solid #f2f3f7;
+    border-bottom: 1px solid var(--el-border-color-lighter);
     span {
       font-size: 14px;
-      color: #4a4a6a;
+      color: var(--el-text-color-regular);
     }
   }
 }
@@ -486,12 +486,12 @@ import XlyTag from '@/components/xly-tag/index.vue'
     margin: 0 0 4px;
     font-size: 14px;
     font-weight: 600;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
   }
   p {
     margin: 0;
     font-size: 13px;
-    color: #8e8ea0;
+    color: var(--el-text-color-secondary);
   }
 }
 
@@ -513,15 +513,15 @@ import XlyTag from '@/components/xly-tag/index.vue'
     flex-shrink: 0;
     &.success {
       background: rgba(103, 194, 58, 0.1);
-      color: #67c23a;
+      color: var(--el-color-success);
     }
     &.primary {
       background: rgba(79, 110, 247, 0.1);
-      color: #4f6ef7;
+      color: var(--el-color-primary);
     }
     &.warning {
       background: rgba(230, 162, 60, 0.1);
-      color: #e6a23c;
+      color: var(--el-color-warning);
     }
   }
   &__content {
@@ -530,12 +530,12 @@ import XlyTag from '@/components/xly-tag/index.vue'
       margin: 0 0 2px;
       font-size: 14px;
       font-weight: 500;
-      color: #1a1a2e;
+      color: var(--el-text-color-primary);
     }
     p {
       margin: 0;
       font-size: 13px;
-      color: #8e8ea0;
+      color: var(--el-text-color-secondary);
     }
   }
 }
@@ -555,16 +555,16 @@ import XlyTag from '@/components/xly-tag/index.vue'
   &__title {
     font-size: 14px;
     font-weight: 500;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
   }
   &__time {
     font-size: 12px;
-    color: #8e8ea0;
+    color: var(--el-text-color-secondary);
   }
   &__desc {
     margin: 0;
     font-size: 13px;
-    color: #8e8ea0;
+    color: var(--el-text-color-secondary);
   }
 }
 </style>

@@ -672,14 +672,14 @@ const handleTimeUpdate = (time: number) => {
   .doc-title {
     font-size: 26px;
     font-weight: 700;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
     margin: 0 0 8px;
     letter-spacing: -0.3px;
   }
 
   .doc-desc {
     font-size: 14px;
-    color: #8e8ea0;
+    color: var(--el-text-color-secondary);
     line-height: 1.6;
     margin: 0;
   }
@@ -691,25 +691,25 @@ const handleTimeUpdate = (time: number) => {
   &__title {
     font-size: 18px;
     font-weight: 600;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
     margin: 0 0 12px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #f2f3f7;
+    border-bottom: 1px solid var(--el-border-color-lighter);
   }
 
   &__desc {
     font-size: 14px;
-    color: #8e8ea0;
+    color: var(--el-text-color-secondary);
     line-height: 1.6;
     margin: 0 0 16px;
 
     code {
-      background: #f5f6fa;
+      background: var(--el-fill-color-light);
       padding: 2px 6px;
       border-radius: 4px;
       font-family: 'Monaco', 'Menlo', monospace;
       font-size: 13px;
-      color: #4f6ef7;
+      color: var(--el-color-primary);
     }
   }
 }
@@ -717,7 +717,7 @@ const handleTimeUpdate = (time: number) => {
 .doc-subtitle {
   font-size: 15px;
   font-weight: 600;
-  color: #1a1a2e;
+  color: var(--el-text-color-primary);
   margin: 20px 0 10px;
 }
 
@@ -734,35 +734,35 @@ const handleTimeUpdate = (time: number) => {
   th, td {
     text-align: left;
     padding: 10px 14px;
-    border-bottom: 1px solid #f2f3f7;
+    border-bottom: 1px solid var(--el-border-color-lighter);
     white-space: nowrap;
   }
 
   th {
-    background: #fafbfd;
+    background: var(--el-fill-color-light);
     font-weight: 600;
-    color: #1a1a2e;
+    color: var(--el-text-color-primary);
   }
 
   td {
-    color: #4a4a6a;
+    color: var(--el-text-color-regular);
   }
 
   code {
-    background: #f5f6fa;
+    background: var(--el-fill-color-light);
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 13px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
-    color: #4f6ef7;
+    color: var(--el-color-primary);
   }
 }
 
 .doc-preview {
-  border: 1px solid #f2f3f7;
+  border: 1px solid var(--el-border-color-lighter);
   border-radius: 12px;
   overflow: hidden;
-  background: #fff;
+  background: var(--el-bg-color-overlay);
 
   &__body {
     display: flex;
@@ -773,8 +773,8 @@ const handleTimeUpdate = (time: number) => {
   }
 
   .doc-code {
-    border-top: 1px solid #f2f3f7;
-    background: #fafbfd;
+    border-top: 1px solid var(--el-border-color-lighter);
+    background: var(--el-fill-color-light);
     padding: 16px 20px;
     overflow-x: auto;
 
@@ -787,7 +787,7 @@ const handleTimeUpdate = (time: number) => {
       font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
       font-size: 13px;
       line-height: 1.7;
-      color: #4a4a6a;
+      color: var(--el-text-color-regular);
       white-space: pre;
     }
   }
@@ -806,7 +806,7 @@ const handleTimeUpdate = (time: number) => {
 
   .video-label {
     font-size: 13px;
-    color: #666;
+    color: var(--el-text-color-secondary);
   }
 }
 
@@ -828,7 +828,7 @@ const handleTimeUpdate = (time: number) => {
 .shortcut-key {
   font-family: 'Monaco', 'Menlo', monospace;
   font-size: 12px;
-  color: #4f6ef7;
+  color: var(--el-color-primary);
   background: #eef2ff;
   padding: 4px 8px;
   border-radius: 4px;
@@ -837,6 +837,6 @@ const handleTimeUpdate = (time: number) => {
 
 .shortcut-desc {
   font-size: 13px;
-  color: #666;
+  color: var(--el-text-color-secondary);
 }
 </style>
