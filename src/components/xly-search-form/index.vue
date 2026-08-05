@@ -84,10 +84,7 @@
           </XlyFormItem>
         </template>
 
-        <!-- 自定义插槽 XlyFormItem -->
-        <slot :name="`custom-form-item`" />
-
-        <XlyFormItem class="search-actions">
+        <XlyFormItem ref="searchActionsRef" class="search-actions" :style="searchActionsStyle">
           <!-- 自定义插槽 -->
           <slot :name="`custom-button`" />
 
@@ -112,7 +109,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted, reactive, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
 import XlyForm from '../xly-form/index.vue'
 import XlyFormItem from '../xly-form/xly-form-item.vue'
 import XlyInput from '../xly-input/index.vue'
@@ -255,18 +252,6 @@ const visibleItems = computed(() => {
   return props.items.filter(item => !item.hiddenWhenCollapsed)
 })
 
-// 根据 item span 计算 grid-column，实现响应式栅格
-function getGridItemStyle(item: SearchItem): Record<string, string> {
-  const span = item.span
-  // 范围选择器占 2 列
-  if (item.type === 'daterange' || item.type === 'datetimerange' || item.type === 'timerange' || item.type === 'range') {
-    return { gridColumn: 'span 2' }
-  }
-  if (!span || span <= 8) return {}
-  if (span >= 18) return { gridColumn: '1 / -1' }
-  return { gridColumn: 'span 2' }
-}
-
 // 初始化表单数据
 const initFormData = () => {
   props.items.forEach(item => {
@@ -346,9 +331,77 @@ defineExpose({
   getFormRef: () => formRef.value
 })
 
+// 根据 item span 计算 grid-column，实现响应式栅格
+function getGridItemStyle(item: SearchItem): Record<string, string> {
+  const span = item.span
+  // 范围选择器占 2 列
+  if (item.type === 'daterange' || item.type === 'datetimerange' || item.type === 'timerange' || item.type === 'range') {
+    return { gridColumn: 'span 2' }
+  }
+  if (!span || span <= 8) return {}
+  if (span >= 18) return { gridColumn: '1 / -1' }
+  return { gridColumn: 'span 2' }
+}
+
+// 按钮区自适应占 1~N 个单元格
+const searchActionsRef = ref()
+const spanColumns = ref(1)
+let resizeObserver: ResizeObserver | null = null
+const searchActionsStyle = computed<Record<string, string>>(() =>
+  spanColumns.value > 1 ? { gridColumn: `span ${spanColumns.value}` } : {}
+)
+// 测量按钮区自然总宽，计算需要占据的单元格数
+async function measureActions() {
+  await nextTick()
+  const actionsEl = searchActionsRef.value?.$el as HTMLElement | undefined
+  const control = actionsEl?.querySelector('.xly-form-item__control') as HTMLElement | null
+  const gridEl = actionsEl?.closest('.search-grid-form') as HTMLElement | null
+  if (!control || !gridEl) return
+
+  // 强制单行、不收缩，测出内容自然宽度
+  control.classList.add('is-measuring')
+  const children = Array.from(control.children) as HTMLElement[]
+  const gap = parseFloat(getComputedStyle(control).columnGap) || 0
+  const needWidth =
+    children.reduce((sum, el) => sum + el.offsetWidth, 0) + gap * Math.max(children.length - 1, 0)
+  control.classList.remove('is-measuring')
+
+  // 单个单元格的实际宽度与 grid 列信息
+  const gridStyle = getComputedStyle(gridEl)
+  const columns = gridStyle.gridTemplateColumns.split(' ').filter(Boolean)
+  const cellWidth = parseFloat(columns[0]) || 250
+  const gridGap = parseFloat(gridStyle.columnGap) || 0
+  const maxColumns = Math.max(columns.length, 1)
+
+  // 占 N 列可用宽度 = N * cellWidth + (N - 1) * gridGap，求能容纳内容的最小 N
+  const next = Math.min(
+    Math.max(Math.ceil((needWidth + 1 + gridGap) / (cellWidth + gridGap)), 1),
+    maxColumns
+  )
+  if (next !== spanColumns.value) {
+    spanColumns.value = next
+  }
+}
+// 展开/收起变化时重新测量按钮区
+watch(visibleItems, () => measureActions())
+
 // 初始化
 onMounted(() => {
   initFormData()
+  measureActions()
+
+  // 容器尺寸变化时重新测量
+  const actionsEl = searchActionsRef.value?.$el as HTMLElement | undefined
+  const gridEl = actionsEl?.closest('.search-grid-form') as HTMLElement | null
+  if (gridEl) {
+    resizeObserver = new ResizeObserver(() => measureActions())
+    resizeObserver.observe(gridEl)
+  }
+})
+
+onUnmounted(() => {
+  resizeObserver?.disconnect()
+  resizeObserver = null
 })
 </script>
 
@@ -375,8 +428,8 @@ onMounted(() => {
     align-items: flex-end;
 
     .xly-form-item {
-      width: 100% !important;
-      min-width: 0;
+      width: auto !important;
+      min-width: 250px !important;
       margin-right: 0 !important;
       margin-bottom: 0;
     }
@@ -384,7 +437,6 @@ onMounted(() => {
 
   .search-actions {
     width: auto;
-    // grid-column-end: -1;
 
     :deep(.xly-form-item__label) {
       display: none;
@@ -393,10 +445,18 @@ onMounted(() => {
     :deep(.xly-form-item__content) {
       .xly-form-item__control {
         display: flex;
-        // justify-content: flex-end;
         align-items: center;
-        flex-wrap: no-wrap;
+        flex-wrap: wrap;
         gap: 12px;
+      }
+
+      // 测量时强制单行、不收缩，得到内容自然宽度
+      .xly-form-item__control.is-measuring {
+        flex-wrap: nowrap;
+
+        > * {
+          flex-shrink: 0;
+        }
       }
 
       .action-divider {
