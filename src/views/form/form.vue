@@ -87,7 +87,7 @@
           </div>
         </div>
       </div>
-      <DocCode :code='`<XlyForm ref="formRef" :model="form" :rules="rules" label-width="90px">
+      <XlyDocCode :code='`<XlyForm ref="formRef" :model="form" :rules="rules" label-width="90px">
   <XlyFormItem label="用户名" prop="username">
     <XlyInput v-model="form.username" placeholder="请输入用户名" />
   </XlyFormItem>
@@ -153,7 +153,7 @@
           </XlyForm>
         </div>
       </div>
-      <DocCode :code='`<XlyForm :model="form" inline>
+      <XlyDocCode :code='`<XlyForm :model="form" inline>
   <XlyFormItem label="关键词">
     <XlyInput v-model="form.keyword" placeholder="关键词" />
   </XlyFormItem>
@@ -201,7 +201,7 @@
           </div>
         </div>
       </div>
-      <DocCode :code='`<XlyForm :model="form" size="large" label-width="60px">...</XlyForm>
+      <XlyDocCode :code='`<XlyForm :model="form" size="large" label-width="60px">...</XlyForm>
 <XlyForm :model="form" label-width="60px">...</XlyForm>
 <XlyForm :model="form" size="small" label-width="60px">...</XlyForm>`' />
     </section>
@@ -237,7 +237,7 @@
           </div>
         </div>
       </div>
-      <DocCode :code='`<XlyForm ref="formRef" :model="form">
+      <XlyDocCode :code='`<XlyForm ref="formRef" :model="form">
   <!-- 默认提示：请填写{label} -->
   <XlyFormItem label="用户名" prop="username" required>
     <XlyInput v-model="form.username" />
@@ -292,7 +292,7 @@
           </div>
         </div>
       </div>
-      <DocCode :code="`import { required, custom, min, max } from '@/components/xly-form/utils'
+      <XlyDocCode :code="`import { required, custom, min, max } from '@/components/xly-form/utils'
 
 const rules = {
   password: [required('请输入密码')],
@@ -344,7 +344,7 @@ const rules = {
           </div>
         </div>
       </div>
-      <DocCode :code="`// 简化规则写法（字符串）
+      <XlyDocCode :code="`// 简化规则写法（字符串）
 const rules = {
   username: ['required', 'min:2'],
   email: ['required', 'email'],

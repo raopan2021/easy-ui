@@ -1,11 +1,50 @@
 <script setup lang="ts">
 defineOptions({ name: 'Home' })
 
+// ──── 快速上手 代码示例 ────
+const installCmd = `npm install easy-ui element-plus @element-plus/icons-vue`
+
+const fullInstallCode = `// main.ts
+import { createApp } from 'vue'
+import EasyUI from 'easy-ui'
+import App from './App.vue'
+
+const app = createApp(App)
+app.use(EasyUI)  // 自动注册 Element Plus + 全局 xly 服务
+app.mount('#app')`
+
+const lightInstallCode = `// main.ts
+import { createApp } from 'vue'
+import ElementPlus from 'element-plus'
+import { setupXly } from 'easy-ui'
+import App from './App.vue'
+
+const app = createApp(App)
+app.use(ElementPlus)
+setupXly(app)
+app.mount('#app')`
+
+const autoImportCode = `// vite.config.ts
+import { xlyComponentResolver } from 'easy-ui'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import Components from 'unplugin-vue-components/vite'
+
+export default defineConfig({
+  plugins: [
+    Components({
+      resolvers: [
+        xlyComponentResolver(),            // Xly* 自动导入
+        ElementPlusResolver({ importStyle: 'css' }),
+      ],
+    }),
+  ],
+})`
+
 const features = [
-  { title: '单文件组件', desc: '每个组件都是独立的 .vue 文件，复制即用，不依赖公共模块。' },
-  { title: '零额外依赖', desc: '只依赖 Element Plus，不引入任何第三方库，无版本冲突。' },
-  { title: 'SCSS 变量换肤', desc: '所有样式通过 SCSS 变量控制，改一个变量全局换色。' },
-  { title: '真实业务场景', desc: '搜索表单、高级表格、权限树…实际项目打磨。' },
+  { title: 'Tree-shaking', desc: '按需引入组件，只打包你实际使用的部分，不浪费 KB。' },
+  { title: '暗色模式', desc: 'html.dark 一键切换，所有组件无缝适配，无需额外配置。' },
+  { title: '自动导入', desc: 'xlyComponentResolver 配合 unplugin-vue-components，组件即写即用。' },
+  { title: '命令式 API', desc: 'xly.$msg / xly.$loading 一行代码调用，告别模板指令。' },
 ]
 
 const componentGroups = [
@@ -38,20 +77,26 @@ function compPath(group: typeof componentGroups[0], key: string) {
           Vue 3 · Element Plus · TypeScript
         </div>
         <h1 class="hero-title">
-          为中后台开发<br>
-          <span class="hero-accent">量身定做</span>的组件库
+          Vue 3 企业级<br>
+          <span class="hero-accent">业务组件库</span>
         </h1>
         <p class="hero-desc">
-          54 个组件，覆盖搜索、表格、权限、上传等真实业务场景。<br>
-          零额外依赖，复制即用。
+          65+ 组件，覆盖表格、表单、图表、权限等业务场景。<br>
+          基于 Element Plus 扩展，tree-shaking、暗色模式开箱即用。
         </p>
         <div class="hero-actions">
           <a href="https://gitee.com/yun_hua_admin/ease-ui" target="_blank" class="btn-primary">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.984 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 11.984 0zm6.09 5.333c.328 0 .593.266.592.593v1.482a.594.594 0 0 1-.593.592H9.777c-.982 0-1.778.796-1.778 1.778v5.926c0 .982.796 1.778 1.778 1.778h4.444a.593.593 0 0 0 .593-.593v-2.963a.593.593 0 0 0-.593-.593H11.63a.592.592 0 0 1-.592-.592v-1.482c0-.327.266-.592.592-.592h2.964a2.666 2.666 0 0 1 2.666 2.666v4.444a2.666 2.666 0 0 1-2.666 2.667H8.148a2.667 2.667 0 0 1-2.667-2.667V8.296a2.667 2.667 0 0 1 2.667-2.666h9.333a.594.594 0 0 1 .593.703z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M11.984 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 11.984 0zm6.09 5.333c.328 0 .593.266.592.593v1.482a.594.594 0 0 1-.593.592H9.777c-.982 0-1.778.796-1.778 1.778v5.926c0 .982.796 1.778 1.778 1.778h4.444a.593.593 0 0 0 .593-.593v-2.963a.593.593 0 0 0-.593-.593H11.63a.592.592 0 0 1-.592-.592v-1.482c0-.327.266-.592.592-.592h2.964a2.666 2.666 0 0 1 2.666 2.666v4.444a2.666 2.666 0 0 1-2.666 2.667H8.148a2.667 2.667 0 0 1-2.667-2.667V8.296a2.667 2.667 0 0 1 2.667-2.666h9.333a.594.594 0 0 1 .593.703z" />
+            </svg>
             Gitee
           </a>
           <a href="https://github.com/Momingyun/ease-ui" target="_blank" class="btn-outline">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+            </svg>
             GitHub
           </a>
         </div>
@@ -74,12 +119,13 @@ function compPath(group: typeof componentGroups[0], key: string) {
     <section class="components">
       <div class="container">
         <h2 class="section-title">组件</h2>
-        <p class="section-desc">覆盖中后台开发全场景，看中哪个复制哪个。</p>
+        <p class="section-desc">覆盖中后台开发全场景，按需引入，只打包你用的。</p>
         <div class="comp-list">
           <div v-for="group in componentGroups" :key="group.name" class="comp-row">
             <span class="comp-cat">{{ group.name }}</span>
             <div class="comp-tags">
-              <router-link v-for="tag in group.items" :key="tag" :to="compPath(group, tag)" class="comp-tag">{{ tag }}</router-link>
+              <router-link v-for="tag in group.items" :key="tag" :to="compPath(group, tag)" class="comp-tag">{{ tag
+                }}</router-link>
             </div>
           </div>
         </div>
@@ -90,11 +136,25 @@ function compPath(group: typeof componentGroups[0], key: string) {
     <section class="start">
       <div class="container">
         <h2 class="section-title">快速上手</h2>
-        <ol class="start-steps">
-          <li><strong>浏览</strong> — 左侧菜单查看演示效果和 API 文档</li>
-          <li><strong>复制</strong> — 将 <code>src/components/xly-xxx</code> 复制到你的项目</li>
-          <li><strong>使用</strong> — 按需调整 SCSS 变量，融入你的项目</li>
-        </ol>
+
+        <div class="start-block">
+          <h3 class="start-step">① 安装</h3>
+          <XlyDocCode :code="installCmd" lang="bash" />
+        </div>
+
+        <div class="start-block">
+          <h3 class="start-step">② 注册</h3>
+          <p class="start-hint">方式一：完整安装（一行搞定）</p>
+          <XlyDocCode :code="fullInstallCode" lang="js" />
+          <p class="start-hint" style="margin-top: 16px">方式二：按需引入（tree-shaking 最佳）</p>
+          <XlyDocCode :code="lightInstallCode" lang="js" />
+        </div>
+
+        <div class="start-block">
+          <h3 class="start-step">③ 自动导入（可选）</h3>
+          <p class="start-hint">配置后组件即写即用，无需手动 import</p>
+          <XlyDocCode :code="autoImportCode" lang="js" />
+        </div>
       </div>
     </section>
   </div>
@@ -327,27 +387,25 @@ $accent: var(--el-color-primary);
   border-top: 1px solid $border;
 }
 
-.start-steps {
-  margin: 8px 0 0;
-  padding-left: 20px;
+.start-block {
+  margin-top: 28px;
+
+  &:first-child {
+    margin-top: 20px;
+  }
+}
+
+.start-step {
   font-size: 14px;
-  color: $text-2;
-  line-height: 2.2;
+  font-weight: 600;
+  color: $text-1;
+  margin: 0 0 8px;
+}
 
-  strong {
-    color: $text-1;
-    font-weight: 600;
-  }
-
-  code {
-    font-family: 'SF Mono', 'Consolas', monospace;
-    font-size: 12px;
-    background: $bg-subtle;
-    border: 1px solid $border;
-    color: $text-1;
-    padding: 1px 6px;
-    border-radius: 4px;
-  }
+.start-hint {
+  font-size: 13px;
+  color: $text-3;
+  margin: 0 0 6px;
 }
 
 /* === Responsive === */
@@ -355,15 +413,19 @@ $accent: var(--el-color-primary);
   .hero {
     padding: 64px 0 56px;
   }
+
   .hero-title {
     font-size: 32px;
   }
+
   .hero-desc br {
     display: none;
   }
+
   .feature-grid {
     grid-template-columns: 1fr;
   }
+
   .comp-row {
     flex-direction: column;
     gap: 4px;

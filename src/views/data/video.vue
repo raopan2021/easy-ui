@@ -23,7 +23,7 @@
             @danmakuSend="handleDanmakuSend"
           />
         </div>
-        <DocCode :code="`const danmakuList = [
+        <XlyDocCode :code="`const danmakuList = [
   { id: 1, text: '前方高能！', time: 5, color: '#FE0302', mode: 'scroll' },
   { id: 2, text: '哈哈哈', time: 10, color: '#FFFF00', mode: 'scroll' },
 ]
@@ -66,7 +66,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code='`<!-- 静音自动播放 -->
+        <XlyDocCode :code='`<!-- 静音自动播放 -->
 <XlyVideo src="..." :autoplay="true" :muted="true" />
 
 <!-- 手动播放 -->
@@ -109,7 +109,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code='`<!-- 自定义封面图 -->
+        <XlyDocCode :code='`<!-- 自定义封面图 -->
 <XlyVideo src="..." poster="..." />
 
 <!-- 自动捕获第一帧（不传poster） -->
@@ -149,7 +149,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code='`<XlyVideo src="..." :width="320" :height="180" />
+        <XlyDocCode :code='`<XlyVideo src="..." :width="320" :height="180" />
 <XlyVideo src="..." width="100%" :height="360" />`' />
       </div>
     </section>
@@ -192,7 +192,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code='`<XlyVideo src="..." :show-speed="false" />
+        <XlyDocCode :code='`<XlyVideo src="..." :show-speed="false" />
 <XlyVideo src="..." :show-volume="false" />
 <XlyVideo src="..." :show-fullscreen="false" />`' />
       </div>
@@ -213,7 +213,7 @@
             :height="280"
           />
         </div>
-        <DocCode :code='`<XlyVideo src="..." :loop="true" />`' />
+        <XlyDocCode :code='`<XlyVideo src="..." :loop="true" />`' />
       </div>
     </section>
 
@@ -232,7 +232,7 @@
             :height="280"
           />
         </div>
-        <DocCode :code='`<XlyVideo src="..." :playback-rates="[0.5, 1, 2, 3]" />`' />
+        <XlyDocCode :code='`<XlyVideo src="..." :playback-rates="[0.5, 1, 2, 3]" />`' />
       </div>
     </section>
 
@@ -255,7 +255,7 @@
             @timeupdate="handleTimeUpdate"
           />
         </div>
-        <DocCode :code="`<XlyVideo
+        <XlyDocCode :code="`<XlyVideo
   ref=&quot;videoRef&quot;
   src=&quot;...&quot;
   @play=&quot;handlePlay&quot;
@@ -289,7 +289,7 @@ const handleTimeUpdate = (time) => console.log('当前时间:', time)
             :danmaku-enabled="false"
           />
         </div>
-        <DocCode :code='`<XlyVideo
+        <XlyDocCode :code='`<XlyVideo
   src="..."
   :danmaku="danmakuList"
   :danmaku-enabled="false"

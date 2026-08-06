@@ -223,123 +223,37 @@ watch(
 
   /* ---- highlight.js 主题（基于 Element Plus CSS 变量）---- */
 
-  .hljs-comment {
-    color: var(--el-text-color-placeholder);
-    font-style: italic;
-  }
-
-  .hljs-quote {
-    color: var(--el-text-color-placeholder);
-    font-style: italic;
-  }
-
-  .hljs-keyword {
-    color: var(--el-color-danger);
-    font-weight: 500;
-  }
-
-  .hljs-type {
-    color: var(--el-color-primary);
-  }
-
-  .hljs-string {
-    color: var(--el-color-success);
-  }
-
-  .hljs-number {
-    color: var(--el-color-success);
-  }
-
-  .hljs-literal {
-    color: var(--el-color-primary);
-  }
-
-  .hljs-built_in {
-    color: var(--el-color-info);
-  }
-
-  .hljs-title {
-    color: var(--el-color-primary);
-  }
-
-  .hljs-params {
-    color: var(--el-text-color-regular);
-  }
-
-  .hljs-tag {
-    color: var(--el-color-primary);
-  }
-
-  .hljs-name {
-    color: var(--el-color-primary);
-  }
-
-  .hljs-attr {
-    color: #e6a23c;
-  }
-
-  .hljs-selector-tag {
-    color: var(--el-color-primary);
-  }
-
-  .hljs-selector-class {
-    color: #e6a23c;
-  }
-
-  .hljs-selector-id {
-    color: var(--el-color-primary);
-  }
-
-  .hljs-template-variable {
-    color: var(--el-color-warning);
-  }
-
-  .hljs-variable {
-    color: var(--el-text-color-regular);
-  }
-
-  .hljs-meta {
-    color: var(--el-color-info);
-  }
-
-  .hljs-section {
-    color: var(--el-color-primary);
-    font-weight: 600;
-  }
-
-  .hljs-addition {
-    color: var(--el-color-success);
-  }
-
-  .hljs-deletion {
-    color: var(--el-color-danger);
-  }
-
-  .hljs-emphasis {
-    font-style: italic;
-  }
-
-  .hljs-strong {
-    font-weight: 600;
-  }
+  .hljs-comment { color: var(--el-text-color-placeholder); font-style: italic; }
+  .hljs-quote    { color: var(--el-text-color-placeholder); font-style: italic; }
+  .hljs-keyword  { color: var(--el-color-danger); font-weight: 500; }
+  .hljs-type     { color: var(--el-color-primary); }
+  .hljs-string   { color: var(--el-color-success); }
+  .hljs-number   { color: var(--el-color-success); }
+  .hljs-literal  { color: var(--el-color-primary); }
+  .hljs-built_in { color: var(--el-color-info); }
+  .hljs-title    { color: var(--el-color-primary); }
+  .hljs-params   { color: var(--el-text-color-regular); }
+  .hljs-tag      { color: var(--el-color-primary); }
+  .hljs-name     { color: var(--el-color-primary); }
+  .hljs-attr     { color: #e6a23c; }
+  .hljs-selector-tag   { color: var(--el-color-primary); }
+  .hljs-selector-class { color: #e6a23c; }
+  .hljs-selector-id    { color: var(--el-color-primary); }
+  .hljs-template-variable { color: var(--el-color-warning); }
+  .hljs-variable          { color: var(--el-text-color-regular); }
+  .hljs-meta     { color: var(--el-color-info); }
+  .hljs-section  { color: var(--el-color-primary); font-weight: 600; }
+  .hljs-addition { color: var(--el-color-success); }
+  .hljs-deletion { color: var(--el-color-danger); }
+  .hljs-emphasis { font-style: italic; }
+  .hljs-strong   { font-weight: 600; }
 }
 
 /* 深色模式微调 */
 html.dark .doc-code {
-  .hljs-attr {
-    color: #e0a440;
-  }
-
-  .hljs-selector-class {
-    color: #e0a440;
-  }
-
-  .hljs-comment {
-    color: #6a9955;
-  }
-
-  .hljs-quote {
-    color: #6a9955;
-  }
+  .hljs-attr           { color: #e0a440; }
+  .hljs-selector-class { color: #e0a440; }
+  .hljs-comment        { color: #6a9955; }
+  .hljs-quote          { color: #6a9955; }
 }
 </style>

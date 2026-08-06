@@ -16,7 +16,7 @@
         <div class="doc-preview__body">
           <XlyImage :src="singleImage" alt="单张图片" />
         </div>
-        <DocCode :code="`<!-- 单张图片 -->
+        <XlyDocCode :code="`<!-- 单张图片 -->
 <XlyImage :src=&quot;singleImage&quot; />
 
 <!-- 数组形式 -->
@@ -52,7 +52,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code='`<XlyImage :src="singleImage" />
+        <XlyDocCode :code='`<XlyImage :src="singleImage" />
 <XlyImage :src="twoImages" />
 <XlyImage :src="threeImages" />
 <XlyImage :src="fourImages" />`' />
@@ -78,7 +78,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code='`<XlyImage :src="manyImages" :max="1" />
+        <XlyDocCode :code='`<XlyImage :src="manyImages" :max="1" />
 <XlyImage :src="manyImages" :max="2" />`' />
       </div>
     </section>
@@ -108,7 +108,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code='`<XlyImage :src="singleImage" fit="fill" />
+        <XlyDocCode :code='`<XlyImage :src="singleImage" fit="fill" />
 <XlyImage :src="singleImage" fit="contain" />
 <XlyImage :src="singleImage" fit="cover" />
 <XlyImage :src="singleImage" fit="scale-down" />`' />
@@ -143,7 +143,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code='`<!-- 只设置一个尺寸，宽高相同 -->
+        <XlyDocCode :code='`<!-- 只设置一个尺寸，宽高相同 -->
 <XlyImage :src="singleImage" :width="80" />  <!-- 80x80 -->
 <XlyImage :src="singleImage" :width="60" />  <!-- 60x60 -->
 
@@ -166,7 +166,7 @@
         <div class="doc-preview__body">
           <XlyImage :src="fourImages" :preview="true" />
         </div>
-        <DocCode :code='`<XlyImage :src="fourImages" :preview="true" />`' />
+        <XlyDocCode :code='`<XlyImage :src="fourImages" :preview="true" />`' />
       </div>
     </section>
 
@@ -193,7 +193,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code="`<!-- 仅缩放 -->
+        <XlyDocCode :code="`<!-- 仅缩放 -->
 <XlyImage :src=&quot;singleImage&quot; :preview=&quot;true&quot; :preview-actions=&quot;['zoomIn', 'zoomOut']&quot; />
 
 <!-- 仅旋转 -->

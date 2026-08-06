@@ -28,7 +28,7 @@
             />
           </XlyCard>
         </div>
-        <DocCode :code="`<XlyChart
+        <XlyDocCode :code="`<XlyChart
   type=&quot;line&quot;
   title=&quot;月度访问量&quot;
   subtitle=&quot;2025年全年数据统计&quot;
@@ -62,7 +62,7 @@
             />
           </XlyCard>
         </div>
-        <DocCode :code="`<XlyChart
+        <XlyDocCode :code="`<XlyChart
   type=&quot;line&quot;
   title=&quot;股价走势&quot;
   :labels=&quot;['周一','周二','周三','周四','周五','周六','周日']&quot;
@@ -96,7 +96,7 @@
             />
           </XlyCard>
         </div>
-        <DocCode :code="`<XlyChart
+        <XlyDocCode :code="`<XlyChart
   type=&quot;line&quot;
   title=&quot;用户增长&quot;
   :labels=&quot;['周一','周二','周三','周四','周五','周六','周日']&quot;
@@ -154,7 +154,7 @@
             />
           </XlyCard>
         </div>
-        <DocCode :code='`<!-- 直线（默认） -->
+        <XlyDocCode :code='`<!-- 直线（默认） -->
 <XlyChart
   type="line"
   :labels="labels"
@@ -218,7 +218,7 @@
             </XlyCard>
           </div>
         </div>
-        <DocCode :code='`<!-- 显示数据点（默认） -->
+        <XlyDocCode :code='`<!-- 显示数据点（默认） -->
 <XlyChart
   type="line"
   :labels="labels"
@@ -255,7 +255,7 @@
             />
           </XlyCard>
         </div>
-        <DocCode :code="`<XlyChart
+        <XlyDocCode :code="`<XlyChart
   type=&quot;bar&quot;
   title=&quot;季度销售额&quot;
   subtitle=&quot;按产品线统计（万元）&quot;
@@ -289,7 +289,7 @@
             />
           </XlyCard>
         </div>
-        <DocCode :code="`<XlyChart
+        <XlyDocCode :code="`<XlyChart
   type=&quot;bar&quot;
   title=&quot;各城市GMV（亿元）&quot;
   :labels=&quot;['北京','上海','广州','深圳','杭州','成都']&quot;
@@ -324,7 +324,7 @@
             />
           </XlyCard>
         </div>
-        <DocCode :code="`<XlyChart
+        <XlyDocCode :code="`<XlyChart
   type=&quot;bar&quot;
   title=&quot;各产品季度销售额&quot;
   :labels=&quot;['Q1', 'Q2', 'Q3', 'Q4']&quot;
@@ -370,7 +370,7 @@
             />
           </XlyCard>
         </div>
-        <DocCode :code="`<XlyChart
+        <XlyDocCode :code="`<XlyChart
   type=&quot;stack&quot;
   title=&quot;各渠道月度销售额&quot;
   :labels=&quot;['1月', '2月', '3月', '4月', '5月', '6月']&quot;
@@ -407,7 +407,7 @@
             />
           </XlyCard>
         </div>
-        <DocCode :code="`<XlyChart
+        <XlyDocCode :code="`<XlyChart
   type=&quot;stack&quot;
   title=&quot;统一每层颜色&quot;
   :labels=&quot;['1月', '2月', '3月', '4月', '5月', '6月']&quot;
@@ -445,7 +445,7 @@
             />
           </XlyCard>
         </div>
-        <DocCode :code="`<!-- stackColors[柱索引][层索引] 精确控制某根柱某层颜色 -->
+        <XlyDocCode :code="`<!-- stackColors[柱索引][层索引] 精确控制某根柱某层颜色 -->
 <!-- 以下将第 3 根柱（索引 2）的所有层设置为高亮色 -->
 <XlyChart
   type=&quot;stack&quot;
@@ -506,7 +506,7 @@
             </XlyCard>
           </div>
         </div>
-        <DocCode :code='`<!-- 折线图显示数据标签 -->
+        <XlyDocCode :code='`<!-- 折线图显示数据标签 -->
 <XlyChart
   type="line"
   :series="series"
@@ -547,7 +547,7 @@
             />
           </XlyCard>
         </div>
-        <DocCode :code="`<XlyChart
+        <XlyDocCode :code="`<XlyChart
   type=&quot;mixed&quot;
   title=&quot;销售额与增长率&quot;
   :labels=&quot;['1月', '2月', '3月', '4月', '5月', '6月']&quot;
@@ -591,7 +591,7 @@
             </XlyCard>
           </div>
         </div>
-        <DocCode :code="`<!-- 单柱 + 单折线：访问量（柱，左Y轴）+ 转化率（折线，右Y轴），量纲自动独立 -->
+        <XlyDocCode :code="`<!-- 单柱 + 单折线：访问量（柱，左Y轴）+ 转化率（折线，右Y轴），量纲自动独立 -->
 <XlyChart
   type=&quot;mixed&quot;
   title=&quot;月度访问量 & 转化率&quot;
@@ -663,7 +663,7 @@
             />
           </XlyCard>
         </div>
-        <DocCode :code="`<!-- ① serie.color：整个系列统一用一种颜色 -->
+        <XlyDocCode :code="`<!-- ① serie.color：整个系列统一用一种颜色 -->
 :series=&quot;[
   { name: '线下销售', data: [...], chartType: 'bar',  color: '#3b82f6' },
   { name: '线上销售', data: [...], chartType: 'bar',  color: '#10b981' },
@@ -722,7 +722,7 @@
             </XlyCard>
           </div>
         </div>
-        <DocCode :code="`<XlyChart
+        <XlyDocCode :code="`<XlyChart
   type=&quot;pie&quot;
   title=&quot;流量来源&quot;
   :data=&quot;[
@@ -758,7 +758,7 @@
             />
           </XlyCard>
         </div>
-        <DocCode :code="`<XlyChart
+        <XlyDocCode :code="`<XlyChart
   type=&quot;pie&quot;
   title=&quot;预算分配&quot;
   :data=&quot;[
@@ -793,7 +793,7 @@
             />
           </XlyCard>
         </div>
-        <DocCode :code="`<XlyChart
+        <XlyDocCode :code="`<XlyChart
   type=&quot;pie&quot;
   title=&quot;订单状态&quot;
   :data=&quot;[
@@ -838,7 +838,7 @@
             </XlyCard>
           </div>
         </div>
-        <DocCode :code="`<XlyChart
+        <XlyDocCode :code="`<XlyChart
   type=&quot;donut&quot;
   title=&quot;任务完成率&quot;
   :data=&quot;[
@@ -885,7 +885,7 @@
             </XlyCard>
           </div>
         </div>
-        <DocCode :code='`<!-- 饼图显示数据标签 -->
+        <XlyDocCode :code='`<!-- 饼图显示数据标签 -->
 <XlyChart
   type="pie"
   :data="data"
@@ -922,7 +922,7 @@
             />
           </XlyCard>
         </div>
-        <DocCode :code="`<XlyChart
+        <XlyDocCode :code="`<XlyChart
   type=&quot;bar&quot;
   title=&quot;收入报表（元）&quot;
   :labels=&quot;monthLabels&quot;
@@ -964,7 +964,7 @@
             />
           </XlyCard>
         </div>
-        <DocCode :code='`<!-- 折线图：每个数据点最小 28px，超出后可拖拽滚动 -->
+        <XlyDocCode :code='`<!-- 折线图：每个数据点最小 28px，超出后可拖拽滚动 -->
 <XlyChart
   type="line"
   title="全年每日访问量"
@@ -1021,7 +1021,7 @@
             </XlyCard>
           </div>
         </div>
-        <DocCode :code="`<XlyChart
+        <XlyDocCode :code="`<XlyChart
   type=&quot;line&quot;
   title=&quot;日活用户&quot;
   :labels=&quot;dayLabels&quot;
@@ -1051,7 +1051,7 @@
             />
           </XlyCard>
         </div>
-        <DocCode :code="`<XlyChart
+        <XlyDocCode :code="`<XlyChart
   type=&quot;funnel&quot;
   title=&quot;注册转化漏斗&quot;
   subtitle=&quot;从曝光到付款各环节转化&quot;
@@ -1086,7 +1086,7 @@
             />
           </XlyCard>
         </div>
-        <DocCode :code="`<XlyChart
+        <XlyDocCode :code="`<XlyChart
   type=&quot;funnel&quot;
   title=&quot;销售流程漏斗&quot;
   :data=&quot;[
@@ -1121,7 +1121,7 @@
             />
           </XlyCard>
         </div>
-        <DocCode :code="`<!-- 曝光量/点击量/付款数单独设色，注册数/激活数自动使用默认色 -->
+        <XlyDocCode :code="`<!-- 曝光量/点击量/付款数单独设色，注册数/激活数自动使用默认色 -->
 <XlyChart
   type=&quot;funnel&quot;
   title=&quot;注册转化漏斗（混用颜色）&quot;
@@ -1157,7 +1157,7 @@
             />
           </XlyCard>
         </div>
-        <DocCode :code="`<XlyChart
+        <XlyDocCode :code="`<XlyChart
   type=&quot;hbar&quot;
   title=&quot;各品类销售额&quot;
   :labels=&quot;['Walnut Brownie','Lemon Juice','Orange Juice','Tea','Matcha Cocoa','Cheese Brownie','Cheese Cocoa','Milk Tea','Matcha Latte']&quot;
@@ -1203,7 +1203,7 @@
             </XlyCard>
           </div>
         </div>
-        <DocCode :code="`<!-- 方式一：:colors 全局调色盘，多系列时按顺序依次指定 -->
+        <XlyDocCode :code="`<!-- 方式一：:colors 全局调色盘，多系列时按顺序依次指定 -->
 <XlyChart
   type=&quot;hbar&quot;
   :labels=&quot;['北京', '上海', '广州', '深圳', '杭州']&quot;
@@ -1277,7 +1277,7 @@
             </XlyCard>
           </div>
         </div>
-        <DocCode :code="`<XlyChart
+        <XlyDocCode :code="`<XlyChart
   type=&quot;gauge&quot;
   title=&quot;CPU 使用率&quot;
   :gauge-value=&quot;72&quot;
@@ -1321,7 +1321,7 @@
             />
           </XlyCard>
         </div>
-        <DocCode :code="`<!-- series 中加入自定义字段，drill 时通过 extra 取出 -->
+        <XlyDocCode :code="`<!-- series 中加入自定义字段，drill 时通过 extra 取出 -->
 <XlyChart
   type=&quot;bar&quot;
   :labels=&quot;quarterLabels&quot;

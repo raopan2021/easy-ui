@@ -41,7 +41,7 @@
           </div>
         </div>
       </div>
-      <DocCode :code="`// 1. 对象数组（label 和 value 分离）
+      <XlyDocCode :code="`// 1. 对象数组（label 和 value 分离）
 <XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; placeholder=&quot;对象数组&quot; />
 
 const options = [
@@ -73,7 +73,7 @@ const simpleOptions = ['北京', '上海', '广州', '深圳']
           </div>
         </div>
       </div>
-      <DocCode :code='`<XlySelect v-model="value" :options="options" clearable />`' />
+      <XlyDocCode :code='`<XlySelect v-model="value" :options="options" clearable />`' />
     </section>
 
     <section class="doc-section">
@@ -91,7 +91,7 @@ const simpleOptions = ['北京', '上海', '广州', '深圳']
           </div>
         </div>
       </div>
-      <DocCode :code='`<XlySelect v-model="value" :options="options" filterable />`' />
+      <XlyDocCode :code='`<XlySelect v-model="value" :options="options" filterable />`' />
     </section>
 
     <section class="doc-section">
@@ -122,7 +122,7 @@ const simpleOptions = ['北京', '上海', '广州', '深圳']
           </div>
         </div>
       </div>
-      <DocCode :code="`<XlySelect
+      <XlyDocCode :code="`<XlySelect
   v-model=&quot;value&quot;
   :options=&quot;options&quot;
   filterable
@@ -161,7 +161,7 @@ function handleCreate(newValue) {
           <div style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ JSON.stringify(val4) }}</div>
         </div>
       </div>
-      <DocCode :code='`<XlySelect v-model="value" :options="options" multiple :max-tag-count="3" />`' />
+      <XlyDocCode :code='`<XlySelect v-model="value" :options="options" multiple :max-tag-count="3" />`' />
     </section>
 
     <section class="doc-section">
@@ -217,7 +217,7 @@ function handleCreate(newValue) {
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值（分号分隔）：{{ val12 }}</span>
         </div>
       </div>
-      <DocCode :code="`// 1. 返回数组（默认）
+      <XlyDocCode :code="`// 1. 返回数组（默认）
 <XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; multiple value-type=&quot;array&quot; />
 // 输出: ['beijing', 'shanghai', 'guangzhou']
 
@@ -262,7 +262,7 @@ const value = ref(&quot;beijing,shanghai,guangzhou&quot;)
           </div>
         </div>
       </div>
-      <DocCode :code="`// 1. 默认使用 disabled 字段
+      <XlyDocCode :code="`// 1. 默认使用 disabled 字段
 const options = [
   { label: '选项1', value: '1' },
   { label: '选项2', value: '2', disabled: true },  // 禁用
@@ -319,7 +319,7 @@ function isItemDisabled(option: any) {
           </div>
         </div>
       </div>
-      <DocCode :code='`<XlySelect v-model="value" :options="options" placeholder="搜索城市" prefix-icon="el:Search" filterable />
+      <XlyDocCode :code='`<XlySelect v-model="value" :options="options" placeholder="搜索城市" prefix-icon="el:Search" filterable />
 <XlySelect v-model="value" :options="options" placeholder="带后缀" suffix-icon="el:Calendar" clearable />`' />
     </section>
 
@@ -347,7 +347,7 @@ function isItemDisabled(option: any) {
           <div style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ val7 ?? '未选择' }}</div>
         </div>
       </div>
-      <DocCode :code="`// 选项对象字段不是 label/value，而是 name/id
+      <XlyDocCode :code="`// 选项对象字段不是 label/value，而是 name/id
 const userOptions = [
   { id: 1, name: '张三', role: 'admin' },
   { id: 2, name: '李四', role: 'editor' },
@@ -376,7 +376,7 @@ const userOptions = [
           </div>
         </div>
       </div>
-      <DocCode :code='`<XlySelect v-model="value" :options="options" size="large" />
+      <XlyDocCode :code='`<XlySelect v-model="value" :options="options" size="large" />
 <XlySelect v-model="value" :options="options" />
 <XlySelect v-model="value" :options="options" size="small" />`' />
     </section>
@@ -409,7 +409,7 @@ const userOptions = [
           <div style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ val8 ?? '未选择' }}</div>
         </div>
       </div>
-      <DocCode :code='`<XlySelect
+      <XlyDocCode :code='`<XlySelect
   v-model="value"
   :options="remoteSelectOptions"
   filterable
@@ -461,7 +461,7 @@ function handleSearch(query: string) {
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ val9 ?? '未选择' }}</span>
         </div>
       </div>
-      <DocCode :code="codeExample" />
+      <XlyDocCode :code="codeExample" />
     </section>
 
     <section class="doc-section">

@@ -36,7 +36,7 @@
             <img :src="basicResult" alt="cropped" />
           </div>
         </div>
-        <DocCode :code='`const cropperRef = ref()
+        <XlyDocCode :code='`const cropperRef = ref()
 
 // 通过 ref 获取结果
 async function getCrop() {
@@ -88,7 +88,7 @@ function onConfirm(data) {
             <span>9:16 竖版</span>
           </div>
         </div>
-        <DocCode :code='`<XlyImageCropper :src="imgSrc" :aspect-ratio="1" />
+        <XlyDocCode :code='`<XlyImageCropper :src="imgSrc" :aspect-ratio="1" />
 <XlyImageCropper :src="imgSrc" :aspect-ratio="16/9" />
 <XlyImageCropper :src="imgSrc" :aspect-ratio="9/16" />`' />
       </div>
@@ -120,7 +120,7 @@ function onConfirm(data) {
             <img :src="noToolbarResult" alt="cropped" />
           </div>
         </div>
-        <DocCode :code='`<XlyImageCropper
+        <XlyDocCode :code='`<XlyImageCropper
   ref="cropperRef"
   :src="imgSrc"
   :toolbar="false"
@@ -179,7 +179,7 @@ const blob = await cropperRef.value.getCroppedBlob()`' />
             <span class="cropper-result__size">{{ interactResultSize }}</span>
           </div>
         </div>
-        <DocCode :code="`// 上传图片
+        <XlyDocCode :code="`// 上传图片
 function triggerUpload() {
   uploadInputRef.value.click()
 }

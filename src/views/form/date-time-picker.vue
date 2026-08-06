@@ -16,7 +16,7 @@
           <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ val1 || '未选择' }}</span>
         </div>
       </div>
-      <DocCode :code='`<XlyDateTimePicker v-model="value" placeholder="请选择日期时间" />`' />
+      <XlyDocCode :code='`<XlyDateTimePicker v-model="value" placeholder="请选择日期时间" />`' />
     </section>
 
     <section class="doc-section">
@@ -30,7 +30,7 @@
           <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ val2 || '未选择' }}</span>
         </div>
       </div>
-      <DocCode :code='`<XlyDateTimePicker v-model="value" show-seconds />`' />
+      <XlyDocCode :code='`<XlyDateTimePicker v-model="value" show-seconds />`' />
     </section>
 
     <section class="doc-section">
@@ -44,7 +44,7 @@
           <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ val3 || '未选择' }}</span>
         </div>
       </div>
-      <DocCode :code='`<XlyDateTimePicker v-model="value" format="YYYY/MM/DD HH:mm" />`' />
+      <XlyDocCode :code='`<XlyDateTimePicker v-model="value" format="YYYY/MM/DD HH:mm" />`' />
     </section>
 
     <section class="doc-section">
@@ -60,7 +60,7 @@
           </div>
         </div>
       </div>
-      <DocCode :code='`<XlyDateTimePicker v-model="value" clearable />
+      <XlyDocCode :code='`<XlyDateTimePicker v-model="value" clearable />
 <XlyDateTimePicker v-model="value" disabled />`' />
     </section>
 
@@ -74,7 +74,7 @@
           <div style="width: 300px;"><XlyDateTimePicker v-model="val5" size="small" /></div>
         </div>
       </div>
-      <DocCode :code='`<XlyDateTimePicker v-model="value" size="large" />
+      <XlyDocCode :code='`<XlyDateTimePicker v-model="value" size="large" />
 <XlyDateTimePicker v-model="value" />
 <XlyDateTimePicker v-model="value" size="small" />`' />
     </section>
@@ -92,7 +92,7 @@
           <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ val6 || '未选择' }}</span>
         </div>
       </div>
-      <DocCode :code='`<XlyDateTimePicker v-model="value" show-seconds />
+      <XlyDocCode :code='`<XlyDateTimePicker v-model="value" show-seconds />
 <!-- 打开面板后，时间输入框可直接键入数字 -->
 <!-- ↑↓ 键调整数值，Enter 跳转下一个输入框 -->`' />
     </section>

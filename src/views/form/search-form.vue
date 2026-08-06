@@ -13,7 +13,7 @@
           <XlySearchForm v-model="searchData1" :items="basicItems" @search="handleSearch" />
         </div>
       </div>
-      <DocCode :code="`<template>
+      <XlyDocCode :code="`<template>
   <XlySearchForm v-model=&quot;searchData&quot; :items=&quot;items&quot; @search=&quot;handleSearch&quot; />
 </template>
 
@@ -42,7 +42,7 @@ const handleSearch = (data) => {
           <XlySearchForm v-model="searchData2" :items="multipleTypeItems" @search="handleSearch" />
         </div>
       </div>
-      <DocCode :code="`const items = [
+      <XlyDocCode :code="`const items = [
   { prop: 'keyword', label: '关键词', type: 'input', placeholder: '请输入关键词' },
   { prop: 'type', label: '类型', type: 'select', options: [
     { label: '类型A', value: 'A' },
@@ -66,7 +66,7 @@ const handleSearch = (data) => {
           <XlySearchForm v-model="searchData3" :items="spanItems" @search="handleSearch" />
         </div>
       </div>
-      <DocCode :code="`const items = [
+      <XlyDocCode :code="`const items = [
   { prop: 'name', label: '姓名', type: 'input', span: 6 },
   { prop: 'phone', label: '手机号', type: 'input', span: 6 },
   { prop: 'email', label: '邮箱', type: 'input', span: 6 },
@@ -90,7 +90,7 @@ const handleSearch = (data) => {
           />
         </div>
       </div>
-      <DocCode :code="`const items = [
+      <XlyDocCode :code="`const items = [
   { prop: 'name', label: '姓名', type: 'input' },
   { prop: 'phone', label: '手机号', type: 'input' },
   { prop: 'email', label: '邮箱', type: 'input' },
@@ -124,7 +124,7 @@ const handleSearch = (data) => {
           </XlySearchForm>
         </div>
       </div>
-      <DocCode :code="`<XlySearchForm v-model=&quot;searchData&quot; :items=&quot;items&quot; @search=&quot;handleSearch&quot;>
+      <XlyDocCode :code="`<XlySearchForm v-model=&quot;searchData&quot; :items=&quot;items&quot; @search=&quot;handleSearch&quot;>
   <template #field-department=&quot;{ modelValue, item, formData, updateModelValue }&quot;>
     <XlySelect
       :model-value=&quot;modelValue&quot;

@@ -21,7 +21,7 @@
           </XlyDropdown>
         </div>
       </div>
-      <DocCode :code='`<XlyDropdown label="下拉菜单">
+      <XlyDocCode :code='`<XlyDropdown label="下拉菜单">
   <template #dropdown>
     <XlyDropdownItem>黄金糕</XlyDropdownItem>
     <XlyDropdownItem>狮子头</XlyDropdownItem>
@@ -46,7 +46,7 @@
           </XlyDropdown>
         </div>
       </div>
-      <DocCode :code='`<XlyDropdown label="悬停展开" trigger="hover">
+      <XlyDocCode :code='`<XlyDropdown label="悬停展开" trigger="hover">
   <template #dropdown>
     <XlyDropdownItem>黄金糕</XlyDropdownItem>
     <XlyDropdownItem>狮子头</XlyDropdownItem>
@@ -69,7 +69,7 @@
           </XlyDropdown>
         </div>
       </div>
-      <DocCode :code='`<XlyDropdown label="带图标">
+      <XlyDocCode :code='`<XlyDropdown label="带图标">
   <template #dropdown>
     <XlyDropdownItem icon="el:Plus">黄金糕</XlyDropdownItem>
     <XlyDropdownItem icon="el:CirclePlus">狮子头</XlyDropdownItem>
@@ -94,7 +94,7 @@
           </XlyDropdown>
         </div>
       </div>
-      <DocCode :code='`<XlyDropdown label="分隔符示例">
+      <XlyDocCode :code='`<XlyDropdown label="分隔符示例">
   <template #dropdown>
     <XlyDropdownItem>黄金糕</XlyDropdownItem>
     <XlyDropdownItem>狮子头</XlyDropdownItem>
@@ -119,7 +119,7 @@
           </XlyDropdown>
         </div>
       </div>
-      <DocCode :code='`<XlyDropdown label="禁用示例">
+      <XlyDocCode :code='`<XlyDropdown label="禁用示例">
   <template #dropdown>
     <XlyDropdownItem>黄金糕</XlyDropdownItem>
     <XlyDropdownItem disabled>狮子头</XlyDropdownItem>
@@ -147,7 +147,7 @@
           </XlyDropdown>
         </div>
       </div>
-      <DocCode :code='`<XlyDropdown>
+      <XlyDocCode :code='`<XlyDropdown>
   <span class="custom-trigger">
     <XlyIcon name="el:Setting" :size="16" />
     设置
@@ -175,7 +175,7 @@
           </XlyDropdown>
         </div>
       </div>
-      <DocCode :code="`<XlyDropdown label=&quot;点击试试&quot;>
+      <XlyDocCode :code="`<XlyDropdown label=&quot;点击试试&quot;>
   <template #dropdown>
     <XlyDropdownItem @click=&quot;handleItemClick('黄金糕')&quot;>黄金糕</XlyDropdownItem>
     <XlyDropdownItem @click=&quot;handleItemClick('狮子头')&quot;>狮子头</XlyDropdownItem>

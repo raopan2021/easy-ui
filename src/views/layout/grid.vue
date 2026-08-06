@@ -38,7 +38,7 @@
             <XlyCol :span="4"><div class="grid-content bg-purple-light"></div></XlyCol>
           </XlyRow>
         </div>
-        <DocCode :code='`<XlyRow>
+        <XlyDocCode :code='`<XlyRow>
   <XlyCol :span="24"><div class="content"></div></XlyCol>
 </XlyRow>
 <XlyRow>
@@ -61,7 +61,7 @@
             <XlyCol :span="6"><div class="grid-content bg-purple"></div></XlyCol>
           </XlyRow>
         </div>
-        <DocCode :code='`<XlyRow :gutter="20">
+        <XlyDocCode :code='`<XlyRow :gutter="20">
   <XlyCol :span="6"><div class="content"></div></XlyCol>
   <XlyCol :span="6"><div class="content"></div></XlyCol>
   <XlyCol :span="6"><div class="content"></div></XlyCol>
@@ -92,7 +92,7 @@
             <XlyCol :span="4"><div class="grid-content bg-purple"></div></XlyCol>
           </XlyRow>
         </div>
-        <DocCode :code='`<XlyRow :gutter="20">
+        <XlyDocCode :code='`<XlyRow :gutter="20">
   <XlyCol :span="16"><div class="content"></div></XlyCol>
   <XlyCol :span="8"><div class="content"></div></XlyCol>
 </XlyRow>`' />
@@ -117,7 +117,7 @@
             <XlyCol :span="12" :offset="6"><div class="grid-content bg-purple"></div></XlyCol>
           </XlyRow>
         </div>
-        <DocCode :code='`<XlyRow :gutter="20">
+        <XlyDocCode :code='`<XlyRow :gutter="20">
   <XlyCol :span="6"><div class="content"></div></XlyCol>
   <XlyCol :span="6" :offset="6"><div class="content"></div></XlyCol>
 </XlyRow>`' />
@@ -151,7 +151,7 @@
             <XlyCol :span="6"><div class="grid-content bg-purple"></div></XlyCol>
           </XlyRow>
         </div>
-        <DocCode :code='`<XlyRow justify="center" :gutter="20">...</XlyRow>
+        <XlyDocCode :code='`<XlyRow justify="center" :gutter="20">...</XlyRow>
 <XlyRow justify="end" :gutter="20">...</XlyRow>
 <XlyRow justify="space-between" :gutter="20">...</XlyRow>
 <XlyRow justify="space-around" :gutter="20">...</XlyRow>`' />
@@ -185,7 +185,7 @@
             </XlyCol>
           </XlyRow>
         </div>
-        <DocCode :code='`<XlyRow :gutter="10">
+        <XlyDocCode :code='`<XlyRow :gutter="10">
   <XlyCol :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
     <div class="content"></div>
   </XlyCol>

@@ -1,42 +1,52 @@
 /**
- * xly 组件自动导入解析器
+ * xly 组件自动导入解析器（unplugin-vue-components）
+ *
+ * 使用方式：
+ * ```ts
+ * // vite.config.ts
+ * import { xlyComponentResolver } from 'easy-ui'
+ * import Components from 'unplugin-vue-components/vite'
+ *
+ * Components({ resolvers: [xlyComponentResolver()] })
+ * ```
  *
  * 规则：
- * - 组件名必须以 Xly 开头
- * - 默认路径：`@/components/xly-{body-kebab}/index.vue`
- * - 特殊映射（子组件 / 目录名不一致）在 `SPECIAL_MAP` 中配置
+ * - XlyXxxYyy → easy-ui（由打包工具 tree-shaking）
  */
-import type { ComponentResolver } from "unplugin-vue-components";
+import type { ComponentResolver } from 'unplugin-vue-components'
+
+/** 库包名 — 消费方 import 的来源 */
+const LIB = 'easy-ui'
 
 export function xlyComponentResolver(): ComponentResolver {
-  /** 组件名 → 相对于 @/components/xly 的导入路径 */
-  const SPECIAL_MAP: Record<string, string> = {
-    XlyFormItem: "xly-form/xly-form-item.vue",
-    XlyDescriptionsItem: "xly-descriptions/item.vue",
-    XlyRadioGroup: "xly-radio/radio-group.vue",
-    XlyUpload: "xly-file-upload/index.vue",
-    XlyFileUpload: "xly-file-upload/index.vue",
-    XlySteps: "xly-steps/index.vue",
-    XlyStep: "xly-steps/step.vue",
-  };
+  const SPECIAL_NAMES = new Set([
+    'XlyFormItem',
+    'XlyDescriptionsItem',
+    'XlyRadioGroup',
+    'XlyUpload',
+    'XlyFileUpload',
+    'XlySteps',
+    'XlyStep',
+    'XlyDropdownItem',
+    'XlyTabPane',
+    'XlyTimelineItem',
+    'XlyDocCode',
+  ])
 
   return {
-    type: "component",
+    type: 'component',
+
     resolve(name: string) {
-      if (!name.startsWith("Xly")) return;
+      if (!name.startsWith('Xly')) return
 
-      // 优先使用显式映射
-      if (SPECIAL_MAP[name]) {
-        return { from: `@/components/${SPECIAL_MAP[name]}` };
+      // 所有组件统一从主入口导入，消费方打包工具负责 tree-shaking
+      // 特殊名称（别名 / 子组件）需要显式导出映射
+      const importName = SPECIAL_NAMES.has(name) ? name : undefined
+
+      return {
+        from: LIB,
+        ...(importName ? { importName } : { name }),
       }
-
-      // 通用规则：XlyXxxYyy → xly-xxx-yyy/index.vue
-      const body = name.slice(3); // 去掉 "Xly" 前缀
-      const kebab = body
-        .replace(/([A-Z])/g, "-$1")
-        .toLowerCase()
-        .replace(/^-/, "");
-      return { from: `@/components/xly-${kebab}/index.vue` };
-    }
-  };
+    },
+  }
 }

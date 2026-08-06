@@ -22,7 +22,7 @@
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ val1 ?? '未选择' }}</span>
         </div>
       </div>
-      <DocCode :code='`<XlyRadio v-model="value" label="1">选项一</XlyRadio>
+      <XlyDocCode :code='`<XlyRadio v-model="value" label="1">选项一</XlyRadio>
 <XlyRadio v-model="value" label="2">选项二</XlyRadio>
 <XlyRadio v-model="value" label="3">选项三</XlyRadio>`' />
     </section>
@@ -45,7 +45,7 @@
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ val2 ?? '未选择' }}</span>
         </div>
       </div>
-      <DocCode :code='`<XlyRadioGroup v-model="value">
+      <XlyDocCode :code='`<XlyRadioGroup v-model="value">
   <XlyRadio label="beijing">北京</XlyRadio>
   <XlyRadio label="shanghai">上海</XlyRadio>
   <XlyRadio label="guangzhou">广州</XlyRadio>
@@ -71,7 +71,7 @@
           </XlyRadioGroup>
         </div>
       </div>
-      <DocCode :code='`<XlyRadio label="a" disabled>禁用</XlyRadio>
+      <XlyDocCode :code='`<XlyRadio label="a" disabled>禁用</XlyRadio>
 <XlyRadio label="b" disabled model-value="b">选中且禁用</XlyRadio>
 
 <XlyRadioGroup v-model="value" disabled>
@@ -96,7 +96,7 @@
           </div>
         </div>
       </div>
-      <DocCode :code='`<XlyRadio v-model="value" label="large" size="large">大号</XlyRadio>
+      <XlyDocCode :code='`<XlyRadio v-model="value" label="large" size="large">大号</XlyRadio>
 <XlyRadio v-model="value" label="default" size="default">默认</XlyRadio>
 <XlyRadio v-model="value" label="small" size="small">小号</XlyRadio>`' />
     </section>
@@ -116,7 +116,7 @@
           </div>
         </div>
       </div>
-      <DocCode :code='`<XlyRadio v-model="value" label="1" border>选项一</XlyRadio>
+      <XlyDocCode :code='`<XlyRadio v-model="value" label="1" border>选项一</XlyRadio>
 <XlyRadio v-model="value" label="2" border>选项二</XlyRadio>
 <XlyRadio v-model="value" label="3" border>选项三</XlyRadio>`' />
     </section>
@@ -142,7 +142,7 @@
           </span>
         </div>
       </div>
-      <DocCode :code='`<XlyRadio v-model="numValue" :label="1">数字 1</XlyRadio>
+      <XlyDocCode :code='`<XlyRadio v-model="numValue" :label="1">数字 1</XlyRadio>
 <XlyRadio v-model="numValue" :label="2">数字 2</XlyRadio>
 
 <XlyRadio v-model="boolValue" :label="true">布尔 true</XlyRadio>

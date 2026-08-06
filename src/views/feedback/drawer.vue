@@ -21,7 +21,7 @@
             <p>这是一个基础抽屉，支持从右侧滑入。点击遮罩或关闭按钮可关闭。</p>
           </XlyDrawer>
         </div>
-        <DocCode :code='`<XlyButton @click="visible = true">打开抽屉</XlyButton>
+        <XlyDocCode :code='`<XlyButton @click="visible = true">打开抽屉</XlyButton>
 <XlyDrawer v-model="visible" title="基础抽屉">
   <p>这是一个基础抽屉。</p>
 </XlyDrawer>`' />
@@ -42,7 +42,7 @@
           <XlyButton @click="topVisible = true">顶部抽屉</XlyButton>
           <XlyButton @click="bottomVisible = true">底部抽屉</XlyButton>
         </div>
-        <DocCode :code='`<XlyDrawer v-model="visible" title="左侧" direction="left">...</XlyDrawer>
+        <XlyDocCode :code='`<XlyDrawer v-model="visible" title="左侧" direction="left">...</XlyDrawer>
 <XlyDrawer v-model="visible" title="右侧" direction="right">...</XlyDrawer>
 <XlyDrawer v-model="visible" title="顶部" direction="top">...</XlyDrawer>
 <XlyDrawer v-model="visible" title="底部" direction="bottom">...</XlyDrawer>`' />
@@ -74,7 +74,7 @@
           <XlyButton @click="sizeMedium = true">中型 (50%)</XlyButton>
           <XlyButton @click="sizeLarge = true">大型 (80%)</XlyButton>
         </div>
-        <DocCode :code='`<!-- 固定宽度 -->
+        <XlyDocCode :code='`<!-- 固定宽度 -->
 <XlyDrawer v-model="visible" title="小型" :size="300">...</XlyDrawer>
 <!-- 百分比宽度 -->
 <XlyDrawer v-model="visible" title="中型" size="50%">...</XlyDrawer>
@@ -103,7 +103,7 @@
         <div class="doc-preview__body">
           <XlyButton type="primary" @click="customVisible = true">自定义抽屉</XlyButton>
         </div>
-        <DocCode :code='`<XlyDrawer v-model="visible" :show-header="false">
+        <XlyDocCode :code='`<XlyDrawer v-model="visible" :show-header="false">
   <template #header>
     <div class="custom-header">
       <el-icon color="#4f6ef7"><Setting /></el-icon>
@@ -162,7 +162,7 @@
         <div class="doc-preview__body">
           <XlyButton @click="noMaskVisible = true">无遮罩抽屉</XlyButton>
         </div>
-        <DocCode :code='`<XlyDrawer v-model="visible" title="固定面板" :show-mask="false">
+        <XlyDocCode :code='`<XlyDrawer v-model="visible" title="固定面板" :show-mask="false">
   <p>这是一个没有遮罩的抽屉，背景完全透明。</p>
 </XlyDrawer>`' />
       </div>
@@ -204,7 +204,7 @@
         <div class="doc-preview__body">
           <XlyButton @click="noHeaderVisible = true">无头部抽屉</XlyButton>
         </div>
-        <DocCode :code='`<XlyDrawer v-model="visible" :show-header="false">
+        <XlyDocCode :code='`<XlyDrawer v-model="visible" :show-header="false">
   <div class="custom-content">
     <p>自定义内容区域</p>
   </div>
@@ -243,7 +243,7 @@
         <div class="doc-preview__body">
           <XlyButton type="primary" @click="eventVisible = true">带事件的抽屉</XlyButton>
         </div>
-        <DocCode :code="`<XlyDrawer v-model=&quot;visible&quot; title=&quot;事件监听&quot;
+        <XlyDocCode :code="`<XlyDrawer v-model=&quot;visible&quot; title=&quot;事件监听&quot;
   @open=&quot;handleOpen&quot;
   @opened=&quot;handleOpened&quot;
   @close=&quot;handleClose&quot;

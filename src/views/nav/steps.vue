@@ -30,7 +30,7 @@
             </button>
           </div>
         </div>
-        <DocCode :code='`<XlySteps :active="active">
+        <XlyDocCode :code='`<XlySteps :active="active">
   <XlyStep :index="0" title="创建账号" description="填写基本信息" />
   <XlyStep :index="1" title="身份验证" description="验证手机号" />
   <XlyStep :index="2" title="设置密码" description="设置登录密码" />
@@ -52,7 +52,7 @@
             <XlyStep :index="3" title="已送达" description="订单已完成" />
           </XlySteps>
         </div>
-        <DocCode :code='`<XlySteps :active="1">
+        <XlyDocCode :code='`<XlySteps :active="1">
   <XlyStep :index="0" title="下单成功" description="2024-01-01 12:00:00" />
   <XlyStep :index="1" title="商家接单" description="预计30分钟送达" />
   <XlyStep :index="2" title="配送中" description="骑手正在赶来" />
@@ -74,7 +74,7 @@
             <XlyStep :index="3" title="审核通过" />
           </XlySteps>
         </div>
-        <DocCode :code='`<XlySteps :active="2" process-status="error">
+        <XlyDocCode :code='`<XlySteps :active="2" process-status="error">
   <XlyStep :index="0" title="提交申请" />
   <XlyStep :index="1" title="资料审核" />
   <XlyStep :index="2" title="实名认证" description="认证失败，请重新上传" />
@@ -96,7 +96,7 @@
             <XlyStep :index="3" title="已上线" description="项目已成功部署上线" />
           </XlySteps>
         </div>
-        <DocCode :code='`<XlySteps :active="1" direction="vertical">
+        <XlyDocCode :code='`<XlySteps :active="1" direction="vertical">
   <XlyStep :index="0" title="项目创建" description="项目已创建" />
   <XlyStep :index="1" title="开发中" description="功能开发中" />
   <XlyStep :index="2" title="测试阶段" description="等待测试" />
@@ -118,7 +118,7 @@
             <XlyStep :index="3" title="完成" icon="el:CircleCheck" />
           </XlySteps>
         </div>
-        <DocCode :code='`<XlySteps :active="1">
+        <XlyDocCode :code='`<XlySteps :active="1">
   <XlyStep :index="0" title="购物车" icon="el:ShoppingCart" />
   <XlyStep :index="1" title="填写地址" icon="el:MapLocation" />
   <XlyStep :index="2" title="支付" icon="el:CreditCard" />
@@ -151,7 +151,7 @@
             </XlyStep>
           </XlySteps>
         </div>
-        <DocCode :code='`<XlySteps :active="1">
+        <XlyDocCode :code='`<XlySteps :active="1">
   <XlyStep :index="0" title="上传文件">
     <template #icon>
       <XlyIcon name="el:Upload" :size="16" color="currentColor" />
@@ -191,7 +191,7 @@
             <XlyStep :index="2" title="处理完成" />
           </XlySteps>
         </div>
-        <DocCode :code="`// 自定义主题色
+        <XlyDocCode :code="`// 自定义主题色
 <XlySteps :active=&quot;1&quot; :color=&quot;{ primary: '#8b5cf6', success: '#10b981', error: '#f43f5e' }&quot;>
   <XlyStep :index=&quot;0&quot; title=&quot;提交申请&quot; />
   <XlyStep :index=&quot;1&quot; title=&quot;审核中&quot; />

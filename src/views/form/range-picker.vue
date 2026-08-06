@@ -20,7 +20,7 @@
           <div class="doc-result">选中值：{{ dateRange.start }} 至 {{ dateRange.end }}</div>
         </div>
       </div>
-      <DocCode :code="`<template>
+      <XlyDocCode :code="`<template>
   <XlyDateRangePicker
     v-model:start=&quot;start&quot;
     v-model:end=&quot;end&quot;
@@ -55,7 +55,7 @@ const dateRange = ref({
           <div class="doc-result">选中值：{{ dateTimeRange.start }} 至 {{ dateTimeRange.end }}</div>
         </div>
       </div>
-      <DocCode :code="`<template>
+      <XlyDocCode :code="`<template>
   <XlyDateTimeRangePicker
     v-model:start=&quot;start&quot;
     v-model:end=&quot;end&quot;
@@ -90,7 +90,7 @@ const dateTimeRange = ref({
           <div class="doc-result">选中值：{{ timeRange.start }} 至 {{ timeRange.end }}</div>
         </div>
       </div>
-      <DocCode :code="`<template>
+      <XlyDocCode :code="`<template>
   <XlyTimeRangePicker
     v-model:start=&quot;start&quot;
     v-model:end=&quot;end&quot;
@@ -145,7 +145,7 @@ const timeRange = ref({
           </div>
         </div>
       </div>
-      <DocCode :code='`<XlyDateRangePicker size="large" .../>
+      <XlyDocCode :code='`<XlyDateRangePicker size="large" .../>
 <XlyDateRangePicker size="default" .../>
 <XlyDateRangePicker size="small" .../>`' />
     </section>
@@ -163,7 +163,7 @@ const timeRange = ref({
           />
         </div>
       </div>
-      <DocCode :code='`<XlyDateRangePicker
+      <XlyDocCode :code='`<XlyDateRangePicker
   v-model:start="start"
   v-model:end="end"
   separator="-"
@@ -183,7 +183,7 @@ const timeRange = ref({
           />
         </div>
       </div>
-      <DocCode :code='`<XlyDateRangePicker
+      <XlyDocCode :code='`<XlyDateRangePicker
   v-model:start="start"
   v-model:end="end"
   disabled

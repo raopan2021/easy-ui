@@ -37,7 +37,7 @@
             status-type="warning"
           />
         </div>
-        <DocCode :code="`<XlyInfoCard
+        <XlyDocCode :code="`<XlyInfoCard
   :image=&quot;demoImage&quot;
   icon=&quot;el:WarningFilled&quot;
   title=&quot;人员闯入&quot;
@@ -89,7 +89,7 @@
             description-color="#6b7280"
           />
         </div>
-        <DocCode :code='`<XlyInfoCard
+        <XlyDocCode :code='`<XlyInfoCard
   background-color="#ffffff"
   text-color="#1a1a2e"
   description-color="#6b7280"
@@ -133,7 +133,7 @@
             status-text-color="#93c5fd"
           />
         </div>
-        <DocCode :code='`<XlyInfoCard
+        <XlyDocCode :code='`<XlyInfoCard
   background-color="#0f172a"
   text-color="#e2e8f0"
   title-color="#f8fafc"
@@ -162,7 +162,7 @@
             @click="handleClick"
           />
         </div>
-        <DocCode :code='`<XlyInfoCard clickable @click="handleClick" .../>`' />
+        <XlyDocCode :code='`<XlyInfoCard clickable @click="handleClick" .../>`' />
       </div>
     </section>
 

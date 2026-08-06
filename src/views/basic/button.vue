@@ -18,7 +18,7 @@
           <XlyButton type="danger">危险按钮</XlyButton>
           <XlyButton type="info">信息按钮</XlyButton>
         </div>
-        <DocCode :code='`<XlyButton>默认按钮</XlyButton>
+        <XlyDocCode :code='`<XlyButton>默认按钮</XlyButton>
 <XlyButton type="success">成功按钮</XlyButton>
 <XlyButton type="warning">警告按钮</XlyButton>
 <XlyButton type="danger">危险按钮</XlyButton>
@@ -35,7 +35,7 @@
           <XlyButton type="text">文字按钮</XlyButton>
           <XlyButton type="ghost">幽灵按钮</XlyButton>
         </div>
-        <DocCode :code='`<XlyButton type="text">文字按钮</XlyButton>
+        <XlyDocCode :code='`<XlyButton type="text">文字按钮</XlyButton>
 <XlyButton type="ghost">幽灵按钮</XlyButton>`' />
       </div>
     </section>
@@ -52,7 +52,7 @@
           <XlyButton link type="danger">危险链接</XlyButton>
           <XlyButton link type="info">信息链接</XlyButton>
         </div>
-        <DocCode :code='`<XlyButton link>链接按钮</XlyButton>
+        <XlyDocCode :code='`<XlyButton link>链接按钮</XlyButton>
 <XlyButton link type="success">成功链接</XlyButton>
 <XlyButton link type="warning">警告链接</XlyButton>
 <XlyButton link type="danger">危险链接</XlyButton>
@@ -70,7 +70,7 @@
           <XlyButton>默认按钮</XlyButton>
           <XlyButton size="small">小型按钮</XlyButton>
         </div>
-        <DocCode :code='`<XlyButton size="large">大型按钮</XlyButton>
+        <XlyDocCode :code='`<XlyButton size="large">大型按钮</XlyButton>
 <XlyButton>默认按钮</XlyButton>
 <XlyButton size="small">小型按钮</XlyButton>`' />
       </div>
@@ -99,7 +99,7 @@
             </template>
           </XlyButton>
         </div>
-        <DocCode :code='`<XlyButton shape="round">圆角按钮</XlyButton>
+        <XlyDocCode :code='`<XlyButton shape="round">圆角按钮</XlyButton>
 <XlyButton shape="circle">
   <template #icon>
     <el-icon><Search /></el-icon>
@@ -123,7 +123,7 @@
           <XlyButton type="success" bold>加粗成功</XlyButton>
           <XlyButton>普通按钮</XlyButton>
         </div>
-        <DocCode :code='`<XlyButton bold>加粗按钮</XlyButton>
+        <XlyDocCode :code='`<XlyButton bold>加粗按钮</XlyButton>
 <XlyButton type="success" bold>加粗成功</XlyButton>
 <XlyButton>普通按钮</XlyButton>`' />
       </div>
@@ -140,7 +140,7 @@
           <XlyButton type="success" loading>加载中</XlyButton>
           <XlyButton type="danger" loading>加载中</XlyButton>
         </div>
-        <DocCode :code='`<XlyButton :loading="loading" @click="handleLoad">点击加载</XlyButton>
+        <XlyDocCode :code='`<XlyButton :loading="loading" @click="handleLoad">点击加载</XlyButton>
 <XlyButton loading>加载中</XlyButton>
 <XlyButton type="success" loading>加载中</XlyButton>
 <XlyButton type="danger" loading>加载中</XlyButton>`' />
@@ -159,7 +159,7 @@
           <XlyButton type="ghost" disabled>禁用幽灵</XlyButton>
           <XlyButton type="link" disabled>禁用链接</XlyButton>
         </div>
-        <DocCode :code='`<XlyButton disabled>禁用按钮</XlyButton>
+        <XlyDocCode :code='`<XlyButton disabled>禁用按钮</XlyButton>
 <XlyButton type="success" disabled>禁用按钮</XlyButton>
 <XlyButton type="text" disabled>禁用文字</XlyButton>
 <XlyButton type="ghost" disabled>禁用幽灵</XlyButton>
@@ -190,7 +190,7 @@
             编辑
           </XlyButton>
         </div>
-        <DocCode :code='`<XlyButton>
+        <XlyDocCode :code='`<XlyButton>
   <template #icon><el-icon><Search /></el-icon></template>
   搜索
 </XlyButton>
@@ -235,7 +235,7 @@
             </XlyButton>
           </div>
         </div>
-        <DocCode :code='`<!-- 表单操作 -->
+        <XlyDocCode :code='`<!-- 表单操作 -->
 <XlyButton bold type="primary">
   <template #icon><el-icon><Check /></el-icon></template>
   提交审核

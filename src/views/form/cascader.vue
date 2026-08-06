@@ -18,7 +18,7 @@
           <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ JSON.stringify(val1) }}</span>
         </div>
       </div>
-      <DocCode :code="`<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; placeholder=&quot;请选择地区&quot; />
+      <XlyDocCode :code="`<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; placeholder=&quot;请选择地区&quot; />
 
 const options = [
   {
@@ -44,7 +44,7 @@ const options = [
           </div>
         </div>
       </div>
-      <DocCode :code='`<XlyCascader v-model="value" :options="options" clearable />`' />
+      <XlyDocCode :code='`<XlyCascader v-model="value" :options="options" clearable />`' />
     </section>
 
     <section class="doc-section">
@@ -65,7 +65,7 @@ const options = [
           <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ JSON.stringify(val3) }}</span>
         </div>
       </div>
-      <DocCode :code='`<XlyCascader v-model="value" :options="options" multiple :max-tag-count="2" />`' />
+      <XlyDocCode :code='`<XlyCascader v-model="value" :options="options" multiple :max-tag-count="2" />`' />
     </section>
 
     <section class="doc-section">
@@ -115,7 +115,7 @@ const options = [
           <span style="font-size: 13px; color: var(--el-text-color-secondary);">当前值（分号分隔）：{{ val12 }}</span>
         </div>
       </div>
-      <DocCode :code='`// 1. 返回二维数组（默认）
+      <XlyDocCode :code='`// 1. 返回二维数组（默认）
 <XlyCascader v-model="value" :options="options" multiple value-type="array" />
 // 输出: [["zhejiang", "hangzhou", "xihu"], ["jiangsu", "nanjing", "xuanwu"]]
 
@@ -142,7 +142,7 @@ const value = ref("zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu")
           </div>
         </div>
       </div>
-      <DocCode :code='`<XlyCascader v-model="value" :options="options" filterable />`' />
+      <XlyDocCode :code='`<XlyCascader v-model="value" :options="options" filterable />`' />
     </section>
 
     <section class="doc-section">
@@ -158,7 +158,7 @@ const value = ref("zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu")
           </div>
         </div>
       </div>
-      <DocCode :code='`<XlyCascader v-model="value" :options="options" />
+      <XlyDocCode :code='`<XlyCascader v-model="value" :options="options" />
 <XlyCascader v-model="value" :options="options" disabled />`' />
     </section>
 
@@ -178,7 +178,7 @@ const value = ref("zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu")
           </div>
         </div>
       </div>
-      <DocCode :code='`<XlyCascader v-model="value" :options="options" size="large" />
+      <XlyDocCode :code='`<XlyCascader v-model="value" :options="options" size="large" />
 <XlyCascader v-model="value" :options="options" />
 <XlyCascader v-model="value" :options="options" size="small" />`' />
     </section>
@@ -194,7 +194,7 @@ const value = ref("zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu")
           <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ JSON.stringify(val7) }}</span>
         </div>
       </div>
-      <DocCode :code='`<XlyCascader v-model="value" :options="options" check-strictly clearable filterable multiple/>`' />
+      <XlyDocCode :code='`<XlyCascader v-model="value" :options="options" check-strictly clearable filterable multiple/>`' />
     </section>
 
     <section class="doc-section">
@@ -218,7 +218,7 @@ const value = ref("zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu")
           <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ JSON.stringify(val8) }}</span>
         </div>
       </div>
-      <DocCode :code="`<XlyCascader
+      <XlyDocCode :code="`<XlyCascader
   v-model=&quot;value&quot;
   :options=&quot;options&quot;
   value-key=&quot;id&quot;
@@ -262,7 +262,7 @@ const options = [
           <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ JSON.stringify(val9) }}</span>
         </div>
       </div>
-      <DocCode :code='`<XlyCascader
+      <XlyDocCode :code='`<XlyCascader
   ref="cascaderRef"
   v-model="value"
   :options="[]"

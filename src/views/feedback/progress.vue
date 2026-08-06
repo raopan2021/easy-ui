@@ -30,7 +30,7 @@
             <XlyProgress :percentage="100" />
           </div>
         </div>
-        <DocCode :code='`<XlyProgress :percentage="0" />
+        <XlyDocCode :code='`<XlyProgress :percentage="0" />
 <XlyProgress :percentage="30" />
 <XlyProgress :percentage="70" />
 <XlyProgress :percentage="100" />`' />
@@ -47,7 +47,7 @@
         <div class="doc-preview__body">
           <XlyProgress :percentage="0" indeterminate text="加载中..." />
         </div>
-        <DocCode :code='`<XlyProgress :percentage="0" indeterminate text="加载中..." />`' />
+        <XlyDocCode :code='`<XlyProgress :percentage="0" indeterminate text="加载中..." />`' />
       </div>
     </section>
 
@@ -80,7 +80,7 @@
             <XlyProgress :percentage="40" status="active" />
           </div>
         </div>
-        <DocCode :code='`<XlyProgress :percentage="50" status="normal" />
+        <XlyDocCode :code='`<XlyProgress :percentage="50" status="normal" />
 <XlyProgress :percentage="100" status="success" />
 <XlyProgress :percentage="60" status="exception" />
 <XlyProgress :percentage="80" status="warning" />
@@ -109,7 +109,7 @@
             <XlyProgress :percentage="80" :color="dynamicColor" />
           </div>
         </div>
-        <DocCode :code="`<!-- 固定颜色 -->
+        <XlyDocCode :code="`<!-- 固定颜色 -->
 <XlyProgress :percentage=&quot;60&quot; color=&quot;#4f6ef7&quot; />
 
 <!-- 动态颜色函数 -->
@@ -145,7 +145,7 @@ const dynamicColor = (percentage) => {
             <XlyProgress :percentage="45" :showInfo="false" />
           </div>
         </div>
-        <DocCode :code='`<!-- 自定义文本 -->
+        <XlyDocCode :code='`<!-- 自定义文本 -->
 <XlyProgress :percentage="60" text="上传中..." />
 <XlyProgress :percentage="85" text="85/100 已完成" />
 
@@ -175,7 +175,7 @@ const dynamicColor = (percentage) => {
             <XlyProgress :percentage="60" :strokeWidth="12" />
           </div>
         </div>
-        <DocCode :code='`<XlyProgress :percentage="60" :strokeWidth="4" />
+        <XlyDocCode :code='`<XlyProgress :percentage="60" :strokeWidth="4" />
 <XlyProgress :percentage="60" :strokeWidth="8" />
 <XlyProgress :percentage="60" :strokeWidth="12" />`' />
       </div>
@@ -208,7 +208,7 @@ const dynamicColor = (percentage) => {
             </div>
           </div>
         </div>
-        <DocCode :code='`<XlyProgress type="circle" :percentage="70" />
+        <XlyDocCode :code='`<XlyProgress type="circle" :percentage="70" />
 <XlyProgress type="circle" :percentage="90" status="success" />
 <XlyProgress type="circle" :percentage="50" status="exception" />
 <XlyProgress type="circle" :percentage="100" :circleSize="80" text="Done" />`' />
@@ -238,7 +238,7 @@ const dynamicColor = (percentage) => {
             </div>
           </div>
         </div>
-        <DocCode :code='`<XlyProgress type="dashboard" :percentage="75" />
+        <XlyDocCode :code='`<XlyProgress type="dashboard" :percentage="75" />
 <XlyProgress type="dashboard" :percentage="85" status="success" />
 <XlyProgress type="dashboard" :percentage="60" status="warning" />`' />
       </div>
@@ -265,7 +265,7 @@ const dynamicColor = (percentage) => {
             </button>
           </div>
         </div>
-        <DocCode :code="`<template>
+        <XlyDocCode :code="`<template>
   <XlyProgress :percentage=&quot;uploadProgress&quot; status=&quot;active&quot; text=&quot;上传中...&quot; />
   <button @click=&quot;startUpload&quot;>开始上传</button>
 </template>

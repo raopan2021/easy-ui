@@ -18,7 +18,7 @@
         <div class="doc-preview__body">
           <XlyUpload v-model="value1" />
         </div>
-        <DocCode :code='`{{ \`<XlyUpload v-model="imageList" />\` }}`' />
+        <XlyDocCode :code='`{{ \`<XlyUpload v-model="imageList" />\` }}`' />
       </div>
       <div class="demo-value-display">
         <span class="demo-value-label">当前值：</span>
@@ -58,7 +58,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code="`{{ \`<!-- 返回数组（默认） -->
+        <XlyDocCode :code="`{{ \`<!-- 返回数组（默认） -->
 <XlyUpload v-model=&quot;imageList&quot; />
 
 <!-- 返回逗号拼接字符串 -->
@@ -92,7 +92,7 @@ const imageStr  = ref('https://img1.jpg,https://img2.jpg')\` }}`" />
             <XlyUpload v-model="value3Unlimited" />
           </div>
         </div>
-        <DocCode :code='`{{ \`<!-- 限制 1 张 -->
+        <XlyDocCode :code='`{{ \`<!-- 限制 1 张 -->
 <XlyUpload v-model="avatar" :limit="1" />
 
 <!-- 限制 3 张，超出触发事件 -->
@@ -125,7 +125,7 @@ function handleExceed(files, limit) {
             <XlyUpload v-model="valueSizeC" :size="140" />
           </div>
         </div>
-        <DocCode :code='`{{ \`<XlyUpload v-model="images" :size="60" />
+        <XlyDocCode :code='`{{ \`<XlyUpload v-model="images" :size="60" />
 <XlyUpload v-model="images" :size="100" />  <!-- 默认 -->
 <XlyUpload v-model="images" :size="140" />\` }}`' />
       </div>
@@ -141,7 +141,7 @@ function handleExceed(files, limit) {
         <div class="doc-preview__body">
           <XlyUpload v-model="valueDrag" :size="120" trigger-text="点击或拖拽" />
         </div>
-        <DocCode :code='`{{ \`<!-- trigger-text 属性为触发区域添加提示文字 -->
+        <XlyDocCode :code='`{{ \`<!-- trigger-text 属性为触发区域添加提示文字 -->
 <XlyUpload v-model="images" :size="120" trigger-text="点击或拖拽" />\` }}`' />
       </div>
     </section>
@@ -156,7 +156,7 @@ function handleExceed(files, limit) {
         <div class="doc-preview__body">
           <XlyUpload v-model="valueDisabled" disabled />
         </div>
-        <DocCode :code='`{{ \`<XlyUpload v-model="images" disabled />\` }}`' />
+        <XlyDocCode :code='`{{ \`<XlyUpload v-model="images" disabled />\` }}`' />
       </div>
     </section>
 
@@ -174,7 +174,7 @@ function handleExceed(files, limit) {
             <XlyUpload v-model="valueValidate" accept-types="jpg,png" :max-size="2" />
           </div>
         </div>
-        <DocCode :code='`{{ \`<!-- 仅允许 JPG/PNG，不超过 2MB -->
+        <XlyDocCode :code='`{{ \`<!-- 仅允许 JPG/PNG，不超过 2MB -->
 <XlyUpload
   v-model="images"
   accept-types="jpg,png"
@@ -337,7 +337,7 @@ const NETWORK_CONFIG = {
             </XlyUpload>
           </div>
         </div>
-        <DocCode :code='`{{ \`<!-- tip 属性 -->
+        <XlyDocCode :code='`{{ \`<!-- tip 属性 -->
 <XlyUpload v-model="images" tip="支持 JPG/PNG/GIF，单张不超过 5MB" />
 
 <!-- #tip 插槽 -->

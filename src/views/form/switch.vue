@@ -17,7 +17,7 @@
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">{{ value1 ? '已开启' : '已关闭' }}</span>
         </div>
       </div>
-      <DocCode :code="`<XlySwitch v-model=&quot;value1&quot; />
+      <XlyDocCode :code="`<XlySwitch v-model=&quot;value1&quot; />
 <span>{{ value1 ? '已开启' : '已关闭' }}</span>`" />
     </section>
 
@@ -34,7 +34,7 @@
           <XlySwitch v-model="value2" size="small" />
         </div>
       </div>
-      <DocCode :code='`<XlySwitch v-model="value" size="large" />
+      <XlyDocCode :code='`<XlySwitch v-model="value" size="large" />
 <XlySwitch v-model="value" size="default" />
 <XlySwitch v-model="value" size="small" />`' />
     </section>
@@ -51,7 +51,7 @@
           <XlySwitch v-model="value4" active-color="#f56c6c" inactive-color="#e6e6e6" />
         </div>
       </div>
-      <DocCode :code='`<XlySwitch v-model="value" active-color="#67c23a" inactive-color="#909399" />
+      <XlyDocCode :code='`<XlySwitch v-model="value" active-color="#67c23a" inactive-color="#909399" />
 <XlySwitch v-model="value" active-color="#f56c6c" inactive-color="#e6e6e6" />`' />
     </section>
 
@@ -67,7 +67,7 @@
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ value5 }}</span>
         </div>
       </div>
-      <DocCode :code='`<XlySwitch v-model="value" active-value="yes" inactive-value="no" />`' />
+      <XlyDocCode :code='`<XlySwitch v-model="value" active-value="yes" inactive-value="no" />`' />
     </section>
 
     <!-- 禁用状态 -->
@@ -82,7 +82,7 @@
           <XlySwitch v-model="value7" disabled />
         </div>
       </div>
-      <DocCode :code='`<XlySwitch v-model="value" disabled />
+      <XlyDocCode :code='`<XlySwitch v-model="value" disabled />
 <XlySwitch v-model="value" disabled model-value="true" />`' />
     </section>
 
@@ -98,7 +98,7 @@
           <XlySwitch v-model="value9" loading />
         </div>
       </div>
-      <DocCode :code='`<XlySwitch v-model="value" loading />
+      <XlyDocCode :code='`<XlySwitch v-model="value" loading />
 <XlySwitch v-model="value" loading model-value="true" />`' />
     </section>
 
@@ -114,7 +114,7 @@
           <XlySwitch v-model="value11" active-text="开" inactive-text="关" />
         </div>
       </div>
-      <DocCode :code='`<XlySwitch v-model="value" active-text="按月付费" inactive-text="按年付费" />
+      <XlyDocCode :code='`<XlySwitch v-model="value" active-text="按月付费" inactive-text="按年付费" />
 <XlySwitch v-model="value" active-text="开" inactive-text="关" />`' />
     </section>
 

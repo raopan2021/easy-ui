@@ -29,7 +29,7 @@
             </button>
           </div>
         </div>
-        <DocCode :code='`<XlyLoading v-model="loading" type="spinner" text="加载中..." />
+        <XlyDocCode :code='`<XlyLoading v-model="loading" type="spinner" text="加载中..." />
 
 <!-- 不同动画类型 -->
 <XlyLoading type="spinner" />  <!-- 旋转点 -->
@@ -58,7 +58,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code='`<XlyLoading type="spinner" text="正在加载..." />
+        <XlyDocCode :code='`<XlyLoading type="spinner" text="正在加载..." />
 <XlyLoading type="wave" text="数据提交中" />
 <XlyLoading type="pulse" text="请稍候" />`' />
       </div>
@@ -89,7 +89,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code='`<XlyLoading size="small" />     <!-- 24px -->
+        <XlyDocCode :code='`<XlyLoading size="small" />     <!-- 24px -->
 <XlyLoading size="medium" />    <!-- 32px -->
 <XlyLoading size="large" />     <!-- 48px -->
 <XlyLoading :size="64" />       <!-- 自定义 64px -->`' />
@@ -117,7 +117,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code='`<XlyLoading color="#4f6ef7" text-color="#4f6ef7" text="蓝色" />
+        <XlyDocCode :code='`<XlyLoading color="#4f6ef7" text-color="#4f6ef7" text="蓝色" />
 <XlyLoading color="#10b981" text-color="#10b981" text="绿色" />
 <XlyLoading color="#f59e0b" text-color="#f59e0b" text="橙色" />`' />
       </div>
@@ -137,7 +137,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code='`<XlyLoading type="ring" :progress="75" text="上传中..." />
+        <XlyDocCode :code='`<XlyLoading type="ring" :progress="75" text="上传中..." />
 
 <!-- 动态进度 -->
 <XlyLoading type="ring" :progress="uploadProgress" />`' />
@@ -154,7 +154,7 @@
             显示全屏加载 (2秒后关闭)
           </button>
         </div>
-        <DocCode :code='`<XlyLoading v-model="fullscreenLoading" fullscreen text="页面加载中..." />
+        <XlyDocCode :code='`<XlyLoading v-model="fullscreenLoading" fullscreen text="页面加载中..." />
 
 <!-- 锁定滚动 -->
 <XlyLoading v-model="loading" fullscreen lock text="处理中..." />`' />
@@ -187,7 +187,7 @@
             </button>
           </div>
         </div>
-        <DocCode :code='`<div class="data-container" style="position: relative;">
+        <XlyDocCode :code='`<div class="data-container" style="position: relative;">
   <!-- 数据内容 -->
   <XlyLoading 
     v-model="loading" 
@@ -236,7 +236,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code="`import { xly } from '@/utils/xly'
+        <XlyDocCode :code="`import { xly } from '@/utils/xly'
 
 // 全屏加载
 const loading = xly.$loading.open({ text: '加载中...' })

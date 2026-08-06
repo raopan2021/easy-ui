@@ -20,7 +20,7 @@
             />
           </div>
         </div>
-        <DocCode :code='`<XlySignature
+        <XlyDocCode :code='`<XlySignature
   :height="200"
   @confirm="onConfirm"
   @change="onChange"
@@ -42,7 +42,7 @@
             />
           </div>
         </div>
-        <DocCode :code='`<XlySignature
+        <XlyDocCode :code='`<XlySignature
   :height="200"
   show-pen-color
   pen-color="#ef4444"
@@ -66,7 +66,7 @@
             />
           </div>
         </div>
-        <DocCode :code='`<XlySignature
+        <XlyDocCode :code='`<XlySignature
   :height="200"
   canvas-bg-color="#1e293b"
   pen-color="#e2e8f0"
@@ -103,7 +103,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code='`<XlySignature
+        <XlyDocCode :code='`<XlySignature
   ref="sigRef"
   :show-toolbar="false"
   :show-placeholder="false"

@@ -116,7 +116,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code='`<XlyPdfSign
+        <XlyDocCode :code='`<XlyPdfSign
   :pdf-url="contractUrl"
   :signatures="signatures"
   @add="handleAdd"

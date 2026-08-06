@@ -21,7 +21,7 @@
             <p>这是一个基础弹窗，点击遮罩或关闭按钮可关闭。</p>
           </XlyModal>
         </div>
-        <DocCode :code='`<XlyButton @click="visible = true">打开弹窗</XlyButton>
+        <XlyDocCode :code='`<XlyButton @click="visible = true">打开弹窗</XlyButton>
 <XlyModal v-model="visible" title="基础弹窗">
   <p>这是一个基础弹窗。</p>
 </XlyModal>`' />
@@ -44,7 +44,7 @@
           <XlyButton @click="fullVisible = true">全屏弹窗</XlyButton>
           <XlyButton @click="customVisible = true">自定义宽度</XlyButton>
         </div>
-        <DocCode :code='`<XlyModal v-model="visible" title="小型" size="small">...</XlyModal>
+        <XlyDocCode :code='`<XlyModal v-model="visible" title="小型" size="small">...</XlyModal>
 <XlyModal v-model="visible" title="默认" size="default">...</XlyModal>
 <XlyModal v-model="visible" title="大型" size="large">...</XlyModal>
 <XlyModal v-model="visible" title="全屏" size="fullscreen">...</XlyModal>
@@ -83,7 +83,7 @@
           <XlyButton @click="slideDownVisible = true">下滑动画</XlyButton>
           <XlyButton @click="fadeVisible = true">淡入动画</XlyButton>
         </div>
-        <DocCode :code='`<XlyModal v-model="visible" title="缩放" transition="zoom">...</XlyModal>
+        <XlyDocCode :code='`<XlyModal v-model="visible" title="缩放" transition="zoom">...</XlyModal>
 <XlyModal v-model="visible" title="上滑" transition="slide-up">...</XlyModal>
 <XlyModal v-model="visible" title="下滑" transition="slide-down">...</XlyModal>
 <XlyModal v-model="visible" title="淡入" transition="fade">...</XlyModal>`' />
@@ -122,7 +122,7 @@
           <XlyButton @click="placementLeft = true">左侧居中</XlyButton>
           <XlyButton @click="placementRight = true">右侧居中</XlyButton>
         </div>
-        <DocCode :code="`<!-- 居中（默认） -->
+        <XlyDocCode :code="`<!-- 居中（默认） -->
 <XlyModal v-model=&quot;visible&quot; placement=&quot;center&quot;>...</XlyModal>
 <!-- 顶部居中 -->
 <XlyModal v-model=&quot;visible&quot; placement=&quot;top&quot;>...</XlyModal>
@@ -172,7 +172,7 @@
         <div class="doc-preview__body">
           <XlyButton @click="customContentVisible = true">自定义弹窗</XlyButton>
         </div>
-        <DocCode :code='`<XlyModal v-model="visible" :show-footer="false">
+        <XlyDocCode :code='`<XlyModal v-model="visible" :show-footer="false">
   <template #header>
     <div style="display:flex;align-items:center;gap:8px">
       <el-icon color="#4f6ef7"><WarningFilled /></el-icon>
@@ -221,7 +221,7 @@
         <div class="doc-preview__body">
           <XlyButton @click="noMaskVisible = true">无遮罩弹窗</XlyButton>
         </div>
-        <DocCode :code='`<XlyModal v-model="visible" title="悬浮面板" :show-mask="false"
+        <XlyDocCode :code='`<XlyModal v-model="visible" title="悬浮面板" :show-mask="false"
   placement="center">
   <p>这是一个没有遮罩的弹窗。</p>
 </XlyModal>`' />
@@ -252,7 +252,7 @@
           <XlyButton @click="noFooterVisible = true">无底部弹窗</XlyButton>
           <XlyButton @click="onlyBodyVisible = true">纯内容弹窗</XlyButton>
         </div>
-        <DocCode :code='`<XlyModal v-model="visible" :show-header="false">...</XlyModal>
+        <XlyDocCode :code='`<XlyModal v-model="visible" :show-header="false">...</XlyModal>
 <XlyModal v-model="visible" :show-footer="false">...</XlyModal>
 <XlyModal v-model="visible" :show-header="false" :show-footer="false">...</XlyModal>`' />
       </div>
@@ -284,7 +284,7 @@
         <div class="doc-preview__body">
           <XlyButton @click="loadingVisible = true">提交表单</XlyButton>
         </div>
-        <DocCode :code='`<XlyModal v-model="visible" title="提交确认" :confirm-loading="loading"
+        <XlyDocCode :code='`<XlyModal v-model="visible" title="提交确认" :confirm-loading="loading"
   @confirm="handleSubmit" @cancel="handleCancel">
   <p>确认提交该表单数据吗？</p>
 </XlyModal>

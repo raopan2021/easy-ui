@@ -19,7 +19,7 @@
         <div class="doc-preview__body">
           <XlyDeptTree :data="treeData" @select="handleSelect" />
         </div>
-        <DocCode :code='`<XlyDeptTree :data="treeData" @select="handleSelect" />`' />
+        <XlyDocCode :code='`<XlyDeptTree :data="treeData" @select="handleSelect" />`' />
       </div>
     </section>
 
@@ -33,7 +33,7 @@
         <div class="doc-preview__body">
           <XlyDeptTree :data="flatData" @select="handleSelect" />
         </div>
-        <DocCode :code='`<XlyDeptTree :data="flatData" />`' />
+        <XlyDocCode :code='`<XlyDeptTree :data="flatData" />`' />
       </div>
     </section>
 
@@ -58,7 +58,7 @@
             <XlyDeptTree :data="treeData" :default-expand-level="0" />
           </div>
         </div>
-        <DocCode :code='`<XlyDeptTree :data="treeData" :default-expand-level="1" />
+        <XlyDocCode :code='`<XlyDeptTree :data="treeData" :default-expand-level="1" />
 <XlyDeptTree :data="treeData" :default-expand-level="2" />
 <XlyDeptTree :data="treeData" :default-expand-level="0" />`' />
       </div>
@@ -79,7 +79,7 @@
             @select="handleSelect2"
           />
         </div>
-        <DocCode :code='`<XlyDeptTree
+        <XlyDocCode :code='`<XlyDeptTree
   :data="treeData"
   :selected-id="currentId"
   :default-expand-level="2"
@@ -102,7 +102,7 @@
             :default-expand-level="1"
           />
         </div>
-        <DocCode :code="`<XlyDeptTree
+        <XlyDocCode :code="`<XlyDeptTree
   :data=&quot;customData&quot;
   :node-key=&quot;{ id: 'deptId', pid: 'parentId', label: 'deptName', children: 'subDepts' }&quot;
 />`" />
@@ -119,7 +119,7 @@
         <div class="doc-preview__body">
           <XlyDeptTree :data="[]" empty-text="暂无部门" />
         </div>
-        <DocCode :code='`<XlyDeptTree :data="[]" empty-text="暂无部门" />`' />
+        <XlyDocCode :code='`<XlyDeptTree :data="[]" empty-text="暂无部门" />`' />
       </div>
     </section>
 
@@ -140,7 +140,7 @@
             <span v-else class="demo-empty">点击节点查看</span>
           </div>
         </div>
-        <DocCode :code="`// 选择节点
+        <XlyDocCode :code="`// 选择节点
 const handleSelect = (node) => {
   console.log('选中节点:', node)
 }

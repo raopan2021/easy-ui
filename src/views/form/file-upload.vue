@@ -19,7 +19,7 @@
         <div class="doc-preview__body">
           <XlyUpload v-model="value1" />
         </div>
-        <DocCode :code='`{{ \`<XlyUpload v-model="fileList" />\` }}`' />
+        <XlyDocCode :code='`{{ \`<XlyUpload v-model="fileList" />\` }}`' />
       </div>
       <div class="demo-value-display">
         <span class="demo-value-label">当前值：</span>
@@ -54,7 +54,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code='`{{ \`<!-- 返回对象数组（默认） -->
+        <XlyDocCode :code='`{{ \`<!-- 返回对象数组（默认） -->
 <XlyUpload v-model="fileList" />
 
 <!-- 返回 JSON 字符串 -->
@@ -92,7 +92,7 @@ interface UploadFileItem {
             <XlyUpload v-model="value3Unlimited" />
           </div>
         </div>
-        <DocCode :code='`{{ \`<!-- 限制 1 个文件 -->
+        <XlyDocCode :code='`{{ \`<!-- 限制 1 个文件 -->
 <XlyUpload v-model="file" :limit="1" />
 
 <!-- 限制 3 个 -->
@@ -114,7 +114,7 @@ function handleExceed(files, limit) {
         <div class="doc-preview__body">
           <XlyUpload v-model="valueDrag" trigger-text="点击或拖拽上传" />
         </div>
-        <DocCode :code='`{{ \`<XlyUpload v-model="files" trigger-text="点击或拖拽上传" />\` }}`' />
+        <XlyDocCode :code='`{{ \`<XlyUpload v-model="files" trigger-text="点击或拖拽上传" />\` }}`' />
       </div>
     </section>
 
@@ -128,7 +128,7 @@ function handleExceed(files, limit) {
         <div class="doc-preview__body">
           <XlyUpload v-model="valueDisabled" disabled />
         </div>
-        <DocCode :code='`{{ \`<XlyUpload v-model="files" disabled />\` }}`' />
+        <XlyDocCode :code='`{{ \`<XlyUpload v-model="files" disabled />\` }}`' />
       </div>
     </section>
 
@@ -150,7 +150,7 @@ function handleExceed(files, limit) {
             />
           </div>
         </div>
-        <DocCode :code='`{{ \`<!-- 仅允许 PDF/Word，不超过 2MB -->
+        <XlyDocCode :code='`{{ \`<!-- 仅允许 PDF/Word，不超过 2MB -->
 <XlyUpload
   v-model="files"
   accept-types="pdf,doc,docx"
@@ -253,7 +253,7 @@ const NETWORK_CONFIG = {
             </XlyUpload>
           </div>
         </div>
-        <DocCode :code='`{{ \`<!-- tip 属性 -->
+        <XlyDocCode :code='`{{ \`<!-- tip 属性 -->
 <XlyUpload v-model="files" tip="支持 PDF/Word，单个不超过 10MB" />
 
 <!-- #tip 插槽 -->

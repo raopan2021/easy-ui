@@ -22,7 +22,7 @@
             <span>文章正文</span>
           </div>
         </div>
-        <DocCode :code='`<span>文章标题</span>
+        <XlyDocCode :code='`<span>文章标题</span>
 <XlyDivider />
 <span>文章正文</span>`' />
       </div>
@@ -44,7 +44,7 @@
             <span>周五</span>
           </div>
         </div>
-        <DocCode :code='`<span>周一</span>
+        <XlyDocCode :code='`<span>周一</span>
 <XlyDivider>周二</XlyDivider>
 <span>周三</span>
 <XlyDivider>周四</XlyDivider>
@@ -64,7 +64,7 @@
           <XlyDivider content-position="center">居中</XlyDivider>
           <XlyDivider content-position="right">右侧</XlyDivider>
         </div>
-        <DocCode :code='`<XlyDivider content-position="left">左侧</XlyDivider>
+        <XlyDocCode :code='`<XlyDivider content-position="left">左侧</XlyDivider>
 <XlyDivider content-position="center">居中</XlyDivider>
 <XlyDivider content-position="right">右侧</XlyDivider>`' />
       </div>
@@ -88,7 +88,7 @@
             <span>选项四</span>
           </div>
         </div>
-        <DocCode :code='`<span>选项一</span>
+        <XlyDocCode :code='`<span>选项一</span>
 <XlyDivider direction="vertical" />
 <span>选项二</span>
 <XlyDivider direction="vertical" />
@@ -110,7 +110,7 @@
           <XlyDivider plain content-position="left">左侧简约</XlyDivider>
           <XlyDivider plain content-position="right">右侧简约</XlyDivider>
         </div>
-        <DocCode :code='`<XlyDivider plain>简约分割线</XlyDivider>
+        <XlyDocCode :code='`<XlyDivider plain>简约分割线</XlyDivider>
 <XlyDivider plain content-position="left">左侧简约</XlyDivider>
 <XlyDivider plain content-position="right">右侧简约</XlyDivider>`' />
       </div>
@@ -129,7 +129,7 @@
           <XlyDivider color="#f56c6c" border-width="3">红色三倍粗</XlyDivider>
           <XlyDivider color="#e8e8e8" plain>浅灰色简约</XlyDivider>
         </div>
-        <DocCode :code='`<XlyDivider color="#4f6ef7">蓝色分割线</XlyDivider>
+        <XlyDocCode :code='`<XlyDivider color="#4f6ef7">蓝色分割线</XlyDivider>
 <XlyDivider color="#67c23a" :border-width="2">绿色加粗</XlyDivider>
 <XlyDivider color="#f56c6c" border-width="3">红色三倍粗</XlyDivider>
 <XlyDivider color="#e8e8e8" plain>浅灰色简约</XlyDivider>`' />

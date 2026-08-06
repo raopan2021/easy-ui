@@ -54,7 +54,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code='`<!-- 传入绑定值 + 字典类型，其余全部自动处理 -->
+        <XlyDocCode :code='`<!-- 传入绑定值 + 字典类型，其余全部自动处理 -->
 <xly-dict-tag value="1" dict-type="user_status" />
 <xly-dict-tag value="2" dict-type="approve_status" />
 
@@ -90,7 +90,7 @@
             <xly-dict-tag value="low,high,urgent" dict-type="priority" multiple />
           </div>
         </div>
-        <DocCode :code="`<!-- 逗号拼接字符串（后端字段常见格式）-->
+        <XlyDocCode :code="`<!-- 逗号拼接字符串（后端字段常见格式）-->
 <xly-dict-tag value=&quot;1,2,3&quot; dict-type=&quot;user_status&quot; multiple />
 
 <!-- 字符串数组 -->
@@ -128,7 +128,7 @@
             </tbody>
           </table>
         </div>
-        <DocCode :code='`<!-- 在表格中使用 -->
+        <XlyDocCode :code='`<!-- 在表格中使用 -->
 <el-table-column label="状态">
   <template #default="{ row }">
     <xly-dict-tag :value="row.status" dict-type="user_status" />
@@ -158,7 +158,7 @@
             <xly-dict-tag value="1,2,3,4" dict-type="user_status" multiple effect="dark" />
           </div>
         </div>
-        <DocCode :code='`<xly-dict-tag value="1" dict-type="user_status" effect="light" />
+        <XlyDocCode :code='`<xly-dict-tag value="1" dict-type="user_status" effect="light" />
 <xly-dict-tag value="1" dict-type="user_status" effect="plain" />
 <xly-dict-tag value="1" dict-type="user_status" effect="dark" />`' />
       </div>
@@ -192,7 +192,7 @@
             <xly-dict-tag value="1,2,3" dict-type="user_status" multiple round />
           </div>
         </div>
-        <DocCode :code='`<xly-dict-tag value="1" dict-type="user_status" size="large" />
+        <XlyDocCode :code='`<xly-dict-tag value="1" dict-type="user_status" size="large" />
 <xly-dict-tag value="1" dict-type="user_status" size="small" />
 <xly-dict-tag value="1,2" dict-type="user_status" multiple round />`' />
       </div>
@@ -213,7 +213,7 @@
             <xly-dict-tag value="0" dict-type="gender" />
           </div>
         </div>
-        <DocCode :code="`// 字典数据中添加 icon 字段（el: 前缀 = Element Plus 图标）
+        <XlyDocCode :code="`// 字典数据中添加 icon 字段（el: 前缀 = Element Plus 图标）
 { id: '1', labelValue: '男', icon: 'el:Male' }
 { id: '2', labelValue: '女', icon: 'el:Female' }
 { id: '0', labelValue: '未知' }`" />
@@ -263,7 +263,7 @@
             />
           </div>
         </div>
-        <DocCode :code='`<!-- 默认：id → labelValue -->
+        <XlyDocCode :code='`<!-- 默认：id → labelValue -->
 <xly-dict-tag value="1" dict-type="user_status" />
 
 <!-- 自定义：code → name -->
@@ -296,7 +296,7 @@
             <xly-dict-tag value="999" dict-type="user_status" />
           </div>
         </div>
-        <DocCode :code='`<!-- 空值不渲染 -->
+        <XlyDocCode :code='`<!-- 空值不渲染 -->
 <xly-dict-tag value="" dict-type="user_status" />
 <xly-dict-tag :value="null" dict-type="user_status" />
 
@@ -312,7 +312,7 @@
         组件内置了 <code>fetchDictList</code> 函数负责数据请求，只需替换此函数即可对接您自己的字典接口，无需修改其他任何代码。
       </p>
       <div class="doc-preview">
-        <DocCode :code="`// 📁 src/components/xly-dict-tag/index.vue
+        <XlyDocCode :code="`// 📁 src/components/xly-dict-tag/index.vue
 
 // ✅ 第一步：引入您的接口方法
 import { getDictDataByType } from '@/api/system/dict'

@@ -35,7 +35,7 @@
             </XlyTimelineItem>
           </XlyTimeline>
         </div>
-        <DocCode :code='`<XlyTimeline>
+        <XlyDocCode :code='`<XlyTimeline>
   <XlyTimelineItem status="finish" timestamp="2024-01-15">
     <h4>项目启动</h4>
     <p>完成项目立项和团队组建</p>
@@ -80,7 +80,7 @@
             </XlyTimelineItem>
           </XlyTimeline>
         </div>
-        <DocCode :code='`<XlyTimelineItem status="finish">...</XlyTimelineItem>
+        <XlyDocCode :code='`<XlyTimelineItem status="finish">...</XlyTimelineItem>
 <XlyTimelineItem status="process">...</XlyTimelineItem>
 <XlyTimelineItem status="wait">...</XlyTimelineItem>
 <XlyTimelineItem status="error">...</XlyTimelineItem>`' />
@@ -114,7 +114,7 @@
             </XlyTimelineItem>
           </XlyTimeline>
         </div>
-        <DocCode :code='`<XlyTimelineItem status="finish" icon="el:Check">
+        <XlyDocCode :code='`<XlyTimelineItem status="finish" icon="el:Check">
   <h4>自定义图标</h4>
 </XlyTimelineItem>
 
@@ -157,7 +157,7 @@
             </XlyTimelineItem>
           </XlyTimeline>
         </div>
-        <DocCode :code='`<!-- 使用 timestamp 属性 -->
+        <XlyDocCode :code='`<!-- 使用 timestamp 属性 -->
 <XlyTimelineItem timestamp="2024-01-15 09:30">
   ...
 </XlyTimelineItem>
@@ -188,7 +188,7 @@
             <XlyTimelineItem status="wait">确认收货</XlyTimelineItem>
           </XlyTimeline>
         </div>
-        <DocCode :code='`<XlyTimeline>
+        <XlyDocCode :code='`<XlyTimeline>
   <XlyTimelineItem status="finish">创建订单 #20240301</XlyTimelineItem>
   <XlyTimelineItem status="finish">支付成功</XlyTimelineItem>
   <XlyTimelineItem status="process">商品打包中</XlyTimelineItem>

@@ -43,7 +43,7 @@
             </XlyForm>
           </div>
         </div>
-        <DocCode :code="`<XlyForm ref=&quot;formRef&quot; v-model=&quot;form&quot; :rules=&quot;rules&quot; :label-width=&quot;100&quot;>
+        <XlyDocCode :code="`<XlyForm ref=&quot;formRef&quot; v-model=&quot;form&quot; :rules=&quot;rules&quot; :label-width=&quot;100&quot;>
   <XlyFormItem label=&quot;姓名&quot; prop=&quot;name&quot;>
     <XlyInput v-model=&quot;form.name&quot; placeholder=&quot;请输入姓名&quot; />
   </XlyFormItem>
@@ -88,7 +88,7 @@ const valid = await formRef.value.validate()`" />
             </XlyForm>
           </div>
         </div>
-        <DocCode :code='`<XlyDatePicker v-model="date" placeholder="选择日期" />
+        <XlyDocCode :code='`<XlyDatePicker v-model="date" placeholder="选择日期" />
 <XlyDatePicker v-model="month" type="month" placeholder="选择月份" />
 <XlyTimePicker v-model="time" placeholder="选择时间" />
 <XlyTimePicker v-model="time" show-seconds />`' />
@@ -130,7 +130,7 @@ const valid = await formRef.value.validate()`" />
             </div>
           </div>
         </div>
-        <DocCode :code="`<XlyRate v-model=&quot;value&quot; />
+        <XlyDocCode :code="`<XlyRate v-model=&quot;value&quot; />
 <XlyRate v-model=&quot;value&quot; allow-half />
 <XlyRate v-model=&quot;value&quot; show-text :texts=&quot;['很差','一般','不错']&quot; />
 <XlyRate v-model=&quot;value&quot; color=&quot;#f56c6c&quot; />
@@ -172,7 +172,7 @@ const valid = await formRef.value.validate()`" />
             </div>
           </div>
         </div>
-        <DocCode :code='`<XlyInput v-model="value" placeholder="请输入" clearable />
+        <XlyDocCode :code='`<XlyInput v-model="value" placeholder="请输入" clearable />
 <XlyInput v-model="value" type="password" />
 <XlyInput v-model="value" prefix-icon="el:Search" />
 <XlyInput v-model="value" :maxlength="20" show-word-limit />
@@ -206,7 +206,7 @@ const valid = await formRef.value.validate()`" />
             </div>
           </div>
         </div>
-        <DocCode :code="`<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; clearable />
+        <XlyDocCode :code="`<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; clearable />
 <XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; filterable />
 <XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; multiple />
 

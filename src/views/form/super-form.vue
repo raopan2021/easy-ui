@@ -21,7 +21,7 @@
           </div>
         </div>
       </div>
-      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { input, textarea, password, rules } = useFormFields()
 
@@ -47,7 +47,7 @@ const fields = [
           </div>
         </div>
       </div>
-      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { select, cascader } = useFormFields()
 
@@ -92,7 +92,7 @@ const fields = [
           </div>
         </div>
       </div>
-      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { datePicker, dateRangePicker } = useFormFields()
 
@@ -122,7 +122,7 @@ const fields = [
           </div>
         </div>
       </div>
-      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { dateTimePicker, dateTimeRangePicker } = useFormFields()
 
@@ -148,7 +148,7 @@ const fields = [
           </div>
         </div>
       </div>
-      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { timePicker, timeRangePicker } = useFormFields()
 
@@ -174,7 +174,7 @@ const fields = [
           </div>
         </div>
       </div>
-      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { select } = useFormFields()
 
@@ -209,7 +209,7 @@ const fields = [
           </div>
         </div>
       </div>
-      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { inputSlot } = useFormFields()
 
@@ -233,7 +233,7 @@ const fields = [
           </div>
         </div>
       </div>
-      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { input, rules } = useFormFields()
 
@@ -283,7 +283,7 @@ const fields = [
           </div>
         </div>
       </div>
-      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 import { ElInput } from 'element-plus'
 const { custom } = useFormFields()
 
@@ -310,7 +310,7 @@ const fields = [
           </div>
         </div>
       </div>
-      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { sw, rate } = useFormFields()
 
@@ -332,7 +332,7 @@ const fields = [
           <XlySuperForm :fields="spanFields" />
         </div>
       </div>
-      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { input } = useFormFields()
 
@@ -357,7 +357,7 @@ const fields = [
           </div>
         </div>
       </div>
-      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { input, select, sw, rules } = useFormFields()
 
@@ -386,7 +386,7 @@ const fields = [
           </div>
         </div>
       </div>
-      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const {
   input, textarea, select,
@@ -431,7 +431,7 @@ async function submitFull() {
           </div>
         </div>
       </div>
-      <DocCode :code="`import { ref } from 'vue'
+      <XlyDocCode :code="`import { ref } from 'vue'
 import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { input, select, rules } = useFormFields()
@@ -486,7 +486,7 @@ function reset() {
       </p>
 
       <h3 class="doc-subtitle">步骤一：在 useFormFields.ts 中添加字段生成函数</h3>
-      <DocCode :code="`// 假设我们要添加一个 XlyNumber 数字输入框组件
+      <XlyDocCode :code="`// 假设我们要添加一个 XlyNumber 数字输入框组件
 
 // 在 useFormFields() 函数中添加：
 function number(prop: string, labelOrOptions?: string | FieldOptions, options?: FieldOptions) {
@@ -504,7 +504,7 @@ return {
 }`" />
 
       <h3 class="doc-subtitle">步骤二：在 index.vue 中注册组件</h3>
-      <DocCode :code="`// 1. 导入组件
+      <XlyDocCode :code="`// 1. 导入组件
 import XlyNumber from '@/components/xly-number/index.vue'
 
 // 2. 在 typeMap 中添加映射
@@ -525,7 +525,7 @@ const typeMap: Record<string, Component> = {
 }`" />
 
       <h3 class="doc-subtitle">步骤三：使用新组件</h3>
-      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { number } = useFormFields()
 
@@ -538,7 +538,7 @@ const fields = [
       <p class="doc-desc">
         如果你只是想偶尔使用某个自定义组件，不需要修改源码，可以使用 <code>custom()</code> 生成器：
       </p>
-      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 import MyCustomInput from '@/components/my-custom-input/index.vue'
 
 const { custom } = useFormFields()

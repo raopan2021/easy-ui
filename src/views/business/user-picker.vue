@@ -21,7 +21,7 @@
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(singleUser) }}</code>
         </div>
-        <DocCode :code='`<XlyUserPicker v-model="userId" placeholder="请选择用户" />`' />
+        <XlyDocCode :code='`<XlyUserPicker v-model="userId" placeholder="请选择用户" />`' />
       </div>
     </section>
 
@@ -39,7 +39,7 @@
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(multiUsers) }}</code>
         </div>
-        <DocCode :code='`<XlyUserPicker v-model="userIds" multiple placeholder="请选择用户" />`' />
+        <XlyDocCode :code='`<XlyUserPicker v-model="userIds" multiple placeholder="请选择用户" />`' />
       </div>
     </section>
 
@@ -57,7 +57,7 @@
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(maxUsers) }}</code>
         </div>
-        <DocCode :code='`<XlyUserPicker v-model="userIds" multiple :max="3" placeholder="最多选择3个用户" />`' />
+        <XlyDocCode :code='`<XlyUserPicker v-model="userIds" multiple :max="3" placeholder="最多选择3个用户" />`' />
       </div>
     </section>
 
@@ -75,7 +75,7 @@
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(stringUsers) }}</code>
         </div>
-        <DocCode :code='`<XlyUserPicker v-model="userIdsStr" multiple return-type="string" placeholder="返回逗号字符串" />`' />
+        <XlyDocCode :code='`<XlyUserPicker v-model="userIdsStr" multiple return-type="string" placeholder="返回逗号字符串" />`' />
       </div>
     </section>
 
@@ -99,7 +99,7 @@
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(extraUsers) }}</code>
         </div>
-        <DocCode :code='`<XlyUserPicker
+        <XlyDocCode :code='`<XlyUserPicker
   v-model="userIds"
   multiple
   show-extra
@@ -123,7 +123,7 @@
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(singleUser) }}</code>
         </div>
-        <DocCode :code='`<XlyUserPicker v-model="userId" disabled placeholder="禁用状态" />`' />
+        <XlyDocCode :code='`<XlyUserPicker v-model="userId" disabled placeholder="禁用状态" />`' />
       </div>
     </section>
 
@@ -133,7 +133,7 @@
       <p class="doc-section__desc">
         组件默认使用内部模拟数据。如需接入真实接口，直接打开组件源码修改 <code>getMockUsers</code> 函数即可。
       </p>
-      <DocCode :code="`// 打开 src/components/xly-user-picker/index.vue
+      <XlyDocCode :code="`// 打开 src/components/xly-user-picker/index.vue
 // 找到 getMockUsers 函数，替换为你的真实接口调用
 
 /**

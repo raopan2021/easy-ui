@@ -25,7 +25,7 @@
             </div>
           </XlyWatermark>
         </div>
-        <DocCode :code='`<XlyWatermark content="内部机密">
+        <XlyDocCode :code='`<XlyWatermark content="内部机密">
   <div>需要保护的区域</div>
 </XlyWatermark>`' />
       </div>
@@ -55,7 +55,7 @@
             </div>
           </XlyWatermark>
         </div>
-        <DocCode :code="`<XlyWatermark :content=&quot;['XLY Admin', '2026-03-21']&quot; :rotate=&quot;-15&quot;>
+        <XlyDocCode :code="`<XlyWatermark :content=&quot;['XLY Admin', '2026-03-21']&quot; :rotate=&quot;-15&quot;>
   <div>多行水印区域</div>
 </XlyWatermark>`" />
       </div>
@@ -130,7 +130,7 @@
             </XlyWatermark>
           </div>
         </div>
-        <DocCode :code='`<!-- 浅色大字 -->
+        <XlyDocCode :code='`<!-- 浅色大字 -->
 <XlyWatermark
   content="浅色水印"
   font-color="rgba(0, 0, 0, 0.06)"
@@ -179,7 +179,7 @@
             <p>水印已隐藏，点击按钮重新显示。</p>
           </div>
         </div>
-        <DocCode :code='`<XlyWatermark
+        <XlyDocCode :code='`<XlyWatermark
   v-if="showWatermark"
   :content="watermarkText"
   :font-color="watermarkColor"
@@ -204,7 +204,7 @@
             <p>指令方式更简洁，适合快速添加。</p>
           </div>
         </div>
-        <DocCode :code="`<div v-watermark=&quot;{ content: '指令水印' }&quot;>
+        <XlyDocCode :code="`<div v-watermark=&quot;{ content: '指令水印' }&quot;>
   内容区域
 </div>
 

@@ -37,7 +37,7 @@
             </template>
           </XlyCard>
         </div>
-        <DocCode :code='`<XlyCard>
+        <XlyDocCode :code='`<XlyCard>
   <template #header>
     <div class="header-title">项目详情</div>
   </template>
@@ -97,7 +97,7 @@
             </XlyCard>
           </div>
         </div>
-        <DocCode :code='`<XlyCard title="基本信息">
+        <XlyDocCode :code='`<XlyCard title="基本信息">
   <div>内容...</div>
 </XlyCard>
 
@@ -125,7 +125,7 @@
             </XlyCard>
           </div>
         </div>
-        <DocCode :code='`<XlyCard shadow="always">...</XlyCard>
+        <XlyDocCode :code='`<XlyCard shadow="always">...</XlyCard>
 <XlyCard shadow="hover">...</XlyCard>
 <XlyCard shadow="never">...</XlyCard>`' />
       </div>
@@ -149,7 +149,7 @@
             </XlyCard>
           </div>
         </div>
-        <DocCode :code='`<XlyCard hoverable title="用户管理">
+        <XlyDocCode :code='`<XlyCard hoverable title="用户管理">
   <div>点击查看详情</div>
 </XlyCard>`' />
       </div>
@@ -248,7 +248,7 @@
             <div class="demo-text muted">禁用状态下无法交互</div>
           </XlyCard>
         </div>
-        <DocCode :code='`<XlyCard disabled>...</XlyCard>`' />
+        <XlyDocCode :code='`<XlyCard disabled>...</XlyCard>`' />
       </div>
     </section>
 

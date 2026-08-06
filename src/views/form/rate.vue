@@ -16,7 +16,7 @@
           </div>
         </div>
       </div>
-      <DocCode :code='`<XlyRate v-model="value" />`' />
+      <XlyDocCode :code='`<XlyRate v-model="value" />`' />
     </section>
 
     <section class="doc-section">
@@ -30,7 +30,7 @@
           </div>
         </div>
       </div>
-      <DocCode :code='`<XlyRate v-model="value" allow-half />`' />
+      <XlyDocCode :code='`<XlyRate v-model="value" allow-half />`' />
     </section>
 
     <section class="doc-section">
@@ -52,7 +52,7 @@
           </div>
         </div>
       </div>
-      <DocCode :code='`<XlyRate v-model="value" color="#4f6ef7" />
+      <XlyDocCode :code='`<XlyRate v-model="value" color="#4f6ef7" />
 <XlyRate v-model="value" color="#f56c6c" />
 <XlyRate v-model="value" color="#67c23a" />`' />
     </section>
@@ -66,7 +66,7 @@
           <XlyRate v-model="val5" :texts="['很差', '一般', '不错', '推荐', '极佳']" />
         </div>
       </div>
-      <DocCode :code="`<XlyRate v-model=&quot;value&quot; show-text />
+      <XlyDocCode :code="`<XlyRate v-model=&quot;value&quot; show-text />
 <XlyRate v-model=&quot;value&quot; :texts=&quot;['很差', '一般', '不错', '推荐', '极佳']&quot; />`" />
     </section>
 
@@ -78,7 +78,7 @@
           <XlyRate v-model="val6" :max="10" show-text />
         </div>
       </div>
-      <DocCode :code='`<XlyRate v-model="value" :max="10" show-text />`' />
+      <XlyDocCode :code='`<XlyRate v-model="value" :max="10" show-text />`' />
     </section>
 
     <section class="doc-section">
@@ -89,7 +89,7 @@
           <XlyRate v-model="val7" disabled />
         </div>
       </div>
-      <DocCode :code='`<XlyRate v-model="value" disabled />`' />
+      <XlyDocCode :code='`<XlyRate v-model="value" disabled />`' />
     </section>
 
     <section class="doc-section">

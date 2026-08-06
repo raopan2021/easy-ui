@@ -25,7 +25,7 @@
           <XlyAvatar>U</XlyAvatar>
           <XlyAvatar src="https://i.pravatar.cc/150?img=1" />
         </div>
-        <DocCode :code='`<!-- 图标头像 -->
+        <XlyDocCode :code='`<!-- 图标头像 -->
 <XlyAvatar>
   <svg>...</svg>
 </XlyAvatar>
@@ -51,7 +51,7 @@
           <XlyAvatar size="large" src="https://i.pravatar.cc/150?img=4" />
           <XlyAvatar :size="80" src="https://i.pravatar.cc/150?img=5" />
         </div>
-        <DocCode :code='`<XlyAvatar size="small" src="..." />
+        <XlyDocCode :code='`<XlyAvatar size="small" src="..." />
 <XlyAvatar src="..." />
 <XlyAvatar size="large" src="..." />
 <XlyAvatar :size="80" src="..." />`' />
@@ -71,7 +71,7 @@
           <XlyAvatar size="small" src="https://i.pravatar.cc/150?img=8" shape="circle" />
           <XlyAvatar size="small" src="https://i.pravatar.cc/150?img=9" shape="square" />
         </div>
-        <DocCode :code='`<XlyAvatar src="..." shape="circle" />
+        <XlyDocCode :code='`<XlyAvatar src="..." shape="circle" />
 <XlyAvatar src="..." shape="square" />`' />
       </div>
     </section>
@@ -91,7 +91,7 @@
           <XlyAvatar size="large">张明</XlyAvatar>
           <XlyAvatar :size="80" color="#4f6ef7" shape="circle">紫</XlyAvatar>
         </div>
-        <DocCode :code='`<XlyAvatar>张</XlyAvatar>
+        <XlyDocCode :code='`<XlyAvatar>张</XlyAvatar>
 <XlyAvatar>李</XlyAvatar>
 <XlyAvatar>王</XlyAvatar>
 <XlyAvatar>陈</XlyAvatar>
@@ -114,7 +114,7 @@
           <XlyAvatar color="#e6a23c" shape="circle">橙</XlyAvatar>
           <XlyAvatar color="#909399" shape="circle">灰</XlyAvatar>
         </div>
-        <DocCode :code='`<XlyAvatar color="#4f6ef7" shape="circle">蓝</XlyAvatar>
+        <XlyDocCode :code='`<XlyAvatar color="#4f6ef7" shape="circle">蓝</XlyAvatar>
 <XlyAvatar color="#67c23a" shape="circle">绿</XlyAvatar>
 <XlyAvatar color="#f56c6c" shape="circle">红</XlyAvatar>`' />
       </div>
@@ -149,7 +149,7 @@
             <span>scale-down</span>
           </div>
         </div>
-        <DocCode :code='`<XlyAvatar :size="100" fit="fill" src="..." />
+        <XlyDocCode :code='`<XlyAvatar :size="100" fit="fill" src="..." />
 <XlyAvatar :size="100" fit="contain" src="..." />
 <XlyAvatar :size="100" fit="cover" src="..." />
 <XlyAvatar :size="100" fit="none" src="..." />
@@ -183,7 +183,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code='`<div class="avatar-group">
+        <XlyDocCode :code='`<div class="avatar-group">
   <XlyAvatar v-for="user in users" :key="user.id" :src="user.avatar" />
   <XlyAvatar>+5</XlyAvatar>
 </div>`' />

@@ -26,7 +26,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code='`<XlyIcon name="el:Search" :size="24" />
+        <XlyDocCode :code='`<XlyIcon name="el:Search" :size="24" />
 <XlyIcon name="el:Edit" :size="24" />
 <XlyIcon name="el:arrow-down" :size="24" />`' />
       </div>
@@ -51,7 +51,7 @@
             暂无自定义 SVG 图标，请将 .svg 文件放入 src/assets/icon/svg/ 目录
           </div>
         </div>
-        <DocCode :code='`<!-- assets/icon/svg/check-circle.svg -->
+        <XlyDocCode :code='`<!-- assets/icon/svg/check-circle.svg -->
 <XlyIcon name="svg:check-circle" :size="24" />
 
 <!-- assets/icon/svg/dashboard.svg -->
@@ -90,7 +90,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code='`<XlyIcon name="el:Setting" :size="24" color="#4f6ef7" />
+        <XlyDocCode :code='`<XlyIcon name="el:Setting" :size="24" color="#4f6ef7" />
 <XlyIcon name="svg:dashboard" :size="36" color="#34c759" />`' />
       </div>
     </section>
@@ -124,7 +124,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code="`<!-- 简单方式：直接使用 @/ 路径（推荐） -->
+        <XlyDocCode :code="`<!-- 简单方式：直接使用 @/ 路径（推荐） -->
 <XlyIcon name=&quot;@/assets/icon/img/img.png&quot; :size=&quot;32&quot; />
 
 <!-- 网络图片 -->
@@ -161,7 +161,7 @@ import imgPng from '@/assets/icon/img/img.png?url'
             <XlyIcon name="el:Share" :size="24" clickable @click="handleIconClick('Share')" />
           </div>
         </div>
-        <DocCode :code="`<XlyIcon
+        <XlyDocCode :code="`<XlyIcon
   name=&quot;el:Delete&quot;
   :size=&quot;24&quot;
   color=&quot;#f56c6c&quot;

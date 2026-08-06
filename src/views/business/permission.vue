@@ -42,7 +42,7 @@
         <div class="doc-preview__body">
           <xly-permission v-model="values.level1" :data="dataLevel1" :max-level="1" />
         </div>
-        <DocCode :code="`// 数据结构：只有模块（无children）
+        <XlyDocCode :code="`// 数据结构：只有模块（无children）
 const data = [
   { id: 'system', label: '系统管理' },
   { id: 'content', label: '内容管理' },
@@ -65,7 +65,7 @@ const data = [
         <div class="doc-preview__body">
           <xly-permission v-model="values.level2" :data="dataLevel2" :max-level="2" />
         </div>
-        <DocCode :code="`// 数据结构：模块 → 页面
+        <XlyDocCode :code="`// 数据结构：模块 → 页面
 const data = [
   {
     id: 'system',
@@ -102,7 +102,7 @@ const data = [
         <div class="doc-preview__body">
           <xly-permission v-model="values.level3" :data="dataLevel3" />
         </div>
-        <DocCode :code="`// 数据结构：模块 → 页面 → 操作
+        <XlyDocCode :code="`// 数据结构：模块 → 页面 → 操作
 const data = [
   {
     id: 'system',
@@ -141,7 +141,7 @@ const data = [
         <div class="doc-preview__body">
           <xly-permission v-model="values.level4" :data="dataLevel4" :max-level="4" />
         </div>
-        <DocCode :code="`// 数据结构：模块 → 页面 → 操作 → 功能
+        <XlyDocCode :code="`// 数据结构：模块 → 页面 → 操作 → 功能
 const data = [
   {
     id: 'system',
@@ -193,7 +193,7 @@ const data = [
         <div class="doc-preview__body">
           <xly-permission v-model="values.level5" :data="dataLevel5" :max-level="5" />
         </div>
-        <DocCode :code="`// 数据结构：模块 → 页面 → 操作 → 功能 → 数据
+        <XlyDocCode :code="`// 数据结构：模块 → 页面 → 操作 → 功能 → 数据
 const data = [
   {
     id: 'system',
@@ -250,7 +250,7 @@ const data = [
         <div class="doc-preview__body">
           <xly-permission v-model="values.custom" :data="dataCustom" id-key="code" label-key="name" children-key="sub" />
         </div>
-        <DocCode :code="`const data = [
+        <XlyDocCode :code="`const data = [
   {
     code: 'system',
     name: '系统管理',
@@ -289,7 +289,7 @@ const data = [
         <div class="doc-preview__body">
           <xly-permission v-model="values.headers" :data="dataLevel3" :headers="['功能分组', '页面名称', '操作项']" />
         </div>
-        <DocCode :code="`<xly-permission
+        <XlyDocCode :code="`<xly-permission
   v-model=&quot;selected&quot;
   :data=&quot;data&quot;
   :headers=&quot;['功能分组', '页面名称', '操作项']&quot;
@@ -312,7 +312,7 @@ const data = [
             <xly-permission v-model="values.partial" :data="dataPartial" />
           </div>
         </div>
-        <DocCode :code="`<!-- 整体禁用 -->
+        <XlyDocCode :code="`<!-- 整体禁用 -->
 <xly-permission v-model=&quot;selected&quot; :data=&quot;data&quot; disabled />
 
 <!-- 部分禁用 -->
@@ -339,7 +339,7 @@ const data = [
             <xly-permission v-model="values.isDisabled" :data="dataIsDisabled" :is-disabled="checkDisabled" />
           </div>
         </div>
-        <DocCode :code='`// 方式1：简单配置 - 指定字段和值
+        <XlyDocCode :code='`// 方式1：简单配置 - 指定字段和值
 <!-- status === 2 禁用 -->
 <xly-permission
   v-model="selected"
@@ -389,7 +389,7 @@ const checkDisabled = (item, level) => {
         <div class="doc-preview__body">
           <xly-permission v-model="values.noborder" :data="dataLevel3" :bordered="false" />
         </div>
-        <DocCode :code='`<xly-permission v-model="selected" :data="data" :bordered="false" />`' />
+        <XlyDocCode :code='`<xly-permission v-model="selected" :data="data" :bordered="false" />`' />
       </div>
     </section>
 

@@ -23,7 +23,7 @@
         <div class="doc-preview__body">
           <XlyQrcode content="https://ease-ui.com" />
         </div>
-        <DocCode :code='`<XlyQrcode content="https://ease-ui.com" />`' />
+        <XlyDocCode :code='`<XlyQrcode content="https://ease-ui.com" />`' />
       </div>
     </section>
 
@@ -49,7 +49,7 @@
             <XlyQrcode content="大尺寸" :size="300" />
           </div>
         </div>
-        <DocCode :code='`<XlyQrcode content="小尺寸" :size="100" />
+        <XlyDocCode :code='`<XlyQrcode content="小尺寸" :size="100" />
 <XlyQrcode content="中尺寸" :size="200" />
 <XlyQrcode content="大尺寸" :size="300" />`' />
       </div>
@@ -80,7 +80,7 @@
             <span>红色主题</span>
           </div>
         </div>
-        <DocCode :code='`<XlyQrcode content="蓝色主题" color-dark="#4F6EF7" color-light="#EEF2FF" />
+        <XlyDocCode :code='`<XlyQrcode content="蓝色主题" color-dark="#4F6EF7" color-light="#EEF2FF" />
 <XlyQrcode content="绿色主题" color-dark="#34C759" color-light="#E8F5E9" />`' />
       </div>
     </section>
@@ -112,7 +112,7 @@
             <span>H (30%)</span>
           </div>
         </div>
-        <DocCode :code='`<XlyQrcode content="低纠错 L" correct-level="L" />
+        <XlyDocCode :code='`<XlyQrcode content="低纠错 L" correct-level="L" />
 <XlyQrcode content="中纠错 M" correct-level="M" />
 <XlyQrcode content="高纠错 Q" correct-level="Q" />
 <XlyQrcode content="最高 H" correct-level="H" />`' />
@@ -139,7 +139,7 @@
             logo-background-color="#ffffff"
           />
         </div>
-        <DocCode :code='`<XlyQrcode
+        <XlyDocCode :code='`<XlyQrcode
   content="https://ease-ui.com"
   :size="200"
   logo="/logo.png"
@@ -177,7 +177,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code="`const qrRef = ref()
+        <XlyDocCode :code="`const qrRef = ref()
 const dynamicContent = ref('https://ease-ui.com')
 
 // 下载二维码
@@ -214,7 +214,7 @@ function handleGetDataUrl() {
             </div>
           </div>
         </div>
-        <DocCode :code="`<XlyQrcode
+        <XlyDocCode :code="`<XlyQrcode
   content=&quot;https://ease-ui.com&quot;
   @generated=&quot;onGenerated&quot;
   @error=&quot;onError&quot;

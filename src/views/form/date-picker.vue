@@ -16,7 +16,7 @@
           <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ val1 || '未选择' }}</span>
         </div>
       </div>
-      <DocCode :code='`<XlyDatePicker v-model="value" placeholder="请选择日期" />`' />
+      <XlyDocCode :code='`<XlyDatePicker v-model="value" placeholder="请选择日期" />`' />
     </section>
 
     <section class="doc-section">
@@ -30,7 +30,7 @@
           <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ val2 || '未选择' }}</span>
         </div>
       </div>
-      <DocCode :code='`<XlyDatePicker v-model="value" type="month" placeholder="请选择月份" />`' />
+      <XlyDocCode :code='`<XlyDatePicker v-model="value" type="month" placeholder="请选择月份" />`' />
     </section>
 
     <section class="doc-section">
@@ -44,7 +44,7 @@
           <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ val3 || '未选择' }}</span>
         </div>
       </div>
-      <DocCode :code='`<XlyDatePicker v-model="value" type="year" placeholder="请选择年份" />`' />
+      <XlyDocCode :code='`<XlyDatePicker v-model="value" type="year" placeholder="请选择年份" />`' />
     </section>
 
     <section class="doc-section">
@@ -57,7 +57,7 @@
           </div>
         </div>
       </div>
-      <DocCode :code='`<XlyDatePicker v-model="value" format="YYYY/MM/DD" />`' />
+      <XlyDocCode :code='`<XlyDatePicker v-model="value" format="YYYY/MM/DD" />`' />
     </section>
 
     <section class="doc-section">
@@ -73,7 +73,7 @@
           </div>
         </div>
       </div>
-      <DocCode :code='`<XlyDatePicker v-model="value" clearable />
+      <XlyDocCode :code='`<XlyDatePicker v-model="value" clearable />
 <XlyDatePicker v-model="value" disabled />`' />
     </section>
 
@@ -87,7 +87,7 @@
           <div style="width: 280px;"><XlyDatePicker v-model="val6" size="small" /></div>
         </div>
       </div>
-      <DocCode :code='`<XlyDatePicker v-model="value" size="large" />
+      <XlyDocCode :code='`<XlyDatePicker v-model="value" size="large" />
 <XlyDatePicker v-model="value" />
 <XlyDatePicker v-model="value" size="small" />`' />
     </section>

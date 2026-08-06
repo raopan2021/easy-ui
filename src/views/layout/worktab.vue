@@ -57,7 +57,7 @@
         </table>
       </div>
 
-      <DocCode :code='`const worktabRef = ref<InstanceType<typeof XlyWorktab>>()
+      <XlyDocCode :code='`const worktabRef = ref<InstanceType<typeof XlyWorktab>>()
 
 // 在标签页变化后调用
 worktabRef.value?.onTabsChange()`' />
@@ -234,7 +234,7 @@ worktabRef.value?.onTabsChange()`' />
       </p>
 
       <h3 class="doc-subtitle">1. 布局模板</h3>
-      <DocCode :code='`<template>
+      <XlyDocCode :code='`<template>
   <div class="layout-container">
     <HeaderLayout />
     <div class="layout-body">
@@ -257,7 +257,7 @@ worktabRef.value?.onTabsChange()`' />
 </template>`' />
 
       <h3 class="doc-subtitle">2. 路由监听（自动添加标签）</h3>
-      <DocCode :code="`<script setup lang=&quot;ts&quot;>
+      <XlyDocCode :code="`<script setup lang=&quot;ts&quot;>
 import { ref, watch, nextTick } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
 import XlyWorktab from '@/components/xly-worktab/index.vue'
@@ -288,7 +288,7 @@ watch(
       <p class="doc-section__desc">
         <code>addTab</code> 会从 <code>route.meta.title</code> 获取标题。当前通过遍历 <code>menu.json</code> 匹配路径。如果你改用了 vue-router 的 meta 配置，可直接在路由定义中设置 <code>meta: { title: '页面名' }</code>，去掉 <code>getRouteTitle</code> 函数。
       </p>
-      <DocCode :code="`// 方式一：当前做法 —— 从 menu.json 匹配标题
+      <XlyDocCode :code="`// 方式一：当前做法 —— 从 menu.json 匹配标题
 function getRouteTitle(path: string): string {
   for (const item of menuData) {
     if (item.path === path) return item.name
@@ -324,7 +324,7 @@ function getRouteTitle(path: string): string {
       <p class="doc-section__desc">
         如需固定其他页面，修改 <code>src/stores/tabs.ts</code> 中 <code>addTab</code> 的 <code>HOME_PATH</code> 常量，或改为数组判断：
       </p>
-      <DocCode :code="`// stores/tabs.ts
+      <XlyDocCode :code="`// stores/tabs.ts
 const AFFIX_PATHS = ['/', '/dashboard']
 
 function addTab(route: RouteLocationNormalized) {
@@ -350,7 +350,7 @@ function addTab(route: RouteLocationNormalized) {
       <p class="doc-section__desc">
         修改 <code>src/components/xly-worktab/index.vue</code> 底部的 SCSS 变量即可全局调整风格：
       </p>
-      <DocCode :code='`// src/components/xly-worktab/index.vue <style>
+      <XlyDocCode :code='`// src/components/xly-worktab/index.vue <style>
 $primary: #4f6ef7;      // 激活标签颜色
 $border-color: #ebeef5;  // 底部边框颜色
 $bg-active: #ecf0ff;     // 激活标签背景
@@ -364,7 +364,7 @@ $bg-hover: #f5f7fa;      // 悬浮标签背景
       <p class="doc-section__desc">
         当前标签只显示文字。如需在标签前加图标，修改组件模板中 <code>worktab-item</code> 的结构，并在 <code>TabItem</code> 类型中增加 <code>icon</code> 字段：
       </p>
-      <DocCode :code="`// 1. 扩展 TabItem 类型（stores/tabs.ts）
+      <XlyDocCode :code="`// 1. 扩展 TabItem 类型（stores/tabs.ts）
 export interface TabItem {
   path: string
   title: string
@@ -395,7 +395,7 @@ function addTab(route: RouteLocationNormalized) {
       <p class="doc-section__desc">
         当前 KeepAlive 缓存所有有 <code>name</code> 的页面。如需按需缓存：
       </p>
-      <DocCode :code='`// 方式一：使用 cachedNames 控制 include
+      <XlyDocCode :code='`// 方式一：使用 cachedNames 控制 include
 <KeepAlive :include="tabsStore.cachedNames">
   <component :is="Component" :key="route.path" />
 </KeepAlive>
@@ -417,7 +417,7 @@ const cachedNames = computed(() => {
       <p class="doc-section__desc">
         当前关闭全部标签后默认跳转到 <code>/</code>。如需跳转到首页或其他页面，修改 <code>closeAllTabs</code> 的返回值：
       </p>
-      <DocCode :code="`// stores/tabs.ts
+      <XlyDocCode :code="`// stores/tabs.ts
 function closeAllTabs(): string | null {
   const affixTabs = tabs.value.filter((tab) => tab.affix)
   tabs.value = affixTabs
@@ -433,7 +433,7 @@ function closeAllTabs(): string | null {
       <p class="doc-section__desc">
         如果某些场景下不需要标签页功能（如移动端、嵌入模式），可通过环境变量或配置控制：
       </p>
-      <DocCode :code="`<!-- layouts/index.vue -->
+      <XlyDocCode :code="`<!-- layouts/index.vue -->
 <XlyWorktab v-if=&quot;showWorkTab&quot; ref=&quot;worktabRef&quot; />
 
 <script setup>
@@ -448,7 +448,7 @@ const showWorkTab = ref(true)
       <p class="doc-section__desc">
         防止标签过多导致性能问题，可在 Store 中增加上限：
       </p>
-      <DocCode :code='`// stores/tabs.ts
+      <XlyDocCode :code='`// stores/tabs.ts
 const MAX_TABS = 20  // 最大标签数
 
 function addTab(route: RouteLocationNormalized) {

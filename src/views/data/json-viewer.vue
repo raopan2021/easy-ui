@@ -19,7 +19,7 @@
         <div class="doc-preview__body">
           <XlyJsonViewer :data="basicData" />
         </div>
-        <DocCode :code='`{{ basicCode }}`' />
+        <XlyDocCode :code='`{{ basicCode }}`' />
       </div>
     </section>
 
@@ -40,7 +40,7 @@
             <XlyJsonViewer :data="basicData" :depth="1" />
           </div>
         </div>
-        <DocCode :code='`<!-- 全部展开 -->
+        <XlyDocCode :code='`<!-- 全部展开 -->
 <XlyJsonViewer :data="jsonData" :depth="0" />
 
 <!-- 只展开第一层 -->
@@ -58,7 +58,7 @@
         <div class="doc-preview__body">
           <XlyJsonViewer :data="deepData" max-height="200px" />
         </div>
-        <DocCode :code='`<XlyJsonViewer :data="jsonData" max-height="200px" />`' />
+        <XlyDocCode :code='`<XlyJsonViewer :data="jsonData" max-height="200px" />`' />
       </div>
     </section>
 
@@ -79,7 +79,7 @@
             <XlyJsonViewer :data="basicData" width="100%" />
           </div>
         </div>
-        <DocCode :code='`<XlyJsonViewer :data="jsonData" width="400px" />
+        <XlyDocCode :code='`<XlyJsonViewer :data="jsonData" width="400px" />
 <XlyJsonViewer :data="jsonData" width="100%" />`' />
       </div>
     </section>
@@ -101,7 +101,7 @@
             <XlyJsonViewer :data="basicData" theme="dark" />
           </div>
         </div>
-        <DocCode :code='`<XlyJsonViewer :data="jsonData" />
+        <XlyDocCode :code='`<XlyJsonViewer :data="jsonData" />
 <XlyJsonViewer :data="jsonData" theme="dark" />`' />
       </div>
     </section>
@@ -123,7 +123,7 @@
             <XlyJsonViewer :data="basicData" :show-expand="false" />
           </div>
         </div>
-        <DocCode :code='`<!-- 隐藏工具栏 -->
+        <XlyDocCode :code='`<!-- 隐藏工具栏 -->
 <XlyJsonViewer :data="jsonData" :show-toolbar="false" />
 
 <!-- 只保留复制按钮 -->
@@ -152,7 +152,7 @@
         <div class="doc-preview__body">
           <XlyJsonViewer :data="stringJson" />
         </div>
-        <DocCode :code="`const jsonStr = '{&quot;name&quot;: &quot;张三&quot;, &quot;age&quot;: 18, &quot;city&quot;: &quot;北京&quot;}'
+        <XlyDocCode :code="`const jsonStr = '{&quot;name&quot;: &quot;张三&quot;, &quot;age&quot;: 18, &quot;city&quot;: &quot;北京&quot;}'
 <XlyJsonViewer :data=&quot;jsonStr&quot; />`" />
       </div>
     </section>
@@ -170,7 +170,7 @@
         <div class="doc-preview__body">
           <XlyJsonViewer :data="businessErrorData" theme="dark" />
         </div>
-        <DocCode :code='`<XlyJsonViewer :data="errorData" theme="dark" />`' />
+        <XlyDocCode :code='`<XlyJsonViewer :data="errorData" theme="dark" />`' />
       </div>
 
       <!-- 空指针异常 -->
@@ -179,7 +179,7 @@
         <div class="doc-preview__body">
           <XlyJsonViewer :data="nullPointerErrorData" :depth="2" theme="dark" />
         </div>
-        <DocCode :code='`<XlyJsonViewer :data="nullPointerErrorData" :depth="2" theme="dark" />`' />
+        <XlyDocCode :code='`<XlyJsonViewer :data="nullPointerErrorData" :depth="2" theme="dark" />`' />
       </div>
 
       <!-- 分页数据 -->
@@ -188,7 +188,7 @@
         <div class="doc-preview__body">
           <XlyJsonViewer :data="pageData" />
         </div>
-        <DocCode :code='`<XlyJsonViewer :data="pageData" />`' />
+        <XlyDocCode :code='`<XlyJsonViewer :data="pageData" />`' />
       </div>
     </section>
 

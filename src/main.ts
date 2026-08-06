@@ -26,8 +26,8 @@ import router from './router'
 const app = createApp(App)
 
 // 全局注册文档代码展示组件
-import DocCode from '@/components/DocCode.vue'
-app.component('DocCode', DocCode)
+import XlyDocCode from '@/components/xly-doc-code/index.vue'
+app.component('XlyDocCode', XlyDocCode)
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)

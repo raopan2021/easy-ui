@@ -16,7 +16,7 @@
           <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ val1 || '未选择' }}</span>
         </div>
       </div>
-      <DocCode :code='`<XlyTimePicker v-model="value" placeholder="请选择时间" />`' />
+      <XlyDocCode :code='`<XlyTimePicker v-model="value" placeholder="请选择时间" />`' />
     </section>
 
     <section class="doc-section">
@@ -30,7 +30,7 @@
           <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ val2 || '未选择' }}</span>
         </div>
       </div>
-      <DocCode :code='`<XlyTimePicker v-model="value" show-seconds />`' />
+      <XlyDocCode :code='`<XlyTimePicker v-model="value" show-seconds />`' />
     </section>
 
     <section class="doc-section">
@@ -46,7 +46,7 @@
           </div>
         </div>
       </div>
-      <DocCode :code='`<XlyTimePicker v-model="value" clearable />
+      <XlyDocCode :code='`<XlyTimePicker v-model="value" clearable />
 <XlyTimePicker v-model="value" disabled />`' />
     </section>
 
@@ -60,7 +60,7 @@
           <div style="width: 240px;"><XlyTimePicker v-model="val4" size="small" /></div>
         </div>
       </div>
-      <DocCode :code='`<XlyTimePicker v-model="value" size="large" />
+      <XlyDocCode :code='`<XlyTimePicker v-model="value" size="large" />
 <XlyTimePicker v-model="value" />
 <XlyTimePicker v-model="value" size="small" />`' />
     </section>

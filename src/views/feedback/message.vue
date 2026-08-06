@@ -22,7 +22,7 @@
           <XlyButton @click="xly.$msg.info('您有一条新消息')">信息消息</XlyButton>
           <XlyButton @click="xly.$msg.text('这是一条纯文本提示')">纯文本</XlyButton>
         </div>
-        <DocCode :code="`import { xly } from '@/utils/xly'
+        <XlyDocCode :code="`import { xly } from '@/utils/xly'
 
 xly.$msg.success('保存成功')
 xly.$msg.warning('请注意')
@@ -47,7 +47,7 @@ xly.$msg.text('纯文本')`" />
             >带标题错误</XlyButton
           >
         </div>
-        <DocCode :code="`xly.$msg.success('数据已保存到数据库', { title: '操作成功' })
+        <XlyDocCode :code="`xly.$msg.success('数据已保存到数据库', { title: '操作成功' })
 xly.$msg.danger('网络连接已断开', { title: '连接错误' })`" />
       </div>
     </section>
@@ -67,7 +67,7 @@ xly.$msg.danger('网络连接已断开', { title: '连接错误' })`" />
           <XlyButton @click="xly.$msg.info('左下角', { position: 'bottom-left' })">左下角</XlyButton>
           <XlyButton @click="xly.$msg.info('右下角', { position: 'bottom-right' })">右下角</XlyButton>
         </div>
-        <DocCode :code="`xly.$msg.info('右上角提示', { position: 'top-right' })
+        <XlyDocCode :code="`xly.$msg.info('右上角提示', { position: 'top-right' })
 xly.$msg.success('左下角提示', { position: 'bottom-left' })`" />
       </div>
     </section>
@@ -94,7 +94,7 @@ xly.$msg.success('左下角提示', { position: 'bottom-left' })`" />
             >信息 + 进度条</XlyButton
           >
         </div>
-        <DocCode :code="`xly.$msg.success('保存成功', { showProgress: true, duration: 5000 })
+        <XlyDocCode :code="`xly.$msg.success('保存成功', { showProgress: true, duration: 5000 })
 xly.$msg.danger('操作失败', { showProgress: true, duration: 5000 })`" />
       </div>
     </section>
@@ -117,7 +117,7 @@ xly.$msg.danger('操作失败', { showProgress: true, duration: 5000 })`" />
             >长消息 + 进度条</XlyButton
           >
         </div>
-        <DocCode :code="`// 鼠标悬停自动暂停，移开继续
+        <XlyDocCode :code="`// 鼠标悬停自动暂停，移开继续
 xly.$msg.info('这是一条较长的消息...', {
   duration: 5000,
   showProgress: true,
@@ -142,7 +142,7 @@ xly.$msg.info('这是一条较长的消息...', {
           >
           <XlyButton @click="xly.$msg.closeAll()">清除所有</XlyButton>
         </div>
-        <DocCode :code="`// duration 设为 0 不自动关闭
+        <XlyDocCode :code="`// duration 设为 0 不自动关闭
 xly.$msg.warning('系统正在升级中', { duration: 0, title: '系统通知' })
 
 // 手动清除所有
@@ -160,7 +160,7 @@ xly.$msg.closeAll()`" />
           <XlyButton type="danger" @click="handleDelete">删除记录</XlyButton>
           <XlyButton @click="handleCopy">复制内容</XlyButton>
         </div>
-        <DocCode :code="`function handleSave() {
+        <XlyDocCode :code="`function handleSave() {
   setTimeout(() => {
     xly.$msg.success('保存成功', { title: '操作成功' })
   }, 500)

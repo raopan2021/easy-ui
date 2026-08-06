@@ -36,7 +36,7 @@
             <XlyFlowDesigner :flow="flow" @save="saveFlow" />
           </div>
         </div>
-        <DocCode :code='`<XlyFlowDesigner :flow="flow" />`' />
+        <XlyDocCode :code='`<XlyFlowDesigner :flow="flow" />`' />
       </div>
     </section>
 
@@ -55,7 +55,7 @@
           </div>
           <div class="customize-card__body">
             <p class="customize-card__desc">根据自己项目修改办理人选择组件</p>
-            <DocCode :code='`<xly-form-item label="办理人：" prop="permissionFlag">
+            <XlyDocCode :code='`<xly-form-item label="办理人：" prop="permissionFlag">
   <xly-input v-model="form.permissionFlag" placeholder="自行更换为自己的人员选择组件" />
   <div class="placeholder mt5">tips:自行更换为自己的人员选择组件</div>
 </xly-form-item>`' language="html" />
@@ -71,7 +71,7 @@
           </div>
           <div class="customize-card__body">
             <p class="customize-card__desc">根据自己项目修改办理人显示组件</p>
-            <DocCode :code='`<span v-if="handler">{{handler}}</span>`' language="html" />
+            <XlyDocCode :code='`<span v-if="handler">{{handler}}</span>`' language="html" />
           </div>
         </div>
       </div>
@@ -330,7 +330,7 @@
       <h2 class="doc-section__title">安装依赖</h2>
       <p class="doc-section__desc">流程设计器基于 LogicFlow 实现，使用前请先安装核心依赖和扩展。</p>
       <div class="doc-preview">
-        <DocCode :code='`{{ installCode }}`' language="html" />
+        <XlyDocCode :code='`{{ installCode }}`' language="html" />
       </div>
     </section>
 
@@ -339,7 +339,7 @@
       <h2 class="doc-section__title">使用方式</h2>
       <p class="doc-section__desc">在业务页面中引入流程设计器组件，传入流程定义 ID 即可。</p>
       <div class="doc-preview">
-        <DocCode :code='`{{ usageCode }}`' language="html" />
+        <XlyDocCode :code='`{{ usageCode }}`' language="html" />
       </div>
     </section>
 

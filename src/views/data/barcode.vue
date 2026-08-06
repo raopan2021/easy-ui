@@ -23,7 +23,7 @@
         <div class="doc-preview__body">
           <XlyBarcode content="ABC-123456" />
         </div>
-        <DocCode :code='`<XlyBarcode content="ABC-123456" />`' />
+        <XlyDocCode :code='`<XlyBarcode content="ABC-123456" />`' />
       </div>
     </section>
 
@@ -61,7 +61,7 @@
             <span>UPC（美国）</span>
           </div>
         </div>
-        <DocCode :code='`<XlyBarcode content="CODE128-TEST" format="CODE128" />
+        <XlyDocCode :code='`<XlyBarcode content="CODE128-TEST" format="CODE128" />
 <XlyBarcode content="CODE39-TEST" format="CODE39" />
 <XlyBarcode content="490123456789" format="EAN13" />
 <XlyBarcode content="12345670" format="EAN8" />
@@ -118,7 +118,7 @@
             <span>绿条浅绿底</span>
           </div>
         </div>
-        <DocCode :code='`<!-- 细条 -->
+        <XlyDocCode :code='`<!-- 细条 -->
 <XlyBarcode content="THIN-BARS" :width="1" :height="80" />
 
 <!-- 粗条蓝条 -->
@@ -155,7 +155,7 @@
             <span>隐藏文本</span>
           </div>
         </div>
-        <DocCode :code='`<XlyBarcode content="HELLO-WORLD" :font-size="14" text-align="center" />
+        <XlyDocCode :code='`<XlyBarcode content="HELLO-WORLD" :font-size="14" text-align="center" />
 <XlyBarcode content="HELLO-WORLD" :font-size="14" text-align="left" />
 <XlyBarcode content="NO-TEXT" :display-value="false" />`' />
       </div>
@@ -188,7 +188,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code="`const barcodeRef = ref()
+        <XlyDocCode :code="`const barcodeRef = ref()
 const dynamicContent = ref('DYNAMIC-CODE')
 
 // 下载 SVG
@@ -226,7 +226,7 @@ function handleDownloadPNG() {
             </div>
           </div>
         </div>
-        <DocCode :code="`<XlyBarcode
+        <XlyDocCode :code="`<XlyBarcode
   content=&quot;EVENT-TEST&quot;
   @generated=&quot;onGenerated&quot;
   @error=&quot;onError&quot;

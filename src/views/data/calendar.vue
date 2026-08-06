@@ -153,7 +153,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code="`<XlyCalendar
+        <XlyDocCode :code="`<XlyCalendar
   :events=&quot;events&quot;
   :default-view=&quot;'month'&quot;
   @date-click=&quot;handleDateClick&quot;
@@ -201,7 +201,7 @@ const events = [
             <el-button size="small" type="primary" @click="addEvent">添加</el-button>
           </div>
         </div>
-        <DocCode :code="`calendar.addEvent({
+        <XlyDocCode :code="`calendar.addEvent({
   title: '新事件',
   date: '2026-07-27',
   time: '14:00',

@@ -17,7 +17,7 @@
           <XlyList :list="listData" />
         </div>
       </div>
-      <DocCode :code='`<XlyList :list="listData" />`' />
+      <XlyDocCode :code='`<XlyList :list="listData" />`' />
     </section>
 
     <!-- 带边框 -->
@@ -31,7 +31,7 @@
           <XlyList :list="listData" bordered />
         </div>
       </div>
-      <DocCode :code='`<XlyList :list="listData" bordered />`' />
+      <XlyDocCode :code='`<XlyList :list="listData" bordered />`' />
     </section>
 
     <!-- 带头像和描述 -->
@@ -51,7 +51,7 @@
           />
         </div>
       </div>
-      <DocCode :code='`<XlyList
+      <XlyDocCode :code='`<XlyList
   :list="userListData"
   avatar="avatar"
   title="name"
@@ -76,7 +76,7 @@
           />
         </div>
       </div>
-      <DocCode :code='`<XlyList
+      <XlyDocCode :code='`<XlyList
   :list="listData"
   header="头部标题"
   footer="共 3 条记录"
@@ -95,7 +95,7 @@
           <XlyList :list="listData" bordered hoverable />
         </div>
       </div>
-      <DocCode :code='`<XlyList :list="listData" bordered hoverable />`' />
+      <XlyDocCode :code='`<XlyList :list="listData" bordered hoverable />`' />
     </section>
 
     <!-- 加载状态 -->
@@ -109,7 +109,7 @@
           <XlyList :list="[]" loading bordered />
         </div>
       </div>
-      <DocCode :code='`<XlyList :list="[]" loading bordered />`' />
+      <XlyDocCode :code='`<XlyList :list="[]" loading bordered />`' />
     </section>
 
     <!-- 空状态 -->
@@ -123,7 +123,7 @@
           <XlyList :list="[]" empty-text="暂无列表数据" bordered />
         </div>
       </div>
-      <DocCode :code='`<XlyList :list="[]" empty-text="暂无列表数据" bordered />`' />
+      <XlyDocCode :code='`<XlyList :list="[]" empty-text="暂无列表数据" bordered />`' />
     </section>
 
     <!-- 自定义渲染 -->
@@ -152,7 +152,7 @@
           </XlyList>
         </div>
       </div>
-      <DocCode :code='`<XlyList :list="customListData" bordered>
+      <XlyDocCode :code='`<XlyList :list="customListData" bordered>
   <template #default="{ item, index }">
     <div class="custom-list-item">
       <span>&#123;&#123; index + 1 &#125;&#125;</span>

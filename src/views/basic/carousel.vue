@@ -16,7 +16,7 @@
             <XlyCarousel :items="basicImages" />
           </div>
         </div>
-        <DocCode :code="`<XlyCarousel :items=&quot;images&quot; />
+        <XlyDocCode :code="`<XlyCarousel :items=&quot;images&quot; />
 
 <script setup>
 const images = [
@@ -38,7 +38,7 @@ const images = [
             <XlyCarousel :items="basicImages" mode="3d" :interval="4000" />
           </div>
         </div>
-        <DocCode :code='`<XlyCarousel :items="images" mode="3d" />`' />
+        <XlyDocCode :code='`<XlyCarousel :items="images" mode="3d" />`' />
       </div>
     </section>
 
@@ -61,7 +61,7 @@ const images = [
             <XlyCarousel :items="titledSlides" mode="3d" show-title :interval="4000" />
           </div>
         </div>
-        <DocCode :code='`<!-- 默认标题字段 -->
+        <XlyDocCode :code='`<!-- 默认标题字段 -->
 <XlyCarousel :items="slides" show-title show-counter />
 
 <!-- 指定字段名 -->
@@ -98,7 +98,7 @@ const images = [
             <XlyCarousel :items="basicImages" dot-type="number" />
           </div>
         </div>
-        <DocCode :code='`<!-- 圆点指示器 -->
+        <XlyDocCode :code='`<!-- 圆点指示器 -->
 <XlyCarousel :items="images" dot-type="dot" />
 
 <!-- 线条指示器 -->
@@ -124,7 +124,7 @@ const images = [
             <XlyCarousel :items="basicImages" dot-position="left" />
           </div>
         </div>
-        <DocCode :code='`<XlyCarousel :items="images" dot-position="bottom" />
+        <XlyDocCode :code='`<XlyCarousel :items="images" dot-position="bottom" />
 <XlyCarousel :items="images" dot-position="left" />
 <XlyCarousel :items="images" dot-position="right" />`' />
       </div>
@@ -149,7 +149,7 @@ const images = [
             <XlyCarousel :items="basicImages" arrow="never" />
           </div>
         </div>
-        <DocCode :code='`<XlyCarousel :items="images" arrow="hover" />
+        <XlyDocCode :code='`<XlyCarousel :items="images" arrow="hover" />
 <XlyCarousel :items="images" arrow="always" />
 <XlyCarousel :items="images" arrow="never" />`' />
       </div>
@@ -174,7 +174,7 @@ const images = [
             </XlyCarousel>
           </div>
         </div>
-        <DocCode :code='`<XlyCarousel :items="slides" :interval="4000">
+        <XlyDocCode :code='`<XlyCarousel :items="slides" :interval="4000">
   <template #item="{ item }">
     <div class="custom-slide" :style="{ background: item.bg }">
       <h3>&lbrace;&lbrace; item.title &rbrace;&rbrace;</h3>
@@ -202,7 +202,7 @@ const images = [
             </XlyCarousel>
           </div>
         </div>
-        <DocCode :code='`<XlyCarousel
+        <XlyDocCode :code='`<XlyCarousel
   :items="notices"
   direction="vertical"
   :interval="2500"
@@ -236,7 +236,7 @@ const images = [
             <XlyCarousel :items="basicImages" height="50vh" :interval="0" arrow="always" />
           </div>
         </div>
-        <DocCode :code='`<!-- 数字类型（单位 px） -->
+        <XlyDocCode :code='`<!-- 数字类型（单位 px） -->
 <XlyCarousel :items="images" :height="120" />
 <XlyCarousel :items="images" :height="300" />
 
@@ -256,7 +256,7 @@ const images = [
             <XlyCarousel :items="basicImages" :interval="0" arrow="always" />
           </div>
         </div>
-        <DocCode :code='`<XlyCarousel :items="images" :interval="0" arrow="always" />`' />
+        <XlyDocCode :code='`<XlyCarousel :items="images" :interval="0" arrow="always" />`' />
       </div>
     </section>
 
@@ -270,7 +270,7 @@ const images = [
             <XlyCarousel :items="basicImages" :loop="false" :interval="0" arrow="always" />
           </div>
         </div>
-        <DocCode :code='`<XlyCarousel :items="images" :loop="false" :interval="0" arrow="always" />`' />
+        <XlyDocCode :code='`<XlyCarousel :items="images" :loop="false" :interval="0" arrow="always" />`' />
       </div>
     </section>
 

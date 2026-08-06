@@ -92,6 +92,7 @@ declare module 'vue' {
     XlyDictSelect: typeof import('./../../components/xly-dict-select/index.vue')['default']
     XlyDictTag: typeof import('./../../components/xly-dict-tag/index.vue')['default']
     XlyDivider: typeof import('./../../components/xly-divider/index.vue')['default']
+    XlyDocCode: typeof import('./../../components/xly-doc-code/index.vue')['default']
     XlyDrawer: typeof import('./../../components/xly-drawer/index.vue')['default']
     XlyDropdown: typeof import('./../../components/xly-dropdown/index.vue')['default']
     XlyEmpty: typeof import('./../../components/xly-empty/index.vue')['default']

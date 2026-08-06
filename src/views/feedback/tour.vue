@@ -31,7 +31,7 @@
             </button>
           </div>
         </div>
-        <DocCode :code="`<template>
+        <XlyDocCode :code="`<template>
   <div ref=&quot;step1Target&quot;>目标元素 1</div>
   <div ref=&quot;step2Target&quot;>目标元素 2</div>
   <div ref=&quot;step3Target&quot;>目标元素 3</div>
@@ -79,7 +79,7 @@
             </button>
           </div>
         </div>
-        <DocCode :code="`<XlyTour
+        <XlyDocCode :code="`<XlyTour
   :steps=&quot;[
     { target: el, title: '上方', placement: 'top', description: '气泡在目标上方' },
     { target: el, title: '下方', placement: 'bottom', description: '气泡在目标下方' },
@@ -110,7 +110,7 @@
             </button>
           </div>
         </div>
-        <DocCode :code='`<XlyTour
+        <XlyDocCode :code='`<XlyTour
   v-model="visible"
   color="#10b981"
   :steps="steps"
@@ -142,7 +142,7 @@
             </button>
           </div>
         </div>
-        <DocCode :code="`import { xly } from '@/utils/xly'
+        <XlyDocCode :code="`import { xly } from '@/utils/xly'
 
 // 命令式启动引导
 xly.$tour({
@@ -168,7 +168,7 @@ xly.$tour({
             开始引导
           </button>
         </div>
-        <DocCode :code='`<XlyTour v-model="visible" :mask="false" :steps="steps" />`' />
+        <XlyDocCode :code='`<XlyTour v-model="visible" :mask="false" :steps="steps" />`' />
       </div>
     </section>
 

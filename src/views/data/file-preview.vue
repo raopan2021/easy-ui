@@ -19,7 +19,7 @@
         <div class="doc-preview__body">
           <XlyFilePreview :files="stringFiles" />
         </div>
-        <DocCode :code='`{{ stringCode }}`' />
+        <XlyDocCode :code='`{{ stringCode }}`' />
       </div>
     </section>
 
@@ -33,7 +33,7 @@
         <div class="doc-preview__body">
           <XlyFilePreview :files="urlArrayFiles" />
         </div>
-        <DocCode :code='`{{ urlArrayCode }}`' />
+        <XlyDocCode :code='`{{ urlArrayCode }}`' />
       </div>
     </section>
 
@@ -48,7 +48,7 @@
         <div class="doc-preview__body">
           <XlyFilePreview :files="objectFiles" />
         </div>
-        <DocCode :code='`{{ objectCode }}`' />
+        <XlyDocCode :code='`{{ objectCode }}`' />
       </div>
     </section>
 
@@ -66,7 +66,7 @@
             :field-names="{ name: 'fileName', url: 'fileUrl', size: 'fileSize' }"
           />
         </div>
-        <DocCode :code='`{{ customFieldCode }}`' />
+        <XlyDocCode :code='`{{ customFieldCode }}`' />
       </div>
     </section>
 
@@ -81,7 +81,7 @@
         <div class="doc-preview__body">
           <XlyFilePreview :files="mixedFiles" />
         </div>
-        <DocCode :code='`{{ mixedCode }}`' />
+        <XlyDocCode :code='`{{ mixedCode }}`' />
       </div>
     </section>
 
@@ -96,7 +96,7 @@
         <div class="doc-preview__body">
           <XlyFilePreview :files="pdfFiles" />
         </div>
-        <DocCode :code='`{{ pdfCode }}`' />
+        <XlyDocCode :code='`{{ pdfCode }}`' />
       </div>
     </section>
 
@@ -125,7 +125,7 @@
             </div>
           </div>
         </div>
-        <DocCode :code='`{{ officeViewerCode }}`' />
+        <XlyDocCode :code='`{{ officeViewerCode }}`' />
       </div>
     </section>
 
@@ -136,7 +136,7 @@
         文件预览组件依赖以下 npm 包，使用前请先安装：
       </p>
       <div class="doc-preview">
-        <DocCode :code='`{{ installCode }}`' language="html" />
+        <XlyDocCode :code='`{{ installCode }}`' language="html" />
       </div>
     </section>
 

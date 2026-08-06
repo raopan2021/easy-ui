@@ -19,7 +19,7 @@
           <XlyStatistic title="营收金额" :value="324150" prefix="¥" suffix="元" variant="warning" />
           <XlyStatistic title="错误率" :value="2.4" suffix="%" variant="danger" />
         </div>
-        <DocCode :code='`<XlyStatistic title="用户数量" :value="8925" suffix="人" variant="primary" />
+        <XlyDocCode :code='`<XlyStatistic title="用户数量" :value="8925" suffix="人" variant="primary" />
 <XlyStatistic title="订单数量" :value="1284" suffix="单" variant="success" />
 <XlyStatistic title="营收金额" :value="324150" prefix="¥" suffix="元" variant="warning" />
 <XlyStatistic title="错误率" :value="2.4" suffix="%" variant="danger" />`' />
@@ -64,7 +64,7 @@
             variant="danger"
           />
         </div>
-        <DocCode :code='`<XlyStatistic title="用户统计" :value="12543" suffix="人" icon="el:User" variant="primary" />
+        <XlyDocCode :code='`<XlyStatistic title="用户统计" :value="12543" suffix="人" icon="el:User" variant="primary" />
 <XlyStatistic title="订单统计" :value="8925" suffix="单" icon="el:ShoppingCart" variant="success" />
 <XlyStatistic title="收入统计" :value="324150" prefix="¥" suffix="元" icon="el:DataLine" variant="warning" />
 <XlyStatistic title="错误统计" :value="12" suffix="个" icon="el:DataLine" variant="danger" />`' />
@@ -83,7 +83,7 @@
           <XlyStatistic title="用户增长" :value="24.8" suffix="%" variant="success" />
           <XlyStatistic title="响应时间" :value="2.4" suffix="秒" variant="info" />
         </div>
-        <DocCode :code='`<XlyStatistic title="本月营收" :value="892500" prefix="¥" suffix="元" variant="primary" />
+        <XlyDocCode :code='`<XlyStatistic title="本月营收" :value="892500" prefix="¥" suffix="元" variant="primary" />
 <XlyStatistic title="用户增长" :value="24.8" suffix="%" variant="success" />
 <XlyStatistic title="响应时间" :value="2.4" suffix="秒" variant="info" />`' />
       </div>
@@ -122,7 +122,7 @@
             icon="el:Location"
           />
         </div>
-        <DocCode :code='`<XlyStatistic title="今日新增" :value="324" suffix="人" size="sm" variant="primary" icon="el:User" />
+        <XlyDocCode :code='`<XlyStatistic title="今日新增" :value="324" suffix="人" size="sm" variant="primary" icon="el:User" />
 <XlyStatistic title="本月销售额" :value="892500" prefix="¥" suffix="元" size="md" variant="success" icon="el:DataLine" />
 <XlyStatistic title="年度目标" :value="12500000" prefix="¥" suffix="万元" size="lg" variant="warning" icon="el:Location" />`' />
       </div>
@@ -155,7 +155,7 @@
             icon="el:DataLine"
           />
         </div>
-        <DocCode :code='`<XlyStatistic title="营收增长" :value="32.4" suffix="%" variant="success" trend="up" trend-label="环比 +5.2%" icon="el:DataLine" />
+        <XlyDocCode :code='`<XlyStatistic title="营收增长" :value="32.4" suffix="%" variant="success" trend="up" trend-label="环比 +5.2%" icon="el:DataLine" />
 <XlyStatistic title="用户流失" :value="8.6" suffix="%" variant="danger" trend="down" trend-label="环比 -1.8%" icon="el:DataLine" />`' />
       </div>
     </section>
@@ -184,7 +184,7 @@
             extra="基于 1,254 条用户评价，NPS 得分 +42"
           />
         </div>
-        <DocCode :code='`<XlyStatistic
+        <XlyDocCode :code='`<XlyStatistic
   title="本月收入"
   :value="892500"
   prefix="¥"
@@ -255,7 +255,7 @@
             />
           </div>
         </div>
-        <DocCode :code='`<div class="dashboard-grid">
+        <XlyDocCode :code='`<div class="dashboard-grid">
   <XlyStatistic
     title="总用户数"
     :value="12543"

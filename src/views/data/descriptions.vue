@@ -20,7 +20,7 @@
             <XlyDescriptionsItem label="邮箱">zhang@company.com</XlyDescriptionsItem>
           </XlyDescriptions>
         </div>
-        <DocCode :code='`<XlyDescriptions title="用户信息">
+        <XlyDocCode :code='`<XlyDescriptions title="用户信息">
   <XlyDescriptionsItem label="姓名">张明</XlyDescriptionsItem>
   <XlyDescriptionsItem label="工号">EMP-2026001</XlyDescriptionsItem>
   <XlyDescriptionsItem label="部门">技术研发部</XlyDescriptionsItem>
@@ -59,7 +59,7 @@
             </XlyDescriptions>
           </div>
         </div>
-        <DocCode :code='`<!-- 上下布局 -->
+        <XlyDocCode :code='`<!-- 上下布局 -->
 <XlyDescriptions layout="vertical">
   <XlyDescriptionsItem label="项目名称">EaseUI</XlyDescriptionsItem>
   ...
@@ -88,7 +88,7 @@
             <XlyDescriptionsItem label="收货地址" :span="3">广东省深圳市南山区科技园南区 A 栋 8 楼 801 室</XlyDescriptionsItem>
           </XlyDescriptions>
         </div>
-        <DocCode :code='`<XlyDescriptions title="订单详情" bordered>
+        <XlyDocCode :code='`<XlyDescriptions title="订单详情" bordered>
   <XlyDescriptionsItem label="订单编号">ORD-001</XlyDescriptionsItem>
   <!-- span 属性实现跨列 -->
   <XlyDescriptionsItem label="收货地址" :span="3">
@@ -127,7 +127,7 @@
             </XlyDescriptions>
           </div>
         </div>
-        <DocCode :code='`<XlyDescriptions :column="2" bordered>...</XlyDescriptions>
+        <XlyDocCode :code='`<XlyDescriptions :column="2" bordered>...</XlyDescriptions>
 <XlyDescriptions :column="4" bordered>...</XlyDescriptions>`' />
       </div>
     </section>
@@ -168,7 +168,7 @@
             </XlyDescriptionsItem>
           </XlyDescriptions>
         </div>
-        <DocCode :code='`<XlyDescriptionsItem label="在职状态">
+        <XlyDocCode :code='`<XlyDescriptionsItem label="在职状态">
   <span class="status-badge">在职</span>
 </XlyDescriptionsItem>
 <XlyDescriptionsItem label="技能标签">
@@ -209,7 +209,7 @@
             </XlyDescriptionsItem>
           </XlyDescriptions>
         </div>
-        <DocCode :code='`<XlyDescriptions layout="vertical" :column="4" bordered>
+        <XlyDocCode :code='`<XlyDescriptions layout="vertical" :column="4" bordered>
   <XlyDescriptionsItem label="今日新增用户">
     <div class="metric-value">1,280</div>
   </XlyDescriptionsItem>
@@ -249,7 +249,7 @@
             <XlyDescriptionsItem label="合同金额">¥ 1,280,000.00</XlyDescriptionsItem>
           </XlyDescriptions>
         </div>
-        <DocCode :code='`<XlyDescriptions bordered>
+        <XlyDocCode :code='`<XlyDescriptions bordered>
   <template #title>
     <XlyIcon name="el:Document" /> 合同信息
   </template>
@@ -292,7 +292,7 @@
             </XlyDescriptions>
           </div>
         </div>
-        <DocCode :code='`<XlyDescriptions size="small" bordered>...</XlyDescriptions>
+        <XlyDocCode :code='`<XlyDescriptions size="small" bordered>...</XlyDescriptions>
 <XlyDescriptions size="default" bordered>...</XlyDescriptions>
 <XlyDescriptions size="large" bordered>...</XlyDescriptions>`' />
       </div>

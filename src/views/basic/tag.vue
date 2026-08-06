@@ -19,7 +19,7 @@
           <xly-tag type="danger">危险</xly-tag>
           <xly-tag type="info">信息</xly-tag>
         </div>
-        <DocCode :code='`<xly-tag>默认</xly-tag>
+        <XlyDocCode :code='`<xly-tag>默认</xly-tag>
 <xly-tag type="primary">主要</xly-tag>
 <xly-tag type="success">成功</xly-tag>
 <xly-tag type="warning">警告</xly-tag>
@@ -62,7 +62,7 @@
             <xly-tag type="info" effect="dark">信息</xly-tag>
           </div>
         </div>
-        <DocCode :code='`<!-- 浅色（默认）-->
+        <XlyDocCode :code='`<!-- 浅色（默认）-->
 <xly-tag effect="light">...</xly-tag>
 
 <!-- 描边 -->
@@ -83,7 +83,7 @@
           <xly-tag type="primary">Default</xly-tag>
           <xly-tag type="primary" size="small">Small</xly-tag>
         </div>
-        <DocCode :code='`<xly-tag type="primary" size="large">Large</xly-tag>
+        <XlyDocCode :code='`<xly-tag type="primary" size="large">Large</xly-tag>
 <xly-tag type="primary">Default</xly-tag>
 <xly-tag type="primary" size="small">Small</xly-tag>`' />
       </div>
@@ -102,7 +102,7 @@
           <xly-tag type="danger" round>危险</xly-tag>
           <xly-tag type="info" round>信息</xly-tag>
         </div>
-        <DocCode :code='`<xly-tag type="primary" round>主要</xly-tag>
+        <XlyDocCode :code='`<xly-tag type="primary" round>主要</xly-tag>
 <xly-tag type="success" round>成功</xly-tag>`' />
       </div>
     </section>
@@ -119,7 +119,7 @@
           <xly-tag type="danger" icon="CircleClose">已拒绝</xly-tag>
           <xly-tag type="info" icon="Clock">处理中</xly-tag>
         </div>
-        <DocCode :code='`<xly-tag type="primary" icon="User">用户</xly-tag>
+        <XlyDocCode :code='`<xly-tag type="primary" icon="User">用户</xly-tag>
 <xly-tag type="success" icon="CircleCheck">已通过</xly-tag>
 <xly-tag type="warning" icon="Warning">待审核</xly-tag>
 <xly-tag type="danger" icon="CircleClose">已拒绝</xly-tag>`' />
@@ -144,7 +144,7 @@
             </xly-tag>
           </div>
         </div>
-        <DocCode :code='`<xly-tag type="primary" closable @close="handleClose">可关闭</xly-tag>`' />
+        <XlyDocCode :code='`<xly-tag type="primary" closable @close="handleClose">可关闭</xly-tag>`' />
       </div>
     </section>
 
@@ -168,7 +168,7 @@
           </div>
           <div v-if="selectedTag" class="click-hint">已选中：<strong>{{ selectedTag }}</strong></div>
         </div>
-        <DocCode :code='`<xly-tag type="primary" clickable @click="handleClick">点击我</xly-tag>`' />
+        <XlyDocCode :code='`<xly-tag type="primary" clickable @click="handleClick">点击我</xly-tag>`' />
       </div>
     </section>
 
@@ -183,7 +183,7 @@
           <xly-tag type="warning" disabled clickable>禁用点击</xly-tag>
           <xly-tag type="danger" disabled effect="dark">禁用深色</xly-tag>
         </div>
-        <DocCode :code='`<xly-tag type="primary" disabled>禁用</xly-tag>`' />
+        <XlyDocCode :code='`<xly-tag type="primary" disabled>禁用</xly-tag>`' />
       </div>
     </section>
 
@@ -218,7 +218,7 @@
             <xly-tag color="#f97316" effect="dark">橙色</xly-tag>
           </div>
         </div>
-        <DocCode :code='`<xly-tag color="#7c3aed">紫色</xly-tag>
+        <XlyDocCode :code='`<xly-tag color="#7c3aed">紫色</xly-tag>
 <xly-tag color="#7c3aed" effect="plain">紫色描边</xly-tag>
 <xly-tag color="#7c3aed" effect="dark">紫色深色</xly-tag>`' />
       </div>
@@ -262,7 +262,7 @@
             </xly-tag>
           </div>
         </div>
-        <DocCode :code='`<xly-tag
+        <XlyDocCode :code='`<xly-tag
   v-for="tag in tags"
   :key="tag"
   closable

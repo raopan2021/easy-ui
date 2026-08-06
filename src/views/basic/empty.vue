@@ -18,7 +18,7 @@
         <div class="doc-preview__body">
           <XlyEmpty />
         </div>
-        <DocCode :code='`<XlyEmpty />`' />
+        <XlyDocCode :code='`<XlyEmpty />`' />
       </div>
     </section>
 
@@ -35,7 +35,7 @@
             <div class="demo-type-label">{{ item.label }}</div>
           </div>
         </div>
-        <DocCode :code='`<XlyEmpty type="default" />
+        <XlyDocCode :code='`<XlyEmpty type="default" />
 <XlyEmpty type="search" />
 <XlyEmpty type="network" />
 <XlyEmpty type="permission" />
@@ -64,7 +64,7 @@
             <div class="demo-type-label">large</div>
           </div>
         </div>
-        <DocCode :code='`<XlyEmpty size="small" description="小尺寸" />
+        <XlyDocCode :code='`<XlyEmpty size="small" description="小尺寸" />
 <XlyEmpty description="默认尺寸" />
 <XlyEmpty size="large" description="大尺寸" />`' />
       </div>
@@ -85,7 +85,7 @@
             </template>
           </XlyEmpty>
         </div>
-        <DocCode :code='`<!-- 属性方式 -->
+        <XlyDocCode :code='`<!-- 属性方式 -->
 <XlyEmpty description="暂时没有相关数据，稍后再试" />
 
 <!-- 插槽方式（支持富文本） -->
@@ -116,7 +116,7 @@
             <XlyButton type="primary" @click="handleApply">申请权限</XlyButton>
           </XlyEmpty>
         </div>
-        <DocCode :code='`<XlyEmpty description="暂无数据">
+        <XlyDocCode :code='`<XlyEmpty description="暂无数据">
   <XlyButton type="primary">立即创建</XlyButton>
 </XlyEmpty>
 
@@ -152,7 +152,7 @@
             </template>
           </XlyEmpty>
         </div>
-        <DocCode :code='`<!-- 自定义图片地址 -->
+        <XlyDocCode :code='`<!-- 自定义图片地址 -->
 <XlyEmpty image="https://..." :image-size="120" description="使用自定义图片" />
 
 <!-- 插槽方式 -->
