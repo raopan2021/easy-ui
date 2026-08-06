@@ -37,16 +37,14 @@
             status-type="warning"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyInfoCard
-  :image="demoImage"
-  icon="el:WarningFilled"
-  title="人员闯入"
-  :description="['1号门口', '2024-05-20 14:32:21']"
-  status="未处理"
-  status-type="danger"
-/&gt;</code></pre>
-        </div>
+        <DocCode :code="`<XlyInfoCard
+  :image=&quot;demoImage&quot;
+  icon=&quot;el:WarningFilled&quot;
+  title=&quot;人员闯入&quot;
+  :description=&quot;['1号门口', '2024-05-20 14:32:21']&quot;
+  status=&quot;未处理&quot;
+  status-type=&quot;danger&quot;
+/>`" />
       </div>
     </section>
 
@@ -91,15 +89,13 @@
             description-color="#6b7280"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyInfoCard
+        <DocCode :code='`<XlyInfoCard
   background-color="#ffffff"
   text-color="#1a1a2e"
   description-color="#6b7280"
   :bordered="true"
   ...
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 
@@ -137,8 +133,7 @@
             status-text-color="#93c5fd"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyInfoCard
+        <DocCode :code='`<XlyInfoCard
   background-color="#0f172a"
   text-color="#e2e8f0"
   title-color="#f8fafc"
@@ -146,8 +141,7 @@
   status-background-color="rgba(239, 68, 68, 0.2)"
   status-text-color="#fca5a5"
   ...
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 
@@ -168,9 +162,7 @@
             @click="handleClick"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyInfoCard clickable @click="handleClick" .../&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyInfoCard clickable @click="handleClick" .../>`' />
       </div>
     </section>
 

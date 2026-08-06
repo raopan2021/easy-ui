@@ -19,9 +19,7 @@
         <div class="doc-preview__body">
           <XlyUpload v-model="value1" />
         </div>
-        <div class="doc-code">
-          <pre><code>{{ `<XlyUpload v-model="fileList" />` }}</code></pre>
-        </div>
+        <DocCode :code='`{{ \`<XlyUpload v-model="fileList" />\` }}`' />
       </div>
       <div class="demo-value-display">
         <span class="demo-value-label">当前值：</span>
@@ -56,8 +54,7 @@
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>{{ `<!-- 返回对象数组（默认） -->
+        <DocCode :code='`{{ \`<!-- 返回对象数组（默认） -->
 <XlyUpload v-model="fileList" />
 
 <!-- 返回 JSON 字符串 -->
@@ -69,8 +66,7 @@ interface UploadFileItem {
   name: string    // 文件名称
   url: string     // 文件地址
   size?: number   // 文件大小（KB）
-}` }}</code></pre>
-        </div>
+}\` }}`' />
       </div>
     </section>
 
@@ -96,17 +92,15 @@ interface UploadFileItem {
             <XlyUpload v-model="value3Unlimited" />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>{{ `<!-- 限制 1 个文件 -->
+        <DocCode :code='`{{ \`<!-- 限制 1 个文件 -->
 <XlyUpload v-model="file" :limit="1" />
 
 <!-- 限制 3 个 -->
 <XlyUpload v-model="files" :limit="3" @exceed="handleExceed" />
 
 function handleExceed(files, limit) {
-  console.log(\`超出 \${files.length} 个\`)
-}` }}</code></pre>
-        </div>
+  console.log(\\\`超出 \\\${files.length} 个\\\`)
+}\` }}`' />
       </div>
     </section>
 
@@ -120,9 +114,7 @@ function handleExceed(files, limit) {
         <div class="doc-preview__body">
           <XlyUpload v-model="valueDrag" trigger-text="点击或拖拽上传" />
         </div>
-        <div class="doc-code">
-          <pre><code>{{ `<XlyUpload v-model="files" trigger-text="点击或拖拽上传" />` }}</code></pre>
-        </div>
+        <DocCode :code='`{{ \`<XlyUpload v-model="files" trigger-text="点击或拖拽上传" />\` }}`' />
       </div>
     </section>
 
@@ -136,9 +128,7 @@ function handleExceed(files, limit) {
         <div class="doc-preview__body">
           <XlyUpload v-model="valueDisabled" disabled />
         </div>
-        <div class="doc-code">
-          <pre><code>{{ `<XlyUpload v-model="files" disabled />` }}</code></pre>
-        </div>
+        <DocCode :code='`{{ \`<XlyUpload v-model="files" disabled />\` }}`' />
       </div>
     </section>
 
@@ -160,8 +150,7 @@ function handleExceed(files, limit) {
             />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>{{ `<!-- 仅允许 PDF/Word，不超过 2MB -->
+        <DocCode :code='`{{ \`<!-- 仅允许 PDF/Word，不超过 2MB -->
 <XlyUpload
   v-model="files"
   accept-types="pdf,doc,docx"
@@ -172,8 +161,7 @@ function handleExceed(files, limit) {
 // size 单位为 KB，2048 = 2MB
 // 支持的格式（后缀或 MIME 类型均可）：
 // accept-types="pdf,doc,docx"
-// accept-types="application/pdf,application/msword"` }}</code></pre>
-        </div>
+// accept-types="application/pdf,application/msword"\` }}`' />
       </div>
     </section>
 
@@ -265,8 +253,7 @@ const NETWORK_CONFIG = {
             </XlyUpload>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>{{ `<!-- tip 属性 -->
+        <DocCode :code='`{{ \`<!-- tip 属性 -->
 <XlyUpload v-model="files" tip="支持 PDF/Word，单个不超过 10MB" />
 
 <!-- #tip 插槽 -->
@@ -274,8 +261,7 @@ const NETWORK_CONFIG = {
   <template #tip>
     <span style="color: orange;">⚠️ 上传后不可撤销</span>
   </template>
-</XlyUpload>` }}</code></pre>
-        </div>
+</XlyUpload>\` }}`' />
       </div>
     </section>
 

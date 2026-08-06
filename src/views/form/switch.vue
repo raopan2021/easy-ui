@@ -17,10 +17,8 @@
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">{{ value1 ? '已开启' : '已关闭' }}</span>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlySwitch v-model="value1" /&gt;
-&lt;span&gt;{{ value1 ? '已开启' : '已关闭' }}&lt;/span&gt;</code></pre>
-      </div>
+      <DocCode :code="`<XlySwitch v-model=&quot;value1&quot; />
+<span>{{ value1 ? '已开启' : '已关闭' }}</span>`" />
     </section>
 
     <!-- 不同尺寸 -->
@@ -36,11 +34,9 @@
           <XlySwitch v-model="value2" size="small" />
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlySwitch v-model="value" size="large" /&gt;
-&lt;XlySwitch v-model="value" size="default" /&gt;
-&lt;XlySwitch v-model="value" size="small" /&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlySwitch v-model="value" size="large" />
+<XlySwitch v-model="value" size="default" />
+<XlySwitch v-model="value" size="small" />`' />
     </section>
 
     <!-- 自定义颜色 -->
@@ -55,10 +51,8 @@
           <XlySwitch v-model="value4" active-color="#f56c6c" inactive-color="#e6e6e6" />
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlySwitch v-model="value" active-color="#67c23a" inactive-color="#909399" /&gt;
-&lt;XlySwitch v-model="value" active-color="#f56c6c" inactive-color="#e6e6e6" /&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlySwitch v-model="value" active-color="#67c23a" inactive-color="#909399" />
+<XlySwitch v-model="value" active-color="#f56c6c" inactive-color="#e6e6e6" />`' />
     </section>
 
     <!-- 自定义值 -->
@@ -73,9 +67,7 @@
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ value5 }}</span>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlySwitch v-model="value" active-value="yes" inactive-value="no" /&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlySwitch v-model="value" active-value="yes" inactive-value="no" />`' />
     </section>
 
     <!-- 禁用状态 -->
@@ -90,10 +82,8 @@
           <XlySwitch v-model="value7" disabled />
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlySwitch v-model="value" disabled /&gt;
-&lt;XlySwitch v-model="value" disabled model-value="true" /&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlySwitch v-model="value" disabled />
+<XlySwitch v-model="value" disabled model-value="true" />`' />
     </section>
 
     <!-- 加载状态 -->
@@ -108,10 +98,8 @@
           <XlySwitch v-model="value9" loading />
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlySwitch v-model="value" loading /&gt;
-&lt;XlySwitch v-model="value" loading model-value="true" /&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlySwitch v-model="value" loading />
+<XlySwitch v-model="value" loading model-value="true" />`' />
     </section>
 
     <!-- 带文字描述 -->
@@ -126,10 +114,8 @@
           <XlySwitch v-model="value11" active-text="开" inactive-text="关" />
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlySwitch v-model="value" active-text="按月付费" inactive-text="按年付费" /&gt;
-&lt;XlySwitch v-model="value" active-text="开" inactive-text="关" /&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlySwitch v-model="value" active-text="按月付费" inactive-text="按年付费" />
+<XlySwitch v-model="value" active-text="开" inactive-text="关" />`' />
     </section>
 
     <!-- API -->

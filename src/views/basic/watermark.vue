@@ -25,11 +25,9 @@
             </div>
           </XlyWatermark>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyWatermark content="内部机密"&gt;
-  &lt;div&gt;需要保护的区域&lt;/div&gt;
-&lt;/XlyWatermark&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyWatermark content="内部机密">
+  <div>需要保护的区域</div>
+</XlyWatermark>`' />
       </div>
     </section>
 
@@ -57,11 +55,9 @@
             </div>
           </XlyWatermark>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyWatermark :content="['XLY Admin', '2026-03-21']" :rotate="-15"&gt;
-  &lt;div&gt;多行水印区域&lt;/div&gt;
-&lt;/XlyWatermark&gt;</code></pre>
-        </div>
+        <DocCode :code="`<XlyWatermark :content=&quot;['XLY Admin', '2026-03-21']&quot; :rotate=&quot;-15&quot;>
+  <div>多行水印区域</div>
+</XlyWatermark>`" />
       </div>
     </section>
 
@@ -134,23 +130,21 @@
             </XlyWatermark>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 浅色大字 --&gt;
-&lt;XlyWatermark
+        <DocCode :code='`<!-- 浅色大字 -->
+<XlyWatermark
   content="浅色水印"
   font-color="rgba(0, 0, 0, 0.06)"
   :font-size="20"
   :width="160" :height="160"
   :gap-x="60" :gap-y="60"
-&gt;
+>
 
-&lt;!-- 彩色水印 --&gt;
-&lt;XlyWatermark
+<!-- 彩色水印 -->
+<XlyWatermark
   content="彩色水印"
   font-color="rgba(245, 108, 108, 0.15)"
   :font-size="16"
-&gt;</code></pre>
-        </div>
+>`' />
       </div>
     </section>
 
@@ -185,15 +179,13 @@
             <p>水印已隐藏，点击按钮重新显示。</p>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyWatermark
+        <DocCode :code='`<XlyWatermark
   v-if="showWatermark"
   :content="watermarkText"
   :font-color="watermarkColor"
-&gt;
-  &lt;div&gt;动态水印区域&lt;/div&gt;
-&lt;/XlyWatermark&gt;</code></pre>
-        </div>
+>
+  <div>动态水印区域</div>
+</XlyWatermark>`' />
       </div>
     </section>
 
@@ -212,19 +204,17 @@
             <p>指令方式更简洁，适合快速添加。</p>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;div v-watermark="{ content: '指令水印' }"&gt;
+        <DocCode :code="`<div v-watermark=&quot;{ content: '指令水印' }&quot;>
   内容区域
-&lt;/div&gt;
+</div>
 
-&lt;div v-watermark="{
+<div v-watermark=&quot;{
   content: ['公司名称', '2026-03-21'],
   fontColor: 'rgba(79, 110, 247, 0.1)',
   rotate: -20,
-}"&gt;
+}&quot;>
   多行指令水印
-&lt;/div&gt;</code></pre>
-        </div>
+</div>`" />
       </div>
     </section>
 

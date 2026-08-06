@@ -41,9 +41,8 @@
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>// 1. 对象数组（label 和 value 分离）
-&lt;XlySelect v-model="value" :options="options" placeholder="对象数组" /&gt;
+      <DocCode :code="`// 1. 对象数组（label 和 value 分离）
+<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; placeholder=&quot;对象数组&quot; />
 
 const options = [
   { label: '北京', value: 'beijing' },
@@ -53,11 +52,10 @@ const options = [
 ]
 
 // 2. 基础数组（元素同时作为 label 和 value）
-&lt;XlySelect v-model="value" :options="simpleOptions" placeholder="基础数组" /&gt;
+<XlySelect v-model=&quot;value&quot; :options=&quot;simpleOptions&quot; placeholder=&quot;基础数组&quot; />
 
 const simpleOptions = ['北京', '上海', '广州', '深圳']
-// 选择后的 value 就是字符串本身，如 '北京'、'上海'</code></pre>
-      </div>
+// 选择后的 value 就是字符串本身，如 '北京'、'上海'`" />
     </section>
 
     <section class="doc-section">
@@ -75,9 +73,7 @@ const simpleOptions = ['北京', '上海', '广州', '深圳']
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlySelect v-model="value" :options="options" clearable /&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlySelect v-model="value" :options="options" clearable />`' />
     </section>
 
     <section class="doc-section">
@@ -95,9 +91,7 @@ const simpleOptions = ['北京', '上海', '广州', '深圳']
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlySelect v-model="value" :options="options" filterable /&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlySelect v-model="value" :options="options" filterable />`' />
     </section>
 
     <section class="doc-section">
@@ -128,20 +122,18 @@ const simpleOptions = ['北京', '上海', '广州', '深圳']
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlySelect
-  v-model="value"
-  :options="options"
+      <DocCode :code="`<XlySelect
+  v-model=&quot;value&quot;
+  :options=&quot;options&quot;
   filterable
   allow-create
-  placeholder="输入并点击添加按钮"
-  @create="handleCreate"
-/&gt;
+  placeholder=&quot;输入并点击添加按钮&quot;
+  @create=&quot;handleCreate&quot;
+/>
 
 function handleCreate(newValue) {
   console.log('创建了新条目:', newValue)
-}</code></pre>
-      </div>
+}`" />
     </section>
 
     <section class="doc-section">
@@ -169,9 +161,7 @@ function handleCreate(newValue) {
           <div style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ JSON.stringify(val4) }}</div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlySelect v-model="value" :options="options" multiple :max-tag-count="3" /&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlySelect v-model="value" :options="options" multiple :max-tag-count="3" />`' />
     </section>
 
     <section class="doc-section">
@@ -227,23 +217,21 @@ function handleCreate(newValue) {
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值（分号分隔）：{{ val12 }}</span>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>// 1. 返回数组（默认）
-&lt;XlySelect v-model="value" :options="options" multiple value-type="array" /&gt;
+      <DocCode :code="`// 1. 返回数组（默认）
+<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; multiple value-type=&quot;array&quot; />
 // 输出: ['beijing', 'shanghai', 'guangzhou']
 
 // 2. 返回字符串（逗号分隔）
-&lt;XlySelect v-model="value" :options="options" multiple value-type="string" /&gt;
-// 输出: "beijing,shanghai,guangzhou"
+<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; multiple value-type=&quot;string&quot; />
+// 输出: &quot;beijing,shanghai,guangzhou&quot;
 
 // 3. 自定义分隔符
-&lt;XlySelect v-model="value" :options="options" multiple value-type="string" separator=";" /&gt;
-// 输出: "beijing;shanghai;guangzhou"
+<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; multiple value-type=&quot;string&quot; separator=&quot;;&quot; />
+// 输出: &quot;beijing;shanghai;guangzhou&quot;
 
 // 4. 支持默认传入字符串值，组件会自动解析
-const value = ref("beijing,shanghai,guangzhou")
-// 组件会自动将其解析为 ['beijing', 'shanghai', 'guangzhou'] 进行渲染</code></pre>
-      </div>
+const value = ref(&quot;beijing,shanghai,guangzhou&quot;)
+// 组件会自动将其解析为 ['beijing', 'shanghai', 'guangzhou'] 进行渲染`" />
     </section>
 
     <section class="doc-section">
@@ -274,32 +262,30 @@ const value = ref("beijing,shanghai,guangzhou")
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>// 1. 默认使用 disabled 字段
+      <DocCode :code="`// 1. 默认使用 disabled 字段
 const options = [
   { label: '选项1', value: '1' },
   { label: '选项2', value: '2', disabled: true },  // 禁用
 ]
 
 // 2. 自定义禁用字段名
-&lt;XlySelect :options="options" disabled-key="isDisabled" /&gt;
+<XlySelect :options=&quot;options&quot; disabled-key=&quot;isDisabled&quot; />
 
 // 3. 直接在组件上写箭头函数（推荐）
-&lt;XlySelect
-  :options="options"
-  :disabled-key="(item) => item.stock === 0"
-/&gt;
+<XlySelect
+  :options=&quot;options&quot;
+  :disabled-key=&quot;(item) => item.stock === 0&quot;
+/>
 
 // 4. 使用定义的函数（适用于复杂逻辑）
 function isItemDisabled(option: any) {
   return option.stock === 0 || option.price > 10000
 }
 
-&lt;XlySelect :options="options" :disabled-key="isItemDisabled" /&gt;
+<XlySelect :options=&quot;options&quot; :disabled-key=&quot;isItemDisabled&quot; />
 
 // 5. 整个组件禁用
-&lt;XlySelect :options="options" disabled /&gt;</code></pre>
-      </div>
+<XlySelect :options=&quot;options&quot; disabled />`" />
     </section>
 
     <section class="doc-section">
@@ -333,10 +319,8 @@ function isItemDisabled(option: any) {
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlySelect v-model="value" :options="options" placeholder="搜索城市" prefix-icon="el:Search" filterable /&gt;
-&lt;XlySelect v-model="value" :options="options" placeholder="带后缀" suffix-icon="el:Calendar" clearable /&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlySelect v-model="value" :options="options" placeholder="搜索城市" prefix-icon="el:Search" filterable />
+<XlySelect v-model="value" :options="options" placeholder="带后缀" suffix-icon="el:Calendar" clearable />`' />
     </section>
 
     <section class="doc-section">
@@ -363,16 +347,14 @@ function isItemDisabled(option: any) {
           <div style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ val7 ?? '未选择' }}</div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>// 选项对象字段不是 label/value，而是 name/id
+      <DocCode :code="`// 选项对象字段不是 label/value，而是 name/id
 const userOptions = [
   { id: 1, name: '张三', role: 'admin' },
   { id: 2, name: '李四', role: 'editor' },
   { id: 3, name: '王五', role: 'viewer' },
 ]
 
-&lt;XlySelect v-model="value" :options="userOptions" label-key="name" value-key="id" /&gt;</code></pre>
-      </div>
+<XlySelect v-model=&quot;value&quot; :options=&quot;userOptions&quot; label-key=&quot;name&quot; value-key=&quot;id&quot; />`" />
     </section>
 
     <section class="doc-section">
@@ -394,11 +376,9 @@ const userOptions = [
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlySelect v-model="value" :options="options" size="large" /&gt;
-&lt;XlySelect v-model="value" :options="options" /&gt;
-&lt;XlySelect v-model="value" :options="options" size="small" /&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlySelect v-model="value" :options="options" size="large" />
+<XlySelect v-model="value" :options="options" />
+<XlySelect v-model="value" :options="options" size="small" />`' />
     </section>
 
     <section class="doc-section">
@@ -429,8 +409,7 @@ const userOptions = [
           <div style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ val8 ?? '未选择' }}</div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlySelect
+      <DocCode :code='`<XlySelect
   v-model="value"
   :options="remoteSelectOptions"
   filterable
@@ -438,17 +417,16 @@ const userOptions = [
   :remote-method="handleSearch"
   :loading="loading"
   clearable
-/&gt;
+/>
 
 // 在 remoteMethod 中发起远程请求并更新选项
 function handleSearch(query: string) {
   loading.value = true
-  fetchOptions(query).then(options =&gt; {
+  fetchOptions(query).then(options => {
     remoteSelectOptions.value = options
     loading.value = false
   })
-}</code></pre>
-      </div>
+}`' />
     </section>
 
     <section class="doc-section">
@@ -483,9 +461,7 @@ function handleSearch(query: string) {
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ val9 ?? '未选择' }}</span>
         </div>
       </div>
-      <div class="doc-code">
-        <pre v-html="codeExample"></pre>
-      </div>
+      <DocCode :code="codeExample" />
     </section>
 
     <section class="doc-section">

@@ -37,20 +37,18 @@
             </template>
           </XlyCard>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyCard&gt;
-  &lt;template #header&gt;
-    &lt;div class="header-title"&gt;项目详情&lt;/div&gt;
-  &lt;/template&gt;
-  &lt;p&gt;卡片内容...&lt;/p&gt;
-  &lt;template #footer&gt;
-    &lt;div class="footer-actions"&gt;
-      &lt;XlyButton type="primary" size="small"&gt;确认&lt;/XlyButton&gt;
-      &lt;XlyButton size="small"&gt;取消&lt;/XlyButton&gt;
-    &lt;/div&gt;
-  &lt;/template&gt;
-&lt;/XlyCard&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyCard>
+  <template #header>
+    <div class="header-title">项目详情</div>
+  </template>
+  <p>卡片内容...</p>
+  <template #footer>
+    <div class="footer-actions">
+      <XlyButton type="primary" size="small">确认</XlyButton>
+      <XlyButton size="small">取消</XlyButton>
+    </div>
+  </template>
+</XlyCard>`' />
       </div>
     </section>
 
@@ -99,15 +97,13 @@
             </XlyCard>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyCard title="基本信息"&gt;
-  &lt;div&gt;内容...&lt;/div&gt;
-&lt;/XlyCard&gt;
+        <DocCode :code='`<XlyCard title="基本信息">
+  <div>内容...</div>
+</XlyCard>
 
-&lt;XlyCard title="联系方式" icon="el:Message"&gt;
-  &lt;div&gt;内容...&lt;/div&gt;
-&lt;/XlyCard&gt;</code></pre>
-        </div>
+<XlyCard title="联系方式" icon="el:Message">
+  <div>内容...</div>
+</XlyCard>`' />
       </div>
     </section>
 
@@ -129,11 +125,9 @@
             </XlyCard>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyCard shadow="always"&gt;...&lt;/XlyCard&gt;
-&lt;XlyCard shadow="hover"&gt;...&lt;/XlyCard&gt;
-&lt;XlyCard shadow="never"&gt;...&lt;/XlyCard&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyCard shadow="always">...</XlyCard>
+<XlyCard shadow="hover">...</XlyCard>
+<XlyCard shadow="never">...</XlyCard>`' />
       </div>
     </section>
 
@@ -155,11 +149,9 @@
             </XlyCard>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyCard hoverable title="用户管理"&gt;
-  &lt;div&gt;点击查看详情&lt;/div&gt;
-&lt;/XlyCard&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyCard hoverable title="用户管理">
+  <div>点击查看详情</div>
+</XlyCard>`' />
       </div>
     </section>
 
@@ -256,9 +248,7 @@
             <div class="demo-text muted">禁用状态下无法交互</div>
           </XlyCard>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyCard disabled&gt;...&lt;/XlyCard&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyCard disabled>...</XlyCard>`' />
       </div>
     </section>
 

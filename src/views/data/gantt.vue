@@ -18,8 +18,7 @@
         <div class="doc-preview__body">
           <XlyGantt :data="basicData" title="项目进度" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyGantt :data="tasks" title="项目进度" /&gt;
+        <DocCode :code="`<XlyGantt :data=&quot;tasks&quot; title=&quot;项目进度&quot; />
 
 const tasks = [
   { id: 1, name: '项目启动会', startDate: '2026-04-01', endDate: '2026-04-02', progress: 100 },
@@ -30,8 +29,7 @@ const tasks = [
   { id: 6, name: '前端开发', startDate: '2026-04-13', endDate: '2026-04-25', progress: 30 },
   { id: 7, name: '系统测试', startDate: '2026-04-23', endDate: '2026-04-28', progress: 0 },
   { id: 8, name: '上线部署', startDate: '2026-04-29', endDate: '2026-04-30', progress: 0 }
-]</code></pre>
-        </div>
+]`" />
       </div>
     </section>
 
@@ -65,9 +63,7 @@ const tasks = [
             <template #progress="{ row }"> {{ row.progress }}% </template>
           </XlyGantt>
         </div>
-        <div class="doc-code">
-          <pre><code v-html="multiColCode"></code></pre>
-        </div>
+        <DocCode :code="multiColCode" />
       </div>
     </section>
 
@@ -81,16 +77,14 @@ const tasks = [
         <div class="doc-preview__body">
           <XlyGantt :data="milestoneData" title="项目里程碑" />
         </div>
-        <div class="doc-code">
-          <pre><code>const tasks = [
+        <DocCode :code="`const tasks = [
   { id: 1, name: '需求评审', startDate: '2026-04-01', endDate: '2026-04-03' },
   { id: 2, name: '评审通过', isMilestone: true, startDate: '2026-04-03' },
   { id: 3, name: '开发阶段', startDate: '2026-04-04', endDate: '2026-04-20' },
   { id: 4, name: '测试阶段', startDate: '2026-04-21', endDate: '2026-04-26' },
   { id: 5, name: '验收通过', isMilestone: true, startDate: '2026-04-26' },
   { id: 6, name: '正式上线', isMilestone: true, startDate: '2026-04-28' }
-]</code></pre>
-        </div>
+]`" />
       </div>
     </section>
 
@@ -102,8 +96,7 @@ const tasks = [
         <div class="doc-preview__body">
           <XlyGantt :data="groupData" title="多层级任务" />
         </div>
-        <div class="doc-code">
-          <pre><code>const tasks = [
+        <DocCode :code="`const tasks = [
   {
     id: 1,
     name: '前端开发',
@@ -124,8 +117,7 @@ const tasks = [
       { id: '2-3', name: '服务部署', startDate: '2026-04-19', endDate: '2026-04-22', progress: 0 }
     ]
   }
-]</code></pre>
-        </div>
+]`" />
       </div>
     </section>
 
@@ -139,16 +131,14 @@ const tasks = [
         <div class="doc-preview__body">
           <XlyGantt :data="depData" title="任务依赖" />
         </div>
-        <div class="doc-code">
-          <pre><code>const tasks = [
+        <DocCode :code="`const tasks = [
   { id: 1, name: '任务A - 需求分析', startDate: '2026-04-01', endDate: '2026-04-05', progress: 100 },
   { id: 2, name: '任务B - 系统设计', startDate: '2026-04-06', endDate: '2026-04-10', dependencies: [1], progress: 80 },
   { id: 3, name: '任务C - 数据库设计', startDate: '2026-04-06', endDate: '2026-04-08', dependencies: [1], progress: 100 },
   { id: 4, name: '任务D - 接口开发', startDate: '2026-04-11', endDate: '2026-04-18', dependencies: [2, 3], progress: 30 },
   { id: 5, name: '任务E - 前端开发', startDate: '2026-04-11', endDate: '2026-04-20', dependencies: [2], progress: 20 },
   { id: 6, name: '任务F - 集成测试', startDate: '2026-04-21', endDate: '2026-04-25', dependencies: [4, 5], progress: 0 }
-]</code></pre>
-        </div>
+]`" />
       </div>
     </section>
 
@@ -160,9 +150,7 @@ const tasks = [
         <div class="doc-preview__body">
           <XlyGantt :data="basicData" title="月视图" default-view="month" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyGantt :data="tasks" default-view="month" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyGantt :data="tasks" default-view="month" />`' />
       </div>
     </section>
 
@@ -176,9 +164,7 @@ const tasks = [
         <div class="doc-preview__body">
           <XlyGantt :data="basicData" title="固定日视图" :show-view-switch="false" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyGantt :data="tasks" :show-view-switch="false" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyGantt :data="tasks" :show-view-switch="false" />`' />
       </div>
     </section>
 
@@ -190,9 +176,7 @@ const tasks = [
         <div class="doc-preview__body">
           <XlyGantt :data="basicData" title="无今日标记" :show-today="false" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyGantt :data="tasks" :show-today="false" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyGantt :data="tasks" :show-today="false" />`' />
       </div>
     </section>
 
@@ -206,9 +190,7 @@ const tasks = [
         <div class="doc-preview__body gantt-size-demo">
           <XlyGantt :data="basicData" title="固定尺寸" width="100%" height="400px" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyGantt :data="tasks" width="100%" height="400px" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyGantt :data="tasks" width="100%" height="400px" />`' />
       </div>
     </section>
 
@@ -224,14 +206,12 @@ const tasks = [
         <div class="doc-preview__body">
           <XlyGantt :data="colorData" title="多彩任务" />
         </div>
-        <div class="doc-code">
-          <pre><code>const tasks = [
+        <DocCode :code="`const tasks = [
   { id: 1, name: '已完成任务', startDate: '2026-04-01', endDate: '2026-04-08', progress: 100, colorClass: 'is-success' },
   { id: 2, name: '进行中任务', startDate: '2026-04-05', endDate: '2026-04-18', progress: 60, colorClass: 'is-warning' },
   { id: 3, name: '紧急任务', startDate: '2026-04-10', endDate: '2026-04-22', progress: 30, colorClass: 'is-danger' },
   { id: 4, name: '规划中', startDate: '2026-04-18', endDate: '2026-04-30', progress: 0, colorClass: 'is-info' }
-]</code></pre>
-        </div>
+]`" />
       </div>
     </section>
 
@@ -243,14 +223,12 @@ const tasks = [
         <div class="doc-preview__body">
           <XlyGantt :data="basicData" title="点击任务" @task-click="handleTaskClick" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyGantt :data="tasks" @task-click="handleTaskClick" /&gt;
+        <DocCode :code="`<XlyGantt :data=&quot;tasks&quot; @task-click=&quot;handleTaskClick&quot; />
 
 function handleTaskClick(task) {
   console.log('点击任务:', task)
-  xly.$msg.success(`点击了: ${task.name}`)
-}</code></pre>
-        </div>
+  xly.$msg.success(\`点击了: \${task.name}\`)
+}`" />
       </div>
       <div class="doc-result" v-if="clickedTask">
         <span class="doc-result__label">点击结果：</span>
@@ -275,19 +253,18 @@ function handleTaskClick(task) {
             @task-click="handleTaskClick"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;template&gt;
-  &lt;XlyGantt
-    ref="ganttRef"
-    :data="tasks"
-    title="软件开发项目"
-    sidebar-width="260"
-    :row-height="42"
-    @task-click="handleTaskClick"
-  /&gt;
-&lt;/template&gt;
+        <DocCode :code="`<template>
+  <XlyGantt
+    ref=&quot;ganttRef&quot;
+    :data=&quot;tasks&quot;
+    title=&quot;软件开发项目&quot;
+    sidebar-width=&quot;260&quot;
+    :row-height=&quot;42&quot;
+    @task-click=&quot;handleTaskClick&quot;
+  />
+</template>
 
-&lt;script setup&gt;
+<script setup>
 import { ref } from 'vue'
 
 const ganttRef = ref()
@@ -311,8 +288,7 @@ function zoomIn() {
 function zoomOut() {
   ganttRef.value?.zoomOut()
 }
-&lt;/script&gt;</code></pre>
-        </div>
+</script>`" />
       </div>
     </section>
 

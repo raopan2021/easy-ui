@@ -19,9 +19,7 @@
         <div class="doc-preview__body">
           <XlyJsonViewer :data="basicData" />
         </div>
-        <div class="doc-code">
-          <pre><code>{{ basicCode }}</code></pre>
-        </div>
+        <DocCode :code='`{{ basicCode }}`' />
       </div>
     </section>
 
@@ -42,13 +40,11 @@
             <XlyJsonViewer :data="basicData" :depth="1" />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 全部展开 --&gt;
-&lt;XlyJsonViewer :data="jsonData" :depth="0" /&gt;
+        <DocCode :code='`<!-- 全部展开 -->
+<XlyJsonViewer :data="jsonData" :depth="0" />
 
-&lt;!-- 只展开第一层 --&gt;
-&lt;XlyJsonViewer :data="jsonData" :depth="1" /&gt;</code></pre>
-        </div>
+<!-- 只展开第一层 -->
+<XlyJsonViewer :data="jsonData" :depth="1" />`' />
       </div>
     </section>
 
@@ -62,9 +58,7 @@
         <div class="doc-preview__body">
           <XlyJsonViewer :data="deepData" max-height="200px" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyJsonViewer :data="jsonData" max-height="200px" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyJsonViewer :data="jsonData" max-height="200px" />`' />
       </div>
     </section>
 
@@ -85,10 +79,8 @@
             <XlyJsonViewer :data="basicData" width="100%" />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyJsonViewer :data="jsonData" width="400px" /&gt;
-&lt;XlyJsonViewer :data="jsonData" width="100%" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyJsonViewer :data="jsonData" width="400px" />
+<XlyJsonViewer :data="jsonData" width="100%" />`' />
       </div>
     </section>
 
@@ -109,10 +101,8 @@
             <XlyJsonViewer :data="basicData" theme="dark" />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyJsonViewer :data="jsonData" /&gt;
-&lt;XlyJsonViewer :data="jsonData" theme="dark" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyJsonViewer :data="jsonData" />
+<XlyJsonViewer :data="jsonData" theme="dark" />`' />
       </div>
     </section>
 
@@ -133,13 +123,11 @@
             <XlyJsonViewer :data="basicData" :show-expand="false" />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 隐藏工具栏 --&gt;
-&lt;XlyJsonViewer :data="jsonData" :show-toolbar="false" /&gt;
+        <DocCode :code='`<!-- 隐藏工具栏 -->
+<XlyJsonViewer :data="jsonData" :show-toolbar="false" />
 
-&lt;!-- 只保留复制按钮 --&gt;
-&lt;XlyJsonViewer :data="jsonData" :show-expand="false" /&gt;</code></pre>
-        </div>
+<!-- 只保留复制按钮 -->
+<XlyJsonViewer :data="jsonData" :show-expand="false" />`' />
       </div>
       <div class="doc-tip">
         <strong>去除工具栏：</strong>如不需要工具栏，找到组件模板中带注释 <code>&lt;!-- 🔌</code> 的代码块，删除对应行即可。具体位置：
@@ -164,10 +152,8 @@
         <div class="doc-preview__body">
           <XlyJsonViewer :data="stringJson" />
         </div>
-        <div class="doc-code">
-          <pre><code>const jsonStr = '{"name": "张三", "age": 18, "city": "北京"}'
-&lt;XlyJsonViewer :data="jsonStr" /&gt;</code></pre>
-        </div>
+        <DocCode :code="`const jsonStr = '{&quot;name&quot;: &quot;张三&quot;, &quot;age&quot;: 18, &quot;city&quot;: &quot;北京&quot;}'
+<XlyJsonViewer :data=&quot;jsonStr&quot; />`" />
       </div>
     </section>
 
@@ -184,9 +170,7 @@
         <div class="doc-preview__body">
           <XlyJsonViewer :data="businessErrorData" theme="dark" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyJsonViewer :data="errorData" theme="dark" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyJsonViewer :data="errorData" theme="dark" />`' />
       </div>
 
       <!-- 空指针异常 -->
@@ -195,9 +179,7 @@
         <div class="doc-preview__body">
           <XlyJsonViewer :data="nullPointerErrorData" :depth="2" theme="dark" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyJsonViewer :data="nullPointerErrorData" :depth="2" theme="dark" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyJsonViewer :data="nullPointerErrorData" :depth="2" theme="dark" />`' />
       </div>
 
       <!-- 分页数据 -->
@@ -206,9 +188,7 @@
         <div class="doc-preview__body">
           <XlyJsonViewer :data="pageData" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyJsonViewer :data="pageData" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyJsonViewer :data="pageData" />`' />
       </div>
     </section>
 

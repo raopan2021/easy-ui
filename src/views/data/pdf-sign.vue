@@ -116,14 +116,12 @@
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyPdfSign
+        <DocCode :code='`<XlyPdfSign
   :pdf-url="contractUrl"
   :signatures="signatures"
   @add="handleAdd"
   @remove="handleRemove"
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 

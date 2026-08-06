@@ -15,9 +15,9 @@
           <XlyInput v-model="val1c" placeholder="禁用状态" disabled />
         </div>
       </div>
-      <div class="doc-code"><pre><code>&lt;XlyInput v-model="value" placeholder="请输入内容" /&gt;
-&lt;XlyInput v-model="value" placeholder="可清除" clearable /&gt;
-&lt;XlyInput v-model="value" placeholder="禁用状态" disabled /&gt;</code></pre></div>
+      <DocCode :code='`<XlyInput v-model="value" placeholder="请输入内容" />
+<XlyInput v-model="value" placeholder="可清除" clearable />
+<XlyInput v-model="value" placeholder="禁用状态" disabled />`' />
     </section>
 
     <section class="doc-section">
@@ -28,7 +28,7 @@
           <XlyInput v-model="pwd" type="password" placeholder="请输入密码" />
         </div>
       </div>
-      <div class="doc-code"><pre><code>&lt;XlyInput v-model="password" type="password" placeholder="请输入密码" /&gt;</code></pre></div>
+      <DocCode :code='`<XlyInput v-model="password" type="password" placeholder="请输入密码" />`' />
     </section>
 
     <section class="doc-section">
@@ -40,8 +40,8 @@
           <XlyInput v-model="val3" placeholder="日期" suffix-icon="el:Calendar" />
         </div>
       </div>
-      <div class="doc-code"><pre><code>&lt;XlyInput v-model="value" placeholder="搜索" prefix-icon="el:Search" /&gt;
-&lt;XlyInput v-model="value" placeholder="日期" suffix-icon="el:Calendar" /&gt;</code></pre></div>
+      <DocCode :code='`<XlyInput v-model="value" placeholder="搜索" prefix-icon="el:Search" />
+<XlyInput v-model="value" placeholder="日期" suffix-icon="el:Calendar" />`' />
     </section>
 
     <section class="doc-section">
@@ -57,12 +57,12 @@
           </XlyInput>
         </div>
       </div>
-      <div class="doc-code"><pre><code>&lt;XlyInput v-model="value" placeholder="请输入网址"&gt;
-  &lt;template #prepend&gt;https://&lt;/template&gt;
-&lt;/XlyInput&gt;
-&lt;XlyInput v-model="value" placeholder="请输入域名"&gt;
-  &lt;template #append&gt;.com&lt;/template&gt;
-&lt;/XlyInput&gt;</code></pre></div>
+      <DocCode :code='`<XlyInput v-model="value" placeholder="请输入网址">
+  <template #prepend>https://</template>
+</XlyInput>
+<XlyInput v-model="value" placeholder="请输入域名">
+  <template #append>.com</template>
+</XlyInput>`' />
     </section>
 
     <section class="doc-section">
@@ -73,7 +73,7 @@
           <XlyInput v-model="val6" placeholder="最多20字" :maxlength="20" show-word-limit />
         </div>
       </div>
-      <div class="doc-code"><pre><code>&lt;XlyInput v-model="value" placeholder="最多20字" :maxlength="20" show-word-limit /&gt;</code></pre></div>
+      <DocCode :code='`<XlyInput v-model="value" placeholder="最多20字" :maxlength="20" show-word-limit />`' />
     </section>
 
     <section class="doc-section">
@@ -86,9 +86,9 @@
           <XlyInput v-model="val7" placeholder="小尺寸 small" size="small" />
         </div>
       </div>
-      <div class="doc-code"><pre><code>&lt;XlyInput v-model="value" size="large" /&gt;
-&lt;XlyInput v-model="value" size="default" /&gt;
-&lt;XlyInput v-model="value" size="small" /&gt;</code></pre></div>
+      <DocCode :code='`<XlyInput v-model="value" size="large" />
+<XlyInput v-model="value" size="default" />
+<XlyInput v-model="value" size="small" />`' />
     </section>
 
     <section class="doc-section">
@@ -102,17 +102,17 @@
           <XlyInput v-model="textarea4" type="textarea" :rows="2" :maxlength="100" show-word-limit placeholder="带字数统计" />
         </div>
       </div>
-      <div class="doc-code"><pre><code>&lt;!-- 默认 2 行，允许垂直拖动调整大小 --&gt;
-&lt;XlyInput v-model="value" type="textarea" :rows="2" placeholder="请输入内容" /&gt;
+      <DocCode :code="`<!-- 默认 2 行，允许垂直拖动调整大小 -->
+<XlyInput v-model=&quot;value&quot; type=&quot;textarea&quot; :rows=&quot;2&quot; placeholder=&quot;请输入内容&quot; />
 
-&lt;!-- 4 行 --&gt;
-&lt;XlyInput v-model="value" type="textarea" :rows="4" /&gt;
+<!-- 4 行 -->
+<XlyInput v-model=&quot;value&quot; type=&quot;textarea&quot; :rows=&quot;4&quot; />
 
-&lt;!-- 禁止调整大小 --&gt;
-&lt;XlyInput v-model="value" type="textarea" :resize="'none'" /&gt;
+<!-- 禁止调整大小 -->
+<XlyInput v-model=&quot;value&quot; type=&quot;textarea&quot; :resize=&quot;'none'&quot; />
 
-&lt;!-- 带字数统计 --&gt;
-&lt;XlyInput v-model="value" type="textarea" :maxlength="100" show-word-limit /&gt;</code></pre></div>
+<!-- 带字数统计 -->
+<XlyInput v-model=&quot;value&quot; type=&quot;textarea&quot; :maxlength=&quot;100&quot; show-word-limit />`" />
     </section>
 
     <section class="doc-section">

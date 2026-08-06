@@ -21,17 +21,15 @@
           </XlyDropdown>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyDropdown label="下拉菜单"&gt;
-  &lt;template #dropdown&gt;
-    &lt;XlyDropdownItem&gt;黄金糕&lt;/XlyDropdownItem&gt;
-    &lt;XlyDropdownItem&gt;狮子头&lt;/XlyDropdownItem&gt;
-    &lt;XlyDropdownItem&gt;螺蛳粉&lt;/XlyDropdownItem&gt;
-    &lt;XlyDropdownItem disabled&gt;双皮奶&lt;/XlyDropdownItem&gt;
-    &lt;XlyDropdownItem divided&gt;蚵仔煎&lt;/XlyDropdownItem&gt;
-  &lt;/template&gt;
-&lt;/XlyDropdown&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyDropdown label="下拉菜单">
+  <template #dropdown>
+    <XlyDropdownItem>黄金糕</XlyDropdownItem>
+    <XlyDropdownItem>狮子头</XlyDropdownItem>
+    <XlyDropdownItem>螺蛳粉</XlyDropdownItem>
+    <XlyDropdownItem disabled>双皮奶</XlyDropdownItem>
+    <XlyDropdownItem divided>蚵仔煎</XlyDropdownItem>
+  </template>
+</XlyDropdown>`' />
     </section>
 
     <section class="doc-section">
@@ -48,15 +46,13 @@
           </XlyDropdown>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyDropdown label="悬停展开" trigger="hover"&gt;
-  &lt;template #dropdown&gt;
-    &lt;XlyDropdownItem&gt;黄金糕&lt;/XlyDropdownItem&gt;
-    &lt;XlyDropdownItem&gt;狮子头&lt;/XlyDropdownItem&gt;
-    &lt;XlyDropdownItem&gt;螺蛳粉&lt;/XlyDropdownItem&gt;
-  &lt;/template&gt;
-&lt;/XlyDropdown&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyDropdown label="悬停展开" trigger="hover">
+  <template #dropdown>
+    <XlyDropdownItem>黄金糕</XlyDropdownItem>
+    <XlyDropdownItem>狮子头</XlyDropdownItem>
+    <XlyDropdownItem>螺蛳粉</XlyDropdownItem>
+  </template>
+</XlyDropdown>`' />
     </section>
 
     <section class="doc-section">
@@ -73,15 +69,13 @@
           </XlyDropdown>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyDropdown label="带图标"&gt;
-  &lt;template #dropdown&gt;
-    &lt;XlyDropdownItem icon="el:Plus"&gt;黄金糕&lt;/XlyDropdownItem&gt;
-    &lt;XlyDropdownItem icon="el:CirclePlus"&gt;狮子头&lt;/XlyDropdownItem&gt;
-    &lt;XlyDropdownItem icon="el:Coffee"&gt;螺蛳粉&lt;/XlyDropdownItem&gt;
-  &lt;/template&gt;
-&lt;/XlyDropdown&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyDropdown label="带图标">
+  <template #dropdown>
+    <XlyDropdownItem icon="el:Plus">黄金糕</XlyDropdownItem>
+    <XlyDropdownItem icon="el:CirclePlus">狮子头</XlyDropdownItem>
+    <XlyDropdownItem icon="el:Coffee">螺蛳粉</XlyDropdownItem>
+  </template>
+</XlyDropdown>`' />
     </section>
 
     <section class="doc-section">
@@ -100,17 +94,15 @@
           </XlyDropdown>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyDropdown label="分隔符示例"&gt;
-  &lt;template #dropdown&gt;
-    &lt;XlyDropdownItem&gt;黄金糕&lt;/XlyDropdownItem&gt;
-    &lt;XlyDropdownItem&gt;狮子头&lt;/XlyDropdownItem&gt;
-    &lt;XlyDropdownItem&gt;螺蛳粉&lt;/XlyDropdownItem&gt;
-    &lt;XlyDropdownItem divided&gt;双皮奶&lt;/XlyDropdownItem&gt;
-    &lt;XlyDropdownItem&gt;蚵仔煎&lt;/XlyDropdownItem&gt;
-  &lt;/template&gt;
-&lt;/XlyDropdown&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyDropdown label="分隔符示例">
+  <template #dropdown>
+    <XlyDropdownItem>黄金糕</XlyDropdownItem>
+    <XlyDropdownItem>狮子头</XlyDropdownItem>
+    <XlyDropdownItem>螺蛳粉</XlyDropdownItem>
+    <XlyDropdownItem divided>双皮奶</XlyDropdownItem>
+    <XlyDropdownItem>蚵仔煎</XlyDropdownItem>
+  </template>
+</XlyDropdown>`' />
     </section>
 
     <section class="doc-section">
@@ -127,15 +119,13 @@
           </XlyDropdown>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyDropdown label="禁用示例"&gt;
-  &lt;template #dropdown&gt;
-    &lt;XlyDropdownItem&gt;黄金糕&lt;/XlyDropdownItem&gt;
-    &lt;XlyDropdownItem disabled&gt;狮子头&lt;/XlyDropdownItem&gt;
-    &lt;XlyDropdownItem&gt;螺蛳粉&lt;/XlyDropdownItem&gt;
-  &lt;/template&gt;
-&lt;/XlyDropdown&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyDropdown label="禁用示例">
+  <template #dropdown>
+    <XlyDropdownItem>黄金糕</XlyDropdownItem>
+    <XlyDropdownItem disabled>狮子头</XlyDropdownItem>
+    <XlyDropdownItem>螺蛳粉</XlyDropdownItem>
+  </template>
+</XlyDropdown>`' />
     </section>
 
     <section class="doc-section">
@@ -157,20 +147,18 @@
           </XlyDropdown>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyDropdown&gt;
-  &lt;span class="custom-trigger"&gt;
-    &lt;XlyIcon name="el:Setting" :size="16" /&gt;
+      <DocCode :code='`<XlyDropdown>
+  <span class="custom-trigger">
+    <XlyIcon name="el:Setting" :size="16" />
     设置
-    &lt;XlyIcon name="el:ArrowDown" :size="12" /&gt;
-  &lt;/span&gt;
-  &lt;template #dropdown&gt;
-    &lt;XlyDropdownItem icon="el:User"&gt;个人信息&lt;/XlyDropdownItem&gt;
-    &lt;XlyDropdownItem icon="el:Lock"&gt;修改密码&lt;/XlyDropdownItem&gt;
-    &lt;XlyDropdownItem icon="el:SwitchButton" divided&gt;退出登录&lt;/XlyDropdownItem&gt;
-  &lt;/template&gt;
-&lt;/XlyDropdown&gt;</code></pre>
-      </div>
+    <XlyIcon name="el:ArrowDown" :size="12" />
+  </span>
+  <template #dropdown>
+    <XlyDropdownItem icon="el:User">个人信息</XlyDropdownItem>
+    <XlyDropdownItem icon="el:Lock">修改密码</XlyDropdownItem>
+    <XlyDropdownItem icon="el:SwitchButton" divided>退出登录</XlyDropdownItem>
+  </template>
+</XlyDropdown>`' />
     </section>
 
     <section class="doc-section">
@@ -187,15 +175,13 @@
           </XlyDropdown>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyDropdown label="点击试试"&gt;
-  &lt;template #dropdown&gt;
-    &lt;XlyDropdownItem @click="handleItemClick('黄金糕')"&gt;黄金糕&lt;/XlyDropdownItem&gt;
-    &lt;XlyDropdownItem @click="handleItemClick('狮子头')"&gt;狮子头&lt;/XlyDropdownItem&gt;
-    &lt;XlyDropdownItem @click="handleItemClick('螺蛳粉')"&gt;螺蛳粉&lt;/XlyDropdownItem&gt;
-  &lt;/template&gt;
-&lt;/XlyDropdown&gt;</code></pre>
-      </div>
+      <DocCode :code="`<XlyDropdown label=&quot;点击试试&quot;>
+  <template #dropdown>
+    <XlyDropdownItem @click=&quot;handleItemClick('黄金糕')&quot;>黄金糕</XlyDropdownItem>
+    <XlyDropdownItem @click=&quot;handleItemClick('狮子头')&quot;>狮子头</XlyDropdownItem>
+    <XlyDropdownItem @click=&quot;handleItemClick('螺蛳粉')&quot;>螺蛳粉</XlyDropdownItem>
+  </template>
+</XlyDropdown>`" />
     </section>
 
     <section class="doc-section">

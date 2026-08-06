@@ -18,8 +18,7 @@
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <xly-table :columns="basicColumns" :data="basicData" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-table :columns="columns" :data="data" /&gt;
+        <DocCode :code="`<xly-table :columns=&quot;columns&quot; :data=&quot;data&quot; />
 
 // columns 示例
 const columns = [
@@ -27,8 +26,7 @@ const columns = [
   { prop: 'age',    name: '年龄',   width: 80,  align: 'center' },
   { prop: 'dept',   name: '部门',   width: 120 },
   { prop: 'status', name: '状态' },
-]</code></pre>
-        </div>
+]`" />
       </div>
     </section>
 
@@ -56,11 +54,9 @@ const columns = [
             <xly-table :columns="basicColumns" :data="basicData" stripe border />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-table :columns="columns" :data="data" stripe /&gt;
-&lt;xly-table :columns="columns" :data="data" border /&gt;
-&lt;xly-table :columns="columns" :data="data" stripe border /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<xly-table :columns="columns" :data="data" stripe />
+<xly-table :columns="columns" :data="data" border />
+<xly-table :columns="columns" :data="data" stripe border />`' />
       </div>
     </section>
 
@@ -88,15 +84,13 @@ const columns = [
             已选 {{ selectedRows.length }} 行：{{ selectedRows.map((r) => r.name).join('、') }}
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-table
+        <DocCode :code='`<xly-table
   :columns="columns"
   :data="data"
   show-index
   selectable
   @selection-change="handleSelectionChange"
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 
@@ -126,16 +120,14 @@ const columns = [
             已选：{{ singleSelectedRow.name }}，部门：{{ singleSelectedRow.dept }}
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-table
+        <DocCode :code='`<xly-table
   :columns="columns"
   :data="data"
   show-index
   selectable
   selection-mode="single"
   @selection-change="handleSelectionChange"
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 
@@ -158,13 +150,11 @@ const columns = [
             >，顺序：<strong>{{ sortInfo.order }}</strong>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>const columns = [
+        <DocCode :code="`const columns = [
   { prop: 'name',   name: '姓名' },
   { prop: 'salary', name: '薪资', sortable: true },
   { prop: 'score',  name: '评分', sortable: true },
-]</code></pre>
-        </div>
+]`" />
       </div>
     </section>
 
@@ -215,20 +205,18 @@ const columns = [
             </template>
           </xly-table>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-table :columns="columns" :data="data"&gt;
-  &lt;!-- 自定义单元格 --&gt;
-  &lt;template #col-status="{ value }"&gt;
-    &lt;xly-tag :type="statusMap[value]"&gt;{{ value }}&lt;/xly-tag&gt;
-  &lt;/template&gt;
+        <DocCode :code='`<xly-table :columns="columns" :data="data">
+  <!-- 自定义单元格 -->
+  <template #col-status="{ value }">
+    <xly-tag :type="statusMap[value]">{{ value }}</xly-tag>
+  </template>
 
-  &lt;!-- 操作列 --&gt;
-  &lt;template #action="{ row }"&gt;
-    &lt;button @click="handleEdit(row)"&gt;编辑&lt;/button&gt;
-    &lt;button @click="handleDelete(row)"&gt;删除&lt;/button&gt;
-  &lt;/template&gt;
-&lt;/xly-table&gt;</code></pre>
-        </div>
+  <!-- 操作列 -->
+  <template #action="{ row }">
+    <button @click="handleEdit(row)">编辑</button>
+    <button @click="handleDelete(row)">删除</button>
+  </template>
+</xly-table>`' />
       </div>
     </section>
 
@@ -243,13 +231,11 @@ const columns = [
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <xly-table :columns="prefixSuffixColumns" :data="salaryData" stripe />
         </div>
-        <div class="doc-code">
-          <pre><code>const columns = [
+        <DocCode :code="`const columns = [
   { prop: 'name',   name: '姓名' },
   { prop: 'salary', name: '薪资', prefix: '¥', suffix: ' 元' },
   { prop: 'score',  name: '评分', suffix: ' 分' },
-]</code></pre>
-        </div>
+]`" />
       </div>
     </section>
 
@@ -303,20 +289,19 @@ const columns = [
           </div>
           <div v-if="currentPageInfo" class="pagination-hint">当前页：{{ currentPageInfo }}</div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-table
-  :columns="columns"
-  :data="data"
-  pagination-position="right"  // left | center | right，默认 right
-  :show-page-size="false"      // 隐藏每页条数选择器，默认 true
-  :show-page-input="false"     // 隐藏页码输入框，默认 true
-  :show-index="false"          // 隐藏序号列，默认 true
-  :page-size="10"              // 每页条数，默认 10
-  :page="1"                    // 当前页码（服务端分页时使用）
-  :total="100"                 // 总条数（服务端分页时使用）
-  @page-change="handlePageChange"
-  @page-size-change="handlePageSizeChange"
-/&gt;
+        <DocCode :code="`<xly-table
+  :columns=&quot;columns&quot;
+  :data=&quot;data&quot;
+  pagination-position=&quot;right&quot;  // left | center | right，默认 right
+  :show-page-size=&quot;false&quot;      // 隐藏每页条数选择器，默认 true
+  :show-page-input=&quot;false&quot;     // 隐藏页码输入框，默认 true
+  :show-index=&quot;false&quot;          // 隐藏序号列，默认 true
+  :page-size=&quot;10&quot;              // 每页条数，默认 10
+  :page=&quot;1&quot;                    // 当前页码（服务端分页时使用）
+  :total=&quot;100&quot;                 // 总条数（服务端分页时使用）
+  @page-change=&quot;handlePageChange&quot;
+  @page-size-change=&quot;handlePageSizeChange&quot;
+/>
 
 // 前端分页示例
 function handlePageChange(page: number) {
@@ -346,8 +331,7 @@ async function handleServerPageSizeChange(pageSize: number) {
   const res = await fetchData({ page: 1, pageSize })
   serverPageData.value = res.data
   serverTotal.value = res.total
-}</code></pre>
-        </div>
+}`" />
       </div>
     </section>
 
@@ -369,15 +353,13 @@ async function handleServerPageSizeChange(pageSize: number) {
             show-index
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-table
+        <DocCode :code='`<xly-table
   :columns="columns"
   :data="data"
   :max-height="280"
   showSummary
   summary-label="平均年龄"
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 
@@ -397,13 +379,11 @@ async function handleServerPageSizeChange(pageSize: number) {
           </div>
           <xly-table :columns="basicColumns" :data="loadingData" :loading="isLoading" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-table
+        <DocCode :code='`<xly-table
   :columns="columns"
   :data="data"
   :loading="isLoading"
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 
@@ -432,9 +412,7 @@ async function handleServerPageSizeChange(pageSize: number) {
             />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-table :columns="columns" :data="[]" empty-text="暂无数据" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<xly-table :columns="columns" :data="[]" empty-text="暂无数据" />`' />
       </div>
     </section>
 
@@ -448,9 +426,7 @@ async function handleServerPageSizeChange(pageSize: number) {
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <xly-table :columns="basicColumns" :data="basicData" compact stripe border />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-table :columns="columns" :data="data" compact /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<xly-table :columns="columns" :data="data" compact />`' />
       </div>
     </section>
 
@@ -470,14 +446,12 @@ async function handleServerPageSizeChange(pageSize: number) {
             </template>
           </xly-table>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-table title="用户列表" :columns="columns" :data="data"&gt;
-  &lt;template #toolbar&gt;
-    &lt;button&gt;新增&lt;/button&gt;
-    &lt;button&gt;导出&lt;/button&gt;
-  &lt;/template&gt;
-&lt;/xly-table&gt;</code></pre>
-        </div>
+        <DocCode :code='`<xly-table title="用户列表" :columns="columns" :data="data">
+  <template #toolbar>
+    <button>新增</button>
+    <button>导出</button>
+  </template>
+</xly-table>`' />
       </div>
     </section>
 
@@ -503,17 +477,16 @@ async function handleServerPageSizeChange(pageSize: number) {
             @export="handleExport"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-table
-  title="员工信息表"
-  :columns="columns"
-  :data="data"
+        <DocCode :code="`<xly-table
+  title=&quot;员工信息表&quot;
+  :columns=&quot;columns&quot;
+  :data=&quot;data&quot;
   show-refresh
   show-export
   show-column-settings
-  @refresh="handleRefresh"
-  @export="handleExport"
-/&gt;
+  @refresh=&quot;handleRefresh&quot;
+  @export=&quot;handleExport&quot;
+/>
 
 function handleRefresh() {
   console.log('点击了刷新按钮')
@@ -523,8 +496,7 @@ function handleRefresh() {
 function handleExport() {
   console.log('点击了导出按钮')
   // 导出数据逻辑
-}</code></pre>
-        </div>
+}`" />
       </div>
     </section>
 
@@ -548,14 +520,13 @@ function handleExport() {
             @column-order-change="handleColumnOrderChange"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-table
-  title="员工信息表"
-  :columns="columns"
-  :data="data"
+        <DocCode :code="`<xly-table
+  title=&quot;员工信息表&quot;
+  :columns=&quot;columns&quot;
+  :data=&quot;data&quot;
   show-column-settings
-  @column-order-change="handleColumnOrderChange"
-/&gt;
+  @column-order-change=&quot;handleColumnOrderChange&quot;
+/>
 
 // 列配置示例
 const columns = [
@@ -569,8 +540,7 @@ const columns = [
 
 function handleColumnOrderChange(newColumns: TableColumn[]) {
   console.log('列顺序已更新', newColumns)
-}</code></pre>
-        </div>
+}`" />
       </div>
     </section>
 
@@ -621,9 +591,7 @@ function handleColumnOrderChange(newColumns: TableColumn[]) {
             {{ expandInfo }}
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code v-html="expandExampleCode" /></pre>
-        </div>
+        <DocCode :code="expandExampleCode" />
       </div>
     </section>
 
@@ -656,17 +624,16 @@ function handleColumnOrderChange(newColumns: TableColumn[]) {
             {{ treeExpandInfo }}
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-table
-  :columns="columns"
-  :data="treeData"
+        <DocCode :code="`<xly-table
+  :columns=&quot;columns&quot;
+  :data=&quot;treeData&quot;
   stripe
   border
-  <span class="code-attr">:tree</span>=<span class="code-string">"true"</span>
-  <span class="code-attr">:tree-indent-size</span>=<span class="code-string">"20"</span>
-  <span class="code-attr">:default-expand-all</span>=<span class="code-string">"true"</span>
-  @tree-expand="handleTreeExpand"
-/&gt;
+  <span class=&quot;code-attr&quot;>:tree</span>=<span class=&quot;code-string&quot;>&quot;true&quot;</span>
+  <span class=&quot;code-attr&quot;>:tree-indent-size</span>=<span class=&quot;code-string&quot;>&quot;20&quot;</span>
+  <span class=&quot;code-attr&quot;>:default-expand-all</span>=<span class=&quot;code-string&quot;>&quot;true&quot;</span>
+  @tree-expand=&quot;handleTreeExpand&quot;
+/>
 
 // 树形数据结构
 const treeData = [
@@ -689,8 +656,7 @@ const treeData = [
 
 function handleTreeExpand(row, expanded) {
   console.log(row.name, expanded ? '展开了' : '收起了')
-}</code></pre>
-        </div>
+}`" />
       </div>
     </section>
 
@@ -724,17 +690,16 @@ function handleTreeExpand(row, expanded) {
             {{ lazyExpandInfo }}
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-table
-  :columns="columns"
-  :data="data"
+        <DocCode :code="`<xly-table
+  :columns=&quot;columns&quot;
+  :data=&quot;data&quot;
   stripe
   border
-  <span class="code-attr">:tree</span>=<span class="code-string">"true"</span>
-  <span class="code-attr">:lazy</span>=<span class="code-string">"true"</span>
-  <span class="code-attr">:load</span>=<span class="code-string">"handleLazyLoad"</span>
-  @tree-expand="handleTreeExpand"
-/&gt;
+  <span class=&quot;code-attr&quot;>:tree</span>=<span class=&quot;code-string&quot;>&quot;true&quot;</span>
+  <span class=&quot;code-attr&quot;>:lazy</span>=<span class=&quot;code-string&quot;>&quot;true&quot;</span>
+  <span class=&quot;code-attr&quot;>:load</span>=<span class=&quot;code-string&quot;>&quot;handleLazyLoad&quot;</span>
+  @tree-expand=&quot;handleTreeExpand&quot;
+/>
 
 // 懒加载方法
 async function handleLazyLoad(row) {
@@ -742,11 +707,10 @@ async function handleLazyLoad(row) {
   await new Promise(resolve => setTimeout(resolve, 800))
   // 返回子节点数据
   return [
-    { name: `${row.name}-子部门1`, manager: '成员A' },
-    { name: `${row.name}-子部门2`, manager: '成员B' },
+    { name: \`\${row.name}-子部门1\`, manager: '成员A' },
+    { name: \`\${row.name}-子部门2\`, manager: '成员B' },
   ]
-}</code></pre>
-        </div>
+}`" />
       </div>
     </section>
 
@@ -770,8 +734,7 @@ async function handleLazyLoad(row) {
             💡 提示：横向滚动表格查看固定列效果
           </p>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-table :columns="columns" :data="data" /&gt;
+        <DocCode :code="`<xly-table :columns=&quot;columns&quot; :data=&quot;data&quot; />
 
 // 列配置示例
 const columns = [
@@ -785,8 +748,7 @@ const columns = [
   { prop: 'company', name: '公司',    width: 150 },
   { prop: 'salary',  name: '薪资',    width: 120, align: 'right' },
   { prop: 'status',  name: '状态',    width: 100, fixed: 'right' },
-]</code></pre>
-        </div>
+]`" />
       </div>
     </section>
 
@@ -817,16 +779,15 @@ const columns = [
             💡 提示：点击右上角"列设置"按钮可控制列的显示/隐藏，横向滚动查看更多列
           </p>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-table
-  :columns="columns"
-  :data="data"
+        <DocCode :code="`<xly-table
+  :columns=&quot;columns&quot;
+  :data=&quot;data&quot;
   stripe
   border
   show-summary
-  summary-label="合计"
+  summary-label=&quot;合计&quot;
   show-column-settings
-/&gt;
+/>
 
 // 多列配置示例
 const columns = [
@@ -848,8 +809,7 @@ const columns = [
   { prop: 'bonus',      name: '奖金',       width: 100, align: 'right',summary: 'sum', },
   { prop: 'performance', name: '绩效评分',  width: 100, fixed: 'right'，align: 'center',summary: 'sum' },
   { prop: 'status',     name: '状态',       width: 100, fixed: 'right' },
-]</code></pre>
-        </div>
+]`" />
       </div>
     </section>
 
@@ -892,21 +852,19 @@ const columns = [
             💡 提示：横向滚动表格，操作列始终固定在右侧
           </p>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-table
+        <DocCode :code='`<xly-table
   :columns="columns"
   :data="data"
   stripe
   border
   action-fixed="right"
   :action-width="140"
-&gt;
-  &lt;template #action="{ row }"&gt;
-    &lt;button @click="handleEdit(row)"&gt;编辑&lt;/button&gt;
-    &lt;button @click="handleDelete(row)"&gt;删除&lt;/button&gt;
-  &lt;/template&gt;
-&lt;/xly-table&gt;</code></pre>
-        </div>
+>
+  <template #action="{ row }">
+    <button @click="handleEdit(row)">编辑</button>
+    <button @click="handleDelete(row)">删除</button>
+  </template>
+</xly-table>`' />
       </div>
     </section>
 
@@ -929,13 +887,12 @@ const columns = [
             :pagination="false"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-table
-  :columns="columns"
-  :data="data"
+        <DocCode :code="`<xly-table
+  :columns=&quot;columns&quot;
+  :data=&quot;data&quot;
   show-summary
-  summary-label="合计"
-/&gt;
+  summary-label=&quot;合计&quot;
+/>
 
 const columns = [
   { prop: 'name',    name: '姓名',   width: 120 },
@@ -946,8 +903,7 @@ const columns = [
   { prop: 'status',  name: '状态',   width: 100,
     summaryText: '—'    // 自定义显示文字，不参与计算
   },
-]</code></pre>
-        </div>
+]`" />
       </div>
     </section>
 

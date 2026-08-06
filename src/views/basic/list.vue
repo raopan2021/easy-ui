@@ -17,9 +17,7 @@
           <XlyList :list="listData" />
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyList :list="listData" /&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyList :list="listData" />`' />
     </section>
 
     <!-- 带边框 -->
@@ -33,9 +31,7 @@
           <XlyList :list="listData" bordered />
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyList :list="listData" bordered /&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyList :list="listData" bordered />`' />
     </section>
 
     <!-- 带头像和描述 -->
@@ -55,15 +51,13 @@
           />
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyList
+      <DocCode :code='`<XlyList
   :list="userListData"
   avatar="avatar"
   title="name"
   description="desc"
   bordered
-/&gt;</code></pre>
-      </div>
+/>`' />
     </section>
 
     <!-- 带头部和底部 -->
@@ -82,14 +76,12 @@
           />
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyList
+      <DocCode :code='`<XlyList
   :list="listData"
   header="头部标题"
   footer="共 3 条记录"
   bordered
-/&gt;</code></pre>
-      </div>
+/>`' />
     </section>
 
     <!-- 悬停效果 -->
@@ -103,9 +95,7 @@
           <XlyList :list="listData" bordered hoverable />
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyList :list="listData" bordered hoverable /&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyList :list="listData" bordered hoverable />`' />
     </section>
 
     <!-- 加载状态 -->
@@ -119,9 +109,7 @@
           <XlyList :list="[]" loading bordered />
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyList :list="[]" loading bordered /&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyList :list="[]" loading bordered />`' />
     </section>
 
     <!-- 空状态 -->
@@ -135,9 +123,7 @@
           <XlyList :list="[]" empty-text="暂无列表数据" bordered />
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyList :list="[]" empty-text="暂无列表数据" bordered /&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyList :list="[]" empty-text="暂无列表数据" bordered />`' />
     </section>
 
     <!-- 自定义渲染 -->
@@ -166,17 +152,15 @@
           </XlyList>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyList :list="customListData" bordered&gt;
-  &lt;template #default="{ item, index }"&gt;
-    &lt;div class="custom-list-item"&gt;
-      &lt;span&gt;&#123;&#123; index + 1 &#125;&#125;&lt;/span&gt;
-      &lt;span&gt;&#123;&#123; item.name &#125;&#125;&lt;/span&gt;
-      &lt;span&gt;&#123;&#123; item.email &#125;&#125;&lt;/span&gt;
-    &lt;/div&gt;
-  &lt;/template&gt;
-&lt;/XlyList&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyList :list="customListData" bordered>
+  <template #default="{ item, index }">
+    <div class="custom-list-item">
+      <span>&#123;&#123; index + 1 &#125;&#125;</span>
+      <span>&#123;&#123; item.name &#125;&#125;</span>
+      <span>&#123;&#123; item.email &#125;&#125;</span>
+    </div>
+  </template>
+</XlyList>`' />
     </section>
 
     <!-- API -->

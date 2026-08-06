@@ -14,6 +14,7 @@ declare module 'vue' {
     BaseNode: typeof import('./../../components/xly-flow-designer/mimic/vue/baseNode.vue')['default']
     Between: typeof import('./../../components/xly-flow-designer/common/vue/between.vue')['default']
     DeptNode: typeof import('./../../components/xly-dept-tree/DeptNode.vue')['default']
+    DocCode: typeof import('./../../components/DocCode.vue')['default']
     DropdownItem: typeof import('./../../components/xly-dropdown/dropdown-item.vue')['default']
     EdgeTooltip: typeof import('./../../components/xly-flow-designer/mimic/vue/EdgeTooltip.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']

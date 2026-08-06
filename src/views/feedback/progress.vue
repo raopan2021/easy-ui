@@ -30,12 +30,10 @@
             <XlyProgress :percentage="100" />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyProgress :percentage="0" /&gt;
-&lt;XlyProgress :percentage="30" /&gt;
-&lt;XlyProgress :percentage="70" /&gt;
-&lt;XlyProgress :percentage="100" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyProgress :percentage="0" />
+<XlyProgress :percentage="30" />
+<XlyProgress :percentage="70" />
+<XlyProgress :percentage="100" />`' />
       </div>
     </section>
 
@@ -49,9 +47,7 @@
         <div class="doc-preview__body">
           <XlyProgress :percentage="0" indeterminate text="加载中..." />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyProgress :percentage="0" indeterminate text="加载中..." /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyProgress :percentage="0" indeterminate text="加载中..." />`' />
       </div>
     </section>
 
@@ -84,13 +80,11 @@
             <XlyProgress :percentage="40" status="active" />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyProgress :percentage="50" status="normal" /&gt;
-&lt;XlyProgress :percentage="100" status="success" /&gt;
-&lt;XlyProgress :percentage="60" status="exception" /&gt;
-&lt;XlyProgress :percentage="80" status="warning" /&gt;
-&lt;XlyProgress :percentage="40" status="active" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyProgress :percentage="50" status="normal" />
+<XlyProgress :percentage="100" status="success" />
+<XlyProgress :percentage="60" status="exception" />
+<XlyProgress :percentage="80" status="warning" />
+<XlyProgress :percentage="40" status="active" />`' />
       </div>
     </section>
 
@@ -115,20 +109,18 @@
             <XlyProgress :percentage="80" :color="dynamicColor" />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 固定颜色 --&gt;
-&lt;XlyProgress :percentage="60" color="#4f6ef7" /&gt;
+        <DocCode :code="`<!-- 固定颜色 -->
+<XlyProgress :percentage=&quot;60&quot; color=&quot;#4f6ef7&quot; />
 
-&lt;!-- 动态颜色函数 --&gt;
-&lt;script setup&gt;
-const dynamicColor = (percentage) =&gt; {
-  if (percentage &lt; 30) return '#f56c6c'
-  if (percentage &lt; 70) return '#e6a23c'
+<!-- 动态颜色函数 -->
+<script setup>
+const dynamicColor = (percentage) => {
+  if (percentage < 30) return '#f56c6c'
+  if (percentage < 70) return '#e6a23c'
   return '#67c23a'
 }
-&lt;/script&gt;
-&lt;XlyProgress :percentage="80" :color="dynamicColor" /&gt;</code></pre>
-        </div>
+</script>
+<XlyProgress :percentage=&quot;80&quot; :color=&quot;dynamicColor&quot; />`" />
       </div>
     </section>
 
@@ -153,14 +145,12 @@ const dynamicColor = (percentage) =&gt; {
             <XlyProgress :percentage="45" :showInfo="false" />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 自定义文本 --&gt;
-&lt;XlyProgress :percentage="60" text="上传中..." /&gt;
-&lt;XlyProgress :percentage="85" text="85/100 已完成" /&gt;
+        <DocCode :code='`<!-- 自定义文本 -->
+<XlyProgress :percentage="60" text="上传中..." />
+<XlyProgress :percentage="85" text="85/100 已完成" />
 
-&lt;!-- 隐藏文本 --&gt;
-&lt;XlyProgress :percentage="45" :showInfo="false" /&gt;</code></pre>
-        </div>
+<!-- 隐藏文本 -->
+<XlyProgress :percentage="45" :showInfo="false" />`' />
       </div>
     </section>
 
@@ -185,11 +175,9 @@ const dynamicColor = (percentage) =&gt; {
             <XlyProgress :percentage="60" :strokeWidth="12" />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyProgress :percentage="60" :strokeWidth="4" /&gt;
-&lt;XlyProgress :percentage="60" :strokeWidth="8" /&gt;
-&lt;XlyProgress :percentage="60" :strokeWidth="12" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyProgress :percentage="60" :strokeWidth="4" />
+<XlyProgress :percentage="60" :strokeWidth="8" />
+<XlyProgress :percentage="60" :strokeWidth="12" />`' />
       </div>
     </section>
 
@@ -220,12 +208,10 @@ const dynamicColor = (percentage) =&gt; {
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyProgress type="circle" :percentage="70" /&gt;
-&lt;XlyProgress type="circle" :percentage="90" status="success" /&gt;
-&lt;XlyProgress type="circle" :percentage="50" status="exception" /&gt;
-&lt;XlyProgress type="circle" :percentage="100" :circleSize="80" text="Done" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyProgress type="circle" :percentage="70" />
+<XlyProgress type="circle" :percentage="90" status="success" />
+<XlyProgress type="circle" :percentage="50" status="exception" />
+<XlyProgress type="circle" :percentage="100" :circleSize="80" text="Done" />`' />
       </div>
     </section>
 
@@ -252,11 +238,9 @@ const dynamicColor = (percentage) =&gt; {
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyProgress type="dashboard" :percentage="75" /&gt;
-&lt;XlyProgress type="dashboard" :percentage="85" status="success" /&gt;
-&lt;XlyProgress type="dashboard" :percentage="60" status="warning" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyProgress type="dashboard" :percentage="75" />
+<XlyProgress type="dashboard" :percentage="85" status="success" />
+<XlyProgress type="dashboard" :percentage="60" status="warning" />`' />
       </div>
     </section>
 
@@ -281,24 +265,23 @@ const dynamicColor = (percentage) =&gt; {
             </button>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;template&gt;
-  &lt;XlyProgress :percentage="uploadProgress" status="active" text="上传中..." /&gt;
-  &lt;button @click="startUpload"&gt;开始上传&lt;/button&gt;
-&lt;/template&gt;
+        <DocCode :code="`<template>
+  <XlyProgress :percentage=&quot;uploadProgress&quot; status=&quot;active&quot; text=&quot;上传中...&quot; />
+  <button @click=&quot;startUpload&quot;>开始上传</button>
+</template>
 
-&lt;script setup&gt;
+<script setup>
 import { ref } from 'vue'
 
 const uploadProgress = ref(0)
 const isUploading = ref(false)
 let timer: number | null = null
 
-const startUpload = () =&gt; {
+const startUpload = () => {
   isUploading.value = true
   uploadProgress.value = 0
-  timer = setInterval(() =&gt; {
-    if (uploadProgress.value &gt;= 100) {
+  timer = setInterval(() => {
+    if (uploadProgress.value >= 100) {
       clearInterval(timer!)
       isUploading.value = false
     } else {
@@ -306,8 +289,7 @@ const startUpload = () =&gt; {
     }
   }, 300)
 }
-&lt;/script&gt;</code></pre>
-        </div>
+</script>`" />
       </div>
     </section>
 

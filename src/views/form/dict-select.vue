@@ -19,9 +19,7 @@
           />
           <span class="preview-value">当前值：<code>{{ JSON.stringify(single1) }}</code></span>
         </div>
-        <div class="doc-code">
-          <pre><code>{{ code1 }}</code></pre>
-        </div>
+        <DocCode :code='`{{ code1 }}`' />
       </div>
     </div>
 
@@ -45,9 +43,7 @@
           />
           <span class="preview-value">当前值：<code>{{ JSON.stringify(multi1) }}</code></span>
         </div>
-        <div class="doc-code">
-          <pre><code>{{ code2 }}</code></pre>
-        </div>
+        <DocCode :code='`{{ code2 }}`' />
       </div>
     </div>
 
@@ -71,9 +67,7 @@
           />
           <span class="preview-value">当前值：<code>{{ JSON.stringify(multi2) }}</code></span>
         </div>
-        <div class="doc-code">
-          <pre><code>{{ code3 }}</code></pre>
-        </div>
+        <DocCode :code='`{{ code3 }}`' />
       </div>
     </div>
 
@@ -95,9 +89,7 @@
           />
           <span class="preview-value">当前值：<code>{{ JSON.stringify(custom1) }}</code></span>
         </div>
-        <div class="doc-code">
-          <pre><code>{{ code4 }}</code></pre>
-        </div>
+        <DocCode :code='`{{ code4 }}`' />
       </div>
     </div>
 
@@ -119,9 +111,7 @@
           />
           <span class="preview-value">当前值：<code>{{ JSON.stringify(custom2) }}</code></span>
         </div>
-        <div class="doc-code">
-          <pre><code>{{ code4_1 }}</code></pre>
-        </div>
+        <DocCode :code='`{{ code4_1 }}`' />
       </div>
     </div>
 
@@ -144,9 +134,7 @@
             change 回调：<code>{{ JSON.stringify(eventResult) }}</code>
           </span>
         </div>
-        <div class="doc-code">
-          <pre><code>{{ code6 }}</code></pre>
-        </div>
+        <DocCode :code='`{{ code6 }}`' />
       </div>
     </div>
 
@@ -160,9 +148,7 @@
           <xly-dict-select v-model="size3" dict-type="gender" size="small" placeholder="small" style="width: 160px" />
           <xly-dict-select v-model="size4" dict-type="gender" disabled placeholder="disabled" style="width: 160px" />
         </div>
-        <div class="doc-code">
-          <pre><code>{{ code7 }}</code></pre>
-        </div>
+        <DocCode :code='`{{ code7 }}`' />
       </div>
     </div>
 
@@ -174,9 +160,7 @@
         在实际项目中，只需替换此函数即可对接后端字典接口。
       </p>
       <div class="doc-preview">
-        <div class="doc-code" style="border-top: none; border-radius: 12px;">
-          <pre><code>{{ devGuideCode }}</code></pre>
-        </div>
+        <DocCode :code='`{{ devGuideCode }}`' language="html" />
       </div>
     </div>
 

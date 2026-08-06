@@ -29,16 +29,14 @@
             </button>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyLoading v-model="loading" type="spinner" text="加载中..." /&gt;
+        <DocCode :code='`<XlyLoading v-model="loading" type="spinner" text="加载中..." />
 
-&lt;!-- 不同动画类型 --&gt;
-&lt;XlyLoading type="spinner" /&gt;  &lt;!-- 旋转点 --&gt;
-&lt;XlyLoading type="wave" /&gt;     &lt;!-- 波浪 --&gt;
-&lt;XlyLoading type="pulse" /&gt;    &lt;!-- 脉冲 --&gt;
-&lt;XlyLoading type="ring" /&gt;     &lt;!-- 环形 --&gt;
-&lt;XlyLoading type="default" /&gt;  &lt;!-- 双点 --&gt;</code></pre>
-        </div>
+<!-- 不同动画类型 -->
+<XlyLoading type="spinner" />  <!-- 旋转点 -->
+<XlyLoading type="wave" />     <!-- 波浪 -->
+<XlyLoading type="pulse" />    <!-- 脉冲 -->
+<XlyLoading type="ring" />     <!-- 环形 -->
+<XlyLoading type="default" />  <!-- 双点 -->`' />
       </div>
     </section>
 
@@ -60,11 +58,9 @@
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyLoading type="spinner" text="正在加载..." /&gt;
-&lt;XlyLoading type="wave" text="数据提交中" /&gt;
-&lt;XlyLoading type="pulse" text="请稍候" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyLoading type="spinner" text="正在加载..." />
+<XlyLoading type="wave" text="数据提交中" />
+<XlyLoading type="pulse" text="请稍候" />`' />
       </div>
     </section>
 
@@ -93,12 +89,10 @@
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyLoading size="small" /&gt;     &lt;!-- 24px --&gt;
-&lt;XlyLoading size="medium" /&gt;    &lt;!-- 32px --&gt;
-&lt;XlyLoading size="large" /&gt;     &lt;!-- 48px --&gt;
-&lt;XlyLoading :size="64" /&gt;       &lt;!-- 自定义 64px --&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyLoading size="small" />     <!-- 24px -->
+<XlyLoading size="medium" />    <!-- 32px -->
+<XlyLoading size="large" />     <!-- 48px -->
+<XlyLoading :size="64" />       <!-- 自定义 64px -->`' />
       </div>
     </section>
 
@@ -123,11 +117,9 @@
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyLoading color="#4f6ef7" text-color="#4f6ef7" text="蓝色" /&gt;
-&lt;XlyLoading color="#10b981" text-color="#10b981" text="绿色" /&gt;
-&lt;XlyLoading color="#f59e0b" text-color="#f59e0b" text="橙色" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyLoading color="#4f6ef7" text-color="#4f6ef7" text="蓝色" />
+<XlyLoading color="#10b981" text-color="#10b981" text="绿色" />
+<XlyLoading color="#f59e0b" text-color="#f59e0b" text="橙色" />`' />
       </div>
     </section>
 
@@ -145,12 +137,10 @@
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyLoading type="ring" :progress="75" text="上传中..." /&gt;
+        <DocCode :code='`<XlyLoading type="ring" :progress="75" text="上传中..." />
 
-&lt;!-- 动态进度 --&gt;
-&lt;XlyLoading type="ring" :progress="uploadProgress" /&gt;</code></pre>
-        </div>
+<!-- 动态进度 -->
+<XlyLoading type="ring" :progress="uploadProgress" />`' />
       </div>
     </section>
 
@@ -164,12 +154,10 @@
             显示全屏加载 (2秒后关闭)
           </button>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyLoading v-model="fullscreenLoading" fullscreen text="页面加载中..." /&gt;
+        <DocCode :code='`<XlyLoading v-model="fullscreenLoading" fullscreen text="页面加载中..." />
 
-&lt;!-- 锁定滚动 --&gt;
-&lt;XlyLoading v-model="loading" fullscreen lock text="处理中..." /&gt;</code></pre>
-        </div>
+<!-- 锁定滚动 -->
+<XlyLoading v-model="loading" fullscreen lock text="处理中..." />`' />
       </div>
     </section>
 
@@ -199,16 +187,14 @@
             </button>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;div class="data-container" style="position: relative;"&gt;
-  &lt;!-- 数据内容 --&gt;
-  &lt;XlyLoading 
+        <DocCode :code='`<div class="data-container" style="position: relative;">
+  <!-- 数据内容 -->
+  <XlyLoading 
     v-model="loading" 
     containerFullscreen 
     text="数据加载中..."
-  /&gt;
-&lt;/div&gt;</code></pre>
-        </div>
+  />
+</div>`' />
       </div>
     </section>
 
@@ -250,8 +236,7 @@
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>import { xly } from '@/utils/xly'
+        <DocCode :code="`import { xly } from '@/utils/xly'
 
 // 全屏加载
 const loading = xly.$loading.open({ text: '加载中...' })
@@ -270,8 +255,7 @@ xly.$loading.container('.my-container')
 
 // 动态更新
 loading.setProgress(50)
-loading.setText('处理中...')</code></pre>
-        </div>
+loading.setText('处理中...')`" />
       </div>
     </section>
 

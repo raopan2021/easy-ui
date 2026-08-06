@@ -26,11 +26,9 @@
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyIcon name="el:Search" :size="24" /&gt;
-&lt;XlyIcon name="el:Edit" :size="24" /&gt;
-&lt;XlyIcon name="el:arrow-down" :size="24" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyIcon name="el:Search" :size="24" />
+<XlyIcon name="el:Edit" :size="24" />
+<XlyIcon name="el:arrow-down" :size="24" />`' />
       </div>
     </section>
 
@@ -53,13 +51,11 @@
             暂无自定义 SVG 图标，请将 .svg 文件放入 src/assets/icon/svg/ 目录
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- assets/icon/svg/check-circle.svg --&gt;
-&lt;XlyIcon name="svg:check-circle" :size="24" /&gt;
+        <DocCode :code='`<!-- assets/icon/svg/check-circle.svg -->
+<XlyIcon name="svg:check-circle" :size="24" />
 
-&lt;!-- assets/icon/svg/dashboard.svg --&gt;
-&lt;XlyIcon name="svg:dashboard" :size="32" color="#4f6ef7" /&gt;</code></pre>
-        </div>
+<!-- assets/icon/svg/dashboard.svg -->
+<XlyIcon name="svg:dashboard" :size="32" color="#4f6ef7" />`' />
       </div>
     </section>
 
@@ -94,10 +90,8 @@
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyIcon name="el:Setting" :size="24" color="#4f6ef7" /&gt;
-&lt;XlyIcon name="svg:dashboard" :size="36" color="#34c759" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyIcon name="el:Setting" :size="24" color="#4f6ef7" />
+<XlyIcon name="svg:dashboard" :size="36" color="#34c759" />`' />
       </div>
     </section>
 
@@ -130,21 +124,19 @@
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 简单方式：直接使用 @/ 路径（推荐） --&gt;
-&lt;XlyIcon name="@/assets/icon/img/img.png" :size="32" /&gt;
+        <DocCode :code="`<!-- 简单方式：直接使用 @/ 路径（推荐） -->
+<XlyIcon name=&quot;@/assets/icon/img/img.png&quot; :size=&quot;32&quot; />
 
-&lt;!-- 网络图片 --&gt;
-&lt;XlyIcon name="https://example.com/icon.png" :size="32" /&gt;
+<!-- 网络图片 -->
+<XlyIcon name=&quot;https://example.com/icon.png&quot; :size=&quot;32&quot; />
 
-&lt;!-- import 方式（如果你需要动态处理图片） --&gt;
-&lt;script setup&gt;
+<!-- import 方式（如果你需要动态处理图片） -->
+<script setup>
 import imgPng from '@/assets/icon/img/img.png?url'
-&lt;/script&gt;
-&lt;template&gt;
-  &lt;XlyIcon :name="imgPng" :size="32" /&gt;
-&lt;/template&gt;</code></pre>
-        </div>
+</script>
+<template>
+  <XlyIcon :name=&quot;imgPng&quot; :size=&quot;32&quot; />
+</template>`" />
       </div>
     </section>
 
@@ -169,15 +161,13 @@ import imgPng from '@/assets/icon/img/img.png?url'
             <XlyIcon name="el:Share" :size="24" clickable @click="handleIconClick('Share')" />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyIcon
-  name="el:Delete"
-  :size="24"
-  color="#f56c6c"
+        <DocCode :code="`<XlyIcon
+  name=&quot;el:Delete&quot;
+  :size=&quot;24&quot;
+  color=&quot;#f56c6c&quot;
   clickable
-  @click="handleIconClick('Delete')"
-/&gt;</code></pre>
-        </div>
+  @click=&quot;handleIconClick('Delete')&quot;
+/>`" />
       </div>
     </section>
 

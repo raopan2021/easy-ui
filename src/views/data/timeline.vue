@@ -35,22 +35,20 @@
             </XlyTimelineItem>
           </XlyTimeline>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyTimeline&gt;
-  &lt;XlyTimelineItem status="finish" timestamp="2024-01-15"&gt;
-    &lt;h4&gt;项目启动&lt;/h4&gt;
-    &lt;p&gt;完成项目立项和团队组建&lt;/p&gt;
-  &lt;/XlyTimelineItem&gt;
-  &lt;XlyTimelineItem status="process" timestamp="2024-02-15"&gt;
-    &lt;h4&gt;开发阶段&lt;/h4&gt;
-    &lt;p&gt;正在进行核心功能开发&lt;/p&gt;
-  &lt;/XlyTimelineItem&gt;
-  &lt;XlyTimelineItem status="wait" timestamp="2024-03-01"&gt;
-    &lt;h4&gt;测试阶段&lt;/h4&gt;
-    &lt;p&gt;计划进行系统测试&lt;/p&gt;
-  &lt;/XlyTimelineItem&gt;
-&lt;/XlyTimeline&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyTimeline>
+  <XlyTimelineItem status="finish" timestamp="2024-01-15">
+    <h4>项目启动</h4>
+    <p>完成项目立项和团队组建</p>
+  </XlyTimelineItem>
+  <XlyTimelineItem status="process" timestamp="2024-02-15">
+    <h4>开发阶段</h4>
+    <p>正在进行核心功能开发</p>
+  </XlyTimelineItem>
+  <XlyTimelineItem status="wait" timestamp="2024-03-01">
+    <h4>测试阶段</h4>
+    <p>计划进行系统测试</p>
+  </XlyTimelineItem>
+</XlyTimeline>`' />
       </div>
     </section>
 
@@ -82,12 +80,10 @@
             </XlyTimelineItem>
           </XlyTimeline>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyTimelineItem status="finish"&gt;...&lt;/XlyTimelineItem&gt;
-&lt;XlyTimelineItem status="process"&gt;...&lt;/XlyTimelineItem&gt;
-&lt;XlyTimelineItem status="wait"&gt;...&lt;/XlyTimelineItem&gt;
-&lt;XlyTimelineItem status="error"&gt;...&lt;/XlyTimelineItem&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyTimelineItem status="finish">...</XlyTimelineItem>
+<XlyTimelineItem status="process">...</XlyTimelineItem>
+<XlyTimelineItem status="wait">...</XlyTimelineItem>
+<XlyTimelineItem status="error">...</XlyTimelineItem>`' />
       </div>
     </section>
 
@@ -118,19 +114,17 @@
             </XlyTimelineItem>
           </XlyTimeline>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyTimelineItem status="finish" icon="el:Check"&gt;
-  &lt;h4&gt;自定义图标&lt;/h4&gt;
-&lt;/XlyTimelineItem&gt;
+        <DocCode :code='`<XlyTimelineItem status="finish" icon="el:Check">
+  <h4>自定义图标</h4>
+</XlyTimelineItem>
 
-&lt;XlyTimelineItem status="process" icon="el:Loading"&gt;
-  &lt;h4&gt;加载中&lt;/h4&gt;
-&lt;/XlyTimelineItem&gt;
+<XlyTimelineItem status="process" icon="el:Loading">
+  <h4>加载中</h4>
+</XlyTimelineItem>
 
-&lt;XlyTimelineItem status="wait" icon="el:Clock"&gt;
-  &lt;h4&gt;待处理&lt;/h4&gt;
-&lt;/XlyTimelineItem&gt;</code></pre>
-        </div>
+<XlyTimelineItem status="wait" icon="el:Clock">
+  <h4>待处理</h4>
+</XlyTimelineItem>`' />
       </div>
     </section>
 
@@ -163,20 +157,18 @@
             </XlyTimelineItem>
           </XlyTimeline>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 使用 timestamp 属性 --&gt;
-&lt;XlyTimelineItem timestamp="2024-01-15 09:30"&gt;
+        <DocCode :code='`<!-- 使用 timestamp 属性 -->
+<XlyTimelineItem timestamp="2024-01-15 09:30">
   ...
-&lt;/XlyTimelineItem&gt;
+</XlyTimelineItem>
 
-&lt;!-- 使用 #timestamp 插槽 --&gt;
-&lt;XlyTimelineItem&gt;
-  &lt;template #timestamp&gt;
-    &lt;span&gt;2024-02-01 14:30&lt;/span&gt;
-  &lt;/template&gt;
+<!-- 使用 #timestamp 插槽 -->
+<XlyTimelineItem>
+  <template #timestamp>
+    <span>2024-02-01 14:30</span>
+  </template>
   ...
-&lt;/XlyTimelineItem&gt;</code></pre>
-        </div>
+</XlyTimelineItem>`' />
       </div>
     </section>
 
@@ -196,15 +188,13 @@
             <XlyTimelineItem status="wait">确认收货</XlyTimelineItem>
           </XlyTimeline>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyTimeline&gt;
-  &lt;XlyTimelineItem status="finish"&gt;创建订单 #20240301&lt;/XlyTimelineItem&gt;
-  &lt;XlyTimelineItem status="finish"&gt;支付成功&lt;/XlyTimelineItem&gt;
-  &lt;XlyTimelineItem status="process"&gt;商品打包中&lt;/XlyTimelineItem&gt;
-  &lt;XlyTimelineItem status="wait"&gt;等待发货&lt;/XlyTimelineItem&gt;
-  &lt;XlyTimelineItem status="wait"&gt;确认收货&lt;/XlyTimelineItem&gt;
-&lt;/XlyTimeline&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyTimeline>
+  <XlyTimelineItem status="finish">创建订单 #20240301</XlyTimelineItem>
+  <XlyTimelineItem status="finish">支付成功</XlyTimelineItem>
+  <XlyTimelineItem status="process">商品打包中</XlyTimelineItem>
+  <XlyTimelineItem status="wait">等待发货</XlyTimelineItem>
+  <XlyTimelineItem status="wait">确认收货</XlyTimelineItem>
+</XlyTimeline>`' />
       </div>
     </section>
 

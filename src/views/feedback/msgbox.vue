@@ -21,15 +21,13 @@
           <XlyButton @click="handleAlert('warning')">警告提示</XlyButton>
           <XlyButton @click="handleAlert('danger')">错误提示</XlyButton>
         </div>
-        <div class="doc-code">
-          <pre><code>import { xly } from '@/utils/xly'
+        <DocCode :code="`import { xly } from '@/utils/xly'
 
 // 基础用法
 await xly.$msgbox.alert('您的账户已成功创建', '注册成功', { type: 'success' })
 
-// 或者简写，title 可省略（默认"提示"）
-await xly.$msgbox.alert('此操作不可撤销，请谨慎操作', '警告', { type: 'warning' })</code></pre>
-        </div>
+// 或者简写，title 可省略（默认&quot;提示&quot;）
+await xly.$msgbox.alert('此操作不可撤销，请谨慎操作', '警告', { type: 'warning' })`" />
       </div>
     </section>
 
@@ -45,8 +43,7 @@ await xly.$msgbox.alert('此操作不可撤销，请谨慎操作', '警告', { t
           <XlyButton @click="handleConfirmDanger">危险操作</XlyButton>
           <XlyButton @click="handleConfirmCancelable">可关闭遮罩</XlyButton>
         </div>
-        <div class="doc-code">
-          <pre><code>// 基础 Confirm
+        <DocCode :code="`// 基础 Confirm
 xly.$msgbox.confirm('确定要删除该记录吗？此操作不可撤销。', '删除确认', {
   type: 'warning',
 })
@@ -68,8 +65,7 @@ xly.$msgbox.confirm('即将清空所有数据，此操作不可恢复！', '危�
 xly.$msgbox.confirm('是否保存当前修改？', '保存提示', {
   type: 'info',
   closeOnClickModal: true,
-})</code></pre>
-        </div>
+})`" />
       </div>
     </section>
 
@@ -86,19 +82,18 @@ xly.$msgbox.confirm('是否保存当前修改？', '保存提示', {
           <XlyButton @click="handlePromptPassword">密码输入</XlyButton>
           <XlyButton @click="handlePromptTextarea">文本域输入</XlyButton>
         </div>
-        <div class="doc-code">
-          <pre><code>// 基础 Prompt
+        <DocCode :code="`// 基础 Prompt
 xly.$msgbox.prompt('请输入项目名称', '新建项目', {
   input: { placeholder: '请输入 2-20 个字符' },
 }).then(({ value }) => {
-  xly.$msg.success(`创建成功：${value}`)
+  xly.$msg.success(\`创建成功：\${value}\`)
 })
 
 // 带正则校验
 xly.$msgbox.prompt('请输入手机号', '绑定手机', {
   input: {
     placeholder: '请输入 11 位手机号',
-    pattern: '^1[3-9]\\d{9}$',
+    pattern: '^1[3-9]\\\\d{9}$',
     patternMessage: '手机号格式不正确',
   },
 })
@@ -111,8 +106,7 @@ xly.$msgbox.prompt('请输入新密码', '修改密码', {
 // 文本域
 xly.$msgbox.prompt('请输入备注', '添加备注', {
   input: { inputType: 'textarea', placeholder: '请输入备注内容...' },
-})</code></pre>
-        </div>
+})`" />
       </div>
     </section>
 
@@ -126,22 +120,20 @@ xly.$msgbox.prompt('请输入备注', '添加备注', {
         <div class="doc-preview__body">
           <XlyButton @click="handleAsyncAwait">async/await 示例</XlyButton>
         </div>
-        <div class="doc-code">
-          <pre><code>async function handleDelete() {
+        <DocCode :code="`async function handleDelete() {
   try {
     await xly.$msgbox.confirm('确定删除该用户吗？', '删除用户', {
       type: 'warning',
       confirmButtonDanger: true,
     })
-    // 用户点击"确定"
+    // 用户点击&quot;确定&quot;
     await deleteUser(userId)
     xly.$msg.success('删除成功')
   } catch {
-    // 用户点击"取消"或关闭
+    // 用户点击&quot;取消&quot;或关闭
     xly.$msg.info('已取消操作')
   }
-}</code></pre>
-        </div>
+}`" />
       </div>
     </section>
 
@@ -156,8 +148,7 @@ xly.$msgbox.prompt('请输入备注', '添加备注', {
           <XlyButton @click="handleCustomText">自定义按钮文字</XlyButton>
           <XlyButton @click="handleNoClose">隐藏关闭图标</XlyButton>
         </div>
-        <div class="doc-code">
-          <pre><code>xly.$msgbox.confirm('检测到未保存的内容，是否离开当前页面？', '离开提示', {
+        <DocCode :code="`xly.$msgbox.confirm('检测到未保存的内容，是否离开当前页面？', '离开提示', {
   confirmButtonText: '离开',
   cancelButtonText: '留下',
   type: 'warning',
@@ -167,8 +158,7 @@ xly.$msgbox.prompt('请输入备注', '添加备注', {
 xly.$msgbox.confirm('请确认以下操作', '二次确认', {
   showClose: false,
   closeOnClickModal: false,
-})</code></pre>
-        </div>
+})`" />
       </div>
     </section>
 
@@ -183,8 +173,7 @@ xly.$msgbox.confirm('请确认以下操作', '二次确认', {
           <XlyButton @click="handleOpen">通用弹框</XlyButton>
           <XlyButton @click="handleHtmlContent">HTML 内容</XlyButton>
         </div>
-        <div class="doc-code">
-          <pre><code>// 通用调用
+        <DocCode :code="`// 通用调用
 xly.$msgbox.open({
   title: '自定义弹框',
   message: '这是一条自定义内容',
@@ -197,11 +186,10 @@ xly.$msgbox.open({
 // HTML 内容（确保内容安全可信）
 xly.$msgbox.open({
   title: '公告',
-  message: '&lt;strong&gt;重要通知：&lt;/strong&gt;系统将于今晚 &lt;span style="color:#cf222e"&gt;22:00&lt;/span&gt; 进行维护。',
+  message: '<strong>重要通知：</strong>系统将于今晚 <span style=&quot;color:#cf222e&quot;>22:00</span> 进行维护。',
   dangerouslyUseHTMLString: true,
   type: 'warning',
-})</code></pre>
-        </div>
+})`" />
       </div>
     </section>
 
@@ -215,8 +203,7 @@ xly.$msgbox.open({
           <XlyButton type="primary" @click="handleBizRename">重命名</XlyButton>
           <XlyButton @click="handleBizLeave">离开页面</XlyButton>
         </div>
-        <div class="doc-code">
-          <pre><code>// 删除记录
+        <DocCode :code="`// 删除记录
 async function handleDelete(id: number) {
   await xly.$msgbox.confirm('确定删除该记录？删除后不可恢复。', '删除确认', {
     type: 'danger',
@@ -241,8 +228,7 @@ router.beforeEach(async (to, from, next) => {
     })
   }
   next()
-})</code></pre>
-        </div>
+})`" />
       </div>
     </section>
 

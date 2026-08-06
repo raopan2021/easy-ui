@@ -20,13 +20,11 @@
             <XlyDescriptionsItem label="邮箱">zhang@company.com</XlyDescriptionsItem>
           </XlyDescriptions>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyDescriptions title="用户信息"&gt;
-  &lt;XlyDescriptionsItem label="姓名"&gt;张明&lt;/XlyDescriptionsItem&gt;
-  &lt;XlyDescriptionsItem label="工号"&gt;EMP-2026001&lt;/XlyDescriptionsItem&gt;
-  &lt;XlyDescriptionsItem label="部门"&gt;技术研发部&lt;/XlyDescriptionsItem&gt;
-&lt;/XlyDescriptions&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyDescriptions title="用户信息">
+  <XlyDescriptionsItem label="姓名">张明</XlyDescriptionsItem>
+  <XlyDescriptionsItem label="工号">EMP-2026001</XlyDescriptionsItem>
+  <XlyDescriptionsItem label="部门">技术研发部</XlyDescriptionsItem>
+</XlyDescriptions>`' />
       </div>
     </section>
 
@@ -61,18 +59,16 @@
             </XlyDescriptions>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 上下布局 --&gt;
-&lt;XlyDescriptions layout="vertical"&gt;
-  &lt;XlyDescriptionsItem label="项目名称"&gt;EaseUI&lt;/XlyDescriptionsItem&gt;
+        <DocCode :code='`<!-- 上下布局 -->
+<XlyDescriptions layout="vertical">
+  <XlyDescriptionsItem label="项目名称">EaseUI</XlyDescriptionsItem>
   ...
-&lt;/XlyDescriptions&gt;
+</XlyDescriptions>
 
-&lt;!-- 上下布局 + 边框 --&gt;
-&lt;XlyDescriptions layout="vertical" bordered&gt;
+<!-- 上下布局 + 边框 -->
+<XlyDescriptions layout="vertical" bordered>
   ...
-&lt;/XlyDescriptions&gt;</code></pre>
-        </div>
+</XlyDescriptions>`' />
       </div>
     </section>
 
@@ -92,15 +88,13 @@
             <XlyDescriptionsItem label="收货地址" :span="3">广东省深圳市南山区科技园南区 A 栋 8 楼 801 室</XlyDescriptionsItem>
           </XlyDescriptions>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyDescriptions title="订单详情" bordered&gt;
-  &lt;XlyDescriptionsItem label="订单编号"&gt;ORD-001&lt;/XlyDescriptionsItem&gt;
-  &lt;!-- span 属性实现跨列 --&gt;
-  &lt;XlyDescriptionsItem label="收货地址" :span="3"&gt;
+        <DocCode :code='`<XlyDescriptions title="订单详情" bordered>
+  <XlyDescriptionsItem label="订单编号">ORD-001</XlyDescriptionsItem>
+  <!-- span 属性实现跨列 -->
+  <XlyDescriptionsItem label="收货地址" :span="3">
     广东省深圳市...
-  &lt;/XlyDescriptionsItem&gt;
-&lt;/XlyDescriptions&gt;</code></pre>
-        </div>
+  </XlyDescriptionsItem>
+</XlyDescriptions>`' />
       </div>
     </section>
 
@@ -133,10 +127,8 @@
             </XlyDescriptions>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyDescriptions :column="2" bordered&gt;...&lt;/XlyDescriptions&gt;
-&lt;XlyDescriptions :column="4" bordered&gt;...&lt;/XlyDescriptions&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyDescriptions :column="2" bordered>...</XlyDescriptions>
+<XlyDescriptions :column="4" bordered>...</XlyDescriptions>`' />
       </div>
     </section>
 
@@ -176,14 +168,12 @@
             </XlyDescriptionsItem>
           </XlyDescriptions>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyDescriptionsItem label="在职状态"&gt;
-  &lt;span class="status-badge"&gt;在职&lt;/span&gt;
-&lt;/XlyDescriptionsItem&gt;
-&lt;XlyDescriptionsItem label="技能标签"&gt;
-  &lt;span v-for="s in skills" :key="s"&gt;{{ s }}&lt;/span&gt;
-&lt;/XlyDescriptionsItem&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyDescriptionsItem label="在职状态">
+  <span class="status-badge">在职</span>
+</XlyDescriptionsItem>
+<XlyDescriptionsItem label="技能标签">
+  <span v-for="s in skills" :key="s">{{ s }}</span>
+</XlyDescriptionsItem>`' />
       </div>
     </section>
 
@@ -219,14 +209,12 @@
             </XlyDescriptionsItem>
           </XlyDescriptions>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyDescriptions layout="vertical" :column="4" bordered&gt;
-  &lt;XlyDescriptionsItem label="今日新增用户"&gt;
-    &lt;div class="metric-value"&gt;1,280&lt;/div&gt;
-  &lt;/XlyDescriptionsItem&gt;
+        <DocCode :code='`<XlyDescriptions layout="vertical" :column="4" bordered>
+  <XlyDescriptionsItem label="今日新增用户">
+    <div class="metric-value">1,280</div>
+  </XlyDescriptionsItem>
   ...
-&lt;/XlyDescriptions&gt;</code></pre>
-        </div>
+</XlyDescriptions>`' />
       </div>
     </section>
 
@@ -261,17 +249,15 @@
             <XlyDescriptionsItem label="合同金额">¥ 1,280,000.00</XlyDescriptionsItem>
           </XlyDescriptions>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyDescriptions bordered&gt;
-  &lt;template #title&gt;
-    &lt;XlyIcon name="el:Document" /&gt; 合同信息
-  &lt;/template&gt;
-  &lt;template #extra&gt;
-    &lt;XlyButton size="small" type="primary"&gt;编辑&lt;/XlyButton&gt;
-  &lt;/template&gt;
+        <DocCode :code='`<XlyDescriptions bordered>
+  <template #title>
+    <XlyIcon name="el:Document" /> 合同信息
+  </template>
+  <template #extra>
+    <XlyButton size="small" type="primary">编辑</XlyButton>
+  </template>
   ...
-&lt;/XlyDescriptions&gt;</code></pre>
-        </div>
+</XlyDescriptions>`' />
       </div>
     </section>
 
@@ -306,11 +292,9 @@
             </XlyDescriptions>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyDescriptions size="small" bordered&gt;...&lt;/XlyDescriptions&gt;
-&lt;XlyDescriptions size="default" bordered&gt;...&lt;/XlyDescriptions&gt;
-&lt;XlyDescriptions size="large" bordered&gt;...&lt;/XlyDescriptions&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyDescriptions size="small" bordered>...</XlyDescriptions>
+<XlyDescriptions size="default" bordered>...</XlyDescriptions>
+<XlyDescriptions size="large" bordered>...</XlyDescriptions>`' />
       </div>
     </section>
 

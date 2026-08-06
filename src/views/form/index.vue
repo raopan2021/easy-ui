@@ -43,22 +43,20 @@
             </XlyForm>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyForm ref="formRef" v-model="form" :rules="rules" :label-width="100"&gt;
-  &lt;XlyFormItem label="姓名" prop="name"&gt;
-    &lt;XlyInput v-model="form.name" placeholder="请输入姓名" /&gt;
-  &lt;/XlyFormItem&gt;
-  &lt;XlyFormItem&gt;
-    &lt;XlyButton @click="submit"&gt;提交&lt;/XlyButton&gt;
-  &lt;/XlyFormItem&gt;
-&lt;/XlyForm&gt;
+        <DocCode :code="`<XlyForm ref=&quot;formRef&quot; v-model=&quot;form&quot; :rules=&quot;rules&quot; :label-width=&quot;100&quot;>
+  <XlyFormItem label=&quot;姓名&quot; prop=&quot;name&quot;>
+    <XlyInput v-model=&quot;form.name&quot; placeholder=&quot;请输入姓名&quot; />
+  </XlyFormItem>
+  <XlyFormItem>
+    <XlyButton @click=&quot;submit&quot;>提交</XlyButton>
+  </XlyFormItem>
+</XlyForm>
 
 const rules = {
   name: [required('请输入姓名'), minLength(2)],
   email: [required('请输入邮箱'), email()],
 }
-const valid = await formRef.value.validate()</code></pre>
-        </div>
+const valid = await formRef.value.validate()`" />
       </div>
     </section>
 
@@ -90,12 +88,10 @@ const valid = await formRef.value.validate()</code></pre>
             </XlyForm>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyDatePicker v-model="date" placeholder="选择日期" /&gt;
-&lt;XlyDatePicker v-model="month" type="month" placeholder="选择月份" /&gt;
-&lt;XlyTimePicker v-model="time" placeholder="选择时间" /&gt;
-&lt;XlyTimePicker v-model="time" show-seconds /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyDatePicker v-model="date" placeholder="选择日期" />
+<XlyDatePicker v-model="month" type="month" placeholder="选择月份" />
+<XlyTimePicker v-model="time" placeholder="选择时间" />
+<XlyTimePicker v-model="time" show-seconds />`' />
       </div>
     </section>
 
@@ -134,13 +130,11 @@ const valid = await formRef.value.validate()</code></pre>
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyRate v-model="value" /&gt;
-&lt;XlyRate v-model="value" allow-half /&gt;
-&lt;XlyRate v-model="value" show-text :texts="['很差','一般','不错']" /&gt;
-&lt;XlyRate v-model="value" color="#f56c6c" /&gt;
-&lt;XlyRate v-model="value" disabled /&gt;</code></pre>
-        </div>
+        <DocCode :code="`<XlyRate v-model=&quot;value&quot; />
+<XlyRate v-model=&quot;value&quot; allow-half />
+<XlyRate v-model=&quot;value&quot; show-text :texts=&quot;['很差','一般','不错']&quot; />
+<XlyRate v-model=&quot;value&quot; color=&quot;#f56c6c&quot; />
+<XlyRate v-model=&quot;value&quot; disabled />`" />
       </div>
     </section>
 
@@ -178,16 +172,14 @@ const valid = await formRef.value.validate()</code></pre>
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyInput v-model="value" placeholder="请输入" clearable /&gt;
-&lt;XlyInput v-model="value" type="password" /&gt;
-&lt;XlyInput v-model="value" prefix-icon="el:Search" /&gt;
-&lt;XlyInput v-model="value" :maxlength="20" show-word-limit /&gt;
-&lt;XlyInput v-model="value"&gt;
-  &lt;template #prepend&gt;https://&lt;/template&gt;
-  &lt;template #append&gt;.com&lt;/template&gt;
-&lt;/XlyInput&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyInput v-model="value" placeholder="请输入" clearable />
+<XlyInput v-model="value" type="password" />
+<XlyInput v-model="value" prefix-icon="el:Search" />
+<XlyInput v-model="value" :maxlength="20" show-word-limit />
+<XlyInput v-model="value">
+  <template #prepend>https://</template>
+  <template #append>.com</template>
+</XlyInput>`' />
       </div>
     </section>
 
@@ -214,16 +206,14 @@ const valid = await formRef.value.validate()</code></pre>
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlySelect v-model="value" :options="options" clearable /&gt;
-&lt;XlySelect v-model="value" :options="options" filterable /&gt;
-&lt;XlySelect v-model="value" :options="options" multiple /&gt;
+        <DocCode :code="`<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; clearable />
+<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; filterable />
+<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; multiple />
 
 const options = [
   { label: '苹果', value: 'apple' },
   { label: '香蕉', value: 'banana' },
-]</code></pre>
-        </div>
+]`" />
       </div>
     </section>
 

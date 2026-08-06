@@ -18,8 +18,7 @@
           <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ JSON.stringify(val1) }}</span>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyCascader v-model="value" :options="options" placeholder="请选择地区" /&gt;
+      <DocCode :code="`<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; placeholder=&quot;请选择地区&quot; />
 
 const options = [
   {
@@ -32,8 +31,7 @@ const options = [
       ]},
     ],
   },
-]</code></pre>
-      </div>
+]`" />
     </section>
 
     <section class="doc-section">
@@ -46,9 +44,7 @@ const options = [
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyCascader v-model="value" :options="options" clearable /&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyCascader v-model="value" :options="options" clearable />`' />
     </section>
 
     <section class="doc-section">
@@ -69,9 +65,7 @@ const options = [
           <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ JSON.stringify(val3) }}</span>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyCascader v-model="value" :options="options" multiple :max-tag-count="2" /&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyCascader v-model="value" :options="options" multiple :max-tag-count="2" />`' />
     </section>
 
     <section class="doc-section">
@@ -121,23 +115,21 @@ const options = [
           <span style="font-size: 13px; color: var(--el-text-color-secondary);">当前值（分号分隔）：{{ val12 }}</span>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>// 1. 返回二维数组（默认）
-&lt;XlyCascader v-model="value" :options="options" multiple value-type="array" /&gt;
+      <DocCode :code='`// 1. 返回二维数组（默认）
+<XlyCascader v-model="value" :options="options" multiple value-type="array" />
 // 输出: [["zhejiang", "hangzhou", "xihu"], ["jiangsu", "nanjing", "xuanwu"]]
 
 // 2. 返回字符串（逗号分隔多条路径，/ 分隔路径内节点）
-&lt;XlyCascader v-model="value" :options="options" multiple value-type="string" /&gt;
+<XlyCascader v-model="value" :options="options" multiple value-type="string" />
 // 输出: "zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu"
 
 // 3. 自定义分隔符
-&lt;XlyCascader v-model="value" :options="options" multiple value-type="string" separator=";" /&gt;
+<XlyCascader v-model="value" :options="options" multiple value-type="string" separator=";" />
 // 输出: "zhejiang/hangzhou/xihu;jiangsu/nanjing/xuanwu"
 
 // 4. 支持默认传入字符串值，组件会自动解析
 const value = ref("zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu")
-// 组件会自动将其解析为 [["zhejiang", "hangzhou", "xihu"], ["jiangsu", "nanjing", "xuanwu"]] 进行渲染</code></pre>
-      </div>
+// 组件会自动将其解析为 [["zhejiang", "hangzhou", "xihu"], ["jiangsu", "nanjing", "xuanwu"]] 进行渲染`' />
     </section>
 
     <section class="doc-section">
@@ -150,9 +142,7 @@ const value = ref("zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu")
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyCascader v-model="value" :options="options" filterable /&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyCascader v-model="value" :options="options" filterable />`' />
     </section>
 
     <section class="doc-section">
@@ -168,10 +158,8 @@ const value = ref("zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu")
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyCascader v-model="value" :options="options" /&gt;
-&lt;XlyCascader v-model="value" :options="options" disabled /&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyCascader v-model="value" :options="options" />
+<XlyCascader v-model="value" :options="options" disabled />`' />
     </section>
 
     <section class="doc-section">
@@ -190,11 +178,9 @@ const value = ref("zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu")
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyCascader v-model="value" :options="options" size="large" /&gt;
-&lt;XlyCascader v-model="value" :options="options" /&gt;
-&lt;XlyCascader v-model="value" :options="options" size="small" /&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyCascader v-model="value" :options="options" size="large" />
+<XlyCascader v-model="value" :options="options" />
+<XlyCascader v-model="value" :options="options" size="small" />`' />
     </section>
 
     <section class="doc-section">
@@ -208,9 +194,7 @@ const value = ref("zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu")
           <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ JSON.stringify(val7) }}</span>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyCascader v-model="value" :options="options" check-strictly clearable filterable multiple/&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyCascader v-model="value" :options="options" check-strictly clearable filterable multiple/>`' />
     </section>
 
     <section class="doc-section">
@@ -234,14 +218,13 @@ const value = ref("zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu")
           <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ JSON.stringify(val8) }}</span>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyCascader
-  v-model="value"
-  :options="options"
-  value-key="id"
-  label-key="name"
-  children-key="subList"
-/&gt;
+      <DocCode :code="`<XlyCascader
+  v-model=&quot;value&quot;
+  :options=&quot;options&quot;
+  value-key=&quot;id&quot;
+  label-key=&quot;name&quot;
+  children-key=&quot;subList&quot;
+/>
 
 const options = [
   {
@@ -254,8 +237,7 @@ const options = [
       ]},
     ],
   },
-]</code></pre>
-      </div>
+]`" />
     </section>
 
     <section class="doc-section">
@@ -280,8 +262,7 @@ const options = [
           <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ JSON.stringify(val9) }}</span>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyCascader
+      <DocCode :code='`<XlyCascader
   ref="cascaderRef"
   v-model="value"
   :options="[]"
@@ -289,16 +270,15 @@ const options = [
   remote
   :remote-method="handleRemoteSearch"
   clearable
-/&gt;
+/>
 
 // 在 remoteMethod 中发起远程请求并更新搜索结果
 function handleRemoteSearch(query: string) {
-  fetchOptions(query).then(options =&gt; {
+  fetchOptions(query).then(options => {
     // 将扁平化的远程结果转换为组件需要的格式
     cascaderRef.value?.remoteOptions.push(...)
   })
-}</code></pre>
-      </div>
+}`' />
     </section>
 
     <section class="doc-section">

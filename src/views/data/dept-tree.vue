@@ -19,9 +19,7 @@
         <div class="doc-preview__body">
           <XlyDeptTree :data="treeData" @select="handleSelect" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyDeptTree :data="treeData" @select="handleSelect" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyDeptTree :data="treeData" @select="handleSelect" />`' />
       </div>
     </section>
 
@@ -35,9 +33,7 @@
         <div class="doc-preview__body">
           <XlyDeptTree :data="flatData" @select="handleSelect" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyDeptTree :data="flatData" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyDeptTree :data="flatData" />`' />
       </div>
     </section>
 
@@ -62,11 +58,9 @@
             <XlyDeptTree :data="treeData" :default-expand-level="0" />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyDeptTree :data="treeData" :default-expand-level="1" /&gt;
-&lt;XlyDeptTree :data="treeData" :default-expand-level="2" /&gt;
-&lt;XlyDeptTree :data="treeData" :default-expand-level="0" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyDeptTree :data="treeData" :default-expand-level="1" />
+<XlyDeptTree :data="treeData" :default-expand-level="2" />
+<XlyDeptTree :data="treeData" :default-expand-level="0" />`' />
       </div>
     </section>
 
@@ -85,14 +79,12 @@
             @select="handleSelect2"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyDeptTree
+        <DocCode :code='`<XlyDeptTree
   :data="treeData"
   :selected-id="currentId"
   :default-expand-level="2"
   @select="handleSelect"
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 
@@ -110,12 +102,10 @@
             :default-expand-level="1"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyDeptTree
-  :data="customData"
-  :node-key="{ id: 'deptId', pid: 'parentId', label: 'deptName', children: 'subDepts' }"
-/&gt;</code></pre>
-        </div>
+        <DocCode :code="`<XlyDeptTree
+  :data=&quot;customData&quot;
+  :node-key=&quot;{ id: 'deptId', pid: 'parentId', label: 'deptName', children: 'subDepts' }&quot;
+/>`" />
       </div>
     </section>
 
@@ -129,9 +119,7 @@
         <div class="doc-preview__body">
           <XlyDeptTree :data="[]" empty-text="暂无部门" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyDeptTree :data="[]" empty-text="暂无部门" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyDeptTree :data="[]" empty-text="暂无部门" />`' />
       </div>
     </section>
 
@@ -152,17 +140,15 @@
             <span v-else class="demo-empty">点击节点查看</span>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>// 选择节点
+        <DocCode :code="`// 选择节点
 const handleSelect = (node) => {
   console.log('选中节点:', node)
 }
 
 // 展开/折叠
 const handleToggle = (node, expanded) => {
-  console.log(`${node.label} 节点${expanded ? '展开' : '折叠'}`)
-}</code></pre>
-        </div>
+  console.log(\`\${node.label} 节点\${expanded ? '展开' : '折叠'}\`)
+}`" />
       </div>
     </section>
 

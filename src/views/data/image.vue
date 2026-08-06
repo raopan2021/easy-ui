@@ -16,16 +16,14 @@
         <div class="doc-preview__body">
           <XlyImage :src="singleImage" alt="单张图片" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 单张图片 --&gt;
-&lt;XlyImage :src="singleImage" /&gt;
+        <DocCode :code="`<!-- 单张图片 -->
+<XlyImage :src=&quot;singleImage&quot; />
 
-&lt;!-- 数组形式 --&gt;
-&lt;XlyImage :src="['url1', 'url2', 'url3']" /&gt;
+<!-- 数组形式 -->
+<XlyImage :src=&quot;['url1', 'url2', 'url3']&quot; />
 
-&lt;!-- 逗号拼接字符串 --&gt;
-&lt;XlyImage src="url1, url2, url3" /&gt;</code></pre>
-        </div>
+<!-- 逗号拼接字符串 -->
+<XlyImage src=&quot;url1, url2, url3&quot; />`" />
       </div>
     </section>
 
@@ -54,12 +52,10 @@
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyImage :src="singleImage" /&gt;
-&lt;XlyImage :src="twoImages" /&gt;
-&lt;XlyImage :src="threeImages" /&gt;
-&lt;XlyImage :src="fourImages" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyImage :src="singleImage" />
+<XlyImage :src="twoImages" />
+<XlyImage :src="threeImages" />
+<XlyImage :src="fourImages" />`' />
       </div>
     </section>
 
@@ -82,10 +78,8 @@
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyImage :src="manyImages" :max="1" /&gt;
-&lt;XlyImage :src="manyImages" :max="2" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyImage :src="manyImages" :max="1" />
+<XlyImage :src="manyImages" :max="2" />`' />
       </div>
     </section>
 
@@ -114,12 +108,10 @@
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyImage :src="singleImage" fit="fill" /&gt;
-&lt;XlyImage :src="singleImage" fit="contain" /&gt;
-&lt;XlyImage :src="singleImage" fit="cover" /&gt;
-&lt;XlyImage :src="singleImage" fit="scale-down" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyImage :src="singleImage" fit="fill" />
+<XlyImage :src="singleImage" fit="contain" />
+<XlyImage :src="singleImage" fit="cover" />
+<XlyImage :src="singleImage" fit="scale-down" />`' />
       </div>
     </section>
 
@@ -151,18 +143,16 @@
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 只设置一个尺寸，宽高相同 --&gt;
-&lt;XlyImage :src="singleImage" :width="80" /&gt;  &lt;!-- 80x80 --&gt;
-&lt;XlyImage :src="singleImage" :width="60" /&gt;  &lt;!-- 60x60 --&gt;
+        <DocCode :code='`<!-- 只设置一个尺寸，宽高相同 -->
+<XlyImage :src="singleImage" :width="80" />  <!-- 80x80 -->
+<XlyImage :src="singleImage" :width="60" />  <!-- 60x60 -->
 
-&lt;!-- 同时设置宽高 --&gt;
-&lt;XlyImage :src="singleImage" :width="120" :height="80" /&gt;
+<!-- 同时设置宽高 -->
+<XlyImage :src="singleImage" :width="120" :height="80" />
 
-&lt;!-- 字符串形式 --&gt;
-&lt;XlyImage :src="singleImage" width="80px" /&gt;
-&lt;XlyImage :src="singleImage" width="100%" /&gt;</code></pre>
-        </div>
+<!-- 字符串形式 -->
+<XlyImage :src="singleImage" width="80px" />
+<XlyImage :src="singleImage" width="100%" />`' />
       </div>
     </section>
 
@@ -176,9 +166,7 @@
         <div class="doc-preview__body">
           <XlyImage :src="fourImages" :preview="true" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyImage :src="fourImages" :preview="true" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyImage :src="fourImages" :preview="true" />`' />
       </div>
     </section>
 
@@ -205,13 +193,11 @@
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 仅缩放 --&gt;
-&lt;XlyImage :src="singleImage" :preview="true" :preview-actions="['zoomIn', 'zoomOut']" /&gt;
+        <DocCode :code="`<!-- 仅缩放 -->
+<XlyImage :src=&quot;singleImage&quot; :preview=&quot;true&quot; :preview-actions=&quot;['zoomIn', 'zoomOut']&quot; />
 
-&lt;!-- 仅旋转 --&gt;
-&lt;XlyImage :src="singleImage" :preview="true" :preview-actions="['rotateLeft', 'rotateRight', 'reset']" /&gt;</code></pre>
-        </div>
+<!-- 仅旋转 -->
+<XlyImage :src=&quot;singleImage&quot; :preview=&quot;true&quot; :preview-actions=&quot;['rotateLeft', 'rotateRight', 'reset']&quot; />`" />
       </div>
     </section>
 

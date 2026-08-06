@@ -87,44 +87,42 @@
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyForm ref="formRef" :model="form" :rules="rules" label-width="90px"&gt;
-  &lt;XlyFormItem label="用户名" prop="username"&gt;
-    &lt;XlyInput v-model="form.username" placeholder="请输入用户名" /&gt;
-  &lt;/XlyFormItem&gt;
-  &lt;XlyFormItem label="性别"&gt;
-    &lt;XlyRadioGroup v-model="form.gender"&gt;
-      &lt;XlyRadio label="male"&gt;男&lt;/XlyRadio&gt;
-      &lt;XlyRadio label="female"&gt;女&lt;/XlyRadio&gt;
-    &lt;/XlyRadioGroup&gt;
-  &lt;/XlyFormItem&gt;
-  &lt;XlyFormItem label="城市"&gt;
-    &lt;XlySelect v-model="form.city" :options="cityOptions" clearable /&gt;
-  &lt;/XlyFormItem&gt;
-  &lt;XlyFormItem label="所属部门"&gt;
-    &lt;XlyCascader v-model="form.department" :options="deptOptions" /&gt;
-  &lt;/XlyFormItem&gt;
-  &lt;XlyFormItem label="出生日期"&gt;
-    &lt;XlyDatePicker v-model="form.birthday" /&gt;
-  &lt;/XlyFormItem&gt;
-  &lt;XlyFormItem label="面试时间"&gt;
-    &lt;XlyTimePicker v-model="form.interviewTime" /&gt;
-  &lt;/XlyFormItem&gt;
-  &lt;XlyFormItem label="入职日期"&gt;
-    &lt;XlyDateTimePicker v-model="form.onboardTime" show-seconds /&gt;
-  &lt;/XlyFormItem&gt;
-  &lt;XlyFormItem label="满意度"&gt;
-    &lt;XlyRate v-model="form.satisfaction" show-text /&gt;
-  &lt;/XlyFormItem&gt;
-  &lt;XlyFormItem label="备注"&gt;
-    &lt;XlyInput v-model="form.remark" type="textarea" :maxlength="200" show-word-limit /&gt;
-  &lt;/XlyFormItem&gt;
-  &lt;XlyFormItem&gt;
-    &lt;XlyButton type="primary" @click="submit"&gt;提交&lt;/XlyButton&gt;
-    &lt;XlyButton @click="reset"&gt;重置&lt;/XlyButton&gt;
-  &lt;/XlyFormItem&gt;
-&lt;/XlyForm&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyForm ref="formRef" :model="form" :rules="rules" label-width="90px">
+  <XlyFormItem label="用户名" prop="username">
+    <XlyInput v-model="form.username" placeholder="请输入用户名" />
+  </XlyFormItem>
+  <XlyFormItem label="性别">
+    <XlyRadioGroup v-model="form.gender">
+      <XlyRadio label="male">男</XlyRadio>
+      <XlyRadio label="female">女</XlyRadio>
+    </XlyRadioGroup>
+  </XlyFormItem>
+  <XlyFormItem label="城市">
+    <XlySelect v-model="form.city" :options="cityOptions" clearable />
+  </XlyFormItem>
+  <XlyFormItem label="所属部门">
+    <XlyCascader v-model="form.department" :options="deptOptions" />
+  </XlyFormItem>
+  <XlyFormItem label="出生日期">
+    <XlyDatePicker v-model="form.birthday" />
+  </XlyFormItem>
+  <XlyFormItem label="面试时间">
+    <XlyTimePicker v-model="form.interviewTime" />
+  </XlyFormItem>
+  <XlyFormItem label="入职日期">
+    <XlyDateTimePicker v-model="form.onboardTime" show-seconds />
+  </XlyFormItem>
+  <XlyFormItem label="满意度">
+    <XlyRate v-model="form.satisfaction" show-text />
+  </XlyFormItem>
+  <XlyFormItem label="备注">
+    <XlyInput v-model="form.remark" type="textarea" :maxlength="200" show-word-limit />
+  </XlyFormItem>
+  <XlyFormItem>
+    <XlyButton type="primary" @click="submit">提交</XlyButton>
+    <XlyButton @click="reset">重置</XlyButton>
+  </XlyFormItem>
+</XlyForm>`' />
     </section>
 
     <!-- 行内表单 -->
@@ -155,22 +153,20 @@
           </XlyForm>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyForm :model="form" inline&gt;
-  &lt;XlyFormItem label="关键词"&gt;
-    &lt;XlyInput v-model="form.keyword" placeholder="关键词" /&gt;
-  &lt;/XlyFormItem&gt;
-  &lt;XlyFormItem label="分类"&gt;
-    &lt;XlySelect v-model="form.category" :options="options" /&gt;
-  &lt;/XlyFormItem&gt;
-  &lt;XlyFormItem label="日期" :span="24" &gt;
-    &lt;XlyDatePicker v-model="form.date" /&gt;
-  &lt;/XlyFormItem&gt;
-  &lt;XlyFormItem&gt;
-    &lt;XlyButton type="primary"&gt;搜索&lt;/XlyButton&gt;
-  &lt;/XlyFormItem&gt;
-&lt;/XlyForm&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyForm :model="form" inline>
+  <XlyFormItem label="关键词">
+    <XlyInput v-model="form.keyword" placeholder="关键词" />
+  </XlyFormItem>
+  <XlyFormItem label="分类">
+    <XlySelect v-model="form.category" :options="options" />
+  </XlyFormItem>
+  <XlyFormItem label="日期" :span="24" >
+    <XlyDatePicker v-model="form.date" />
+  </XlyFormItem>
+  <XlyFormItem>
+    <XlyButton type="primary">搜索</XlyButton>
+  </XlyFormItem>
+</XlyForm>`' />
     </section>
 
     <!-- 表单尺寸 -->
@@ -205,11 +201,9 @@
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyForm :model="form" size="large" label-width="60px"&gt;...&lt;/XlyForm&gt;
-&lt;XlyForm :model="form" label-width="60px"&gt;...&lt;/XlyForm&gt;
-&lt;XlyForm :model="form" size="small" label-width="60px"&gt;...&lt;/XlyForm&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyForm :model="form" size="large" label-width="60px">...</XlyForm>
+<XlyForm :model="form" label-width="60px">...</XlyForm>
+<XlyForm :model="form" size="small" label-width="60px">...</XlyForm>`' />
     </section>
 
     <!-- 最简单方式：required 属性 -->
@@ -243,28 +237,26 @@
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyForm ref="formRef" :model="form"&gt;
-  &lt;!-- 默认提示：请填写{label} --&gt;
-  &lt;XlyFormItem label="用户名" prop="username" required&gt;
-    &lt;XlyInput v-model="form.username" /&gt;
-  &lt;/XlyFormItem&gt;
+      <DocCode :code='`<XlyForm ref="formRef" :model="form">
+  <!-- 默认提示：请填写{label} -->
+  <XlyFormItem label="用户名" prop="username" required>
+    <XlyInput v-model="form.username" />
+  </XlyFormItem>
 
-  &lt;!-- 自定义提示文字 --&gt;
-  &lt;XlyFormItem label="邮箱" prop="email" required msg="邮箱不能为空"&gt;
-    &lt;XlyInput v-model="form.email" /&gt;
-  &lt;/XlyFormItem&gt;
+  <!-- 自定义提示文字 -->
+  <XlyFormItem label="邮箱" prop="email" required msg="邮箱不能为空">
+    <XlyInput v-model="form.email" />
+  </XlyFormItem>
 
-  &lt;!-- 选填字段，不设置 required --&gt;
-  &lt;XlyFormItem label="备注" prop="remark"&gt;
-    &lt;XlyInput v-model="form.remark" type="textarea" /&gt;
-  &lt;/XlyFormItem&gt;
+  <!-- 选填字段，不设置 required -->
+  <XlyFormItem label="备注" prop="remark">
+    <XlyInput v-model="form.remark" type="textarea" />
+  </XlyFormItem>
 
-  &lt;XlyFormItem&gt;
-    &lt;XlyButton type="primary" @click="handleSubmit"&gt;提交&lt;/XlyButton&gt;
-  &lt;/XlyFormItem&gt;
-&lt;/XlyForm&gt;</code></pre>
-      </div>
+  <XlyFormItem>
+    <XlyButton type="primary" @click="handleSubmit">提交</XlyButton>
+  </XlyFormItem>
+</XlyForm>`' />
     </section>
 
     <!-- 自定义校验 -->
@@ -300,8 +292,7 @@
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>import { required, custom, min, max } from '@/components/xly-form/utils'
+      <DocCode :code="`import { required, custom, min, max } from '@/components/xly-form/utils'
 
 const rules = {
   password: [required('请输入密码')],
@@ -312,8 +303,7 @@ const rules = {
     }),
   ],
   age: [required('请输入年龄'), min(18), max(60)],
-}</code></pre>
-      </div>
+}`" />
     </section>
 
     <!-- 简化规则示例 -->
@@ -354,8 +344,7 @@ const rules = {
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>// 简化规则写法（字符串）
+      <DocCode :code="`// 简化规则写法（字符串）
 const rules = {
   username: ['required', 'min:2'],
   email: ['required', 'email'],
@@ -371,8 +360,7 @@ const mixedRules = {
   password: ['required', 'min:6', custom((v) => {
     return /[A-Z]/.test(v) || '必须包含大写字母'
   })],
-}</code></pre>
-      </div>
+}`" />
     </section>
 
     <!-- API -->

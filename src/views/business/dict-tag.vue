@@ -54,14 +54,12 @@
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 传入绑定值 + 字典类型，其余全部自动处理 --&gt;
-&lt;xly-dict-tag value="1" dict-type="user_status" /&gt;
-&lt;xly-dict-tag value="2" dict-type="approve_status" /&gt;
+        <DocCode :code='`<!-- 传入绑定值 + 字典类型，其余全部自动处理 -->
+<xly-dict-tag value="1" dict-type="user_status" />
+<xly-dict-tag value="2" dict-type="approve_status" />
 
-&lt;!-- 未匹配到字典时直接显示原始值，不报错 --&gt;
-&lt;xly-dict-tag value="99" dict-type="user_status" /&gt;</code></pre>
-        </div>
+<!-- 未匹配到字典时直接显示原始值，不报错 -->
+<xly-dict-tag value="99" dict-type="user_status" />`' />
       </div>
     </section>
 
@@ -92,13 +90,11 @@
             <xly-dict-tag value="low,high,urgent" dict-type="priority" multiple />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 逗号拼接字符串（后端字段常见格式）--&gt;
-&lt;xly-dict-tag value="1,2,3" dict-type="user_status" multiple /&gt;
+        <DocCode :code="`<!-- 逗号拼接字符串（后端字段常见格式）-->
+<xly-dict-tag value=&quot;1,2,3&quot; dict-type=&quot;user_status&quot; multiple />
 
-&lt;!-- 字符串数组 --&gt;
-&lt;xly-dict-tag :value="['0','2','3']" dict-type="approve_status" multiple /&gt;</code></pre>
-        </div>
+<!-- 字符串数组 -->
+<xly-dict-tag :value=&quot;['0','2','3']&quot; dict-type=&quot;approve_status&quot; multiple />`" />
       </div>
     </section>
 
@@ -132,14 +128,12 @@
             </tbody>
           </table>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 在表格中使用 --&gt;
-&lt;el-table-column label="状态"&gt;
-  &lt;template #default="{ row }"&gt;
-    &lt;xly-dict-tag :value="row.status" dict-type="user_status" /&gt;
-  &lt;/template&gt;
-&lt;/el-table-column&gt;</code></pre>
-        </div>
+        <DocCode :code='`<!-- 在表格中使用 -->
+<el-table-column label="状态">
+  <template #default="{ row }">
+    <xly-dict-tag :value="row.status" dict-type="user_status" />
+  </template>
+</el-table-column>`' />
       </div>
     </section>
 
@@ -164,11 +158,9 @@
             <xly-dict-tag value="1,2,3,4" dict-type="user_status" multiple effect="dark" />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-dict-tag value="1" dict-type="user_status" effect="light" /&gt;
-&lt;xly-dict-tag value="1" dict-type="user_status" effect="plain" /&gt;
-&lt;xly-dict-tag value="1" dict-type="user_status" effect="dark" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<xly-dict-tag value="1" dict-type="user_status" effect="light" />
+<xly-dict-tag value="1" dict-type="user_status" effect="plain" />
+<xly-dict-tag value="1" dict-type="user_status" effect="dark" />`' />
       </div>
     </section>
 
@@ -200,11 +192,9 @@
             <xly-dict-tag value="1,2,3" dict-type="user_status" multiple round />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-dict-tag value="1" dict-type="user_status" size="large" /&gt;
-&lt;xly-dict-tag value="1" dict-type="user_status" size="small" /&gt;
-&lt;xly-dict-tag value="1,2" dict-type="user_status" multiple round /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<xly-dict-tag value="1" dict-type="user_status" size="large" />
+<xly-dict-tag value="1" dict-type="user_status" size="small" />
+<xly-dict-tag value="1,2" dict-type="user_status" multiple round />`' />
       </div>
     </section>
 
@@ -223,12 +213,10 @@
             <xly-dict-tag value="0" dict-type="gender" />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>// 字典数据中添加 icon 字段（el: 前缀 = Element Plus 图标）
+        <DocCode :code="`// 字典数据中添加 icon 字段（el: 前缀 = Element Plus 图标）
 { id: '1', labelValue: '男', icon: 'el:Male' }
 { id: '2', labelValue: '女', icon: 'el:Female' }
-{ id: '0', labelValue: '未知' }</code></pre>
-        </div>
+{ id: '0', labelValue: '未知' }`" />
       </div>
       <div class="doc-tip">
         <strong>去除图标：</strong>如不需要图标功能，找到组件模板中带注释 <code>&lt;!-- 🔌 图标：</code> 的代码行，删除即可。具体位置：
@@ -275,18 +263,16 @@
             />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 默认：id → labelValue --&gt;
-&lt;xly-dict-tag value="1" dict-type="user_status" /&gt;
+        <DocCode :code='`<!-- 默认：id → labelValue -->
+<xly-dict-tag value="1" dict-type="user_status" />
 
-&lt;!-- 自定义：code → name --&gt;
-&lt;xly-dict-tag
+<!-- 自定义：code → name -->
+<xly-dict-tag
   value="active"
   dict-type="your_dict"
   label-field="name"
   value-field="code"
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 
@@ -310,14 +296,12 @@
             <xly-dict-tag value="999" dict-type="user_status" />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 空值不渲染 --&gt;
-&lt;xly-dict-tag value="" dict-type="user_status" /&gt;
-&lt;xly-dict-tag :value="null" dict-type="user_status" /&gt;
+        <DocCode :code='`<!-- 空值不渲染 -->
+<xly-dict-tag value="" dict-type="user_status" />
+<xly-dict-tag :value="null" dict-type="user_status" />
 
-&lt;!-- 未匹配时显示原始值 --&gt;
-&lt;xly-dict-tag value="999" dict-type="user_status" /&gt;</code></pre>
-        </div>
+<!-- 未匹配时显示原始值 -->
+<xly-dict-tag value="999" dict-type="user_status" />`' />
       </div>
     </section>
 
@@ -328,14 +312,13 @@
         组件内置了 <code>fetchDictList</code> 函数负责数据请求，只需替换此函数即可对接您自己的字典接口，无需修改其他任何代码。
       </p>
       <div class="doc-preview">
-        <div class="doc-code" style="border-top: none; border-radius: 12px;">
-          <pre><code>// 📁 src/components/xly-dict-tag/index.vue
+        <DocCode :code="`// 📁 src/components/xly-dict-tag/index.vue
 
 // ✅ 第一步：引入您的接口方法
 import { getDictDataByType } from '@/api/system/dict'
 
 // ✅ 第二步：替换 fetchDictList 函数
-async function fetchDictList(dictType: string): Promise&lt;DictItem[]&gt; {
+async function fetchDictList(dictType: string): Promise<DictItem[]> {
   const res = await getDictDataByType(dictType)
   // ✅ 第三步：映射为组件期望的格式
   // 默认期望每条数据有 id 和 labelValue 字段
@@ -343,23 +326,23 @@ async function fetchDictList(dictType: string): Promise&lt;DictItem[]&gt; {
   //
   // 方案 A：在这里统一 map 转换
   return res.data.map(item => ({
-    id: item.dictValue,       // 对应 value-field 默认值 "id"
-    labelValue: item.dictLabel, // 对应 label-field 默认值 "labelValue"
+    id: item.dictValue,       // 对应 value-field 默认值 &quot;id&quot;
+    labelValue: item.dictLabel, // 对应 label-field 默认值 &quot;labelValue&quot;
     type: item.listClass,     // 可选：Tag 类型（success/warning/danger 等）
     color: item.color,        // 可选：自定义颜色（覆盖 type）
-    icon: item.dictIcon,      // 可选：图标名（el: 前缀 = Element Plus 图标，如 "el:User"）
+    icon: item.dictIcon,      // 可选：图标名（el: 前缀 = Element Plus 图标，如 &quot;el:User&quot;）
   }))
 
   // 方案 B：直接返回原始数据，通过 label-field / value-field 属性指定字段名
   // return res.data
   // 然后在使用组件时指定字段：
-  // &lt;xly-dict-tag label-field="dictLabel" value-field="dictValue" ... /&gt;
+  // <xly-dict-tag label-field=&quot;dictLabel&quot; value-field=&quot;dictValue&quot; ... />
 }
 
 // ✅ 可选：增加缓存，避免相同字典类型重复请求
-const dictCache = new Map&lt;string, DictItem[]&gt;()
+const dictCache = new Map<string, DictItem[]>()
 
-async function fetchDictList(dictType: string): Promise&lt;DictItem[]&gt; {
+async function fetchDictList(dictType: string): Promise<DictItem[]> {
   if (dictCache.has(dictType)) {
     return dictCache.get(dictType)!
   }
@@ -367,8 +350,7 @@ async function fetchDictList(dictType: string): Promise&lt;DictItem[]&gt; {
   const list = res.data.map(item => ({ ... }))
   dictCache.set(dictType, list)
   return list
-}</code></pre>
-        </div>
+}`" language="js" />
       </div>
 
       <div class="tip-block">

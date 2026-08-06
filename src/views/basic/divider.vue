@@ -22,11 +22,9 @@
             <span>文章正文</span>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;span&gt;文章标题&lt;/span&gt;
-&lt;XlyDivider /&gt;
-&lt;span&gt;文章正文&lt;/span&gt;</code></pre>
-        </div>
+        <DocCode :code='`<span>文章标题</span>
+<XlyDivider />
+<span>文章正文</span>`' />
       </div>
     </section>
 
@@ -46,13 +44,11 @@
             <span>周五</span>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;span&gt;周一&lt;/span&gt;
-&lt;XlyDivider&gt;周二&lt;/XlyDivider&gt;
-&lt;span&gt;周三&lt;/span&gt;
-&lt;XlyDivider&gt;周四&lt;/XlyDivider&gt;
-&lt;span&gt;周五&lt;/span&gt;</code></pre>
-        </div>
+        <DocCode :code='`<span>周一</span>
+<XlyDivider>周二</XlyDivider>
+<span>周三</span>
+<XlyDivider>周四</XlyDivider>
+<span>周五</span>`' />
       </div>
     </section>
 
@@ -68,11 +64,9 @@
           <XlyDivider content-position="center">居中</XlyDivider>
           <XlyDivider content-position="right">右侧</XlyDivider>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyDivider content-position="left"&gt;左侧&lt;/XlyDivider&gt;
-&lt;XlyDivider content-position="center"&gt;居中&lt;/XlyDivider&gt;
-&lt;XlyDivider content-position="right"&gt;右侧&lt;/XlyDivider&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyDivider content-position="left">左侧</XlyDivider>
+<XlyDivider content-position="center">居中</XlyDivider>
+<XlyDivider content-position="right">右侧</XlyDivider>`' />
       </div>
     </section>
 
@@ -94,15 +88,13 @@
             <span>选项四</span>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;span&gt;选项一&lt;/span&gt;
-&lt;XlyDivider direction="vertical" /&gt;
-&lt;span&gt;选项二&lt;/span&gt;
-&lt;XlyDivider direction="vertical" /&gt;
-&lt;span&gt;选项三&lt;/span&gt;
-&lt;XlyDivider direction="vertical" /&gt;
-&lt;span&gt;选项四&lt;/span&gt;</code></pre>
-        </div>
+        <DocCode :code='`<span>选项一</span>
+<XlyDivider direction="vertical" />
+<span>选项二</span>
+<XlyDivider direction="vertical" />
+<span>选项三</span>
+<XlyDivider direction="vertical" />
+<span>选项四</span>`' />
       </div>
     </section>
 
@@ -118,11 +110,9 @@
           <XlyDivider plain content-position="left">左侧简约</XlyDivider>
           <XlyDivider plain content-position="right">右侧简约</XlyDivider>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyDivider plain&gt;简约分割线&lt;/XlyDivider&gt;
-&lt;XlyDivider plain content-position="left"&gt;左侧简约&lt;/XlyDivider&gt;
-&lt;XlyDivider plain content-position="right"&gt;右侧简约&lt;/XlyDivider&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyDivider plain>简约分割线</XlyDivider>
+<XlyDivider plain content-position="left">左侧简约</XlyDivider>
+<XlyDivider plain content-position="right">右侧简约</XlyDivider>`' />
       </div>
     </section>
 
@@ -139,12 +129,10 @@
           <XlyDivider color="#f56c6c" border-width="3">红色三倍粗</XlyDivider>
           <XlyDivider color="#e8e8e8" plain>浅灰色简约</XlyDivider>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyDivider color="#4f6ef7"&gt;蓝色分割线&lt;/XlyDivider&gt;
-&lt;XlyDivider color="#67c23a" :border-width="2"&gt;绿色加粗&lt;/XlyDivider&gt;
-&lt;XlyDivider color="#f56c6c" border-width="3"&gt;红色三倍粗&lt;/XlyDivider&gt;
-&lt;XlyDivider color="#e8e8e8" plain&gt;浅灰色简约&lt;/XlyDivider&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyDivider color="#4f6ef7">蓝色分割线</XlyDivider>
+<XlyDivider color="#67c23a" :border-width="2">绿色加粗</XlyDivider>
+<XlyDivider color="#f56c6c" border-width="3">红色三倍粗</XlyDivider>
+<XlyDivider color="#e8e8e8" plain>浅灰色简约</XlyDivider>`' />
       </div>
     </section>
 

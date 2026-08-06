@@ -20,13 +20,11 @@
             />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlySignature
+        <DocCode :code='`<XlySignature
   :height="200"
   @confirm="onConfirm"
   @change="onChange"
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 
@@ -44,13 +42,11 @@
             />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlySignature
+        <DocCode :code='`<XlySignature
   :height="200"
   show-pen-color
   pen-color="#ef4444"
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 
@@ -70,15 +66,13 @@
             />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlySignature
+        <DocCode :code='`<XlySignature
   :height="200"
   canvas-bg-color="#1e293b"
   pen-color="#e2e8f0"
   :radius="10"
   toolbar-text
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 
@@ -109,17 +103,15 @@
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlySignature
+        <DocCode :code='`<XlySignature
   ref="sigRef"
   :show-toolbar="false"
   :show-placeholder="false"
   :height="160"
-/&gt;
-&lt;button @click="sigRef?.undo()"&gt;撤销&lt;/button&gt;
-&lt;button @click="sigRef?.clear()"&gt;清空&lt;/button&gt;
-&lt;button @click="sigRef?.getDataUrl()"&gt;获取签名&lt;/button&gt;</code></pre>
-        </div>
+/>
+<button @click="sigRef?.undo()">撤销</button>
+<button @click="sigRef?.clear()">清空</button>
+<button @click="sigRef?.getDataUrl()">获取签名</button>`' />
       </div>
     </section>
 

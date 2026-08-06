@@ -42,16 +42,14 @@
         <div class="doc-preview__body">
           <xly-permission v-model="values.level1" :data="dataLevel1" :max-level="1" />
         </div>
-        <div class="doc-code">
-          <pre><code>// 数据结构：只有模块（无children）
+        <DocCode :code="`// 数据结构：只有模块（无children）
 const data = [
   { id: 'system', label: '系统管理' },
   { id: 'content', label: '内容管理' },
   { id: 'order', label: '订单管理' }
 ]
 
-&lt;xly-permission v-model="selected" :data="data" :max-level="1" /&gt;</code></pre>
-        </div>
+<xly-permission v-model=&quot;selected&quot; :data=&quot;data&quot; :max-level=&quot;1&quot; />`" />
       </div>
       <div class="doc-result">
         <span class="doc-result__label">返回值：</span>
@@ -67,8 +65,7 @@ const data = [
         <div class="doc-preview__body">
           <xly-permission v-model="values.level2" :data="dataLevel2" :max-level="2" />
         </div>
-        <div class="doc-code">
-          <pre><code>// 数据结构：模块 → 页面
+        <DocCode :code="`// 数据结构：模块 → 页面
 const data = [
   {
     id: 'system',
@@ -89,8 +86,7 @@ const data = [
   }
 ]
 
-&lt;xly-permission v-model="selected" :data="data" :max-level="2" /&gt;</code></pre>
-        </div>
+<xly-permission v-model=&quot;selected&quot; :data=&quot;data&quot; :max-level=&quot;2&quot; />`" />
       </div>
       <div class="doc-result">
         <span class="doc-result__label">返回值：</span>
@@ -106,8 +102,7 @@ const data = [
         <div class="doc-preview__body">
           <xly-permission v-model="values.level3" :data="dataLevel3" />
         </div>
-        <div class="doc-code">
-          <pre><code>// 数据结构：模块 → 页面 → 操作
+        <DocCode :code="`// 数据结构：模块 → 页面 → 操作
 const data = [
   {
     id: 'system',
@@ -127,11 +122,10 @@ const data = [
   }
 ]
 
-&lt;xly-permission v-model="selected" :data="data" /&gt;
+<xly-permission v-model=&quot;selected&quot; :data=&quot;data&quot; />
 
 // 勾选 user:view → 返回 ['system', 'user', 'user:view']
-// 勾选用户管理全部 → 返回 ['system', 'user', 'user:view', 'user:add', 'user:edit', 'user:delete']</code></pre>
-        </div>
+// 勾选用户管理全部 → 返回 ['system', 'user', 'user:view', 'user:add', 'user:edit', 'user:delete']`" />
       </div>
       <div class="doc-result">
         <span class="doc-result__label">返回值：</span>
@@ -147,8 +141,7 @@ const data = [
         <div class="doc-preview__body">
           <xly-permission v-model="values.level4" :data="dataLevel4" :max-level="4" />
         </div>
-        <div class="doc-code">
-          <pre><code>// 数据结构：模块 → 页面 → 操作 → 功能
+        <DocCode :code="`// 数据结构：模块 → 页面 → 操作 → 功能
 const data = [
   {
     id: 'system',
@@ -181,11 +174,10 @@ const data = [
   }
 ]
 
-&lt;xly-permission v-model="selected" :data="data" :max-level="4" /&gt;
+<xly-permission v-model=&quot;selected&quot; :data=&quot;data&quot; :max-level=&quot;4&quot; />
 
 // 勾选 user:query:basic → 返回 ['system', 'user', 'user:query', 'user:query:basic']
-// 勾选 查询 全部 → 返回 ['system', 'user', 'user:query', 'user:query:basic', 'user:query:advanced']</code></pre>
-        </div>
+// 勾选 查询 全部 → 返回 ['system', 'user', 'user:query', 'user:query:basic', 'user:query:advanced']`" />
       </div>
       <div class="doc-result">
         <span class="doc-result__label">返回值：</span>
@@ -201,8 +193,7 @@ const data = [
         <div class="doc-preview__body">
           <xly-permission v-model="values.level5" :data="dataLevel5" :max-level="5" />
         </div>
-        <div class="doc-code">
-          <pre><code>// 数据结构：模块 → 页面 → 操作 → 功能 → 数据
+        <DocCode :code="`// 数据结构：模块 → 页面 → 操作 → 功能 → 数据
 const data = [
   {
     id: 'system',
@@ -240,11 +231,10 @@ const data = [
   }
 ]
 
-&lt;xly-permission v-model="selected" :data="data" :max-level="5" /&gt;
+<xly-permission v-model=&quot;selected&quot; :data=&quot;data&quot; :max-level=&quot;5&quot; />
 
 // 勾选 精确查询 → 返回 ['system','user','user:query','user:query:basic','user:query:basic:exact']
-// 勾选 基础查询 全部 → 返回 ['system','user','user:query','user:query:basic','user:query:basic:exact','user:query:basic:fuzzy']</code></pre>
-        </div>
+// 勾选 基础查询 全部 → 返回 ['system','user','user:query','user:query:basic','user:query:basic:exact','user:query:basic:fuzzy']`" />
       </div>
       <div class="doc-result">
         <span class="doc-result__label">返回值：</span>
@@ -260,8 +250,7 @@ const data = [
         <div class="doc-preview__body">
           <xly-permission v-model="values.custom" :data="dataCustom" id-key="code" label-key="name" children-key="sub" />
         </div>
-        <div class="doc-code">
-          <pre><code>const data = [
+        <DocCode :code="`const data = [
   {
     code: 'system',
     name: '系统管理',
@@ -278,14 +267,13 @@ const data = [
   }
 ]
 
-&lt;xly-permission
-  v-model="selected"
-  :data="data"
-  id-key="code"
-  label-key="name"
-  children-key="sub"
-/&gt;</code></pre>
-        </div>
+<xly-permission
+  v-model=&quot;selected&quot;
+  :data=&quot;data&quot;
+  id-key=&quot;code&quot;
+  label-key=&quot;name&quot;
+  children-key=&quot;sub&quot;
+/>`" />
       </div>
       <div class="doc-result">
         <span class="doc-result__label">返回值：</span>
@@ -301,13 +289,11 @@ const data = [
         <div class="doc-preview__body">
           <xly-permission v-model="values.headers" :data="dataLevel3" :headers="['功能分组', '页面名称', '操作项']" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-permission
-  v-model="selected"
-  :data="data"
-  :headers="['功能分组', '页面名称', '操作项']"
-/&gt;</code></pre>
-        </div>
+        <DocCode :code="`<xly-permission
+  v-model=&quot;selected&quot;
+  :data=&quot;data&quot;
+  :headers=&quot;['功能分组', '页面名称', '操作项']&quot;
+/>`" />
       </div>
     </section>
 
@@ -326,13 +312,11 @@ const data = [
             <xly-permission v-model="values.partial" :data="dataPartial" />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 整体禁用 --&gt;
-&lt;xly-permission v-model="selected" :data="data" disabled /&gt;
+        <DocCode :code="`<!-- 整体禁用 -->
+<xly-permission v-model=&quot;selected&quot; :data=&quot;data&quot; disabled />
 
-&lt;!-- 部分禁用 --&gt;
-{ id: 'user:delete', label: '删除', disabled: true }</code></pre>
-        </div>
+<!-- 部分禁用 -->
+{ id: 'user:delete', label: '删除', disabled: true }`" />
       </div>
     </section>
 
@@ -355,35 +339,33 @@ const data = [
             <xly-permission v-model="values.isDisabled" :data="dataIsDisabled" :is-disabled="checkDisabled" />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>// 方式1：简单配置 - 指定字段和值
-&lt;!-- status === 2 禁用 --&gt;
-&lt;xly-permission
+        <DocCode :code='`// 方式1：简单配置 - 指定字段和值
+<!-- status === 2 禁用 -->
+<xly-permission
   v-model="selected"
   :data="data"
   disabled-field="status"
   :disabled-value="2"
-/&gt;
+/>
 
-&lt;!-- type 为 1 或 2 时禁用 --&gt;
-&lt;xly-permission
+<!-- type 为 1 或 2 时禁用 -->
+<xly-permission
   v-model="selected"
   :data="data"
   disabled-field="type"
   :disabled-value="[1, 2]"
-/&gt;
+/>
 
 // 方式2：函数判断 - 用于复杂逻辑
 const checkDisabled = (item, level) => {
   return item.status === 2 || (level > 2 && item.forbidden)
 }
 
-&lt;xly-permission
+<xly-permission
   v-model="selected"
   :data="data"
   :is-disabled="checkDisabled"
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
       <div class="doc-result">
         <span class="doc-result__label">返回值（简单配置1）：</span>
@@ -407,9 +389,7 @@ const checkDisabled = (item, level) => {
         <div class="doc-preview__body">
           <xly-permission v-model="values.noborder" :data="dataLevel3" :bordered="false" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-permission v-model="selected" :data="data" :bordered="false" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<xly-permission v-model="selected" :data="data" :bordered="false" />`' />
       </div>
     </section>
 

@@ -31,22 +31,20 @@
             </button>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;template&gt;
-  &lt;div ref="step1Target"&gt;目标元素 1&lt;/div&gt;
-  &lt;div ref="step2Target"&gt;目标元素 2&lt;/div&gt;
-  &lt;div ref="step3Target"&gt;目标元素 3&lt;/div&gt;
+        <DocCode :code="`<template>
+  <div ref=&quot;step1Target&quot;>目标元素 1</div>
+  <div ref=&quot;step2Target&quot;>目标元素 2</div>
+  <div ref=&quot;step3Target&quot;>目标元素 3</div>
 
-  &lt;XlyTour
-    v-model="tourVisible"
-    :steps="[
+  <XlyTour
+    v-model=&quot;tourVisible&quot;
+    :steps=&quot;[
       { target: step1Target, title: '第一步', description: '这里是数据概览区域' },
       { target: step2Target, title: '第二步', description: '这里是功能入口' },
       { target: step3Target, title: '第三步', description: '这里是快捷操作' }
-    ]"
-  /&gt;
-&lt;/template&gt;</code></pre>
-        </div>
+    ]&quot;
+  />
+</template>`" />
       </div>
     </section>
 
@@ -81,16 +79,14 @@
             </button>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyTour
-  :steps="[
+        <DocCode :code="`<XlyTour
+  :steps=&quot;[
     { target: el, title: '上方', placement: 'top', description: '气泡在目标上方' },
     { target: el, title: '下方', placement: 'bottom', description: '气泡在目标下方' },
     { target: el, title: '左方', placement: 'left', description: '气泡在目标左侧' },
     { target: el, title: '右方', placement: 'right', description: '气泡在目标右侧' }
-  ]"
-/&gt;</code></pre>
-        </div>
+  ]&quot;
+/>`" />
       </div>
     </section>
 
@@ -114,13 +110,11 @@
             </button>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyTour
+        <DocCode :code='`<XlyTour
   v-model="visible"
   color="#10b981"
   :steps="steps"
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 
@@ -148,8 +142,7 @@
             </button>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>import { xly } from '@/utils/xly'
+        <DocCode :code="`import { xly } from '@/utils/xly'
 
 // 命令式启动引导
 xly.$tour({
@@ -158,8 +151,7 @@ xly.$tour({
     { target: '.another-element', title: '第二步', description: '更多说明' }
   ],
   color: '#4f6ef7'
-})</code></pre>
-        </div>
+})`" />
       </div>
     </section>
 
@@ -176,9 +168,7 @@ xly.$tour({
             开始引导
           </button>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyTour v-model="visible" :mask="false" :steps="steps" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyTour v-model="visible" :mask="false" :steps="steps" />`' />
       </div>
     </section>
 

@@ -23,9 +23,7 @@
         <div class="doc-preview__body">
           <XlyQrcode content="https://ease-ui.com" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyQrcode content="https://ease-ui.com" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyQrcode content="https://ease-ui.com" />`' />
       </div>
     </section>
 
@@ -51,11 +49,9 @@
             <XlyQrcode content="大尺寸" :size="300" />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyQrcode content="小尺寸" :size="100" /&gt;
-&lt;XlyQrcode content="中尺寸" :size="200" /&gt;
-&lt;XlyQrcode content="大尺寸" :size="300" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyQrcode content="小尺寸" :size="100" />
+<XlyQrcode content="中尺寸" :size="200" />
+<XlyQrcode content="大尺寸" :size="300" />`' />
       </div>
     </section>
 
@@ -84,10 +80,8 @@
             <span>红色主题</span>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyQrcode content="蓝色主题" color-dark="#4F6EF7" color-light="#EEF2FF" /&gt;
-&lt;XlyQrcode content="绿色主题" color-dark="#34C759" color-light="#E8F5E9" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyQrcode content="蓝色主题" color-dark="#4F6EF7" color-light="#EEF2FF" />
+<XlyQrcode content="绿色主题" color-dark="#34C759" color-light="#E8F5E9" />`' />
       </div>
     </section>
 
@@ -118,12 +112,10 @@
             <span>H (30%)</span>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyQrcode content="低纠错 L" correct-level="L" /&gt;
-&lt;XlyQrcode content="中纠错 M" correct-level="M" /&gt;
-&lt;XlyQrcode content="高纠错 Q" correct-level="Q" /&gt;
-&lt;XlyQrcode content="最高 H" correct-level="H" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyQrcode content="低纠错 L" correct-level="L" />
+<XlyQrcode content="中纠错 M" correct-level="M" />
+<XlyQrcode content="高纠错 Q" correct-level="Q" />
+<XlyQrcode content="最高 H" correct-level="H" />`' />
       </div>
     </section>
 
@@ -147,16 +139,14 @@
             logo-background-color="#ffffff"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyQrcode
+        <DocCode :code='`<XlyQrcode
   content="https://ease-ui.com"
   :size="200"
   logo="/logo.png"
   :logo-size="40"
   :logo-radius="8"
   logo-background-color="#ffffff"
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 
@@ -187,8 +177,7 @@
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>const qrRef = ref()
+        <DocCode :code="`const qrRef = ref()
 const dynamicContent = ref('https://ease-ui.com')
 
 // 下载二维码
@@ -200,8 +189,7 @@ function handleDownload() {
 function handleGetDataUrl() {
   const dataUrl = qrRef.value?.toDataURL()
   console.log(dataUrl)
-}</code></pre>
-        </div>
+}`" />
       </div>
     </section>
 
@@ -226,12 +214,11 @@ function handleGetDataUrl() {
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyQrcode
-  content="https://ease-ui.com"
-  @generated="onGenerated"
-  @error="onError"
-/&gt;
+        <DocCode :code="`<XlyQrcode
+  content=&quot;https://ease-ui.com&quot;
+  @generated=&quot;onGenerated&quot;
+  @error=&quot;onError&quot;
+/>
 
 // generated: 生成成功时触发，返回 base64 数据 URL
 function onGenerated(dataUrl: string) {
@@ -241,8 +228,7 @@ function onGenerated(dataUrl: string) {
 // error: 生成失败时触发
 function onError(error: Error) {
   console.error('二维码生成失败', error)
-}</code></pre>
-        </div>
+}`" />
       </div>
     </section>
 

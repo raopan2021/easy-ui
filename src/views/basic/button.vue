@@ -18,13 +18,11 @@
           <XlyButton type="danger">危险按钮</XlyButton>
           <XlyButton type="info">信息按钮</XlyButton>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyButton&gt;默认按钮&lt;/XlyButton&gt;
-&lt;XlyButton type="success"&gt;成功按钮&lt;/XlyButton&gt;
-&lt;XlyButton type="warning"&gt;警告按钮&lt;/XlyButton&gt;
-&lt;XlyButton type="danger"&gt;危险按钮&lt;/XlyButton&gt;
-&lt;XlyButton type="info"&gt;信息按钮&lt;/XlyButton&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyButton>默认按钮</XlyButton>
+<XlyButton type="success">成功按钮</XlyButton>
+<XlyButton type="warning">警告按钮</XlyButton>
+<XlyButton type="danger">危险按钮</XlyButton>
+<XlyButton type="info">信息按钮</XlyButton>`' />
       </div>
     </section>
 
@@ -37,10 +35,8 @@
           <XlyButton type="text">文字按钮</XlyButton>
           <XlyButton type="ghost">幽灵按钮</XlyButton>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyButton type="text"&gt;文字按钮&lt;/XlyButton&gt;
-&lt;XlyButton type="ghost"&gt;幽灵按钮&lt;/XlyButton&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyButton type="text">文字按钮</XlyButton>
+<XlyButton type="ghost">幽灵按钮</XlyButton>`' />
       </div>
     </section>
 
@@ -56,13 +52,11 @@
           <XlyButton link type="danger">危险链接</XlyButton>
           <XlyButton link type="info">信息链接</XlyButton>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyButton link&gt;链接按钮&lt;/XlyButton&gt;
-&lt;XlyButton link type="success"&gt;成功链接&lt;/XlyButton&gt;
-&lt;XlyButton link type="warning"&gt;警告链接&lt;/XlyButton&gt;
-&lt;XlyButton link type="danger"&gt;危险链接&lt;/XlyButton&gt;
-&lt;XlyButton link type="info"&gt;信息链接&lt;/XlyButton&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyButton link>链接按钮</XlyButton>
+<XlyButton link type="success">成功链接</XlyButton>
+<XlyButton link type="warning">警告链接</XlyButton>
+<XlyButton link type="danger">危险链接</XlyButton>
+<XlyButton link type="info">信息链接</XlyButton>`' />
       </div>
     </section>
 
@@ -76,11 +70,9 @@
           <XlyButton>默认按钮</XlyButton>
           <XlyButton size="small">小型按钮</XlyButton>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyButton size="large"&gt;大型按钮&lt;/XlyButton&gt;
-&lt;XlyButton&gt;默认按钮&lt;/XlyButton&gt;
-&lt;XlyButton size="small"&gt;小型按钮&lt;/XlyButton&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyButton size="large">大型按钮</XlyButton>
+<XlyButton>默认按钮</XlyButton>
+<XlyButton size="small">小型按钮</XlyButton>`' />
       </div>
     </section>
 
@@ -107,19 +99,17 @@
             </template>
           </XlyButton>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyButton shape="round"&gt;圆角按钮&lt;/XlyButton&gt;
-&lt;XlyButton shape="circle"&gt;
-  &lt;template #icon&gt;
-    &lt;el-icon&gt;&lt;Search /&gt;&lt;/el-icon&gt;
-  &lt;/template&gt;
-&lt;/XlyButton&gt;
-&lt;XlyButton shape="circle" type="success"&gt;
-  &lt;template #icon&gt;
-    &lt;el-icon&gt;&lt;Plus /&gt;&lt;/el-icon&gt;
-  &lt;/template&gt;
-&lt;/XlyButton&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyButton shape="round">圆角按钮</XlyButton>
+<XlyButton shape="circle">
+  <template #icon>
+    <el-icon><Search /></el-icon>
+  </template>
+</XlyButton>
+<XlyButton shape="circle" type="success">
+  <template #icon>
+    <el-icon><Plus /></el-icon>
+  </template>
+</XlyButton>`' />
       </div>
     </section>
 
@@ -133,11 +123,9 @@
           <XlyButton type="success" bold>加粗成功</XlyButton>
           <XlyButton>普通按钮</XlyButton>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyButton bold&gt;加粗按钮&lt;/XlyButton&gt;
-&lt;XlyButton type="success" bold&gt;加粗成功&lt;/XlyButton&gt;
-&lt;XlyButton&gt;普通按钮&lt;/XlyButton&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyButton bold>加粗按钮</XlyButton>
+<XlyButton type="success" bold>加粗成功</XlyButton>
+<XlyButton>普通按钮</XlyButton>`' />
       </div>
     </section>
 
@@ -152,12 +140,10 @@
           <XlyButton type="success" loading>加载中</XlyButton>
           <XlyButton type="danger" loading>加载中</XlyButton>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyButton :loading="loading" @click="handleLoad"&gt;点击加载&lt;/XlyButton&gt;
-&lt;XlyButton loading&gt;加载中&lt;/XlyButton&gt;
-&lt;XlyButton type="success" loading&gt;加载中&lt;/XlyButton&gt;
-&lt;XlyButton type="danger" loading&gt;加载中&lt;/XlyButton&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyButton :loading="loading" @click="handleLoad">点击加载</XlyButton>
+<XlyButton loading>加载中</XlyButton>
+<XlyButton type="success" loading>加载中</XlyButton>
+<XlyButton type="danger" loading>加载中</XlyButton>`' />
       </div>
     </section>
 
@@ -173,13 +159,11 @@
           <XlyButton type="ghost" disabled>禁用幽灵</XlyButton>
           <XlyButton type="link" disabled>禁用链接</XlyButton>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyButton disabled&gt;禁用按钮&lt;/XlyButton&gt;
-&lt;XlyButton type="success" disabled&gt;禁用按钮&lt;/XlyButton&gt;
-&lt;XlyButton type="text" disabled&gt;禁用文字&lt;/XlyButton&gt;
-&lt;XlyButton type="ghost" disabled&gt;禁用幽灵&lt;/XlyButton&gt;
-&lt;XlyButton link disabled&gt;禁用链接&lt;/XlyButton&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyButton disabled>禁用按钮</XlyButton>
+<XlyButton type="success" disabled>禁用按钮</XlyButton>
+<XlyButton type="text" disabled>禁用文字</XlyButton>
+<XlyButton type="ghost" disabled>禁用幽灵</XlyButton>
+<XlyButton link disabled>禁用链接</XlyButton>`' />
       </div>
     </section>
 
@@ -206,16 +190,14 @@
             编辑
           </XlyButton>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyButton&gt;
-  &lt;template #icon&gt;&lt;el-icon&gt;&lt;Search /&gt;&lt;/el-icon&gt;&lt;/template&gt;
+        <DocCode :code='`<XlyButton>
+  <template #icon><el-icon><Search /></el-icon></template>
   搜索
-&lt;/XlyButton&gt;
-&lt;XlyButton type="success"&gt;
-  &lt;template #icon&gt;&lt;el-icon&gt;&lt;Plus /&gt;&lt;/el-icon&gt;&lt;/template&gt;
+</XlyButton>
+<XlyButton type="success">
+  <template #icon><el-icon><Plus /></el-icon></template>
   新增
-&lt;/XlyButton&gt;</code></pre>
-        </div>
+</XlyButton>`' />
       </div>
     </section>
 
@@ -253,28 +235,26 @@
             </XlyButton>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 表单操作 --&gt;
-&lt;XlyButton bold type="primary"&gt;
-  &lt;template #icon&gt;&lt;el-icon&gt;&lt;Check /&gt;&lt;/el-icon&gt;&lt;/template&gt;
+        <DocCode :code='`<!-- 表单操作 -->
+<XlyButton bold type="primary">
+  <template #icon><el-icon><Check /></el-icon></template>
   提交审核
-&lt;/XlyButton&gt;
-&lt;XlyButton type="ghost"&gt;
-  &lt;template #icon&gt;&lt;el-icon&gt;&lt;RefreshLeft /&gt;&lt;/el-icon&gt;&lt;/template&gt;
+</XlyButton>
+<XlyButton type="ghost">
+  <template #icon><el-icon><RefreshLeft /></el-icon></template>
   重置
-&lt;/XlyButton&gt;
-&lt;XlyButton type="text"&gt;取消&lt;/XlyButton&gt;
+</XlyButton>
+<XlyButton type="text">取消</XlyButton>
 
-&lt;!-- 工具栏操作 --&gt;
-&lt;XlyButton type="danger" size="small"&gt;
-  &lt;template #icon&gt;&lt;el-icon&gt;&lt;Delete /&gt;&lt;/el-icon&gt;&lt;/template&gt;
+<!-- 工具栏操作 -->
+<XlyButton type="danger" size="small">
+  <template #icon><el-icon><Delete /></el-icon></template>
   批量删除
-&lt;/XlyButton&gt;
-&lt;XlyButton type="primary" size="small"&gt;
-  &lt;template #icon&gt;&lt;el-icon&gt;&lt;Download /&gt;&lt;/el-icon&gt;&lt;/template&gt;
+</XlyButton>
+<XlyButton type="primary" size="small">
+  <template #icon><el-icon><Download /></el-icon></template>
   导出数据
-&lt;/XlyButton&gt;</code></pre>
-        </div>
+</XlyButton>`' />
       </div>
     </section>
 

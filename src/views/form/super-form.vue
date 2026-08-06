@@ -21,8 +21,7 @@
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { input, textarea, password, rules } = useFormFields()
 
@@ -32,8 +31,7 @@ const fields = [
   input('email', '邮箱', { rules: rules.email() }),
   textarea('remark', '备注', { props: { rows: 3 } }),
   password('password', '密码'),
-]</code></pre>
-      </div>
+]`" />
     </section>
 
     <!-- 选择类组件 -->
@@ -49,8 +47,7 @@ const fields = [
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { select, cascader } = useFormFields()
 
@@ -79,8 +76,7 @@ const fields = [
       ]
     }
   }),
-]</code></pre>
-      </div>
+]`" />
     </section>
 
     <!-- 日期类组件 -->
@@ -96,8 +92,7 @@ const fields = [
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { datePicker, dateRangePicker } = useFormFields()
 
@@ -111,8 +106,7 @@ const fields = [
   dateRangePicker('dateRange', '有效期', 'startDate', 'endDate', {
     props: { clearable: true }
   }),
-]</code></pre>
-      </div>
+]`" />
     </section>
 
     <!-- 日期时间类组件 -->
@@ -128,8 +122,7 @@ const fields = [
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { dateTimePicker, dateTimeRangePicker } = useFormFields()
 
@@ -139,8 +132,7 @@ const fields = [
   dateTimeRangePicker('dateTimeRange', '施工时间', 'beginTime', 'finishTime', {
     props: { clearable: true }
   }),
-]</code></pre>
-      </div>
+]`" />
     </section>
 
     <!-- 时间类组件 -->
@@ -156,8 +148,7 @@ const fields = [
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { timePicker, timeRangePicker } = useFormFields()
 
@@ -167,8 +158,7 @@ const fields = [
   timeRangePicker('timeRange', '营业时间', 'startTime', 'endTime', {
     props: { clearable: true }
   }),
-]</code></pre>
-      </div>
+]`" />
     </section>
 
     <!-- 远程搜索 -->
@@ -184,8 +174,7 @@ const fields = [
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { select } = useFormFields()
 
@@ -194,8 +183,8 @@ async function searchUser(query: string) {
   if (!query) return []
   // 模拟 API 调用
   return [
-    { label: `用户 ${query}1`, value: query + '1' },
-    { label: `用户 ${query}2`, value: query + '2' },
+    { label: \`用户 \${query}1\`, value: query + '1' },
+    { label: \`用户 \${query}2\`, value: query + '2' },
   ]
 }
 
@@ -204,8 +193,7 @@ const fields = [
     remoteMethod: searchUser,
     props: { filterable: true, remote: true, placeholder: '输入关键词搜索用户' }
   }),
-]</code></pre>
-      </div>
+]`" />
     </section>
 
     <!-- 前后缀 -->
@@ -221,8 +209,7 @@ const fields = [
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { inputSlot } = useFormFields()
 
@@ -230,8 +217,7 @@ const { inputSlot } = useFormFields()
 const fields = [
   input('domain', '域名', { props: { prefix: 'https://', suffix: '.com' } }),
   input('price', '价格', { props: { prefix: '¥', suffix: '元' } }),
-]</code></pre>
-      </div>
+]`" />
     </section>
 
     <!-- 复杂校验 -->
@@ -247,8 +233,7 @@ const fields = [
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { input, rules } = useFormFields()
 
@@ -282,8 +267,7 @@ const fields = [
       }, '用户名已被注册')
     ]
   }),
-]</code></pre>
-      </div>
+]`" />
     </section>
 
     <!-- 自定义组件 -->
@@ -299,8 +283,7 @@ const fields = [
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 import { ElInput } from 'element-plus'
 const { custom } = useFormFields()
 
@@ -311,8 +294,7 @@ const fields = [
   custom('addr', ElInput, '地址', { props: { placeholder: '请输入地址' } })
 ]
 
-        </code></pre>
-      </div>
+        `" />
     </section>
 
     <!-- 特殊组件 -->
@@ -328,8 +310,7 @@ const fields = [
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { sw, rate } = useFormFields()
 
@@ -340,8 +321,7 @@ const fields = [
   }),
   // 评分
   rate('rating', '评分', { required: true }),
-]</code></pre>
-      </div>
+]`" />
     </section>
 
     <!-- 栅格布局 -->
@@ -352,8 +332,7 @@ const fields = [
           <XlySuperForm :fields="spanFields" />
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { input } = useFormFields()
 
@@ -362,8 +341,7 @@ const fields = [
   input('name', '姓名', { span: 12 }),
   input('phone', '手机号', { span: 12 }),
   input('remark', '备注', { span: 24 }),  // 占整行
-]</code></pre>
-      </div>
+]`" />
     </section>
 
     <!-- 链式调用 -->
@@ -379,8 +357,7 @@ const fields = [
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { input, select, sw, rules } = useFormFields()
 
@@ -393,8 +370,7 @@ const fields = [
     { label: '运营部', value: 2 },
   ]),
   sw('enabled').$required(),
-]</code></pre>
-      </div>
+]`" />
     </section>
 
     <!-- 完整示例 -->
@@ -410,8 +386,7 @@ const fields = [
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const {
   input, textarea, select,
@@ -434,8 +409,7 @@ async function submitFull() {
   const valid = await fullForm.value?.validate()
   if (!valid) return
   console.log(fullForm.value?.getFormData())
-}</code></pre>
-      </div>
+}`" />
     </section>
 
     <!-- v-model 双向绑定 -->
@@ -457,8 +431,7 @@ async function submitFull() {
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>import { ref } from 'vue'
+      <DocCode :code="`import { ref } from 'vue'
 import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { input, select, rules } = useFormFields()
@@ -502,8 +475,7 @@ function fillData() {
 // 重置
 function reset() {
   formData.value = { name: '', dept: null }
-}</code></pre>
-      </div>
+}`" />
     </section>
 
     <!-- 扩展组件支持 -->
@@ -514,8 +486,7 @@ function reset() {
       </p>
 
       <h3 class="doc-subtitle">步骤一：在 useFormFields.ts 中添加字段生成函数</h3>
-      <div class="doc-code">
-        <pre><code>// 假设我们要添加一个 XlyNumber 数字输入框组件
+      <DocCode :code="`// 假设我们要添加一个 XlyNumber 数字输入框组件
 
 // 在 useFormFields() 函数中添加：
 function number(prop: string, labelOrOptions?: string | FieldOptions, options?: FieldOptions) {
@@ -530,16 +501,14 @@ return {
   // ... 其他
   number,  // 👈 添加这行
   // ...
-}</code></pre>
-      </div>
+}`" />
 
       <h3 class="doc-subtitle">步骤二：在 index.vue 中注册组件</h3>
-      <div class="doc-code">
-        <pre><code>// 1. 导入组件
+      <DocCode :code="`// 1. 导入组件
 import XlyNumber from '@/components/xly-number/index.vue'
 
 // 2. 在 typeMap 中添加映射
-const typeMap: Record&lt;string, Component&gt; = {
+const typeMap: Record<string, Component> = {
   input: XlyInput,
   select: XlySelect,
   // ... 其他
@@ -553,27 +522,23 @@ const typeMap: Record&lt;string, Component&gt; = {
   :deep(.xly-number__wrapper) {  // 👈 添加新组件的选择器
     box-shadow: 0 0 0 1px #f56c6c inset;
   }
-}</code></pre>
-      </div>
+}`" />
 
       <h3 class="doc-subtitle">步骤三：使用新组件</h3>
-      <div class="doc-code">
-        <pre><code>import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 
 const { number } = useFormFields()
 
 const fields = [
   number('price', '价格', { required: true }),
   number('quantity', '数量', { props: { min: 1, max: 100 } }),
-]</code></pre>
-      </div>
+]`" />
 
       <h3 class="doc-subtitle">添加自定义组件（通过 component 属性）</h3>
       <p class="doc-desc">
         如果你只是想偶尔使用某个自定义组件，不需要修改源码，可以使用 <code>custom()</code> 生成器：
       </p>
-      <div class="doc-code">
-        <pre><code>import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <DocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
 import MyCustomInput from '@/components/my-custom-input/index.vue'
 
 const { custom } = useFormFields()
@@ -583,8 +548,7 @@ const fields = [
   custom('content', MyCustomInput, '自定义内容', {
     props: { placeholder: '请输入' }
   }),
-]</code></pre>
-      </div>
+]`" />
 
       <h3 class="doc-subtitle">注意事项</h3>
       <ul class="doc-list">

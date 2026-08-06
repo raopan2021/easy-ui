@@ -22,11 +22,9 @@
             <xly-button type="success">内容</xly-button>
           </xly-badge>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-badge :value="5"&gt;
-  &lt;xly-button&gt;消息&lt;/xly-button&gt;
-&lt;/xly-badge&gt;</code></pre>
-        </div>
+        <DocCode :code='`<xly-badge :value="5">
+  <xly-button>消息</xly-button>
+</xly-badge>`' />
       </div>
 
       <!-- 类型 -->
@@ -49,13 +47,11 @@
             <xly-button>info</xly-button>
           </xly-badge>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-badge :value="5" type="primary"&gt;...&lt;/xly-badge&gt;
-&lt;xly-badge :value="5" type="success"&gt;...&lt;/xly-badge&gt;
-&lt;xly-badge :value="5" type="warning"&gt;...&lt;/xly-badge&gt;
-&lt;xly-badge :value="5" type="danger"&gt;...&lt;/xly-badge&gt;
-&lt;xly-badge :value="5" type="info"&gt;...&lt;/xly-badge&gt;</code></pre>
-        </div>
+        <DocCode :code='`<xly-badge :value="5" type="primary">...</xly-badge>
+<xly-badge :value="5" type="success">...</xly-badge>
+<xly-badge :value="5" type="warning">...</xly-badge>
+<xly-badge :value="5" type="danger">...</xly-badge>
+<xly-badge :value="5" type="info">...</xly-badge>`' />
       </div>
 
       <!-- 自定义颜色 -->
@@ -72,11 +68,9 @@
             <xly-button>紫色</xly-button>
           </xly-badge>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-badge value="NEW" color="#ff0000"&gt;...&lt;/xly-badge&gt;
-&lt;xly-badge value="NEW" color="#10b981"&gt;...&lt;/xly-badge&gt;
-&lt;xly-badge value="NEW" color="#8b5cf6"&gt;...&lt;/xly-badge&gt;</code></pre>
-        </div>
+        <DocCode :code='`<xly-badge value="NEW" color="#ff0000">...</xly-badge>
+<xly-badge value="NEW" color="#10b981">...</xly-badge>
+<xly-badge value="NEW" color="#8b5cf6">...</xly-badge>`' />
       </div>
     </section>
 
@@ -95,13 +89,11 @@
             <xly-button>show-zero</xly-button>
           </xly-badge>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 默认隐藏 0 --&gt;
-&lt;xly-badge :value="0"&gt;...&lt;/xly-badge&gt;
+        <DocCode :code='`<!-- 默认隐藏 0 -->
+<xly-badge :value="0">...</xly-badge>
 
-&lt;!-- 强制显示 0 --&gt;
-&lt;xly-badge :value="0" show-zero&gt;...&lt;/xly-badge&gt;</code></pre>
-        </div>
+<!-- 强制显示 0 -->
+<xly-badge :value="0" show-zero>...</xly-badge>`' />
       </div>
     </section>
 
@@ -121,13 +113,11 @@
             <xly-button>圆形+自定义色</xly-button>
           </xly-badge>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 椭圆（默认） --&gt;
-&lt;xly-badge :value="5"&gt;...&lt;/xly-badge&gt;
+        <DocCode :code='`<!-- 椭圆（默认） -->
+<xly-badge :value="5">...</xly-badge>
 
-&lt;!-- 圆形 --&gt;
-&lt;xly-badge :value="5" circle&gt;...&lt;/xly-badge&gt;</code></pre>
-        </div>
+<!-- 圆形 -->
+<xly-badge :value="5" circle>...</xly-badge>`' />
       </div>
     </section>
 
@@ -141,11 +131,9 @@
           <xly-badge value="99+" type="primary" />
           <xly-badge :value="newMsg" type="success" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 独立显示 --&gt;
-&lt;xly-badge :value="5" /&gt;
-&lt;xly-badge value="99+" type="primary" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<!-- 独立显示 -->
+<xly-badge :value="5" />
+<xly-badge value="99+" type="primary" />`' />
       </div>
     </section>
 
@@ -165,11 +153,9 @@
             <xly-icon name="el:Message" :size="24" />
           </xly-badge>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-badge :value="12"&gt;
-  &lt;xly-icon name="el:Bell" /&gt;
-&lt;/xly-badge&gt;</code></pre>
-        </div>
+        <DocCode :code='`<xly-badge :value="12">
+  <xly-icon name="el:Bell" />
+</xly-badge>`' />
       </div>
     </section>
 
@@ -192,12 +178,10 @@
             <xly-button>bottom-right</xly-button>
           </xly-badge>
         </div>
-        <div class="doc-code">
-          <pre><code>position="top-right"  // 默认
+        <DocCode :code='`position="top-right"  // 默认
 position="top-left"
 position="bottom-right"
-position="bottom-left"</code></pre>
-        </div>
+position="bottom-left"`' />
       </div>
     </section>
 
@@ -223,13 +207,11 @@ position="bottom-left"</code></pre>
             <xly-button>info</xly-button>
           </xly-badge>
         </div>
-        <div class="doc-code">
-          <pre><code>type="primary"   // 蓝色
+        <DocCode :code='`type="primary"   // 蓝色
 type="success"   // 绿色
 type="warning"  // 橙色
 type="danger"   // 红色（默认）
-type="info"     // 灰色</code></pre>
-        </div>
+type="info"     // 灰色`' />
       </div>
     </section>
 
@@ -246,9 +228,7 @@ type="info"     // 灰色</code></pre>
             <xly-button>自定义紫色</xly-button>
           </xly-badge>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-badge :value="5" color="#10b981"&gt;...&lt;/xly-badge&gt;</code></pre>
-        </div>
+        <DocCode :code='`<xly-badge :value="5" color="#10b981">...</xly-badge>`' />
       </div>
     </section>
 
@@ -262,8 +242,7 @@ type="info"     // 灰色</code></pre>
             {{ hasBadge ? '移除徽标' : '添加徽标' }}
           </xly-button>
         </div>
-        <div class="doc-code">
-          <pre><code>import { xly } from '@/utils/xly'
+        <DocCode :code="`import { xly } from '@/utils/xly'
 
 // 在元素上显示徽标
 const badge = xly.$badge.open(el, { value: 5 })
@@ -272,8 +251,7 @@ const badge = xly.$badge.open(el, { value: 5 })
 badge.setValue(10)
 
 // 移除徽标
-badge.close()</code></pre>
-        </div>
+badge.close()`" />
       </div>
 
       <!-- 命令式 - 位置 -->
@@ -285,12 +263,10 @@ badge.close()</code></pre>
           <xly-button ref="btnPos1" @click="togglePos1">右上</xly-button>
           <xly-button ref="btnPos3" @click="togglePos3">右下</xly-button>
         </div>
-        <div class="doc-code">
-          <pre><code>xly.$badge.open(el, { value: 5, position: 'top-left' })
+        <DocCode :code="`xly.$badge.open(el, { value: 5, position: 'top-left' })
 xly.$badge.open(el, { value: 5, position: 'top-right' })
 xly.$badge.open(el, { value: 5, position: 'bottom-left' })
-xly.$badge.open(el, { value: 5, position: 'bottom-right' })</code></pre>
-        </div>
+xly.$badge.open(el, { value: 5, position: 'bottom-right' })`" />
       </div>
 
       <!-- 命令式 - 类型 -->
@@ -303,13 +279,11 @@ xly.$badge.open(el, { value: 5, position: 'bottom-right' })</code></pre>
           <xly-button ref="btnType4" @click="toggleType4">danger</xly-button>
           <xly-button ref="btnType5" @click="toggleType5">info</xly-button>
         </div>
-        <div class="doc-code">
-          <pre><code>xly.$badge.open(el, { value: 5, type: 'primary' })
+        <DocCode :code="`xly.$badge.open(el, { value: 5, type: 'primary' })
 xly.$badge.open(el, { value: 5, type: 'success' })
 xly.$badge.open(el, { value: 5, type: 'warning' })
 xly.$badge.open(el, { value: 5, type: 'danger' })
-xly.$badge.open(el, { value: 5, type: 'info' })</code></pre>
-        </div>
+xly.$badge.open(el, { value: 5, type: 'info' })`" />
       </div>
 
       <!-- 命令式 - 自定义颜色 -->
@@ -320,11 +294,9 @@ xly.$badge.open(el, { value: 5, type: 'info' })</code></pre>
           <xly-button ref="btnColor2" @click="toggleColor2">#10b981</xly-button>
           <xly-button ref="btnColor3" @click="toggleColor3">#8b5cf6</xly-button>
         </div>
-        <div class="doc-code">
-          <pre><code>xly.$badge.open(el, { value: 'NEW', color: '#ff0000' })
+        <DocCode :code="`xly.$badge.open(el, { value: 'NEW', color: '#ff0000' })
 xly.$badge.open(el, { value: 'NEW', color: '#10b981' })
-xly.$badge.open(el, { value: 'NEW', color: '#8b5cf6' })</code></pre>
-        </div>
+xly.$badge.open(el, { value: 'NEW', color: '#8b5cf6' })`" />
       </div>
 
       <!-- 命令式 - 圆形 -->
@@ -334,13 +306,11 @@ xly.$badge.open(el, { value: 'NEW', color: '#8b5cf6' })</code></pre>
           <xly-button ref="btnCircle1" @click="toggleCircle1">椭圆</xly-button>
           <xly-button ref="btnCircle2" @click="toggleCircle2">圆形</xly-button>
         </div>
-        <div class="doc-code">
-          <pre><code>// 椭圆（默认）
+        <DocCode :code='`// 椭圆（默认）
 xly.$badge.open(el, { value: 5 })
 
 // 圆形
-xly.$badge.open(el, { value: 5, circle: true })</code></pre>
-        </div>
+xly.$badge.open(el, { value: 5, circle: true })`' />
       </div>
     </section>
 

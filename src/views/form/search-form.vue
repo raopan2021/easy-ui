@@ -13,12 +13,11 @@
           <XlySearchForm v-model="searchData1" :items="basicItems" @search="handleSearch" />
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;template&gt;
-  &lt;XlySearchForm v-model="searchData" :items="items" @search="handleSearch" /&gt;
-&lt;/template&gt;
+      <DocCode :code="`<template>
+  <XlySearchForm v-model=&quot;searchData&quot; :items=&quot;items&quot; @search=&quot;handleSearch&quot; />
+</template>
 
-&lt;script setup&gt;
+<script setup>
 const searchData = ref({})
 
 const items = [
@@ -29,11 +28,10 @@ const items = [
   ]}
 ]
 
-const handleSearch = (data) =&gt; {
+const handleSearch = (data) => {
   console.log('搜索数据:', data)
 }
-&lt;/script&gt;</code></pre>
-      </div>
+</script>`" />
     </section>
 
     <section class="doc-section">
@@ -44,8 +42,7 @@ const handleSearch = (data) =&gt; {
           <XlySearchForm v-model="searchData2" :items="multipleTypeItems" @search="handleSearch" />
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>const items = [
+      <DocCode :code="`const items = [
   { prop: 'keyword', label: '关键词', type: 'input', placeholder: '请输入关键词' },
   { prop: 'type', label: '类型', type: 'select', options: [
     { label: '类型A', value: 'A' },
@@ -58,8 +55,7 @@ const handleSearch = (data) =&gt; {
 ]
 
 // 结果会直接绑定到两个属性
-// { beginDate: '2024-01-01', endDate: '2024-01-31' }</code></pre>
-      </div>
+// { beginDate: '2024-01-01', endDate: '2024-01-31' }`" />
     </section>
 
     <section class="doc-section">
@@ -70,14 +66,12 @@ const handleSearch = (data) =&gt; {
           <XlySearchForm v-model="searchData3" :items="spanItems" @search="handleSearch" />
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>const items = [
+      <DocCode :code="`const items = [
   { prop: 'name', label: '姓名', type: 'input', span: 6 },
   { prop: 'phone', label: '手机号', type: 'input', span: 6 },
   { prop: 'email', label: '邮箱', type: 'input', span: 6 },
   { prop: 'address', label: '地址', type: 'input', span: 12 }
-]</code></pre>
-      </div>
+]`" />
     </section>
 
     <section class="doc-section">
@@ -96,8 +90,7 @@ const handleSearch = (data) =&gt; {
           />
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>const items = [
+      <DocCode :code="`const items = [
   { prop: 'name', label: '姓名', type: 'input' },
   { prop: 'phone', label: '手机号', type: 'input' },
   { prop: 'email', label: '邮箱', type: 'input' },
@@ -105,13 +98,12 @@ const handleSearch = (data) =&gt; {
   { prop: 'remark', label: '备注', type: 'textarea', rows: 2, hiddenWhenCollapsed: true }
 ]
 
-&lt;XlySearchForm
-  v-model="searchData"
-  :items="items"
+<XlySearchForm
+  v-model=&quot;searchData&quot;
+  :items=&quot;items&quot;
   show-expand-button
-  @search="handleSearch"
-/&gt;</code></pre>
-      </div>
+  @search=&quot;handleSearch&quot;
+/>`" />
     </section>
 
     <section class="doc-section">
@@ -132,23 +124,21 @@ const handleSearch = (data) =&gt; {
           </XlySearchForm>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlySearchForm v-model="searchData" :items="items" @search="handleSearch"&gt;
-  &lt;template #field-department="{ modelValue, item, formData, updateModelValue }"&gt;
-    &lt;XlySelect
-      :model-value="modelValue"
-      @update:model-value="updateModelValue"
-      placeholder="请选择部门"
-      :options="departmentOptions"
+      <DocCode :code="`<XlySearchForm v-model=&quot;searchData&quot; :items=&quot;items&quot; @search=&quot;handleSearch&quot;>
+  <template #field-department=&quot;{ modelValue, item, formData, updateModelValue }&quot;>
+    <XlySelect
+      :model-value=&quot;modelValue&quot;
+      @update:model-value=&quot;updateModelValue&quot;
+      placeholder=&quot;请选择部门&quot;
+      :options=&quot;departmentOptions&quot;
       clearable
-    /&gt;
-  &lt;/template&gt;
-&lt;/XlySearchForm&gt;
+    />
+  </template>
+</XlySearchForm>
 
 const items = [
   { prop: 'department', label: '部门', type: 'custom' }
-]</code></pre>
-      </div>
+]`" />
     </section>
 
     <section class="doc-section">

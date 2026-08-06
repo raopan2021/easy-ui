@@ -16,9 +16,7 @@
         <div class="doc-preview__body">
           <XlyTreeChart :data="basicData" :height="800" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyTreeChart :data="treeData" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyTreeChart :data="treeData" />`' />
       </div>
     </section>
 
@@ -33,9 +31,7 @@
         <div class="doc-preview__body">
           <XlyTreeChart :trees="multiTreeData" :height="500" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyTreeChart :trees="[treeData1, treeData2]" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyTreeChart :trees="[treeData1, treeData2]" />`' />
       </div>
     </section>
 
@@ -49,8 +45,7 @@
         <div class="doc-preview__body">
           <XlyTreeChart :data="structureData" :height="350" />
         </div>
-        <div class="doc-code">
-          <pre><code>import type { TreeChartNode } from '@/components/xly-tree-chart'
+        <DocCode :code="`import type { TreeChartNode } from '@/components/xly-tree-chart'
 
 const treeData: TreeChartNode[] = [
   {
@@ -71,8 +66,7 @@ const treeData: TreeChartNode[] = [
       },
     ],
   },
-]</code></pre>
-        </div>
+]`" />
       </div>
     </section>
 
@@ -86,9 +80,7 @@ const treeData: TreeChartNode[] = [
         <div class="doc-preview__body">
           <XlyTreeChart :data="basicData" layout="vertical" :height="500" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyTreeChart :data="treeData" layout="vertical" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyTreeChart :data="treeData" layout="vertical" />`' />
       </div>
     </section>
 
@@ -102,9 +94,7 @@ const treeData: TreeChartNode[] = [
         <div class="doc-preview__body">
           <XlyTreeChart :data="basicData" layout="horizontal" :height="300" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyTreeChart :data="treeData" layout="horizontal" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyTreeChart :data="treeData" layout="horizontal" />`' />
       </div>
     </section>
 
@@ -118,9 +108,7 @@ const treeData: TreeChartNode[] = [
         <div class="doc-preview__body">
           <XlyTreeChart :data="basicData" :show-toolbar="false" :height="300" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyTreeChart :data="treeData" :show-toolbar="false" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyTreeChart :data="treeData" :show-toolbar="false" />`' />
       </div>
     </section>
 
@@ -138,8 +126,7 @@ const treeData: TreeChartNode[] = [
             :height="300"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyTreeChart
+        <DocCode :code='`<XlyTreeChart
   :data="treeData"
   :node-config="{
     nodeWidth: 180,
@@ -147,8 +134,7 @@ const treeData: TreeChartNode[] = [
     horizontalGap: 80,
     verticalGap: 32,
   }"
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 
@@ -166,12 +152,10 @@ const treeData: TreeChartNode[] = [
             :height="300"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyTreeChart
-  :data="treeData"
-  :colors="['#6366f1', '#8b5cf6', '#a78bfa', '#c4b5fd', '#ddd6fe']"
-/&gt;</code></pre>
-        </div>
+        <DocCode :code="`<XlyTreeChart
+  :data=&quot;treeData&quot;
+  :colors=&quot;['#6366f1', '#8b5cf6', '#a78bfa', '#c4b5fd', '#ddd6fe']&quot;
+/>`" />
       </div>
     </section>
 
@@ -185,8 +169,7 @@ const treeData: TreeChartNode[] = [
         <div class="doc-preview__body">
           <XlyTreeChart :data="customStyleData" :height="400" />
         </div>
-        <div class="doc-code">
-          <pre><code>const treeData: TreeChartNode[] = [
+        <DocCode :code="`const treeData: TreeChartNode[] = [
   {
     id: 1,
     label: '产品研发部',
@@ -225,8 +208,7 @@ const treeData: TreeChartNode[] = [
       },
     ],
   },
-]</code></pre>
-        </div>
+]`" />
       </div>
     </section>
 
@@ -244,12 +226,10 @@ const treeData: TreeChartNode[] = [
           </div>
           <XlyTreeChart :data="basicData" @node-click="onNodeClick" :height="300" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyTreeChart
+        <DocCode :code='`<XlyTreeChart
   :data="treeData"
   @node-click="onNodeClick"
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 
@@ -272,14 +252,12 @@ const treeData: TreeChartNode[] = [
             :height="300"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyTreeChart
+        <DocCode :code='`<XlyTreeChart
   :data="treeData"
   :expanded-keys="controlledKeys"
   @toggle-expand="onToggleExpand"
   @update:expanded-keys="controlledKeys = $event"
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 
@@ -293,9 +271,7 @@ const treeData: TreeChartNode[] = [
         <div class="doc-preview__body">
           <XlyTreeChart :data="orgData" layout="horizontal" :height="500" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyTreeChart :data="orgData" layout="horizontal" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyTreeChart :data="orgData" layout="horizontal" />`' />
       </div>
     </section>
 
@@ -309,9 +285,7 @@ const treeData: TreeChartNode[] = [
         <div class="doc-preview__body">
           <XlyTreeChart :data="basicData" :expandable="false" :height="300" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyTreeChart :data="treeData" :expandable="false" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyTreeChart :data="treeData" :expandable="false" />`' />
       </div>
     </section>
 
@@ -331,14 +305,12 @@ const treeData: TreeChartNode[] = [
             :height="300"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyTreeChart
+        <DocCode :code='`<XlyTreeChart
   :data="treeData"
   background-color="#1a1a2e"
   :show-grid="true"
   grid-color="#3a3a5e"
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 
@@ -357,13 +329,11 @@ const treeData: TreeChartNode[] = [
             :height="300"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyTreeChart
+        <DocCode :code='`<XlyTreeChart
   :data="treeData"
   background-color="#f8fafc"
   :show-grid="false"
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 
@@ -382,13 +352,11 @@ const treeData: TreeChartNode[] = [
             layout="horizontal"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyTreeChart
+        <DocCode :code='`<XlyTreeChart
   :data="treeData"
   :width="800"
   :height="300"
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 

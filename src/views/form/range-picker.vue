@@ -20,25 +20,23 @@
           <div class="doc-result">选中值：{{ dateRange.start }} 至 {{ dateRange.end }}</div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;template&gt;
-  &lt;XlyDateRangePicker
-    v-model:start="start"
-    v-model:end="end"
-    start-placeholder="开始日期"
-    end-placeholder="结束日期"
-  /&gt;
-&lt;/template&gt;
+      <DocCode :code="`<template>
+  <XlyDateRangePicker
+    v-model:start=&quot;start&quot;
+    v-model:end=&quot;end&quot;
+    start-placeholder=&quot;开始日期&quot;
+    end-placeholder=&quot;结束日期&quot;
+  />
+</template>
 
-&lt;script setup&gt;
+<script setup>
 import { ref } from 'vue'
 
 const dateRange = ref({
   start: '',
   end: ''
 })
-&lt;/script&gt;</code></pre>
-      </div>
+</script>`" />
     </section>
 
     <!-- 日期时间范围选择器 -->
@@ -57,26 +55,24 @@ const dateRange = ref({
           <div class="doc-result">选中值：{{ dateTimeRange.start }} 至 {{ dateTimeRange.end }}</div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;template&gt;
-  &lt;XlyDateTimeRangePicker
-    v-model:start="start"
-    v-model:end="end"
-    :show-seconds="true"
-    start-placeholder="开始时间"
-    end-placeholder="结束时间"
-  /&gt;
-&lt;/template&gt;
+      <DocCode :code="`<template>
+  <XlyDateTimeRangePicker
+    v-model:start=&quot;start&quot;
+    v-model:end=&quot;end&quot;
+    :show-seconds=&quot;true&quot;
+    start-placeholder=&quot;开始时间&quot;
+    end-placeholder=&quot;结束时间&quot;
+  />
+</template>
 
-&lt;script setup&gt;
+<script setup>
 import { ref } from 'vue'
 
 const dateTimeRange = ref({
   start: '',
   end: ''
 })
-&lt;/script&gt;</code></pre>
-      </div>
+</script>`" />
     </section>
 
     <!-- 时间范围选择器 -->
@@ -94,25 +90,23 @@ const dateTimeRange = ref({
           <div class="doc-result">选中值：{{ timeRange.start }} 至 {{ timeRange.end }}</div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;template&gt;
-  &lt;XlyTimeRangePicker
-    v-model:start="start"
-    v-model:end="end"
-    start-placeholder="开始时间"
-    end-placeholder="结束时间"
-  /&gt;
-&lt;/template&gt;
+      <DocCode :code="`<template>
+  <XlyTimeRangePicker
+    v-model:start=&quot;start&quot;
+    v-model:end=&quot;end&quot;
+    start-placeholder=&quot;开始时间&quot;
+    end-placeholder=&quot;结束时间&quot;
+  />
+</template>
 
-&lt;script setup&gt;
+<script setup>
 import { ref } from 'vue'
 
 const timeRange = ref({
   start: '',
   end: ''
 })
-&lt;/script&gt;</code></pre>
-      </div>
+</script>`" />
     </section>
 
     <!-- 不同尺寸 -->
@@ -151,11 +145,9 @@ const timeRange = ref({
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyDateRangePicker size="large" .../&gt;
-&lt;XlyDateRangePicker size="default" .../&gt;
-&lt;XlyDateRangePicker size="small" .../&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyDateRangePicker size="large" .../>
+<XlyDateRangePicker size="default" .../>
+<XlyDateRangePicker size="small" .../>`' />
     </section>
 
     <!-- 自定义分隔符 -->
@@ -171,13 +163,11 @@ const timeRange = ref({
           />
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyDateRangePicker
+      <DocCode :code='`<XlyDateRangePicker
   v-model:start="start"
   v-model:end="end"
   separator="-"
-/&gt;</code></pre>
-      </div>
+/>`' />
     </section>
 
     <!-- 禁用状态 -->
@@ -193,13 +183,11 @@ const timeRange = ref({
           />
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyDateRangePicker
+      <DocCode :code='`<XlyDateRangePicker
   v-model:start="start"
   v-model:end="end"
   disabled
-/&gt;</code></pre>
-      </div>
+/>`' />
     </section>
 
     <!-- API 文档 -->

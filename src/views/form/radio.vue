@@ -22,11 +22,9 @@
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ val1 ?? '未选择' }}</span>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyRadio v-model="value" label="1"&gt;选项一&lt;/XlyRadio&gt;
-&lt;XlyRadio v-model="value" label="2"&gt;选项二&lt;/XlyRadio&gt;
-&lt;XlyRadio v-model="value" label="3"&gt;选项三&lt;/XlyRadio&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyRadio v-model="value" label="1">选项一</XlyRadio>
+<XlyRadio v-model="value" label="2">选项二</XlyRadio>
+<XlyRadio v-model="value" label="3">选项三</XlyRadio>`' />
     </section>
 
     <!-- RadioGroup 用法 -->
@@ -47,14 +45,12 @@
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ val2 ?? '未选择' }}</span>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyRadioGroup v-model="value"&gt;
-  &lt;XlyRadio label="beijing"&gt;北京&lt;/XlyRadio&gt;
-  &lt;XlyRadio label="shanghai"&gt;上海&lt;/XlyRadio&gt;
-  &lt;XlyRadio label="guangzhou"&gt;广州&lt;/XlyRadio&gt;
-  &lt;XlyRadio label="shenzhen"&gt;深圳&lt;/XlyRadio&gt;
-&lt;/XlyRadioGroup&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyRadioGroup v-model="value">
+  <XlyRadio label="beijing">北京</XlyRadio>
+  <XlyRadio label="shanghai">上海</XlyRadio>
+  <XlyRadio label="guangzhou">广州</XlyRadio>
+  <XlyRadio label="shenzhen">深圳</XlyRadio>
+</XlyRadioGroup>`' />
     </section>
 
     <!-- 禁用状态 -->
@@ -75,15 +71,13 @@
           </XlyRadioGroup>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyRadio label="a" disabled&gt;禁用&lt;/XlyRadio&gt;
-&lt;XlyRadio label="b" disabled model-value="b"&gt;选中且禁用&lt;/XlyRadio&gt;
+      <DocCode :code='`<XlyRadio label="a" disabled>禁用</XlyRadio>
+<XlyRadio label="b" disabled model-value="b">选中且禁用</XlyRadio>
 
-&lt;XlyRadioGroup v-model="value" disabled&gt;
-  &lt;XlyRadio label="1"&gt;组内禁用一&lt;/XlyRadio&gt;
-  &lt;XlyRadio label="2"&gt;组内禁用二&lt;/XlyRadio&gt;
-&lt;/XlyRadioGroup&gt;</code></pre>
-      </div>
+<XlyRadioGroup v-model="value" disabled>
+  <XlyRadio label="1">组内禁用一</XlyRadio>
+  <XlyRadio label="2">组内禁用二</XlyRadio>
+</XlyRadioGroup>`' />
     </section>
 
     <!-- 不同尺寸 -->
@@ -102,11 +96,9 @@
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyRadio v-model="value" label="large" size="large"&gt;大号&lt;/XlyRadio&gt;
-&lt;XlyRadio v-model="value" label="default" size="default"&gt;默认&lt;/XlyRadio&gt;
-&lt;XlyRadio v-model="value" label="small" size="small"&gt;小号&lt;/XlyRadio&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyRadio v-model="value" label="large" size="large">大号</XlyRadio>
+<XlyRadio v-model="value" label="default" size="default">默认</XlyRadio>
+<XlyRadio v-model="value" label="small" size="small">小号</XlyRadio>`' />
     </section>
 
     <!-- 带边框 -->
@@ -124,11 +116,9 @@
           </div>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyRadio v-model="value" label="1" border&gt;选项一&lt;/XlyRadio&gt;
-&lt;XlyRadio v-model="value" label="2" border&gt;选项二&lt;/XlyRadio&gt;
-&lt;XlyRadio v-model="value" label="3" border&gt;选项三&lt;/XlyRadio&gt;</code></pre>
-      </div>
+      <DocCode :code='`<XlyRadio v-model="value" label="1" border>选项一</XlyRadio>
+<XlyRadio v-model="value" label="2" border>选项二</XlyRadio>
+<XlyRadio v-model="value" label="3" border>选项三</XlyRadio>`' />
     </section>
 
     <!-- 不同类型值 -->
@@ -152,13 +142,11 @@
           </span>
         </div>
       </div>
-      <div class="doc-code">
-        <pre><code>&lt;XlyRadio v-model="numValue" :label="1"&gt;数字 1&lt;/XlyRadio&gt;
-&lt;XlyRadio v-model="numValue" :label="2"&gt;数字 2&lt;/XlyRadio&gt;
+      <DocCode :code='`<XlyRadio v-model="numValue" :label="1">数字 1</XlyRadio>
+<XlyRadio v-model="numValue" :label="2">数字 2</XlyRadio>
 
-&lt;XlyRadio v-model="boolValue" :label="true"&gt;布尔 true&lt;/XlyRadio&gt;
-&lt;XlyRadio v-model="boolValue" :label="false"&gt;布尔 false&lt;/XlyRadio&gt;</code></pre>
-      </div>
+<XlyRadio v-model="boolValue" :label="true">布尔 true</XlyRadio>
+<XlyRadio v-model="boolValue" :label="false">布尔 false</XlyRadio>`' />
     </section>
   </div>
 </template>

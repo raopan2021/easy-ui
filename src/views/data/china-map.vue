@@ -26,22 +26,20 @@
             @click="handleClick"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyChinaMap
-  title="2025年各省份 GDP 总量"
-  subtitle="单位：亿元"
-  :data="[
+        <DocCode :code="`<XlyChinaMap
+  title=&quot;2025年各省份 GDP 总量&quot;
+  subtitle=&quot;单位：亿元&quot;
+  :data=&quot;[
     { name: '广东', value: 135673 },
     { name: '江苏', value: 128222 },
     { name: '山东', value: 92069 },
     // ...
-  ]"
-  :height="680"
-  value-label="GDP"
-  legend-title="GDP（亿元）"
-  @click="handleClick"
-/&gt;</code></pre>
-        </div>
+  ]&quot;
+  :height=&quot;680&quot;
+  value-label=&quot;GDP&quot;
+  legend-title=&quot;GDP（亿元）&quot;
+  @click=&quot;handleClick&quot;
+/>`" />
       </div>
       <div v-if="clickResult" class="doc-result">
         <span class="doc-result__label">点击省份：</span>
@@ -74,12 +72,10 @@
             legend-title="GDP（亿元）"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyChinaMap
+        <DocCode :code='`<XlyChinaMap
   :data="multiYearData"
   tooltip-mode="compare"  // 默认值，Tooltip 同时展示所有数据
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
 
       <!-- 切换模式 -->
@@ -96,12 +92,10 @@
             legend-title="GDP（亿元）"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyChinaMap
+        <DocCode :code='`<XlyChinaMap
   :data="multiYearData"
   tooltip-mode="switch"  // Tab 切换模式
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
 
       <!-- 数据格式说明 -->
@@ -161,13 +155,11 @@
             legend-title="GDP（亿元）"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyChinaMap
-  :data="gdpData"
-  :height="420"
-  :label-mode="labelMode"  // 'short' | 'full'
-/&gt;</code></pre>
-        </div>
+        <DocCode :code="`<XlyChinaMap
+  :data=&quot;gdpData&quot;
+  :height=&quot;420&quot;
+  :label-mode=&quot;labelMode&quot;  // 'short' | 'full'
+/>`" />
       </div>
     </section>
 
@@ -205,19 +197,17 @@
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 绿色系 --&gt;
-&lt;XlyChinaMap
-  :color-range="['#d1fae5', '#065f46']"
-  empty-color="#f1f5f9"
-/&gt;
+        <DocCode :code="`<!-- 绿色系 -->
+<XlyChinaMap
+  :color-range=&quot;['#d1fae5', '#065f46']&quot;
+  empty-color=&quot;#f1f5f9&quot;
+/>
 
-&lt;!-- 橙红系 --&gt;
-&lt;XlyChinaMap
-  :color-range="['#fef3c7', '#b45309']"
-  empty-color="#f1f5f9"
-/&gt;</code></pre>
-        </div>
+<!-- 橙红系 -->
+<XlyChinaMap
+  :color-range=&quot;['#fef3c7', '#b45309']&quot;
+  empty-color=&quot;#f1f5f9&quot;
+/>`" />
       </div>
     </section>
 
@@ -243,15 +233,13 @@
             legend-title="活跃用户（万）"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyChinaMap
-  :data="data"
-  :show-bubble="true"
-  bubble-color="#6366f1"
-  :color-range="['#ede9fe', '#ede9fe']"
-  value-label="活跃用户"
-/&gt;</code></pre>
-        </div>
+        <DocCode :code="`<XlyChinaMap
+  :data=&quot;data&quot;
+  :show-bubble=&quot;true&quot;
+  bubble-color=&quot;#6366f1&quot;
+  :color-range=&quot;['#ede9fe', '#ede9fe']&quot;
+  value-label=&quot;活跃用户&quot;
+/>`" />
       </div>
     </section>
 
@@ -273,13 +261,11 @@
             legend-title="数值"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyChinaMap
-  :data="data"
-  :show-label="false"
-  :color-range="['#e0e7ff', '#4338ca']"
-/&gt;</code></pre>
-        </div>
+        <DocCode :code="`<XlyChinaMap
+  :data=&quot;data&quot;
+  :show-label=&quot;false&quot;
+  :color-range=&quot;['#e0e7ff', '#4338ca']&quot;
+/>`" />
       </div>
     </section>
 
@@ -302,16 +288,14 @@
             @click="handleClick"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyChinaMap
+        <DocCode :code='`<XlyChinaMap
   :data="data"
   :height="420"
   :zoomable="true"
   :min-scale="0.5"
   :max-scale="4"
   @click="handleClick"
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 
@@ -332,14 +316,12 @@
             :show-legend="false"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyChinaMap
+        <DocCode :code='`<XlyChinaMap
   :data="[]"
   empty-color="#dbeafe"
   stroke-color="#93c5fd"
   :show-legend="false"
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 
@@ -410,14 +392,12 @@
     <section class="doc-section">
       <h2 class="doc-section__title">MapDataItem 数据结构</h2>
       <div class="doc-preview">
-        <div class="doc-code" style="border-top: none; border-radius: 12px;">
-          <pre><code>interface MapDataItem {
+        <DocCode :code='`interface MapDataItem {
   name: string    // 省份名称（支持全称，如"广东"/"广东省"均可）
   value: number   // 数值
   label?: string  // 自定义 Tooltip 标签（不填则使用 value-label 属性）
   extra?: string  // 额外信息（暂保留扩展）
-}</code></pre>
-        </div>
+}`' language="js" />
       </div>
     </section>
 

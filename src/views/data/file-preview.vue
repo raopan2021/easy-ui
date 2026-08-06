@@ -19,9 +19,7 @@
         <div class="doc-preview__body">
           <XlyFilePreview :files="stringFiles" />
         </div>
-        <div class="doc-code">
-          <pre><code>{{ stringCode }}</code></pre>
-        </div>
+        <DocCode :code='`{{ stringCode }}`' />
       </div>
     </section>
 
@@ -35,9 +33,7 @@
         <div class="doc-preview__body">
           <XlyFilePreview :files="urlArrayFiles" />
         </div>
-        <div class="doc-code">
-          <pre><code>{{ urlArrayCode }}</code></pre>
-        </div>
+        <DocCode :code='`{{ urlArrayCode }}`' />
       </div>
     </section>
 
@@ -52,9 +48,7 @@
         <div class="doc-preview__body">
           <XlyFilePreview :files="objectFiles" />
         </div>
-        <div class="doc-code">
-          <pre><code>{{ objectCode }}</code></pre>
-        </div>
+        <DocCode :code='`{{ objectCode }}`' />
       </div>
     </section>
 
@@ -72,9 +66,7 @@
             :field-names="{ name: 'fileName', url: 'fileUrl', size: 'fileSize' }"
           />
         </div>
-        <div class="doc-code">
-          <pre><code>{{ customFieldCode }}</code></pre>
-        </div>
+        <DocCode :code='`{{ customFieldCode }}`' />
       </div>
     </section>
 
@@ -89,9 +81,7 @@
         <div class="doc-preview__body">
           <XlyFilePreview :files="mixedFiles" />
         </div>
-        <div class="doc-code">
-          <pre><code>{{ mixedCode }}</code></pre>
-        </div>
+        <DocCode :code='`{{ mixedCode }}`' />
       </div>
     </section>
 
@@ -106,9 +96,7 @@
         <div class="doc-preview__body">
           <XlyFilePreview :files="pdfFiles" />
         </div>
-        <div class="doc-code">
-          <pre><code>{{ pdfCode }}</code></pre>
-        </div>
+        <DocCode :code='`{{ pdfCode }}`' />
       </div>
     </section>
 
@@ -137,9 +125,7 @@
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>{{ officeViewerCode }}</code></pre>
-        </div>
+        <DocCode :code='`{{ officeViewerCode }}`' />
       </div>
     </section>
 
@@ -150,9 +136,7 @@
         文件预览组件依赖以下 npm 包，使用前请先安装：
       </p>
       <div class="doc-preview">
-        <div class="doc-code" style="border-top: none;">
-          <pre><code>{{ installCode }}</code></pre>
-        </div>
+        <DocCode :code='`{{ installCode }}`' language="html" />
       </div>
     </section>
 

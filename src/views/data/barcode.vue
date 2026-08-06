@@ -23,9 +23,7 @@
         <div class="doc-preview__body">
           <XlyBarcode content="ABC-123456" />
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyBarcode content="ABC-123456" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyBarcode content="ABC-123456" />`' />
       </div>
     </section>
 
@@ -63,13 +61,11 @@
             <span>UPC（美国）</span>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyBarcode content="CODE128-TEST" format="CODE128" /&gt;
-&lt;XlyBarcode content="CODE39-TEST" format="CODE39" /&gt;
-&lt;XlyBarcode content="490123456789" format="EAN13" /&gt;
-&lt;XlyBarcode content="12345670" format="EAN8" /&gt;
-&lt;XlyBarcode content="012345678905" format="UPC" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyBarcode content="CODE128-TEST" format="CODE128" />
+<XlyBarcode content="CODE39-TEST" format="CODE39" />
+<XlyBarcode content="490123456789" format="EAN13" />
+<XlyBarcode content="12345670" format="EAN8" />
+<XlyBarcode content="012345678905" format="UPC" />`' />
       </div>
     </section>
 
@@ -122,16 +118,14 @@
             <span>绿条浅绿底</span>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;!-- 细条 --&gt;
-&lt;XlyBarcode content="THIN-BARS" :width="1" :height="80" /&gt;
+        <DocCode :code='`<!-- 细条 -->
+<XlyBarcode content="THIN-BARS" :width="1" :height="80" />
 
-&lt;!-- 粗条蓝条 --&gt;
-&lt;XlyBarcode content="THICK-BARS" :width="4" :height="120" line-color="#4F6EF7" /&gt;
+<!-- 粗条蓝条 -->
+<XlyBarcode content="THICK-BARS" :width="4" :height="120" line-color="#4F6EF7" />
 
-&lt;!-- 红条白底 --&gt;
-&lt;XlyBarcode content="RED-BARS" line-color="#FF3B30" background="#FFF5F5" /&gt;</code></pre>
-        </div>
+<!-- 红条白底 -->
+<XlyBarcode content="RED-BARS" line-color="#FF3B30" background="#FFF5F5" />`' />
       </div>
     </section>
 
@@ -161,11 +155,9 @@
             <span>隐藏文本</span>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyBarcode content="HELLO-WORLD" :font-size="14" text-align="center" /&gt;
-&lt;XlyBarcode content="HELLO-WORLD" :font-size="14" text-align="left" /&gt;
-&lt;XlyBarcode content="NO-TEXT" :display-value="false" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyBarcode content="HELLO-WORLD" :font-size="14" text-align="center" />
+<XlyBarcode content="HELLO-WORLD" :font-size="14" text-align="left" />
+<XlyBarcode content="NO-TEXT" :display-value="false" />`' />
       </div>
     </section>
 
@@ -196,8 +188,7 @@
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>const barcodeRef = ref()
+        <DocCode :code="`const barcodeRef = ref()
 const dynamicContent = ref('DYNAMIC-CODE')
 
 // 下载 SVG
@@ -208,8 +199,7 @@ function handleDownloadSVG() {
 // 下载 PNG
 function handleDownloadPNG() {
   barcodeRef.value?.downloadPNG('my-barcode.png', 2)
-}</code></pre>
-        </div>
+}`" />
       </div>
     </section>
 
@@ -236,12 +226,11 @@ function handleDownloadPNG() {
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyBarcode
-  content="EVENT-TEST"
-  @generated="onGenerated"
-  @error="onError"
-/&gt;
+        <DocCode :code="`<XlyBarcode
+  content=&quot;EVENT-TEST&quot;
+  @generated=&quot;onGenerated&quot;
+  @error=&quot;onError&quot;
+/>
 
 function onGenerated(svgElement: SVGElement) {
   console.log('条码生成成功', svgElement)
@@ -249,8 +238,7 @@ function onGenerated(svgElement: SVGElement) {
 
 function onError(error: Error) {
   console.error('条码生成失败', error)
-}</code></pre>
-        </div>
+}`" />
       </div>
     </section>
 

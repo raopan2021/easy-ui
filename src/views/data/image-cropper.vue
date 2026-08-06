@@ -36,8 +36,7 @@
             <img :src="basicResult" alt="cropped" />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>const cropperRef = ref()
+        <DocCode :code='`const cropperRef = ref()
 
 // 通过 ref 获取结果
 async function getCrop() {
@@ -48,8 +47,7 @@ async function getCrop() {
 // 通过事件获取结果
 function onConfirm(data) {
   console.log(data.dataURL)
-}</code></pre>
-        </div>
+}`' />
       </div>
     </section>
 
@@ -90,11 +88,9 @@ function onConfirm(data) {
             <span>9:16 竖版</span>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyImageCropper :src="imgSrc" :aspect-ratio="1" /&gt;
-&lt;XlyImageCropper :src="imgSrc" :aspect-ratio="16/9" /&gt;
-&lt;XlyImageCropper :src="imgSrc" :aspect-ratio="9/16" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyImageCropper :src="imgSrc" :aspect-ratio="1" />
+<XlyImageCropper :src="imgSrc" :aspect-ratio="16/9" />
+<XlyImageCropper :src="imgSrc" :aspect-ratio="9/16" />`' />
       </div>
     </section>
 
@@ -124,13 +120,12 @@ function onConfirm(data) {
             <img :src="noToolbarResult" alt="cropped" />
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyImageCropper
+        <DocCode :code='`<XlyImageCropper
   ref="cropperRef"
   :src="imgSrc"
   :toolbar="false"
   :show-action="false"
-/&gt;
+/>
 
 // 旋转
 cropperRef.value.rotate(90)
@@ -140,8 +135,7 @@ cropperRef.value.reset()
 
 // 获取裁剪结果
 const dataURL = cropperRef.value.getCroppedDataURL()
-const blob = await cropperRef.value.getCroppedBlob()</code></pre>
-        </div>
+const blob = await cropperRef.value.getCroppedBlob()`' />
       </div>
     </section>
 
@@ -185,8 +179,7 @@ const blob = await cropperRef.value.getCroppedBlob()</code></pre>
             <span class="cropper-result__size">{{ interactResultSize }}</span>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>// 上传图片
+        <DocCode :code="`// 上传图片
 function triggerUpload() {
   uploadInputRef.value.click()
 }
@@ -201,8 +194,7 @@ async function onConfirm(data) {
   interactResult.value = data.dataURL
   const blob = await cropperRef.value.getCroppedBlob()
   console.log(blob.size, 'bytes')
-}</code></pre>
-        </div>
+}`" />
       </div>
     </section>
 

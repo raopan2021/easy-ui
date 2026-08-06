@@ -153,20 +153,18 @@
             </div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyCalendar
-  :events="events"
-  :default-view="'month'"
-  @date-click="handleDateClick"
-  @event-click="handleEventClick"
-/&gt;
+        <DocCode :code="`<XlyCalendar
+  :events=&quot;events&quot;
+  :default-view=&quot;'month'&quot;
+  @date-click=&quot;handleDateClick&quot;
+  @event-click=&quot;handleEventClick&quot;
+/>
 
 const events = [
   { id: 1, title: '周会', date: '2026-07-27', time: '09:00', color: '#3b82f6', tag: '会议' },
   { id: 2, title: '项目评审', date: '2026-07-28', time: '14:00', color: '#f59e0b', tag: '评审' },
   ...
-]</code></pre>
-        </div>
+]`" />
       </div>
     </section>
 
@@ -203,15 +201,13 @@ const events = [
             <el-button size="small" type="primary" @click="addEvent">添加</el-button>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>calendar.addEvent({
+        <DocCode :code="`calendar.addEvent({
   title: '新事件',
   date: '2026-07-27',
   time: '14:00',
   tag: '会议',
   color: '#3b82f6'
-})</code></pre>
-        </div>
+})`" />
       </div>
     </section>
 

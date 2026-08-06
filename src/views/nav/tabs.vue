@@ -31,19 +31,17 @@
             </xly-tab-pane>
           </xly-tabs>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-tabs v-model="activeTab"&gt;
-  &lt;xly-tab-pane name="user" label="用户管理"&gt;
+        <DocCode :code='`<xly-tabs v-model="activeTab">
+  <xly-tab-pane name="user" label="用户管理">
     用户管理内容
-  &lt;/xly-tab-pane&gt;
-  &lt;xly-tab-pane name="role" label="角色管理"&gt;
+  </xly-tab-pane>
+  <xly-tab-pane name="role" label="角色管理">
     角色管理内容
-  &lt;/xly-tab-pane&gt;
-  &lt;xly-tab-pane name="perm" label="权限配置"&gt;
+  </xly-tab-pane>
+  <xly-tab-pane name="perm" label="权限配置">
     权限配置内容
-  &lt;/xly-tab-pane&gt;
-&lt;/xly-tabs&gt;</code></pre>
-        </div>
+  </xly-tab-pane>
+</xly-tabs>`' />
       </div>
     </section>
 
@@ -76,14 +74,12 @@
             </xly-tab-pane>
           </xly-tabs>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-tabs v-model="activeTab" type="card"&gt;
-  &lt;xly-tab-pane name="overview" label="概览"&gt;概览内容&lt;/xly-tab-pane&gt;
-  &lt;xly-tab-pane name="monitor" label="监控"&gt;监控内容&lt;/xly-tab-pane&gt;
-  &lt;xly-tab-pane name="alarm" label="告警"&gt;告警内容&lt;/xly-tab-pane&gt;
-  &lt;xly-tab-pane name="log" label="日志"&gt;日志内容&lt;/xly-tab-pane&gt;
-&lt;/xly-tabs&gt;</code></pre>
-        </div>
+        <DocCode :code='`<xly-tabs v-model="activeTab" type="card">
+  <xly-tab-pane name="overview" label="概览">概览内容</xly-tab-pane>
+  <xly-tab-pane name="monitor" label="监控">监控内容</xly-tab-pane>
+  <xly-tab-pane name="alarm" label="告警">告警内容</xly-tab-pane>
+  <xly-tab-pane name="log" label="日志">日志内容</xly-tab-pane>
+</xly-tabs>`' />
       </div>
     </section>
 
@@ -111,13 +107,11 @@
             </xly-tab-pane>
           </xly-tabs>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-tabs v-model="activeTab" type="segment"&gt;
-  &lt;xly-tab-pane name="all" label="全部"&gt;全部内容&lt;/xly-tab-pane&gt;
-  &lt;xly-tab-pane name="active" label="进行中"&gt;进行中内容&lt;/xly-tab-pane&gt;
-  &lt;xly-tab-pane name="done" label="已完成"&gt;已完成内容&lt;/xly-tab-pane&gt;
-&lt;/xly-tabs&gt;</code></pre>
-        </div>
+        <DocCode :code='`<xly-tabs v-model="activeTab" type="segment">
+  <xly-tab-pane name="all" label="全部">全部内容</xly-tab-pane>
+  <xly-tab-pane name="active" label="进行中">进行中内容</xly-tab-pane>
+  <xly-tab-pane name="done" label="已完成">已完成内容</xly-tab-pane>
+</xly-tabs>`' />
       </div>
     </section>
 
@@ -152,11 +146,9 @@
             </xly-tabs>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-tabs v-model="activeTab" size="large"&gt;...&lt;/xly-tabs&gt;
-&lt;xly-tabs v-model="activeTab" size="default"&gt;...&lt;/xly-tabs&gt;
-&lt;xly-tabs v-model="activeTab" size="small"&gt;...&lt;/xly-tabs&gt;</code></pre>
-        </div>
+        <DocCode :code='`<xly-tabs v-model="activeTab" size="large">...</xly-tabs>
+<xly-tabs v-model="activeTab" size="default">...</xly-tabs>
+<xly-tabs v-model="activeTab" size="small">...</xly-tabs>`' />
       </div>
     </section>
 
@@ -189,14 +181,12 @@
             </xly-tab-pane>
           </xly-tabs>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-tabs v-model="activeTab"&gt;
-  &lt;xly-tab-pane name="home" label="首页" icon="HomeFilled"&gt;...&lt;/xly-tab-pane&gt;
-  &lt;xly-tab-pane name="setting" label="设置" icon="Setting"&gt;...&lt;/xly-tab-pane&gt;
-  &lt;xly-tab-pane name="user" label="用户" icon="User"&gt;...&lt;/xly-tab-pane&gt;
-  &lt;xly-tab-pane name="bell" label="通知" icon="Bell"&gt;...&lt;/xly-tab-pane&gt;
-&lt;/xly-tabs&gt;</code></pre>
-        </div>
+        <DocCode :code='`<xly-tabs v-model="activeTab">
+  <xly-tab-pane name="home" label="首页" icon="HomeFilled">...</xly-tab-pane>
+  <xly-tab-pane name="setting" label="设置" icon="Setting">...</xly-tab-pane>
+  <xly-tab-pane name="user" label="用户" icon="User">...</xly-tab-pane>
+  <xly-tab-pane name="bell" label="通知" icon="Bell">...</xly-tab-pane>
+</xly-tabs>`' />
       </div>
     </section>
 
@@ -224,13 +214,11 @@
             </xly-tab-pane>
           </xly-tabs>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-tabs v-model="activeTab"&gt;
-  &lt;xly-tab-pane name="basic" label="基本信息"&gt;...&lt;/xly-tab-pane&gt;
-  &lt;xly-tab-pane name="security" label="安全设置"&gt;...&lt;/xly-tab-pane&gt;
-  &lt;xly-tab-pane name="advanced" label="高级设置" disabled&gt;...&lt;/xly-tab-pane&gt;
-&lt;/xly-tabs&gt;</code></pre>
-        </div>
+        <DocCode :code='`<xly-tabs v-model="activeTab">
+  <xly-tab-pane name="basic" label="基本信息">...</xly-tab-pane>
+  <xly-tab-pane name="security" label="安全设置">...</xly-tab-pane>
+  <xly-tab-pane name="advanced" label="高级设置" disabled>...</xly-tab-pane>
+</xly-tabs>`' />
       </div>
     </section>
 
@@ -258,13 +246,11 @@
             </xly-tab-pane>
           </xly-tabs>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-tabs v-model="activeTab" tab-position="bottom"&gt;
-  &lt;xly-tab-pane name="tab1" label="选项一"&gt;...&lt;/xly-tab-pane&gt;
-  &lt;xly-tab-pane name="tab2" label="选项二"&gt;...&lt;/xly-tab-pane&gt;
-  &lt;xly-tab-pane name="tab3" label="选项三"&gt;...&lt;/xly-tab-pane&gt;
-&lt;/xly-tabs&gt;</code></pre>
-        </div>
+        <DocCode :code='`<xly-tabs v-model="activeTab" tab-position="bottom">
+  <xly-tab-pane name="tab1" label="选项一">...</xly-tab-pane>
+  <xly-tab-pane name="tab2" label="选项二">...</xly-tab-pane>
+  <xly-tab-pane name="tab3" label="选项三">...</xly-tab-pane>
+</xly-tabs>`' />
       </div>
     </section>
 
@@ -285,10 +271,8 @@
             <xly-tab-pane name="o3" label="选项三"><div class="tab-demo-content"><p>橙色主题内容</p></div></xly-tab-pane>
           </xly-tabs>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-tabs v-model="activeTab" active-color="#34c759"&gt;...&lt;/xly-tabs&gt;
-&lt;xly-tabs v-model="activeTab" active-color="#f5a623" type="card"&gt;...&lt;/xly-tabs&gt;</code></pre>
-        </div>
+        <DocCode :code='`<xly-tabs v-model="activeTab" active-color="#34c759">...</xly-tabs>
+<xly-tabs v-model="activeTab" active-color="#f5a623" type="card">...</xly-tabs>`' />
       </div>
     </section>
 
@@ -323,15 +307,13 @@
             <p v-for="(log, i) in eventLogs" :key="i" class="event-log">{{ log }}</p>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;xly-tabs
+        <DocCode :code='`<xly-tabs
   v-model="activeTab"
   @tab-click="handleTabClick"
   @tab-change="handleTabChange"
-&gt;
+>
   ...
-&lt;/xly-tabs&gt;</code></pre>
-        </div>
+</xly-tabs>`' />
       </div>
     </section>
 

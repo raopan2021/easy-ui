@@ -21,9 +21,7 @@
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(singleUser) }}</code>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyUserPicker v-model="userId" placeholder="请选择用户" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyUserPicker v-model="userId" placeholder="请选择用户" />`' />
       </div>
     </section>
 
@@ -41,9 +39,7 @@
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(multiUsers) }}</code>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyUserPicker v-model="userIds" multiple placeholder="请选择用户" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyUserPicker v-model="userIds" multiple placeholder="请选择用户" />`' />
       </div>
     </section>
 
@@ -61,9 +57,7 @@
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(maxUsers) }}</code>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyUserPicker v-model="userIds" multiple :max="3" placeholder="最多选择3个用户" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyUserPicker v-model="userIds" multiple :max="3" placeholder="最多选择3个用户" />`' />
       </div>
     </section>
 
@@ -81,9 +75,7 @@
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(stringUsers) }}</code>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyUserPicker v-model="userIdsStr" multiple return-type="string" placeholder="返回逗号字符串" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyUserPicker v-model="userIdsStr" multiple return-type="string" placeholder="返回逗号字符串" />`' />
       </div>
     </section>
 
@@ -107,15 +99,13 @@
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(extraUsers) }}</code>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyUserPicker
+        <DocCode :code='`<XlyUserPicker
   v-model="userIds"
   multiple
   show-extra
   extra-key="department"
   placeholder="显示部门信息"
-/&gt;</code></pre>
-        </div>
+/>`' />
       </div>
     </section>
 
@@ -133,9 +123,7 @@
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(singleUser) }}</code>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyUserPicker v-model="userId" disabled placeholder="禁用状态" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyUserPicker v-model="userId" disabled placeholder="禁用状态" />`' />
       </div>
     </section>
 
@@ -145,8 +133,7 @@
       <p class="doc-section__desc">
         组件默认使用内部模拟数据。如需接入真实接口，直接打开组件源码修改 <code>getMockUsers</code> 函数即可。
       </p>
-      <div class="doc-code">
-        <pre><code>// 打开 src/components/xly-user-picker/index.vue
+      <DocCode :code="`// 打开 src/components/xly-user-picker/index.vue
 // 找到 getMockUsers 函数，替换为你的真实接口调用
 
 /**
@@ -155,20 +142,19 @@
  * @param keyword 搜索关键词
  * @returns 用户列表
  */
-async function getMockUsers(keyword?: string): Promise&lt;UserItem[]&gt; {
+async function getMockUsers(keyword?: string): Promise<UserItem[]> {
   // 👇 替换为真实接口
-  const res = await fetch(`/api/users?keyword=${keyword || ''}`)
+  const res = await fetch(\`/api/users?keyword=\${keyword || ''}\`)
   const data = await res.json()
 
   // 返回用户对象数组，必须包含 valueKey 和 nameKey 指定的字段
   return data.list.map(item => ({
-    id: item.id,              // 对应 value-key="id"
-    name: item.name,          // 对应 name-key="name"
-    department: item.dept,   // 对应 extra-key="department"
+    id: item.id,              // 对应 value-key=&quot;id&quot;
+    name: item.name,          // 对应 name-key=&quot;name&quot;
+    department: item.dept,   // 对应 extra-key=&quot;department&quot;
     avatar: item.avatar,
   }))
-}</code></pre>
-      </div>
+}`" />
 
       <h3 class="doc-subtitle">函数签名</h3>
       <div class="doc-table">

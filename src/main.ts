@@ -25,6 +25,10 @@ import router from './router'
 
 const app = createApp(App)
 
+// 全局注册文档代码展示组件
+import DocCode from '@/components/DocCode.vue'
+app.component('DocCode', DocCode)
+
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }

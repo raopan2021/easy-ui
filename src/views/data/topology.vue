@@ -44,9 +44,7 @@
             <div class="topo-tooltip__info">状态: {{ statusText(tooltipNode.status) }}</div>
           </div>
         </div>
-        <div class="doc-code">
-          <pre><code>&lt;XlyTopology :nodes="nodes" :edges="edges" :width="900" :height="600" /&gt;</code></pre>
-        </div>
+        <DocCode :code='`<XlyTopology :nodes="nodes" :edges="edges" :width="900" :height="600" />`' />
       </div>
     </section>
 
