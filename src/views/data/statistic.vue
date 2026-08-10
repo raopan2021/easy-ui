@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyStatistic } from 'easy-ui'
+import { EasyStatistic } from 'easy-ui'
 </script>
 
 <template>
@@ -24,16 +24,16 @@ import { XlyStatistic } from 'easy-ui'
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyStatistic title="用户数量" :value="8925" suffix="人" variant="primary" />
-          <XlyStatistic title="订单数量" :value="1284" suffix="单" variant="success" />
-          <XlyStatistic title="营收金额" :value="324150" prefix="¥" suffix="元" variant="warning" />
-          <XlyStatistic title="错误率" :value="2.4" suffix="%" variant="danger" />
+          <EasyStatistic title="用户数量" :value="8925" suffix="人" variant="primary" />
+          <EasyStatistic title="订单数量" :value="1284" suffix="单" variant="success" />
+          <EasyStatistic title="营收金额" :value="324150" prefix="¥" suffix="元" variant="warning" />
+          <EasyStatistic title="错误率" :value="2.4" suffix="%" variant="danger" />
         </div>
-        <XlyDocCode
-          code="<XlyStatistic title=&quot;用户数量&quot; :value=&quot;8925&quot; suffix=&quot;人&quot; variant=&quot;primary&quot; />
-<XlyStatistic title=&quot;订单数量&quot; :value=&quot;1284&quot; suffix=&quot;单&quot; variant=&quot;success&quot; />
-<XlyStatistic title=&quot;营收金额&quot; :value=&quot;324150&quot; prefix=&quot;¥&quot; suffix=&quot;元&quot; variant=&quot;warning&quot; />
-<XlyStatistic title=&quot;错误率&quot; :value=&quot;2.4&quot; suffix=&quot;%&quot; variant=&quot;danger&quot; />"
+        <EasyDocCode
+          code="<EasyStatistic title=&quot;用户数量&quot; :value=&quot;8925&quot; suffix=&quot;人&quot; variant=&quot;primary&quot; />
+<EasyStatistic title=&quot;订单数量&quot; :value=&quot;1284&quot; suffix=&quot;单&quot; variant=&quot;success&quot; />
+<EasyStatistic title=&quot;营收金额&quot; :value=&quot;324150&quot; prefix=&quot;¥&quot; suffix=&quot;元&quot; variant=&quot;warning&quot; />
+<EasyStatistic title=&quot;错误率&quot; :value=&quot;2.4&quot; suffix=&quot;%&quot; variant=&quot;danger&quot; />"
         />
       </div>
     </section>
@@ -48,16 +48,16 @@ import { XlyStatistic } from 'easy-ui'
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyStatistic title="用户统计" :value="12543" suffix="人" icon="el:User" variant="primary" />
-          <XlyStatistic title="订单统计" :value="8925" suffix="单" icon="el:ShoppingCart" variant="success" />
-          <XlyStatistic title="收入统计" :value="324150" prefix="¥" suffix="元" icon="el:DataLine" variant="warning" />
-          <XlyStatistic title="错误统计" :value="12" suffix="个" icon="el:DataLine" variant="danger" />
+          <EasyStatistic title="用户统计" :value="12543" suffix="人" icon="el:User" variant="primary" />
+          <EasyStatistic title="订单统计" :value="8925" suffix="单" icon="el:ShoppingCart" variant="success" />
+          <EasyStatistic title="收入统计" :value="324150" prefix="¥" suffix="元" icon="el:DataLine" variant="warning" />
+          <EasyStatistic title="错误统计" :value="12" suffix="个" icon="el:DataLine" variant="danger" />
         </div>
-        <XlyDocCode
-          code="<XlyStatistic title=&quot;用户统计&quot; :value=&quot;12543&quot; suffix=&quot;人&quot; icon=&quot;el:User&quot; variant=&quot;primary&quot; />
-<XlyStatistic title=&quot;订单统计&quot; :value=&quot;8925&quot; suffix=&quot;单&quot; icon=&quot;el:ShoppingCart&quot; variant=&quot;success&quot; />
-<XlyStatistic title=&quot;收入统计&quot; :value=&quot;324150&quot; prefix=&quot;¥&quot; suffix=&quot;元&quot; icon=&quot;el:DataLine&quot; variant=&quot;warning&quot; />
-<XlyStatistic title=&quot;错误统计&quot; :value=&quot;12&quot; suffix=&quot;个&quot; icon=&quot;el:DataLine&quot; variant=&quot;danger&quot; />"
+        <EasyDocCode
+          code="<EasyStatistic title=&quot;用户统计&quot; :value=&quot;12543&quot; suffix=&quot;人&quot; icon=&quot;el:User&quot; variant=&quot;primary&quot; />
+<EasyStatistic title=&quot;订单统计&quot; :value=&quot;8925&quot; suffix=&quot;单&quot; icon=&quot;el:ShoppingCart&quot; variant=&quot;success&quot; />
+<EasyStatistic title=&quot;收入统计&quot; :value=&quot;324150&quot; prefix=&quot;¥&quot; suffix=&quot;元&quot; icon=&quot;el:DataLine&quot; variant=&quot;warning&quot; />
+<EasyStatistic title=&quot;错误统计&quot; :value=&quot;12&quot; suffix=&quot;个&quot; icon=&quot;el:DataLine&quot; variant=&quot;danger&quot; />"
         />
       </div>
     </section>
@@ -72,14 +72,14 @@ import { XlyStatistic } from 'easy-ui'
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyStatistic title="本月营收" :value="892500" prefix="¥" suffix="元" variant="primary" />
-          <XlyStatistic title="用户增长" :value="24.8" suffix="%" variant="success" />
-          <XlyStatistic title="响应时间" :value="2.4" suffix="秒" variant="info" />
+          <EasyStatistic title="本月营收" :value="892500" prefix="¥" suffix="元" variant="primary" />
+          <EasyStatistic title="用户增长" :value="24.8" suffix="%" variant="success" />
+          <EasyStatistic title="响应时间" :value="2.4" suffix="秒" variant="info" />
         </div>
-        <XlyDocCode
-          code="<XlyStatistic title=&quot;本月营收&quot; :value=&quot;892500&quot; prefix=&quot;¥&quot; suffix=&quot;元&quot; variant=&quot;primary&quot; />
-<XlyStatistic title=&quot;用户增长&quot; :value=&quot;24.8&quot; suffix=&quot;%&quot; variant=&quot;success&quot; />
-<XlyStatistic title=&quot;响应时间&quot; :value=&quot;2.4&quot; suffix=&quot;秒&quot; variant=&quot;info&quot; />"
+        <EasyDocCode
+          code="<EasyStatistic title=&quot;本月营收&quot; :value=&quot;892500&quot; prefix=&quot;¥&quot; suffix=&quot;元&quot; variant=&quot;primary&quot; />
+<EasyStatistic title=&quot;用户增长&quot; :value=&quot;24.8&quot; suffix=&quot;%&quot; variant=&quot;success&quot; />
+<EasyStatistic title=&quot;响应时间&quot; :value=&quot;2.4&quot; suffix=&quot;秒&quot; variant=&quot;info&quot; />"
         />
       </div>
     </section>
@@ -94,8 +94,8 @@ import { XlyStatistic } from 'easy-ui'
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyStatistic title="今日新增" :value="324" suffix="人" size="sm" variant="primary" icon="el:User" />
-          <XlyStatistic
+          <EasyStatistic title="今日新增" :value="324" suffix="人" size="sm" variant="primary" icon="el:User" />
+          <EasyStatistic
             title="本月销售额"
             :value="892500"
             prefix="¥"
@@ -104,7 +104,7 @@ import { XlyStatistic } from 'easy-ui'
             variant="success"
             icon="el:DataLine"
           />
-          <XlyStatistic
+          <EasyStatistic
             title="年度目标"
             :value="12500000"
             prefix="¥"
@@ -114,10 +114,10 @@ import { XlyStatistic } from 'easy-ui'
             icon="el:Location"
           />
         </div>
-        <XlyDocCode
-          code="<XlyStatistic title=&quot;今日新增&quot; :value=&quot;324&quot; suffix=&quot;人&quot; size=&quot;sm&quot; variant=&quot;primary&quot; icon=&quot;el:User&quot; />
-<XlyStatistic title=&quot;本月销售额&quot; :value=&quot;892500&quot; prefix=&quot;¥&quot; suffix=&quot;元&quot; size=&quot;md&quot; variant=&quot;success&quot; icon=&quot;el:DataLine&quot; />
-<XlyStatistic title=&quot;年度目标&quot; :value=&quot;12500000&quot; prefix=&quot;¥&quot; suffix=&quot;万元&quot; size=&quot;lg&quot; variant=&quot;warning&quot; icon=&quot;el:Location&quot; />"
+        <EasyDocCode
+          code="<EasyStatistic title=&quot;今日新增&quot; :value=&quot;324&quot; suffix=&quot;人&quot; size=&quot;sm&quot; variant=&quot;primary&quot; icon=&quot;el:User&quot; />
+<EasyStatistic title=&quot;本月销售额&quot; :value=&quot;892500&quot; prefix=&quot;¥&quot; suffix=&quot;元&quot; size=&quot;md&quot; variant=&quot;success&quot; icon=&quot;el:DataLine&quot; />
+<EasyStatistic title=&quot;年度目标&quot; :value=&quot;12500000&quot; prefix=&quot;¥&quot; suffix=&quot;万元&quot; size=&quot;lg&quot; variant=&quot;warning&quot; icon=&quot;el:Location&quot; />"
         />
       </div>
     </section>
@@ -132,7 +132,7 @@ import { XlyStatistic } from 'easy-ui'
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyStatistic
+          <EasyStatistic
             title="营收增长"
             :value="32.4"
             suffix="%"
@@ -141,7 +141,7 @@ import { XlyStatistic } from 'easy-ui'
             trend-label="环比 +5.2%"
             icon="el:DataLine"
           />
-          <XlyStatistic
+          <EasyStatistic
             title="用户流失"
             :value="8.6"
             suffix="%"
@@ -151,9 +151,9 @@ import { XlyStatistic } from 'easy-ui'
             icon="el:DataLine"
           />
         </div>
-        <XlyDocCode
-          code="<XlyStatistic title=&quot;营收增长&quot; :value=&quot;32.4&quot; suffix=&quot;%&quot; variant=&quot;success&quot; trend=&quot;up&quot; trend-label=&quot;环比 +5.2%&quot; icon=&quot;el:DataLine&quot; />
-<XlyStatistic title=&quot;用户流失&quot; :value=&quot;8.6&quot; suffix=&quot;%&quot; variant=&quot;danger&quot; trend=&quot;down&quot; trend-label=&quot;环比 -1.8%&quot; icon=&quot;el:DataLine&quot; />"
+        <EasyDocCode
+          code="<EasyStatistic title=&quot;营收增长&quot; :value=&quot;32.4&quot; suffix=&quot;%&quot; variant=&quot;success&quot; trend=&quot;up&quot; trend-label=&quot;环比 +5.2%&quot; icon=&quot;el:DataLine&quot; />
+<EasyStatistic title=&quot;用户流失&quot; :value=&quot;8.6&quot; suffix=&quot;%&quot; variant=&quot;danger&quot; trend=&quot;down&quot; trend-label=&quot;环比 -1.8%&quot; icon=&quot;el:DataLine&quot; />"
         />
       </div>
     </section>
@@ -168,7 +168,7 @@ import { XlyStatistic } from 'easy-ui'
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyStatistic
+          <EasyStatistic
             title="本月收入"
             :value="892500"
             prefix="¥"
@@ -177,7 +177,7 @@ import { XlyStatistic } from 'easy-ui'
             icon="el:DataLine"
             extra="较上月增长 12.5%，完成季度目标的 85%"
           />
-          <XlyStatistic
+          <EasyStatistic
             title="用户满意度"
             :value="4.85"
             suffix="/5.0"
@@ -186,8 +186,8 @@ import { XlyStatistic } from 'easy-ui'
             extra="基于 1,254 条用户评价，NPS 得分 +42"
           />
         </div>
-        <XlyDocCode
-          code="<XlyStatistic
+        <EasyDocCode
+          code="<EasyStatistic
   title=&quot;本月收入&quot;
   :value=&quot;892500&quot;
   prefix=&quot;¥&quot;
@@ -196,7 +196,7 @@ import { XlyStatistic } from 'easy-ui'
   icon=&quot;el:DataLine&quot;
   extra=&quot;较上月增长 12.5%，完成季度目标的 85%&quot;
 />
-<XlyStatistic
+<EasyStatistic
   title=&quot;用户满意度&quot;
   :value=&quot;4.85&quot;
   suffix=&quot;/5.0&quot;
@@ -219,7 +219,7 @@ import { XlyStatistic } from 'easy-ui'
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="dashboard-grid">
-            <XlyStatistic
+            <EasyStatistic
               title="总用户数"
               :value="12543"
               suffix="人"
@@ -228,7 +228,7 @@ import { XlyStatistic } from 'easy-ui'
               :bordered="true"
               :hoverable="true"
             />
-            <XlyStatistic
+            <EasyStatistic
               title="本月收入"
               :value="892500"
               prefix="¥"
@@ -240,7 +240,7 @@ import { XlyStatistic } from 'easy-ui'
               trend="up"
               trend-label="+12.5%"
             />
-            <XlyStatistic
+            <EasyStatistic
               title="订单数量"
               :value="1284"
               suffix="单"
@@ -249,7 +249,7 @@ import { XlyStatistic } from 'easy-ui'
               :bordered="true"
               :hoverable="true"
             />
-            <XlyStatistic
+            <EasyStatistic
               title="转化率"
               :value="24.8"
               suffix="%"
@@ -261,9 +261,9 @@ import { XlyStatistic } from 'easy-ui'
             />
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<div class=&quot;dashboard-grid&quot;>
-  <XlyStatistic
+  <EasyStatistic
     title=&quot;总用户数&quot;
     :value=&quot;12543&quot;
     suffix=&quot;人&quot;
@@ -272,7 +272,7 @@ import { XlyStatistic } from 'easy-ui'
     :bordered=&quot;true&quot;
     :hoverable=&quot;true&quot;
   />
-  <XlyStatistic
+  <EasyStatistic
     title=&quot;本月收入&quot;
     :value=&quot;892500&quot;
     prefix=&quot;¥&quot;
@@ -284,7 +284,7 @@ import { XlyStatistic } from 'easy-ui'
     trend=&quot;up&quot;
     trend-label=&quot;+12.5%&quot;
   />
-  <XlyStatistic
+  <EasyStatistic
     title=&quot;订单数量&quot;
     :value=&quot;1284&quot;
     suffix=&quot;单&quot;

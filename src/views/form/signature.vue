@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { XlySignature } from 'easy-ui'
+import { EasySignature } from 'easy-ui'
 import { ref } from 'vue'
 
 defineOptions({ name: 'SignatureDoc' })
 
-const pureSigRef = ref<InstanceType<typeof XlySignature>>()
+const pureSigRef = ref<InstanceType<typeof EasySignature>>()
 const signatureDataUrl = ref('')
 
 function onConfirm(dataUrl: string) {
@@ -56,11 +56,11 @@ function formatDataUrlSize(dataUrl: string): string {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="sig-demo" style="max-width: 500px">
-            <XlySignature :height="200" @confirm="onConfirm" @change="onChange" />
+            <EasySignature :height="200" @confirm="onConfirm" @change="onChange" />
           </div>
         </div>
-        <XlyDocCode
-          code="<XlySignature
+        <EasyDocCode
+          code="<EasySignature
   :height=&quot;200&quot;
   @confirm=&quot;onConfirm&quot;
   @change=&quot;onChange&quot;
@@ -80,11 +80,11 @@ function formatDataUrlSize(dataUrl: string): string {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="sig-demo" style="max-width: 550px">
-            <XlySignature :height="200" show-pen-color pen-color="#ef4444" />
+            <EasySignature :height="200" show-pen-color pen-color="#ef4444" />
           </div>
         </div>
-        <XlyDocCode
-          code="<XlySignature
+        <EasyDocCode
+          code="<EasySignature
   :height=&quot;200&quot;
   show-pen-color
   pen-color=&quot;#ef4444&quot;
@@ -104,11 +104,11 @@ function formatDataUrlSize(dataUrl: string): string {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="sig-demo sig-demo--dark" style="max-width: 500px">
-            <XlySignature :height="200" canvas-bg-color="#1e293b" pen-color="#e2e8f0" :radius="10" toolbar-text />
+            <EasySignature :height="200" canvas-bg-color="#1e293b" pen-color="#e2e8f0" :radius="10" toolbar-text />
           </div>
         </div>
-        <XlyDocCode
-          code="<XlySignature
+        <EasyDocCode
+          code="<EasySignature
   :height=&quot;200&quot;
   canvas-bg-color=&quot;#1e293b&quot;
   pen-color=&quot;#e2e8f0&quot;
@@ -130,7 +130,7 @@ function formatDataUrlSize(dataUrl: string): string {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="sig-demo" style="max-width: 500px">
-            <XlySignature
+            <EasySignature
               ref="pureSigRef"
               :height="160"
               :show-toolbar="false"
@@ -157,8 +157,8 @@ function formatDataUrlSize(dataUrl: string): string {
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlySignature
+        <EasyDocCode
+          code="<EasySignature
   ref=&quot;sigRef&quot;
   :show-toolbar=&quot;false&quot;
   :show-placeholder=&quot;false&quot;
@@ -249,7 +249,7 @@ function formatDataUrlSize(dataUrl: string): string {
             </tr>
             <tr>
               <td><code>placeholderIcon</code></td>
-              <td>占位提示图标（XlyIcon 格式）</td>
+              <td>占位提示图标（EasyIcon 格式）</td>
               <td><code>string</code></td>
               <td><code>''</code></td>
             </tr>

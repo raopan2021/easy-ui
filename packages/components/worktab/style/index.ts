@@ -1,0 +1,1 @@
+import '../src/worktab.vue'

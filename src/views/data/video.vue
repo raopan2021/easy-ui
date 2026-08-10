@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyVideo } from 'easy-ui'
+import { EasyVideo } from 'easy-ui'
 import { ref } from 'vue'
 
 // 弹幕类型
@@ -86,7 +86,7 @@ function handleTimeUpdate(time: number) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyVideo
+          <EasyVideo
             src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
             poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
             :height="480"
@@ -95,13 +95,13 @@ function handleTimeUpdate(time: number) {
             @danmaku-send="handleDanmakuSend"
           />
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="const danmakuList = [
   { id: 1, text: '前方高能！', time: 5, color: '#FE0302', mode: 'scroll' },
   { id: 2, text: '哈哈哈', time: 10, color: '#FFFF00', mode: 'scroll' },
 ]
 
-<XlyVideo
+<EasyVideo
   src=&quot;...&quot;
   :danmaku=&quot;danmakuList&quot;
   @danmakuSend=&quot;handleDanmakuSend&quot;
@@ -123,7 +123,7 @@ function handleTimeUpdate(time: number) {
           <div class="video-row">
             <div class="video-item">
               <span class="video-label">自动播放（静音）</span>
-              <XlyVideo
+              <EasyVideo
                 src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
                 :autoplay="true"
                 :muted="true"
@@ -133,7 +133,7 @@ function handleTimeUpdate(time: number) {
             </div>
             <div class="video-item">
               <span class="video-label">不自动播放</span>
-              <XlyVideo
+              <EasyVideo
                 src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
                 :autoplay="false"
                 :show-poster="false"
@@ -142,12 +142,12 @@ function handleTimeUpdate(time: number) {
             </div>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 静音自动播放 -->
-<XlyVideo src=&quot;...&quot; :autoplay=&quot;true&quot; :muted=&quot;true&quot; />
+<EasyVideo src=&quot;...&quot; :autoplay=&quot;true&quot; :muted=&quot;true&quot; />
 
 <!-- 手动播放 -->
-<XlyVideo src=&quot;...&quot; :autoplay=&quot;false&quot; />"
+<EasyVideo src=&quot;...&quot; :autoplay=&quot;false&quot; />"
         />
       </div>
     </section>
@@ -166,7 +166,7 @@ function handleTimeUpdate(time: number) {
           <div class="video-row">
             <div class="video-item">
               <span class="video-label">自定义封面图</span>
-              <XlyVideo
+              <EasyVideo
                 src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
                 poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
                 :height="180"
@@ -174,7 +174,7 @@ function handleTimeUpdate(time: number) {
             </div>
             <div class="video-item">
               <span class="video-label">自动捕获第一帧（无poster）</span>
-              <XlyVideo
+              <EasyVideo
                 src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
                 :show-poster="true"
                 :height="180"
@@ -182,7 +182,7 @@ function handleTimeUpdate(time: number) {
             </div>
             <div class="video-item">
               <span class="video-label">隐藏封面图</span>
-              <XlyVideo
+              <EasyVideo
                 src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
                 :show-poster="false"
                 :height="180"
@@ -190,15 +190,15 @@ function handleTimeUpdate(time: number) {
             </div>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 自定义封面图 -->
-<XlyVideo src=&quot;...&quot; poster=&quot;...&quot; />
+<EasyVideo src=&quot;...&quot; poster=&quot;...&quot; />
 
 <!-- 自动捕获第一帧（不传poster） -->
-<XlyVideo src=&quot;...&quot; />
+<EasyVideo src=&quot;...&quot; />
 
 <!-- 隐藏封面图 -->
-<XlyVideo src=&quot;...&quot; :show-poster=&quot;false&quot; />"
+<EasyVideo src=&quot;...&quot; :show-poster=&quot;false&quot; />"
         />
       </div>
     </section>
@@ -216,7 +216,7 @@ function handleTimeUpdate(time: number) {
           <div class="video-row">
             <div class="video-item">
               <span class="video-label">小尺寸 320x180</span>
-              <XlyVideo
+              <EasyVideo
                 src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
                 poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
                 :width="320"
@@ -225,7 +225,7 @@ function handleTimeUpdate(time: number) {
             </div>
             <div class="video-item">
               <span class="video-label">大尺寸 640x360</span>
-              <XlyVideo
+              <EasyVideo
                 src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
                 poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
                 :width="640"
@@ -234,9 +234,9 @@ function handleTimeUpdate(time: number) {
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyVideo src=&quot;...&quot; :width=&quot;320&quot; :height=&quot;180&quot; />
-<XlyVideo src=&quot;...&quot; width=&quot;100%&quot; :height=&quot;360&quot; />"
+        <EasyDocCode
+          code="<EasyVideo src=&quot;...&quot; :width=&quot;320&quot; :height=&quot;180&quot; />
+<EasyVideo src=&quot;...&quot; width=&quot;100%&quot; :height=&quot;360&quot; />"
         />
       </div>
     </section>
@@ -254,7 +254,7 @@ function handleTimeUpdate(time: number) {
           <div class="video-row">
             <div class="video-item">
               <span class="video-label">隐藏速度控制</span>
-              <XlyVideo
+              <EasyVideo
                 src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
                 poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
                 :show-speed="false"
@@ -263,7 +263,7 @@ function handleTimeUpdate(time: number) {
             </div>
             <div class="video-item">
               <span class="video-label">隐藏音量控制</span>
-              <XlyVideo
+              <EasyVideo
                 src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
                 poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
                 :show-volume="false"
@@ -272,7 +272,7 @@ function handleTimeUpdate(time: number) {
             </div>
             <div class="video-item">
               <span class="video-label">隐藏全屏按钮</span>
-              <XlyVideo
+              <EasyVideo
                 src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
                 poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
                 :show-fullscreen="false"
@@ -281,10 +281,10 @@ function handleTimeUpdate(time: number) {
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyVideo src=&quot;...&quot; :show-speed=&quot;false&quot; />
-<XlyVideo src=&quot;...&quot; :show-volume=&quot;false&quot; />
-<XlyVideo src=&quot;...&quot; :show-fullscreen=&quot;false&quot; />"
+        <EasyDocCode
+          code="<EasyVideo src=&quot;...&quot; :show-speed=&quot;false&quot; />
+<EasyVideo src=&quot;...&quot; :show-volume=&quot;false&quot; />
+<EasyVideo src=&quot;...&quot; :show-fullscreen=&quot;false&quot; />"
         />
       </div>
     </section>
@@ -299,14 +299,14 @@ function handleTimeUpdate(time: number) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyVideo
+          <EasyVideo
             src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
             poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
             :loop="true"
             :height="280"
           />
         </div>
-        <XlyDocCode code="<XlyVideo src=&quot;...&quot; :loop=&quot;true&quot; />" />
+        <EasyDocCode code="<EasyVideo src=&quot;...&quot; :loop=&quot;true&quot; />" />
       </div>
     </section>
 
@@ -320,14 +320,14 @@ function handleTimeUpdate(time: number) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyVideo
+          <EasyVideo
             src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
             poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
             :playback-rates="[0.5, 1, 2, 3]"
             :height="280"
           />
         </div>
-        <XlyDocCode code="<XlyVideo src=&quot;...&quot; :playback-rates=&quot;[0.5, 1, 2, 3]&quot; />" />
+        <EasyDocCode code="<EasyVideo src=&quot;...&quot; :playback-rates=&quot;[0.5, 1, 2, 3]&quot; />" />
       </div>
     </section>
 
@@ -342,7 +342,7 @@ function handleTimeUpdate(time: number) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyVideo
+          <EasyVideo
             ref="videoRef"
             src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
             poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
@@ -353,8 +353,8 @@ function handleTimeUpdate(time: number) {
             @timeupdate="handleTimeUpdate"
           />
         </div>
-        <XlyDocCode
-          code="<XlyVideo
+        <EasyDocCode
+          code="<EasyVideo
   ref=&quot;videoRef&quot;
   src=&quot;...&quot;
   @play=&quot;handlePlay&quot;
@@ -383,7 +383,7 @@ const handleTimeUpdate = (time) => console.log('当前时间:', time)
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyVideo
+          <EasyVideo
             src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
             poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
             :height="280"
@@ -391,8 +391,8 @@ const handleTimeUpdate = (time) => console.log('当前时间:', time)
             :danmaku-enabled="false"
           />
         </div>
-        <XlyDocCode
-          code="<XlyVideo
+        <EasyDocCode
+          code="<EasyVideo
   src=&quot;...&quot;
   :danmaku=&quot;danmakuList&quot;
   :danmaku-enabled=&quot;false&quot;

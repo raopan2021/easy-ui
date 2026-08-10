@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { CircleCheckFilled, Message, Star } from '@element-plus/icons-vue'
-import { XlyTag, XlyTimeline, XlyTimelineItem } from 'easy-ui'
+import { EasyTag, EasyTimeline, EasyTimelineItem } from 'easy-ui'
 </script>
 
 <template>
@@ -25,40 +25,40 @@ import { XlyTag, XlyTimeline, XlyTimelineItem } from 'easy-ui'
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTimeline>
-            <XlyTimelineItem status="finish" timestamp="2024-01-15 09:30">
+          <EasyTimeline>
+            <EasyTimelineItem status="finish" timestamp="2024-01-15 09:30">
               <h4>项目启动</h4>
               <p>完成项目立项和团队组建</p>
-            </XlyTimelineItem>
-            <XlyTimelineItem status="finish" timestamp="2024-02-01 14:00">
+            </EasyTimelineItem>
+            <EasyTimelineItem status="finish" timestamp="2024-02-01 14:00">
               <h4>需求分析</h4>
               <p>完成需求文档编写和评审</p>
-            </XlyTimelineItem>
-            <XlyTimelineItem status="process" timestamp="2024-02-15 10:00">
+            </EasyTimelineItem>
+            <EasyTimelineItem status="process" timestamp="2024-02-15 10:00">
               <h4>开发阶段</h4>
               <p>正在进行核心功能开发</p>
-            </XlyTimelineItem>
-            <XlyTimelineItem status="wait" timestamp="2024-03-01">
+            </EasyTimelineItem>
+            <EasyTimelineItem status="wait" timestamp="2024-03-01">
               <h4>测试阶段</h4>
               <p>计划进行系统测试</p>
-            </XlyTimelineItem>
-          </XlyTimeline>
+            </EasyTimelineItem>
+          </EasyTimeline>
         </div>
-        <XlyDocCode
-          code="<XlyTimeline>
-  <XlyTimelineItem status=&quot;finish&quot; timestamp=&quot;2024-01-15&quot;>
+        <EasyDocCode
+          code="<EasyTimeline>
+  <EasyTimelineItem status=&quot;finish&quot; timestamp=&quot;2024-01-15&quot;>
     <h4>项目启动</h4>
     <p>完成项目立项和团队组建</p>
-  </XlyTimelineItem>
-  <XlyTimelineItem status=&quot;process&quot; timestamp=&quot;2024-02-15&quot;>
+  </EasyTimelineItem>
+  <EasyTimelineItem status=&quot;process&quot; timestamp=&quot;2024-02-15&quot;>
     <h4>开发阶段</h4>
     <p>正在进行核心功能开发</p>
-  </XlyTimelineItem>
-  <XlyTimelineItem status=&quot;wait&quot; timestamp=&quot;2024-03-01&quot;>
+  </EasyTimelineItem>
+  <EasyTimelineItem status=&quot;wait&quot; timestamp=&quot;2024-03-01&quot;>
     <h4>测试阶段</h4>
     <p>计划进行系统测试</p>
-  </XlyTimelineItem>
-</XlyTimeline>"
+  </EasyTimelineItem>
+</EasyTimeline>"
         />
       </div>
     </section>
@@ -74,30 +74,30 @@ import { XlyTag, XlyTimeline, XlyTimelineItem } from 'easy-ui'
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTimeline>
-            <XlyTimelineItem status="finish">
+          <EasyTimeline>
+            <EasyTimelineItem status="finish">
               <h4>已完成</h4>
               <p>使用绿色勾选图标表示完成状态</p>
-            </XlyTimelineItem>
-            <XlyTimelineItem status="process">
+            </EasyTimelineItem>
+            <EasyTimelineItem status="process">
               <h4>进行中</h4>
               <p>使用蓝色圆点表示当前进行中的状态</p>
-            </XlyTimelineItem>
-            <XlyTimelineItem status="wait">
+            </EasyTimelineItem>
+            <EasyTimelineItem status="wait">
               <h4>待处理</h4>
               <p>使用灰色圆圈表示待处理状态</p>
-            </XlyTimelineItem>
-            <XlyTimelineItem status="error">
+            </EasyTimelineItem>
+            <EasyTimelineItem status="error">
               <h4>错误状态</h4>
               <p>使用红色叉号表示错误或失败状态</p>
-            </XlyTimelineItem>
-          </XlyTimeline>
+            </EasyTimelineItem>
+          </EasyTimeline>
         </div>
-        <XlyDocCode
-          code="<XlyTimelineItem status=&quot;finish&quot;>...</XlyTimelineItem>
-<XlyTimelineItem status=&quot;process&quot;>...</XlyTimelineItem>
-<XlyTimelineItem status=&quot;wait&quot;>...</XlyTimelineItem>
-<XlyTimelineItem status=&quot;error&quot;>...</XlyTimelineItem>"
+        <EasyDocCode
+          code="<EasyTimelineItem status=&quot;finish&quot;>...</EasyTimelineItem>
+<EasyTimelineItem status=&quot;process&quot;>...</EasyTimelineItem>
+<EasyTimelineItem status=&quot;wait&quot;>...</EasyTimelineItem>
+<EasyTimelineItem status=&quot;error&quot;>...</EasyTimelineItem>"
         />
       </div>
     </section>
@@ -108,42 +108,42 @@ import { XlyTag, XlyTimeline, XlyTimelineItem } from 'easy-ui'
         自定义节点图标
       </h2>
       <p class="doc-section__desc">
-        通过 <code>icon</code> 属性直接传入图标名称，使用已有的 <code>XlyIcon</code> 组件。支持 Element Plus
+        通过 <code>icon</code> 属性直接传入图标名称，使用已有的 <code>EasyIcon</code> 组件。支持 Element Plus
         图标（<code>el:xxx</code>）和 SVG 图标（<code>svg:xxx</code>）。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTimeline>
-            <XlyTimelineItem status="finish" icon="el:Check">
+          <EasyTimeline>
+            <EasyTimelineItem status="finish" icon="el:Check">
               <h4>自定义图标</h4>
               <p>使用 el:Check 图标</p>
-            </XlyTimelineItem>
-            <XlyTimelineItem status="process" icon="el:Loading">
+            </EasyTimelineItem>
+            <EasyTimelineItem status="process" icon="el:Loading">
               <h4>加载中</h4>
               <p>使用 el:Loading 图标</p>
-            </XlyTimelineItem>
-            <XlyTimelineItem status="wait" icon="el:Clock">
+            </EasyTimelineItem>
+            <EasyTimelineItem status="wait" icon="el:Clock">
               <h4>待处理</h4>
               <p>使用 el:Clock 图标</p>
-            </XlyTimelineItem>
-            <XlyTimelineItem status="error" icon="el:Close">
+            </EasyTimelineItem>
+            <EasyTimelineItem status="error" icon="el:Close">
               <h4>错误状态</h4>
               <p>使用 el:Close 图标</p>
-            </XlyTimelineItem>
-          </XlyTimeline>
+            </EasyTimelineItem>
+          </EasyTimeline>
         </div>
-        <XlyDocCode
-          code="<XlyTimelineItem status=&quot;finish&quot; icon=&quot;el:Check&quot;>
+        <EasyDocCode
+          code="<EasyTimelineItem status=&quot;finish&quot; icon=&quot;el:Check&quot;>
   <h4>自定义图标</h4>
-</XlyTimelineItem>
+</EasyTimelineItem>
 
-<XlyTimelineItem status=&quot;process&quot; icon=&quot;el:Loading&quot;>
+<EasyTimelineItem status=&quot;process&quot; icon=&quot;el:Loading&quot;>
   <h4>加载中</h4>
-</XlyTimelineItem>
+</EasyTimelineItem>
 
-<XlyTimelineItem status=&quot;wait&quot; icon=&quot;el:Clock&quot;>
+<EasyTimelineItem status=&quot;wait&quot; icon=&quot;el:Clock&quot;>
   <h4>待处理</h4>
-</XlyTimelineItem>"
+</EasyTimelineItem>"
         />
       </div>
     </section>
@@ -158,12 +158,12 @@ import { XlyTag, XlyTimeline, XlyTimelineItem } from 'easy-ui'
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTimeline>
-            <XlyTimelineItem timestamp="2024-01-15 09:30:00">
+          <EasyTimeline>
+            <EasyTimelineItem timestamp="2024-01-15 09:30:00">
               <h4>项目启动会议</h4>
               <p>明确项目目标和分工</p>
-            </XlyTimelineItem>
-            <XlyTimelineItem>
+            </EasyTimelineItem>
+            <EasyTimelineItem>
               <template #timestamp>
                 <div class="custom-timestamp">
                   <span class="date">2024-02-01</span>
@@ -172,26 +172,26 @@ import { XlyTag, XlyTimeline, XlyTimelineItem } from 'easy-ui'
               </template>
               <h4>设计评审</h4>
               <p>完成 UI 设计稿评审</p>
-            </XlyTimelineItem>
-            <XlyTimelineItem timestamp="2024-02-15">
+            </EasyTimelineItem>
+            <EasyTimelineItem timestamp="2024-02-15">
               <h4>开发启动</h4>
               <p>开始核心功能开发</p>
-            </XlyTimelineItem>
-          </XlyTimeline>
+            </EasyTimelineItem>
+          </EasyTimeline>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 使用 timestamp 属性 -->
-<XlyTimelineItem timestamp=&quot;2024-01-15 09:30&quot;>
+<EasyTimelineItem timestamp=&quot;2024-01-15 09:30&quot;>
   ...
-</XlyTimelineItem>
+</EasyTimelineItem>
 
 <!-- 使用 #timestamp 插槽 -->
-<XlyTimelineItem>
+<EasyTimelineItem>
   <template #timestamp>
     <span>2024-02-01 14:30</span>
   </template>
   ...
-</XlyTimelineItem>"
+</EasyTimelineItem>"
         />
       </div>
     </section>
@@ -206,32 +206,32 @@ import { XlyTag, XlyTimeline, XlyTimelineItem } from 'easy-ui'
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTimeline>
-            <XlyTimelineItem status="finish">
+          <EasyTimeline>
+            <EasyTimelineItem status="finish">
               创建订单 #20240301
-            </XlyTimelineItem>
-            <XlyTimelineItem status="finish">
+            </EasyTimelineItem>
+            <EasyTimelineItem status="finish">
               支付成功
-            </XlyTimelineItem>
-            <XlyTimelineItem status="process">
+            </EasyTimelineItem>
+            <EasyTimelineItem status="process">
               商品打包中
-            </XlyTimelineItem>
-            <XlyTimelineItem status="wait">
+            </EasyTimelineItem>
+            <EasyTimelineItem status="wait">
               等待发货
-            </XlyTimelineItem>
-            <XlyTimelineItem status="wait">
+            </EasyTimelineItem>
+            <EasyTimelineItem status="wait">
               确认收货
-            </XlyTimelineItem>
-          </XlyTimeline>
+            </EasyTimelineItem>
+          </EasyTimeline>
         </div>
-        <XlyDocCode
-          code="<XlyTimeline>
-  <XlyTimelineItem status=&quot;finish&quot;>创建订单 #20240301</XlyTimelineItem>
-  <XlyTimelineItem status=&quot;finish&quot;>支付成功</XlyTimelineItem>
-  <XlyTimelineItem status=&quot;process&quot;>商品打包中</XlyTimelineItem>
-  <XlyTimelineItem status=&quot;wait&quot;>等待发货</XlyTimelineItem>
-  <XlyTimelineItem status=&quot;wait&quot;>确认收货</XlyTimelineItem>
-</XlyTimeline>"
+        <EasyDocCode
+          code="<EasyTimeline>
+  <EasyTimelineItem status=&quot;finish&quot;>创建订单 #20240301</EasyTimelineItem>
+  <EasyTimelineItem status=&quot;finish&quot;>支付成功</EasyTimelineItem>
+  <EasyTimelineItem status=&quot;process&quot;>商品打包中</EasyTimelineItem>
+  <EasyTimelineItem status=&quot;wait&quot;>等待发货</EasyTimelineItem>
+  <EasyTimelineItem status=&quot;wait&quot;>确认收货</EasyTimelineItem>
+</EasyTimeline>"
         />
       </div>
     </section>
@@ -253,42 +253,42 @@ import { XlyTag, XlyTimeline, XlyTimelineItem } from 'easy-ui'
         <div class="order-tracker">
           <div class="order-tracker__header">
             <span>运单号：SF1234567890</span>
-            <XlyTag type="primary" size="small">
+            <EasyTag type="primary" size="small">
               运输中
-            </XlyTag>
+            </EasyTag>
           </div>
-          <XlyTimeline>
-            <XlyTimelineItem status="finish" timestamp="2024-03-20 10:30">
+          <EasyTimeline>
+            <EasyTimelineItem status="finish" timestamp="2024-03-20 10:30">
               <div class="tracker-item">
                 <h4>已发货</h4>
                 <p>商品已从深圳仓库发出</p>
               </div>
-            </XlyTimelineItem>
-            <XlyTimelineItem status="finish" timestamp="2024-03-20 14:20">
+            </EasyTimelineItem>
+            <EasyTimelineItem status="finish" timestamp="2024-03-20 14:20">
               <div class="tracker-item">
                 <h4>运输中</h4>
                 <p>包裹正在发往广州</p>
               </div>
-            </XlyTimelineItem>
-            <XlyTimelineItem status="process" timestamp="2024-03-21 09:00">
+            </EasyTimelineItem>
+            <EasyTimelineItem status="process" timestamp="2024-03-21 09:00">
               <div class="tracker-item">
                 <h4>到达中转站</h4>
                 <p>包裹已到达广州中转站</p>
               </div>
-            </XlyTimelineItem>
-            <XlyTimelineItem status="wait">
+            </EasyTimelineItem>
+            <EasyTimelineItem status="wait">
               <div class="tracker-item">
                 <h4>派送中</h4>
                 <p>快递员正在派送</p>
               </div>
-            </XlyTimelineItem>
-            <XlyTimelineItem status="wait">
+            </EasyTimelineItem>
+            <EasyTimelineItem status="wait">
               <div class="tracker-item">
                 <h4>已签收</h4>
                 <p>收件人已签收</p>
               </div>
-            </XlyTimelineItem>
-          </XlyTimeline>
+            </EasyTimelineItem>
+          </EasyTimeline>
         </div>
       </div>
 
@@ -298,8 +298,8 @@ import { XlyTag, XlyTimeline, XlyTimelineItem } from 'easy-ui'
       </h3>
       <div class="doc-preview doc-preview--noborder">
         <div class="activity-list">
-          <XlyTimeline>
-            <XlyTimelineItem status="finish" timestamp="2024-03-24 15:30">
+          <EasyTimeline>
+            <EasyTimelineItem status="finish" timestamp="2024-03-24 15:30">
               <div class="activity-item">
                 <div class="activity-item__icon success">
                   <el-icon><CircleCheckFilled /></el-icon>
@@ -309,8 +309,8 @@ import { XlyTag, XlyTimeline, XlyTimelineItem } from 'easy-ui'
                   <p>成功购买《Vue3实战》课程</p>
                 </div>
               </div>
-            </XlyTimelineItem>
-            <XlyTimelineItem status="finish" timestamp="2024-03-24 14:20">
+            </EasyTimelineItem>
+            <EasyTimelineItem status="finish" timestamp="2024-03-24 14:20">
               <div class="activity-item">
                 <div class="activity-item__icon primary">
                   <el-icon><Message /></el-icon>
@@ -320,8 +320,8 @@ import { XlyTag, XlyTimeline, XlyTimelineItem } from 'easy-ui'
                   <p>对《React入门》课程发表了评论</p>
                 </div>
               </div>
-            </XlyTimelineItem>
-            <XlyTimelineItem status="finish" timestamp="2024-03-24 10:00">
+            </EasyTimelineItem>
+            <EasyTimelineItem status="finish" timestamp="2024-03-24 10:00">
               <div class="activity-item">
                 <div class="activity-item__icon warning">
                   <el-icon><Star /></el-icon>
@@ -331,8 +331,8 @@ import { XlyTag, XlyTimeline, XlyTimelineItem } from 'easy-ui'
                   <p>收藏了《TypeScript进阶》课程</p>
                 </div>
               </div>
-            </XlyTimelineItem>
-          </XlyTimeline>
+            </EasyTimelineItem>
+          </EasyTimeline>
         </div>
       </div>
 
@@ -342,8 +342,8 @@ import { XlyTag, XlyTimeline, XlyTimelineItem } from 'easy-ui'
       </h3>
       <div class="doc-preview doc-preview--noborder">
         <div class="approval-flow">
-          <XlyTimeline>
-            <XlyTimelineItem status="finish" timestamp="2024-03-20 09:00">
+          <EasyTimeline>
+            <EasyTimelineItem status="finish" timestamp="2024-03-20 09:00">
               <div class="approval-item">
                 <div class="approval-item__header">
                   <span class="approval-item__title">提交申请</span>
@@ -353,8 +353,8 @@ import { XlyTag, XlyTimeline, XlyTimelineItem } from 'easy-ui'
                   张明 提交了请假申请（3天）
                 </p>
               </div>
-            </XlyTimelineItem>
-            <XlyTimelineItem status="finish" timestamp="2024-03-20 10:30">
+            </EasyTimelineItem>
+            <EasyTimelineItem status="finish" timestamp="2024-03-20 10:30">
               <div class="approval-item">
                 <div class="approval-item__header">
                   <span class="approval-item__title">直属主管审批</span>
@@ -364,8 +364,8 @@ import { XlyTag, XlyTimeline, XlyTimelineItem } from 'easy-ui'
                   李华 审批通过
                 </p>
               </div>
-            </XlyTimelineItem>
-            <XlyTimelineItem status="process" timestamp="2024-03-20 11:00">
+            </EasyTimelineItem>
+            <EasyTimelineItem status="process" timestamp="2024-03-20 11:00">
               <div class="approval-item">
                 <div class="approval-item__header">
                   <span class="approval-item__title">部门经理审批</span>
@@ -375,8 +375,8 @@ import { XlyTag, XlyTimeline, XlyTimelineItem } from 'easy-ui'
                   等待王芳审批
                 </p>
               </div>
-            </XlyTimelineItem>
-            <XlyTimelineItem status="wait">
+            </EasyTimelineItem>
+            <EasyTimelineItem status="wait">
               <div class="approval-item">
                 <div class="approval-item__header">
                   <span class="approval-item__title">HR备案</span>
@@ -385,8 +385,8 @@ import { XlyTag, XlyTimeline, XlyTimelineItem } from 'easy-ui'
                   审批通过后自动备案
                 </p>
               </div>
-            </XlyTimelineItem>
-          </XlyTimeline>
+            </EasyTimelineItem>
+          </EasyTimeline>
         </div>
       </div>
     </section>

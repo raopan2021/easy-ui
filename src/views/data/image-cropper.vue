@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { XlyButton, XlyImageCropper } from 'easy-ui'
+import { EasyButton, EasyImageCropper } from 'easy-ui'
 import { ElMessage } from 'element-plus'
 import { ref } from 'vue'
 
 // 基础示例
-const cropperRef = ref<InstanceType<typeof XlyImageCropper>>()
+const cropperRef = ref<InstanceType<typeof EasyImageCropper>>()
 const basicSrc = 'https://picsum.photos/seed/cropper/800/600'
 const basicResult = ref('')
 
@@ -21,7 +21,7 @@ function onBasicCancel() {
 // 使用同 basicSrc
 
 // 隐藏工具栏示例
-const noToolbarRef = ref<InstanceType<typeof XlyImageCropper>>()
+const noToolbarRef = ref<InstanceType<typeof EasyImageCropper>>()
 const noToolbarResult = ref('')
 
 function noToolbarRotate() {
@@ -42,7 +42,7 @@ async function noToolbarCrop() {
 
 // 交互式演示
 const uploadInputRef = ref<HTMLInputElement | null>(null)
-const interactRef = ref<InstanceType<typeof XlyImageCropper>>()
+const interactRef = ref<InstanceType<typeof EasyImageCropper>>()
 const interactSrc = ref('')
 const interactResult = ref('')
 const interactResultSize = ref('')
@@ -97,7 +97,7 @@ async function onInteractConfirm(data: { dataURL: string, blob: Blob | null }) {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="cropper-demo-wrapper">
-            <XlyImageCropper
+            <EasyImageCropper
               ref="cropperRef"
               :src="basicSrc"
               toolbar
@@ -111,7 +111,7 @@ async function onInteractConfirm(data: { dataURL: string, blob: Blob | null }) {
             <img :src="basicResult" alt="cropped">
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="const cropperRef = ref()
 
 // 通过 ref 获取结果
@@ -140,22 +140,22 @@ function onConfirm(data) {
       <div class="doc-preview">
         <div class="doc-preview__body cropper-ratio-group">
           <div class="cropper-ratio-item">
-            <XlyImageCropper :src="basicSrc" :aspect-ratio="1" :toolbar="false" :show-action="false" />
+            <EasyImageCropper :src="basicSrc" :aspect-ratio="1" :toolbar="false" :show-action="false" />
             <span>1:1 正方形</span>
           </div>
           <div class="cropper-ratio-item">
-            <XlyImageCropper :src="basicSrc" :aspect-ratio="16 / 9" :toolbar="false" :show-action="false" />
+            <EasyImageCropper :src="basicSrc" :aspect-ratio="16 / 9" :toolbar="false" :show-action="false" />
             <span>16:9 横版</span>
           </div>
           <div class="cropper-ratio-item">
-            <XlyImageCropper :src="basicSrc" :aspect-ratio="9 / 16" :toolbar="false" :show-action="false" />
+            <EasyImageCropper :src="basicSrc" :aspect-ratio="9 / 16" :toolbar="false" :show-action="false" />
             <span>9:16 竖版</span>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyImageCropper :src=&quot;imgSrc&quot; :aspect-ratio=&quot;1&quot; />
-<XlyImageCropper :src=&quot;imgSrc&quot; :aspect-ratio=&quot;16/9&quot; />
-<XlyImageCropper :src=&quot;imgSrc&quot; :aspect-ratio=&quot;9/16&quot; />"
+        <EasyDocCode
+          code="<EasyImageCropper :src=&quot;imgSrc&quot; :aspect-ratio=&quot;1&quot; />
+<EasyImageCropper :src=&quot;imgSrc&quot; :aspect-ratio=&quot;16/9&quot; />
+<EasyImageCropper :src=&quot;imgSrc&quot; :aspect-ratio=&quot;9/16&quot; />"
         />
       </div>
     </section>
@@ -172,25 +172,25 @@ function onConfirm(data) {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="cropper-no-toolbar">
-            <XlyImageCropper ref="noToolbarRef" :src="basicSrc" :toolbar="false" :show-action="false" />
+            <EasyImageCropper ref="noToolbarRef" :src="basicSrc" :toolbar="false" :show-action="false" />
             <div class="cropper-no-toolbar__btns">
-              <XlyButton size="small" @click="noToolbarRotate">
+              <EasyButton size="small" @click="noToolbarRotate">
                 旋转90°
-              </XlyButton>
-              <XlyButton size="small" @click="noToolbarReset">
+              </EasyButton>
+              <EasyButton size="small" @click="noToolbarReset">
                 重置
-              </XlyButton>
-              <XlyButton size="small" type="primary" @click="noToolbarCrop">
+              </EasyButton>
+              <EasyButton size="small" type="primary" @click="noToolbarCrop">
                 获取裁剪
-              </XlyButton>
+              </EasyButton>
             </div>
           </div>
           <div v-if="noToolbarResult" class="cropper-result">
             <img :src="noToolbarResult" alt="cropped">
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyImageCropper
+        <EasyDocCode
+          code="<EasyImageCropper
   ref=&quot;cropperRef&quot;
   :src=&quot;imgSrc&quot;
   :toolbar=&quot;false&quot;
@@ -229,7 +229,7 @@ const blob = await cropperRef.value.getCroppedBlob()"
             </div>
             <input ref="uploadInputRef" type="file" accept="image/*" style="display: none" @change="onFileChange">
             <div v-if="interactSrc" class="cropper-interact__cropper">
-              <XlyImageCropper
+              <EasyImageCropper
                 ref="interactRef"
                 :src="interactSrc"
                 toolbar
@@ -246,7 +246,7 @@ const blob = await cropperRef.value.getCroppedBlob()"
             <span class="cropper-result__size">{{ interactResultSize }}</span>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="// 上传图片
 function triggerUpload() {
   uploadInputRef.value.click()

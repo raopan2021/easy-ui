@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyDatePicker } from 'easy-ui'
+import { EasyDatePicker } from 'easy-ui'
 import { ref } from 'vue'
 
 const val1 = ref('')
@@ -31,12 +31,12 @@ const val6 = ref('')
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 280px">
-            <XlyDatePicker v-model="val1" placeholder="请选择日期" />
+            <EasyDatePicker v-model="val1" placeholder="请选择日期" />
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ val1 || '未选择' }}</span>
         </div>
       </div>
-      <XlyDocCode code="<XlyDatePicker v-model=&quot;value&quot; placeholder=&quot;请选择日期&quot; />" />
+      <EasyDocCode code="<EasyDatePicker v-model=&quot;value&quot; placeholder=&quot;请选择日期&quot; />" />
     </section>
 
     <section class="doc-section">
@@ -49,13 +49,13 @@ const val6 = ref('')
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 280px">
-            <XlyDatePicker v-model="val2" type="month" placeholder="请选择月份" />
+            <EasyDatePicker v-model="val2" type="month" placeholder="请选择月份" />
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ val2 || '未选择' }}</span>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyDatePicker v-model=&quot;value&quot; type=&quot;month&quot; placeholder=&quot;请选择月份&quot; />"
+      <EasyDocCode
+        code="<EasyDatePicker v-model=&quot;value&quot; type=&quot;month&quot; placeholder=&quot;请选择月份&quot; />"
       />
     </section>
 
@@ -69,13 +69,13 @@ const val6 = ref('')
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 280px">
-            <XlyDatePicker v-model="val3" type="year" placeholder="请选择年份" />
+            <EasyDatePicker v-model="val3" type="year" placeholder="请选择年份" />
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ val3 || '未选择' }}</span>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyDatePicker v-model=&quot;value&quot; type=&quot;year&quot; placeholder=&quot;请选择年份&quot; />"
+      <EasyDocCode
+        code="<EasyDatePicker v-model=&quot;value&quot; type=&quot;year&quot; placeholder=&quot;请选择年份&quot; />"
       />
     </section>
 
@@ -89,11 +89,11 @@ const val6 = ref('')
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 280px">
-            <XlyDatePicker v-model="val4" placeholder="YYYY/MM/DD" format="YYYY/MM/DD" />
+            <EasyDatePicker v-model="val4" placeholder="YYYY/MM/DD" format="YYYY/MM/DD" />
           </div>
         </div>
       </div>
-      <XlyDocCode code="<XlyDatePicker v-model=&quot;value&quot; format=&quot;YYYY/MM/DD&quot; />" />
+      <EasyDocCode code="<EasyDatePicker v-model=&quot;value&quot; format=&quot;YYYY/MM/DD&quot; />" />
     </section>
 
     <section class="doc-section">
@@ -106,16 +106,16 @@ const val6 = ref('')
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 280px">
-            <XlyDatePicker v-model="val5" placeholder="可清除" clearable />
+            <EasyDatePicker v-model="val5" placeholder="可清除" clearable />
           </div>
           <div style="width: 280px">
-            <XlyDatePicker v-model="val5" placeholder="禁用状态" disabled />
+            <EasyDatePicker v-model="val5" placeholder="禁用状态" disabled />
           </div>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyDatePicker v-model=&quot;value&quot; clearable />
-<XlyDatePicker v-model=&quot;value&quot; disabled />"
+      <EasyDocCode
+        code="<EasyDatePicker v-model=&quot;value&quot; clearable />
+<EasyDatePicker v-model=&quot;value&quot; disabled />"
       />
     </section>
 
@@ -129,20 +129,20 @@ const val6 = ref('')
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 280px">
-            <XlyDatePicker v-model="val6" size="large" />
+            <EasyDatePicker v-model="val6" size="large" />
           </div>
           <div style="width: 280px">
-            <XlyDatePicker v-model="val6" />
+            <EasyDatePicker v-model="val6" />
           </div>
           <div style="width: 280px">
-            <XlyDatePicker v-model="val6" size="small" />
+            <EasyDatePicker v-model="val6" size="small" />
           </div>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyDatePicker v-model=&quot;value&quot; size=&quot;large&quot; />
-<XlyDatePicker v-model=&quot;value&quot; />
-<XlyDatePicker v-model=&quot;value&quot; size=&quot;small&quot; />"
+      <EasyDocCode
+        code="<EasyDatePicker v-model=&quot;value&quot; size=&quot;large&quot; />
+<EasyDatePicker v-model=&quot;value&quot; />
+<EasyDatePicker v-model=&quot;value&quot; size=&quot;small&quot; />"
       />
     </section>
 

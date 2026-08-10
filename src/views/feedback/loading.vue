@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { LoadingInstance } from 'easy-ui'
-import { xly, XlyLoading } from 'easy-ui'
+import { EasyLoading, xly } from 'easy-ui'
 import { ref } from 'vue'
 
 const loadingTypes = [
@@ -105,7 +105,7 @@ function showQuickContainer() {
               :class="{ 'is-active': currentType === type.value }"
               @click="currentType = type.value"
             >
-              <XlyLoading :model-value="true" :type="type.value" :mask="false" size="large" />
+              <EasyLoading :model-value="true" :type="type.value" :mask="false" size="large" />
               <span class="type-label">{{ type.label }}</span>
             </div>
           </div>
@@ -115,15 +115,15 @@ function showQuickContainer() {
             </button>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyLoading v-model=&quot;loading&quot; type=&quot;spinner&quot; text=&quot;加载中...&quot; />
+        <EasyDocCode
+          code="<EasyLoading v-model=&quot;loading&quot; type=&quot;spinner&quot; text=&quot;加载中...&quot; />
 
 <!-- 不同动画类型 -->
-<XlyLoading type=&quot;spinner&quot; />  <!-- 旋转点 -->
-<XlyLoading type=&quot;wave&quot; />     <!-- 波浪 -->
-<XlyLoading type=&quot;pulse&quot; />    <!-- 脉冲 -->
-<XlyLoading type=&quot;ring&quot; />     <!-- 环形 -->
-<XlyLoading type=&quot;default&quot; />  <!-- 双点 -->"
+<EasyLoading type=&quot;spinner&quot; />  <!-- 旋转点 -->
+<EasyLoading type=&quot;wave&quot; />     <!-- 波浪 -->
+<EasyLoading type=&quot;pulse&quot; />    <!-- 脉冲 -->
+<EasyLoading type=&quot;ring&quot; />     <!-- 环形 -->
+<EasyLoading type=&quot;default&quot; />  <!-- 双点 -->"
         />
       </div>
     </section>
@@ -140,20 +140,20 @@ function showQuickContainer() {
         <div class="doc-preview__body">
           <div class="loading-texts">
             <div class="text-item">
-              <XlyLoading :model-value="true" type="spinner" text="正在加载..." :mask="false" />
+              <EasyLoading :model-value="true" type="spinner" text="正在加载..." :mask="false" />
             </div>
             <div class="text-item">
-              <XlyLoading :model-value="true" type="wave" text="数据提交中" :mask="false" />
+              <EasyLoading :model-value="true" type="wave" text="数据提交中" :mask="false" />
             </div>
             <div class="text-item">
-              <XlyLoading :model-value="true" type="pulse" text="请稍候" :mask="false" />
+              <EasyLoading :model-value="true" type="pulse" text="请稍候" :mask="false" />
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyLoading type=&quot;spinner&quot; text=&quot;正在加载...&quot; />
-<XlyLoading type=&quot;wave&quot; text=&quot;数据提交中&quot; />
-<XlyLoading type=&quot;pulse&quot; text=&quot;请稍候&quot; />"
+        <EasyDocCode
+          code="<EasyLoading type=&quot;spinner&quot; text=&quot;正在加载...&quot; />
+<EasyLoading type=&quot;wave&quot; text=&quot;数据提交中&quot; />
+<EasyLoading type=&quot;pulse&quot; text=&quot;请稍候&quot; />"
         />
       </div>
     </section>
@@ -170,28 +170,28 @@ function showQuickContainer() {
         <div class="doc-preview__body">
           <div class="loading-sizes">
             <div class="size-item">
-              <XlyLoading :model-value="true" type="spinner" size="small" :mask="false" />
+              <EasyLoading :model-value="true" type="spinner" size="small" :mask="false" />
               <span>small (24px)</span>
             </div>
             <div class="size-item">
-              <XlyLoading :model-value="true" type="spinner" size="medium" :mask="false" />
+              <EasyLoading :model-value="true" type="spinner" size="medium" :mask="false" />
               <span>medium (32px)</span>
             </div>
             <div class="size-item">
-              <XlyLoading :model-value="true" type="spinner" size="large" :mask="false" />
+              <EasyLoading :model-value="true" type="spinner" size="large" :mask="false" />
               <span>large (48px)</span>
             </div>
             <div class="size-item">
-              <XlyLoading :model-value="true" type="spinner" :size="64" :mask="false" />
+              <EasyLoading :model-value="true" type="spinner" :size="64" :mask="false" />
               <span>自定义 (64px)</span>
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyLoading size=&quot;small&quot; />     <!-- 24px -->
-<XlyLoading size=&quot;medium&quot; />    <!-- 32px -->
-<XlyLoading size=&quot;large&quot; />     <!-- 48px -->
-<XlyLoading :size=&quot;64&quot; />       <!-- 自定义 64px -->"
+        <EasyDocCode
+          code="<EasyLoading size=&quot;small&quot; />     <!-- 24px -->
+<EasyLoading size=&quot;medium&quot; />    <!-- 32px -->
+<EasyLoading size=&quot;large&quot; />     <!-- 48px -->
+<EasyLoading :size=&quot;64&quot; />       <!-- 自定义 64px -->"
         />
       </div>
     </section>
@@ -208,7 +208,7 @@ function showQuickContainer() {
         <div class="doc-preview__body">
           <div class="loading-colors">
             <div class="color-item">
-              <XlyLoading
+              <EasyLoading
                 :model-value="true"
                 type="spinner"
                 color="#4f6ef7"
@@ -218,7 +218,7 @@ function showQuickContainer() {
               />
             </div>
             <div class="color-item">
-              <XlyLoading
+              <EasyLoading
                 :model-value="true"
                 type="wave"
                 color="#10b981"
@@ -228,7 +228,7 @@ function showQuickContainer() {
               />
             </div>
             <div class="color-item">
-              <XlyLoading
+              <EasyLoading
                 :model-value="true"
                 type="pulse"
                 color="#f59e0b"
@@ -238,7 +238,7 @@ function showQuickContainer() {
               />
             </div>
             <div class="color-item">
-              <XlyLoading
+              <EasyLoading
                 :model-value="true"
                 type="ring"
                 color="#ec4899"
@@ -250,10 +250,10 @@ function showQuickContainer() {
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyLoading color=&quot;#4f6ef7&quot; text-color=&quot;#4f6ef7&quot; text=&quot;蓝色&quot; />
-<XlyLoading color=&quot;#10b981&quot; text-color=&quot;#10b981&quot; text=&quot;绿色&quot; />
-<XlyLoading color=&quot;#f59e0b&quot; text-color=&quot;#f59e0b&quot; text=&quot;橙色&quot; />"
+        <EasyDocCode
+          code="<EasyLoading color=&quot;#4f6ef7&quot; text-color=&quot;#4f6ef7&quot; text=&quot;蓝色&quot; />
+<EasyLoading color=&quot;#10b981&quot; text-color=&quot;#10b981&quot; text=&quot;绿色&quot; />
+<EasyLoading color=&quot;#f59e0b&quot; text-color=&quot;#f59e0b&quot; text=&quot;橙色&quot; />"
         />
       </div>
     </section>
@@ -269,7 +269,7 @@ function showQuickContainer() {
       <div class="doc-preview">
         <div class="doc-preview__body doc-preview__body--column">
           <div class="ring-progress-demo">
-            <XlyLoading
+            <EasyLoading
               :model-value="true"
               type="ring"
               :progress="ringProgress"
@@ -283,11 +283,11 @@ function showQuickContainer() {
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyLoading type=&quot;ring&quot; :progress=&quot;75&quot; text=&quot;上传中...&quot; />
+        <EasyDocCode
+          code="<EasyLoading type=&quot;ring&quot; :progress=&quot;75&quot; text=&quot;上传中...&quot; />
 
 <!-- 动态进度 -->
-<XlyLoading type=&quot;ring&quot; :progress=&quot;uploadProgress&quot; />"
+<EasyLoading type=&quot;ring&quot; :progress=&quot;uploadProgress&quot; />"
         />
       </div>
     </section>
@@ -306,11 +306,11 @@ function showQuickContainer() {
             显示全屏加载 (2秒后关闭)
           </button>
         </div>
-        <XlyDocCode
-          code="<XlyLoading v-model=&quot;fullscreenLoading&quot; fullscreen text=&quot;页面加载中...&quot; />
+        <EasyDocCode
+          code="<EasyLoading v-model=&quot;fullscreenLoading&quot; fullscreen text=&quot;页面加载中...&quot; />
 
 <!-- 锁定滚动 -->
-<XlyLoading v-model=&quot;loading&quot; fullscreen lock text=&quot;处理中...&quot; />"
+<EasyLoading v-model=&quot;loading&quot; fullscreen lock text=&quot;处理中...&quot; />"
         />
       </div>
     </section>
@@ -333,17 +333,17 @@ function showQuickContainer() {
                 <li>数据项 2</li>
                 <li>数据项 3</li>
               </ul>
-              <XlyLoading v-model="containerLoading" container-fullscreen text="数据加载中..." type="wave" />
+              <EasyLoading v-model="containerLoading" container-fullscreen text="数据加载中..." type="wave" />
             </div>
             <button class="demo-btn" @click="toggleContainerLoading">
               {{ containerLoading ? '关闭' : '显示' }}容器加载
             </button>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<div class=&quot;data-container&quot; style=&quot;position: relative;&quot;>
   <!-- 数据内容 -->
-  <XlyLoading
+  <EasyLoading
     v-model=&quot;loading&quot;
     containerFullscreen
     text=&quot;数据加载中...&quot;
@@ -395,7 +395,7 @@ function showQuickContainer() {
             </div>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="import { xly } from 'easy-ui'
 
 // 全屏加载
@@ -643,10 +643,10 @@ loading.setText('处理中...')"
     </section>
 
     <!-- 全屏加载演示 -->
-    <XlyLoading v-model="fullscreenLoading" fullscreen :type="currentType" text="页面加载中..." />
+    <EasyLoading v-model="fullscreenLoading" fullscreen :type="currentType" text="页面加载中..." />
 
     <!-- 基础加载演示 -->
-    <XlyLoading v-model="basicLoading" :type="currentType" text="加载中..." />
+    <EasyLoading v-model="basicLoading" :type="currentType" text="加载中..." />
   </div>
 </template>
 

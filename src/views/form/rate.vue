@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyRate } from 'easy-ui'
+import { EasyRate } from 'easy-ui'
 import { ref } from 'vue'
 
 const val1 = ref(3)
@@ -32,12 +32,12 @@ const val7 = ref(3)
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="display: flex; align-items: center; gap: 12px">
-            <XlyRate v-model="val1" />
+            <EasyRate v-model="val1" />
             <span style="font-size: 14px; color: var(--el-text-color-regular)">{{ val1 }} 分</span>
           </div>
         </div>
       </div>
-      <XlyDocCode code="<XlyRate v-model=&quot;value&quot; />" />
+      <EasyDocCode code="<EasyRate v-model=&quot;value&quot; />" />
     </section>
 
     <section class="doc-section">
@@ -50,12 +50,12 @@ const val7 = ref(3)
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="display: flex; align-items: center; gap: 12px">
-            <XlyRate v-model="val2" allow-half />
+            <EasyRate v-model="val2" allow-half />
             <span style="font-size: 14px; color: var(--el-text-color-regular)">{{ val2 }} 分</span>
           </div>
         </div>
       </div>
-      <XlyDocCode code="<XlyRate v-model=&quot;value&quot; allow-half />" />
+      <EasyDocCode code="<EasyRate v-model=&quot;value&quot; allow-half />" />
     </section>
 
     <section class="doc-section">
@@ -68,23 +68,23 @@ const val7 = ref(3)
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 16px">
           <div style="display: flex; align-items: center; gap: 16px">
-            <XlyRate v-model="val3" color="#4f6ef7" />
+            <EasyRate v-model="val3" color="#4f6ef7" />
             <span style="font-size: 13px; color: var(--el-text-color-secondary)">主题蓝</span>
           </div>
           <div style="display: flex; align-items: center; gap: 16px">
-            <XlyRate v-model="val3" color="#f56c6c" />
+            <EasyRate v-model="val3" color="#f56c6c" />
             <span style="font-size: 13px; color: var(--el-text-color-secondary)">警告红</span>
           </div>
           <div style="display: flex; align-items: center; gap: 16px">
-            <XlyRate v-model="val3" color="#67c23a" />
+            <EasyRate v-model="val3" color="#67c23a" />
             <span style="font-size: 13px; color: var(--el-text-color-secondary)">成功绿</span>
           </div>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyRate v-model=&quot;value&quot; color=&quot;#4f6ef7&quot; />
-<XlyRate v-model=&quot;value&quot; color=&quot;#f56c6c&quot; />
-<XlyRate v-model=&quot;value&quot; color=&quot;#67c23a&quot; />"
+      <EasyDocCode
+        code="<EasyRate v-model=&quot;value&quot; color=&quot;#4f6ef7&quot; />
+<EasyRate v-model=&quot;value&quot; color=&quot;#f56c6c&quot; />
+<EasyRate v-model=&quot;value&quot; color=&quot;#67c23a&quot; />"
       />
     </section>
 
@@ -97,13 +97,13 @@ const val7 = ref(3)
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 16px">
-          <XlyRate v-model="val4" show-text />
-          <XlyRate v-model="val5" :texts="['很差', '一般', '不错', '推荐', '极佳']" />
+          <EasyRate v-model="val4" show-text />
+          <EasyRate v-model="val5" :texts="['很差', '一般', '不错', '推荐', '极佳']" />
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyRate v-model=&quot;value&quot; show-text />
-<XlyRate v-model=&quot;value&quot; :texts=&quot;['很差', '一般', '不错', '推荐', '极佳']&quot; />"
+      <EasyDocCode
+        code="<EasyRate v-model=&quot;value&quot; show-text />
+<EasyRate v-model=&quot;value&quot; :texts=&quot;['很差', '一般', '不错', '推荐', '极佳']&quot; />"
       />
     </section>
 
@@ -116,10 +116,10 @@ const val7 = ref(3)
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 16px">
-          <XlyRate v-model="val6" :max="10" show-text />
+          <EasyRate v-model="val6" :max="10" show-text />
         </div>
       </div>
-      <XlyDocCode code="<XlyRate v-model=&quot;value&quot; :max=&quot;10&quot; show-text />" />
+      <EasyDocCode code="<EasyRate v-model=&quot;value&quot; :max=&quot;10&quot; show-text />" />
     </section>
 
     <section class="doc-section">
@@ -131,10 +131,10 @@ const val7 = ref(3)
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
-          <XlyRate v-model="val7" disabled />
+          <EasyRate v-model="val7" disabled />
         </div>
       </div>
-      <XlyDocCode code="<XlyRate v-model=&quot;value&quot; disabled />" />
+      <EasyDocCode code="<EasyRate v-model=&quot;value&quot; disabled />" />
     </section>
 
     <section class="doc-section">

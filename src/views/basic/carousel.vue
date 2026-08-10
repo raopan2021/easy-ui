@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyCarousel } from 'easy-ui'
+import { EasyCarousel } from 'easy-ui'
 
 const basicImages = [
   'https://picsum.photos/seed/carousel-a/800/400',
@@ -70,11 +70,11 @@ const verticalSlides = [
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="carousel-demo">
-            <XlyCarousel :items="basicImages" />
+            <EasyCarousel :items="basicImages" />
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyCarousel :items=&quot;images&quot; />
+        <EasyDocCode
+          code="<EasyCarousel :items=&quot;images&quot; />
 
 <script setup>
 const images = [
@@ -99,10 +99,10 @@ const images = [
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="carousel-demo">
-            <XlyCarousel :items="basicImages" mode="3d" :interval="4000" />
+            <EasyCarousel :items="basicImages" mode="3d" :interval="4000" />
           </div>
         </div>
-        <XlyDocCode code="<XlyCarousel :items=&quot;images&quot; mode=&quot;3d&quot; />" />
+        <EasyDocCode code="<EasyCarousel :items=&quot;images&quot; mode=&quot;3d&quot; />" />
       </div>
     </section>
 
@@ -122,37 +122,37 @@ const images = [
             <p class="demo-label">
               默认标题 + 计数器
             </p>
-            <XlyCarousel :items="titledSlides" show-title show-counter :interval="4000" />
+            <EasyCarousel :items="titledSlides" show-title show-counter :interval="4000" />
           </div>
           <div class="carousel-demo">
             <p class="demo-label">
               自定义字段名（titleField="name"）
             </p>
-            <XlyCarousel :items="namedSlides" show-title title-field="name" :interval="4000" />
+            <EasyCarousel :items="namedSlides" show-title title-field="name" :interval="4000" />
           </div>
           <div class="carousel-demo">
             <p class="demo-label">
               3D 模式 + 标题
             </p>
-            <XlyCarousel :items="titledSlides" mode="3d" show-title :interval="4000" />
+            <EasyCarousel :items="titledSlides" mode="3d" show-title :interval="4000" />
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 默认标题字段 -->
-<XlyCarousel :items=&quot;slides&quot; show-title show-counter />
+<EasyCarousel :items=&quot;slides&quot; show-title show-counter />
 
 <!-- 指定字段名 -->
-<XlyCarousel :items=&quot;slides&quot; show-title title-field=&quot;name&quot; />
+<EasyCarousel :items=&quot;slides&quot; show-title title-field=&quot;name&quot; />
 
 <!-- 3D 模式 + 标题 -->
-<XlyCarousel :items=&quot;slides&quot; mode=&quot;3d&quot; show-title />
+<EasyCarousel :items=&quot;slides&quot; mode=&quot;3d&quot; show-title />
 
 <!-- 自定义标题插槽 -->
-<XlyCarousel :items=&quot;slides&quot; show-title>
+<EasyCarousel :items=&quot;slides&quot; show-title>
   <template #title=&quot;{ item }&quot;>
     <span>{{ item.category }} - {{ item.title }}</span>
   </template>
-</XlyCarousel>"
+</EasyCarousel>"
         />
       </div>
     </section>
@@ -172,30 +172,30 @@ const images = [
             <p class="demo-label">
               圆点指示器（默认）
             </p>
-            <XlyCarousel :items="basicImages" dot-type="dot" />
+            <EasyCarousel :items="basicImages" dot-type="dot" />
           </div>
           <div class="carousel-demo">
             <p class="demo-label">
               线条指示器
             </p>
-            <XlyCarousel :items="basicImages" dot-type="line" />
+            <EasyCarousel :items="basicImages" dot-type="line" />
           </div>
           <div class="carousel-demo">
             <p class="demo-label">
               数字指示器
             </p>
-            <XlyCarousel :items="basicImages" dot-type="number" />
+            <EasyCarousel :items="basicImages" dot-type="number" />
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 圆点指示器 -->
-<XlyCarousel :items=&quot;images&quot; dot-type=&quot;dot&quot; />
+<EasyCarousel :items=&quot;images&quot; dot-type=&quot;dot&quot; />
 
 <!-- 线条指示器 -->
-<XlyCarousel :items=&quot;images&quot; dot-type=&quot;line&quot; />
+<EasyCarousel :items=&quot;images&quot; dot-type=&quot;line&quot; />
 
 <!-- 数字指示器 -->
-<XlyCarousel :items=&quot;images&quot; dot-type=&quot;number&quot; />"
+<EasyCarousel :items=&quot;images&quot; dot-type=&quot;number&quot; />"
         />
       </div>
     </section>
@@ -215,19 +215,19 @@ const images = [
             <p class="demo-label">
               底部（默认）
             </p>
-            <XlyCarousel :items="basicImages" dot-position="bottom" />
+            <EasyCarousel :items="basicImages" dot-position="bottom" />
           </div>
           <div class="carousel-demo">
             <p class="demo-label">
               左侧
             </p>
-            <XlyCarousel :items="basicImages" dot-position="left" />
+            <EasyCarousel :items="basicImages" dot-position="left" />
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyCarousel :items=&quot;images&quot; dot-position=&quot;bottom&quot; />
-<XlyCarousel :items=&quot;images&quot; dot-position=&quot;left&quot; />
-<XlyCarousel :items=&quot;images&quot; dot-position=&quot;right&quot; />"
+        <EasyDocCode
+          code="<EasyCarousel :items=&quot;images&quot; dot-position=&quot;bottom&quot; />
+<EasyCarousel :items=&quot;images&quot; dot-position=&quot;left&quot; />
+<EasyCarousel :items=&quot;images&quot; dot-position=&quot;right&quot; />"
         />
       </div>
     </section>
@@ -248,25 +248,25 @@ const images = [
             <p class="demo-label">
               悬停显示（默认） — 鼠标移入查看效果
             </p>
-            <XlyCarousel :items="basicImages" arrow="hover" />
+            <EasyCarousel :items="basicImages" arrow="hover" />
           </div>
           <div class="carousel-demo">
             <p class="demo-label">
               始终显示
             </p>
-            <XlyCarousel :items="basicImages" arrow="always" />
+            <EasyCarousel :items="basicImages" arrow="always" />
           </div>
           <div class="carousel-demo">
             <p class="demo-label">
               始终隐藏
             </p>
-            <XlyCarousel :items="basicImages" arrow="never" />
+            <EasyCarousel :items="basicImages" arrow="never" />
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyCarousel :items=&quot;images&quot; arrow=&quot;hover&quot; />
-<XlyCarousel :items=&quot;images&quot; arrow=&quot;always&quot; />
-<XlyCarousel :items=&quot;images&quot; arrow=&quot;never&quot; />"
+        <EasyDocCode
+          code="<EasyCarousel :items=&quot;images&quot; arrow=&quot;hover&quot; />
+<EasyCarousel :items=&quot;images&quot; arrow=&quot;always&quot; />
+<EasyCarousel :items=&quot;images&quot; arrow=&quot;never&quot; />"
         />
       </div>
     </section>
@@ -282,7 +282,7 @@ const images = [
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="carousel-demo">
-            <XlyCarousel :items="customSlides" :interval="4000">
+            <EasyCarousel :items="customSlides" :interval="4000">
               <template #item="{ item }">
                 <div class="custom-slide" :style="{ background: (item as any).bg }">
                   <div class="custom-slide__content">
@@ -291,18 +291,18 @@ const images = [
                   </div>
                 </div>
               </template>
-            </XlyCarousel>
+            </EasyCarousel>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyCarousel :items=&quot;slides&quot; :interval=&quot;4000&quot;>
+        <EasyDocCode
+          code="<EasyCarousel :items=&quot;slides&quot; :interval=&quot;4000&quot;>
   <template #item=&quot;{ item }&quot;>
     <div class=&quot;custom-slide&quot; :style=&quot;{ background: item.bg }&quot;>
       <h3>{{ item.title }}</h3>
       <p>{{ item.desc }}</p>
     </div>
   </template>
-</XlyCarousel>"
+</EasyCarousel>"
         />
       </div>
     </section>
@@ -318,18 +318,18 @@ const images = [
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="carousel-demo carousel-demo--vertical">
-            <XlyCarousel :items="verticalSlides" direction="vertical" :interval="2500">
+            <EasyCarousel :items="verticalSlides" direction="vertical" :interval="2500">
               <template #item="{ item }">
                 <div class="vertical-slide" :style="{ background: (item as any).bg }">
                   <span class="vertical-slide__tag">{{ (item as any).tag }}</span>
                   <span class="vertical-slide__text">{{ (item as any).text }}</span>
                 </div>
               </template>
-            </XlyCarousel>
+            </EasyCarousel>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyCarousel
+        <EasyDocCode
+          code="<EasyCarousel
   :items=&quot;notices&quot;
   direction=&quot;vertical&quot;
   :interval=&quot;2500&quot;
@@ -340,7 +340,7 @@ const images = [
       <span>{{ item.text }}</span>
     </div>
   </template>
-</XlyCarousel>"
+</EasyCarousel>"
         />
       </div>
     </section>
@@ -360,29 +360,29 @@ const images = [
             <p class="demo-label">
               高度 120px
             </p>
-            <XlyCarousel :items="basicImages" :height="120" :interval="0" arrow="always" />
+            <EasyCarousel :items="basicImages" :height="120" :interval="0" arrow="always" />
           </div>
           <div class="carousel-demo">
             <p class="demo-label">
               高度 300px
             </p>
-            <XlyCarousel :items="basicImages" :height="300" :interval="0" arrow="always" />
+            <EasyCarousel :items="basicImages" :height="300" :interval="0" arrow="always" />
           </div>
           <div class="carousel-demo">
             <p class="demo-label">
               CSS 字符串 '50vh'
             </p>
-            <XlyCarousel :items="basicImages" height="50vh" :interval="0" arrow="always" />
+            <EasyCarousel :items="basicImages" height="50vh" :interval="0" arrow="always" />
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 数字类型（单位 px） -->
-<XlyCarousel :items=&quot;images&quot; :height=&quot;120&quot; />
-<XlyCarousel :items=&quot;images&quot; :height=&quot;300&quot; />
+<EasyCarousel :items=&quot;images&quot; :height=&quot;120&quot; />
+<EasyCarousel :items=&quot;images&quot; :height=&quot;300&quot; />
 
 <!-- CSS 字符串 -->
-<XlyCarousel :items=&quot;images&quot; height=&quot;50vh&quot; />
-<XlyCarousel :items=&quot;images&quot; height=&quot;400px&quot; />"
+<EasyCarousel :items=&quot;images&quot; height=&quot;50vh&quot; />
+<EasyCarousel :items=&quot;images&quot; height=&quot;400px&quot; />"
         />
       </div>
     </section>
@@ -398,11 +398,11 @@ const images = [
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="carousel-demo">
-            <XlyCarousel :items="basicImages" :interval="0" arrow="always" />
+            <EasyCarousel :items="basicImages" :interval="0" arrow="always" />
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyCarousel :items=&quot;images&quot; :interval=&quot;0&quot; arrow=&quot;always&quot; />"
+        <EasyDocCode
+          code="<EasyCarousel :items=&quot;images&quot; :interval=&quot;0&quot; arrow=&quot;always&quot; />"
         />
       </div>
     </section>
@@ -418,11 +418,11 @@ const images = [
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="carousel-demo">
-            <XlyCarousel :items="basicImages" :loop="false" :interval="0" arrow="always" />
+            <EasyCarousel :items="basicImages" :loop="false" :interval="0" arrow="always" />
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyCarousel :items=&quot;images&quot; :loop=&quot;false&quot; :interval=&quot;0&quot; arrow=&quot;always&quot; />"
+        <EasyDocCode
+          code="<EasyCarousel :items=&quot;images&quot; :loop=&quot;false&quot; :interval=&quot;0&quot; arrow=&quot;always&quot; />"
         />
       </div>
     </section>

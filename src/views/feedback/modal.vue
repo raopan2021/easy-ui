@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { CircleCheckFilled, WarningFilled } from '@element-plus/icons-vue'
-import { XlyButton, XlyModal } from 'easy-ui'
+import { EasyButton, EasyModal } from 'easy-ui'
 import { ref } from 'vue'
 
 const basicVisible = ref(false)
@@ -63,18 +63,18 @@ const successVisible = ref(false)
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="basicVisible = true">
+          <EasyButton @click="basicVisible = true">
             打开弹窗
-          </XlyButton>
-          <XlyModal v-model="basicVisible" title="基础弹窗">
+          </EasyButton>
+          <EasyModal v-model="basicVisible" title="基础弹窗">
             <p>这是一个基础弹窗，点击遮罩或关闭按钮可关闭。</p>
-          </XlyModal>
+          </EasyModal>
         </div>
-        <XlyDocCode
-          code="<XlyButton @click=&quot;visible = true&quot;>打开弹窗</XlyButton>
-<XlyModal v-model=&quot;visible&quot; title=&quot;基础弹窗&quot;>
+        <EasyDocCode
+          code="<EasyButton @click=&quot;visible = true&quot;>打开弹窗</EasyButton>
+<EasyModal v-model=&quot;visible&quot; title=&quot;基础弹窗&quot;>
   <p>这是一个基础弹窗。</p>
-</XlyModal>"
+</EasyModal>"
         />
       </div>
     </section>
@@ -90,46 +90,46 @@ const successVisible = ref(false)
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="smallVisible = true">
+          <EasyButton @click="smallVisible = true">
             小型弹窗
-          </XlyButton>
-          <XlyButton @click="defaultVisible = true">
+          </EasyButton>
+          <EasyButton @click="defaultVisible = true">
             默认弹窗
-          </XlyButton>
-          <XlyButton @click="largeVisible = true">
+          </EasyButton>
+          <EasyButton @click="largeVisible = true">
             大型弹窗
-          </XlyButton>
-          <XlyButton @click="fullVisible = true">
+          </EasyButton>
+          <EasyButton @click="fullVisible = true">
             全屏弹窗
-          </XlyButton>
-          <XlyButton @click="customVisible = true">
+          </EasyButton>
+          <EasyButton @click="customVisible = true">
             自定义宽度
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
-          code="<XlyModal v-model=&quot;visible&quot; title=&quot;小型&quot; size=&quot;small&quot;>...</XlyModal>
-<XlyModal v-model=&quot;visible&quot; title=&quot;默认&quot; size=&quot;default&quot;>...</XlyModal>
-<XlyModal v-model=&quot;visible&quot; title=&quot;大型&quot; size=&quot;large&quot;>...</XlyModal>
-<XlyModal v-model=&quot;visible&quot; title=&quot;全屏&quot; size=&quot;fullscreen&quot;>...</XlyModal>
-<XlyModal v-model=&quot;visible&quot; title=&quot;自定义&quot; width=&quot;400px&quot;>...</XlyModal>"
+        <EasyDocCode
+          code="<EasyModal v-model=&quot;visible&quot; title=&quot;小型&quot; size=&quot;small&quot;>...</EasyModal>
+<EasyModal v-model=&quot;visible&quot; title=&quot;默认&quot; size=&quot;default&quot;>...</EasyModal>
+<EasyModal v-model=&quot;visible&quot; title=&quot;大型&quot; size=&quot;large&quot;>...</EasyModal>
+<EasyModal v-model=&quot;visible&quot; title=&quot;全屏&quot; size=&quot;fullscreen&quot;>...</EasyModal>
+<EasyModal v-model=&quot;visible&quot; title=&quot;自定义&quot; width=&quot;400px&quot;>...</EasyModal>"
         />
       </div>
 
-      <XlyModal v-model="smallVisible" title="小型弹窗" size="small">
+      <EasyModal v-model="smallVisible" title="小型弹窗" size="small">
         <p>宽度 480px，适用于简单的确认操作场景。</p>
-      </XlyModal>
-      <XlyModal v-model="defaultVisible" title="默认弹窗">
+      </EasyModal>
+      <EasyModal v-model="defaultVisible" title="默认弹窗">
         <p>宽度 560px，适用于大多数常规表单和内容展示。</p>
-      </XlyModal>
-      <XlyModal v-model="largeVisible" title="大型弹窗" size="large">
+      </EasyModal>
+      <EasyModal v-model="largeVisible" title="大型弹窗" size="large">
         <p>宽度 780px，适用于内容较多、需要更大展示空间的场景，如详情查看、复杂表单等。</p>
-      </XlyModal>
-      <XlyModal v-model="fullVisible" title="全屏弹窗" size="fullscreen">
+      </EasyModal>
+      <EasyModal v-model="fullVisible" title="全屏弹窗" size="fullscreen">
         <p>全屏弹窗，适用于需要最大展示空间的场景。</p>
-      </XlyModal>
-      <XlyModal v-model="customVisible" title="自定义宽度" width="400px">
+      </EasyModal>
+      <EasyModal v-model="customVisible" title="自定义宽度" width="400px">
         <p>通过 width 属性自定义宽度为 400px。</p>
-      </XlyModal>
+      </EasyModal>
     </section>
 
     <!-- 动画效果 -->
@@ -143,39 +143,39 @@ const successVisible = ref(false)
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="zoomVisible = true">
+          <EasyButton @click="zoomVisible = true">
             缩放动画
-          </XlyButton>
-          <XlyButton @click="slideUpVisible = true">
+          </EasyButton>
+          <EasyButton @click="slideUpVisible = true">
             上滑动画
-          </XlyButton>
-          <XlyButton @click="slideDownVisible = true">
+          </EasyButton>
+          <EasyButton @click="slideDownVisible = true">
             下滑动画
-          </XlyButton>
-          <XlyButton @click="fadeVisible = true">
+          </EasyButton>
+          <EasyButton @click="fadeVisible = true">
             淡入动画
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
-          code="<XlyModal v-model=&quot;visible&quot; title=&quot;缩放&quot; transition=&quot;zoom&quot;>...</XlyModal>
-<XlyModal v-model=&quot;visible&quot; title=&quot;上滑&quot; transition=&quot;slide-up&quot;>...</XlyModal>
-<XlyModal v-model=&quot;visible&quot; title=&quot;下滑&quot; transition=&quot;slide-down&quot;>...</XlyModal>
-<XlyModal v-model=&quot;visible&quot; title=&quot;淡入&quot; transition=&quot;fade&quot;>...</XlyModal>"
+        <EasyDocCode
+          code="<EasyModal v-model=&quot;visible&quot; title=&quot;缩放&quot; transition=&quot;zoom&quot;>...</EasyModal>
+<EasyModal v-model=&quot;visible&quot; title=&quot;上滑&quot; transition=&quot;slide-up&quot;>...</EasyModal>
+<EasyModal v-model=&quot;visible&quot; title=&quot;下滑&quot; transition=&quot;slide-down&quot;>...</EasyModal>
+<EasyModal v-model=&quot;visible&quot; title=&quot;淡入&quot; transition=&quot;fade&quot;>...</EasyModal>"
         />
       </div>
 
-      <XlyModal v-model="zoomVisible" title="缩放动画" transition="zoom">
+      <EasyModal v-model="zoomVisible" title="缩放动画" transition="zoom">
         <p>默认的缩放弹窗动画，带有弹性缓动效果。</p>
-      </XlyModal>
-      <XlyModal v-model="slideUpVisible" title="上滑动画" transition="slide-up">
+      </EasyModal>
+      <EasyModal v-model="slideUpVisible" title="上滑动画" transition="slide-up">
         <p>从下方滑入的动画效果，适合底部操作场景。</p>
-      </XlyModal>
-      <XlyModal v-model="slideDownVisible" title="下滑动画" transition="slide-down">
+      </EasyModal>
+      <EasyModal v-model="slideDownVisible" title="下滑动画" transition="slide-down">
         <p>从上方滑入的动画效果，适合顶部通知场景。</p>
-      </XlyModal>
-      <XlyModal v-model="fadeVisible" title="淡入动画" transition="fade">
+      </EasyModal>
+      <EasyModal v-model="fadeVisible" title="淡入动画" transition="fade">
         <p>简洁的淡入淡出效果，适合轻量级提示场景。</p>
-      </XlyModal>
+      </EasyModal>
     </section>
 
     <!-- 自定义弹出位置 -->
@@ -188,74 +188,74 @@ const successVisible = ref(false)
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="placementCenter = true">
+          <EasyButton @click="placementCenter = true">
             居中（默认）
-          </XlyButton>
-          <XlyButton @click="placementTop = true">
+          </EasyButton>
+          <EasyButton @click="placementTop = true">
             顶部居中
-          </XlyButton>
-          <XlyButton @click="placementTopLeft = true">
+          </EasyButton>
+          <EasyButton @click="placementTopLeft = true">
             左上角
-          </XlyButton>
-          <XlyButton @click="placementTopRight = true">
+          </EasyButton>
+          <EasyButton @click="placementTopRight = true">
             右上角
-          </XlyButton>
-          <XlyButton @click="placementBottom = true">
+          </EasyButton>
+          <EasyButton @click="placementBottom = true">
             底部居中
-          </XlyButton>
-          <XlyButton @click="placementBottomLeft = true">
+          </EasyButton>
+          <EasyButton @click="placementBottomLeft = true">
             左下角
-          </XlyButton>
-          <XlyButton @click="placementBottomRight = true">
+          </EasyButton>
+          <EasyButton @click="placementBottomRight = true">
             右下角
-          </XlyButton>
-          <XlyButton @click="placementLeft = true">
+          </EasyButton>
+          <EasyButton @click="placementLeft = true">
             左侧居中
-          </XlyButton>
-          <XlyButton @click="placementRight = true">
+          </EasyButton>
+          <EasyButton @click="placementRight = true">
             右侧居中
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 居中（默认） -->
-<XlyModal v-model=&quot;visible&quot; placement=&quot;center&quot;>...</XlyModal>
+<EasyModal v-model=&quot;visible&quot; placement=&quot;center&quot;>...</EasyModal>
 <!-- 顶部居中 -->
-<XlyModal v-model=&quot;visible&quot; placement=&quot;top&quot;>...</XlyModal>
+<EasyModal v-model=&quot;visible&quot; placement=&quot;top&quot;>...</EasyModal>
 <!-- 右上角，偏移 20px -->
-<XlyModal v-model=&quot;visible&quot; placement=&quot;top-right&quot;
-  :offset=&quot;{ x: '20px', y: '20px' }&quot;>...</XlyModal>
+<EasyModal v-model=&quot;visible&quot; placement=&quot;top-right&quot;
+  :offset=&quot;{ x: '20px', y: '20px' }&quot;>...</EasyModal>
 <!-- 左侧居中 -->
-<XlyModal v-model=&quot;visible&quot; placement=&quot;left&quot;>...</XlyModal>"
+<EasyModal v-model=&quot;visible&quot; placement=&quot;left&quot;>...</EasyModal>"
         />
       </div>
 
-      <XlyModal v-model="placementCenter" title="居中（默认）" size="small">
+      <EasyModal v-model="placementCenter" title="居中（默认）" size="small">
         <p>默认居中显示，最常用的弹窗位置。</p>
-      </XlyModal>
-      <XlyModal v-model="placementTop" title="顶部居中" size="small" placement="top">
+      </EasyModal>
+      <EasyModal v-model="placementTop" title="顶部居中" size="small" placement="top">
         <p>顶部水平居中弹出。</p>
-      </XlyModal>
-      <XlyModal v-model="placementTopLeft" title="左上角" size="small" placement="top-left">
+      </EasyModal>
+      <EasyModal v-model="placementTopLeft" title="左上角" size="small" placement="top-left">
         <p>左上角弹出，适合通知提示场景。</p>
-      </XlyModal>
-      <XlyModal v-model="placementTopRight" title="右上角" size="small" placement="top-right">
+      </EasyModal>
+      <EasyModal v-model="placementTopRight" title="右上角" size="small" placement="top-right">
         <p>右上角弹出，适合通知或帮助面板。</p>
-      </XlyModal>
-      <XlyModal v-model="placementBottom" title="底部居中" size="small" placement="bottom">
+      </EasyModal>
+      <EasyModal v-model="placementBottom" title="底部居中" size="small" placement="bottom">
         <p>底部水平居中弹出。</p>
-      </XlyModal>
-      <XlyModal v-model="placementBottomLeft" title="左下角" size="small" placement="bottom-left">
+      </EasyModal>
+      <EasyModal v-model="placementBottomLeft" title="左下角" size="small" placement="bottom-left">
         <p>左下角弹出。</p>
-      </XlyModal>
-      <XlyModal v-model="placementBottomRight" title="右下角" size="small" placement="bottom-right">
+      </EasyModal>
+      <EasyModal v-model="placementBottomRight" title="右下角" size="small" placement="bottom-right">
         <p>右下角弹出，适合聊天窗口场景。</p>
-      </XlyModal>
-      <XlyModal v-model="placementLeft" title="左侧居中" size="small" placement="left">
+      </EasyModal>
+      <EasyModal v-model="placementLeft" title="左侧居中" size="small" placement="left">
         <p>左侧垂直居中弹出，适合侧边面板场景。</p>
-      </XlyModal>
-      <XlyModal v-model="placementRight" title="右侧居中" size="small" placement="right">
+      </EasyModal>
+      <EasyModal v-model="placementRight" title="右侧居中" size="small" placement="right">
         <p>右侧垂直居中弹出，适合详情抽屉场景。</p>
-      </XlyModal>
+      </EasyModal>
     </section>
 
     <!-- 自定义内容 -->
@@ -268,12 +268,12 @@ const successVisible = ref(false)
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="customContentVisible = true">
+          <EasyButton @click="customContentVisible = true">
             自定义弹窗
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
-          code="<XlyModal v-model=&quot;visible&quot; :show-footer=&quot;false&quot;>
+        <EasyDocCode
+          code="<EasyModal v-model=&quot;visible&quot; :show-footer=&quot;false&quot;>
   <template #header>
     <div style=&quot;display:flex;align-items:center;gap:8px&quot;>
       <el-icon color=&quot;#4f6ef7&quot;><WarningFilled /></el-icon>
@@ -283,15 +283,15 @@ const successVisible = ref(false)
   <p>确定要删除该记录吗？此操作不可撤销。</p>
   <template #footer>
     <div style=&quot;display:flex;justify-content:flex-end;gap:10px&quot;>
-      <XlyButton type=&quot;text&quot; @click=&quot;visible = false&quot;>取消</XlyButton>
-      <XlyButton type=&quot;danger&quot; @click=&quot;handleDelete&quot;>确认删除</XlyButton>
+      <EasyButton type=&quot;text&quot; @click=&quot;visible = false&quot;>取消</EasyButton>
+      <EasyButton type=&quot;danger&quot; @click=&quot;handleDelete&quot;>确认删除</EasyButton>
     </div>
   </template>
-</XlyModal>"
+</EasyModal>"
         />
       </div>
 
-      <XlyModal v-model="customContentVisible" :show-footer="false">
+      <EasyModal v-model="customContentVisible" :show-footer="false">
         <template #header>
           <div class="custom-header">
             <el-icon color="#f56c6c" :size="20">
@@ -308,15 +308,15 @@ const successVisible = ref(false)
         </div>
         <template #footer>
           <div class="custom-footer">
-            <XlyButton type="text" @click="customContentVisible = false">
+            <EasyButton type="text" @click="customContentVisible = false">
               取消
-            </XlyButton>
-            <XlyButton type="danger" @click="customContentVisible = false">
+            </EasyButton>
+            <EasyButton type="danger" @click="customContentVisible = false">
               确认删除
-            </XlyButton>
+            </EasyButton>
           </div>
         </template>
-      </XlyModal>
+      </EasyModal>
     </section>
 
     <!-- 无遮罩 -->
@@ -331,19 +331,19 @@ const successVisible = ref(false)
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="noMaskVisible = true">
+          <EasyButton @click="noMaskVisible = true">
             无遮罩弹窗
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
-          code="<XlyModal v-model=&quot;visible&quot; title=&quot;悬浮面板&quot; :show-mask=&quot;false&quot;
+        <EasyDocCode
+          code="<EasyModal v-model=&quot;visible&quot; title=&quot;悬浮面板&quot; :show-mask=&quot;false&quot;
   placement=&quot;center&quot;>
   <p>这是一个没有遮罩的弹窗。</p>
-</XlyModal>"
+</EasyModal>"
         />
       </div>
 
-      <XlyModal
+      <EasyModal
         v-model="noMaskVisible"
         title="悬浮面板"
         :show-mask="false"
@@ -352,7 +352,7 @@ const successVisible = ref(false)
         size="small"
       >
         <p>没有遮罩层的弹窗，背景完全透明，适合悬浮面板场景。</p>
-      </XlyModal>
+      </EasyModal>
     </section>
 
     <!-- 无头无尾 -->
@@ -366,30 +366,30 @@ const successVisible = ref(false)
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="noHeaderVisible = true">
+          <EasyButton @click="noHeaderVisible = true">
             无头部弹窗
-          </XlyButton>
-          <XlyButton @click="noFooterVisible = true">
+          </EasyButton>
+          <EasyButton @click="noFooterVisible = true">
             无底部弹窗
-          </XlyButton>
-          <XlyButton @click="onlyBodyVisible = true">
+          </EasyButton>
+          <EasyButton @click="onlyBodyVisible = true">
             纯内容弹窗
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
-          code="<XlyModal v-model=&quot;visible&quot; :show-header=&quot;false&quot;>...</XlyModal>
-<XlyModal v-model=&quot;visible&quot; :show-footer=&quot;false&quot;>...</XlyModal>
-<XlyModal v-model=&quot;visible&quot; :show-header=&quot;false&quot; :show-footer=&quot;false&quot;>...</XlyModal>"
+        <EasyDocCode
+          code="<EasyModal v-model=&quot;visible&quot; :show-header=&quot;false&quot;>...</EasyModal>
+<EasyModal v-model=&quot;visible&quot; :show-footer=&quot;false&quot;>...</EasyModal>
+<EasyModal v-model=&quot;visible&quot; :show-header=&quot;false&quot; :show-footer=&quot;false&quot;>...</EasyModal>"
         />
       </div>
 
-      <XlyModal v-model="noHeaderVisible" :show-header="false" title="无头部">
+      <EasyModal v-model="noHeaderVisible" :show-header="false" title="无头部">
         <p>没有标题栏的弹窗，适合纯展示场景。</p>
-      </XlyModal>
-      <XlyModal v-model="noFooterVisible" title="无底部" :show-footer="false">
+      </EasyModal>
+      <EasyModal v-model="noFooterVisible" title="无底部" :show-footer="false">
         <p>没有底部操作栏的弹窗，适合只读信息展示。</p>
-      </XlyModal>
-      <XlyModal v-model="onlyBodyVisible" :show-header="false" :show-footer="false" size="small">
+      </EasyModal>
+      <EasyModal v-model="onlyBodyVisible" :show-header="false" :show-footer="false" size="small">
         <div style="text-align: center; padding: 20px 0">
           <el-icon color="#34c759" :size="48">
             <CircleCheckFilled />
@@ -401,7 +401,7 @@ const successVisible = ref(false)
             数据已成功保存
           </p>
         </div>
-      </XlyModal>
+      </EasyModal>
     </section>
 
     <!-- 确认加载 -->
@@ -414,15 +414,15 @@ const successVisible = ref(false)
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="loadingVisible = true">
+          <EasyButton @click="loadingVisible = true">
             提交表单
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
-          code="<XlyModal v-model=&quot;visible&quot; title=&quot;提交确认&quot; :confirm-loading=&quot;loading&quot;
+        <EasyDocCode
+          code="<EasyModal v-model=&quot;visible&quot; title=&quot;提交确认&quot; :confirm-loading=&quot;loading&quot;
   @confirm=&quot;handleSubmit&quot; @cancel=&quot;handleCancel&quot;>
   <p>确认提交该表单数据吗？</p>
-</XlyModal>
+</EasyModal>
 
 // JS
 function handleSubmit() {
@@ -435,7 +435,7 @@ function handleSubmit() {
         />
       </div>
 
-      <XlyModal
+      <EasyModal
         v-model="loadingVisible"
         title="提交确认"
         :confirm-loading="confirmLoading"
@@ -443,7 +443,7 @@ function handleSubmit() {
         @cancel="loadingVisible = false"
       >
         <p>确认提交该表单数据吗？提交后将进入审核流程。</p>
-      </XlyModal>
+      </EasyModal>
     </section>
 
     <!-- 业务场景 -->
@@ -456,19 +456,19 @@ function handleSubmit() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton type="danger" @click="deleteVisible = true">
+          <EasyButton type="danger" @click="deleteVisible = true">
             删除确认
-          </XlyButton>
-          <XlyButton type="primary" @click="formVisible = true">
+          </EasyButton>
+          <EasyButton type="primary" @click="formVisible = true">
             表单弹窗
-          </XlyButton>
-          <XlyButton type="success" @click="successVisible = true">
+          </EasyButton>
+          <EasyButton type="success" @click="successVisible = true">
             成功提示
-          </XlyButton>
+          </EasyButton>
         </div>
       </div>
 
-      <XlyModal v-model="deleteVisible" :show-footer="false" size="small">
+      <EasyModal v-model="deleteVisible" :show-footer="false" size="small">
         <template #header>
           <div class="custom-header">
             <el-icon color="#f56c6c" :size="20">
@@ -485,17 +485,17 @@ function handleSubmit() {
         </div>
         <template #footer>
           <div class="custom-footer">
-            <XlyButton type="text" @click="deleteVisible = false">
+            <EasyButton type="text" @click="deleteVisible = false">
               取消
-            </XlyButton>
-            <XlyButton type="danger" @click="deleteVisible = false">
+            </EasyButton>
+            <EasyButton type="danger" @click="deleteVisible = false">
               确认删除
-            </XlyButton>
+            </EasyButton>
           </div>
         </template>
-      </XlyModal>
+      </EasyModal>
 
-      <XlyModal v-model="formVisible" title="新增用户" size="small">
+      <EasyModal v-model="formVisible" title="新增用户" size="small">
         <div class="demo-form">
           <div class="demo-form__item">
             <label class="demo-form__label">用户名 <span class="required">*</span></label>
@@ -518,9 +518,9 @@ function handleSubmit() {
             <el-input type="textarea" placeholder="请输入备注" :rows="3" />
           </div>
         </div>
-      </XlyModal>
+      </EasyModal>
 
-      <XlyModal v-model="successVisible" :show-header="false" :show-footer="false" size="small" transition="zoom">
+      <EasyModal v-model="successVisible" :show-header="false" :show-footer="false" size="small" transition="zoom">
         <div style="text-align: center; padding: 24px 0">
           <div
             style="
@@ -544,11 +544,11 @@ function handleSubmit() {
           <p style="margin: 0 0 20px; font-size: 14px; color: var(--el-text-color-secondary); line-height: 1.6">
             用户数据已成功保存
           </p>
-          <XlyButton type="primary" @click="successVisible = false">
+          <EasyButton type="primary" @click="successVisible = false">
             我知道了
-          </XlyButton>
+          </EasyButton>
         </div>
-      </XlyModal>
+      </EasyModal>
     </section>
 
     <!-- API 文档 -->

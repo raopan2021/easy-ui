@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyUserPicker } from 'easy-ui'
+import { EasyUserPicker } from 'easy-ui'
 import { ref } from 'vue'
 
 // 单选
@@ -40,13 +40,13 @@ const extraUsers = ref<(number | string)[]>([])
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyUserPicker v-model="singleUser" placeholder="请选择用户" />
+          <EasyUserPicker v-model="singleUser" placeholder="请选择用户" />
         </div>
         <div class="doc-value">
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(singleUser) }}</code>
         </div>
-        <XlyDocCode code="<XlyUserPicker v-model=&quot;userId&quot; placeholder=&quot;请选择用户&quot; />" />
+        <EasyDocCode code="<EasyUserPicker v-model=&quot;userId&quot; placeholder=&quot;请选择用户&quot; />" />
       </div>
     </section>
 
@@ -60,14 +60,14 @@ const extraUsers = ref<(number | string)[]>([])
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyUserPicker v-model="multiUsers" multiple placeholder="请选择用户" />
+          <EasyUserPicker v-model="multiUsers" multiple placeholder="请选择用户" />
         </div>
         <div class="doc-value">
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(multiUsers) }}</code>
         </div>
-        <XlyDocCode
-          code="<XlyUserPicker v-model=&quot;userIds&quot; multiple placeholder=&quot;请选择用户&quot; />"
+        <EasyDocCode
+          code="<EasyUserPicker v-model=&quot;userIds&quot; multiple placeholder=&quot;请选择用户&quot; />"
         />
       </div>
     </section>
@@ -82,14 +82,14 @@ const extraUsers = ref<(number | string)[]>([])
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyUserPicker v-model="maxUsers" multiple :max="3" placeholder="最多选择3个用户" />
+          <EasyUserPicker v-model="maxUsers" multiple :max="3" placeholder="最多选择3个用户" />
         </div>
         <div class="doc-value">
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(maxUsers) }}</code>
         </div>
-        <XlyDocCode
-          code="<XlyUserPicker v-model=&quot;userIds&quot; multiple :max=&quot;3&quot; placeholder=&quot;最多选择3个用户&quot; />"
+        <EasyDocCode
+          code="<EasyUserPicker v-model=&quot;userIds&quot; multiple :max=&quot;3&quot; placeholder=&quot;最多选择3个用户&quot; />"
         />
       </div>
     </section>
@@ -104,14 +104,14 @@ const extraUsers = ref<(number | string)[]>([])
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyUserPicker v-model="stringUsers" multiple return-type="string" placeholder="返回逗号字符串" />
+          <EasyUserPicker v-model="stringUsers" multiple return-type="string" placeholder="返回逗号字符串" />
         </div>
         <div class="doc-value">
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(stringUsers) }}</code>
         </div>
-        <XlyDocCode
-          code="<XlyUserPicker v-model=&quot;userIdsStr&quot; multiple return-type=&quot;string&quot; placeholder=&quot;返回逗号字符串&quot; />"
+        <EasyDocCode
+          code="<EasyUserPicker v-model=&quot;userIdsStr&quot; multiple return-type=&quot;string&quot; placeholder=&quot;返回逗号字符串&quot; />"
         />
       </div>
     </section>
@@ -126,14 +126,14 @@ const extraUsers = ref<(number | string)[]>([])
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyUserPicker v-model="extraUsers" multiple show-extra extra-key="department" placeholder="显示部门信息" />
+          <EasyUserPicker v-model="extraUsers" multiple show-extra extra-key="department" placeholder="显示部门信息" />
         </div>
         <div class="doc-value">
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(extraUsers) }}</code>
         </div>
-        <XlyDocCode
-          code="<XlyUserPicker
+        <EasyDocCode
+          code="<EasyUserPicker
   v-model=&quot;userIds&quot;
   multiple
   show-extra
@@ -154,13 +154,13 @@ const extraUsers = ref<(number | string)[]>([])
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyUserPicker v-model="singleUser" disabled placeholder="禁用状态" />
+          <EasyUserPicker v-model="singleUser" disabled placeholder="禁用状态" />
         </div>
         <div class="doc-value">
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(singleUser) }}</code>
         </div>
-        <XlyDocCode code="<XlyUserPicker v-model=&quot;userId&quot; disabled placeholder=&quot;禁用状态&quot; />" />
+        <EasyDocCode code="<EasyUserPicker v-model=&quot;userId&quot; disabled placeholder=&quot;禁用状态&quot; />" />
       </div>
     </section>
 
@@ -172,8 +172,8 @@ const extraUsers = ref<(number | string)[]>([])
       <p class="doc-section__desc">
         组件默认使用内部模拟数据。如需接入真实接口，直接打开组件源码修改 <code>getMockUsers</code> 函数即可。
       </p>
-      <XlyDocCode
-        code="// 打开 src/components/xly-user-picker/index.vue
+      <EasyDocCode
+        code="// 打开 packages/components/user-picker/index.ts
 // 找到 getMockUsers 函数，替换为你的真实接口调用
 
 /**

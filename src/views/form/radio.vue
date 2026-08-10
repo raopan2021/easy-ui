@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyRadio, XlyRadioGroup } from 'easy-ui'
+import { EasyRadio, EasyRadioGroup } from 'easy-ui'
 import { ref } from 'vue'
 
 const val1 = ref<string | number | boolean>()
@@ -28,29 +28,29 @@ const boolVal = ref<string | number | boolean>()
         基础用法
       </h2>
       <p class="doc-section__desc">
-        单独使用时，通过 <code>v-model</code> 绑定值，每个 <code>XlyRadio</code> 设置
+        单独使用时，通过 <code>v-model</code> 绑定值，每个 <code>EasyRadio</code> 设置
         <code>label</code> 属性作为选中时的值。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="display: flex; gap: 16px">
-            <XlyRadio v-model="val1" label="1">
+            <EasyRadio v-model="val1" label="1">
               选项一
-            </XlyRadio>
-            <XlyRadio v-model="val1" label="2">
+            </EasyRadio>
+            <EasyRadio v-model="val1" label="2">
               选项二
-            </XlyRadio>
-            <XlyRadio v-model="val1" label="3">
+            </EasyRadio>
+            <EasyRadio v-model="val1" label="3">
               选项三
-            </XlyRadio>
+            </EasyRadio>
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ val1 ?? '未选择' }}</span>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyRadio v-model=&quot;value&quot; label=&quot;1&quot;>选项一</XlyRadio>
-<XlyRadio v-model=&quot;value&quot; label=&quot;2&quot;>选项二</XlyRadio>
-<XlyRadio v-model=&quot;value&quot; label=&quot;3&quot;>选项三</XlyRadio>"
+      <EasyDocCode
+        code="<EasyRadio v-model=&quot;value&quot; label=&quot;1&quot;>选项一</EasyRadio>
+<EasyRadio v-model=&quot;value&quot; label=&quot;2&quot;>选项二</EasyRadio>
+<EasyRadio v-model=&quot;value&quot; label=&quot;3&quot;>选项三</EasyRadio>"
       />
     </section>
 
@@ -60,34 +60,34 @@ const boolVal = ref<string | number | boolean>()
         单选框组
       </h2>
       <p class="doc-section__desc">
-        使用 <code>XlyRadioGroup</code> 包裹，只需在组上绑定 <code>v-model</code>，子项只需设置 <code>label</code>。
+        使用 <code>EasyRadioGroup</code> 包裹，只需在组上绑定 <code>v-model</code>，子项只需设置 <code>label</code>。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
-          <XlyRadioGroup v-model="val2">
-            <XlyRadio label="beijing">
+          <EasyRadioGroup v-model="val2">
+            <EasyRadio label="beijing">
               北京
-            </XlyRadio>
-            <XlyRadio label="shanghai">
+            </EasyRadio>
+            <EasyRadio label="shanghai">
               上海
-            </XlyRadio>
-            <XlyRadio label="guangzhou">
+            </EasyRadio>
+            <EasyRadio label="guangzhou">
               广州
-            </XlyRadio>
-            <XlyRadio label="shenzhen">
+            </EasyRadio>
+            <EasyRadio label="shenzhen">
               深圳
-            </XlyRadio>
-          </XlyRadioGroup>
+            </EasyRadio>
+          </EasyRadioGroup>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ val2 ?? '未选择' }}</span>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyRadioGroup v-model=&quot;value&quot;>
-  <XlyRadio label=&quot;beijing&quot;>北京</XlyRadio>
-  <XlyRadio label=&quot;shanghai&quot;>上海</XlyRadio>
-  <XlyRadio label=&quot;guangzhou&quot;>广州</XlyRadio>
-  <XlyRadio label=&quot;shenzhen&quot;>深圳</XlyRadio>
-</XlyRadioGroup>"
+      <EasyDocCode
+        code="<EasyRadioGroup v-model=&quot;value&quot;>
+  <EasyRadio label=&quot;beijing&quot;>北京</EasyRadio>
+  <EasyRadio label=&quot;shanghai&quot;>上海</EasyRadio>
+  <EasyRadio label=&quot;guangzhou&quot;>广州</EasyRadio>
+  <EasyRadio label=&quot;shenzhen&quot;>深圳</EasyRadio>
+</EasyRadioGroup>"
       />
     </section>
 
@@ -97,36 +97,36 @@ const boolVal = ref<string | number | boolean>()
         禁用状态
       </h2>
       <p class="doc-section__desc">
-        通过 <code>disabled</code> 属性禁用单选框，也可以在 <code>XlyRadioGroup</code> 上设置整体禁用。
+        通过 <code>disabled</code> 属性禁用单选框，也可以在 <code>EasyRadioGroup</code> 上设置整体禁用。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 16px">
           <div style="display: flex; gap: 16px">
-            <XlyRadio label="a" disabled>
+            <EasyRadio label="a" disabled>
               禁用
-            </XlyRadio>
-            <XlyRadio label="b" disabled model-value="b">
+            </EasyRadio>
+            <EasyRadio label="b" disabled model-value="b">
               选中且禁用
-            </XlyRadio>
+            </EasyRadio>
           </div>
-          <XlyRadioGroup v-model="val3" disabled>
-            <XlyRadio label="1">
+          <EasyRadioGroup v-model="val3" disabled>
+            <EasyRadio label="1">
               组内禁用一
-            </XlyRadio>
-            <XlyRadio label="2">
+            </EasyRadio>
+            <EasyRadio label="2">
               组内禁用二
-            </XlyRadio>
-          </XlyRadioGroup>
+            </EasyRadio>
+          </EasyRadioGroup>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyRadio label=&quot;a&quot; disabled>禁用</XlyRadio>
-<XlyRadio label=&quot;b&quot; disabled model-value=&quot;b&quot;>选中且禁用</XlyRadio>
+      <EasyDocCode
+        code="<EasyRadio label=&quot;a&quot; disabled>禁用</EasyRadio>
+<EasyRadio label=&quot;b&quot; disabled model-value=&quot;b&quot;>选中且禁用</EasyRadio>
 
-<XlyRadioGroup v-model=&quot;value&quot; disabled>
-  <XlyRadio label=&quot;1&quot;>组内禁用一</XlyRadio>
-  <XlyRadio label=&quot;2&quot;>组内禁用二</XlyRadio>
-</XlyRadioGroup>"
+<EasyRadioGroup v-model=&quot;value&quot; disabled>
+  <EasyRadio label=&quot;1&quot;>组内禁用一</EasyRadio>
+  <EasyRadio label=&quot;2&quot;>组内禁用二</EasyRadio>
+</EasyRadioGroup>"
       />
     </section>
 
@@ -137,27 +137,27 @@ const boolVal = ref<string | number | boolean>()
       </h2>
       <p class="doc-section__desc">
         通过 <code>size</code> 属性设置尺寸，可选 <code>large</code>、<code>default</code>、<code>small</code>。 在
-        <code>XlyRadioGroup</code> 上设置可统一控制子项尺寸。
+        <code>EasyRadioGroup</code> 上设置可统一控制子项尺寸。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 16px">
           <div style="display: flex; gap: 16px">
-            <XlyRadio v-model="sizeVal" label="large" size="large">
+            <EasyRadio v-model="sizeVal" label="large" size="large">
               大号 Large
-            </XlyRadio>
-            <XlyRadio v-model="sizeVal" label="default" size="default">
+            </EasyRadio>
+            <EasyRadio v-model="sizeVal" label="default" size="default">
               默认 Default
-            </XlyRadio>
-            <XlyRadio v-model="sizeVal" label="small" size="small">
+            </EasyRadio>
+            <EasyRadio v-model="sizeVal" label="small" size="small">
               小号 Small
-            </XlyRadio>
+            </EasyRadio>
           </div>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyRadio v-model=&quot;value&quot; label=&quot;large&quot; size=&quot;large&quot;>大号</XlyRadio>
-<XlyRadio v-model=&quot;value&quot; label=&quot;default&quot; size=&quot;default&quot;>默认</XlyRadio>
-<XlyRadio v-model=&quot;value&quot; label=&quot;small&quot; size=&quot;small&quot;>小号</XlyRadio>"
+      <EasyDocCode
+        code="<EasyRadio v-model=&quot;value&quot; label=&quot;large&quot; size=&quot;large&quot;>大号</EasyRadio>
+<EasyRadio v-model=&quot;value&quot; label=&quot;default&quot; size=&quot;default&quot;>默认</EasyRadio>
+<EasyRadio v-model=&quot;value&quot; label=&quot;small&quot; size=&quot;small&quot;>小号</EasyRadio>"
       />
     </section>
 
@@ -172,22 +172,22 @@ const boolVal = ref<string | number | boolean>()
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 16px">
           <div style="display: flex; gap: 12px">
-            <XlyRadio v-model="borderVal" label="1" border>
+            <EasyRadio v-model="borderVal" label="1" border>
               选项一
-            </XlyRadio>
-            <XlyRadio v-model="borderVal" label="2" border>
+            </EasyRadio>
+            <EasyRadio v-model="borderVal" label="2" border>
               选项二
-            </XlyRadio>
-            <XlyRadio v-model="borderVal" label="3" border>
+            </EasyRadio>
+            <EasyRadio v-model="borderVal" label="3" border>
               选项三
-            </XlyRadio>
+            </EasyRadio>
           </div>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyRadio v-model=&quot;value&quot; label=&quot;1&quot; border>选项一</XlyRadio>
-<XlyRadio v-model=&quot;value&quot; label=&quot;2&quot; border>选项二</XlyRadio>
-<XlyRadio v-model=&quot;value&quot; label=&quot;3&quot; border>选项三</XlyRadio>"
+      <EasyDocCode
+        code="<EasyRadio v-model=&quot;value&quot; label=&quot;1&quot; border>选项一</EasyRadio>
+<EasyRadio v-model=&quot;value&quot; label=&quot;2&quot; border>选项二</EasyRadio>
+<EasyRadio v-model=&quot;value&quot; label=&quot;3&quot; border>选项三</EasyRadio>"
       />
     </section>
 
@@ -202,32 +202,32 @@ const boolVal = ref<string | number | boolean>()
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 16px">
           <div style="display: flex; gap: 16px">
-            <XlyRadio v-model="typeVal" :label="1">
+            <EasyRadio v-model="typeVal" :label="1">
               数字 1
-            </XlyRadio>
-            <XlyRadio v-model="typeVal" :label="2">
+            </EasyRadio>
+            <EasyRadio v-model="typeVal" :label="2">
               数字 2
-            </XlyRadio>
+            </EasyRadio>
           </div>
           <div style="display: flex; gap: 16px">
-            <XlyRadio v-model="boolVal" :label="true">
+            <EasyRadio v-model="boolVal" :label="true">
               布尔 true
-            </XlyRadio>
-            <XlyRadio v-model="boolVal" :label="false">
+            </EasyRadio>
+            <EasyRadio v-model="boolVal" :label="false">
               布尔 false
-            </XlyRadio>
+            </EasyRadio>
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">
             数字值：{{ typeVal ?? '未选择' }}，布尔值：{{ boolVal ?? '未选择' }}
           </span>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyRadio v-model=&quot;numValue&quot; :label=&quot;1&quot;>数字 1</XlyRadio>
-<XlyRadio v-model=&quot;numValue&quot; :label=&quot;2&quot;>数字 2</XlyRadio>
+      <EasyDocCode
+        code="<EasyRadio v-model=&quot;numValue&quot; :label=&quot;1&quot;>数字 1</EasyRadio>
+<EasyRadio v-model=&quot;numValue&quot; :label=&quot;2&quot;>数字 2</EasyRadio>
 
-<XlyRadio v-model=&quot;boolValue&quot; :label=&quot;true&quot;>布尔 true</XlyRadio>
-<XlyRadio v-model=&quot;boolValue&quot; :label=&quot;false&quot;>布尔 false</XlyRadio>"
+<EasyRadio v-model=&quot;boolValue&quot; :label=&quot;true&quot;>布尔 true</EasyRadio>
+<EasyRadio v-model=&quot;boolValue&quot; :label=&quot;false&quot;>布尔 false</EasyRadio>"
       />
     </section>
   </div>

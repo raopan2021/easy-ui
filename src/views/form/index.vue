@@ -1,23 +1,23 @@
 <script setup lang="ts">
 import {
+  EasyButton,
+  EasyDatePicker,
+  EasyForm,
+  EasyFormItem,
+  EasyInput,
+  EasyRate,
+  EasySelect,
+  EasyTimePicker,
   email,
   minLength,
   phone,
   required,
   xly,
-  XlyButton,
-  XlyDatePicker,
-  XlyForm,
-  XlyFormItem,
-  XlyInput,
-  XlyRate,
-  XlySelect,
-  XlyTimePicker,
 } from 'easy-ui'
 import { reactive, ref } from 'vue'
 
 /** ===== 基础表单 ===== */
-const basicFormRef = ref<InstanceType<typeof XlyForm> | null>(null)
+const basicFormRef = ref<InstanceType<typeof EasyForm> | null>(null)
 const basicForm = reactive({
   name: '',
   email: '',
@@ -111,51 +111,51 @@ const selectMulti = ref<(string | number)[]>([])
         基础表单 + 校验
       </h2>
       <p class="doc-section__desc">
-        使用 <code>XlyForm</code> + <code>XlyFormItem</code> 包裹表单项，传入 <code>rules</code> 配置校验规则。
+        使用 <code>EasyForm</code> + <code>EasyFormItem</code> 包裹表单项，传入 <code>rules</code> 配置校验规则。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="form-demo-card">
-            <XlyForm ref="basicFormRef" v-model="basicForm" :rules="basicRules" :label-width="100">
-              <XlyFormItem label="姓名" prop="name">
-                <XlyInput v-model="basicForm.name" placeholder="请输入姓名" clearable />
-              </XlyFormItem>
-              <XlyFormItem label="邮箱" prop="email">
-                <XlyInput v-model="basicForm.email" placeholder="请输入邮箱" clearable />
-              </XlyFormItem>
-              <XlyFormItem label="手机号" prop="phone">
-                <XlyInput v-model="basicForm.phone" placeholder="请输入手机号" maxlength="11" clearable />
-              </XlyFormItem>
-              <XlyFormItem label="部门" prop="department">
-                <XlySelect
+            <EasyForm ref="basicFormRef" v-model="basicForm" :rules="basicRules" :label-width="100">
+              <EasyFormItem label="姓名" prop="name">
+                <EasyInput v-model="basicForm.name" placeholder="请输入姓名" clearable />
+              </EasyFormItem>
+              <EasyFormItem label="邮箱" prop="email">
+                <EasyInput v-model="basicForm.email" placeholder="请输入邮箱" clearable />
+              </EasyFormItem>
+              <EasyFormItem label="手机号" prop="phone">
+                <EasyInput v-model="basicForm.phone" placeholder="请输入手机号" maxlength="11" clearable />
+              </EasyFormItem>
+              <EasyFormItem label="部门" prop="department">
+                <EasySelect
                   v-model="basicForm.department"
                   :options="departmentOptions"
                   placeholder="请选择部门"
                   clearable
                 />
-              </XlyFormItem>
-              <XlyFormItem>
+              </EasyFormItem>
+              <EasyFormItem>
                 <div class="form-demo-actions">
-                  <XlyButton @click="submitBasicForm">
+                  <EasyButton @click="submitBasicForm">
                     提交
-                  </XlyButton>
-                  <XlyButton type="ghost" @click="resetBasicForm">
+                  </EasyButton>
+                  <EasyButton type="ghost" @click="resetBasicForm">
                     重置
-                  </XlyButton>
+                  </EasyButton>
                 </div>
-              </XlyFormItem>
-            </XlyForm>
+              </EasyFormItem>
+            </EasyForm>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyForm ref=&quot;formRef&quot; v-model=&quot;form&quot; :rules=&quot;rules&quot; :label-width=&quot;100&quot;>
-  <XlyFormItem label=&quot;姓名&quot; prop=&quot;name&quot;>
-    <XlyInput v-model=&quot;form.name&quot; placeholder=&quot;请输入姓名&quot; />
-  </XlyFormItem>
-  <XlyFormItem>
-    <XlyButton @click=&quot;submit&quot;>提交</XlyButton>
-  </XlyFormItem>
-</XlyForm>
+        <EasyDocCode
+          code="<EasyForm ref=&quot;formRef&quot; v-model=&quot;form&quot; :rules=&quot;rules&quot; :label-width=&quot;100&quot;>
+  <EasyFormItem label=&quot;姓名&quot; prop=&quot;name&quot;>
+    <EasyInput v-model=&quot;form.name&quot; placeholder=&quot;请输入姓名&quot; />
+  </EasyFormItem>
+  <EasyFormItem>
+    <EasyButton @click=&quot;submit&quot;>提交</EasyButton>
+  </EasyFormItem>
+</EasyForm>
 
 const rules = {
   name: [required('请输入姓名'), minLength(2)],
@@ -177,30 +177,30 @@ const valid = await formRef.value.validate()"
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="form-demo-card">
-            <XlyForm v-model="dateForm" :label-width="100">
-              <XlyFormItem label="日期">
-                <XlyDatePicker v-model="dateForm.date" placeholder="选择日期" />
-              </XlyFormItem>
-              <XlyFormItem label="月份">
-                <XlyDatePicker v-model="dateForm.month" type="month" placeholder="选择月份" />
-              </XlyFormItem>
-              <XlyFormItem label="年份">
-                <XlyDatePicker v-model="dateForm.year" type="year" placeholder="选择年份" />
-              </XlyFormItem>
-              <XlyFormItem label="时间">
-                <XlyTimePicker v-model="dateForm.time" placeholder="选择时间" />
-              </XlyFormItem>
-              <XlyFormItem label="时分秒">
-                <XlyTimePicker v-model="dateForm.timeWithSeconds" placeholder="精确到秒" show-seconds />
-              </XlyFormItem>
-            </XlyForm>
+            <EasyForm v-model="dateForm" :label-width="100">
+              <EasyFormItem label="日期">
+                <EasyDatePicker v-model="dateForm.date" placeholder="选择日期" />
+              </EasyFormItem>
+              <EasyFormItem label="月份">
+                <EasyDatePicker v-model="dateForm.month" type="month" placeholder="选择月份" />
+              </EasyFormItem>
+              <EasyFormItem label="年份">
+                <EasyDatePicker v-model="dateForm.year" type="year" placeholder="选择年份" />
+              </EasyFormItem>
+              <EasyFormItem label="时间">
+                <EasyTimePicker v-model="dateForm.time" placeholder="选择时间" />
+              </EasyFormItem>
+              <EasyFormItem label="时分秒">
+                <EasyTimePicker v-model="dateForm.timeWithSeconds" placeholder="精确到秒" show-seconds />
+              </EasyFormItem>
+            </EasyForm>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyDatePicker v-model=&quot;date&quot; placeholder=&quot;选择日期&quot; />
-<XlyDatePicker v-model=&quot;month&quot; type=&quot;month&quot; placeholder=&quot;选择月份&quot; />
-<XlyTimePicker v-model=&quot;time&quot; placeholder=&quot;选择时间&quot; />
-<XlyTimePicker v-model=&quot;time&quot; show-seconds />"
+        <EasyDocCode
+          code="<EasyDatePicker v-model=&quot;date&quot; placeholder=&quot;选择日期&quot; />
+<EasyDatePicker v-model=&quot;month&quot; type=&quot;month&quot; placeholder=&quot;选择月份&quot; />
+<EasyTimePicker v-model=&quot;time&quot; placeholder=&quot;选择时间&quot; />
+<EasyTimePicker v-model=&quot;time&quot; show-seconds />"
         />
       </div>
     </section>
@@ -218,36 +218,36 @@ const valid = await formRef.value.validate()"
           <div class="rate-demo-group">
             <div class="rate-demo-item">
               <span class="rate-demo-label">基础评分</span>
-              <XlyRate v-model="rate1" />
+              <EasyRate v-model="rate1" />
             </div>
             <div class="rate-demo-item">
               <span class="rate-demo-label">半星</span>
-              <XlyRate v-model="rate2" allow-half />
+              <EasyRate v-model="rate2" allow-half />
             </div>
             <div class="rate-demo-item">
               <span class="rate-demo-label">文字提示</span>
-              <XlyRate v-model="rate3" show-text :texts="['很差', '一般', '不错', '很好', '极佳']" />
+              <EasyRate v-model="rate3" show-text :texts="['很差', '一般', '不错', '很好', '极佳']" />
             </div>
             <div class="rate-demo-item">
               <span class="rate-demo-label">自定义颜色</span>
-              <XlyRate v-model="rate4" color="#f56c6c" />
+              <EasyRate v-model="rate4" color="#f56c6c" />
             </div>
             <div class="rate-demo-item">
               <span class="rate-demo-label">禁用</span>
-              <XlyRate v-model="rate5" disabled />
+              <EasyRate v-model="rate5" disabled />
             </div>
             <div class="rate-demo-item">
               <span class="rate-demo-label">大号</span>
-              <XlyRate v-model="rate6" size="large" />
+              <EasyRate v-model="rate6" size="large" />
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyRate v-model=&quot;value&quot; />
-<XlyRate v-model=&quot;value&quot; allow-half />
-<XlyRate v-model=&quot;value&quot; show-text :texts=&quot;['很差','一般','不错']&quot; />
-<XlyRate v-model=&quot;value&quot; color=&quot;#f56c6c&quot; />
-<XlyRate v-model=&quot;value&quot; disabled />"
+        <EasyDocCode
+          code="<EasyRate v-model=&quot;value&quot; />
+<EasyRate v-model=&quot;value&quot; allow-half />
+<EasyRate v-model=&quot;value&quot; show-text :texts=&quot;['很差','一般','不错']&quot; />
+<EasyRate v-model=&quot;value&quot; color=&quot;#f56c6c&quot; />
+<EasyRate v-model=&quot;value&quot; disabled />"
         />
       </div>
     </section>
@@ -265,42 +265,42 @@ const valid = await formRef.value.validate()"
           <div class="input-demo-group">
             <div class="input-demo-item">
               <span class="input-demo-label">默认</span>
-              <XlyInput v-model="inputVal" placeholder="请输入" clearable />
+              <EasyInput v-model="inputVal" placeholder="请输入" clearable />
             </div>
             <div class="input-demo-item">
               <span class="input-demo-label">密码</span>
-              <XlyInput v-model="inputPwd" type="password" placeholder="请输入密码" />
+              <EasyInput v-model="inputPwd" type="password" placeholder="请输入密码" />
             </div>
             <div class="input-demo-item">
               <span class="input-demo-label">前缀</span>
-              <XlyInput v-model="inputVal2" placeholder="搜索" prefix-icon="el:Search" />
+              <EasyInput v-model="inputVal2" placeholder="搜索" prefix-icon="el:Search" />
             </div>
             <div class="input-demo-item">
               <span class="input-demo-label">字数限制</span>
-              <XlyInput v-model="inputVal3" placeholder="最多20字" :maxlength="20" show-word-limit />
+              <EasyInput v-model="inputVal3" placeholder="最多20字" :maxlength="20" show-word-limit />
             </div>
             <div class="input-demo-item">
               <span class="input-demo-label">复合输入</span>
-              <XlyInput v-model="inputUrl" placeholder="请输入网址">
+              <EasyInput v-model="inputUrl" placeholder="请输入网址">
                 <template #prepend>
                   https://
                 </template>
                 <template #append>
                   .com
                 </template>
-              </XlyInput>
+              </EasyInput>
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyInput v-model=&quot;value&quot; placeholder=&quot;请输入&quot; clearable />
-<XlyInput v-model=&quot;value&quot; type=&quot;password&quot; />
-<XlyInput v-model=&quot;value&quot; prefix-icon=&quot;el:Search&quot; />
-<XlyInput v-model=&quot;value&quot; :maxlength=&quot;20&quot; show-word-limit />
-<XlyInput v-model=&quot;value&quot;>
+        <EasyDocCode
+          code="<EasyInput v-model=&quot;value&quot; placeholder=&quot;请输入&quot; clearable />
+<EasyInput v-model=&quot;value&quot; type=&quot;password&quot; />
+<EasyInput v-model=&quot;value&quot; prefix-icon=&quot;el:Search&quot; />
+<EasyInput v-model=&quot;value&quot; :maxlength=&quot;20&quot; show-word-limit />
+<EasyInput v-model=&quot;value&quot;>
   <template #prepend>https://</template>
   <template #append>.com</template>
-</XlyInput>"
+</EasyInput>"
         />
       </div>
     </section>
@@ -318,22 +318,22 @@ const valid = await formRef.value.validate()"
           <div class="input-demo-group">
             <div class="input-demo-item">
               <span class="input-demo-label">单选</span>
-              <XlySelect v-model="selectVal" :options="fruitOptions" placeholder="请选择" clearable />
+              <EasySelect v-model="selectVal" :options="fruitOptions" placeholder="请选择" clearable />
             </div>
             <div class="input-demo-item">
               <span class="input-demo-label">可搜索</span>
-              <XlySelect v-model="selectVal2" :options="fruitOptions" placeholder="搜索选择" filterable clearable />
+              <EasySelect v-model="selectVal2" :options="fruitOptions" placeholder="搜索选择" filterable clearable />
             </div>
             <div class="input-demo-item">
               <span class="input-demo-label">多选</span>
-              <XlySelect v-model="selectMulti" :options="fruitOptions" placeholder="可多选" multiple />
+              <EasySelect v-model="selectMulti" :options="fruitOptions" placeholder="可多选" multiple />
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; clearable />
-<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; filterable />
-<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; multiple />
+        <EasyDocCode
+          code="<EasySelect v-model=&quot;value&quot; :options=&quot;options&quot; clearable />
+<EasySelect v-model=&quot;value&quot; :options=&quot;options&quot; filterable />
+<EasySelect v-model=&quot;value&quot; :options=&quot;options&quot; multiple />
 
 const options = [
   { label: '苹果', value: 'apple' },

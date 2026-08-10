@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { TreeChartNode } from 'easy-ui'
-import { XlyTreeChart } from 'easy-ui'
+import { EasyTreeChart } from 'easy-ui'
 import { ref } from 'vue'
 
 // ===== 数据结构示例 =====
@@ -633,9 +633,9 @@ function onToggleExpand(node: TreeChartNode, expanded: boolean) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTreeChart :data="basicData" :height="800" />
+          <EasyTreeChart :data="basicData" :height="800" />
         </div>
-        <XlyDocCode code="<XlyTreeChart :data=&quot;treeData&quot; />" />
+        <EasyDocCode code="<EasyTreeChart :data=&quot;treeData&quot; />" />
       </div>
     </section>
 
@@ -650,9 +650,9 @@ function onToggleExpand(node: TreeChartNode, expanded: boolean) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTreeChart :trees="multiTreeData" :height="500" />
+          <EasyTreeChart :trees="multiTreeData" :height="500" />
         </div>
-        <XlyDocCode code="<XlyTreeChart :trees=&quot;[treeData1, treeData2]&quot; />" />
+        <EasyDocCode code="<EasyTreeChart :trees=&quot;[treeData1, treeData2]&quot; />" />
       </div>
     </section>
 
@@ -666,9 +666,9 @@ function onToggleExpand(node: TreeChartNode, expanded: boolean) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTreeChart :data="structureData" :height="350" />
+          <EasyTreeChart :data="structureData" :height="350" />
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="import type { TreeChartNode } from 'easy-ui'
 
 const treeData: TreeChartNode[] = [
@@ -705,9 +705,9 @@ const treeData: TreeChartNode[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTreeChart :data="basicData" layout="vertical" :height="500" />
+          <EasyTreeChart :data="basicData" layout="vertical" :height="500" />
         </div>
-        <XlyDocCode code="<XlyTreeChart :data=&quot;treeData&quot; layout=&quot;vertical&quot; />" />
+        <EasyDocCode code="<EasyTreeChart :data=&quot;treeData&quot; layout=&quot;vertical&quot; />" />
       </div>
     </section>
 
@@ -721,9 +721,9 @@ const treeData: TreeChartNode[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTreeChart :data="basicData" layout="horizontal" :height="300" />
+          <EasyTreeChart :data="basicData" layout="horizontal" :height="300" />
         </div>
-        <XlyDocCode code="<XlyTreeChart :data=&quot;treeData&quot; layout=&quot;horizontal&quot; />" />
+        <EasyDocCode code="<EasyTreeChart :data=&quot;treeData&quot; layout=&quot;horizontal&quot; />" />
       </div>
     </section>
 
@@ -737,9 +737,9 @@ const treeData: TreeChartNode[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTreeChart :data="basicData" :show-toolbar="false" :height="300" />
+          <EasyTreeChart :data="basicData" :show-toolbar="false" :height="300" />
         </div>
-        <XlyDocCode code="<XlyTreeChart :data=&quot;treeData&quot; :show-toolbar=&quot;false&quot; />" />
+        <EasyDocCode code="<EasyTreeChart :data=&quot;treeData&quot; :show-toolbar=&quot;false&quot; />" />
       </div>
     </section>
 
@@ -753,10 +753,10 @@ const treeData: TreeChartNode[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTreeChart :data="basicData" :node-config="customNodeConfig" :height="300" />
+          <EasyTreeChart :data="basicData" :node-config="customNodeConfig" :height="300" />
         </div>
-        <XlyDocCode
-          code="<XlyTreeChart
+        <EasyDocCode
+          code="<EasyTreeChart
   :data=&quot;treeData&quot;
   :node-config=&quot;{
     nodeWidth: 180,
@@ -779,10 +779,10 @@ const treeData: TreeChartNode[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTreeChart :data="basicData" :colors="customColors" :height="300" />
+          <EasyTreeChart :data="basicData" :colors="customColors" :height="300" />
         </div>
-        <XlyDocCode
-          code="<XlyTreeChart
+        <EasyDocCode
+          code="<EasyTreeChart
   :data=&quot;treeData&quot;
   :colors=&quot;['#6366f1', '#8b5cf6', '#a78bfa', '#c4b5fd', '#ddd6fe']&quot;
 />"
@@ -800,9 +800,9 @@ const treeData: TreeChartNode[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTreeChart :data="customStyleData" :height="400" />
+          <EasyTreeChart :data="customStyleData" :height="400" />
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="const treeData: TreeChartNode[] = [
   {
     id: 1,
@@ -861,10 +861,10 @@ const treeData: TreeChartNode[] = [
             <span class="click-tag">node-click</span>
             <code>{{ clickLog }}</code>
           </div>
-          <XlyTreeChart :data="basicData" :height="300" @node-click="onNodeClick" />
+          <EasyTreeChart :data="basicData" :height="300" @node-click="onNodeClick" />
         </div>
-        <XlyDocCode
-          code="<XlyTreeChart
+        <EasyDocCode
+          code="<EasyTreeChart
   :data=&quot;treeData&quot;
   @node-click=&quot;onNodeClick&quot;
 />"
@@ -886,15 +886,15 @@ const treeData: TreeChartNode[] = [
             <span class="click-tag">toggle-expand</span>
             <code>{{ expandLog }}</code>
           </div>
-          <XlyTreeChart
+          <EasyTreeChart
             :data="basicData"
             :expanded-keys="controlledKeys"
             :height="300"
             @toggle-expand="onToggleExpand"
           />
         </div>
-        <XlyDocCode
-          code="<XlyTreeChart
+        <EasyDocCode
+          code="<EasyTreeChart
   :data=&quot;treeData&quot;
   :expanded-keys=&quot;controlledKeys&quot;
   @toggle-expand=&quot;onToggleExpand&quot;
@@ -914,9 +914,9 @@ const treeData: TreeChartNode[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTreeChart :data="orgData" layout="horizontal" :height="500" />
+          <EasyTreeChart :data="orgData" layout="horizontal" :height="500" />
         </div>
-        <XlyDocCode code="<XlyTreeChart :data=&quot;orgData&quot; layout=&quot;horizontal&quot; />" />
+        <EasyDocCode code="<EasyTreeChart :data=&quot;orgData&quot; layout=&quot;horizontal&quot; />" />
       </div>
     </section>
 
@@ -930,9 +930,9 @@ const treeData: TreeChartNode[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTreeChart :data="basicData" :expandable="false" :height="300" />
+          <EasyTreeChart :data="basicData" :expandable="false" :height="300" />
         </div>
-        <XlyDocCode code="<XlyTreeChart :data=&quot;treeData&quot; :expandable=&quot;false&quot; />" />
+        <EasyDocCode code="<EasyTreeChart :data=&quot;treeData&quot; :expandable=&quot;false&quot; />" />
       </div>
     </section>
 
@@ -946,7 +946,7 @@ const treeData: TreeChartNode[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTreeChart
+          <EasyTreeChart
             :data="basicData"
             background-color="#1a1a2e"
             :show-grid="true"
@@ -954,8 +954,8 @@ const treeData: TreeChartNode[] = [
             :height="300"
           />
         </div>
-        <XlyDocCode
-          code="<XlyTreeChart
+        <EasyDocCode
+          code="<EasyTreeChart
   :data=&quot;treeData&quot;
   background-color=&quot;#1a1a2e&quot;
   :show-grid=&quot;true&quot;
@@ -975,10 +975,10 @@ const treeData: TreeChartNode[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTreeChart :data="basicData" background-color="#f8fafc" :show-grid="false" :height="300" />
+          <EasyTreeChart :data="basicData" background-color="#f8fafc" :show-grid="false" :height="300" />
         </div>
-        <XlyDocCode
-          code="<XlyTreeChart
+        <EasyDocCode
+          code="<EasyTreeChart
   :data=&quot;treeData&quot;
   background-color=&quot;#f8fafc&quot;
   :show-grid=&quot;false&quot;
@@ -998,10 +998,10 @@ const treeData: TreeChartNode[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTreeChart :data="basicData" :width="800" :height="300" layout="horizontal" />
+          <EasyTreeChart :data="basicData" :width="800" :height="300" layout="horizontal" />
         </div>
-        <XlyDocCode
-          code="<XlyTreeChart
+        <EasyDocCode
+          code="<EasyTreeChart
   :data=&quot;treeData&quot;
   :width=&quot;800&quot;
   :height=&quot;300&quot;

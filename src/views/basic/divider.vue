@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyDivider, XlyTag } from 'easy-ui'
+import { EasyDivider, EasyTag } from 'easy-ui'
 </script>
 
 <template>
@@ -26,13 +26,13 @@ import { XlyDivider, XlyTag } from 'easy-ui'
         <div class="doc-preview__body">
           <div class="demo-block">
             <span>文章标题</span>
-            <XlyDivider />
+            <EasyDivider />
             <span>文章正文</span>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<span>文章标题</span>
-<XlyDivider />
+<EasyDivider />
 <span>文章正文</span>"
         />
       </div>
@@ -50,17 +50,17 @@ import { XlyDivider, XlyTag } from 'easy-ui'
         <div class="doc-preview__body">
           <div class="demo-block demo-block--vertical">
             <span>周一</span>
-            <XlyDivider>周二</XlyDivider>
+            <EasyDivider>周二</EasyDivider>
             <span>周三</span>
-            <XlyDivider>周四</XlyDivider>
+            <EasyDivider>周四</EasyDivider>
             <span>周五</span>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<span>周一</span>
-<XlyDivider>周二</XlyDivider>
+<EasyDivider>周二</EasyDivider>
 <span>周三</span>
-<XlyDivider>周四</XlyDivider>
+<EasyDivider>周四</EasyDivider>
 <span>周五</span>"
         />
       </div>
@@ -76,20 +76,20 @@ import { XlyDivider, XlyTag } from 'easy-ui'
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body demo-column">
-          <XlyDivider content-position="left">
+          <EasyDivider content-position="left">
             左侧
-          </XlyDivider>
-          <XlyDivider content-position="center">
+          </EasyDivider>
+          <EasyDivider content-position="center">
             居中
-          </XlyDivider>
-          <XlyDivider content-position="right">
+          </EasyDivider>
+          <EasyDivider content-position="right">
             右侧
-          </XlyDivider>
+          </EasyDivider>
         </div>
-        <XlyDocCode
-          code="<XlyDivider content-position=&quot;left&quot;>左侧</XlyDivider>
-<XlyDivider content-position=&quot;center&quot;>居中</XlyDivider>
-<XlyDivider content-position=&quot;right&quot;>右侧</XlyDivider>"
+        <EasyDocCode
+          code="<EasyDivider content-position=&quot;left&quot;>左侧</EasyDivider>
+<EasyDivider content-position=&quot;center&quot;>居中</EasyDivider>
+<EasyDivider content-position=&quot;right&quot;>右侧</EasyDivider>"
         />
       </div>
     </section>
@@ -106,21 +106,21 @@ import { XlyDivider, XlyTag } from 'easy-ui'
         <div class="doc-preview__body">
           <div class="demo-inline">
             <span>选项一</span>
-            <XlyDivider direction="vertical" />
+            <EasyDivider direction="vertical" />
             <span>选项二</span>
-            <XlyDivider direction="vertical" />
+            <EasyDivider direction="vertical" />
             <span>选项三</span>
-            <XlyDivider direction="vertical" />
+            <EasyDivider direction="vertical" />
             <span>选项四</span>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<span>选项一</span>
-<XlyDivider direction=&quot;vertical&quot; />
+<EasyDivider direction=&quot;vertical&quot; />
 <span>选项二</span>
-<XlyDivider direction=&quot;vertical&quot; />
+<EasyDivider direction=&quot;vertical&quot; />
 <span>选项三</span>
-<XlyDivider direction=&quot;vertical&quot; />
+<EasyDivider direction=&quot;vertical&quot; />
 <span>选项四</span>"
         />
       </div>
@@ -136,20 +136,20 @@ import { XlyDivider, XlyTag } from 'easy-ui'
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body demo-column">
-          <XlyDivider plain>
+          <EasyDivider plain>
             简约分割线
-          </XlyDivider>
-          <XlyDivider plain content-position="left">
+          </EasyDivider>
+          <EasyDivider plain content-position="left">
             左侧简约
-          </XlyDivider>
-          <XlyDivider plain content-position="right">
+          </EasyDivider>
+          <EasyDivider plain content-position="right">
             右侧简约
-          </XlyDivider>
+          </EasyDivider>
         </div>
-        <XlyDocCode
-          code="<XlyDivider plain>简约分割线</XlyDivider>
-<XlyDivider plain content-position=&quot;left&quot;>左侧简约</XlyDivider>
-<XlyDivider plain content-position=&quot;right&quot;>右侧简约</XlyDivider>"
+        <EasyDocCode
+          code="<EasyDivider plain>简约分割线</EasyDivider>
+<EasyDivider plain content-position=&quot;left&quot;>左侧简约</EasyDivider>
+<EasyDivider plain content-position=&quot;right&quot;>右侧简约</EasyDivider>"
         />
       </div>
     </section>
@@ -164,24 +164,24 @@ import { XlyDivider, XlyTag } from 'easy-ui'
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body demo-column">
-          <XlyDivider color="#4f6ef7">
+          <EasyDivider color="#4f6ef7">
             蓝色分割线
-          </XlyDivider>
-          <XlyDivider color="#67c23a" :border-width="2">
+          </EasyDivider>
+          <EasyDivider color="#67c23a" :border-width="2">
             绿色加粗
-          </XlyDivider>
-          <XlyDivider color="#f56c6c" border-width="3">
+          </EasyDivider>
+          <EasyDivider color="#f56c6c" border-width="3">
             红色三倍粗
-          </XlyDivider>
-          <XlyDivider color="#e8e8e8" plain>
+          </EasyDivider>
+          <EasyDivider color="#e8e8e8" plain>
             浅灰色简约
-          </XlyDivider>
+          </EasyDivider>
         </div>
-        <XlyDocCode
-          code="<XlyDivider color=&quot;#4f6ef7&quot;>蓝色分割线</XlyDivider>
-<XlyDivider color=&quot;#67c23a&quot; :border-width=&quot;2&quot;>绿色加粗</XlyDivider>
-<XlyDivider color=&quot;#f56c6c&quot; border-width=&quot;3&quot;>红色三倍粗</XlyDivider>
-<XlyDivider color=&quot;#e8e8e8&quot; plain>浅灰色简约</XlyDivider>"
+        <EasyDocCode
+          code="<EasyDivider color=&quot;#4f6ef7&quot;>蓝色分割线</EasyDivider>
+<EasyDivider color=&quot;#67c23a&quot; :border-width=&quot;2&quot;>绿色加粗</EasyDivider>
+<EasyDivider color=&quot;#f56c6c&quot; border-width=&quot;3&quot;>红色三倍粗</EasyDivider>
+<EasyDivider color=&quot;#e8e8e8&quot; plain>浅灰色简约</EasyDivider>"
         />
       </div>
     </section>
@@ -216,7 +216,7 @@ import { XlyDivider, XlyTag } from 'easy-ui'
               </div>
             </div>
           </div>
-          <XlyDivider />
+          <EasyDivider />
           <div class="scenario-block__header">
             <h4>高级设置</h4>
           </div>
@@ -241,21 +241,21 @@ import { XlyDivider, XlyTag } from 'easy-ui'
       </h3>
       <div class="doc-preview doc-preview--noborder">
         <div class="demo-tags">
-          <XlyTag type="primary">
+          <EasyTag type="primary">
             标签一
-          </XlyTag>
-          <XlyDivider direction="vertical" />
-          <XlyTag type="success">
+          </EasyTag>
+          <EasyDivider direction="vertical" />
+          <EasyTag type="success">
             标签二
-          </XlyTag>
-          <XlyDivider direction="vertical" />
-          <XlyTag type="warning">
+          </EasyTag>
+          <EasyDivider direction="vertical" />
+          <EasyTag type="warning">
             标签三
-          </XlyTag>
-          <XlyDivider direction="vertical" />
-          <XlyTag type="danger">
+          </EasyTag>
+          <EasyDivider direction="vertical" />
+          <EasyTag type="danger">
             标签四
-          </XlyTag>
+          </EasyTag>
         </div>
       </div>
 
@@ -271,14 +271,14 @@ import { XlyDivider, XlyTag } from 'easy-ui'
             </div>
             <span>填写信息</span>
           </div>
-          <XlyDivider direction="vertical" />
+          <EasyDivider direction="vertical" />
           <div class="demo-step">
             <div class="demo-step__number">
               2
             </div>
             <span>确认订单</span>
           </div>
-          <XlyDivider direction="vertical" />
+          <EasyDivider direction="vertical" />
           <div class="demo-step">
             <div class="demo-step__number">
               3

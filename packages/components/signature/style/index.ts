@@ -1,0 +1,1 @@
+import '../src/signature.vue'

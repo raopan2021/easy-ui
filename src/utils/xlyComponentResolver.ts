@@ -4,33 +4,33 @@
  * 使用方式：
  * ```ts
  * // vite.config.ts
- * import { xlyComponentResolver } from 'easy-ui'
+ * import { EasyComponentResolver } from 'easy-ui'
  * import Components from 'unplugin-vue-components/vite'
  *
- * Components({ resolvers: [xlyComponentResolver()] })
+ * Components({ resolvers: [EasyComponentResolver()] })
  * ```
  *
  * 规则：
- * - XlyXxxYyy → easy-ui（由打包工具 tree-shaking）
+ * - EasyXxxYyy → easy-ui（由打包工具 tree-shaking）
  */
 import type { ComponentResolver } from 'unplugin-vue-components'
 
 /** 库包名 — 消费方 import 的来源 */
 const LIB = 'easy-ui'
 
-export function xlyComponentResolver(): ComponentResolver {
+export function EasyComponentResolver(): ComponentResolver {
   const SPECIAL_NAMES = new Set([
-    'XlyFormItem',
-    'XlyDescriptionsItem',
-    'XlyRadioGroup',
-    'XlyUpload',
-    'XlyFileUpload',
-    'XlySteps',
-    'XlyStep',
-    'XlyDropdownItem',
-    'XlyTabPane',
-    'XlyTimelineItem',
-    'XlyDocCode',
+    'EasyFormItem',
+    'EasyDescriptionsItem',
+    'EasyRadioGroup',
+    'EasyUpload',
+    'EasyFileUpload',
+    'EasySteps',
+    'EasyStep',
+    'EasyDropdownItem',
+    'EasyTabPane',
+    'EasyTimelineItem',
+    'EasyDocCode',
   ])
 
   return {

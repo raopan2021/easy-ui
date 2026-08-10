@@ -1,0 +1,1 @@
+import '../src/video.vue'

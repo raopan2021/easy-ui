@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyDateRangePicker, XlyDateTimeRangePicker, XlyTimeRangePicker } from 'easy-ui'
+import { EasyDateRangePicker, EasyDateTimeRangePicker, EasyTimeRangePicker } from 'easy-ui'
 import { ref } from 'vue'
 
 // 日期范围
@@ -64,7 +64,7 @@ const disabledRange = ref({
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDateRangePicker
+          <EasyDateRangePicker
             v-model:start="dateRange.start"
             v-model:end="dateRange.end"
             start-placeholder="开始日期"
@@ -75,9 +75,9 @@ const disabledRange = ref({
           </div>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="<template>
-  <XlyDateRangePicker
+  <EasyDateRangePicker
     v-model:start=&quot;start&quot;
     v-model:end=&quot;end&quot;
     start-placeholder=&quot;开始日期&quot;
@@ -106,7 +106,7 @@ const dateRange = ref({
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDateTimeRangePicker
+          <EasyDateTimeRangePicker
             v-model:start="dateTimeRange.start"
             v-model:end="dateTimeRange.end"
             :show-seconds="true"
@@ -118,9 +118,9 @@ const dateRange = ref({
           </div>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="<template>
-  <XlyDateTimeRangePicker
+  <EasyDateTimeRangePicker
     v-model:start=&quot;start&quot;
     v-model:end=&quot;end&quot;
     :show-seconds=&quot;true&quot;
@@ -150,7 +150,7 @@ const dateTimeRange = ref({
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTimeRangePicker
+          <EasyTimeRangePicker
             v-model:start="timeRange.start"
             v-model:end="timeRange.end"
             start-placeholder="开始时间"
@@ -161,9 +161,9 @@ const dateTimeRange = ref({
           </div>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="<template>
-  <XlyTimeRangePicker
+  <EasyTimeRangePicker
     v-model:start=&quot;start&quot;
     v-model:end=&quot;end&quot;
     start-placeholder=&quot;开始时间&quot;
@@ -195,11 +195,11 @@ const timeRange = ref({
           <div class="size-demo">
             <div class="size-item">
               <span class="size-label">Large</span>
-              <XlyDateRangePicker v-model:start="sizeRange.largeStart" v-model:end="sizeRange.largeEnd" size="large" />
+              <EasyDateRangePicker v-model:start="sizeRange.largeStart" v-model:end="sizeRange.largeEnd" size="large" />
             </div>
             <div class="size-item">
               <span class="size-label">Default</span>
-              <XlyDateRangePicker
+              <EasyDateRangePicker
                 v-model:start="sizeRange.defaultStart"
                 v-model:end="sizeRange.defaultEnd"
                 size="default"
@@ -207,15 +207,15 @@ const timeRange = ref({
             </div>
             <div class="size-item">
               <span class="size-label">Small</span>
-              <XlyDateRangePicker v-model:start="sizeRange.smallStart" v-model:end="sizeRange.smallEnd" size="small" />
+              <EasyDateRangePicker v-model:start="sizeRange.smallStart" v-model:end="sizeRange.smallEnd" size="small" />
             </div>
           </div>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyDateRangePicker size=&quot;large&quot; .../>
-<XlyDateRangePicker size=&quot;default&quot; .../>
-<XlyDateRangePicker size=&quot;small&quot; .../>"
+      <EasyDocCode
+        code="<EasyDateRangePicker size=&quot;large&quot; .../>
+<EasyDateRangePicker size=&quot;default&quot; .../>
+<EasyDateRangePicker size=&quot;small&quot; .../>"
       />
     </section>
 
@@ -229,11 +229,11 @@ const timeRange = ref({
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDateRangePicker v-model:start="customRange.start" v-model:end="customRange.end" separator="-" />
+          <EasyDateRangePicker v-model:start="customRange.start" v-model:end="customRange.end" separator="-" />
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyDateRangePicker
+      <EasyDocCode
+        code="<EasyDateRangePicker
   v-model:start=&quot;start&quot;
   v-model:end=&quot;end&quot;
   separator=&quot;-&quot;
@@ -251,11 +251,11 @@ const timeRange = ref({
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDateRangePicker v-model:start="disabledRange.start" v-model:end="disabledRange.end" disabled />
+          <EasyDateRangePicker v-model:start="disabledRange.start" v-model:end="disabledRange.end" disabled />
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyDateRangePicker
+      <EasyDocCode
+        code="<EasyDateRangePicker
   v-model:start=&quot;start&quot;
   v-model:end=&quot;end&quot;
   disabled

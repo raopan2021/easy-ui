@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyDropdown, XlyDropdownItem, XlyIcon } from 'easy-ui'
+import { EasyDropdown, EasyDropdownItem, EasyIcon } from 'easy-ui'
 import { ref } from 'vue'
 
 const clickedItem = ref('')
@@ -29,31 +29,31 @@ function handleItemClick(name: string) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDropdown label="下拉菜单">
+          <EasyDropdown label="下拉菜单">
             <template #dropdown>
-              <XlyDropdownItem>黄金糕</XlyDropdownItem>
-              <XlyDropdownItem>狮子头</XlyDropdownItem>
-              <XlyDropdownItem>螺蛳粉</XlyDropdownItem>
-              <XlyDropdownItem disabled>
+              <EasyDropdownItem>黄金糕</EasyDropdownItem>
+              <EasyDropdownItem>狮子头</EasyDropdownItem>
+              <EasyDropdownItem>螺蛳粉</EasyDropdownItem>
+              <EasyDropdownItem disabled>
                 双皮奶
-              </XlyDropdownItem>
-              <XlyDropdownItem divided>
+              </EasyDropdownItem>
+              <EasyDropdownItem divided>
                 蚵仔煎
-              </XlyDropdownItem>
+              </EasyDropdownItem>
             </template>
-          </XlyDropdown>
+          </EasyDropdown>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyDropdown label=&quot;下拉菜单&quot;>
+      <EasyDocCode
+        code="<EasyDropdown label=&quot;下拉菜单&quot;>
   <template #dropdown>
-    <XlyDropdownItem>黄金糕</XlyDropdownItem>
-    <XlyDropdownItem>狮子头</XlyDropdownItem>
-    <XlyDropdownItem>螺蛳粉</XlyDropdownItem>
-    <XlyDropdownItem disabled>双皮奶</XlyDropdownItem>
-    <XlyDropdownItem divided>蚵仔煎</XlyDropdownItem>
+    <EasyDropdownItem>黄金糕</EasyDropdownItem>
+    <EasyDropdownItem>狮子头</EasyDropdownItem>
+    <EasyDropdownItem>螺蛳粉</EasyDropdownItem>
+    <EasyDropdownItem disabled>双皮奶</EasyDropdownItem>
+    <EasyDropdownItem divided>蚵仔煎</EasyDropdownItem>
   </template>
-</XlyDropdown>"
+</EasyDropdown>"
       />
     </section>
 
@@ -66,23 +66,23 @@ function handleItemClick(name: string) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDropdown label="悬停展开" trigger="hover">
+          <EasyDropdown label="悬停展开" trigger="hover">
             <template #dropdown>
-              <XlyDropdownItem>黄金糕</XlyDropdownItem>
-              <XlyDropdownItem>狮子头</XlyDropdownItem>
-              <XlyDropdownItem>螺蛳粉</XlyDropdownItem>
+              <EasyDropdownItem>黄金糕</EasyDropdownItem>
+              <EasyDropdownItem>狮子头</EasyDropdownItem>
+              <EasyDropdownItem>螺蛳粉</EasyDropdownItem>
             </template>
-          </XlyDropdown>
+          </EasyDropdown>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyDropdown label=&quot;悬停展开&quot; trigger=&quot;hover&quot;>
+      <EasyDocCode
+        code="<EasyDropdown label=&quot;悬停展开&quot; trigger=&quot;hover&quot;>
   <template #dropdown>
-    <XlyDropdownItem>黄金糕</XlyDropdownItem>
-    <XlyDropdownItem>狮子头</XlyDropdownItem>
-    <XlyDropdownItem>螺蛳粉</XlyDropdownItem>
+    <EasyDropdownItem>黄金糕</EasyDropdownItem>
+    <EasyDropdownItem>狮子头</EasyDropdownItem>
+    <EasyDropdownItem>螺蛳粉</EasyDropdownItem>
   </template>
-</XlyDropdown>"
+</EasyDropdown>"
       />
     </section>
 
@@ -95,29 +95,29 @@ function handleItemClick(name: string) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDropdown label="带图标">
+          <EasyDropdown label="带图标">
             <template #dropdown>
-              <XlyDropdownItem icon="el:Plus">
+              <EasyDropdownItem icon="el:Plus">
                 黄金糕
-              </XlyDropdownItem>
-              <XlyDropdownItem icon="el:CirclePlus">
+              </EasyDropdownItem>
+              <EasyDropdownItem icon="el:CirclePlus">
                 狮子头
-              </XlyDropdownItem>
-              <XlyDropdownItem icon="el:Coffee">
+              </EasyDropdownItem>
+              <EasyDropdownItem icon="el:Coffee">
                 螺蛳粉
-              </XlyDropdownItem>
+              </EasyDropdownItem>
             </template>
-          </XlyDropdown>
+          </EasyDropdown>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyDropdown label=&quot;带图标&quot;>
+      <EasyDocCode
+        code="<EasyDropdown label=&quot;带图标&quot;>
   <template #dropdown>
-    <XlyDropdownItem icon=&quot;el:Plus&quot;>黄金糕</XlyDropdownItem>
-    <XlyDropdownItem icon=&quot;el:CirclePlus&quot;>狮子头</XlyDropdownItem>
-    <XlyDropdownItem icon=&quot;el:Coffee&quot;>螺蛳粉</XlyDropdownItem>
+    <EasyDropdownItem icon=&quot;el:Plus&quot;>黄金糕</EasyDropdownItem>
+    <EasyDropdownItem icon=&quot;el:CirclePlus&quot;>狮子头</EasyDropdownItem>
+    <EasyDropdownItem icon=&quot;el:Coffee&quot;>螺蛳粉</EasyDropdownItem>
   </template>
-</XlyDropdown>"
+</EasyDropdown>"
       />
     </section>
 
@@ -130,29 +130,29 @@ function handleItemClick(name: string) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDropdown label="分隔符示例">
+          <EasyDropdown label="分隔符示例">
             <template #dropdown>
-              <XlyDropdownItem>黄金糕</XlyDropdownItem>
-              <XlyDropdownItem>狮子头</XlyDropdownItem>
-              <XlyDropdownItem>螺蛳粉</XlyDropdownItem>
-              <XlyDropdownItem divided>
+              <EasyDropdownItem>黄金糕</EasyDropdownItem>
+              <EasyDropdownItem>狮子头</EasyDropdownItem>
+              <EasyDropdownItem>螺蛳粉</EasyDropdownItem>
+              <EasyDropdownItem divided>
                 双皮奶
-              </XlyDropdownItem>
-              <XlyDropdownItem>蚵仔煎</XlyDropdownItem>
+              </EasyDropdownItem>
+              <EasyDropdownItem>蚵仔煎</EasyDropdownItem>
             </template>
-          </XlyDropdown>
+          </EasyDropdown>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyDropdown label=&quot;分隔符示例&quot;>
+      <EasyDocCode
+        code="<EasyDropdown label=&quot;分隔符示例&quot;>
   <template #dropdown>
-    <XlyDropdownItem>黄金糕</XlyDropdownItem>
-    <XlyDropdownItem>狮子头</XlyDropdownItem>
-    <XlyDropdownItem>螺蛳粉</XlyDropdownItem>
-    <XlyDropdownItem divided>双皮奶</XlyDropdownItem>
-    <XlyDropdownItem>蚵仔煎</XlyDropdownItem>
+    <EasyDropdownItem>黄金糕</EasyDropdownItem>
+    <EasyDropdownItem>狮子头</EasyDropdownItem>
+    <EasyDropdownItem>螺蛳粉</EasyDropdownItem>
+    <EasyDropdownItem divided>双皮奶</EasyDropdownItem>
+    <EasyDropdownItem>蚵仔煎</EasyDropdownItem>
   </template>
-</XlyDropdown>"
+</EasyDropdown>"
       />
     </section>
 
@@ -165,25 +165,25 @@ function handleItemClick(name: string) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDropdown label="禁用示例">
+          <EasyDropdown label="禁用示例">
             <template #dropdown>
-              <XlyDropdownItem>黄金糕</XlyDropdownItem>
-              <XlyDropdownItem disabled>
+              <EasyDropdownItem>黄金糕</EasyDropdownItem>
+              <EasyDropdownItem disabled>
                 狮子头
-              </XlyDropdownItem>
-              <XlyDropdownItem>螺蛳粉</XlyDropdownItem>
+              </EasyDropdownItem>
+              <EasyDropdownItem>螺蛳粉</EasyDropdownItem>
             </template>
-          </XlyDropdown>
+          </EasyDropdown>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyDropdown label=&quot;禁用示例&quot;>
+      <EasyDocCode
+        code="<EasyDropdown label=&quot;禁用示例&quot;>
   <template #dropdown>
-    <XlyDropdownItem>黄金糕</XlyDropdownItem>
-    <XlyDropdownItem disabled>狮子头</XlyDropdownItem>
-    <XlyDropdownItem>螺蛳粉</XlyDropdownItem>
+    <EasyDropdownItem>黄金糕</EasyDropdownItem>
+    <EasyDropdownItem disabled>狮子头</EasyDropdownItem>
+    <EasyDropdownItem>螺蛳粉</EasyDropdownItem>
   </template>
-</XlyDropdown>"
+</EasyDropdown>"
       />
     </section>
 
@@ -196,39 +196,39 @@ function handleItemClick(name: string) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDropdown>
+          <EasyDropdown>
             <span class="custom-trigger">
-              <XlyIcon name="el:Setting" :size="16" />
+              <EasyIcon name="el:Setting" :size="16" />
               设置
-              <XlyIcon name="el:ArrowDown" :size="12" />
+              <EasyIcon name="el:ArrowDown" :size="12" />
             </span>
             <template #dropdown>
-              <XlyDropdownItem icon="el:User">
+              <EasyDropdownItem icon="el:User">
                 个人信息
-              </XlyDropdownItem>
-              <XlyDropdownItem icon="el:Lock">
+              </EasyDropdownItem>
+              <EasyDropdownItem icon="el:Lock">
                 修改密码
-              </XlyDropdownItem>
-              <XlyDropdownItem icon="el:SwitchButton" divided>
+              </EasyDropdownItem>
+              <EasyDropdownItem icon="el:SwitchButton" divided>
                 退出登录
-              </XlyDropdownItem>
+              </EasyDropdownItem>
             </template>
-          </XlyDropdown>
+          </EasyDropdown>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyDropdown>
+      <EasyDocCode
+        code="<EasyDropdown>
   <span class=&quot;custom-trigger&quot;>
-    <XlyIcon name=&quot;el:Setting&quot; :size=&quot;16&quot; />
+    <EasyIcon name=&quot;el:Setting&quot; :size=&quot;16&quot; />
     设置
-    <XlyIcon name=&quot;el:ArrowDown&quot; :size=&quot;12&quot; />
+    <EasyIcon name=&quot;el:ArrowDown&quot; :size=&quot;12&quot; />
   </span>
   <template #dropdown>
-    <XlyDropdownItem icon=&quot;el:User&quot;>个人信息</XlyDropdownItem>
-    <XlyDropdownItem icon=&quot;el:Lock&quot;>修改密码</XlyDropdownItem>
-    <XlyDropdownItem icon=&quot;el:SwitchButton&quot; divided>退出登录</XlyDropdownItem>
+    <EasyDropdownItem icon=&quot;el:User&quot;>个人信息</EasyDropdownItem>
+    <EasyDropdownItem icon=&quot;el:Lock&quot;>修改密码</EasyDropdownItem>
+    <EasyDropdownItem icon=&quot;el:SwitchButton&quot; divided>退出登录</EasyDropdownItem>
   </template>
-</XlyDropdown>"
+</EasyDropdown>"
       />
     </section>
 
@@ -241,29 +241,29 @@ function handleItemClick(name: string) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDropdown label="点击试试">
+          <EasyDropdown label="点击试试">
             <template #dropdown>
-              <XlyDropdownItem @click="handleItemClick('黄金糕')">
+              <EasyDropdownItem @click="handleItemClick('黄金糕')">
                 黄金糕
-              </XlyDropdownItem>
-              <XlyDropdownItem @click="handleItemClick('狮子头')">
+              </EasyDropdownItem>
+              <EasyDropdownItem @click="handleItemClick('狮子头')">
                 狮子头
-              </XlyDropdownItem>
-              <XlyDropdownItem @click="handleItemClick('螺蛳粉')">
+              </EasyDropdownItem>
+              <EasyDropdownItem @click="handleItemClick('螺蛳粉')">
                 螺蛳粉
-              </XlyDropdownItem>
+              </EasyDropdownItem>
             </template>
-          </XlyDropdown>
+          </EasyDropdown>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyDropdown label=&quot;点击试试&quot;>
+      <EasyDocCode
+        code="<EasyDropdown label=&quot;点击试试&quot;>
   <template #dropdown>
-    <XlyDropdownItem @click=&quot;handleItemClick('黄金糕')&quot;>黄金糕</XlyDropdownItem>
-    <XlyDropdownItem @click=&quot;handleItemClick('狮子头')&quot;>狮子头</XlyDropdownItem>
-    <XlyDropdownItem @click=&quot;handleItemClick('螺蛳粉')&quot;>螺蛳粉</XlyDropdownItem>
+    <EasyDropdownItem @click=&quot;handleItemClick('黄金糕')&quot;>黄金糕</EasyDropdownItem>
+    <EasyDropdownItem @click=&quot;handleItemClick('狮子头')&quot;>狮子头</EasyDropdownItem>
+    <EasyDropdownItem @click=&quot;handleItemClick('螺蛳粉')&quot;>螺蛳粉</EasyDropdownItem>
   </template>
-</XlyDropdown>"
+</EasyDropdown>"
       />
     </section>
 
@@ -321,7 +321,7 @@ function handleItemClick(name: string) {
             </tr>
             <tr>
               <td>dropdown</td>
-              <td>下拉菜单，通常是 &lt;XlyDropdownItem&gt; 的列表</td>
+              <td>下拉菜单，通常是 &lt;EasyDropdownItem&gt; 的列表</td>
             </tr>
           </tbody>
         </table>

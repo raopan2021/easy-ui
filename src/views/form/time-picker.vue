@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyTimePicker } from 'easy-ui'
+import { EasyTimePicker } from 'easy-ui'
 import { ref } from 'vue'
 
 const val1 = ref('')
@@ -29,12 +29,12 @@ const val4 = ref('')
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 240px">
-            <XlyTimePicker v-model="val1" placeholder="请选择时间" />
+            <EasyTimePicker v-model="val1" placeholder="请选择时间" />
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ val1 || '未选择' }}</span>
         </div>
       </div>
-      <XlyDocCode code="<XlyTimePicker v-model=&quot;value&quot; placeholder=&quot;请选择时间&quot; />" />
+      <EasyDocCode code="<EasyTimePicker v-model=&quot;value&quot; placeholder=&quot;请选择时间&quot; />" />
     </section>
 
     <section class="doc-section">
@@ -47,12 +47,12 @@ const val4 = ref('')
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 240px">
-            <XlyTimePicker v-model="val2" placeholder="含秒" show-seconds />
+            <EasyTimePicker v-model="val2" placeholder="含秒" show-seconds />
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ val2 || '未选择' }}</span>
         </div>
       </div>
-      <XlyDocCode code="<XlyTimePicker v-model=&quot;value&quot; show-seconds />" />
+      <EasyDocCode code="<EasyTimePicker v-model=&quot;value&quot; show-seconds />" />
     </section>
 
     <section class="doc-section">
@@ -65,16 +65,16 @@ const val4 = ref('')
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 240px">
-            <XlyTimePicker v-model="val3" placeholder="可清除" clearable />
+            <EasyTimePicker v-model="val3" placeholder="可清除" clearable />
           </div>
           <div style="width: 240px">
-            <XlyTimePicker v-model="val3" placeholder="禁用状态" disabled />
+            <EasyTimePicker v-model="val3" placeholder="禁用状态" disabled />
           </div>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyTimePicker v-model=&quot;value&quot; clearable />
-<XlyTimePicker v-model=&quot;value&quot; disabled />"
+      <EasyDocCode
+        code="<EasyTimePicker v-model=&quot;value&quot; clearable />
+<EasyTimePicker v-model=&quot;value&quot; disabled />"
       />
     </section>
 
@@ -88,20 +88,20 @@ const val4 = ref('')
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 240px">
-            <XlyTimePicker v-model="val4" size="large" />
+            <EasyTimePicker v-model="val4" size="large" />
           </div>
           <div style="width: 240px">
-            <XlyTimePicker v-model="val4" />
+            <EasyTimePicker v-model="val4" />
           </div>
           <div style="width: 240px">
-            <XlyTimePicker v-model="val4" size="small" />
+            <EasyTimePicker v-model="val4" size="small" />
           </div>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyTimePicker v-model=&quot;value&quot; size=&quot;large&quot; />
-<XlyTimePicker v-model=&quot;value&quot; />
-<XlyTimePicker v-model=&quot;value&quot; size=&quot;small&quot; />"
+      <EasyDocCode
+        code="<EasyTimePicker v-model=&quot;value&quot; size=&quot;large&quot; />
+<EasyTimePicker v-model=&quot;value&quot; />
+<EasyTimePicker v-model=&quot;value&quot; size=&quot;small&quot; />"
       />
     </section>
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { xly, XlyButton } from 'easy-ui'
+import { EasyButton, xly } from 'easy-ui'
 
 function handleSave() {
   setTimeout(() => {
@@ -38,23 +38,23 @@ function handleCopy() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="xly.$msg.success('保存成功')">
+          <EasyButton @click="xly.$msg.success('保存成功')">
             成功消息
-          </XlyButton>
-          <XlyButton @click="xly.$msg.warning('请注意，余额即将不足')">
+          </EasyButton>
+          <EasyButton @click="xly.$msg.warning('请注意，余额即将不足')">
             警告消息
-          </XlyButton>
-          <XlyButton @click="xly.$msg.danger('操作失败，请重试')">
+          </EasyButton>
+          <EasyButton @click="xly.$msg.danger('操作失败，请重试')">
             错误消息
-          </XlyButton>
-          <XlyButton @click="xly.$msg.info('您有一条新消息')">
+          </EasyButton>
+          <EasyButton @click="xly.$msg.info('您有一条新消息')">
             信息消息
-          </XlyButton>
-          <XlyButton @click="xly.$msg.text('这是一条纯文本提示')">
+          </EasyButton>
+          <EasyButton @click="xly.$msg.text('这是一条纯文本提示')">
             纯文本
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="import { xly } from 'easy-ui'
 
 xly.$msg.success('保存成功')
@@ -76,14 +76,14 @@ xly.$msg.text('纯文本')"
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="xly.$msg.success('数据已成功保存到数据库', { title: '操作成功' })">
+          <EasyButton @click="xly.$msg.success('数据已成功保存到数据库', { title: '操作成功' })">
             带标题成功
-          </XlyButton>
-          <XlyButton @click="xly.$msg.danger('网络连接已断开，请检查网络设置', { title: '连接错误' })">
+          </EasyButton>
+          <EasyButton @click="xly.$msg.danger('网络连接已断开，请检查网络设置', { title: '连接错误' })">
             带标题错误
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="xly.$msg.success('数据已保存到数据库', { title: '操作成功' })
 xly.$msg.danger('网络连接已断开', { title: '连接错误' })"
         />
@@ -100,26 +100,26 @@ xly.$msg.danger('网络连接已断开', { title: '连接错误' })"
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="xly.$msg.info('顶部居中', { position: 'top' })">
+          <EasyButton @click="xly.$msg.info('顶部居中', { position: 'top' })">
             顶部居中
-          </XlyButton>
-          <XlyButton @click="xly.$msg.info('左上角', { position: 'top-left' })">
+          </EasyButton>
+          <EasyButton @click="xly.$msg.info('左上角', { position: 'top-left' })">
             左上角
-          </XlyButton>
-          <XlyButton @click="xly.$msg.info('右上角', { position: 'top-right' })">
+          </EasyButton>
+          <EasyButton @click="xly.$msg.info('右上角', { position: 'top-right' })">
             右上角
-          </XlyButton>
-          <XlyButton @click="xly.$msg.info('底部居中', { position: 'bottom' })">
+          </EasyButton>
+          <EasyButton @click="xly.$msg.info('底部居中', { position: 'bottom' })">
             底部居中
-          </XlyButton>
-          <XlyButton @click="xly.$msg.info('左下角', { position: 'bottom-left' })">
+          </EasyButton>
+          <EasyButton @click="xly.$msg.info('左下角', { position: 'bottom-left' })">
             左下角
-          </XlyButton>
-          <XlyButton @click="xly.$msg.info('右下角', { position: 'bottom-right' })">
+          </EasyButton>
+          <EasyButton @click="xly.$msg.info('右下角', { position: 'bottom-right' })">
             右下角
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="xly.$msg.info('右上角提示', { position: 'top-right' })
 xly.$msg.success('左下角提示', { position: 'bottom-left' })"
         />
@@ -136,17 +136,17 @@ xly.$msg.success('左下角提示', { position: 'bottom-left' })"
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="xly.$msg.success('保存成功，即将自动关闭', { showProgress: true, duration: 5000 })">
+          <EasyButton @click="xly.$msg.success('保存成功，即将自动关闭', { showProgress: true, duration: 5000 })">
             成功 + 进度条
-          </XlyButton>
-          <XlyButton @click="xly.$msg.danger('错误信息，5秒后关闭', { showProgress: true, duration: 5000 })">
+          </EasyButton>
+          <EasyButton @click="xly.$msg.danger('错误信息，5秒后关闭', { showProgress: true, duration: 5000 })">
             错误 + 进度条
-          </XlyButton>
-          <XlyButton @click="xly.$msg.info('提示信息', { showProgress: true, duration: 5000 })">
+          </EasyButton>
+          <EasyButton @click="xly.$msg.info('提示信息', { showProgress: true, duration: 5000 })">
             信息 + 进度条
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="xly.$msg.success('保存成功', { showProgress: true, duration: 5000 })
 xly.$msg.danger('操作失败', { showProgress: true, duration: 5000 })"
         />
@@ -163,7 +163,7 @@ xly.$msg.danger('操作失败', { showProgress: true, duration: 5000 })"
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton
+          <EasyButton
             @click="
               xly.$msg.info(
                 '这是一条较长的消息提示，鼠标悬停在此处会暂停关闭倒计时，移开后继续倒计时。适用于需要用户仔细阅读的场景。',
@@ -172,9 +172,9 @@ xly.$msg.danger('操作失败', { showProgress: true, duration: 5000 })"
             "
           >
             长消息 + 进度条
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="// 鼠标悬停自动暂停，移开继续
 xly.$msg.info('这是一条较长的消息...', {
   duration: 5000,
@@ -195,14 +195,14 @@ xly.$msg.info('这是一条较长的消息...', {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="xly.$msg.warning('系统正在升级中，请稍后操作', { duration: 0, title: '系统通知' })">
+          <EasyButton @click="xly.$msg.warning('系统正在升级中，请稍后操作', { duration: 0, title: '系统通知' })">
             持久消息
-          </XlyButton>
-          <XlyButton @click="xly.$msg.closeAll()">
+          </EasyButton>
+          <EasyButton @click="xly.$msg.closeAll()">
             清除所有
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="// duration 设为 0 不自动关闭
 xly.$msg.warning('系统正在升级中', { duration: 0, title: '系统通知' })
 
@@ -222,17 +222,17 @@ xly.$msg.closeAll()"
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton type="primary" @click="handleSave">
+          <EasyButton type="primary" @click="handleSave">
             保存数据
-          </XlyButton>
-          <XlyButton type="danger" @click="handleDelete">
+          </EasyButton>
+          <EasyButton type="danger" @click="handleDelete">
             删除记录
-          </XlyButton>
-          <XlyButton @click="handleCopy">
+          </EasyButton>
+          <EasyButton @click="handleCopy">
             复制内容
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="function handleSave() {
   setTimeout(() => {
     xly.$msg.success('保存成功', { title: '操作成功' })

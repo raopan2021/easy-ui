@@ -50,6 +50,7 @@
     "@vitejs/plugin-vue": "^6.0.7",
     "@vue/test-utils": "^2.4.6",
     "@vue/tsconfig": "^0.8.1",
+    "esbuild": "^0.28.2",
     "eslint": "^10.8.0",
     "eslint-plugin-format": "^2.0.1",
     "eslint-plugin-unicorn": "72.0.0",

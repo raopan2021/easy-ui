@@ -165,24 +165,24 @@ function toggleCircle(btnRef: any, circle: boolean) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <xly-badge :value="5">
-            <xly-button>消息</xly-button>
-          </xly-badge>
-          <xly-badge :value="88">
-            <xly-button type="primary">
+          <easy-badge :value="5">
+            <easy-button>消息</easy-button>
+          </easy-badge>
+          <easy-badge :value="88">
+            <easy-button type="primary">
               通知
-            </xly-button>
-          </xly-badge>
-          <xly-badge :value="999">
-            <xly-button type="success">
+            </easy-button>
+          </easy-badge>
+          <easy-badge :value="999">
+            <easy-button type="success">
               内容
-            </xly-button>
-          </xly-badge>
+            </easy-button>
+          </easy-badge>
         </div>
-        <XlyDocCode
-          code="<xly-badge :value=&quot;5&quot;>
-  <xly-button>消息</xly-button>
-</xly-badge>"
+        <EasyDocCode
+          code="<easy-badge :value=&quot;5&quot;>
+  <easy-button>消息</easy-button>
+</easy-badge>"
         />
       </div>
 
@@ -192,28 +192,28 @@ function toggleCircle(btnRef: any, circle: boolean) {
           类型：
         </div>
         <div class="doc-preview__body">
-          <xly-badge :value="5" type="primary">
-            <xly-button>primary</xly-button>
-          </xly-badge>
-          <xly-badge :value="5" type="success">
-            <xly-button>success</xly-button>
-          </xly-badge>
-          <xly-badge :value="5" type="warning">
-            <xly-button>warning</xly-button>
-          </xly-badge>
-          <xly-badge :value="5" type="danger">
-            <xly-button>danger</xly-button>
-          </xly-badge>
-          <xly-badge :value="5" type="info">
-            <xly-button>info</xly-button>
-          </xly-badge>
+          <easy-badge :value="5" type="primary">
+            <easy-button>primary</easy-button>
+          </easy-badge>
+          <easy-badge :value="5" type="success">
+            <easy-button>success</easy-button>
+          </easy-badge>
+          <easy-badge :value="5" type="warning">
+            <easy-button>warning</easy-button>
+          </easy-badge>
+          <easy-badge :value="5" type="danger">
+            <easy-button>danger</easy-button>
+          </easy-badge>
+          <easy-badge :value="5" type="info">
+            <easy-button>info</easy-button>
+          </easy-badge>
         </div>
-        <XlyDocCode
-          code="<xly-badge :value=&quot;5&quot; type=&quot;primary&quot;>...</xly-badge>
-<xly-badge :value=&quot;5&quot; type=&quot;success&quot;>...</xly-badge>
-<xly-badge :value=&quot;5&quot; type=&quot;warning&quot;>...</xly-badge>
-<xly-badge :value=&quot;5&quot; type=&quot;danger&quot;>...</xly-badge>
-<xly-badge :value=&quot;5&quot; type=&quot;info&quot;>...</xly-badge>"
+        <EasyDocCode
+          code="<easy-badge :value=&quot;5&quot; type=&quot;primary&quot;>...</easy-badge>
+<easy-badge :value=&quot;5&quot; type=&quot;success&quot;>...</easy-badge>
+<easy-badge :value=&quot;5&quot; type=&quot;warning&quot;>...</easy-badge>
+<easy-badge :value=&quot;5&quot; type=&quot;danger&quot;>...</easy-badge>
+<easy-badge :value=&quot;5&quot; type=&quot;info&quot;>...</easy-badge>"
         />
       </div>
 
@@ -223,20 +223,20 @@ function toggleCircle(btnRef: any, circle: boolean) {
           自定义颜色：
         </div>
         <div class="doc-preview__body">
-          <xly-badge value="NEW" color="#ff0000">
-            <xly-button>红色</xly-button>
-          </xly-badge>
-          <xly-badge value="NEW" color="#10b981">
-            <xly-button>绿色</xly-button>
-          </xly-badge>
-          <xly-badge value="NEW" color="#8b5cf6">
-            <xly-button>紫色</xly-button>
-          </xly-badge>
+          <easy-badge value="NEW" color="#ff0000">
+            <easy-button>红色</easy-button>
+          </easy-badge>
+          <easy-badge value="NEW" color="#10b981">
+            <easy-button>绿色</easy-button>
+          </easy-badge>
+          <easy-badge value="NEW" color="#8b5cf6">
+            <easy-button>紫色</easy-button>
+          </easy-badge>
         </div>
-        <XlyDocCode
-          code="<xly-badge value=&quot;NEW&quot; color=&quot;#ff0000&quot;>...</xly-badge>
-<xly-badge value=&quot;NEW&quot; color=&quot;#10b981&quot;>...</xly-badge>
-<xly-badge value=&quot;NEW&quot; color=&quot;#8b5cf6&quot;>...</xly-badge>"
+        <EasyDocCode
+          code="<easy-badge value=&quot;NEW&quot; color=&quot;#ff0000&quot;>...</easy-badge>
+<easy-badge value=&quot;NEW&quot; color=&quot;#10b981&quot;>...</easy-badge>
+<easy-badge value=&quot;NEW&quot; color=&quot;#8b5cf6&quot;>...</easy-badge>"
         />
       </div>
     </section>
@@ -251,19 +251,19 @@ function toggleCircle(btnRef: any, circle: boolean) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <xly-badge :value="0">
-            <xly-button>默认隐藏0</xly-button>
-          </xly-badge>
-          <xly-badge :value="0" show-zero>
-            <xly-button>show-zero</xly-button>
-          </xly-badge>
+          <easy-badge :value="0">
+            <easy-button>默认隐藏0</easy-button>
+          </easy-badge>
+          <easy-badge :value="0" show-zero>
+            <easy-button>show-zero</easy-button>
+          </easy-badge>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 默认隐藏 0 -->
-<xly-badge :value=&quot;0&quot;>...</xly-badge>
+<easy-badge :value=&quot;0&quot;>...</easy-badge>
 
 <!-- 强制显示 0 -->
-<xly-badge :value=&quot;0&quot; show-zero>...</xly-badge>"
+<easy-badge :value=&quot;0&quot; show-zero>...</easy-badge>"
         />
       </div>
     </section>
@@ -278,22 +278,22 @@ function toggleCircle(btnRef: any, circle: boolean) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <xly-badge :value="5">
-            <xly-button>椭圆</xly-button>
-          </xly-badge>
-          <xly-badge :value="5" circle>
-            <xly-button>圆形</xly-button>
-          </xly-badge>
-          <xly-badge value="NEW" circle color="#10b981">
-            <xly-button>圆形+自定义色</xly-button>
-          </xly-badge>
+          <easy-badge :value="5">
+            <easy-button>椭圆</easy-button>
+          </easy-badge>
+          <easy-badge :value="5" circle>
+            <easy-button>圆形</easy-button>
+          </easy-badge>
+          <easy-badge value="NEW" circle color="#10b981">
+            <easy-button>圆形+自定义色</easy-button>
+          </easy-badge>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 椭圆（默认） -->
-<xly-badge :value=&quot;5&quot;>...</xly-badge>
+<easy-badge :value=&quot;5&quot;>...</easy-badge>
 
 <!-- 圆形 -->
-<xly-badge :value=&quot;5&quot; circle>...</xly-badge>"
+<easy-badge :value=&quot;5&quot; circle>...</easy-badge>"
         />
       </div>
     </section>
@@ -308,14 +308,14 @@ function toggleCircle(btnRef: any, circle: boolean) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <xly-badge :value="5" />
-          <xly-badge value="99+" type="primary" />
-          <xly-badge :value="newMsg" type="success" />
+          <easy-badge :value="5" />
+          <easy-badge value="99+" type="primary" />
+          <easy-badge :value="newMsg" type="success" />
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 独立显示 -->
-<xly-badge :value=&quot;5&quot; />
-<xly-badge value=&quot;99+&quot; type=&quot;primary&quot; />"
+<easy-badge :value=&quot;5&quot; />
+<easy-badge value=&quot;99+&quot; type=&quot;primary&quot; />"
         />
       </div>
     </section>
@@ -330,20 +330,20 @@ function toggleCircle(btnRef: any, circle: boolean) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <xly-badge :value="12">
-            <xly-icon name="el:Bell" :size="24" />
-          </xly-badge>
-          <xly-badge :value="3" type="warning">
-            <xly-icon name="el:ShoppingCart" :size="24" />
-          </xly-badge>
-          <xly-badge value="99+" type="danger">
-            <xly-icon name="el:Message" :size="24" />
-          </xly-badge>
+          <easy-badge :value="12">
+            <easy-icon name="el:Bell" :size="24" />
+          </easy-badge>
+          <easy-badge :value="3" type="warning">
+            <easy-icon name="el:ShoppingCart" :size="24" />
+          </easy-badge>
+          <easy-badge value="99+" type="danger">
+            <easy-icon name="el:Message" :size="24" />
+          </easy-badge>
         </div>
-        <XlyDocCode
-          code="<xly-badge :value=&quot;12&quot;>
-  <xly-icon name=&quot;el:Bell&quot; />
-</xly-badge>"
+        <EasyDocCode
+          code="<easy-badge :value=&quot;12&quot;>
+  <easy-icon name=&quot;el:Bell&quot; />
+</easy-badge>"
         />
       </div>
     </section>
@@ -358,20 +358,20 @@ function toggleCircle(btnRef: any, circle: boolean) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <xly-badge :value="5" position="top-left">
-            <xly-button>top-left</xly-button>
-          </xly-badge>
-          <xly-badge :value="5" position="bottom-left">
-            <xly-button>bottom-right</xly-button>
-          </xly-badge>
-          <xly-badge :value="5" position="top-right">
-            <xly-button>top-right</xly-button>
-          </xly-badge>
-          <xly-badge :value="5" position="bottom-right">
-            <xly-button>bottom-right</xly-button>
-          </xly-badge>
+          <easy-badge :value="5" position="top-left">
+            <easy-button>top-left</easy-button>
+          </easy-badge>
+          <easy-badge :value="5" position="bottom-left">
+            <easy-button>bottom-right</easy-button>
+          </easy-badge>
+          <easy-badge :value="5" position="top-right">
+            <easy-button>top-right</easy-button>
+          </easy-badge>
+          <easy-badge :value="5" position="bottom-right">
+            <easy-button>bottom-right</easy-button>
+          </easy-badge>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="position=&quot;top-right&quot;  // 默认
 position=&quot;top-left&quot;
 position=&quot;bottom-right&quot;
@@ -390,23 +390,23 @@ position=&quot;bottom-left&quot;"
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <xly-badge :value="5" type="primary">
-            <xly-button>primary</xly-button>
-          </xly-badge>
-          <xly-badge :value="5" type="success">
-            <xly-button>success</xly-button>
-          </xly-badge>
-          <xly-badge :value="5" type="warning">
-            <xly-button>warning</xly-button>
-          </xly-badge>
-          <xly-badge :value="5" type="danger">
-            <xly-button>danger</xly-button>
-          </xly-badge>
-          <xly-badge :value="5" type="info">
-            <xly-button>info</xly-button>
-          </xly-badge>
+          <easy-badge :value="5" type="primary">
+            <easy-button>primary</easy-button>
+          </easy-badge>
+          <easy-badge :value="5" type="success">
+            <easy-button>success</easy-button>
+          </easy-badge>
+          <easy-badge :value="5" type="warning">
+            <easy-button>warning</easy-button>
+          </easy-badge>
+          <easy-badge :value="5" type="danger">
+            <easy-button>danger</easy-button>
+          </easy-badge>
+          <easy-badge :value="5" type="info">
+            <easy-button>info</easy-button>
+          </easy-badge>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="type=&quot;primary&quot;   // 蓝色
 type=&quot;success&quot;   // 绿色
 type=&quot;warning&quot;  // 橙色
@@ -426,14 +426,14 @@ type=&quot;info&quot;     // 灰色"
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <xly-badge :value="5" color="#10b981">
-            <xly-button>自定义绿色</xly-button>
-          </xly-badge>
-          <xly-badge :value="5" color="#8b5cf6">
-            <xly-button>自定义紫色</xly-button>
-          </xly-badge>
+          <easy-badge :value="5" color="#10b981">
+            <easy-button>自定义绿色</easy-button>
+          </easy-badge>
+          <easy-badge :value="5" color="#8b5cf6">
+            <easy-button>自定义紫色</easy-button>
+          </easy-badge>
         </div>
-        <XlyDocCode code="<xly-badge :value=&quot;5&quot; color=&quot;#10b981&quot;>...</xly-badge>" />
+        <EasyDocCode code="<easy-badge :value=&quot;5&quot; color=&quot;#10b981&quot;>...</easy-badge>" />
       </div>
     </section>
 
@@ -447,11 +447,11 @@ type=&quot;info&quot;     // 灰色"
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <xly-button ref="btnRef" @click="toggleBadge">
+          <easy-button ref="btnRef" @click="toggleBadge">
             {{ hasBadge ? '移除徽标' : '添加徽标' }}
-          </xly-button>
+          </easy-button>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="import { xly } from 'easy-ui'
 
 // 在元素上显示徽标
@@ -471,20 +471,20 @@ badge.close()"
           位置：
         </div>
         <div class="doc-preview__body">
-          <xly-button ref="btnPos2" @click="togglePos2">
+          <easy-button ref="btnPos2" @click="togglePos2">
             左上
-          </xly-button>
-          <xly-button ref="btnPos4" @click="togglePos4">
+          </easy-button>
+          <easy-button ref="btnPos4" @click="togglePos4">
             左下
-          </xly-button>
-          <xly-button ref="btnPos1" @click="togglePos1">
+          </easy-button>
+          <easy-button ref="btnPos1" @click="togglePos1">
             右上
-          </xly-button>
-          <xly-button ref="btnPos3" @click="togglePos3">
+          </easy-button>
+          <easy-button ref="btnPos3" @click="togglePos3">
             右下
-          </xly-button>
+          </easy-button>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="xly.$badge.open(el, { value: 5, position: 'top-left' })
 xly.$badge.open(el, { value: 5, position: 'top-right' })
 xly.$badge.open(el, { value: 5, position: 'bottom-left' })
@@ -498,23 +498,23 @@ xly.$badge.open(el, { value: 5, position: 'bottom-right' })"
           类型：
         </div>
         <div class="doc-preview__body">
-          <xly-button ref="btnType1" @click="toggleType1">
+          <easy-button ref="btnType1" @click="toggleType1">
             primary
-          </xly-button>
-          <xly-button ref="btnType2" @click="toggleType2">
+          </easy-button>
+          <easy-button ref="btnType2" @click="toggleType2">
             success
-          </xly-button>
-          <xly-button ref="btnType3" @click="toggleType3">
+          </easy-button>
+          <easy-button ref="btnType3" @click="toggleType3">
             warning
-          </xly-button>
-          <xly-button ref="btnType4" @click="toggleType4">
+          </easy-button>
+          <easy-button ref="btnType4" @click="toggleType4">
             danger
-          </xly-button>
-          <xly-button ref="btnType5" @click="toggleType5">
+          </easy-button>
+          <easy-button ref="btnType5" @click="toggleType5">
             info
-          </xly-button>
+          </easy-button>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="xly.$badge.open(el, { value: 5, type: 'primary' })
 xly.$badge.open(el, { value: 5, type: 'success' })
 xly.$badge.open(el, { value: 5, type: 'warning' })
@@ -529,17 +529,17 @@ xly.$badge.open(el, { value: 5, type: 'info' })"
           自定义颜色：
         </div>
         <div class="doc-preview__body">
-          <xly-button ref="btnColor1" @click="toggleColor1">
+          <easy-button ref="btnColor1" @click="toggleColor1">
             #ff0000
-          </xly-button>
-          <xly-button ref="btnColor2" @click="toggleColor2">
+          </easy-button>
+          <easy-button ref="btnColor2" @click="toggleColor2">
             #10b981
-          </xly-button>
-          <xly-button ref="btnColor3" @click="toggleColor3">
+          </easy-button>
+          <easy-button ref="btnColor3" @click="toggleColor3">
             #8b5cf6
-          </xly-button>
+          </easy-button>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="xly.$badge.open(el, { value: 'NEW', color: '#ff0000' })
 xly.$badge.open(el, { value: 'NEW', color: '#10b981' })
 xly.$badge.open(el, { value: 'NEW', color: '#8b5cf6' })"
@@ -552,14 +552,14 @@ xly.$badge.open(el, { value: 'NEW', color: '#8b5cf6' })"
           圆形：
         </div>
         <div class="doc-preview__body">
-          <xly-button ref="btnCircle1" @click="toggleCircle1">
+          <easy-button ref="btnCircle1" @click="toggleCircle1">
             椭圆
-          </xly-button>
-          <xly-button ref="btnCircle2" @click="toggleCircle2">
+          </easy-button>
+          <easy-button ref="btnCircle2" @click="toggleCircle2">
             圆形
-          </xly-button>
+          </easy-button>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="// 椭圆（默认）
 xly.$badge.open(el, { value: 5 })
 

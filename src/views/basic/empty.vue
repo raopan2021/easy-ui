@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyButton, XlyEmpty } from 'easy-ui'
+import { EasyButton, EasyEmpty } from 'easy-ui'
 import { ref } from 'vue'
 
 const keyword = ref('')
@@ -43,9 +43,9 @@ function handleApply() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyEmpty />
+          <EasyEmpty />
         </div>
-        <XlyDocCode code="<XlyEmpty />" />
+        <EasyDocCode code="<EasyEmpty />" />
       </div>
     </section>
 
@@ -60,18 +60,18 @@ function handleApply() {
       <div class="doc-preview">
         <div class="doc-preview__body demo-types">
           <div v-for="item in typeList" :key="item.type" class="demo-type-item">
-            <XlyEmpty :type="item.type" />
+            <EasyEmpty :type="item.type" />
             <div class="demo-type-label">
               {{ item.label }}
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyEmpty type=&quot;default&quot; />
-<XlyEmpty type=&quot;search&quot; />
-<XlyEmpty type=&quot;network&quot; />
-<XlyEmpty type=&quot;permission&quot; />
-<XlyEmpty type=&quot;list&quot; />"
+        <EasyDocCode
+          code="<EasyEmpty type=&quot;default&quot; />
+<EasyEmpty type=&quot;search&quot; />
+<EasyEmpty type=&quot;network&quot; />
+<EasyEmpty type=&quot;permission&quot; />
+<EasyEmpty type=&quot;list&quot; />"
         />
       </div>
     </section>
@@ -88,28 +88,28 @@ function handleApply() {
       <div class="doc-preview">
         <div class="doc-preview__body demo-sizes">
           <div class="demo-size-item">
-            <XlyEmpty size="small" description="小尺寸" />
+            <EasyEmpty size="small" description="小尺寸" />
             <div class="demo-type-label">
               small
             </div>
           </div>
           <div class="demo-size-item">
-            <XlyEmpty description="默认尺寸" />
+            <EasyEmpty description="默认尺寸" />
             <div class="demo-type-label">
               default
             </div>
           </div>
           <div class="demo-size-item">
-            <XlyEmpty size="large" description="大尺寸" />
+            <EasyEmpty size="large" description="大尺寸" />
             <div class="demo-type-label">
               large
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyEmpty size=&quot;small&quot; description=&quot;小尺寸&quot; />
-<XlyEmpty description=&quot;默认尺寸&quot; />
-<XlyEmpty size=&quot;large&quot; description=&quot;大尺寸&quot; />"
+        <EasyDocCode
+          code="<EasyEmpty size=&quot;small&quot; description=&quot;小尺寸&quot; />
+<EasyEmpty description=&quot;默认尺寸&quot; />
+<EasyEmpty size=&quot;large&quot; description=&quot;大尺寸&quot; />"
         />
       </div>
     </section>
@@ -124,23 +124,23 @@ function handleApply() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="gap: 48px">
-          <XlyEmpty description="暂时没有相关数据，稍后再试" />
-          <XlyEmpty type="search">
+          <EasyEmpty description="暂时没有相关数据，稍后再试" />
+          <EasyEmpty type="search">
             <template #description>
               未找到 <strong style="color: #4f6ef7">"{{ keyword }}"</strong> 相关内容
             </template>
-          </XlyEmpty>
+          </EasyEmpty>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 属性方式 -->
-<XlyEmpty description=&quot;暂时没有相关数据，稍后再试&quot; />
+<EasyEmpty description=&quot;暂时没有相关数据，稍后再试&quot; />
 
 <!-- 插槽方式（支持富文本） -->
-<XlyEmpty type=&quot;search&quot;>
+<EasyEmpty type=&quot;search&quot;>
   <template #description>
     未找到 <strong>&quot;关键词&quot;</strong> 相关内容
   </template>
-</XlyEmpty>"
+</EasyEmpty>"
         />
       </div>
     </section>
@@ -155,34 +155,34 @@ function handleApply() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="gap: 64px">
-          <XlyEmpty description="暂无数据">
-            <XlyButton type="primary">
+          <EasyEmpty description="暂无数据">
+            <EasyButton type="primary">
               立即创建
-            </XlyButton>
-          </XlyEmpty>
-          <XlyEmpty type="network" description="网络连接异常">
-            <XlyButton @click="handleRetry">
+            </EasyButton>
+          </EasyEmpty>
+          <EasyEmpty type="network" description="网络连接异常">
+            <EasyButton @click="handleRetry">
               重新连接
-            </XlyButton>
-            <XlyButton type="primary" @click="handleRetry">
+            </EasyButton>
+            <EasyButton type="primary" @click="handleRetry">
               刷新页面
-            </XlyButton>
-          </XlyEmpty>
-          <XlyEmpty type="permission" description="暂无权限访问">
-            <XlyButton type="primary" @click="handleApply">
+            </EasyButton>
+          </EasyEmpty>
+          <EasyEmpty type="permission" description="暂无权限访问">
+            <EasyButton type="primary" @click="handleApply">
               申请权限
-            </XlyButton>
-          </XlyEmpty>
+            </EasyButton>
+          </EasyEmpty>
         </div>
-        <XlyDocCode
-          code="<XlyEmpty description=&quot;暂无数据&quot;>
-  <XlyButton type=&quot;primary&quot;>立即创建</XlyButton>
-</XlyEmpty>
+        <EasyDocCode
+          code="<EasyEmpty description=&quot;暂无数据&quot;>
+  <EasyButton type=&quot;primary&quot;>立即创建</EasyButton>
+</EasyEmpty>
 
-<XlyEmpty type=&quot;network&quot; description=&quot;网络连接异常&quot;>
-  <XlyButton>重新连接</XlyButton>
-  <XlyButton type=&quot;primary&quot;>刷新页面</XlyButton>
-</XlyEmpty>"
+<EasyEmpty type=&quot;network&quot; description=&quot;网络连接异常&quot;>
+  <EasyButton>重新连接</EasyButton>
+  <EasyButton type=&quot;primary&quot;>刷新页面</EasyButton>
+</EasyEmpty>"
         />
       </div>
     </section>
@@ -198,12 +198,12 @@ function handleApply() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="gap: 64px">
-          <XlyEmpty
+          <EasyEmpty
             image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
             :image-size="120"
             description="使用自定义图片"
           />
-          <XlyEmpty description="使用插槽自定义图片区域">
+          <EasyEmpty description="使用插槽自定义图片区域">
             <template #image>
               <div class="custom-image-slot">
                 <svg viewBox="0 0 80 80" width="80" height="80" fill="none">
@@ -212,18 +212,18 @@ function handleApply() {
                 </svg>
               </div>
             </template>
-          </XlyEmpty>
+          </EasyEmpty>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 自定义图片地址 -->
-<XlyEmpty image=&quot;https://...&quot; :image-size=&quot;120&quot; description=&quot;使用自定义图片&quot; />
+<EasyEmpty image=&quot;https://...&quot; :image-size=&quot;120&quot; description=&quot;使用自定义图片&quot; />
 
 <!-- 插槽方式 -->
-<XlyEmpty description=&quot;...&quot;>
+<EasyEmpty description=&quot;...&quot;>
   <template #image>
     <img src=&quot;...&quot; />
   </template>
-</XlyEmpty>"
+</EasyEmpty>"
         />
       </div>
     </section>
@@ -256,11 +256,11 @@ function handleApply() {
             <tbody>
               <tr>
                 <td colspan="5">
-                  <XlyEmpty size="small" description="暂无员工数据">
-                    <XlyButton size="small" type="primary">
+                  <EasyEmpty size="small" description="暂无员工数据">
+                    <EasyButton size="small" type="primary">
                       添加员工
-                    </XlyButton>
-                  </XlyEmpty>
+                    </EasyButton>
+                  </EasyEmpty>
                 </td>
               </tr>
             </tbody>
@@ -276,22 +276,22 @@ function handleApply() {
         <div class="demo-search-result">
           <div class="demo-search-bar">
             <input v-model="keyword" class="demo-input" placeholder="输入搜索关键词...">
-            <XlyButton type="primary" size="small">
+            <EasyButton type="primary" size="small">
               搜索
-            </XlyButton>
+            </EasyButton>
           </div>
           <div v-if="keyword" class="demo-result-body">
-            <XlyEmpty type="search">
+            <EasyEmpty type="search">
               <template #description>
                 没有找到与 <strong style="color: #4f6ef7">"{{ keyword }}"</strong> 相关的内容
               </template>
-              <XlyButton size="small" @click="keyword = ''">
+              <EasyButton size="small" @click="keyword = ''">
                 清除搜索
-              </XlyButton>
-            </XlyEmpty>
+              </EasyButton>
+            </EasyEmpty>
           </div>
           <div v-else class="demo-result-body demo-result-body--hint">
-            <XlyEmpty size="small" description="请输入关键词开始搜索" />
+            <EasyEmpty size="small" description="请输入关键词开始搜索" />
           </div>
         </div>
       </div>
@@ -302,12 +302,12 @@ function handleApply() {
       </h3>
       <div class="doc-preview doc-preview--noborder">
         <div class="demo-card-container">
-          <XlyEmpty type="list" description="还没有添加任何项目">
-            <XlyButton type="primary">
+          <EasyEmpty type="list" description="还没有添加任何项目">
+            <EasyButton type="primary">
               新建项目
-            </XlyButton>
-            <XlyButton>从模板创建</XlyButton>
-          </XlyEmpty>
+            </EasyButton>
+            <EasyButton>从模板创建</EasyButton>
+          </EasyEmpty>
         </div>
       </div>
     </section>

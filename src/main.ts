@@ -1,6 +1,6 @@
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 // easy-ui 全局服务 + 组件
-import { setupWatermarkDirective, setupXly, XlyDocCode } from 'easy-ui'
+import { EasyDocCode, setupWatermarkDirective, setupXly } from 'easy-ui'
 
 // Element Plus
 import ElementPlus from 'element-plus'
@@ -22,7 +22,7 @@ import 'element-plus/dist/index.css'
 const app = createApp(App)
 
 // 全局注册文档代码展示组件
-app.component('XlyDocCode', XlyDocCode)
+app.component('EasyDocCode', EasyDocCode)
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)

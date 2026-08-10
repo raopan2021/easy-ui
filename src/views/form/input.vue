@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyInput } from 'easy-ui'
+import { EasyInput } from 'easy-ui'
 import { ref } from 'vue'
 
 const val1 = ref('')
@@ -38,15 +38,15 @@ const textarea4 = ref('')
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
-          <XlyInput v-model="val1" placeholder="请输入内容" />
-          <XlyInput v-model="val1b" placeholder="可清除" clearable />
-          <XlyInput v-model="val1c" placeholder="禁用状态" disabled />
+          <EasyInput v-model="val1" placeholder="请输入内容" />
+          <EasyInput v-model="val1b" placeholder="可清除" clearable />
+          <EasyInput v-model="val1c" placeholder="禁用状态" disabled />
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyInput v-model=&quot;value&quot; placeholder=&quot;请输入内容&quot; />
-<XlyInput v-model=&quot;value&quot; placeholder=&quot;可清除&quot; clearable />
-<XlyInput v-model=&quot;value&quot; placeholder=&quot;禁用状态&quot; disabled />"
+      <EasyDocCode
+        code="<EasyInput v-model=&quot;value&quot; placeholder=&quot;请输入内容&quot; />
+<EasyInput v-model=&quot;value&quot; placeholder=&quot;可清除&quot; clearable />
+<EasyInput v-model=&quot;value&quot; placeholder=&quot;禁用状态&quot; disabled />"
       />
     </section>
 
@@ -59,11 +59,11 @@ const textarea4 = ref('')
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
-          <XlyInput v-model="pwd" type="password" placeholder="请输入密码" />
+          <EasyInput v-model="pwd" type="password" placeholder="请输入密码" />
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyInput v-model=&quot;password&quot; type=&quot;password&quot; placeholder=&quot;请输入密码&quot; />"
+      <EasyDocCode
+        code="<EasyInput v-model=&quot;password&quot; type=&quot;password&quot; placeholder=&quot;请输入密码&quot; />"
       />
     </section>
 
@@ -72,18 +72,18 @@ const textarea4 = ref('')
         前后缀
       </h2>
       <p class="doc-section__desc">
-        通过 <code>prefixIcon</code> / <code>suffixIcon</code> 传入图标名称（使用 XlyIcon 的 name 格式），或通过
+        通过 <code>prefixIcon</code> / <code>suffixIcon</code> 传入图标名称（使用 EasyIcon 的 name 格式），或通过
         <code>#prefix</code> / <code>#suffix</code> 插槽自定义内容。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
-          <XlyInput v-model="val2" placeholder="搜索" prefix-icon="el:Search" />
-          <XlyInput v-model="val3" placeholder="日期" suffix-icon="el:Calendar" />
+          <EasyInput v-model="val2" placeholder="搜索" prefix-icon="el:Search" />
+          <EasyInput v-model="val3" placeholder="日期" suffix-icon="el:Calendar" />
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyInput v-model=&quot;value&quot; placeholder=&quot;搜索&quot; prefix-icon=&quot;el:Search&quot; />
-<XlyInput v-model=&quot;value&quot; placeholder=&quot;日期&quot; suffix-icon=&quot;el:Calendar&quot; />"
+      <EasyDocCode
+        code="<EasyInput v-model=&quot;value&quot; placeholder=&quot;搜索&quot; prefix-icon=&quot;el:Search&quot; />
+<EasyInput v-model=&quot;value&quot; placeholder=&quot;日期&quot; suffix-icon=&quot;el:Calendar&quot; />"
       />
     </section>
 
@@ -96,25 +96,25 @@ const textarea4 = ref('')
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
-          <XlyInput v-model="val4" placeholder="请输入网址">
+          <EasyInput v-model="val4" placeholder="请输入网址">
             <template #prepend>
               https://
             </template>
-          </XlyInput>
-          <XlyInput v-model="val5" placeholder="请输入域名">
+          </EasyInput>
+          <EasyInput v-model="val5" placeholder="请输入域名">
             <template #append>
               .com
             </template>
-          </XlyInput>
+          </EasyInput>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyInput v-model=&quot;value&quot; placeholder=&quot;请输入网址&quot;>
+      <EasyDocCode
+        code="<EasyInput v-model=&quot;value&quot; placeholder=&quot;请输入网址&quot;>
   <template #prepend>https://</template>
-</XlyInput>
-<XlyInput v-model=&quot;value&quot; placeholder=&quot;请输入域名&quot;>
+</EasyInput>
+<EasyInput v-model=&quot;value&quot; placeholder=&quot;请输入域名&quot;>
   <template #append>.com</template>
-</XlyInput>"
+</EasyInput>"
       />
     </section>
 
@@ -127,11 +127,11 @@ const textarea4 = ref('')
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
-          <XlyInput v-model="val6" placeholder="最多20字" :maxlength="20" show-word-limit />
+          <EasyInput v-model="val6" placeholder="最多20字" :maxlength="20" show-word-limit />
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyInput v-model=&quot;value&quot; placeholder=&quot;最多20字&quot; :maxlength=&quot;20&quot; show-word-limit />"
+      <EasyDocCode
+        code="<EasyInput v-model=&quot;value&quot; placeholder=&quot;最多20字&quot; :maxlength=&quot;20&quot; show-word-limit />"
       />
     </section>
 
@@ -144,15 +144,15 @@ const textarea4 = ref('')
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
-          <XlyInput v-model="val7" placeholder="大尺寸 large" size="large" />
-          <XlyInput v-model="val7" placeholder="默认尺寸 default" size="default" />
-          <XlyInput v-model="val7" placeholder="小尺寸 small" size="small" />
+          <EasyInput v-model="val7" placeholder="大尺寸 large" size="large" />
+          <EasyInput v-model="val7" placeholder="默认尺寸 default" size="default" />
+          <EasyInput v-model="val7" placeholder="小尺寸 small" size="small" />
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyInput v-model=&quot;value&quot; size=&quot;large&quot; />
-<XlyInput v-model=&quot;value&quot; size=&quot;default&quot; />
-<XlyInput v-model=&quot;value&quot; size=&quot;small&quot; />"
+      <EasyDocCode
+        code="<EasyInput v-model=&quot;value&quot; size=&quot;large&quot; />
+<EasyInput v-model=&quot;value&quot; size=&quot;default&quot; />
+<EasyInput v-model=&quot;value&quot; size=&quot;small&quot; />"
       />
     </section>
 
@@ -166,10 +166,10 @@ const textarea4 = ref('')
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
-          <XlyInput v-model="textarea1" type="textarea" :rows="2" placeholder="默认 2 行" />
-          <XlyInput v-model="textarea2" type="textarea" :rows="4" placeholder="4 行" />
-          <XlyInput v-model="textarea3" type="textarea" :rows="3" placeholder="禁止调整大小" resize="none" />
-          <XlyInput
+          <EasyInput v-model="textarea1" type="textarea" :rows="2" placeholder="默认 2 行" />
+          <EasyInput v-model="textarea2" type="textarea" :rows="4" placeholder="4 行" />
+          <EasyInput v-model="textarea3" type="textarea" :rows="3" placeholder="禁止调整大小" resize="none" />
+          <EasyInput
             v-model="textarea4"
             type="textarea"
             :rows="2"
@@ -179,18 +179,18 @@ const textarea4 = ref('')
           />
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="<!-- 默认 2 行，允许垂直拖动调整大小 -->
-<XlyInput v-model=&quot;value&quot; type=&quot;textarea&quot; :rows=&quot;2&quot; placeholder=&quot;请输入内容&quot; />
+<EasyInput v-model=&quot;value&quot; type=&quot;textarea&quot; :rows=&quot;2&quot; placeholder=&quot;请输入内容&quot; />
 
 <!-- 4 行 -->
-<XlyInput v-model=&quot;value&quot; type=&quot;textarea&quot; :rows=&quot;4&quot; />
+<EasyInput v-model=&quot;value&quot; type=&quot;textarea&quot; :rows=&quot;4&quot; />
 
 <!-- 禁止调整大小 -->
-<XlyInput v-model=&quot;value&quot; type=&quot;textarea&quot; :resize=&quot;'none'&quot; />
+<EasyInput v-model=&quot;value&quot; type=&quot;textarea&quot; :resize=&quot;'none'&quot; />
 
 <!-- 带字数统计 -->
-<XlyInput v-model=&quot;value&quot; type=&quot;textarea&quot; :maxlength=&quot;100&quot; show-word-limit />"
+<EasyInput v-model=&quot;value&quot; type=&quot;textarea&quot; :maxlength=&quot;100&quot; show-word-limit />"
       />
     </section>
 
@@ -263,13 +263,13 @@ const textarea4 = ref('')
             </tr>
             <tr>
               <td><code>prefixIcon</code></td>
-              <td>前缀图标名称（XlyIcon name 格式）</td>
+              <td>前缀图标名称（EasyIcon name 格式）</td>
               <td><code>string</code></td>
               <td>—</td>
             </tr>
             <tr>
               <td><code>suffixIcon</code></td>
-              <td>后缀图标名称（XlyIcon name 格式）</td>
+              <td>后缀图标名称（EasyIcon name 格式）</td>
               <td><code>string</code></td>
               <td>—</td>
             </tr>

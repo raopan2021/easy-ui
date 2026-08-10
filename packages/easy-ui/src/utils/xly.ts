@@ -1,18 +1,16 @@
 import type { App } from 'vue'
-import { XlyBadge } from '../components/xly-badge/badge'
-import { XlyLoading } from '../components/xly-loading/loading'
-import { setupXlyMessage } from '../components/xly-message/install'
-import { XlyMsg } from '../components/xly-message/message'
-import { setupXlyMsgBox } from '../components/xly-msgbox/install'
-import { XlyMsgBox } from '../components/xly-msgbox/msgbox'
-import { XlyTour } from '../components/xly-tour/tour'
+import { easyBadge } from '../../../components/badge'
+import { vEasyLoading } from '../../../components/loading'
+import { EasyMsg, setupEasyMessage } from '../../../components/message'
+import { EasyMsgBox, setupEasyMsgBox } from '../../../components/msgbox'
+import { vEasyTour } from '../../../components/tour'
 
 /**
  * xly 全局工具对象
  *
  * 使用方式：
  * ```ts
- * import { xly } from '@/utils/xly'
+ * import { xly } from 'easy-ui'
  *
  * // 消息提示
  * xly.$msg.success('操作成功')
@@ -33,15 +31,15 @@ import { XlyTour } from '../components/xly-tour/tour'
  */
 export const xly = {
   /** 消息提示 */
-  $msg: XlyMsg,
+  $msg: EasyMsg,
   /** 加载 */
-  $loading: XlyLoading,
+  $loading: vEasyLoading,
   /** 操作引导 */
-  $tour: XlyTour,
+  $tour: vEasyTour,
   /** 徽标 */
-  $badge: XlyBadge,
+  $badge: easyBadge,
   /** 消息弹出框 */
-  $msgbox: XlyMsgBox,
+  $msgbox: EasyMsgBox,
 }
 
 /**
@@ -49,7 +47,7 @@ export const xly = {
  *
  * 在 main.ts 中调用：
  * ```ts
- * import { setupXly } from '@/utils/xly'
+ * import { setupXly } from 'easy-ui'
  * setupXly(app)
  * ```
  *
@@ -59,10 +57,10 @@ export const xly = {
  */
 export function setupXly(app: App) {
   // 挂载消息提示组件容器
-  setupXlyMessage(app)
+  setupEasyMessage(app)
 
   // 挂载消息弹出框容器
-  setupXlyMsgBox(app)
+  setupEasyMsgBox(app)
 
   // 同时挂载两处，确保 script setup 和模板都能访问 xly
   app.config.globalProperties.xly = xly
@@ -78,9 +76,8 @@ export function setupXly(app: App) {
   })
 }
 
-export type { BadgeInstance, BadgeOptions } from '../components/xly-badge/badge'
-export type { LoadingInstance, LoadingOptions } from '../components/xly-loading/loading'
-// 类型导出
-export type { MessageOptions } from '../components/xly-message/message'
-export type { MsgBoxAction, MsgBoxInputConfig, MsgBoxOptions, MsgBoxType } from '../components/xly-msgbox/msgbox'
-export type { TourInstance, TourOptions } from '../components/xly-tour/tour'
+export type { BadgeInstance, BadgeOptions } from '../../../components/badge'
+export type { LoadingInstance, LoadingOptions } from '../../../components/loading'
+export type { MessageOptions } from '../../../components/message'
+export type { MsgBoxAction, MsgBoxInputConfig, MsgBoxOptions, MsgBoxType } from '../../../components/msgbox'
+export type { TourInstance, TourOptions } from '../../../components/tour'

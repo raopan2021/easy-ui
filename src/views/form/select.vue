@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlySelect } from 'easy-ui'
+import { EasySelect } from 'easy-ui'
 import { ref } from 'vue'
 
 const val1 = ref<string | number>('beijing')
@@ -17,7 +17,7 @@ const val14 = ref<string | number>()
 const val15 = ref<string>()
 
 // 远程搜索示例
-const remoteSelectRef = ref<InstanceType<typeof XlySelect> | null>(null)
+const remoteSelectRef = ref<InstanceType<typeof EasySelect> | null>(null)
 const remoteLoading = ref(false)
 const remoteSelectOptions = ref<any[]>([])
 
@@ -101,7 +101,7 @@ const styledOptions = [
 ]
 
 // 自定义选项代码示例
-const codeExample = `&lt;XlySelect v-model="value" :options="options"&gt;
+const codeExample = `&lt;EasySelect v-model="value" :options="options"&gt;
   &lt;template #option="{ option, index, selected }"&gt;
     &lt;div class="custom-option"&gt;
       &lt;!-- 根据选项数据添加自定义内容 --&gt;
@@ -111,7 +111,7 @@ const codeExample = `&lt;XlySelect v-model="value" :options="options"&gt;
       &lt;span v-if="selected"&gt;✓&lt;/span&gt;
     &lt;/div&gt;
   &lt;/template&gt;
-&lt;/XlySelect&gt;`
+&lt;/EasySelect&gt;`
 </script>
 
 <template>
@@ -139,10 +139,10 @@ const codeExample = `&lt;XlySelect v-model="value" :options="options"&gt;
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlySelect v-model="val1" :options="cityOptions" placeholder="对象数组" />
+            <EasySelect v-model="val1" :options="cityOptions" placeholder="对象数组" />
           </div>
           <div style="width: 300px">
-            <XlySelect v-model="val15" :options="simpleCityOptions" placeholder="基础数组" />
+            <EasySelect v-model="val15" :options="simpleCityOptions" placeholder="基础数组" />
           </div>
           <div style="width: 300px">
             <span style="font-size: 13px; color: var(--el-text-color-secondary)">对象数组当前值：{{ val1 ?? '未选择' }}</span>
@@ -152,9 +152,9 @@ const codeExample = `&lt;XlySelect v-model="value" :options="options"&gt;
           </div>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="// 1. 对象数组（label 和 value 分离）
-<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; placeholder=&quot;对象数组&quot; />
+<EasySelect v-model=&quot;value&quot; :options=&quot;options&quot; placeholder=&quot;对象数组&quot; />
 
 const options = [
   { label: '北京', value: 'beijing' },
@@ -164,7 +164,7 @@ const options = [
 ]
 
 // 2. 基础数组（元素同时作为 label 和 value）
-<XlySelect v-model=&quot;value&quot; :options=&quot;simpleOptions&quot; placeholder=&quot;基础数组&quot; />
+<EasySelect v-model=&quot;value&quot; :options=&quot;simpleOptions&quot; placeholder=&quot;基础数组&quot; />
 
 const simpleOptions = ['北京', '上海', '广州', '深圳']
 // 选择后的 value 就是字符串本身，如 '北京'、'上海'"
@@ -181,11 +181,11 @@ const simpleOptions = ['北京', '上海', '广州', '深圳']
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlySelect v-model="val2" :options="cityOptions" placeholder="可清除" clearable />
+            <EasySelect v-model="val2" :options="cityOptions" placeholder="可清除" clearable />
           </div>
         </div>
       </div>
-      <XlyDocCode code="<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; clearable />" />
+      <EasyDocCode code="<EasySelect v-model=&quot;value&quot; :options=&quot;options&quot; clearable />" />
     </section>
 
     <section class="doc-section">
@@ -198,11 +198,11 @@ const simpleOptions = ['北京', '上海', '广州', '深圳']
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlySelect v-model="val3" :options="longOptions" placeholder="输入搜索..." filterable />
+            <EasySelect v-model="val3" :options="longOptions" placeholder="输入搜索..." filterable />
           </div>
         </div>
       </div>
-      <XlyDocCode code="<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; filterable />" />
+      <EasyDocCode code="<EasySelect v-model=&quot;value&quot; :options=&quot;options&quot; filterable />" />
     </section>
 
     <section class="doc-section">
@@ -219,7 +219,7 @@ const simpleOptions = ['北京', '上海', '广州', '深圳']
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlySelect
+            <EasySelect
               v-model="val14"
               :options="cityOptions"
               placeholder="输入并点击添加按钮"
@@ -232,8 +232,8 @@ const simpleOptions = ['北京', '上海', '广州', '深圳']
           </div>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlySelect
+      <EasyDocCode
+        code="<EasySelect
   v-model=&quot;value&quot;
   :options=&quot;options&quot;
   filterable
@@ -258,7 +258,7 @@ function handleCreate(newValue) {
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 400px">
-            <XlySelect
+            <EasySelect
               v-model="val4"
               :options="cityOptions"
               placeholder="可多选"
@@ -274,8 +274,8 @@ function handleCreate(newValue) {
           </div>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; multiple :max-tag-count=&quot;3&quot; />"
+      <EasyDocCode
+        code="<EasySelect v-model=&quot;value&quot; :options=&quot;options&quot; multiple :max-tag-count=&quot;3&quot; />"
       />
     </section>
 
@@ -292,7 +292,7 @@ function handleCreate(newValue) {
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 400px">
-            <XlySelect
+            <EasySelect
               v-model="val10"
               :options="cityOptions"
               placeholder="返回数组（默认）"
@@ -304,7 +304,7 @@ function handleCreate(newValue) {
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值（数组）：{{ JSON.stringify(val10) }}</span>
 
           <div style="width: 400px">
-            <XlySelect
+            <EasySelect
               v-model="val11"
               :options="cityOptions"
               placeholder="返回字符串（逗号分隔）"
@@ -316,7 +316,7 @@ function handleCreate(newValue) {
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值（字符串）：{{ val11 }}</span>
 
           <div style="width: 400px">
-            <XlySelect
+            <EasySelect
               v-model="val12"
               :options="cityOptions"
               placeholder="自定义分隔符（分号）"
@@ -329,17 +329,17 @@ function handleCreate(newValue) {
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值（分号分隔）：{{ val12 }}</span>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="// 1. 返回数组（默认）
-<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; multiple value-type=&quot;array&quot; />
+<EasySelect v-model=&quot;value&quot; :options=&quot;options&quot; multiple value-type=&quot;array&quot; />
 // 输出: ['beijing', 'shanghai', 'guangzhou']
 
 // 2. 返回字符串（逗号分隔）
-<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; multiple value-type=&quot;string&quot; />
+<EasySelect v-model=&quot;value&quot; :options=&quot;options&quot; multiple value-type=&quot;string&quot; />
 // 输出: &quot;beijing,shanghai,guangzhou&quot;
 
 // 3. 自定义分隔符
-<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; multiple value-type=&quot;string&quot; separator=&quot;;&quot; />
+<EasySelect v-model=&quot;value&quot; :options=&quot;options&quot; multiple value-type=&quot;string&quot; separator=&quot;;&quot; />
 // 输出: &quot;beijing;shanghai;guangzhou&quot;
 
 // 4. 支持默认传入字符串值，组件会自动解析
@@ -360,10 +360,10 @@ const value = ref(&quot;beijing,shanghai,guangzhou&quot;)
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlySelect v-model="val5" :options="disabledOptions" placeholder="含禁用选项" />
+            <EasySelect v-model="val5" :options="disabledOptions" placeholder="含禁用选项" />
           </div>
           <div style="width: 300px">
-            <XlySelect
+            <EasySelect
               v-model="val5"
               :options="customDisabledOptions"
               placeholder="箭头函数直接写禁用逻辑"
@@ -371,11 +371,11 @@ const value = ref(&quot;beijing,shanghai,guangzhou&quot;)
             />
           </div>
           <div style="width: 300px">
-            <XlySelect v-model="val5" :options="cityOptions" placeholder="整组禁用" disabled />
+            <EasySelect v-model="val5" :options="cityOptions" placeholder="整组禁用" disabled />
           </div>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="// 1. 默认使用 disabled 字段
 const options = [
   { label: '选项1', value: '1' },
@@ -383,10 +383,10 @@ const options = [
 ]
 
 // 2. 自定义禁用字段名
-<XlySelect :options=&quot;options&quot; disabled-key=&quot;isDisabled&quot; />
+<EasySelect :options=&quot;options&quot; disabled-key=&quot;isDisabled&quot; />
 
 // 3. 直接在组件上写箭头函数（推荐）
-<XlySelect
+<EasySelect
   :options=&quot;options&quot;
   :disabled-key=&quot;(item) => item.stock === 0&quot;
 />
@@ -396,10 +396,10 @@ function isItemDisabled(option: any) {
   return option.stock === 0 || option.price > 10000
 }
 
-<XlySelect :options=&quot;options&quot; :disabled-key=&quot;isItemDisabled&quot; />
+<EasySelect :options=&quot;options&quot; :disabled-key=&quot;isItemDisabled&quot; />
 
 // 5. 整个组件禁用
-<XlySelect :options=&quot;options&quot; disabled />"
+<EasySelect :options=&quot;options&quot; disabled />"
       />
     </section>
 
@@ -408,13 +408,13 @@ function isItemDisabled(option: any) {
         前后缀
       </h2>
       <p class="doc-section__desc">
-        通过 <code>prefixIcon</code> / <code>suffixIcon</code> 传入图标名称（XlyIcon name 格式），或通过
+        通过 <code>prefixIcon</code> / <code>suffixIcon</code> 传入图标名称（EasyIcon name 格式），或通过
         <code>#prefix</code> / <code>#suffix</code> 插槽自定义内容。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlySelect
+            <EasySelect
               v-model="val1"
               :options="cityOptions"
               placeholder="搜索城市"
@@ -423,13 +423,13 @@ function isItemDisabled(option: any) {
             />
           </div>
           <div style="width: 300px">
-            <XlySelect v-model="val2" :options="cityOptions" placeholder="带后缀" suffix-icon="el:Calendar" clearable />
+            <EasySelect v-model="val2" :options="cityOptions" placeholder="带后缀" suffix-icon="el:Calendar" clearable />
           </div>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; placeholder=&quot;搜索城市&quot; prefix-icon=&quot;el:Search&quot; filterable />
-<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; placeholder=&quot;带后缀&quot; suffix-icon=&quot;el:Calendar&quot; clearable />"
+      <EasyDocCode
+        code="<EasySelect v-model=&quot;value&quot; :options=&quot;options&quot; placeholder=&quot;搜索城市&quot; prefix-icon=&quot;el:Search&quot; filterable />
+<EasySelect v-model=&quot;value&quot; :options=&quot;options&quot; placeholder=&quot;带后缀&quot; suffix-icon=&quot;el:Calendar&quot; clearable />"
       />
     </section>
 
@@ -444,7 +444,7 @@ function isItemDisabled(option: any) {
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlySelect
+            <EasySelect
               v-model="val7"
               :options="userOptions"
               placeholder="请选择用户"
@@ -458,7 +458,7 @@ function isItemDisabled(option: any) {
           </div>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="// 选项对象字段不是 label/value，而是 name/id
 const userOptions = [
   { id: 1, name: '张三', role: 'admin' },
@@ -466,7 +466,7 @@ const userOptions = [
   { id: 3, name: '王五', role: 'viewer' },
 ]
 
-<XlySelect v-model=&quot;value&quot; :options=&quot;userOptions&quot; label-key=&quot;name&quot; value-key=&quot;id&quot; />"
+<EasySelect v-model=&quot;value&quot; :options=&quot;userOptions&quot; label-key=&quot;name&quot; value-key=&quot;id&quot; />"
       />
     </section>
 
@@ -480,20 +480,20 @@ const userOptions = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlySelect v-model="val6" :options="cityOptions" placeholder="大尺寸" size="large" />
+            <EasySelect v-model="val6" :options="cityOptions" placeholder="大尺寸" size="large" />
           </div>
           <div style="width: 300px">
-            <XlySelect v-model="val6" :options="cityOptions" placeholder="默认尺寸" />
+            <EasySelect v-model="val6" :options="cityOptions" placeholder="默认尺寸" />
           </div>
           <div style="width: 300px">
-            <XlySelect v-model="val6" :options="cityOptions" placeholder="小尺寸" size="small" />
+            <EasySelect v-model="val6" :options="cityOptions" placeholder="小尺寸" size="small" />
           </div>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; size=&quot;large&quot; />
-<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; />
-<XlySelect v-model=&quot;value&quot; :options=&quot;options&quot; size=&quot;small&quot; />"
+      <EasyDocCode
+        code="<EasySelect v-model=&quot;value&quot; :options=&quot;options&quot; size=&quot;large&quot; />
+<EasySelect v-model=&quot;value&quot; :options=&quot;options&quot; />
+<EasySelect v-model=&quot;value&quot; :options=&quot;options&quot; size=&quot;small&quot; />"
       />
     </section>
 
@@ -510,7 +510,7 @@ const userOptions = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlySelect
+            <EasySelect
               v-model="val8"
               :options="remoteSelectOptions"
               placeholder="输入关键字远程搜索..."
@@ -526,8 +526,8 @@ const userOptions = [
           </div>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlySelect
+      <EasyDocCode
+        code="<EasySelect
   v-model=&quot;value&quot;
   :options=&quot;remoteSelectOptions&quot;
   filterable
@@ -559,7 +559,7 @@ function handleSearch(query: string) {
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlySelect v-model="val9" :options="styledOptions" placeholder="自定义选项">
+            <EasySelect v-model="val9" :options="styledOptions" placeholder="自定义选项">
               <template #option="{ option, selected }">
                 <div class="custom-option">
                   <span v-if="option?.value === 'urgent'" class="priority-badge urgent">紧急</span>
@@ -569,12 +569,12 @@ function handleSearch(query: string) {
                   <span v-if="selected" class="check-mark">✓</span>
                 </div>
               </template>
-            </XlySelect>
+            </EasySelect>
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ val9 ?? '未选择' }}</span>
         </div>
       </div>
-      <XlyDocCode :code="codeExample" />
+      <EasyDocCode :code="codeExample" />
     </section>
 
     <section class="doc-section">
@@ -675,13 +675,13 @@ function handleSearch(query: string) {
             </tr>
             <tr>
               <td><code>prefixIcon</code></td>
-              <td>前缀图标名称（XlyIcon name 格式）</td>
+              <td>前缀图标名称（EasyIcon name 格式）</td>
               <td><code>string</code></td>
               <td>—</td>
             </tr>
             <tr>
               <td><code>suffixIcon</code></td>
-              <td>后缀图标名称（XlyIcon name 格式）</td>
+              <td>后缀图标名称（EasyIcon name 格式）</td>
               <td><code>string</code></td>
               <td>—</td>
             </tr>

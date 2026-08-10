@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyButton, XlyUpload } from 'easy-ui'
+import { EasyButton, EasyUpload } from 'easy-ui'
 import { ref } from 'vue'
 
 // ---- 基础用法 ----
@@ -76,9 +76,9 @@ const avatarImages = ref<string[]>([])
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyUpload v-model="value1" />
+          <EasyUpload v-model="value1" />
         </div>
-        <XlyDocCode code="{{ `<XlyUpload v-model=&quot;imageList&quot; />` }}" />
+        <EasyDocCode code="{{ `<EasyUpload v-model=&quot;imageList&quot; />` }}" />
       </div>
       <div class="demo-value-display">
         <span class="demo-value-label">当前值：</span>
@@ -106,7 +106,7 @@ const avatarImages = ref<string[]>([])
             <div class="demo-vmodel-label">
               传入数组 / 返回数组（默认）
             </div>
-            <XlyUpload v-model="value2Array" :limit="3" />
+            <EasyUpload v-model="value2Array" :limit="3" />
             <div class="demo-value-display">
               <span class="demo-value-label">值：</span>
               <span class="demo-value-content">Array({{ Array.isArray(value2Array) ? value2Array.length : 0 }})</span>
@@ -116,7 +116,7 @@ const avatarImages = ref<string[]>([])
             <div class="demo-vmodel-label">
               返回逗号拼接字符串（value-mode="string"）
             </div>
-            <XlyUpload v-model="value2String" value-mode="string" :limit="3" />
+            <EasyUpload v-model="value2String" value-mode="string" :limit="3" />
             <div class="demo-value-display">
               <span class="demo-value-label">值：</span>
               <span class="demo-value-content demo-value-str">
@@ -127,12 +127,12 @@ const avatarImages = ref<string[]>([])
             </div>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="{{ `<!-- 返回数组（默认） -->
-<XlyUpload v-model=&quot;imageList&quot; />
+<EasyUpload v-model=&quot;imageList&quot; />
 
 <!-- 返回逗号拼接字符串 -->
-<XlyUpload v-model=&quot;imageStr&quot; value-mode=&quot;string&quot; />
+<EasyUpload v-model=&quot;imageStr&quot; value-mode=&quot;string&quot; />
 
 // 传入时两种格式均支持：
 const imageList = ref(['https://img1.jpg', 'https://img2.jpg'])
@@ -156,27 +156,27 @@ const imageStr  = ref('https://img1.jpg,https://img2.jpg')` }}"
             <div class="demo-label">
               limit=1（头像单图）
             </div>
-            <XlyUpload v-model="value3Single" :limit="1" />
+            <EasyUpload v-model="value3Single" :limit="1" />
           </div>
           <div>
             <div class="demo-label">
               limit=3
             </div>
-            <XlyUpload v-model="value3Multi" :limit="3" @exceed="handleExceed" />
+            <EasyUpload v-model="value3Multi" :limit="3" @exceed="handleExceed" />
           </div>
           <div>
             <div class="demo-label">
               不限制数量
             </div>
-            <XlyUpload v-model="value3Unlimited" />
+            <EasyUpload v-model="value3Unlimited" />
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="{{ `<!-- 限制 1 张 -->
-<XlyUpload v-model=&quot;avatar&quot; :limit=&quot;1&quot; />
+<EasyUpload v-model=&quot;avatar&quot; :limit=&quot;1&quot; />
 
 <!-- 限制 3 张，超出触发事件 -->
-<XlyUpload v-model=&quot;images&quot; :limit=&quot;3&quot; @exceed=&quot;handleExceed&quot; />
+<EasyUpload v-model=&quot;images&quot; :limit=&quot;3&quot; @exceed=&quot;handleExceed&quot; />
 
 function handleExceed(files, limit) {
   alert(\`最多上传 \${limit} 张，已超出 \${files.length} 张\`)
@@ -199,25 +199,25 @@ function handleExceed(files, limit) {
             <div class="demo-label">
               size=60
             </div>
-            <XlyUpload v-model="valueSizeA" :size="60" />
+            <EasyUpload v-model="valueSizeA" :size="60" />
           </div>
           <div>
             <div class="demo-label">
               size=100（默认）
             </div>
-            <XlyUpload v-model="valueSizeB" :size="100" />
+            <EasyUpload v-model="valueSizeB" :size="100" />
           </div>
           <div>
             <div class="demo-label">
               size=140
             </div>
-            <XlyUpload v-model="valueSizeC" :size="140" />
+            <EasyUpload v-model="valueSizeC" :size="140" />
           </div>
         </div>
-        <XlyDocCode
-          code="{{ `<XlyUpload v-model=&quot;images&quot; :size=&quot;60&quot; />
-<XlyUpload v-model=&quot;images&quot; :size=&quot;100&quot; />  <!-- 默认 -->
-<XlyUpload v-model=&quot;images&quot; :size=&quot;140&quot; />` }}"
+        <EasyDocCode
+          code="{{ `<EasyUpload v-model=&quot;images&quot; :size=&quot;60&quot; />
+<EasyUpload v-model=&quot;images&quot; :size=&quot;100&quot; />  <!-- 默认 -->
+<EasyUpload v-model=&quot;images&quot; :size=&quot;140&quot; />` }}"
         />
       </div>
     </section>
@@ -232,11 +232,11 @@ function handleExceed(files, limit) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyUpload v-model="valueDrag" :size="120" trigger-text="点击或拖拽" />
+          <EasyUpload v-model="valueDrag" :size="120" trigger-text="点击或拖拽" />
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="{{ `<!-- trigger-text 属性为触发区域添加提示文字 -->
-<XlyUpload v-model=&quot;images&quot; :size=&quot;120&quot; trigger-text=&quot;点击或拖拽&quot; />` }}"
+<EasyUpload v-model=&quot;images&quot; :size=&quot;120&quot; trigger-text=&quot;点击或拖拽&quot; />` }}"
         />
       </div>
     </section>
@@ -251,9 +251,9 @@ function handleExceed(files, limit) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyUpload v-model="valueDisabled" disabled />
+          <EasyUpload v-model="valueDisabled" disabled />
         </div>
-        <XlyDocCode code="{{ `<XlyUpload v-model=&quot;images&quot; disabled />` }}" />
+        <EasyDocCode code="{{ `<EasyUpload v-model=&quot;images&quot; disabled />` }}" />
       </div>
     </section>
 
@@ -272,12 +272,12 @@ function handleExceed(files, limit) {
             <div class="demo-label">
               accept-types="jpg,png" + max-size="2"
             </div>
-            <XlyUpload v-model="valueValidate" accept-types="jpg,png" :max-size="2" />
+            <EasyUpload v-model="valueValidate" accept-types="jpg,png" :max-size="2" />
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="{{ `<!-- 仅允许 JPG/PNG，不超过 2MB -->
-<XlyUpload
+<EasyUpload
   v-model=&quot;images&quot;
   accept-types=&quot;jpg,png&quot;
   :max-size=&quot;2&quot;
@@ -318,7 +318,7 @@ function handleValidateError(msg) {
           <div class="doc-alert__title">
             如何切换？
           </div>
-          <p>打开 <code>src/components/xly-upload/index.vue</code>，找到顶部的配置区：</p>
+          <p>打开 <code>packages/components/file-upload/index.ts</code>，找到顶部的配置区：</p>
           <div class="doc-code doc-code--standalone">
             <pre><code>{{ `// 切换上传模式：'local' | 'network'
 const UPLOAD_MODE: 'local' | 'network' = 'local'
@@ -444,31 +444,31 @@ const NETWORK_CONFIG = {
             <div class="demo-label">
               tip 属性
             </div>
-            <XlyUpload v-model="valueTip1" tip="支持 JPG/PNG/GIF，单张不超过 5MB" />
+            <EasyUpload v-model="valueTip1" tip="支持 JPG/PNG/GIF，单张不超过 5MB" />
           </div>
           <div>
             <div class="demo-label">
               #tip 插槽
             </div>
-            <XlyUpload v-model="valueTip2">
+            <EasyUpload v-model="valueTip2">
               <template #tip>
                 <div style="color: #f5a623; font-size: 12px">
                   ⚠️ 上传后不可撤销，请确认图片正确
                 </div>
               </template>
-            </XlyUpload>
+            </EasyUpload>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="{{ `<!-- tip 属性 -->
-<XlyUpload v-model=&quot;images&quot; tip=&quot;支持 JPG/PNG/GIF，单张不超过 5MB&quot; />
+<EasyUpload v-model=&quot;images&quot; tip=&quot;支持 JPG/PNG/GIF，单张不超过 5MB&quot; />
 
 <!-- #tip 插槽 -->
-<XlyUpload v-model=&quot;images&quot;>
+<EasyUpload v-model=&quot;images&quot;>
   <template #tip>
     <span style=&quot;color: orange;&quot;>⚠️ 上传后不可撤销</span>
   </template>
-</XlyUpload>` }}"
+</EasyUpload>` }}"
         />
       </div>
     </section>
@@ -493,17 +493,17 @@ const NETWORK_CONFIG = {
           </div>
           <div class="demo-form-row">
             <label class="demo-form-label">主图 <span class="required">*</span></label>
-            <XlyUpload v-model="productForm.cover" :limit="1" :size="120" tip="建议尺寸 800×800，支持 JPG/PNG" />
+            <EasyUpload v-model="productForm.cover" :limit="1" :size="120" tip="建议尺寸 800×800，支持 JPG/PNG" />
           </div>
           <div class="demo-form-row">
             <label class="demo-form-label">轮播图</label>
-            <XlyUpload v-model="productForm.gallery" :limit="6" :size="100" tip="最多上传 6 张，每张不超过 5MB" />
+            <EasyUpload v-model="productForm.gallery" :limit="6" :size="100" tip="最多上传 6 张，每张不超过 5MB" />
           </div>
           <div class="demo-form-actions">
-            <XlyButton type="primary" @click="handleProductSubmit">
+            <EasyButton type="primary" @click="handleProductSubmit">
               保存商品
-            </XlyButton>
-            <XlyButton>重置</XlyButton>
+            </EasyButton>
+            <EasyButton>重置</EasyButton>
           </div>
         </div>
       </div>
@@ -528,7 +528,7 @@ const NETWORK_CONFIG = {
             <div class="demo-avatar-title">
               点击上传头像
             </div>
-            <XlyUpload v-model="avatarImages" :limit="1" :size="80" tip="支持 JPG/PNG，建议正方形图片" />
+            <EasyUpload v-model="avatarImages" :limit="1" :size="80" tip="支持 JPG/PNG，建议正方形图片" />
           </div>
         </div>
       </div>

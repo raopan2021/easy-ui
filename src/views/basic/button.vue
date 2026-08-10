@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Check, Delete, Download, Edit, Plus, RefreshLeft, Search, Upload } from '@element-plus/icons-vue'
-import { XlyButton } from 'easy-ui'
+import { EasyButton } from 'easy-ui'
 import { ref } from 'vue'
 
 const loading = ref(false)
@@ -35,26 +35,26 @@ function handleLoad() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton>默认按钮</XlyButton>
-          <XlyButton type="success">
+          <EasyButton>默认按钮</EasyButton>
+          <EasyButton type="success">
             成功按钮
-          </XlyButton>
-          <XlyButton type="warning">
+          </EasyButton>
+          <EasyButton type="warning">
             警告按钮
-          </XlyButton>
-          <XlyButton type="danger">
+          </EasyButton>
+          <EasyButton type="danger">
             危险按钮
-          </XlyButton>
-          <XlyButton type="info">
+          </EasyButton>
+          <EasyButton type="info">
             信息按钮
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
-          code="<XlyButton>默认按钮</XlyButton>
-<XlyButton type=&quot;success&quot;>成功按钮</XlyButton>
-<XlyButton type=&quot;warning&quot;>警告按钮</XlyButton>
-<XlyButton type=&quot;danger&quot;>危险按钮</XlyButton>
-<XlyButton type=&quot;info&quot;>信息按钮</XlyButton>"
+        <EasyDocCode
+          code="<EasyButton>默认按钮</EasyButton>
+<EasyButton type=&quot;success&quot;>成功按钮</EasyButton>
+<EasyButton type=&quot;warning&quot;>警告按钮</EasyButton>
+<EasyButton type=&quot;danger&quot;>危险按钮</EasyButton>
+<EasyButton type=&quot;info&quot;>信息按钮</EasyButton>"
         />
       </div>
     </section>
@@ -69,16 +69,16 @@ function handleLoad() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton type="text">
+          <EasyButton type="text">
             文字按钮
-          </XlyButton>
-          <XlyButton type="ghost">
+          </EasyButton>
+          <EasyButton type="ghost">
             幽灵按钮
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
-          code="<XlyButton type=&quot;text&quot;>文字按钮</XlyButton>
-<XlyButton type=&quot;ghost&quot;>幽灵按钮</XlyButton>"
+        <EasyDocCode
+          code="<EasyButton type=&quot;text&quot;>文字按钮</EasyButton>
+<EasyButton type=&quot;ghost&quot;>幽灵按钮</EasyButton>"
         />
       </div>
     </section>
@@ -95,28 +95,28 @@ function handleLoad() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton link>
+          <EasyButton link>
             链接按钮
-          </XlyButton>
-          <XlyButton link type="success">
+          </EasyButton>
+          <EasyButton link type="success">
             成功链接
-          </XlyButton>
-          <XlyButton link type="warning">
+          </EasyButton>
+          <EasyButton link type="warning">
             警告链接
-          </XlyButton>
-          <XlyButton link type="danger">
+          </EasyButton>
+          <EasyButton link type="danger">
             危险链接
-          </XlyButton>
-          <XlyButton link type="info">
+          </EasyButton>
+          <EasyButton link type="info">
             信息链接
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
-          code="<XlyButton link>链接按钮</XlyButton>
-<XlyButton link type=&quot;success&quot;>成功链接</XlyButton>
-<XlyButton link type=&quot;warning&quot;>警告链接</XlyButton>
-<XlyButton link type=&quot;danger&quot;>危险链接</XlyButton>
-<XlyButton link type=&quot;info&quot;>信息链接</XlyButton>"
+        <EasyDocCode
+          code="<EasyButton link>链接按钮</EasyButton>
+<EasyButton link type=&quot;success&quot;>成功链接</EasyButton>
+<EasyButton link type=&quot;warning&quot;>警告链接</EasyButton>
+<EasyButton link type=&quot;danger&quot;>危险链接</EasyButton>
+<EasyButton link type=&quot;info&quot;>信息链接</EasyButton>"
         />
       </div>
     </section>
@@ -132,18 +132,18 @@ function handleLoad() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton size="large">
+          <EasyButton size="large">
             大型按钮
-          </XlyButton>
-          <XlyButton>默认按钮</XlyButton>
-          <XlyButton size="small">
+          </EasyButton>
+          <EasyButton>默认按钮</EasyButton>
+          <EasyButton size="small">
             小型按钮
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
-          code="<XlyButton size=&quot;large&quot;>大型按钮</XlyButton>
-<XlyButton>默认按钮</XlyButton>
-<XlyButton size=&quot;small&quot;>小型按钮</XlyButton>"
+        <EasyDocCode
+          code="<EasyButton size=&quot;large&quot;>大型按钮</EasyButton>
+<EasyButton>默认按钮</EasyButton>
+<EasyButton size=&quot;small&quot;>小型按钮</EasyButton>"
         />
       </div>
     </section>
@@ -159,37 +159,37 @@ function handleLoad() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton shape="round">
+          <EasyButton shape="round">
             圆角按钮
-          </XlyButton>
-          <XlyButton shape="circle">
+          </EasyButton>
+          <EasyButton shape="circle">
             <template #icon>
               <el-icon><Search /></el-icon>
             </template>
-          </XlyButton>
-          <XlyButton shape="circle" type="success">
+          </EasyButton>
+          <EasyButton shape="circle" type="success">
             <template #icon>
               <el-icon><Plus /></el-icon>
             </template>
-          </XlyButton>
-          <XlyButton shape="circle" type="danger">
+          </EasyButton>
+          <EasyButton shape="circle" type="danger">
             <template #icon>
               <el-icon><Delete /></el-icon>
             </template>
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
-          code="<XlyButton shape=&quot;round&quot;>圆角按钮</XlyButton>
-<XlyButton shape=&quot;circle&quot;>
+        <EasyDocCode
+          code="<EasyButton shape=&quot;round&quot;>圆角按钮</EasyButton>
+<EasyButton shape=&quot;circle&quot;>
   <template #icon>
     <el-icon><Search /></el-icon>
   </template>
-</XlyButton>
-<XlyButton shape=&quot;circle&quot; type=&quot;success&quot;>
+</EasyButton>
+<EasyButton shape=&quot;circle&quot; type=&quot;success&quot;>
   <template #icon>
     <el-icon><Plus /></el-icon>
   </template>
-</XlyButton>"
+</EasyButton>"
         />
       </div>
     </section>
@@ -204,18 +204,18 @@ function handleLoad() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton bold>
+          <EasyButton bold>
             加粗按钮
-          </XlyButton>
-          <XlyButton type="success" bold>
+          </EasyButton>
+          <EasyButton type="success" bold>
             加粗成功
-          </XlyButton>
-          <XlyButton>普通按钮</XlyButton>
+          </EasyButton>
+          <EasyButton>普通按钮</EasyButton>
         </div>
-        <XlyDocCode
-          code="<XlyButton bold>加粗按钮</XlyButton>
-<XlyButton type=&quot;success&quot; bold>加粗成功</XlyButton>
-<XlyButton>普通按钮</XlyButton>"
+        <EasyDocCode
+          code="<EasyButton bold>加粗按钮</EasyButton>
+<EasyButton type=&quot;success&quot; bold>加粗成功</EasyButton>
+<EasyButton>普通按钮</EasyButton>"
         />
       </div>
     </section>
@@ -230,24 +230,24 @@ function handleLoad() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton :loading="loading" @click="handleLoad">
+          <EasyButton :loading="loading" @click="handleLoad">
             点击加载
-          </XlyButton>
-          <XlyButton loading>
+          </EasyButton>
+          <EasyButton loading>
             加载中
-          </XlyButton>
-          <XlyButton type="success" loading>
+          </EasyButton>
+          <EasyButton type="success" loading>
             加载中
-          </XlyButton>
-          <XlyButton type="danger" loading>
+          </EasyButton>
+          <EasyButton type="danger" loading>
             加载中
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
-          code="<XlyButton :loading=&quot;loading&quot; @click=&quot;handleLoad&quot;>点击加载</XlyButton>
-<XlyButton loading>加载中</XlyButton>
-<XlyButton type=&quot;success&quot; loading>加载中</XlyButton>
-<XlyButton type=&quot;danger&quot; loading>加载中</XlyButton>"
+        <EasyDocCode
+          code="<EasyButton :loading=&quot;loading&quot; @click=&quot;handleLoad&quot;>点击加载</EasyButton>
+<EasyButton loading>加载中</EasyButton>
+<EasyButton type=&quot;success&quot; loading>加载中</EasyButton>
+<EasyButton type=&quot;danger&quot; loading>加载中</EasyButton>"
         />
       </div>
     </section>
@@ -262,28 +262,28 @@ function handleLoad() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton disabled>
+          <EasyButton disabled>
             禁用按钮
-          </XlyButton>
-          <XlyButton type="success" disabled>
+          </EasyButton>
+          <EasyButton type="success" disabled>
             禁用按钮
-          </XlyButton>
-          <XlyButton type="text" disabled>
+          </EasyButton>
+          <EasyButton type="text" disabled>
             禁用文字
-          </XlyButton>
-          <XlyButton type="ghost" disabled>
+          </EasyButton>
+          <EasyButton type="ghost" disabled>
             禁用幽灵
-          </XlyButton>
-          <XlyButton type="link" disabled>
+          </EasyButton>
+          <EasyButton type="link" disabled>
             禁用链接
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
-          code="<XlyButton disabled>禁用按钮</XlyButton>
-<XlyButton type=&quot;success&quot; disabled>禁用按钮</XlyButton>
-<XlyButton type=&quot;text&quot; disabled>禁用文字</XlyButton>
-<XlyButton type=&quot;ghost&quot; disabled>禁用幽灵</XlyButton>
-<XlyButton link disabled>禁用链接</XlyButton>"
+        <EasyDocCode
+          code="<EasyButton disabled>禁用按钮</EasyButton>
+<EasyButton type=&quot;success&quot; disabled>禁用按钮</EasyButton>
+<EasyButton type=&quot;text&quot; disabled>禁用文字</EasyButton>
+<EasyButton type=&quot;ghost&quot; disabled>禁用幽灵</EasyButton>
+<EasyButton link disabled>禁用链接</EasyButton>"
         />
       </div>
     </section>
@@ -298,40 +298,40 @@ function handleLoad() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton>
+          <EasyButton>
             <template #icon>
               <el-icon><Search /></el-icon>
             </template>
             搜索
-          </XlyButton>
-          <XlyButton type="success">
+          </EasyButton>
+          <EasyButton type="success">
             <template #icon>
               <el-icon><Plus /></el-icon>
             </template>
             新增
-          </XlyButton>
-          <XlyButton type="danger">
+          </EasyButton>
+          <EasyButton type="danger">
             <template #icon>
               <el-icon><Delete /></el-icon>
             </template>
             删除
-          </XlyButton>
-          <XlyButton type="warning">
+          </EasyButton>
+          <EasyButton type="warning">
             <template #icon>
               <el-icon><Edit /></el-icon>
             </template>
             编辑
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
-          code="<XlyButton>
+        <EasyDocCode
+          code="<EasyButton>
   <template #icon><el-icon><Search /></el-icon></template>
   搜索
-</XlyButton>
-<XlyButton type=&quot;success&quot;>
+</EasyButton>
+<EasyButton type=&quot;success&quot;>
   <template #icon><el-icon><Plus /></el-icon></template>
   新增
-</XlyButton>"
+</EasyButton>"
         />
       </div>
     </section>
@@ -347,64 +347,64 @@ function handleLoad() {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="button-group">
-            <XlyButton bold type="primary">
+            <EasyButton bold type="primary">
               <template #icon>
                 <el-icon><Check /></el-icon>
               </template>
               提交审核
-            </XlyButton>
-            <XlyButton type="ghost">
+            </EasyButton>
+            <EasyButton type="ghost">
               <template #icon>
                 <el-icon><RefreshLeft /></el-icon>
               </template>
               重置
-            </XlyButton>
-            <XlyButton type="text">
+            </EasyButton>
+            <EasyButton type="text">
               取消
-            </XlyButton>
+            </EasyButton>
           </div>
           <div class="button-group" style="margin-top: 12px">
-            <XlyButton type="danger" size="small">
+            <EasyButton type="danger" size="small">
               <template #icon>
                 <el-icon><Delete /></el-icon>
               </template>
               批量删除
-            </XlyButton>
-            <XlyButton type="primary" size="small">
+            </EasyButton>
+            <EasyButton type="primary" size="small">
               <template #icon>
                 <el-icon><Download /></el-icon>
               </template>
               导出数据
-            </XlyButton>
-            <XlyButton type="success" size="small">
+            </EasyButton>
+            <EasyButton type="success" size="small">
               <template #icon>
                 <el-icon><Upload /></el-icon>
               </template>
               导入数据
-            </XlyButton>
+            </EasyButton>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 表单操作 -->
-<XlyButton bold type=&quot;primary&quot;>
+<EasyButton bold type=&quot;primary&quot;>
   <template #icon><el-icon><Check /></el-icon></template>
   提交审核
-</XlyButton>
-<XlyButton type=&quot;ghost&quot;>
+</EasyButton>
+<EasyButton type=&quot;ghost&quot;>
   <template #icon><el-icon><RefreshLeft /></el-icon></template>
   重置
-</XlyButton>
-<XlyButton type=&quot;text&quot;>取消</XlyButton>
+</EasyButton>
+<EasyButton type=&quot;text&quot;>取消</EasyButton>
 
 <!-- 工具栏操作 -->
-<XlyButton type=&quot;danger&quot; size=&quot;small&quot;>
+<EasyButton type=&quot;danger&quot; size=&quot;small&quot;>
   <template #icon><el-icon><Delete /></el-icon></template>
   批量删除
-</XlyButton>
-<XlyButton type=&quot;primary&quot; size=&quot;small&quot;>
+</EasyButton>
+<EasyButton type=&quot;primary&quot; size=&quot;small&quot;>
   <template #icon><el-icon><Download /></el-icon></template>
   导出数据
-</XlyButton>"
+</EasyButton>"
         />
       </div>
     </section>

@@ -110,9 +110,9 @@ function handleToggle(node: any, expanded: boolean) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDeptTree :data="treeData" @select="handleSelect" />
+          <EasyDeptTree :data="treeData" @select="handleSelect" />
         </div>
-        <XlyDocCode code="<XlyDeptTree :data=&quot;treeData&quot; @select=&quot;handleSelect&quot; />" />
+        <EasyDocCode code="<EasyDeptTree :data=&quot;treeData&quot; @select=&quot;handleSelect&quot; />" />
       </div>
     </section>
 
@@ -126,9 +126,9 @@ function handleToggle(node: any, expanded: boolean) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDeptTree :data="flatData" @select="handleSelect" />
+          <EasyDeptTree :data="flatData" @select="handleSelect" />
         </div>
-        <XlyDocCode code="<XlyDeptTree :data=&quot;flatData&quot; />" />
+        <EasyDocCode code="<EasyDeptTree :data=&quot;flatData&quot; />" />
       </div>
     </section>
 
@@ -144,21 +144,21 @@ function handleToggle(node: any, expanded: boolean) {
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 20px">
           <div>
             <span class="demo-label">default-expand-level=1</span>
-            <XlyDeptTree :data="treeData" :default-expand-level="1" />
+            <EasyDeptTree :data="treeData" :default-expand-level="1" />
           </div>
           <div>
             <span class="demo-label">default-expand-level=2</span>
-            <XlyDeptTree :data="treeData" :default-expand-level="2" />
+            <EasyDeptTree :data="treeData" :default-expand-level="2" />
           </div>
           <div>
             <span class="demo-label">default-expand-level=0（全部展开）</span>
-            <XlyDeptTree :data="treeData" :default-expand-level="0" />
+            <EasyDeptTree :data="treeData" :default-expand-level="0" />
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyDeptTree :data=&quot;treeData&quot; :default-expand-level=&quot;1&quot; />
-<XlyDeptTree :data=&quot;treeData&quot; :default-expand-level=&quot;2&quot; />
-<XlyDeptTree :data=&quot;treeData&quot; :default-expand-level=&quot;0&quot; />"
+        <EasyDocCode
+          code="<EasyDeptTree :data=&quot;treeData&quot; :default-expand-level=&quot;1&quot; />
+<EasyDeptTree :data=&quot;treeData&quot; :default-expand-level=&quot;2&quot; />
+<EasyDeptTree :data=&quot;treeData&quot; :default-expand-level=&quot;0&quot; />"
         />
       </div>
     </section>
@@ -173,10 +173,10 @@ function handleToggle(node: any, expanded: boolean) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDeptTree :data="treeData" :selected-id="currentId" :default-expand-level="2" @select="handleSelect2" />
+          <EasyDeptTree :data="treeData" :selected-id="currentId" :default-expand-level="2" @select="handleSelect2" />
         </div>
-        <XlyDocCode
-          code="<XlyDeptTree
+        <EasyDocCode
+          code="<EasyDeptTree
   :data=&quot;treeData&quot;
   :selected-id=&quot;currentId&quot;
   :default-expand-level=&quot;2&quot;
@@ -196,14 +196,14 @@ function handleToggle(node: any, expanded: boolean) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDeptTree
+          <EasyDeptTree
             :data="customData"
             :node-key="{ id: 'deptId', pid: 'parentId', label: 'deptName', children: 'subDepts' }"
             :default-expand-level="1"
           />
         </div>
-        <XlyDocCode
-          code="<XlyDeptTree
+        <EasyDocCode
+          code="<EasyDeptTree
   :data=&quot;customData&quot;
   :node-key=&quot;{ id: 'deptId', pid: 'parentId', label: 'deptName', children: 'subDepts' }&quot;
 />"
@@ -221,9 +221,9 @@ function handleToggle(node: any, expanded: boolean) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDeptTree :data="[]" empty-text="暂无部门" />
+          <EasyDeptTree :data="[]" empty-text="暂无部门" />
         </div>
-        <XlyDocCode code="<XlyDeptTree :data=&quot;[]&quot; empty-text=&quot;暂无部门&quot; />" />
+        <EasyDocCode code="<EasyDeptTree :data=&quot;[]&quot; empty-text=&quot;暂无部门&quot; />" />
       </div>
     </section>
 
@@ -234,14 +234,14 @@ function handleToggle(node: any, expanded: boolean) {
       </h2>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
-          <XlyDeptTree :data="treeData" :default-expand-level="2" @select="handleSelect" @toggle="handleToggle" />
+          <EasyDeptTree :data="treeData" :default-expand-level="2" @select="handleSelect" @toggle="handleToggle" />
           <div class="demo-events">
             <span class="demo-label">选中的节点：</span>
             <code v-if="selectedNode">{{ JSON.stringify(selectedNode) }}</code>
             <span v-else class="demo-empty">点击节点查看</span>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="// 选择节点
 const handleSelect = (node) => {
   console.log('选中节点:', node)

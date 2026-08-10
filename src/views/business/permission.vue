@@ -374,9 +374,9 @@ const values = reactive({
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <xly-permission v-model="values.level1" :data="dataLevel1" :max-level="1" />
+          <easy-permission v-model="values.level1" :data="dataLevel1" :max-level="1" />
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="// 数据结构：只有模块（无children）
 const data = [
   { id: 'system', label: '系统管理' },
@@ -384,7 +384,7 @@ const data = [
   { id: 'order', label: '订单管理' }
 ]
 
-<xly-permission v-model=&quot;selected&quot; :data=&quot;data&quot; :max-level=&quot;1&quot; />"
+<easy-permission v-model=&quot;selected&quot; :data=&quot;data&quot; :max-level=&quot;1&quot; />"
         />
       </div>
       <div class="doc-result">
@@ -403,9 +403,9 @@ const data = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <xly-permission v-model="values.level2" :data="dataLevel2" :max-level="2" />
+          <easy-permission v-model="values.level2" :data="dataLevel2" :max-level="2" />
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="// 数据结构：模块 → 页面
 const data = [
   {
@@ -427,7 +427,7 @@ const data = [
   }
 ]
 
-<xly-permission v-model=&quot;selected&quot; :data=&quot;data&quot; :max-level=&quot;2&quot; />"
+<easy-permission v-model=&quot;selected&quot; :data=&quot;data&quot; :max-level=&quot;2&quot; />"
         />
       </div>
       <div class="doc-result">
@@ -446,9 +446,9 @@ const data = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <xly-permission v-model="values.level3" :data="dataLevel3" />
+          <easy-permission v-model="values.level3" :data="dataLevel3" />
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="// 数据结构：模块 → 页面 → 操作
 const data = [
   {
@@ -469,7 +469,7 @@ const data = [
   }
 ]
 
-<xly-permission v-model=&quot;selected&quot; :data=&quot;data&quot; />
+<easy-permission v-model=&quot;selected&quot; :data=&quot;data&quot; />
 
 // 勾选 user:view → 返回 ['system', 'user', 'user:view']
 // 勾选用户管理全部 → 返回 ['system', 'user', 'user:view', 'user:add', 'user:edit', 'user:delete']"
@@ -492,9 +492,9 @@ const data = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <xly-permission v-model="values.level4" :data="dataLevel4" :max-level="4" />
+          <easy-permission v-model="values.level4" :data="dataLevel4" :max-level="4" />
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="// 数据结构：模块 → 页面 → 操作 → 功能
 const data = [
   {
@@ -528,7 +528,7 @@ const data = [
   }
 ]
 
-<xly-permission v-model=&quot;selected&quot; :data=&quot;data&quot; :max-level=&quot;4&quot; />
+<easy-permission v-model=&quot;selected&quot; :data=&quot;data&quot; :max-level=&quot;4&quot; />
 
 // 勾选 user:query:basic → 返回 ['system', 'user', 'user:query', 'user:query:basic']
 // 勾选 查询 全部 → 返回 ['system', 'user', 'user:query', 'user:query:basic', 'user:query:advanced']"
@@ -550,9 +550,9 @@ const data = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <xly-permission v-model="values.level5" :data="dataLevel5" :max-level="5" />
+          <easy-permission v-model="values.level5" :data="dataLevel5" :max-level="5" />
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="// 数据结构：模块 → 页面 → 操作 → 功能 → 数据
 const data = [
   {
@@ -591,7 +591,7 @@ const data = [
   }
 ]
 
-<xly-permission v-model=&quot;selected&quot; :data=&quot;data&quot; :max-level=&quot;5&quot; />
+<easy-permission v-model=&quot;selected&quot; :data=&quot;data&quot; :max-level=&quot;5&quot; />
 
 // 勾选 精确查询 → 返回 ['system','user','user:query','user:query:basic','user:query:basic:exact']
 // 勾选 基础查询 全部 → 返回 ['system','user','user:query','user:query:basic','user:query:basic:exact','user:query:basic:fuzzy']"
@@ -614,7 +614,7 @@ const data = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <xly-permission
+          <easy-permission
             v-model="values.custom"
             :data="dataCustom"
             id-key="code"
@@ -622,7 +622,7 @@ const data = [
             children-key="sub"
           />
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="const data = [
   {
     code: 'system',
@@ -640,7 +640,7 @@ const data = [
   }
 ]
 
-<xly-permission
+<easy-permission
   v-model=&quot;selected&quot;
   :data=&quot;data&quot;
   id-key=&quot;code&quot;
@@ -665,10 +665,10 @@ const data = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <xly-permission v-model="values.headers" :data="dataLevel3" :headers="['功能分组', '页面名称', '操作项']" />
+          <easy-permission v-model="values.headers" :data="dataLevel3" :headers="['功能分组', '页面名称', '操作项']" />
         </div>
-        <XlyDocCode
-          code="<xly-permission
+        <EasyDocCode
+          code="<easy-permission
   v-model=&quot;selected&quot;
   :data=&quot;data&quot;
   :headers=&quot;['功能分组', '页面名称', '操作项']&quot;
@@ -689,16 +689,16 @@ const data = [
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 16px">
           <div>
             <span class="doc-preview__label">整体禁用：</span>
-            <xly-permission v-model="values.disabled" :data="dataLevel3" disabled />
+            <easy-permission v-model="values.disabled" :data="dataLevel3" disabled />
           </div>
           <div>
             <span class="doc-preview__label">部分禁用：</span>
-            <xly-permission v-model="values.partial" :data="dataPartial" />
+            <easy-permission v-model="values.partial" :data="dataPartial" />
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 整体禁用 -->
-<xly-permission v-model=&quot;selected&quot; :data=&quot;data&quot; disabled />
+<easy-permission v-model=&quot;selected&quot; :data=&quot;data&quot; disabled />
 
 <!-- 部分禁用 -->
 { id: 'user:delete', label: '删除', disabled: true }"
@@ -719,7 +719,7 @@ const data = [
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 16px">
           <div>
             <span class="doc-preview__label">简单配置（status=2 禁用）：</span>
-            <xly-permission
+            <easy-permission
               v-model="values.fieldDisabled"
               :data="dataFieldDisabled"
               disabled-field="status"
@@ -728,7 +728,7 @@ const data = [
           </div>
           <div>
             <span class="doc-preview__label">简单配置（type in [1,2] 禁用）：</span>
-            <xly-permission
+            <easy-permission
               v-model="values.fieldDisabled2"
               :data="dataFieldDisabled2"
               disabled-field="type"
@@ -737,13 +737,13 @@ const data = [
           </div>
           <div>
             <span class="doc-preview__label">函数判断（复杂逻辑）：</span>
-            <xly-permission v-model="values.isDisabled" :data="dataIsDisabled" :is-disabled="checkDisabled" />
+            <easy-permission v-model="values.isDisabled" :data="dataIsDisabled" :is-disabled="checkDisabled" />
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="// 方式1：简单配置 - 指定字段和值
 <!-- status === 2 禁用 -->
-<xly-permission
+<easy-permission
   v-model=&quot;selected&quot;
   :data=&quot;data&quot;
   disabled-field=&quot;status&quot;
@@ -751,7 +751,7 @@ const data = [
 />
 
 <!-- type 为 1 或 2 时禁用 -->
-<xly-permission
+<easy-permission
   v-model=&quot;selected&quot;
   :data=&quot;data&quot;
   disabled-field=&quot;type&quot;
@@ -763,7 +763,7 @@ const checkDisabled = (item, level) => {
   return item.status === 2 || (level > 2 && item.forbidden)
 }
 
-<xly-permission
+<easy-permission
   v-model=&quot;selected&quot;
   :data=&quot;data&quot;
   :is-disabled=&quot;checkDisabled&quot;
@@ -794,10 +794,10 @@ const checkDisabled = (item, level) => {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <xly-permission v-model="values.noborder" :data="dataLevel3" :bordered="false" />
+          <easy-permission v-model="values.noborder" :data="dataLevel3" :bordered="false" />
         </div>
-        <XlyDocCode
-          code="<xly-permission v-model=&quot;selected&quot; :data=&quot;data&quot; :bordered=&quot;false&quot; />"
+        <EasyDocCode
+          code="<easy-permission v-model=&quot;selected&quot; :data=&quot;data&quot; :bordered=&quot;false&quot; />"
         />
       </div>
     </section>

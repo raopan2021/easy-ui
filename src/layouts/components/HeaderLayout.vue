@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyIcon } from 'easy-ui'
+import { EasyIcon } from 'easy-ui'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useMenuLayoutStore } from '@/stores/menuLayout'
@@ -109,7 +109,7 @@ onUnmounted(() => {
     >
       <!-- 消息通知 -->
       <button class="header__action-btn" title="消息通知" @click="showMessageDrawer = true">
-        <XlyIcon name="el:Bell" :size="18" />
+        <EasyIcon name="el:Bell" :size="18" />
         <span v-if="messageUnreadCount > 0" class="header__badge">{{
           messageUnreadCount > 99 ? '99+' : messageUnreadCount
         }}</span>
@@ -117,26 +117,26 @@ onUnmounted(() => {
 
       <!-- 主题切换：跟随系统 / 浅色 / 深色 -->
       <button class="header__action-btn" :title="themeTitle" @click="themeStore.toggleMode()">
-        <XlyIcon :name="themeIcon" :size="18" />
+        <EasyIcon :name="themeIcon" :size="18" />
       </button>
 
       <!-- 布局切换 -->
       <button class="header__action-btn" title="切换布局" @click="showLayoutDrawer = true">
-        <XlyIcon name="el:Operation" :size="18" />
+        <EasyIcon name="el:Operation" :size="18" />
       </button>
 
       <!-- 全屏切换 -->
       <button class="header__action-btn" :title="isFullscreen ? '退出全屏' : '全屏'" @click="toggleFullscreen">
-        <XlyIcon :name="isFullscreen ? 'el:CloseBold' : 'el:FullScreen'" :size="18" />
+        <EasyIcon :name="isFullscreen ? 'el:CloseBold' : 'el:FullScreen'" :size="18" />
       </button>
 
       <!-- 用户信息 -->
       <div class="header__user" @click="showUserMenu = !showUserMenu">
         <div class="header__avatar">
-          <XlyIcon name="el:User" :size="18" color="#fff" />
+          <EasyIcon name="el:User" :size="18" color="#fff" />
         </div>
         <span class="header__username">Admin</span>
-        <XlyIcon
+        <EasyIcon
           class="header__arrow"
           :class="{ 'is-open': showUserMenu }"
           name="el:ArrowDown"
@@ -150,7 +150,7 @@ onUnmounted(() => {
         <div v-if="showUserMenu" class="header__user-dropdown">
           <div class="header__user-dropdown-header">
             <div class="header__avatar header__avatar--dropdown">
-              <XlyIcon name="el:User" :size="18" color="#fff" />
+              <EasyIcon name="el:User" :size="18" color="#fff" />
             </div>
             <div class="header__user-dropdown-info">
               <span class="header__user-dropdown-name">Admin</span>
@@ -159,16 +159,16 @@ onUnmounted(() => {
           </div>
           <div class="header__user-dropdown-divider" />
           <div class="header__user-dropdown-item">
-            <XlyIcon name="el:UserFilled" :size="16" />
+            <EasyIcon name="el:UserFilled" :size="16" />
             <span>个人中心</span>
           </div>
           <div class="header__user-dropdown-item">
-            <XlyIcon name="el:Plus" :size="16" />
+            <EasyIcon name="el:Plus" :size="16" />
             <span>新建</span>
           </div>
           <div class="header__user-dropdown-divider" />
           <div class="header__user-dropdown-item header__user-dropdown-item--danger" @click="handleLogout">
-            <XlyIcon name="el:SwitchButton" :size="16" />
+            <EasyIcon name="el:SwitchButton" :size="16" />
             <span>退出登录</span>
           </div>
         </div>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyTabPane, XlyTabs } from 'easy-ui'
+import { EasyTabPane, EasyTabs } from 'easy-ui'
 import { ref } from 'vue'
 
 const activeTab1 = ref('user')
@@ -45,37 +45,37 @@ function handleTabChange(value: string | number) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <XlyTabs v-model="activeTab1">
-            <XlyTabPane name="user" label="用户管理">
+          <EasyTabs v-model="activeTab1">
+            <EasyTabPane name="user" label="用户管理">
               <div class="tab-demo-content">
                 <p>这里是用户管理的内容区域。</p>
                 <p>可以放置表格、表单等复杂内容。</p>
               </div>
-            </XlyTabPane>
-            <XlyTabPane name="role" label="角色管理">
+            </EasyTabPane>
+            <EasyTabPane name="role" label="角色管理">
               <div class="tab-demo-content">
                 <p>这里是角色管理的内容区域。</p>
               </div>
-            </XlyTabPane>
-            <XlyTabPane name="perm" label="权限配置">
+            </EasyTabPane>
+            <EasyTabPane name="perm" label="权限配置">
               <div class="tab-demo-content">
                 <p>这里是权限配置的内容区域。</p>
               </div>
-            </XlyTabPane>
-          </XlyTabs>
+            </EasyTabPane>
+          </EasyTabs>
         </div>
-        <XlyDocCode
-          code="<xly-tabs v-model=&quot;activeTab&quot;>
-  <xly-tab-pane name=&quot;user&quot; label=&quot;用户管理&quot;>
+        <EasyDocCode
+          code="<easy-tabs v-model=&quot;activeTab&quot;>
+  <easy-tab-pane name=&quot;user&quot; label=&quot;用户管理&quot;>
     用户管理内容
-  </xly-tab-pane>
-  <xly-tab-pane name=&quot;role&quot; label=&quot;角色管理&quot;>
+  </easy-tab-pane>
+  <easy-tab-pane name=&quot;role&quot; label=&quot;角色管理&quot;>
     角色管理内容
-  </xly-tab-pane>
-  <xly-tab-pane name=&quot;perm&quot; label=&quot;权限配置&quot;>
+  </easy-tab-pane>
+  <easy-tab-pane name=&quot;perm&quot; label=&quot;权限配置&quot;>
     权限配置内容
-  </xly-tab-pane>
-</xly-tabs>"
+  </easy-tab-pane>
+</easy-tabs>"
         />
       </div>
     </section>
@@ -90,36 +90,36 @@ function handleTabChange(value: string | number) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <XlyTabs v-model="activeTab2" type="card">
-            <XlyTabPane name="overview" label="概览">
+          <EasyTabs v-model="activeTab2" type="card">
+            <EasyTabPane name="overview" label="概览">
               <div class="tab-demo-content">
                 <p>系统运行概览数据。</p>
               </div>
-            </XlyTabPane>
-            <XlyTabPane name="monitor" label="监控">
+            </EasyTabPane>
+            <EasyTabPane name="monitor" label="监控">
               <div class="tab-demo-content">
                 <p>系统监控信息。</p>
               </div>
-            </XlyTabPane>
-            <XlyTabPane name="alarm" label="告警">
+            </EasyTabPane>
+            <EasyTabPane name="alarm" label="告警">
               <div class="tab-demo-content">
                 <p>告警记录与处理。</p>
               </div>
-            </XlyTabPane>
-            <XlyTabPane name="log" label="日志">
+            </EasyTabPane>
+            <EasyTabPane name="log" label="日志">
               <div class="tab-demo-content">
                 <p>系统运行日志。</p>
               </div>
-            </XlyTabPane>
-          </XlyTabs>
+            </EasyTabPane>
+          </EasyTabs>
         </div>
-        <XlyDocCode
-          code="<xly-tabs v-model=&quot;activeTab&quot; type=&quot;card&quot;>
-  <xly-tab-pane name=&quot;overview&quot; label=&quot;概览&quot;>概览内容</xly-tab-pane>
-  <xly-tab-pane name=&quot;monitor&quot; label=&quot;监控&quot;>监控内容</xly-tab-pane>
-  <xly-tab-pane name=&quot;alarm&quot; label=&quot;告警&quot;>告警内容</xly-tab-pane>
-  <xly-tab-pane name=&quot;log&quot; label=&quot;日志&quot;>日志内容</xly-tab-pane>
-</xly-tabs>"
+        <EasyDocCode
+          code="<easy-tabs v-model=&quot;activeTab&quot; type=&quot;card&quot;>
+  <easy-tab-pane name=&quot;overview&quot; label=&quot;概览&quot;>概览内容</easy-tab-pane>
+  <easy-tab-pane name=&quot;monitor&quot; label=&quot;监控&quot;>监控内容</easy-tab-pane>
+  <easy-tab-pane name=&quot;alarm&quot; label=&quot;告警&quot;>告警内容</easy-tab-pane>
+  <easy-tab-pane name=&quot;log&quot; label=&quot;日志&quot;>日志内容</easy-tab-pane>
+</easy-tabs>"
         />
       </div>
     </section>
@@ -134,30 +134,30 @@ function handleTabChange(value: string | number) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <XlyTabs v-model="activeTab3" type="segment">
-            <XlyTabPane name="all" label="全部">
+          <EasyTabs v-model="activeTab3" type="segment">
+            <EasyTabPane name="all" label="全部">
               <div class="tab-demo-content">
                 <p>显示全部内容。</p>
               </div>
-            </XlyTabPane>
-            <XlyTabPane name="active" label="进行中">
+            </EasyTabPane>
+            <EasyTabPane name="active" label="进行中">
               <div class="tab-demo-content">
                 <p>显示进行中的内容。</p>
               </div>
-            </XlyTabPane>
-            <XlyTabPane name="done" label="已完成">
+            </EasyTabPane>
+            <EasyTabPane name="done" label="已完成">
               <div class="tab-demo-content">
                 <p>显示已完成的内容。</p>
               </div>
-            </XlyTabPane>
-          </XlyTabs>
+            </EasyTabPane>
+          </EasyTabs>
         </div>
-        <XlyDocCode
-          code="<xly-tabs v-model=&quot;activeTab&quot; type=&quot;segment&quot;>
-  <xly-tab-pane name=&quot;all&quot; label=&quot;全部&quot;>全部内容</xly-tab-pane>
-  <xly-tab-pane name=&quot;active&quot; label=&quot;进行中&quot;>进行中内容</xly-tab-pane>
-  <xly-tab-pane name=&quot;done&quot; label=&quot;已完成&quot;>已完成内容</xly-tab-pane>
-</xly-tabs>"
+        <EasyDocCode
+          code="<easy-tabs v-model=&quot;activeTab&quot; type=&quot;segment&quot;>
+  <easy-tab-pane name=&quot;all&quot; label=&quot;全部&quot;>全部内容</easy-tab-pane>
+  <easy-tab-pane name=&quot;active&quot; label=&quot;进行中&quot;>进行中内容</easy-tab-pane>
+  <easy-tab-pane name=&quot;done&quot; label=&quot;已完成&quot;>已完成内容</easy-tab-pane>
+</easy-tabs>"
         />
       </div>
     </section>
@@ -177,73 +177,73 @@ function handleTabChange(value: string | number) {
             <p class="size-label">
               Large
             </p>
-            <XlyTabs v-model="activeTab4" size="large">
-              <XlyTabPane name="a" label="选项一">
+            <EasyTabs v-model="activeTab4" size="large">
+              <EasyTabPane name="a" label="选项一">
                 <div class="tab-demo-content">
                   <p>Large 选项卡内容</p>
                 </div>
-              </XlyTabPane>
-              <XlyTabPane name="b" label="选项二">
+              </EasyTabPane>
+              <EasyTabPane name="b" label="选项二">
                 <div class="tab-demo-content">
                   <p>Large 选项卡内容</p>
                 </div>
-              </XlyTabPane>
-              <XlyTabPane name="c" label="选项三">
+              </EasyTabPane>
+              <EasyTabPane name="c" label="选项三">
                 <div class="tab-demo-content">
                   <p>Large 选项卡内容</p>
                 </div>
-              </XlyTabPane>
-            </XlyTabs>
+              </EasyTabPane>
+            </EasyTabs>
           </div>
           <div>
             <p class="size-label">
               Default
             </p>
-            <XlyTabs v-model="activeTab4">
-              <XlyTabPane name="a" label="选项一">
+            <EasyTabs v-model="activeTab4">
+              <EasyTabPane name="a" label="选项一">
                 <div class="tab-demo-content">
                   <p>Default 选项卡内容</p>
                 </div>
-              </XlyTabPane>
-              <XlyTabPane name="b" label="选项二">
+              </EasyTabPane>
+              <EasyTabPane name="b" label="选项二">
                 <div class="tab-demo-content">
                   <p>Default 选项卡内容</p>
                 </div>
-              </XlyTabPane>
-              <XlyTabPane name="c" label="选项三">
+              </EasyTabPane>
+              <EasyTabPane name="c" label="选项三">
                 <div class="tab-demo-content">
                   <p>Default 选项卡内容</p>
                 </div>
-              </XlyTabPane>
-            </XlyTabs>
+              </EasyTabPane>
+            </EasyTabs>
           </div>
           <div>
             <p class="size-label">
               Small
             </p>
-            <XlyTabs v-model="activeTab4" size="small">
-              <XlyTabPane name="a" label="选项一">
+            <EasyTabs v-model="activeTab4" size="small">
+              <EasyTabPane name="a" label="选项一">
                 <div class="tab-demo-content">
                   <p>Small 选项卡内容</p>
                 </div>
-              </XlyTabPane>
-              <XlyTabPane name="b" label="选项二">
+              </EasyTabPane>
+              <EasyTabPane name="b" label="选项二">
                 <div class="tab-demo-content">
                   <p>Small 选项卡内容</p>
                 </div>
-              </XlyTabPane>
-              <XlyTabPane name="c" label="选项三">
+              </EasyTabPane>
+              <EasyTabPane name="c" label="选项三">
                 <div class="tab-demo-content">
                   <p>Small 选项卡内容</p>
                 </div>
-              </XlyTabPane>
-            </XlyTabs>
+              </EasyTabPane>
+            </EasyTabs>
           </div>
         </div>
-        <XlyDocCode
-          code="<xly-tabs v-model=&quot;activeTab&quot; size=&quot;large&quot;>...</xly-tabs>
-<xly-tabs v-model=&quot;activeTab&quot; size=&quot;default&quot;>...</xly-tabs>
-<xly-tabs v-model=&quot;activeTab&quot; size=&quot;small&quot;>...</xly-tabs>"
+        <EasyDocCode
+          code="<easy-tabs v-model=&quot;activeTab&quot; size=&quot;large&quot;>...</easy-tabs>
+<easy-tabs v-model=&quot;activeTab&quot; size=&quot;default&quot;>...</easy-tabs>
+<easy-tabs v-model=&quot;activeTab&quot; size=&quot;small&quot;>...</easy-tabs>"
         />
       </div>
     </section>
@@ -258,36 +258,36 @@ function handleTabChange(value: string | number) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <XlyTabs v-model="activeTab5">
-            <XlyTabPane name="home" label="首页" icon="HomeFilled">
+          <EasyTabs v-model="activeTab5">
+            <EasyTabPane name="home" label="首页" icon="HomeFilled">
               <div class="tab-demo-content">
                 <p>首页内容，包含常用功能和快捷入口。</p>
               </div>
-            </XlyTabPane>
-            <XlyTabPane name="setting" label="设置" icon="Setting">
+            </EasyTabPane>
+            <EasyTabPane name="setting" label="设置" icon="Setting">
               <div class="tab-demo-content">
                 <p>系统设置与偏好配置。</p>
               </div>
-            </XlyTabPane>
-            <XlyTabPane name="user" label="用户" icon="User">
+            </EasyTabPane>
+            <EasyTabPane name="user" label="用户" icon="User">
               <div class="tab-demo-content">
                 <p>用户信息与账户管理。</p>
               </div>
-            </XlyTabPane>
-            <XlyTabPane name="bell" label="通知" icon="Bell">
+            </EasyTabPane>
+            <EasyTabPane name="bell" label="通知" icon="Bell">
               <div class="tab-demo-content">
                 <p>消息通知与提醒。</p>
               </div>
-            </XlyTabPane>
-          </XlyTabs>
+            </EasyTabPane>
+          </EasyTabs>
         </div>
-        <XlyDocCode
-          code="<xly-tabs v-model=&quot;activeTab&quot;>
-  <xly-tab-pane name=&quot;home&quot; label=&quot;首页&quot; icon=&quot;HomeFilled&quot;>...</xly-tab-pane>
-  <xly-tab-pane name=&quot;setting&quot; label=&quot;设置&quot; icon=&quot;Setting&quot;>...</xly-tab-pane>
-  <xly-tab-pane name=&quot;user&quot; label=&quot;用户&quot; icon=&quot;User&quot;>...</xly-tab-pane>
-  <xly-tab-pane name=&quot;bell&quot; label=&quot;通知&quot; icon=&quot;Bell&quot;>...</xly-tab-pane>
-</xly-tabs>"
+        <EasyDocCode
+          code="<easy-tabs v-model=&quot;activeTab&quot;>
+  <easy-tab-pane name=&quot;home&quot; label=&quot;首页&quot; icon=&quot;HomeFilled&quot;>...</easy-tab-pane>
+  <easy-tab-pane name=&quot;setting&quot; label=&quot;设置&quot; icon=&quot;Setting&quot;>...</easy-tab-pane>
+  <easy-tab-pane name=&quot;user&quot; label=&quot;用户&quot; icon=&quot;User&quot;>...</easy-tab-pane>
+  <easy-tab-pane name=&quot;bell&quot; label=&quot;通知&quot; icon=&quot;Bell&quot;>...</easy-tab-pane>
+</easy-tabs>"
         />
       </div>
     </section>
@@ -302,30 +302,30 @@ function handleTabChange(value: string | number) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <XlyTabs v-model="activeTab6">
-            <XlyTabPane name="basic" label="基本信息">
+          <EasyTabs v-model="activeTab6">
+            <EasyTabPane name="basic" label="基本信息">
               <div class="tab-demo-content">
                 <p>基本信息配置。</p>
               </div>
-            </XlyTabPane>
-            <XlyTabPane name="security" label="安全设置">
+            </EasyTabPane>
+            <EasyTabPane name="security" label="安全设置">
               <div class="tab-demo-content">
                 <p>安全相关配置。</p>
               </div>
-            </XlyTabPane>
-            <XlyTabPane name="advanced" label="高级设置" disabled>
+            </EasyTabPane>
+            <EasyTabPane name="advanced" label="高级设置" disabled>
               <div class="tab-demo-content">
                 <p>高级功能（需升级版本后解锁）。</p>
               </div>
-            </XlyTabPane>
-          </XlyTabs>
+            </EasyTabPane>
+          </EasyTabs>
         </div>
-        <XlyDocCode
-          code="<xly-tabs v-model=&quot;activeTab&quot;>
-  <xly-tab-pane name=&quot;basic&quot; label=&quot;基本信息&quot;>...</xly-tab-pane>
-  <xly-tab-pane name=&quot;security&quot; label=&quot;安全设置&quot;>...</xly-tab-pane>
-  <xly-tab-pane name=&quot;advanced&quot; label=&quot;高级设置&quot; disabled>...</xly-tab-pane>
-</xly-tabs>"
+        <EasyDocCode
+          code="<easy-tabs v-model=&quot;activeTab&quot;>
+  <easy-tab-pane name=&quot;basic&quot; label=&quot;基本信息&quot;>...</easy-tab-pane>
+  <easy-tab-pane name=&quot;security&quot; label=&quot;安全设置&quot;>...</easy-tab-pane>
+  <easy-tab-pane name=&quot;advanced&quot; label=&quot;高级设置&quot; disabled>...</easy-tab-pane>
+</easy-tabs>"
         />
       </div>
     </section>
@@ -340,30 +340,30 @@ function handleTabChange(value: string | number) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <XlyTabs v-model="activeTab7" tab-position="bottom">
-            <XlyTabPane name="tab1" label="选项一">
+          <EasyTabs v-model="activeTab7" tab-position="bottom">
+            <EasyTabPane name="tab1" label="选项一">
               <div class="tab-demo-content">
                 <p>选项卡位于底部的示例内容。</p>
               </div>
-            </XlyTabPane>
-            <XlyTabPane name="tab2" label="选项二">
+            </EasyTabPane>
+            <EasyTabPane name="tab2" label="选项二">
               <div class="tab-demo-content">
                 <p>适合需要内容区域在上方展示的场景。</p>
               </div>
-            </XlyTabPane>
-            <XlyTabPane name="tab3" label="选项三">
+            </EasyTabPane>
+            <EasyTabPane name="tab3" label="选项三">
               <div class="tab-demo-content">
                 <p>底部选项卡内容。</p>
               </div>
-            </XlyTabPane>
-          </XlyTabs>
+            </EasyTabPane>
+          </EasyTabs>
         </div>
-        <XlyDocCode
-          code="<xly-tabs v-model=&quot;activeTab&quot; tab-position=&quot;bottom&quot;>
-  <xly-tab-pane name=&quot;tab1&quot; label=&quot;选项一&quot;>...</xly-tab-pane>
-  <xly-tab-pane name=&quot;tab2&quot; label=&quot;选项二&quot;>...</xly-tab-pane>
-  <xly-tab-pane name=&quot;tab3&quot; label=&quot;选项三&quot;>...</xly-tab-pane>
-</xly-tabs>"
+        <EasyDocCode
+          code="<easy-tabs v-model=&quot;activeTab&quot; tab-position=&quot;bottom&quot;>
+  <easy-tab-pane name=&quot;tab1&quot; label=&quot;选项一&quot;>...</easy-tab-pane>
+  <easy-tab-pane name=&quot;tab2&quot; label=&quot;选项二&quot;>...</easy-tab-pane>
+  <easy-tab-pane name=&quot;tab3&quot; label=&quot;选项三&quot;>...</easy-tab-pane>
+</easy-tabs>"
         />
       </div>
     </section>
@@ -378,44 +378,44 @@ function handleTabChange(value: string | number) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch; gap: 24px">
-          <XlyTabs v-model="activeTab8" active-color="#34c759">
-            <XlyTabPane name="g1" label="绿色主题">
+          <EasyTabs v-model="activeTab8" active-color="#34c759">
+            <EasyTabPane name="g1" label="绿色主题">
               <div class="tab-demo-content">
                 <p>成功 / 绿色激活色</p>
               </div>
-            </XlyTabPane>
-            <XlyTabPane name="g2" label="选项二">
+            </EasyTabPane>
+            <EasyTabPane name="g2" label="选项二">
               <div class="tab-demo-content">
                 <p>绿色主题内容</p>
               </div>
-            </XlyTabPane>
-            <XlyTabPane name="g3" label="选项三">
+            </EasyTabPane>
+            <EasyTabPane name="g3" label="选项三">
               <div class="tab-demo-content">
                 <p>绿色主题内容</p>
               </div>
-            </XlyTabPane>
-          </XlyTabs>
-          <XlyTabs v-model="activeTab8" active-color="#f5a623" type="card">
-            <XlyTabPane name="o1" label="橙色主题">
+            </EasyTabPane>
+          </EasyTabs>
+          <EasyTabs v-model="activeTab8" active-color="#f5a623" type="card">
+            <EasyTabPane name="o1" label="橙色主题">
               <div class="tab-demo-content">
                 <p>警告 / 橙色激活色</p>
               </div>
-            </XlyTabPane>
-            <XlyTabPane name="o2" label="选项二">
+            </EasyTabPane>
+            <EasyTabPane name="o2" label="选项二">
               <div class="tab-demo-content">
                 <p>橙色主题内容</p>
               </div>
-            </XlyTabPane>
-            <XlyTabPane name="o3" label="选项三">
+            </EasyTabPane>
+            <EasyTabPane name="o3" label="选项三">
               <div class="tab-demo-content">
                 <p>橙色主题内容</p>
               </div>
-            </XlyTabPane>
-          </XlyTabs>
+            </EasyTabPane>
+          </EasyTabs>
         </div>
-        <XlyDocCode
-          code="<xly-tabs v-model=&quot;activeTab&quot; active-color=&quot;#34c759&quot;>...</xly-tabs>
-<xly-tabs v-model=&quot;activeTab&quot; active-color=&quot;#f5a623&quot; type=&quot;card&quot;>...</xly-tabs>"
+        <EasyDocCode
+          code="<easy-tabs v-model=&quot;activeTab&quot; active-color=&quot;#34c759&quot;>...</easy-tabs>
+<easy-tabs v-model=&quot;activeTab&quot; active-color=&quot;#f5a623&quot; type=&quot;card&quot;>...</easy-tabs>"
         />
       </div>
     </section>
@@ -430,37 +430,37 @@ function handleTabChange(value: string | number) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <XlyTabs v-model="activeTab9" @tab-click="handleTabClick" @tab-change="handleTabChange">
-            <XlyTabPane name="event1" label="选项一">
+          <EasyTabs v-model="activeTab9" @tab-click="handleTabClick" @tab-change="handleTabChange">
+            <EasyTabPane name="event1" label="选项一">
               <div class="tab-demo-content">
                 <p>点击或切换选项卡时，下方会显示事件日志。</p>
               </div>
-            </XlyTabPane>
-            <XlyTabPane name="event2" label="选项二">
+            </EasyTabPane>
+            <EasyTabPane name="event2" label="选项二">
               <div class="tab-demo-content">
                 <p>事件日志面板。</p>
               </div>
-            </XlyTabPane>
-            <XlyTabPane name="event3" label="选项三">
+            </EasyTabPane>
+            <EasyTabPane name="event3" label="选项三">
               <div class="tab-demo-content">
                 <p>事件日志面板。</p>
               </div>
-            </XlyTabPane>
-          </XlyTabs>
+            </EasyTabPane>
+          </EasyTabs>
           <div v-if="eventLogs.length" class="event-logs">
             <p v-for="(log, i) in eventLogs" :key="i" class="event-log">
               {{ log }}
             </p>
           </div>
         </div>
-        <XlyDocCode
-          code="<xly-tabs
+        <EasyDocCode
+          code="<easy-tabs
   v-model=&quot;activeTab&quot;
   @tab-click=&quot;handleTabClick&quot;
   @tab-change=&quot;handleTabChange&quot;
 >
   ...
-</xly-tabs>"
+</easy-tabs>"
         />
       </div>
     </section>

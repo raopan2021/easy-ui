@@ -1,5 +1,5 @@
 import type { App } from 'vue'
-import { setupXlyMessage, setupXlyMsgBox, XlyBadge, XlyLoading, XlyMsg, XlyMsgBox, XlyTour } from 'easy-ui'
+import { easyBadge, EasyMsg, EasyMsgBox, setupEasyMessage, setupEasyMsgBox, vEasyLoading, vEasyTour } from 'easy-ui'
 
 /**
  * xly 全局工具对象
@@ -27,15 +27,15 @@ import { setupXlyMessage, setupXlyMsgBox, XlyBadge, XlyLoading, XlyMsg, XlyMsgBo
  */
 export const xly = {
   /** 消息提示 */
-  $msg: XlyMsg,
+  $msg: EasyMsg,
   /** 加载 */
-  $loading: XlyLoading,
+  $loading: vEasyLoading,
   /** 操作引导 */
-  $tour: XlyTour,
+  $tour: vEasyTour,
   /** 徽标 */
-  $badge: XlyBadge,
+  $badge: easyBadge,
   /** 消息弹出框 */
-  $msgbox: XlyMsgBox,
+  $msgbox: EasyMsgBox,
 }
 
 /**
@@ -53,10 +53,10 @@ export const xly = {
  */
 export function setupXly(app: App) {
   // 挂载消息提示组件容器
-  setupXlyMessage(app)
+  setupEasyMessage(app)
 
   // 挂载消息弹出框容器
-  setupXlyMsgBox(app)
+  setupEasyMsgBox(app)
 
   // 同时挂载两处，确保 script setup 和模板都能访问 xly
   app.config.globalProperties.xly = xly

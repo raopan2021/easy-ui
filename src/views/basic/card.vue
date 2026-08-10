@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyButton, XlyCard, XlyIcon } from 'easy-ui'
+import { EasyButton, EasyCard, EasyIcon } from 'easy-ui'
 </script>
 
 <template>
@@ -24,7 +24,7 @@ import { XlyButton, XlyCard, XlyIcon } from 'easy-ui'
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard style="width: 380px">
+          <EasyCard style="width: 380px">
             <template #header>
               <div class="header-title">
                 项目详情
@@ -45,29 +45,29 @@ import { XlyButton, XlyCard, XlyIcon } from 'easy-ui'
             </div>
             <template #footer>
               <div class="footer-actions">
-                <XlyButton type="primary" size="small">
+                <EasyButton type="primary" size="small">
                   确认
-                </XlyButton>
-                <XlyButton size="small">
+                </EasyButton>
+                <EasyButton size="small">
                   取消
-                </XlyButton>
+                </EasyButton>
               </div>
             </template>
-          </XlyCard>
+          </EasyCard>
         </div>
-        <XlyDocCode
-          code="<XlyCard>
+        <EasyDocCode
+          code="<EasyCard>
   <template #header>
     <div class=&quot;header-title&quot;>项目详情</div>
   </template>
   <p>卡片内容...</p>
   <template #footer>
     <div class=&quot;footer-actions&quot;>
-      <XlyButton type=&quot;primary&quot; size=&quot;small&quot;>确认</XlyButton>
-      <XlyButton size=&quot;small&quot;>取消</XlyButton>
+      <EasyButton type=&quot;primary&quot; size=&quot;small&quot;>确认</EasyButton>
+      <EasyButton size=&quot;small&quot;>取消</EasyButton>
     </div>
   </template>
-</XlyCard>"
+</EasyCard>"
         />
       </div>
     </section>
@@ -83,7 +83,7 @@ import { XlyButton, XlyCard, XlyIcon } from 'easy-ui'
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="grid-2">
-            <XlyCard title="基本信息" style="width: 260px">
+            <EasyCard title="基本信息" style="width: 260px">
               <div class="info-list">
                 <div class="info-row">
                   <span class="label">姓名</span>
@@ -102,8 +102,8 @@ import { XlyButton, XlyCard, XlyIcon } from 'easy-ui'
                   <span class="value">高级工程师</span>
                 </div>
               </div>
-            </XlyCard>
-            <XlyCard title="联系方式" icon="el:Message" style="width: 260px">
+            </EasyCard>
+            <EasyCard title="联系方式" icon="el:Message" style="width: 260px">
               <div class="info-list">
                 <div class="info-row">
                   <span class="label">手机</span>
@@ -118,17 +118,17 @@ import { XlyButton, XlyCard, XlyIcon } from 'easy-ui'
                   <span class="value">A栋 8层 801</span>
                 </div>
               </div>
-            </XlyCard>
+            </EasyCard>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyCard title=&quot;基本信息&quot;>
+        <EasyDocCode
+          code="<EasyCard title=&quot;基本信息&quot;>
   <div>内容...</div>
-</XlyCard>
+</EasyCard>
 
-<XlyCard title=&quot;联系方式&quot; icon=&quot;el:Message&quot;>
+<EasyCard title=&quot;联系方式&quot; icon=&quot;el:Message&quot;>
   <div>内容...</div>
-</XlyCard>"
+</EasyCard>"
         />
       </div>
     </section>
@@ -144,27 +144,27 @@ import { XlyButton, XlyCard, XlyIcon } from 'easy-ui'
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="grid-3">
-            <XlyCard title="始终显示" shadow="always" style="width: 160px">
+            <EasyCard title="始终显示" shadow="always" style="width: 160px">
               <div class="demo-text">
                 默认带阴影
               </div>
-            </XlyCard>
-            <XlyCard title="悬浮显示" shadow="hover" style="width: 160px">
+            </EasyCard>
+            <EasyCard title="悬浮显示" shadow="hover" style="width: 160px">
               <div class="demo-text">
                 悬浮时显示
               </div>
-            </XlyCard>
-            <XlyCard title="无阴影" shadow="never" style="width: 160px">
+            </EasyCard>
+            <EasyCard title="无阴影" shadow="never" style="width: 160px">
               <div class="demo-text">
                 始终无阴影
               </div>
-            </XlyCard>
+            </EasyCard>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyCard shadow=&quot;always&quot;>...</XlyCard>
-<XlyCard shadow=&quot;hover&quot;>...</XlyCard>
-<XlyCard shadow=&quot;never&quot;>...</XlyCard>"
+        <EasyDocCode
+          code="<EasyCard shadow=&quot;always&quot;>...</EasyCard>
+<EasyCard shadow=&quot;hover&quot;>...</EasyCard>
+<EasyCard shadow=&quot;never&quot;>...</EasyCard>"
         />
       </div>
     </section>
@@ -180,27 +180,27 @@ import { XlyButton, XlyCard, XlyIcon } from 'easy-ui'
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="grid-3">
-            <XlyCard hoverable title="用户管理" style="width: 160px">
+            <EasyCard hoverable title="用户管理" style="width: 160px">
               <div class="demo-text">
                 点击查看详情
               </div>
-            </XlyCard>
-            <XlyCard hoverable title="订单管理" style="width: 160px">
+            </EasyCard>
+            <EasyCard hoverable title="订单管理" style="width: 160px">
               <div class="demo-text">
                 点击查看详情
               </div>
-            </XlyCard>
-            <XlyCard hoverable title="系统设置" style="width: 160px">
+            </EasyCard>
+            <EasyCard hoverable title="系统设置" style="width: 160px">
               <div class="demo-text">
                 点击查看详情
               </div>
-            </XlyCard>
+            </EasyCard>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyCard hoverable title=&quot;用户管理&quot;>
+        <EasyDocCode
+          code="<EasyCard hoverable title=&quot;用户管理&quot;>
   <div>点击查看详情</div>
-</XlyCard>"
+</EasyCard>"
         />
       </div>
     </section>
@@ -217,7 +217,7 @@ import { XlyButton, XlyCard, XlyIcon } from 'easy-ui'
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="stat-grid">
-            <XlyCard class="stat-card">
+            <EasyCard class="stat-card">
               <div class="stat-content">
                 <div class="stat-top">
                   <span class="stat-label">总用户数</span>
@@ -230,8 +230,8 @@ import { XlyButton, XlyCard, XlyIcon } from 'easy-ui'
                   较上月
                 </div>
               </div>
-            </XlyCard>
-            <XlyCard class="stat-card">
+            </EasyCard>
+            <EasyCard class="stat-card">
               <div class="stat-content">
                 <div class="stat-top">
                   <span class="stat-label">今日订单</span>
@@ -244,8 +244,8 @@ import { XlyButton, XlyCard, XlyIcon } from 'easy-ui'
                   较昨日
                 </div>
               </div>
-            </XlyCard>
-            <XlyCard class="stat-card">
+            </EasyCard>
+            <EasyCard class="stat-card">
               <div class="stat-content">
                 <div class="stat-top">
                   <span class="stat-label">本月收入</span>
@@ -258,8 +258,8 @@ import { XlyButton, XlyCard, XlyIcon } from 'easy-ui'
                   较上月
                 </div>
               </div>
-            </XlyCard>
-            <XlyCard class="stat-card">
+            </EasyCard>
+            <EasyCard class="stat-card">
               <div class="stat-content">
                 <div class="stat-top">
                   <span class="stat-label">待处理事项</span>
@@ -271,7 +271,7 @@ import { XlyButton, XlyCard, XlyIcon } from 'easy-ui'
                   本周
                 </div>
               </div>
-            </XlyCard>
+            </EasyCard>
           </div>
         </div>
       </div>
@@ -281,7 +281,7 @@ import { XlyButton, XlyCard, XlyIcon } from 'easy-ui'
       </h3>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard style="width: 100%; max-width: 520px">
+          <EasyCard style="width: 100%; max-width: 520px">
             <template #header>
               <div class="task-header">
                 <span class="header-title">我的任务</span>
@@ -290,22 +290,22 @@ import { XlyButton, XlyCard, XlyIcon } from 'easy-ui'
             </template>
             <div class="task-list">
               <div class="task-item">
-                <XlyIcon name="el:Check" :size="15" class="icon-success" />
+                <EasyIcon name="el:Check" :size="15" class="icon-success" />
                 <span class="task-text">完成需求文档编写</span>
                 <span class="badge badge-success">已完成</span>
               </div>
               <div class="task-item">
-                <XlyIcon name="el:Clock" :size="15" class="icon-primary" />
+                <EasyIcon name="el:Clock" :size="15" class="icon-primary" />
                 <span class="task-text">评审技术方案</span>
                 <span class="badge badge-primary">进行中</span>
               </div>
               <div class="task-item">
-                <XlyIcon name="el:Clock" :size="15" class="icon-muted" />
+                <EasyIcon name="el:Clock" :size="15" class="icon-muted" />
                 <span class="task-text">开发用户模块</span>
                 <span class="badge badge-muted">待开始</span>
               </div>
             </div>
-          </XlyCard>
+          </EasyCard>
         </div>
       </div>
     </section>
@@ -320,13 +320,13 @@ import { XlyButton, XlyCard, XlyIcon } from 'easy-ui'
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard disabled title="禁用卡片" style="width: 260px">
+          <EasyCard disabled title="禁用卡片" style="width: 260px">
             <div class="demo-text muted">
               禁用状态下无法交互
             </div>
-          </XlyCard>
+          </EasyCard>
         </div>
-        <XlyDocCode code="<XlyCard disabled>...</XlyCard>" />
+        <EasyDocCode code="<EasyCard disabled>...</EasyCard>" />
       </div>
     </section>
 

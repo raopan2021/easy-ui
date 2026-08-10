@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyDrawer } from 'easy-ui'
+import { EasyDrawer } from 'easy-ui'
 import { computed, ref } from 'vue'
 
 defineOptions({ name: 'MessageDrawer' })
@@ -288,7 +288,7 @@ function handleClear() {
 </script>
 
 <template>
-  <XlyDrawer
+  <EasyDrawer
     v-model="drawerVisible"
     title="消息通知"
     direction="right"
@@ -394,7 +394,7 @@ function handleClear() {
         </button>
       </div>
     </template>
-  </XlyDrawer>
+  </EasyDrawer>
 </template>
 
 <style scoped lang="scss">

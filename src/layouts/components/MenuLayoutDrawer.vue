@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { MenuLayout } from '@/stores/menuLayout'
-import { XlyDrawer } from 'easy-ui'
+import { EasyDrawer } from 'easy-ui'
 import { computed } from 'vue'
 import { useMenuLayoutStore } from '@/stores/menuLayout'
 
@@ -58,7 +58,7 @@ function handleSelect(key: MenuLayout) {
 </script>
 
 <template>
-  <XlyDrawer
+  <EasyDrawer
     v-model="drawerVisible"
     title="切换布局风格"
     direction="right"
@@ -109,7 +109,7 @@ function handleSelect(key: MenuLayout) {
         </div>
       </div>
     </div>
-  </XlyDrawer>
+  </EasyDrawer>
 </template>
 
 <style scoped lang="scss">

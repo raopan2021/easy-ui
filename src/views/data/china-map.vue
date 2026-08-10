@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { MapDataItem, MapDataSet } from 'easy-ui'
-import { XlyChinaMap } from 'easy-ui'
+import { EasyChinaMap } from 'easy-ui'
 import { ref } from 'vue'
 
 // ===== 标签模式 =====
@@ -211,7 +211,7 @@ const multiYearData: MapDataSet[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyChinaMap
+          <EasyChinaMap
             title="2025年各省份 GDP 总量"
             subtitle="单位：亿元"
             :data="gdpData"
@@ -221,8 +221,8 @@ const multiYearData: MapDataSet[] = [
             @click="handleClick"
           />
         </div>
-        <XlyDocCode
-          code="<XlyChinaMap
+        <EasyDocCode
+          code="<EasyChinaMap
   title=&quot;2025年各省份 GDP 总量&quot;
   subtitle=&quot;单位：亿元&quot;
   :data=&quot;[
@@ -263,7 +263,7 @@ const multiYearData: MapDataSet[] = [
       </h3>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyChinaMap
+          <EasyChinaMap
             title="省份 GDP 对比"
             subtitle="单位：亿元 | Tooltip 同时展示所有年份数据"
             :data="multiYearData"
@@ -273,8 +273,8 @@ const multiYearData: MapDataSet[] = [
             legend-title="GDP（亿元）"
           />
         </div>
-        <XlyDocCode
-          code="<XlyChinaMap
+        <EasyDocCode
+          code="<EasyChinaMap
   :data=&quot;multiYearData&quot;
   tooltip-mode=&quot;compare&quot;  // 默认值，Tooltip 同时展示所有数据
 />"
@@ -287,7 +287,7 @@ const multiYearData: MapDataSet[] = [
       </h3>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyChinaMap
+          <EasyChinaMap
             title="省份 GDP 切换"
             subtitle="单位：亿元 | 点击 Tab 切换数据集"
             :data="multiYearData"
@@ -297,8 +297,8 @@ const multiYearData: MapDataSet[] = [
             legend-title="GDP（亿元）"
           />
         </div>
-        <XlyDocCode
-          code="<XlyChinaMap
+        <EasyDocCode
+          code="<EasyChinaMap
   :data=&quot;multiYearData&quot;
   tooltip-mode=&quot;switch&quot;  // Tab 切换模式
 />"
@@ -355,7 +355,7 @@ const multiYearData: MapDataSet[] = [
               全称
             </button>
           </div>
-          <XlyChinaMap
+          <EasyChinaMap
             :title="labelMode === 'short' ? '简称模式 — 简洁清晰' : '全称模式 — 信息完整'"
             :data="gdpData"
             :height="420"
@@ -364,8 +364,8 @@ const multiYearData: MapDataSet[] = [
             legend-title="GDP（亿元）"
           />
         </div>
-        <XlyDocCode
-          code="<XlyChinaMap
+        <EasyDocCode
+          code="<EasyChinaMap
   :data=&quot;gdpData&quot;
   :height=&quot;420&quot;
   :label-mode=&quot;labelMode&quot;  // 'short' | 'full'
@@ -387,7 +387,7 @@ const multiYearData: MapDataSet[] = [
         <div class="doc-preview__body">
           <div class="map-row">
             <div class="map-item">
-              <XlyChinaMap
+              <EasyChinaMap
                 title="绿色系 — 用户覆盖率"
                 :data="coverageData"
                 :height="320"
@@ -398,7 +398,7 @@ const multiYearData: MapDataSet[] = [
               />
             </div>
             <div class="map-item">
-              <XlyChinaMap
+              <EasyChinaMap
                 title="橙红系 — 投诉数量"
                 :data="complaintData"
                 :height="320"
@@ -410,15 +410,15 @@ const multiYearData: MapDataSet[] = [
             </div>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 绿色系 -->
-<XlyChinaMap
+<EasyChinaMap
   :color-range=&quot;['#d1fae5', '#065f46']&quot;
   empty-color=&quot;#f1f5f9&quot;
 />
 
 <!-- 橙红系 -->
-<XlyChinaMap
+<EasyChinaMap
   :color-range=&quot;['#fef3c7', '#b45309']&quot;
   empty-color=&quot;#f1f5f9&quot;
 />"
@@ -437,7 +437,7 @@ const multiYearData: MapDataSet[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyChinaMap
+          <EasyChinaMap
             title="各省份活跃用户分布"
             subtitle="气泡大小代表活跃用户量"
             :data="userCountData"
@@ -450,8 +450,8 @@ const multiYearData: MapDataSet[] = [
             legend-title="活跃用户（万）"
           />
         </div>
-        <XlyDocCode
-          code="<XlyChinaMap
+        <EasyDocCode
+          code="<EasyChinaMap
   :data=&quot;data&quot;
   :show-bubble=&quot;true&quot;
   bubble-color=&quot;#6366f1&quot;
@@ -472,7 +472,7 @@ const multiYearData: MapDataSet[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyChinaMap
+          <EasyChinaMap
             title="极简风格"
             :data="gdpData"
             :height="400"
@@ -482,8 +482,8 @@ const multiYearData: MapDataSet[] = [
             legend-title="数值"
           />
         </div>
-        <XlyDocCode
-          code="<XlyChinaMap
+        <EasyDocCode
+          code="<EasyChinaMap
   :data=&quot;data&quot;
   :show-label=&quot;false&quot;
   :color-range=&quot;['#e0e7ff', '#4338ca']&quot;
@@ -503,7 +503,7 @@ const multiYearData: MapDataSet[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyChinaMap
+          <EasyChinaMap
             title="支持缩放平移"
             subtitle="滚轮缩放 / 拖拽平移 / 左下角按钮"
             :data="gdpData"
@@ -513,8 +513,8 @@ const multiYearData: MapDataSet[] = [
             @click="handleClick"
           />
         </div>
-        <XlyDocCode
-          code="<XlyChinaMap
+        <EasyDocCode
+          code="<EasyChinaMap
   :data=&quot;data&quot;
   :height=&quot;420&quot;
   :zoomable=&quot;true&quot;
@@ -536,7 +536,7 @@ const multiYearData: MapDataSet[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyChinaMap
+          <EasyChinaMap
             title="全国地图底图"
             :data="[]"
             :height="380"
@@ -545,8 +545,8 @@ const multiYearData: MapDataSet[] = [
             :show-legend="false"
           />
         </div>
-        <XlyDocCode
-          code="<XlyChinaMap
+        <EasyDocCode
+          code="<EasyChinaMap
   :data=&quot;[]&quot;
   empty-color=&quot;#dbeafe&quot;
   stroke-color=&quot;#93c5fd&quot;
@@ -734,7 +734,7 @@ const multiYearData: MapDataSet[] = [
         MapDataItem 数据结构
       </h2>
       <div class="doc-preview">
-        <XlyDocCode
+        <EasyDocCode
           code="interface MapDataItem {
   name: string    // 省份名称（支持全称，如&quot;广东&quot;/&quot;广东省&quot;均可）
   value: number   // 数值

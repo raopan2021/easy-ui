@@ -328,8 +328,8 @@ onMounted(() => {
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyPdfSign
+        <EasyDocCode
+          code="<EasyPdfSign
   :pdf-url=&quot;contractUrl&quot;
   :signatures=&quot;signatures&quot;
   @add=&quot;handleAdd&quot;

@@ -31,7 +31,7 @@ npm install @logicflow/core @logicflow/extension`
 const usageCode
   = `<template>
   <div style="height: 100vh;">
-    <XlyFlowDesigner :flowId="flowId" />
+    <EasyFlowDesigner :flowId="flowId" />
   </div>
 </template>
 
@@ -102,10 +102,10 @@ function saveFlow(flowData: any) {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="designer-wrap">
-            <XlyFlowDesigner :flow="flow" @save="saveFlow" />
+            <EasyFlowDesigner :flow="flow" @save="saveFlow" />
           </div>
         </div>
-        <XlyDocCode code="<XlyFlowDesigner :flow=&quot;flow&quot; />" />
+        <EasyDocCode code="<EasyFlowDesigner :flow=&quot;flow&quot; />" />
       </div>
     </section>
 
@@ -121,18 +121,18 @@ function saveFlow(flowData: any) {
         <div class="customize-card">
           <div class="customize-card__header">
             <span class="customize-card__step">1</span>
-            <span class="customize-card__file">/src/components/xly-flow-designer/common/vue/between.vue</span>
+            <span class="customize-card__file">/packages/components/flow-designer/common/vue/between.vue</span>
             <span class="customize-card__line">第 62-66 行</span>
           </div>
           <div class="customize-card__body">
             <p class="customize-card__desc">
               根据自己项目修改办理人选择组件
             </p>
-            <XlyDocCode
-              code="<xly-form-item label=&quot;办理人：&quot; prop=&quot;permissionFlag&quot;>
-  <xly-input v-model=&quot;form.permissionFlag&quot; placeholder=&quot;自行更换为自己的人员选择组件&quot; />
+            <EasyDocCode
+              code="<easy-form-item label=&quot;办理人：&quot; prop=&quot;permissionFlag&quot;>
+  <easy-input v-model=&quot;form.permissionFlag&quot; placeholder=&quot;自行更换为自己的人员选择组件&quot; />
   <div class=&quot;placeholder mt5&quot;>tips:自行更换为自己的人员选择组件</div>
-</xly-form-item>"
+</easy-form-item>"
               language="html"
             />
           </div>
@@ -140,14 +140,14 @@ function saveFlow(flowData: any) {
         <div class="customize-card">
           <div class="customize-card__header">
             <span class="customize-card__step">2</span>
-            <span class="customize-card__file">/src/components/xly-flow-designer/mimic/vue/baseNode.vue</span>
+            <span class="customize-card__file">/packages/components/flow-designer/mimic/vue/baseNode.vue</span>
             <span class="customize-card__line">第 109 行</span>
           </div>
           <div class="customize-card__body">
             <p class="customize-card__desc">
               根据自己项目修改办理人显示组件
             </p>
-            <XlyDocCode code="<span v-if=&quot;handler&quot;>{{handler}}</span>" language="html" />
+            <EasyDocCode code="<span v-if=&quot;handler&quot;>{{handler}}</span>" language="html" />
           </div>
         </div>
       </div>
@@ -379,7 +379,7 @@ function saveFlow(flowData: any) {
         流程设计器基于 LogicFlow 实现，使用前请先安装核心依赖和扩展。
       </p>
       <div class="doc-preview">
-        <XlyDocCode :code="installCode" language="html" />
+        <EasyDocCode :code="installCode" language="html" />
       </div>
     </section>
 
@@ -392,7 +392,7 @@ function saveFlow(flowData: any) {
         在业务页面中引入流程设计器组件，传入流程定义 ID 即可。
       </p>
       <div class="doc-preview">
-        <XlyDocCode :code="usageCode" language="html" />
+        <EasyDocCode :code="usageCode" language="html" />
       </div>
     </section>
 

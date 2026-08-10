@@ -30,13 +30,13 @@ const size3 = ref<string | null>(null)
 const size4 = ref<string | null>(null)
 
 // ===== 代码示例 =====
-const code1 = `<xly-dict-select
+const code1 = `<easy-dict-select
   v-model="status"
   dict-type="user_status"
   placeholder="请选择用户状态"
 />`
 
-const code2 = `<xly-dict-select
+const code2 = `<easy-dict-select
   v-model="statuses"
   dict-type="approve_status"
   multiple
@@ -46,7 +46,7 @@ const code2 = `<xly-dict-select
 />
 <!-- statuses 绑定值为 string[]，如 ['0', '2'] -->`
 
-const code3 = `<xly-dict-select
+const code3 = `<easy-dict-select
   v-model="orderStatuses"
   dict-type="order_status"
   multiple
@@ -57,7 +57,7 @@ const code3 = `<xly-dict-select
 <!-- orderStatuses 绑定值为逗号字符串，如 '1,2,4' -->`
 
 const code4 = `<!-- 默认 labelField="labelName" 显示中文；切为 labelValue 则显示英文代码 -->
-<xly-dict-select
+<easy-dict-select
   v-model="status"
   dict-type="user_status"
   label-field="labelValue"
@@ -65,14 +65,14 @@ const code4 = `<!-- 默认 labelField="labelName" 显示中文；切为 labelVal
 />`
 
 const code4_1 = `<!-- 默认返回 id；设为 return-field="labelValue" 则返回英文代码 -->
-<xly-dict-select
+<easy-dict-select
   v-model="status"
   dict-type="user_status"
   return-field="labelValue"
   placeholder="返回 NORMAL / DISABLED ..."
 />`
 
-const code6 = `<xly-dict-select
+const code6 = `<easy-dict-select
   v-model="role"
   dict-type="role_type"
   @change="(value, item) => {
@@ -81,10 +81,10 @@ const code6 = `<xly-dict-select
   }"
 />`
 
-const code7 = `<xly-dict-select v-model="val" dict-type="gender" size="large" />
-<xly-dict-select v-model="val" dict-type="gender" size="default" />
-<xly-dict-select v-model="val" dict-type="gender" size="small" />
-<xly-dict-select v-model="val" dict-type="gender" disabled />`
+const code7 = `<easy-dict-select v-model="val" dict-type="gender" size="large" />
+<easy-dict-select v-model="val" dict-type="gender" size="default" />
+<easy-dict-select v-model="val" dict-type="gender" size="small" />
+<easy-dict-select v-model="val" dict-type="gender" disabled />`
 
 const devGuideCode = `// ① 在组件文件中找到 fetchDictList 函数（约第 80 行）
 // ② 替换为以下实现（以 axios 为例）：
@@ -169,7 +169,7 @@ const propsList = [
       </h2>
       <div class="doc-preview">
         <div class="preview-row">
-          <xly-dict-select
+          <easy-dict-select
             v-model="single1"
             dict-type="user_status"
             placeholder="请选择用户状态"
@@ -177,7 +177,7 @@ const propsList = [
           />
           <span class="preview-value">当前值：<code>{{ JSON.stringify(single1) }}</code></span>
         </div>
-        <XlyDocCode :code="code1" />
+        <EasyDocCode :code="code1" />
       </div>
     </div>
 
@@ -192,7 +192,7 @@ const propsList = [
       </p>
       <div class="doc-preview">
         <div class="preview-row wrap">
-          <xly-dict-select
+          <easy-dict-select
             v-model="multi1"
             dict-type="approve_status"
             multiple
@@ -203,7 +203,7 @@ const propsList = [
           />
           <span class="preview-value">当前值：<code>{{ JSON.stringify(multi1) }}</code></span>
         </div>
-        <XlyDocCode :code="code2" />
+        <EasyDocCode :code="code2" />
       </div>
     </div>
 
@@ -218,7 +218,7 @@ const propsList = [
       </p>
       <div class="doc-preview">
         <div class="preview-row wrap">
-          <xly-dict-select
+          <easy-dict-select
             v-model="multi2"
             dict-type="order_status"
             multiple
@@ -229,7 +229,7 @@ const propsList = [
           />
           <span class="preview-value">当前值：<code>{{ JSON.stringify(multi2) }}</code></span>
         </div>
-        <XlyDocCode :code="code3" />
+        <EasyDocCode :code="code3" />
       </div>
     </div>
 
@@ -244,7 +244,7 @@ const propsList = [
       </p>
       <div class="doc-preview">
         <div class="preview-row">
-          <xly-dict-select
+          <easy-dict-select
             v-model="custom1"
             dict-type="user_status"
             label-field="labelValue"
@@ -253,7 +253,7 @@ const propsList = [
           />
           <span class="preview-value">当前值：<code>{{ JSON.stringify(custom1) }}</code></span>
         </div>
-        <XlyDocCode :code="code4" />
+        <EasyDocCode :code="code4" />
       </div>
     </div>
 
@@ -268,7 +268,7 @@ const propsList = [
       </p>
       <div class="doc-preview">
         <div class="preview-row">
-          <xly-dict-select
+          <easy-dict-select
             v-model="custom2"
             dict-type="user_status"
             return-field="labelValue"
@@ -277,7 +277,7 @@ const propsList = [
           />
           <span class="preview-value">当前值：<code>{{ JSON.stringify(custom2) }}</code></span>
         </div>
-        <XlyDocCode :code="code4_1" />
+        <EasyDocCode :code="code4_1" />
       </div>
     </div>
 
@@ -291,7 +291,7 @@ const propsList = [
       </p>
       <div class="doc-preview">
         <div class="preview-row wrap">
-          <xly-dict-select
+          <easy-dict-select
             v-model="event1"
             dict-type="role_type"
             placeholder="选择角色"
@@ -302,7 +302,7 @@ const propsList = [
             change 回调：<code>{{ JSON.stringify(eventResult) }}</code>
           </span>
         </div>
-        <XlyDocCode :code="code6" />
+        <EasyDocCode :code="code6" />
       </div>
     </div>
 
@@ -313,18 +313,18 @@ const propsList = [
       </h2>
       <div class="doc-preview">
         <div class="preview-row wrap" style="gap: 12px 16px">
-          <xly-dict-select v-model="size1" dict-type="gender" size="large" placeholder="large" style="width: 160px" />
-          <xly-dict-select
+          <easy-dict-select v-model="size1" dict-type="gender" size="large" placeholder="large" style="width: 160px" />
+          <easy-dict-select
             v-model="size2"
             dict-type="gender"
             size="default"
             placeholder="default"
             style="width: 160px"
           />
-          <xly-dict-select v-model="size3" dict-type="gender" size="small" placeholder="small" style="width: 160px" />
-          <xly-dict-select v-model="size4" dict-type="gender" disabled placeholder="disabled" style="width: 160px" />
+          <easy-dict-select v-model="size3" dict-type="gender" size="small" placeholder="small" style="width: 160px" />
+          <easy-dict-select v-model="size4" dict-type="gender" disabled placeholder="disabled" style="width: 160px" />
         </div>
-        <XlyDocCode :code="code7" />
+        <EasyDocCode :code="code7" />
       </div>
     </div>
 
@@ -338,7 +338,7 @@ const propsList = [
         在实际项目中，只需替换此函数即可对接后端字典接口。
       </p>
       <div class="doc-preview">
-        <XlyDocCode :code="devGuideCode" language="html" />
+        <EasyDocCode :code="devGuideCode" language="html" />
       </div>
     </div>
 

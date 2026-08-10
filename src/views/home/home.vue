@@ -32,7 +32,7 @@ export default defineConfig({
   plugins: [
     Components({
       resolvers: [
-        xlyComponentResolver(),            // Xly* 自动导入
+        xlyComponentResolver(),            // Easy* 自动导入
         ElementPlusResolver({ importStyle: 'css' }),
       ],
     }),
@@ -193,7 +193,7 @@ function compPath(group: (typeof componentGroups)[0], key: string) {
           <h3 class="start-step">
             ① 安装
           </h3>
-          <XlyDocCode :code="installCmd" lang="bash" />
+          <EasyDocCode :code="installCmd" lang="bash" />
         </div>
 
         <div class="start-block">
@@ -203,11 +203,11 @@ function compPath(group: (typeof componentGroups)[0], key: string) {
           <p class="start-hint">
             方式一：完整安装（一行搞定）
           </p>
-          <XlyDocCode :code="fullInstallCode" lang="js" />
+          <EasyDocCode :code="fullInstallCode" lang="js" />
           <p class="start-hint" style="margin-top: 16px">
             方式二：按需引入（tree-shaking 最佳）
           </p>
-          <XlyDocCode :code="lightInstallCode" lang="js" />
+          <EasyDocCode :code="lightInstallCode" lang="js" />
         </div>
 
         <div class="start-block">
@@ -217,7 +217,7 @@ function compPath(group: (typeof componentGroups)[0], key: string) {
           <p class="start-hint">
             配置后组件即写即用，无需手动 import
           </p>
-          <XlyDocCode :code="autoImportCode" lang="js" />
+          <EasyDocCode :code="autoImportCode" lang="js" />
         </div>
       </div>
     </section>

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { TableColumn } from 'easy-ui'
-import { XlyTable, XlyTag } from 'easy-ui'
+import { EasyTable, EasyTag } from 'easy-ui'
 import { ref } from 'vue'
 
 /* -------------------- 展开行 -------------------- */
-const expandTableRef = ref<InstanceType<typeof XlyTable>>()
+const expandTableRef = ref<InstanceType<typeof EasyTable>>()
 const expandColumns: TableColumn[] = [
   { prop: 'name', name: '项目名称', width: 180 },
   { prop: 'manager', name: '负责人', width: 100 },
@@ -121,7 +121,7 @@ function handleSingleSelection(rows: Record<string, any>[]) {
 }
 
 /* -------------------- 树形数据 -------------------- */
-const treeTableRef = ref<InstanceType<typeof XlyTable>>()
+const treeTableRef = ref<InstanceType<typeof EasyTable>>()
 const treeColumns: TableColumn[] = [
   { prop: 'name', name: '部门/模块名称', minWidth: 180 },
   { prop: 'manager', name: '负责人', width: 100, align: 'center' },
@@ -218,7 +218,7 @@ function handleTreeExpand(row: Record<string, any>, expanded: boolean) {
 }
 
 /* -------------------- 树形数据 + 懒加载 -------------------- */
-const lazyTableRef = ref<InstanceType<typeof XlyTable>>()
+const lazyTableRef = ref<InstanceType<typeof EasyTable>>()
 const lazyColumns: TableColumn[] = [
   { prop: 'name', name: '部门名称', minWidth: 180 },
   { prop: 'manager', name: '负责人', width: 100, align: 'center' },
@@ -604,10 +604,10 @@ const enhancedBigData = bigData.map((item, i) => ({
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <XlyTable :columns="basicColumns" :data="basicData" />
+          <EasyTable :columns="basicColumns" :data="basicData" />
         </div>
-        <XlyDocCode
-          code="<xly-table :columns=&quot;columns&quot; :data=&quot;data&quot; />
+        <EasyDocCode
+          code="<easy-table :columns=&quot;columns&quot; :data=&quot;data&quot; />
 
 // columns 示例
 const columns = [
@@ -634,25 +634,25 @@ const columns = [
             <p class="size-label">
               stripe
             </p>
-            <XlyTable :columns="basicColumns" :data="basicData" stripe />
+            <EasyTable :columns="basicColumns" :data="basicData" stripe />
           </div>
           <div>
             <p class="size-label">
               border
             </p>
-            <XlyTable :columns="basicColumns" :data="basicData" border />
+            <EasyTable :columns="basicColumns" :data="basicData" border />
           </div>
           <div>
             <p class="size-label">
               stripe + border
             </p>
-            <XlyTable :columns="basicColumns" :data="basicData" stripe border />
+            <EasyTable :columns="basicColumns" :data="basicData" stripe border />
           </div>
         </div>
-        <XlyDocCode
-          code="<xly-table :columns=&quot;columns&quot; :data=&quot;data&quot; stripe />
-<xly-table :columns=&quot;columns&quot; :data=&quot;data&quot; border />
-<xly-table :columns=&quot;columns&quot; :data=&quot;data&quot; stripe border />"
+        <EasyDocCode
+          code="<easy-table :columns=&quot;columns&quot; :data=&quot;data&quot; stripe />
+<easy-table :columns=&quot;columns&quot; :data=&quot;data&quot; border />
+<easy-table :columns=&quot;columns&quot; :data=&quot;data&quot; stripe border />"
         />
       </div>
     </section>
@@ -668,7 +668,7 @@ const columns = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch; gap: 12px">
-          <XlyTable
+          <EasyTable
             :columns="basicColumns"
             :data="basicData"
             show-index
@@ -680,8 +680,8 @@ const columns = [
             已选 {{ selectedRows.length }} 行：{{ selectedRows.map((r) => r.name).join('、') }}
           </div>
         </div>
-        <XlyDocCode
-          code="<xly-table
+        <EasyDocCode
+          code="<easy-table
   :columns=&quot;columns&quot;
   :data=&quot;data&quot;
   show-index
@@ -704,7 +704,7 @@ const columns = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch; gap: 12px">
-          <XlyTable
+          <EasyTable
             :columns="basicColumns"
             :data="basicData"
             show-index
@@ -717,8 +717,8 @@ const columns = [
             已选：{{ singleSelectedRow.name }}，部门：{{ singleSelectedRow.dept }}
           </div>
         </div>
-        <XlyDocCode
-          code="<xly-table
+        <EasyDocCode
+          code="<easy-table
   :columns=&quot;columns&quot;
   :data=&quot;data&quot;
   show-index
@@ -740,12 +740,12 @@ const columns = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <XlyTable :columns="sortableColumns" :data="salaryData" stripe @sort-change="handleSortChange" />
+          <EasyTable :columns="sortableColumns" :data="salaryData" stripe @sort-change="handleSortChange" />
           <div v-if="sortInfo" class="sort-hint">
             排序字段：<strong>{{ sortInfo.key }}</strong>，顺序：<strong>{{ sortInfo.order }}</strong>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="const columns = [
   { prop: 'name',   name: '姓名' },
   { prop: 'salary', name: '薪资', sortable: true },
@@ -766,14 +766,14 @@ const columns = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <XlyTable :columns="customColumns" :data="statusData" stripe>
+          <EasyTable :columns="customColumns" :data="statusData" stripe>
             <!-- 状态列自定义 -->
             <template #col-status="{ value }">
-              <XlyTag :type="statusTypeMap[value as keyof typeof statusTypeMap] ?? 'info'" size="small">
+              <EasyTag :type="statusTypeMap[value as keyof typeof statusTypeMap] ?? 'info'" size="small">
                 {{
                   value
                 }}
-              </XlyTag>
+              </EasyTag>
             </template>
             <!-- 进度列自定义 -->
             <template #col-progress="{ value }">
@@ -801,13 +801,13 @@ const columns = [
                 </button>
               </div>
             </template>
-          </XlyTable>
+          </EasyTable>
         </div>
-        <XlyDocCode
-          code="<xly-table :columns=&quot;columns&quot; :data=&quot;data&quot;>
+        <EasyDocCode
+          code="<easy-table :columns=&quot;columns&quot; :data=&quot;data&quot;>
   <!-- 自定义单元格 -->
   <template #col-status=&quot;{ value }&quot;>
-    <xly-tag :type=&quot;statusMap[value]&quot;>{{ value }}</xly-tag>
+    <easy-tag :type=&quot;statusMap[value]&quot;>{{ value }}</easy-tag>
   </template>
 
   <!-- 操作列 -->
@@ -815,7 +815,7 @@ const columns = [
     <button @click=&quot;handleEdit(row)&quot;>编辑</button>
     <button @click=&quot;handleDelete(row)&quot;>删除</button>
   </template>
-</xly-table>"
+</easy-table>"
         />
       </div>
     </section>
@@ -830,9 +830,9 @@ const columns = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <XlyTable :columns="prefixSuffixColumns" :data="salaryData" stripe />
+          <EasyTable :columns="prefixSuffixColumns" :data="salaryData" stripe />
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="const columns = [
   { prop: 'name',   name: '姓名' },
   { prop: 'salary', name: '薪资', prefix: '¥', suffix: ' 元' },
@@ -858,7 +858,7 @@ const columns = [
             <p class="size-label">
               右侧分页（默认）
             </p>
-            <XlyTable
+            <EasyTable
               :columns="paginationColumns"
               :data="bigData"
               stripe
@@ -871,7 +871,7 @@ const columns = [
             <p class="size-label">
               居中分页
             </p>
-            <XlyTable
+            <EasyTable
               :columns="paginationColumns"
               :data="bigData"
               stripe
@@ -885,7 +885,7 @@ const columns = [
             <p class="size-label">
               左侧分页 + 隐藏每页条数选择
             </p>
-            <XlyTable
+            <EasyTable
               :columns="paginationColumns"
               :data="bigData"
               stripe
@@ -899,8 +899,8 @@ const columns = [
             当前页：{{ currentPageInfo }}
           </div>
         </div>
-        <XlyDocCode
-          code="<xly-table
+        <EasyDocCode
+          code="<easy-table
   :columns=&quot;columns&quot;
   :data=&quot;data&quot;
   pagination-position=&quot;right&quot;  // left | center | right，默认 right
@@ -957,7 +957,7 @@ async function handleServerPageSizeChange(pageSize: number) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <XlyTable
+          <EasyTable
             :columns="basicColumns"
             :data="bigData.slice(0, 15)"
             :max-height="280"
@@ -967,8 +967,8 @@ async function handleServerPageSizeChange(pageSize: number) {
             show-index
           />
         </div>
-        <XlyDocCode
-          code="<xly-table
+        <EasyDocCode
+          code="<easy-table
   :columns=&quot;columns&quot;
   :data=&quot;data&quot;
   :max-height=&quot;280&quot;
@@ -994,10 +994,10 @@ async function handleServerPageSizeChange(pageSize: number) {
               模拟加载（2s）
             </button>
           </div>
-          <XlyTable :columns="basicColumns" :data="loadingData" :loading="isLoading" />
+          <EasyTable :columns="basicColumns" :data="loadingData" :loading="isLoading" />
         </div>
-        <XlyDocCode
-          code="<xly-table
+        <EasyDocCode
+          code="<easy-table
   :columns=&quot;columns&quot;
   :data=&quot;data&quot;
   :loading=&quot;isLoading&quot;
@@ -1021,17 +1021,17 @@ async function handleServerPageSizeChange(pageSize: number) {
             <p class="size-label">
               默认空状态
             </p>
-            <XlyTable :columns="basicColumns" :data="[]" />
+            <EasyTable :columns="basicColumns" :data="[]" />
           </div>
           <div>
             <p class="size-label">
               自定义文字
             </p>
-            <XlyTable :columns="basicColumns" :data="[]" empty-text="暂无查询结果，请尝试其他条件" />
+            <EasyTable :columns="basicColumns" :data="[]" empty-text="暂无查询结果，请尝试其他条件" />
           </div>
         </div>
-        <XlyDocCode
-          code="<xly-table :columns=&quot;columns&quot; :data=&quot;[]&quot; empty-text=&quot;暂无数据&quot; />"
+        <EasyDocCode
+          code="<easy-table :columns=&quot;columns&quot; :data=&quot;[]&quot; empty-text=&quot;暂无数据&quot; />"
         />
       </div>
     </section>
@@ -1046,9 +1046,9 @@ async function handleServerPageSizeChange(pageSize: number) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <XlyTable :columns="basicColumns" :data="basicData" compact stripe border />
+          <EasyTable :columns="basicColumns" :data="basicData" compact stripe border />
         </div>
-        <XlyDocCode code="<xly-table :columns=&quot;columns&quot; :data=&quot;data&quot; compact />" />
+        <EasyDocCode code="<easy-table :columns=&quot;columns&quot; :data=&quot;data&quot; compact />" />
       </div>
     </section>
 
@@ -1062,7 +1062,7 @@ async function handleServerPageSizeChange(pageSize: number) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <XlyTable title="用户列表" :columns="basicColumns" :data="basicData" stripe>
+          <EasyTable title="用户列表" :columns="basicColumns" :data="basicData" stripe>
             <template #toolbar>
               <button class="demo-btn demo-btn--primary">
                 新增用户
@@ -1071,15 +1071,15 @@ async function handleServerPageSizeChange(pageSize: number) {
                 导出
               </button>
             </template>
-          </XlyTable>
+          </EasyTable>
         </div>
-        <XlyDocCode
-          code="<xly-table title=&quot;用户列表&quot; :columns=&quot;columns&quot; :data=&quot;data&quot;>
+        <EasyDocCode
+          code="<easy-table title=&quot;用户列表&quot; :columns=&quot;columns&quot; :data=&quot;data&quot;>
   <template #toolbar>
     <button>新增</button>
     <button>导出</button>
   </template>
-</xly-table>"
+</easy-table>"
         />
       </div>
     </section>
@@ -1096,7 +1096,7 @@ async function handleServerPageSizeChange(pageSize: number) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <XlyTable
+          <EasyTable
             title="员工信息表"
             :columns="basicColumns"
             :data="basicData"
@@ -1108,8 +1108,8 @@ async function handleServerPageSizeChange(pageSize: number) {
             @export="handleExport"
           />
         </div>
-        <XlyDocCode
-          code="<xly-table
+        <EasyDocCode
+          code="<easy-table
   title=&quot;员工信息表&quot;
   :columns=&quot;columns&quot;
   :data=&quot;data&quot;
@@ -1146,7 +1146,7 @@ function handleExport() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <XlyTable
+          <EasyTable
             title="员工信息表"
             :columns="columnSettingsColumns"
             :data="basicData"
@@ -1155,8 +1155,8 @@ function handleExport() {
             @column-order-change="handleColumnOrderChange"
           />
         </div>
-        <XlyDocCode
-          code="<xly-table
+        <EasyDocCode
+          code="<easy-table
   title=&quot;员工信息表&quot;
   :columns=&quot;columns&quot;
   :data=&quot;data&quot;
@@ -1193,7 +1193,7 @@ function handleColumnOrderChange(newColumns: TableColumn[]) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch; gap: 12px">
-          <XlyTable
+          <EasyTable
             ref="expandTableRef"
             :columns="expandColumns"
             :data="expandData"
@@ -1220,7 +1220,7 @@ function handleColumnOrderChange(newColumns: TableColumn[]) {
                 </div>
               </div>
             </template>
-          </XlyTable>
+          </EasyTable>
           <div class="expand-toolbar">
             <button class="demo-btn" @click="expandAllRows">
               展开全部
@@ -1233,7 +1233,7 @@ function handleColumnOrderChange(newColumns: TableColumn[]) {
             {{ expandInfo }}
           </div>
         </div>
-        <XlyDocCode :code="expandExampleCode" />
+        <EasyDocCode :code="expandExampleCode" />
       </div>
     </section>
 
@@ -1249,7 +1249,7 @@ function handleColumnOrderChange(newColumns: TableColumn[]) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch; gap: 12px">
-          <XlyTable
+          <EasyTable
             ref="treeTableRef"
             :columns="treeColumns"
             :data="treeData"
@@ -1264,8 +1264,8 @@ function handleColumnOrderChange(newColumns: TableColumn[]) {
             {{ treeExpandInfo }}
           </div>
         </div>
-        <XlyDocCode
-          code="<xly-table
+        <EasyDocCode
+          code="<easy-table
   :columns=&quot;columns&quot;
   :data=&quot;treeData&quot;
   stripe
@@ -1313,7 +1313,7 @@ function handleTreeExpand(row, expanded) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch; gap: 12px">
-          <XlyTable
+          <EasyTable
             ref="lazyTableRef"
             :columns="lazyColumns"
             :data="lazyData"
@@ -1331,8 +1331,8 @@ function handleTreeExpand(row, expanded) {
             {{ lazyExpandInfo }}
           </div>
         </div>
-        <XlyDocCode
-          code="<xly-table
+        <EasyDocCode
+          code="<easy-table
   :columns=&quot;columns&quot;
   :data=&quot;data&quot;
   stripe
@@ -1367,13 +1367,13 @@ async function handleLazyLoad(row) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <XlyTable :columns="fixedColumns" :data="enhancedBigData.slice(0, 8)" stripe border :page-size="8" />
+          <EasyTable :columns="fixedColumns" :data="enhancedBigData.slice(0, 8)" stripe border :page-size="8" />
           <p style="font-size: 13px; color: var(--el-text-color-secondary); margin-top: 12px">
             💡 提示：横向滚动表格查看固定列效果
           </p>
         </div>
-        <XlyDocCode
-          code="<xly-table :columns=&quot;columns&quot; :data=&quot;data&quot; />
+        <EasyDocCode
+          code="<easy-table :columns=&quot;columns&quot; :data=&quot;data&quot; />
 
 // 列配置示例
 const columns = [
@@ -1403,7 +1403,7 @@ const columns = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch; max-width: 100%">
           <div style="width: 100%; overflow-x: auto">
-            <XlyTable
+            <EasyTable
               :columns="scrollColumns"
               :data="enhancedBigData.slice(0, 10)"
               stripe
@@ -1418,8 +1418,8 @@ const columns = [
             💡 提示：点击右上角"列设置"按钮可控制列的显示/隐藏，横向滚动查看更多列
           </p>
         </div>
-        <XlyDocCode
-          code="<xly-table
+        <EasyDocCode
+          code="<easy-table
   :columns=&quot;columns&quot;
   :data=&quot;data&quot;
   stripe
@@ -1469,7 +1469,7 @@ const columns = [
             <p class="size-label">
               操作列固定在右侧
             </p>
-            <XlyTable
+            <EasyTable
               :columns="actionFixedColumns"
               :data="enhancedBigData.slice(0, 8)"
               stripe
@@ -1488,14 +1488,14 @@ const columns = [
                   </button>
                 </div>
               </template>
-            </XlyTable>
+            </EasyTable>
           </div>
           <p style="font-size: 13px; color: var(--el-text-color-secondary)">
             💡 提示：横向滚动表格，操作列始终固定在右侧
           </p>
         </div>
-        <XlyDocCode
-          code="<xly-table
+        <EasyDocCode
+          code="<easy-table
   :columns=&quot;columns&quot;
   :data=&quot;data&quot;
   stripe
@@ -1507,7 +1507,7 @@ const columns = [
     <button @click=&quot;handleEdit(row)&quot;>编辑</button>
     <button @click=&quot;handleDelete(row)&quot;>删除</button>
   </template>
-</xly-table>"
+</easy-table>"
         />
       </div>
     </section>
@@ -1524,7 +1524,7 @@ const columns = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <XlyTable
+          <EasyTable
             :columns="summaryColumns"
             :data="summaryData"
             show-summary
@@ -1533,8 +1533,8 @@ const columns = [
             :pagination="false"
           />
         </div>
-        <XlyDocCode
-          code="<xly-table
+        <EasyDocCode
+          code="<easy-table
   :columns=&quot;columns&quot;
   :data=&quot;data&quot;
   show-summary

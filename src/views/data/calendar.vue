@@ -618,8 +618,8 @@ function getSimpleLunar(y: number, m: number, d: number): string {
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyCalendar
+        <EasyDocCode
+          code="<EasyCalendar
   :events=&quot;events&quot;
   :default-view=&quot;'month'&quot;
   @date-click=&quot;handleDateClick&quot;
@@ -669,7 +669,7 @@ const events = [
             </el-button>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="calendar.addEvent({
   title: '新事件',
   date: '2026-07-27',

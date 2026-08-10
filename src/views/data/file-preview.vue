@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { XlyFilePreview } from 'easy-ui'
+import { EasyFilePreview } from 'easy-ui'
 
 // ==================== OSS 公网示例文件 ====================
-const OSS = 'https://xlyoa.oss-cn-hangzhou.aliyuncs.com/xly/test'
+const OSS = 'https://Easyoa.oss-cn-hangzhou.aliyuncs.com/xly/test'
 const pdfUrl = `${OSS}/EaseUI.pdf`
 const docxUrl = `${OSS}/EaseUI.docx`
 const xlsxUrl = `${OSS}/EaseUI.xlsx`
@@ -49,9 +49,9 @@ npm install @vue-office/docx @vue-office/excel @vue-office/pdf
 npm install pptx-preview`
 
 const stringCode = `<!-- 逗号拼接字符串，最简用法 -->
-<XlyFilePreview files="https://oss.com/EaseUI.pdf,https://oss.com/EaseUI.xlsx,https://oss.com/EaseUI.docx" />`
+<EasyFilePreview files="https://oss.com/EaseUI.pdf,https://oss.com/EaseUI.xlsx,https://oss.com/EaseUI.docx" />`
 
-const urlArrayCode = `<XlyFilePreview :files="[
+const urlArrayCode = `<EasyFilePreview :files="[
   'https://oss.com/EaseUI.pdf',
   'https://oss.com/EaseUI.xlsx',
   'https://oss.com/EaseUI.pptx',
@@ -63,14 +63,14 @@ const objectCode = `const files = [
   { name: 'EaseUI.docx', url: 'https://oss.com/EaseUI.docx', size: 358400  },
 ]
 
-<XlyFilePreview :files="files" />`
+<EasyFilePreview :files="files" />`
 
 const customFieldCode = `const files = [
   { fileName: 'EaseUI.docx', fileUrl: 'https://oss.com/EaseUI.docx', fileSize: 358400 },
   { fileName: 'EaseUI.xlsx', fileUrl: 'https://oss.com/EaseUI.xlsx', fileSize: 204800 },
 ]
 
-<XlyFilePreview
+<EasyFilePreview
   :files="files"
   :field-names="{ name: 'fileName', url: 'fileUrl', size: 'fileSize' }"
 />`
@@ -82,7 +82,7 @@ const mixedCode = `const files = [
   { name: 'EaseUI.pptx', url: 'https://oss.com/EaseUI.pptx', size: 2097152 },
 ]
 
-<XlyFilePreview :files="files" />`
+<EasyFilePreview :files="files" />`
 
 const officeViewerCode = `<!-- Office 预览方案 -->
 <!-- @vue-office/docx  → Word 高还原度渲染   -->
@@ -94,9 +94,9 @@ const officeViewerCode = `<!-- Office 预览方案 -->
 // 支持传入 URL 字符串、ArrayBuffer 或 Blob`
 
 const pdfCode = `<!-- PDF 使用 @vue-office/pdf Canvas 渲染 -->
-<XlyFilePreview :files="[{
+<EasyFilePreview :files="[{
   name: 'EaseUI.pdf',
-  url: 'https://xlyoa.oss-cn-hangzhou.aliyuncs.com/xly/test/EaseUI.pdf',
+  url: 'https://Easyoa.oss-cn-hangzhou.aliyuncs.com/xly/test/EaseUI.pdf',
   size: 1536000
 }]" />`
 </script>
@@ -124,9 +124,9 @@ const pdfCode = `<!-- PDF 使用 @vue-office/pdf Canvas 渲染 -->
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyFilePreview :files="stringFiles" />
+          <EasyFilePreview :files="stringFiles" />
         </div>
-        <XlyDocCode :code="stringCode" />
+        <EasyDocCode :code="stringCode" />
       </div>
     </section>
 
@@ -140,9 +140,9 @@ const pdfCode = `<!-- PDF 使用 @vue-office/pdf Canvas 渲染 -->
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyFilePreview :files="urlArrayFiles" />
+          <EasyFilePreview :files="urlArrayFiles" />
         </div>
-        <XlyDocCode :code="urlArrayCode" />
+        <EasyDocCode :code="urlArrayCode" />
       </div>
     </section>
 
@@ -157,9 +157,9 @@ const pdfCode = `<!-- PDF 使用 @vue-office/pdf Canvas 渲染 -->
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyFilePreview :files="objectFiles" />
+          <EasyFilePreview :files="objectFiles" />
         </div>
-        <XlyDocCode :code="objectCode" />
+        <EasyDocCode :code="objectCode" />
       </div>
     </section>
 
@@ -174,12 +174,12 @@ const pdfCode = `<!-- PDF 使用 @vue-office/pdf Canvas 渲染 -->
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyFilePreview
+          <EasyFilePreview
             :files="customFieldFiles"
             :field-names="{ name: 'fileName', url: 'fileUrl', size: 'fileSize' }"
           />
         </div>
-        <XlyDocCode :code="customFieldCode" />
+        <EasyDocCode :code="customFieldCode" />
       </div>
     </section>
 
@@ -194,9 +194,9 @@ const pdfCode = `<!-- PDF 使用 @vue-office/pdf Canvas 渲染 -->
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyFilePreview :files="mixedFiles" />
+          <EasyFilePreview :files="mixedFiles" />
         </div>
-        <XlyDocCode :code="mixedCode" />
+        <EasyDocCode :code="mixedCode" />
       </div>
     </section>
 
@@ -211,9 +211,9 @@ const pdfCode = `<!-- PDF 使用 @vue-office/pdf Canvas 渲染 -->
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyFilePreview :files="pdfFiles" />
+          <EasyFilePreview :files="pdfFiles" />
         </div>
-        <XlyDocCode :code="pdfCode" />
+        <EasyDocCode :code="pdfCode" />
       </div>
     </section>
 
@@ -260,7 +260,7 @@ const pdfCode = `<!-- PDF 使用 @vue-office/pdf Canvas 渲染 -->
             </div>
           </div>
         </div>
-        <XlyDocCode :code="officeViewerCode" />
+        <EasyDocCode :code="officeViewerCode" />
       </div>
     </section>
 
@@ -273,7 +273,7 @@ const pdfCode = `<!-- PDF 使用 @vue-office/pdf Canvas 渲染 -->
         文件预览组件依赖以下 npm 包，使用前请先安装：
       </p>
       <div class="doc-preview">
-        <XlyDocCode :code="installCode" language="html" />
+        <EasyDocCode :code="installCode" language="html" />
       </div>
     </section>
 

@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import {
+  EasyButton,
+  EasyDescriptions,
+  EasyDescriptionsItem,
+  EasyForm,
+  EasyFormItem,
+  EasyInput,
+  EasyModal,
+  EasySearchForm,
+  EasySelect,
+  EasyTable,
   email,
   min,
   minLength,
   required,
   xly,
-  XlyButton,
-  XlyDescriptions,
-  XlyDescriptionsItem,
-  XlyForm,
-  XlyFormItem,
-  XlyInput,
-  XlyModal,
-  XlySearchForm,
-  XlySelect,
-  XlyTable,
 } from 'easy-ui'
 import { onMounted, reactive, ref } from 'vue'
 
@@ -331,7 +331,7 @@ onMounted(() => {
 <template>
   <div class="crud-demo">
     <!-- 搜索区域 -->
-    <XlySearchForm
+    <EasySearchForm
       ref="searchFormRef"
       :items="searchItems"
       :model-value="searchData"
@@ -341,7 +341,7 @@ onMounted(() => {
     />
 
     <!-- 表格区域 -->
-    <XlyTable
+    <EasyTable
       ref="tableRef"
       :data="tableData"
       :columns="tableColumns"
@@ -363,103 +363,103 @@ onMounted(() => {
       @page-size-change="handlePageSizeChange"
     >
       <template #toolbar>
-        <XlyButton type="primary" size="small" @click="openAddModal">
+        <EasyButton type="primary" size="small" @click="openAddModal">
           新增
-        </XlyButton>
+        </EasyButton>
       </template>
       <!-- 状态列自定义 -->
       <template #col-status="{ row }">
-        <XlyTag :type="row.status === 1 ? 'success' : 'info'" size="small">
+        <EasyTag :type="row.status === 1 ? 'success' : 'info'" size="small">
           {{ row.status === 1 ? '启用' : '禁用' }}
-        </XlyTag>
+        </EasyTag>
       </template>
 
       <!-- 操作列 -->
       <template #action="{ row }">
         <div class="action-buttons">
-          <XlyButton link type="primary" size="small" @click="openViewModal(row)">
+          <EasyButton link type="primary" size="small" @click="openViewModal(row)">
             查看
-          </XlyButton>
-          <XlyButton link type="primary" size="small" @click="openEditModal(row)">
+          </EasyButton>
+          <EasyButton link type="primary" size="small" @click="openEditModal(row)">
             编辑
-          </XlyButton>
-          <XlyButton link size="small" type="danger" @click="handleDelete(row)">
+          </EasyButton>
+          <EasyButton link size="small" type="danger" @click="handleDelete(row)">
             删除
-          </XlyButton>
+          </EasyButton>
         </div>
       </template>
-    </XlyTable>
+    </EasyTable>
 
     <!-- 新增/编辑弹窗 -->
-    <XlyModal
+    <EasyModal
       v-model="formModal.visible"
       :title="formModal.isEdit ? '编辑用户' : '新增用户'"
       width="520px"
       @confirm="handleFormSubmit"
       @cancel="formModal.visible = false"
     >
-      <XlyForm ref="formRef" :model="formData" :rules="formRules" label-width="80px">
-        <XlyFormItem label="用户名" prop="name">
-          <XlyInput v-model="formData.name" placeholder="请输入用户名" />
-        </XlyFormItem>
-        <XlyFormItem label="邮箱" prop="email">
-          <XlyInput v-model="formData.email" placeholder="请输入邮箱" />
-        </XlyFormItem>
-        <XlyFormItem label="手机号" prop="phone">
-          <XlyInput v-model="formData.phone" placeholder="请输入手机号" />
-        </XlyFormItem>
-        <XlyFormItem label="部门" prop="dept">
-          <XlySelect v-model="formData.dept" placeholder="请选择部门" :options="deptOptions" />
-        </XlyFormItem>
-        <XlyFormItem label="状态" prop="status">
-          <XlySelect v-model="formData.status" placeholder="请选择状态" :options="statusOptions" />
-        </XlyFormItem>
-        <XlyFormItem label="备注" prop="remark">
-          <XlyInput v-model="formData.remark" type="textarea" placeholder="请输入备注" :rows="3" />
-        </XlyFormItem>
-      </XlyForm>
-    </XlyModal>
+      <EasyForm ref="formRef" :model="formData" :rules="formRules" label-width="80px">
+        <EasyFormItem label="用户名" prop="name">
+          <EasyInput v-model="formData.name" placeholder="请输入用户名" />
+        </EasyFormItem>
+        <EasyFormItem label="邮箱" prop="email">
+          <EasyInput v-model="formData.email" placeholder="请输入邮箱" />
+        </EasyFormItem>
+        <EasyFormItem label="手机号" prop="phone">
+          <EasyInput v-model="formData.phone" placeholder="请输入手机号" />
+        </EasyFormItem>
+        <EasyFormItem label="部门" prop="dept">
+          <EasySelect v-model="formData.dept" placeholder="请选择部门" :options="deptOptions" />
+        </EasyFormItem>
+        <EasyFormItem label="状态" prop="status">
+          <EasySelect v-model="formData.status" placeholder="请选择状态" :options="statusOptions" />
+        </EasyFormItem>
+        <EasyFormItem label="备注" prop="remark">
+          <EasyInput v-model="formData.remark" type="textarea" placeholder="请输入备注" :rows="3" />
+        </EasyFormItem>
+      </EasyForm>
+    </EasyModal>
 
     <!-- 查看详情弹窗 -->
-    <XlyModal
+    <EasyModal
       v-model="viewModal.visible"
       title="用户详情"
       width="50%"
       :show-confirm="false"
       @cancel="viewModal.visible = false"
     >
-      <XlyDescriptions :column="2" border>
-        <XlyDescriptionsItem label="用户ID">
+      <EasyDescriptions :column="2" border>
+        <EasyDescriptionsItem label="用户ID">
           {{ viewData.id }}
-        </XlyDescriptionsItem>
-        <XlyDescriptionsItem label="用户名">
+        </EasyDescriptionsItem>
+        <EasyDescriptionsItem label="用户名">
           {{ viewData.name }}
-        </XlyDescriptionsItem>
-        <XlyDescriptionsItem label="邮箱">
+        </EasyDescriptionsItem>
+        <EasyDescriptionsItem label="邮箱">
           {{ viewData.email }}
-        </XlyDescriptionsItem>
-        <XlyDescriptionsItem label="手机号">
+        </EasyDescriptionsItem>
+        <EasyDescriptionsItem label="手机号">
           {{ viewData.phone }}
-        </XlyDescriptionsItem>
-        <XlyDescriptionsItem label="部门">
+        </EasyDescriptionsItem>
+        <EasyDescriptionsItem label="部门">
           {{ viewData.deptName }}
-        </XlyDescriptionsItem>
-        <XlyDescriptionsItem label="状态">
-          <XlyTag :type="viewData.status === 1 ? 'success' : 'info'" size="small">
+        </EasyDescriptionsItem>
+        <EasyDescriptionsItem label="状态">
+          <EasyTag :type="viewData.status === 1 ? 'success' : 'info'" size="small">
             {{ viewData.status === 1 ? '启用' : '禁用' }}
-          </XlyTag>
-        </XlyDescriptionsItem>
-        <XlyDescriptionsItem label="创建时间">
+          </EasyTag>
+        </EasyDescriptionsItem>
+        <EasyDescriptionsItem label="创建时间">
           {{ viewData.createTime }}
-        </XlyDescriptionsItem>
-        <XlyDescriptionsItem label="备注">
+        </EasyDescriptionsItem>
+        <EasyDescriptionsItem label="备注">
           {{ viewData.remark || '-' }}
-        </XlyDescriptionsItem>
-      </XlyDescriptions>
-    </XlyModal>
+        </EasyDescriptionsItem>
+      </EasyDescriptions>
+    </EasyModal>
 
     <!-- 删除确认弹窗 -->
-    <XlyModal
+    <EasyModal
       v-model="deleteModal.visible"
       title="确认删除"
       width="400px"
@@ -477,7 +477,7 @@ onMounted(() => {
           此操作不可恢复，请谨慎操作。
         </p>
       </div>
-    </XlyModal>
+    </EasyModal>
   </div>
 </template>
 

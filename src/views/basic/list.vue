@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyList } from 'easy-ui'
+import { EasyList } from 'easy-ui'
 import { ref } from 'vue'
 
 const listData = ref([
@@ -42,10 +42,10 @@ const customListData = ref([
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="width: 100%">
-          <XlyList :list="listData" />
+          <EasyList :list="listData" />
         </div>
       </div>
-      <XlyDocCode code="<XlyList :list=&quot;listData&quot; />" />
+      <EasyDocCode code="<EasyList :list=&quot;listData&quot; />" />
     </section>
 
     <!-- 带边框 -->
@@ -58,10 +58,10 @@ const customListData = ref([
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="width: 100%">
-          <XlyList :list="listData" bordered />
+          <EasyList :list="listData" bordered />
         </div>
       </div>
-      <XlyDocCode code="<XlyList :list=&quot;listData&quot; bordered />" />
+      <EasyDocCode code="<EasyList :list=&quot;listData&quot; bordered />" />
     </section>
 
     <!-- 带头像和描述 -->
@@ -74,11 +74,11 @@ const customListData = ref([
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="width: 100%">
-          <XlyList :list="userListData" avatar="avatar" title="name" description="desc" bordered />
+          <EasyList :list="userListData" avatar="avatar" title="name" description="desc" bordered />
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyList
+      <EasyDocCode
+        code="<EasyList
   :list=&quot;userListData&quot;
   avatar=&quot;avatar&quot;
   title=&quot;name&quot;
@@ -98,11 +98,11 @@ const customListData = ref([
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="width: 100%">
-          <XlyList :list="listData" header="头部标题" footer="共 3 条记录" bordered />
+          <EasyList :list="listData" header="头部标题" footer="共 3 条记录" bordered />
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyList
+      <EasyDocCode
+        code="<EasyList
   :list=&quot;listData&quot;
   header=&quot;头部标题&quot;
   footer=&quot;共 3 条记录&quot;
@@ -121,10 +121,10 @@ const customListData = ref([
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="width: 100%">
-          <XlyList :list="listData" bordered hoverable />
+          <EasyList :list="listData" bordered hoverable />
         </div>
       </div>
-      <XlyDocCode code="<XlyList :list=&quot;listData&quot; bordered hoverable />" />
+      <EasyDocCode code="<EasyList :list=&quot;listData&quot; bordered hoverable />" />
     </section>
 
     <!-- 加载状态 -->
@@ -137,10 +137,10 @@ const customListData = ref([
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="width: 100%">
-          <XlyList :list="[]" loading bordered />
+          <EasyList :list="[]" loading bordered />
         </div>
       </div>
-      <XlyDocCode code="<XlyList :list=&quot;[]&quot; loading bordered />" />
+      <EasyDocCode code="<EasyList :list=&quot;[]&quot; loading bordered />" />
     </section>
 
     <!-- 空状态 -->
@@ -154,10 +154,10 @@ const customListData = ref([
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="width: 100%">
-          <XlyList :list="[]" empty-text="暂无列表数据" bordered />
+          <EasyList :list="[]" empty-text="暂无列表数据" bordered />
         </div>
       </div>
-      <XlyDocCode code="<XlyList :list=&quot;[]&quot; empty-text=&quot;暂无列表数据&quot; bordered />" />
+      <EasyDocCode code="<EasyList :list=&quot;[]&quot; empty-text=&quot;暂无列表数据&quot; bordered />" />
     </section>
 
     <!-- 自定义渲染 -->
@@ -171,7 +171,7 @@ const customListData = ref([
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="width: 100%">
-          <XlyList :list="customListData" bordered>
+          <EasyList :list="customListData" bordered>
             <template #default="{ item, index }">
               <div class="custom-list-item">
                 <div class="custom-list-item__left">
@@ -186,11 +186,11 @@ const customListData = ref([
                 </span>
               </div>
             </template>
-          </XlyList>
+          </EasyList>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyList :list=&quot;customListData&quot; bordered>
+      <EasyDocCode
+        code="<EasyList :list=&quot;customListData&quot; bordered>
   <template #default=&quot;{ item, index }&quot;>
     <div class=&quot;custom-list-item&quot;>
       <span>{{ index + 1 }}</span>
@@ -198,7 +198,7 @@ const customListData = ref([
       <span>{{ item.email }}</span>
     </div>
   </template>
-</XlyList>"
+</EasyList>"
       />
     </section>
 

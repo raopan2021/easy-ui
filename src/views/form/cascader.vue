@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyCascader } from 'easy-ui'
+import { EasyCascader } from 'easy-ui'
 import { ref } from 'vue'
 
 const val1 = ref<(string | number)[]>([])
@@ -16,7 +16,7 @@ const val11 = ref<string>()
 const val12 = ref<string>()
 
 // 远程搜索示例
-const remoteCascaderRef = ref<InstanceType<typeof XlyCascader> | null>(null)
+const remoteCascaderRef = ref<InstanceType<typeof EasyCascader> | null>(null)
 
 function remoteCascaderSearch(query: string) {
   if (!remoteCascaderRef.value)
@@ -226,13 +226,13 @@ const customFieldOptions = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlyCascader v-model="val1" :options="areaOptions" placeholder="请选择地区" />
+            <EasyCascader v-model="val1" :options="areaOptions" placeholder="请选择地区" />
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ JSON.stringify(val1) }}</span>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; placeholder=&quot;请选择地区&quot; />
+      <EasyDocCode
+        code="<EasyCascader v-model=&quot;value&quot; :options=&quot;options&quot; placeholder=&quot;请选择地区&quot; />
 
 const options = [
   {
@@ -259,11 +259,11 @@ const options = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlyCascader v-model="val2" :options="areaOptions" placeholder="可清除" clearable />
+            <EasyCascader v-model="val2" :options="areaOptions" placeholder="可清除" clearable />
           </div>
         </div>
       </div>
-      <XlyDocCode code="<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; clearable />" />
+      <EasyDocCode code="<EasyCascader v-model=&quot;value&quot; :options=&quot;options&quot; clearable />" />
     </section>
 
     <section class="doc-section">
@@ -276,7 +276,7 @@ const options = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 400px">
-            <XlyCascader
+            <EasyCascader
               v-model="val3"
               :options="areaOptions"
               placeholder="可多选"
@@ -288,8 +288,8 @@ const options = [
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ JSON.stringify(val3) }}</span>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; multiple :max-tag-count=&quot;2&quot; />"
+      <EasyDocCode
+        code="<EasyCascader v-model=&quot;value&quot; :options=&quot;options&quot; multiple :max-tag-count=&quot;2&quot; />"
       />
     </section>
 
@@ -306,7 +306,7 @@ const options = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 400px">
-            <XlyCascader
+            <EasyCascader
               v-model="val10"
               :options="areaOptions"
               placeholder="返回二维数组（默认）"
@@ -318,7 +318,7 @@ const options = [
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值（二维数组）：{{ JSON.stringify(val10) }}</span>
 
           <div style="width: 400px">
-            <XlyCascader
+            <EasyCascader
               v-model="val11"
               :options="areaOptions"
               placeholder="返回字符串（逗号分隔）"
@@ -330,7 +330,7 @@ const options = [
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值（字符串）：{{ val11 }}</span>
 
           <div style="width: 400px">
-            <XlyCascader
+            <EasyCascader
               v-model="val12"
               :options="areaOptions"
               placeholder="自定义分隔符（分号）"
@@ -343,17 +343,17 @@ const options = [
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值（分号分隔）：{{ val12 }}</span>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="// 1. 返回二维数组（默认）
-<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; multiple value-type=&quot;array&quot; />
+<EasyCascader v-model=&quot;value&quot; :options=&quot;options&quot; multiple value-type=&quot;array&quot; />
 // 输出: [[&quot;zhejiang&quot;, &quot;hangzhou&quot;, &quot;xihu&quot;], [&quot;jiangsu&quot;, &quot;nanjing&quot;, &quot;xuanwu&quot;]]
 
 // 2. 返回字符串（逗号分隔多条路径，/ 分隔路径内节点）
-<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; multiple value-type=&quot;string&quot; />
+<EasyCascader v-model=&quot;value&quot; :options=&quot;options&quot; multiple value-type=&quot;string&quot; />
 // 输出: &quot;zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu&quot;
 
 // 3. 自定义分隔符
-<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; multiple value-type=&quot;string&quot; separator=&quot;;&quot; />
+<EasyCascader v-model=&quot;value&quot; :options=&quot;options&quot; multiple value-type=&quot;string&quot; separator=&quot;;&quot; />
 // 输出: &quot;zhejiang/hangzhou/xihu;jiangsu/nanjing/xuanwu&quot;
 
 // 4. 支持默认传入字符串值，组件会自动解析
@@ -372,11 +372,11 @@ const value = ref(&quot;zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu&quot;)
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlyCascader v-model="val4" :options="areaOptions" placeholder="搜索地区..." filterable />
+            <EasyCascader v-model="val4" :options="areaOptions" placeholder="搜索地区..." filterable />
           </div>
         </div>
       </div>
-      <XlyDocCode code="<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; filterable />" />
+      <EasyDocCode code="<EasyCascader v-model=&quot;value&quot; :options=&quot;options&quot; filterable />" />
     </section>
 
     <section class="doc-section">
@@ -389,16 +389,16 @@ const value = ref(&quot;zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu&quot;)
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlyCascader v-model="val5" :options="disabledOptions" placeholder="含禁用选项" />
+            <EasyCascader v-model="val5" :options="disabledOptions" placeholder="含禁用选项" />
           </div>
           <div style="width: 300px">
-            <XlyCascader v-model="val5" :options="areaOptions" placeholder="整组禁用" disabled />
+            <EasyCascader v-model="val5" :options="areaOptions" placeholder="整组禁用" disabled />
           </div>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; />
-<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; disabled />"
+      <EasyDocCode
+        code="<EasyCascader v-model=&quot;value&quot; :options=&quot;options&quot; />
+<EasyCascader v-model=&quot;value&quot; :options=&quot;options&quot; disabled />"
       />
     </section>
 
@@ -412,20 +412,20 @@ const value = ref(&quot;zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu&quot;)
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlyCascader v-model="val6" :options="areaOptions" placeholder="大尺寸" size="large" />
+            <EasyCascader v-model="val6" :options="areaOptions" placeholder="大尺寸" size="large" />
           </div>
           <div style="width: 300px">
-            <XlyCascader v-model="val6" :options="areaOptions" placeholder="默认尺寸" />
+            <EasyCascader v-model="val6" :options="areaOptions" placeholder="默认尺寸" />
           </div>
           <div style="width: 300px">
-            <XlyCascader v-model="val6" :options="areaOptions" placeholder="小尺寸" size="small" />
+            <EasyCascader v-model="val6" :options="areaOptions" placeholder="小尺寸" size="small" />
           </div>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; size=&quot;large&quot; />
-<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; />
-<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; size=&quot;small&quot; />"
+      <EasyDocCode
+        code="<EasyCascader v-model=&quot;value&quot; :options=&quot;options&quot; size=&quot;large&quot; />
+<EasyCascader v-model=&quot;value&quot; :options=&quot;options&quot; />
+<EasyCascader v-model=&quot;value&quot; :options=&quot;options&quot; size=&quot;small&quot; />"
       />
     </section>
 
@@ -440,7 +440,7 @@ const value = ref(&quot;zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu&quot;)
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlyCascader
+            <EasyCascader
               v-model="val7"
               :options="areaOptions"
               placeholder="可选中任意层级"
@@ -453,8 +453,8 @@ const value = ref(&quot;zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu&quot;)
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ JSON.stringify(val7) }}</span>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; check-strictly clearable filterable multiple/>"
+      <EasyDocCode
+        code="<EasyCascader v-model=&quot;value&quot; :options=&quot;options&quot; check-strictly clearable filterable multiple/>"
       />
     </section>
 
@@ -469,7 +469,7 @@ const value = ref(&quot;zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu&quot;)
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlyCascader
+            <EasyCascader
               v-model="val8"
               :options="customFieldOptions"
               value-key="id"
@@ -482,8 +482,8 @@ const value = ref(&quot;zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu&quot;)
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ JSON.stringify(val8) }}</span>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyCascader
+      <EasyDocCode
+        code="<EasyCascader
   v-model=&quot;value&quot;
   :options=&quot;options&quot;
   value-key=&quot;id&quot;
@@ -518,7 +518,7 @@ const options = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlyCascader
+            <EasyCascader
               ref="remoteCascaderRef"
               v-model="val9"
               :options="[]"
@@ -532,8 +532,8 @@ const options = [
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ JSON.stringify(val9) }}</span>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyCascader
+      <EasyDocCode
+        code="<EasyCascader
   ref=&quot;cascaderRef&quot;
   v-model=&quot;value&quot;
   :options=&quot;[]&quot;

@@ -326,16 +326,16 @@ async function submitFull() {
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 500px">
-            <XlySuperForm ref="inputForm" :fields="inputFields" />
+            <EasySuperForm ref="inputForm" :fields="inputFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitInput">
+            <EasyButton type="primary" @click="submitInput">
               提交
-            </XlyButton>
+            </EasyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="import {  useFormFields  } from 'easy-ui'
 
 const { input, textarea, password, rules } = useFormFields()
@@ -358,16 +358,16 @@ const fields = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 400px">
-            <XlySuperForm ref="selectForm" :fields="selectFields" />
+            <EasySuperForm ref="selectForm" :fields="selectFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitSelect">
+            <EasyButton type="primary" @click="submitSelect">
               提交
-            </XlyButton>
+            </EasyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="import {  useFormFields  } from 'easy-ui'
 
 const { select, cascader } = useFormFields()
@@ -409,16 +409,16 @@ const fields = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 500px">
-            <XlySuperForm ref="dateForm" :fields="dateFields" />
+            <EasySuperForm ref="dateForm" :fields="dateFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitDate">
+            <EasyButton type="primary" @click="submitDate">
               提交
-            </XlyButton>
+            </EasyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="import {  useFormFields  } from 'easy-ui'
 
 const { datePicker, dateRangePicker } = useFormFields()
@@ -445,16 +445,16 @@ const fields = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 500px">
-            <XlySuperForm ref="dateTimeForm" :fields="dateTimeFields" />
+            <EasySuperForm ref="dateTimeForm" :fields="dateTimeFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitDateTime">
+            <EasyButton type="primary" @click="submitDateTime">
               提交
-            </XlyButton>
+            </EasyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="import {  useFormFields  } from 'easy-ui'
 
 const { dateTimePicker, dateTimeRangePicker } = useFormFields()
@@ -477,16 +477,16 @@ const fields = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 500px">
-            <XlySuperForm ref="timeForm" :fields="timeFields" />
+            <EasySuperForm ref="timeForm" :fields="timeFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitTime">
+            <EasyButton type="primary" @click="submitTime">
               提交
-            </XlyButton>
+            </EasyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="import {  useFormFields  } from 'easy-ui'
 
 const { timePicker, timeRangePicker } = useFormFields()
@@ -509,16 +509,16 @@ const fields = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 400px">
-            <XlySuperForm ref="remoteForm" :fields="remoteFields" />
+            <EasySuperForm ref="remoteForm" :fields="remoteFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitRemote">
+            <EasyButton type="primary" @click="submitRemote">
               提交
-            </XlyButton>
+            </EasyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="import {  useFormFields  } from 'easy-ui'
 
 const { select } = useFormFields()
@@ -550,16 +550,16 @@ const fields = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 400px">
-            <XlySuperForm ref="prefixForm" :fields="prefixFields" />
+            <EasySuperForm ref="prefixForm" :fields="prefixFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitPrefix">
+            <EasyButton type="primary" @click="submitPrefix">
               提交
-            </XlyButton>
+            </EasyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="import {  useFormFields  } from 'easy-ui'
 
 const { inputSlot } = useFormFields()
@@ -580,16 +580,16 @@ const fields = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 500px">
-            <XlySuperForm ref="validateForm" :fields="validateFields" />
+            <EasySuperForm ref="validateForm" :fields="validateFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitValidate">
+            <EasyButton type="primary" @click="submitValidate">
               提交
-            </XlyButton>
+            </EasyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="import {  useFormFields  } from 'easy-ui'
 
 const { input, rules } = useFormFields()
@@ -636,16 +636,16 @@ const fields = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 400px">
-            <XlySuperForm ref="customForm" :fields="customFields" />
+            <EasySuperForm ref="customForm" :fields="customFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitCustom">
+            <EasyButton type="primary" @click="submitCustom">
               提交
-            </XlyButton>
+            </EasyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="import {  useFormFields  } from 'easy-ui'
 import { ElInput } from 'element-plus'
 const { custom } = useFormFields()
@@ -669,16 +669,16 @@ const fields = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 400px">
-            <XlySuperForm ref="swForm" :fields="swFields" />
+            <EasySuperForm ref="swForm" :fields="swFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitSw">
+            <EasyButton type="primary" @click="submitSw">
               提交
-            </XlyButton>
+            </EasyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="import {  useFormFields  } from 'easy-ui'
 
 const { sw, rate } = useFormFields()
@@ -701,10 +701,10 @@ const fields = [
       </h2>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <XlySuperForm :fields="spanFields" />
+          <EasySuperForm :fields="spanFields" />
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="import {  useFormFields  } from 'easy-ui'
 
 const { input } = useFormFields()
@@ -726,16 +726,16 @@ const fields = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 400px">
-            <XlySuperForm ref="chainForm" :fields="chainFields" />
+            <EasySuperForm ref="chainForm" :fields="chainFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitChain">
+            <EasyButton type="primary" @click="submitChain">
               提交
-            </XlyButton>
+            </EasyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="import {  useFormFields  } from 'easy-ui'
 
 const { input, select, sw, rules } = useFormFields()
@@ -761,16 +761,16 @@ const fields = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%">
-            <XlySuperForm ref="fullForm" :fields="fullFields" />
+            <EasySuperForm ref="fullForm" :fields="fullFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitFull">
+            <EasyButton type="primary" @click="submitFull">
               提交
-            </XlyButton>
+            </EasyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="import {  useFormFields  } from 'easy-ui'
 
 const {
@@ -810,29 +810,29 @@ async function submitFull() {
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 500px">
-            <XlySuperForm ref="vmodelForm" v-model="vmodelData" :fields="vmodelFields" />
+            <EasySuperForm ref="vmodelForm" v-model="vmodelData" :fields="vmodelFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitVmodel">
+            <EasyButton type="primary" @click="submitVmodel">
               提交
-            </XlyButton>
-            <XlyButton style="margin-left: 8px" @click="resetVmodel">
+            </EasyButton>
+            <EasyButton style="margin-left: 8px" @click="resetVmodel">
               重置
-            </XlyButton>
-            <XlyButton style="margin-left: 8px" @click="fillVmodel">
+            </EasyButton>
+            <EasyButton style="margin-left: 8px" @click="fillVmodel">
               填充初始值
-            </XlyButton>
+            </EasyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="import { ref } from 'vue'
 import {
   MyCustomInput,
   useFormFields,
-  XlyButton,
-  XlyNumber,
-  XlySuperForm,
+  EasyButton,
+  EasyNumber,
+  EasySuperForm,
 } from 'easy-ui'
 
 const { input, select, rules } = useFormFields()
@@ -892,8 +892,8 @@ function reset() {
       <h3 class="doc-subtitle">
         步骤一：在 useFormFields.ts 中添加字段生成函数
       </h3>
-      <XlyDocCode
-        code="// 假设我们要添加一个 XlyNumber 数字输入框组件
+      <EasyDocCode
+        code="// 假设我们要添加一个 EasyNumber 数字输入框组件
 
 // 在 useFormFields() 函数中添加：
 function number(prop: string, labelOrOptions?: string | FieldOptions, options?: FieldOptions) {
@@ -914,15 +914,15 @@ return {
       <h3 class="doc-subtitle">
         步骤二：在 index.vue 中注册组件
       </h3>
-      <XlyDocCode
+      <EasyDocCode
         code="// 1. 导入组件
 
 // 2. 在 typeMap 中添加映射
 const typeMap: Record<string, Component> = {
-  input: XlyInput,
-  select: XlySelect,
+  input: EasyInput,
+  select: EasySelect,
   // ... 其他
-  number: XlyNumber,  // 👈 添加这行
+  number: EasyNumber,  // 👈 添加这行
 }
 
 // 3. 如需错误样式高亮，在 SCSS 中添加选择器
@@ -938,7 +938,7 @@ const typeMap: Record<string, Component> = {
       <h3 class="doc-subtitle">
         步骤三：使用新组件
       </h3>
-      <XlyDocCode
+      <EasyDocCode
         code="import {  useFormFields  } from 'easy-ui'
 
 const { number } = useFormFields()
@@ -955,7 +955,7 @@ const fields = [
       <p class="doc-desc">
         如果你只是想偶尔使用某个自定义组件，不需要修改源码，可以使用 <code>custom()</code> 生成器：
       </p>
-      <XlyDocCode
+      <EasyDocCode
         code="import {  useFormFields  } from 'easy-ui'
 
 const { custom } = useFormFields()

@@ -1,0 +1,1 @@
+import '../src/statistic.vue'

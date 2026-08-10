@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import * as EpIcons from '@element-plus/icons-vue'
-import { getSvgIconNames, xly, XlyIcon } from 'easy-ui'
+import { EasyIcon, getSvgIconNames, xly } from 'easy-ui'
 import { computed } from 'vue'
 
 /** 常用基础 Element Plus 图标 */
@@ -82,15 +82,15 @@ function copyIconName(name: string) {
         <div class="doc-preview__body">
           <div class="icon-grid">
             <div v-for="icon in basicElIcons" :key="icon" class="icon-grid__item">
-              <XlyIcon :name="`el:${icon}`" :size="24" />
+              <EasyIcon :name="`el:${icon}`" :size="24" />
               <span class="icon-grid__label">{{ icon }}</span>
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyIcon name=&quot;el:Search&quot; :size=&quot;24&quot; />
-<XlyIcon name=&quot;el:Edit&quot; :size=&quot;24&quot; />
-<XlyIcon name=&quot;el:arrow-down&quot; :size=&quot;24&quot; />"
+        <EasyDocCode
+          code="<EasyIcon name=&quot;el:Search&quot; :size=&quot;24&quot; />
+<EasyIcon name=&quot;el:Edit&quot; :size=&quot;24&quot; />
+<EasyIcon name=&quot;el:arrow-down&quot; :size=&quot;24&quot; />"
         />
       </div>
     </section>
@@ -108,7 +108,7 @@ function copyIconName(name: string) {
         <div class="doc-preview__body">
           <div class="icon-grid">
             <div v-for="icon in svgIconList" :key="icon" class="icon-grid__item">
-              <XlyIcon :name="`svg:${icon}`" :size="24" />
+              <EasyIcon :name="`svg:${icon}`" :size="24" />
               <span class="icon-grid__label">{{ icon }}</span>
             </div>
           </div>
@@ -116,12 +116,12 @@ function copyIconName(name: string) {
             暂无自定义 SVG 图标，请将 .svg 文件放入 src/assets/icon/svg/ 目录
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- assets/icon/svg/check-circle.svg -->
-<XlyIcon name=&quot;svg:check-circle&quot; :size=&quot;24&quot; />
+<EasyIcon name=&quot;svg:check-circle&quot; :size=&quot;24&quot; />
 
 <!-- assets/icon/svg/dashboard.svg -->
-<XlyIcon name=&quot;svg:dashboard&quot; :size=&quot;32&quot; color=&quot;#4f6ef7&quot; />"
+<EasyIcon name=&quot;svg:dashboard&quot; :size=&quot;32&quot; color=&quot;#4f6ef7&quot; />"
         />
       </div>
     </section>
@@ -138,30 +138,30 @@ function copyIconName(name: string) {
         <div class="doc-preview__body">
           <div class="icon-showcase">
             <div class="icon-showcase__item">
-              <XlyIcon name="el:Setting" :size="16" color="#8e8ea0" />
+              <EasyIcon name="el:Setting" :size="16" color="#8e8ea0" />
               <span>16px 灰色</span>
             </div>
             <div class="icon-showcase__item">
-              <XlyIcon name="el:Setting" :size="20" color="#4f6ef7" />
+              <EasyIcon name="el:Setting" :size="20" color="#4f6ef7" />
               <span>20px 蓝色</span>
             </div>
             <div class="icon-showcase__item">
-              <XlyIcon name="el:Setting" :size="28" color="#34c759" />
+              <EasyIcon name="el:Setting" :size="28" color="#34c759" />
               <span>28px 绿色</span>
             </div>
             <div class="icon-showcase__item">
-              <XlyIcon name="el:Setting" :size="36" color="#f5a623" />
+              <EasyIcon name="el:Setting" :size="36" color="#f5a623" />
               <span>36px 橙色</span>
             </div>
             <div class="icon-showcase__item">
-              <XlyIcon name="el:Setting" :size="48" color="#f56c6c" />
+              <EasyIcon name="el:Setting" :size="48" color="#f56c6c" />
               <span>48px 红色</span>
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyIcon name=&quot;el:Setting&quot; :size=&quot;24&quot; color=&quot;#4f6ef7&quot; />
-<XlyIcon name=&quot;svg:dashboard&quot; :size=&quot;36&quot; color=&quot;#34c759&quot; />"
+        <EasyDocCode
+          code="<EasyIcon name=&quot;el:Setting&quot; :size=&quot;24&quot; color=&quot;#4f6ef7&quot; />
+<EasyIcon name=&quot;svg:dashboard&quot; :size=&quot;36&quot; color=&quot;#34c759&quot; />"
         />
       </div>
     </section>
@@ -185,11 +185,11 @@ function copyIconName(name: string) {
         <div class="doc-preview__body">
           <div class="icon-showcase">
             <div class="icon-showcase__item">
-              <XlyIcon name="@/assets/icon/img/img.png" :size="32" />
+              <EasyIcon name="@/assets/icon/img/img.png" :size="32" />
               <span>简单方式：直接使用 @/ 路径（推荐）</span>
             </div>
             <div class="icon-showcase__item">
-              <XlyIcon
+              <EasyIcon
                 name="https://img2.baidu.com/it/u=3879244448,1206251298&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
                 :size="32"
               />
@@ -197,19 +197,19 @@ function copyIconName(name: string) {
             </div>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 简单方式：直接使用 @/ 路径（推荐） -->
-<XlyIcon name=&quot;@/assets/icon/img/img.png&quot; :size=&quot;32&quot; />
+<EasyIcon name=&quot;@/assets/icon/img/img.png&quot; :size=&quot;32&quot; />
 
 <!-- 网络图片 -->
-<XlyIcon name=&quot;https://example.com/icon.png&quot; :size=&quot;32&quot; />
+<EasyIcon name=&quot;https://example.com/icon.png&quot; :size=&quot;32&quot; />
 
 <!-- import 方式（如果你需要动态处理图片） -->
 <script setup>
 import imgPng from '@/assets/icon/img/img.png?url'
 </script>
 <template>
-  <XlyIcon :name=&quot;imgPng&quot; :size=&quot;32&quot; />
+  <EasyIcon :name=&quot;imgPng&quot; :size=&quot;32&quot; />
 </template>"
         />
       </div>
@@ -226,14 +226,14 @@ import imgPng from '@/assets/icon/img/img.png?url'
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="icon-showcase">
-            <XlyIcon name="el:Search" :size="24" clickable @click="handleIconClick('Search')" />
-            <XlyIcon name="el:Edit" :size="24" clickable @click="handleIconClick('Edit')" />
-            <XlyIcon name="el:Delete" :size="24" clickable color="#f56c6c" @click="handleIconClick('Delete')" />
-            <XlyIcon name="el:Share" :size="24" clickable @click="handleIconClick('Share')" />
+            <EasyIcon name="el:Search" :size="24" clickable @click="handleIconClick('Search')" />
+            <EasyIcon name="el:Edit" :size="24" clickable @click="handleIconClick('Edit')" />
+            <EasyIcon name="el:Delete" :size="24" clickable color="#f56c6c" @click="handleIconClick('Delete')" />
+            <EasyIcon name="el:Share" :size="24" clickable @click="handleIconClick('Share')" />
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyIcon
+        <EasyDocCode
+          code="<EasyIcon
   name=&quot;el:Delete&quot;
   :size=&quot;24&quot;
   color=&quot;#f56c6c&quot;
@@ -262,7 +262,7 @@ import imgPng from '@/assets/icon/img/img.png?url'
               :title="`点击复制：el:${icon}`"
               @click="copyIconName(icon)"
             >
-              <XlyIcon :name="`el:${icon}`" :size="20" />
+              <EasyIcon :name="`el:${icon}`" :size="20" />
               <span class="icon-grid__label">{{ icon }}</span>
             </div>
           </div>

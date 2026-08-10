@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { xly, XlyButton } from 'easy-ui'
+import { EasyButton, xly } from 'easy-ui'
 
 // Alert 示例
 function handleAlert(type: 'info' | 'success' | 'warning' | 'danger') {
@@ -195,20 +195,20 @@ function handleBizLeave() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="handleAlert('info')">
+          <EasyButton @click="handleAlert('info')">
             信息提示
-          </XlyButton>
-          <XlyButton @click="handleAlert('success')">
+          </EasyButton>
+          <EasyButton @click="handleAlert('success')">
             成功提示
-          </XlyButton>
-          <XlyButton @click="handleAlert('warning')">
+          </EasyButton>
+          <EasyButton @click="handleAlert('warning')">
             警告提示
-          </XlyButton>
-          <XlyButton @click="handleAlert('danger')">
+          </EasyButton>
+          <EasyButton @click="handleAlert('danger')">
             错误提示
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="import { xly } from 'easy-ui'
 
 // 基础用法
@@ -230,17 +230,17 @@ await xly.$msgbox.alert('此操作不可撤销，请谨慎操作', '警告', { t
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="handleConfirm">
+          <EasyButton @click="handleConfirm">
             删除确认
-          </XlyButton>
-          <XlyButton @click="handleConfirmDanger">
+          </EasyButton>
+          <EasyButton @click="handleConfirmDanger">
             危险操作
-          </XlyButton>
-          <XlyButton @click="handleConfirmCancelable">
+          </EasyButton>
+          <EasyButton @click="handleConfirmCancelable">
             可关闭遮罩
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="// 基础 Confirm
 xly.$msgbox.confirm('确定要删除该记录吗？此操作不可撤销。', '删除确认', {
   type: 'warning',
@@ -278,20 +278,20 @@ xly.$msgbox.confirm('是否保存当前修改？', '保存提示', {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="handlePrompt">
+          <EasyButton @click="handlePrompt">
             输入名称
-          </XlyButton>
-          <XlyButton @click="handlePromptValidate">
+          </EasyButton>
+          <EasyButton @click="handlePromptValidate">
             带校验规则
-          </XlyButton>
-          <XlyButton @click="handlePromptPassword">
+          </EasyButton>
+          <EasyButton @click="handlePromptPassword">
             密码输入
-          </XlyButton>
-          <XlyButton @click="handlePromptTextarea">
+          </EasyButton>
+          <EasyButton @click="handlePromptTextarea">
             文本域输入
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="// 基础 Prompt
 xly.$msgbox.prompt('请输入项目名称', '新建项目', {
   input: { placeholder: '请输入 2-20 个字符' },
@@ -331,11 +331,11 @@ xly.$msgbox.prompt('请输入备注', '添加备注', {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="handleAsyncAwait">
+          <EasyButton @click="handleAsyncAwait">
             async/await 示例
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="async function handleDelete() {
   try {
     await xly.$msgbox.confirm('确定删除该用户吗？', '删除用户', {
@@ -364,14 +364,14 @@ xly.$msgbox.prompt('请输入备注', '添加备注', {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="handleCustomText">
+          <EasyButton @click="handleCustomText">
             自定义按钮文字
-          </XlyButton>
-          <XlyButton @click="handleNoClose">
+          </EasyButton>
+          <EasyButton @click="handleNoClose">
             隐藏关闭图标
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="xly.$msgbox.confirm('检测到未保存的内容，是否离开当前页面？', '离开提示', {
   confirmButtonText: '离开',
   cancelButtonText: '留下',
@@ -397,14 +397,14 @@ xly.$msgbox.confirm('请确认以下操作', '二次确认', {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="handleOpen">
+          <EasyButton @click="handleOpen">
             通用弹框
-          </XlyButton>
-          <XlyButton @click="handleHtmlContent">
+          </EasyButton>
+          <EasyButton @click="handleHtmlContent">
             HTML 内容
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="// 通用调用
 xly.$msgbox.open({
   title: '自定义弹框',
@@ -436,17 +436,17 @@ xly.$msgbox.open({
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton type="danger" @click="handleBizDelete">
+          <EasyButton type="danger" @click="handleBizDelete">
             删除记录
-          </XlyButton>
-          <XlyButton type="primary" @click="handleBizRename">
+          </EasyButton>
+          <EasyButton type="primary" @click="handleBizRename">
             重命名
-          </XlyButton>
-          <XlyButton @click="handleBizLeave">
+          </EasyButton>
+          <EasyButton @click="handleBizLeave">
             离开页面
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="// 删除记录
 async function handleDelete(id: number) {
   await xly.$msgbox.confirm('确定删除该记录？删除后不可恢复。', '删除确认', {

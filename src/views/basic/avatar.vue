@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyAvatar, XlyButton, XlyTag } from 'easy-ui'
+import { EasyAvatar, EasyButton, EasyTag } from 'easy-ui'
 import { ref } from 'vue'
 
 // 头像组数据
@@ -67,26 +67,26 @@ const teamMembers = ref([
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyAvatar>
+          <EasyAvatar>
             <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
               <circle cx="12" cy="7" r="4" />
             </svg>
-          </XlyAvatar>
-          <XlyAvatar>U</XlyAvatar>
-          <XlyAvatar src="https://i.pravatar.cc/150?img=1" />
+          </EasyAvatar>
+          <EasyAvatar>U</EasyAvatar>
+          <EasyAvatar src="https://i.pravatar.cc/150?img=1" />
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 图标头像 -->
-<XlyAvatar>
+<EasyAvatar>
   <svg>...</svg>
-</XlyAvatar>
+</EasyAvatar>
 
 <!-- 文字头像 -->
-<XlyAvatar>U</XlyAvatar>
+<EasyAvatar>U</EasyAvatar>
 
 <!-- 图片头像 -->
-<XlyAvatar src=&quot;https://...&quot; />"
+<EasyAvatar src=&quot;https://...&quot; />"
         />
       </div>
     </section>
@@ -102,16 +102,16 @@ const teamMembers = ref([
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyAvatar size="small" src="https://i.pravatar.cc/150?img=2" />
-          <XlyAvatar src="https://i.pravatar.cc/150?img=3" />
-          <XlyAvatar size="large" src="https://i.pravatar.cc/150?img=4" />
-          <XlyAvatar :size="80" src="https://i.pravatar.cc/150?img=5" />
+          <EasyAvatar size="small" src="https://i.pravatar.cc/150?img=2" />
+          <EasyAvatar src="https://i.pravatar.cc/150?img=3" />
+          <EasyAvatar size="large" src="https://i.pravatar.cc/150?img=4" />
+          <EasyAvatar :size="80" src="https://i.pravatar.cc/150?img=5" />
         </div>
-        <XlyDocCode
-          code="<XlyAvatar size=&quot;small&quot; src=&quot;...&quot; />
-<XlyAvatar src=&quot;...&quot; />
-<XlyAvatar size=&quot;large&quot; src=&quot;...&quot; />
-<XlyAvatar :size=&quot;80&quot; src=&quot;...&quot; />"
+        <EasyDocCode
+          code="<EasyAvatar size=&quot;small&quot; src=&quot;...&quot; />
+<EasyAvatar src=&quot;...&quot; />
+<EasyAvatar size=&quot;large&quot; src=&quot;...&quot; />
+<EasyAvatar :size=&quot;80&quot; src=&quot;...&quot; />"
         />
       </div>
     </section>
@@ -126,14 +126,14 @@ const teamMembers = ref([
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyAvatar src="https://i.pravatar.cc/150?img=6" shape="circle" />
-          <XlyAvatar src="https://i.pravatar.cc/150?img=7" shape="square" />
-          <XlyAvatar size="small" src="https://i.pravatar.cc/150?img=8" shape="circle" />
-          <XlyAvatar size="small" src="https://i.pravatar.cc/150?img=9" shape="square" />
+          <EasyAvatar src="https://i.pravatar.cc/150?img=6" shape="circle" />
+          <EasyAvatar src="https://i.pravatar.cc/150?img=7" shape="square" />
+          <EasyAvatar size="small" src="https://i.pravatar.cc/150?img=8" shape="circle" />
+          <EasyAvatar size="small" src="https://i.pravatar.cc/150?img=9" shape="square" />
         </div>
-        <XlyDocCode
-          code="<XlyAvatar src=&quot;...&quot; shape=&quot;circle&quot; />
-<XlyAvatar src=&quot;...&quot; shape=&quot;square&quot; />"
+        <EasyDocCode
+          code="<EasyAvatar src=&quot;...&quot; shape=&quot;circle&quot; />
+<EasyAvatar src=&quot;...&quot; shape=&quot;square&quot; />"
         />
       </div>
     </section>
@@ -148,24 +148,24 @@ const teamMembers = ref([
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyAvatar>张</XlyAvatar>
-          <XlyAvatar>李</XlyAvatar>
-          <XlyAvatar>王</XlyAvatar>
-          <XlyAvatar>陈</XlyAvatar>
-          <XlyAvatar size="large">
+          <EasyAvatar>张</EasyAvatar>
+          <EasyAvatar>李</EasyAvatar>
+          <EasyAvatar>王</EasyAvatar>
+          <EasyAvatar>陈</EasyAvatar>
+          <EasyAvatar size="large">
             张明
-          </XlyAvatar>
-          <XlyAvatar :size="80" color="#4f6ef7" shape="circle">
+          </EasyAvatar>
+          <EasyAvatar :size="80" color="#4f6ef7" shape="circle">
             紫
-          </XlyAvatar>
+          </EasyAvatar>
         </div>
-        <XlyDocCode
-          code="<XlyAvatar>张</XlyAvatar>
-<XlyAvatar>李</XlyAvatar>
-<XlyAvatar>王</XlyAvatar>
-<XlyAvatar>陈</XlyAvatar>
-<XlyAvatar size=&quot;large&quot;>张明</XlyAvatar>
-<XlyAvatar :size=&quot;80&quot; color=&quot;#4f6ef7&quot;>紫</XlyAvatar>"
+        <EasyDocCode
+          code="<EasyAvatar>张</EasyAvatar>
+<EasyAvatar>李</EasyAvatar>
+<EasyAvatar>王</EasyAvatar>
+<EasyAvatar>陈</EasyAvatar>
+<EasyAvatar size=&quot;large&quot;>张明</EasyAvatar>
+<EasyAvatar :size=&quot;80&quot; color=&quot;#4f6ef7&quot;>紫</EasyAvatar>"
         />
       </div>
     </section>
@@ -180,26 +180,26 @@ const teamMembers = ref([
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyAvatar color="#4f6ef7" shape="circle">
+          <EasyAvatar color="#4f6ef7" shape="circle">
             蓝
-          </XlyAvatar>
-          <XlyAvatar color="#67c23a" shape="circle">
+          </EasyAvatar>
+          <EasyAvatar color="#67c23a" shape="circle">
             绿
-          </XlyAvatar>
-          <XlyAvatar color="#f56c6c" shape="circle">
+          </EasyAvatar>
+          <EasyAvatar color="#f56c6c" shape="circle">
             红
-          </XlyAvatar>
-          <XlyAvatar color="#e6a23c" shape="circle">
+          </EasyAvatar>
+          <EasyAvatar color="#e6a23c" shape="circle">
             橙
-          </XlyAvatar>
-          <XlyAvatar color="#909399" shape="circle">
+          </EasyAvatar>
+          <EasyAvatar color="#909399" shape="circle">
             灰
-          </XlyAvatar>
+          </EasyAvatar>
         </div>
-        <XlyDocCode
-          code="<XlyAvatar color=&quot;#4f6ef7&quot; shape=&quot;circle&quot;>蓝</XlyAvatar>
-<XlyAvatar color=&quot;#67c23a&quot; shape=&quot;circle&quot;>绿</XlyAvatar>
-<XlyAvatar color=&quot;#f56c6c&quot; shape=&quot;circle&quot;>红</XlyAvatar>"
+        <EasyDocCode
+          code="<EasyAvatar color=&quot;#4f6ef7&quot; shape=&quot;circle&quot;>蓝</EasyAvatar>
+<EasyAvatar color=&quot;#67c23a&quot; shape=&quot;circle&quot;>绿</EasyAvatar>
+<EasyAvatar color=&quot;#f56c6c&quot; shape=&quot;circle&quot;>红</EasyAvatar>"
         />
       </div>
     </section>
@@ -215,32 +215,32 @@ const teamMembers = ref([
       <div class="doc-preview">
         <div class="doc-preview__body demo-fit">
           <div class="demo-fit__item">
-            <XlyAvatar :size="100" fit="fill" src="https://picsum.photos/200/300" shape="square" />
+            <EasyAvatar :size="100" fit="fill" src="https://picsum.photos/200/300" shape="square" />
             <span>fill</span>
           </div>
           <div class="demo-fit__item">
-            <XlyAvatar :size="100" fit="contain" src="https://picsum.photos/200/300" shape="square" />
+            <EasyAvatar :size="100" fit="contain" src="https://picsum.photos/200/300" shape="square" />
             <span>contain</span>
           </div>
           <div class="demo-fit__item">
-            <XlyAvatar :size="100" fit="cover" src="https://picsum.photos/200/300" shape="square" />
+            <EasyAvatar :size="100" fit="cover" src="https://picsum.photos/200/300" shape="square" />
             <span>cover</span>
           </div>
           <div class="demo-fit__item">
-            <XlyAvatar :size="100" fit="none" src="https://picsum.photos/200/300" shape="square" />
+            <EasyAvatar :size="100" fit="none" src="https://picsum.photos/200/300" shape="square" />
             <span>none</span>
           </div>
           <div class="demo-fit__item">
-            <XlyAvatar :size="100" fit="scale-down" src="https://picsum.photos/200/300" shape="square" />
+            <EasyAvatar :size="100" fit="scale-down" src="https://picsum.photos/200/300" shape="square" />
             <span>scale-down</span>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyAvatar :size=&quot;100&quot; fit=&quot;fill&quot; src=&quot;...&quot; />
-<XlyAvatar :size=&quot;100&quot; fit=&quot;contain&quot; src=&quot;...&quot; />
-<XlyAvatar :size=&quot;100&quot; fit=&quot;cover&quot; src=&quot;...&quot; />
-<XlyAvatar :size=&quot;100&quot; fit=&quot;none&quot; src=&quot;...&quot; />
-<XlyAvatar :size=&quot;100&quot; fit=&quot;scale-down&quot; src=&quot;...&quot; />"
+        <EasyDocCode
+          code="<EasyAvatar :size=&quot;100&quot; fit=&quot;fill&quot; src=&quot;...&quot; />
+<EasyAvatar :size=&quot;100&quot; fit=&quot;contain&quot; src=&quot;...&quot; />
+<EasyAvatar :size=&quot;100&quot; fit=&quot;cover&quot; src=&quot;...&quot; />
+<EasyAvatar :size=&quot;100&quot; fit=&quot;none&quot; src=&quot;...&quot; />
+<EasyAvatar :size=&quot;100&quot; fit=&quot;scale-down&quot; src=&quot;...&quot; />"
         />
       </div>
     </section>
@@ -262,19 +262,19 @@ const teamMembers = ref([
               class="avatar-group__item"
               :style="{ zIndex: users.length - index }"
             >
-              <XlyAvatar :src="user.avatar" :size="40" :title="user.name" />
+              <EasyAvatar :src="user.avatar" :size="40" :title="user.name" />
             </div>
             <div class="avatar-group__more" :style="{ zIndex: 0 }">
-              <XlyAvatar :size="40" color="#909399">
+              <EasyAvatar :size="40" color="#909399">
                 +5
-              </XlyAvatar>
+              </EasyAvatar>
             </div>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<div class=&quot;avatar-group&quot;>
-  <XlyAvatar v-for=&quot;user in users&quot; :key=&quot;user.id&quot; :src=&quot;user.avatar&quot; />
-  <XlyAvatar>+5</XlyAvatar>
+  <EasyAvatar v-for=&quot;user in users&quot; :key=&quot;user.id&quot; :src=&quot;user.avatar&quot; />
+  <EasyAvatar>+5</EasyAvatar>
 </div>"
         />
       </div>
@@ -296,26 +296,26 @@ const teamMembers = ref([
       <div class="doc-preview doc-preview--noborder">
         <div class="user-card">
           <div class="user-card__avatar">
-            <XlyAvatar :size="64" src="https://i.pravatar.cc/150?img=10" shape="circle" />
+            <EasyAvatar :size="64" src="https://i.pravatar.cc/150?img=10" shape="circle" />
           </div>
           <div class="user-card__info">
             <h3>张明</h3>
             <p>高级前端工程师 · 5年经验</p>
             <div class="user-card__tags">
-              <XlyTag type="primary" size="small">
+              <EasyTag type="primary" size="small">
                 Vue
-              </XlyTag>
-              <XlyTag type="success" size="small">
+              </EasyTag>
+              <EasyTag type="success" size="small">
                 React
-              </XlyTag>
-              <XlyTag type="warning" size="small">
+              </EasyTag>
+              <EasyTag type="warning" size="small">
                 TypeScript
-              </XlyTag>
+              </EasyTag>
             </div>
           </div>
-          <XlyButton type="primary" size="small">
+          <EasyButton type="primary" size="small">
             关注
-          </XlyButton>
+          </EasyButton>
         </div>
       </div>
 
@@ -326,7 +326,7 @@ const teamMembers = ref([
       <div class="doc-preview doc-preview--noborder">
         <div class="comment-list">
           <div v-for="comment in comments" :key="comment.id" class="comment-item">
-            <XlyAvatar :size="36" :src="comment.avatar" shape="circle" />
+            <EasyAvatar :size="36" :src="comment.avatar" shape="circle" />
             <div class="comment-item__content">
               <div class="comment-item__header">
                 <span class="comment-item__name">{{ comment.name }}</span>
@@ -347,7 +347,7 @@ const teamMembers = ref([
       <div class="doc-preview doc-preview--noborder">
         <div class="team-list">
           <div v-for="member in teamMembers" :key="member.id" class="team-item">
-            <XlyAvatar :size="48" :src="member.avatar" shape="circle" />
+            <EasyAvatar :size="48" :src="member.avatar" shape="circle" />
             <div class="team-item__info">
               <span class="team-item__name">{{ member.name }}</span>
               <span class="team-item__role">{{ member.role }}</span>

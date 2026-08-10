@@ -34,7 +34,7 @@ const basicCode = `const jsonData = {
   },
 }
 
-<XlyJsonViewer :data="basicData" />`
+<EasyJsonViewer :data="basicData" />`
 
 // 深度数据
 const deepData = ref({
@@ -202,9 +202,9 @@ const pageData = ref({
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyJsonViewer :data="basicData" />
+          <EasyJsonViewer :data="basicData" />
         </div>
-        <XlyDocCode :code="basicCode" />
+        <EasyDocCode :code="basicCode" />
       </div>
     </section>
 
@@ -221,19 +221,19 @@ const pageData = ref({
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 20px">
           <div>
             <span class="demo-label">depth=0（全部展开）</span>
-            <XlyJsonViewer :data="basicData" :depth="0" />
+            <EasyJsonViewer :data="basicData" :depth="0" />
           </div>
           <div>
             <span class="demo-label">depth=1（只展开第一层）</span>
-            <XlyJsonViewer :data="basicData" :depth="1" />
+            <EasyJsonViewer :data="basicData" :depth="1" />
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 全部展开 -->
-<XlyJsonViewer :data=&quot;jsonData&quot; :depth=&quot;0&quot; />
+<EasyJsonViewer :data=&quot;jsonData&quot; :depth=&quot;0&quot; />
 
 <!-- 只展开第一层 -->
-<XlyJsonViewer :data=&quot;jsonData&quot; :depth=&quot;1&quot; />"
+<EasyJsonViewer :data=&quot;jsonData&quot; :depth=&quot;1&quot; />"
         />
       </div>
     </section>
@@ -248,9 +248,9 @@ const pageData = ref({
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyJsonViewer :data="deepData" max-height="200px" />
+          <EasyJsonViewer :data="deepData" max-height="200px" />
         </div>
-        <XlyDocCode code="<XlyJsonViewer :data=&quot;jsonData&quot; max-height=&quot;200px&quot; />" />
+        <EasyDocCode code="<EasyJsonViewer :data=&quot;jsonData&quot; max-height=&quot;200px&quot; />" />
       </div>
     </section>
 
@@ -266,16 +266,16 @@ const pageData = ref({
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 20px">
           <div>
             <span class="demo-label">width="400px"</span>
-            <XlyJsonViewer :data="basicData" width="400px" />
+            <EasyJsonViewer :data="basicData" width="400px" />
           </div>
           <div>
             <span class="demo-label">width="100%"</span>
-            <XlyJsonViewer :data="basicData" width="100%" />
+            <EasyJsonViewer :data="basicData" width="100%" />
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyJsonViewer :data=&quot;jsonData&quot; width=&quot;400px&quot; />
-<XlyJsonViewer :data=&quot;jsonData&quot; width=&quot;100%&quot; />"
+        <EasyDocCode
+          code="<EasyJsonViewer :data=&quot;jsonData&quot; width=&quot;400px&quot; />
+<EasyJsonViewer :data=&quot;jsonData&quot; width=&quot;100%&quot; />"
         />
       </div>
     </section>
@@ -292,16 +292,16 @@ const pageData = ref({
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 20px">
           <div>
             <span class="demo-label">light（默认）</span>
-            <XlyJsonViewer :data="basicData" />
+            <EasyJsonViewer :data="basicData" />
           </div>
           <div>
             <span class="demo-label">dark</span>
-            <XlyJsonViewer :data="basicData" theme="dark" />
+            <EasyJsonViewer :data="basicData" theme="dark" />
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyJsonViewer :data=&quot;jsonData&quot; />
-<XlyJsonViewer :data=&quot;jsonData&quot; theme=&quot;dark&quot; />"
+        <EasyDocCode
+          code="<EasyJsonViewer :data=&quot;jsonData&quot; />
+<EasyJsonViewer :data=&quot;jsonData&quot; theme=&quot;dark&quot; />"
         />
       </div>
     </section>
@@ -318,19 +318,19 @@ const pageData = ref({
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 20px">
           <div>
             <span class="demo-label">隐藏工具栏</span>
-            <XlyJsonViewer :data="basicData" :show-toolbar="false" />
+            <EasyJsonViewer :data="basicData" :show-toolbar="false" />
           </div>
           <div>
             <span class="demo-label">只保留复制</span>
-            <XlyJsonViewer :data="basicData" :show-expand="false" />
+            <EasyJsonViewer :data="basicData" :show-expand="false" />
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 隐藏工具栏 -->
-<XlyJsonViewer :data=&quot;jsonData&quot; :show-toolbar=&quot;false&quot; />
+<EasyJsonViewer :data=&quot;jsonData&quot; :show-toolbar=&quot;false&quot; />
 
 <!-- 只保留复制按钮 -->
-<XlyJsonViewer :data=&quot;jsonData&quot; :show-expand=&quot;false&quot; />"
+<EasyJsonViewer :data=&quot;jsonData&quot; :show-expand=&quot;false&quot; />"
         />
       </div>
       <div class="doc-tip">
@@ -366,11 +366,11 @@ const pageData = ref({
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyJsonViewer :data="stringJson" />
+          <EasyJsonViewer :data="stringJson" />
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="const jsonStr = '{&quot;name&quot;: &quot;张三&quot;, &quot;age&quot;: 18, &quot;city&quot;: &quot;北京&quot;}'
-<XlyJsonViewer :data=&quot;jsonStr&quot; />"
+<EasyJsonViewer :data=&quot;jsonStr&quot; />"
         />
       </div>
     </section>
@@ -390,9 +390,9 @@ const pageData = ref({
       </h3>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyJsonViewer :data="businessErrorData" theme="dark" />
+          <EasyJsonViewer :data="businessErrorData" theme="dark" />
         </div>
-        <XlyDocCode code="<XlyJsonViewer :data=&quot;errorData&quot; theme=&quot;dark&quot; />" />
+        <EasyDocCode code="<EasyJsonViewer :data=&quot;errorData&quot; theme=&quot;dark&quot; />" />
       </div>
 
       <!-- 空指针异常 -->
@@ -401,10 +401,10 @@ const pageData = ref({
       </h3>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyJsonViewer :data="nullPointerErrorData" :depth="2" theme="dark" />
+          <EasyJsonViewer :data="nullPointerErrorData" :depth="2" theme="dark" />
         </div>
-        <XlyDocCode
-          code="<XlyJsonViewer :data=&quot;nullPointerErrorData&quot; :depth=&quot;2&quot; theme=&quot;dark&quot; />"
+        <EasyDocCode
+          code="<EasyJsonViewer :data=&quot;nullPointerErrorData&quot; :depth=&quot;2&quot; theme=&quot;dark&quot; />"
         />
       </div>
 
@@ -414,9 +414,9 @@ const pageData = ref({
       </h3>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyJsonViewer :data="pageData" />
+          <EasyJsonViewer :data="pageData" />
         </div>
-        <XlyDocCode code="<XlyJsonViewer :data=&quot;pageData&quot; />" />
+        <EasyDocCode code="<EasyJsonViewer :data=&quot;pageData&quot; />" />
       </div>
     </section>
 

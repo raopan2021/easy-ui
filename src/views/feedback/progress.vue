@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyProgress } from 'easy-ui'
+import { EasyProgress } from 'easy-ui'
 import { ref } from 'vue'
 
 const uploadProgress = ref(0)
@@ -70,26 +70,26 @@ function resetProgress() {
         <div class="doc-preview__body doc-preview__body--column">
           <div class="progress-demo">
             <label>0%</label>
-            <XlyProgress :percentage="0" />
+            <EasyProgress :percentage="0" />
           </div>
           <div class="progress-demo">
             <label>30%</label>
-            <XlyProgress :percentage="30" />
+            <EasyProgress :percentage="30" />
           </div>
           <div class="progress-demo">
             <label>70%</label>
-            <XlyProgress :percentage="70" />
+            <EasyProgress :percentage="70" />
           </div>
           <div class="progress-demo">
             <label>100%</label>
-            <XlyProgress :percentage="100" />
+            <EasyProgress :percentage="100" />
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyProgress :percentage=&quot;0&quot; />
-<XlyProgress :percentage=&quot;30&quot; />
-<XlyProgress :percentage=&quot;70&quot; />
-<XlyProgress :percentage=&quot;100&quot; />"
+        <EasyDocCode
+          code="<EasyProgress :percentage=&quot;0&quot; />
+<EasyProgress :percentage=&quot;30&quot; />
+<EasyProgress :percentage=&quot;70&quot; />
+<EasyProgress :percentage=&quot;100&quot; />"
         />
       </div>
     </section>
@@ -104,9 +104,9 @@ function resetProgress() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyProgress :percentage="0" indeterminate text="加载中..." />
+          <EasyProgress :percentage="0" indeterminate text="加载中..." />
         </div>
-        <XlyDocCode code="<XlyProgress :percentage=&quot;0&quot; indeterminate text=&quot;加载中...&quot; />" />
+        <EasyDocCode code="<EasyProgress :percentage=&quot;0&quot; indeterminate text=&quot;加载中...&quot; />" />
       </div>
     </section>
 
@@ -122,31 +122,31 @@ function resetProgress() {
         <div class="doc-preview__body doc-preview__body--column">
           <div class="progress-demo">
             <label>normal</label>
-            <XlyProgress :percentage="50" status="normal" />
+            <EasyProgress :percentage="50" status="normal" />
           </div>
           <div class="progress-demo">
             <label>success</label>
-            <XlyProgress :percentage="100" status="success" />
+            <EasyProgress :percentage="100" status="success" />
           </div>
           <div class="progress-demo">
             <label>exception</label>
-            <XlyProgress :percentage="60" status="exception" />
+            <EasyProgress :percentage="60" status="exception" />
           </div>
           <div class="progress-demo">
             <label>warning</label>
-            <XlyProgress :percentage="80" status="warning" />
+            <EasyProgress :percentage="80" status="warning" />
           </div>
           <div class="progress-demo">
             <label>active</label>
-            <XlyProgress :percentage="40" status="active" />
+            <EasyProgress :percentage="40" status="active" />
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyProgress :percentage=&quot;50&quot; status=&quot;normal&quot; />
-<XlyProgress :percentage=&quot;100&quot; status=&quot;success&quot; />
-<XlyProgress :percentage=&quot;60&quot; status=&quot;exception&quot; />
-<XlyProgress :percentage=&quot;80&quot; status=&quot;warning&quot; />
-<XlyProgress :percentage=&quot;40&quot; status=&quot;active&quot; />"
+        <EasyDocCode
+          code="<EasyProgress :percentage=&quot;50&quot; status=&quot;normal&quot; />
+<EasyProgress :percentage=&quot;100&quot; status=&quot;success&quot; />
+<EasyProgress :percentage=&quot;60&quot; status=&quot;exception&quot; />
+<EasyProgress :percentage=&quot;80&quot; status=&quot;warning&quot; />
+<EasyProgress :percentage=&quot;40&quot; status=&quot;active&quot; />"
         />
       </div>
     </section>
@@ -163,20 +163,20 @@ function resetProgress() {
         <div class="doc-preview__body doc-preview__body--column">
           <div class="progress-demo">
             <label>固定颜色</label>
-            <XlyProgress :percentage="60" color="#4f6ef7" />
+            <EasyProgress :percentage="60" color="#4f6ef7" />
           </div>
           <div class="progress-demo">
             <label>自定义颜色</label>
-            <XlyProgress :percentage="70" color="#10b981" />
+            <EasyProgress :percentage="70" color="#10b981" />
           </div>
           <div class="progress-demo">
             <label>动态颜色</label>
-            <XlyProgress :percentage="80" :color="dynamicColor" />
+            <EasyProgress :percentage="80" :color="dynamicColor" />
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 固定颜色 -->
-<XlyProgress :percentage=&quot;60&quot; color=&quot;#4f6ef7&quot; />
+<EasyProgress :percentage=&quot;60&quot; color=&quot;#4f6ef7&quot; />
 
 <!-- 动态颜色函数 -->
 <script setup>
@@ -186,7 +186,7 @@ const dynamicColor = (percentage) => {
   return '#67c23a'
 }
 </script>
-<XlyProgress :percentage=&quot;80&quot; :color=&quot;dynamicColor&quot; />"
+<EasyProgress :percentage=&quot;80&quot; :color=&quot;dynamicColor&quot; />"
         />
       </div>
     </section>
@@ -203,24 +203,24 @@ const dynamicColor = (percentage) => {
         <div class="doc-preview__body doc-preview__body--column">
           <div class="progress-demo">
             <label>自定义文本</label>
-            <XlyProgress :percentage="60" text="上传中..." />
+            <EasyProgress :percentage="60" text="上传中..." />
           </div>
           <div class="progress-demo">
             <label>详细文本</label>
-            <XlyProgress :percentage="85" text="85/100 已完成" />
+            <EasyProgress :percentage="85" text="85/100 已完成" />
           </div>
           <div class="progress-demo">
             <label>隐藏文本</label>
-            <XlyProgress :percentage="45" :show-info="false" />
+            <EasyProgress :percentage="45" :show-info="false" />
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 自定义文本 -->
-<XlyProgress :percentage=&quot;60&quot; text=&quot;上传中...&quot; />
-<XlyProgress :percentage=&quot;85&quot; text=&quot;85/100 已完成&quot; />
+<EasyProgress :percentage=&quot;60&quot; text=&quot;上传中...&quot; />
+<EasyProgress :percentage=&quot;85&quot; text=&quot;85/100 已完成&quot; />
 
 <!-- 隐藏文本 -->
-<XlyProgress :percentage=&quot;45&quot; :showInfo=&quot;false&quot; />"
+<EasyProgress :percentage=&quot;45&quot; :showInfo=&quot;false&quot; />"
         />
       </div>
     </section>
@@ -237,21 +237,21 @@ const dynamicColor = (percentage) => {
         <div class="doc-preview__body doc-preview__body--column">
           <div class="progress-demo">
             <label>4px</label>
-            <XlyProgress :percentage="60" :stroke-width="4" />
+            <EasyProgress :percentage="60" :stroke-width="4" />
           </div>
           <div class="progress-demo">
             <label>8px</label>
-            <XlyProgress :percentage="60" :stroke-width="8" />
+            <EasyProgress :percentage="60" :stroke-width="8" />
           </div>
           <div class="progress-demo">
             <label>12px</label>
-            <XlyProgress :percentage="60" :stroke-width="12" />
+            <EasyProgress :percentage="60" :stroke-width="12" />
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyProgress :percentage=&quot;60&quot; :strokeWidth=&quot;4&quot; />
-<XlyProgress :percentage=&quot;60&quot; :strokeWidth=&quot;8&quot; />
-<XlyProgress :percentage=&quot;60&quot; :strokeWidth=&quot;12&quot; />"
+        <EasyDocCode
+          code="<EasyProgress :percentage=&quot;60&quot; :strokeWidth=&quot;4&quot; />
+<EasyProgress :percentage=&quot;60&quot; :strokeWidth=&quot;8&quot; />
+<EasyProgress :percentage=&quot;60&quot; :strokeWidth=&quot;12&quot; />"
         />
       </div>
     </section>
@@ -268,28 +268,28 @@ const dynamicColor = (percentage) => {
         <div class="doc-preview__body">
           <div class="circle-demo">
             <div class="circle-item">
-              <XlyProgress type="circle" :percentage="70" :circle-size="120" />
+              <EasyProgress type="circle" :percentage="70" :circle-size="120" />
               <span>70%</span>
             </div>
             <div class="circle-item">
-              <XlyProgress type="circle" :percentage="90" status="success" :circle-size="120" />
+              <EasyProgress type="circle" :percentage="90" status="success" :circle-size="120" />
               <span>90%</span>
             </div>
             <div class="circle-item">
-              <XlyProgress type="circle" :percentage="50" status="exception" :circle-size="120" />
+              <EasyProgress type="circle" :percentage="50" status="exception" :circle-size="120" />
               <span>50%</span>
             </div>
             <div class="circle-item">
-              <XlyProgress type="circle" :percentage="100" :circle-size="80" text="Done" />
+              <EasyProgress type="circle" :percentage="100" :circle-size="80" text="Done" />
               <span>自定义文本</span>
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyProgress type=&quot;circle&quot; :percentage=&quot;70&quot; />
-<XlyProgress type=&quot;circle&quot; :percentage=&quot;90&quot; status=&quot;success&quot; />
-<XlyProgress type=&quot;circle&quot; :percentage=&quot;50&quot; status=&quot;exception&quot; />
-<XlyProgress type=&quot;circle&quot; :percentage=&quot;100&quot; :circleSize=&quot;80&quot; text=&quot;Done&quot; />"
+        <EasyDocCode
+          code="<EasyProgress type=&quot;circle&quot; :percentage=&quot;70&quot; />
+<EasyProgress type=&quot;circle&quot; :percentage=&quot;90&quot; status=&quot;success&quot; />
+<EasyProgress type=&quot;circle&quot; :percentage=&quot;50&quot; status=&quot;exception&quot; />
+<EasyProgress type=&quot;circle&quot; :percentage=&quot;100&quot; :circleSize=&quot;80&quot; text=&quot;Done&quot; />"
         />
       </div>
     </section>
@@ -306,23 +306,23 @@ const dynamicColor = (percentage) => {
         <div class="doc-preview__body">
           <div class="dashboard-demo">
             <div class="dashboard-item">
-              <XlyProgress type="dashboard" :percentage="75" :circle-size="120" />
+              <EasyProgress type="dashboard" :percentage="75" :circle-size="120" />
               <span>75%</span>
             </div>
             <div class="dashboard-item">
-              <XlyProgress type="dashboard" :percentage="85" status="success" :circle-size="120" />
+              <EasyProgress type="dashboard" :percentage="85" status="success" :circle-size="120" />
               <span>85%</span>
             </div>
             <div class="dashboard-item">
-              <XlyProgress type="dashboard" :percentage="60" status="warning" :circle-size="120" />
+              <EasyProgress type="dashboard" :percentage="60" status="warning" :circle-size="120" />
               <span>60%</span>
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyProgress type=&quot;dashboard&quot; :percentage=&quot;75&quot; />
-<XlyProgress type=&quot;dashboard&quot; :percentage=&quot;85&quot; status=&quot;success&quot; />
-<XlyProgress type=&quot;dashboard&quot; :percentage=&quot;60&quot; status=&quot;warning&quot; />"
+        <EasyDocCode
+          code="<EasyProgress type=&quot;dashboard&quot; :percentage=&quot;75&quot; />
+<EasyProgress type=&quot;dashboard&quot; :percentage=&quot;85&quot; status=&quot;success&quot; />
+<EasyProgress type=&quot;dashboard&quot; :percentage=&quot;60&quot; status=&quot;warning&quot; />"
         />
       </div>
     </section>
@@ -339,7 +339,7 @@ const dynamicColor = (percentage) => {
         <div class="doc-preview__body doc-preview__body--column">
           <div class="progress-demo">
             <label>上传进度</label>
-            <XlyProgress :percentage="uploadProgress" status="active" text="上传中..." />
+            <EasyProgress :percentage="uploadProgress" status="active" text="上传中..." />
           </div>
           <div class="progress-control">
             <button class="demo-btn demo-btn--primary" :disabled="isUploading" @click="startUpload">
@@ -350,9 +350,9 @@ const dynamicColor = (percentage) => {
             </button>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<template>
-  <XlyProgress :percentage=&quot;uploadProgress&quot; status=&quot;active&quot; text=&quot;上传中...&quot; />
+  <EasyProgress :percentage=&quot;uploadProgress&quot; status=&quot;active&quot; text=&quot;上传中...&quot; />
   <button @click=&quot;startUpload&quot;>开始上传</button>
 </template>
 

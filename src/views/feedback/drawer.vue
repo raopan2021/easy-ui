@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { CircleCheckFilled, Document, HomeFilled, Setting, UserFilled, WarningFilled } from '@element-plus/icons-vue'
-import { XlyButton, XlyDrawer, XlyTag } from 'easy-ui'
+import { EasyButton, EasyDrawer, EasyTag } from 'easy-ui'
 import { ref } from 'vue'
 
 // 基础用法
@@ -88,18 +88,18 @@ const formData = ref({
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="basicVisible = true">
+          <EasyButton @click="basicVisible = true">
             打开抽屉
-          </XlyButton>
-          <XlyDrawer v-model="basicVisible" title="基础抽屉">
+          </EasyButton>
+          <EasyDrawer v-model="basicVisible" title="基础抽屉">
             <p>这是一个基础抽屉，支持从右侧滑入。点击遮罩或关闭按钮可关闭。</p>
-          </XlyDrawer>
+          </EasyDrawer>
         </div>
-        <XlyDocCode
-          code="<XlyButton @click=&quot;visible = true&quot;>打开抽屉</XlyButton>
-<XlyDrawer v-model=&quot;visible&quot; title=&quot;基础抽屉&quot;>
+        <EasyDocCode
+          code="<EasyButton @click=&quot;visible = true&quot;>打开抽屉</EasyButton>
+<EasyDrawer v-model=&quot;visible&quot; title=&quot;基础抽屉&quot;>
   <p>这是一个基础抽屉。</p>
-</XlyDrawer>"
+</EasyDrawer>"
         />
       </div>
     </section>
@@ -115,39 +115,39 @@ const formData = ref({
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="leftVisible = true">
+          <EasyButton @click="leftVisible = true">
             左侧抽屉
-          </XlyButton>
-          <XlyButton @click="rightVisible = true">
+          </EasyButton>
+          <EasyButton @click="rightVisible = true">
             右侧抽屉
-          </XlyButton>
-          <XlyButton @click="topVisible = true">
+          </EasyButton>
+          <EasyButton @click="topVisible = true">
             顶部抽屉
-          </XlyButton>
-          <XlyButton @click="bottomVisible = true">
+          </EasyButton>
+          <EasyButton @click="bottomVisible = true">
             底部抽屉
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
-          code="<XlyDrawer v-model=&quot;visible&quot; title=&quot;左侧&quot; direction=&quot;left&quot;>...</XlyDrawer>
-<XlyDrawer v-model=&quot;visible&quot; title=&quot;右侧&quot; direction=&quot;right&quot;>...</XlyDrawer>
-<XlyDrawer v-model=&quot;visible&quot; title=&quot;顶部&quot; direction=&quot;top&quot;>...</XlyDrawer>
-<XlyDrawer v-model=&quot;visible&quot; title=&quot;底部&quot; direction=&quot;bottom&quot;>...</XlyDrawer>"
+        <EasyDocCode
+          code="<EasyDrawer v-model=&quot;visible&quot; title=&quot;左侧&quot; direction=&quot;left&quot;>...</EasyDrawer>
+<EasyDrawer v-model=&quot;visible&quot; title=&quot;右侧&quot; direction=&quot;right&quot;>...</EasyDrawer>
+<EasyDrawer v-model=&quot;visible&quot; title=&quot;顶部&quot; direction=&quot;top&quot;>...</EasyDrawer>
+<EasyDrawer v-model=&quot;visible&quot; title=&quot;底部&quot; direction=&quot;bottom&quot;>...</EasyDrawer>"
         />
       </div>
 
-      <XlyDrawer v-model="leftVisible" title="左侧抽屉" direction="left">
+      <EasyDrawer v-model="leftVisible" title="左侧抽屉" direction="left">
         <p>从左侧滑入的抽屉，适用于导航菜单或列表详情。</p>
-      </XlyDrawer>
-      <XlyDrawer v-model="rightVisible" title="右侧抽屉" direction="right">
+      </EasyDrawer>
+      <EasyDrawer v-model="rightVisible" title="右侧抽屉" direction="right">
         <p>从右侧滑入的抽屉（默认），适用于详情查看或表单填写。</p>
-      </XlyDrawer>
-      <XlyDrawer v-model="topVisible" title="顶部抽屉" direction="top">
+      </EasyDrawer>
+      <EasyDrawer v-model="topVisible" title="顶部抽屉" direction="top">
         <p>从顶部滑入的抽屉，适用于筛选面板或工具栏。</p>
-      </XlyDrawer>
-      <XlyDrawer v-model="bottomVisible" title="底部抽屉" direction="bottom">
+      </EasyDrawer>
+      <EasyDrawer v-model="bottomVisible" title="底部抽屉" direction="bottom">
         <p>从底部滑入的抽屉，适用于操作确认或快捷操作。</p>
-      </XlyDrawer>
+      </EasyDrawer>
     </section>
 
     <!-- 自定义尺寸 -->
@@ -160,35 +160,35 @@ const formData = ref({
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="sizeSmall = true">
+          <EasyButton @click="sizeSmall = true">
             小型 (300px)
-          </XlyButton>
-          <XlyButton @click="sizeMedium = true">
+          </EasyButton>
+          <EasyButton @click="sizeMedium = true">
             中型 (50%)
-          </XlyButton>
-          <XlyButton @click="sizeLarge = true">
+          </EasyButton>
+          <EasyButton @click="sizeLarge = true">
             大型 (80%)
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 固定宽度 -->
-<XlyDrawer v-model=&quot;visible&quot; title=&quot;小型&quot; :size=&quot;300&quot;>...</XlyDrawer>
+<EasyDrawer v-model=&quot;visible&quot; title=&quot;小型&quot; :size=&quot;300&quot;>...</EasyDrawer>
 <!-- 百分比宽度 -->
-<XlyDrawer v-model=&quot;visible&quot; title=&quot;中型&quot; size=&quot;50%&quot;>...</XlyDrawer>
+<EasyDrawer v-model=&quot;visible&quot; title=&quot;中型&quot; size=&quot;50%&quot;>...</EasyDrawer>
 <!-- 大尺寸 -->
-<XlyDrawer v-model=&quot;visible&quot; title=&quot;大型&quot; size=&quot;80%&quot;>...</XlyDrawer>"
+<EasyDrawer v-model=&quot;visible&quot; title=&quot;大型&quot; size=&quot;80%&quot;>...</EasyDrawer>"
         />
       </div>
 
-      <XlyDrawer v-model="sizeSmall" title="小型抽屉" direction="left" :size="300">
+      <EasyDrawer v-model="sizeSmall" title="小型抽屉" direction="left" :size="300">
         <p>宽度固定为 300px，适用于简单的信息展示。</p>
-      </XlyDrawer>
-      <XlyDrawer v-model="sizeMedium" title="中型抽屉" direction="right" size="50%">
+      </EasyDrawer>
+      <EasyDrawer v-model="sizeMedium" title="中型抽屉" direction="right" size="50%">
         <p>宽度为视口的 50%，适用于中等复杂度的内容展示。</p>
-      </XlyDrawer>
-      <XlyDrawer v-model="sizeLarge" title="大型抽屉" direction="right" size="80%">
+      </EasyDrawer>
+      <EasyDrawer v-model="sizeLarge" title="大型抽屉" direction="right" size="80%">
         <p>宽度为视口的 80%，适用于需要较大空间的场景。</p>
-      </XlyDrawer>
+      </EasyDrawer>
     </section>
 
     <!-- 自定义内容 -->
@@ -201,12 +201,12 @@ const formData = ref({
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton type="primary" @click="customVisible = true">
+          <EasyButton type="primary" @click="customVisible = true">
             自定义抽屉
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
-          code="<XlyDrawer v-model=&quot;visible&quot; :show-header=&quot;false&quot;>
+        <EasyDocCode
+          code="<EasyDrawer v-model=&quot;visible&quot; :show-header=&quot;false&quot;>
   <template #header>
     <div class=&quot;custom-header&quot;>
       <el-icon color=&quot;#4f6ef7&quot;><Setting /></el-icon>
@@ -218,15 +218,15 @@ const formData = ref({
   </div>
   <template #footer>
     <div class=&quot;custom-footer&quot;>
-      <XlyButton @click=&quot;visible = false&quot;>取消</XlyButton>
-      <XlyButton type=&quot;primary&quot;>保存配置</XlyButton>
+      <EasyButton @click=&quot;visible = false&quot;>取消</EasyButton>
+      <EasyButton type=&quot;primary&quot;>保存配置</EasyButton>
     </div>
   </template>
-</XlyDrawer>"
+</EasyDrawer>"
         />
       </div>
 
-      <XlyDrawer v-model="customVisible" direction="right" :show-header="false">
+      <EasyDrawer v-model="customVisible" direction="right" :show-header="false">
         <template #header>
           <div class="custom-header">
             <el-icon color="#4f6ef7" :size="20">
@@ -257,15 +257,15 @@ const formData = ref({
         </div>
         <template #footer>
           <div class="custom-footer">
-            <XlyButton @click="customVisible = false">
+            <EasyButton @click="customVisible = false">
               取消
-            </XlyButton>
-            <XlyButton type="primary" @click="customVisible = false">
+            </EasyButton>
+            <EasyButton type="primary" @click="customVisible = false">
               保存配置
-            </XlyButton>
+            </EasyButton>
           </div>
         </template>
-      </XlyDrawer>
+      </EasyDrawer>
     </section>
 
     <!-- 无遮罩 -->
@@ -278,18 +278,18 @@ const formData = ref({
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="noMaskVisible = true">
+          <EasyButton @click="noMaskVisible = true">
             无遮罩抽屉
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
-          code="<XlyDrawer v-model=&quot;visible&quot; title=&quot;固定面板&quot; :show-mask=&quot;false&quot;>
+        <EasyDocCode
+          code="<EasyDrawer v-model=&quot;visible&quot; title=&quot;固定面板&quot; :show-mask=&quot;false&quot;>
   <p>这是一个没有遮罩的抽屉，背景完全透明。</p>
-</XlyDrawer>"
+</EasyDrawer>"
         />
       </div>
 
-      <XlyDrawer
+      <EasyDrawer
         v-model="noMaskVisible"
         title="固定面板"
         direction="left"
@@ -313,7 +313,7 @@ const formData = ref({
             </div>
           </div>
         </div>
-      </XlyDrawer>
+      </EasyDrawer>
     </section>
 
     <!-- 隐藏头尾 -->
@@ -326,26 +326,26 @@ const formData = ref({
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="noHeaderVisible = true">
+          <EasyButton @click="noHeaderVisible = true">
             无头部抽屉
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
-          code="<XlyDrawer v-model=&quot;visible&quot; :show-header=&quot;false&quot;>
+        <EasyDocCode
+          code="<EasyDrawer v-model=&quot;visible&quot; :show-header=&quot;false&quot;>
   <div class=&quot;custom-content&quot;>
     <p>自定义内容区域</p>
   </div>
   <template #footer>
     <div class=&quot;actions&quot;>
-      <XlyButton>取消</XlyButton>
-      <XlyButton type=&quot;primary&quot;>确认</XlyButton>
+      <EasyButton>取消</EasyButton>
+      <EasyButton type=&quot;primary&quot;>确认</EasyButton>
     </div>
   </template>
-</XlyDrawer>"
+</EasyDrawer>"
         />
       </div>
 
-      <XlyDrawer v-model="noHeaderVisible" :show-header="false" direction="right" :show-footer="false">
+      <EasyDrawer v-model="noHeaderVisible" :show-header="false" direction="right" :show-footer="false">
         <div class="custom-content">
           <div class="success-icon">
             <el-icon color="#34c759" :size="48">
@@ -361,12 +361,12 @@ const formData = ref({
         </div>
         <template #footer>
           <div class="custom-footer">
-            <XlyButton type="primary" @click="noHeaderVisible = false">
+            <EasyButton type="primary" @click="noHeaderVisible = false">
               我知道了
-            </XlyButton>
+            </EasyButton>
           </div>
         </template>
-      </XlyDrawer>
+      </EasyDrawer>
     </section>
 
     <!-- 事件监听 -->
@@ -379,18 +379,18 @@ const formData = ref({
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton type="primary" @click="eventVisible = true">
+          <EasyButton type="primary" @click="eventVisible = true">
             带事件的抽屉
-          </XlyButton>
+          </EasyButton>
         </div>
-        <XlyDocCode
-          code="<XlyDrawer v-model=&quot;visible&quot; title=&quot;事件监听&quot;
+        <EasyDocCode
+          code="<EasyDrawer v-model=&quot;visible&quot; title=&quot;事件监听&quot;
   @open=&quot;handleOpen&quot;
   @opened=&quot;handleOpened&quot;
   @close=&quot;handleClose&quot;
   @after-close=&quot;handleAfterClose&quot;>
   <p>打开控制台查看事件日志</p>
-</XlyDrawer>
+</EasyDrawer>
 
 // JS
 function handleOpen() {
@@ -408,7 +408,7 @@ function handleAfterClose() {
         />
       </div>
 
-      <XlyDrawer
+      <EasyDrawer
         v-model="eventVisible"
         title="事件监听"
         @open="handleOpen"
@@ -423,7 +423,7 @@ function handleAfterClose() {
             <span class="event-log__name">{{ log.name }}</span>
           </div>
         </div>
-      </XlyDrawer>
+      </EasyDrawer>
     </section>
 
     <!-- 业务场景 -->
@@ -436,20 +436,20 @@ function handleAfterClose() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton type="primary" @click="detailVisible = true">
+          <EasyButton type="primary" @click="detailVisible = true">
             查看详情
-          </XlyButton>
-          <XlyButton type="success" @click="formVisible = true">
+          </EasyButton>
+          <EasyButton type="success" @click="formVisible = true">
             表单填写
-          </XlyButton>
-          <XlyButton type="warning" @click="confirmVisible = true">
+          </EasyButton>
+          <EasyButton type="warning" @click="confirmVisible = true">
             确认操作
-          </XlyButton>
+          </EasyButton>
         </div>
       </div>
 
       <!-- 详情抽屉 -->
-      <XlyDrawer v-model="detailVisible" title="用户详情" direction="right" size="45%">
+      <EasyDrawer v-model="detailVisible" title="用户详情" direction="right" size="45%">
         <div class="detail-info">
           <div class="detail-info__header">
             <div class="detail-info__avatar">
@@ -481,16 +481,16 @@ function handleAfterClose() {
             </div>
             <div class="detail-info__item">
               <span class="detail-info__label">状态</span>
-              <XlyTag type="success">
+              <EasyTag type="success">
                 在职
-              </XlyTag>
+              </EasyTag>
             </div>
           </div>
         </div>
-      </XlyDrawer>
+      </EasyDrawer>
 
       <!-- 表单抽屉 -->
-      <XlyDrawer v-model="formVisible" title="编辑用户" direction="right">
+      <EasyDrawer v-model="formVisible" title="编辑用户" direction="right">
         <div class="demo-form">
           <div class="demo-form__item">
             <label class="demo-form__label">用户名 <span class="required">*</span></label>
@@ -523,18 +523,18 @@ function handleAfterClose() {
         </div>
         <template #footer>
           <div class="custom-footer">
-            <XlyButton @click="formVisible = false">
+            <EasyButton @click="formVisible = false">
               取消
-            </XlyButton>
-            <XlyButton type="primary" @click="formVisible = false">
+            </EasyButton>
+            <EasyButton type="primary" @click="formVisible = false">
               保存
-            </XlyButton>
+            </EasyButton>
           </div>
         </template>
-      </XlyDrawer>
+      </EasyDrawer>
 
       <!-- 确认抽屉 -->
-      <XlyDrawer
+      <EasyDrawer
         v-model="confirmVisible"
         title="操作确认"
         direction="bottom"
@@ -557,15 +557,15 @@ function handleAfterClose() {
         </div>
         <template #footer>
           <div class="confirm-footer">
-            <XlyButton @click="confirmVisible = false">
+            <EasyButton @click="confirmVisible = false">
               取消
-            </XlyButton>
-            <XlyButton type="danger" @click="confirmVisible = false">
+            </EasyButton>
+            <EasyButton type="danger" @click="confirmVisible = false">
               确认删除
-            </XlyButton>
+            </EasyButton>
           </div>
         </template>
-      </XlyDrawer>
+      </EasyDrawer>
     </section>
 
     <!-- API 文档 -->

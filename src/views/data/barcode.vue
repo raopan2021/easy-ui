@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { XlyBarcode, XlyButton } from 'easy-ui'
+import { EasyBarcode, EasyButton } from 'easy-ui'
 import { ElInput, ElMessage } from 'element-plus'
 import { ref } from 'vue'
 
-const barcodeRef = ref<InstanceType<typeof XlyBarcode>>()
+const barcodeRef = ref<InstanceType<typeof EasyBarcode>>()
 const dynamicContent = ref('DYNAMIC-CODE-123')
 
 function handleDownloadSVG() {
@@ -64,9 +64,9 @@ function onError(error: Error) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyBarcode content="ABC-123456" />
+          <EasyBarcode content="ABC-123456" />
         </div>
-        <XlyDocCode code="<XlyBarcode content=&quot;ABC-123456&quot; />" />
+        <EasyDocCode code="<EasyBarcode content=&quot;ABC-123456&quot; />" />
       </div>
     </section>
 
@@ -83,32 +83,32 @@ function onError(error: Error) {
       <div class="doc-preview">
         <div class="doc-preview__body barcode-format-group">
           <div class="barcode-format-item">
-            <XlyBarcode content="CODE128-TEST" format="CODE128" :height="60" :font-size="14" />
+            <EasyBarcode content="CODE128-TEST" format="CODE128" :height="60" :font-size="14" />
             <span>CODE128（通用）</span>
           </div>
           <div class="barcode-format-item">
-            <XlyBarcode content="CODE39-TEST" format="CODE39" :height="60" :font-size="14" />
+            <EasyBarcode content="CODE39-TEST" format="CODE39" :height="60" :font-size="14" />
             <span>CODE39（工业）</span>
           </div>
           <div class="barcode-format-item">
-            <XlyBarcode content="490123456789" format="EAN13" :height="60" :font-size="14" />
+            <EasyBarcode content="490123456789" format="EAN13" :height="60" :font-size="14" />
             <span>EAN13（商品）</span>
           </div>
           <div class="barcode-format-item">
-            <XlyBarcode content="12345670" format="EAN8" :height="60" :font-size="14" />
+            <EasyBarcode content="12345670" format="EAN8" :height="60" :font-size="14" />
             <span>EAN8（8位商品）</span>
           </div>
           <div class="barcode-format-item">
-            <XlyBarcode content="012345678905" format="UPC" :height="60" :font-size="14" />
+            <EasyBarcode content="012345678905" format="UPC" :height="60" :font-size="14" />
             <span>UPC（美国）</span>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyBarcode content=&quot;CODE128-TEST&quot; format=&quot;CODE128&quot; />
-<XlyBarcode content=&quot;CODE39-TEST&quot; format=&quot;CODE39&quot; />
-<XlyBarcode content=&quot;490123456789&quot; format=&quot;EAN13&quot; />
-<XlyBarcode content=&quot;12345670&quot; format=&quot;EAN8&quot; />
-<XlyBarcode content=&quot;012345678905&quot; format=&quot;UPC&quot; />"
+        <EasyDocCode
+          code="<EasyBarcode content=&quot;CODE128-TEST&quot; format=&quot;CODE128&quot; />
+<EasyBarcode content=&quot;CODE39-TEST&quot; format=&quot;CODE39&quot; />
+<EasyBarcode content=&quot;490123456789&quot; format=&quot;EAN13&quot; />
+<EasyBarcode content=&quot;12345670&quot; format=&quot;EAN8&quot; />
+<EasyBarcode content=&quot;012345678905&quot; format=&quot;UPC&quot; />"
         />
       </div>
     </section>
@@ -125,31 +125,31 @@ function onError(error: Error) {
       <div class="doc-preview">
         <div class="doc-preview__body barcode-style-group">
           <div class="barcode-style-item">
-            <XlyBarcode content="THIN-BARS" :width="1" :height="80" line-color="#1a1a2e" :font-size="12" />
+            <EasyBarcode content="THIN-BARS" :width="1" :height="80" line-color="#1a1a2e" :font-size="12" />
             <span>细条</span>
           </div>
           <div class="barcode-style-item">
-            <XlyBarcode content="THICK-BARS" :width="4" :height="120" line-color="#4F6EF7" :font-size="18" />
+            <EasyBarcode content="THICK-BARS" :width="4" :height="120" line-color="#4F6EF7" :font-size="18" />
             <span>粗条</span>
           </div>
           <div class="barcode-style-item">
-            <XlyBarcode content="RED-BARS" :height="100" line-color="#FF3B30" background="#FFF5F5" :font-size="16" />
+            <EasyBarcode content="RED-BARS" :height="100" line-color="#FF3B30" background="#FFF5F5" :font-size="16" />
             <span>红条白底</span>
           </div>
           <div class="barcode-style-item">
-            <XlyBarcode content="GREEN-BARS" :height="100" line-color="#34C759" background="#E8F5E9" :font-size="16" />
+            <EasyBarcode content="GREEN-BARS" :height="100" line-color="#34C759" background="#E8F5E9" :font-size="16" />
             <span>绿条浅绿底</span>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 细条 -->
-<XlyBarcode content=&quot;THIN-BARS&quot; :width=&quot;1&quot; :height=&quot;80&quot; />
+<EasyBarcode content=&quot;THIN-BARS&quot; :width=&quot;1&quot; :height=&quot;80&quot; />
 
 <!-- 粗条蓝条 -->
-<XlyBarcode content=&quot;THICK-BARS&quot; :width=&quot;4&quot; :height=&quot;120&quot; line-color=&quot;#4F6EF7&quot; />
+<EasyBarcode content=&quot;THICK-BARS&quot; :width=&quot;4&quot; :height=&quot;120&quot; line-color=&quot;#4F6EF7&quot; />
 
 <!-- 红条白底 -->
-<XlyBarcode content=&quot;RED-BARS&quot; line-color=&quot;#FF3B30&quot; background=&quot;#FFF5F5&quot; />"
+<EasyBarcode content=&quot;RED-BARS&quot; line-color=&quot;#FF3B30&quot; background=&quot;#FFF5F5&quot; />"
         />
       </div>
     </section>
@@ -166,26 +166,26 @@ function onError(error: Error) {
       <div class="doc-preview">
         <div class="doc-preview__body barcode-text-group">
           <div class="barcode-text-item">
-            <XlyBarcode content="HELLO-WORLD" :height="80" :font-size="14" text-align="center" />
+            <EasyBarcode content="HELLO-WORLD" :height="80" :font-size="14" text-align="center" />
             <span>居中（默认）</span>
           </div>
           <div class="barcode-text-item">
-            <XlyBarcode content="HELLO-WORLD" :height="80" :font-size="14" text-align="left" />
+            <EasyBarcode content="HELLO-WORLD" :height="80" :font-size="14" text-align="left" />
             <span>左对齐</span>
           </div>
           <div class="barcode-text-item">
-            <XlyBarcode content="HELLO-WORLD" :height="80" :font-size="14" text-align="right" />
+            <EasyBarcode content="HELLO-WORLD" :height="80" :font-size="14" text-align="right" />
             <span>右对齐</span>
           </div>
           <div class="barcode-text-item">
-            <XlyBarcode content="NO-TEXT" :height="80" :display-value="false" />
+            <EasyBarcode content="NO-TEXT" :height="80" :display-value="false" />
             <span>隐藏文本</span>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyBarcode content=&quot;HELLO-WORLD&quot; :font-size=&quot;14&quot; text-align=&quot;center&quot; />
-<XlyBarcode content=&quot;HELLO-WORLD&quot; :font-size=&quot;14&quot; text-align=&quot;left&quot; />
-<XlyBarcode content=&quot;NO-TEXT&quot; :display-value=&quot;false&quot; />"
+        <EasyDocCode
+          code="<EasyBarcode content=&quot;HELLO-WORLD&quot; :font-size=&quot;14&quot; text-align=&quot;center&quot; />
+<EasyBarcode content=&quot;HELLO-WORLD&quot; :font-size=&quot;14&quot; text-align=&quot;left&quot; />
+<EasyBarcode content=&quot;NO-TEXT&quot; :display-value=&quot;false&quot; />"
         />
       </div>
     </section>
@@ -210,20 +210,20 @@ function onError(error: Error) {
                 style="margin-bottom: 16px"
               />
               <div class="barcode-interactive__controls">
-                <XlyButton type="primary" @click="handleDownloadSVG">
+                <EasyButton type="primary" @click="handleDownloadSVG">
                   下载 SVG
-                </XlyButton>
-                <XlyButton type="ghost" @click="handleDownloadPNG">
+                </EasyButton>
+                <EasyButton type="ghost" @click="handleDownloadPNG">
                   下载 PNG
-                </XlyButton>
+                </EasyButton>
               </div>
             </div>
             <div class="barcode-interactive__right">
-              <XlyBarcode ref="barcodeRef" :content="dynamicContent" :height="100" />
+              <EasyBarcode ref="barcodeRef" :content="dynamicContent" :height="100" />
             </div>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="const barcodeRef = ref()
 const dynamicContent = ref('DYNAMIC-CODE')
 
@@ -250,7 +250,7 @@ function handleDownloadPNG() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyBarcode content="EVENT-TEST" :height="100" @generated="onGenerated" @error="onError" />
+          <EasyBarcode content="EVENT-TEST" :height="100" @generated="onGenerated" @error="onError" />
           <div v-if="eventLog.length" class="barcode-event-log">
             <div v-for="(log, index) in eventLog" :key="index" class="barcode-event-log__item">
               <el-tag :type="log.type === 'success' ? 'success' : 'danger'" size="small">
@@ -260,8 +260,8 @@ function handleDownloadPNG() {
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyBarcode
+        <EasyDocCode
+          code="<EasyBarcode
   content=&quot;EVENT-TEST&quot;
   @generated=&quot;onGenerated&quot;
   @error=&quot;onError&quot;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyButton, XlyDescriptions, XlyDescriptionsItem, XlyIcon } from 'easy-ui'
+import { EasyButton, EasyDescriptions, EasyDescriptionsItem, EasyIcon } from 'easy-ui'
 </script>
 
 <template>
@@ -19,37 +19,37 @@ import { XlyButton, XlyDescriptions, XlyDescriptionsItem, XlyIcon } from 'easy-u
         基础用法
       </h2>
       <p class="doc-section__desc">
-        通过 <code>XlyDescriptionsItem</code> 配置每一项内容，默认水平排列（label 左，内容右）。
+        通过 <code>EasyDescriptionsItem</code> 配置每一项内容，默认水平排列（label 左，内容右）。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDescriptions title="用户信息">
-            <XlyDescriptionsItem label="姓名">
+          <EasyDescriptions title="用户信息">
+            <EasyDescriptionsItem label="姓名">
               张明
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="工号">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="工号">
               EMP-2026001
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="部门">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="部门">
               技术研发部
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="职位">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="职位">
               高级工程师
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="手机">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="手机">
               138-xxxx-xxxx
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="邮箱">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="邮箱">
               zhang@company.com
-            </XlyDescriptionsItem>
-          </XlyDescriptions>
+            </EasyDescriptionsItem>
+          </EasyDescriptions>
         </div>
-        <XlyDocCode
-          code="<XlyDescriptions title=&quot;用户信息&quot;>
-  <XlyDescriptionsItem label=&quot;姓名&quot;>张明</XlyDescriptionsItem>
-  <XlyDescriptionsItem label=&quot;工号&quot;>EMP-2026001</XlyDescriptionsItem>
-  <XlyDescriptionsItem label=&quot;部门&quot;>技术研发部</XlyDescriptionsItem>
-</XlyDescriptions>"
+        <EasyDocCode
+          code="<EasyDescriptions title=&quot;用户信息&quot;>
+  <EasyDescriptionsItem label=&quot;姓名&quot;>张明</EasyDescriptionsItem>
+  <EasyDescriptionsItem label=&quot;工号&quot;>EMP-2026001</EasyDescriptionsItem>
+  <EasyDescriptionsItem label=&quot;部门&quot;>技术研发部</EasyDescriptionsItem>
+</EasyDescriptions>"
         />
       </div>
     </section>
@@ -68,64 +68,64 @@ import { XlyButton, XlyDescriptions, XlyDescriptionsItem, XlyIcon } from 'easy-u
             <div class="sub-label">
               无边框
             </div>
-            <XlyDescriptions title="项目概况" layout="vertical">
-              <XlyDescriptionsItem label="项目名称">
+            <EasyDescriptions title="项目概况" layout="vertical">
+              <EasyDescriptionsItem label="项目名称">
                 EaseUI 企业级组件库
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="负责人">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="负责人">
                 张明
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="创建时间">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="创建时间">
                 2026-01-01
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="当前版本">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="当前版本">
                 v2.4.0
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="开源协议">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="开源协议">
                 MIT
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="当前状态">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="当前状态">
                 <span class="status-badge status-active"><span class="status-dot" />进行中</span>
-              </XlyDescriptionsItem>
-            </XlyDescriptions>
+              </EasyDescriptionsItem>
+            </EasyDescriptions>
           </div>
           <div>
             <div class="sub-label">
               有边框
             </div>
-            <XlyDescriptions title="订单信息" layout="vertical" bordered>
-              <XlyDescriptionsItem label="订单编号">
+            <EasyDescriptions title="订单信息" layout="vertical" bordered>
+              <EasyDescriptionsItem label="订单编号">
                 ORD-20260325-001
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="下单时间">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="下单时间">
                 2026-03-25 14:30:00
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="支付方式">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="支付方式">
                 微信支付
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="商品名称">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="商品名称">
                 Vue3 企业级组件库
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="数量">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="数量">
                 1
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="订单金额">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="订单金额">
                 ¥ 299.00
-              </XlyDescriptionsItem>
-            </XlyDescriptions>
+              </EasyDescriptionsItem>
+            </EasyDescriptions>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 上下布局 -->
-<XlyDescriptions layout=&quot;vertical&quot;>
-  <XlyDescriptionsItem label=&quot;项目名称&quot;>EaseUI</XlyDescriptionsItem>
+<EasyDescriptions layout=&quot;vertical&quot;>
+  <EasyDescriptionsItem label=&quot;项目名称&quot;>EaseUI</EasyDescriptionsItem>
   ...
-</XlyDescriptions>
+</EasyDescriptions>
 
 <!-- 上下布局 + 边框 -->
-<XlyDescriptions layout=&quot;vertical&quot; bordered>
+<EasyDescriptions layout=&quot;vertical&quot; bordered>
   ...
-</XlyDescriptions>"
+</EasyDescriptions>"
         />
       </div>
     </section>
@@ -140,38 +140,38 @@ import { XlyButton, XlyDescriptions, XlyDescriptionsItem, XlyIcon } from 'easy-u
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDescriptions title="订单详情" bordered>
-            <XlyDescriptionsItem label="订单编号">
+          <EasyDescriptions title="订单详情" bordered>
+            <EasyDescriptionsItem label="订单编号">
               ORD-20260325-001
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="下单时间">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="下单时间">
               2026-03-25 14:30:00
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="支付方式">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="支付方式">
               微信支付
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="商品名称">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="商品名称">
               Vue3 企业级组件库
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="商品数量">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="商品数量">
               1
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="订单金额">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="订单金额">
               ¥ 299.00
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="收货地址" :span="3">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="收货地址" :span="3">
               广东省深圳市南山区科技园南区 A 栋 8 楼 801 室
-            </XlyDescriptionsItem>
-          </XlyDescriptions>
+            </EasyDescriptionsItem>
+          </EasyDescriptions>
         </div>
-        <XlyDocCode
-          code="<XlyDescriptions title=&quot;订单详情&quot; bordered>
-  <XlyDescriptionsItem label=&quot;订单编号&quot;>ORD-001</XlyDescriptionsItem>
+        <EasyDocCode
+          code="<EasyDescriptions title=&quot;订单详情&quot; bordered>
+  <EasyDescriptionsItem label=&quot;订单编号&quot;>ORD-001</EasyDescriptionsItem>
   <!-- span 属性实现跨列 -->
-  <XlyDescriptionsItem label=&quot;收货地址&quot; :span=&quot;3&quot;>
+  <EasyDescriptionsItem label=&quot;收货地址&quot; :span=&quot;3&quot;>
     广东省深圳市...
-  </XlyDescriptionsItem>
-</XlyDescriptions>"
+  </EasyDescriptionsItem>
+</EasyDescriptions>"
         />
       </div>
     </section>
@@ -190,56 +190,56 @@ import { XlyButton, XlyDescriptions, XlyDescriptionsItem, XlyIcon } from 'easy-u
             <div class="sub-label">
               column = 2
             </div>
-            <XlyDescriptions :column="2" bordered>
-              <XlyDescriptionsItem label="项目名称">
+            <EasyDescriptions :column="2" bordered>
+              <EasyDescriptionsItem label="项目名称">
                 EaseUI 企业级组件库
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="创建时间">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="创建时间">
                 2026-01-01
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="负责人">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="负责人">
                 张明
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="当前状态">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="当前状态">
                 进行中
-              </XlyDescriptionsItem>
-            </XlyDescriptions>
+              </EasyDescriptionsItem>
+            </EasyDescriptions>
           </div>
           <div>
             <div class="sub-label">
               column = 4
             </div>
-            <XlyDescriptions :column="4" bordered>
-              <XlyDescriptionsItem label="CPU">
+            <EasyDescriptions :column="4" bordered>
+              <EasyDescriptionsItem label="CPU">
                 Intel Core i9
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="内存">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="内存">
                 64 GB DDR5
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="硬盘">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="硬盘">
                 2 TB NVMe SSD
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="显卡">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="显卡">
                 NVIDIA RTX 4090
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="操作系统">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="操作系统">
                 macOS Sequoia
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="序列号">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="序列号">
                 MAC-2026-00128
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="购买日期">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="购买日期">
                 2026-01-15
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="保修期至">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="保修期至">
                 2029-01-15
-              </XlyDescriptionsItem>
-            </XlyDescriptions>
+              </EasyDescriptionsItem>
+            </EasyDescriptions>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyDescriptions :column=&quot;2&quot; bordered>...</XlyDescriptions>
-<XlyDescriptions :column=&quot;4&quot; bordered>...</XlyDescriptions>"
+        <EasyDocCode
+          code="<EasyDescriptions :column=&quot;2&quot; bordered>...</EasyDescriptions>
+<EasyDescriptions :column=&quot;4&quot; bordered>...</EasyDescriptions>"
         />
       </div>
     </section>
@@ -254,27 +254,27 @@ import { XlyButton, XlyDescriptions, XlyDescriptionsItem, XlyIcon } from 'easy-u
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDescriptions title="员工档案" bordered>
-            <XlyDescriptionsItem label="姓名">
+          <EasyDescriptions title="员工档案" bordered>
+            <EasyDescriptionsItem label="姓名">
               李雯
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="在职状态">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="在职状态">
               <span class="status-badge status-active"> <span class="status-dot" /> 在职 </span>
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="入职日期">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="入职日期">
               2023-06-01
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="技能标签">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="技能标签">
               <div class="tag-group">
                 <span class="tech-tag blue">Vue 3</span>
                 <span class="tech-tag green">TypeScript</span>
                 <span class="tech-tag orange">Node.js</span>
                 <span class="tech-tag purple">Go</span>
               </div>
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="绩效评级">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="绩效评级">
               <div class="rating-row">
-                <XlyIcon
+                <EasyIcon
                   v-for="i in 5"
                   :key="i"
                   name="el:StarFilled"
@@ -283,26 +283,26 @@ import { XlyButton, XlyDescriptions, XlyDescriptionsItem, XlyIcon } from 'easy-u
                 />
                 <span class="rating-text">4.0 / 5.0</span>
               </div>
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="操作">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="操作">
               <div class="action-group">
-                <XlyButton type="primary" size="small">
+                <EasyButton type="primary" size="small">
                   编辑
-                </XlyButton>
-                <XlyButton size="small">
+                </EasyButton>
+                <EasyButton size="small">
                   查看档案
-                </XlyButton>
+                </EasyButton>
               </div>
-            </XlyDescriptionsItem>
-          </XlyDescriptions>
+            </EasyDescriptionsItem>
+          </EasyDescriptions>
         </div>
-        <XlyDocCode
-          code="<XlyDescriptionsItem label=&quot;在职状态&quot;>
+        <EasyDocCode
+          code="<EasyDescriptionsItem label=&quot;在职状态&quot;>
   <span class=&quot;status-badge&quot;>在职</span>
-</XlyDescriptionsItem>
-<XlyDescriptionsItem label=&quot;技能标签&quot;>
+</EasyDescriptionsItem>
+<EasyDescriptionsItem label=&quot;技能标签&quot;>
   <span v-for=&quot;s in skills&quot; :key=&quot;s&quot;>{{ s }}</span>
-</XlyDescriptionsItem>"
+</EasyDescriptionsItem>"
         />
       </div>
     </section>
@@ -317,55 +317,55 @@ import { XlyButton, XlyDescriptions, XlyDescriptionsItem, XlyIcon } from 'easy-u
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDescriptions title="运营数据" layout="vertical" :column="4" bordered>
-            <XlyDescriptionsItem label="今日新增用户">
+          <EasyDescriptions title="运营数据" layout="vertical" :column="4" bordered>
+            <EasyDescriptionsItem label="今日新增用户">
               <div class="metric-value">
                 1,280
               </div>
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="月活跃用户">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="月活跃用户">
               <div class="metric-value">
                 42,680
               </div>
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="累计订单量">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="累计订单量">
               <div class="metric-value">
                 158,092
               </div>
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="今日营收">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="今日营收">
               <div class="metric-value revenue">
                 ¥ 86,420
               </div>
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="系统状态">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="系统状态">
               <span class="status-badge status-active"><span class="status-dot" />正常运行</span>
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="最后同步">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="最后同步">
               2026-03-26 13:00:00
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="数据版本">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="数据版本">
               v20260326-003
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="操作">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="操作">
               <div class="action-group">
-                <XlyButton size="small" type="primary">
+                <EasyButton size="small" type="primary">
                   刷新
-                </XlyButton>
-                <XlyButton size="small">
+                </EasyButton>
+                <EasyButton size="small">
                   导出
-                </XlyButton>
+                </EasyButton>
               </div>
-            </XlyDescriptionsItem>
-          </XlyDescriptions>
+            </EasyDescriptionsItem>
+          </EasyDescriptions>
         </div>
-        <XlyDocCode
-          code="<XlyDescriptions layout=&quot;vertical&quot; :column=&quot;4&quot; bordered>
-  <XlyDescriptionsItem label=&quot;今日新增用户&quot;>
+        <EasyDocCode
+          code="<EasyDescriptions layout=&quot;vertical&quot; :column=&quot;4&quot; bordered>
+  <EasyDescriptionsItem label=&quot;今日新增用户&quot;>
     <div class=&quot;metric-value&quot;>1,280</div>
-  </XlyDescriptionsItem>
+  </EasyDescriptionsItem>
   ...
-</XlyDescriptions>"
+</EasyDescriptions>"
         />
       </div>
     </section>
@@ -380,53 +380,53 @@ import { XlyButton, XlyDescriptions, XlyDescriptionsItem, XlyIcon } from 'easy-u
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDescriptions bordered>
+          <EasyDescriptions bordered>
             <template #title>
               <div class="custom-title">
-                <XlyIcon name="el:Document" :size="15" class="custom-title__icon" />
+                <EasyIcon name="el:Document" :size="15" class="custom-title__icon" />
                 合同基本信息
               </div>
             </template>
             <template #extra>
               <div class="extra-group">
-                <XlyButton size="small">
+                <EasyButton size="small">
                   打印
-                </XlyButton>
-                <XlyButton size="small" type="primary">
+                </EasyButton>
+                <EasyButton size="small" type="primary">
                   编辑
-                </XlyButton>
+                </EasyButton>
               </div>
             </template>
-            <XlyDescriptionsItem label="合同编号">
+            <EasyDescriptionsItem label="合同编号">
               HT-2026-00128
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="签署日期">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="签署日期">
               2026-03-01
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="合同状态">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="合同状态">
               <span class="status-badge status-active"> <span class="status-dot" /> 生效中 </span>
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="甲方">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="甲方">
               深圳市云华科技有限公司
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="乙方">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="乙方">
               北京易代码信息技术有限公司
-            </XlyDescriptionsItem>
-            <XlyDescriptionsItem label="合同金额">
+            </EasyDescriptionsItem>
+            <EasyDescriptionsItem label="合同金额">
               ¥ 1,280,000.00
-            </XlyDescriptionsItem>
-          </XlyDescriptions>
+            </EasyDescriptionsItem>
+          </EasyDescriptions>
         </div>
-        <XlyDocCode
-          code="<XlyDescriptions bordered>
+        <EasyDocCode
+          code="<EasyDescriptions bordered>
   <template #title>
-    <XlyIcon name=&quot;el:Document&quot; /> 合同信息
+    <EasyIcon name=&quot;el:Document&quot; /> 合同信息
   </template>
   <template #extra>
-    <XlyButton size=&quot;small&quot; type=&quot;primary&quot;>编辑</XlyButton>
+    <EasyButton size=&quot;small&quot; type=&quot;primary&quot;>编辑</EasyButton>
   </template>
   ...
-</XlyDescriptions>"
+</EasyDescriptions>"
         />
       </div>
     </section>
@@ -445,55 +445,55 @@ import { XlyButton, XlyDescriptions, XlyDescriptionsItem, XlyIcon } from 'easy-u
             <div class="sub-label">
               size = small
             </div>
-            <XlyDescriptions size="small" bordered>
-              <XlyDescriptionsItem label="姓名">
+            <EasyDescriptions size="small" bordered>
+              <EasyDescriptionsItem label="姓名">
                 张明
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="工号">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="工号">
                 EMP-001
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="部门">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="部门">
                 技术研发部
-              </XlyDescriptionsItem>
-            </XlyDescriptions>
+              </EasyDescriptionsItem>
+            </EasyDescriptions>
           </div>
           <div>
             <div class="sub-label">
               size = default
             </div>
-            <XlyDescriptions size="default" bordered>
-              <XlyDescriptionsItem label="姓名">
+            <EasyDescriptions size="default" bordered>
+              <EasyDescriptionsItem label="姓名">
                 张明
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="工号">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="工号">
                 EMP-001
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="部门">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="部门">
                 技术研发部
-              </XlyDescriptionsItem>
-            </XlyDescriptions>
+              </EasyDescriptionsItem>
+            </EasyDescriptions>
           </div>
           <div>
             <div class="sub-label">
               size = large
             </div>
-            <XlyDescriptions size="large" bordered>
-              <XlyDescriptionsItem label="姓名">
+            <EasyDescriptions size="large" bordered>
+              <EasyDescriptionsItem label="姓名">
                 张明
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="工号">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="工号">
                 EMP-001
-              </XlyDescriptionsItem>
-              <XlyDescriptionsItem label="部门">
+              </EasyDescriptionsItem>
+              <EasyDescriptionsItem label="部门">
                 技术研发部
-              </XlyDescriptionsItem>
-            </XlyDescriptions>
+              </EasyDescriptionsItem>
+            </EasyDescriptions>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyDescriptions size=&quot;small&quot; bordered>...</XlyDescriptions>
-<XlyDescriptions size=&quot;default&quot; bordered>...</XlyDescriptions>
-<XlyDescriptions size=&quot;large&quot; bordered>...</XlyDescriptions>"
+        <EasyDocCode
+          code="<EasyDescriptions size=&quot;small&quot; bordered>...</EasyDescriptions>
+<EasyDescriptions size=&quot;default&quot; bordered>...</EasyDescriptions>
+<EasyDescriptions size=&quot;large&quot; bordered>...</EasyDescriptions>"
         />
       </div>
     </section>
@@ -578,7 +578,7 @@ import { XlyButton, XlyDescriptions, XlyDescriptionsItem, XlyIcon } from 'easy-u
           <tbody>
             <tr>
               <td><code>default</code></td>
-              <td>放置 XlyDescriptionsItem 子项</td>
+              <td>放置 EasyDescriptionsItem 子项</td>
             </tr>
             <tr>
               <td><code>title</code></td>

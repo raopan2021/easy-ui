@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyTag } from 'easy-ui'
+import { EasyTag } from 'easy-ui'
 import { nextTick, ref } from 'vue'
 
 // 可关闭标签数据
@@ -85,30 +85,30 @@ function removeTagByValue(list: string[], tag: string) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTag>默认</XlyTag>
-          <XlyTag type="primary">
+          <EasyTag>默认</EasyTag>
+          <EasyTag type="primary">
             主要
-          </XlyTag>
-          <XlyTag type="success">
+          </EasyTag>
+          <EasyTag type="success">
             成功
-          </XlyTag>
-          <XlyTag type="warning">
+          </EasyTag>
+          <EasyTag type="warning">
             警告
-          </XlyTag>
-          <XlyTag type="danger">
+          </EasyTag>
+          <EasyTag type="danger">
             危险
-          </XlyTag>
-          <XlyTag type="info">
+          </EasyTag>
+          <EasyTag type="info">
             信息
-          </XlyTag>
+          </EasyTag>
         </div>
-        <XlyDocCode
-          code="<xly-tag>默认</xly-tag>
-<xly-tag type=&quot;primary&quot;>主要</xly-tag>
-<xly-tag type=&quot;success&quot;>成功</xly-tag>
-<xly-tag type=&quot;warning&quot;>警告</xly-tag>
-<xly-tag type=&quot;danger&quot;>危险</xly-tag>
-<xly-tag type=&quot;info&quot;>信息</xly-tag>"
+        <EasyDocCode
+          code="<easy-tag>默认</easy-tag>
+<easy-tag type=&quot;primary&quot;>主要</easy-tag>
+<easy-tag type=&quot;success&quot;>成功</easy-tag>
+<easy-tag type=&quot;warning&quot;>警告</easy-tag>
+<easy-tag type=&quot;danger&quot;>危险</easy-tag>
+<easy-tag type=&quot;info&quot;>信息</easy-tag>"
         />
       </div>
     </section>
@@ -126,75 +126,75 @@ function removeTagByValue(list: string[], tag: string) {
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div class="tag-row">
             <span class="effect-label">light</span>
-            <XlyTag>默认</XlyTag>
-            <XlyTag type="primary">
+            <EasyTag>默认</EasyTag>
+            <EasyTag type="primary">
               主要
-            </XlyTag>
-            <XlyTag type="success">
+            </EasyTag>
+            <EasyTag type="success">
               成功
-            </XlyTag>
-            <XlyTag type="warning">
+            </EasyTag>
+            <EasyTag type="warning">
               警告
-            </XlyTag>
-            <XlyTag type="danger">
+            </EasyTag>
+            <EasyTag type="danger">
               危险
-            </XlyTag>
-            <XlyTag type="info">
+            </EasyTag>
+            <EasyTag type="info">
               信息
-            </XlyTag>
+            </EasyTag>
           </div>
           <div class="tag-row">
             <span class="effect-label">plain</span>
-            <XlyTag effect="plain">
+            <EasyTag effect="plain">
               默认
-            </XlyTag>
-            <XlyTag type="primary" effect="plain">
+            </EasyTag>
+            <EasyTag type="primary" effect="plain">
               主要
-            </XlyTag>
-            <XlyTag type="success" effect="plain">
+            </EasyTag>
+            <EasyTag type="success" effect="plain">
               成功
-            </XlyTag>
-            <XlyTag type="warning" effect="plain">
+            </EasyTag>
+            <EasyTag type="warning" effect="plain">
               警告
-            </XlyTag>
-            <XlyTag type="danger" effect="plain">
+            </EasyTag>
+            <EasyTag type="danger" effect="plain">
               危险
-            </XlyTag>
-            <XlyTag type="info" effect="plain">
+            </EasyTag>
+            <EasyTag type="info" effect="plain">
               信息
-            </XlyTag>
+            </EasyTag>
           </div>
           <div class="tag-row">
             <span class="effect-label">dark</span>
-            <XlyTag effect="dark">
+            <EasyTag effect="dark">
               默认
-            </XlyTag>
-            <XlyTag type="primary" effect="dark">
+            </EasyTag>
+            <EasyTag type="primary" effect="dark">
               主要
-            </XlyTag>
-            <XlyTag type="success" effect="dark">
+            </EasyTag>
+            <EasyTag type="success" effect="dark">
               成功
-            </XlyTag>
-            <XlyTag type="warning" effect="dark">
+            </EasyTag>
+            <EasyTag type="warning" effect="dark">
               警告
-            </XlyTag>
-            <XlyTag type="danger" effect="dark">
+            </EasyTag>
+            <EasyTag type="danger" effect="dark">
               危险
-            </XlyTag>
-            <XlyTag type="info" effect="dark">
+            </EasyTag>
+            <EasyTag type="info" effect="dark">
               信息
-            </XlyTag>
+            </EasyTag>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 浅色（默认）-->
-<xly-tag effect=&quot;light&quot;>...</xly-tag>
+<easy-tag effect=&quot;light&quot;>...</easy-tag>
 
 <!-- 描边 -->
-<xly-tag effect=&quot;plain&quot;>...</xly-tag>
+<easy-tag effect=&quot;plain&quot;>...</easy-tag>
 
 <!-- 深色 -->
-<xly-tag effect=&quot;dark&quot;>...</xly-tag>"
+<easy-tag effect=&quot;dark&quot;>...</easy-tag>"
         />
       </div>
     </section>
@@ -210,20 +210,20 @@ function removeTagByValue(list: string[], tag: string) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTag type="primary" size="large">
+          <EasyTag type="primary" size="large">
             Large
-          </XlyTag>
-          <XlyTag type="primary">
+          </EasyTag>
+          <EasyTag type="primary">
             Default
-          </XlyTag>
-          <XlyTag type="primary" size="small">
+          </EasyTag>
+          <EasyTag type="primary" size="small">
             Small
-          </XlyTag>
+          </EasyTag>
         </div>
-        <XlyDocCode
-          code="<xly-tag type=&quot;primary&quot; size=&quot;large&quot;>Large</xly-tag>
-<xly-tag type=&quot;primary&quot;>Default</xly-tag>
-<xly-tag type=&quot;primary&quot; size=&quot;small&quot;>Small</xly-tag>"
+        <EasyDocCode
+          code="<easy-tag type=&quot;primary&quot; size=&quot;large&quot;>Large</easy-tag>
+<easy-tag type=&quot;primary&quot;>Default</easy-tag>
+<easy-tag type=&quot;primary&quot; size=&quot;small&quot;>Small</easy-tag>"
         />
       </div>
     </section>
@@ -238,28 +238,28 @@ function removeTagByValue(list: string[], tag: string) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTag round>
+          <EasyTag round>
             默认
-          </XlyTag>
-          <XlyTag type="primary" round>
+          </EasyTag>
+          <EasyTag type="primary" round>
             主要
-          </XlyTag>
-          <XlyTag type="success" round>
+          </EasyTag>
+          <EasyTag type="success" round>
             成功
-          </XlyTag>
-          <XlyTag type="warning" round>
+          </EasyTag>
+          <EasyTag type="warning" round>
             警告
-          </XlyTag>
-          <XlyTag type="danger" round>
+          </EasyTag>
+          <EasyTag type="danger" round>
             危险
-          </XlyTag>
-          <XlyTag type="info" round>
+          </EasyTag>
+          <EasyTag type="info" round>
             信息
-          </XlyTag>
+          </EasyTag>
         </div>
-        <XlyDocCode
-          code="<xly-tag type=&quot;primary&quot; round>主要</xly-tag>
-<xly-tag type=&quot;success&quot; round>成功</xly-tag>"
+        <EasyDocCode
+          code="<easy-tag type=&quot;primary&quot; round>主要</easy-tag>
+<easy-tag type=&quot;success&quot; round>成功</easy-tag>"
         />
       </div>
     </section>
@@ -274,27 +274,27 @@ function removeTagByValue(list: string[], tag: string) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTag type="primary" icon="User">
+          <EasyTag type="primary" icon="User">
             用户
-          </XlyTag>
-          <XlyTag type="success" icon="CircleCheck">
+          </EasyTag>
+          <EasyTag type="success" icon="CircleCheck">
             已通过
-          </XlyTag>
-          <XlyTag type="warning" icon="Warning">
+          </EasyTag>
+          <EasyTag type="warning" icon="Warning">
             待审核
-          </XlyTag>
-          <XlyTag type="danger" icon="CircleClose">
+          </EasyTag>
+          <EasyTag type="danger" icon="CircleClose">
             已拒绝
-          </XlyTag>
-          <XlyTag type="info" icon="Clock">
+          </EasyTag>
+          <EasyTag type="info" icon="Clock">
             处理中
-          </XlyTag>
+          </EasyTag>
         </div>
-        <XlyDocCode
-          code="<xly-tag type=&quot;primary&quot; icon=&quot;User&quot;>用户</xly-tag>
-<xly-tag type=&quot;success&quot; icon=&quot;CircleCheck&quot;>已通过</xly-tag>
-<xly-tag type=&quot;warning&quot; icon=&quot;Warning&quot;>待审核</xly-tag>
-<xly-tag type=&quot;danger&quot; icon=&quot;CircleClose&quot;>已拒绝</xly-tag>"
+        <EasyDocCode
+          code="<easy-tag type=&quot;primary&quot; icon=&quot;User&quot;>用户</easy-tag>
+<easy-tag type=&quot;success&quot; icon=&quot;CircleCheck&quot;>已通过</easy-tag>
+<easy-tag type=&quot;warning&quot; icon=&quot;Warning&quot;>待审核</easy-tag>
+<easy-tag type=&quot;danger&quot; icon=&quot;CircleClose&quot;>已拒绝</easy-tag>"
         />
       </div>
     </section>
@@ -310,7 +310,7 @@ function removeTagByValue(list: string[], tag: string) {
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 16px">
           <div class="tag-row">
-            <XlyTag
+            <EasyTag
               v-for="tag in closableTags1"
               :key="tag.label"
               :type="tag.type"
@@ -318,11 +318,11 @@ function removeTagByValue(list: string[], tag: string) {
               @close="removeTag(closableTags1, tag)"
             >
               {{ tag.label }}
-            </XlyTag>
+            </EasyTag>
             <span v-if="closableTags1.length === 0" class="empty-hint">所有标签已关闭，刷新页面重置</span>
           </div>
           <div class="tag-row">
-            <XlyTag
+            <EasyTag
               v-for="tag in closableTags2"
               :key="tag.label"
               :type="tag.type"
@@ -332,11 +332,11 @@ function removeTagByValue(list: string[], tag: string) {
               @close="removeTag(closableTags2, tag)"
             >
               {{ tag.label }}
-            </XlyTag>
+            </EasyTag>
           </div>
         </div>
-        <XlyDocCode
-          code="<xly-tag type=&quot;primary&quot; closable @close=&quot;handleClose&quot;>可关闭</xly-tag>"
+        <EasyDocCode
+          code="<easy-tag type=&quot;primary&quot; closable @close=&quot;handleClose&quot;>可关闭</easy-tag>"
         />
       </div>
     </section>
@@ -352,7 +352,7 @@ function removeTagByValue(list: string[], tag: string) {
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 16px">
           <div class="tag-row">
-            <XlyTag
+            <EasyTag
               v-for="tag in clickableTags"
               :key="tag.label"
               :type="selectedTag === tag.label ? tag.type : 'default'"
@@ -361,14 +361,14 @@ function removeTagByValue(list: string[], tag: string) {
               @click="selectedTag = tag.label"
             >
               {{ tag.label }}
-            </XlyTag>
+            </EasyTag>
           </div>
           <div v-if="selectedTag" class="click-hint">
             已选中：<strong>{{ selectedTag }}</strong>
           </div>
         </div>
-        <XlyDocCode
-          code="<xly-tag type=&quot;primary&quot; clickable @click=&quot;handleClick&quot;>点击我</xly-tag>"
+        <EasyDocCode
+          code="<easy-tag type=&quot;primary&quot; clickable @click=&quot;handleClick&quot;>点击我</easy-tag>"
         />
       </div>
     </section>
@@ -383,20 +383,20 @@ function removeTagByValue(list: string[], tag: string) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyTag type="primary" disabled>
+          <EasyTag type="primary" disabled>
             禁用
-          </XlyTag>
-          <XlyTag type="success" disabled closable>
+          </EasyTag>
+          <EasyTag type="success" disabled closable>
             禁用关闭
-          </XlyTag>
-          <XlyTag type="warning" disabled clickable>
+          </EasyTag>
+          <EasyTag type="warning" disabled clickable>
             禁用点击
-          </XlyTag>
-          <XlyTag type="danger" disabled effect="dark">
+          </EasyTag>
+          <EasyTag type="danger" disabled effect="dark">
             禁用深色
-          </XlyTag>
+          </EasyTag>
         </div>
-        <XlyDocCode code="<xly-tag type=&quot;primary&quot; disabled>禁用</xly-tag>" />
+        <EasyDocCode code="<easy-tag type=&quot;primary&quot; disabled>禁用</easy-tag>" />
       </div>
     </section>
 
@@ -412,63 +412,63 @@ function removeTagByValue(list: string[], tag: string) {
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div class="tag-row">
             <span class="effect-label">light</span>
-            <XlyTag color="#7c3aed">
+            <EasyTag color="#7c3aed">
               紫色
-            </XlyTag>
-            <XlyTag color="#0ea5e9">
+            </EasyTag>
+            <EasyTag color="#0ea5e9">
               天蓝
-            </XlyTag>
-            <XlyTag color="#f43f5e">
+            </EasyTag>
+            <EasyTag color="#f43f5e">
               玫瑰
-            </XlyTag>
-            <XlyTag color="#10b981">
+            </EasyTag>
+            <EasyTag color="#10b981">
               翠绿
-            </XlyTag>
-            <XlyTag color="#f97316">
+            </EasyTag>
+            <EasyTag color="#f97316">
               橙色
-            </XlyTag>
+            </EasyTag>
           </div>
           <div class="tag-row">
             <span class="effect-label">plain</span>
-            <XlyTag color="#7c3aed" effect="plain">
+            <EasyTag color="#7c3aed" effect="plain">
               紫色
-            </XlyTag>
-            <XlyTag color="#0ea5e9" effect="plain">
+            </EasyTag>
+            <EasyTag color="#0ea5e9" effect="plain">
               天蓝
-            </XlyTag>
-            <XlyTag color="#f43f5e" effect="plain">
+            </EasyTag>
+            <EasyTag color="#f43f5e" effect="plain">
               玫瑰
-            </XlyTag>
-            <XlyTag color="#10b981" effect="plain">
+            </EasyTag>
+            <EasyTag color="#10b981" effect="plain">
               翠绿
-            </XlyTag>
-            <XlyTag color="#f97316" effect="plain">
+            </EasyTag>
+            <EasyTag color="#f97316" effect="plain">
               橙色
-            </XlyTag>
+            </EasyTag>
           </div>
           <div class="tag-row">
             <span class="effect-label">dark</span>
-            <XlyTag color="#7c3aed" effect="dark">
+            <EasyTag color="#7c3aed" effect="dark">
               紫色
-            </XlyTag>
-            <XlyTag color="#0ea5e9" effect="dark">
+            </EasyTag>
+            <EasyTag color="#0ea5e9" effect="dark">
               天蓝
-            </XlyTag>
-            <XlyTag color="#f43f5e" effect="dark">
+            </EasyTag>
+            <EasyTag color="#f43f5e" effect="dark">
               玫瑰
-            </XlyTag>
-            <XlyTag color="#10b981" effect="dark">
+            </EasyTag>
+            <EasyTag color="#10b981" effect="dark">
               翠绿
-            </XlyTag>
-            <XlyTag color="#f97316" effect="dark">
+            </EasyTag>
+            <EasyTag color="#f97316" effect="dark">
               橙色
-            </XlyTag>
+            </EasyTag>
           </div>
         </div>
-        <XlyDocCode
-          code="<xly-tag color=&quot;#7c3aed&quot;>紫色</xly-tag>
-<xly-tag color=&quot;#7c3aed&quot; effect=&quot;plain&quot;>紫色描边</xly-tag>
-<xly-tag color=&quot;#7c3aed&quot; effect=&quot;dark&quot;>紫色深色</xly-tag>"
+        <EasyDocCode
+          code="<easy-tag color=&quot;#7c3aed&quot;>紫色</easy-tag>
+<easy-tag color=&quot;#7c3aed&quot; effect=&quot;plain&quot;>紫色描边</easy-tag>
+<easy-tag color=&quot;#7c3aed&quot; effect=&quot;dark&quot;>紫色深色</easy-tag>"
         />
       </div>
     </section>
@@ -484,7 +484,7 @@ function removeTagByValue(list: string[], tag: string) {
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div class="tag-row" style="flex-wrap: wrap">
-            <XlyTag
+            <EasyTag
               v-for="tag in dynamicTags"
               :key="tag"
               type="primary"
@@ -493,7 +493,7 @@ function removeTagByValue(list: string[], tag: string) {
               @close="removeTagByValue(dynamicTags, tag)"
             >
               {{ tag }}
-            </XlyTag>
+            </EasyTag>
             <div v-if="inputVisible" class="tag-input-wrap">
               <input
                 ref="inputRef"
@@ -504,20 +504,20 @@ function removeTagByValue(list: string[], tag: string) {
                 @blur="addTag"
               >
             </div>
-            <XlyTag v-else type="primary" effect="plain" clickable @click="showInput">
+            <EasyTag v-else type="primary" effect="plain" clickable @click="showInput">
               + 新增标签
-            </XlyTag>
+            </EasyTag>
           </div>
         </div>
-        <XlyDocCode
-          code="<xly-tag
+        <EasyDocCode
+          code="<easy-tag
   v-for=&quot;tag in tags&quot;
   :key=&quot;tag&quot;
   closable
   @close=&quot;removeTag(tag)&quot;
->{{ tag }}</xly-tag>
+>{{ tag }}</easy-tag>
 
-<xly-tag clickable @click=&quot;showInput&quot;>+ 新增</xly-tag>"
+<easy-tag clickable @click=&quot;showInput&quot;>+ 新增</easy-tag>"
         />
       </div>
     </section>

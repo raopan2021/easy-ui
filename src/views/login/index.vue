@@ -14,7 +14,7 @@ import MinimalTheme from './components/themes/MinimalTheme.vue'
 import NatureTheme from './components/themes/NatureTheme.vue'
 import ThemeSwitcher from './components/ThemeSwitcher.vue'
 
-defineOptions({ name: 'XlyLogin' })
+defineOptions({ name: 'EasyLogin' })
 
 /* ============ 主题列表 ============ */
 const themes: ThemeConfig[] = [

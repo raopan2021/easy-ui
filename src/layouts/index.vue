@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyWorktab } from 'easy-ui'
+import { EasyWorktab } from 'easy-ui'
 import { computed, nextTick, ref, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
 import menuData from '@/data/menu.json'
@@ -12,7 +12,7 @@ import VerticalSidebar from './components/VerticalSidebar.vue'
 const route = useRoute()
 const tabsStore = useTabsStore()
 const menuLayoutStore = useMenuLayoutStore()
-const worktabRef = ref<InstanceType<typeof XlyWorktab>>()
+const worktabRef = ref<InstanceType<typeof EasyWorktab>>()
 const contentRef = ref<HTMLElement>()
 
 // 菜单组件映射（水平布局时不需要单独组件）
@@ -88,7 +88,7 @@ watch(
       <!-- 右侧内容 -->
       <div class="layout-main" :class="{ 'layout-main--horizontal': menuLayoutStore.currentLayout === 'horizontal' }">
         <!-- 标签页 -->
-        <XlyWorktab ref="worktabRef" />
+        <EasyWorktab ref="worktabRef" />
         <!-- 页面内容（keep-alive 缓存） -->
         <main ref="contentRef" class="layout-content">
           <RouterView v-slot="{ Component, route: currentRoute }">

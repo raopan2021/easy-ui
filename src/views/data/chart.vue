@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyCard, XlyChart } from 'easy-ui'
+import { EasyCard, EasyChart } from 'easy-ui'
 import { ref } from 'vue'
 
 // ===== 折线图数据 =====
@@ -350,8 +350,8 @@ function onDrill(payload: {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard shadow="never" :bordered="true">
-            <XlyChart
+          <EasyCard shadow="never" :bordered="true">
+            <EasyChart
               type="line"
               title="月度访问量"
               subtitle="2025年全年数据统计"
@@ -360,10 +360,10 @@ function onDrill(payload: {
               :height="300"
               :show-label="true"
             />
-          </XlyCard>
+          </EasyCard>
         </div>
-        <XlyDocCode
-          code="<XlyChart
+        <EasyDocCode
+          code="<EasyChart
   type=&quot;line&quot;
   title=&quot;月度访问量&quot;
   subtitle=&quot;2025年全年数据统计&quot;
@@ -389,8 +389,8 @@ function onDrill(payload: {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard shadow="never" :bordered="true">
-            <XlyChart
+          <EasyCard shadow="never" :bordered="true">
+            <EasyChart
               type="line"
               title="股价走势"
               :labels="weekLabels"
@@ -398,10 +398,10 @@ function onDrill(payload: {
               :area-fill="false"
               :height="260"
             />
-          </XlyCard>
+          </EasyCard>
         </div>
-        <XlyDocCode
-          code="<XlyChart
+        <EasyDocCode
+          code="<EasyChart
   type=&quot;line&quot;
   title=&quot;股价走势&quot;
   :labels=&quot;['周一','周二','周三','周四','周五','周六','周日']&quot;
@@ -426,8 +426,8 @@ function onDrill(payload: {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard shadow="never" :bordered="true">
-            <XlyChart
+          <EasyCard shadow="never" :bordered="true">
+            <EasyChart
               type="line"
               title="用户增长"
               :labels="dayLabels"
@@ -436,10 +436,10 @@ function onDrill(payload: {
               :height="240"
               legend-position="top"
             />
-          </XlyCard>
+          </EasyCard>
         </div>
-        <XlyDocCode
-          code="<XlyChart
+        <EasyDocCode
+          code="<EasyChart
   type=&quot;line&quot;
   title=&quot;用户增长&quot;
   :labels=&quot;['周一','周二','周三','周四','周五','周六','周日']&quot;
@@ -464,8 +464,8 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="chart-row">
-            <XlyCard shadow="never" :bordered="true" class="chart-col">
-              <XlyChart
+            <EasyCard shadow="never" :bordered="true" class="chart-col">
+              <EasyChart
                 type="line"
                 title="直线（默认）"
                 :labels="smoothLabels"
@@ -474,9 +474,9 @@ function onDrill(payload: {
                 :show-dots="false"
                 :height="220"
               />
-            </XlyCard>
-            <XlyCard shadow="never" :bordered="true" class="chart-col">
-              <XlyChart
+            </EasyCard>
+            <EasyCard shadow="never" :bordered="true" class="chart-col">
+              <EasyChart
                 type="line"
                 title="平滑曲线"
                 :labels="smoothLabels"
@@ -486,10 +486,10 @@ function onDrill(payload: {
                 :show-dots="false"
                 :height="220"
               />
-            </XlyCard>
+            </EasyCard>
           </div>
-          <XlyCard shadow="never" :bordered="true" style="margin-top: 16px">
-            <XlyChart
+          <EasyCard shadow="never" :bordered="true" style="margin-top: 16px">
+            <EasyChart
               type="line"
               title="平滑面积图"
               :labels="smoothLabels"
@@ -498,11 +498,11 @@ function onDrill(payload: {
               :smooth="true"
               :height="240"
             />
-          </XlyCard>
+          </EasyCard>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 直线（默认） -->
-<XlyChart
+<EasyChart
   type=&quot;line&quot;
   :labels=&quot;labels&quot;
   :series=&quot;series&quot;
@@ -511,7 +511,7 @@ function onDrill(payload: {
 />
 
 <!-- 平滑曲线 -->
-<XlyChart
+<EasyChart
   type=&quot;line&quot;
   :labels=&quot;labels&quot;
   :series=&quot;series&quot;
@@ -521,7 +521,7 @@ function onDrill(payload: {
 />
 
 <!-- 平滑面积图 -->
-<XlyChart
+<EasyChart
   type=&quot;line&quot;
   :labels=&quot;labels&quot;
   :series=&quot;series&quot;
@@ -545,8 +545,8 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="chart-row">
-            <XlyCard shadow="never" :bordered="true" class="chart-col">
-              <XlyChart
+            <EasyCard shadow="never" :bordered="true" class="chart-col">
+              <EasyChart
                 type="line"
                 title="显示数据点（默认）"
                 :labels="smoothLabels"
@@ -554,9 +554,9 @@ function onDrill(payload: {
                 :area-fill="false"
                 :height="220"
               />
-            </XlyCard>
-            <XlyCard shadow="never" :bordered="true" class="chart-col">
-              <XlyChart
+            </EasyCard>
+            <EasyCard shadow="never" :bordered="true" class="chart-col">
+              <EasyChart
                 type="line"
                 title="隐藏数据点"
                 :labels="smoothLabels"
@@ -565,12 +565,12 @@ function onDrill(payload: {
                 :show-dots="false"
                 :height="220"
               />
-            </XlyCard>
+            </EasyCard>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 显示数据点（默认） -->
-<XlyChart
+<EasyChart
   type=&quot;line&quot;
   :labels=&quot;labels&quot;
   :series=&quot;series&quot;
@@ -578,7 +578,7 @@ function onDrill(payload: {
 />
 
 <!-- 隐藏数据点 -->
-<XlyChart
+<EasyChart
   type=&quot;line&quot;
   :labels=&quot;labels&quot;
   :series=&quot;series&quot;
@@ -599,8 +599,8 @@ function onDrill(payload: {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard shadow="never" :bordered="true">
-            <XlyChart
+          <EasyCard shadow="never" :bordered="true">
+            <EasyChart
               type="bar"
               title="季度销售额"
               subtitle="按产品线统计（万元）"
@@ -609,10 +609,10 @@ function onDrill(payload: {
               :height="300"
               :show-label="true"
             />
-          </XlyCard>
+          </EasyCard>
         </div>
-        <XlyDocCode
-          code="<XlyChart
+        <EasyDocCode
+          code="<EasyChart
   type=&quot;bar&quot;
   title=&quot;季度销售额&quot;
   subtitle=&quot;按产品线统计（万元）&quot;
@@ -639,8 +639,8 @@ function onDrill(payload: {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard shadow="never" :bordered="true">
-            <XlyChart
+          <EasyCard shadow="never" :bordered="true">
+            <EasyChart
               type="bar"
               title="各城市 GMV（亿元）"
               :labels="cityLabels"
@@ -649,10 +649,10 @@ function onDrill(payload: {
               :bar-radius="6"
               :height="260"
             />
-          </XlyCard>
+          </EasyCard>
         </div>
-        <XlyDocCode
-          code="<XlyChart
+        <EasyDocCode
+          code="<EasyChart
   type=&quot;bar&quot;
   title=&quot;各城市GMV（亿元）&quot;
   :labels=&quot;['北京','上海','广州','深圳','杭州','成都']&quot;
@@ -677,8 +677,8 @@ function onDrill(payload: {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard shadow="never" :bordered="true">
-            <XlyChart
+          <EasyCard shadow="never" :bordered="true">
+            <EasyChart
               type="bar"
               title="各产品季度销售额"
               subtitle="单柱自定义颜色示例"
@@ -688,10 +688,10 @@ function onDrill(payload: {
               :show-label="true"
               :bar-radius="6"
             />
-          </XlyCard>
+          </EasyCard>
         </div>
-        <XlyDocCode
-          code="<XlyChart
+        <EasyDocCode
+          code="<EasyChart
   type=&quot;bar&quot;
   title=&quot;各产品季度销售额&quot;
   :labels=&quot;['Q1', 'Q2', 'Q3', 'Q4']&quot;
@@ -727,8 +727,8 @@ function onDrill(payload: {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard shadow="never" :bordered="true">
-            <XlyChart
+          <EasyCard shadow="never" :bordered="true">
+            <EasyChart
               type="stack"
               title="各渠道月度销售额"
               subtitle="Q1 – Q2 多渠道堆叠对比"
@@ -738,10 +738,10 @@ function onDrill(payload: {
               :show-label="true"
               :bar-radius="4"
             />
-          </XlyCard>
+          </EasyCard>
         </div>
-        <XlyDocCode
-          code="<XlyChart
+        <EasyDocCode
+          code="<EasyChart
   type=&quot;stack&quot;
   title=&quot;各渠道月度销售额&quot;
   :labels=&quot;['1月', '2月', '3月', '4月', '5月', '6月']&quot;
@@ -769,8 +769,8 @@ function onDrill(payload: {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard shadow="never" :bordered="true">
-            <XlyChart
+          <EasyCard shadow="never" :bordered="true">
+            <EasyChart
               type="stack"
               title="统一每层颜色"
               :labels="stackLabels"
@@ -779,10 +779,10 @@ function onDrill(payload: {
               :bar-radius="4"
               :show-label="true"
             />
-          </XlyCard>
+          </EasyCard>
         </div>
-        <XlyDocCode
-          code="<XlyChart
+        <EasyDocCode
+          code="<EasyChart
   type=&quot;stack&quot;
   title=&quot;统一每层颜色&quot;
   :labels=&quot;['1月', '2月', '3月', '4月', '5月', '6月']&quot;
@@ -810,8 +810,8 @@ function onDrill(payload: {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard shadow="never" :bordered="true">
-            <XlyChart
+          <EasyCard shadow="never" :bordered="true">
+            <EasyChart
               type="stack"
               title="单独设置某柱某层颜色"
               subtitle="第3根柱子高亮所有层"
@@ -821,12 +821,12 @@ function onDrill(payload: {
               :height="280"
               :bar-radius="4"
             />
-          </XlyCard>
+          </EasyCard>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- stackColors[柱索引][层索引] 精确控制某根柱某层颜色 -->
 <!-- 以下将第 3 根柱（索引 2）的所有层设置为高亮色 -->
-<XlyChart
+<EasyChart
   type=&quot;stack&quot;
   title=&quot;单独设置某柱某层颜色&quot;
   subtitle=&quot;第3根柱子高亮所有层&quot;
@@ -863,8 +863,8 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="chart-row">
-            <XlyCard shadow="never" :bordered="true" class="chart-col">
-              <XlyChart
+            <EasyCard shadow="never" :bordered="true" class="chart-col">
+              <EasyChart
                 type="line"
                 title="用户增长（含标签）"
                 :labels="dayLabels"
@@ -873,9 +873,9 @@ function onDrill(payload: {
                 :show-label="true"
                 :height="240"
               />
-            </XlyCard>
-            <XlyCard shadow="never" :bordered="true" class="chart-col">
-              <XlyChart
+            </EasyCard>
+            <EasyCard shadow="never" :bordered="true" class="chart-col">
+              <EasyChart
                 type="bar"
                 title="各城市 GMV（含标签）"
                 :labels="cityLabels"
@@ -885,12 +885,12 @@ function onDrill(payload: {
                 :show-label="true"
                 :height="240"
               />
-            </XlyCard>
+            </EasyCard>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 折线图显示数据标签 -->
-<XlyChart
+<EasyChart
   type=&quot;line&quot;
   :series=&quot;series&quot;
   :labels=&quot;labels&quot;
@@ -898,7 +898,7 @@ function onDrill(payload: {
 />
 
 <!-- 柱状图显示数据标签 -->
-<XlyChart
+<EasyChart
   type=&quot;bar&quot;
   :series=&quot;series&quot;
   :labels=&quot;labels&quot;
@@ -920,8 +920,8 @@ function onDrill(payload: {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard shadow="never" :bordered="true">
-            <XlyChart
+          <EasyCard shadow="never" :bordered="true">
+            <EasyChart
               type="mixed"
               title="销售额与增长率"
               subtitle="柱状：销售额（万元）  折线：环比增长率（%）"
@@ -929,10 +929,10 @@ function onDrill(payload: {
               :series="mixedSeries"
               :height="320"
             />
-          </XlyCard>
+          </EasyCard>
         </div>
-        <XlyDocCode
-          code="<XlyChart
+        <EasyDocCode
+          code="<EasyChart
   type=&quot;mixed&quot;
   title=&quot;销售额与增长率&quot;
   :labels=&quot;['1月', '2月', '3月', '4月', '5月', '6月']&quot;
@@ -959,29 +959,29 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="chart-row">
-            <XlyCard shadow="never" :bordered="true" class="chart-col">
-              <XlyChart
+            <EasyCard shadow="never" :bordered="true" class="chart-col">
+              <EasyChart
                 type="mixed"
                 title="月度访问量 & 转化率"
                 :labels="mixedLabels"
                 :series="mixedSeries2"
                 :height="300"
               />
-            </XlyCard>
-            <XlyCard shadow="never" :bordered="true" class="chart-col">
-              <XlyChart
+            </EasyCard>
+            <EasyCard shadow="never" :bordered="true" class="chart-col">
+              <EasyChart
                 type="mixed"
                 title="收入 & 费用率（多折线）"
                 :labels="mixedLabels"
                 :series="mixedSeries3"
                 :height="300"
               />
-            </XlyCard>
+            </EasyCard>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 单柱 + 单折线：访问量（柱，左Y轴）+ 转化率（折线，右Y轴），量纲自动独立 -->
-<XlyChart
+<EasyChart
   type=&quot;mixed&quot;
   title=&quot;月度访问量 & 转化率&quot;
   :labels=&quot;['1月','2月','3月','4月','5月','6月']&quot;
@@ -993,7 +993,7 @@ function onDrill(payload: {
 />
 
 <!-- 多柱 + 多折线：左Y轴（主营/其他收入），右Y轴（销售/管理费用率） -->
-<XlyChart
+<EasyChart
   type=&quot;mixed&quot;
   title=&quot;收入 & 费用率&quot;
   :labels=&quot;['1月','2月','3月','4月','5月','6月']&quot;
@@ -1023,29 +1023,29 @@ function onDrill(payload: {
         <div class="doc-preview__body">
           <div class="chart-row">
             <!-- 方式一：serie.color 统一着色 -->
-            <XlyCard shadow="never" :bordered="true" class="chart-col">
-              <XlyChart
+            <EasyCard shadow="never" :bordered="true" class="chart-col">
+              <EasyChart
                 type="mixed"
                 title="serie.color 统一着色"
                 :labels="mixedLabels"
                 :series="mixedColorSeries1"
                 :height="280"
               />
-            </XlyCard>
+            </EasyCard>
             <!-- 方式二：serie.colors 逐柱着色 -->
-            <XlyCard shadow="never" :bordered="true" class="chart-col">
-              <XlyChart
+            <EasyCard shadow="never" :bordered="true" class="chart-col">
+              <EasyChart
                 type="mixed"
                 title="serie.colors 逐柱着色"
                 :labels="mixedLabels"
                 :series="mixedColorSeries2"
                 :height="280"
               />
-            </XlyCard>
+            </EasyCard>
           </div>
           <!-- 方式三：:colors 全局调色盘 -->
-          <XlyCard shadow="never" :bordered="true" style="margin-top: 12px">
-            <XlyChart
+          <EasyCard shadow="never" :bordered="true" style="margin-top: 12px">
+            <EasyChart
               type="mixed"
               title=":colors 全局调色盘（按系列顺序：柱1/柱2/折线）"
               :labels="mixedLabels"
@@ -1053,9 +1053,9 @@ function onDrill(payload: {
               :colors="['#6366f1', '#a78bfa', '#f59e0b']"
               :height="280"
             />
-          </XlyCard>
+          </EasyCard>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- ① serie.color：整个系列统一用一种颜色 -->
 :series=&quot;[
   { name: '线下销售', data: [...], chartType: 'bar',  color: '#3b82f6' },
@@ -1076,7 +1076,7 @@ function onDrill(payload: {
 ]&quot;
 
 <!-- ③ :colors 全局调色盘：按 series 原始顺序（含折线）依次分配 -->
-<XlyChart
+<EasyChart
   type=&quot;mixed&quot;
   :colors=&quot;['#6366f1', '#a78bfa', '#f59e0b']&quot;
   :series=&quot;[
@@ -1100,16 +1100,16 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="chart-row">
-            <XlyCard shadow="never" :bordered="true" class="chart-col">
-              <XlyChart type="pie" title="流量来源" :data="pieData" :height="280" :show-label="true" />
-            </XlyCard>
-            <XlyCard shadow="never" :bordered="true" class="chart-col">
-              <XlyChart type="pie" title="设备分布" :data="deviceData" :height="280" legend-position="right" />
-            </XlyCard>
+            <EasyCard shadow="never" :bordered="true" class="chart-col">
+              <EasyChart type="pie" title="流量来源" :data="pieData" :height="280" :show-label="true" />
+            </EasyCard>
+            <EasyCard shadow="never" :bordered="true" class="chart-col">
+              <EasyChart type="pie" title="设备分布" :data="deviceData" :height="280" legend-position="right" />
+            </EasyCard>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyChart
+        <EasyDocCode
+          code="<EasyChart
   type=&quot;pie&quot;
   title=&quot;流量来源&quot;
   :data=&quot;[
@@ -1136,8 +1136,8 @@ function onDrill(payload: {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard shadow="never" :bordered="true">
-            <XlyChart
+          <EasyCard shadow="never" :bordered="true">
+            <EasyChart
               type="pie"
               title="预算分配"
               :data="budgetPieData"
@@ -1145,10 +1145,10 @@ function onDrill(payload: {
               :height="280"
               :show-label="true"
             />
-          </XlyCard>
+          </EasyCard>
         </div>
-        <XlyDocCode
-          code="<XlyChart
+        <EasyDocCode
+          code="<EasyChart
   type=&quot;pie&quot;
   title=&quot;预算分配&quot;
   :data=&quot;[
@@ -1176,12 +1176,12 @@ function onDrill(payload: {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard shadow="never" :bordered="true">
-            <XlyChart type="pie" title="订单状态" :data="orderStatusData" :height="280" legend-position="right" />
-          </XlyCard>
+          <EasyCard shadow="never" :bordered="true">
+            <EasyChart type="pie" title="订单状态" :data="orderStatusData" :height="280" legend-position="right" />
+          </EasyCard>
         </div>
-        <XlyDocCode
-          code="<XlyChart
+        <EasyDocCode
+          code="<EasyChart
   type=&quot;pie&quot;
   title=&quot;订单状态&quot;
   :data=&quot;[
@@ -1208,8 +1208,8 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="chart-row">
-            <XlyCard shadow="never" :bordered="true" class="chart-col">
-              <XlyChart
+            <EasyCard shadow="never" :bordered="true" class="chart-col">
+              <EasyChart
                 type="donut"
                 title="任务完成率"
                 :data="taskData"
@@ -1217,9 +1217,9 @@ function onDrill(payload: {
                 donut-value="72%"
                 :height="280"
               />
-            </XlyCard>
-            <XlyCard shadow="never" :bordered="true" class="chart-col">
-              <XlyChart
+            </EasyCard>
+            <EasyCard shadow="never" :bordered="true" class="chart-col">
+              <EasyChart
                 type="donut"
                 title="预算使用情况"
                 :data="budgetData"
@@ -1228,11 +1228,11 @@ function onDrill(payload: {
                 :height="280"
                 :colors="['#ef4444', '#f59e0b', '#10b981', '#3b82f6']"
               />
-            </XlyCard>
+            </EasyCard>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyChart
+        <EasyDocCode
+          code="<EasyChart
   type=&quot;donut&quot;
   title=&quot;任务完成率&quot;
   :data=&quot;[
@@ -1259,11 +1259,11 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="chart-row">
-            <XlyCard shadow="never" :bordered="true" class="chart-col">
-              <XlyChart type="pie" title="流量来源（含标签）" :data="pieData" :show-label="true" :height="280" />
-            </XlyCard>
-            <XlyCard shadow="never" :bordered="true" class="chart-col">
-              <XlyChart
+            <EasyCard shadow="never" :bordered="true" class="chart-col">
+              <EasyChart type="pie" title="流量来源（含标签）" :data="pieData" :show-label="true" :height="280" />
+            </EasyCard>
+            <EasyCard shadow="never" :bordered="true" class="chart-col">
+              <EasyChart
                 type="donut"
                 title="任务完成率（含标签）"
                 :data="taskData"
@@ -1272,19 +1272,19 @@ function onDrill(payload: {
                 :show-label="true"
                 :height="280"
               />
-            </XlyCard>
+            </EasyCard>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 饼图显示数据标签 -->
-<XlyChart
+<EasyChart
   type=&quot;pie&quot;
   :data=&quot;data&quot;
   :show-label=&quot;true&quot;
 />
 
 <!-- 环形图显示数据标签 -->
-<XlyChart
+<EasyChart
   type=&quot;donut&quot;
   :data=&quot;data&quot;
   donut-label=&quot;已完成&quot;
@@ -1305,8 +1305,8 @@ function onDrill(payload: {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard shadow="never" :bordered="true">
-            <XlyChart
+          <EasyCard shadow="never" :bordered="true">
+            <EasyChart
               type="bar"
               title="收入报表（元）"
               :labels="monthLabels"
@@ -1314,10 +1314,10 @@ function onDrill(payload: {
               :formatter="currencyFormatter"
               :height="280"
             />
-          </XlyCard>
+          </EasyCard>
         </div>
-        <XlyDocCode
-          code="<XlyChart
+        <EasyDocCode
+          code="<EasyChart
   type=&quot;bar&quot;
   title=&quot;收入报表（元）&quot;
   :labels=&quot;monthLabels&quot;
@@ -1339,8 +1339,8 @@ function onDrill(payload: {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard shadow="never" :bordered="true" style="margin-bottom: 16px">
-            <XlyChart
+          <EasyCard shadow="never" :bordered="true" style="margin-bottom: 16px">
+            <EasyChart
               type="line"
               title="全年每日访问量（365 天）"
               subtitle="拖拽或滚轮横向平移"
@@ -1349,9 +1349,9 @@ function onDrill(payload: {
               :min-item-width="50"
               :height="300"
             />
-          </XlyCard>
-          <XlyCard shadow="never" :bordered="true">
-            <XlyChart
+          </EasyCard>
+          <EasyCard shadow="never" :bordered="true">
+            <EasyChart
               type="bar"
               title="60 周销售数据"
               :labels="weeklyLabels"
@@ -1359,11 +1359,11 @@ function onDrill(payload: {
               :min-item-width="40"
               :height="280"
             />
-          </XlyCard>
+          </EasyCard>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 折线图：每个数据点最小 28px，超出后可拖拽滚动 -->
-<XlyChart
+<EasyChart
   type=&quot;line&quot;
   title=&quot;全年每日访问量&quot;
   :labels=&quot;dailyLabels&quot;
@@ -1373,7 +1373,7 @@ function onDrill(payload: {
 />
 
 <!-- 柱状图：每组最小 40px -->
-<XlyChart
+<EasyChart
   type=&quot;bar&quot;
   title=&quot;60 周销售数据&quot;
   :labels=&quot;weeklyLabels&quot;
@@ -1396,8 +1396,8 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="chart-row">
-            <XlyCard shadow="never" :bordered="true" class="chart-col">
-              <XlyChart
+            <EasyCard shadow="never" :bordered="true" class="chart-col">
+              <EasyChart
                 type="line"
                 title="日活用户"
                 :labels="dayLabels"
@@ -1408,9 +1408,9 @@ function onDrill(payload: {
                 :colors="['#3b82f6']"
                 :height="200"
               />
-            </XlyCard>
-            <XlyCard shadow="never" :bordered="true" class="chart-col">
-              <XlyChart
+            </EasyCard>
+            <EasyCard shadow="never" :bordered="true" class="chart-col">
+              <EasyChart
                 type="bar"
                 title="本周订单"
                 :labels="dayLabels"
@@ -1421,11 +1421,11 @@ function onDrill(payload: {
                 :colors="['#f59e0b']"
                 :height="200"
               />
-            </XlyCard>
+            </EasyCard>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyChart
+        <EasyDocCode
+          code="<EasyChart
   type=&quot;line&quot;
   title=&quot;日活用户&quot;
   :labels=&quot;dayLabels&quot;
@@ -1448,18 +1448,18 @@ function onDrill(payload: {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard shadow="never" :bordered="true">
-            <XlyChart
+          <EasyCard shadow="never" :bordered="true">
+            <EasyChart
               type="funnel"
               title="注册转化漏斗"
               subtitle="从曝光到付款各环节转化"
               :data="funnelData"
               :height="380"
             />
-          </XlyCard>
+          </EasyCard>
         </div>
-        <XlyDocCode
-          code="<XlyChart
+        <EasyDocCode
+          code="<EasyChart
   type=&quot;funnel&quot;
   title=&quot;注册转化漏斗&quot;
   subtitle=&quot;从曝光到付款各环节转化&quot;
@@ -1486,18 +1486,18 @@ function onDrill(payload: {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard shadow="never" :bordered="true">
-            <XlyChart
+          <EasyCard shadow="never" :bordered="true">
+            <EasyChart
               type="funnel"
               title="销售流程漏斗"
               :data="salesFunnelData"
               :colors="['#6366f1', '#8b5cf6', '#a78bfa', '#c4b5fd', '#ddd6fe']"
               :height="380"
             />
-          </XlyCard>
+          </EasyCard>
         </div>
-        <XlyDocCode
-          code="<XlyChart
+        <EasyDocCode
+          code="<EasyChart
   type=&quot;funnel&quot;
   title=&quot;销售流程漏斗&quot;
   :data=&quot;[
@@ -1525,13 +1525,13 @@ function onDrill(payload: {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard shadow="never" :bordered="true">
-            <XlyChart type="funnel" title="注册转化漏斗（混用颜色）" :data="mixedFunnelData" :height="380" />
-          </XlyCard>
+          <EasyCard shadow="never" :bordered="true">
+            <EasyChart type="funnel" title="注册转化漏斗（混用颜色）" :data="mixedFunnelData" :height="380" />
+          </EasyCard>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 曝光量/点击量/付款数单独设色，注册数/激活数自动使用默认色 -->
-<XlyChart
+<EasyChart
   type=&quot;funnel&quot;
   title=&quot;注册转化漏斗（混用颜色）&quot;
   :data=&quot;[
@@ -1557,8 +1557,8 @@ function onDrill(payload: {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard shadow="never" :bordered="true">
-            <XlyChart
+          <EasyCard shadow="never" :bordered="true">
+            <EasyChart
               type="hbar"
               title="各品类销售额"
               subtitle="单位：万元"
@@ -1567,10 +1567,10 @@ function onDrill(payload: {
               :height="360"
               :formatter="wanFormatter"
             />
-          </XlyCard>
+          </EasyCard>
         </div>
-        <XlyDocCode
-          code="<XlyChart
+        <EasyDocCode
+          code="<EasyChart
   type=&quot;hbar&quot;
   title=&quot;各品类销售额&quot;
   :labels=&quot;['Walnut Brownie','Lemon Juice','Orange Juice','Tea','Matcha Cocoa','Cheese Brownie','Cheese Cocoa','Milk Tea','Matcha Latte']&quot;
@@ -1596,8 +1596,8 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="chart-row">
-            <XlyCard shadow="never" :bordered="true" class="chart-col">
-              <XlyChart
+            <EasyCard shadow="never" :bordered="true" class="chart-col">
+              <EasyChart
                 type="hbar"
                 title="城市销售额（全局色）"
                 :labels="hbarColorLabels"
@@ -1606,9 +1606,9 @@ function onDrill(payload: {
                 :height="320"
                 :formatter="wanFormatter"
               />
-            </XlyCard>
-            <XlyCard shadow="never" :bordered="true" class="chart-col">
-              <XlyChart
+            </EasyCard>
+            <EasyCard shadow="never" :bordered="true" class="chart-col">
+              <EasyChart
                 type="hbar"
                 title="品类销售（每柱独立色）"
                 :labels="hbarLabels.slice(0, 6)"
@@ -1616,12 +1616,12 @@ function onDrill(payload: {
                 :height="320"
                 :formatter="wanFormatter"
               />
-            </XlyCard>
+            </EasyCard>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 方式一：:colors 全局调色盘，多系列时按顺序依次指定 -->
-<XlyChart
+<EasyChart
   type=&quot;hbar&quot;
   :labels=&quot;['北京', '上海', '广州', '深圳', '杭州']&quot;
   :series=&quot;[
@@ -1632,7 +1632,7 @@ function onDrill(payload: {
 />
 
 <!-- 方式二：serie.color 设置该系列整体颜色 -->
-<XlyChart
+<EasyChart
   type=&quot;hbar&quot;
   title=&quot;城市销售额&quot;
   :labels=&quot;['北京', '上海', '广州', '深圳', '杭州']&quot;
@@ -1645,7 +1645,7 @@ function onDrill(payload: {
 />
 
 <!-- 方式三：serie.colors 为每根柱子单独设置颜色 -->
-<XlyChart
+<EasyChart
   type=&quot;hbar&quot;
   title=&quot;品类销售排行（各柱独立色）&quot;
   :labels=&quot;['Lemon Juice', 'Orange Juice', 'Tea', 'Milk Tea', 'Matcha Latte', 'Cheese Cocoa']&quot;
@@ -1671,8 +1671,8 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="chart-row">
-            <XlyCard shadow="never" :bordered="true" class="chart-col">
-              <XlyChart
+            <EasyCard shadow="never" :bordered="true" class="chart-col">
+              <EasyChart
                 type="gauge"
                 title="CPU 使用率"
                 :gauge-value="72"
@@ -1682,9 +1682,9 @@ function onDrill(payload: {
                 :colors="['#10b981', '#f59e0b', '#ef4444']"
                 :height="260"
               />
-            </XlyCard>
-            <XlyCard shadow="never" :bordered="true" class="chart-col">
-              <XlyChart
+            </EasyCard>
+            <EasyCard shadow="never" :bordered="true" class="chart-col">
+              <EasyChart
                 type="gauge"
                 title="今日完成进度"
                 :gauge-value="6820"
@@ -1694,11 +1694,11 @@ function onDrill(payload: {
                 :colors="['#3b82f6', '#6366f1']"
                 :height="260"
               />
-            </XlyCard>
+            </EasyCard>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyChart
+        <EasyDocCode
+          code="<EasyChart
   type=&quot;gauge&quot;
   title=&quot;CPU 使用率&quot;
   :gauge-value=&quot;72&quot;
@@ -1731,8 +1731,8 @@ function onDrill(payload: {
             <span class="drill-tag">drill 事件</span>
             <code>{{ drillLog }}</code>
           </div>
-          <XlyCard shadow="never" :bordered="true">
-            <XlyChart
+          <EasyCard shadow="never" :bordered="true">
+            <EasyChart
               type="bar"
               title="点击柱子触发下钻"
               :labels="quarterLabels"
@@ -1740,11 +1740,11 @@ function onDrill(payload: {
               :height="260"
               @drill="onDrill"
             />
-          </XlyCard>
+          </EasyCard>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- series 中加入自定义字段，drill 时通过 extra 取出 -->
-<XlyChart
+<EasyChart
   type=&quot;bar&quot;
   :labels=&quot;quarterLabels&quot;
   :series=&quot;[

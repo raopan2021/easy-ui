@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyInfoCard } from 'easy-ui'
+import { EasyInfoCard } from 'easy-ui'
 import { ElMessage } from 'element-plus'
 
 const demoImage = 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=200&h=150&fit=crop'
@@ -34,7 +34,7 @@ function handleClick() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body info-card-demo">
-          <XlyInfoCard
+          <EasyInfoCard
             :image="demoImage"
             icon="el:WarningFilled"
             title="人员闯入"
@@ -42,7 +42,7 @@ function handleClick() {
             status="未处理"
             status-type="danger"
           />
-          <XlyInfoCard
+          <EasyInfoCard
             :image="demoImage2"
             icon="el:MapLocation"
             title="区域入侵"
@@ -50,7 +50,7 @@ function handleClick() {
             status="未处理"
             status-type="danger"
           />
-          <XlyInfoCard
+          <EasyInfoCard
             :image="demoImage3"
             icon="el:FirstAidKit"
             title="安全帽未戴"
@@ -59,8 +59,8 @@ function handleClick() {
             status-type="warning"
           />
         </div>
-        <XlyDocCode
-          code="<XlyInfoCard
+        <EasyDocCode
+          code="<EasyInfoCard
   :image=&quot;demoImage&quot;
   icon=&quot;el:WarningFilled&quot;
   title=&quot;人员闯入&quot;
@@ -82,7 +82,7 @@ function handleClick() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body info-card-demo-light">
-          <XlyInfoCard
+          <EasyInfoCard
             :image="demoImage"
             icon="el:WarningFilled"
             title="人员闯入"
@@ -94,7 +94,7 @@ function handleClick() {
             description-color="#6b7280"
             :bordered="true"
           />
-          <XlyInfoCard
+          <EasyInfoCard
             :image="demoImage2"
             icon="el:MapLocation"
             title="区域入侵"
@@ -105,7 +105,7 @@ function handleClick() {
             text-color="#1e293b"
             description-color="#64748b"
           />
-          <XlyInfoCard
+          <EasyInfoCard
             :image="demoImage3"
             icon="el:FirstAidKit"
             title="安全帽未戴"
@@ -117,8 +117,8 @@ function handleClick() {
             description-color="#6b7280"
           />
         </div>
-        <XlyDocCode
-          code="<XlyInfoCard
+        <EasyDocCode
+          code="<EasyInfoCard
   background-color=&quot;#ffffff&quot;
   text-color=&quot;#1a1a2e&quot;
   description-color=&quot;#6b7280&quot;
@@ -139,7 +139,7 @@ function handleClick() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body info-card-demo">
-          <XlyInfoCard
+          <EasyInfoCard
             :image="demoImage"
             icon="el:WarningFilled"
             title="人员闯入"
@@ -153,7 +153,7 @@ function handleClick() {
             status-background-color="rgba(239, 68, 68, 0.2)"
             status-text-color="#fca5a5"
           />
-          <XlyInfoCard
+          <EasyInfoCard
             icon="el:Notification"
             title="系统通知"
             :description="['服务器将于今晚 02:00 进行维护', '预计耗时 30 分钟']"
@@ -167,8 +167,8 @@ function handleClick() {
             status-text-color="#93c5fd"
           />
         </div>
-        <XlyDocCode
-          code="<XlyInfoCard
+        <EasyDocCode
+          code="<EasyInfoCard
   background-color=&quot;#0f172a&quot;
   text-color=&quot;#e2e8f0&quot;
   title-color=&quot;#f8fafc&quot;
@@ -191,7 +191,7 @@ function handleClick() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body info-card-demo">
-          <XlyInfoCard
+          <EasyInfoCard
             :image="demoImage"
             icon="el:WarningFilled"
             title="人员闯入"
@@ -202,7 +202,7 @@ function handleClick() {
             @click="handleClick"
           />
         </div>
-        <XlyDocCode code="<XlyInfoCard clickable @click=&quot;handleClick&quot; .../>" />
+        <EasyDocCode code="<EasyInfoCard clickable @click=&quot;handleClick&quot; .../>" />
       </div>
     </section>
 
@@ -230,7 +230,7 @@ function handleClick() {
             </tr>
             <tr>
               <td><code>icon</code></td>
-              <td>标题前的图标（XlyIcon 格式，如 el:WarningFilled）</td>
+              <td>标题前的图标（EasyIcon 格式，如 el:WarningFilled）</td>
               <td><code>string</code></td>
               <td><code>''</code></td>
             </tr>

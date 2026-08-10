@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyDateTimePicker } from 'easy-ui'
+import { EasyDateTimePicker } from 'easy-ui'
 import { ref } from 'vue'
 
 const val1 = ref('')
@@ -31,12 +31,12 @@ const val6 = ref('')
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlyDateTimePicker v-model="val1" placeholder="请选择日期时间" />
+            <EasyDateTimePicker v-model="val1" placeholder="请选择日期时间" />
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ val1 || '未选择' }}</span>
         </div>
       </div>
-      <XlyDocCode code="<XlyDateTimePicker v-model=&quot;value&quot; placeholder=&quot;请选择日期时间&quot; />" />
+      <EasyDocCode code="<EasyDateTimePicker v-model=&quot;value&quot; placeholder=&quot;请选择日期时间&quot; />" />
     </section>
 
     <section class="doc-section">
@@ -49,12 +49,12 @@ const val6 = ref('')
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlyDateTimePicker v-model="val2" placeholder="精确到秒" show-seconds />
+            <EasyDateTimePicker v-model="val2" placeholder="精确到秒" show-seconds />
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ val2 || '未选择' }}</span>
         </div>
       </div>
-      <XlyDocCode code="<XlyDateTimePicker v-model=&quot;value&quot; show-seconds />" />
+      <EasyDocCode code="<EasyDateTimePicker v-model=&quot;value&quot; show-seconds />" />
     </section>
 
     <section class="doc-section">
@@ -68,12 +68,12 @@ const val6 = ref('')
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlyDateTimePicker v-model="val3" placeholder="自定义格式" format="YYYY/MM/DD HH:mm" />
+            <EasyDateTimePicker v-model="val3" placeholder="自定义格式" format="YYYY/MM/DD HH:mm" />
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ val3 || '未选择' }}</span>
         </div>
       </div>
-      <XlyDocCode code="<XlyDateTimePicker v-model=&quot;value&quot; format=&quot;YYYY/MM/DD HH:mm&quot; />" />
+      <EasyDocCode code="<EasyDateTimePicker v-model=&quot;value&quot; format=&quot;YYYY/MM/DD HH:mm&quot; />" />
     </section>
 
     <section class="doc-section">
@@ -86,16 +86,16 @@ const val6 = ref('')
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlyDateTimePicker v-model="val4" placeholder="可清除" clearable />
+            <EasyDateTimePicker v-model="val4" placeholder="可清除" clearable />
           </div>
           <div style="width: 300px">
-            <XlyDateTimePicker v-model="val4" placeholder="禁用状态" disabled />
+            <EasyDateTimePicker v-model="val4" placeholder="禁用状态" disabled />
           </div>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyDateTimePicker v-model=&quot;value&quot; clearable />
-<XlyDateTimePicker v-model=&quot;value&quot; disabled />"
+      <EasyDocCode
+        code="<EasyDateTimePicker v-model=&quot;value&quot; clearable />
+<EasyDateTimePicker v-model=&quot;value&quot; disabled />"
       />
     </section>
 
@@ -109,20 +109,20 @@ const val6 = ref('')
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlyDateTimePicker v-model="val5" size="large" />
+            <EasyDateTimePicker v-model="val5" size="large" />
           </div>
           <div style="width: 300px">
-            <XlyDateTimePicker v-model="val5" />
+            <EasyDateTimePicker v-model="val5" />
           </div>
           <div style="width: 300px">
-            <XlyDateTimePicker v-model="val5" size="small" />
+            <EasyDateTimePicker v-model="val5" size="small" />
           </div>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyDateTimePicker v-model=&quot;value&quot; size=&quot;large&quot; />
-<XlyDateTimePicker v-model=&quot;value&quot; />
-<XlyDateTimePicker v-model=&quot;value&quot; size=&quot;small&quot; />"
+      <EasyDocCode
+        code="<EasyDateTimePicker v-model=&quot;value&quot; size=&quot;large&quot; />
+<EasyDateTimePicker v-model=&quot;value&quot; />
+<EasyDateTimePicker v-model=&quot;value&quot; size=&quot;small&quot; />"
       />
     </section>
 
@@ -137,13 +137,13 @@ const val6 = ref('')
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <XlyDateTimePicker v-model="val6" placeholder="试试手动输入时间" show-seconds />
+            <EasyDateTimePicker v-model="val6" placeholder="试试手动输入时间" show-seconds />
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ val6 || '未选择' }}</span>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyDateTimePicker v-model=&quot;value&quot; show-seconds />
+      <EasyDocCode
+        code="<EasyDateTimePicker v-model=&quot;value&quot; show-seconds />
 <!-- 打开面板后，时间输入框可直接键入数字 -->
 <!-- ↑↓ 键调整数值，Enter 跳转下一个输入框 -->"
       />

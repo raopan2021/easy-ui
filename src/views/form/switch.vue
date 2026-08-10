@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlySwitch } from 'easy-ui'
+import { EasySwitch } from 'easy-ui'
 import { ref } from 'vue'
 
 const value1 = ref(true)
@@ -36,12 +36,12 @@ const value11 = ref(false)
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlySwitch v-model="value1" />
+          <EasySwitch v-model="value1" />
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">{{ value1 ? '已开启' : '已关闭' }}</span>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlySwitch v-model=&quot;value1&quot; />
+      <EasyDocCode
+        code="<EasySwitch v-model=&quot;value1&quot; />
 <span>{{ value1 ? '已开启' : '已关闭' }}</span>"
       />
     </section>
@@ -56,15 +56,15 @@ const value11 = ref(false)
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="gap: 20px">
-          <XlySwitch v-model="value2" size="large" />
-          <XlySwitch v-model="value2" size="default" />
-          <XlySwitch v-model="value2" size="small" />
+          <EasySwitch v-model="value2" size="large" />
+          <EasySwitch v-model="value2" size="default" />
+          <EasySwitch v-model="value2" size="small" />
         </div>
       </div>
-      <XlyDocCode
-        code="<XlySwitch v-model=&quot;value&quot; size=&quot;large&quot; />
-<XlySwitch v-model=&quot;value&quot; size=&quot;default&quot; />
-<XlySwitch v-model=&quot;value&quot; size=&quot;small&quot; />"
+      <EasyDocCode
+        code="<EasySwitch v-model=&quot;value&quot; size=&quot;large&quot; />
+<EasySwitch v-model=&quot;value&quot; size=&quot;default&quot; />
+<EasySwitch v-model=&quot;value&quot; size=&quot;small&quot; />"
       />
     </section>
 
@@ -78,13 +78,13 @@ const value11 = ref(false)
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="gap: 20px">
-          <XlySwitch v-model="value3" active-color="#67c23a" inactive-color="#909399" />
-          <XlySwitch v-model="value4" active-color="#f56c6c" inactive-color="#e6e6e6" />
+          <EasySwitch v-model="value3" active-color="#67c23a" inactive-color="#909399" />
+          <EasySwitch v-model="value4" active-color="#f56c6c" inactive-color="#e6e6e6" />
         </div>
       </div>
-      <XlyDocCode
-        code="<XlySwitch v-model=&quot;value&quot; active-color=&quot;#67c23a&quot; inactive-color=&quot;#909399&quot; />
-<XlySwitch v-model=&quot;value&quot; active-color=&quot;#f56c6c&quot; inactive-color=&quot;#e6e6e6&quot; />"
+      <EasyDocCode
+        code="<EasySwitch v-model=&quot;value&quot; active-color=&quot;#67c23a&quot; inactive-color=&quot;#909399&quot; />
+<EasySwitch v-model=&quot;value&quot; active-color=&quot;#f56c6c&quot; inactive-color=&quot;#e6e6e6&quot; />"
       />
     </section>
 
@@ -98,12 +98,12 @@ const value11 = ref(false)
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
-          <XlySwitch v-model="value5" active-value="yes" inactive-value="no" />
+          <EasySwitch v-model="value5" active-value="yes" inactive-value="no" />
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ value5 }}</span>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlySwitch v-model=&quot;value&quot; active-value=&quot;yes&quot; inactive-value=&quot;no&quot; />"
+      <EasyDocCode
+        code="<EasySwitch v-model=&quot;value&quot; active-value=&quot;yes&quot; inactive-value=&quot;no&quot; />"
       />
     </section>
 
@@ -117,13 +117,13 @@ const value11 = ref(false)
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="gap: 20px">
-          <XlySwitch v-model="value6" disabled />
-          <XlySwitch v-model="value7" disabled />
+          <EasySwitch v-model="value6" disabled />
+          <EasySwitch v-model="value7" disabled />
         </div>
       </div>
-      <XlyDocCode
-        code="<XlySwitch v-model=&quot;value&quot; disabled />
-<XlySwitch v-model=&quot;value&quot; disabled model-value=&quot;true&quot; />"
+      <EasyDocCode
+        code="<EasySwitch v-model=&quot;value&quot; disabled />
+<EasySwitch v-model=&quot;value&quot; disabled model-value=&quot;true&quot; />"
       />
     </section>
 
@@ -137,13 +137,13 @@ const value11 = ref(false)
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="gap: 20px">
-          <XlySwitch v-model="value8" loading />
-          <XlySwitch v-model="value9" loading />
+          <EasySwitch v-model="value8" loading />
+          <EasySwitch v-model="value9" loading />
         </div>
       </div>
-      <XlyDocCode
-        code="<XlySwitch v-model=&quot;value&quot; loading />
-<XlySwitch v-model=&quot;value&quot; loading model-value=&quot;true&quot; />"
+      <EasyDocCode
+        code="<EasySwitch v-model=&quot;value&quot; loading />
+<EasySwitch v-model=&quot;value&quot; loading model-value=&quot;true&quot; />"
       />
     </section>
 
@@ -157,13 +157,13 @@ const value11 = ref(false)
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
-          <XlySwitch v-model="value10" active-text="按月付费" inactive-text="按年付费" />
-          <XlySwitch v-model="value11" active-text="开" inactive-text="关" />
+          <EasySwitch v-model="value10" active-text="按月付费" inactive-text="按年付费" />
+          <EasySwitch v-model="value11" active-text="开" inactive-text="关" />
         </div>
       </div>
-      <XlyDocCode
-        code="<XlySwitch v-model=&quot;value&quot; active-text=&quot;按月付费&quot; inactive-text=&quot;按年付费&quot; />
-<XlySwitch v-model=&quot;value&quot; active-text=&quot;开&quot; inactive-text=&quot;关&quot; />"
+      <EasyDocCode
+        code="<EasySwitch v-model=&quot;value&quot; active-text=&quot;按月付费&quot; inactive-text=&quot;按年付费&quot; />
+<EasySwitch v-model=&quot;value&quot; active-text=&quot;开&quot; inactive-text=&quot;关&quot; />"
       />
     </section>
 

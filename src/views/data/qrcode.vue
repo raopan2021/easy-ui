@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { XlyButton, XlyQrcode } from 'easy-ui'
+import { EasyButton, EasyQrcode } from 'easy-ui'
 import { ElInput, ElMessage } from 'element-plus'
 import { ref } from 'vue'
 
-const qrRef = ref<InstanceType<typeof XlyQrcode>>()
+const qrRef = ref<InstanceType<typeof EasyQrcode>>()
 const dynamicContent = ref('https://ease-ui.com')
 
 function handleDownload() {
@@ -67,9 +67,9 @@ function onError(error: Error) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyQrcode content="https://ease-ui.com" />
+          <EasyQrcode content="https://ease-ui.com" />
         </div>
-        <XlyDocCode code="<XlyQrcode content=&quot;https://ease-ui.com&quot; />" />
+        <EasyDocCode code="<EasyQrcode content=&quot;https://ease-ui.com&quot; />" />
       </div>
     </section>
 
@@ -85,21 +85,21 @@ function onError(error: Error) {
         <div class="doc-preview__body qrcode-size-group">
           <div class="qrcode-size-item">
             <span class="qrcode-size-item__label">100px</span>
-            <XlyQrcode content="小尺寸" :size="100" />
+            <EasyQrcode content="小尺寸" :size="100" />
           </div>
           <div class="qrcode-size-item">
             <span class="qrcode-size-item__label">200px</span>
-            <XlyQrcode content="中尺寸" :size="200" />
+            <EasyQrcode content="中尺寸" :size="200" />
           </div>
           <div class="qrcode-size-item">
             <span class="qrcode-size-item__label">300px</span>
-            <XlyQrcode content="大尺寸" :size="300" />
+            <EasyQrcode content="大尺寸" :size="300" />
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyQrcode content=&quot;小尺寸&quot; :size=&quot;100&quot; />
-<XlyQrcode content=&quot;中尺寸&quot; :size=&quot;200&quot; />
-<XlyQrcode content=&quot;大尺寸&quot; :size=&quot;300&quot; />"
+        <EasyDocCode
+          code="<EasyQrcode content=&quot;小尺寸&quot; :size=&quot;100&quot; />
+<EasyQrcode content=&quot;中尺寸&quot; :size=&quot;200&quot; />
+<EasyQrcode content=&quot;大尺寸&quot; :size=&quot;300&quot; />"
         />
       </div>
     </section>
@@ -115,25 +115,25 @@ function onError(error: Error) {
       <div class="doc-preview">
         <div class="doc-preview__body qrcode-color-group">
           <div class="qrcode-color-item">
-            <XlyQrcode content="深色主题" color-dark="#000000" color-light="#ffffff" />
+            <EasyQrcode content="深色主题" color-dark="#000000" color-light="#ffffff" />
             <span>深色主题</span>
           </div>
           <div class="qrcode-color-item">
-            <XlyQrcode content="蓝色主题" color-dark="#4F6EF7" color-light="#EEF2FF" />
+            <EasyQrcode content="蓝色主题" color-dark="#4F6EF7" color-light="#EEF2FF" />
             <span>蓝色主题</span>
           </div>
           <div class="qrcode-color-item">
-            <XlyQrcode content="绿色主题" color-dark="#34C759" color-light="#E8F5E9" />
+            <EasyQrcode content="绿色主题" color-dark="#34C759" color-light="#E8F5E9" />
             <span>绿色主题</span>
           </div>
           <div class="qrcode-color-item">
-            <XlyQrcode content="红色主题" color-dark="#FF3B30" color-light="#FFEBEE" />
+            <EasyQrcode content="红色主题" color-dark="#FF3B30" color-light="#FFEBEE" />
             <span>红色主题</span>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyQrcode content=&quot;蓝色主题&quot; color-dark=&quot;#4F6EF7&quot; color-light=&quot;#EEF2FF&quot; />
-<XlyQrcode content=&quot;绿色主题&quot; color-dark=&quot;#34C759&quot; color-light=&quot;#E8F5E9&quot; />"
+        <EasyDocCode
+          code="<EasyQrcode content=&quot;蓝色主题&quot; color-dark=&quot;#4F6EF7&quot; color-light=&quot;#EEF2FF&quot; />
+<EasyQrcode content=&quot;绿色主题&quot; color-dark=&quot;#34C759&quot; color-light=&quot;#E8F5E9&quot; />"
         />
       </div>
     </section>
@@ -151,27 +151,27 @@ function onError(error: Error) {
       <div class="doc-preview">
         <div class="doc-preview__body qrcode-level-group">
           <div class="qrcode-level-item">
-            <XlyQrcode content="低纠错 L" :size="120" correct-level="L" />
+            <EasyQrcode content="低纠错 L" :size="120" correct-level="L" />
             <span>L (7%)</span>
           </div>
           <div class="qrcode-level-item">
-            <XlyQrcode content="中纠错 M" :size="120" correct-level="M" />
+            <EasyQrcode content="中纠错 M" :size="120" correct-level="M" />
             <span>M (15%)</span>
           </div>
           <div class="qrcode-level-item">
-            <XlyQrcode content="高纠错 Q" :size="120" correct-level="Q" />
+            <EasyQrcode content="高纠错 Q" :size="120" correct-level="Q" />
             <span>Q (25%)</span>
           </div>
           <div class="qrcode-level-item">
-            <XlyQrcode content="最高 H" :size="120" correct-level="H" />
+            <EasyQrcode content="最高 H" :size="120" correct-level="H" />
             <span>H (30%)</span>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyQrcode content=&quot;低纠错 L&quot; correct-level=&quot;L&quot; />
-<XlyQrcode content=&quot;中纠错 M&quot; correct-level=&quot;M&quot; />
-<XlyQrcode content=&quot;高纠错 Q&quot; correct-level=&quot;Q&quot; />
-<XlyQrcode content=&quot;最高 H&quot; correct-level=&quot;H&quot; />"
+        <EasyDocCode
+          code="<EasyQrcode content=&quot;低纠错 L&quot; correct-level=&quot;L&quot; />
+<EasyQrcode content=&quot;中纠错 M&quot; correct-level=&quot;M&quot; />
+<EasyQrcode content=&quot;高纠错 Q&quot; correct-level=&quot;Q&quot; />
+<EasyQrcode content=&quot;最高 H&quot; correct-level=&quot;H&quot; />"
         />
       </div>
     </section>
@@ -187,7 +187,7 @@ function onError(error: Error) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyQrcode
+          <EasyQrcode
             content="https://ease-ui.com"
             :size="200"
             logo="/logo.png"
@@ -196,8 +196,8 @@ function onError(error: Error) {
             logo-background-color="#ffffff"
           />
         </div>
-        <XlyDocCode
-          code="<XlyQrcode
+        <EasyDocCode
+          code="<EasyQrcode
   content=&quot;https://ease-ui.com&quot;
   :size=&quot;200&quot;
   logo=&quot;/logo.png&quot;
@@ -229,20 +229,20 @@ function onError(error: Error) {
                 style="margin-bottom: 16px"
               />
               <div class="qrcode-interactive__controls">
-                <XlyButton type="primary" @click="handleDownload">
+                <EasyButton type="primary" @click="handleDownload">
                   下载二维码
-                </XlyButton>
-                <XlyButton type="ghost" @click="handleGetDataUrl">
+                </EasyButton>
+                <EasyButton type="ghost" @click="handleGetDataUrl">
                   获取 Base64
-                </XlyButton>
+                </EasyButton>
               </div>
             </div>
             <div class="qrcode-interactive__right">
-              <XlyQrcode ref="qrRef" :content="dynamicContent" :size="160" />
+              <EasyQrcode ref="qrRef" :content="dynamicContent" :size="160" />
             </div>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="const qrRef = ref()
 const dynamicContent = ref('https://ease-ui.com')
 
@@ -270,7 +270,7 @@ function handleGetDataUrl() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyQrcode content="https://ease-ui.com" :size="200" @generated="onGenerated" @error="onError" />
+          <EasyQrcode content="https://ease-ui.com" :size="200" @generated="onGenerated" @error="onError" />
           <div v-if="eventLog.length" class="qrcode-event-log">
             <div v-for="(log, index) in eventLog" :key="index" class="qrcode-event-log__item">
               <el-tag :type="log.type === 'success' ? 'success' : 'danger'" size="small">
@@ -280,8 +280,8 @@ function handleGetDataUrl() {
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyQrcode
+        <EasyDocCode
+          code="<EasyQrcode
   content=&quot;https://ease-ui.com&quot;
   @generated=&quot;onGenerated&quot;
   @error=&quot;onError&quot;

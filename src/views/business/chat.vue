@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ChatAttachment, ChatMessage } from 'easy-ui'
-import { XlyChat, XlyChatInput } from 'easy-ui'
+import { EasyChat, EasyChatInput } from 'easy-ui'
 import { ref } from 'vue'
 
 // 输入框组件
@@ -16,7 +16,7 @@ function handleUploadInput(files: File[]) {
 }
 
 // 基础用法
-const chatRef1 = ref<InstanceType<typeof XlyChat> | null>(null)
+const chatRef1 = ref<InstanceType<typeof EasyChat> | null>(null)
 const messages1 = ref<ChatMessage[]>([
   {
     id: 1,
@@ -52,7 +52,7 @@ function handleSend1(content: string, attachments: ChatAttachment[]) {
 }
 
 // 打字效果
-const chatRef2 = ref<InstanceType<typeof XlyChat> | null>(null)
+const chatRef2 = ref<InstanceType<typeof EasyChat> | null>(null)
 const messages2 = ref<ChatMessage[]>([
   {
     id: 1,
@@ -123,7 +123,7 @@ console.log(message)
 }
 
 // Markdown 渲染
-const chatRef3 = ref<InstanceType<typeof XlyChat> | null>(null)
+const chatRef3 = ref<InstanceType<typeof EasyChat> | null>(null)
 const markdownContent = `
 # Markdown 渲染示例
 
@@ -183,7 +183,7 @@ function handleSend3(content: string, attachments: ChatAttachment[]) {
 }
 
 // 附件上传
-const chatRef4 = ref<InstanceType<typeof XlyChat> | null>(null)
+const chatRef4 = ref<InstanceType<typeof EasyChat> | null>(null)
 const messages4 = ref<ChatMessage[]>([])
 
 function handleSend4(content: string, attachments: ChatAttachment[]) {
@@ -213,7 +213,7 @@ function handleUpload4(files: File[]) {
 }
 
 // 滚动到顶部加载
-const chatRef5 = ref<InstanceType<typeof XlyChat> | null>(null)
+const chatRef5 = ref<InstanceType<typeof EasyChat> | null>(null)
 const loading5 = ref(false)
 const messages5 = ref<ChatMessage[]>([
   {
@@ -302,11 +302,11 @@ function handleScrollToTop5() {
       </p>
       <div class="demo-preview">
         <div class="chat-container" style="height: 500px">
-          <XlyChat ref="chatRef1" v-model:messages="messages1" placeholder="输入消息..." @send="handleSend1" />
+          <EasyChat ref="chatRef1" v-model:messages="messages1" placeholder="输入消息..." @send="handleSend1" />
         </div>
       </div>
       <div class="demo-code">
-        <pre><code>&lt;XlyChat
+        <pre><code>&lt;EasyChat
   v-model:messages="messages"
   placeholder="输入消息..."
   @send="handleSend"
@@ -361,7 +361,7 @@ function handleSend(content: string, attachments: ChatAttachment[]) {
       </p>
       <div class="demo-preview">
         <div class="chat-container" style="height: 500px">
-          <XlyChat
+          <EasyChat
             ref="chatRef2"
             v-model:messages="messages2"
             enable-typing
@@ -372,7 +372,7 @@ function handleSend(content: string, attachments: ChatAttachment[]) {
         </div>
       </div>
       <div class="demo-code">
-        <pre><code>&lt;XlyChat
+        <pre><code>&lt;EasyChat
   v-model:messages="messages"
   enable-typing
   :typing-speed="50"
@@ -427,7 +427,7 @@ function handleSend(content: string) {
       </p>
       <div class="demo-preview">
         <div class="chat-container" style="height: 500px">
-          <XlyChat ref="chatRef3" v-model:messages="messages3" placeholder="输入消息..." @send="handleSend3" />
+          <EasyChat ref="chatRef3" v-model:messages="messages3" placeholder="输入消息..." @send="handleSend3" />
         </div>
       </div>
       <div class="demo-code">
@@ -471,7 +471,7 @@ messages.value.push({
       </p>
       <div class="demo-preview">
         <div class="chat-container" style="height: 500px">
-          <XlyChat
+          <EasyChat
             ref="chatRef4"
             v-model:messages="messages4"
             allow-upload
@@ -483,7 +483,7 @@ messages.value.push({
         </div>
       </div>
       <div class="demo-code">
-        <pre><code>&lt;XlyChat
+        <pre><code>&lt;EasyChat
   v-model:messages="messages"
   allow-upload
   :max-attachments="3"
@@ -518,7 +518,7 @@ function handleUpload(files: File[]) {
       </p>
       <div class="demo-preview">
         <div class="chat-container" style="height: 500px">
-          <XlyChat
+          <EasyChat
             ref="chatRef5"
             v-model:messages="messages5"
             :loading="loading5"
@@ -529,7 +529,7 @@ function handleUpload(files: File[]) {
         </div>
       </div>
       <div class="demo-code">
-        <pre><code>&lt;XlyChat
+        <pre><code>&lt;EasyChat
   v-model:messages="messages"
   :loading="loading"
   placeholder="输入消息..."
@@ -560,7 +560,7 @@ async function handleScrollToTop() {
       </p>
       <div class="demo-preview">
         <div class="chat-container" style="height: 200px">
-          <XlyChatInput
+          <EasyChatInput
             v-model="inputValue"
             placeholder="请输入消息..."
             :allow-upload="true"
@@ -573,7 +573,7 @@ async function handleScrollToTop() {
         </div>
       </div>
       <div class="demo-code">
-        <pre><code>&lt;XlyChatInput
+        <pre><code>&lt;EasyChatInput
   v-model="inputValue"
   placeholder="请输入消息..."
   :allow-upload="true"

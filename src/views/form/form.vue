@@ -1,24 +1,24 @@
 <script setup lang="ts">
 import {
   custom,
+  EasyButton,
+  EasyCascader,
+  EasyDatePicker,
+  EasyDateTimePicker,
+  EasyForm,
+  EasyFormItem,
+  EasyInput,
+  EasyRadio,
+  EasyRadioGroup,
+  EasyRate,
+  EasySelect,
+  EasyTimePicker,
   email,
   max,
   min,
   minLength,
   required,
   xly,
-  XlyButton,
-  XlyCascader,
-  XlyDatePicker,
-  XlyDateTimePicker,
-  XlyForm,
-  XlyFormItem,
-  XlyInput,
-  XlyRadio,
-  XlyRadioGroup,
-  XlyRate,
-  XlySelect,
-  XlyTimePicker,
 } from 'easy-ui'
 import { reactive, ref } from 'vue'
 
@@ -172,7 +172,7 @@ function resetSimplest() {
         表单 Form
       </h1>
       <p class="doc-desc">
-        表单容器组件，配合 <code>XlyFormItem</code> 实现表单布局和字段校验。
+        表单容器组件，配合 <code>EasyFormItem</code> 实现表单布局和字段校验。
         支持行内模式、三种尺寸，内置常用校验规则，可集成所有表单组件。
       </p>
     </header>
@@ -184,115 +184,115 @@ function resetSimplest() {
       </h2>
       <p class="doc-section__desc">
         在一个表单中集成
-        <code>XlyInput</code>、<code>XlySelect</code>、<code>XlyRadioGroup</code>、<code>XlyRate</code>、<code>XlyDatePicker</code>、<code>XlyTimePicker</code>、<code>XlyDateTimePicker</code>、<code>XlyCascader</code>
+        <code>EasyInput</code>、<code>EasySelect</code>、<code>EasyRadioGroup</code>、<code>EasyRate</code>、<code>EasyDatePicker</code>、<code>EasyTimePicker</code>、<code>EasyDateTimePicker</code>、<code>EasyCascader</code>
         等全部表单组件，并展示校验功能。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div style="width: 100%; max-width: 580px">
-            <XlyForm ref="fullFormRef" :model="fullForm" :rules="fullRules" label-width="120px">
-              <XlyFormItem label="用户名" prop="username">
-                <XlyInput v-model="fullForm.username" placeholder="请输入用户名" />
-              </XlyFormItem>
-              <XlyFormItem label="邮箱" prop="email">
-                <XlyInput v-model="fullForm.email" placeholder="请输入邮箱" />
-              </XlyFormItem>
-              <XlyFormItem label="性别">
-                <XlyRadioGroup v-model="fullForm.gender">
-                  <XlyRadio label="male">
+            <EasyForm ref="fullFormRef" :model="fullForm" :rules="fullRules" label-width="120px">
+              <EasyFormItem label="用户名" prop="username">
+                <EasyInput v-model="fullForm.username" placeholder="请输入用户名" />
+              </EasyFormItem>
+              <EasyFormItem label="邮箱" prop="email">
+                <EasyInput v-model="fullForm.email" placeholder="请输入邮箱" />
+              </EasyFormItem>
+              <EasyFormItem label="性别">
+                <EasyRadioGroup v-model="fullForm.gender">
+                  <EasyRadio label="male">
                     男
-                  </XlyRadio>
-                  <XlyRadio label="female">
+                  </EasyRadio>
+                  <EasyRadio label="female">
                     女
-                  </XlyRadio>
-                  <XlyRadio label="other">
+                  </EasyRadio>
+                  <EasyRadio label="other">
                     其他
-                  </XlyRadio>
-                </XlyRadioGroup>
-              </XlyFormItem>
-              <XlyFormItem label="城市">
-                <XlySelect v-model="fullForm.city" :options="cityOptions" placeholder="请选择城市" clearable />
-              </XlyFormItem>
-              <XlyFormItem label="所属部门">
-                <XlyCascader
+                  </EasyRadio>
+                </EasyRadioGroup>
+              </EasyFormItem>
+              <EasyFormItem label="城市">
+                <EasySelect v-model="fullForm.city" :options="cityOptions" placeholder="请选择城市" clearable />
+              </EasyFormItem>
+              <EasyFormItem label="所属部门">
+                <EasyCascader
                   v-model="fullForm.department"
                   :options="departmentOptions"
                   placeholder="请选择部门"
                   clearable
                 />
-              </XlyFormItem>
-              <XlyFormItem label="出生日期">
-                <XlyDatePicker v-model="fullForm.birthday" placeholder="请选择日期" />
-              </XlyFormItem>
-              <XlyFormItem label="面试时间">
-                <XlyTimePicker v-model="fullForm.interviewTime" placeholder="请选择时间" />
-              </XlyFormItem>
-              <XlyFormItem label="入职日期">
-                <XlyDateTimePicker v-model="fullForm.onboardTime" placeholder="请选择日期时间" show-seconds />
-              </XlyFormItem>
-              <XlyFormItem label="满意度">
-                <XlyRate v-model="fullForm.satisfaction" show-text />
-              </XlyFormItem>
-              <XlyFormItem label="备注">
-                <XlyInput
+              </EasyFormItem>
+              <EasyFormItem label="出生日期">
+                <EasyDatePicker v-model="fullForm.birthday" placeholder="请选择日期" />
+              </EasyFormItem>
+              <EasyFormItem label="面试时间">
+                <EasyTimePicker v-model="fullForm.interviewTime" placeholder="请选择时间" />
+              </EasyFormItem>
+              <EasyFormItem label="入职日期">
+                <EasyDateTimePicker v-model="fullForm.onboardTime" placeholder="请选择日期时间" show-seconds />
+              </EasyFormItem>
+              <EasyFormItem label="满意度">
+                <EasyRate v-model="fullForm.satisfaction" show-text />
+              </EasyFormItem>
+              <EasyFormItem label="备注">
+                <EasyInput
                   v-model="fullForm.remark"
                   type="textarea"
                   placeholder="请输入备注信息"
                   :maxlength="200"
                   show-word-limit
                 />
-              </XlyFormItem>
-              <XlyFormItem>
+              </EasyFormItem>
+              <EasyFormItem>
                 <div style="display: flex; gap: 8px">
-                  <XlyButton type="primary" @click="submitFull">
+                  <EasyButton type="primary" @click="submitFull">
                     提交
-                  </XlyButton>
-                  <XlyButton @click="resetFull">
+                  </EasyButton>
+                  <EasyButton @click="resetFull">
                     重置
-                  </XlyButton>
+                  </EasyButton>
                 </div>
-              </XlyFormItem>
-            </XlyForm>
+              </EasyFormItem>
+            </EasyForm>
           </div>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyForm ref=&quot;formRef&quot; :model=&quot;form&quot; :rules=&quot;rules&quot; label-width=&quot;90px&quot;>
-  <XlyFormItem label=&quot;用户名&quot; prop=&quot;username&quot;>
-    <XlyInput v-model=&quot;form.username&quot; placeholder=&quot;请输入用户名&quot; />
-  </XlyFormItem>
-  <XlyFormItem label=&quot;性别&quot;>
-    <XlyRadioGroup v-model=&quot;form.gender&quot;>
-      <XlyRadio label=&quot;male&quot;>男</XlyRadio>
-      <XlyRadio label=&quot;female&quot;>女</XlyRadio>
-    </XlyRadioGroup>
-  </XlyFormItem>
-  <XlyFormItem label=&quot;城市&quot;>
-    <XlySelect v-model=&quot;form.city&quot; :options=&quot;cityOptions&quot; clearable />
-  </XlyFormItem>
-  <XlyFormItem label=&quot;所属部门&quot;>
-    <XlyCascader v-model=&quot;form.department&quot; :options=&quot;deptOptions&quot; />
-  </XlyFormItem>
-  <XlyFormItem label=&quot;出生日期&quot;>
-    <XlyDatePicker v-model=&quot;form.birthday&quot; />
-  </XlyFormItem>
-  <XlyFormItem label=&quot;面试时间&quot;>
-    <XlyTimePicker v-model=&quot;form.interviewTime&quot; />
-  </XlyFormItem>
-  <XlyFormItem label=&quot;入职日期&quot;>
-    <XlyDateTimePicker v-model=&quot;form.onboardTime&quot; show-seconds />
-  </XlyFormItem>
-  <XlyFormItem label=&quot;满意度&quot;>
-    <XlyRate v-model=&quot;form.satisfaction&quot; show-text />
-  </XlyFormItem>
-  <XlyFormItem label=&quot;备注&quot;>
-    <XlyInput v-model=&quot;form.remark&quot; type=&quot;textarea&quot; :maxlength=&quot;200&quot; show-word-limit />
-  </XlyFormItem>
-  <XlyFormItem>
-    <XlyButton type=&quot;primary&quot; @click=&quot;submit&quot;>提交</XlyButton>
-    <XlyButton @click=&quot;reset&quot;>重置</XlyButton>
-  </XlyFormItem>
-</XlyForm>"
+      <EasyDocCode
+        code="<EasyForm ref=&quot;formRef&quot; :model=&quot;form&quot; :rules=&quot;rules&quot; label-width=&quot;90px&quot;>
+  <EasyFormItem label=&quot;用户名&quot; prop=&quot;username&quot;>
+    <EasyInput v-model=&quot;form.username&quot; placeholder=&quot;请输入用户名&quot; />
+  </EasyFormItem>
+  <EasyFormItem label=&quot;性别&quot;>
+    <EasyRadioGroup v-model=&quot;form.gender&quot;>
+      <EasyRadio label=&quot;male&quot;>男</EasyRadio>
+      <EasyRadio label=&quot;female&quot;>女</EasyRadio>
+    </EasyRadioGroup>
+  </EasyFormItem>
+  <EasyFormItem label=&quot;城市&quot;>
+    <EasySelect v-model=&quot;form.city&quot; :options=&quot;cityOptions&quot; clearable />
+  </EasyFormItem>
+  <EasyFormItem label=&quot;所属部门&quot;>
+    <EasyCascader v-model=&quot;form.department&quot; :options=&quot;deptOptions&quot; />
+  </EasyFormItem>
+  <EasyFormItem label=&quot;出生日期&quot;>
+    <EasyDatePicker v-model=&quot;form.birthday&quot; />
+  </EasyFormItem>
+  <EasyFormItem label=&quot;面试时间&quot;>
+    <EasyTimePicker v-model=&quot;form.interviewTime&quot; />
+  </EasyFormItem>
+  <EasyFormItem label=&quot;入职日期&quot;>
+    <EasyDateTimePicker v-model=&quot;form.onboardTime&quot; show-seconds />
+  </EasyFormItem>
+  <EasyFormItem label=&quot;满意度&quot;>
+    <EasyRate v-model=&quot;form.satisfaction&quot; show-text />
+  </EasyFormItem>
+  <EasyFormItem label=&quot;备注&quot;>
+    <EasyInput v-model=&quot;form.remark&quot; type=&quot;textarea&quot; :maxlength=&quot;200&quot; show-word-limit />
+  </EasyFormItem>
+  <EasyFormItem>
+    <EasyButton type=&quot;primary&quot; @click=&quot;submit&quot;>提交</EasyButton>
+    <EasyButton @click=&quot;reset&quot;>重置</EasyButton>
+  </EasyFormItem>
+</EasyForm>"
       />
     </section>
 
@@ -306,39 +306,39 @@ function resetSimplest() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyForm :model="inlineForm" inline>
-            <XlyFormItem label="关键词">
-              <XlyInput v-model="inlineForm.keyword" placeholder="关键词" prefix-icon="el:Search" />
-            </XlyFormItem>
-            <XlyFormItem label="分类">
-              <XlySelect v-model="inlineForm.category" :options="categoryOptions" placeholder="分类" />
-            </XlyFormItem>
-            <XlyFormItem label="日期" :span="24">
-              <XlyDatePicker v-model="inlineForm.date" placeholder="日期" />
-            </XlyFormItem>
-            <XlyFormItem>
-              <XlyButton type="primary">
+          <EasyForm :model="inlineForm" inline>
+            <EasyFormItem label="关键词">
+              <EasyInput v-model="inlineForm.keyword" placeholder="关键词" prefix-icon="el:Search" />
+            </EasyFormItem>
+            <EasyFormItem label="分类">
+              <EasySelect v-model="inlineForm.category" :options="categoryOptions" placeholder="分类" />
+            </EasyFormItem>
+            <EasyFormItem label="日期" :span="24">
+              <EasyDatePicker v-model="inlineForm.date" placeholder="日期" />
+            </EasyFormItem>
+            <EasyFormItem>
+              <EasyButton type="primary">
                 搜索
-              </XlyButton>
-            </XlyFormItem>
-          </XlyForm>
+              </EasyButton>
+            </EasyFormItem>
+          </EasyForm>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyForm :model=&quot;form&quot; inline>
-  <XlyFormItem label=&quot;关键词&quot;>
-    <XlyInput v-model=&quot;form.keyword&quot; placeholder=&quot;关键词&quot; />
-  </XlyFormItem>
-  <XlyFormItem label=&quot;分类&quot;>
-    <XlySelect v-model=&quot;form.category&quot; :options=&quot;options&quot; />
-  </XlyFormItem>
-  <XlyFormItem label=&quot;日期&quot; :span=&quot;24&quot; >
-    <XlyDatePicker v-model=&quot;form.date&quot; />
-  </XlyFormItem>
-  <XlyFormItem>
-    <XlyButton type=&quot;primary&quot;>搜索</XlyButton>
-  </XlyFormItem>
-</XlyForm>"
+      <EasyDocCode
+        code="<EasyForm :model=&quot;form&quot; inline>
+  <EasyFormItem label=&quot;关键词&quot;>
+    <EasyInput v-model=&quot;form.keyword&quot; placeholder=&quot;关键词&quot; />
+  </EasyFormItem>
+  <EasyFormItem label=&quot;分类&quot;>
+    <EasySelect v-model=&quot;form.category&quot; :options=&quot;options&quot; />
+  </EasyFormItem>
+  <EasyFormItem label=&quot;日期&quot; :span=&quot;24&quot; >
+    <EasyDatePicker v-model=&quot;form.date&quot; />
+  </EasyFormItem>
+  <EasyFormItem>
+    <EasyButton type=&quot;primary&quot;>搜索</EasyButton>
+  </EasyFormItem>
+</EasyForm>"
       />
     </section>
 
@@ -353,32 +353,32 @@ function resetSimplest() {
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 16px">
           <div style="width: 400px">
-            <XlyForm :model="sizeForm" size="large" label-width="60px">
-              <XlyFormItem label="大尺寸">
-                <XlyInput v-model="sizeForm.val" placeholder="large" />
-              </XlyFormItem>
-            </XlyForm>
+            <EasyForm :model="sizeForm" size="large" label-width="60px">
+              <EasyFormItem label="大尺寸">
+                <EasyInput v-model="sizeForm.val" placeholder="large" />
+              </EasyFormItem>
+            </EasyForm>
           </div>
           <div style="width: 400px">
-            <XlyForm :model="sizeForm" label-width="60px">
-              <XlyFormItem label="默认">
-                <XlyInput v-model="sizeForm.val" placeholder="default" />
-              </XlyFormItem>
-            </XlyForm>
+            <EasyForm :model="sizeForm" label-width="60px">
+              <EasyFormItem label="默认">
+                <EasyInput v-model="sizeForm.val" placeholder="default" />
+              </EasyFormItem>
+            </EasyForm>
           </div>
           <div style="width: 400px">
-            <XlyForm :model="sizeForm" size="small" label-width="60px">
-              <XlyFormItem label="小尺寸">
-                <XlyInput v-model="sizeForm.val" placeholder="small" />
-              </XlyFormItem>
-            </XlyForm>
+            <EasyForm :model="sizeForm" size="small" label-width="60px">
+              <EasyFormItem label="小尺寸">
+                <EasyInput v-model="sizeForm.val" placeholder="small" />
+              </EasyFormItem>
+            </EasyForm>
           </div>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyForm :model=&quot;form&quot; size=&quot;large&quot; label-width=&quot;60px&quot;>...</XlyForm>
-<XlyForm :model=&quot;form&quot; label-width=&quot;60px&quot;>...</XlyForm>
-<XlyForm :model=&quot;form&quot; size=&quot;small&quot; label-width=&quot;60px&quot;>...</XlyForm>"
+      <EasyDocCode
+        code="<EasyForm :model=&quot;form&quot; size=&quot;large&quot; label-width=&quot;60px&quot;>...</EasyForm>
+<EasyForm :model=&quot;form&quot; label-width=&quot;60px&quot;>...</EasyForm>
+<EasyForm :model=&quot;form&quot; size=&quot;small&quot; label-width=&quot;60px&quot;>...</EasyForm>"
       />
     </section>
 
@@ -388,58 +388,58 @@ function resetSimplest() {
         最简单方式：required 属性
       </h2>
       <p class="doc-section__desc">
-        对于简单的必填校验，直接在 <code>XlyFormItem</code> 上设置 <code>required</code> 属性即可，无需编写 rules。<br>
+        对于简单的必填校验，直接在 <code>EasyFormItem</code> 上设置 <code>required</code> 属性即可，无需编写 rules。<br>
         默认提示文字为"请填写{label}"，也可以通过 <code>msg</code> 自定义。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div style="width: 100%; max-width: 500px">
-            <XlyForm ref="simplestFormRef" :model="simplestForm" label-width="100px">
-              <XlyFormItem label="用户名" prop="username" required>
-                <XlyInput v-model="simplestForm.username" placeholder="默认提示：请填写用户名" />
-              </XlyFormItem>
-              <XlyFormItem label="邮箱" prop="email" required msg="邮箱不能为空">
-                <XlyInput v-model="simplestForm.email" placeholder="自定义提示：邮箱不能为空" />
-              </XlyFormItem>
-              <XlyFormItem label="手机号" prop="phone">
-                <XlyInput v-model="simplestForm.phone" placeholder="选填" />
-              </XlyFormItem>
-              <XlyFormItem label="备注" prop="remark">
-                <XlyInput v-model="simplestForm.remark" type="textarea" placeholder="选填" />
-              </XlyFormItem>
-              <XlyFormItem>
-                <XlyButton type="primary" @click="submitSimplest">
+            <EasyForm ref="simplestFormRef" :model="simplestForm" label-width="100px">
+              <EasyFormItem label="用户名" prop="username" required>
+                <EasyInput v-model="simplestForm.username" placeholder="默认提示：请填写用户名" />
+              </EasyFormItem>
+              <EasyFormItem label="邮箱" prop="email" required msg="邮箱不能为空">
+                <EasyInput v-model="simplestForm.email" placeholder="自定义提示：邮箱不能为空" />
+              </EasyFormItem>
+              <EasyFormItem label="手机号" prop="phone">
+                <EasyInput v-model="simplestForm.phone" placeholder="选填" />
+              </EasyFormItem>
+              <EasyFormItem label="备注" prop="remark">
+                <EasyInput v-model="simplestForm.remark" type="textarea" placeholder="选填" />
+              </EasyFormItem>
+              <EasyFormItem>
+                <EasyButton type="primary" @click="submitSimplest">
                   提交
-                </XlyButton>
-                <XlyButton @click="resetSimplest">
+                </EasyButton>
+                <EasyButton @click="resetSimplest">
                   重置
-                </XlyButton>
-              </XlyFormItem>
-            </XlyForm>
+                </EasyButton>
+              </EasyFormItem>
+            </EasyForm>
           </div>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlyForm ref=&quot;formRef&quot; :model=&quot;form&quot;>
+      <EasyDocCode
+        code="<EasyForm ref=&quot;formRef&quot; :model=&quot;form&quot;>
   <!-- 默认提示：请填写{label} -->
-  <XlyFormItem label=&quot;用户名&quot; prop=&quot;username&quot; required>
-    <XlyInput v-model=&quot;form.username&quot; />
-  </XlyFormItem>
+  <EasyFormItem label=&quot;用户名&quot; prop=&quot;username&quot; required>
+    <EasyInput v-model=&quot;form.username&quot; />
+  </EasyFormItem>
 
   <!-- 自定义提示文字 -->
-  <XlyFormItem label=&quot;邮箱&quot; prop=&quot;email&quot; required msg=&quot;邮箱不能为空&quot;>
-    <XlyInput v-model=&quot;form.email&quot; />
-  </XlyFormItem>
+  <EasyFormItem label=&quot;邮箱&quot; prop=&quot;email&quot; required msg=&quot;邮箱不能为空&quot;>
+    <EasyInput v-model=&quot;form.email&quot; />
+  </EasyFormItem>
 
   <!-- 选填字段，不设置 required -->
-  <XlyFormItem label=&quot;备注&quot; prop=&quot;remark&quot;>
-    <XlyInput v-model=&quot;form.remark&quot; type=&quot;textarea&quot; />
-  </XlyFormItem>
+  <EasyFormItem label=&quot;备注&quot; prop=&quot;remark&quot;>
+    <EasyInput v-model=&quot;form.remark&quot; type=&quot;textarea&quot; />
+  </EasyFormItem>
 
-  <XlyFormItem>
-    <XlyButton type=&quot;primary&quot; @click=&quot;handleSubmit&quot;>提交</XlyButton>
-  </XlyFormItem>
-</XlyForm>"
+  <EasyFormItem>
+    <EasyButton type=&quot;primary&quot; @click=&quot;handleSubmit&quot;>提交</EasyButton>
+  </EasyFormItem>
+</EasyForm>"
       />
     </section>
 
@@ -454,26 +454,26 @@ function resetSimplest() {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div style="width: 100%; max-width: 500px">
-            <XlyForm ref="customFormRef" :model="customForm" :rules="customRules" label-width="80px">
-              <XlyFormItem label="密码" prop="password">
-                <XlyInput v-model="customForm.password" type="password" placeholder="请输入密码" />
-              </XlyFormItem>
-              <XlyFormItem label="确认密码" prop="confirmPassword">
-                <XlyInput v-model="customForm.confirmPassword" type="password" placeholder="请再次输入" />
-              </XlyFormItem>
-              <XlyFormItem label="年龄" prop="age">
-                <XlyInput v-model="customForm.age" placeholder="请输入年龄（18-60）" />
-              </XlyFormItem>
-              <XlyFormItem>
-                <XlyButton type="primary" @click="submitCustom">
+            <EasyForm ref="customFormRef" :model="customForm" :rules="customRules" label-width="80px">
+              <EasyFormItem label="密码" prop="password">
+                <EasyInput v-model="customForm.password" type="password" placeholder="请输入密码" />
+              </EasyFormItem>
+              <EasyFormItem label="确认密码" prop="confirmPassword">
+                <EasyInput v-model="customForm.confirmPassword" type="password" placeholder="请再次输入" />
+              </EasyFormItem>
+              <EasyFormItem label="年龄" prop="age">
+                <EasyInput v-model="customForm.age" placeholder="请输入年龄（18-60）" />
+              </EasyFormItem>
+              <EasyFormItem>
+                <EasyButton type="primary" @click="submitCustom">
                   校验
-                </XlyButton>
-              </XlyFormItem>
-            </XlyForm>
+                </EasyButton>
+              </EasyFormItem>
+            </EasyForm>
           </div>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="import {  required, custom, min, max  } from 'easy-ui'
 
 const rules = {
@@ -500,35 +500,35 @@ const rules = {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div style="width: 100%; max-width: 500px">
-            <XlyForm ref="simpleFormRef" :model="simpleForm" :rules="simpleRules" label-width="80px">
-              <XlyFormItem label="用户名" prop="username">
-                <XlyInput v-model="simpleForm.username" placeholder="必填，至少2个字符" />
-              </XlyFormItem>
-              <XlyFormItem label="邮箱" prop="email">
-                <XlyInput v-model="simpleForm.email" placeholder="必填，邮箱格式" />
-              </XlyFormItem>
-              <XlyFormItem label="手机号" prop="phone">
-                <XlyInput v-model="simpleForm.phone" placeholder="手机号格式" />
-              </XlyFormItem>
-              <XlyFormItem label="年龄" prop="age">
-                <XlyInput v-model="simpleForm.age" placeholder="18-60岁" />
-              </XlyFormItem>
-              <XlyFormItem label="个人网站" prop="website">
-                <XlyInput v-model="simpleForm.website" placeholder="URL 格式" />
-              </XlyFormItem>
-              <XlyFormItem>
-                <XlyButton type="primary" @click="submitSimple">
+            <EasyForm ref="simpleFormRef" :model="simpleForm" :rules="simpleRules" label-width="80px">
+              <EasyFormItem label="用户名" prop="username">
+                <EasyInput v-model="simpleForm.username" placeholder="必填，至少2个字符" />
+              </EasyFormItem>
+              <EasyFormItem label="邮箱" prop="email">
+                <EasyInput v-model="simpleForm.email" placeholder="必填，邮箱格式" />
+              </EasyFormItem>
+              <EasyFormItem label="手机号" prop="phone">
+                <EasyInput v-model="simpleForm.phone" placeholder="手机号格式" />
+              </EasyFormItem>
+              <EasyFormItem label="年龄" prop="age">
+                <EasyInput v-model="simpleForm.age" placeholder="18-60岁" />
+              </EasyFormItem>
+              <EasyFormItem label="个人网站" prop="website">
+                <EasyInput v-model="simpleForm.website" placeholder="URL 格式" />
+              </EasyFormItem>
+              <EasyFormItem>
+                <EasyButton type="primary" @click="submitSimple">
                   提交
-                </XlyButton>
-                <XlyButton @click="resetSimple">
+                </EasyButton>
+                <EasyButton @click="resetSimple">
                   重置
-                </XlyButton>
-              </XlyFormItem>
-            </XlyForm>
+                </EasyButton>
+              </EasyFormItem>
+            </EasyForm>
           </div>
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="// 简化规则写法（字符串）
 const rules = {
   username: ['required', 'min:2'],
@@ -556,7 +556,7 @@ const mixedRules = {
       </h3>
 
       <h3 class="doc-subtitle">
-        XlyForm Props
+        EasyForm Props
       </h3>
       <div class="doc-table">
         <table>
@@ -622,7 +622,7 @@ const mixedRules = {
       </div>
 
       <h3 class="doc-subtitle">
-        XlyForm Methods
+        EasyForm Methods
       </h3>
       <div class="doc-table">
         <table>
@@ -659,7 +659,7 @@ const mixedRules = {
       </div>
 
       <h3 class="doc-subtitle">
-        XlyFormItem Props
+        EasyFormItem Props
       </h3>
       <div class="doc-table">
         <table>
@@ -719,7 +719,7 @@ const mixedRules = {
       </div>
 
       <h3 class="doc-subtitle">
-        XlyFormItem Slots
+        EasyFormItem Slots
       </h3>
       <div class="doc-table">
         <table>

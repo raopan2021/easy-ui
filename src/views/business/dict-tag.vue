@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyDictTag } from 'easy-ui'
+import { EasyDictTag } from 'easy-ui'
 
 const tableData = [
   { name: '张三', status: '1', role: 'admin', gender: '1', roles: 'admin,editor' },
@@ -35,47 +35,47 @@ const tableData = [
           <div class="demo-row">
             <span class="demo-label">用户状态</span>
             <div class="demo-tags">
-              <XlyDictTag value="1" dict-type="user_status" />
-              <XlyDictTag value="2" dict-type="user_status" />
-              <XlyDictTag value="3" dict-type="user_status" />
-              <XlyDictTag value="4" dict-type="user_status" />
+              <EasyDictTag value="1" dict-type="user_status" />
+              <EasyDictTag value="2" dict-type="user_status" />
+              <EasyDictTag value="3" dict-type="user_status" />
+              <EasyDictTag value="4" dict-type="user_status" />
             </div>
           </div>
           <div class="demo-row">
             <span class="demo-label">审批状态</span>
             <div class="demo-tags">
-              <XlyDictTag value="0" dict-type="approve_status" />
-              <XlyDictTag value="1" dict-type="approve_status" />
-              <XlyDictTag value="2" dict-type="approve_status" />
-              <XlyDictTag value="3" dict-type="approve_status" />
-              <XlyDictTag value="4" dict-type="approve_status" />
+              <EasyDictTag value="0" dict-type="approve_status" />
+              <EasyDictTag value="1" dict-type="approve_status" />
+              <EasyDictTag value="2" dict-type="approve_status" />
+              <EasyDictTag value="3" dict-type="approve_status" />
+              <EasyDictTag value="4" dict-type="approve_status" />
             </div>
           </div>
           <div class="demo-row">
             <span class="demo-label">性别（含图标）</span>
             <div class="demo-tags">
-              <XlyDictTag value="1" dict-type="gender" />
-              <XlyDictTag value="2" dict-type="gender" />
-              <XlyDictTag value="0" dict-type="gender" />
+              <EasyDictTag value="1" dict-type="gender" />
+              <EasyDictTag value="2" dict-type="gender" />
+              <EasyDictTag value="0" dict-type="gender" />
             </div>
           </div>
           <div class="demo-row">
             <span class="demo-label">优先级（自定义颜色）</span>
             <div class="demo-tags">
-              <XlyDictTag value="low" dict-type="priority" />
-              <XlyDictTag value="medium" dict-type="priority" />
-              <XlyDictTag value="high" dict-type="priority" />
-              <XlyDictTag value="urgent" dict-type="priority" />
+              <EasyDictTag value="low" dict-type="priority" />
+              <EasyDictTag value="medium" dict-type="priority" />
+              <EasyDictTag value="high" dict-type="priority" />
+              <EasyDictTag value="urgent" dict-type="priority" />
             </div>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 传入绑定值 + 字典类型，其余全部自动处理 -->
-<xly-dict-tag value=&quot;1&quot; dict-type=&quot;user_status&quot; />
-<xly-dict-tag value=&quot;2&quot; dict-type=&quot;approve_status&quot; />
+<easy-dict-tag value=&quot;1&quot; dict-type=&quot;user_status&quot; />
+<easy-dict-tag value=&quot;2&quot; dict-type=&quot;approve_status&quot; />
 
 <!-- 未匹配到字典时直接显示原始值，不报错 -->
-<xly-dict-tag value=&quot;99&quot; dict-type=&quot;user_status&quot; />"
+<easy-dict-tag value=&quot;99&quot; dict-type=&quot;user_status&quot; />"
         />
       </div>
     </section>
@@ -93,27 +93,27 @@ const tableData = [
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 20px">
           <div class="demo-row">
             <span class="demo-label">逗号字符串</span>
-            <XlyDictTag value="1,2,3" dict-type="user_status" multiple />
+            <EasyDictTag value="1,2,3" dict-type="user_status" multiple />
           </div>
           <div class="demo-row">
             <span class="demo-label">字符串数组</span>
-            <XlyDictTag :value="['0', '2', '3']" dict-type="approve_status" multiple />
+            <EasyDictTag :value="['0', '2', '3']" dict-type="approve_status" multiple />
           </div>
           <div class="demo-row">
             <span class="demo-label">订单状态</span>
-            <XlyDictTag :value="['1', '2', '4']" dict-type="order_status" multiple />
+            <EasyDictTag :value="['1', '2', '4']" dict-type="order_status" multiple />
           </div>
           <div class="demo-row">
             <span class="demo-label">优先级多选</span>
-            <XlyDictTag value="low,high,urgent" dict-type="priority" multiple />
+            <EasyDictTag value="low,high,urgent" dict-type="priority" multiple />
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 逗号拼接字符串（后端字段常见格式）-->
-<xly-dict-tag value=&quot;1,2,3&quot; dict-type=&quot;user_status&quot; multiple />
+<easy-dict-tag value=&quot;1,2,3&quot; dict-type=&quot;user_status&quot; multiple />
 
 <!-- 字符串数组 -->
-<xly-dict-tag :value=&quot;['0','2','3']&quot; dict-type=&quot;approve_status&quot; multiple />"
+<easy-dict-tag :value=&quot;['0','2','3']&quot; dict-type=&quot;approve_status&quot; multiple />"
         />
       </div>
     </section>
@@ -142,19 +142,19 @@ const tableData = [
             <tbody>
               <tr v-for="row in tableData" :key="row.name">
                 <td>{{ row.name }}</td>
-                <td><XlyDictTag :value="row.status" dict-type="user_status" /></td>
-                <td><XlyDictTag :value="row.role" dict-type="role_type" /></td>
-                <td><XlyDictTag :value="row.gender" dict-type="gender" /></td>
-                <td><XlyDictTag :value="row.roles" dict-type="role_type" multiple /></td>
+                <td><EasyDictTag :value="row.status" dict-type="user_status" /></td>
+                <td><EasyDictTag :value="row.role" dict-type="role_type" /></td>
+                <td><EasyDictTag :value="row.gender" dict-type="gender" /></td>
+                <td><EasyDictTag :value="row.roles" dict-type="role_type" multiple /></td>
               </tr>
             </tbody>
           </table>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 在表格中使用 -->
 <el-table-column label=&quot;状态&quot;>
   <template #default=&quot;{ row }&quot;>
-    <xly-dict-tag :value=&quot;row.status&quot; dict-type=&quot;user_status&quot; />
+    <easy-dict-tag :value=&quot;row.status&quot; dict-type=&quot;user_status&quot; />
   </template>
 </el-table-column>"
         />
@@ -174,21 +174,21 @@ const tableData = [
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 14px">
           <div class="demo-row">
             <span class="demo-label effect-label">light</span>
-            <XlyDictTag value="1,2,3,4" dict-type="user_status" multiple effect="light" />
+            <EasyDictTag value="1,2,3,4" dict-type="user_status" multiple effect="light" />
           </div>
           <div class="demo-row">
             <span class="demo-label effect-label">plain</span>
-            <XlyDictTag value="1,2,3,4" dict-type="user_status" multiple effect="plain" />
+            <EasyDictTag value="1,2,3,4" dict-type="user_status" multiple effect="plain" />
           </div>
           <div class="demo-row">
             <span class="demo-label effect-label">dark</span>
-            <XlyDictTag value="1,2,3,4" dict-type="user_status" multiple effect="dark" />
+            <EasyDictTag value="1,2,3,4" dict-type="user_status" multiple effect="dark" />
           </div>
         </div>
-        <XlyDocCode
-          code="<xly-dict-tag value=&quot;1&quot; dict-type=&quot;user_status&quot; effect=&quot;light&quot; />
-<xly-dict-tag value=&quot;1&quot; dict-type=&quot;user_status&quot; effect=&quot;plain&quot; />
-<xly-dict-tag value=&quot;1&quot; dict-type=&quot;user_status&quot; effect=&quot;dark&quot; />"
+        <EasyDocCode
+          code="<easy-dict-tag value=&quot;1&quot; dict-type=&quot;user_status&quot; effect=&quot;light&quot; />
+<easy-dict-tag value=&quot;1&quot; dict-type=&quot;user_status&quot; effect=&quot;plain&quot; />
+<easy-dict-tag value=&quot;1&quot; dict-type=&quot;user_status&quot; effect=&quot;dark&quot; />"
         />
       </div>
     </section>
@@ -205,28 +205,28 @@ const tableData = [
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 14px">
           <div class="demo-row">
             <span class="demo-label">Large</span>
-            <XlyDictTag value="1" dict-type="user_status" size="large" />
-            <XlyDictTag value="2" dict-type="approve_status" size="large" />
+            <EasyDictTag value="1" dict-type="user_status" size="large" />
+            <EasyDictTag value="2" dict-type="approve_status" size="large" />
           </div>
           <div class="demo-row">
             <span class="demo-label">Default</span>
-            <XlyDictTag value="1" dict-type="user_status" />
-            <XlyDictTag value="2" dict-type="approve_status" />
+            <EasyDictTag value="1" dict-type="user_status" />
+            <EasyDictTag value="2" dict-type="approve_status" />
           </div>
           <div class="demo-row">
             <span class="demo-label">Small</span>
-            <XlyDictTag value="1" dict-type="user_status" size="small" />
-            <XlyDictTag value="2" dict-type="approve_status" size="small" />
+            <EasyDictTag value="1" dict-type="user_status" size="small" />
+            <EasyDictTag value="2" dict-type="approve_status" size="small" />
           </div>
           <div class="demo-row">
             <span class="demo-label">Round</span>
-            <XlyDictTag value="1,2,3" dict-type="user_status" multiple round />
+            <EasyDictTag value="1,2,3" dict-type="user_status" multiple round />
           </div>
         </div>
-        <XlyDocCode
-          code="<xly-dict-tag value=&quot;1&quot; dict-type=&quot;user_status&quot; size=&quot;large&quot; />
-<xly-dict-tag value=&quot;1&quot; dict-type=&quot;user_status&quot; size=&quot;small&quot; />
-<xly-dict-tag value=&quot;1,2&quot; dict-type=&quot;user_status&quot; multiple round />"
+        <EasyDocCode
+          code="<easy-dict-tag value=&quot;1&quot; dict-type=&quot;user_status&quot; size=&quot;large&quot; />
+<easy-dict-tag value=&quot;1&quot; dict-type=&quot;user_status&quot; size=&quot;small&quot; />
+<easy-dict-tag value=&quot;1,2&quot; dict-type=&quot;user_status&quot; multiple round />"
         />
       </div>
     </section>
@@ -244,12 +244,12 @@ const tableData = [
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 14px">
           <div class="demo-row">
             <span class="demo-label">带图标</span>
-            <XlyDictTag value="1" dict-type="gender" />
-            <XlyDictTag value="2" dict-type="gender" />
-            <XlyDictTag value="0" dict-type="gender" />
+            <EasyDictTag value="1" dict-type="gender" />
+            <EasyDictTag value="2" dict-type="gender" />
+            <EasyDictTag value="0" dict-type="gender" />
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="// 字典数据中添加 icon 字段（el: 前缀 = Element Plus 图标）
 { id: '1', labelValue: '男', icon: 'el:Male' }
 { id: '2', labelValue: '女', icon: 'el:Female' }
@@ -292,22 +292,22 @@ const tableData = [
           <div class="demo-row">
             <span class="demo-label">默认字段</span>
             <span class="demo-hint">labelValue / id</span>
-            <XlyDictTag value="1" dict-type="user_status" />
+            <EasyDictTag value="1" dict-type="user_status" />
           </div>
           <div class="demo-row">
             <span class="demo-label">自定义字段</span>
             <span class="demo-hint">name / code</span>
             <!-- 使用自定义字段的字典类型（演示用） -->
-            <XlyDictTag value="active" dict-type="custom_field_demo" label-field="name" value-field="code" />
-            <XlyDictTag value="inactive" dict-type="custom_field_demo" label-field="name" value-field="code" />
+            <EasyDictTag value="active" dict-type="custom_field_demo" label-field="name" value-field="code" />
+            <EasyDictTag value="inactive" dict-type="custom_field_demo" label-field="name" value-field="code" />
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 默认：id → labelValue -->
-<xly-dict-tag value=&quot;1&quot; dict-type=&quot;user_status&quot; />
+<easy-dict-tag value=&quot;1&quot; dict-type=&quot;user_status&quot; />
 
 <!-- 自定义：code → name -->
-<xly-dict-tag
+<easy-dict-tag
   value=&quot;active&quot;
   dict-type=&quot;your_dict&quot;
   label-field=&quot;name&quot;
@@ -330,22 +330,22 @@ const tableData = [
           <div class="demo-row">
             <span class="demo-label">空值</span>
             <span class="demo-hint">[不渲染]</span>
-            <XlyDictTag value="" dict-type="user_status" />
-            <XlyDictTag :value="null" dict-type="user_status" />
+            <EasyDictTag value="" dict-type="user_status" />
+            <EasyDictTag :value="null" dict-type="user_status" />
           </div>
           <div class="demo-row">
             <span class="demo-label">未匹配</span>
             <span class="demo-hint">[显示原始值]</span>
-            <XlyDictTag value="999" dict-type="user_status" />
+            <EasyDictTag value="999" dict-type="user_status" />
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 空值不渲染 -->
-<xly-dict-tag value=&quot;&quot; dict-type=&quot;user_status&quot; />
-<xly-dict-tag :value=&quot;null&quot; dict-type=&quot;user_status&quot; />
+<easy-dict-tag value=&quot;&quot; dict-type=&quot;user_status&quot; />
+<easy-dict-tag :value=&quot;null&quot; dict-type=&quot;user_status&quot; />
 
 <!-- 未匹配时显示原始值 -->
-<xly-dict-tag value=&quot;999&quot; dict-type=&quot;user_status&quot; />"
+<easy-dict-tag value=&quot;999&quot; dict-type=&quot;user_status&quot; />"
         />
       </div>
     </section>
@@ -360,8 +360,8 @@ const tableData = [
         <code>fetchDictList</code> 函数负责数据请求，只需替换此函数即可对接您自己的字典接口，无需修改其他任何代码。
       </p>
       <div class="doc-preview">
-        <XlyDocCode
-          code="// 📁 src/components/xly-dict-tag/index.vue
+        <EasyDocCode
+          code="// 📁 packages/components/dict-tag/index.ts
 
 // ✅ 第一步：引入您的接口方法
 import { getDictDataByType } from '@/api/system/dict'
@@ -385,7 +385,7 @@ async function fetchDictList(dictType: string): Promise<DictItem[]> {
   // 方案 B：直接返回原始数据，通过 label-field / value-field 属性指定字段名
   // return res.data
   // 然后在使用组件时指定字段：
-  // <xly-dict-tag label-field=&quot;dictLabel&quot; value-field=&quot;dictValue&quot; ... />
+  // <easy-dict-tag label-field=&quot;dictLabel&quot; value-field=&quot;dictValue&quot; ... />
 }
 
 // ✅ 可选：增加缓存，避免相同字典类型重复请求
@@ -411,7 +411,7 @@ async function fetchDictList(dictType: string): Promise<DictItem[]> {
         <div class="tip-block__content">
           <strong>推荐做法：</strong>将 <code>fetchDictList</code> 提取到
           <code>src/utils/dict.ts</code> 中统一管理，所有使用字典的组件 （如
-          <code>XlyDictSelect</code>）都引用同一个带缓存的请求函数， 避免同一字典类型在页面上多次网络请求。
+          <code>EasyDictSelect</code>）都引用同一个带缓存的请求函数， 避免同一字典类型在页面上多次网络请求。
         </div>
       </div>
     </section>

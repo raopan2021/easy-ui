@@ -464,8 +464,8 @@ onMounted(() => {
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyTopology :nodes=&quot;nodes&quot; :edges=&quot;edges&quot; :width=&quot;900&quot; :height=&quot;600&quot; />"
+        <EasyDocCode
+          code="<EasyTopology :nodes=&quot;nodes&quot; :edges=&quot;edges&quot; :width=&quot;900&quot; :height=&quot;600&quot; />"
         />
       </div>
     </section>

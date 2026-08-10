@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { xly, XlyTour } from 'easy-ui'
+import { EasyTour, xly } from 'easy-ui'
 import { ref } from 'vue'
 
 // ==================== 基础用法 ====================
@@ -188,13 +188,13 @@ function onTourChange(current: number) {
             </button>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<template>
   <div ref=&quot;step1Target&quot;>目标元素 1</div>
   <div ref=&quot;step2Target&quot;>目标元素 2</div>
   <div ref=&quot;step3Target&quot;>目标元素 3</div>
 
-  <XlyTour
+  <EasyTour
     v-model=&quot;tourVisible&quot;
     :steps=&quot;[
       { target: step1Target, title: '第一步', description: '这里是数据概览区域' },
@@ -243,8 +243,8 @@ function onTourChange(current: number) {
             </button>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyTour
+        <EasyDocCode
+          code="<EasyTour
   :steps=&quot;[
     { target: el, title: '上方', placement: 'top', description: '气泡在目标上方' },
     { target: el, title: '下方', placement: 'bottom', description: '气泡在目标下方' },
@@ -280,8 +280,8 @@ function onTourChange(current: number) {
             </button>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyTour
+        <EasyDocCode
+          code="<EasyTour
   v-model=&quot;visible&quot;
   color=&quot;#10b981&quot;
   :steps=&quot;steps&quot;
@@ -318,7 +318,7 @@ function onTourChange(current: number) {
             </button>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="import { xly } from 'easy-ui'
 
 // 命令式启动引导
@@ -350,8 +350,8 @@ xly.$tour({
             开始引导
           </button>
         </div>
-        <XlyDocCode
-          code="<XlyTour v-model=&quot;visible&quot; :mask=&quot;false&quot; :steps=&quot;steps&quot; />"
+        <EasyDocCode
+          code="<EasyTour v-model=&quot;visible&quot; :mask=&quot;false&quot; :steps=&quot;steps&quot; />"
         />
       </div>
     </section>
@@ -726,10 +726,10 @@ xly.$tour({
     </section>
 
     <!-- Tour 组件引用 -->
-    <XlyTour v-model="basicTourVisible" :steps="basicSteps" @finish="onTourFinish" @change="onTourChange" />
-    <XlyTour v-model="placementTourVisible" :steps="placementSteps" />
-    <XlyTour v-model="colorTourVisible" :steps="colorSteps" :color="tourColor" />
-    <XlyTour v-model="noMaskTourVisible" :steps="noMaskSteps" :mask="false" />
+    <EasyTour v-model="basicTourVisible" :steps="basicSteps" @finish="onTourFinish" @change="onTourChange" />
+    <EasyTour v-model="placementTourVisible" :steps="placementSteps" />
+    <EasyTour v-model="colorTourVisible" :steps="colorSteps" :color="tourColor" />
+    <EasyTour v-model="noMaskTourVisible" :steps="noMaskSteps" :mask="false" />
   </div>
 </template>
 

@@ -1,0 +1,73 @@
+# 构建并部署 EasyUI 文档站到 GitHub Pages
+#
+# 前提：仓库 Settings → Pages → Source 选择 "GitHub Actions"
+# 部署路径：https://<user>.github.io/easy-ui/（vite.config.ts 依据 GH_PAGES 设置 base）
+#
+name: Deploy EasyUI site to Pages
+
+on:
+  # 在针对 `main` 分支的推送上运行
+  push:
+    branches: [main]
+
+  # 允许从 Actions 选项卡手动运行
+  workflow_dispatch:
+
+# 设置 GITHUB_TOKEN 权限以允许部署到 GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 只允许同时进行一次部署，跳过正在运行与最新队列之间的运行
+# 不取消正在进行的运行，允许生产部署完成
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  # ── 构建工作 ──
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0 # 保留完整历史，便于 lastUpdated / 版本信息
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false # 由下方 Install 步骤统一安装，避免重复
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm # 缓存 pnpm store，加速安装
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile # 严格按 pnpm-lock.yaml 安装
+      - name: Build with EasyUI
+        env:
+          # 文档站部署在 GitHub Pages 子路径 /easy-ui/ 下，vite.config.ts 据此设置 base
+          GH_PAGES: 'true'
+        run: pnpm build
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  # ── 部署工作 ──
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

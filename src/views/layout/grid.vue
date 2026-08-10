@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyCol, XlyRow } from 'easy-ui'
+import { EasyCol, EasyRow } from 'easy-ui'
 </script>
 
 <template>
@@ -19,77 +19,77 @@ import { XlyCol, XlyRow } from 'easy-ui'
         基础用法
       </h2>
       <p class="doc-section__desc">
-        使用 <code>XlyRow</code> 和 <code>XlyCol</code> 组件创建栅格布局，通过 <code>span</code> 属性设置分栏数。
+        使用 <code>EasyRow</code> 和 <code>EasyCol</code> 组件创建栅格布局，通过 <code>span</code> 属性设置分栏数。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body doc-preview__body--column">
-          <XlyRow>
-            <XlyCol :span="24">
+          <EasyRow>
+            <EasyCol :span="24">
               <div class="grid-content bg-purple-dark" />
-            </XlyCol>
-          </XlyRow>
-          <XlyRow>
-            <XlyCol :span="12">
+            </EasyCol>
+          </EasyRow>
+          <EasyRow>
+            <EasyCol :span="12">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :span="12">
+            </EasyCol>
+            <EasyCol :span="12">
               <div class="grid-content bg-purple-light" />
-            </XlyCol>
-          </XlyRow>
-          <XlyRow>
-            <XlyCol :span="8">
+            </EasyCol>
+          </EasyRow>
+          <EasyRow>
+            <EasyCol :span="8">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :span="8">
+            </EasyCol>
+            <EasyCol :span="8">
               <div class="grid-content bg-purple-light" />
-            </XlyCol>
-            <XlyCol :span="8">
+            </EasyCol>
+            <EasyCol :span="8">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-          </XlyRow>
-          <XlyRow>
-            <XlyCol :span="6">
+            </EasyCol>
+          </EasyRow>
+          <EasyRow>
+            <EasyCol :span="6">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :span="6">
+            </EasyCol>
+            <EasyCol :span="6">
               <div class="grid-content bg-purple-light" />
-            </XlyCol>
-            <XlyCol :span="6">
+            </EasyCol>
+            <EasyCol :span="6">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :span="6">
+            </EasyCol>
+            <EasyCol :span="6">
               <div class="grid-content bg-purple-light" />
-            </XlyCol>
-          </XlyRow>
-          <XlyRow>
-            <XlyCol :span="4">
+            </EasyCol>
+          </EasyRow>
+          <EasyRow>
+            <EasyCol :span="4">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :span="4">
+            </EasyCol>
+            <EasyCol :span="4">
               <div class="grid-content bg-purple-light" />
-            </XlyCol>
-            <XlyCol :span="4">
+            </EasyCol>
+            <EasyCol :span="4">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :span="4">
+            </EasyCol>
+            <EasyCol :span="4">
               <div class="grid-content bg-purple-light" />
-            </XlyCol>
-            <XlyCol :span="4">
+            </EasyCol>
+            <EasyCol :span="4">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :span="4">
+            </EasyCol>
+            <EasyCol :span="4">
               <div class="grid-content bg-purple-light" />
-            </XlyCol>
-          </XlyRow>
+            </EasyCol>
+          </EasyRow>
         </div>
-        <XlyDocCode
-          code="<XlyRow>
-  <XlyCol :span=&quot;24&quot;><div class=&quot;content&quot;></div></XlyCol>
-</XlyRow>
-<XlyRow>
-  <XlyCol :span=&quot;12&quot;><div class=&quot;content&quot;></div></XlyCol>
-  <XlyCol :span=&quot;12&quot;><div class=&quot;content&quot;></div></XlyCol>
-</XlyRow>"
+        <EasyDocCode
+          code="<EasyRow>
+  <EasyCol :span=&quot;24&quot;><div class=&quot;content&quot;></div></EasyCol>
+</EasyRow>
+<EasyRow>
+  <EasyCol :span=&quot;12&quot;><div class=&quot;content&quot;></div></EasyCol>
+  <EasyCol :span=&quot;12&quot;><div class=&quot;content&quot;></div></EasyCol>
+</EasyRow>"
         />
       </div>
     </section>
@@ -104,28 +104,28 @@ import { XlyCol, XlyRow } from 'easy-ui'
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyRow :gutter="20">
-            <XlyCol :span="6">
+          <EasyRow :gutter="20">
+            <EasyCol :span="6">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :span="6">
+            </EasyCol>
+            <EasyCol :span="6">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :span="6">
+            </EasyCol>
+            <EasyCol :span="6">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :span="6">
+            </EasyCol>
+            <EasyCol :span="6">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-          </XlyRow>
+            </EasyCol>
+          </EasyRow>
         </div>
-        <XlyDocCode
-          code="<XlyRow :gutter=&quot;20&quot;>
-  <XlyCol :span=&quot;6&quot;><div class=&quot;content&quot;></div></XlyCol>
-  <XlyCol :span=&quot;6&quot;><div class=&quot;content&quot;></div></XlyCol>
-  <XlyCol :span=&quot;6&quot;><div class=&quot;content&quot;></div></XlyCol>
-  <XlyCol :span=&quot;6&quot;><div class=&quot;content&quot;></div></XlyCol>
-</XlyRow>"
+        <EasyDocCode
+          code="<EasyRow :gutter=&quot;20&quot;>
+  <EasyCol :span=&quot;6&quot;><div class=&quot;content&quot;></div></EasyCol>
+  <EasyCol :span=&quot;6&quot;><div class=&quot;content&quot;></div></EasyCol>
+  <EasyCol :span=&quot;6&quot;><div class=&quot;content&quot;></div></EasyCol>
+  <EasyCol :span=&quot;6&quot;><div class=&quot;content&quot;></div></EasyCol>
+</EasyRow>"
         />
       </div>
     </section>
@@ -140,45 +140,45 @@ import { XlyCol, XlyRow } from 'easy-ui'
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body doc-preview__body--column">
-          <XlyRow :gutter="20">
-            <XlyCol :span="16">
+          <EasyRow :gutter="20">
+            <EasyCol :span="16">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :span="8">
+            </EasyCol>
+            <EasyCol :span="8">
               <div class="grid-content bg-purple-light" />
-            </XlyCol>
-          </XlyRow>
-          <XlyRow :gutter="20">
-            <XlyCol :span="8">
+            </EasyCol>
+          </EasyRow>
+          <EasyRow :gutter="20">
+            <EasyCol :span="8">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :span="8">
+            </EasyCol>
+            <EasyCol :span="8">
               <div class="grid-content bg-purple-light" />
-            </XlyCol>
-            <XlyCol :span="4">
+            </EasyCol>
+            <EasyCol :span="4">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :span="4">
+            </EasyCol>
+            <EasyCol :span="4">
               <div class="grid-content bg-purple-light" />
-            </XlyCol>
-          </XlyRow>
-          <XlyRow :gutter="20">
-            <XlyCol :span="4">
+            </EasyCol>
+          </EasyRow>
+          <EasyRow :gutter="20">
+            <EasyCol :span="4">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :span="16">
+            </EasyCol>
+            <EasyCol :span="16">
               <div class="grid-content bg-purple-light" />
-            </XlyCol>
-            <XlyCol :span="4">
+            </EasyCol>
+            <EasyCol :span="4">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-          </XlyRow>
+            </EasyCol>
+          </EasyRow>
         </div>
-        <XlyDocCode
-          code="<XlyRow :gutter=&quot;20&quot;>
-  <XlyCol :span=&quot;16&quot;><div class=&quot;content&quot;></div></XlyCol>
-  <XlyCol :span=&quot;8&quot;><div class=&quot;content&quot;></div></XlyCol>
-</XlyRow>"
+        <EasyDocCode
+          code="<EasyRow :gutter=&quot;20&quot;>
+  <EasyCol :span=&quot;16&quot;><div class=&quot;content&quot;></div></EasyCol>
+  <EasyCol :span=&quot;8&quot;><div class=&quot;content&quot;></div></EasyCol>
+</EasyRow>"
         />
       </div>
     </section>
@@ -193,33 +193,33 @@ import { XlyCol, XlyRow } from 'easy-ui'
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body doc-preview__body--column">
-          <XlyRow :gutter="20">
-            <XlyCol :span="6">
+          <EasyRow :gutter="20">
+            <EasyCol :span="6">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :span="6" :offset="6">
+            </EasyCol>
+            <EasyCol :span="6" :offset="6">
               <div class="grid-content bg-purple-light" />
-            </XlyCol>
-          </XlyRow>
-          <XlyRow :gutter="20">
-            <XlyCol :span="6" :offset="6">
+            </EasyCol>
+          </EasyRow>
+          <EasyRow :gutter="20">
+            <EasyCol :span="6" :offset="6">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :span="6" :offset="6">
+            </EasyCol>
+            <EasyCol :span="6" :offset="6">
               <div class="grid-content bg-purple-light" />
-            </XlyCol>
-          </XlyRow>
-          <XlyRow :gutter="20">
-            <XlyCol :span="12" :offset="6">
+            </EasyCol>
+          </EasyRow>
+          <EasyRow :gutter="20">
+            <EasyCol :span="12" :offset="6">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-          </XlyRow>
+            </EasyCol>
+          </EasyRow>
         </div>
-        <XlyDocCode
-          code="<XlyRow :gutter=&quot;20&quot;>
-  <XlyCol :span=&quot;6&quot;><div class=&quot;content&quot;></div></XlyCol>
-  <XlyCol :span=&quot;6&quot; :offset=&quot;6&quot;><div class=&quot;content&quot;></div></XlyCol>
-</XlyRow>"
+        <EasyDocCode
+          code="<EasyRow :gutter=&quot;20&quot;>
+  <EasyCol :span=&quot;6&quot;><div class=&quot;content&quot;></div></EasyCol>
+  <EasyCol :span=&quot;6&quot; :offset=&quot;6&quot;><div class=&quot;content&quot;></div></EasyCol>
+</EasyRow>"
         />
       </div>
     </section>
@@ -234,56 +234,56 @@ import { XlyCol, XlyRow } from 'easy-ui'
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body doc-preview__body--column">
-          <XlyRow justify="center" :gutter="20">
-            <XlyCol :span="6">
+          <EasyRow justify="center" :gutter="20">
+            <EasyCol :span="6">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :span="6">
+            </EasyCol>
+            <EasyCol :span="6">
               <div class="grid-content bg-purple-light" />
-            </XlyCol>
-            <XlyCol :span="6">
+            </EasyCol>
+            <EasyCol :span="6">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-          </XlyRow>
-          <XlyRow justify="end" :gutter="20">
-            <XlyCol :span="6">
+            </EasyCol>
+          </EasyRow>
+          <EasyRow justify="end" :gutter="20">
+            <EasyCol :span="6">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :span="6">
+            </EasyCol>
+            <EasyCol :span="6">
               <div class="grid-content bg-purple-light" />
-            </XlyCol>
-            <XlyCol :span="6">
+            </EasyCol>
+            <EasyCol :span="6">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-          </XlyRow>
-          <XlyRow justify="space-between" :gutter="20">
-            <XlyCol :span="6">
+            </EasyCol>
+          </EasyRow>
+          <EasyRow justify="space-between" :gutter="20">
+            <EasyCol :span="6">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :span="6">
+            </EasyCol>
+            <EasyCol :span="6">
               <div class="grid-content bg-purple-light" />
-            </XlyCol>
-            <XlyCol :span="6">
+            </EasyCol>
+            <EasyCol :span="6">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-          </XlyRow>
-          <XlyRow justify="space-around" :gutter="20">
-            <XlyCol :span="6">
+            </EasyCol>
+          </EasyRow>
+          <EasyRow justify="space-around" :gutter="20">
+            <EasyCol :span="6">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :span="6">
+            </EasyCol>
+            <EasyCol :span="6">
               <div class="grid-content bg-purple-light" />
-            </XlyCol>
-            <XlyCol :span="6">
+            </EasyCol>
+            <EasyCol :span="6">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-          </XlyRow>
+            </EasyCol>
+          </EasyRow>
         </div>
-        <XlyDocCode
-          code="<XlyRow justify=&quot;center&quot; :gutter=&quot;20&quot;>...</XlyRow>
-<XlyRow justify=&quot;end&quot; :gutter=&quot;20&quot;>...</XlyRow>
-<XlyRow justify=&quot;space-between&quot; :gutter=&quot;20&quot;>...</XlyRow>
-<XlyRow justify=&quot;space-around&quot; :gutter=&quot;20&quot;>...</XlyRow>"
+        <EasyDocCode
+          code="<EasyRow justify=&quot;center&quot; :gutter=&quot;20&quot;>...</EasyRow>
+<EasyRow justify=&quot;end&quot; :gutter=&quot;20&quot;>...</EasyRow>
+<EasyRow justify=&quot;space-between&quot; :gutter=&quot;20&quot;>...</EasyRow>
+<EasyRow justify=&quot;space-around&quot; :gutter=&quot;20&quot;>...</EasyRow>"
         />
       </div>
     </section>
@@ -298,33 +298,33 @@ import { XlyCol, XlyRow } from 'easy-ui'
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyRow :gutter="10">
-            <XlyCol :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
+          <EasyRow :gutter="10">
+            <EasyCol :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
+            </EasyCol>
+            <EasyCol :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
               <div class="grid-content bg-purple-light" />
-            </XlyCol>
-            <XlyCol :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
+            </EasyCol>
+            <EasyCol :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
+            </EasyCol>
+            <EasyCol :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
               <div class="grid-content bg-purple-light" />
-            </XlyCol>
-            <XlyCol :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
+            </EasyCol>
+            <EasyCol :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
               <div class="grid-content bg-purple" />
-            </XlyCol>
-            <XlyCol :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
+            </EasyCol>
+            <EasyCol :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
               <div class="grid-content bg-purple-light" />
-            </XlyCol>
-          </XlyRow>
+            </EasyCol>
+          </EasyRow>
         </div>
-        <XlyDocCode
-          code="<XlyRow :gutter=&quot;10&quot;>
-  <XlyCol :xs=&quot;24&quot; :sm=&quot;12&quot; :md=&quot;8&quot; :lg=&quot;6&quot; :xl=&quot;4&quot;>
+        <EasyDocCode
+          code="<EasyRow :gutter=&quot;10&quot;>
+  <EasyCol :xs=&quot;24&quot; :sm=&quot;12&quot; :md=&quot;8&quot; :lg=&quot;6&quot; :xl=&quot;4&quot;>
     <div class=&quot;content&quot;></div>
-  </XlyCol>
-</XlyRow>"
+  </EasyCol>
+</EasyRow>"
         />
       </div>
     </section>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlyAvatar, XlyImage } from 'easy-ui'
+import { EasyAvatar, EasyImage } from 'easy-ui'
 
 // 示例图片
 const singleImage = 'https://picsum.photos/400/300?random=1'
@@ -40,17 +40,17 @@ const manyImages = Array.from({ length: 12 }, (_, i) => `https://picsum.photos/4
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyImage :src="singleImage" alt="单张图片" />
+          <EasyImage :src="singleImage" alt="单张图片" />
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 单张图片 -->
-<XlyImage :src=&quot;singleImage&quot; />
+<EasyImage :src=&quot;singleImage&quot; />
 
 <!-- 数组形式 -->
-<XlyImage :src=&quot;['url1', 'url2', 'url3']&quot; />
+<EasyImage :src=&quot;['url1', 'url2', 'url3']&quot; />
 
 <!-- 逗号拼接字符串 -->
-<XlyImage src=&quot;url1, url2, url3&quot; />"
+<EasyImage src=&quot;url1, url2, url3&quot; />"
         />
       </div>
     </section>
@@ -68,27 +68,27 @@ const manyImages = Array.from({ length: 12 }, (_, i) => `https://picsum.photos/4
           <div class="image-row">
             <div class="image-item">
               <span class="image-label">单张</span>
-              <XlyImage :src="singleImage" />
+              <EasyImage :src="singleImage" />
             </div>
             <div class="image-item">
               <span class="image-label">两张</span>
-              <XlyImage :src="twoImages" />
+              <EasyImage :src="twoImages" />
             </div>
             <div class="image-item">
               <span class="image-label">三张</span>
-              <XlyImage :src="threeImages" />
+              <EasyImage :src="threeImages" />
             </div>
             <div class="image-item">
               <span class="image-label">四张</span>
-              <XlyImage :src="fourImages" />
+              <EasyImage :src="fourImages" />
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyImage :src=&quot;singleImage&quot; />
-<XlyImage :src=&quot;twoImages&quot; />
-<XlyImage :src=&quot;threeImages&quot; />
-<XlyImage :src=&quot;fourImages&quot; />"
+        <EasyDocCode
+          code="<EasyImage :src=&quot;singleImage&quot; />
+<EasyImage :src=&quot;twoImages&quot; />
+<EasyImage :src=&quot;threeImages&quot; />
+<EasyImage :src=&quot;fourImages&quot; />"
         />
       </div>
     </section>
@@ -106,17 +106,17 @@ const manyImages = Array.from({ length: 12 }, (_, i) => `https://picsum.photos/4
           <div class="image-row">
             <div class="image-item">
               <span class="image-label">max = 1</span>
-              <XlyImage :src="manyImages" :max="1" />
+              <EasyImage :src="manyImages" :max="1" />
             </div>
             <div class="image-item">
               <span class="image-label">max = 2</span>
-              <XlyImage :src="manyImages" :max="2" />
+              <EasyImage :src="manyImages" :max="2" />
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyImage :src=&quot;manyImages&quot; :max=&quot;1&quot; />
-<XlyImage :src=&quot;manyImages&quot; :max=&quot;2&quot; />"
+        <EasyDocCode
+          code="<EasyImage :src=&quot;manyImages&quot; :max=&quot;1&quot; />
+<EasyImage :src=&quot;manyImages&quot; :max=&quot;2&quot; />"
         />
       </div>
     </section>
@@ -134,27 +134,27 @@ const manyImages = Array.from({ length: 12 }, (_, i) => `https://picsum.photos/4
           <div class="image-row">
             <div class="image-item">
               <span class="image-label">fill</span>
-              <XlyImage :src="singleImage" fit="fill" />
+              <EasyImage :src="singleImage" fit="fill" />
             </div>
             <div class="image-item">
               <span class="image-label">contain</span>
-              <XlyImage :src="singleImage" fit="contain" />
+              <EasyImage :src="singleImage" fit="contain" />
             </div>
             <div class="image-item">
               <span class="image-label">cover</span>
-              <XlyImage :src="singleImage" fit="cover" />
+              <EasyImage :src="singleImage" fit="cover" />
             </div>
             <div class="image-item">
               <span class="image-label">scale-down</span>
-              <XlyImage :src="singleImage" fit="scale-down" />
+              <EasyImage :src="singleImage" fit="scale-down" />
             </div>
           </div>
         </div>
-        <XlyDocCode
-          code="<XlyImage :src=&quot;singleImage&quot; fit=&quot;fill&quot; />
-<XlyImage :src=&quot;singleImage&quot; fit=&quot;contain&quot; />
-<XlyImage :src=&quot;singleImage&quot; fit=&quot;cover&quot; />
-<XlyImage :src=&quot;singleImage&quot; fit=&quot;scale-down&quot; />"
+        <EasyDocCode
+          code="<EasyImage :src=&quot;singleImage&quot; fit=&quot;fill&quot; />
+<EasyImage :src=&quot;singleImage&quot; fit=&quot;contain&quot; />
+<EasyImage :src=&quot;singleImage&quot; fit=&quot;cover&quot; />
+<EasyImage :src=&quot;singleImage&quot; fit=&quot;scale-down&quot; />"
         />
       </div>
     </section>
@@ -173,33 +173,33 @@ const manyImages = Array.from({ length: 12 }, (_, i) => `https://picsum.photos/4
           <div class="image-row">
             <div class="image-item">
               <span class="image-label">默认 120x120</span>
-              <XlyImage :src="singleImage" />
+              <EasyImage :src="singleImage" />
             </div>
             <div class="image-item">
               <span class="image-label">width=80</span>
-              <XlyImage :src="singleImage" :width="80" />
+              <EasyImage :src="singleImage" :width="80" />
             </div>
             <div class="image-item">
               <span class="image-label">width=60</span>
-              <XlyImage :src="singleImage" :width="60" />
+              <EasyImage :src="singleImage" :width="60" />
             </div>
             <div class="image-item">
               <span class="image-label">width=48</span>
-              <XlyImage :src="singleImage" :width="48" />
+              <EasyImage :src="singleImage" :width="48" />
             </div>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 只设置一个尺寸，宽高相同 -->
-<XlyImage :src=&quot;singleImage&quot; :width=&quot;80&quot; />  <!-- 80x80 -->
-<XlyImage :src=&quot;singleImage&quot; :width=&quot;60&quot; />  <!-- 60x60 -->
+<EasyImage :src=&quot;singleImage&quot; :width=&quot;80&quot; />  <!-- 80x80 -->
+<EasyImage :src=&quot;singleImage&quot; :width=&quot;60&quot; />  <!-- 60x60 -->
 
 <!-- 同时设置宽高 -->
-<XlyImage :src=&quot;singleImage&quot; :width=&quot;120&quot; :height=&quot;80&quot; />
+<EasyImage :src=&quot;singleImage&quot; :width=&quot;120&quot; :height=&quot;80&quot; />
 
 <!-- 字符串形式 -->
-<XlyImage :src=&quot;singleImage&quot; width=&quot;80px&quot; />
-<XlyImage :src=&quot;singleImage&quot; width=&quot;100%&quot; />"
+<EasyImage :src=&quot;singleImage&quot; width=&quot;80px&quot; />
+<EasyImage :src=&quot;singleImage&quot; width=&quot;100%&quot; />"
         />
       </div>
     </section>
@@ -214,9 +214,9 @@ const manyImages = Array.from({ length: 12 }, (_, i) => `https://picsum.photos/4
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyImage :src="fourImages" :preview="true" />
+          <EasyImage :src="fourImages" :preview="true" />
         </div>
-        <XlyDocCode code="<XlyImage :src=&quot;fourImages&quot; :preview=&quot;true&quot; />" />
+        <EasyDocCode code="<EasyImage :src=&quot;fourImages&quot; :preview=&quot;true&quot; />" />
       </div>
     </section>
 
@@ -233,24 +233,24 @@ const manyImages = Array.from({ length: 12 }, (_, i) => `https://picsum.photos/4
           <div class="image-row">
             <div class="image-item">
               <span class="image-label">仅缩放</span>
-              <XlyImage :src="singleImage" :preview="true" :preview-actions="['zoomIn', 'zoomOut']" />
+              <EasyImage :src="singleImage" :preview="true" :preview-actions="['zoomIn', 'zoomOut']" />
             </div>
             <div class="image-item">
               <span class="image-label">仅旋转</span>
-              <XlyImage :src="singleImage" :preview="true" :preview-actions="['rotateLeft', 'rotateRight', 'reset']" />
+              <EasyImage :src="singleImage" :preview="true" :preview-actions="['rotateLeft', 'rotateRight', 'reset']" />
             </div>
             <div class="image-item">
               <span class="image-label">完整功能</span>
-              <XlyImage :src="fourImages" :preview="true" :preview-actions="true" />
+              <EasyImage :src="fourImages" :preview="true" :preview-actions="true" />
             </div>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="<!-- 仅缩放 -->
-<XlyImage :src=&quot;singleImage&quot; :preview=&quot;true&quot; :preview-actions=&quot;['zoomIn', 'zoomOut']&quot; />
+<EasyImage :src=&quot;singleImage&quot; :preview=&quot;true&quot; :preview-actions=&quot;['zoomIn', 'zoomOut']&quot; />
 
 <!-- 仅旋转 -->
-<XlyImage :src=&quot;singleImage&quot; :preview=&quot;true&quot; :preview-actions=&quot;['rotateLeft', 'rotateRight', 'reset']&quot; />"
+<EasyImage :src=&quot;singleImage&quot; :preview=&quot;true&quot; :preview-actions=&quot;['rotateLeft', 'rotateRight', 'reset']&quot; />"
         />
       </div>
     </section>
@@ -267,7 +267,7 @@ const manyImages = Array.from({ length: 12 }, (_, i) => `https://picsum.photos/4
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="product-card">
-            <XlyImage :src="fourImages" />
+            <EasyImage :src="fourImages" />
             <div class="product-info">
               <div class="product-title">
                 AirPods Pro 无线耳机
@@ -287,7 +287,7 @@ const manyImages = Array.from({ length: 12 }, (_, i) => `https://picsum.photos/4
         <div class="doc-preview__body">
           <div class="user-album">
             <div class="album-header">
-              <XlyAvatar>紫</XlyAvatar>
+              <EasyAvatar>紫</EasyAvatar>
               <div class="album-info">
                 <div class="album-title">
                   旅行照片
@@ -297,7 +297,7 @@ const manyImages = Array.from({ length: 12 }, (_, i) => `https://picsum.photos/4
                 </div>
               </div>
             </div>
-            <XlyImage :src="manyImages" :max="6" />
+            <EasyImage :src="manyImages" :max="6" />
           </div>
         </div>
       </div>
@@ -309,12 +309,12 @@ const manyImages = Array.from({ length: 12 }, (_, i) => `https://picsum.photos/4
         <div class="doc-preview__body">
           <div class="chat-messages">
             <div class="chat-message">
-              <XlyAvatar>张</XlyAvatar>
+              <EasyAvatar>张</EasyAvatar>
               <div class="chat-content">
                 <div class="chat-bubble">
                   这是现场的照片
                 </div>
-                <XlyImage :src="threeImages" :max="3" />
+                <EasyImage :src="threeImages" :max="3" />
                 <div class="chat-time">
                   10:30
                 </div>

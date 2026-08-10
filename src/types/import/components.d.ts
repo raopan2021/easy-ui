@@ -11,6 +11,18 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    EasyBadge: typeof import('easy-ui')['EasyBadge']
+    EasyButton: typeof import('easy-ui')['EasyButton']
+    EasyDeptTree: typeof import('easy-ui')['EasyDeptTree']
+    EasyDictSelect: typeof import('easy-ui')['EasyDictSelect']
+    EasyDocCode: typeof import('easy-ui')['EasyDocCode']
+    EasyFlowDesigner: typeof import('easy-ui')['EasyFlowDesigner']
+    EasyIcon: typeof import('easy-ui')['EasyIcon']
+    EasyJsonViewer: typeof import('easy-ui')['EasyJsonViewer']
+    EasyPermission: typeof import('easy-ui')['EasyPermission']
+    EasySelect: typeof import('easy-ui')['EasySelect']
+    EasySuperForm: typeof import('easy-ui')['EasySuperForm']
+    EasyTag: typeof import('easy-ui')['EasyTag']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElButtonGroup: typeof import('element-plus/es')['ElButtonGroup']
     ElCheckbox: typeof import('element-plus/es')['ElCheckbox']
@@ -53,18 +65,6 @@ declare module 'vue' {
     ElTreeSelect: typeof import('element-plus/es')['ElTreeSelect']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    XlyBadge: typeof import('easy-ui')['XlyBadge']
-    XlyButton: typeof import('easy-ui')['XlyButton']
-    XlyDeptTree: typeof import('easy-ui')['XlyDeptTree']
-    XlyDictSelect: typeof import('easy-ui')['XlyDictSelect']
-    XlyDocCode: typeof import('easy-ui')['XlyDocCode']
-    XlyFlowDesigner: typeof import('easy-ui')['XlyFlowDesigner']
-    XlyIcon: typeof import('easy-ui')['XlyIcon']
-    XlyJsonViewer: typeof import('easy-ui')['XlyJsonViewer']
-    XlyPermission: typeof import('easy-ui')['XlyPermission']
-    XlySelect: typeof import('easy-ui')['XlySelect']
-    XlySuperForm: typeof import('easy-ui')['XlySuperForm']
-    XlyTag: typeof import('easy-ui')['XlyTag']
   }
   export interface GlobalDirectives {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']

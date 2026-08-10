@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { UploadFileItem } from 'easy-ui'
-import { XlyButton, XlyUpload } from 'easy-ui'
+import { EasyButton, EasyUpload } from 'easy-ui'
 import { ref } from 'vue'
 
 // ---- 基础用法 ----
@@ -65,9 +65,9 @@ function handleDocSubmit() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyUpload v-model="value1" />
+          <EasyUpload v-model="value1" />
         </div>
-        <XlyDocCode code="{{ `<XlyUpload v-model=&quot;fileList&quot; />` }}" />
+        <EasyDocCode code="{{ `<EasyUpload v-model=&quot;fileList&quot; />` }}" />
       </div>
       <div class="demo-value-display">
         <span class="demo-value-label">当前值：</span>
@@ -91,7 +91,7 @@ function handleDocSubmit() {
             <div class="demo-vmodel-label">
               返回对象数组（默认）
             </div>
-            <XlyUpload v-model="value2Array" :limit="3" />
+            <EasyUpload v-model="value2Array" :limit="3" />
             <div class="demo-value-display">
               <span class="demo-value-label">类型：</span>
               <span class="demo-value-content">UploadFileItem[]</span>
@@ -101,19 +101,19 @@ function handleDocSubmit() {
             <div class="demo-vmodel-label">
               返回 JSON 字符串（value-mode="string"）
             </div>
-            <XlyUpload v-model="value2String" value-mode="string" :limit="3" />
+            <EasyUpload v-model="value2String" value-mode="string" :limit="3" />
             <div class="demo-value-display">
               <span class="demo-value-label">类型：</span>
               <span class="demo-value-content demo-value-str">JSON.stringify([...])</span>
             </div>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="{{ `<!-- 返回对象数组（默认） -->
-<XlyUpload v-model=&quot;fileList&quot; />
+<EasyUpload v-model=&quot;fileList&quot; />
 
 <!-- 返回 JSON 字符串 -->
-<XlyUpload v-model=&quot;fileJson&quot; value-mode=&quot;string&quot; />
+<EasyUpload v-model=&quot;fileJson&quot; value-mode=&quot;string&quot; />
 
 // 对象结构
 interface UploadFileItem {
@@ -141,27 +141,27 @@ interface UploadFileItem {
             <div class="demo-label">
               limit=1
             </div>
-            <XlyUpload v-model="value3Single" :limit="1" />
+            <EasyUpload v-model="value3Single" :limit="1" />
           </div>
           <div>
             <div class="demo-label">
               limit=3
             </div>
-            <XlyUpload v-model="value3Multi" :limit="3" />
+            <EasyUpload v-model="value3Multi" :limit="3" />
           </div>
           <div>
             <div class="demo-label">
               不限制数量
             </div>
-            <XlyUpload v-model="value3Unlimited" />
+            <EasyUpload v-model="value3Unlimited" />
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="{{ `<!-- 限制 1 个文件 -->
-<XlyUpload v-model=&quot;file&quot; :limit=&quot;1&quot; />
+<EasyUpload v-model=&quot;file&quot; :limit=&quot;1&quot; />
 
 <!-- 限制 3 个 -->
-<XlyUpload v-model=&quot;files&quot; :limit=&quot;3&quot; @exceed=&quot;handleExceed&quot; />
+<EasyUpload v-model=&quot;files&quot; :limit=&quot;3&quot; @exceed=&quot;handleExceed&quot; />
 
 function handleExceed(files, limit) {
   console.log(\`超出 \${files.length} 个\`)
@@ -180,10 +180,10 @@ function handleExceed(files, limit) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyUpload v-model="valueDrag" trigger-text="点击或拖拽上传" />
+          <EasyUpload v-model="valueDrag" trigger-text="点击或拖拽上传" />
         </div>
-        <XlyDocCode
-          code="{{ `<XlyUpload v-model=&quot;files&quot; trigger-text=&quot;点击或拖拽上传&quot; />` }}"
+        <EasyDocCode
+          code="{{ `<EasyUpload v-model=&quot;files&quot; trigger-text=&quot;点击或拖拽上传&quot; />` }}"
         />
       </div>
     </section>
@@ -198,9 +198,9 @@ function handleExceed(files, limit) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyUpload v-model="valueDisabled" disabled />
+          <EasyUpload v-model="valueDisabled" disabled />
         </div>
-        <XlyDocCode code="{{ `<XlyUpload v-model=&quot;files&quot; disabled />` }}" />
+        <EasyDocCode code="{{ `<EasyUpload v-model=&quot;files&quot; disabled />` }}" />
       </div>
     </section>
 
@@ -219,12 +219,12 @@ function handleExceed(files, limit) {
             <div class="demo-label">
               accept-types="pdf,doc,docx" + max-size=2048（2MB）
             </div>
-            <XlyUpload v-model="valueValidate" accept-types="pdf,doc,docx" :max-size="2048" />
+            <EasyUpload v-model="valueValidate" accept-types="pdf,doc,docx" :max-size="2048" />
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="{{ `<!-- 仅允许 PDF/Word，不超过 2MB -->
-<XlyUpload
+<EasyUpload
   v-model=&quot;files&quot;
   accept-types=&quot;pdf,doc,docx&quot;
   :max-size=&quot;2048&quot;
@@ -260,7 +260,7 @@ function handleExceed(files, limit) {
           <div class="doc-alert__title">
             如何切换？
           </div>
-          <p>打开 <code>src/components/xly-upload/index.vue</code>，找到顶部的配置区：</p>
+          <p>打开 <code>packages/components/file-upload/index.ts</code>，找到顶部的配置区：</p>
           <div class="doc-code doc-code--standalone">
             <pre><code>{{ `// 切换上传模式：'local' | 'network'
 const UPLOAD_MODE: 'local' | 'network' = 'local'
@@ -326,31 +326,31 @@ const NETWORK_CONFIG = {
             <div class="demo-label">
               tip 属性
             </div>
-            <XlyUpload v-model="valueTip1" tip="支持 PDF/Word/Excel，单个不超过 10MB" />
+            <EasyUpload v-model="valueTip1" tip="支持 PDF/Word/Excel，单个不超过 10MB" />
           </div>
           <div>
             <div class="demo-label">
               #tip 插槽
             </div>
-            <XlyUpload v-model="valueTip2">
+            <EasyUpload v-model="valueTip2">
               <template #tip>
                 <div style="color: #fa8c16; font-size: 12px">
                   ⚠️ 上传后不可撤销，请确认文件正确
                 </div>
               </template>
-            </XlyUpload>
+            </EasyUpload>
           </div>
         </div>
-        <XlyDocCode
+        <EasyDocCode
           code="{{ `<!-- tip 属性 -->
-<XlyUpload v-model=&quot;files&quot; tip=&quot;支持 PDF/Word，单个不超过 10MB&quot; />
+<EasyUpload v-model=&quot;files&quot; tip=&quot;支持 PDF/Word，单个不超过 10MB&quot; />
 
 <!-- #tip 插槽 -->
-<XlyUpload v-model=&quot;files&quot;>
+<EasyUpload v-model=&quot;files&quot;>
   <template #tip>
     <span style=&quot;color: orange;&quot;>⚠️ 上传后不可撤销</span>
   </template>
-</XlyUpload>` }}"
+</EasyUpload>` }}"
         />
       </div>
     </section>
@@ -375,7 +375,7 @@ const NETWORK_CONFIG = {
           </div>
           <div class="demo-form-row">
             <label class="demo-form-label">附件 <span class="required">*</span></label>
-            <XlyUpload
+            <EasyUpload
               v-model="docForm.attachments"
               :limit="5"
               accept-types="pdf,doc,docx,xls,xlsx,ppt,pptx"
@@ -384,10 +384,10 @@ const NETWORK_CONFIG = {
             />
           </div>
           <div class="demo-form-actions">
-            <XlyButton type="primary" @click="handleDocSubmit">
+            <EasyButton type="primary" @click="handleDocSubmit">
               提交文档
-            </XlyButton>
-            <XlyButton>重置</XlyButton>
+            </EasyButton>
+            <EasyButton>重置</EasyButton>
           </div>
         </div>
       </div>

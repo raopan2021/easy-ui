@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { XlySearchForm } from 'easy-ui'
+import { EasySearchForm } from 'easy-ui'
 import { ref } from 'vue'
 
 // 基础用法
@@ -126,12 +126,12 @@ function handleSearch(data: any) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlySearchForm v-model="searchData1" :items="basicItems" @search="handleSearch" />
+          <EasySearchForm v-model="searchData1" :items="basicItems" @search="handleSearch" />
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="<template>
-  <XlySearchForm v-model=&quot;searchData&quot; :items=&quot;items&quot; @search=&quot;handleSearch&quot; />
+  <EasySearchForm v-model=&quot;searchData&quot; :items=&quot;items&quot; @search=&quot;handleSearch&quot; />
 </template>
 
 <script setup>
@@ -161,10 +161,10 @@ const handleSearch = (data) => {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlySearchForm v-model="searchData2" :items="multipleTypeItems" @search="handleSearch" />
+          <EasySearchForm v-model="searchData2" :items="multipleTypeItems" @search="handleSearch" />
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="const items = [
   { prop: 'keyword', label: '关键词', type: 'input', placeholder: '请输入关键词' },
   { prop: 'type', label: '类型', type: 'select', options: [
@@ -191,10 +191,10 @@ const handleSearch = (data) => {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlySearchForm v-model="searchData3" :items="spanItems" @search="handleSearch" />
+          <EasySearchForm v-model="searchData3" :items="spanItems" @search="handleSearch" />
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="const items = [
   { prop: 'name', label: '姓名', type: 'input', span: 6 },
   { prop: 'phone', label: '手机号', type: 'input', span: 6 },
@@ -214,10 +214,10 @@ const handleSearch = (data) => {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlySearchForm v-model="searchData4" :items="expandItems" show-expand-button @search="handleSearch" />
+          <EasySearchForm v-model="searchData4" :items="expandItems" show-expand-button @search="handleSearch" />
         </div>
       </div>
-      <XlyDocCode
+      <EasyDocCode
         code="const items = [
   { prop: 'name', label: '姓名', type: 'input' },
   { prop: 'phone', label: '手机号', type: 'input' },
@@ -226,7 +226,7 @@ const handleSearch = (data) => {
   { prop: 'remark', label: '备注', type: 'textarea', rows: 2, hiddenWhenCollapsed: true }
 ]
 
-<XlySearchForm
+<EasySearchForm
   v-model=&quot;searchData&quot;
   :items=&quot;items&quot;
   show-expand-button
@@ -244,9 +244,9 @@ const handleSearch = (data) => {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlySearchForm v-model="searchData5" :items="customItems" @search="handleSearch">
+          <EasySearchForm v-model="searchData5" :items="customItems" @search="handleSearch">
             <template #field-department="{ modelValue, updateModelValue }">
-              <XlySelect
+              <EasySelect
                 :model-value="modelValue"
                 placeholder="请选择部门"
                 :options="departmentOptions"
@@ -254,13 +254,13 @@ const handleSearch = (data) => {
                 @update:model-value="updateModelValue"
               />
             </template>
-          </XlySearchForm>
+          </EasySearchForm>
         </div>
       </div>
-      <XlyDocCode
-        code="<XlySearchForm v-model=&quot;searchData&quot; :items=&quot;items&quot; @search=&quot;handleSearch&quot;>
+      <EasyDocCode
+        code="<EasySearchForm v-model=&quot;searchData&quot; :items=&quot;items&quot; @search=&quot;handleSearch&quot;>
   <template #field-department=&quot;{ modelValue, item, formData, updateModelValue }&quot;>
-    <XlySelect
+    <EasySelect
       :model-value=&quot;modelValue&quot;
       @update:model-value=&quot;updateModelValue&quot;
       placeholder=&quot;请选择部门&quot;
@@ -268,7 +268,7 @@ const handleSearch = (data) => {
       clearable
     />
   </template>
-</XlySearchForm>
+</EasySearchForm>
 
 const items = [
   { prop: 'department', label: '部门', type: 'custom' }

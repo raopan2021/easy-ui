@@ -10,6 +10,8 @@ import { xlyComponentResolver } from './packages/easy-ui/src/utils/xlyComponentR
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
+  // 部署到 GitHub Pages 子路径时设置 base（由 CI 环境变量 GH_PAGES 触发）
+  base: process.env.GH_PAGES === 'true' ? '/easy-ui/' : '/',
   plugins: [
     vue(),
     // 自动按需导入 API
