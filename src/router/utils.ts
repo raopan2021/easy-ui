@@ -1,7 +1,7 @@
-import type { RouteRecordRaw } from 'vue-router'
 import type { Component } from 'vue'
-import { getMenuData, resolveComponent } from '@/utils/menu'
+import type { RouteRecordRaw } from 'vue-router'
 import type { MenuItem } from '@/types/menu.ts'
+import { getMenuData } from '@/utils/menu'
 
 // 动态导入 views 目录下所有 .vue 文件
 const viewModules = import.meta.glob<Component>('../views/**/*.vue')
@@ -45,7 +45,8 @@ function transformMenuToRoutes(menuItems: MenuItem[]): RouteRecordRaw[] {
       if (childrenRoutes.length > 0) {
         routes.push(...childrenRoutes)
       }
-    } else if (item.component && item.path) {
+    }
+    else if (item.component && item.path) {
       const loader = resolveComponentPath(item.component)
       if (loader) {
         routes.push({

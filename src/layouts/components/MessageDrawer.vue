@@ -1,114 +1,6 @@
-<template>
-  <XlyDrawer
-    v-model="drawerVisible"
-    title="消息通知"
-    direction="right"
-    :showHeader="true"
-    :showClose="true"
-    :showMask="true"
-    :closeOnClickModal="true"
-  >
-    <!-- 分类标签 -->
-    <div class="message-tabs">
-      <button
-        v-for="tab in tabs"
-        :key="tab.key"
-        class="message-tab"
-        :class="{ 'is-active': activeTab === tab.key }"
-        @click="activeTab = tab.key"
-      >
-        {{ tab.label }}
-        <span v-if="tab.count > 0" class="message-tab__count">{{ tab.count }}</span>
-      </button>
-    </div>
-
-    <!-- 消息列表 -->
-    <div class="message-list">
-      <template v-if="filteredMessages.length > 0">
-        <div
-          v-for="msg in filteredMessages"
-          :key="msg.id"
-          class="message-item"
-          :class="{ 'is-unread': !msg.isRead }"
-          @click="handleReadMessage(msg)"
-        >
-          <div class="message-item__icon" :class="`message-item__icon--${msg.type}`">
-            <svg
-              v-if="msg.type === 'system'"
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <circle cx="12" cy="12" r="10" />
-              <line x1="12" y1="8" x2="12" y2="12" />
-              <line x1="12" y1="16" x2="12.01" y2="16" />
-            </svg>
-            <svg
-              v-else-if="msg.type === 'notice'"
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-              <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-            </svg>
-            <svg
-              v-else
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-              <polyline points="22 4 12 14.01 9 11.01" />
-            </svg>
-          </div>
-          <div class="message-item__content">
-            <div class="message-item__title">{{ msg.title }}</div>
-            <div class="message-item__desc">{{ msg.content }}</div>
-            <div class="message-item__time">{{ msg.time }}</div>
-          </div>
-          <div v-if="!msg.isRead" class="message-item__dot"></div>
-        </div>
-      </template>
-      <div v-else class="message-empty">
-        <svg
-          viewBox="0 0 24 24"
-          width="48"
-          height="48"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.5"
-          opacity="0.3"
-        >
-          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
-          <path d="M13.73 21a2 2 0 0 1-3.46 0" />
-        </svg>
-        <span>暂无消息</span>
-      </div>
-    </div>
-
-    <!-- 底部操作 -->
-    <template #footer>
-      <div class="message-footer">
-        <button class="message-footer__btn" @click="handleReadAll">全部已读</button>
-        <button class="message-footer__btn" @click="handleClear">清空消息</button>
-      </div>
-    </template>
-  </XlyDrawer>
-</template>
-
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
-import XlyDrawer from '@/components/xly-drawer/index.vue'
+import { XlyDrawer } from 'easy-ui'
+import { computed, ref } from 'vue'
 
 defineOptions({ name: 'MessageDrawer' })
 
@@ -123,7 +15,7 @@ const emit = defineEmits<{
 // 抽屉显示状态
 const drawerVisible = computed({
   get: () => props.modelValue,
-  set: (val) => emit('update:modelValue', val),
+  set: val => emit('update:modelValue', val),
 })
 
 // 消息类型
@@ -361,19 +253,21 @@ const messages = ref<Message[]>([
 // 分类标签
 const tabs = computed(() => [
   { key: 'all', label: '全部', count: messages.value.length },
-  { key: 'unread', label: '未读', count: messages.value.filter((m) => !m.isRead).length },
-  { key: 'system', label: '系统', count: messages.value.filter((m) => m.type === 'system').length },
-  { key: 'notice', label: '通知', count: messages.value.filter((m) => m.type === 'notice').length },
-  { key: 'task', label: '任务', count: messages.value.filter((m) => m.type === 'task').length },
+  { key: 'unread', label: '未读', count: messages.value.filter(m => !m.isRead).length },
+  { key: 'system', label: '系统', count: messages.value.filter(m => m.type === 'system').length },
+  { key: 'notice', label: '通知', count: messages.value.filter(m => m.type === 'notice').length },
+  { key: 'task', label: '任务', count: messages.value.filter(m => m.type === 'task').length },
 ])
 
 const activeTab = ref<string>('all')
 
 // 根据分类过滤消息
 const filteredMessages = computed(() => {
-  if (activeTab.value === 'all') return messages.value
-  if (activeTab.value === 'unread') return messages.value.filter((m) => !m.isRead)
-  return messages.value.filter((m) => m.type === activeTab.value)
+  if (activeTab.value === 'all')
+    return messages.value
+  if (activeTab.value === 'unread')
+    return messages.value.filter(m => !m.isRead)
+  return messages.value.filter(m => m.type === activeTab.value)
 })
 
 // 点击消息标记为已读
@@ -383,7 +277,7 @@ function handleReadMessage(msg: Message) {
 
 // 全部标为已读
 function handleReadAll() {
-  messages.value.forEach((m) => (m.isRead = true))
+  messages.value.forEach(m => (m.isRead = true))
 }
 
 // 清空消息
@@ -392,6 +286,116 @@ function handleClear() {
   activeTab.value = 'all'
 }
 </script>
+
+<template>
+  <XlyDrawer
+    v-model="drawerVisible"
+    title="消息通知"
+    direction="right"
+    :show-header="true"
+    :show-close="true"
+    :show-mask="true"
+    :close-on-click-modal="true"
+  >
+    <!-- 分类标签 -->
+    <div class="message-tabs">
+      <button
+        v-for="tab in tabs"
+        :key="tab.key"
+        class="message-tab"
+        :class="{ 'is-active': activeTab === tab.key }"
+        @click="activeTab = tab.key"
+      >
+        {{ tab.label }}
+        <span v-if="tab.count > 0" class="message-tab__count">{{ tab.count }}</span>
+      </button>
+    </div>
+
+    <!-- 消息列表 -->
+    <div class="message-list">
+      <template v-if="filteredMessages.length > 0">
+        <div
+          v-for="msg in filteredMessages"
+          :key="msg.id"
+          class="message-item"
+          :class="{ 'is-unread': !msg.isRead }"
+          @click="handleReadMessage(msg)"
+        >
+          <div class="message-item__icon" :class="`message-item__icon--${msg.type}`">
+            <svg
+              v-if="msg.type === 'system'"
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+            <svg
+              v-else-if="msg.type === 'notice'"
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+              <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+            </svg>
+            <svg v-else viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+          </div>
+          <div class="message-item__content">
+            <div class="message-item__title">
+              {{ msg.title }}
+            </div>
+            <div class="message-item__desc">
+              {{ msg.content }}
+            </div>
+            <div class="message-item__time">
+              {{ msg.time }}
+            </div>
+          </div>
+          <div v-if="!msg.isRead" class="message-item__dot" />
+        </div>
+      </template>
+      <div v-else class="message-empty">
+        <svg
+          viewBox="0 0 24 24"
+          width="48"
+          height="48"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+          opacity="0.3"
+        >
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+          <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+        </svg>
+        <span>暂无消息</span>
+      </div>
+    </div>
+
+    <!-- 底部操作 -->
+    <template #footer>
+      <div class="message-footer">
+        <button class="message-footer__btn" @click="handleReadAll">
+          全部已读
+        </button>
+        <button class="message-footer__btn" @click="handleClear">
+          清空消息
+        </button>
+      </div>
+    </template>
+  </XlyDrawer>
+</template>
 
 <style scoped lang="scss">
 // ========== 覆盖 drawer body padding ==========
@@ -446,7 +450,7 @@ $border-color: var(--el-border-color);
     border-color: var(--el-color-primary-light-9);
   }
 
-  &__count {
+  .message-tab__count {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -500,7 +504,7 @@ $border-color: var(--el-border-color);
     background: var(--el-color-primary-light-9);
   }
 
-  &__icon {
+  .message-item__icon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -509,28 +513,28 @@ $border-color: var(--el-border-color);
     border-radius: 10px;
     flex-shrink: 0;
 
-    &--system {
+    &.message-item__icon--system {
       color: $primary;
       background: var(--el-color-primary-light-9);
     }
 
-    &--notice {
+    &.message-item__icon--notice {
       color: $success;
       background: var(--el-fill-color-light);
     }
 
-    &--task {
+    &.message-item__icon--task {
       color: $warning;
       background: var(--el-fill-color-light);
     }
   }
 
-  &__content {
+  .message-item__content {
     flex: 1;
     min-width: 0;
   }
 
-  &__title {
+  .message-item__title {
     font-size: 14px;
     font-weight: 500;
     color: $text-primary;
@@ -538,7 +542,7 @@ $border-color: var(--el-border-color);
     line-height: 1.4;
   }
 
-  &__desc {
+  .message-item__desc {
     font-size: 13px;
     color: $text-secondary;
     line-height: 1.5;
@@ -548,13 +552,13 @@ $border-color: var(--el-border-color);
     overflow: hidden;
   }
 
-  &__time {
+  .message-item__time {
     font-size: 12px;
     color: $text-default;
     margin-top: 6px;
   }
 
-  &__dot {
+  .message-item__dot {
     width: 8px;
     height: 8px;
     background: $primary;
@@ -584,7 +588,7 @@ $border-color: var(--el-border-color);
   display: flex;
   justify-content: space-between;
 
-  &__btn {
+  .message-footer__btn {
     flex: 1;
     padding: 10px 16px;
     font-size: 14px;

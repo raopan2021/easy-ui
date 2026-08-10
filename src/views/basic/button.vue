@@ -1,88 +1,167 @@
+<script setup lang="ts">
+import { Check, Delete, Download, Edit, Plus, RefreshLeft, Search, Upload } from '@element-plus/icons-vue'
+import { XlyButton } from 'easy-ui'
+import { ref } from 'vue'
+
+const loading = ref(false)
+
+function handleLoad() {
+  loading.value = true
+  setTimeout(() => {
+    loading.value = false
+  }, 2000)
+}
+</script>
+
 <template>
   <div class="button-doc">
     <!-- 页面标题 -->
     <div class="doc-header">
-      <h1 class="doc-title">Button 按钮</h1>
-      <p class="doc-desc">企业级操作按钮，支持多种类型、尺寸、形状，内置加载状态。</p>
+      <h1 class="doc-title">
+        Button 按钮
+      </h1>
+      <p class="doc-desc">
+        企业级操作按钮，支持多种类型、尺寸、形状，内置加载状态。
+      </p>
     </div>
 
     <!-- 基础用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
-      <p class="doc-section__desc">通过 <code>type</code> 属性设置按钮类型，支持 primary / success / warning / danger / info 五种语义类型。</p>
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>type</code> 属性设置按钮类型，支持 primary / success / warning / danger / info 五种语义类型。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <XlyButton>默认按钮</XlyButton>
-          <XlyButton type="success">成功按钮</XlyButton>
-          <XlyButton type="warning">警告按钮</XlyButton>
-          <XlyButton type="danger">危险按钮</XlyButton>
-          <XlyButton type="info">信息按钮</XlyButton>
+          <XlyButton type="success">
+            成功按钮
+          </XlyButton>
+          <XlyButton type="warning">
+            警告按钮
+          </XlyButton>
+          <XlyButton type="danger">
+            危险按钮
+          </XlyButton>
+          <XlyButton type="info">
+            信息按钮
+          </XlyButton>
         </div>
-        <XlyDocCode :code='`<XlyButton>默认按钮</XlyButton>
-<XlyButton type="success">成功按钮</XlyButton>
-<XlyButton type="warning">警告按钮</XlyButton>
-<XlyButton type="danger">危险按钮</XlyButton>
-<XlyButton type="info">信息按钮</XlyButton>`' />
+        <XlyDocCode
+          code="<XlyButton>默认按钮</XlyButton>
+<XlyButton type=&quot;success&quot;>成功按钮</XlyButton>
+<XlyButton type=&quot;warning&quot;>警告按钮</XlyButton>
+<XlyButton type=&quot;danger&quot;>危险按钮</XlyButton>
+<XlyButton type=&quot;info&quot;>信息按钮</XlyButton>"
+        />
       </div>
     </section>
 
     <!-- 朴素按钮 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">朴素按钮</h2>
-      <p class="doc-section__desc">文字按钮（<code>type="text"</code>）和幽灵按钮（<code>type="ghost"</code>）用于次要操作场景，视觉层级更低。</p>
+      <h2 class="doc-section__title">
+        朴素按钮
+      </h2>
+      <p class="doc-section__desc">
+        文字按钮（<code>type="text"</code>）和幽灵按钮（<code>type="ghost"</code>）用于次要操作场景，视觉层级更低。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton type="text">文字按钮</XlyButton>
-          <XlyButton type="ghost">幽灵按钮</XlyButton>
+          <XlyButton type="text">
+            文字按钮
+          </XlyButton>
+          <XlyButton type="ghost">
+            幽灵按钮
+          </XlyButton>
         </div>
-        <XlyDocCode :code='`<XlyButton type="text">文字按钮</XlyButton>
-<XlyButton type="ghost">幽灵按钮</XlyButton>`' />
+        <XlyDocCode
+          code="<XlyButton type=&quot;text&quot;>文字按钮</XlyButton>
+<XlyButton type=&quot;ghost&quot;>幽灵按钮</XlyButton>"
+        />
       </div>
     </section>
 
     <!-- 链接按钮 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">链接按钮</h2>
-      <p class="doc-section__desc">通过 <code>link</code> 属性设置链接样式按钮，类似原生 <code>&lt;a&gt;</code> 标签，适用于需要跳转或操作的文字链接场景，hover 时显示下划线。可与 <code>type</code> 属性组合控制颜色。</p>
+      <h2 class="doc-section__title">
+        链接按钮
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>link</code> 属性设置链接样式按钮，类似原生
+        <code>&lt;a&gt;</code> 标签，适用于需要跳转或操作的文字链接场景，hover 时显示下划线。可与
+        <code>type</code> 属性组合控制颜色。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton link>链接按钮</XlyButton>
-          <XlyButton link type="success">成功链接</XlyButton>
-          <XlyButton link type="warning">警告链接</XlyButton>
-          <XlyButton link type="danger">危险链接</XlyButton>
-          <XlyButton link type="info">信息链接</XlyButton>
+          <XlyButton link>
+            链接按钮
+          </XlyButton>
+          <XlyButton link type="success">
+            成功链接
+          </XlyButton>
+          <XlyButton link type="warning">
+            警告链接
+          </XlyButton>
+          <XlyButton link type="danger">
+            危险链接
+          </XlyButton>
+          <XlyButton link type="info">
+            信息链接
+          </XlyButton>
         </div>
-        <XlyDocCode :code='`<XlyButton link>链接按钮</XlyButton>
-<XlyButton link type="success">成功链接</XlyButton>
-<XlyButton link type="warning">警告链接</XlyButton>
-<XlyButton link type="danger">危险链接</XlyButton>
-<XlyButton link type="info">信息链接</XlyButton>`' />
+        <XlyDocCode
+          code="<XlyButton link>链接按钮</XlyButton>
+<XlyButton link type=&quot;success&quot;>成功链接</XlyButton>
+<XlyButton link type=&quot;warning&quot;>警告链接</XlyButton>
+<XlyButton link type=&quot;danger&quot;>危险链接</XlyButton>
+<XlyButton link type=&quot;info&quot;>信息链接</XlyButton>"
+        />
       </div>
     </section>
 
     <!-- 不同尺寸 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">不同尺寸</h2>
-      <p class="doc-section__desc">通过 <code>size</code> 属性设置按钮尺寸，提供 <code>large</code> / <code>default</code> / <code>small</code> 三种规格。</p>
+      <h2 class="doc-section__title">
+        不同尺寸
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>size</code> 属性设置按钮尺寸，提供 <code>large</code> / <code>default</code> /
+        <code>small</code> 三种规格。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton size="large">大型按钮</XlyButton>
+          <XlyButton size="large">
+            大型按钮
+          </XlyButton>
           <XlyButton>默认按钮</XlyButton>
-          <XlyButton size="small">小型按钮</XlyButton>
+          <XlyButton size="small">
+            小型按钮
+          </XlyButton>
         </div>
-        <XlyDocCode :code='`<XlyButton size="large">大型按钮</XlyButton>
+        <XlyDocCode
+          code="<XlyButton size=&quot;large&quot;>大型按钮</XlyButton>
 <XlyButton>默认按钮</XlyButton>
-<XlyButton size="small">小型按钮</XlyButton>`' />
+<XlyButton size=&quot;small&quot;>小型按钮</XlyButton>"
+        />
       </div>
     </section>
 
     <!-- 圆角按钮 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">圆角按钮</h2>
-      <p class="doc-section__desc">通过 <code>shape="round"</code> 设置圆角按钮，通过 <code>shape="circle"</code> 设置圆形按钮（圆形按钮需配合 icon 使用）。</p>
+      <h2 class="doc-section__title">
+        圆角按钮
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>shape="round"</code> 设置圆角按钮，通过 <code>shape="circle"</code> 设置圆形按钮（圆形按钮需配合 icon
+        使用）。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton shape="round">圆角按钮</XlyButton>
+          <XlyButton shape="round">
+            圆角按钮
+          </XlyButton>
           <XlyButton shape="circle">
             <template #icon>
               <el-icon><Search /></el-icon>
@@ -99,169 +178,245 @@
             </template>
           </XlyButton>
         </div>
-        <XlyDocCode :code='`<XlyButton shape="round">圆角按钮</XlyButton>
-<XlyButton shape="circle">
+        <XlyDocCode
+          code="<XlyButton shape=&quot;round&quot;>圆角按钮</XlyButton>
+<XlyButton shape=&quot;circle&quot;>
   <template #icon>
     <el-icon><Search /></el-icon>
   </template>
 </XlyButton>
-<XlyButton shape="circle" type="success">
+<XlyButton shape=&quot;circle&quot; type=&quot;success&quot;>
   <template #icon>
     <el-icon><Plus /></el-icon>
   </template>
-</XlyButton>`' />
+</XlyButton>"
+        />
       </div>
     </section>
 
     <!-- 加粗按钮 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">加粗按钮</h2>
-      <p class="doc-section__desc">通过 <code>bold</code> 属性让按钮文字加粗，适用于需要更强视觉强调的场景，如主操作按钮。</p>
+      <h2 class="doc-section__title">
+        加粗按钮
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>bold</code> 属性让按钮文字加粗，适用于需要更强视觉强调的场景，如主操作按钮。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton bold>加粗按钮</XlyButton>
-          <XlyButton type="success" bold>加粗成功</XlyButton>
+          <XlyButton bold>
+            加粗按钮
+          </XlyButton>
+          <XlyButton type="success" bold>
+            加粗成功
+          </XlyButton>
           <XlyButton>普通按钮</XlyButton>
         </div>
-        <XlyDocCode :code='`<XlyButton bold>加粗按钮</XlyButton>
-<XlyButton type="success" bold>加粗成功</XlyButton>
-<XlyButton>普通按钮</XlyButton>`' />
+        <XlyDocCode
+          code="<XlyButton bold>加粗按钮</XlyButton>
+<XlyButton type=&quot;success&quot; bold>加粗成功</XlyButton>
+<XlyButton>普通按钮</XlyButton>"
+        />
       </div>
     </section>
 
     <!-- 加载状态 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">加载状态</h2>
-      <p class="doc-section__desc">通过 <code>loading</code> 属性设置按钮加载状态，加载期间按钮不可点击。</p>
+      <h2 class="doc-section__title">
+        加载状态
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>loading</code> 属性设置按钮加载状态，加载期间按钮不可点击。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton :loading="loading" @click="handleLoad">点击加载</XlyButton>
-          <XlyButton loading>加载中</XlyButton>
-          <XlyButton type="success" loading>加载中</XlyButton>
-          <XlyButton type="danger" loading>加载中</XlyButton>
+          <XlyButton :loading="loading" @click="handleLoad">
+            点击加载
+          </XlyButton>
+          <XlyButton loading>
+            加载中
+          </XlyButton>
+          <XlyButton type="success" loading>
+            加载中
+          </XlyButton>
+          <XlyButton type="danger" loading>
+            加载中
+          </XlyButton>
         </div>
-        <XlyDocCode :code='`<XlyButton :loading="loading" @click="handleLoad">点击加载</XlyButton>
+        <XlyDocCode
+          code="<XlyButton :loading=&quot;loading&quot; @click=&quot;handleLoad&quot;>点击加载</XlyButton>
 <XlyButton loading>加载中</XlyButton>
-<XlyButton type="success" loading>加载中</XlyButton>
-<XlyButton type="danger" loading>加载中</XlyButton>`' />
+<XlyButton type=&quot;success&quot; loading>加载中</XlyButton>
+<XlyButton type=&quot;danger&quot; loading>加载中</XlyButton>"
+        />
       </div>
     </section>
 
     <!-- 禁用状态 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">禁用状态</h2>
-      <p class="doc-section__desc">通过 <code>disabled</code> 属性设置按钮禁用状态，禁用期间按钮不可点击。</p>
+      <h2 class="doc-section__title">
+        禁用状态
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>disabled</code> 属性设置按钮禁用状态，禁用期间按钮不可点击。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton disabled>禁用按钮</XlyButton>
-          <XlyButton type="success" disabled>禁用按钮</XlyButton>
-          <XlyButton type="text" disabled>禁用文字</XlyButton>
-          <XlyButton type="ghost" disabled>禁用幽灵</XlyButton>
-          <XlyButton type="link" disabled>禁用链接</XlyButton>
+          <XlyButton disabled>
+            禁用按钮
+          </XlyButton>
+          <XlyButton type="success" disabled>
+            禁用按钮
+          </XlyButton>
+          <XlyButton type="text" disabled>
+            禁用文字
+          </XlyButton>
+          <XlyButton type="ghost" disabled>
+            禁用幽灵
+          </XlyButton>
+          <XlyButton type="link" disabled>
+            禁用链接
+          </XlyButton>
         </div>
-        <XlyDocCode :code='`<XlyButton disabled>禁用按钮</XlyButton>
-<XlyButton type="success" disabled>禁用按钮</XlyButton>
-<XlyButton type="text" disabled>禁用文字</XlyButton>
-<XlyButton type="ghost" disabled>禁用幽灵</XlyButton>
-<XlyButton link disabled>禁用链接</XlyButton>`' />
+        <XlyDocCode
+          code="<XlyButton disabled>禁用按钮</XlyButton>
+<XlyButton type=&quot;success&quot; disabled>禁用按钮</XlyButton>
+<XlyButton type=&quot;text&quot; disabled>禁用文字</XlyButton>
+<XlyButton type=&quot;ghost&quot; disabled>禁用幽灵</XlyButton>
+<XlyButton link disabled>禁用链接</XlyButton>"
+        />
       </div>
     </section>
 
     <!-- 图标按钮 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">图标按钮</h2>
-      <p class="doc-section__desc">通过 <code>#icon</code> 插槽添加图标，让按钮更具表现力。</p>
+      <h2 class="doc-section__title">
+        图标按钮
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>#icon</code> 插槽添加图标，让按钮更具表现力。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <XlyButton>
-            <template #icon><el-icon><Search /></el-icon></template>
+            <template #icon>
+              <el-icon><Search /></el-icon>
+            </template>
             搜索
           </XlyButton>
           <XlyButton type="success">
-            <template #icon><el-icon><Plus /></el-icon></template>
+            <template #icon>
+              <el-icon><Plus /></el-icon>
+            </template>
             新增
           </XlyButton>
           <XlyButton type="danger">
-            <template #icon><el-icon><Delete /></el-icon></template>
+            <template #icon>
+              <el-icon><Delete /></el-icon>
+            </template>
             删除
           </XlyButton>
           <XlyButton type="warning">
-            <template #icon><el-icon><Edit /></el-icon></template>
+            <template #icon>
+              <el-icon><Edit /></el-icon>
+            </template>
             编辑
           </XlyButton>
         </div>
-        <XlyDocCode :code='`<XlyButton>
+        <XlyDocCode
+          code="<XlyButton>
   <template #icon><el-icon><Search /></el-icon></template>
   搜索
 </XlyButton>
-<XlyButton type="success">
+<XlyButton type=&quot;success&quot;>
   <template #icon><el-icon><Plus /></el-icon></template>
   新增
-</XlyButton>`' />
+</XlyButton>"
+        />
       </div>
     </section>
 
     <!-- 按钮组合 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">按钮组合</h2>
-      <p class="doc-section__desc">在实际业务场景中，按钮常以组合形式出现。下面展示常见的业务操作场景。</p>
+      <h2 class="doc-section__title">
+        按钮组合
+      </h2>
+      <p class="doc-section__desc">
+        在实际业务场景中，按钮常以组合形式出现。下面展示常见的业务操作场景。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="button-group">
             <XlyButton bold type="primary">
-              <template #icon><el-icon><Check /></el-icon></template>
+              <template #icon>
+                <el-icon><Check /></el-icon>
+              </template>
               提交审核
             </XlyButton>
             <XlyButton type="ghost">
-              <template #icon><el-icon><RefreshLeft /></el-icon></template>
+              <template #icon>
+                <el-icon><RefreshLeft /></el-icon>
+              </template>
               重置
             </XlyButton>
             <XlyButton type="text">
               取消
             </XlyButton>
           </div>
-          <div class="button-group" style="margin-top: 12px;">
+          <div class="button-group" style="margin-top: 12px">
             <XlyButton type="danger" size="small">
-              <template #icon><el-icon><Delete /></el-icon></template>
+              <template #icon>
+                <el-icon><Delete /></el-icon>
+              </template>
               批量删除
             </XlyButton>
             <XlyButton type="primary" size="small">
-              <template #icon><el-icon><Download /></el-icon></template>
+              <template #icon>
+                <el-icon><Download /></el-icon>
+              </template>
               导出数据
             </XlyButton>
             <XlyButton type="success" size="small">
-              <template #icon><el-icon><Upload /></el-icon></template>
+              <template #icon>
+                <el-icon><Upload /></el-icon>
+              </template>
               导入数据
             </XlyButton>
           </div>
         </div>
-        <XlyDocCode :code='`<!-- 表单操作 -->
-<XlyButton bold type="primary">
+        <XlyDocCode
+          code="<!-- 表单操作 -->
+<XlyButton bold type=&quot;primary&quot;>
   <template #icon><el-icon><Check /></el-icon></template>
   提交审核
 </XlyButton>
-<XlyButton type="ghost">
+<XlyButton type=&quot;ghost&quot;>
   <template #icon><el-icon><RefreshLeft /></el-icon></template>
   重置
 </XlyButton>
-<XlyButton type="text">取消</XlyButton>
+<XlyButton type=&quot;text&quot;>取消</XlyButton>
 
 <!-- 工具栏操作 -->
-<XlyButton type="danger" size="small">
+<XlyButton type=&quot;danger&quot; size=&quot;small&quot;>
   <template #icon><el-icon><Delete /></el-icon></template>
   批量删除
 </XlyButton>
-<XlyButton type="primary" size="small">
+<XlyButton type=&quot;primary&quot; size=&quot;small&quot;>
   <template #icon><el-icon><Download /></el-icon></template>
   导出数据
-</XlyButton>`' />
+</XlyButton>"
+        />
       </div>
     </section>
 
     <!-- API 文档 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">API</h2>
-      <h3 class="doc-subtitle">Props</h3>
+      <h2 class="doc-section__title">
+        API
+      </h2>
+      <h3 class="doc-subtitle">
+        Props
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -325,7 +480,9 @@
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Slots</h3>
+      <h3 class="doc-subtitle">
+        Slots
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -347,7 +504,9 @@
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Events</h3>
+      <h3 class="doc-subtitle">
+        Events
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -370,81 +529,126 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue'
-import { Search, Plus, Delete, Edit, Check, RefreshLeft, Download, Upload } from '@element-plus/icons-vue'
-import XlyButton from '@/components/xly-button/index.vue'
-
-const loading = ref(false)
-
-function handleLoad() {
-  loading.value = true
-  setTimeout(() => {
-    loading.value = false
-  }, 2000)
-}
-</script>
-
 <style scoped lang="scss">
 .button-doc {
   padding: 8px 0 40px;
 }
 
-.doc-header { margin-bottom: 36px; }
+.doc-header {
+  margin-bottom: 36px;
+}
 .doc-title {
-  font-size: 26px; font-weight: 700; color: var(--el-text-color-primary);
-  margin: 0 0 8px; letter-spacing: -0.3px;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  letter-spacing: -0.3px;
 }
 .doc-desc {
-  font-size: 14px; color: var(--el-text-color-secondary); margin: 0; line-height: 1.6;
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0;
+  line-height: 1.6;
 }
 
-.doc-section { margin-bottom: 32px; }
+.doc-section {
+  margin-bottom: 32px;
+}
 .doc-section__title {
-  font-size: 18px; font-weight: 600; color: var(--el-text-color-primary);
-  margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--el-border-color-lighter);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--el-border-color-lighter);
 }
 .doc-section__desc {
-  font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 16px; line-height: 1.6;
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0 0 16px;
+  line-height: 1.6;
   code {
-    background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px;
-    border-radius: 4px; font-size: 13px;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
   }
 }
 
 .doc-preview {
-  border: 1px solid var(--el-border-color-lighter); border-radius: 12px;
-  overflow: hidden; background: var(--el-bg-color-overlay);
+  border: 1px solid var(--el-border-color-lighter);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--el-bg-color-overlay);
 }
 .doc-preview__body {
-  display: flex; flex-wrap: wrap; align-items: center;
-  gap: 12px; padding: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
 }
 .doc-code {
-  border-top: 1px solid var(--el-border-color-lighter); background: var(--el-fill-color-light);
-  padding: 16px 20px; overflow-x: auto;
-  pre { margin: 0; padding: 0; }
+  border-top: 1px solid var(--el-border-color-lighter);
+  background: var(--el-fill-color-light);
+  padding: 16px 20px;
+  overflow-x: auto;
+  pre {
+    margin: 0;
+    padding: 0;
+  }
   code {
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
-    font-size: 13px; line-height: 1.7; color: var(--el-text-color-regular); white-space: pre;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--el-text-color-regular);
+    white-space: pre;
   }
 }
 
-.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
-.doc-table { overflow-x: auto;
-  table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); white-space: nowrap; }
-  th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); }
-  td { color: var(--el-text-color-regular); }
+.doc-subtitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 20px 0 10px;
+}
+.doc-table {
+  overflow-x: auto;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+    white-space: nowrap;
+  }
+  th {
+    background: var(--el-fill-color-light);
+    font-weight: 600;
+    color: var(--el-text-color-primary);
+  }
+  td {
+    color: var(--el-text-color-regular);
+  }
   code {
-    background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px;
-    border-radius: 4px; font-size: 13px;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
   }
 }
 
 .button-group {
-  display: flex; align-items: center; gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 </style>

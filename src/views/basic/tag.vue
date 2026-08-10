@@ -1,161 +1,358 @@
+<script setup lang="ts">
+import { XlyTag } from 'easy-ui'
+import { nextTick, ref } from 'vue'
+
+// 可关闭标签数据
+const closableTags1 = ref([
+  { label: '用户管理', type: 'primary' as const },
+  { label: '角色配置', type: 'success' as const },
+  { label: '权限审批', type: 'warning' as const },
+  { label: '系统日志', type: 'danger' as const },
+  { label: '数据备份', type: 'info' as const },
+])
+const closableTags2 = ref([
+  { label: 'Vue 3', type: 'primary' as const },
+  { label: 'TypeScript', type: 'success' as const },
+  { label: 'Vite', type: 'warning' as const },
+  { label: 'Tailwind', type: 'info' as const },
+])
+
+function removeTag(list: { label: string, type: string }[], tag: { label: string, type: string }) {
+  const idx = list.indexOf(tag)
+  if (idx > -1)
+    list.splice(idx, 1)
+}
+
+// 可点击标签
+const clickableTags = [
+  { label: '技术', type: 'primary' as const },
+  { label: '设计', type: 'success' as const },
+  { label: '运营', type: 'warning' as const },
+  { label: '产品', type: 'danger' as const },
+  { label: '数据', type: 'info' as const },
+]
+const selectedTag = ref<string>('')
+
+// 动态编辑
+const dynamicTags = ref(['前端开发', 'UI 设计', '后端接口'])
+const inputVisible = ref(false)
+const inputValue = ref('')
+const inputRef = ref<HTMLInputElement>()
+
+async function showInput() {
+  inputVisible.value = true
+  await nextTick()
+  inputRef.value?.focus()
+}
+
+function addTag() {
+  const val = inputValue.value.trim()
+  if (val && !dynamicTags.value.includes(val)) {
+    dynamicTags.value.push(val)
+  }
+  inputVisible.value = false
+  inputValue.value = ''
+}
+
+function removeTagByValue(list: string[], tag: string) {
+  const idx = list.indexOf(tag)
+  if (idx > -1)
+    list.splice(idx, 1)
+}
+</script>
+
 <template>
   <div class="tag-doc">
     <!-- 页面标题 -->
     <div class="doc-header">
-      <h1 class="doc-title">Tag 标签</h1>
-      <p class="doc-desc">用于标记和分类，支持多种类型、尺寸、主题效果，以及可关闭、可点击、圆角、图标等丰富特性。</p>
+      <h1 class="doc-title">
+        Tag 标签
+      </h1>
+      <p class="doc-desc">
+        用于标记和分类，支持多种类型、尺寸、主题效果，以及可关闭、可点击、圆角、图标等丰富特性。
+      </p>
     </div>
 
     <!-- 基础用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
-      <p class="doc-section__desc">通过 <code>type</code> 属性设置标签类型，支持 <code>default</code>、<code>primary</code>、<code>success</code>、<code>warning</code>、<code>danger</code>、<code>info</code> 六种类型。</p>
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>type</code> 属性设置标签类型，支持
+        <code>default</code>、<code>primary</code>、<code>success</code>、<code>warning</code>、<code>danger</code>、<code>info</code>
+        六种类型。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <xly-tag>默认</xly-tag>
-          <xly-tag type="primary">主要</xly-tag>
-          <xly-tag type="success">成功</xly-tag>
-          <xly-tag type="warning">警告</xly-tag>
-          <xly-tag type="danger">危险</xly-tag>
-          <xly-tag type="info">信息</xly-tag>
+          <XlyTag>默认</XlyTag>
+          <XlyTag type="primary">
+            主要
+          </XlyTag>
+          <XlyTag type="success">
+            成功
+          </XlyTag>
+          <XlyTag type="warning">
+            警告
+          </XlyTag>
+          <XlyTag type="danger">
+            危险
+          </XlyTag>
+          <XlyTag type="info">
+            信息
+          </XlyTag>
         </div>
-        <XlyDocCode :code='`<xly-tag>默认</xly-tag>
-<xly-tag type="primary">主要</xly-tag>
-<xly-tag type="success">成功</xly-tag>
-<xly-tag type="warning">警告</xly-tag>
-<xly-tag type="danger">危险</xly-tag>
-<xly-tag type="info">信息</xly-tag>`' />
+        <XlyDocCode
+          code="<xly-tag>默认</xly-tag>
+<xly-tag type=&quot;primary&quot;>主要</xly-tag>
+<xly-tag type=&quot;success&quot;>成功</xly-tag>
+<xly-tag type=&quot;warning&quot;>警告</xly-tag>
+<xly-tag type=&quot;danger&quot;>危险</xly-tag>
+<xly-tag type=&quot;info&quot;>信息</xly-tag>"
+        />
       </div>
     </section>
 
     <!-- 主题效果 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">主题效果</h2>
-      <p class="doc-section__desc">通过 <code>effect</code> 属性切换主题，支持 <code>light</code>（浅色，默认）、<code>plain</code>（描边）、<code>dark</code>（深色）三种效果。</p>
+      <h2 class="doc-section__title">
+        主题效果
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>effect</code> 属性切换主题，支持
+        <code>light</code>（浅色，默认）、<code>plain</code>（描边）、<code>dark</code>（深色）三种效果。
+      </p>
       <div class="doc-preview">
-        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div class="tag-row">
             <span class="effect-label">light</span>
-            <xly-tag>默认</xly-tag>
-            <xly-tag type="primary">主要</xly-tag>
-            <xly-tag type="success">成功</xly-tag>
-            <xly-tag type="warning">警告</xly-tag>
-            <xly-tag type="danger">危险</xly-tag>
-            <xly-tag type="info">信息</xly-tag>
+            <XlyTag>默认</XlyTag>
+            <XlyTag type="primary">
+              主要
+            </XlyTag>
+            <XlyTag type="success">
+              成功
+            </XlyTag>
+            <XlyTag type="warning">
+              警告
+            </XlyTag>
+            <XlyTag type="danger">
+              危险
+            </XlyTag>
+            <XlyTag type="info">
+              信息
+            </XlyTag>
           </div>
           <div class="tag-row">
             <span class="effect-label">plain</span>
-            <xly-tag effect="plain">默认</xly-tag>
-            <xly-tag type="primary" effect="plain">主要</xly-tag>
-            <xly-tag type="success" effect="plain">成功</xly-tag>
-            <xly-tag type="warning" effect="plain">警告</xly-tag>
-            <xly-tag type="danger" effect="plain">危险</xly-tag>
-            <xly-tag type="info" effect="plain">信息</xly-tag>
+            <XlyTag effect="plain">
+              默认
+            </XlyTag>
+            <XlyTag type="primary" effect="plain">
+              主要
+            </XlyTag>
+            <XlyTag type="success" effect="plain">
+              成功
+            </XlyTag>
+            <XlyTag type="warning" effect="plain">
+              警告
+            </XlyTag>
+            <XlyTag type="danger" effect="plain">
+              危险
+            </XlyTag>
+            <XlyTag type="info" effect="plain">
+              信息
+            </XlyTag>
           </div>
           <div class="tag-row">
             <span class="effect-label">dark</span>
-            <xly-tag effect="dark">默认</xly-tag>
-            <xly-tag type="primary" effect="dark">主要</xly-tag>
-            <xly-tag type="success" effect="dark">成功</xly-tag>
-            <xly-tag type="warning" effect="dark">警告</xly-tag>
-            <xly-tag type="danger" effect="dark">危险</xly-tag>
-            <xly-tag type="info" effect="dark">信息</xly-tag>
+            <XlyTag effect="dark">
+              默认
+            </XlyTag>
+            <XlyTag type="primary" effect="dark">
+              主要
+            </XlyTag>
+            <XlyTag type="success" effect="dark">
+              成功
+            </XlyTag>
+            <XlyTag type="warning" effect="dark">
+              警告
+            </XlyTag>
+            <XlyTag type="danger" effect="dark">
+              危险
+            </XlyTag>
+            <XlyTag type="info" effect="dark">
+              信息
+            </XlyTag>
           </div>
         </div>
-        <XlyDocCode :code='`<!-- 浅色（默认）-->
-<xly-tag effect="light">...</xly-tag>
+        <XlyDocCode
+          code="<!-- 浅色（默认）-->
+<xly-tag effect=&quot;light&quot;>...</xly-tag>
 
 <!-- 描边 -->
-<xly-tag effect="plain">...</xly-tag>
+<xly-tag effect=&quot;plain&quot;>...</xly-tag>
 
 <!-- 深色 -->
-<xly-tag effect="dark">...</xly-tag>`' />
+<xly-tag effect=&quot;dark&quot;>...</xly-tag>"
+        />
       </div>
     </section>
 
     <!-- 不同尺寸 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">不同尺寸</h2>
-      <p class="doc-section__desc">通过 <code>size</code> 属性设置标签大小，支持 <code>large</code>、<code>default</code>、<code>small</code> 三种规格。</p>
+      <h2 class="doc-section__title">
+        不同尺寸
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>size</code> 属性设置标签大小，支持 <code>large</code>、<code>default</code>、<code>small</code>
+        三种规格。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <xly-tag type="primary" size="large">Large</xly-tag>
-          <xly-tag type="primary">Default</xly-tag>
-          <xly-tag type="primary" size="small">Small</xly-tag>
+          <XlyTag type="primary" size="large">
+            Large
+          </XlyTag>
+          <XlyTag type="primary">
+            Default
+          </XlyTag>
+          <XlyTag type="primary" size="small">
+            Small
+          </XlyTag>
         </div>
-        <XlyDocCode :code='`<xly-tag type="primary" size="large">Large</xly-tag>
-<xly-tag type="primary">Default</xly-tag>
-<xly-tag type="primary" size="small">Small</xly-tag>`' />
+        <XlyDocCode
+          code="<xly-tag type=&quot;primary&quot; size=&quot;large&quot;>Large</xly-tag>
+<xly-tag type=&quot;primary&quot;>Default</xly-tag>
+<xly-tag type=&quot;primary&quot; size=&quot;small&quot;>Small</xly-tag>"
+        />
       </div>
     </section>
 
     <!-- 圆角样式 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">圆角样式</h2>
-      <p class="doc-section__desc">添加 <code>round</code> 属性，标签变为胶囊形圆角。</p>
+      <h2 class="doc-section__title">
+        圆角样式
+      </h2>
+      <p class="doc-section__desc">
+        添加 <code>round</code> 属性，标签变为胶囊形圆角。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <xly-tag round>默认</xly-tag>
-          <xly-tag type="primary" round>主要</xly-tag>
-          <xly-tag type="success" round>成功</xly-tag>
-          <xly-tag type="warning" round>警告</xly-tag>
-          <xly-tag type="danger" round>危险</xly-tag>
-          <xly-tag type="info" round>信息</xly-tag>
+          <XlyTag round>
+            默认
+          </XlyTag>
+          <XlyTag type="primary" round>
+            主要
+          </XlyTag>
+          <XlyTag type="success" round>
+            成功
+          </XlyTag>
+          <XlyTag type="warning" round>
+            警告
+          </XlyTag>
+          <XlyTag type="danger" round>
+            危险
+          </XlyTag>
+          <XlyTag type="info" round>
+            信息
+          </XlyTag>
         </div>
-        <XlyDocCode :code='`<xly-tag type="primary" round>主要</xly-tag>
-<xly-tag type="success" round>成功</xly-tag>`' />
+        <XlyDocCode
+          code="<xly-tag type=&quot;primary&quot; round>主要</xly-tag>
+<xly-tag type=&quot;success&quot; round>成功</xly-tag>"
+        />
       </div>
     </section>
 
     <!-- 带图标 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">带图标</h2>
-      <p class="doc-section__desc">通过 <code>icon</code> 属性为标签添加前置图标，使用 Element Plus 图标名称。</p>
+      <h2 class="doc-section__title">
+        带图标
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>icon</code> 属性为标签添加前置图标，使用 Element Plus 图标名称。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <xly-tag type="primary" icon="User">用户</xly-tag>
-          <xly-tag type="success" icon="CircleCheck">已通过</xly-tag>
-          <xly-tag type="warning" icon="Warning">待审核</xly-tag>
-          <xly-tag type="danger" icon="CircleClose">已拒绝</xly-tag>
-          <xly-tag type="info" icon="Clock">处理中</xly-tag>
+          <XlyTag type="primary" icon="User">
+            用户
+          </XlyTag>
+          <XlyTag type="success" icon="CircleCheck">
+            已通过
+          </XlyTag>
+          <XlyTag type="warning" icon="Warning">
+            待审核
+          </XlyTag>
+          <XlyTag type="danger" icon="CircleClose">
+            已拒绝
+          </XlyTag>
+          <XlyTag type="info" icon="Clock">
+            处理中
+          </XlyTag>
         </div>
-        <XlyDocCode :code='`<xly-tag type="primary" icon="User">用户</xly-tag>
-<xly-tag type="success" icon="CircleCheck">已通过</xly-tag>
-<xly-tag type="warning" icon="Warning">待审核</xly-tag>
-<xly-tag type="danger" icon="CircleClose">已拒绝</xly-tag>`' />
+        <XlyDocCode
+          code="<xly-tag type=&quot;primary&quot; icon=&quot;User&quot;>用户</xly-tag>
+<xly-tag type=&quot;success&quot; icon=&quot;CircleCheck&quot;>已通过</xly-tag>
+<xly-tag type=&quot;warning&quot; icon=&quot;Warning&quot;>待审核</xly-tag>
+<xly-tag type=&quot;danger&quot; icon=&quot;CircleClose&quot;>已拒绝</xly-tag>"
+        />
       </div>
     </section>
 
     <!-- 可关闭 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">可关闭</h2>
-      <p class="doc-section__desc">添加 <code>closable</code> 属性后，标签右侧出现关闭按钮，点击后触发 <code>close</code> 事件并隐藏标签。</p>
+      <h2 class="doc-section__title">
+        可关闭
+      </h2>
+      <p class="doc-section__desc">
+        添加 <code>closable</code> 属性后，标签右侧出现关闭按钮，点击后触发 <code>close</code> 事件并隐藏标签。
+      </p>
       <div class="doc-preview">
-        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 16px;">
+        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 16px">
           <div class="tag-row">
-            <xly-tag v-for="tag in closableTags1" :key="tag.label" :type="tag.type" closable @close="removeTag(closableTags1, tag)">
+            <XlyTag
+              v-for="tag in closableTags1"
+              :key="tag.label"
+              :type="tag.type"
+              closable
+              @close="removeTag(closableTags1, tag)"
+            >
               {{ tag.label }}
-            </xly-tag>
+            </XlyTag>
             <span v-if="closableTags1.length === 0" class="empty-hint">所有标签已关闭，刷新页面重置</span>
           </div>
           <div class="tag-row">
-            <xly-tag v-for="tag in closableTags2" :key="tag.label" :type="tag.type" effect="plain" round closable @close="removeTag(closableTags2, tag)">
+            <XlyTag
+              v-for="tag in closableTags2"
+              :key="tag.label"
+              :type="tag.type"
+              effect="plain"
+              round
+              closable
+              @close="removeTag(closableTags2, tag)"
+            >
               {{ tag.label }}
-            </xly-tag>
+            </XlyTag>
           </div>
         </div>
-        <XlyDocCode :code='`<xly-tag type="primary" closable @close="handleClose">可关闭</xly-tag>`' />
+        <XlyDocCode
+          code="<xly-tag type=&quot;primary&quot; closable @close=&quot;handleClose&quot;>可关闭</xly-tag>"
+        />
       </div>
     </section>
 
     <!-- 可点击 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">可点击</h2>
-      <p class="doc-section__desc">添加 <code>clickable</code> 属性后，标签具有点击 hover 效果，并触发 <code>click</code> 事件。</p>
+      <h2 class="doc-section__title">
+        可点击
+      </h2>
+      <p class="doc-section__desc">
+        添加 <code>clickable</code> 属性后，标签具有点击 hover 效果，并触发 <code>click</code> 事件。
+      </p>
       <div class="doc-preview">
-        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 16px;">
+        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 16px">
           <div class="tag-row">
-            <xly-tag
+            <XlyTag
               v-for="tag in clickableTags"
               :key="tag.label"
               :type="selectedTag === tag.label ? tag.type : 'default'"
@@ -164,74 +361,130 @@
               @click="selectedTag = tag.label"
             >
               {{ tag.label }}
-            </xly-tag>
+            </XlyTag>
           </div>
-          <div v-if="selectedTag" class="click-hint">已选中：<strong>{{ selectedTag }}</strong></div>
+          <div v-if="selectedTag" class="click-hint">
+            已选中：<strong>{{ selectedTag }}</strong>
+          </div>
         </div>
-        <XlyDocCode :code='`<xly-tag type="primary" clickable @click="handleClick">点击我</xly-tag>`' />
+        <XlyDocCode
+          code="<xly-tag type=&quot;primary&quot; clickable @click=&quot;handleClick&quot;>点击我</xly-tag>"
+        />
       </div>
     </section>
 
     <!-- 禁用状态 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">禁用状态</h2>
-      <p class="doc-section__desc">通过 <code>disabled</code> 属性禁用标签，禁用后标签半透明且无法交互。</p>
+      <h2 class="doc-section__title">
+        禁用状态
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>disabled</code> 属性禁用标签，禁用后标签半透明且无法交互。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <xly-tag type="primary" disabled>禁用</xly-tag>
-          <xly-tag type="success" disabled closable>禁用关闭</xly-tag>
-          <xly-tag type="warning" disabled clickable>禁用点击</xly-tag>
-          <xly-tag type="danger" disabled effect="dark">禁用深色</xly-tag>
+          <XlyTag type="primary" disabled>
+            禁用
+          </XlyTag>
+          <XlyTag type="success" disabled closable>
+            禁用关闭
+          </XlyTag>
+          <XlyTag type="warning" disabled clickable>
+            禁用点击
+          </XlyTag>
+          <XlyTag type="danger" disabled effect="dark">
+            禁用深色
+          </XlyTag>
         </div>
-        <XlyDocCode :code='`<xly-tag type="primary" disabled>禁用</xly-tag>`' />
+        <XlyDocCode code="<xly-tag type=&quot;primary&quot; disabled>禁用</xly-tag>" />
       </div>
     </section>
 
     <!-- 自定义颜色 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义颜色</h2>
-      <p class="doc-section__desc">通过 <code>color</code> 属性自定义标签颜色，结合 <code>effect</code> 属性可产生不同视觉效果。</p>
+      <h2 class="doc-section__title">
+        自定义颜色
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>color</code> 属性自定义标签颜色，结合 <code>effect</code> 属性可产生不同视觉效果。
+      </p>
       <div class="doc-preview">
-        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px;">
+        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div class="tag-row">
             <span class="effect-label">light</span>
-            <xly-tag color="#7c3aed">紫色</xly-tag>
-            <xly-tag color="#0ea5e9">天蓝</xly-tag>
-            <xly-tag color="#f43f5e">玫瑰</xly-tag>
-            <xly-tag color="#10b981">翠绿</xly-tag>
-            <xly-tag color="#f97316">橙色</xly-tag>
+            <XlyTag color="#7c3aed">
+              紫色
+            </XlyTag>
+            <XlyTag color="#0ea5e9">
+              天蓝
+            </XlyTag>
+            <XlyTag color="#f43f5e">
+              玫瑰
+            </XlyTag>
+            <XlyTag color="#10b981">
+              翠绿
+            </XlyTag>
+            <XlyTag color="#f97316">
+              橙色
+            </XlyTag>
           </div>
           <div class="tag-row">
             <span class="effect-label">plain</span>
-            <xly-tag color="#7c3aed" effect="plain">紫色</xly-tag>
-            <xly-tag color="#0ea5e9" effect="plain">天蓝</xly-tag>
-            <xly-tag color="#f43f5e" effect="plain">玫瑰</xly-tag>
-            <xly-tag color="#10b981" effect="plain">翠绿</xly-tag>
-            <xly-tag color="#f97316" effect="plain">橙色</xly-tag>
+            <XlyTag color="#7c3aed" effect="plain">
+              紫色
+            </XlyTag>
+            <XlyTag color="#0ea5e9" effect="plain">
+              天蓝
+            </XlyTag>
+            <XlyTag color="#f43f5e" effect="plain">
+              玫瑰
+            </XlyTag>
+            <XlyTag color="#10b981" effect="plain">
+              翠绿
+            </XlyTag>
+            <XlyTag color="#f97316" effect="plain">
+              橙色
+            </XlyTag>
           </div>
           <div class="tag-row">
             <span class="effect-label">dark</span>
-            <xly-tag color="#7c3aed" effect="dark">紫色</xly-tag>
-            <xly-tag color="#0ea5e9" effect="dark">天蓝</xly-tag>
-            <xly-tag color="#f43f5e" effect="dark">玫瑰</xly-tag>
-            <xly-tag color="#10b981" effect="dark">翠绿</xly-tag>
-            <xly-tag color="#f97316" effect="dark">橙色</xly-tag>
+            <XlyTag color="#7c3aed" effect="dark">
+              紫色
+            </XlyTag>
+            <XlyTag color="#0ea5e9" effect="dark">
+              天蓝
+            </XlyTag>
+            <XlyTag color="#f43f5e" effect="dark">
+              玫瑰
+            </XlyTag>
+            <XlyTag color="#10b981" effect="dark">
+              翠绿
+            </XlyTag>
+            <XlyTag color="#f97316" effect="dark">
+              橙色
+            </XlyTag>
           </div>
         </div>
-        <XlyDocCode :code='`<xly-tag color="#7c3aed">紫色</xly-tag>
-<xly-tag color="#7c3aed" effect="plain">紫色描边</xly-tag>
-<xly-tag color="#7c3aed" effect="dark">紫色深色</xly-tag>`' />
+        <XlyDocCode
+          code="<xly-tag color=&quot;#7c3aed&quot;>紫色</xly-tag>
+<xly-tag color=&quot;#7c3aed&quot; effect=&quot;plain&quot;>紫色描边</xly-tag>
+<xly-tag color=&quot;#7c3aed&quot; effect=&quot;dark&quot;>紫色深色</xly-tag>"
+        />
       </div>
     </section>
 
     <!-- 动态编辑 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">动态编辑标签</h2>
-      <p class="doc-section__desc">结合 <code>closable</code> 与输入框，实现动态添加/删除标签的交互。</p>
+      <h2 class="doc-section__title">
+        动态编辑标签
+      </h2>
+      <p class="doc-section__desc">
+        结合 <code>closable</code> 与输入框，实现动态添加/删除标签的交互。
+      </p>
       <div class="doc-preview">
-        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px;">
-          <div class="tag-row" style="flex-wrap: wrap;">
-            <xly-tag
+        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
+          <div class="tag-row" style="flex-wrap: wrap">
+            <XlyTag
               v-for="tag in dynamicTags"
               :key="tag"
               type="primary"
@@ -240,7 +493,7 @@
               @close="removeTagByValue(dynamicTags, tag)"
             >
               {{ tag }}
-            </xly-tag>
+            </XlyTag>
             <div v-if="inputVisible" class="tag-input-wrap">
               <input
                 ref="inputRef"
@@ -249,35 +502,35 @@
                 placeholder="回车确认"
                 @keyup.enter="addTag"
                 @blur="addTag"
-              />
+              >
             </div>
-            <xly-tag
-              v-else
-              type="primary"
-              effect="plain"
-              clickable
-              @click="showInput"
-            >
+            <XlyTag v-else type="primary" effect="plain" clickable @click="showInput">
               + 新增标签
-            </xly-tag>
+            </XlyTag>
           </div>
         </div>
-        <XlyDocCode :code='`<xly-tag
-  v-for="tag in tags"
-  :key="tag"
+        <XlyDocCode
+          code="<xly-tag
+  v-for=&quot;tag in tags&quot;
+  :key=&quot;tag&quot;
   closable
-  @close="removeTag(tag)"
+  @close=&quot;removeTag(tag)&quot;
 >{{ tag }}</xly-tag>
 
-<xly-tag clickable @click="showInput">+ 新增</xly-tag>`' />
+<xly-tag clickable @click=&quot;showInput&quot;>+ 新增</xly-tag>"
+        />
       </div>
     </section>
 
     <!-- API 文档 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">API</h2>
+      <h2 class="doc-section__title">
+        API
+      </h2>
 
-      <h3 class="doc-subtitle">Tag Props</h3>
+      <h3 class="doc-subtitle">
+        Tag Props
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -347,7 +600,9 @@
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Tag Events</h3>
+      <h3 class="doc-subtitle">
+        Tag Events
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -372,7 +627,9 @@
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Tag Methods</h3>
+      <h3 class="doc-subtitle">
+        Tag Methods
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -393,122 +650,119 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, nextTick } from 'vue'
-import XlyTag from '@/components/xly-tag/index.vue'
-
-// 可关闭标签数据
-const closableTags1 = ref([
-  { label: '用户管理', type: 'primary' as const },
-  { label: '角色配置', type: 'success' as const },
-  { label: '权限审批', type: 'warning' as const },
-  { label: '系统日志', type: 'danger' as const },
-  { label: '数据备份', type: 'info' as const },
-])
-const closableTags2 = ref([
-  { label: 'Vue 3', type: 'primary' as const },
-  { label: 'TypeScript', type: 'success' as const },
-  { label: 'Vite', type: 'warning' as const },
-  { label: 'Tailwind', type: 'info' as const },
-])
-
-function removeTag(list: { label: string; type: string }[], tag: { label: string; type: string }) {
-  const idx = list.indexOf(tag)
-  if (idx > -1) list.splice(idx, 1)
-}
-
-// 可点击标签
-const clickableTags = [
-  { label: '技术', type: 'primary' as const },
-  { label: '设计', type: 'success' as const },
-  { label: '运营', type: 'warning' as const },
-  { label: '产品', type: 'danger' as const },
-  { label: '数据', type: 'info' as const },
-]
-const selectedTag = ref<string>('')
-
-// 动态编辑
-const dynamicTags = ref(['前端开发', 'UI 设计', '后端接口'])
-const inputVisible = ref(false)
-const inputValue = ref('')
-const inputRef = ref<HTMLInputElement>()
-
-async function showInput() {
-  inputVisible.value = true
-  await nextTick()
-  inputRef.value?.focus()
-}
-
-function addTag() {
-  const val = inputValue.value.trim()
-  if (val && !dynamicTags.value.includes(val)) {
-    dynamicTags.value.push(val)
-  }
-  inputVisible.value = false
-  inputValue.value = ''
-}
-
-function removeTagByValue(list: string[], tag: string) {
-  const idx = list.indexOf(tag)
-  if (idx > -1) list.splice(idx, 1)
-}
-</script>
-
 <style scoped lang="scss">
 .tag-doc {
   padding: 8px 0 40px;
 }
 
-.doc-header { margin-bottom: 36px; }
+.doc-header {
+  margin-bottom: 36px;
+}
 .doc-title {
-  font-size: 26px; font-weight: 700; color: var(--el-text-color-primary);
-  margin: 0 0 8px; letter-spacing: -0.3px;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  letter-spacing: -0.3px;
 }
 .doc-desc {
-  font-size: 14px; color: var(--el-text-color-secondary); margin: 0; line-height: 1.6;
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0;
+  line-height: 1.6;
 }
 
-.doc-section { margin-bottom: 32px; }
+.doc-section {
+  margin-bottom: 32px;
+}
 .doc-section__title {
-  font-size: 18px; font-weight: 600; color: var(--el-text-color-primary);
-  margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--el-border-color-lighter);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--el-border-color-lighter);
 }
 .doc-section__desc {
-  font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 16px; line-height: 1.6;
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0 0 16px;
+  line-height: 1.6;
   code {
-    background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px;
-    border-radius: 4px; font-size: 13px;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
   }
 }
 
 .doc-preview {
-  border: 1px solid var(--el-border-color-lighter); border-radius: 12px;
-  overflow: hidden; background: var(--el-bg-color-overlay);
+  border: 1px solid var(--el-border-color-lighter);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--el-bg-color-overlay);
 }
 .doc-preview__body {
-  display: flex; flex-wrap: wrap; align-items: center;
-  gap: 10px; padding: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding: 24px;
 }
 .doc-code {
-  border-top: 1px solid var(--el-border-color-lighter); background: var(--el-fill-color-light);
-  padding: 16px 20px; overflow-x: auto;
-  pre { margin: 0; padding: 0; }
+  border-top: 1px solid var(--el-border-color-lighter);
+  background: var(--el-fill-color-light);
+  padding: 16px 20px;
+  overflow-x: auto;
+  pre {
+    margin: 0;
+    padding: 0;
+  }
   code {
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
-    font-size: 13px; line-height: 1.7; color: var(--el-text-color-regular); white-space: pre;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--el-text-color-regular);
+    white-space: pre;
   }
 }
 
-.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
-.doc-table { overflow-x: auto;
-  table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); }
-  th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); white-space: nowrap; }
-  td { color: var(--el-text-color-regular); }
+.doc-subtitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 20px 0 10px;
+}
+.doc-table {
+  overflow-x: auto;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+  }
+  th {
+    background: var(--el-fill-color-light);
+    font-weight: 600;
+    color: var(--el-text-color-primary);
+    white-space: nowrap;
+  }
+  td {
+    color: var(--el-text-color-regular);
+  }
   code {
-    background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px;
-    border-radius: 4px; font-size: 13px;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
   }
 }
@@ -540,7 +794,9 @@ function removeTagByValue(list: string[], tag: string) {
   background: var(--el-fill-color-light);
   border-radius: 6px;
 
-  strong { color: var(--el-color-primary); }
+  strong {
+    color: var(--el-color-primary);
+  }
 }
 
 /* 动态编辑输入框 */

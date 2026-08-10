@@ -1,43 +1,13 @@
-<template>
-  <div class="layout-container">
-    <!-- 顶部导航（包含水平菜单） -->
-    <HeaderLayout />
-    <!-- 主体区域 -->
-    <div class="layout-body" :class="{ 'layout-body--horizontal': menuLayoutStore.currentLayout === 'horizontal' }">
-      <!-- 左侧菜单 -->
-      <component
-        :is="currentMenuComponent"
-        ref="sidebarRef"
-        class="layout-sidebar"
-        v-if="menuLayoutStore.currentLayout !== 'horizontal'"
-      />
-      <!-- 右侧内容 -->
-      <div class="layout-main" :class="{ 'layout-main--horizontal': menuLayoutStore.currentLayout === 'horizontal' }">
-        <!-- 标签页 -->
-        <XlyWorktab ref="worktabRef" />
-        <!-- 页面内容（keep-alive 缓存） -->
-        <main class="layout-content" ref="contentRef">
-          <RouterView v-slot="{ Component, route }">
-            <KeepAlive>
-              <component :is="Component" :key="route.path" />
-            </KeepAlive>
-          </RouterView>
-        </main>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { ref, watch, nextTick, computed } from 'vue'
+import { XlyWorktab } from 'easy-ui'
+import { computed, nextTick, ref, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
-import HeaderLayout from './components/HeaderLayout.vue'
-import FixedSidebar from './components/FixedSidebar.vue'
-import VerticalSidebar from './components/VerticalSidebar.vue'
-import XlyWorktab from '@/components/xly-worktab/index.vue'
-import { useTabsStore } from '@/stores/tabs'
-import { useMenuLayoutStore } from '@/stores/menuLayout'
 import menuData from '@/data/menu.json'
+import { useMenuLayoutStore } from '@/stores/menuLayout'
+import { useTabsStore } from '@/stores/tabs'
+import FixedSidebar from './components/FixedSidebar.vue'
+import HeaderLayout from './components/HeaderLayout.vue'
+import VerticalSidebar from './components/VerticalSidebar.vue'
 
 const route = useRoute()
 const tabsStore = useTabsStore()
@@ -69,13 +39,16 @@ watch(
 // 从菜单数据中匹配路由标题
 function getRouteTitle(path: string): string {
   for (const item of menuData) {
-    if (item.path === path) return item.name
+    if (item.path === path)
+      return item.name
     if (item.children) {
       for (const child of item.children) {
-        if (child.path === path) return child.name
+        if (child.path === path)
+          return child.name
         if (child.children) {
           for (const grand of child.children) {
-            if (grand.path === path) return grand.name
+            if (grand.path === path)
+              return grand.name
           }
         }
       }
@@ -100,6 +73,35 @@ watch(
 )
 </script>
 
+<template>
+  <div class="layout-container">
+    <!-- 顶部导航（包含水平菜单） -->
+    <HeaderLayout />
+    <!-- 主体区域 -->
+    <div class="layout-body" :class="{ 'layout-body--horizontal': menuLayoutStore.currentLayout === 'horizontal' }">
+      <!-- 左侧菜单 -->
+      <component
+        :is="currentMenuComponent"
+        v-if="menuLayoutStore.currentLayout !== 'horizontal'"
+        class="layout-sidebar"
+      />
+      <!-- 右侧内容 -->
+      <div class="layout-main" :class="{ 'layout-main--horizontal': menuLayoutStore.currentLayout === 'horizontal' }">
+        <!-- 标签页 -->
+        <XlyWorktab ref="worktabRef" />
+        <!-- 页面内容（keep-alive 缓存） -->
+        <main ref="contentRef" class="layout-content">
+          <RouterView v-slot="{ Component, route: currentRoute }">
+            <KeepAlive>
+              <component :is="Component" :key="currentRoute.path" />
+            </KeepAlive>
+          </RouterView>
+        </main>
+      </div>
+    </div>
+  </div>
+</template>
+
 <style scoped lang="scss">
 $corner-radius: 20px;
 
@@ -116,7 +118,7 @@ $corner-radius: 20px;
   overflow: hidden;
   position: relative;
 
-  &--horizontal {
+  &.layout-body--horizontal {
     background-color: var(--el-fill-color-light);
   }
 }
@@ -151,7 +153,7 @@ $corner-radius: 20px;
     background: transparent;
   }
 
-  &--horizontal {
+  &.layout-main--horizontal {
     border-radius: $corner-radius $corner-radius 0 0;
   }
 }

@@ -1,7 +1,176 @@
+<script setup lang="ts">
+import {
+  custom,
+  email,
+  max,
+  min,
+  minLength,
+  required,
+  xly,
+  XlyButton,
+  XlyCascader,
+  XlyDatePicker,
+  XlyDateTimePicker,
+  XlyForm,
+  XlyFormItem,
+  XlyInput,
+  XlyRadio,
+  XlyRadioGroup,
+  XlyRate,
+  XlySelect,
+  XlyTimePicker,
+} from 'easy-ui'
+import { reactive, ref } from 'vue'
+
+// ========== 完整表单 ==========
+const fullFormRef = ref()
+const fullForm = reactive({
+  username: '',
+  email: '',
+  gender: '' as string | number | boolean,
+  city: '' as string | number | boolean,
+  department: [] as (string | number)[],
+  birthday: '',
+  interviewTime: '',
+  onboardTime: '',
+  satisfaction: 0,
+  remark: '',
+})
+const fullRules = {
+  username: [required('请输入用户名'), minLength(2, '至少2个字符')],
+  email: [required('请输入邮箱'), email()],
+}
+
+const cityOptions = [
+  { label: '北京', value: 'beijing' },
+  { label: '上海', value: 'shanghai' },
+  { label: '广州', value: 'guangzhou' },
+  { label: '深圳', value: 'shenzhen' },
+  { label: '杭州', value: 'hangzhou' },
+  { label: '成都', value: 'chengdu' },
+]
+
+const departmentOptions = [
+  {
+    label: '技术部',
+    value: 'tech',
+    children: [
+      { label: '前端组', value: 'frontend' },
+      { label: '后端组', value: 'backend' },
+      { label: '测试组', value: 'qa' },
+    ],
+  },
+  {
+    label: '产品部',
+    value: 'product',
+    children: [
+      { label: '产品设计', value: 'design' },
+      { label: '用户研究', value: 'research' },
+    ],
+  },
+  {
+    label: '运营部',
+    value: 'operation',
+    children: [
+      { label: '内容运营', value: 'content' },
+      { label: '用户运营', value: 'user' },
+    ],
+  },
+]
+
+async function submitFull() {
+  const valid = await fullFormRef.value?.validate()
+  if (valid)
+    xly.$msg.success('提交成功')
+}
+
+function resetFull() {
+  fullFormRef.value?.resetFields()
+}
+
+// ========== 行内表单 ==========
+const inlineForm = reactive({
+  keyword: '',
+  category: '' as string | number,
+  date: '',
+})
+const categoryOptions = [
+  { label: '技术', value: 'tech' },
+  { label: '设计', value: 'design' },
+  { label: '产品', value: 'product' },
+]
+
+// ========== 表单尺寸 ==========
+const sizeForm = reactive({ val: '' })
+
+// ========== 自定义校验 ==========
+const customFormRef = ref()
+const customForm = reactive({ password: '', confirmPassword: '', age: '' })
+const customRules = {
+  password: [required('请输入密码'), minLength(6, '至少6位')],
+  confirmPassword: [required('请确认密码'), custom((v: string) => (v !== customForm.password ? '两次密码不一致' : ''))],
+  age: [required('请输入年龄'), min(18, '不能小于18'), max(60, '不能大于60')],
+}
+
+async function submitCustom() {
+  const valid = await customFormRef.value?.validate()
+  if (valid)
+    xly.$msg.success('自定义校验通过')
+}
+
+// ========== 简化规则示例 ==========
+const simpleFormRef = ref()
+const simpleForm = reactive({
+  username: '',
+  email: '',
+  phone: '',
+  age: '',
+  website: '',
+})
+const simpleRules = {
+  username: ['required', 'min:2'],
+  email: ['required', 'email'],
+  phone: ['phone'],
+  age: ['minVal:18', 'maxVal:60'],
+  website: ['url'],
+}
+
+async function submitSimple() {
+  const valid = await simpleFormRef.value?.validate()
+  if (valid)
+    xly.$msg.success('简化规则校验通过')
+}
+
+function resetSimple() {
+  simpleFormRef.value?.resetFields()
+}
+
+// ========== 最简单方式示例 ==========
+const simplestFormRef = ref()
+const simplestForm = reactive({
+  username: '',
+  email: '',
+  phone: '',
+  remark: '',
+})
+
+async function submitSimplest() {
+  const valid = await simplestFormRef.value?.validate()
+  if (valid)
+    xly.$msg.success('校验通过')
+}
+
+function resetSimplest() {
+  simplestFormRef.value?.resetFields()
+}
+</script>
+
 <template>
   <div class="component-doc">
     <header class="doc-header">
-      <h1 class="doc-title">表单 Form</h1>
+      <h1 class="doc-title">
+        表单 Form
+      </h1>
       <p class="doc-desc">
         表单容器组件，配合 <code>XlyFormItem</code> 实现表单布局和字段校验。
         支持行内模式、三种尺寸，内置常用校验规则，可集成所有表单组件。
@@ -10,13 +179,12 @@
 
     <!-- 完整表单示例 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">完整表单</h2>
+      <h2 class="doc-section__title">
+        完整表单
+      </h2>
       <p class="doc-section__desc">
         在一个表单中集成
-        <code>XlyInput</code
-        >、<code>XlySelect</code>、<code>XlyRadioGroup</code>、<code>XlyRate</code>、<code>XlyDatePicker</code>、<code>XlyTimePicker</code>、<code>XlyDateTimePicker</code>、<code
-          >XlyCascader</code
-        >
+        <code>XlyInput</code>、<code>XlySelect</code>、<code>XlyRadioGroup</code>、<code>XlyRate</code>、<code>XlyDatePicker</code>、<code>XlyTimePicker</code>、<code>XlyDateTimePicker</code>、<code>XlyCascader</code>
         等全部表单组件，并展示校验功能。
       </p>
       <div class="doc-preview">
@@ -31,18 +199,19 @@
               </XlyFormItem>
               <XlyFormItem label="性别">
                 <XlyRadioGroup v-model="fullForm.gender">
-                  <XlyRadio label="male">男</XlyRadio>
-                  <XlyRadio label="female">女</XlyRadio>
-                  <XlyRadio label="other">其他</XlyRadio>
+                  <XlyRadio label="male">
+                    男
+                  </XlyRadio>
+                  <XlyRadio label="female">
+                    女
+                  </XlyRadio>
+                  <XlyRadio label="other">
+                    其他
+                  </XlyRadio>
                 </XlyRadioGroup>
               </XlyFormItem>
               <XlyFormItem label="城市">
-                <XlySelect
-                  v-model="fullForm.city"
-                  :options="cityOptions"
-                  placeholder="请选择城市"
-                  clearable
-                />
+                <XlySelect v-model="fullForm.city" :options="cityOptions" placeholder="请选择城市" clearable />
               </XlyFormItem>
               <XlyFormItem label="所属部门">
                 <XlyCascader
@@ -59,11 +228,7 @@
                 <XlyTimePicker v-model="fullForm.interviewTime" placeholder="请选择时间" />
               </XlyFormItem>
               <XlyFormItem label="入职日期">
-                <XlyDateTimePicker
-                  v-model="fullForm.onboardTime"
-                  placeholder="请选择日期时间"
-                  show-seconds
-                />
+                <XlyDateTimePicker v-model="fullForm.onboardTime" placeholder="请选择日期时间" show-seconds />
               </XlyFormItem>
               <XlyFormItem label="满意度">
                 <XlyRate v-model="fullForm.satisfaction" show-text />
@@ -79,55 +244,63 @@
               </XlyFormItem>
               <XlyFormItem>
                 <div style="display: flex; gap: 8px">
-                  <XlyButton type="primary" @click="submitFull">提交</XlyButton>
-                  <XlyButton @click="resetFull">重置</XlyButton>
+                  <XlyButton type="primary" @click="submitFull">
+                    提交
+                  </XlyButton>
+                  <XlyButton @click="resetFull">
+                    重置
+                  </XlyButton>
                 </div>
               </XlyFormItem>
             </XlyForm>
           </div>
         </div>
       </div>
-      <XlyDocCode :code='`<XlyForm ref="formRef" :model="form" :rules="rules" label-width="90px">
-  <XlyFormItem label="用户名" prop="username">
-    <XlyInput v-model="form.username" placeholder="请输入用户名" />
+      <XlyDocCode
+        code="<XlyForm ref=&quot;formRef&quot; :model=&quot;form&quot; :rules=&quot;rules&quot; label-width=&quot;90px&quot;>
+  <XlyFormItem label=&quot;用户名&quot; prop=&quot;username&quot;>
+    <XlyInput v-model=&quot;form.username&quot; placeholder=&quot;请输入用户名&quot; />
   </XlyFormItem>
-  <XlyFormItem label="性别">
-    <XlyRadioGroup v-model="form.gender">
-      <XlyRadio label="male">男</XlyRadio>
-      <XlyRadio label="female">女</XlyRadio>
+  <XlyFormItem label=&quot;性别&quot;>
+    <XlyRadioGroup v-model=&quot;form.gender&quot;>
+      <XlyRadio label=&quot;male&quot;>男</XlyRadio>
+      <XlyRadio label=&quot;female&quot;>女</XlyRadio>
     </XlyRadioGroup>
   </XlyFormItem>
-  <XlyFormItem label="城市">
-    <XlySelect v-model="form.city" :options="cityOptions" clearable />
+  <XlyFormItem label=&quot;城市&quot;>
+    <XlySelect v-model=&quot;form.city&quot; :options=&quot;cityOptions&quot; clearable />
   </XlyFormItem>
-  <XlyFormItem label="所属部门">
-    <XlyCascader v-model="form.department" :options="deptOptions" />
+  <XlyFormItem label=&quot;所属部门&quot;>
+    <XlyCascader v-model=&quot;form.department&quot; :options=&quot;deptOptions&quot; />
   </XlyFormItem>
-  <XlyFormItem label="出生日期">
-    <XlyDatePicker v-model="form.birthday" />
+  <XlyFormItem label=&quot;出生日期&quot;>
+    <XlyDatePicker v-model=&quot;form.birthday&quot; />
   </XlyFormItem>
-  <XlyFormItem label="面试时间">
-    <XlyTimePicker v-model="form.interviewTime" />
+  <XlyFormItem label=&quot;面试时间&quot;>
+    <XlyTimePicker v-model=&quot;form.interviewTime&quot; />
   </XlyFormItem>
-  <XlyFormItem label="入职日期">
-    <XlyDateTimePicker v-model="form.onboardTime" show-seconds />
+  <XlyFormItem label=&quot;入职日期&quot;>
+    <XlyDateTimePicker v-model=&quot;form.onboardTime&quot; show-seconds />
   </XlyFormItem>
-  <XlyFormItem label="满意度">
-    <XlyRate v-model="form.satisfaction" show-text />
+  <XlyFormItem label=&quot;满意度&quot;>
+    <XlyRate v-model=&quot;form.satisfaction&quot; show-text />
   </XlyFormItem>
-  <XlyFormItem label="备注">
-    <XlyInput v-model="form.remark" type="textarea" :maxlength="200" show-word-limit />
+  <XlyFormItem label=&quot;备注&quot;>
+    <XlyInput v-model=&quot;form.remark&quot; type=&quot;textarea&quot; :maxlength=&quot;200&quot; show-word-limit />
   </XlyFormItem>
   <XlyFormItem>
-    <XlyButton type="primary" @click="submit">提交</XlyButton>
-    <XlyButton @click="reset">重置</XlyButton>
+    <XlyButton type=&quot;primary&quot; @click=&quot;submit&quot;>提交</XlyButton>
+    <XlyButton @click=&quot;reset&quot;>重置</XlyButton>
   </XlyFormItem>
-</XlyForm>`' />
+</XlyForm>"
+      />
     </section>
 
     <!-- 行内表单 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">行内表单</h2>
+      <h2 class="doc-section__title">
+        行内表单
+      </h2>
       <p class="doc-section__desc">
         设置 <code>inline</code> 属性让表单项水平排列，常用于搜索筛选场景。
       </p>
@@ -138,46 +311,47 @@
               <XlyInput v-model="inlineForm.keyword" placeholder="关键词" prefix-icon="el:Search" />
             </XlyFormItem>
             <XlyFormItem label="分类">
-              <XlySelect
-                v-model="inlineForm.category"
-                :options="categoryOptions"
-                placeholder="分类"
-              />
+              <XlySelect v-model="inlineForm.category" :options="categoryOptions" placeholder="分类" />
             </XlyFormItem>
             <XlyFormItem label="日期" :span="24">
               <XlyDatePicker v-model="inlineForm.date" placeholder="日期" />
             </XlyFormItem>
             <XlyFormItem>
-              <XlyButton type="primary">搜索</XlyButton>
+              <XlyButton type="primary">
+                搜索
+              </XlyButton>
             </XlyFormItem>
           </XlyForm>
         </div>
       </div>
-      <XlyDocCode :code='`<XlyForm :model="form" inline>
-  <XlyFormItem label="关键词">
-    <XlyInput v-model="form.keyword" placeholder="关键词" />
+      <XlyDocCode
+        code="<XlyForm :model=&quot;form&quot; inline>
+  <XlyFormItem label=&quot;关键词&quot;>
+    <XlyInput v-model=&quot;form.keyword&quot; placeholder=&quot;关键词&quot; />
   </XlyFormItem>
-  <XlyFormItem label="分类">
-    <XlySelect v-model="form.category" :options="options" />
+  <XlyFormItem label=&quot;分类&quot;>
+    <XlySelect v-model=&quot;form.category&quot; :options=&quot;options&quot; />
   </XlyFormItem>
-  <XlyFormItem label="日期" :span="24" >
-    <XlyDatePicker v-model="form.date" />
+  <XlyFormItem label=&quot;日期&quot; :span=&quot;24&quot; >
+    <XlyDatePicker v-model=&quot;form.date&quot; />
   </XlyFormItem>
   <XlyFormItem>
-    <XlyButton type="primary">搜索</XlyButton>
+    <XlyButton type=&quot;primary&quot;>搜索</XlyButton>
   </XlyFormItem>
-</XlyForm>`' />
+</XlyForm>"
+      />
     </section>
 
     <!-- 表单尺寸 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">表单尺寸</h2>
-      <p class="doc-section__desc">通过 <code>size</code> 属性统一控制表单内所有组件的尺寸。</p>
+      <h2 class="doc-section__title">
+        表单尺寸
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>size</code> 属性统一控制表单内所有组件的尺寸。
+      </p>
       <div class="doc-preview">
-        <div
-          class="doc-preview__body"
-          style="flex-direction: column; align-items: flex-start; gap: 16px"
-        >
+        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 16px">
           <div style="width: 400px">
             <XlyForm :model="sizeForm" size="large" label-width="60px">
               <XlyFormItem label="大尺寸">
@@ -201,16 +375,20 @@
           </div>
         </div>
       </div>
-      <XlyDocCode :code='`<XlyForm :model="form" size="large" label-width="60px">...</XlyForm>
-<XlyForm :model="form" label-width="60px">...</XlyForm>
-<XlyForm :model="form" size="small" label-width="60px">...</XlyForm>`' />
+      <XlyDocCode
+        code="<XlyForm :model=&quot;form&quot; size=&quot;large&quot; label-width=&quot;60px&quot;>...</XlyForm>
+<XlyForm :model=&quot;form&quot; label-width=&quot;60px&quot;>...</XlyForm>
+<XlyForm :model=&quot;form&quot; size=&quot;small&quot; label-width=&quot;60px&quot;>...</XlyForm>"
+      />
     </section>
 
     <!-- 最简单方式：required 属性 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">最简单方式：required 属性</h2>
+      <h2 class="doc-section__title">
+        最简单方式：required 属性
+      </h2>
       <p class="doc-section__desc">
-        对于简单的必填校验，直接在 <code>XlyFormItem</code> 上设置 <code>required</code> 属性即可，无需编写 rules。<br />
+        对于简单的必填校验，直接在 <code>XlyFormItem</code> 上设置 <code>required</code> 属性即可，无需编写 rules。<br>
         默认提示文字为"请填写{label}"，也可以通过 <code>msg</code> 自定义。
       </p>
       <div class="doc-preview">
@@ -230,69 +408,73 @@
                 <XlyInput v-model="simplestForm.remark" type="textarea" placeholder="选填" />
               </XlyFormItem>
               <XlyFormItem>
-                <XlyButton type="primary" @click="submitSimplest">提交</XlyButton>
-                <XlyButton @click="resetSimplest">重置</XlyButton>
+                <XlyButton type="primary" @click="submitSimplest">
+                  提交
+                </XlyButton>
+                <XlyButton @click="resetSimplest">
+                  重置
+                </XlyButton>
               </XlyFormItem>
             </XlyForm>
           </div>
         </div>
       </div>
-      <XlyDocCode :code='`<XlyForm ref="formRef" :model="form">
+      <XlyDocCode
+        code="<XlyForm ref=&quot;formRef&quot; :model=&quot;form&quot;>
   <!-- 默认提示：请填写{label} -->
-  <XlyFormItem label="用户名" prop="username" required>
-    <XlyInput v-model="form.username" />
+  <XlyFormItem label=&quot;用户名&quot; prop=&quot;username&quot; required>
+    <XlyInput v-model=&quot;form.username&quot; />
   </XlyFormItem>
 
   <!-- 自定义提示文字 -->
-  <XlyFormItem label="邮箱" prop="email" required msg="邮箱不能为空">
-    <XlyInput v-model="form.email" />
+  <XlyFormItem label=&quot;邮箱&quot; prop=&quot;email&quot; required msg=&quot;邮箱不能为空&quot;>
+    <XlyInput v-model=&quot;form.email&quot; />
   </XlyFormItem>
 
   <!-- 选填字段，不设置 required -->
-  <XlyFormItem label="备注" prop="remark">
-    <XlyInput v-model="form.remark" type="textarea" />
+  <XlyFormItem label=&quot;备注&quot; prop=&quot;remark&quot;>
+    <XlyInput v-model=&quot;form.remark&quot; type=&quot;textarea&quot; />
   </XlyFormItem>
 
   <XlyFormItem>
-    <XlyButton type="primary" @click="handleSubmit">提交</XlyButton>
+    <XlyButton type=&quot;primary&quot; @click=&quot;handleSubmit&quot;>提交</XlyButton>
   </XlyFormItem>
-</XlyForm>`' />
+</XlyForm>"
+      />
     </section>
 
     <!-- 自定义校验 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义校验</h2>
-      <p class="doc-section__desc">使用 <code>custom()</code> 规则实现任意自定义校验逻辑。</p>
+      <h2 class="doc-section__title">
+        自定义校验
+      </h2>
+      <p class="doc-section__desc">
+        使用 <code>custom()</code> 规则实现任意自定义校验逻辑。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div style="width: 100%; max-width: 500px">
-            <XlyForm
-              ref="customFormRef"
-              :model="customForm"
-              :rules="customRules"
-              label-width="80px"
-            >
+            <XlyForm ref="customFormRef" :model="customForm" :rules="customRules" label-width="80px">
               <XlyFormItem label="密码" prop="password">
                 <XlyInput v-model="customForm.password" type="password" placeholder="请输入密码" />
               </XlyFormItem>
               <XlyFormItem label="确认密码" prop="confirmPassword">
-                <XlyInput
-                  v-model="customForm.confirmPassword"
-                  type="password"
-                  placeholder="请再次输入"
-                />
+                <XlyInput v-model="customForm.confirmPassword" type="password" placeholder="请再次输入" />
               </XlyFormItem>
               <XlyFormItem label="年龄" prop="age">
                 <XlyInput v-model="customForm.age" placeholder="请输入年龄（18-60）" />
               </XlyFormItem>
               <XlyFormItem>
-                <XlyButton type="primary" @click="submitCustom">校验</XlyButton>
+                <XlyButton type="primary" @click="submitCustom">
+                  校验
+                </XlyButton>
               </XlyFormItem>
             </XlyForm>
           </div>
         </div>
       </div>
-      <XlyDocCode :code="`import { required, custom, min, max } from '@/components/xly-form/utils'
+      <XlyDocCode
+        code="import {  required, custom, min, max  } from 'easy-ui'
 
 const rules = {
   password: [required('请输入密码')],
@@ -303,24 +485,22 @@ const rules = {
     }),
   ],
   age: [required('请输入年龄'), min(18), max(60)],
-}`" />
+}"
+      />
     </section>
 
     <!-- 简化规则示例 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">简化规则</h2>
+      <h2 class="doc-section__title">
+        简化规则
+      </h2>
       <p class="doc-section__desc">
         支持使用字符串形式的简化规则，代码更简洁，同时兼容函数式规则。两种方式可以混合使用。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div style="width: 100%; max-width: 500px">
-            <XlyForm
-              ref="simpleFormRef"
-              :model="simpleForm"
-              :rules="simpleRules"
-              label-width="80px"
-            >
+            <XlyForm ref="simpleFormRef" :model="simpleForm" :rules="simpleRules" label-width="80px">
               <XlyFormItem label="用户名" prop="username">
                 <XlyInput v-model="simpleForm.username" placeholder="必填，至少2个字符" />
               </XlyFormItem>
@@ -337,14 +517,19 @@ const rules = {
                 <XlyInput v-model="simpleForm.website" placeholder="URL 格式" />
               </XlyFormItem>
               <XlyFormItem>
-                <XlyButton type="primary" @click="submitSimple">提交</XlyButton>
-                <XlyButton @click="resetSimple">重置</XlyButton>
+                <XlyButton type="primary" @click="submitSimple">
+                  提交
+                </XlyButton>
+                <XlyButton @click="resetSimple">
+                  重置
+                </XlyButton>
               </XlyFormItem>
             </XlyForm>
           </div>
         </div>
       </div>
-      <XlyDocCode :code="`// 简化规则写法（字符串）
+      <XlyDocCode
+        code="// 简化规则写法（字符串）
 const rules = {
   username: ['required', 'min:2'],
   email: ['required', 'email'],
@@ -360,14 +545,19 @@ const mixedRules = {
   password: ['required', 'min:6', custom((v) => {
     return /[A-Z]/.test(v) || '必须包含大写字母'
   })],
-}`" />
+}"
+      />
     </section>
 
     <!-- API -->
     <section class="doc-section">
-      <h3 class="doc-subtitle">API</h3>
+      <h3 class="doc-subtitle">
+        API
+      </h3>
 
-      <h3 class="doc-subtitle">XlyForm Props</h3>
+      <h3 class="doc-subtitle">
+        XlyForm Props
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -431,7 +621,9 @@ const mixedRules = {
         </table>
       </div>
 
-      <h3 class="doc-subtitle">XlyForm Methods</h3>
+      <h3 class="doc-subtitle">
+        XlyForm Methods
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -466,7 +658,9 @@ const mixedRules = {
         </table>
       </div>
 
-      <h3 class="doc-subtitle">XlyFormItem Props</h3>
+      <h3 class="doc-subtitle">
+        XlyFormItem Props
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -524,7 +718,9 @@ const mixedRules = {
         </table>
       </div>
 
-      <h3 class="doc-subtitle">XlyFormItem Slots</h3>
+      <h3 class="doc-subtitle">
+        XlyFormItem Slots
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -546,7 +742,9 @@ const mixedRules = {
         </table>
       </div>
 
-      <h3 class="doc-subtitle">校验规则 (utils.ts)</h3>
+      <h3 class="doc-subtitle">
+        校验规则 (utils.ts)
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -624,165 +822,6 @@ const mixedRules = {
     </section>
   </div>
 </template>
-
-<script setup lang="ts">
-import { reactive, ref } from 'vue'
-import XlyButton from '@/components/xly-button/index.vue'
-import XlyInput from '@/components/xly-input/index.vue'
-import XlySelect from '@/components/xly-select/index.vue'
-import XlyRadio from '@/components/xly-radio/index.vue'
-import XlyRadioGroup from '@/components/xly-radio/radio-group.vue'
-import XlyRate from '@/components/xly-rate/index.vue'
-import XlyDatePicker from '@/components/xly-date-picker/index.vue'
-import XlyTimePicker from '@/components/xly-time-picker/index.vue'
-import XlyDateTimePicker from '@/components/xly-date-time-picker/index.vue'
-import XlyCascader from '@/components/xly-cascader/index.vue'
-import XlyForm from '@/components/xly-form/index.vue'
-import XlyFormItem from '@/components/xly-form/xly-form-item.vue'
-import { custom, email, max, min, minLength, required } from '@/components/xly-form/utils'
-import { xly } from '@/utils/xly'
-
-// ========== 完整表单 ==========
-const fullFormRef = ref()
-const fullForm = reactive({
-  username: '',
-  email: '',
-  gender: '' as string | number | boolean,
-  city: '' as string | number | boolean,
-  department: [] as (string | number)[],
-  birthday: '',
-  interviewTime: '',
-  onboardTime: '',
-  satisfaction: 0,
-  remark: '',
-})
-const fullRules = {
-  username: [required('请输入用户名'), minLength(2, '至少2个字符')],
-  email: [required('请输入邮箱'), email()],
-}
-
-const cityOptions = [
-  { label: '北京', value: 'beijing' },
-  { label: '上海', value: 'shanghai' },
-  { label: '广州', value: 'guangzhou' },
-  { label: '深圳', value: 'shenzhen' },
-  { label: '杭州', value: 'hangzhou' },
-  { label: '成都', value: 'chengdu' },
-]
-
-const departmentOptions = [
-  {
-    label: '技术部',
-    value: 'tech',
-    children: [
-      { label: '前端组', value: 'frontend' },
-      { label: '后端组', value: 'backend' },
-      { label: '测试组', value: 'qa' },
-    ],
-  },
-  {
-    label: '产品部',
-    value: 'product',
-    children: [
-      { label: '产品设计', value: 'design' },
-      { label: '用户研究', value: 'research' },
-    ],
-  },
-  {
-    label: '运营部',
-    value: 'operation',
-    children: [
-      { label: '内容运营', value: 'content' },
-      { label: '用户运营', value: 'user' },
-    ],
-  },
-]
-
-async function submitFull() {
-  const valid = await fullFormRef.value?.validate()
-  if (valid) xly.$msg.success('提交成功')
-}
-
-function resetFull() {
-  fullFormRef.value?.resetFields()
-}
-
-// ========== 行内表单 ==========
-const inlineForm = reactive({
-  keyword: '',
-  category: '' as string | number,
-  date: '',
-})
-const categoryOptions = [
-  { label: '技术', value: 'tech' },
-  { label: '设计', value: 'design' },
-  { label: '产品', value: 'product' },
-]
-
-// ========== 表单尺寸 ==========
-const sizeForm = reactive({ val: '' })
-
-// ========== 自定义校验 ==========
-const customFormRef = ref()
-const customForm = reactive({ password: '', confirmPassword: '', age: '' })
-const customRules = {
-  password: [required('请输入密码'), minLength(6, '至少6位')],
-  confirmPassword: [
-    required('请确认密码'),
-    custom((v: string) => (v !== customForm.password ? '两次密码不一致' : '')),
-  ],
-  age: [required('请输入年龄'), min(18, '不能小于18'), max(60, '不能大于60')],
-}
-
-async function submitCustom() {
-  const valid = await customFormRef.value?.validate()
-  if (valid) xly.$msg.success('自定义校验通过')
-}
-
-// ========== 简化规则示例 ==========
-const simpleFormRef = ref()
-const simpleForm = reactive({
-  username: '',
-  email: '',
-  phone: '',
-  age: '',
-  website: '',
-})
-const simpleRules = {
-  username: ['required', 'min:2'],
-  email: ['required', 'email'],
-  phone: ['phone'],
-  age: ['minVal:18', 'maxVal:60'],
-  website: ['url'],
-}
-
-async function submitSimple() {
-  const valid = await simpleFormRef.value?.validate()
-  if (valid) xly.$msg.success('简化规则校验通过')
-}
-
-function resetSimple() {
-  simpleFormRef.value?.resetFields()
-}
-
-// ========== 最简单方式示例 ==========
-const simplestFormRef = ref()
-const simplestForm = reactive({
-  username: '',
-  email: '',
-  phone: '',
-  remark: '',
-})
-
-async function submitSimplest() {
-  const valid = await simplestFormRef.value?.validate()
-  if (valid) xly.$msg.success('校验通过')
-}
-
-function resetSimplest() {
-  simplestFormRef.value?.resetFields()
-}
-</script>
 
 <style scoped lang="scss">
 .component-doc {

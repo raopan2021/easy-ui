@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useUserStore } from '@/stores/user'
 import MainLayout from '../layouts/index.vue'
 import { generateLocalRoutes } from './utils'
-import { useUserStore } from '@/stores/user'
 
 // 动态生成的路由（同步版本，快速加载）
 const dynamicRoutes = generateLocalRoutes()
@@ -40,7 +40,8 @@ const router = createRouter({
 // 路由守卫：未登录跳转登录页
 router.beforeEach((to) => {
   // 公开页面直接放行
-  if (to.meta.public) return true
+  if (to.meta.public)
+    return true
 
   const userStore = useUserStore()
   if (!userStore.isLoggedIn) {

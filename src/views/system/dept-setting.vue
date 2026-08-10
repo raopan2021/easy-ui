@@ -1,8 +1,313 @@
+<script setup lang="ts">
+import type { FormInstance, FormRules } from 'element-plus'
+import { Plus, RefreshRight, Search } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
+import { computed, onMounted, reactive, ref } from 'vue'
+
+interface DeptItem {
+  id: number
+  name: string
+  code: string
+  leader: string
+  parentId: number
+  sort: number
+  status: number
+  createTime: string
+  children?: DeptItem[]
+}
+
+let idCounter = 100
+function genMockData(): DeptItem[] {
+  return [
+    {
+      id: 1,
+      name: '总公司',
+      code: 'headquarters',
+      leader: '张总',
+      parentId: 0,
+      sort: 1,
+      status: 1,
+      createTime: '2025-06-01 09:00:00',
+      children: [
+        {
+          id: 11,
+          name: '技术部',
+          code: 'tech_dept',
+          leader: '李经理',
+          parentId: 1,
+          sort: 1,
+          status: 1,
+          createTime: '2025-06-01 09:30:00',
+          children: [
+            {
+              id: 111,
+              name: '前端组',
+              code: 'frontend',
+              leader: '王组长',
+              parentId: 11,
+              sort: 1,
+              status: 1,
+              createTime: '2025-06-15 10:00:00',
+            },
+            {
+              id: 112,
+              name: '后端组',
+              code: 'backend',
+              leader: '赵组长',
+              parentId: 11,
+              sort: 2,
+              status: 1,
+              createTime: '2025-06-15 10:30:00',
+            },
+          ],
+        },
+        {
+          id: 12,
+          name: '产品部',
+          code: 'product_dept',
+          leader: '陈经理',
+          parentId: 1,
+          sort: 2,
+          status: 1,
+          createTime: '2025-06-01 09:30:00',
+        },
+        {
+          id: 13,
+          name: '市场部',
+          code: 'market_dept',
+          leader: '刘经理',
+          parentId: 1,
+          sort: 3,
+          status: 0,
+          createTime: '2025-06-01 10:00:00',
+        },
+      ],
+    },
+    {
+      id: 2,
+      name: '上海分公司',
+      code: 'sh_branch',
+      leader: '周总',
+      parentId: 0,
+      sort: 2,
+      status: 1,
+      createTime: '2025-08-01 09:00:00',
+      children: [
+        {
+          id: 21,
+          name: '销售部',
+          code: 'sales_sh',
+          leader: '孙经理',
+          parentId: 2,
+          sort: 1,
+          status: 1,
+          createTime: '2025-08-01 09:30:00',
+        },
+      ],
+    },
+  ]
+}
+
+let allData: DeptItem[] = genMockData()
+
+// --- search ---
+const searchForm = reactive({ keyword: '' })
+
+function filterTree(list: DeptItem[], keyword: string): DeptItem[] {
+  return list.reduce<DeptItem[]>((acc, node) => {
+    const children = node.children ? filterTree(node.children, keyword) : []
+    if (!keyword || node.name.includes(keyword) || node.code.includes(keyword) || children.length) {
+      acc.push({ ...node, children: children.length ? children : node.children ? [] : undefined })
+    }
+    return acc
+  }, [])
+}
+
+function deepCloneTree(list: DeptItem[]): DeptItem[] {
+  return list.map(n => ({ ...n, children: n.children ? deepCloneTree(n.children) : undefined }))
+}
+
+function handleSearch() {
+  fetchData()
+}
+function handleReset() {
+  searchForm.keyword = ''
+  fetchData()
+}
+
+// --- table ---
+const tableRef = ref()
+const loading = ref(false)
+const treeData = ref<DeptItem[]>([])
+
+function flattenTree(list: DeptItem[]): DeptItem[] {
+  return list.reduce<DeptItem[]>((acc, n) => {
+    acc.push(n)
+    if (n.children?.length)
+      acc.push(...flattenTree(n.children))
+    return acc
+  }, [])
+}
+
+function expandAll() {
+  const flat = flattenTree(allData)
+  flat.forEach(row => tableRef.value?.toggleRowExpansion(row, true))
+}
+function collapseAll() {
+  const flat = flattenTree(allData)
+  flat.forEach(row => tableRef.value?.toggleRowExpansion(row, false))
+}
+
+function fetchData() {
+  loading.value = true
+  setTimeout(() => {
+    const cloned = deepCloneTree(allData)
+    treeData.value = searchForm.keyword ? filterTree(cloned, searchForm.keyword) : cloned
+    loading.value = false
+  }, 200)
+}
+
+// --- dialog ---
+const formRef = ref<FormInstance>()
+const dialog = reactive({
+  visible: false,
+  isEdit: false,
+  loading: false,
+  form: {} as DeptItem,
+})
+
+const dialogTitle = computed(() => (dialog.isEdit ? '编辑部门' : '新增部门'))
+
+const parentOptions = computed(() => {
+  const flat = flattenTree(allData)
+  return flat.filter(d => d.status === 1)
+})
+
+const formRules: FormRules = {
+  name: [{ required: true, message: '请输入部门名称', trigger: 'blur' }],
+  code: [{ required: true, message: '请输入部门编码', trigger: 'blur' }],
+  leader: [{ required: true, message: '请输入负责人', trigger: 'blur' }],
+}
+
+function getInitForm(parentId = 0) {
+  return { id: 0, name: '', code: '', leader: '', parentId, sort: 0, status: 1, createTime: '' }
+}
+
+function handleAddRoot() {
+  dialog.isEdit = false
+  dialog.form = getInitForm(0) as DeptItem
+  dialog.visible = true
+}
+function handleAddChild(parent: DeptItem) {
+  dialog.isEdit = false
+  dialog.form = getInitForm(parent.id) as DeptItem
+  dialog.visible = true
+}
+
+function handleEdit(row: DeptItem) {
+  dialog.isEdit = true
+  dialog.form = { ...row, children: undefined }
+  dialog.visible = true
+}
+function handleDialogClose() {
+  formRef.value?.resetFields()
+  dialog.form = getInitForm() as DeptItem
+}
+
+function findAndReplace(list: DeptItem[], id: number, replacer: (n: DeptItem) => DeptItem | null): DeptItem[] {
+  return list.reduce<DeptItem[]>((acc, node) => {
+    if (node.id === id) {
+      const r = replacer(node)
+      if (r)
+        acc.push(r)
+    }
+    else {
+      acc.push({ ...node, children: node.children ? findAndReplace(node.children, id, replacer) : undefined })
+    }
+    return acc
+  }, [])
+}
+
+function gatherIds(list: DeptItem[]): number[] {
+  return list.reduce<number[]>((acc, n) => {
+    acc.push(n.id)
+    if (n.children?.length)
+      acc.push(...gatherIds(n.children))
+    return acc
+  }, [])
+}
+
+async function handleSubmit() {
+  const valid = await formRef.value?.validate().catch(() => false)
+  if (!valid)
+    return
+  dialog.loading = true
+  setTimeout(() => {
+    if (dialog.isEdit) {
+      allData = findAndReplace(allData, dialog.form.id, node => ({
+        ...node,
+        name: dialog.form.name,
+        code: dialog.form.code,
+        leader: dialog.form.leader,
+        parentId: dialog.form.parentId,
+        sort: dialog.form.sort,
+        status: dialog.form.status,
+        children: node.children,
+      }))
+      ElMessage.success('编辑成功')
+    }
+    else {
+      const newNode: DeptItem = {
+        ...dialog.form,
+        id: ++idCounter,
+        createTime: new Date().toLocaleString('zh-CN', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+        }),
+        children: [],
+      }
+      if (dialog.form.parentId) {
+        allData = findAndReplace(allData, dialog.form.parentId, p => ({
+          ...p,
+          children: [...(p.children || []), newNode],
+        }))
+      }
+      else {
+        allData.push(newNode)
+      }
+      ElMessage.success('新增成功')
+    }
+    dialog.visible = false
+    dialog.loading = false
+    fetchData()
+  }, 300)
+}
+
+function handleDelete(row: DeptItem) {
+  const ids = gatherIds([row])
+  ids.forEach((id) => {
+    allData = findAndReplace(allData, id, () => null)
+  })
+  ElMessage.success('删除成功')
+  fetchData()
+}
+
+onMounted(() => fetchData())
+</script>
+
 <template>
   <div class="system-page">
     <div class="page-header">
-      <h2 class="page-header__title">部门设置</h2>
-      <p class="page-header__desc">管理机构组织架构，支持无限层级的部门树管理</p>
+      <h2 class="page-header__title">
+        部门设置
+      </h2>
+      <p class="page-header__desc">
+        管理机构组织架构，支持无限层级的部门树管理
+      </p>
     </div>
 
     <div class="search-bar">
@@ -26,8 +331,12 @@
       <el-button type="primary" @click="handleAddRoot">
         <el-icon><Plus /></el-icon>新增根部门
       </el-button>
-      <el-button @click="expandAll">展开全部</el-button>
-      <el-button @click="collapseAll">折叠全部</el-button>
+      <el-button @click="expandAll">
+        展开全部
+      </el-button>
+      <el-button @click="collapseAll">
+        折叠全部
+      </el-button>
     </div>
 
     <el-table
@@ -42,7 +351,7 @@
     >
       <el-table-column prop="name" label="部门名称" min-width="180">
         <template #default="{ row }">
-          <el-icon :size="16" style="margin-right: 6px; vertical-align: middle; color: var(--el-color-primary);">
+          <el-icon :size="16" style="margin-right: 6px; vertical-align: middle; color: var(--el-color-primary)">
             <component :is="row.children?.length ? 'FolderOpened' : 'Document'" />
           </el-icon>
           <span :style="{ fontWeight: row.parentId === 0 ? 600 : 400 }">{{ row.name }}</span>
@@ -61,11 +370,17 @@
       <el-table-column prop="createTime" label="创建时间" width="170" />
       <el-table-column label="操作" width="200" fixed="right">
         <template #default="{ row }">
-          <el-button link type="primary" size="small" @click="handleEdit(row)">编辑</el-button>
-          <el-button link type="success" size="small" @click="handleAddChild(row)">新增子部门</el-button>
+          <el-button link type="primary" size="small" @click="handleEdit(row)">
+            编辑
+          </el-button>
+          <el-button link type="success" size="small" @click="handleAddChild(row)">
+            新增子部门
+          </el-button>
           <el-popconfirm title="确定删除该部门及其子部门？" @confirm="handleDelete(row)">
             <template #reference>
-              <el-button link type="danger" size="small">删除</el-button>
+              <el-button link type="danger" size="small">
+                删除
+              </el-button>
             </template>
           </el-popconfirm>
         </template>
@@ -108,195 +423,46 @@
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialog.visible = false">取消</el-button>
-        <el-button type="primary" :loading="dialog.loading" @click="handleSubmit">确定</el-button>
+        <el-button @click="dialog.visible = false">
+          取消
+        </el-button>
+        <el-button type="primary" :loading="dialog.loading" @click="handleSubmit">
+          确定
+        </el-button>
       </template>
     </el-dialog>
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref, reactive, computed, onMounted } from 'vue'
-import { ElMessage, ElMessageBox } from 'element-plus'
-import type { FormInstance, FormRules } from 'element-plus'
-import { Plus, Search, RefreshRight } from '@element-plus/icons-vue'
-
-interface DeptItem {
-  id: number
-  name: string
-  code: string
-  leader: string
-  parentId: number
-  sort: number
-  status: number
-  createTime: string
-  children?: DeptItem[]
-}
-
-let idCounter = 100
-function genMockData(): DeptItem[] {
-  return [
-    { id: 1, name: '总公司', code: 'headquarters', leader: '张总', parentId: 0, sort: 1, status: 1, createTime: '2025-06-01 09:00:00', children: [
-      { id: 11, name: '技术部', code: 'tech_dept', leader: '李经理', parentId: 1, sort: 1, status: 1, createTime: '2025-06-01 09:30:00', children: [
-        { id: 111, name: '前端组', code: 'frontend', leader: '王组长', parentId: 11, sort: 1, status: 1, createTime: '2025-06-15 10:00:00' },
-        { id: 112, name: '后端组', code: 'backend', leader: '赵组长', parentId: 11, sort: 2, status: 1, createTime: '2025-06-15 10:30:00' },
-      ]},
-      { id: 12, name: '产品部', code: 'product_dept', leader: '陈经理', parentId: 1, sort: 2, status: 1, createTime: '2025-06-01 09:30:00' },
-      { id: 13, name: '市场部', code: 'market_dept', leader: '刘经理', parentId: 1, sort: 3, status: 0, createTime: '2025-06-01 10:00:00' },
-    ]},
-    { id: 2, name: '上海分公司', code: 'sh_branch', leader: '周总', parentId: 0, sort: 2, status: 1, createTime: '2025-08-01 09:00:00', children: [
-      { id: 21, name: '销售部', code: 'sales_sh', leader: '孙经理', parentId: 2, sort: 1, status: 1, createTime: '2025-08-01 09:30:00' },
-    ]},
-  ]
-}
-
-let allData: DeptItem[] = genMockData()
-
-// --- search ---
-const searchForm = reactive({ keyword: '' })
-
-function filterTree(list: DeptItem[], keyword: string): DeptItem[] {
-  return list.reduce<DeptItem[]>((acc, node) => {
-    const children = node.children ? filterTree(node.children, keyword) : []
-    if (!keyword || node.name.includes(keyword) || node.code.includes(keyword) || children.length) {
-      acc.push({ ...node, children: children.length ? children : node.children ? [] : undefined })
-    }
-    return acc
-  }, [])
-}
-
-function deepCloneTree(list: DeptItem[]): DeptItem[] {
-  return list.map(n => ({ ...n, children: n.children ? deepCloneTree(n.children) : undefined }))
-}
-
-function handleSearch() { fetchData() }
-function handleReset() { searchForm.keyword = ''; fetchData() }
-
-// --- table ---
-const tableRef = ref()
-const loading = ref(false)
-const treeData = ref<DeptItem[]>([])
-
-function flattenTree(list: DeptItem[]): DeptItem[] {
-  return list.reduce<DeptItem[]>((acc, n) => {
-    acc.push(n)
-    if (n.children?.length) acc.push(...flattenTree(n.children))
-    return acc
-  }, [])
-}
-
-function expandAll() {
-  const flat = flattenTree(allData)
-  flat.forEach(row => tableRef.value?.toggleRowExpansion(row, true))
-}
-function collapseAll() {
-  const flat = flattenTree(allData)
-  flat.forEach(row => tableRef.value?.toggleRowExpansion(row, false))
-}
-
-function fetchData() {
-  loading.value = true
-  setTimeout(() => {
-    const cloned = deepCloneTree(allData)
-    treeData.value = searchForm.keyword ? filterTree(cloned, searchForm.keyword) : cloned
-    loading.value = false
-  }, 200)
-}
-
-// --- dialog ---
-const formRef = ref<FormInstance>()
-const dialog = reactive({
-  visible: false,
-  isEdit: false,
-  loading: false,
-  form: {} as DeptItem,
-})
-
-const dialogTitle = computed(() => dialog.isEdit ? '编辑部门' : '新增部门')
-
-const parentOptions = computed(() => {
-  const flat = flattenTree(allData)
-  return flat.filter(d => d.status === 1)
-})
-
-const formRules: FormRules = {
-  name: [{ required: true, message: '请输入部门名称', trigger: 'blur' }],
-  code: [{ required: true, message: '请输入部门编码', trigger: 'blur' }],
-  leader: [{ required: true, message: '请输入负责人', trigger: 'blur' }],
-}
-
-function getInitForm(parentId = 0) {
-  return { id: 0, name: '', code: '', leader: '', parentId, sort: 0, status: 1, createTime: '' }
-}
-
-function handleAddRoot() { dialog.isEdit = false; dialog.form = getInitForm(0) as DeptItem; dialog.visible = true }
-function handleAddChild(parent: DeptItem) { dialog.isEdit = false; dialog.form = getInitForm(parent.id) as DeptItem; dialog.visible = true }
-
-function handleEdit(row: DeptItem) { dialog.isEdit = true; dialog.form = { ...row, children: undefined }; dialog.visible = true }
-function handleDialogClose() { formRef.value?.resetFields(); dialog.form = getInitForm() as DeptItem }
-
-function findAndReplace(list: DeptItem[], id: number, replacer: (n: DeptItem) => DeptItem | null): DeptItem[] {
-  return list.reduce<DeptItem[]>((acc, node) => {
-    if (node.id === id) {
-      const r = replacer(node)
-      if (r) acc.push(r)
-    } else {
-      acc.push({ ...node, children: node.children ? findAndReplace(node.children, id, replacer) : undefined })
-    }
-    return acc
-  }, [])
-}
-
-function gatherIds(list: DeptItem[]): number[] {
-  return list.reduce<number[]>((acc, n) => { acc.push(n.id); if (n.children?.length) acc.push(...gatherIds(n.children)); return acc }, [])
-}
-
-async function handleSubmit() {
-  const valid = await formRef.value?.validate().catch(() => false)
-  if (!valid) return
-  dialog.loading = true
-  setTimeout(() => {
-    if (dialog.isEdit) {
-      allData = findAndReplace(allData, dialog.form.id, (node) => ({
-        ...node, name: dialog.form.name, code: dialog.form.code, leader: dialog.form.leader,
-        parentId: dialog.form.parentId, sort: dialog.form.sort, status: dialog.form.status, children: node.children,
-      }))
-      ElMessage.success('编辑成功')
-    } else {
-      const newNode: DeptItem = {
-        ...dialog.form, id: ++idCounter,
-        createTime: new Date().toLocaleString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' }),
-        children: [],
-      }
-      if (dialog.form.parentId) {
-        allData = findAndReplace(allData, dialog.form.parentId, (p) => ({ ...p, children: [...(p.children || []), newNode] }))
-      } else {
-        allData.push(newNode)
-      }
-      ElMessage.success('新增成功')
-    }
-    dialog.visible = false
-    dialog.loading = false
-    fetchData()
-  }, 300)
-}
-
-function handleDelete(row: DeptItem) {
-  const ids = gatherIds([row])
-  ids.forEach(id => { allData = findAndReplace(allData, id, () => null) })
-  ElMessage.success('删除成功')
-  fetchData()
-}
-
-onMounted(() => fetchData())
-</script>
-
 <style scoped lang="scss">
-.system-page { padding: 8px 0 40px; }
-.page-header { margin-bottom: 24px;
-  &__title { font-size: 22px; font-weight: 700; margin: 0 0 6px; color: var(--el-text-color-primary); }
-  &__desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0; }
+.system-page {
+  padding: 8px 0 40px;
 }
-.search-bar { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 16px; }
-.action-bar { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; }
+.page-header {
+  margin-bottom: 24px;
+  .page-header__title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    color: var(--el-text-color-primary);
+  }
+  .page-header__desc {
+    font-size: 14px;
+    color: var(--el-text-color-secondary);
+    margin: 0;
+  }
+}
+.search-bar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.action-bar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+}
 </style>

@@ -1,8 +1,52 @@
+<script setup lang="ts">
+import { XlyButton, XlyQrcode } from 'easy-ui'
+import { ElInput, ElMessage } from 'element-plus'
+import { ref } from 'vue'
+
+const qrRef = ref<InstanceType<typeof XlyQrcode>>()
+const dynamicContent = ref('https://ease-ui.com')
+
+function handleDownload() {
+  qrRef.value?.download(`qrcode-${Date.now()}.png`)
+  ElMessage.success('下载成功')
+}
+
+function handleGetDataUrl() {
+  const dataUrl = qrRef.value?.toDataURL()
+  if (dataUrl) {
+    ElMessage.success('已复制到剪贴板')
+    navigator.clipboard.writeText(dataUrl)
+  }
+}
+
+// 事件日志
+const eventLog = ref<Array<{ type: 'success' | 'error', message: string }>>([])
+
+function onGenerated(dataUrl: string) {
+  eventLog.value.unshift({
+    type: 'success',
+    message: `生成成功，Base64 长度: ${dataUrl.length}`,
+  })
+  if (eventLog.value.length > 3) {
+    eventLog.value.pop()
+  }
+}
+
+function onError(error: Error) {
+  eventLog.value.unshift({
+    type: 'error',
+    message: `生成失败: ${error.message}`,
+  })
+}
+</script>
+
 <template>
   <div class="qrcode-doc">
     <!-- 页面标题 -->
     <div class="doc-header">
-      <h1 class="doc-title">Qrcode 二维码生成器</h1>
+      <h1 class="doc-title">
+        Qrcode 二维码生成器
+      </h1>
       <p class="doc-desc">
         基于 <code>qrcode</code> 库实现的二维码生成器，支持自定义尺寸、颜色、纠错级别，可添加 Logo
         图标，支持下载为图片。
@@ -15,7 +59,9 @@
 
     <!-- 基础用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
       <p class="doc-section__desc">
         传入 <code>content</code> 属性即可生成二维码，默认尺寸 200px，纠错级别 M。
       </p>
@@ -23,16 +69,17 @@
         <div class="doc-preview__body">
           <XlyQrcode content="https://ease-ui.com" />
         </div>
-        <XlyDocCode :code='`<XlyQrcode content="https://ease-ui.com" />`' />
+        <XlyDocCode code="<XlyQrcode content=&quot;https://ease-ui.com&quot; />" />
       </div>
     </section>
 
     <!-- 自定义尺寸和颜色 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义尺寸和颜色</h2>
+      <h2 class="doc-section__title">
+        自定义尺寸和颜色
+      </h2>
       <p class="doc-section__desc">
-        通过 <code>size</code> 设置尺寸，<code>colorDark</code> 和
-        <code>colorLight</code> 设置前景色和背景色。
+        通过 <code>size</code> 设置尺寸，<code>colorDark</code> 和 <code>colorLight</code> 设置前景色和背景色。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body qrcode-size-group">
@@ -49,15 +96,19 @@
             <XlyQrcode content="大尺寸" :size="300" />
           </div>
         </div>
-        <XlyDocCode :code='`<XlyQrcode content="小尺寸" :size="100" />
-<XlyQrcode content="中尺寸" :size="200" />
-<XlyQrcode content="大尺寸" :size="300" />`' />
+        <XlyDocCode
+          code="<XlyQrcode content=&quot;小尺寸&quot; :size=&quot;100&quot; />
+<XlyQrcode content=&quot;中尺寸&quot; :size=&quot;200&quot; />
+<XlyQrcode content=&quot;大尺寸&quot; :size=&quot;300&quot; />"
+        />
       </div>
     </section>
 
     <!-- 颜色主题 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">颜色主题</h2>
+      <h2 class="doc-section__title">
+        颜色主题
+      </h2>
       <p class="doc-section__desc">
         通过 <code>colorDark</code> 和 <code>colorLight</code> 属性自定义二维码颜色。
       </p>
@@ -80,14 +131,18 @@
             <span>红色主题</span>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyQrcode content="蓝色主题" color-dark="#4F6EF7" color-light="#EEF2FF" />
-<XlyQrcode content="绿色主题" color-dark="#34C759" color-light="#E8F5E9" />`' />
+        <XlyDocCode
+          code="<XlyQrcode content=&quot;蓝色主题&quot; color-dark=&quot;#4F6EF7&quot; color-light=&quot;#EEF2FF&quot; />
+<XlyQrcode content=&quot;绿色主题&quot; color-dark=&quot;#34C759&quot; color-light=&quot;#E8F5E9&quot; />"
+        />
       </div>
     </section>
 
     <!-- 纠错级别 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">纠错级别</h2>
+      <h2 class="doc-section__title">
+        纠错级别
+      </h2>
       <p class="doc-section__desc">
         通过
         <code>correctLevel</code>
@@ -112,20 +167,22 @@
             <span>H (30%)</span>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyQrcode content="低纠错 L" correct-level="L" />
-<XlyQrcode content="中纠错 M" correct-level="M" />
-<XlyQrcode content="高纠错 Q" correct-level="Q" />
-<XlyQrcode content="最高 H" correct-level="H" />`' />
+        <XlyDocCode
+          code="<XlyQrcode content=&quot;低纠错 L&quot; correct-level=&quot;L&quot; />
+<XlyQrcode content=&quot;中纠错 M&quot; correct-level=&quot;M&quot; />
+<XlyQrcode content=&quot;高纠错 Q&quot; correct-level=&quot;Q&quot; />
+<XlyQrcode content=&quot;最高 H&quot; correct-level=&quot;H&quot; />"
+        />
       </div>
     </section>
 
     <!-- 带 Logo -->
     <section class="doc-section">
-      <h2 class="doc-section__title">带 Logo</h2>
+      <h2 class="doc-section__title">
+        带 Logo
+      </h2>
       <p class="doc-section__desc">
-        通过 <code>logo</code> 属性添加 Logo 图片，<code>logoSize</code> 控制尺寸，<code
-          >logoRadius</code
-        >
+        通过 <code>logo</code> 属性添加 Logo 图片，<code>logoSize</code> 控制尺寸，<code>logoRadius</code>
         控制圆角，<code>logoBackgroundColor</code> 设置背景色。
       </p>
       <div class="doc-preview">
@@ -139,20 +196,24 @@
             logo-background-color="#ffffff"
           />
         </div>
-        <XlyDocCode :code='`<XlyQrcode
-  content="https://ease-ui.com"
-  :size="200"
-  logo="/logo.png"
-  :logo-size="40"
-  :logo-radius="8"
-  logo-background-color="#ffffff"
-/>`' />
+        <XlyDocCode
+          code="<XlyQrcode
+  content=&quot;https://ease-ui.com&quot;
+  :size=&quot;200&quot;
+  logo=&quot;/logo.png&quot;
+  :logo-size=&quot;40&quot;
+  :logo-radius=&quot;8&quot;
+  logo-background-color=&quot;#ffffff&quot;
+/>"
+        />
       </div>
     </section>
 
     <!-- 动态生成 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">动态生成与交互</h2>
+      <h2 class="doc-section__title">
+        动态生成与交互
+      </h2>
       <p class="doc-section__desc">
         通过 <code>ref</code> 获取组件实例，调用 <code>download</code> 方法下载二维码图片。
       </p>
@@ -160,7 +221,7 @@
         <div class="doc-preview__body">
           <div class="qrcode-interactive">
             <div class="qrcode-interactive__left">
-              <el-input
+              <ElInput
                 v-model="dynamicContent"
                 type="textarea"
                 :rows="3"
@@ -168,8 +229,12 @@
                 style="margin-bottom: 16px"
               />
               <div class="qrcode-interactive__controls">
-                <XlyButton type="primary" @click="handleDownload">下载二维码</XlyButton>
-                <XlyButton type="ghost" @click="handleGetDataUrl">获取 Base64</XlyButton>
+                <XlyButton type="primary" @click="handleDownload">
+                  下载二维码
+                </XlyButton>
+                <XlyButton type="ghost" @click="handleGetDataUrl">
+                  获取 Base64
+                </XlyButton>
               </div>
             </div>
             <div class="qrcode-interactive__right">
@@ -177,7 +242,8 @@
             </div>
           </div>
         </div>
-        <XlyDocCode :code="`const qrRef = ref()
+        <XlyDocCode
+          code="const qrRef = ref()
 const dynamicContent = ref('https://ease-ui.com')
 
 // 下载二维码
@@ -189,22 +255,22 @@ function handleDownload() {
 function handleGetDataUrl() {
   const dataUrl = qrRef.value?.toDataURL()
   console.log(dataUrl)
-}`" />
+}"
+        />
       </div>
     </section>
 
     <!-- 事件 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">事件</h2>
-      <p class="doc-section__desc">二维码生成成功或失败时会触发相应事件。</p>
+      <h2 class="doc-section__title">
+        事件
+      </h2>
+      <p class="doc-section__desc">
+        二维码生成成功或失败时会触发相应事件。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyQrcode
-            content="https://ease-ui.com"
-            :size="200"
-            @generated="onGenerated"
-            @error="onError"
-          />
+          <XlyQrcode content="https://ease-ui.com" :size="200" @generated="onGenerated" @error="onError" />
           <div v-if="eventLog.length" class="qrcode-event-log">
             <div v-for="(log, index) in eventLog" :key="index" class="qrcode-event-log__item">
               <el-tag :type="log.type === 'success' ? 'success' : 'danger'" size="small">
@@ -214,7 +280,8 @@ function handleGetDataUrl() {
             </div>
           </div>
         </div>
-        <XlyDocCode :code="`<XlyQrcode
+        <XlyDocCode
+          code="<XlyQrcode
   content=&quot;https://ease-ui.com&quot;
   @generated=&quot;onGenerated&quot;
   @error=&quot;onError&quot;
@@ -228,13 +295,16 @@ function onGenerated(dataUrl: string) {
 // error: 生成失败时触发
 function onError(error: Error) {
   console.error('二维码生成失败', error)
-}`" />
+}"
+        />
       </div>
     </section>
 
     <!-- Props API -->
     <section class="doc-section">
-      <h2 class="doc-section__title">Props</h2>
+      <h2 class="doc-section__title">
+        Props
+      </h2>
       <div class="doc-table-wrapper">
         <table class="doc-table">
           <thead>
@@ -307,7 +377,9 @@ function onError(error: Error) {
 
     <!-- Methods API -->
     <section class="doc-section">
-      <h2 class="doc-section__title">Methods</h2>
+      <h2 class="doc-section__title">
+        Methods
+      </h2>
       <div class="doc-table-wrapper">
         <table class="doc-table">
           <thead>
@@ -340,7 +412,9 @@ function onError(error: Error) {
 
     <!-- Events API -->
     <section class="doc-section">
-      <h2 class="doc-section__title">Events</h2>
+      <h2 class="doc-section__title">
+        Events
+      </h2>
       <div class="doc-table-wrapper">
         <table class="doc-table">
           <thead>
@@ -368,49 +442,6 @@ function onError(error: Error) {
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue'
-import { ElInput, ElMessage } from 'element-plus'
-import XlyQrcode from '@/components/xly-qrcode/index.vue'
-import XlyButton from '@/components/xly-button/index.vue'
-
-const qrRef = ref<InstanceType<typeof XlyQrcode>>()
-const dynamicContent = ref('https://ease-ui.com')
-
-function handleDownload() {
-  qrRef.value?.download(`qrcode-${Date.now()}.png`)
-  ElMessage.success('下载成功')
-}
-
-function handleGetDataUrl() {
-  const dataUrl = qrRef.value?.toDataURL()
-  if (dataUrl) {
-    ElMessage.success('已复制到剪贴板')
-    navigator.clipboard.writeText(dataUrl)
-  }
-}
-
-// 事件日志
-const eventLog = ref<Array<{ type: 'success' | 'error'; message: string }>>([])
-
-function onGenerated(dataUrl: string) {
-  eventLog.value.unshift({
-    type: 'success',
-    message: `生成成功，Base64 长度: ${dataUrl.length}`,
-  })
-  if (eventLog.value.length > 3) {
-    eventLog.value.pop()
-  }
-}
-
-function onError(error: Error) {
-  eventLog.value.unshift({
-    type: 'error',
-    message: `生成失败: ${error.message}`,
-  })
-}
-</script>
-
 <style scoped lang="scss">
 /* ========== 文档页通用样式 ========== */
 /* ========== 依赖说明 ========== */
@@ -424,12 +455,12 @@ function onError(error: Error) {
   border-radius: 8px;
   font-size: 14px;
 
-  &__label {
+  .doc-requires__label {
     color: var(--el-text-color-secondary);
     font-weight: 500;
   }
 
-  &__cmd {
+  .doc-requires__cmd {
     padding: 4px 12px;
     background: #1a1a2e;
     color: #a5d6a7;
@@ -539,7 +570,7 @@ function onError(error: Error) {
   align-items: center;
   gap: 8px;
 
-  &__label {
+  .qrcode-size-item__label {
     font-size: 13px;
     color: var(--el-text-color-secondary);
   }
@@ -591,17 +622,17 @@ function onError(error: Error) {
   width: 100%;
   max-width: 600px;
 
-  &__left {
+  .qrcode-interactive__left {
     flex: 1;
     display: flex;
     flex-direction: column;
   }
 
-  &__right {
+  .qrcode-interactive__right {
     flex-shrink: 0;
   }
 
-  &__controls {
+  .qrcode-interactive__controls {
     display: flex;
     gap: 8px;
   }
@@ -615,7 +646,7 @@ function onError(error: Error) {
   width: 100%;
   max-width: 400px;
 
-  &__item {
+  .qrcode-event-log__item {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -642,7 +673,7 @@ function onError(error: Error) {
   }
 
   th {
-    background: #f8f9fb;
+    background: var(--el-fill-color-lighter);
     font-weight: 600;
     color: var(--el-text-color-primary);
     white-space: nowrap;

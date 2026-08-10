@@ -1,203 +1,343 @@
+<script setup lang="ts">
+import { XlyCol, XlyRow } from 'easy-ui'
+</script>
+
 <template>
   <div class="grid-doc">
     <div class="doc-header">
-      <h1 class="doc-title">栅格布局 Grid</h1>
-      <p class="doc-desc">通过基础的 24 分栏，迅速简便地创建布局。</p>
+      <h1 class="doc-title">
+        栅格布局 Grid
+      </h1>
+      <p class="doc-desc">
+        通过基础的 24 分栏，迅速简便地创建布局。
+      </p>
     </div>
 
     <!-- 基础用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
-      <p class="doc-section__desc">使用 <code>XlyRow</code> 和 <code>XlyCol</code> 组件创建栅格布局，通过 <code>span</code> 属性设置分栏数。</p>
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
+      <p class="doc-section__desc">
+        使用 <code>XlyRow</code> 和 <code>XlyCol</code> 组件创建栅格布局，通过 <code>span</code> 属性设置分栏数。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body doc-preview__body--column">
           <XlyRow>
-            <XlyCol :span="24"><div class="grid-content bg-purple-dark"></div></XlyCol>
+            <XlyCol :span="24">
+              <div class="grid-content bg-purple-dark" />
+            </XlyCol>
           </XlyRow>
           <XlyRow>
-            <XlyCol :span="12"><div class="grid-content bg-purple"></div></XlyCol>
-            <XlyCol :span="12"><div class="grid-content bg-purple-light"></div></XlyCol>
+            <XlyCol :span="12">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
+            <XlyCol :span="12">
+              <div class="grid-content bg-purple-light" />
+            </XlyCol>
           </XlyRow>
           <XlyRow>
-            <XlyCol :span="8"><div class="grid-content bg-purple"></div></XlyCol>
-            <XlyCol :span="8"><div class="grid-content bg-purple-light"></div></XlyCol>
-            <XlyCol :span="8"><div class="grid-content bg-purple"></div></XlyCol>
+            <XlyCol :span="8">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
+            <XlyCol :span="8">
+              <div class="grid-content bg-purple-light" />
+            </XlyCol>
+            <XlyCol :span="8">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
           </XlyRow>
           <XlyRow>
-            <XlyCol :span="6"><div class="grid-content bg-purple"></div></XlyCol>
-            <XlyCol :span="6"><div class="grid-content bg-purple-light"></div></XlyCol>
-            <XlyCol :span="6"><div class="grid-content bg-purple"></div></XlyCol>
-            <XlyCol :span="6"><div class="grid-content bg-purple-light"></div></XlyCol>
+            <XlyCol :span="6">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
+            <XlyCol :span="6">
+              <div class="grid-content bg-purple-light" />
+            </XlyCol>
+            <XlyCol :span="6">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
+            <XlyCol :span="6">
+              <div class="grid-content bg-purple-light" />
+            </XlyCol>
           </XlyRow>
           <XlyRow>
-            <XlyCol :span="4"><div class="grid-content bg-purple"></div></XlyCol>
-            <XlyCol :span="4"><div class="grid-content bg-purple-light"></div></XlyCol>
-            <XlyCol :span="4"><div class="grid-content bg-purple"></div></XlyCol>
-            <XlyCol :span="4"><div class="grid-content bg-purple-light"></div></XlyCol>
-            <XlyCol :span="4"><div class="grid-content bg-purple"></div></XlyCol>
-            <XlyCol :span="4"><div class="grid-content bg-purple-light"></div></XlyCol>
+            <XlyCol :span="4">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
+            <XlyCol :span="4">
+              <div class="grid-content bg-purple-light" />
+            </XlyCol>
+            <XlyCol :span="4">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
+            <XlyCol :span="4">
+              <div class="grid-content bg-purple-light" />
+            </XlyCol>
+            <XlyCol :span="4">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
+            <XlyCol :span="4">
+              <div class="grid-content bg-purple-light" />
+            </XlyCol>
           </XlyRow>
         </div>
-        <XlyDocCode :code='`<XlyRow>
-  <XlyCol :span="24"><div class="content"></div></XlyCol>
+        <XlyDocCode
+          code="<XlyRow>
+  <XlyCol :span=&quot;24&quot;><div class=&quot;content&quot;></div></XlyCol>
 </XlyRow>
 <XlyRow>
-  <XlyCol :span="12"><div class="content"></div></XlyCol>
-  <XlyCol :span="12"><div class="content"></div></XlyCol>
-</XlyRow>`' />
+  <XlyCol :span=&quot;12&quot;><div class=&quot;content&quot;></div></XlyCol>
+  <XlyCol :span=&quot;12&quot;><div class=&quot;content&quot;></div></XlyCol>
+</XlyRow>"
+        />
       </div>
     </section>
 
     <!-- 分栏间隔 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">分栏间隔</h2>
-      <p class="doc-section__desc">通过 <code>gutter</code> 属性设置分栏之间的间隔（单位 px）。</p>
+      <h2 class="doc-section__title">
+        分栏间隔
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>gutter</code> 属性设置分栏之间的间隔（单位 px）。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <XlyRow :gutter="20">
-            <XlyCol :span="6"><div class="grid-content bg-purple"></div></XlyCol>
-            <XlyCol :span="6"><div class="grid-content bg-purple"></div></XlyCol>
-            <XlyCol :span="6"><div class="grid-content bg-purple"></div></XlyCol>
-            <XlyCol :span="6"><div class="grid-content bg-purple"></div></XlyCol>
+            <XlyCol :span="6">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
+            <XlyCol :span="6">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
+            <XlyCol :span="6">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
+            <XlyCol :span="6">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
           </XlyRow>
         </div>
-        <XlyDocCode :code='`<XlyRow :gutter="20">
-  <XlyCol :span="6"><div class="content"></div></XlyCol>
-  <XlyCol :span="6"><div class="content"></div></XlyCol>
-  <XlyCol :span="6"><div class="content"></div></XlyCol>
-  <XlyCol :span="6"><div class="content"></div></XlyCol>
-</XlyRow>`' />
+        <XlyDocCode
+          code="<XlyRow :gutter=&quot;20&quot;>
+  <XlyCol :span=&quot;6&quot;><div class=&quot;content&quot;></div></XlyCol>
+  <XlyCol :span=&quot;6&quot;><div class=&quot;content&quot;></div></XlyCol>
+  <XlyCol :span=&quot;6&quot;><div class=&quot;content&quot;></div></XlyCol>
+  <XlyCol :span=&quot;6&quot;><div class=&quot;content&quot;></div></XlyCol>
+</XlyRow>"
+        />
       </div>
     </section>
 
     <!-- 混合布局 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">混合布局</h2>
-      <p class="doc-section__desc">通过组合不同的 <code>span</code> 值，创建灵活的混合布局。</p>
+      <h2 class="doc-section__title">
+        混合布局
+      </h2>
+      <p class="doc-section__desc">
+        通过组合不同的 <code>span</code> 值，创建灵活的混合布局。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body doc-preview__body--column">
           <XlyRow :gutter="20">
-            <XlyCol :span="16"><div class="grid-content bg-purple"></div></XlyCol>
-            <XlyCol :span="8"><div class="grid-content bg-purple-light"></div></XlyCol>
+            <XlyCol :span="16">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
+            <XlyCol :span="8">
+              <div class="grid-content bg-purple-light" />
+            </XlyCol>
           </XlyRow>
           <XlyRow :gutter="20">
-            <XlyCol :span="8"><div class="grid-content bg-purple"></div></XlyCol>
-            <XlyCol :span="8"><div class="grid-content bg-purple-light"></div></XlyCol>
-            <XlyCol :span="4"><div class="grid-content bg-purple"></div></XlyCol>
-            <XlyCol :span="4"><div class="grid-content bg-purple-light"></div></XlyCol>
+            <XlyCol :span="8">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
+            <XlyCol :span="8">
+              <div class="grid-content bg-purple-light" />
+            </XlyCol>
+            <XlyCol :span="4">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
+            <XlyCol :span="4">
+              <div class="grid-content bg-purple-light" />
+            </XlyCol>
           </XlyRow>
           <XlyRow :gutter="20">
-            <XlyCol :span="4"><div class="grid-content bg-purple"></div></XlyCol>
-            <XlyCol :span="16"><div class="grid-content bg-purple-light"></div></XlyCol>
-            <XlyCol :span="4"><div class="grid-content bg-purple"></div></XlyCol>
+            <XlyCol :span="4">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
+            <XlyCol :span="16">
+              <div class="grid-content bg-purple-light" />
+            </XlyCol>
+            <XlyCol :span="4">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
           </XlyRow>
         </div>
-        <XlyDocCode :code='`<XlyRow :gutter="20">
-  <XlyCol :span="16"><div class="content"></div></XlyCol>
-  <XlyCol :span="8"><div class="content"></div></XlyCol>
-</XlyRow>`' />
+        <XlyDocCode
+          code="<XlyRow :gutter=&quot;20&quot;>
+  <XlyCol :span=&quot;16&quot;><div class=&quot;content&quot;></div></XlyCol>
+  <XlyCol :span=&quot;8&quot;><div class=&quot;content&quot;></div></XlyCol>
+</XlyRow>"
+        />
       </div>
     </section>
 
     <!-- 分栏偏移 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">分栏偏移</h2>
-      <p class="doc-section__desc">通过 <code>offset</code> 属性设置分栏的偏移量。</p>
+      <h2 class="doc-section__title">
+        分栏偏移
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>offset</code> 属性设置分栏的偏移量。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body doc-preview__body--column">
           <XlyRow :gutter="20">
-            <XlyCol :span="6"><div class="grid-content bg-purple"></div></XlyCol>
-            <XlyCol :span="6" :offset="6"><div class="grid-content bg-purple-light"></div></XlyCol>
+            <XlyCol :span="6">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
+            <XlyCol :span="6" :offset="6">
+              <div class="grid-content bg-purple-light" />
+            </XlyCol>
           </XlyRow>
           <XlyRow :gutter="20">
-            <XlyCol :span="6" :offset="6"><div class="grid-content bg-purple"></div></XlyCol>
-            <XlyCol :span="6" :offset="6"><div class="grid-content bg-purple-light"></div></XlyCol>
+            <XlyCol :span="6" :offset="6">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
+            <XlyCol :span="6" :offset="6">
+              <div class="grid-content bg-purple-light" />
+            </XlyCol>
           </XlyRow>
           <XlyRow :gutter="20">
-            <XlyCol :span="12" :offset="6"><div class="grid-content bg-purple"></div></XlyCol>
+            <XlyCol :span="12" :offset="6">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
           </XlyRow>
         </div>
-        <XlyDocCode :code='`<XlyRow :gutter="20">
-  <XlyCol :span="6"><div class="content"></div></XlyCol>
-  <XlyCol :span="6" :offset="6"><div class="content"></div></XlyCol>
-</XlyRow>`' />
+        <XlyDocCode
+          code="<XlyRow :gutter=&quot;20&quot;>
+  <XlyCol :span=&quot;6&quot;><div class=&quot;content&quot;></div></XlyCol>
+  <XlyCol :span=&quot;6&quot; :offset=&quot;6&quot;><div class=&quot;content&quot;></div></XlyCol>
+</XlyRow>"
+        />
       </div>
     </section>
 
     <!-- 对齐方式 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">对齐方式</h2>
-      <p class="doc-section__desc">通过 <code>justify</code> 属性设置子元素的水平排列方式。</p>
+      <h2 class="doc-section__title">
+        对齐方式
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>justify</code> 属性设置子元素的水平排列方式。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body doc-preview__body--column">
           <XlyRow justify="center" :gutter="20">
-            <XlyCol :span="6"><div class="grid-content bg-purple"></div></XlyCol>
-            <XlyCol :span="6"><div class="grid-content bg-purple-light"></div></XlyCol>
-            <XlyCol :span="6"><div class="grid-content bg-purple"></div></XlyCol>
+            <XlyCol :span="6">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
+            <XlyCol :span="6">
+              <div class="grid-content bg-purple-light" />
+            </XlyCol>
+            <XlyCol :span="6">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
           </XlyRow>
           <XlyRow justify="end" :gutter="20">
-            <XlyCol :span="6"><div class="grid-content bg-purple"></div></XlyCol>
-            <XlyCol :span="6"><div class="grid-content bg-purple-light"></div></XlyCol>
-            <XlyCol :span="6"><div class="grid-content bg-purple"></div></XlyCol>
+            <XlyCol :span="6">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
+            <XlyCol :span="6">
+              <div class="grid-content bg-purple-light" />
+            </XlyCol>
+            <XlyCol :span="6">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
           </XlyRow>
           <XlyRow justify="space-between" :gutter="20">
-            <XlyCol :span="6"><div class="grid-content bg-purple"></div></XlyCol>
-            <XlyCol :span="6"><div class="grid-content bg-purple-light"></div></XlyCol>
-            <XlyCol :span="6"><div class="grid-content bg-purple"></div></XlyCol>
+            <XlyCol :span="6">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
+            <XlyCol :span="6">
+              <div class="grid-content bg-purple-light" />
+            </XlyCol>
+            <XlyCol :span="6">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
           </XlyRow>
           <XlyRow justify="space-around" :gutter="20">
-            <XlyCol :span="6"><div class="grid-content bg-purple"></div></XlyCol>
-            <XlyCol :span="6"><div class="grid-content bg-purple-light"></div></XlyCol>
-            <XlyCol :span="6"><div class="grid-content bg-purple"></div></XlyCol>
+            <XlyCol :span="6">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
+            <XlyCol :span="6">
+              <div class="grid-content bg-purple-light" />
+            </XlyCol>
+            <XlyCol :span="6">
+              <div class="grid-content bg-purple" />
+            </XlyCol>
           </XlyRow>
         </div>
-        <XlyDocCode :code='`<XlyRow justify="center" :gutter="20">...</XlyRow>
-<XlyRow justify="end" :gutter="20">...</XlyRow>
-<XlyRow justify="space-between" :gutter="20">...</XlyRow>
-<XlyRow justify="space-around" :gutter="20">...</XlyRow>`' />
+        <XlyDocCode
+          code="<XlyRow justify=&quot;center&quot; :gutter=&quot;20&quot;>...</XlyRow>
+<XlyRow justify=&quot;end&quot; :gutter=&quot;20&quot;>...</XlyRow>
+<XlyRow justify=&quot;space-between&quot; :gutter=&quot;20&quot;>...</XlyRow>
+<XlyRow justify=&quot;space-around&quot; :gutter=&quot;20&quot;>...</XlyRow>"
+        />
       </div>
     </section>
 
     <!-- 响应式布局 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">响应式布局</h2>
-      <p class="doc-section__desc">参照 Bootstrap 的响应式设计，预设六个响应尺寸：xs、sm、md、lg、xl。</p>
+      <h2 class="doc-section__title">
+        响应式布局
+      </h2>
+      <p class="doc-section__desc">
+        参照 Bootstrap 的响应式设计，预设六个响应尺寸：xs、sm、md、lg、xl。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <XlyRow :gutter="10">
             <XlyCol :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
-              <div class="grid-content bg-purple"></div>
+              <div class="grid-content bg-purple" />
             </XlyCol>
             <XlyCol :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
-              <div class="grid-content bg-purple-light"></div>
+              <div class="grid-content bg-purple-light" />
             </XlyCol>
             <XlyCol :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
-              <div class="grid-content bg-purple"></div>
+              <div class="grid-content bg-purple" />
             </XlyCol>
             <XlyCol :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
-              <div class="grid-content bg-purple-light"></div>
+              <div class="grid-content bg-purple-light" />
             </XlyCol>
             <XlyCol :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
-              <div class="grid-content bg-purple"></div>
+              <div class="grid-content bg-purple" />
             </XlyCol>
             <XlyCol :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
-              <div class="grid-content bg-purple-light"></div>
+              <div class="grid-content bg-purple-light" />
             </XlyCol>
           </XlyRow>
         </div>
-        <XlyDocCode :code='`<XlyRow :gutter="10">
-  <XlyCol :xs="24" :sm="12" :md="8" :lg="6" :xl="4">
-    <div class="content"></div>
+        <XlyDocCode
+          code="<XlyRow :gutter=&quot;10&quot;>
+  <XlyCol :xs=&quot;24&quot; :sm=&quot;12&quot; :md=&quot;8&quot; :lg=&quot;6&quot; :xl=&quot;4&quot;>
+    <div class=&quot;content&quot;></div>
   </XlyCol>
-</XlyRow>`' />
+</XlyRow>"
+        />
       </div>
     </section>
 
     <!-- API 文档 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">API</h2>
+      <h2 class="doc-section__title">
+        API
+      </h2>
 
-      <h3 class="doc-subtitle">Row Attributes</h3>
+      <h3 class="doc-subtitle">
+        Row Attributes
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -235,7 +375,9 @@
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Col Attributes</h3>
+      <h3 class="doc-subtitle">
+        Col Attributes
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -304,67 +446,117 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import XlyRow from '@/components/xly-row/index.vue'
-import XlyCol from '@/components/xly-col/index.vue'
-</script>
-
 <style scoped lang="scss">
 .grid-doc {
   padding: 8px 0 40px;
 }
 
-.doc-header { margin-bottom: 36px; }
+.doc-header {
+  margin-bottom: 36px;
+}
 .doc-title {
-  font-size: 26px; font-weight: 700; color: var(--el-text-color-primary);
-  margin: 0 0 8px; letter-spacing: -0.3px;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  letter-spacing: -0.3px;
 }
 .doc-desc {
-  font-size: 14px; color: var(--el-text-color-secondary); margin: 0; line-height: 1.6;
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0;
+  line-height: 1.6;
 }
 
-.doc-section { margin-bottom: 32px; }
+.doc-section {
+  margin-bottom: 32px;
+}
 .doc-section__title {
-  font-size: 18px; font-weight: 600; color: var(--el-text-color-primary);
-  margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--el-border-color-lighter);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--el-border-color-lighter);
 }
 .doc-section__desc {
-  font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 16px; line-height: 1.6;
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0 0 16px;
+  line-height: 1.6;
   code {
-    background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px;
-    border-radius: 4px; font-size: 13px;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
   }
 }
 
 .doc-preview {
-  border: 1px solid var(--el-border-color-lighter); border-radius: 12px;
-  overflow: hidden; background: var(--el-bg-color-overlay);
+  border: 1px solid var(--el-border-color-lighter);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--el-bg-color-overlay);
 }
 .doc-preview__body {
-  display: flex; flex-wrap: wrap; align-items: center;
-  gap: 12px; padding: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
 }
 .doc-preview__body--column {
   flex-direction: column;
   align-items: stretch;
 }
 .doc-code {
-  border-top: 1px solid var(--el-border-color-lighter); background: var(--el-fill-color-light);
-  padding: 16px 20px; overflow-x: auto;
-  pre { margin: 0; padding: 0; }
+  border-top: 1px solid var(--el-border-color-lighter);
+  background: var(--el-fill-color-light);
+  padding: 16px 20px;
+  overflow-x: auto;
+  pre {
+    margin: 0;
+    padding: 0;
+  }
   code {
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
-    font-size: 13px; line-height: 1.7; color: var(--el-text-color-regular); white-space: pre;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--el-text-color-regular);
+    white-space: pre;
   }
 }
 
-.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
-.doc-table { overflow-x: auto;
-  table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); white-space: nowrap; }
-  th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); }
-  td { color: var(--el-text-color-regular); }
+.doc-subtitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 20px 0 10px;
+}
+.doc-table {
+  overflow-x: auto;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+    white-space: nowrap;
+  }
+  th {
+    background: var(--el-fill-color-light);
+    font-weight: 600;
+    color: var(--el-text-color-primary);
+  }
+  td {
+    color: var(--el-text-color-regular);
+  }
 }
 
 .grid-content {

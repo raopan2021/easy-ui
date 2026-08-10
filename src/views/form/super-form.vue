@@ -1,7 +1,317 @@
+<script setup lang="ts">
+import { useFormFields } from 'easy-ui'
+import { ref } from 'vue'
+
+const {
+  input,
+  textarea,
+  password,
+  select,
+  cascader,
+  datePicker,
+  dateRangePicker,
+  dateTimePicker,
+  dateTimeRangePicker,
+  timePicker,
+  timeRangePicker,
+  sw,
+  rate,
+  rules,
+  custom,
+} = useFormFields()
+
+// v-model 双向绑定
+const vmodelForm = ref()
+const vmodelData = ref({
+  name: '',
+  dept: null as number | null,
+})
+const vmodelFields = [
+  input('name', '姓名', { required: true }),
+  select('dept', '部门', {
+    required: true,
+    props: {
+      clearable: true,
+      options: [
+        { label: '技术部', value: 1 },
+        { label: '运营部', value: 2 },
+        { label: '市场部', value: 3 },
+      ],
+    },
+  }),
+]
+async function submitVmodel() {
+  const valid = await vmodelForm.value?.validate()
+  if (!valid)
+    return
+  console.log('getFormData():', vmodelForm.value?.getFormData())
+  console.log('v-model 数据:', vmodelData.value)
+}
+function resetVmodel() {
+  vmodelData.value.name = ''
+  vmodelData.value.dept = null
+}
+function fillVmodel() {
+  vmodelData.value.name = '张三'
+  vmodelData.value.dept = 1
+}
+
+// 输入类
+const inputForm = ref()
+const inputFields = [
+  input('name', '姓名', { required: true, props: { placeholder: '请输入姓名' } }),
+  input('phone', '手机号', { rules: rules.phone(), props: { placeholder: '请输入手机号' } }),
+  input('email', '邮箱', { rules: rules.email(), props: { placeholder: '请输入邮箱' } }),
+  textarea('remark', '备注', { props: { placeholder: '备注信息', rows: 3 } }),
+  password('password', '密码'),
+]
+async function submitInput() {
+  const valid = await inputForm.value?.validate()
+  if (!valid)
+    return
+  console.log(inputForm.value?.getFormData())
+}
+
+// 选择类
+const selectForm = ref()
+const selectFields = [
+  select('dept', '部门', {
+    required: true,
+    props: {
+      placeholder: '请选择部门',
+      clearable: true,
+      options: [
+        { label: '技术部', value: 1 },
+        { label: '运营部', value: 2 },
+        { label: '市场部', value: 3 },
+      ],
+    },
+  }),
+  cascader('region', '地区', {
+    props: {
+      placeholder: '请选择地区',
+      clearable: true,
+      options: [
+        { label: '北京', value: 'bj', children: [{ label: '朝阳区', value: 'cy' }] },
+        { label: '上海', value: 'sh', children: [{ label: '浦东新区', value: 'pd' }] },
+      ],
+    },
+  }),
+]
+async function submitSelect() {
+  const valid = await selectForm.value?.validate()
+  if (!valid)
+    return
+  console.log(selectForm.value?.getFormData())
+}
+
+// 日期类
+const dateForm = ref()
+const dateFields = [
+  datePicker('birthday', '生日', { props: { placeholder: '选择日期', clearable: true } }),
+  // 范围组件：prop, label, startProp, endProp, options
+  dateRangePicker('dateRange', '有效期', 'startDate', 'endDate', {
+    props: { placeholder: ['开始日期', '结束日期'], clearable: true },
+  }),
+]
+async function submitDate() {
+  const valid = await dateForm.value?.validate()
+  if (!valid)
+    return
+  console.log(dateForm.value?.getFormData())
+}
+
+// 日期时间类
+const dateTimeForm = ref()
+const dateTimeFields = [
+  dateTimePicker('startTime', '开始时间', {
+    props: { placeholder: '选择日期时间', clearable: true },
+  }),
+  // 范围组件：prop, label, startProp, endProp, options
+  dateTimeRangePicker('dateTimeRange', '施工时间', 'beginTime', 'finishTime', {
+    props: { placeholder: ['开始时间', '结束时间'], clearable: true },
+  }),
+]
+async function submitDateTime() {
+  const valid = await dateTimeForm.value?.validate()
+  if (!valid)
+    return
+  console.log(dateTimeForm.value?.getFormData())
+}
+
+// 时间类
+const timeForm = ref()
+const timeFields = [
+  timePicker('time', '时间', { props: { placeholder: '选择时间', clearable: true } }),
+  // 范围组件：prop, label, startProp, endProp, options
+  timeRangePicker('timeRange', '营业时间', 'startTime', 'endTime', {
+    props: { placeholder: ['开始时间', '结束时间'], clearable: true },
+  }),
+]
+async function submitTime() {
+  const valid = await timeForm.value?.validate()
+  if (!valid)
+    return
+  console.log(timeForm.value?.getFormData())
+}
+
+// 远程搜索
+const remoteForm = ref()
+const remoteFields = [
+  select('user', '用户', {
+    remoteMethod: async (query: string) => {
+      if (!query)
+        return []
+      // 模拟 API 调用
+      return [
+        { label: `用户 ${query}1`, value: `${query}1` },
+        { label: `用户 ${query}2`, value: `${query}2` },
+      ]
+    },
+    props: { filterable: true, remote: true, placeholder: '输入关键词搜索用户' },
+  }),
+]
+async function submitRemote() {
+  const valid = await remoteForm.value?.validate()
+  if (!valid)
+    return
+  console.log(remoteForm.value?.getFormData())
+}
+
+// 前后缀
+const prefixForm = ref()
+const prefixFields = [
+  input('domain', '域名', { props: { prefix: 'https://', suffix: '.com' } }),
+  input('price', '价格', { props: { prefix: '¥', suffix: '元' } }),
+]
+async function submitPrefix() {
+  const valid = await prefixForm.value?.validate()
+  if (!valid)
+    return
+  console.log(prefixForm.value?.getFormData())
+}
+
+// 复杂校验
+const validateForm = ref()
+const validateFields = [
+  input('name', '姓名', { required: true }),
+  input('phone', '手机号', { rules: rules.phone() }),
+  input('email', '邮箱', { rules: rules.email() }),
+  input('age', '年龄', {
+    rules: rules.range(18, 60, '年龄必须在 18-60 岁之间'),
+  }),
+  input('password', '密码', { required: true }),
+  input('confirmPwd', '确认密码', {
+    rules: [
+      rules.required('请确认密码'),
+      rules.custom((value: string, formData?: any) => {
+        if (value !== formData?.password)
+          return '两次密码不一致'
+        return true
+      }),
+    ],
+  }),
+  input('username', '用户名', {
+    rules: [
+      rules.required(),
+      rules.custom(async (value: string) => {
+        await new Promise(r => setTimeout(r, 500))
+        if (['admin', 'root'].includes(value))
+          return '用户名已存在'
+        return true
+      }, '用户名已被注册'),
+    ],
+  }),
+]
+async function submitValidate() {
+  const valid = await validateForm.value?.validate()
+  if (!valid)
+    return
+  console.log(validateForm.value?.getFormData())
+}
+
+// 自定义组件
+const customForm = ref()
+const customFields = [
+  input('name', '姓名', { required: true }),
+  // custom(prop, component, label, options)
+  // 使用自定义 Vue 组件，组件需支持 v-model
+  custom('addr', ElInput, '地址', { props: { placeholder: '请输入地址' } }),
+]
+async function submitCustom() {
+  const valid = await customForm.value?.validate()
+  if (!valid)
+    return
+  console.log(customForm.value?.getFormData())
+}
+
+// 特殊组件
+const swForm = ref()
+const swFields = [
+  sw('enabled', '启用', { props: { activeText: '是', inactiveText: '否' } }),
+  rate('rating', '评分', { required: true }),
+]
+async function submitSw() {
+  const valid = await swForm.value?.validate()
+  if (!valid)
+    return
+  console.log(swForm.value?.getFormData())
+}
+
+// 栅格布局
+const spanFields = [
+  input('name', '姓名', { span: 12 }),
+  input('phone', '手机号', { span: 12 }),
+  textarea('remark', '备注', { span: 24, props: { rows: 2 } }),
+]
+
+// 链式调用
+const chainForm = ref()
+const chainFields = [
+  input('name').$required(),
+  input('phone').$required().$rule(rules.phone()),
+  input('email').$rule(rules.email()),
+  select('dept')
+    .$required()
+    .$options([
+      { label: '技术部', value: 1 },
+      { label: '运营部', value: 2 },
+    ]),
+  sw('enabled').$required(),
+]
+async function submitChain() {
+  const valid = await chainForm.value?.validate()
+  if (!valid)
+    return
+  console.log(chainForm.value?.getFormData())
+}
+
+// 完整示例
+const fullForm = ref()
+const fullFields = [
+  input('name', '姓名', { required: true }),
+  input('phone', '手机号', { rules: rules.phone() }),
+  select('dept', '部门', { options: [{ label: '技术部', value: 1 }] }),
+  datePicker('birthday', '生日'),
+  dateRangePicker('dateRange', '有效期', 'startDate', 'endDate'),
+  sw('enabled', '启用'),
+  rate('rating', '评分'),
+  textarea('remark', '备注', { span: 24 }),
+]
+async function submitFull() {
+  const valid = await fullForm.value?.validate()
+  if (!valid)
+    return
+  console.log(fullForm.value?.getFormData())
+}
+</script>
+
 <template>
   <div class="component-doc">
     <header class="doc-header">
-      <h1 class="doc-title">Super Form 快速表单</h1>
+      <h1 class="doc-title">
+        Super Form 快速表单
+      </h1>
       <p class="doc-desc">
         配置驱动的表单组件。通过 <code>fields</code> 配置字段，组件自动渲染、支持校验。 支持
         <code>useFormFields</code> 生成器简化配置。
@@ -10,18 +320,23 @@
 
     <!-- 输入类组件 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">输入类组件</h2>
+      <h2 class="doc-section__title">
+        输入类组件
+      </h2>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 500px">
             <XlySuperForm ref="inputForm" :fields="inputFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitInput">提交</XlyButton>
+            <XlyButton type="primary" @click="submitInput">
+              提交
+            </XlyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode
+        code="import {  useFormFields  } from 'easy-ui'
 
 const { input, textarea, password, rules } = useFormFields()
 
@@ -31,23 +346,29 @@ const fields = [
   input('email', '邮箱', { rules: rules.email() }),
   textarea('remark', '备注', { props: { rows: 3 } }),
   password('password', '密码'),
-]`" />
+]"
+      />
     </section>
 
     <!-- 选择类组件 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">选择类组件</h2>
+      <h2 class="doc-section__title">
+        选择类组件
+      </h2>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 400px">
             <XlySuperForm ref="selectForm" :fields="selectFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitSelect">提交</XlyButton>
+            <XlyButton type="primary" @click="submitSelect">
+              提交
+            </XlyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode
+        code="import {  useFormFields  } from 'easy-ui'
 
 const { select, cascader } = useFormFields()
 
@@ -76,23 +397,29 @@ const fields = [
       ]
     }
   }),
-]`" />
+]"
+      />
     </section>
 
     <!-- 日期类组件 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">日期类组件</h2>
+      <h2 class="doc-section__title">
+        日期类组件
+      </h2>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 500px">
             <XlySuperForm ref="dateForm" :fields="dateFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitDate">提交</XlyButton>
+            <XlyButton type="primary" @click="submitDate">
+              提交
+            </XlyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode
+        code="import {  useFormFields  } from 'easy-ui'
 
 const { datePicker, dateRangePicker } = useFormFields()
 
@@ -106,23 +433,29 @@ const fields = [
   dateRangePicker('dateRange', '有效期', 'startDate', 'endDate', {
     props: { clearable: true }
   }),
-]`" />
+]"
+      />
     </section>
 
     <!-- 日期时间类组件 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">日期时间类组件</h2>
+      <h2 class="doc-section__title">
+        日期时间类组件
+      </h2>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 500px">
             <XlySuperForm ref="dateTimeForm" :fields="dateTimeFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitDateTime">提交</XlyButton>
+            <XlyButton type="primary" @click="submitDateTime">
+              提交
+            </XlyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode
+        code="import {  useFormFields  } from 'easy-ui'
 
 const { dateTimePicker, dateTimeRangePicker } = useFormFields()
 
@@ -132,23 +465,29 @@ const fields = [
   dateTimeRangePicker('dateTimeRange', '施工时间', 'beginTime', 'finishTime', {
     props: { clearable: true }
   }),
-]`" />
+]"
+      />
     </section>
 
     <!-- 时间类组件 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">时间类组件</h2>
+      <h2 class="doc-section__title">
+        时间类组件
+      </h2>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 500px">
             <XlySuperForm ref="timeForm" :fields="timeFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitTime">提交</XlyButton>
+            <XlyButton type="primary" @click="submitTime">
+              提交
+            </XlyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode
+        code="import {  useFormFields  } from 'easy-ui'
 
 const { timePicker, timeRangePicker } = useFormFields()
 
@@ -158,23 +497,29 @@ const fields = [
   timeRangePicker('timeRange', '营业时间', 'startTime', 'endTime', {
     props: { clearable: true }
   }),
-]`" />
+]"
+      />
     </section>
 
     <!-- 远程搜索 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">远程搜索</h2>
+      <h2 class="doc-section__title">
+        远程搜索
+      </h2>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 400px">
             <XlySuperForm ref="remoteForm" :fields="remoteFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitRemote">提交</XlyButton>
+            <XlyButton type="primary" @click="submitRemote">
+              提交
+            </XlyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode
+        code="import {  useFormFields  } from 'easy-ui'
 
 const { select } = useFormFields()
 
@@ -183,8 +528,8 @@ async function searchUser(query: string) {
   if (!query) return []
   // 模拟 API 调用
   return [
-    { label: \`用户 \${query}1\`, value: query + '1' },
-    { label: \`用户 \${query}2\`, value: query + '2' },
+    { label: `用户 ${query}1`, value: query + '1' },
+    { label: `用户 ${query}2`, value: query + '2' },
   ]
 }
 
@@ -193,23 +538,29 @@ const fields = [
     remoteMethod: searchUser,
     props: { filterable: true, remote: true, placeholder: '输入关键词搜索用户' }
   }),
-]`" />
+]"
+      />
     </section>
 
     <!-- 前后缀 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">前后缀</h2>
+      <h2 class="doc-section__title">
+        前后缀
+      </h2>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 400px">
             <XlySuperForm ref="prefixForm" :fields="prefixFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitPrefix">提交</XlyButton>
+            <XlyButton type="primary" @click="submitPrefix">
+              提交
+            </XlyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode
+        code="import {  useFormFields  } from 'easy-ui'
 
 const { inputSlot } = useFormFields()
 
@@ -217,23 +568,29 @@ const { inputSlot } = useFormFields()
 const fields = [
   input('domain', '域名', { props: { prefix: 'https://', suffix: '.com' } }),
   input('price', '价格', { props: { prefix: '¥', suffix: '元' } }),
-]`" />
+]"
+      />
     </section>
 
     <!-- 复杂校验 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">复杂校验</h2>
+      <h2 class="doc-section__title">
+        复杂校验
+      </h2>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 500px">
             <XlySuperForm ref="validateForm" :fields="validateFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitValidate">提交</XlyButton>
+            <XlyButton type="primary" @click="submitValidate">
+              提交
+            </XlyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode
+        code="import {  useFormFields  } from 'easy-ui'
 
 const { input, rules } = useFormFields()
 
@@ -267,23 +624,29 @@ const fields = [
       }, '用户名已被注册')
     ]
   }),
-]`" />
+]"
+      />
     </section>
 
     <!-- 自定义组件 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义组件</h2>
+      <h2 class="doc-section__title">
+        自定义组件
+      </h2>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 400px">
             <XlySuperForm ref="customForm" :fields="customFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitCustom">提交</XlyButton>
+            <XlyButton type="primary" @click="submitCustom">
+              提交
+            </XlyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode
+        code="import {  useFormFields  } from 'easy-ui'
 import { ElInput } from 'element-plus'
 const { custom } = useFormFields()
 
@@ -294,23 +657,29 @@ const fields = [
   custom('addr', ElInput, '地址', { props: { placeholder: '请输入地址' } })
 ]
 
-        `" />
+        "
+      />
     </section>
 
     <!-- 特殊组件 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">特殊组件</h2>
+      <h2 class="doc-section__title">
+        特殊组件
+      </h2>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 400px">
             <XlySuperForm ref="swForm" :fields="swFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitSw">提交</XlyButton>
+            <XlyButton type="primary" @click="submitSw">
+              提交
+            </XlyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode
+        code="import {  useFormFields  } from 'easy-ui'
 
 const { sw, rate } = useFormFields()
 
@@ -321,18 +690,22 @@ const fields = [
   }),
   // 评分
   rate('rating', '评分', { required: true }),
-]`" />
+]"
+      />
     </section>
 
     <!-- 栅格布局 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">栅格布局</h2>
+      <h2 class="doc-section__title">
+        栅格布局
+      </h2>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <XlySuperForm :fields="spanFields" />
         </div>
       </div>
-      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode
+        code="import {  useFormFields  } from 'easy-ui'
 
 const { input } = useFormFields()
 
@@ -341,23 +714,29 @@ const fields = [
   input('name', '姓名', { span: 12 }),
   input('phone', '手机号', { span: 12 }),
   input('remark', '备注', { span: 24 }),  // 占整行
-]`" />
+]"
+      />
     </section>
 
     <!-- 链式调用 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">链式调用</h2>
+      <h2 class="doc-section__title">
+        链式调用
+      </h2>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%; max-width: 400px">
             <XlySuperForm ref="chainForm" :fields="chainFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitChain">提交</XlyButton>
+            <XlyButton type="primary" @click="submitChain">
+              提交
+            </XlyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode
+        code="import {  useFormFields  } from 'easy-ui'
 
 const { input, select, sw, rules } = useFormFields()
 
@@ -370,23 +749,29 @@ const fields = [
     { label: '运营部', value: 2 },
   ]),
   sw('enabled').$required(),
-]`" />
+]"
+      />
     </section>
 
     <!-- 完整示例 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">完整示例</h2>
+      <h2 class="doc-section__title">
+        完整示例
+      </h2>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
           <div style="width: 100%">
             <XlySuperForm ref="fullForm" :fields="fullFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitFull">提交</XlyButton>
+            <XlyButton type="primary" @click="submitFull">
+              提交
+            </XlyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode
+        code="import {  useFormFields  } from 'easy-ui'
 
 const {
   input, textarea, select,
@@ -409,12 +794,15 @@ async function submitFull() {
   const valid = await fullForm.value?.validate()
   if (!valid) return
   console.log(fullForm.value?.getFormData())
-}`" />
+}"
+      />
     </section>
 
     <!-- v-model 双向绑定 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">v-model 双向绑定</h2>
+      <h2 class="doc-section__title">
+        v-model 双向绑定
+      </h2>
       <p class="doc-desc">
         支持通过 <code>v-model</code> 绑定外部数据对象，实现表单数据的双向同步。 使用
         <code>getFormData()</code> 方法获取表单数据。
@@ -425,14 +813,27 @@ async function submitFull() {
             <XlySuperForm ref="vmodelForm" v-model="vmodelData" :fields="vmodelFields" />
           </div>
           <div style="margin-top: 16px">
-            <XlyButton type="primary" @click="submitVmodel">提交</XlyButton>
-            <XlyButton style="margin-left: 8px" @click="resetVmodel">重置</XlyButton>
-            <XlyButton style="margin-left: 8px" @click="fillVmodel">填充初始值</XlyButton>
+            <XlyButton type="primary" @click="submitVmodel">
+              提交
+            </XlyButton>
+            <XlyButton style="margin-left: 8px" @click="resetVmodel">
+              重置
+            </XlyButton>
+            <XlyButton style="margin-left: 8px" @click="fillVmodel">
+              填充初始值
+            </XlyButton>
           </div>
         </div>
       </div>
-      <XlyDocCode :code="`import { ref } from 'vue'
-import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <XlyDocCode
+        code="import { ref } from 'vue'
+import {
+  MyCustomInput,
+  useFormFields,
+  XlyButton,
+  XlyNumber,
+  XlySuperForm,
+} from 'easy-ui'
 
 const { input, select, rules } = useFormFields()
 
@@ -475,18 +876,24 @@ function fillData() {
 // 重置
 function reset() {
   formData.value = { name: '', dept: null }
-}`" />
+}"
+      />
     </section>
 
     <!-- 扩展组件支持 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">扩展组件支持</h2>
+      <h2 class="doc-section__title">
+        扩展组件支持
+      </h2>
       <p class="doc-desc">
         通过添加 <code>typeMap</code> 映射，可以像内置组件一样使用自定义组件。
       </p>
 
-      <h3 class="doc-subtitle">步骤一：在 useFormFields.ts 中添加字段生成函数</h3>
-      <XlyDocCode :code="`// 假设我们要添加一个 XlyNumber 数字输入框组件
+      <h3 class="doc-subtitle">
+        步骤一：在 useFormFields.ts 中添加字段生成函数
+      </h3>
+      <XlyDocCode
+        code="// 假设我们要添加一个 XlyNumber 数字输入框组件
 
 // 在 useFormFields() 函数中添加：
 function number(prop: string, labelOrOptions?: string | FieldOptions, options?: FieldOptions) {
@@ -501,11 +908,14 @@ return {
   // ... 其他
   number,  // 👈 添加这行
   // ...
-}`" />
+}"
+      />
 
-      <h3 class="doc-subtitle">步骤二：在 index.vue 中注册组件</h3>
-      <XlyDocCode :code="`// 1. 导入组件
-import XlyNumber from '@/components/xly-number/index.vue'
+      <h3 class="doc-subtitle">
+        步骤二：在 index.vue 中注册组件
+      </h3>
+      <XlyDocCode
+        code="// 1. 导入组件
 
 // 2. 在 typeMap 中添加映射
 const typeMap: Record<string, Component> = {
@@ -522,24 +932,31 @@ const typeMap: Record<string, Component> = {
   :deep(.xly-number__wrapper) {  // 👈 添加新组件的选择器
     box-shadow: 0 0 0 1px #f56c6c inset;
   }
-}`" />
+}"
+      />
 
-      <h3 class="doc-subtitle">步骤三：使用新组件</h3>
-      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
+      <h3 class="doc-subtitle">
+        步骤三：使用新组件
+      </h3>
+      <XlyDocCode
+        code="import {  useFormFields  } from 'easy-ui'
 
 const { number } = useFormFields()
 
 const fields = [
   number('price', '价格', { required: true }),
   number('quantity', '数量', { props: { min: 1, max: 100 } }),
-]`" />
+]"
+      />
 
-      <h3 class="doc-subtitle">添加自定义组件（通过 component 属性）</h3>
+      <h3 class="doc-subtitle">
+        添加自定义组件（通过 component 属性）
+      </h3>
       <p class="doc-desc">
         如果你只是想偶尔使用某个自定义组件，不需要修改源码，可以使用 <code>custom()</code> 生成器：
       </p>
-      <XlyDocCode :code="`import { useFormFields } from '@/components/xly-super-form/useFormFields'
-import MyCustomInput from '@/components/my-custom-input/index.vue'
+      <XlyDocCode
+        code="import {  useFormFields  } from 'easy-ui'
 
 const { custom } = useFormFields()
 
@@ -548,9 +965,12 @@ const fields = [
   custom('content', MyCustomInput, '自定义内容', {
     props: { placeholder: '请输入' }
   }),
-]`" />
+]"
+      />
 
-      <h3 class="doc-subtitle">注意事项</h3>
+      <h3 class="doc-subtitle">
+        注意事项
+      </h3>
       <ul class="doc-list">
         <li>新组件必须支持 <code>v-model</code> 双向绑定</li>
         <li>组件需要处理 <code>v-bind</code> 传递的属性（如 <code>placeholder</code>、<code>disabled</code> 等）</li>
@@ -561,7 +981,9 @@ const fields = [
 
     <!-- Props 说明 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">Props 说明</h2>
+      <h2 class="doc-section__title">
+        Props 说明
+      </h2>
       <table class="doc-table">
         <thead>
           <tr>
@@ -599,7 +1021,9 @@ const fields = [
         </tbody>
       </table>
 
-      <h3 class="doc-subtitle">Field 属性</h3>
+      <h3 class="doc-subtitle">
+        Field 属性
+      </h3>
       <table class="doc-table">
         <thead>
           <tr>
@@ -691,7 +1115,9 @@ const fields = [
         </tbody>
       </table>
 
-      <h3 class="doc-subtitle">支持的组件类型</h3>
+      <h3 class="doc-subtitle">
+        支持的组件类型
+      </h3>
       <table class="doc-table">
         <thead>
           <tr>
@@ -882,298 +1308,3 @@ const fields = [
   }
 }
 </style>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import XlySuperForm from '@/components/xly-super-form/index.vue'
-import XlyButton from '@/components/xly-button/index.vue'
-import { useFormFields } from '@/components/xly-super-form/useFormFields'
-import { ElInput } from 'element-plus'
-
-const {
-  input,
-  textarea,
-  password,
-  select,
-  cascader,
-  datePicker,
-  dateRangePicker,
-  dateTimePicker,
-  dateTimeRangePicker,
-  timePicker,
-  timeRangePicker,
-  sw,
-  rate,
-  rules,
-  custom,
-} = useFormFields()
-
-// v-model 双向绑定
-const vmodelForm = ref()
-const vmodelData = ref({
-  name: '',
-  dept: null as number | null,
-})
-const vmodelFields = [
-  input('name', '姓名', { required: true }),
-  select('dept', '部门', {
-    required: true,
-    props: {
-      clearable: true,
-      options: [
-        { label: '技术部', value: 1 },
-        { label: '运营部', value: 2 },
-        { label: '市场部', value: 3 },
-      ],
-    },
-  }),
-]
-async function submitVmodel() {
-  const valid = await vmodelForm.value?.validate()
-  if (!valid) return
-  console.log('getFormData():', vmodelForm.value?.getFormData())
-  console.log('v-model 数据:', vmodelData.value)
-}
-function resetVmodel() {
-  vmodelData.value.name = ''
-  vmodelData.value.dept = null
-}
-function fillVmodel() {
-  vmodelData.value.name = '张三'
-  vmodelData.value.dept = 1
-}
-
-// 输入类
-const inputForm = ref()
-const inputFields = [
-  input('name', '姓名', { required: true, props: { placeholder: '请输入姓名' } }),
-  input('phone', '手机号', { rules: rules.phone(), props: { placeholder: '请输入手机号' } }),
-  input('email', '邮箱', { rules: rules.email(), props: { placeholder: '请输入邮箱' } }),
-  textarea('remark', '备注', { props: { placeholder: '备注信息', rows: 3 } }),
-  password('password', '密码'),
-]
-async function submitInput() {
-  const valid = await inputForm.value?.validate()
-  if (!valid) return
-  console.log(inputForm.value?.getFormData())
-}
-
-// 选择类
-const selectForm = ref()
-const selectFields = [
-  select('dept', '部门', {
-    required: true,
-    props: {
-      placeholder: '请选择部门',
-      clearable: true,
-      options: [
-        { label: '技术部', value: 1 },
-        { label: '运营部', value: 2 },
-        { label: '市场部', value: 3 },
-      ],
-    },
-  }),
-  cascader('region', '地区', {
-    props: {
-      placeholder: '请选择地区',
-      clearable: true,
-      options: [
-        { label: '北京', value: 'bj', children: [{ label: '朝阳区', value: 'cy' }] },
-        { label: '上海', value: 'sh', children: [{ label: '浦东新区', value: 'pd' }] },
-      ],
-    },
-  }),
-]
-async function submitSelect() {
-  const valid = await selectForm.value?.validate()
-  if (!valid) return
-  console.log(selectForm.value?.getFormData())
-}
-
-// 日期类
-const dateForm = ref()
-const dateFields = [
-  datePicker('birthday', '生日', { props: { placeholder: '选择日期', clearable: true } }),
-  // 范围组件：prop, label, startProp, endProp, options
-  dateRangePicker('dateRange', '有效期', 'startDate', 'endDate', {
-    props: { placeholder: ['开始日期', '结束日期'], clearable: true },
-  }),
-]
-async function submitDate() {
-  const valid = await dateForm.value?.validate()
-  if (!valid) return
-  console.log(dateForm.value?.getFormData())
-}
-
-// 日期时间类
-const dateTimeForm = ref()
-const dateTimeFields = [
-  dateTimePicker('startTime', '开始时间', {
-    props: { placeholder: '选择日期时间', clearable: true },
-  }),
-  // 范围组件：prop, label, startProp, endProp, options
-  dateTimeRangePicker('dateTimeRange', '施工时间', 'beginTime', 'finishTime', {
-    props: { placeholder: ['开始时间', '结束时间'], clearable: true },
-  }),
-]
-async function submitDateTime() {
-  const valid = await dateTimeForm.value?.validate()
-  if (!valid) return
-  console.log(dateTimeForm.value?.getFormData())
-}
-
-// 时间类
-const timeForm = ref()
-const timeFields = [
-  timePicker('time', '时间', { props: { placeholder: '选择时间', clearable: true } }),
-  // 范围组件：prop, label, startProp, endProp, options
-  timeRangePicker('timeRange', '营业时间', 'startTime', 'endTime', {
-    props: { placeholder: ['开始时间', '结束时间'], clearable: true },
-  }),
-]
-async function submitTime() {
-  const valid = await timeForm.value?.validate()
-  if (!valid) return
-  console.log(timeForm.value?.getFormData())
-}
-
-// 远程搜索
-const remoteForm = ref()
-const remoteFields = [
-  select('user', '用户', {
-    remoteMethod: async (query: string) => {
-      if (!query) return []
-      // 模拟 API 调用
-      return [
-        { label: `用户 ${query}1`, value: query + '1' },
-        { label: `用户 ${query}2`, value: query + '2' },
-      ]
-    },
-    props: { filterable: true, remote: true, placeholder: '输入关键词搜索用户' },
-  }),
-]
-async function submitRemote() {
-  const valid = await remoteForm.value?.validate()
-  if (!valid) return
-  console.log(remoteForm.value?.getFormData())
-}
-
-// 前后缀
-const prefixForm = ref()
-const prefixFields = [
-  input('domain', '域名', { props: { prefix: 'https://', suffix: '.com' } }),
-  input('price', '价格', { props: { prefix: '¥', suffix: '元' } }),
-]
-async function submitPrefix() {
-  const valid = await prefixForm.value?.validate()
-  if (!valid) return
-  console.log(prefixForm.value?.getFormData())
-}
-
-// 复杂校验
-const validateForm = ref()
-const validateFields = [
-  input('name', '姓名', { required: true }),
-  input('phone', '手机号', { rules: rules.phone() }),
-  input('email', '邮箱', { rules: rules.email() }),
-  input('age', '年龄', {
-    rules: rules.range(18, 60, '年龄必须在 18-60 岁之间'),
-  }),
-  input('password', '密码', { required: true }),
-  input('confirmPwd', '确认密码', {
-    rules: [
-      rules.required('请确认密码'),
-      rules.custom((value: string, formData?: any) => {
-        if (value !== formData?.password) return '两次密码不一致'
-        return true
-      }),
-    ],
-  }),
-  input('username', '用户名', {
-    rules: [
-      rules.required(),
-      rules.custom(async (value: string) => {
-        await new Promise((r) => setTimeout(r, 500))
-        if (['admin', 'root'].includes(value)) return '用户名已存在'
-        return true
-      }, '用户名已被注册'),
-    ],
-  }),
-]
-async function submitValidate() {
-  const valid = await validateForm.value?.validate()
-  if (!valid) return
-  console.log(validateForm.value?.getFormData())
-}
-
-// 自定义组件
-const customForm = ref()
-const customFields = [
-  input('name', '姓名', { required: true }),
-  // custom(prop, component, label, options)
-  // 使用自定义 Vue 组件，组件需支持 v-model
-  custom('addr', ElInput, '地址', { props: { placeholder: '请输入地址' } }),
-]
-async function submitCustom() {
-  const valid = await customForm.value?.validate()
-  if (!valid) return
-  console.log(customForm.value?.getFormData())
-}
-
-// 特殊组件
-const swForm = ref()
-const swFields = [
-  sw('enabled', '启用', { props: { activeText: '是', inactiveText: '否' } }),
-  rate('rating', '评分', { required: true }),
-]
-async function submitSw() {
-  const valid = await swForm.value?.validate()
-  if (!valid) return
-  console.log(swForm.value?.getFormData())
-}
-
-// 栅格布局
-const spanFields = [
-  input('name', '姓名', { span: 12 }),
-  input('phone', '手机号', { span: 12 }),
-  textarea('remark', '备注', { span: 24, props: { rows: 2 } }),
-]
-
-// 链式调用
-const chainForm = ref()
-const chainFields = [
-  input('name').$required(),
-  input('phone').$required().$rule(rules.phone()),
-  input('email').$rule(rules.email()),
-  select('dept')
-    .$required()
-    .$options([
-      { label: '技术部', value: 1 },
-      { label: '运营部', value: 2 },
-    ]),
-  sw('enabled').$required(),
-]
-async function submitChain() {
-  const valid = await chainForm.value?.validate()
-  if (!valid) return
-  console.log(chainForm.value?.getFormData())
-}
-
-// 完整示例
-const fullForm = ref()
-const fullFields = [
-  input('name', '姓名', { required: true }),
-  input('phone', '手机号', { rules: rules.phone() }),
-  select('dept', '部门', { options: [{ label: '技术部', value: 1 }] }),
-  datePicker('birthday', '生日'),
-  dateRangePicker('dateRange', '有效期', 'startDate', 'endDate'),
-  sw('enabled', '启用'),
-  rate('rating', '评分'),
-  textarea('remark', '备注', { span: 24 }),
-]
-async function submitFull() {
-  const valid = await fullForm.value?.validate()
-  if (!valid) return
-  console.log(fullForm.value?.getFormData())
-}
-</script>

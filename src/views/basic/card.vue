@@ -1,20 +1,34 @@
+<script setup lang="ts">
+import { XlyButton, XlyCard, XlyIcon } from 'easy-ui'
+</script>
+
 <template>
   <div class="card-doc">
     <!-- 页面标题 -->
     <div class="doc-header">
-      <h1 class="doc-title">Card 卡片</h1>
-      <p class="doc-desc">简洁现代的卡片组件，用于组织和展示内容区块，支持头部、内容区、底部的灵活结构。</p>
+      <h1 class="doc-title">
+        Card 卡片
+      </h1>
+      <p class="doc-desc">
+        简洁现代的卡片组件，用于组织和展示内容区块，支持头部、内容区、底部的灵活结构。
+      </p>
     </div>
 
     <!-- Card 基础用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">Card 基础用法</h2>
-      <p class="doc-section__desc">包含头部、内容区和底部的卡片结构。</p>
+      <h2 class="doc-section__title">
+        Card 基础用法
+      </h2>
+      <p class="doc-section__desc">
+        包含头部、内容区和底部的卡片结构。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard style="width: 380px;">
+          <XlyCard style="width: 380px">
             <template #header>
-              <div class="header-title">项目详情</div>
+              <div class="header-title">
+                项目详情
+              </div>
             </template>
             <p class="base-text">
               这是一个基于 Vue 3 + TypeScript 构建的管理系统，提供了丰富的企业级 UI 组件库，支持快速开发。
@@ -31,35 +45,45 @@
             </div>
             <template #footer>
               <div class="footer-actions">
-                <XlyButton type="primary" size="small">确认</XlyButton>
-                <XlyButton size="small">取消</XlyButton>
+                <XlyButton type="primary" size="small">
+                  确认
+                </XlyButton>
+                <XlyButton size="small">
+                  取消
+                </XlyButton>
               </div>
             </template>
           </XlyCard>
         </div>
-        <XlyDocCode :code='`<XlyCard>
+        <XlyDocCode
+          code="<XlyCard>
   <template #header>
-    <div class="header-title">项目详情</div>
+    <div class=&quot;header-title&quot;>项目详情</div>
   </template>
   <p>卡片内容...</p>
   <template #footer>
-    <div class="footer-actions">
-      <XlyButton type="primary" size="small">确认</XlyButton>
-      <XlyButton size="small">取消</XlyButton>
+    <div class=&quot;footer-actions&quot;>
+      <XlyButton type=&quot;primary&quot; size=&quot;small&quot;>确认</XlyButton>
+      <XlyButton size=&quot;small&quot;>取消</XlyButton>
     </div>
   </template>
-</XlyCard>`' />
+</XlyCard>"
+        />
       </div>
     </section>
 
     <!-- Card 带标题的卡片 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">Card 带标题的卡片</h2>
-      <p class="doc-section__desc">使用 <code>title</code> 属性快速设置标题，或使用 <code>icon</code> 添加图标。</p>
+      <h2 class="doc-section__title">
+        Card 带标题的卡片
+      </h2>
+      <p class="doc-section__desc">
+        使用 <code>title</code> 属性快速设置标题，或使用 <code>icon</code> 添加图标。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="grid-2">
-            <XlyCard title="基本信息" style="width: 260px;">
+            <XlyCard title="基本信息" style="width: 260px">
               <div class="info-list">
                 <div class="info-row">
                   <span class="label">姓名</span>
@@ -79,7 +103,7 @@
                 </div>
               </div>
             </XlyCard>
-            <XlyCard title="联系方式" icon="el:Message" style="width: 260px;">
+            <XlyCard title="联系方式" icon="el:Message" style="width: 260px">
               <div class="info-list">
                 <div class="info-row">
                   <span class="label">手机</span>
@@ -97,69 +121,99 @@
             </XlyCard>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyCard title="基本信息">
+        <XlyDocCode
+          code="<XlyCard title=&quot;基本信息&quot;>
   <div>内容...</div>
 </XlyCard>
 
-<XlyCard title="联系方式" icon="el:Message">
+<XlyCard title=&quot;联系方式&quot; icon=&quot;el:Message&quot;>
   <div>内容...</div>
-</XlyCard>`' />
+</XlyCard>"
+        />
       </div>
     </section>
 
     <!-- Card 阴影效果 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">Card 阴影效果</h2>
-      <p class="doc-section__desc">通过 <code>shadow</code> 属性设置阴影显示时机。</p>
+      <h2 class="doc-section__title">
+        Card 阴影效果
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>shadow</code> 属性设置阴影显示时机。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="grid-3">
-            <XlyCard title="始终显示" shadow="always" style="width: 160px;">
-              <div class="demo-text">默认带阴影</div>
+            <XlyCard title="始终显示" shadow="always" style="width: 160px">
+              <div class="demo-text">
+                默认带阴影
+              </div>
             </XlyCard>
-            <XlyCard title="悬浮显示" shadow="hover" style="width: 160px;">
-              <div class="demo-text">悬浮时显示</div>
+            <XlyCard title="悬浮显示" shadow="hover" style="width: 160px">
+              <div class="demo-text">
+                悬浮时显示
+              </div>
             </XlyCard>
-            <XlyCard title="无阴影" shadow="never" style="width: 160px;">
-              <div class="demo-text">始终无阴影</div>
+            <XlyCard title="无阴影" shadow="never" style="width: 160px">
+              <div class="demo-text">
+                始终无阴影
+              </div>
             </XlyCard>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyCard shadow="always">...</XlyCard>
-<XlyCard shadow="hover">...</XlyCard>
-<XlyCard shadow="never">...</XlyCard>`' />
+        <XlyDocCode
+          code="<XlyCard shadow=&quot;always&quot;>...</XlyCard>
+<XlyCard shadow=&quot;hover&quot;>...</XlyCard>
+<XlyCard shadow=&quot;never&quot;>...</XlyCard>"
+        />
       </div>
     </section>
 
     <!-- Card 悬浮效果 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">Card 悬浮效果</h2>
-      <p class="doc-section__desc">使用 <code>hoverable</code> 属性使卡片可交互。</p>
+      <h2 class="doc-section__title">
+        Card 悬浮效果
+      </h2>
+      <p class="doc-section__desc">
+        使用 <code>hoverable</code> 属性使卡片可交互。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="grid-3">
-            <XlyCard hoverable title="用户管理" style="width: 160px;">
-              <div class="demo-text">点击查看详情</div>
+            <XlyCard hoverable title="用户管理" style="width: 160px">
+              <div class="demo-text">
+                点击查看详情
+              </div>
             </XlyCard>
-            <XlyCard hoverable title="订单管理" style="width: 160px;">
-              <div class="demo-text">点击查看详情</div>
+            <XlyCard hoverable title="订单管理" style="width: 160px">
+              <div class="demo-text">
+                点击查看详情
+              </div>
             </XlyCard>
-            <XlyCard hoverable title="系统设置" style="width: 160px;">
-              <div class="demo-text">点击查看详情</div>
+            <XlyCard hoverable title="系统设置" style="width: 160px">
+              <div class="demo-text">
+                点击查看详情
+              </div>
             </XlyCard>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyCard hoverable title="用户管理">
+        <XlyDocCode
+          code="<XlyCard hoverable title=&quot;用户管理&quot;>
   <div>点击查看详情</div>
-</XlyCard>`' />
+</XlyCard>"
+        />
       </div>
     </section>
 
     <!-- Card 业务场景 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">Card 业务场景</h2>
+      <h2 class="doc-section__title">
+        Card 业务场景
+      </h2>
 
-      <h3 class="doc-subtitle">数据统计</h3>
+      <h3 class="doc-subtitle">
+        数据统计
+      </h3>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="stat-grid">
@@ -169,8 +223,12 @@
                   <span class="stat-label">总用户数</span>
                   <span class="trend up">↑ 12.5%</span>
                 </div>
-                <div class="stat-value">12,846</div>
-                <div class="stat-bottom">较上月</div>
+                <div class="stat-value">
+                  12,846
+                </div>
+                <div class="stat-bottom">
+                  较上月
+                </div>
               </div>
             </XlyCard>
             <XlyCard class="stat-card">
@@ -179,8 +237,12 @@
                   <span class="stat-label">今日订单</span>
                   <span class="trend up">↑ 8.2%</span>
                 </div>
-                <div class="stat-value">358</div>
-                <div class="stat-bottom">较昨日</div>
+                <div class="stat-value">
+                  358
+                </div>
+                <div class="stat-bottom">
+                  较昨日
+                </div>
               </div>
             </XlyCard>
             <XlyCard class="stat-card">
@@ -189,8 +251,12 @@
                   <span class="stat-label">本月收入</span>
                   <span class="trend down">↓ 3.1%</span>
                 </div>
-                <div class="stat-value">¥89,230</div>
-                <div class="stat-bottom">较上月</div>
+                <div class="stat-value">
+                  ¥89,230
+                </div>
+                <div class="stat-bottom">
+                  较上月
+                </div>
               </div>
             </XlyCard>
             <XlyCard class="stat-card">
@@ -198,18 +264,24 @@
                 <div class="stat-top">
                   <span class="stat-label">待处理事项</span>
                 </div>
-                <div class="stat-value">24</div>
-                <div class="stat-bottom">本周</div>
+                <div class="stat-value">
+                  24
+                </div>
+                <div class="stat-bottom">
+                  本周
+                </div>
               </div>
             </XlyCard>
           </div>
         </div>
       </div>
 
-      <h3 class="doc-subtitle">任务列表</h3>
+      <h3 class="doc-subtitle">
+        任务列表
+      </h3>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard style="width: 100%; max-width: 520px;">
+          <XlyCard style="width: 100%; max-width: 520px">
             <template #header>
               <div class="task-header">
                 <span class="header-title">我的任务</span>
@@ -240,23 +312,33 @@
 
     <!-- Card 禁用状态 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">Card 禁用状态</h2>
-      <p class="doc-section__desc">使用 <code>disabled</code> 属性禁用卡片。</p>
+      <h2 class="doc-section__title">
+        Card 禁用状态
+      </h2>
+      <p class="doc-section__desc">
+        使用 <code>disabled</code> 属性禁用卡片。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyCard disabled title="禁用卡片" style="width: 260px;">
-            <div class="demo-text muted">禁用状态下无法交互</div>
+          <XlyCard disabled title="禁用卡片" style="width: 260px">
+            <div class="demo-text muted">
+              禁用状态下无法交互
+            </div>
           </XlyCard>
         </div>
-        <XlyDocCode :code='`<XlyCard disabled>...</XlyCard>`' />
+        <XlyDocCode code="<XlyCard disabled>...</XlyCard>" />
       </div>
     </section>
 
     <!-- API 文档 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">API</h2>
+      <h2 class="doc-section__title">
+        API
+      </h2>
 
-      <h3 class="doc-subtitle">Props</h3>
+      <h3 class="doc-subtitle">
+        Props
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -314,7 +396,9 @@
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Slots</h3>
+      <h3 class="doc-subtitle">
+        Slots
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -347,15 +431,9 @@
           </tbody>
         </table>
       </div>
-
     </section>
   </div>
 </template>
-<script setup lang="ts">
-import XlyButton from '@/components/xly-button/index.vue'
-import XlyCard from '@/components/xly-card/index.vue'
-import XlyIcon from '@/components/xly-icon/index.vue'
-</script>
 
 <style scoped lang="scss">
 .card-doc {

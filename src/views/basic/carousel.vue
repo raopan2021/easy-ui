@@ -1,22 +1,80 @@
+<script setup lang="ts">
+import { XlyCarousel } from 'easy-ui'
+
+const basicImages = [
+  'https://picsum.photos/seed/carousel-a/800/400',
+  'https://picsum.photos/seed/carousel-b/800/400',
+  'https://picsum.photos/seed/carousel-c/800/400',
+  'https://picsum.photos/seed/carousel-d/800/400',
+]
+
+const titledSlides = [
+  {
+    src: 'https://picsum.photos/seed/title-1/800/400',
+    title: '晨光中的城市天际线',
+    desc: '宁静的早晨，城市在晨曦中苏醒',
+  },
+  { src: 'https://picsum.photos/seed/title-2/800/400', title: '海岸边的日落余晖', desc: '金色的阳光洒在海面上' },
+  { src: 'https://picsum.photos/seed/title-3/800/400', title: '雪山与星空的对话', desc: '在海拔 4000 米仰望银河' },
+  { src: 'https://picsum.photos/seed/title-4/800/400', title: '热带雨林深处的秘境', desc: '探索未知的自然奇观' },
+]
+
+const namedSlides = [
+  { src: 'https://picsum.photos/seed/name-1/800/400', name: '科技前沿' },
+  { src: 'https://picsum.photos/seed/name-2/800/400', name: '艺术殿堂' },
+  { src: 'https://picsum.photos/seed/name-3/800/400', name: '自然之声' },
+]
+
+const customSlides = [
+  {
+    bg: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    title: '全新设计语言',
+    desc: '采用现代化 UI 设计，带来极致视觉体验',
+  },
+  { bg: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)', title: '高效开发体验', desc: '丰富的组件库，开箱即用' },
+  {
+    bg: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+    title: '强大的类型系统',
+    desc: '全面 TypeScript 支持，开发更安心',
+  },
+]
+
+const verticalSlides = [
+  { bg: '#4f6ef7', tag: '新功能', text: 'v2.0 版本发布，新增暗色模式支持' },
+  { bg: '#34c759', tag: '通知', text: '系统将于今晚 22:00 进行维护升级' },
+  { bg: '#f5a623', tag: '公告', text: '年度技术大会报名已开启，名额有限' },
+  { bg: '#f56c6c', tag: '预警', text: 'API 调用量已达日限额的 80%' },
+]
+</script>
+
 <template>
   <div class="carousel-doc">
     <!-- 页面标题 -->
     <div class="doc-header">
-      <h1 class="doc-title">Carousel 轮播</h1>
-      <p class="doc-desc">用于循环展示一组内容，支持 3D 透视模式、自动播放、循环切换、键盘导航、轮播标题和多种指示器样式。</p>
+      <h1 class="doc-title">
+        Carousel 轮播
+      </h1>
+      <p class="doc-desc">
+        用于循环展示一组内容，支持 3D 透视模式、自动播放、循环切换、键盘导航、轮播标题和多种指示器样式。
+      </p>
     </div>
 
     <!-- 基础用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
-      <p class="doc-section__desc">通过 <code>items</code> 属性传入图片 URL 数组，组件会自动轮播。默认间隔 3 秒，支持循环播放。</p>
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>items</code> 属性传入图片 URL 数组，组件会自动轮播。默认间隔 3 秒，支持循环播放。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="carousel-demo">
             <XlyCarousel :items="basicImages" />
           </div>
         </div>
-        <XlyDocCode :code="`<XlyCarousel :items=&quot;images&quot; />
+        <XlyDocCode
+          code="<XlyCarousel :items=&quot;images&quot; />
 
 <script setup>
 const images = [
@@ -24,146 +82,208 @@ const images = [
   'https://picsum.photos/seed/slide2/800/400',
   'https://picsum.photos/seed/slide3/800/400',
 ]
-</script>`" />
+</script>"
+        />
       </div>
     </section>
 
     <!-- 3D 模式 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">3D 透视模式</h2>
-      <p class="doc-section__desc">通过 <code>mode="3d"</code> 开启 3D 透视效果，幻灯片以卡片堆叠形式展示，当前项居中放大，两侧项缩小并带有透视旋转，带来更沉浸的视觉体验。</p>
+      <h2 class="doc-section__title">
+        3D 透视模式
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>mode="3d"</code> 开启 3D
+        透视效果，幻灯片以卡片堆叠形式展示，当前项居中放大，两侧项缩小并带有透视旋转，带来更沉浸的视觉体验。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="carousel-demo">
             <XlyCarousel :items="basicImages" mode="3d" :interval="4000" />
           </div>
         </div>
-        <XlyDocCode :code='`<XlyCarousel :items="images" mode="3d" />`' />
+        <XlyDocCode code="<XlyCarousel :items=&quot;images&quot; mode=&quot;3d&quot; />" />
       </div>
     </section>
 
     <!-- 轮播标题 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">轮播标题</h2>
-      <p class="doc-section__desc">通过 <code>show-title</code> 属性开启标题栏，标题文本默认从数据对象的 <code>title</code> 字段读取。可通过 <code>title-field</code> 指定字段名，也可通过 <code>#title</code> 插槽完全自定义标题内容。配合 <code>show-counter</code> 可显示当前序号。</p>
+      <h2 class="doc-section__title">
+        轮播标题
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>show-title</code> 属性开启标题栏，标题文本默认从数据对象的 <code>title</code> 字段读取。可通过
+        <code>title-field</code> 指定字段名，也可通过 <code>#title</code> 插槽完全自定义标题内容。配合
+        <code>show-counter</code> 可显示当前序号。
+      </p>
       <div class="doc-preview">
-        <div class="doc-preview__body" style="flex-direction: column; gap: 20px;">
+        <div class="doc-preview__body" style="flex-direction: column; gap: 20px">
           <div class="carousel-demo">
-            <p class="demo-label">默认标题 + 计数器</p>
+            <p class="demo-label">
+              默认标题 + 计数器
+            </p>
             <XlyCarousel :items="titledSlides" show-title show-counter :interval="4000" />
           </div>
           <div class="carousel-demo">
-            <p class="demo-label">自定义字段名（titleField="name"）</p>
+            <p class="demo-label">
+              自定义字段名（titleField="name"）
+            </p>
             <XlyCarousel :items="namedSlides" show-title title-field="name" :interval="4000" />
           </div>
           <div class="carousel-demo">
-            <p class="demo-label">3D 模式 + 标题</p>
+            <p class="demo-label">
+              3D 模式 + 标题
+            </p>
             <XlyCarousel :items="titledSlides" mode="3d" show-title :interval="4000" />
           </div>
         </div>
-        <XlyDocCode :code='`<!-- 默认标题字段 -->
-<XlyCarousel :items="slides" show-title show-counter />
+        <XlyDocCode
+          code="<!-- 默认标题字段 -->
+<XlyCarousel :items=&quot;slides&quot; show-title show-counter />
 
 <!-- 指定字段名 -->
-<XlyCarousel :items="slides" show-title title-field="name" />
+<XlyCarousel :items=&quot;slides&quot; show-title title-field=&quot;name&quot; />
 
 <!-- 3D 模式 + 标题 -->
-<XlyCarousel :items="slides" mode="3d" show-title />
+<XlyCarousel :items=&quot;slides&quot; mode=&quot;3d&quot; show-title />
 
 <!-- 自定义标题插槽 -->
-<XlyCarousel :items="slides" show-title>
-  <template #title="{ item }">
-    <span>&lbrace;&lbrace; item.category &rbrace;&rbrace; - &lbrace;&lbrace; item.title &rbrace;&rbrace;</span>
+<XlyCarousel :items=&quot;slides&quot; show-title>
+  <template #title=&quot;{ item }&quot;>
+    <span>{{ item.category }} - {{ item.title }}</span>
   </template>
-</XlyCarousel>`' />
+</XlyCarousel>"
+        />
       </div>
     </section>
 
     <!-- 指示器样式 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">指示器样式</h2>
-      <p class="doc-section__desc">通过 <code>dot-type</code> 属性设置指示器样式，支持 <code>dot</code>（圆点）、<code>line</code>（线条）和 <code>number</code>（数字）三种类型。</p>
+      <h2 class="doc-section__title">
+        指示器样式
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>dot-type</code> 属性设置指示器样式，支持 <code>dot</code>（圆点）、<code>line</code>（线条）和
+        <code>number</code>（数字）三种类型。
+      </p>
       <div class="doc-preview">
-        <div class="doc-preview__body" style="flex-direction: column; gap: 20px;">
+        <div class="doc-preview__body" style="flex-direction: column; gap: 20px">
           <div class="carousel-demo">
-            <p class="demo-label">圆点指示器（默认）</p>
+            <p class="demo-label">
+              圆点指示器（默认）
+            </p>
             <XlyCarousel :items="basicImages" dot-type="dot" />
           </div>
           <div class="carousel-demo">
-            <p class="demo-label">线条指示器</p>
+            <p class="demo-label">
+              线条指示器
+            </p>
             <XlyCarousel :items="basicImages" dot-type="line" />
           </div>
           <div class="carousel-demo">
-            <p class="demo-label">数字指示器</p>
+            <p class="demo-label">
+              数字指示器
+            </p>
             <XlyCarousel :items="basicImages" dot-type="number" />
           </div>
         </div>
-        <XlyDocCode :code='`<!-- 圆点指示器 -->
-<XlyCarousel :items="images" dot-type="dot" />
+        <XlyDocCode
+          code="<!-- 圆点指示器 -->
+<XlyCarousel :items=&quot;images&quot; dot-type=&quot;dot&quot; />
 
 <!-- 线条指示器 -->
-<XlyCarousel :items="images" dot-type="line" />
+<XlyCarousel :items=&quot;images&quot; dot-type=&quot;line&quot; />
 
 <!-- 数字指示器 -->
-<XlyCarousel :items="images" dot-type="number" />`' />
+<XlyCarousel :items=&quot;images&quot; dot-type=&quot;number&quot; />"
+        />
       </div>
     </section>
 
     <!-- 指示器位置 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">指示器位置</h2>
-      <p class="doc-section__desc">通过 <code>dot-position</code> 属性设置指示器位置，支持 <code>bottom</code>（底部）、<code>left</code>（左侧）、<code>right</code>（右侧）。</p>
+      <h2 class="doc-section__title">
+        指示器位置
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>dot-position</code> 属性设置指示器位置，支持
+        <code>bottom</code>（底部）、<code>left</code>（左侧）、<code>right</code>（右侧）。
+      </p>
       <div class="doc-preview">
-        <div class="doc-preview__body" style="flex-direction: column; gap: 20px;">
+        <div class="doc-preview__body" style="flex-direction: column; gap: 20px">
           <div class="carousel-demo">
-            <p class="demo-label">底部（默认）</p>
+            <p class="demo-label">
+              底部（默认）
+            </p>
             <XlyCarousel :items="basicImages" dot-position="bottom" />
           </div>
           <div class="carousel-demo">
-            <p class="demo-label">左侧</p>
+            <p class="demo-label">
+              左侧
+            </p>
             <XlyCarousel :items="basicImages" dot-position="left" />
           </div>
         </div>
-        <XlyDocCode :code='`<XlyCarousel :items="images" dot-position="bottom" />
-<XlyCarousel :items="images" dot-position="left" />
-<XlyCarousel :items="images" dot-position="right" />`' />
+        <XlyDocCode
+          code="<XlyCarousel :items=&quot;images&quot; dot-position=&quot;bottom&quot; />
+<XlyCarousel :items=&quot;images&quot; dot-position=&quot;left&quot; />
+<XlyCarousel :items=&quot;images&quot; dot-position=&quot;right&quot; />"
+        />
       </div>
     </section>
 
     <!-- 箭头策略 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">箭头显示策略</h2>
-      <p class="doc-section__desc">通过 <code>arrow</code> 属性控制箭头的显示方式：<code>hover</code>（悬停显示，默认）、<code>always</code>（始终显示）、<code>never</code>（始终隐藏）。</p>
+      <h2 class="doc-section__title">
+        箭头显示策略
+      </h2>
+      <p class="doc-section__desc">
+        通过
+        <code>arrow</code>
+        属性控制箭头的显示方式：<code>hover</code>（悬停显示，默认）、<code>always</code>（始终显示）、<code>never</code>（始终隐藏）。
+      </p>
       <div class="doc-preview">
-        <div class="doc-preview__body" style="flex-direction: column; gap: 20px;">
+        <div class="doc-preview__body" style="flex-direction: column; gap: 20px">
           <div class="carousel-demo">
-            <p class="demo-label">悬停显示（默认） — 鼠标移入查看效果</p>
+            <p class="demo-label">
+              悬停显示（默认） — 鼠标移入查看效果
+            </p>
             <XlyCarousel :items="basicImages" arrow="hover" />
           </div>
           <div class="carousel-demo">
-            <p class="demo-label">始终显示</p>
+            <p class="demo-label">
+              始终显示
+            </p>
             <XlyCarousel :items="basicImages" arrow="always" />
           </div>
           <div class="carousel-demo">
-            <p class="demo-label">始终隐藏</p>
+            <p class="demo-label">
+              始终隐藏
+            </p>
             <XlyCarousel :items="basicImages" arrow="never" />
           </div>
         </div>
-        <XlyDocCode :code='`<XlyCarousel :items="images" arrow="hover" />
-<XlyCarousel :items="images" arrow="always" />
-<XlyCarousel :items="images" arrow="never" />`' />
+        <XlyDocCode
+          code="<XlyCarousel :items=&quot;images&quot; arrow=&quot;hover&quot; />
+<XlyCarousel :items=&quot;images&quot; arrow=&quot;always&quot; />
+<XlyCarousel :items=&quot;images&quot; arrow=&quot;never&quot; />"
+        />
       </div>
     </section>
 
     <!-- 自定义内容 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义内容</h2>
-      <p class="doc-section__desc">通过 <code>#item</code> 作用域插槽自定义每张幻灯片的内容，适用于非图片类的轮播场景。</p>
+      <h2 class="doc-section__title">
+        自定义内容
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>#item</code> 作用域插槽自定义每张幻灯片的内容，适用于非图片类的轮播场景。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="carousel-demo">
             <XlyCarousel :items="customSlides" :interval="4000">
-              <template #item="{ item, index }">
+              <template #item="{ item }">
                 <div class="custom-slide" :style="{ background: (item as any).bg }">
                   <div class="custom-slide__content">
                     <h3>{{ (item as any).title }}</h3>
@@ -174,21 +294,27 @@ const images = [
             </XlyCarousel>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyCarousel :items="slides" :interval="4000">
-  <template #item="{ item }">
-    <div class="custom-slide" :style="{ background: item.bg }">
-      <h3>&lbrace;&lbrace; item.title &rbrace;&rbrace;</h3>
-      <p>&lbrace;&lbrace; item.desc &rbrace;&rbrace;</p>
+        <XlyDocCode
+          code="<XlyCarousel :items=&quot;slides&quot; :interval=&quot;4000&quot;>
+  <template #item=&quot;{ item }&quot;>
+    <div class=&quot;custom-slide&quot; :style=&quot;{ background: item.bg }&quot;>
+      <h3>{{ item.title }}</h3>
+      <p>{{ item.desc }}</p>
     </div>
   </template>
-</XlyCarousel>`' />
+</XlyCarousel>"
+        />
       </div>
     </section>
 
     <!-- 垂直轮播 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">垂直轮播</h2>
-      <p class="doc-section__desc">通过 <code>direction="vertical"</code> 切换为垂直方向轮播，适用于侧边公告等场景。</p>
+      <h2 class="doc-section__title">
+        垂直轮播
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>direction="vertical"</code> 切换为垂直方向轮播，适用于侧边公告等场景。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="carousel-demo carousel-demo--vertical">
@@ -202,82 +328,113 @@ const images = [
             </XlyCarousel>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyCarousel
-  :items="notices"
-  direction="vertical"
-  :interval="2500"
+        <XlyDocCode
+          code="<XlyCarousel
+  :items=&quot;notices&quot;
+  direction=&quot;vertical&quot;
+  :interval=&quot;2500&quot;
 >
-  <template #item="{ item }">
-    <div class="notice">
-      <span>&lbrace;&lbrace; item.tag &rbrace;&rbrace;</span>
-      <span>&lbrace;&lbrace; item.text &rbrace;&rbrace;</span>
+  <template #item=&quot;{ item }&quot;>
+    <div class=&quot;notice&quot;>
+      <span>{{ item.tag }}</span>
+      <span>{{ item.text }}</span>
     </div>
   </template>
-</XlyCarousel>`' />
+</XlyCarousel>"
+        />
       </div>
     </section>
 
     <!-- 自定义高度 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义高度</h2>
-      <p class="doc-section__desc">通过 <code>height</code> 属性设置轮播容器高度，支持数字（单位 px）或 CSS 字符串（如 <code>'40vh'</code>、<code>'300px'</code>）。默认高度为 200px（3D 模式为 260px）。</p>
+      <h2 class="doc-section__title">
+        自定义高度
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>height</code> 属性设置轮播容器高度，支持数字（单位 px）或 CSS 字符串（如
+        <code>'40vh'</code>、<code>'300px'</code>）。默认高度为 200px（3D 模式为 260px）。
+      </p>
       <div class="doc-preview">
-        <div class="doc-preview__body" style="flex-direction: column; gap: 20px;">
+        <div class="doc-preview__body" style="flex-direction: column; gap: 20px">
           <div class="carousel-demo">
-            <p class="demo-label">高度 120px</p>
+            <p class="demo-label">
+              高度 120px
+            </p>
             <XlyCarousel :items="basicImages" :height="120" :interval="0" arrow="always" />
           </div>
           <div class="carousel-demo">
-            <p class="demo-label">高度 300px</p>
+            <p class="demo-label">
+              高度 300px
+            </p>
             <XlyCarousel :items="basicImages" :height="300" :interval="0" arrow="always" />
           </div>
           <div class="carousel-demo">
-            <p class="demo-label">CSS 字符串 '50vh'</p>
+            <p class="demo-label">
+              CSS 字符串 '50vh'
+            </p>
             <XlyCarousel :items="basicImages" height="50vh" :interval="0" arrow="always" />
           </div>
         </div>
-        <XlyDocCode :code='`<!-- 数字类型（单位 px） -->
-<XlyCarousel :items="images" :height="120" />
-<XlyCarousel :items="images" :height="300" />
+        <XlyDocCode
+          code="<!-- 数字类型（单位 px） -->
+<XlyCarousel :items=&quot;images&quot; :height=&quot;120&quot; />
+<XlyCarousel :items=&quot;images&quot; :height=&quot;300&quot; />
 
 <!-- CSS 字符串 -->
-<XlyCarousel :items="images" height="50vh" />
-<XlyCarousel :items="images" height="400px" />`' />
+<XlyCarousel :items=&quot;images&quot; height=&quot;50vh&quot; />
+<XlyCarousel :items=&quot;images&quot; height=&quot;400px&quot; />"
+        />
       </div>
     </section>
 
     <!-- 关闭自动播放 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">关闭自动播放</h2>
-      <p class="doc-section__desc">将 <code>interval</code> 设为 <code>0</code> 关闭自动播放，通过箭头或指示器手动切换。</p>
+      <h2 class="doc-section__title">
+        关闭自动播放
+      </h2>
+      <p class="doc-section__desc">
+        将 <code>interval</code> 设为 <code>0</code> 关闭自动播放，通过箭头或指示器手动切换。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="carousel-demo">
             <XlyCarousel :items="basicImages" :interval="0" arrow="always" />
           </div>
         </div>
-        <XlyDocCode :code='`<XlyCarousel :items="images" :interval="0" arrow="always" />`' />
+        <XlyDocCode
+          code="<XlyCarousel :items=&quot;images&quot; :interval=&quot;0&quot; arrow=&quot;always&quot; />"
+        />
       </div>
     </section>
 
     <!-- 非循环模式 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">非循环模式</h2>
-      <p class="doc-section__desc">将 <code>loop</code> 设为 <code>false</code>，轮播到达首尾后停止，不会循环。</p>
+      <h2 class="doc-section__title">
+        非循环模式
+      </h2>
+      <p class="doc-section__desc">
+        将 <code>loop</code> 设为 <code>false</code>，轮播到达首尾后停止，不会循环。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="carousel-demo">
             <XlyCarousel :items="basicImages" :loop="false" :interval="0" arrow="always" />
           </div>
         </div>
-        <XlyDocCode :code='`<XlyCarousel :items="images" :loop="false" :interval="0" arrow="always" />`' />
+        <XlyDocCode
+          code="<XlyCarousel :items=&quot;images&quot; :loop=&quot;false&quot; :interval=&quot;0&quot; arrow=&quot;always&quot; />"
+        />
       </div>
     </section>
 
     <!-- API 文档 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">API</h2>
-      <h3 class="doc-subtitle">Props</h3>
+      <h2 class="doc-section__title">
+        API
+      </h2>
+      <h3 class="doc-subtitle">
+        Props
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -395,7 +552,9 @@ const images = [
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Slots</h3>
+      <h3 class="doc-subtitle">
+        Slots
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -420,7 +579,9 @@ const images = [
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Events</h3>
+      <h3 class="doc-subtitle">
+        Events
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -440,7 +601,9 @@ const images = [
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Expose</h3>
+      <h3 class="doc-subtitle">
+        Expose
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -478,98 +641,119 @@ const images = [
   </div>
 </template>
 
-<script setup lang="ts">
-import XlyCarousel from '@/components/xly-carousel/index.vue'
-
-const basicImages = [
-  'https://picsum.photos/seed/carousel-a/800/400',
-  'https://picsum.photos/seed/carousel-b/800/400',
-  'https://picsum.photos/seed/carousel-c/800/400',
-  'https://picsum.photos/seed/carousel-d/800/400',
-]
-
-const titledSlides = [
-  { src: 'https://picsum.photos/seed/title-1/800/400', title: '晨光中的城市天际线', desc: '宁静的早晨，城市在晨曦中苏醒' },
-  { src: 'https://picsum.photos/seed/title-2/800/400', title: '海岸边的日落余晖', desc: '金色的阳光洒在海面上' },
-  { src: 'https://picsum.photos/seed/title-3/800/400', title: '雪山与星空的对话', desc: '在海拔 4000 米仰望银河' },
-  { src: 'https://picsum.photos/seed/title-4/800/400', title: '热带雨林深处的秘境', desc: '探索未知的自然奇观' },
-]
-
-const namedSlides = [
-  { src: 'https://picsum.photos/seed/name-1/800/400', name: '科技前沿' },
-  { src: 'https://picsum.photos/seed/name-2/800/400', name: '艺术殿堂' },
-  { src: 'https://picsum.photos/seed/name-3/800/400', name: '自然之声' },
-]
-
-const customSlides = [
-  { bg: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', title: '全新设计语言', desc: '采用现代化 UI 设计，带来极致视觉体验' },
-  { bg: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)', title: '高效开发体验', desc: '丰富的组件库，开箱即用' },
-  { bg: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)', title: '强大的类型系统', desc: '全面 TypeScript 支持，开发更安心' },
-]
-
-const verticalSlides = [
-  { bg: '#4f6ef7', tag: '新功能', text: 'v2.0 版本发布，新增暗色模式支持' },
-  { bg: '#34c759', tag: '通知', text: '系统将于今晚 22:00 进行维护升级' },
-  { bg: '#f5a623', tag: '公告', text: '年度技术大会报名已开启，名额有限' },
-  { bg: '#f56c6c', tag: '预警', text: 'API 调用量已达日限额的 80%' },
-]
-</script>
-
 <style scoped lang="scss">
 .carousel-doc {
   padding: 8px 0 40px;
 }
 
-.doc-header { margin-bottom: 36px; }
+.doc-header {
+  margin-bottom: 36px;
+}
 .doc-title {
-  font-size: 26px; font-weight: 700; color: var(--el-text-color-primary);
-  margin: 0 0 8px; letter-spacing: -0.3px;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  letter-spacing: -0.3px;
 }
 .doc-desc {
-  font-size: 14px; color: var(--el-text-color-secondary); margin: 0; line-height: 1.6;
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0;
+  line-height: 1.6;
 }
 
-.doc-section { margin-bottom: 32px; }
+.doc-section {
+  margin-bottom: 32px;
+}
 .doc-section__title {
-  font-size: 18px; font-weight: 600; color: var(--el-text-color-primary);
-  margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--el-border-color-lighter);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--el-border-color-lighter);
 }
 .doc-section__desc {
-  font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 16px; line-height: 1.6;
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0 0 16px;
+  line-height: 1.6;
   code {
-    background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px;
-    border-radius: 4px; font-size: 13px;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
   }
 }
 
 .doc-preview {
-  border: 1px solid var(--el-border-color-lighter); border-radius: 12px;
-  overflow: hidden; background: var(--el-bg-color-overlay);
+  border: 1px solid var(--el-border-color-lighter);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--el-bg-color-overlay);
 }
 .doc-preview__body {
-  display: flex; flex-wrap: wrap; align-items: center;
-  gap: 12px; padding: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
 }
 .doc-code {
-  border-top: 1px solid var(--el-border-color-lighter); background: var(--el-fill-color-light);
-  padding: 16px 20px; overflow-x: auto;
-  pre { margin: 0; padding: 0; }
+  border-top: 1px solid var(--el-border-color-lighter);
+  background: var(--el-fill-color-light);
+  padding: 16px 20px;
+  overflow-x: auto;
+  pre {
+    margin: 0;
+    padding: 0;
+  }
   code {
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
-    font-size: 13px; line-height: 1.7; color: var(--el-text-color-regular); white-space: pre;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--el-text-color-regular);
+    white-space: pre;
   }
 }
 
-.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
-.doc-table { overflow-x: auto;
-  table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); white-space: nowrap; }
-  th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); }
-  td { color: var(--el-text-color-regular); }
+.doc-subtitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 20px 0 10px;
+}
+.doc-table {
+  overflow-x: auto;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+    white-space: nowrap;
+  }
+  th {
+    background: var(--el-fill-color-light);
+    font-weight: 600;
+    color: var(--el-text-color-primary);
+  }
+  td {
+    color: var(--el-text-color-regular);
+  }
   code {
-    background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px;
-    border-radius: 4px; font-size: 13px;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
   }
 }
@@ -580,7 +764,7 @@ const verticalSlides = [
   border-radius: 8px;
   overflow: hidden;
 
-  &--vertical {
+  &.carousel-demo--vertical {
     max-width: 360px;
   }
 }
@@ -600,7 +784,7 @@ const verticalSlides = [
   justify-content: center;
   padding: 24px;
 
-  &__content {
+  .custom-slide__content {
     text-align: center;
     color: #fff;
 
@@ -629,7 +813,7 @@ const verticalSlides = [
   box-sizing: border-box;
   color: #fff;
 
-  &__tag {
+  .vertical-slide__tag {
     flex-shrink: 0;
     padding: 2px 10px;
     background: rgba(255, 255, 255, 0.2);
@@ -638,7 +822,7 @@ const verticalSlides = [
     font-weight: 600;
   }
 
-  &__text {
+  .vertical-slide__text {
     font-size: 14px;
     overflow: hidden;
     text-overflow: ellipsis;

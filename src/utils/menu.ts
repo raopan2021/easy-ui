@@ -33,7 +33,7 @@ let cacheSource: MenuDataSource | null = null
 export async function getMenuData(
   source: MenuDataSource = 'local',
   apiUrl?: string,
-  forceRefresh = false
+  forceRefresh = false,
 ): Promise<MenuItem[]> {
   // 如果有缓存且来源相同且不强制刷新，直接返回缓存
   if (menuCache && cacheSource === source && !forceRefresh) {
@@ -47,7 +47,8 @@ export async function getMenuData(
     const modules = import.meta.glob<{ default: MenuItem[] }>('../data/menu.json', { eager: true })
     const module = modules['../data/menu.json']
     data = module?.default || []
-  } else if (source === 'remote' && apiUrl) {
+  }
+  else if (source === 'remote' && apiUrl) {
     // 远程 API 模式
     try {
       const response = await fetch(apiUrl)
@@ -55,7 +56,8 @@ export async function getMenuData(
         throw new Error(`HTTP error! status: ${response.status}`)
       }
       data = await response.json()
-    } catch (error) {
+    }
+    catch (error) {
       console.error('[Menu] 获取远程菜单失败:', error)
       ElMessage.error('菜单加载失败，请刷新页面重试')
       // 失败时降级使用缓存或空数组
@@ -113,7 +115,7 @@ export function resolveComponent(component: string): (() => Promise<Component>) 
  * 将嵌套的菜单结构展平为一维数组
  */
 export function flattenMenu(data: MenuItem[]): MenuItem[] {
-  return data.map((item) => ({
+  return data.map(item => ({
     id: item.id,
     name: item.name,
     icon: item.icon,
@@ -129,10 +131,12 @@ export function flattenMenu(data: MenuItem[]): MenuItem[] {
  */
 export function findMenuByPath(data: MenuItem[], path: string): MenuItem | null {
   for (const item of data) {
-    if (item.path === path) return item
+    if (item.path === path)
+      return item
     if (item.children) {
       const found = findMenuByPath(item.children, path)
-      if (found) return found
+      if (found)
+        return found
     }
   }
   return null
@@ -145,10 +149,12 @@ export function findParentMenu(data: MenuItem[], path: string): MenuItem | null 
   for (const item of data) {
     if (item.children) {
       for (const child of item.children) {
-        if (child.path === path) return item
+        if (child.path === path)
+          return item
       }
       const found = findParentMenu(item.children, path)
-      if (found) return found
+      if (found)
+        return found
     }
   }
   return null
@@ -174,7 +180,8 @@ export function getMenuPermissions(): string[] {
   if (stored) {
     try {
       return JSON.parse(stored)
-    } catch {
+    }
+    catch {
       return []
     }
   }
@@ -194,28 +201,30 @@ export function clearMenuPermissions(): void {
  * @param permissions 用户权限列表
  */
 export function filterMenuByPermissions(data: MenuItem[], permissions: string[]): MenuItem[] {
-  return data.filter((item) => {
-    // 如果有 children，递归过滤子菜单
-    if (item.children?.length) {
-      const filteredChildren = filterMenuByPermissions(item.children, permissions)
-      // 只有当子菜单中有可显示的项时才显示父级
-      return filteredChildren.length > 0
-    }
-    // 没有 children 的菜单，根据权限判断
-    if (item.key && permissions.includes(item.key)) {
-      return true
-    }
-    // 如果没有设置 key，默认显示
-    return !item.key
-  }).map((item) => {
-    if (item.children?.length) {
-      return {
-        ...item,
-        children: filterMenuByPermissions(item.children, permissions),
+  return data
+    .filter((item) => {
+      // 如果有 children，递归过滤子菜单
+      if (item.children?.length) {
+        const filteredChildren = filterMenuByPermissions(item.children, permissions)
+        // 只有当子菜单中有可显示的项时才显示父级
+        return filteredChildren.length > 0
       }
-    }
-    return item
-  })
+      // 没有 children 的菜单，根据权限判断
+      if (item.key && permissions.includes(item.key)) {
+        return true
+      }
+      // 如果没有设置 key，默认显示
+      return !item.key
+    })
+    .map((item) => {
+      if (item.children?.length) {
+        return {
+          ...item,
+          children: filterMenuByPermissions(item.children, permissions),
+        }
+      }
+      return item
+    })
 }
 
 // 导出默认配置

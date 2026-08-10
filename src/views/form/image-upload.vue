@@ -1,8 +1,66 @@
+<script setup lang="ts">
+import { XlyButton, XlyUpload } from 'easy-ui'
+import { ref } from 'vue'
+
+// ---- 基础用法 ----
+const value1 = ref<string[]>([])
+
+// ---- v-model 双向绑定 ----
+const value2Array = ref<string[]>([])
+const value2String = ref<string>('')
+
+// ---- 限制数量 ----
+const value3Single = ref<string[]>([])
+const value3Multi = ref<string[]>([])
+const value3Unlimited = ref<string[]>([])
+
+function handleExceed(files: File[], limit: number) {
+  alert(`最多上传 ${limit} 张，已超出 ${files.length} 张，已自动截取前 ${limit} 张`)
+}
+
+// ---- 自定义尺寸 ----
+const valueSizeA = ref<string[]>([])
+const valueSizeB = ref<string[]>([])
+const valueSizeC = ref<string[]>([])
+
+// ---- 拖拽 ----
+const valueDrag = ref<string[]>([])
+
+// ---- 禁用 ----
+const valueDisabled = ref<string[]>(['https://picsum.photos/seed/d1/200/200', 'https://picsum.photos/seed/d2/200/200'])
+
+// ---- 校验 ----
+const valueValidate = ref<string[]>([])
+// ---- 提示文字 ----
+const valueTip1 = ref<string[]>([])
+const valueTip2 = ref<string[]>([])
+
+// ---- 商品表单 ----
+const productForm = ref({
+  name: '',
+  cover: [] as string[],
+  gallery: [] as string[],
+})
+
+function handleProductSubmit() {
+  if (!productForm.value.cover.length) {
+    alert('请上传主图！')
+    return
+  }
+  alert(`保存成功！\n商品名称：${productForm.value.name}\n主图：已上传\n轮播图：${productForm.value.gallery.length} 张`)
+}
+
+// ---- 头像 ----
+const avatarImages = ref<string[]>([])
+</script>
+
 <template>
   <div class="upload-doc">
     <!-- 页面标题 -->
     <div class="doc-header">
-      <h1 class="doc-title">Upload 图片上传</h1>
+      <h1 class="doc-title">
+        Upload 图片上传
+      </h1>
       <p class="doc-desc">
         支持本地预览与网络上传的图片上传组件，提供 v-model 双向绑定，支持上传数量限制、拖拽上传、进度展示和预览功能。
       </p>
@@ -10,7 +68,9 @@
 
     <!-- 基础用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
       <p class="doc-section__desc">
         默认使用本地模式，读取本地图片并以 <code>base64</code> 形式存储，无需后端接口即可看到完整效果。
       </p>
@@ -18,29 +78,34 @@
         <div class="doc-preview__body">
           <XlyUpload v-model="value1" />
         </div>
-        <XlyDocCode :code='`{{ \`<XlyUpload v-model="imageList" />\` }}`' />
+        <XlyDocCode code="{{ `<XlyUpload v-model=&quot;imageList&quot; />` }}" />
       </div>
       <div class="demo-value-display">
         <span class="demo-value-label">当前值：</span>
-        <span class="demo-value-content" v-if="value1&&value1.length">{{ JSON.stringify(value1)?.substring(0, 30) }}..."]</span>
+        <span v-if="value1 && value1.length" class="demo-value-content">{{ JSON.stringify(value1)?.substring(0, 30) }}..."]</span>
       </div>
     </section>
 
     <!-- v-model 绑定 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">v-model 双向绑定</h2>
+      <h2 class="doc-section__title">
+        v-model 双向绑定
+      </h2>
       <p class="doc-section__desc">
-        <code>modelValue</code> 支持 <strong>字符串数组</strong> 和 <strong>逗号拼接字符串</strong> 两种格式传入，
-        通过 <code>value-mode</code> 控制返回格式（<code>array</code> 返回数组 / <code>string</code> 返回逗号拼接字符串）。
-        <br />
-        💡 <strong>原理：</strong><code>value-mode="string"</code> 时，每项 URL 先经过 <code>encodeURIComponent</code> 编码再用逗号拼接，
-        base64 中的逗号被编码为 <code>%2C</code>，解析时 <code>split(',')</code> 不会出错，再逐项 <code>decodeURIComponent</code> 还原。
-        兼容未编码的普通 http URL（无 <code>%</code> 字符时 decode 不受影响）。
+        <code>modelValue</code> 支持 <strong>字符串数组</strong> 和 <strong>逗号拼接字符串</strong> 两种格式传入， 通过
+        <code>value-mode</code> 控制返回格式（<code>array</code> 返回数组 / <code>string</code> 返回逗号拼接字符串）。
+        <br>
+        💡 <strong>原理：</strong><code>value-mode="string"</code> 时，每项 URL 先经过
+        <code>encodeURIComponent</code> 编码再用逗号拼接， base64 中的逗号被编码为 <code>%2C</code>，解析时
+        <code>split(',')</code> 不会出错，再逐项 <code>decodeURIComponent</code> 还原。 兼容未编码的普通 http URL（无
+        <code>%</code> 字符时 decode 不受影响）。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body demo-vmodel">
           <div class="demo-vmodel-item">
-            <div class="demo-vmodel-label">传入数组 / 返回数组（默认）</div>
+            <div class="demo-vmodel-label">
+              传入数组 / 返回数组（默认）
+            </div>
             <XlyUpload v-model="value2Array" :limit="3" />
             <div class="demo-value-display">
               <span class="demo-value-label">值：</span>
@@ -48,17 +113,22 @@
             </div>
           </div>
           <div class="demo-vmodel-item">
-            <div class="demo-vmodel-label">返回逗号拼接字符串（value-mode="string"）</div>
+            <div class="demo-vmodel-label">
+              返回逗号拼接字符串（value-mode="string"）
+            </div>
             <XlyUpload v-model="value2String" value-mode="string" :limit="3" />
             <div class="demo-value-display">
               <span class="demo-value-label">值：</span>
               <span class="demo-value-content demo-value-str">
-                {{ typeof value2String === 'string' && value2String ? `[${value2String.split(',').length} 张]` : '（空）' }}
+                {{
+                  typeof value2String === 'string' && value2String ? `[${value2String.split(',').length} 张]` : '（空）'
+                }}
               </span>
             </div>
           </div>
         </div>
-        <XlyDocCode :code="`{{ \`<!-- 返回数组（默认） -->
+        <XlyDocCode
+          code="{{ `<!-- 返回数组（默认） -->
 <XlyUpload v-model=&quot;imageList&quot; />
 
 <!-- 返回逗号拼接字符串 -->
@@ -66,74 +136,97 @@
 
 // 传入时两种格式均支持：
 const imageList = ref(['https://img1.jpg', 'https://img2.jpg'])
-const imageStr  = ref('https://img1.jpg,https://img2.jpg')\` }}`" />
+const imageStr  = ref('https://img1.jpg,https://img2.jpg')` }}"
+        />
       </div>
     </section>
 
     <!-- 限制数量 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">限制上传数量</h2>
+      <h2 class="doc-section__title">
+        限制上传数量
+      </h2>
       <p class="doc-section__desc">
-        通过 <code>limit</code> 属性设置最大上传数量，达到上限后上传按钮自动隐藏。
-        超出时会触发 <code>@exceed</code> 事件。
+        通过 <code>limit</code> 属性设置最大上传数量，达到上限后上传按钮自动隐藏。 超出时会触发
+        <code>@exceed</code> 事件。
       </p>
       <div class="doc-preview">
-        <div class="doc-preview__body" style="gap: 40px; align-items: flex-start;">
+        <div class="doc-preview__body" style="gap: 40px; align-items: flex-start">
           <div>
-            <div class="demo-label">limit=1（头像单图）</div>
+            <div class="demo-label">
+              limit=1（头像单图）
+            </div>
             <XlyUpload v-model="value3Single" :limit="1" />
           </div>
           <div>
-            <div class="demo-label">limit=3</div>
+            <div class="demo-label">
+              limit=3
+            </div>
             <XlyUpload v-model="value3Multi" :limit="3" @exceed="handleExceed" />
           </div>
           <div>
-            <div class="demo-label">不限制数量</div>
+            <div class="demo-label">
+              不限制数量
+            </div>
             <XlyUpload v-model="value3Unlimited" />
           </div>
         </div>
-        <XlyDocCode :code='`{{ \`<!-- 限制 1 张 -->
-<XlyUpload v-model="avatar" :limit="1" />
+        <XlyDocCode
+          code="{{ `<!-- 限制 1 张 -->
+<XlyUpload v-model=&quot;avatar&quot; :limit=&quot;1&quot; />
 
 <!-- 限制 3 张，超出触发事件 -->
-<XlyUpload v-model="images" :limit="3" @exceed="handleExceed" />
+<XlyUpload v-model=&quot;images&quot; :limit=&quot;3&quot; @exceed=&quot;handleExceed&quot; />
 
 function handleExceed(files, limit) {
-  alert(\\\`最多上传 \\\${limit} 张，已超出 \\\${files.length} 张\\\`)
-}\` }}`' />
+  alert(\`最多上传 \${limit} 张，已超出 \${files.length} 张\`)
+}` }}"
+        />
       </div>
     </section>
 
     <!-- 自定义尺寸 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义缩略图尺寸</h2>
+      <h2 class="doc-section__title">
+        自定义缩略图尺寸
+      </h2>
       <p class="doc-section__desc">
         通过 <code>size</code> 属性设置缩略图边长（像素），默认 <code>100</code>。
       </p>
       <div class="doc-preview">
-        <div class="doc-preview__body" style="gap: 32px; align-items: flex-end;">
+        <div class="doc-preview__body" style="gap: 32px; align-items: flex-end">
           <div>
-            <div class="demo-label">size=60</div>
+            <div class="demo-label">
+              size=60
+            </div>
             <XlyUpload v-model="valueSizeA" :size="60" />
           </div>
           <div>
-            <div class="demo-label">size=100（默认）</div>
+            <div class="demo-label">
+              size=100（默认）
+            </div>
             <XlyUpload v-model="valueSizeB" :size="100" />
           </div>
           <div>
-            <div class="demo-label">size=140</div>
+            <div class="demo-label">
+              size=140
+            </div>
             <XlyUpload v-model="valueSizeC" :size="140" />
           </div>
         </div>
-        <XlyDocCode :code='`{{ \`<XlyUpload v-model="images" :size="60" />
-<XlyUpload v-model="images" :size="100" />  <!-- 默认 -->
-<XlyUpload v-model="images" :size="140" />\` }}`' />
+        <XlyDocCode
+          code="{{ `<XlyUpload v-model=&quot;images&quot; :size=&quot;60&quot; />
+<XlyUpload v-model=&quot;images&quot; :size=&quot;100&quot; />  <!-- 默认 -->
+<XlyUpload v-model=&quot;images&quot; :size=&quot;140&quot; />` }}"
+        />
       </div>
     </section>
 
     <!-- 拖拽上传 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">拖拽上传</h2>
+      <h2 class="doc-section__title">
+        拖拽上传
+      </h2>
       <p class="doc-section__desc">
         上传按钮区域支持直接将图片文件<strong>拖入</strong>，边框会高亮提示。
       </p>
@@ -141,14 +234,18 @@ function handleExceed(files, limit) {
         <div class="doc-preview__body">
           <XlyUpload v-model="valueDrag" :size="120" trigger-text="点击或拖拽" />
         </div>
-        <XlyDocCode :code='`{{ \`<!-- trigger-text 属性为触发区域添加提示文字 -->
-<XlyUpload v-model="images" :size="120" trigger-text="点击或拖拽" />\` }}`' />
+        <XlyDocCode
+          code="{{ `<!-- trigger-text 属性为触发区域添加提示文字 -->
+<XlyUpload v-model=&quot;images&quot; :size=&quot;120&quot; trigger-text=&quot;点击或拖拽&quot; />` }}"
+        />
       </div>
     </section>
 
     <!-- 禁用状态 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">禁用状态</h2>
+      <h2 class="doc-section__title">
+        禁用状态
+      </h2>
       <p class="doc-section__desc">
         设置 <code>disabled</code> 后，上传按钮隐藏，已有图片不可删除。
       </p>
@@ -156,30 +253,35 @@ function handleExceed(files, limit) {
         <div class="doc-preview__body">
           <XlyUpload v-model="valueDisabled" disabled />
         </div>
-        <XlyDocCode :code='`{{ \`<XlyUpload v-model="images" disabled />\` }}`' />
+        <XlyDocCode code="{{ `<XlyUpload v-model=&quot;images&quot; disabled />` }}" />
       </div>
     </section>
 
     <!-- 上传前校验 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">上传前校验</h2>
+      <h2 class="doc-section__title">
+        上传前校验
+      </h2>
       <p class="doc-section__desc">
-        通过 <code>accept-types</code>、<code>max-size</code>、<code>min-size</code> 属性配置校验规则，无需编写 JS 代码。
-        校验失败时触发 <code>@validate-error</code> 事件并显示错误信息。
+        通过 <code>accept-types</code>、<code>max-size</code>、<code>min-size</code> 属性配置校验规则，无需编写 JS
+        代码。 校验失败时触发 <code>@validate-error</code> 事件并显示错误信息。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div>
-            <div class="demo-label">accept-types="jpg,png" + max-size="2"</div>
+            <div class="demo-label">
+              accept-types="jpg,png" + max-size="2"
+            </div>
             <XlyUpload v-model="valueValidate" accept-types="jpg,png" :max-size="2" />
           </div>
         </div>
-        <XlyDocCode :code='`{{ \`<!-- 仅允许 JPG/PNG，不超过 2MB -->
+        <XlyDocCode
+          code="{{ `<!-- 仅允许 JPG/PNG，不超过 2MB -->
 <XlyUpload
-  v-model="images"
-  accept-types="jpg,png"
-  :max-size="2"
-  @validate-error="handleValidateError"
+  v-model=&quot;images&quot;
+  accept-types=&quot;jpg,png&quot;
+  :max-size=&quot;2&quot;
+  @validate-error=&quot;handleValidateError&quot;
 />
 
 function handleValidateError(msg) {
@@ -187,17 +289,21 @@ function handleValidateError(msg) {
 }
 
 // 支持的格式（后缀或 MIME 类型均可）：
-// accept-types="jpg,png,gif"
-// accept-types="image/jpeg,image/png,image/gif"
-// 最小尺寸同理：min-size="0.1"\` }}`' />
+// accept-types=&quot;jpg,png,gif&quot;
+// accept-types=&quot;image/jpeg,image/png,image/gif&quot;
+// 最小尺寸同理：min-size=&quot;0.1&quot;` }}"
+        />
       </div>
     </section>
 
     <!-- 网络上传 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">切换上传模式</h2>
+      <h2 class="doc-section__title">
+        切换上传模式
+      </h2>
       <p class="doc-section__desc">
-        组件顶部有一个 <code>UPLOAD_MODE</code> 配置项，修改它即可切换本地上传/网络上传，此说明仅作为参考，请根据实际业务需求进行修改。
+        组件顶部有一个
+        <code>UPLOAD_MODE</code> 配置项，修改它即可切换本地上传/网络上传，此说明仅作为参考，请根据实际业务需求进行修改。
       </p>
 
       <div class="doc-alert">
@@ -209,7 +315,9 @@ function handleValidateError(msg) {
           </svg>
         </div>
         <div class="doc-alert__body">
-          <div class="doc-alert__title">如何切换？</div>
+          <div class="doc-alert__title">
+            如何切换？
+          </div>
           <p>打开 <code>src/components/xly-upload/index.vue</code>，找到顶部的配置区：</p>
           <div class="doc-code doc-code--standalone">
             <pre><code>{{ `// 切换上传模式：'local' | 'network'
@@ -232,8 +340,12 @@ const NETWORK_CONFIG = {
 
       <!-- 接口返回格式 -->
       <div class="doc-upload-options">
-        <h3 class="doc-subtitle">接口返回格式</h3>
-        <p class="doc-section__desc">组件自动兼容以下三种响应格式，只需设置 <code>responseUrlPath</code> 即可：</p>
+        <h3 class="doc-subtitle">
+          接口返回格式
+        </h3>
+        <p class="doc-section__desc">
+          组件自动兼容以下三种响应格式，只需设置 <code>responseUrlPath</code> 即可：
+        </p>
         <div class="doc-table">
           <table>
             <thead>
@@ -262,7 +374,9 @@ const NETWORK_CONFIG = {
 
       <!-- NETWORK_CONFIG 完整配置 -->
       <div class="doc-upload-options">
-        <h3 class="doc-subtitle">NETWORK_CONFIG 完整配置</h3>
+        <h3 class="doc-subtitle">
+          NETWORK_CONFIG 完整配置
+        </h3>
         <div class="doc-table">
           <table>
             <thead>
@@ -318,80 +432,90 @@ const NETWORK_CONFIG = {
 
     <!-- 自定义提示 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">提示文字</h2>
+      <h2 class="doc-section__title">
+        提示文字
+      </h2>
       <p class="doc-section__desc">
         通过 <code>tip</code> 属性或 <code>#tip</code> 插槽在上传区域下方添加提示说明。
       </p>
       <div class="doc-preview">
-        <div class="doc-preview__body" style="align-items: flex-start; gap: 48px;">
+        <div class="doc-preview__body" style="align-items: flex-start; gap: 48px">
           <div>
-            <div class="demo-label">tip 属性</div>
+            <div class="demo-label">
+              tip 属性
+            </div>
             <XlyUpload v-model="valueTip1" tip="支持 JPG/PNG/GIF，单张不超过 5MB" />
           </div>
           <div>
-            <div class="demo-label">#tip 插槽</div>
+            <div class="demo-label">
+              #tip 插槽
+            </div>
             <XlyUpload v-model="valueTip2">
               <template #tip>
-                <div style="color: #f5a623; font-size: 12px;">⚠️ 上传后不可撤销，请确认图片正确</div>
+                <div style="color: #f5a623; font-size: 12px">
+                  ⚠️ 上传后不可撤销，请确认图片正确
+                </div>
               </template>
             </XlyUpload>
           </div>
         </div>
-        <XlyDocCode :code='`{{ \`<!-- tip 属性 -->
-<XlyUpload v-model="images" tip="支持 JPG/PNG/GIF，单张不超过 5MB" />
+        <XlyDocCode
+          code="{{ `<!-- tip 属性 -->
+<XlyUpload v-model=&quot;images&quot; tip=&quot;支持 JPG/PNG/GIF，单张不超过 5MB&quot; />
 
 <!-- #tip 插槽 -->
-<XlyUpload v-model="images">
+<XlyUpload v-model=&quot;images&quot;>
   <template #tip>
-    <span style="color: orange;">⚠️ 上传后不可撤销</span>
+    <span style=&quot;color: orange;&quot;>⚠️ 上传后不可撤销</span>
   </template>
-</XlyUpload>\` }}`' />
+</XlyUpload>` }}"
+        />
       </div>
     </section>
 
     <!-- 业务场景 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">业务场景</h2>
-      <p class="doc-section__desc">实际项目中常见的使用场景示例。</p>
+      <h2 class="doc-section__title">
+        业务场景
+      </h2>
+      <p class="doc-section__desc">
+        实际项目中常见的使用场景示例。
+      </p>
 
-      <h3 class="doc-subsection__title">商品图片上传</h3>
+      <h3 class="doc-subsection__title">
+        商品图片上传
+      </h3>
       <div class="doc-preview doc-preview--noborder">
         <div class="demo-form-scene">
           <div class="demo-form-row">
             <label class="demo-form-label">商品名称</label>
-            <input v-model="productForm.name" class="demo-input" placeholder="请输入商品名称" />
+            <input v-model="productForm.name" class="demo-input" placeholder="请输入商品名称">
           </div>
           <div class="demo-form-row">
             <label class="demo-form-label">主图 <span class="required">*</span></label>
-            <XlyUpload
-              v-model="productForm.cover"
-              :limit="1"
-              :size="120"
-              tip="建议尺寸 800×800，支持 JPG/PNG"
-            />
+            <XlyUpload v-model="productForm.cover" :limit="1" :size="120" tip="建议尺寸 800×800，支持 JPG/PNG" />
           </div>
           <div class="demo-form-row">
             <label class="demo-form-label">轮播图</label>
-            <XlyUpload
-              v-model="productForm.gallery"
-              :limit="6"
-              :size="100"
-              tip="最多上传 6 张，每张不超过 5MB"
-            />
+            <XlyUpload v-model="productForm.gallery" :limit="6" :size="100" tip="最多上传 6 张，每张不超过 5MB" />
           </div>
           <div class="demo-form-actions">
-            <XlyButton type="primary" @click="handleProductSubmit">保存商品</XlyButton>
+            <XlyButton type="primary" @click="handleProductSubmit">
+              保存商品
+            </XlyButton>
             <XlyButton>重置</XlyButton>
           </div>
         </div>
       </div>
 
-      <h3 class="doc-subsection__title">头像修改</h3>
+      <h3 class="doc-subsection__title">
+        头像修改
+      </h3>
       <div class="doc-preview doc-preview--noborder">
         <div class="demo-avatar-scene">
           <div class="demo-avatar-left">
             <div v-if="avatarImages.length" class="demo-avatar-preview">
-              <img :src="Array.isArray(avatarImages) ? avatarImages[0] : ''" />
+              <img :src="Array.isArray(avatarImages) ? avatarImages[0] : ''">
             </div>
             <div v-else class="demo-avatar-placeholder">
               <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#c0c4cc" stroke-width="1.5">
@@ -401,13 +525,10 @@ const NETWORK_CONFIG = {
             </div>
           </div>
           <div class="demo-avatar-right">
-            <div class="demo-avatar-title">点击上传头像</div>
-            <XlyUpload
-              v-model="avatarImages"
-              :limit="1"
-              :size="80"
-              tip="支持 JPG/PNG，建议正方形图片"
-            />
+            <div class="demo-avatar-title">
+              点击上传头像
+            </div>
+            <XlyUpload v-model="avatarImages" :limit="1" :size="80" tip="支持 JPG/PNG，建议正方形图片" />
           </div>
         </div>
       </div>
@@ -415,9 +536,13 @@ const NETWORK_CONFIG = {
 
     <!-- API 文档 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">API</h2>
+      <h2 class="doc-section__title">
+        API
+      </h2>
 
-      <h3 class="doc-subtitle">Props</h3>
+      <h3 class="doc-subtitle">
+        Props
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -437,7 +562,10 @@ const NETWORK_CONFIG = {
             </tr>
             <tr>
               <td><code>value-mode</code></td>
-              <td>返回值格式：<code>array</code> 返回数组，<code>string</code> 返回逗号拼接（每项经过 <code>encodeURIComponent</code> 编码，base64 安全）</td>
+              <td>
+                返回值格式：<code>array</code> 返回数组，<code>string</code> 返回逗号拼接（每项经过
+                <code>encodeURIComponent</code> 编码，base64 安全）
+              </td>
               <td><code>'array' | 'string'</code></td>
               <td><code>'array'</code></td>
             </tr>
@@ -497,7 +625,9 @@ const NETWORK_CONFIG = {
             </tr>
             <tr>
               <td><code>accept-types</code></td>
-              <td>允许的文件后缀或 MIME 类型，逗号拼接，如 <code>jpg,png</code> 或 <code>image/jpeg,image/png</code></td>
+              <td>
+                允许的文件后缀或 MIME 类型，逗号拼接，如 <code>jpg,png</code> 或 <code>image/jpeg,image/png</code>
+              </td>
               <td><code>string</code></td>
               <td>—（不限制）</td>
             </tr>
@@ -517,7 +647,9 @@ const NETWORK_CONFIG = {
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Events</h3>
+      <h3 class="doc-subtitle">
+        Events
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -567,7 +699,9 @@ const NETWORK_CONFIG = {
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Slots</h3>
+      <h3 class="doc-subtitle">
+        Slots
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -589,7 +723,9 @@ const NETWORK_CONFIG = {
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Exposes（ref 暴露方法）</h3>
+      <h3 class="doc-subtitle">
+        Exposes（ref 暴露方法）
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -614,89 +750,132 @@ const NETWORK_CONFIG = {
           </tbody>
         </table>
       </div>
-
     </section>
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue'
-import XlyUpload from '@/components/xly-image-upload/index.vue'
-import XlyButton from '@/components/xly-button/index.vue'
-
-// ---- 基础用法 ----
-const value1 = ref<string[]>([])
-
-// ---- v-model 双向绑定 ----
-const value2Array = ref<string[]>([])
-const value2String = ref<string>('')
-
-// ---- 限制数量 ----
-const value3Single = ref<string[]>([])
-const value3Multi = ref<string[]>([])
-const value3Unlimited = ref<string[]>([])
-
-function handleExceed(files: File[], limit: number) {
-  alert(`最多上传 ${limit} 张，已超出 ${files.length} 张，已自动截取前 ${limit} 张`)
-}
-
-// ---- 自定义尺寸 ----
-const valueSizeA = ref<string[]>([])
-const valueSizeB = ref<string[]>([])
-const valueSizeC = ref<string[]>([])
-
-// ---- 拖拽 ----
-const valueDrag = ref<string[]>([])
-
-// ---- 禁用 ----
-const valueDisabled = ref<string[]>([
-  'https://picsum.photos/seed/d1/200/200',
-  'https://picsum.photos/seed/d2/200/200',
-])
-
-// ---- 校验 ----
-const valueValidate = ref<string[]>([])
-function handleValidateError(msg: string) {
-  alert(msg)
-}
-
-// ---- 提示文字 ----
-const valueTip1 = ref<string[]>([])
-const valueTip2 = ref<string[]>([])
-
-// ---- 商品表单 ----
-const productForm = ref({
-  name: '',
-  cover: [] as string[],
-  gallery: [] as string[],
-})
-
-function handleProductSubmit() {
-  if (!productForm.value.cover.length) {
-    alert('请上传主图！')
-    return
-  }
-  alert(`保存成功！\n商品名称：${productForm.value.name}\n主图：已上传\n轮播图：${productForm.value.gallery.length} 张`)
-}
-
-// ---- 头像 ----
-const avatarImages = ref<string[]>([])
-</script>
-
 <style scoped lang="scss">
-.upload-doc { padding: 8px 0 40px; }
-.doc-header { margin-bottom: 36px; }
-.doc-title { font-size: 26px; font-weight: 700; color: var(--el-text-color-primary); margin: 0 0 8px; letter-spacing: -0.3px; }
-.doc-desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0; line-height: 1.6; }
-.doc-section { margin-bottom: 32px; }
-.doc-section__title { font-size: 18px; font-weight: 600; color: var(--el-text-color-primary); margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--el-border-color-lighter); }
-.doc-subsection__title { font-size: 15px; font-weight: 600; color: var(--el-text-color-regular); margin: 24px 0 12px; }
-.doc-section__desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 16px; line-height: 1.6; code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; } }
-.doc-preview { border: 1px solid var(--el-border-color-lighter); border-radius: 12px; overflow: hidden; background: var(--el-bg-color-overlay); &--noborder { border: none; background: var(--el-fill-color-light); } }
-.doc-preview__body { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 24px; }
-.doc-code { border-top: 1px solid var(--el-border-color-lighter); background: var(--el-fill-color-light); padding: 16px 20px; overflow-x: auto; pre { margin: 0; padding: 0; } code { font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 13px; line-height: 1.7; color: var(--el-text-color-regular); white-space: pre; } }
-.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
-.doc-table { overflow-x: auto; table { width: 100%; border-collapse: collapse; font-size: 14px; } th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); } th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); white-space: nowrap; } td { color: var(--el-text-color-regular); } code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; } }
+.upload-doc {
+  padding: 8px 0 40px;
+}
+.doc-header {
+  margin-bottom: 36px;
+}
+.doc-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  letter-spacing: -0.3px;
+}
+.doc-desc {
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+.doc-section {
+  margin-bottom: 32px;
+}
+.doc-section__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--el-border-color-lighter);
+}
+.doc-subsection__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--el-text-color-regular);
+  margin: 24px 0 12px;
+}
+.doc-section__desc {
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0 0 16px;
+  line-height: 1.6;
+  code {
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+  }
+}
+.doc-preview {
+  border: 1px solid var(--el-border-color-lighter);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--el-bg-color-overlay);
+  &.doc-preview--noborder {
+    border: none;
+    background: var(--el-fill-color-light);
+  }
+}
+.doc-preview__body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+}
+.doc-code {
+  border-top: 1px solid var(--el-border-color-lighter);
+  background: var(--el-fill-color-light);
+  padding: 16px 20px;
+  overflow-x: auto;
+  pre {
+    margin: 0;
+    padding: 0;
+  }
+  code {
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--el-text-color-regular);
+    white-space: pre;
+  }
+}
+.doc-subtitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 20px 0 10px;
+}
+.doc-table {
+  overflow-x: auto;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+  }
+  th {
+    background: var(--el-fill-color-light);
+    font-weight: 600;
+    color: var(--el-text-color-primary);
+    white-space: nowrap;
+  }
+  td {
+    color: var(--el-text-color-regular);
+  }
+  code {
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+  }
+}
 
 // 当前值展示
 .demo-value-display {
@@ -823,7 +1002,9 @@ const avatarImages = ref<string[]>([])
     border-color: #4f6ef7;
   }
 
-  &::placeholder { color: var(--el-text-color-placeholder); }
+  &::placeholder {
+    color: var(--el-text-color-placeholder);
+  }
 }
 
 .demo-form-actions {
@@ -891,13 +1072,13 @@ const avatarImages = ref<string[]>([])
   padding: 16px 18px;
   margin-top: 12px;
 
-  &__icon {
+  .doc-alert__icon {
     flex-shrink: 0;
     color: var(--el-color-primary);
     padding-top: 1px;
   }
 
-  &__body {
+  .doc-alert__body {
     flex: 1;
     font-size: 14px;
     color: var(--el-text-color-regular);
@@ -905,7 +1086,9 @@ const avatarImages = ref<string[]>([])
 
     p {
       margin: 0 0 8px;
-      &:last-child { margin-bottom: 0; }
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
 
     code {
@@ -918,7 +1101,7 @@ const avatarImages = ref<string[]>([])
     }
   }
 
-  &__title {
+  .doc-alert__title {
     font-weight: 600;
     color: var(--el-text-color-primary);
     margin-bottom: 8px;

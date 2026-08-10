@@ -1,8 +1,54 @@
+<script setup lang="ts">
+import type { UploadFileItem } from 'easy-ui'
+import { XlyButton, XlyUpload } from 'easy-ui'
+import { ref } from 'vue'
+
+// ---- 基础用法 ----
+const value1 = ref<UploadFileItem[]>([])
+
+// ---- v-model 双向绑定 ----
+const value2Array = ref<UploadFileItem[]>([])
+const value2String = ref('')
+
+// ---- 限制数量 ----
+const value3Single = ref<UploadFileItem[]>([])
+const value3Multi = ref<UploadFileItem[]>([])
+const value3Unlimited = ref<UploadFileItem[]>([])
+
+// ---- 拖拽 ----
+const valueDrag = ref<UploadFileItem[]>([])
+
+// ---- 禁用 ----
+const valueDisabled = ref<UploadFileItem[]>([
+  { id: '1', name: '项目文档.pdf', url: 'https://example.com/doc.pdf', size: 1024 },
+  { id: '2', name: '数据报表.xlsx', url: 'https://example.com/report.xlsx', size: 2048 },
+])
+
+// ---- 校验 ----
+const valueValidate = ref<UploadFileItem[]>([])
+
+// ---- 提示文字 ----
+const valueTip1 = ref<UploadFileItem[]>([])
+const valueTip2 = ref<UploadFileItem[]>([])
+
+// ---- 文档表单 ----
+const docForm = ref({
+  title: '',
+  attachments: [] as UploadFileItem[],
+})
+
+function handleDocSubmit() {
+  alert(`提交成功！\n文档标题：${docForm.value.title}\n附件数量：${docForm.value.attachments.length} 个`)
+}
+</script>
+
 <template>
   <div class="upload-doc">
     <!-- 页面标题 -->
     <div class="doc-header">
-      <h1 class="doc-title">FileUpload 文件上传</h1>
+      <h1 class="doc-title">
+        FileUpload 文件上传
+      </h1>
       <p class="doc-desc">
         支持本地预览与网络上传的文件上传组件，提供 v-model
         双向绑定，支持上传数量限制、拖拽上传、进度展示和文件类型识别功能。
@@ -11,7 +57,9 @@
 
     <!-- 基础用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
       <p class="doc-section__desc">
         默认使用本地模式，读取本地文件并以 <code>base64</code> 形式存储，无需后端接口即可看到完整效果。
       </p>
@@ -19,26 +67,30 @@
         <div class="doc-preview__body">
           <XlyUpload v-model="value1" />
         </div>
-        <XlyDocCode :code='`{{ \`<XlyUpload v-model="fileList" />\` }}`' />
+        <XlyDocCode code="{{ `<XlyUpload v-model=&quot;fileList&quot; />` }}" />
       </div>
       <div class="demo-value-display">
         <span class="demo-value-label">当前值：</span>
-        <span class="demo-value-content" v-if="value1 && value1.length">[{{ value1.length }} 个文件]</span>
-        <span class="demo-value-content" v-else>（空）</span>
+        <span v-if="value1 && value1.length" class="demo-value-content">[{{ value1.length }} 个文件]</span>
+        <span v-else class="demo-value-content">（空）</span>
       </div>
     </section>
 
     <!-- v-model 绑定 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">v-model 双向绑定</h2>
+      <h2 class="doc-section__title">
+        v-model 双向绑定
+      </h2>
       <p class="doc-section__desc">
-        <code>modelValue</code> 支持 <strong>对象数组</strong> 和 <strong>JSON 字符串</strong> 两种格式传入，
-        通过 <code>value-mode</code> 控制返回格式。
+        <code>modelValue</code> 支持 <strong>对象数组</strong> 和 <strong>JSON 字符串</strong> 两种格式传入， 通过
+        <code>value-mode</code> 控制返回格式。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body demo-vmodel">
           <div class="demo-vmodel-item">
-            <div class="demo-vmodel-label">返回对象数组（默认）</div>
+            <div class="demo-vmodel-label">
+              返回对象数组（默认）
+            </div>
             <XlyUpload v-model="value2Array" :limit="3" />
             <div class="demo-value-display">
               <span class="demo-value-label">类型：</span>
@@ -46,7 +98,9 @@
             </div>
           </div>
           <div class="demo-vmodel-item">
-            <div class="demo-vmodel-label">返回 JSON 字符串（value-mode="string"）</div>
+            <div class="demo-vmodel-label">
+              返回 JSON 字符串（value-mode="string"）
+            </div>
             <XlyUpload v-model="value2String" value-mode="string" :limit="3" />
             <div class="demo-value-display">
               <span class="demo-value-label">类型：</span>
@@ -54,11 +108,12 @@
             </div>
           </div>
         </div>
-        <XlyDocCode :code='`{{ \`<!-- 返回对象数组（默认） -->
-<XlyUpload v-model="fileList" />
+        <XlyDocCode
+          code="{{ `<!-- 返回对象数组（默认） -->
+<XlyUpload v-model=&quot;fileList&quot; />
 
 <!-- 返回 JSON 字符串 -->
-<XlyUpload v-model="fileJson" value-mode="string" />
+<XlyUpload v-model=&quot;fileJson&quot; value-mode=&quot;string&quot; />
 
 // 对象结构
 interface UploadFileItem {
@@ -66,47 +121,60 @@ interface UploadFileItem {
   name: string    // 文件名称
   url: string     // 文件地址
   size?: number   // 文件大小（KB）
-}\` }}`' />
+}` }}"
+        />
       </div>
     </section>
 
     <!-- 限制数量 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">限制上传数量</h2>
+      <h2 class="doc-section__title">
+        限制上传数量
+      </h2>
       <p class="doc-section__desc">
-        通过 <code>limit</code> 属性设置最大上传数量，达到上限后上传按钮自动隐藏。
-        超出时会触发 <code>@exceed</code> 事件。
+        通过 <code>limit</code> 属性设置最大上传数量，达到上限后上传按钮自动隐藏。 超出时会触发
+        <code>@exceed</code> 事件。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="gap: 40px; align-items: flex-start">
           <div>
-            <div class="demo-label">limit=1</div>
+            <div class="demo-label">
+              limit=1
+            </div>
             <XlyUpload v-model="value3Single" :limit="1" />
           </div>
           <div>
-            <div class="demo-label">limit=3</div>
+            <div class="demo-label">
+              limit=3
+            </div>
             <XlyUpload v-model="value3Multi" :limit="3" />
           </div>
           <div>
-            <div class="demo-label">不限制数量</div>
+            <div class="demo-label">
+              不限制数量
+            </div>
             <XlyUpload v-model="value3Unlimited" />
           </div>
         </div>
-        <XlyDocCode :code='`{{ \`<!-- 限制 1 个文件 -->
-<XlyUpload v-model="file" :limit="1" />
+        <XlyDocCode
+          code="{{ `<!-- 限制 1 个文件 -->
+<XlyUpload v-model=&quot;file&quot; :limit=&quot;1&quot; />
 
 <!-- 限制 3 个 -->
-<XlyUpload v-model="files" :limit="3" @exceed="handleExceed" />
+<XlyUpload v-model=&quot;files&quot; :limit=&quot;3&quot; @exceed=&quot;handleExceed&quot; />
 
 function handleExceed(files, limit) {
-  console.log(\\\`超出 \\\${files.length} 个\\\`)
-}\` }}`' />
+  console.log(\`超出 \${files.length} 个\`)
+}` }}"
+        />
       </div>
     </section>
 
     <!-- 拖拽上传 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">拖拽上传</h2>
+      <h2 class="doc-section__title">
+        拖拽上传
+      </h2>
       <p class="doc-section__desc">
         上传按钮区域支持直接将文件<strong>拖入</strong>，边框会高亮提示。
       </p>
@@ -114,13 +182,17 @@ function handleExceed(files, limit) {
         <div class="doc-preview__body">
           <XlyUpload v-model="valueDrag" trigger-text="点击或拖拽上传" />
         </div>
-        <XlyDocCode :code='`{{ \`<XlyUpload v-model="files" trigger-text="点击或拖拽上传" />\` }}`' />
+        <XlyDocCode
+          code="{{ `<XlyUpload v-model=&quot;files&quot; trigger-text=&quot;点击或拖拽上传&quot; />` }}"
+        />
       </div>
     </section>
 
     <!-- 禁用状态 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">禁用状态</h2>
+      <h2 class="doc-section__title">
+        禁用状态
+      </h2>
       <p class="doc-section__desc">
         设置 <code>disabled</code> 后，上传按钮隐藏，已有文件不可删除。
       </p>
@@ -128,46 +200,50 @@ function handleExceed(files, limit) {
         <div class="doc-preview__body">
           <XlyUpload v-model="valueDisabled" disabled />
         </div>
-        <XlyDocCode :code='`{{ \`<XlyUpload v-model="files" disabled />\` }}`' />
+        <XlyDocCode code="{{ `<XlyUpload v-model=&quot;files&quot; disabled />` }}" />
       </div>
     </section>
 
     <!-- 上传前校验 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">上传前校验</h2>
+      <h2 class="doc-section__title">
+        上传前校验
+      </h2>
       <p class="doc-section__desc">
-        通过 <code>accept-types</code>、<code>max-size</code>、<code>min-size</code>
-        属性配置校验规则，无需编写 JS 代码。校验失败时触发 <code>@validate-error</code> 事件。
+        通过 <code>accept-types</code>、<code>max-size</code>、<code>min-size</code> 属性配置校验规则，无需编写 JS
+        代码。校验失败时触发 <code>@validate-error</code> 事件。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div>
-            <div class="demo-label">accept-types="pdf,doc,docx" + max-size=2048（2MB）</div>
-            <XlyUpload
-              v-model="valueValidate"
-              accept-types="pdf,doc,docx"
-              :max-size="2048"
-            />
+            <div class="demo-label">
+              accept-types="pdf,doc,docx" + max-size=2048（2MB）
+            </div>
+            <XlyUpload v-model="valueValidate" accept-types="pdf,doc,docx" :max-size="2048" />
           </div>
         </div>
-        <XlyDocCode :code='`{{ \`<!-- 仅允许 PDF/Word，不超过 2MB -->
+        <XlyDocCode
+          code="{{ `<!-- 仅允许 PDF/Word，不超过 2MB -->
 <XlyUpload
-  v-model="files"
-  accept-types="pdf,doc,docx"
-  :max-size="2048"
-  @validate-error="handleValidateError"
+  v-model=&quot;files&quot;
+  accept-types=&quot;pdf,doc,docx&quot;
+  :max-size=&quot;2048&quot;
+  @validate-error=&quot;handleValidateError&quot;
 />
 
 // size 单位为 KB，2048 = 2MB
 // 支持的格式（后缀或 MIME 类型均可）：
-// accept-types="pdf,doc,docx"
-// accept-types="application/pdf,application/msword"\` }}`' />
+// accept-types=&quot;pdf,doc,docx&quot;
+// accept-types=&quot;application/pdf,application/msword&quot;` }}"
+        />
       </div>
     </section>
 
     <!-- 网络上传 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">切换上传模式</h2>
+      <h2 class="doc-section__title">
+        切换上传模式
+      </h2>
       <p class="doc-section__desc">
         组件顶部有一个 <code>UPLOAD_MODE</code> 配置项，修改它即可切换本地上传/网络上传。
       </p>
@@ -181,7 +257,9 @@ function handleExceed(files, limit) {
           </svg>
         </div>
         <div class="doc-alert__body">
-          <div class="doc-alert__title">如何切换？</div>
+          <div class="doc-alert__title">
+            如何切换？
+          </div>
           <p>打开 <code>src/components/xly-upload/index.vue</code>，找到顶部的配置区：</p>
           <div class="doc-code doc-code--standalone">
             <pre><code>{{ `// 切换上传模式：'local' | 'network'
@@ -204,7 +282,9 @@ const NETWORK_CONFIG = {
 
       <!-- 接口返回格式 -->
       <div class="doc-upload-options">
-        <h3 class="doc-subtitle">接口返回格式</h3>
+        <h3 class="doc-subtitle">
+          接口返回格式
+        </h3>
         <div class="doc-table">
           <table>
             <thead>
@@ -234,48 +314,64 @@ const NETWORK_CONFIG = {
 
     <!-- 自定义提示 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">提示文字</h2>
+      <h2 class="doc-section__title">
+        提示文字
+      </h2>
       <p class="doc-section__desc">
         通过 <code>tip</code> 属性或 <code>#tip</code> 插槽在上传区域下方添加提示说明。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="align-items: flex-start; gap: 48px">
           <div>
-            <div class="demo-label">tip 属性</div>
+            <div class="demo-label">
+              tip 属性
+            </div>
             <XlyUpload v-model="valueTip1" tip="支持 PDF/Word/Excel，单个不超过 10MB" />
           </div>
           <div>
-            <div class="demo-label">#tip 插槽</div>
+            <div class="demo-label">
+              #tip 插槽
+            </div>
             <XlyUpload v-model="valueTip2">
               <template #tip>
-                <div style="color: #fa8c16; font-size: 12px">⚠️ 上传后不可撤销，请确认文件正确</div>
+                <div style="color: #fa8c16; font-size: 12px">
+                  ⚠️ 上传后不可撤销，请确认文件正确
+                </div>
               </template>
             </XlyUpload>
           </div>
         </div>
-        <XlyDocCode :code='`{{ \`<!-- tip 属性 -->
-<XlyUpload v-model="files" tip="支持 PDF/Word，单个不超过 10MB" />
+        <XlyDocCode
+          code="{{ `<!-- tip 属性 -->
+<XlyUpload v-model=&quot;files&quot; tip=&quot;支持 PDF/Word，单个不超过 10MB&quot; />
 
 <!-- #tip 插槽 -->
-<XlyUpload v-model="files">
+<XlyUpload v-model=&quot;files&quot;>
   <template #tip>
-    <span style="color: orange;">⚠️ 上传后不可撤销</span>
+    <span style=&quot;color: orange;&quot;>⚠️ 上传后不可撤销</span>
   </template>
-</XlyUpload>\` }}`' />
+</XlyUpload>` }}"
+        />
       </div>
     </section>
 
     <!-- 业务场景 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">业务场景</h2>
-      <p class="doc-section__desc">实际项目中常见的使用场景示例。</p>
+      <h2 class="doc-section__title">
+        业务场景
+      </h2>
+      <p class="doc-section__desc">
+        实际项目中常见的使用场景示例。
+      </p>
 
-      <h3 class="doc-subsection__title">附件上传</h3>
+      <h3 class="doc-subsection__title">
+        附件上传
+      </h3>
       <div class="doc-preview doc-preview--noborder">
         <div class="demo-form-scene">
           <div class="demo-form-row">
             <label class="demo-form-label">文档标题</label>
-            <input v-model="docForm.title" class="demo-input" placeholder="请输入文档标题" />
+            <input v-model="docForm.title" class="demo-input" placeholder="请输入文档标题">
           </div>
           <div class="demo-form-row">
             <label class="demo-form-label">附件 <span class="required">*</span></label>
@@ -288,7 +384,9 @@ const NETWORK_CONFIG = {
             />
           </div>
           <div class="demo-form-actions">
-            <XlyButton type="primary" @click="handleDocSubmit">提交文档</XlyButton>
+            <XlyButton type="primary" @click="handleDocSubmit">
+              提交文档
+            </XlyButton>
             <XlyButton>重置</XlyButton>
           </div>
         </div>
@@ -297,9 +395,13 @@ const NETWORK_CONFIG = {
 
     <!-- API 文档 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">API</h2>
+      <h2 class="doc-section__title">
+        API
+      </h2>
 
-      <h3 class="doc-subtitle">UploadFileItem 对象结构</h3>
+      <h3 class="doc-subtitle">
+        UploadFileItem 对象结构
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -334,7 +436,9 @@ const NETWORK_CONFIG = {
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Props</h3>
+      <h3 class="doc-subtitle">
+        Props
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -422,7 +526,9 @@ const NETWORK_CONFIG = {
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Events</h3>
+      <h3 class="doc-subtitle">
+        Events
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -472,7 +578,9 @@ const NETWORK_CONFIG = {
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Slots</h3>
+      <h3 class="doc-subtitle">
+        Slots
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -494,7 +602,9 @@ const NETWORK_CONFIG = {
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Exposes（ref 暴露方法）</h3>
+      <h3 class="doc-subtitle">
+        Exposes（ref 暴露方法）
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -522,51 +632,6 @@ const NETWORK_CONFIG = {
     </section>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import XlyUpload from '@/components/xly-file-upload/index.vue'
-import XlyButton from '@/components/xly-button/index.vue'
-import type { UploadFileItem } from '@/components/xly-file-upload/index.vue'
-
-// ---- 基础用法 ----
-const value1 = ref<UploadFileItem[]>([])
-
-// ---- v-model 双向绑定 ----
-const value2Array = ref<UploadFileItem[]>([])
-const value2String = ref('')
-
-// ---- 限制数量 ----
-const value3Single = ref<UploadFileItem[]>([])
-const value3Multi = ref<UploadFileItem[]>([])
-const value3Unlimited = ref<UploadFileItem[]>([])
-
-// ---- 拖拽 ----
-const valueDrag = ref<UploadFileItem[]>([])
-
-// ---- 禁用 ----
-const valueDisabled = ref<UploadFileItem[]>([
-  { id: '1', name: '项目文档.pdf', url: 'https://example.com/doc.pdf', size: 1024 },
-  { id: '2', name: '数据报表.xlsx', url: 'https://example.com/report.xlsx', size: 2048 },
-])
-
-// ---- 校验 ----
-const valueValidate = ref<UploadFileItem[]>([])
-
-// ---- 提示文字 ----
-const valueTip1 = ref<UploadFileItem[]>([])
-const valueTip2 = ref<UploadFileItem[]>([])
-
-// ---- 文档表单 ----
-const docForm = ref({
-  title: '',
-  attachments: [] as UploadFileItem[],
-})
-
-function handleDocSubmit() {
-  alert(`提交成功！\n文档标题：${docForm.value.title}\n附件数量：${docForm.value.attachments.length} 个`)
-}
-</script>
 
 <style scoped lang="scss">
 .upload-doc {
@@ -634,7 +699,7 @@ function handleDocSubmit() {
   overflow: hidden;
   background: var(--el-bg-color-overlay);
 
-  &--noborder {
+  &.doc-preview--noborder {
     border: none;
     background: var(--el-fill-color-light);
   }
@@ -834,13 +899,13 @@ function handleDocSubmit() {
   padding: 16px 18px;
   margin-top: 12px;
 
-  &__icon {
+  .doc-alert__icon {
     flex-shrink: 0;
     color: var(--el-color-primary);
     padding-top: 1px;
   }
 
-  &__body {
+  .doc-alert__body {
     flex: 1;
     font-size: 14px;
     color: var(--el-text-color-regular);
@@ -864,7 +929,7 @@ function handleDocSubmit() {
     }
   }
 
-  &__title {
+  .doc-alert__title {
     font-weight: 600;
     color: var(--el-text-color-primary);
     margin-bottom: 8px;

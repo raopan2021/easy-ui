@@ -1,3 +1,85 @@
+<script setup lang="ts">
+import { XlyIcon } from 'easy-ui'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useMenuLayoutStore } from '@/stores/menuLayout'
+import { useThemeStore } from '@/stores/theme'
+import { useUserStore } from '@/stores/user'
+import HorizontalMenu from './HorizontalMenu.vue'
+import MenuLayoutDrawer from './MenuLayoutDrawer.vue'
+import MessageDrawer from './MessageDrawer.vue'
+
+const router = useRouter()
+const userStore = useUserStore()
+const menuLayoutStore = useMenuLayoutStore()
+const themeStore = useThemeStore()
+
+// 主题按钮图标与提示：auto=显示器 / light=太阳 / dark=月亮
+const themeIcon = computed(() => {
+  if (themeStore.mode === 'light')
+    return 'el:Sunny'
+  if (themeStore.mode === 'dark')
+    return 'el:Moon'
+  return 'el:Monitor'
+})
+const themeTitle = computed(() => {
+  if (themeStore.mode === 'light')
+    return '当前：浅色（点击切换深色）'
+  if (themeStore.mode === 'dark')
+    return '当前：深色（点击切换跟随系统）'
+  return '当前：跟随系统（点击切换浅色）'
+})
+const showUserMenu = ref(false)
+const showMessageDrawer = ref(false)
+const showLayoutDrawer = ref(false)
+const messageDrawerRef = ref<InstanceType<typeof MessageDrawer>>()
+
+// 模拟未读消息数量
+const messageUnreadCount = ref(8)
+
+// 全屏状态
+const isFullscreen = ref(false)
+
+// 切换全屏
+function toggleFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen()
+    isFullscreen.value = true
+  }
+  else {
+    document.exitFullscreen()
+    isFullscreen.value = false
+  }
+}
+
+// 监听 ESC 退出全屏
+function handleFullscreenChange() {
+  isFullscreen.value = !!document.fullscreenElement
+}
+
+function handleLogout() {
+  userStore.logout()
+  showUserMenu.value = false
+  router.push({ name: 'Login' })
+}
+
+function handleClickOutside(e: MouseEvent) {
+  const target = e.target as HTMLElement
+  if (!target.closest('.header__user') && !target.closest('.header__user-dropdown')) {
+    showUserMenu.value = false
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
+  document.addEventListener('fullscreenchange', handleFullscreenChange)
+})
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside)
+  document.removeEventListener('fullscreenchange', handleFullscreenChange)
+})
+</script>
+
 <template>
   <header class="header" :class="{ 'header--horizontal': menuLayoutStore.currentLayout === 'horizontal' }">
     <!-- 左侧：Logo + 系统名称 -->
@@ -21,12 +103,16 @@
     <HorizontalMenu v-if="menuLayoutStore.currentLayout === 'horizontal'" class="header__horizontal-menu" />
 
     <!-- 右侧：功能操作区 -->
-    <div class="header__actions" :class="{ 'header__actions--horizontal': menuLayoutStore.currentLayout === 'horizontal' }">
-
+    <div
+      class="header__actions"
+      :class="{ 'header__actions--horizontal': menuLayoutStore.currentLayout === 'horizontal' }"
+    >
       <!-- 消息通知 -->
       <button class="header__action-btn" title="消息通知" @click="showMessageDrawer = true">
         <XlyIcon name="el:Bell" :size="18" />
-        <span v-if="messageUnreadCount > 0" class="header__badge">{{ messageUnreadCount > 99 ? '99+' : messageUnreadCount }}</span>
+        <span v-if="messageUnreadCount > 0" class="header__badge">{{
+          messageUnreadCount > 99 ? '99+' : messageUnreadCount
+        }}</span>
       </button>
 
       <!-- 主题切换：跟随系统 / 浅色 / 深色 -->
@@ -71,7 +157,7 @@
               <span class="header__user-dropdown-email">admin@example.com</span>
             </div>
           </div>
-          <div class="header__user-dropdown-divider"></div>
+          <div class="header__user-dropdown-divider" />
           <div class="header__user-dropdown-item">
             <XlyIcon name="el:UserFilled" :size="16" />
             <span>个人中心</span>
@@ -80,7 +166,7 @@
             <XlyIcon name="el:Plus" :size="16" />
             <span>新建</span>
           </div>
-          <div class="header__user-dropdown-divider"></div>
+          <div class="header__user-dropdown-divider" />
           <div class="header__user-dropdown-item header__user-dropdown-item--danger" @click="handleLogout">
             <XlyIcon name="el:SwitchButton" :size="16" />
             <span>退出登录</span>
@@ -90,88 +176,11 @@
     </div>
 
     <!-- 消息抽屉 -->
-    <MessageDrawer v-model="showMessageDrawer" ref="messageDrawerRef" />
+    <MessageDrawer ref="messageDrawerRef" v-model="showMessageDrawer" />
     <!-- 布局抽屉 -->
     <MenuLayoutDrawer v-model="showLayoutDrawer" />
   </header>
 </template>
-
-<script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
-import { useRouter } from 'vue-router'
-import XlyIcon from '@/components/xly-icon/index.vue'
-import MessageDrawer from './MessageDrawer.vue'
-import MenuLayoutDrawer from './MenuLayoutDrawer.vue'
-import HorizontalMenu from './HorizontalMenu.vue'
-import { useUserStore } from '@/stores/user'
-import { useMenuLayoutStore } from '@/stores/menuLayout'
-import { useThemeStore } from '@/stores/theme'
-
-const router = useRouter()
-const userStore = useUserStore()
-const menuLayoutStore = useMenuLayoutStore()
-const themeStore = useThemeStore()
-
-// 主题按钮图标与提示：auto=显示器 / light=太阳 / dark=月亮
-const themeIcon = computed(() => {
-  if (themeStore.mode === 'light') return 'el:Sunny'
-  if (themeStore.mode === 'dark') return 'el:Moon'
-  return 'el:Monitor'
-})
-const themeTitle = computed(() => {
-  if (themeStore.mode === 'light') return '当前：浅色（点击切换深色）'
-  if (themeStore.mode === 'dark') return '当前：深色（点击切换跟随系统）'
-  return '当前：跟随系统（点击切换浅色）'
-})
-const showUserMenu = ref(false)
-const showMessageDrawer = ref(false)
-const showLayoutDrawer = ref(false)
-const messageDrawerRef = ref<InstanceType<typeof MessageDrawer>>()
-
-// 模拟未读消息数量
-const messageUnreadCount = ref(8)
-
-// 全屏状态
-const isFullscreen = ref(false)
-
-// 切换全屏
-function toggleFullscreen() {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen()
-    isFullscreen.value = true
-  } else {
-    document.exitFullscreen()
-    isFullscreen.value = false
-  }
-}
-
-// 监听 ESC 退出全屏
-function handleFullscreenChange() {
-  isFullscreen.value = !!document.fullscreenElement
-}
-
-function handleLogout() {
-  userStore.logout()
-  showUserMenu.value = false
-  router.push({ name: 'Login' })
-}
-
-function handleClickOutside(e: MouseEvent) {
-  const target = e.target as HTMLElement
-  if (!target.closest('.header__user') && !target.closest('.header__user-dropdown')) {
-    showUserMenu.value = false
-  }
-}
-
-onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
-  document.addEventListener('fullscreenchange', handleFullscreenChange)
-})
-onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside)
-  document.removeEventListener('fullscreenchange', handleFullscreenChange)
-})
-</script>
 
 <style scoped lang="scss">
 /* ========== 设计令牌 ========== */
@@ -195,7 +204,7 @@ $radius: 10px;
   position: relative;
 
   // 水平布局模式：Logo 左侧 + 菜单居中 + 操作右侧
-  &--horizontal {
+  &.header--horizontal {
     padding: 0;
     gap: 0;
   }
@@ -211,7 +220,7 @@ $radius: 10px;
   align-items: center;
   gap: 8px;
 
-  &--horizontal {
+  &.header__actions--horizontal {
     padding-right: 28px;
   }
 }
@@ -222,7 +231,7 @@ $radius: 10px;
   align-items: center;
   gap: 12px;
 
-  &--horizontal {
+  &.header__brand--horizontal {
     padding-left: 28px;
   }
 }
@@ -342,7 +351,9 @@ $radius: 10px;
   width: 220px;
   background: var(--el-bg-color);
   border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.06);
   padding: 6px;
   z-index: 100;
 }
@@ -398,7 +409,7 @@ $radius: 10px;
     color: $text-primary;
   }
 
-  &--danger {
+  &.header__user-dropdown-item--danger {
     &:hover {
       background: rgba(245, 63, 63, 0.06);
       color: var(--el-color-danger);

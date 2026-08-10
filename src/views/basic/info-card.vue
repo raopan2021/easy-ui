@@ -1,15 +1,37 @@
+<script setup lang="ts">
+import { XlyInfoCard } from 'easy-ui'
+import { ElMessage } from 'element-plus'
+
+const demoImage = 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=200&h=150&fit=crop'
+const demoImage2 = 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=200&h=150&fit=crop'
+const demoImage3 = 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=200&h=150&fit=crop'
+
+function handleClick() {
+  ElMessage.success('卡片被点击')
+}
+</script>
+
 <template>
   <div class="info-card-doc">
     <!-- 页面标题 -->
     <div class="doc-header">
-      <h1 class="doc-title">InfoCard 信息卡片</h1>
-      <p class="doc-desc">专为信息展示场景设计，支持左侧图片/图标、标题、描述列表和状态标签，可完全自定义配色方案。</p>
+      <h1 class="doc-title">
+        InfoCard 信息卡片
+      </h1>
+      <p class="doc-desc">
+        专为信息展示场景设计，支持左侧图片/图标、标题、描述列表和状态标签，可完全自定义配色方案。
+      </p>
     </div>
 
     <!-- InfoCard 基础用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
-      <p class="doc-section__desc">传入 <code>image</code> 或 <code>icon</code>、<code>title</code>、<code>description</code>、<code>status</code> 即可渲染一张信息卡片。</p>
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
+      <p class="doc-section__desc">
+        传入 <code>image</code> 或 <code>icon</code>、<code>title</code>、<code>description</code>、<code>status</code>
+        即可渲染一张信息卡片。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body info-card-demo">
           <XlyInfoCard
@@ -37,21 +59,27 @@
             status-type="warning"
           />
         </div>
-        <XlyDocCode :code="`<XlyInfoCard
+        <XlyDocCode
+          code="<XlyInfoCard
   :image=&quot;demoImage&quot;
   icon=&quot;el:WarningFilled&quot;
   title=&quot;人员闯入&quot;
   :description=&quot;['1号门口', '2024-05-20 14:32:21']&quot;
   status=&quot;未处理&quot;
   status-type=&quot;danger&quot;
-/>`" />
+/>"
+        />
       </div>
     </section>
 
     <!-- InfoCard 白色背景 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">浅色背景</h2>
-      <p class="doc-section__desc">通过 <code>backgroundColor</code>、<code>textColor</code> 等属性切换为浅色主题。</p>
+      <h2 class="doc-section__title">
+        浅色背景
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>backgroundColor</code>、<code>textColor</code> 等属性切换为浅色主题。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body info-card-demo-light">
           <XlyInfoCard
@@ -89,20 +117,26 @@
             description-color="#6b7280"
           />
         </div>
-        <XlyDocCode :code='`<XlyInfoCard
-  background-color="#ffffff"
-  text-color="#1a1a2e"
-  description-color="#6b7280"
-  :bordered="true"
+        <XlyDocCode
+          code="<XlyInfoCard
+  background-color=&quot;#ffffff&quot;
+  text-color=&quot;#1a1a2e&quot;
+  description-color=&quot;#6b7280&quot;
+  :bordered=&quot;true&quot;
   ...
-/>`' />
+/>"
+        />
       </div>
     </section>
 
     <!-- InfoCard 自定义颜色 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义颜色</h2>
-      <p class="doc-section__desc">通过配色属性精细控制背景、整体文字、标题、描述、状态标签的颜色。</p>
+      <h2 class="doc-section__title">
+        自定义颜色
+      </h2>
+      <p class="doc-section__desc">
+        通过配色属性精细控制背景、整体文字、标题、描述、状态标签的颜色。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body info-card-demo">
           <XlyInfoCard
@@ -133,22 +167,28 @@
             status-text-color="#93c5fd"
           />
         </div>
-        <XlyDocCode :code='`<XlyInfoCard
-  background-color="#0f172a"
-  text-color="#e2e8f0"
-  title-color="#f8fafc"
-  description-color="#94a3b8"
-  status-background-color="rgba(239, 68, 68, 0.2)"
-  status-text-color="#fca5a5"
+        <XlyDocCode
+          code="<XlyInfoCard
+  background-color=&quot;#0f172a&quot;
+  text-color=&quot;#e2e8f0&quot;
+  title-color=&quot;#f8fafc&quot;
+  description-color=&quot;#94a3b8&quot;
+  status-background-color=&quot;rgba(239, 68, 68, 0.2)&quot;
+  status-text-color=&quot;#fca5a5&quot;
   ...
-/>`' />
+/>"
+        />
       </div>
     </section>
 
     <!-- InfoCard 可点击 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">可点击</h2>
-      <p class="doc-section__desc">使用 <code>clickable</code> 属性使卡片可交互，点击时触发 <code>click</code> 事件。</p>
+      <h2 class="doc-section__title">
+        可点击
+      </h2>
+      <p class="doc-section__desc">
+        使用 <code>clickable</code> 属性使卡片可交互，点击时触发 <code>click</code> 事件。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body info-card-demo">
           <XlyInfoCard
@@ -162,13 +202,15 @@
             @click="handleClick"
           />
         </div>
-        <XlyDocCode :code='`<XlyInfoCard clickable @click="handleClick" .../>`' />
+        <XlyDocCode code="<XlyInfoCard clickable @click=&quot;handleClick&quot; .../>" />
       </div>
     </section>
 
     <!-- Props -->
     <section class="doc-section">
-      <h2 class="doc-section__title">Props</h2>
+      <h2 class="doc-section__title">
+        Props
+      </h2>
       <div class="doc-table">
         <table>
           <thead>
@@ -283,7 +325,9 @@
 
     <!-- Events -->
     <section class="doc-section">
-      <h2 class="doc-section__title">Events</h2>
+      <h2 class="doc-section__title">
+        Events
+      </h2>
       <div class="doc-table">
         <table>
           <thead>
@@ -306,7 +350,9 @@
 
     <!-- Slots -->
     <section class="doc-section">
-      <h2 class="doc-section__title">Slots</h2>
+      <h2 class="doc-section__title">
+        Slots
+      </h2>
       <div class="doc-table">
         <table>
           <thead>
@@ -326,19 +372,6 @@
     </section>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ElMessage } from 'element-plus'
-import XlyInfoCard from '@/components/xly-info-card/index.vue'
-
-const demoImage = 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=200&h=150&fit=crop'
-const demoImage2 = 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=200&h=150&fit=crop'
-const demoImage3 = 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=200&h=150&fit=crop'
-
-function handleClick() {
-  ElMessage.success('卡片被点击')
-}
-</script>
 
 <style scoped lang="scss">
 .info-card-doc {
@@ -472,7 +505,7 @@ function handleClick() {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  background: #f1f5f9;
+  background: var(--el-fill-color-light);
   padding: 20px;
   border-radius: 10px;
 }

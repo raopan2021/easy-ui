@@ -16,7 +16,7 @@ app.mount('#app')`
 const lightInstallCode = `// main.ts
 import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
-import { setupXly } from 'easy-ui'
+import { setupXly, xlyComponentResolver } from 'easy-ui'
 import App from './App.vue'
 
 const app = createApp(App)
@@ -25,7 +25,6 @@ setupXly(app)
 app.mount('#app')`
 
 const autoImportCode = `// vite.config.ts
-import { xlyComponentResolver } from 'easy-ui'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 
@@ -48,10 +47,52 @@ const features = [
 ]
 
 const componentGroups = [
-  { name: '基础', prefix: '/basic', items: ['button', 'icon', 'tag', 'divider', 'avatar', 'card', 'watermark', 'carousel', 'empty', 'badge', 'list'] },
-  { name: '数据展示', prefix: '/data', items: ['table', 'chart', 'statistic', 'descriptions', 'image', 'timeline', 'video', 'china-map', 'file-preview', 'json-viewer', 'dept-tree', 'tree-chart', 'gantt'] },
+  {
+    name: '基础',
+    prefix: '/basic',
+    items: ['button', 'icon', 'tag', 'divider', 'avatar', 'card', 'watermark', 'carousel', 'empty', 'badge', 'list'],
+  },
+  {
+    name: '数据展示',
+    prefix: '/data',
+    items: [
+      'table',
+      'chart',
+      'statistic',
+      'descriptions',
+      'image',
+      'timeline',
+      'video',
+      'china-map',
+      'file-preview',
+      'json-viewer',
+      'dept-tree',
+      'tree-chart',
+      'gantt',
+    ],
+  },
   { name: '导航', prefix: '/nav', items: ['tabs', 'steps', 'dropdown'] },
-  { name: '表单', prefix: '/form', items: ['input', 'select', 'radio', 'cascader', 'rate', 'switch', 'date-picker', 'time-picker', 'date-time-picker', 'search-form', 'range-picker', 'image-upload', 'file-upload', 'upload', 'dict-select'] },
+  {
+    name: '表单',
+    prefix: '/form',
+    items: [
+      'input',
+      'select',
+      'radio',
+      'cascader',
+      'rate',
+      'switch',
+      'date-picker',
+      'time-picker',
+      'date-time-picker',
+      'search-form',
+      'range-picker',
+      'image-upload',
+      'file-upload',
+      'upload',
+      'dict-select',
+    ],
+  },
   { name: '反馈', prefix: '/feedback', items: ['modal', 'drawer', 'loading', 'message', 'tour', 'progress'] },
   { name: '布局', prefix: '/layout', items: ['grid', 'worktab'] },
   { name: '业务', prefix: '/business', items: ['permission', 'chat', 'user-picker', 'dict-tag'] },
@@ -62,7 +103,7 @@ const pathOverrides: Record<string, string> = {
   'search-form': '/form/searchForm',
 }
 
-function compPath(group: typeof componentGroups[0], key: string) {
+function compPath(group: (typeof componentGroups)[0], key: string) {
   return pathOverrides[key] || `${group.prefix}/${key}`
 }
 </script>
@@ -73,7 +114,7 @@ function compPath(group: typeof componentGroups[0], key: string) {
     <section class="hero">
       <div class="container">
         <div class="hero-badge">
-          <span class="badge-dot"></span>
+          <span class="badge-dot" />
           Vue 3 · Element Plus · TypeScript
         </div>
         <h1 class="hero-title">
@@ -88,14 +129,16 @@ function compPath(group: typeof componentGroups[0], key: string) {
           <a href="https://gitee.com/yun_hua_admin/ease-ui" target="_blank" class="btn-primary">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
               <path
-                d="M11.984 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 11.984 0zm6.09 5.333c.328 0 .593.266.592.593v1.482a.594.594 0 0 1-.593.592H9.777c-.982 0-1.778.796-1.778 1.778v5.926c0 .982.796 1.778 1.778 1.778h4.444a.593.593 0 0 0 .593-.593v-2.963a.593.593 0 0 0-.593-.593H11.63a.592.592 0 0 1-.592-.592v-1.482c0-.327.266-.592.592-.592h2.964a2.666 2.666 0 0 1 2.666 2.666v4.444a2.666 2.666 0 0 1-2.666 2.667H8.148a2.667 2.667 0 0 1-2.667-2.667V8.296a2.667 2.667 0 0 1 2.667-2.666h9.333a.594.594 0 0 1 .593.703z" />
+                d="M11.984 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 11.984 0zm6.09 5.333c.328 0 .593.266.592.593v1.482a.594.594 0 0 1-.593.592H9.777c-.982 0-1.778.796-1.778 1.778v5.926c0 .982.796 1.778 1.778 1.778h4.444a.593.593 0 0 0 .593-.593v-2.963a.593.593 0 0 0-.593-.593H11.63a.592.592 0 0 1-.592-.592v-1.482c0-.327.266-.592.592-.592h2.964a2.666 2.666 0 0 1 2.666 2.666v4.444a2.666 2.666 0 0 1-2.666 2.667H8.148a2.667 2.667 0 0 1-2.667-2.667V8.296a2.667 2.667 0 0 1 2.667-2.666h9.333a.594.594 0 0 1 .593.703z"
+              />
             </svg>
             Gitee
           </a>
           <a href="https://github.com/Momingyun/ease-ui" target="_blank" class="btn-outline">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
               <path
-                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"
+              />
             </svg>
             GitHub
           </a>
@@ -118,14 +161,21 @@ function compPath(group: typeof componentGroups[0], key: string) {
     <!-- 组件 -->
     <section class="components">
       <div class="container">
-        <h2 class="section-title">组件</h2>
-        <p class="section-desc">覆盖中后台开发全场景，按需引入，只打包你用的。</p>
+        <h2 class="section-title">
+          组件
+        </h2>
+        <p class="section-desc">
+          覆盖中后台开发全场景，按需引入，只打包你用的。
+        </p>
         <div class="comp-list">
           <div v-for="group in componentGroups" :key="group.name" class="comp-row">
             <span class="comp-cat">{{ group.name }}</span>
             <div class="comp-tags">
-              <router-link v-for="tag in group.items" :key="tag" :to="compPath(group, tag)" class="comp-tag">{{ tag
-                }}</router-link>
+              <router-link v-for="tag in group.items" :key="tag" :to="compPath(group, tag)" class="comp-tag">
+                {{
+                  tag
+                }}
+              </router-link>
             </div>
           </div>
         </div>
@@ -135,24 +185,38 @@ function compPath(group: typeof componentGroups[0], key: string) {
     <!-- 上手 -->
     <section class="start">
       <div class="container">
-        <h2 class="section-title">快速上手</h2>
+        <h2 class="section-title">
+          快速上手
+        </h2>
 
         <div class="start-block">
-          <h3 class="start-step">① 安装</h3>
+          <h3 class="start-step">
+            ① 安装
+          </h3>
           <XlyDocCode :code="installCmd" lang="bash" />
         </div>
 
         <div class="start-block">
-          <h3 class="start-step">② 注册</h3>
-          <p class="start-hint">方式一：完整安装（一行搞定）</p>
+          <h3 class="start-step">
+            ② 注册
+          </h3>
+          <p class="start-hint">
+            方式一：完整安装（一行搞定）
+          </p>
           <XlyDocCode :code="fullInstallCode" lang="js" />
-          <p class="start-hint" style="margin-top: 16px">方式二：按需引入（tree-shaking 最佳）</p>
+          <p class="start-hint" style="margin-top: 16px">
+            方式二：按需引入（tree-shaking 最佳）
+          </p>
           <XlyDocCode :code="lightInstallCode" lang="js" />
         </div>
 
         <div class="start-block">
-          <h3 class="start-step">③ 自动导入（可选）</h3>
-          <p class="start-hint">配置后组件即写即用，无需手动 import</p>
+          <h3 class="start-step">
+            ③ 自动导入（可选）
+          </h3>
+          <p class="start-hint">
+            配置后组件即写即用，无需手动 import
+          </p>
           <XlyDocCode :code="autoImportCode" lang="js" />
         </div>
       </div>

@@ -1,14 +1,67 @@
+<script setup lang="ts">
+import { XlyDateRangePicker, XlyDateTimeRangePicker, XlyTimeRangePicker } from 'easy-ui'
+import { ref } from 'vue'
+
+// 日期范围
+const dateRange = ref({
+  start: '',
+  end: '',
+})
+
+// 日期时间范围
+const dateTimeRange = ref({
+  start: '',
+  end: '',
+})
+
+// 时间范围
+const timeRange = ref({
+  start: '',
+  end: '',
+})
+
+// 不同尺寸
+const sizeRange = ref({
+  largeStart: '',
+  largeEnd: '',
+  defaultStart: '',
+  defaultEnd: '',
+  smallStart: '',
+  smallEnd: '',
+})
+
+// 自定义分隔符
+const customRange = ref({
+  start: '',
+  end: '',
+})
+
+// 禁用状态
+const disabledRange = ref({
+  start: '',
+  end: '',
+})
+</script>
+
 <template>
   <div class="component-doc">
     <header class="doc-header">
-      <h1 class="doc-title">范围选择器 Range Picker</h1>
-      <p class="doc-desc">日期范围、日期时间范围、时间范围选择器，支持双向绑定两个独立属性。</p>
+      <h1 class="doc-title">
+        范围选择器 Range Picker
+      </h1>
+      <p class="doc-desc">
+        日期范围、日期时间范围、时间范围选择器，支持双向绑定两个独立属性。
+      </p>
     </header>
 
     <!-- 日期范围选择器 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">日期范围选择器 DateRangePicker</h2>
-      <p class="doc-section__desc">用于选择日期范围，直接双向绑定两个独立的日期属性。</p>
+      <h2 class="doc-section__title">
+        日期范围选择器 DateRangePicker
+      </h2>
+      <p class="doc-section__desc">
+        用于选择日期范围，直接双向绑定两个独立的日期属性。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <XlyDateRangePicker
@@ -17,10 +70,13 @@
             start-placeholder="开始日期"
             end-placeholder="结束日期"
           />
-          <div class="doc-result">选中值：{{ dateRange.start }} 至 {{ dateRange.end }}</div>
+          <div class="doc-result">
+            选中值：{{ dateRange.start }} 至 {{ dateRange.end }}
+          </div>
         </div>
       </div>
-      <XlyDocCode :code="`<template>
+      <XlyDocCode
+        code="<template>
   <XlyDateRangePicker
     v-model:start=&quot;start&quot;
     v-model:end=&quot;end&quot;
@@ -36,13 +92,18 @@ const dateRange = ref({
   start: '',
   end: ''
 })
-</script>`" />
+</script>"
+      />
     </section>
 
     <!-- 日期时间范围选择器 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">日期时间范围选择器 DateTimeRangePicker</h2>
-      <p class="doc-section__desc">用于选择日期时间范围，支持显示秒数。</p>
+      <h2 class="doc-section__title">
+        日期时间范围选择器 DateTimeRangePicker
+      </h2>
+      <p class="doc-section__desc">
+        用于选择日期时间范围，支持显示秒数。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <XlyDateTimeRangePicker
@@ -52,10 +113,13 @@ const dateRange = ref({
             start-placeholder="开始时间"
             end-placeholder="结束时间"
           />
-          <div class="doc-result">选中值：{{ dateTimeRange.start }} 至 {{ dateTimeRange.end }}</div>
+          <div class="doc-result">
+            选中值：{{ dateTimeRange.start }} 至 {{ dateTimeRange.end }}
+          </div>
         </div>
       </div>
-      <XlyDocCode :code="`<template>
+      <XlyDocCode
+        code="<template>
   <XlyDateTimeRangePicker
     v-model:start=&quot;start&quot;
     v-model:end=&quot;end&quot;
@@ -72,13 +136,18 @@ const dateTimeRange = ref({
   start: '',
   end: ''
 })
-</script>`" />
+</script>"
+      />
     </section>
 
     <!-- 时间范围选择器 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">时间范围选择器 TimeRangePicker</h2>
-      <p class="doc-section__desc">用于选择时间范围（时:分）。</p>
+      <h2 class="doc-section__title">
+        时间范围选择器 TimeRangePicker
+      </h2>
+      <p class="doc-section__desc">
+        用于选择时间范围（时:分）。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <XlyTimeRangePicker
@@ -87,10 +156,13 @@ const dateTimeRange = ref({
             start-placeholder="开始时间"
             end-placeholder="结束时间"
           />
-          <div class="doc-result">选中值：{{ timeRange.start }} 至 {{ timeRange.end }}</div>
+          <div class="doc-result">
+            选中值：{{ timeRange.start }} 至 {{ timeRange.end }}
+          </div>
         </div>
       </div>
-      <XlyDocCode :code="`<template>
+      <XlyDocCode
+        code="<template>
   <XlyTimeRangePicker
     v-model:start=&quot;start&quot;
     v-model:end=&quot;end&quot;
@@ -106,12 +178,15 @@ const timeRange = ref({
   start: '',
   end: ''
 })
-</script>`" />
+</script>"
+      />
     </section>
 
     <!-- 不同尺寸 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">不同尺寸</h2>
+      <h2 class="doc-section__title">
+        不同尺寸
+      </h2>
       <p class="doc-section__desc">
         支持 <code>large</code>、<code>default</code>、<code>small</code> 三种尺寸。
       </p>
@@ -120,81 +195,83 @@ const timeRange = ref({
           <div class="size-demo">
             <div class="size-item">
               <span class="size-label">Large</span>
-              <XlyDateRangePicker
-                size="large"
-                v-model:start="sizeRange.largeStart"
-                v-model:end="sizeRange.largeEnd"
-              />
+              <XlyDateRangePicker v-model:start="sizeRange.largeStart" v-model:end="sizeRange.largeEnd" size="large" />
             </div>
             <div class="size-item">
               <span class="size-label">Default</span>
               <XlyDateRangePicker
-                size="default"
                 v-model:start="sizeRange.defaultStart"
                 v-model:end="sizeRange.defaultEnd"
+                size="default"
               />
             </div>
             <div class="size-item">
               <span class="size-label">Small</span>
-              <XlyDateRangePicker
-                size="small"
-                v-model:start="sizeRange.smallStart"
-                v-model:end="sizeRange.smallEnd"
-              />
+              <XlyDateRangePicker v-model:start="sizeRange.smallStart" v-model:end="sizeRange.smallEnd" size="small" />
             </div>
           </div>
         </div>
       </div>
-      <XlyDocCode :code='`<XlyDateRangePicker size="large" .../>
-<XlyDateRangePicker size="default" .../>
-<XlyDateRangePicker size="small" .../>`' />
+      <XlyDocCode
+        code="<XlyDateRangePicker size=&quot;large&quot; .../>
+<XlyDateRangePicker size=&quot;default&quot; .../>
+<XlyDateRangePicker size=&quot;small&quot; .../>"
+      />
     </section>
 
     <!-- 自定义分隔符 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义分隔符</h2>
-      <p class="doc-section__desc">通过 <code>separator</code> 属性自定义分隔符。</p>
+      <h2 class="doc-section__title">
+        自定义分隔符
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>separator</code> 属性自定义分隔符。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDateRangePicker
-            v-model:start="customRange.start"
-            v-model:end="customRange.end"
-            separator="-"
-          />
+          <XlyDateRangePicker v-model:start="customRange.start" v-model:end="customRange.end" separator="-" />
         </div>
       </div>
-      <XlyDocCode :code='`<XlyDateRangePicker
-  v-model:start="start"
-  v-model:end="end"
-  separator="-"
-/>`' />
+      <XlyDocCode
+        code="<XlyDateRangePicker
+  v-model:start=&quot;start&quot;
+  v-model:end=&quot;end&quot;
+  separator=&quot;-&quot;
+/>"
+      />
     </section>
 
     <!-- 禁用状态 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">禁用状态</h2>
-      <p class="doc-section__desc">通过 <code>disabled</code> 属性设置禁用状态。</p>
+      <h2 class="doc-section__title">
+        禁用状态
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>disabled</code> 属性设置禁用状态。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyDateRangePicker
-            v-model:start="disabledRange.start"
-            v-model:end="disabledRange.end"
-            disabled
-          />
+          <XlyDateRangePicker v-model:start="disabledRange.start" v-model:end="disabledRange.end" disabled />
         </div>
       </div>
-      <XlyDocCode :code='`<XlyDateRangePicker
-  v-model:start="start"
-  v-model:end="end"
+      <XlyDocCode
+        code="<XlyDateRangePicker
+  v-model:start=&quot;start&quot;
+  v-model:end=&quot;end&quot;
   disabled
-/>`' />
+/>"
+      />
     </section>
 
     <!-- API 文档 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">API 文档</h2>
+      <h2 class="doc-section__title">
+        API 文档
+      </h2>
       <div class="doc-api">
-        <h3 class="doc-api__title">DateRangePicker Props</h3>
+        <h3 class="doc-api__title">
+          DateRangePicker Props
+        </h3>
         <div class="doc-table">
           <table>
             <thead>
@@ -276,7 +353,9 @@ const timeRange = ref({
           </table>
         </div>
 
-        <h3 class="doc-api__title">DateTimeRangePicker Props</h3>
+        <h3 class="doc-api__title">
+          DateTimeRangePicker Props
+        </h3>
         <div class="doc-table">
           <table>
             <thead>
@@ -358,7 +437,9 @@ const timeRange = ref({
           </table>
         </div>
 
-        <h3 class="doc-api__title">TimeRangePicker Props</h3>
+        <h3 class="doc-api__title">
+          TimeRangePicker Props
+        </h3>
         <div class="doc-table">
           <table>
             <thead>
@@ -434,7 +515,9 @@ const timeRange = ref({
           </table>
         </div>
 
-        <h3 class="doc-api__title">Events</h3>
+        <h3 class="doc-api__title">
+          Events
+        </h3>
         <div class="doc-table">
           <table>
             <thead>
@@ -467,53 +550,6 @@ const timeRange = ref({
     </section>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import XlyDateRangePicker from '@/components/xly-date-range-picker/index.vue'
-import XlyDateTimeRangePicker from '@/components/xly-date-time-range-picker/index.vue'
-import XlyTimeRangePicker from '@/components/xly-time-range-picker/index.vue'
-
-// 日期范围
-const dateRange = ref({
-  start: '',
-  end: '',
-})
-
-// 日期时间范围
-const dateTimeRange = ref({
-  start: '',
-  end: '',
-})
-
-// 时间范围
-const timeRange = ref({
-  start: '',
-  end: '',
-})
-
-// 不同尺寸
-const sizeRange = ref({
-  largeStart: '',
-  largeEnd: '',
-  defaultStart: '',
-  defaultEnd: '',
-  smallStart: '',
-  smallEnd: '',
-})
-
-// 自定义分隔符
-const customRange = ref({
-  start: '',
-  end: '',
-})
-
-// 禁用状态
-const disabledRange = ref({
-  start: '',
-  end: '',
-})
-</script>
 
 <style scoped lang="scss">
 .component-doc {

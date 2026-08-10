@@ -1,20 +1,88 @@
+<script setup lang="ts">
+const flow = ref({
+  category: '01K3QAXT4BWG7CX1VCZ0BDQGVN',
+  categoryList: null,
+  chartStatusColor: null,
+  ext: '{}',
+  extMap: null,
+  flowCode: 'test',
+  flowName: '测试',
+  formCustom: 'N',
+  formPath: '',
+  id: null,
+  instance: null,
+  isPublish: 0,
+  listenerPath: '',
+  listenerType: '',
+  modelValue: 'MIMIC',
+  nodeList: [],
+  topText: '',
+  topTextShow: false,
+  version: '1',
+})
+
+// 代码示例
+const installCode = `# LogicFlow 核心
+npm install @logicflow/core @logicflow/extension
+
+# LogicFlow 样式
+npm install @logicflow/core @logicflow/extension`
+
+const usageCode
+  = `<template>
+  <div style="height: 100vh;">
+    <XlyFlowDesigner :flowId="flowId" />
+  </div>
+</template>
+
+<script setup lang="ts">
+
+const flow = ref({category: '01K3QAXT4BWG7CX1VCZ0BDQGVN',
+      categoryList: null,
+      chartStatusColor: null,
+      ext: '{}',
+      extMap: null,
+      flowCode: 'test',
+      flowName: '测试',
+      formCustom: 'N',
+      formPath: '',
+      id: null,
+      instance: null,
+      isPublish: 0,
+      listenerPath: '',
+      listenerType: '',
+      modelValue: 'MIMIC',
+      nodeList: [],
+      topText: '',
+      topTextShow: false,
+      version: '1'})
+
+// 暗色主题切换（可选）
+window.postMessage({ type: 'theme-dark' }, '*')
+window.postMessage({ type: 'theme-light' }, '*')
+    </scr` + `ipt>`
+
+function saveFlow(flowData: any) {
+  console.log('保存流程数据：', flowData)
+}
+</script>
+
 <template>
   <div class="flow-design-doc">
     <!-- 页面标题 -->
     <div class="doc-header">
-      <h1 class="doc-title">FlowDesigner 流程设计器</h1>
+      <h1 class="doc-title">
+        FlowDesigner 流程设计器
+      </h1>
       <p class="doc-desc">
         基于 LogicFlow 的可视化流程设计组件，支持仿钉钉模式和经典模式两种布局，
-        内置节点拖拽、属性配置、监听器管理、流程保存与导出等完整能力。
-        适用于审批流、工单流、业务流程编排等场景。
+        内置节点拖拽、属性配置、监听器管理、流程保存与导出等完整能力。 适用于审批流、工单流、业务流程编排等场景。
       </p>
       <p class="doc-desc">
         该流程设计器基于warmFlow平台的流程设计器组件进行二次开发，保留了核心功能并做了部分定制化修改以适配不同项目需求。非warmFlow项目可能不适用此流程设计器。
       </p>
       <p class="doc-desc">
-        warmFlow项目地址：<a href="https://warm-flow.com/" target="_blank"
-          >https://warm-flow.com/</a
-        >
+        warmFlow项目地址：<a href="https://warm-flow.com/" target="_blank">https://warm-flow.com/</a>
       </p>
       <p class="doc-desc">
         使用说明:参照warmFlow在线体验地址，体验项目中流程定义与流程图在同一页面完成，此流程设计器仅包含流程图设计部分，不包含流程定义，所以使用需要先完成流程定义再进行流程图设计，分为两步操作。
@@ -23,12 +91,13 @@
 
     <!-- 基础用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
       <p class="doc-section__desc">
-        通过 <code>flow</code> 属性传入流程定义对象，组件会自动加载流程数据并渲染画布。
-        当前组件仅暴露一个 <code>flow</code> prop，内部状态均通过组件自行管理。
-        <code>flow</code
-        >信息在打开流程设计页面前通过接口自行获取，数据格式参考wormFlow文档或下方使用方式中示例数据。
+        通过 <code>flow</code> 属性传入流程定义对象，组件会自动加载流程数据并渲染画布。 当前组件仅暴露一个
+        <code>flow</code> prop，内部状态均通过组件自行管理。
+        <code>flow</code>信息在打开流程设计页面前通过接口自行获取，数据格式参考wormFlow文档或下方使用方式中示例数据。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
@@ -36,42 +105,49 @@
             <XlyFlowDesigner :flow="flow" @save="saveFlow" />
           </div>
         </div>
-        <XlyDocCode :code='`<XlyFlowDesigner :flow="flow" />`' />
+        <XlyDocCode code="<XlyFlowDesigner :flow=&quot;flow&quot; />" />
       </div>
     </section>
 
-    <!--自定义修改部分-->
+    <!-- 自定义修改部分 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义修改部分</h2>
-      <p class="doc-section__desc">以下两个文件需要根据项目实际情况替换为自定义的人员选择组件。</p>
+      <h2 class="doc-section__title">
+        自定义修改部分
+      </h2>
+      <p class="doc-section__desc">
+        以下两个文件需要根据项目实际情况替换为自定义的人员选择组件。
+      </p>
       <div class="customize-list">
         <div class="customize-card">
           <div class="customize-card__header">
             <span class="customize-card__step">1</span>
-            <span class="customize-card__file"
-              >/src/components/xly-flow-designer/common/vue/between.vue</span
-            >
+            <span class="customize-card__file">/src/components/xly-flow-designer/common/vue/between.vue</span>
             <span class="customize-card__line">第 62-66 行</span>
           </div>
           <div class="customize-card__body">
-            <p class="customize-card__desc">根据自己项目修改办理人选择组件</p>
-            <XlyDocCode :code='`<xly-form-item label="办理人：" prop="permissionFlag">
-  <xly-input v-model="form.permissionFlag" placeholder="自行更换为自己的人员选择组件" />
-  <div class="placeholder mt5">tips:自行更换为自己的人员选择组件</div>
-</xly-form-item>`' language="html" />
+            <p class="customize-card__desc">
+              根据自己项目修改办理人选择组件
+            </p>
+            <XlyDocCode
+              code="<xly-form-item label=&quot;办理人：&quot; prop=&quot;permissionFlag&quot;>
+  <xly-input v-model=&quot;form.permissionFlag&quot; placeholder=&quot;自行更换为自己的人员选择组件&quot; />
+  <div class=&quot;placeholder mt5&quot;>tips:自行更换为自己的人员选择组件</div>
+</xly-form-item>"
+              language="html"
+            />
           </div>
         </div>
         <div class="customize-card">
           <div class="customize-card__header">
             <span class="customize-card__step">2</span>
-            <span class="customize-card__file"
-              >/src/components/xly-flow-designer/mimic/vue/baseNode.vue</span
-            >
+            <span class="customize-card__file">/src/components/xly-flow-designer/mimic/vue/baseNode.vue</span>
             <span class="customize-card__line">第 109 行</span>
           </div>
           <div class="customize-card__body">
-            <p class="customize-card__desc">根据自己项目修改办理人显示组件</p>
-            <XlyDocCode :code='`<span v-if="handler">{{handler}}</span>`' language="html" />
+            <p class="customize-card__desc">
+              根据自己项目修改办理人显示组件
+            </p>
+            <XlyDocCode code="<span v-if=&quot;handler&quot;>{{handler}}</span>" language="html" />
           </div>
         </div>
       </div>
@@ -79,14 +155,18 @@
 
     <!-- 功能说明 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">功能说明</h2>
+      <h2 class="doc-section__title">
+        功能说明
+      </h2>
       <p class="doc-section__desc">
         流程设计器支持两种布局模式，根据流程数据的 <code>modelValue</code> 字段自动切换。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body flex-col">
           <div>
-            <div class="sub-label">仿钉钉模式 (MIMIC)</div>
+            <div class="sub-label">
+              仿钉钉模式 (MIMIC)
+            </div>
             <ul class="feature-list">
               <li class="feature-item">
                 <span class="feature-tag primary">布局</span>
@@ -107,7 +187,9 @@
             </ul>
           </div>
           <div>
-            <div class="sub-label">经典模式 (CLASSICS)</div>
+            <div class="sub-label">
+              经典模式 (CLASSICS)
+            </div>
             <ul class="feature-list">
               <li class="feature-item">
                 <span class="feature-tag warning">布局</span>
@@ -133,21 +215,18 @@
 
     <!-- 工具栏 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">工具栏</h2>
-      <p class="doc-section__desc">组件顶部工具栏提供画布操作和数据管理功能。</p>
+      <h2 class="doc-section__title">
+        工具栏
+      </h2>
+      <p class="doc-section__desc">
+        组件顶部工具栏提供画布操作和数据管理功能。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="toolbar-grid">
             <div class="toolbar-item">
               <span class="toolbar-item__icon">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                   <circle cx="11" cy="11" r="8" />
                   <line x1="21" y1="21" x2="16.65" y2="16.65" />
                   <line x1="8" y1="11" x2="14" y2="11" />
@@ -160,14 +239,7 @@
             </div>
             <div class="toolbar-item">
               <span class="toolbar-item__icon">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                   <circle cx="11" cy="11" r="8" />
                   <line x1="21" y1="21" x2="16.65" y2="16.65" />
                   <line x1="8" y1="11" x2="14" y2="11" />
@@ -181,14 +253,7 @@
             </div>
             <div class="toolbar-item">
               <span class="toolbar-item__icon">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                   <rect x="3" y="3" width="18" height="18" rx="2" />
                   <line x1="9" y1="3" x2="9" y2="21" />
                 </svg>
@@ -200,14 +265,7 @@
             </div>
             <div class="toolbar-item">
               <span class="toolbar-item__icon">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                   <polyline points="1 4 1 10 7 10" />
                   <polyline points="23 20 23 14 17 14" />
                   <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15" />
@@ -220,14 +278,7 @@
             </div>
             <div class="toolbar-item">
               <span class="toolbar-item__icon">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                   <polyline points="7 10 12 15 17 10" />
                   <line x1="12" y1="15" x2="12" y2="3" />
@@ -240,14 +291,7 @@
             </div>
             <div class="toolbar-item">
               <span class="toolbar-item__icon">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                   <polyline points="14 2 14 8 20 8" />
                   <line x1="16" y1="13" x2="8" y2="13" />
@@ -261,14 +305,7 @@
             </div>
             <div class="toolbar-item">
               <span class="toolbar-item__icon primary">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
                   <polyline points="17 21 17 13 7 13 7 21" />
                   <polyline points="7 3 7 8 15 8" />
@@ -286,12 +323,18 @@
 
     <!-- 节点属性配置 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">节点属性配置</h2>
-      <p class="doc-section__desc">通过弹窗面板配置节点属性，不同节点类型展示不同的配置表单。</p>
+      <h2 class="doc-section__title">
+        节点属性配置
+      </h2>
+      <p class="doc-section__desc">
+        通过弹窗面板配置节点属性，不同节点类型展示不同的配置表单。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body flex-col">
           <div>
-            <div class="sub-label">开始节点</div>
+            <div class="sub-label">
+              开始节点
+            </div>
             <div class="node-config-card">
               <div class="node-config-card__tabs">
                 <span class="tab active">基础设置</span>
@@ -304,7 +347,9 @@
             </div>
           </div>
           <div>
-            <div class="sub-label">中间审批节点</div>
+            <div class="sub-label">
+              中间审批节点
+            </div>
             <div class="node-config-card">
               <div class="node-config-card__tabs">
                 <span class="tab active">基础设置</span>
@@ -327,27 +372,39 @@
 
     <!-- 安装依赖 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">安装依赖</h2>
-      <p class="doc-section__desc">流程设计器基于 LogicFlow 实现，使用前请先安装核心依赖和扩展。</p>
+      <h2 class="doc-section__title">
+        安装依赖
+      </h2>
+      <p class="doc-section__desc">
+        流程设计器基于 LogicFlow 实现，使用前请先安装核心依赖和扩展。
+      </p>
       <div class="doc-preview">
-        <XlyDocCode :code='`{{ installCode }}`' language="html" />
+        <XlyDocCode :code="installCode" language="html" />
       </div>
     </section>
 
     <!-- 使用方式 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">使用方式</h2>
-      <p class="doc-section__desc">在业务页面中引入流程设计器组件，传入流程定义 ID 即可。</p>
+      <h2 class="doc-section__title">
+        使用方式
+      </h2>
+      <p class="doc-section__desc">
+        在业务页面中引入流程设计器组件，传入流程定义 ID 即可。
+      </p>
       <div class="doc-preview">
-        <XlyDocCode :code='`{{ usageCode }}`' language="html" />
+        <XlyDocCode :code="usageCode" language="html" />
       </div>
     </section>
 
     <!-- API -->
     <section class="doc-section">
-      <h2 class="doc-section__title">API</h2>
+      <h2 class="doc-section__title">
+        API
+      </h2>
 
-      <h3 class="doc-subtitle">Props</h3>
+      <h3 class="doc-subtitle">
+        Props
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -369,7 +426,9 @@
         </table>
       </div>
 
-      <h3 class="doc-subtitle">内部状态</h3>
+      <h3 class="doc-subtitle">
+        内部状态
+      </h3>
       <p class="doc-section__desc" style="margin-top: 12px">
         以下状态由组件内部管理，通过 <code>flowId</code> 的变化自动驱动。
       </p>
@@ -407,7 +466,9 @@
         </table>
       </div>
 
-      <h3 class="doc-subtitle">消息通信</h3>
+      <h3 class="doc-subtitle">
+        消息通信
+      </h3>
       <p class="doc-section__desc" style="margin-top: 12px">
         组件通过 <code>window.postMessage</code> 与父窗口通信。
       </p>
@@ -440,7 +501,9 @@
         </table>
       </div>
 
-      <h3 class="doc-subtitle">节点类型</h3>
+      <h3 class="doc-subtitle">
+        节点类型
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -492,7 +555,9 @@
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Events</h3>
+      <h3 class="doc-subtitle">
+        Events
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -514,75 +579,6 @@
     </section>
   </div>
 </template>
-
-<script setup lang="ts">
-const flow = ref({
-  category: '01K3QAXT4BWG7CX1VCZ0BDQGVN',
-  categoryList: null,
-  chartStatusColor: null,
-  ext: '{}',
-  extMap: null,
-  flowCode: 'test',
-  flowName: '测试',
-  formCustom: 'N',
-  formPath: '',
-  id: null,
-  instance: null,
-  isPublish: 0,
-  listenerPath: '',
-  listenerType: '',
-  modelValue: 'MIMIC',
-  nodeList: [],
-  topText: '',
-  topTextShow: false,
-  version: '1',
-})
-
-// 代码示例
-const installCode = `# LogicFlow 核心
-npm install @logicflow/core @logicflow/extension
-
-# LogicFlow 样式
-npm install @logicflow/core @logicflow/extension`
-
-const usageCode =
-  `<template>
-  <div style="height: 100vh;">
-    <XlyFlowDesigner :flowId="flowId" />
-  </div>
-</template>
-
-<script setup lang="ts">
-
-const flow = ref({category: '01K3QAXT4BWG7CX1VCZ0BDQGVN',
-      categoryList: null,
-      chartStatusColor: null,
-      ext: '{}',
-      extMap: null,
-      flowCode: 'test',
-      flowName: '测试',
-      formCustom: 'N',
-      formPath: '',
-      id: null,
-      instance: null,
-      isPublish: 0,
-      listenerPath: '',
-      listenerType: '',
-      modelValue: 'MIMIC',
-      nodeList: [],
-      topText: '',
-      topTextShow: false,
-      version: '1'})
-
-// 暗色主题切换（可选）
-window.postMessage({ type: 'theme-dark' }, '*')
-window.postMessage({ type: 'theme-light' }, '*')
-</scr` + `ipt>`
-
-const saveFlow = (flowData: any) => {
-  console.log('保存流程数据：', flowData)
-}
-</script>
 
 <style scoped lang="scss">
 .flow-design-doc {
@@ -750,7 +746,7 @@ const saveFlow = (flowData: any) => {
     border-color: #d4e4ff;
   }
 
-  &__header {
+  .customize-card__header {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -759,7 +755,7 @@ const saveFlow = (flowData: any) => {
     border-bottom: 1px solid var(--el-border-color-lighter);
   }
 
-  &__step {
+  .customize-card__step {
     flex-shrink: 0;
     width: 22px;
     height: 22px;
@@ -773,7 +769,7 @@ const saveFlow = (flowData: any) => {
     justify-content: center;
   }
 
-  &__file {
+  .customize-card__file {
     flex: 1;
     min-width: 0;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
@@ -782,13 +778,13 @@ const saveFlow = (flowData: any) => {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    background: #f1f5f9;
+    background: var(--el-fill-color-light);
     padding: 2px 8px;
     border-radius: 4px;
     border: 1px solid var(--el-border-color-lighter);
   }
 
-  &__line {
+  .customize-card__line {
     flex-shrink: 0;
     font-size: 12px;
     color: var(--el-text-color-secondary);
@@ -798,11 +794,11 @@ const saveFlow = (flowData: any) => {
     border: 1px solid var(--el-border-color-lighter);
   }
 
-  &__body {
+  .customize-card__body {
     padding: 14px 16px;
   }
 
-  &__desc {
+  .customize-card__desc {
     font-size: 13.5px;
     color: var(--el-text-color-regular);
     margin: 0 0 12px;
@@ -891,11 +887,10 @@ const saveFlow = (flowData: any) => {
   transition: all 0.2s;
 
   &:hover {
-    border-color: #91caff;
-    background: #f0f7ff;
+    background: var(--el-color-primary-light-5);
   }
 
-  &__icon {
+  .toolbar-item__icon {
     flex-shrink: 0;
     width: 32px;
     height: 32px;
@@ -907,17 +902,17 @@ const saveFlow = (flowData: any) => {
     justify-content: center;
 
     &.primary {
-      background: #e6f4ff;
+      background: var(--el-color-primary-light-9);
       color: var(--el-color-primary);
     }
   }
 
-  &__info {
+  .toolbar-item__info {
     flex: 1;
     min-width: 0;
   }
 
-  &__name {
+  .toolbar-item__name {
     display: block;
     font-size: 13px;
     font-weight: 600;
@@ -925,7 +920,7 @@ const saveFlow = (flowData: any) => {
     margin-bottom: 2px;
   }
 
-  &__desc {
+  .toolbar-item__desc {
     display: block;
     font-size: 12px;
     color: var(--el-text-color-secondary);
@@ -940,7 +935,7 @@ const saveFlow = (flowData: any) => {
   border: 1px solid var(--el-border-color-lighter);
   border-radius: 10px;
 
-  &__tabs {
+  .node-config-card__tabs {
     display: flex;
     gap: 16px;
     margin-bottom: 14px;
@@ -976,7 +971,7 @@ const saveFlow = (flowData: any) => {
   }
 
   code {
-    background: #f1f5f9;
+    background: var(--el-fill-color-light);
     color: var(--el-color-primary);
     padding: 1px 6px;
     border-radius: 4px;

@@ -1,14 +1,86 @@
+<script setup lang="ts">
+import { XlyVideo } from 'easy-ui'
+import { ref } from 'vue'
+
+// 弹幕类型
+interface Danmaku {
+  id: number
+  text: string
+  time: number
+  color: string
+  mode: 'scroll' | 'top' | 'bottom'
+}
+
+// 示例弹幕数据
+const danmakuList = ref<Danmaku[]>([
+  { id: 1, text: '前方高能！', time: 3, color: '#FE0302', mode: 'scroll' },
+  { id: 2, text: '太精彩了', time: 6, color: '#FF7204', mode: 'scroll' },
+  { id: 3, text: '哈哈哈笑死了', time: 9, color: '#FFFF00', mode: 'scroll' },
+  { id: 4, text: '学到了', time: 12, color: '#00FF00', mode: 'scroll' },
+  { id: 5, text: '必须三连！', time: 15, color: '#00FFFF', mode: 'scroll' },
+  { id: 6, text: '大佬牛皮', time: 18, color: '#4A5BEE', mode: 'scroll' },
+  { id: 7, text: '泪目', time: 21, color: '#FF39C4', mode: 'scroll' },
+  { id: 8, text: '太强了', time: 24, color: '#ffffff', mode: 'scroll' },
+  { id: 9, text: '收藏了', time: 27, color: '#FFFF00', mode: 'scroll' },
+  { id: 10, text: '下次还看', time: 30, color: '#00FF00', mode: 'scroll' },
+  { id: 11, text: '666', time: 33, color: '#FE0302', mode: 'scroll' },
+  { id: 12, text: '干货满满', time: 36, color: '#FF7204', mode: 'scroll' },
+  { id: 13, text: '点赞！', time: 39, color: '#00FFFF', mode: 'scroll' },
+  { id: 14, text: '值得关注', time: 42, color: '#4A5BEE', mode: 'scroll' },
+  { id: 15, text: '辛苦了', time: 45, color: '#FF39C4', mode: 'scroll' },
+  { id: 16, text: '前方高能！1111', time: 3, color: '#FE0302', mode: 'scroll' },
+  { id: 17, text: '太精彩了111', time: 6, color: '#FF7204', mode: 'scroll' },
+  { id: 18, text: '哈哈哈笑死了111', time: 9, color: '#FFFF00', mode: 'scroll' },
+  { id: 19, text: '学到了111', time: 90, color: '#00FF00', mode: 'scroll' },
+  { id: 20, text: '必须三连！111', time: 60, color: '#00FFFF', mode: 'scroll' },
+  { id: 21, text: '大佬牛皮111', time: 80, color: '#4A5BEE', mode: 'scroll' },
+])
+
+// 弹幕发送处理（组件内部已维护 sentDanmaku，无需外部重复添加）
+function handleDanmakuSend(danmaku: Danmaku) {
+  console.log('发送弹幕:', danmaku)
+}
+
+const videoRef = ref()
+
+// 播放事件处理
+function handlePlay() {
+  console.log('播放开始')
+}
+
+// 暂停事件处理
+function handlePause() {
+  console.log('暂停')
+}
+
+// 结束事件处理
+function handleEnded() {
+  console.log('播放结束')
+}
+
+// 时间更新事件处理
+function handleTimeUpdate(time: number) {
+  console.log('当前时间:', time)
+}
+</script>
+
 <template>
   <div class="video-doc">
     <!-- 页面标题 -->
     <div class="doc-header">
-      <h1 class="doc-title">Video 视频</h1>
-      <p class="doc-desc">现代风格的视频播放组件，支持封面图、播放控制、进度拖拽、音量调节、全屏等功能。</p>
+      <h1 class="doc-title">
+        Video 视频
+      </h1>
+      <p class="doc-desc">
+        现代风格的视频播放组件，支持封面图、播放控制、进度拖拽、音量调节、全屏等功能。
+      </p>
     </div>
 
     <!-- 弹幕功能 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">弹幕功能</h2>
+      <h2 class="doc-section__title">
+        弹幕功能
+      </h2>
       <p class="doc-section__desc">
         支持弹幕显示、发送弹幕、弹幕列表等B站风格功能。默认静音播放，按 <code>C</code> 键可快速切换弹幕显示。
       </p>
@@ -19,11 +91,12 @@
             poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
             :height="480"
             :danmaku="danmakuList"
-            :showPoster="true"
-            @danmakuSend="handleDanmakuSend"
+            :show-poster="true"
+            @danmaku-send="handleDanmakuSend"
           />
         </div>
-        <XlyDocCode :code="`const danmakuList = [
+        <XlyDocCode
+          code="const danmakuList = [
   { id: 1, text: '前方高能！', time: 5, color: '#FE0302', mode: 'scroll' },
   { id: 2, text: '哈哈哈', time: 10, color: '#FFFF00', mode: 'scroll' },
 ]
@@ -32,13 +105,16 @@
   src=&quot;...&quot;
   :danmaku=&quot;danmakuList&quot;
   @danmakuSend=&quot;handleDanmakuSend&quot;
-/>`" />
+/>"
+        />
       </div>
     </section>
 
     <!-- 自动播放 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自动播放</h2>
+      <h2 class="doc-section__title">
+        自动播放
+      </h2>
       <p class="doc-section__desc">
         设置 <code>autoplay</code> 属性实现自动播放，<code>muted</code> 属性实现静音自动播放。
       </p>
@@ -66,19 +142,24 @@
             </div>
           </div>
         </div>
-        <XlyDocCode :code='`<!-- 静音自动播放 -->
-<XlyVideo src="..." :autoplay="true" :muted="true" />
+        <XlyDocCode
+          code="<!-- 静音自动播放 -->
+<XlyVideo src=&quot;...&quot; :autoplay=&quot;true&quot; :muted=&quot;true&quot; />
 
 <!-- 手动播放 -->
-<XlyVideo src="..." :autoplay="false" />`' />
+<XlyVideo src=&quot;...&quot; :autoplay=&quot;false&quot; />"
+        />
       </div>
     </section>
 
     <!-- 封面图模式 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">封面图模式</h2>
+      <h2 class="doc-section__title">
+        封面图模式
+      </h2>
       <p class="doc-section__desc">
-        设置 <code>showPoster</code> 属性控制是否显示封面图，点击封面后开始播放视频。如果未传入 <code>poster</code>，将自动捕获视频第一帧作为封面。
+        设置 <code>showPoster</code> 属性控制是否显示封面图，点击封面后开始播放视频。如果未传入
+        <code>poster</code>，将自动捕获视频第一帧作为封面。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
@@ -95,7 +176,7 @@
               <span class="video-label">自动捕获第一帧（无poster）</span>
               <XlyVideo
                 src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
-                :showPoster="true"
+                :show-poster="true"
                 :height="180"
               />
             </div>
@@ -103,26 +184,30 @@
               <span class="video-label">隐藏封面图</span>
               <XlyVideo
                 src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
-                :showPoster="false"
+                :show-poster="false"
                 :height="180"
               />
             </div>
           </div>
         </div>
-        <XlyDocCode :code='`<!-- 自定义封面图 -->
-<XlyVideo src="..." poster="..." />
+        <XlyDocCode
+          code="<!-- 自定义封面图 -->
+<XlyVideo src=&quot;...&quot; poster=&quot;...&quot; />
 
 <!-- 自动捕获第一帧（不传poster） -->
-<XlyVideo src="..." />
+<XlyVideo src=&quot;...&quot; />
 
 <!-- 隐藏封面图 -->
-<XlyVideo src="..." :show-poster="false" />`' />
+<XlyVideo src=&quot;...&quot; :show-poster=&quot;false&quot; />"
+        />
       </div>
     </section>
 
     <!-- 自定义尺寸 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义尺寸</h2>
+      <h2 class="doc-section__title">
+        自定义尺寸
+      </h2>
       <p class="doc-section__desc">
         通过 <code>width</code> 和 <code>height</code> 属性设置视频尺寸。
       </p>
@@ -149,14 +234,18 @@
             </div>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyVideo src="..." :width="320" :height="180" />
-<XlyVideo src="..." width="100%" :height="360" />`' />
+        <XlyDocCode
+          code="<XlyVideo src=&quot;...&quot; :width=&quot;320&quot; :height=&quot;180&quot; />
+<XlyVideo src=&quot;...&quot; width=&quot;100%&quot; :height=&quot;360&quot; />"
+        />
       </div>
     </section>
 
     <!-- 播放控制选项 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">播放控制选项</h2>
+      <h2 class="doc-section__title">
+        播放控制选项
+      </h2>
       <p class="doc-section__desc">
         通过属性控制各个控制项的显示隐藏。
       </p>
@@ -192,15 +281,19 @@
             </div>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyVideo src="..." :show-speed="false" />
-<XlyVideo src="..." :show-volume="false" />
-<XlyVideo src="..." :show-fullscreen="false" />`' />
+        <XlyDocCode
+          code="<XlyVideo src=&quot;...&quot; :show-speed=&quot;false&quot; />
+<XlyVideo src=&quot;...&quot; :show-volume=&quot;false&quot; />
+<XlyVideo src=&quot;...&quot; :show-fullscreen=&quot;false&quot; />"
+        />
       </div>
     </section>
 
     <!-- 循环播放 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">循环播放</h2>
+      <h2 class="doc-section__title">
+        循环播放
+      </h2>
       <p class="doc-section__desc">
         设置 <code>loop</code> 属性实现视频循环播放。
       </p>
@@ -213,13 +306,15 @@
             :height="280"
           />
         </div>
-        <XlyDocCode :code='`<XlyVideo src="..." :loop="true" />`' />
+        <XlyDocCode code="<XlyVideo src=&quot;...&quot; :loop=&quot;true&quot; />" />
       </div>
     </section>
 
     <!-- 自定义播放速率 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义播放速率</h2>
+      <h2 class="doc-section__title">
+        自定义播放速率
+      </h2>
       <p class="doc-section__desc">
         通过 <code>playbackRates</code> 属性自定义可选的播放速率。
       </p>
@@ -232,15 +327,18 @@
             :height="280"
           />
         </div>
-        <XlyDocCode :code='`<XlyVideo src="..." :playback-rates="[0.5, 1, 2, 3]" />`' />
+        <XlyDocCode code="<XlyVideo src=&quot;...&quot; :playback-rates=&quot;[0.5, 1, 2, 3]&quot; />" />
       </div>
     </section>
 
     <!-- 事件监听 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">事件监听</h2>
+      <h2 class="doc-section__title">
+        事件监听
+      </h2>
       <p class="doc-section__desc">
-        支持 <code>play</code>、<code>pause</code>、<code>ended</code>、<code>timeupdate</code>、<code>error</code> 等事件。
+        支持 <code>play</code>、<code>pause</code>、<code>ended</code>、<code>timeupdate</code>、<code>error</code>
+        等事件。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
@@ -255,7 +353,8 @@
             @timeupdate="handleTimeUpdate"
           />
         </div>
-        <XlyDocCode :code="`<XlyVideo
+        <XlyDocCode
+          code="<XlyVideo
   ref=&quot;videoRef&quot;
   src=&quot;...&quot;
   @play=&quot;handlePlay&quot;
@@ -269,13 +368,16 @@ const handlePlay = () => console.log('播放开始')
 const handlePause = () => console.log('暂停')
 const handleEnded = () => console.log('播放结束')
 const handleTimeUpdate = (time) => console.log('当前时间:', time)
-</script>`" />
+</script>"
+        />
       </div>
     </section>
 
     <!-- 关闭弹幕功能 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">关闭弹幕功能</h2>
+      <h2 class="doc-section__title">
+        关闭弹幕功能
+      </h2>
       <p class="doc-section__desc">
         设置 <code>danmakuEnabled</code> 属性为 <code>false</code> 可关闭弹幕功能，所有弹幕相关 UI 都不显示。
       </p>
@@ -289,19 +391,25 @@ const handleTimeUpdate = (time) => console.log('当前时间:', time)
             :danmaku-enabled="false"
           />
         </div>
-        <XlyDocCode :code='`<XlyVideo
-  src="..."
-  :danmaku="danmakuList"
-  :danmaku-enabled="false"
-/>`' />
+        <XlyDocCode
+          code="<XlyVideo
+  src=&quot;...&quot;
+  :danmaku=&quot;danmakuList&quot;
+  :danmaku-enabled=&quot;false&quot;
+/>"
+        />
       </div>
     </section>
 
     <!-- API -->
     <section class="doc-section">
-      <h2 class="doc-section__title">API</h2>
+      <h2 class="doc-section__title">
+        API
+      </h2>
 
-      <h3 class="doc-subtitle">Props</h3>
+      <h3 class="doc-subtitle">
+        Props
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -443,7 +551,9 @@ const handleTimeUpdate = (time) => console.log('当前时间:', time)
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Events</h3>
+      <h3 class="doc-subtitle">
+        Events
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -493,7 +603,9 @@ const handleTimeUpdate = (time) => console.log('当前时间:', time)
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Methods</h3>
+      <h3 class="doc-subtitle">
+        Methods
+      </h3>
       <p class="doc-section__desc">
         通过 <code>ref</code> 绑定组件实例后，可以调用以下方法：
       </p>
@@ -529,7 +641,9 @@ const handleTimeUpdate = (time) => console.log('当前时间:', time)
 
     <!-- 快捷键说明 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">键盘快捷键</h2>
+      <h2 class="doc-section__title">
+        键盘快捷键
+      </h2>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="shortcuts-list">
@@ -576,73 +690,6 @@ const handleTimeUpdate = (time) => console.log('当前时间:', time)
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue'
-import XlyVideo from '@/components/xly-video/index.vue'
-
-// 弹幕类型
-interface Danmaku {
-  id: number
-  text: string
-  time: number
-  color: string
-  mode: 'scroll' | 'top' | 'bottom'
-}
-
-// 示例弹幕数据
-const danmakuList = ref<Danmaku[]>([
-  { id: 1, text: '前方高能！', time: 3, color: '#FE0302', mode: 'scroll' },
-  { id: 2, text: '太精彩了', time: 6, color: '#FF7204', mode: 'scroll' },
-  { id: 3, text: '哈哈哈笑死了', time: 9, color: '#FFFF00', mode: 'scroll' },
-  { id: 4, text: '学到了', time: 12, color: '#00FF00', mode: 'scroll' },
-  { id: 5, text: '必须三连！', time: 15, color: '#00FFFF', mode: 'scroll' },
-  { id: 6, text: '大佬牛皮', time: 18, color: '#4A5BEE', mode: 'scroll' },
-  { id: 7, text: '泪目', time: 21, color: '#FF39C4', mode: 'scroll' },
-  { id: 8, text: '太强了', time: 24, color: '#ffffff', mode: 'scroll' },
-  { id: 9, text: '收藏了', time: 27, color: '#FFFF00', mode: 'scroll' },
-  { id: 10, text: '下次还看', time: 30, color: '#00FF00', mode: 'scroll' },
-  { id: 11, text: '666', time: 33, color: '#FE0302', mode: 'scroll' },
-  { id: 12, text: '干货满满', time: 36, color: '#FF7204', mode: 'scroll' },
-  { id: 13, text: '点赞！', time: 39, color: '#00FFFF', mode: 'scroll' },
-  { id: 14, text: '值得关注', time: 42, color: '#4A5BEE', mode: 'scroll' },
-  { id: 15, text: '辛苦了', time: 45, color: '#FF39C4', mode: 'scroll' },
-  { id: 16, text: '前方高能！1111', time: 3, color: '#FE0302', mode: 'scroll' },
-  { id: 17, text: '太精彩了111', time: 6, color: '#FF7204', mode: 'scroll' },
-  { id: 18, text: '哈哈哈笑死了111', time: 9, color: '#FFFF00', mode: 'scroll' },
-  { id: 19, text: '学到了111', time: 90, color: '#00FF00', mode: 'scroll' },
-  { id: 20, text: '必须三连！111', time: 60, color: '#00FFFF', mode: 'scroll' },
-  { id: 21, text: '大佬牛皮111', time: 80, color: '#4A5BEE', mode: 'scroll' },
-])
-
-// 弹幕发送处理（组件内部已维护 sentDanmaku，无需外部重复添加）
-const handleDanmakuSend = (danmaku: Danmaku) => {
-  console.log('发送弹幕:', danmaku)
-}
-
-const videoRef = ref()
-
-// 播放事件处理
-const handlePlay = () => {
-  console.log('播放开始')
-}
-
-// 暂停事件处理
-const handlePause = () => {
-  console.log('暂停')
-}
-
-// 结束事件处理
-const handleEnded = () => {
-  console.log('播放结束')
-}
-
-// 时间更新事件处理
-const handleTimeUpdate = (time: number) => {
-  console.log('当前时间:', time)
-}
-
-</script>
-
 <style scoped lang="scss">
 .video-doc {
   padding: 8px 0 40px;
@@ -670,7 +717,7 @@ const handleTimeUpdate = (time: number) => {
 .doc-section {
   margin-bottom: 32px;
 
-  &__title {
+  .doc-section__title {
     font-size: 18px;
     font-weight: 600;
     color: var(--el-text-color-primary);
@@ -679,7 +726,7 @@ const handleTimeUpdate = (time: number) => {
     border-bottom: 1px solid var(--el-border-color-lighter);
   }
 
-  &__desc {
+  .doc-section__desc {
     font-size: 14px;
     color: var(--el-text-color-secondary);
     line-height: 1.6;
@@ -713,7 +760,8 @@ const handleTimeUpdate = (time: number) => {
     font-size: 14px;
   }
 
-  th, td {
+  th,
+  td {
     text-align: left;
     padding: 10px 14px;
     border-bottom: 1px solid var(--el-border-color-lighter);
@@ -746,7 +794,7 @@ const handleTimeUpdate = (time: number) => {
   overflow: hidden;
   background: var(--el-bg-color-overlay);
 
-  &__body {
+  .doc-preview__body {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -803,7 +851,7 @@ const handleTimeUpdate = (time: number) => {
   align-items: center;
   gap: 12px;
   padding: 12px 16px;
-  background: #f9f9f9;
+  background: var(--el-bg-color-overlay);
   border-radius: 8px;
 }
 

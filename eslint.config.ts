@@ -1,41 +1,37 @@
-import { globalIgnores } from 'eslint/config'
-import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
-import pluginVue from 'eslint-plugin-vue'
-import pluginVitest from '@vitest/eslint-plugin'
-import pluginOxlint from 'eslint-plugin-oxlint'
-import skipFormatting from 'eslint-config-prettier/flat'
+import antfu from '@antfu/eslint-config'
 
-// To allow more languages other than `ts` in `.vue` files, uncomment the following lines:
-// import { configureVueProject } from '@vue/eslint-config-typescript'
-// configureVueProject({ scriptLangs: ['ts', 'tsx'] })
-// More info at https://github.com/vuejs/eslint-config-typescript/#advanced-setup
-
-export default defineConfigWithVueTs(
-  {
-    name: 'app/files-to-lint',
-    files: ['**/*.{vue,ts,mts,tsx}'],
+export default antfu({
+  vue: true,
+  typescript: true,
+  stylistic: { indent: 2, quotes: 'single' },
+  formatters: { css: true, html: true, markdown: 'prettier' },
+}, {
+  ignores: ['pnpm-workspace.yaml', '.npmrc', '**/README.md'],
+}, {
+  // 全局 TS/JS 规则
+  rules: {
+    'ts/no-use-before-define': 'warn',
+    'no-unmodified-loop-condition': 'warn',
   },
-
-  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**']),
-
-  ...pluginVue.configs['flat/essential'],
-  vueTsConfigs.recommended,
-
-  {
-    ...pluginVitest.configs.recommended,
-    files: ['src/**/__tests__/*'],
+}, {
+  // Vue 专属规则 — 添加 files 过滤，避免在 .md 等非 Vue 文件中崩溃
+  files: ['**/*.vue'],
+  rules: {
+    'vue/custom-event-name-casing': 'off',
+    'vue/no-use-v-if-with-v-for': 'warn',
+    'vue/no-mutating-props': 'warn',
   },
-
-  ...pluginOxlint.buildFromOxlintConfigFile('.oxlintrc.json'),
-
-  {
-    name: 'app/custom-rules',
-    rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-      'vue/no-mutating-props': 'off',
-      'vue/multi-word-component-names': 'off',
-    },
+}, {
+  // demo 页面：console/alert 属于演示行为，其余规则不放松
+  files: ['src/views/**/*.vue'],
+  rules: {
+    'no-console': 'off',
+    'no-alert': 'off',
   },
-
-  skipFormatting,
-)
+}, {
+  // easy-ui 组件库：仅允许 warn/error 级别的 console
+  files: ['packages/easy-ui/src/**/*.{vue,ts}'],
+  rules: {
+    'no-console': ['error', { allow: ['warn', 'error'] }],
+  },
+})

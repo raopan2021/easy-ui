@@ -1,19 +1,105 @@
+<script setup lang="ts">
+import type { LoadingInstance } from 'easy-ui'
+import { xly, XlyLoading } from 'easy-ui'
+import { ref } from 'vue'
+
+const loadingTypes = [
+  { value: 'spinner' as const, label: '旋转点' },
+  { value: 'wave' as const, label: '波浪' },
+  { value: 'pulse' as const, label: '脉冲' },
+  { value: 'ring' as const, label: '环形' },
+  { value: 'default' as const, label: '双点' },
+]
+
+const currentType = ref('spinner')
+const basicLoading = ref(false)
+const fullscreenLoading = ref(false)
+const containerLoading = ref(false)
+const ringProgress = ref(75)
+
+// 全局 API 示例
+let apiLoading: LoadingInstance | null = null
+let containerApiLoading: LoadingInstance | null = null
+
+function showLoading() {
+  basicLoading.value = true
+  setTimeout(() => {
+    basicLoading.value = false
+  }, 2000)
+}
+
+function showFullscreenLoading() {
+  fullscreenLoading.value = true
+  setTimeout(() => {
+    fullscreenLoading.value = false
+  }, 2000)
+}
+
+function toggleContainerLoading() {
+  containerLoading.value = !containerLoading.value
+}
+
+// 使用全局 API 显示全屏加载
+function showApiFullscreenLoading() {
+  apiLoading = xly.$loading.open({
+    type: currentType.value,
+    text: '全局 API 加载中...',
+  })
+
+  setTimeout(() => {
+    apiLoading?.close()
+  }, 2000)
+}
+
+// 使用全局 API 显示容器内加载
+function showApiContainerLoading() {
+  containerApiLoading = xly.$loading.open({
+    target: '.api-container-box',
+    type: 'wave',
+    text: '数据加载中...',
+  })
+
+  setTimeout(() => {
+    containerApiLoading?.close()
+  }, 2000)
+}
+
+// 使用快捷方法
+function showQuickFullscreen() {
+  const loading = xly.$loading.fullscreen('快捷全屏加载...')
+  setTimeout(() => loading.close(), 2000)
+}
+
+function showQuickContainer() {
+  const loading = xly.$loading.container('.api-container-box', '快捷容器加载...')
+  setTimeout(() => loading.close(), 2000)
+}
+</script>
+
 <template>
   <div class="loading-doc">
     <div class="doc-header">
-      <h1 class="doc-title">加载 Loading</h1>
-      <p class="doc-desc">用于页面和区块的加载中状态，支持多种动画类型和自定义配置。</p>
+      <h1 class="doc-title">
+        加载 Loading
+      </h1>
+      <p class="doc-desc">
+        用于页面和区块的加载中状态，支持多种动画类型和自定义配置。
+      </p>
     </div>
 
     <!-- 基础用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
-      <p class="doc-section__desc">通过 <code>v-model</code> 控制加载显示，支持多种动画类型。</p>
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>v-model</code> 控制加载显示，支持多种动画类型。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="loading-types">
-            <div 
-              v-for="type in loadingTypes" 
+            <div
+              v-for="type in loadingTypes"
               :key="type.value"
               class="type-item"
               :class="{ 'is-active': currentType === type.value }"
@@ -29,21 +115,27 @@
             </button>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyLoading v-model="loading" type="spinner" text="加载中..." />
+        <XlyDocCode
+          code="<XlyLoading v-model=&quot;loading&quot; type=&quot;spinner&quot; text=&quot;加载中...&quot; />
 
 <!-- 不同动画类型 -->
-<XlyLoading type="spinner" />  <!-- 旋转点 -->
-<XlyLoading type="wave" />     <!-- 波浪 -->
-<XlyLoading type="pulse" />    <!-- 脉冲 -->
-<XlyLoading type="ring" />     <!-- 环形 -->
-<XlyLoading type="default" />  <!-- 双点 -->`' />
+<XlyLoading type=&quot;spinner&quot; />  <!-- 旋转点 -->
+<XlyLoading type=&quot;wave&quot; />     <!-- 波浪 -->
+<XlyLoading type=&quot;pulse&quot; />    <!-- 脉冲 -->
+<XlyLoading type=&quot;ring&quot; />     <!-- 环形 -->
+<XlyLoading type=&quot;default&quot; />  <!-- 双点 -->"
+        />
       </div>
     </section>
 
     <!-- 带文本 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">带文本提示</h2>
-      <p class="doc-section__desc">通过 <code>text</code> 属性添加加载提示文字。</p>
+      <h2 class="doc-section__title">
+        带文本提示
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>text</code> 属性添加加载提示文字。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="loading-texts">
@@ -58,16 +150,22 @@
             </div>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyLoading type="spinner" text="正在加载..." />
-<XlyLoading type="wave" text="数据提交中" />
-<XlyLoading type="pulse" text="请稍候" />`' />
+        <XlyDocCode
+          code="<XlyLoading type=&quot;spinner&quot; text=&quot;正在加载...&quot; />
+<XlyLoading type=&quot;wave&quot; text=&quot;数据提交中&quot; />
+<XlyLoading type=&quot;pulse&quot; text=&quot;请稍候&quot; />"
+        />
       </div>
     </section>
 
     <!-- 不同尺寸 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">不同尺寸</h2>
-      <p class="doc-section__desc">通过 <code>size</code> 属性设置加载大小，支持 small、medium、large 或自定义数值。</p>
+      <h2 class="doc-section__title">
+        不同尺寸
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>size</code> 属性设置加载大小，支持 small、medium、large 或自定义数值。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="loading-sizes">
@@ -89,82 +187,142 @@
             </div>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyLoading size="small" />     <!-- 24px -->
-<XlyLoading size="medium" />    <!-- 32px -->
-<XlyLoading size="large" />     <!-- 48px -->
-<XlyLoading :size="64" />       <!-- 自定义 64px -->`' />
+        <XlyDocCode
+          code="<XlyLoading size=&quot;small&quot; />     <!-- 24px -->
+<XlyLoading size=&quot;medium&quot; />    <!-- 32px -->
+<XlyLoading size=&quot;large&quot; />     <!-- 48px -->
+<XlyLoading :size=&quot;64&quot; />       <!-- 自定义 64px -->"
+        />
       </div>
     </section>
 
     <!-- 自定义颜色 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义颜色</h2>
-      <p class="doc-section__desc">通过 <code>color</code> 和 <code>textColor</code> 属性自定义加载颜色。</p>
+      <h2 class="doc-section__title">
+        自定义颜色
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>color</code> 和 <code>textColor</code> 属性自定义加载颜色。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="loading-colors">
             <div class="color-item">
-              <XlyLoading :model-value="true" type="spinner" color="#4f6ef7" text="蓝色" text-color="#4f6ef7" :mask="false" />
+              <XlyLoading
+                :model-value="true"
+                type="spinner"
+                color="#4f6ef7"
+                text="蓝色"
+                text-color="#4f6ef7"
+                :mask="false"
+              />
             </div>
             <div class="color-item">
-              <XlyLoading :model-value="true" type="wave" color="#10b981" text="绿色" text-color="#10b981" :mask="false" />
+              <XlyLoading
+                :model-value="true"
+                type="wave"
+                color="#10b981"
+                text="绿色"
+                text-color="#10b981"
+                :mask="false"
+              />
             </div>
             <div class="color-item">
-              <XlyLoading :model-value="true" type="pulse" color="#f59e0b" text="橙色" text-color="#f59e0b" :mask="false" />
+              <XlyLoading
+                :model-value="true"
+                type="pulse"
+                color="#f59e0b"
+                text="橙色"
+                text-color="#f59e0b"
+                :mask="false"
+              />
             </div>
             <div class="color-item">
-              <XlyLoading :model-value="true" type="ring" color="#ec4899" text="粉色" text-color="#ec4899" :mask="false" progress="75" />
+              <XlyLoading
+                :model-value="true"
+                type="ring"
+                color="#ec4899"
+                text="粉色"
+                text-color="#ec4899"
+                :mask="false"
+                progress="75"
+              />
             </div>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyLoading color="#4f6ef7" text-color="#4f6ef7" text="蓝色" />
-<XlyLoading color="#10b981" text-color="#10b981" text="绿色" />
-<XlyLoading color="#f59e0b" text-color="#f59e0b" text="橙色" />`' />
+        <XlyDocCode
+          code="<XlyLoading color=&quot;#4f6ef7&quot; text-color=&quot;#4f6ef7&quot; text=&quot;蓝色&quot; />
+<XlyLoading color=&quot;#10b981&quot; text-color=&quot;#10b981&quot; text=&quot;绿色&quot; />
+<XlyLoading color=&quot;#f59e0b&quot; text-color=&quot;#f59e0b&quot; text=&quot;橙色&quot; />"
+        />
       </div>
     </section>
 
     <!-- 环形进度 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">环形进度</h2>
-      <p class="doc-section__desc">使用 <code>type="ring"</code> 显示环形进度，通过 <code>progress</code> 属性控制进度（0-100）。</p>
+      <h2 class="doc-section__title">
+        环形进度
+      </h2>
+      <p class="doc-section__desc">
+        使用 <code>type="ring"</code> 显示环形进度，通过 <code>progress</code> 属性控制进度（0-100）。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body doc-preview__body--column">
           <div class="ring-progress-demo">
-            <XlyLoading :model-value="true" type="ring" :progress="ringProgress" :mask="false" size="large" text="上传中..." />
+            <XlyLoading
+              :model-value="true"
+              type="ring"
+              :progress="ringProgress"
+              :mask="false"
+              size="large"
+              text="上传中..."
+            />
             <div class="progress-control">
               <span>进度: {{ ringProgress }}%</span>
-              <input v-model.number="ringProgress" type="range" min="0" max="100" />
+              <input v-model.number="ringProgress" type="range" min="0" max="100">
             </div>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyLoading type="ring" :progress="75" text="上传中..." />
+        <XlyDocCode
+          code="<XlyLoading type=&quot;ring&quot; :progress=&quot;75&quot; text=&quot;上传中...&quot; />
 
 <!-- 动态进度 -->
-<XlyLoading type="ring" :progress="uploadProgress" />`' />
+<XlyLoading type=&quot;ring&quot; :progress=&quot;uploadProgress&quot; />"
+        />
       </div>
     </section>
 
     <!-- 全屏加载 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">全屏加载</h2>
-      <p class="doc-section__desc">设置 <code>fullscreen</code> 为 true 可显示全屏加载，常用于页面初始化或全局操作。</p>
+      <h2 class="doc-section__title">
+        全屏加载
+      </h2>
+      <p class="doc-section__desc">
+        设置 <code>fullscreen</code> 为 true 可显示全屏加载，常用于页面初始化或全局操作。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <button class="demo-btn demo-btn--primary" @click="showFullscreenLoading">
             显示全屏加载 (2秒后关闭)
           </button>
         </div>
-        <XlyDocCode :code='`<XlyLoading v-model="fullscreenLoading" fullscreen text="页面加载中..." />
+        <XlyDocCode
+          code="<XlyLoading v-model=&quot;fullscreenLoading&quot; fullscreen text=&quot;页面加载中...&quot; />
 
 <!-- 锁定滚动 -->
-<XlyLoading v-model="loading" fullscreen lock text="处理中..." />`' />
+<XlyLoading v-model=&quot;loading&quot; fullscreen lock text=&quot;处理中...&quot; />"
+        />
       </div>
     </section>
 
     <!-- 容器内加载 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">容器内加载</h2>
-      <p class="doc-section__desc">设置 <code>containerFullscreen</code> 可在父容器内显示全屏加载，适用于表格、卡片等局部区域。</p>
+      <h2 class="doc-section__title">
+        容器内加载
+      </h2>
+      <p class="doc-section__desc">
+        设置 <code>containerFullscreen</code> 可在父容器内显示全屏加载，适用于表格、卡片等局部区域。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="container-demo">
@@ -175,33 +333,34 @@
                 <li>数据项 2</li>
                 <li>数据项 3</li>
               </ul>
-              <XlyLoading 
-                v-model="containerLoading" 
-                containerFullscreen 
-                text="数据加载中..."
-                type="wave"
-              />
+              <XlyLoading v-model="containerLoading" container-fullscreen text="数据加载中..." type="wave" />
             </div>
             <button class="demo-btn" @click="toggleContainerLoading">
               {{ containerLoading ? '关闭' : '显示' }}容器加载
             </button>
           </div>
         </div>
-        <XlyDocCode :code='`<div class="data-container" style="position: relative;">
+        <XlyDocCode
+          code="<div class=&quot;data-container&quot; style=&quot;position: relative;&quot;>
   <!-- 数据内容 -->
-  <XlyLoading 
-    v-model="loading" 
-    containerFullscreen 
-    text="数据加载中..."
+  <XlyLoading
+    v-model=&quot;loading&quot;
+    containerFullscreen
+    text=&quot;数据加载中...&quot;
   />
-</div>`' />
+</div>"
+        />
       </div>
     </section>
 
     <!-- 全局 API 调用 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">命令式调用</h2>
-      <p class="doc-section__desc">通过 <code>xly.$loading</code> 在任意位置调用，无需在模板中写组件。统一入口：<code>import { xly } from '@/utils/xly'</code></p>
+      <h2 class="doc-section__title">
+        命令式调用
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>xly.$loading</code> 在任意位置调用，无需在模板中写组件。统一入口：<code>import { xly } from 'easy-ui'</code>
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body doc-preview__body--column">
           <div class="api-demo-section">
@@ -215,7 +374,7 @@
               </button>
             </div>
           </div>
-          
+
           <div class="api-demo-section">
             <h4>容器内加载</h4>
             <div class="api-container-box">
@@ -236,7 +395,8 @@
             </div>
           </div>
         </div>
-        <XlyDocCode :code="`import { xly } from '@/utils/xly'
+        <XlyDocCode
+          code="import { xly } from 'easy-ui'
 
 // 全屏加载
 const loading = xly.$loading.open({ text: '加载中...' })
@@ -255,15 +415,20 @@ xly.$loading.container('.my-container')
 
 // 动态更新
 loading.setProgress(50)
-loading.setText('处理中...')`" />
+loading.setText('处理中...')"
+        />
       </div>
     </section>
 
     <!-- API 文档 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">API</h2>
-      
-      <h3 class="doc-subtitle">Attributes</h3>
+      <h2 class="doc-section__title">
+        API
+      </h2>
+
+      <h3 class="doc-subtitle">
+        Attributes
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -364,7 +529,9 @@ loading.setText('处理中...')`" />
         </table>
       </div>
 
-      <h3 class="doc-subtitle">命令式 API (xly.$loading)</h3>
+      <h3 class="doc-subtitle">
+        命令式 API (xly.$loading)
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -410,7 +577,9 @@ loading.setText('处理中...')`" />
         </table>
       </div>
 
-      <h3 class="doc-subtitle">LoadingInstance 方法</h3>
+      <h3 class="doc-subtitle">
+        LoadingInstance 方法
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -440,7 +609,9 @@ loading.setText('处理中...')`" />
         </table>
       </div>
 
-      <h3 class="doc-subtitle">组件 Methods</h3>
+      <h3 class="doc-subtitle">
+        组件 Methods
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -472,157 +643,124 @@ loading.setText('处理中...')`" />
     </section>
 
     <!-- 全屏加载演示 -->
-    <XlyLoading 
-      v-model="fullscreenLoading" 
-      fullscreen 
-      :type="currentType"
-      text="页面加载中..."
-    />
+    <XlyLoading v-model="fullscreenLoading" fullscreen :type="currentType" text="页面加载中..." />
 
     <!-- 基础加载演示 -->
-    <XlyLoading 
-      v-model="basicLoading" 
-      :type="currentType"
-      text="加载中..."
-    />
+    <XlyLoading v-model="basicLoading" :type="currentType" text="加载中..." />
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import XlyLoading from '@/components/xly-loading/index.vue'
-import { xly } from '@/utils/xly'
-import type { LoadingInstance } from '@/components/xly-loading'
-
-const loadingTypes = [
-  { value: 'spinner' as const, label: '旋转点' },
-  { value: 'wave' as const, label: '波浪' },
-  { value: 'pulse' as const, label: '脉冲' },
-  { value: 'ring' as const, label: '环形' },
-  { value: 'default' as const, label: '双点' },
-]
-
-const currentType = ref('spinner')
-const basicLoading = ref(false)
-const fullscreenLoading = ref(false)
-const containerLoading = ref(false)
-const ringProgress = ref(75)
-
-// 全局 API 示例
-let apiLoading: LoadingInstance | null = null
-let containerApiLoading: LoadingInstance | null = null
-
-function showLoading() {
-  basicLoading.value = true
-  setTimeout(() => {
-    basicLoading.value = false
-  }, 2000)
-}
-
-function showFullscreenLoading() {
-  fullscreenLoading.value = true
-  setTimeout(() => {
-    fullscreenLoading.value = false
-  }, 2000)
-}
-
-function toggleContainerLoading() {
-  containerLoading.value = !containerLoading.value
-}
-
-// 使用全局 API 显示全屏加载
-function showApiFullscreenLoading() {
-  apiLoading = xly.$loading.open({
-    type: currentType.value,
-    text: '全局 API 加载中...'
-  })
-  
-  setTimeout(() => {
-    apiLoading?.close()
-  }, 2000)
-}
-
-// 使用全局 API 显示容器内加载
-function showApiContainerLoading() {
-  containerApiLoading = xly.$loading.open({
-    target: '.api-container-box',
-    type: 'wave',
-    text: '数据加载中...'
-  })
-  
-  setTimeout(() => {
-    containerApiLoading?.close()
-  }, 2000)
-}
-
-// 使用快捷方法
-function showQuickFullscreen() {
-  const loading = xly.$loading.fullscreen('快捷全屏加载...')
-  setTimeout(() => loading.close(), 2000)
-}
-
-function showQuickContainer() {
-  const loading = xly.$loading.container('.api-container-box', '快捷容器加载...')
-  setTimeout(() => loading.close(), 2000)
-}
-</script>
 
 <style scoped lang="scss">
 .loading-doc {
   padding: 8px 0 40px;
 }
 
-.doc-header { margin-bottom: 36px; }
+.doc-header {
+  margin-bottom: 36px;
+}
 .doc-title {
-  font-size: 26px; font-weight: 700; color: var(--el-text-color-primary);
-  margin: 0 0 8px; letter-spacing: -0.3px;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  letter-spacing: -0.3px;
 }
 .doc-desc {
-  font-size: 14px; color: var(--el-text-color-secondary); margin: 0; line-height: 1.6;
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0;
+  line-height: 1.6;
 }
 
-.doc-section { margin-bottom: 32px; }
+.doc-section {
+  margin-bottom: 32px;
+}
 .doc-section__title {
-  font-size: 18px; font-weight: 600; color: var(--el-text-color-primary);
-  margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--el-border-color-lighter);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--el-border-color-lighter);
 }
 .doc-section__desc {
-  font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 16px; line-height: 1.6;
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0 0 16px;
+  line-height: 1.6;
   code {
-    background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px;
-    border-radius: 4px; font-size: 13px;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
   }
 }
 
 .doc-preview {
-  border: 1px solid var(--el-border-color-lighter); border-radius: 12px;
-  overflow: hidden; background: var(--el-bg-color-overlay);
+  border: 1px solid var(--el-border-color-lighter);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--el-bg-color-overlay);
 }
 .doc-preview__body {
-  display: flex; flex-wrap: wrap; align-items: center;
-  gap: 12px; padding: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
 }
 .doc-preview__body--column {
   flex-direction: column;
   align-items: stretch;
 }
 .doc-code {
-  border-top: 1px solid var(--el-border-color-lighter); background: var(--el-fill-color-light);
-  padding: 16px 20px; overflow-x: auto;
-  pre { margin: 0; padding: 0; }
+  border-top: 1px solid var(--el-border-color-lighter);
+  background: var(--el-fill-color-light);
+  padding: 16px 20px;
+  overflow-x: auto;
+  pre {
+    margin: 0;
+    padding: 0;
+  }
   code {
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
-    font-size: 13px; line-height: 1.7; color: var(--el-text-color-regular); white-space: pre;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--el-text-color-regular);
+    white-space: pre;
   }
 }
 
-.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
-.doc-table { overflow-x: auto;
-  table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); white-space: nowrap; }
-  th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); }
-  td { color: var(--el-text-color-regular); }
+.doc-subtitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 20px 0 10px;
+}
+.doc-table {
+  overflow-x: auto;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+    white-space: nowrap;
+  }
+  th {
+    background: var(--el-fill-color-light);
+    font-weight: 600;
+    color: var(--el-text-color-primary);
+  }
+  td {
+    color: var(--el-text-color-regular);
+  }
 }
 
 // 加载类型选择
@@ -643,15 +781,15 @@ function showQuickContainer() {
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s;
-  
+
   &:hover {
     border-color: #d1d5db;
     background: var(--el-fill-color-light);
   }
-  
+
   &.is-active {
     border-color: #4f6ef7;
-    background: #f5f6ff;
+    background: var(--el-fill-color-light);
   }
 }
 
@@ -716,14 +854,14 @@ function showQuickContainer() {
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  
+
   span {
     font-size: 14px;
     color: var(--el-text-color-secondary);
     font-weight: 500;
   }
-  
-  input[type="range"] {
+
+  input[type='range'] {
     width: 200px;
   }
 }
@@ -731,11 +869,11 @@ function showQuickContainer() {
 // API 演示
 .api-demo-section {
   margin-bottom: 24px;
-  
+
   &:last-child {
     margin-bottom: 0;
   }
-  
+
   h4 {
     margin: 0 0 12px;
     font-size: 14px;
@@ -753,19 +891,19 @@ function showQuickContainer() {
   padding: 16px;
   background: var(--el-bg-color-overlay);
   margin-bottom: 12px;
-  
+
   h5 {
     margin: 0 0 12px;
     font-size: 14px;
     color: var(--el-text-color-primary);
   }
-  
+
   ul {
     margin: 0;
     padding-left: 20px;
     color: var(--el-text-color-secondary);
     font-size: 13px;
-    
+
     li {
       margin-bottom: 6px;
     }
@@ -787,18 +925,18 @@ function showQuickContainer() {
   border-radius: 8px;
   padding: 16px;
   background: var(--el-bg-color-overlay);
-  
+
   h4 {
     margin: 0 0 12px;
     font-size: 16px;
     color: var(--el-text-color-primary);
   }
-  
+
   ul {
     margin: 0;
     padding-left: 20px;
     color: var(--el-text-color-secondary);
-    
+
     li {
       margin-bottom: 8px;
     }
@@ -826,12 +964,12 @@ function showQuickContainer() {
   color: var(--el-text-color-regular);
   cursor: pointer;
   transition: all 0.2s;
-  
+
   &:hover:not(:disabled) {
     border-color: #d1d5db;
     background: var(--el-fill-color-light);
   }
-  
+
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -842,7 +980,7 @@ function showQuickContainer() {
   background: var(--el-color-primary);
   border-color: #4f6ef7;
   color: #fff;
-  
+
   &:hover:not(:disabled) {
     background: #3d5ce5;
     border-color: #3d5ce5;

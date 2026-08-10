@@ -1,8 +1,14 @@
+<script setup lang="ts">
+defineOptions({ name: 'XlyWorktabDoc' })
+</script>
+
 <template>
   <div class="worktab-doc">
     <!-- 页面标题 -->
     <div class="doc-header">
-      <h1 class="doc-title">WorkTab 多标签页</h1>
+      <h1 class="doc-title">
+        WorkTab 多标签页
+      </h1>
       <p class="doc-desc">
         管理系统多标签页组件，支持标签切换、关闭、右键菜单、横向滚动、KeepAlive 页面缓存。
       </p>
@@ -10,11 +16,16 @@
 
     <!-- 涉及文件 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">📦 涉及文件</h2>
+      <h2 class="doc-section__title">
+        📦 涉及文件
+      </h2>
       <div class="doc-table">
         <table>
           <thead>
-            <tr><th>文件路径</th><th>说明</th></tr>
+            <tr>
+              <th>文件路径</th>
+              <th>说明</th>
+            </tr>
           </thead>
           <tbody>
             <tr>
@@ -36,16 +47,25 @@
 
     <!-- 组件 Props / Expose -->
     <section class="doc-section">
-      <h2 class="doc-section__title">🔗 组件接口</h2>
+      <h2 class="doc-section__title">
+        🔗 组件接口
+      </h2>
       <p class="doc-section__desc">
-        <code>&lt;XlyWorktab /&gt;</code> 当前为无 Props 设计，标签数据完全由 Store 驱动。通过 <code>ref</code> 可调用暴露方法。
+        <code>&lt;XlyWorktab /&gt;</code> 当前为无 Props 设计，标签数据完全由 Store 驱动。通过
+        <code>ref</code> 可调用暴露方法。
       </p>
 
-      <h3 class="doc-subtitle">Expose 方法</h3>
+      <h3 class="doc-subtitle">
+        Expose 方法
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
-            <tr><th>方法</th><th>说明</th><th>调用时机</th></tr>
+            <tr>
+              <th>方法</th>
+              <th>说明</th>
+              <th>调用时机</th>
+            </tr>
           </thead>
           <tbody>
             <tr>
@@ -57,24 +77,35 @@
         </table>
       </div>
 
-      <XlyDocCode :code='`const worktabRef = ref<InstanceType<typeof XlyWorktab>>()
+      <XlyDocCode
+        code="const worktabRef = ref<InstanceType<typeof XlyWorktab>>()
 
 // 在标签页变化后调用
-worktabRef.value?.onTabsChange()`' />
+worktabRef.value?.onTabsChange()"
+      />
     </section>
 
     <!-- Store API -->
     <section class="doc-section">
-      <h2 class="doc-section__title">💾 Store API（tabs.ts）</h2>
+      <h2 class="doc-section__title">
+        💾 Store API（tabs.ts）
+      </h2>
       <p class="doc-section__desc">
         标签页状态通过 Pinia Store 集中管理。<code>import { useTabsStore } from '@/stores/tabs'</code>
       </p>
 
-      <h3 class="doc-subtitle">TabItem 类型</h3>
+      <h3 class="doc-subtitle">
+        TabItem 类型
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
-            <tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr>
+            <tr>
+              <th>字段</th>
+              <th>类型</th>
+              <th>必填</th>
+              <th>说明</th>
+            </tr>
           </thead>
           <tbody>
             <tr>
@@ -105,11 +136,17 @@ worktabRef.value?.onTabsChange()`' />
         </table>
       </div>
 
-      <h3 class="doc-subtitle">State</h3>
+      <h3 class="doc-subtitle">
+        State
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
-            <tr><th>属性</th><th>类型</th><th>说明</th></tr>
+            <tr>
+              <th>属性</th>
+              <th>类型</th>
+              <th>说明</th>
+            </tr>
           </thead>
           <tbody>
             <tr>
@@ -131,11 +168,18 @@ worktabRef.value?.onTabsChange()`' />
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Actions</h3>
+      <h3 class="doc-subtitle">
+        Actions
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
-            <tr><th>方法</th><th>参数</th><th>返回值</th><th>说明</th></tr>
+            <tr>
+              <th>方法</th>
+              <th>参数</th>
+              <th>返回值</th>
+              <th>说明</th>
+            </tr>
           </thead>
           <tbody>
             <tr>
@@ -181,14 +225,20 @@ worktabRef.value?.onTabsChange()`' />
 
     <!-- 右键菜单 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">🖱️ 右键菜单</h2>
+      <h2 class="doc-section__title">
+        🖱️ 右键菜单
+      </h2>
       <p class="doc-section__desc">
         在标签上右键点击弹出上下文菜单。菜单通过 <code>Teleport</code> 挂载到 body，确保不被父容器裁切。
       </p>
       <div class="doc-table">
         <table>
           <thead>
-            <tr><th>菜单项</th><th>说明</th><th>特殊逻辑</th></tr>
+            <tr>
+              <th>菜单项</th>
+              <th>说明</th>
+              <th>特殊逻辑</th>
+            </tr>
           </thead>
           <tbody>
             <tr>
@@ -228,39 +278,48 @@ worktabRef.value?.onTabsChange()`' />
 
     <!-- 集成方式 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">🛠️ 集成方式</h2>
+      <h2 class="doc-section__title">
+        🛠️ 集成方式
+      </h2>
       <p class="doc-section__desc">
         WorkTab 已集成到 <code>src/layouts/index.vue</code>。以下为完整集成代码和步骤说明，方便二开时参考。
       </p>
 
-      <h3 class="doc-subtitle">1. 布局模板</h3>
-      <XlyDocCode :code='`<template>
-  <div class="layout-container">
+      <h3 class="doc-subtitle">
+        1. 布局模板
+      </h3>
+      <XlyDocCode
+        code="<template>
+  <div class=&quot;layout-container&quot;>
     <HeaderLayout />
-    <div class="layout-body">
+    <div class=&quot;layout-body&quot;>
       <FixedSidebar />
-      <div class="layout-main">
+      <div class=&quot;layout-main&quot;>
         <!-- ① 放置 WorkTab 组件 -->
-        <XlyWorktab ref="worktabRef" />
+        <XlyWorktab ref=&quot;worktabRef&quot; />
 
         <!-- ② KeepAlive 包裹 RouterView -->
-        <main class="layout-content">
-          <RouterView v-slot="{ Component, route }">
+        <main class=&quot;layout-content&quot;>
+          <RouterView v-slot=&quot;{ Component, route }&quot;>
             <KeepAlive>
-              <component :is="Component" :key="route.path" />
+              <component :is=&quot;Component&quot; :key=&quot;route.path&quot; />
             </KeepAlive>
           </RouterView>
         </main>
       </div>
     </div>
   </div>
-</template>`' />
+</template>"
+      />
 
-      <h3 class="doc-subtitle">2. 路由监听（自动添加标签）</h3>
-      <XlyDocCode :code="`<script setup lang=&quot;ts&quot;>
+      <h3 class="doc-subtitle">
+        2. 路由监听（自动添加标签）
+      </h3>
+      <XlyDocCode
+        code="<script setup lang=&quot;ts&quot;>
 import { ref, watch, nextTick } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
-import XlyWorktab from '@/components/xly-worktab/index.vue'
+import { XlyWorktab } from 'easy-ui'
 import { useTabsStore } from '@/stores/tabs'
 
 const route = useRoute()
@@ -282,13 +341,19 @@ watch(
   },
   { immediate: true },
 )
-</script>`" />
+</script>"
+      />
 
-      <h3 class="doc-subtitle">3. 路由标题匹配</h3>
+      <h3 class="doc-subtitle">
+        3. 路由标题匹配
+      </h3>
       <p class="doc-section__desc">
-        <code>addTab</code> 会从 <code>route.meta.title</code> 获取标题。当前通过遍历 <code>menu.json</code> 匹配路径。如果你改用了 vue-router 的 meta 配置，可直接在路由定义中设置 <code>meta: { title: '页面名' }</code>，去掉 <code>getRouteTitle</code> 函数。
+        <code>addTab</code> 会从 <code>route.meta.title</code> 获取标题。当前通过遍历
+        <code>menu.json</code> 匹配路径。如果你改用了 vue-router 的 meta 配置，可直接在路由定义中设置
+        <code>meta: { title: '页面名' }</code>，去掉 <code>getRouteTitle</code> 函数。
       </p>
-      <XlyDocCode :code="`// 方式一：当前做法 —— 从 menu.json 匹配标题
+      <XlyDocCode
+        code="// 方式一：当前做法 —— 从 menu.json 匹配标题
 function getRouteTitle(path: string): string {
   for (const item of menuData) {
     if (item.path === path) return item.name
@@ -307,50 +372,71 @@ function getRouteTitle(path: string): string {
   path: '/user/list',
   component: () => import('@/views/user/list.vue'),
   meta: { title: '用户管理' }
-}`" />
+}"
+      />
 
-      <h3 class="doc-subtitle">4. KeepAlive 缓存原理</h3>
+      <h3 class="doc-subtitle">
+        4. KeepAlive 缓存原理
+      </h3>
       <p class="doc-section__desc">
-        KeepAlive 通过组件的 <code>name</code> 进行缓存匹配。页面组件必须通过 <code>defineOptions({ name: 'XxxPage' })</code> 声明名称，Store 的 <code>cachedNames</code> 会自动从 <code>tab.name</code>（即路由名称）收集。
+        KeepAlive 通过组件的 <code>name</code> 进行缓存匹配。页面组件必须通过
+        <code>defineOptions({ name: 'XxxPage' })</code> 声明名称，Store 的 <code>cachedNames</code> 会自动从
+        <code>tab.name</code>（即路由名称）收集。
       </p>
       <div class="doc-tip doc-tip--warning">
-        <strong>⚠️ 注意：</strong>如果页面组件没有声明 <code>defineOptions({ name: 'xxx' })</code>，KeepAlive 将无法缓存该页面。
+        <strong>⚠️ 注意：</strong>如果页面组件没有声明 <code>defineOptions({ name: 'xxx' })</code>，KeepAlive
+        将无法缓存该页面。
       </div>
 
-      <h3 class="doc-subtitle">5. 固定标签（首页固定）✅ 已内置</h3>
+      <h3 class="doc-subtitle">
+        5. 固定标签（首页固定）✅ 已内置
+      </h3>
       <div class="doc-tip doc-tip--info">
-        <strong>✅ 已内置：</strong>路径为 <code>/</code> 的标签会自动标记 <code>affix: true</code>，不可关闭。布局初始化时也会确保首页标签始终存在。
+        <strong>✅ 已内置：</strong>路径为 <code>/</code> 的标签会自动标记
+        <code>affix: true</code>，不可关闭。布局初始化时也会确保首页标签始终存在。
       </div>
       <p class="doc-section__desc">
-        如需固定其他页面，修改 <code>src/stores/tabs.ts</code> 中 <code>addTab</code> 的 <code>HOME_PATH</code> 常量，或改为数组判断：
+        如需固定其他页面，修改 <code>src/stores/tabs.ts</code> 中 <code>addTab</code> 的
+        <code>HOME_PATH</code> 常量，或改为数组判断：
       </p>
-      <XlyDocCode :code="`// stores/tabs.ts
+      <XlyDocCode
+        code="// stores/tabs.ts
 const AFFIX_PATHS = ['/', '/dashboard']
 
 function addTab(route: RouteLocationNormalized) {
   // ...
   const isAffix = AFFIX_PATHS.includes(route.path)
   tabs.value.push({ path, title, name: route.name, ...(isAffix ? { affix: true } : {}) })
-}`" />
+}"
+      />
 
-      <h3 class="doc-subtitle">6. 持久化标签页（刷新不丢失）✅ 已内置</h3>
+      <h3 class="doc-subtitle">
+        6. 持久化标签页（刷新不丢失）✅ 已内置
+      </h3>
       <div class="doc-tip doc-tip--info">
-        <strong>✅ 已内置：</strong>Store 通过 <code>watchEffect</code> 自动将标签页列表和激活状态保存到 <code>localStorage</code>（key: <code>xly-worktab</code>），页面刷新时自动恢复。
+        <strong>✅ 已内置：</strong>Store 通过 <code>watchEffect</code> 自动将标签页列表和激活状态保存到
+        <code>localStorage</code>（key: <code>xly-worktab</code>），页面刷新时自动恢复。
       </div>
       <p class="doc-section__desc">
-        如需禁用持久化或更换存储 key，修改 <code>src/stores/tabs.ts</code> 顶部的 <code>STORAGE_KEY</code> 常量，并注释掉 <code>loadStorage</code> / <code>saveStorage</code> 调用。
+        如需禁用持久化或更换存储 key，修改 <code>src/stores/tabs.ts</code> 顶部的
+        <code>STORAGE_KEY</code> 常量，并注释掉 <code>loadStorage</code> / <code>saveStorage</code> 调用。
       </p>
     </section>
 
     <!-- 二开指南 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">🧩 二开指南</h2>
+      <h2 class="doc-section__title">
+        🧩 二开指南
+      </h2>
 
-      <h3 class="doc-subtitle">场景一：自定义标签样式</h3>
+      <h3 class="doc-subtitle">
+        场景一：自定义标签样式
+      </h3>
       <p class="doc-section__desc">
         修改 <code>src/components/xly-worktab/index.vue</code> 底部的 SCSS 变量即可全局调整风格：
       </p>
-      <XlyDocCode :code='`// src/components/xly-worktab/index.vue <style>
+      <XlyDocCode
+        code="// src/components/xly-worktab/index.vue <style>
 $primary: #4f6ef7;      // 激活标签颜色
 $border-color: #ebeef5;  // 底部边框颜色
 $bg-active: #ecf0ff;     // 激活标签背景
@@ -358,13 +444,18 @@ $bg-hover: #f5f7fa;      // 悬浮标签背景
 // 标签尺寸：
 .worktab-item { height: 28px; padding: 0 10px; font-size: 13px; max-width: 160px; }
 // 标签栏高度：
-.xly-worktab { height: 40px; }`' />
+.xly-worktab { height: 40px; }"
+      />
 
-      <h3 class="doc-subtitle">场景二：添加标签图标</h3>
+      <h3 class="doc-subtitle">
+        场景二：添加标签图标
+      </h3>
       <p class="doc-section__desc">
-        当前标签只显示文字。如需在标签前加图标，修改组件模板中 <code>worktab-item</code> 的结构，并在 <code>TabItem</code> 类型中增加 <code>icon</code> 字段：
+        当前标签只显示文字。如需在标签前加图标，修改组件模板中 <code>worktab-item</code> 的结构，并在
+        <code>TabItem</code> 类型中增加 <code>icon</code> 字段：
       </p>
-      <XlyDocCode :code="`// 1. 扩展 TabItem 类型（stores/tabs.ts）
+      <XlyDocCode
+        code="// 1. 扩展 TabItem 类型（stores/tabs.ts）
 export interface TabItem {
   path: string
   title: string
@@ -381,23 +472,31 @@ function addTab(route: RouteLocationNormalized) {
 
 // 3. 组件模板中渲染图标
 // <XlyIcon :name=&quot;tab.icon&quot; style=&quot;margin-right: 4px&quot; />
-// <span class=&quot;worktab-item__title&quot;>{'{'}{ tab.title }{'}'}</span>`" />
+// <span class=&quot;worktab-item__title&quot;>{'{'}{ tab.title }{'}'}</span>"
+      />
 
-      <h3 class="doc-subtitle">场景三：持久化标签页（刷新不丢失）✅ 已内置</h3>
+      <h3 class="doc-subtitle">
+        场景三：持久化标签页（刷新不丢失）✅ 已内置
+      </h3>
       <div class="doc-tip doc-tip--info">
-        <strong>✅ 已内置：</strong>Store 已使用 <code>watchEffect</code> 和 <code>localStorage</code> 实现持久化，key 为 <code>xly-worktab</code>。无需额外配置。
+        <strong>✅ 已内置：</strong>Store 已使用 <code>watchEffect</code> 和 <code>localStorage</code> 实现持久化，key
+        为 <code>xly-worktab</code>。无需额外配置。
       </div>
       <p class="doc-section__desc">
-        如需关闭持久化或使用其他存储方式（如 IndexedDB），修改 <code>src/stores/tabs.ts</code> 中的 <code>loadStorage</code> / <code>saveStorage</code> 函数。
+        如需关闭持久化或使用其他存储方式（如 IndexedDB），修改 <code>src/stores/tabs.ts</code> 中的
+        <code>loadStorage</code> / <code>saveStorage</code> 函数。
       </p>
 
-      <h3 class="doc-subtitle">场景四：控制 KeepAlive 缓存范围</h3>
+      <h3 class="doc-subtitle">
+        场景四：控制 KeepAlive 缓存范围
+      </h3>
       <p class="doc-section__desc">
         当前 KeepAlive 缓存所有有 <code>name</code> 的页面。如需按需缓存：
       </p>
-      <XlyDocCode :code='`// 方式一：使用 cachedNames 控制 include
-<KeepAlive :include="tabsStore.cachedNames">
-  <component :is="Component" :key="route.path" />
+      <XlyDocCode
+        code="// 方式一：使用 cachedNames 控制 include
+<KeepAlive :include=&quot;tabsStore.cachedNames&quot;>
+  <component :is=&quot;Component&quot; :key=&quot;route.path&quot; />
 </KeepAlive>
 
 // 方式二：在 TabItem 中增加 cached 字段
@@ -411,13 +510,17 @@ const cachedNames = computed(() => {
   return tabs.value
     .filter((tab) => tab.name && tab.cached !== false)
     .map((tab) => tab.name as string)
-})`' />
+})"
+      />
 
-      <h3 class="doc-subtitle">场景五：关闭全部标签后跳转到指定页面</h3>
+      <h3 class="doc-subtitle">
+        场景五：关闭全部标签后跳转到指定页面
+      </h3>
       <p class="doc-section__desc">
         当前关闭全部标签后默认跳转到 <code>/</code>。如需跳转到首页或其他页面，修改 <code>closeAllTabs</code> 的返回值：
       </p>
-      <XlyDocCode :code="`// stores/tabs.ts
+      <XlyDocCode
+        code="// stores/tabs.ts
 function closeAllTabs(): string | null {
   const affixTabs = tabs.value.filter((tab) => tab.affix)
   tabs.value = affixTabs
@@ -427,13 +530,17 @@ function closeAllTabs(): string | null {
   }
   activeTab.value = ''
   return '/home'  // ← 改为你的默认首页路径
-}`" />
+}"
+      />
 
-      <h3 class="doc-subtitle">场景六：禁用/隐藏 WorkTab</h3>
+      <h3 class="doc-subtitle">
+        场景六：禁用/隐藏 WorkTab
+      </h3>
       <p class="doc-section__desc">
         如果某些场景下不需要标签页功能（如移动端、嵌入模式），可通过环境变量或配置控制：
       </p>
-      <XlyDocCode :code="`<!-- layouts/index.vue -->
+      <XlyDocCode
+        code="<!-- layouts/index.vue -->
 <XlyWorktab v-if=&quot;showWorkTab&quot; ref=&quot;worktabRef&quot; />
 
 <script setup>
@@ -442,13 +549,17 @@ const showWorkTab = import.meta.env.VITE_SHOW_WORKTAB !== 'false'
 
 // 方式二：响应式配置（可运行时切换）
 const showWorkTab = ref(true)
-</script>`" />
+</script>"
+      />
 
-      <h3 class="doc-subtitle">场景七：最大标签数量限制</h3>
+      <h3 class="doc-subtitle">
+        场景七：最大标签数量限制
+      </h3>
       <p class="doc-section__desc">
         防止标签过多导致性能问题，可在 Store 中增加上限：
       </p>
-      <XlyDocCode :code='`// stores/tabs.ts
+      <XlyDocCode
+        code="// stores/tabs.ts
 const MAX_TABS = 20  // 最大标签数
 
 function addTab(route: RouteLocationNormalized) {
@@ -471,35 +582,42 @@ function addTab(route: RouteLocationNormalized) {
   const title = (route.meta?.title as string) || path
   tabs.value.push({ path, title, name: route.name })
   activeTab.value = path
-}`' />
+}"
+      />
     </section>
 
     <!-- 注意事项 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">📌 注意事项</h2>
+      <h2 class="doc-section__title">
+        📌 注意事项
+      </h2>
       <div class="doc-note-list">
         <div class="doc-note-item">
           <span class="doc-note-item__label">KeepAlive 匹配</span>
           <span class="doc-note-item__desc">
-            组件必须设置 <code>defineOptions({ name: 'XxxPage' })</code>，且 name 需与路由配置的 <code>name</code> 一致，否则缓存不生效。
+            组件必须设置 <code>defineOptions({ name: 'XxxPage' })</code>，且 name 需与路由配置的
+            <code>name</code> 一致，否则缓存不生效。
           </span>
         </div>
         <div class="doc-note-item">
           <span class="doc-note-item__label">关闭标签跳转</span>
           <span class="doc-note-item__desc">
-            <code>closeTab</code> 和 <code>closeAllTabs</code> 返回需要跳转的路径，调用方需自行 <code>router.push(target)</code>。
+            <code>closeTab</code> 和 <code>closeAllTabs</code> 返回需要跳转的路径，调用方需自行
+            <code>router.push(target)</code>。
           </span>
         </div>
         <div class="doc-note-item">
           <span class="doc-note-item__label">右键菜单定位</span>
           <span class="doc-note-item__desc">
-            右键菜单使用 <code>position: fixed</code> + <code>Teleport to="body"</code>，不受 overflow 裁切。如果页面有缩放（zoom），坐标可能需要手动修正。
+            右键菜单使用 <code>position: fixed</code> + <code>Teleport to="body"</code>，不受 overflow
+            裁切。如果页面有缩放（zoom），坐标可能需要手动修正。
           </span>
         </div>
         <div class="doc-note-item">
           <span class="doc-note-item__label">滚动按钮</span>
           <span class="doc-note-item__desc">
-            左右滚动箭头在标签总宽度超出容器时自动显示，监听了 <code>scroll</code> 事件和鼠标滚轮（<code>@wheel</code>）。
+            左右滚动箭头在标签总宽度超出容器时自动显示，监听了
+            <code>scroll</code> 事件和鼠标滚轮（<code>@wheel</code>）。
           </span>
         </div>
         <div class="doc-note-item">
@@ -512,10 +630,6 @@ function addTab(route: RouteLocationNormalized) {
     </section>
   </div>
 </template>
-
-<script setup lang="ts">
-defineOptions({ name: 'XlyWorktabDoc' })
-</script>
 
 <style scoped lang="scss">
 .worktab-doc {
@@ -587,7 +701,8 @@ defineOptions({ name: 'XlyWorktabDoc' })
     font-size: 14px;
   }
 
-  th, td {
+  th,
+  td {
     text-align: left;
     padding: 10px 14px;
     border-bottom: 1px solid var(--el-border-color-lighter);
@@ -643,7 +758,7 @@ defineOptions({ name: 'XlyWorktabDoc' })
   line-height: 1.6;
   margin-bottom: 16px;
 
-  &--warning {
+  &.doc-tip--warning {
     background: #fff8e6;
     border: 1px solid #ffe4a0;
     color: #996600;
@@ -673,7 +788,7 @@ defineOptions({ name: 'XlyWorktabDoc' })
   border-radius: 8px;
   border: 1px solid var(--el-border-color-lighter);
 
-  &__label {
+  .doc-note-item__label {
     font-size: 13px;
     font-weight: 600;
     color: var(--el-text-color-primary);
@@ -681,7 +796,7 @@ defineOptions({ name: 'XlyWorktabDoc' })
     min-width: 110px;
   }
 
-  &__desc {
+  .doc-note-item__desc {
     font-size: 13px;
     color: var(--el-text-color-regular);
     line-height: 1.6;

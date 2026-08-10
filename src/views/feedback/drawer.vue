@@ -1,8 +1,78 @@
+<script setup lang="ts">
+import { CircleCheckFilled, Document, HomeFilled, Setting, UserFilled, WarningFilled } from '@element-plus/icons-vue'
+import { XlyButton, XlyDrawer, XlyTag } from 'easy-ui'
+import { ref } from 'vue'
+
+// 基础用法
+const basicVisible = ref(false)
+
+// 不同方向
+const leftVisible = ref(false)
+const rightVisible = ref(false)
+const topVisible = ref(false)
+const bottomVisible = ref(false)
+
+// 自定义尺寸
+const sizeSmall = ref(false)
+const sizeMedium = ref(false)
+const sizeLarge = ref(false)
+
+// 自定义内容
+const customVisible = ref(false)
+
+// 无遮罩
+const noMaskVisible = ref(false)
+
+// 隐藏头尾
+const noHeaderVisible = ref(false)
+
+// 事件监听
+const eventVisible = ref(false)
+const eventLogs = ref<Array<{ time: string, name: string }>>([])
+
+function addLog(name: string) {
+  const now = new Date()
+  const time = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
+  eventLogs.value.unshift({ time, name })
+}
+
+function handleOpen() {
+  addLog('open - 抽屉即将打开')
+}
+
+function handleOpened() {
+  addLog('opened - 抽屉已完全打开')
+}
+
+function handleClose() {
+  addLog('close - 抽屉即将关闭')
+}
+
+function handleAfterClose() {
+  addLog('after-close - 抽屉已完全关闭')
+}
+
+// 业务场景
+const detailVisible = ref(false)
+const formVisible = ref(false)
+const confirmVisible = ref(false)
+
+const formData = ref({
+  username: '张明',
+  email: 'zhangming@example.com',
+  department: 'product',
+  role: 'editor',
+  remark: '',
+})
+</script>
+
 <template>
   <div class="drawer-doc">
     <!-- 页面标题 -->
     <div class="doc-header">
-      <h1 class="doc-title">Drawer 抽屉</h1>
+      <h1 class="doc-title">
+        Drawer 抽屉
+      </h1>
       <p class="doc-desc">
         从侧边滑入的面板组件，支持左、右、上、下四个方向弹出，常用于详情查看、表单填写、配置面板等场景。
       </p>
@@ -10,42 +80,60 @@
 
     <!-- 基础用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
       <p class="doc-section__desc">
         通过 <code>v-model</code> 控制抽屉显示与隐藏，<code>title</code> 设置标题。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="basicVisible = true">打开抽屉</XlyButton>
+          <XlyButton @click="basicVisible = true">
+            打开抽屉
+          </XlyButton>
           <XlyDrawer v-model="basicVisible" title="基础抽屉">
             <p>这是一个基础抽屉，支持从右侧滑入。点击遮罩或关闭按钮可关闭。</p>
           </XlyDrawer>
         </div>
-        <XlyDocCode :code='`<XlyButton @click="visible = true">打开抽屉</XlyButton>
-<XlyDrawer v-model="visible" title="基础抽屉">
+        <XlyDocCode
+          code="<XlyButton @click=&quot;visible = true&quot;>打开抽屉</XlyButton>
+<XlyDrawer v-model=&quot;visible&quot; title=&quot;基础抽屉&quot;>
   <p>这是一个基础抽屉。</p>
-</XlyDrawer>`' />
+</XlyDrawer>"
+        />
       </div>
     </section>
 
     <!-- 不同方向 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">不同方向</h2>
+      <h2 class="doc-section__title">
+        不同方向
+      </h2>
       <p class="doc-section__desc">
         通过 <code>direction</code> 属性设置抽屉弹出方向，支持 <code>left</code>（左侧）、
         <code>right</code>（右侧，默认）、<code>top</code>（顶部）、<code>bottom</code>（底部）四种方向。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="leftVisible = true">左侧抽屉</XlyButton>
-          <XlyButton @click="rightVisible = true">右侧抽屉</XlyButton>
-          <XlyButton @click="topVisible = true">顶部抽屉</XlyButton>
-          <XlyButton @click="bottomVisible = true">底部抽屉</XlyButton>
+          <XlyButton @click="leftVisible = true">
+            左侧抽屉
+          </XlyButton>
+          <XlyButton @click="rightVisible = true">
+            右侧抽屉
+          </XlyButton>
+          <XlyButton @click="topVisible = true">
+            顶部抽屉
+          </XlyButton>
+          <XlyButton @click="bottomVisible = true">
+            底部抽屉
+          </XlyButton>
         </div>
-        <XlyDocCode :code='`<XlyDrawer v-model="visible" title="左侧" direction="left">...</XlyDrawer>
-<XlyDrawer v-model="visible" title="右侧" direction="right">...</XlyDrawer>
-<XlyDrawer v-model="visible" title="顶部" direction="top">...</XlyDrawer>
-<XlyDrawer v-model="visible" title="底部" direction="bottom">...</XlyDrawer>`' />
+        <XlyDocCode
+          code="<XlyDrawer v-model=&quot;visible&quot; title=&quot;左侧&quot; direction=&quot;left&quot;>...</XlyDrawer>
+<XlyDrawer v-model=&quot;visible&quot; title=&quot;右侧&quot; direction=&quot;right&quot;>...</XlyDrawer>
+<XlyDrawer v-model=&quot;visible&quot; title=&quot;顶部&quot; direction=&quot;top&quot;>...</XlyDrawer>
+<XlyDrawer v-model=&quot;visible&quot; title=&quot;底部&quot; direction=&quot;bottom&quot;>...</XlyDrawer>"
+        />
       </div>
 
       <XlyDrawer v-model="leftVisible" title="左侧抽屉" direction="left">
@@ -64,22 +152,32 @@
 
     <!-- 自定义尺寸 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义尺寸</h2>
+      <h2 class="doc-section__title">
+        自定义尺寸
+      </h2>
       <p class="doc-section__desc">
         通过 <code>size</code> 属性设置抽屉宽度或高度。接受数字（像素）或字符串（百分比/任意CSS单位）。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="sizeSmall = true">小型 (300px)</XlyButton>
-          <XlyButton @click="sizeMedium = true">中型 (50%)</XlyButton>
-          <XlyButton @click="sizeLarge = true">大型 (80%)</XlyButton>
+          <XlyButton @click="sizeSmall = true">
+            小型 (300px)
+          </XlyButton>
+          <XlyButton @click="sizeMedium = true">
+            中型 (50%)
+          </XlyButton>
+          <XlyButton @click="sizeLarge = true">
+            大型 (80%)
+          </XlyButton>
         </div>
-        <XlyDocCode :code='`<!-- 固定宽度 -->
-<XlyDrawer v-model="visible" title="小型" :size="300">...</XlyDrawer>
+        <XlyDocCode
+          code="<!-- 固定宽度 -->
+<XlyDrawer v-model=&quot;visible&quot; title=&quot;小型&quot; :size=&quot;300&quot;>...</XlyDrawer>
 <!-- 百分比宽度 -->
-<XlyDrawer v-model="visible" title="中型" size="50%">...</XlyDrawer>
+<XlyDrawer v-model=&quot;visible&quot; title=&quot;中型&quot; size=&quot;50%&quot;>...</XlyDrawer>
 <!-- 大尺寸 -->
-<XlyDrawer v-model="visible" title="大型" size="80%">...</XlyDrawer>`' />
+<XlyDrawer v-model=&quot;visible&quot; title=&quot;大型&quot; size=&quot;80%&quot;>...</XlyDrawer>"
+        />
       </div>
 
       <XlyDrawer v-model="sizeSmall" title="小型抽屉" direction="left" :size="300">
@@ -95,58 +193,76 @@
 
     <!-- 自定义内容 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义内容</h2>
+      <h2 class="doc-section__title">
+        自定义内容
+      </h2>
       <p class="doc-section__desc">
         通过 <code>#header</code>、默认插槽和 <code>#footer</code> 完全自定义抽屉内容。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton type="primary" @click="customVisible = true">自定义抽屉</XlyButton>
+          <XlyButton type="primary" @click="customVisible = true">
+            自定义抽屉
+          </XlyButton>
         </div>
-        <XlyDocCode :code='`<XlyDrawer v-model="visible" :show-header="false">
+        <XlyDocCode
+          code="<XlyDrawer v-model=&quot;visible&quot; :show-header=&quot;false&quot;>
   <template #header>
-    <div class="custom-header">
-      <el-icon color="#4f6ef7"><Setting /></el-icon>
+    <div class=&quot;custom-header&quot;>
+      <el-icon color=&quot;#4f6ef7&quot;><Setting /></el-icon>
       <span>系统设置</span>
     </div>
   </template>
-  <div class="settings-form">
+  <div class=&quot;settings-form&quot;>
     <p>在这里配置系统参数...</p>
   </div>
   <template #footer>
-    <div class="custom-footer">
-      <XlyButton @click="visible = false">取消</XlyButton>
-      <XlyButton type="primary">保存配置</XlyButton>
+    <div class=&quot;custom-footer&quot;>
+      <XlyButton @click=&quot;visible = false&quot;>取消</XlyButton>
+      <XlyButton type=&quot;primary&quot;>保存配置</XlyButton>
     </div>
   </template>
-</XlyDrawer>`' />
+</XlyDrawer>"
+        />
       </div>
 
       <XlyDrawer v-model="customVisible" direction="right" :show-header="false">
         <template #header>
           <div class="custom-header">
-            <el-icon color="#4f6ef7" :size="20"><Setting /></el-icon>
+            <el-icon color="#4f6ef7" :size="20">
+              <Setting />
+            </el-icon>
             <span class="custom-header__text">系统设置</span>
           </div>
         </template>
         <div class="settings-form">
           <div class="settings-form__item">
             <label class="settings-form__label">通知推送</label>
-            <p class="settings-form__desc">接收系统通知和更新提醒</p>
+            <p class="settings-form__desc">
+              接收系统通知和更新提醒
+            </p>
           </div>
           <div class="settings-form__item">
             <label class="settings-form__label">邮件订阅</label>
-            <p class="settings-form__desc">接收定期邮件摘要</p>
+            <p class="settings-form__desc">
+              接收定期邮件摘要
+            </p>
           </div>
           <div class="settings-form__item">
             <label class="settings-form__label">深色模式</label>
-            <p class="settings-form__desc">开启深色主题显示</p>
+            <p class="settings-form__desc">
+              开启深色主题显示
+            </p>
           </div>
         </div>
         <template #footer>
           <div class="custom-footer">
-            <XlyButton @click="customVisible = false">取消</XlyButton>
-            <XlyButton type="primary" @click="customVisible = false">保存配置</XlyButton>
+            <XlyButton @click="customVisible = false">
+              取消
+            </XlyButton>
+            <XlyButton type="primary" @click="customVisible = false">
+              保存配置
+            </XlyButton>
           </div>
         </template>
       </XlyDrawer>
@@ -154,17 +270,23 @@
 
     <!-- 无遮罩 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">无遮罩抽屉</h2>
+      <h2 class="doc-section__title">
+        无遮罩抽屉
+      </h2>
       <p class="doc-section__desc">
         通过 <code>:show-mask="false"</code> 隐藏遮罩层，适用于固定侧边栏或辅助面板。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="noMaskVisible = true">无遮罩抽屉</XlyButton>
+          <XlyButton @click="noMaskVisible = true">
+            无遮罩抽屉
+          </XlyButton>
         </div>
-        <XlyDocCode :code='`<XlyDrawer v-model="visible" title="固定面板" :show-mask="false">
+        <XlyDocCode
+          code="<XlyDrawer v-model=&quot;visible&quot; title=&quot;固定面板&quot; :show-mask=&quot;false&quot;>
   <p>这是一个没有遮罩的抽屉，背景完全透明。</p>
-</XlyDrawer>`' />
+</XlyDrawer>"
+        />
       </div>
 
       <XlyDrawer
@@ -196,38 +318,52 @@
 
     <!-- 隐藏头尾 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">隐藏头尾</h2>
+      <h2 class="doc-section__title">
+        隐藏头尾
+      </h2>
       <p class="doc-section__desc">
         通过 <code>:show-header="false"</code> 隐藏抽屉头部，通过 <code>#footer</code> 插槽自定义底部区域。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="noHeaderVisible = true">无头部抽屉</XlyButton>
+          <XlyButton @click="noHeaderVisible = true">
+            无头部抽屉
+          </XlyButton>
         </div>
-        <XlyDocCode :code='`<XlyDrawer v-model="visible" :show-header="false">
-  <div class="custom-content">
+        <XlyDocCode
+          code="<XlyDrawer v-model=&quot;visible&quot; :show-header=&quot;false&quot;>
+  <div class=&quot;custom-content&quot;>
     <p>自定义内容区域</p>
   </div>
   <template #footer>
-    <div class="actions">
+    <div class=&quot;actions&quot;>
       <XlyButton>取消</XlyButton>
-      <XlyButton type="primary">确认</XlyButton>
+      <XlyButton type=&quot;primary&quot;>确认</XlyButton>
     </div>
   </template>
-</XlyDrawer>`' />
+</XlyDrawer>"
+        />
       </div>
 
       <XlyDrawer v-model="noHeaderVisible" :show-header="false" direction="right" :show-footer="false">
         <div class="custom-content">
           <div class="success-icon">
-            <el-icon color="#34c759" :size="48"><CircleCheckFilled /></el-icon>
+            <el-icon color="#34c759" :size="48">
+              <CircleCheckFilled />
+            </el-icon>
           </div>
-          <p class="success-title">操作成功</p>
-          <p class="success-desc">您的设置已成功保存</p>
+          <p class="success-title">
+            操作成功
+          </p>
+          <p class="success-desc">
+            您的设置已成功保存
+          </p>
         </div>
         <template #footer>
           <div class="custom-footer">
-            <XlyButton type="primary" @click="noHeaderVisible = false">我知道了</XlyButton>
+            <XlyButton type="primary" @click="noHeaderVisible = false">
+              我知道了
+            </XlyButton>
           </div>
         </template>
       </XlyDrawer>
@@ -235,15 +371,20 @@
 
     <!-- 事件监听 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">事件监听</h2>
+      <h2 class="doc-section__title">
+        事件监听
+      </h2>
       <p class="doc-section__desc">
         监听抽屉的打开、关闭等事件，执行相应逻辑。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton type="primary" @click="eventVisible = true">带事件的抽屉</XlyButton>
+          <XlyButton type="primary" @click="eventVisible = true">
+            带事件的抽屉
+          </XlyButton>
         </div>
-        <XlyDocCode :code="`<XlyDrawer v-model=&quot;visible&quot; title=&quot;事件监听&quot;
+        <XlyDocCode
+          code="<XlyDrawer v-model=&quot;visible&quot; title=&quot;事件监听&quot;
   @open=&quot;handleOpen&quot;
   @opened=&quot;handleOpened&quot;
   @close=&quot;handleClose&quot;
@@ -263,7 +404,8 @@ function handleClose() {
 }
 function handleAfterClose() {
   console.log('抽屉已完全关闭')
-}`" />
+}"
+        />
       </div>
 
       <XlyDrawer
@@ -286,13 +428,23 @@ function handleAfterClose() {
 
     <!-- 业务场景 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">业务场景</h2>
-      <p class="doc-section__desc">抽屉在实际业务中的常见用法。</p>
+      <h2 class="doc-section__title">
+        业务场景
+      </h2>
+      <p class="doc-section__desc">
+        抽屉在实际业务中的常见用法。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton type="primary" @click="detailVisible = true">查看详情</XlyButton>
-          <XlyButton type="success" @click="formVisible = true">表单填写</XlyButton>
-          <XlyButton type="warning" @click="confirmVisible = true">确认操作</XlyButton>
+          <XlyButton type="primary" @click="detailVisible = true">
+            查看详情
+          </XlyButton>
+          <XlyButton type="success" @click="formVisible = true">
+            表单填写
+          </XlyButton>
+          <XlyButton type="warning" @click="confirmVisible = true">
+            确认操作
+          </XlyButton>
         </div>
       </div>
 
@@ -301,7 +453,9 @@ function handleAfterClose() {
         <div class="detail-info">
           <div class="detail-info__header">
             <div class="detail-info__avatar">
-              <el-icon color="#fff" :size="28"><UserFilled /></el-icon>
+              <el-icon color="#fff" :size="28">
+                <UserFilled />
+              </el-icon>
             </div>
             <div class="detail-info__title">
               <h3>张明</h3>
@@ -327,7 +481,9 @@ function handleAfterClose() {
             </div>
             <div class="detail-info__item">
               <span class="detail-info__label">状态</span>
-              <XlyTag type="success">在职</XlyTag>
+              <XlyTag type="success">
+                在职
+              </XlyTag>
             </div>
           </div>
         </div>
@@ -367,25 +523,46 @@ function handleAfterClose() {
         </div>
         <template #footer>
           <div class="custom-footer">
-            <XlyButton @click="formVisible = false">取消</XlyButton>
-            <XlyButton type="primary" @click="formVisible = false">保存</XlyButton>
+            <XlyButton @click="formVisible = false">
+              取消
+            </XlyButton>
+            <XlyButton type="primary" @click="formVisible = false">
+              保存
+            </XlyButton>
           </div>
         </template>
       </XlyDrawer>
 
       <!-- 确认抽屉 -->
-      <XlyDrawer v-model="confirmVisible" title="操作确认" direction="bottom" :size="320" :show-header="false" :show-footer="false">
+      <XlyDrawer
+        v-model="confirmVisible"
+        title="操作确认"
+        direction="bottom"
+        :size="320"
+        :show-header="false"
+        :show-footer="false"
+      >
         <div class="confirm-content">
           <div class="confirm-icon">
-            <el-icon color="#f56c6c" :size="40"><WarningFilled /></el-icon>
+            <el-icon color="#f56c6c" :size="40">
+              <WarningFilled />
+            </el-icon>
           </div>
-          <p class="confirm-title">确认删除</p>
-          <p class="confirm-desc">确定要删除选中的 3 条记录吗？此操作不可撤销。</p>
+          <p class="confirm-title">
+            确认删除
+          </p>
+          <p class="confirm-desc">
+            确定要删除选中的 3 条记录吗？此操作不可撤销。
+          </p>
         </div>
         <template #footer>
           <div class="confirm-footer">
-            <XlyButton @click="confirmVisible = false">取消</XlyButton>
-            <XlyButton type="danger" @click="confirmVisible = false">确认删除</XlyButton>
+            <XlyButton @click="confirmVisible = false">
+              取消
+            </XlyButton>
+            <XlyButton type="danger" @click="confirmVisible = false">
+              确认删除
+            </XlyButton>
           </div>
         </template>
       </XlyDrawer>
@@ -393,8 +570,12 @@ function handleAfterClose() {
 
     <!-- API 文档 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">API</h2>
-      <h3 class="doc-subtitle">Props</h3>
+      <h2 class="doc-section__title">
+        API
+      </h2>
+      <h3 class="doc-subtitle">
+        Props
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -464,32 +645,72 @@ function handleAfterClose() {
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Slots</h3>
+      <h3 class="doc-subtitle">
+        Slots
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
-            <tr><th>插槽名</th><th>说明</th></tr>
+            <tr>
+              <th>插槽名</th>
+              <th>说明</th>
+            </tr>
           </thead>
           <tbody>
-            <tr><td><code>default</code></td><td>抽屉主体内容</td></tr>
-            <tr><td><code>header</code></td><td>自定义头部内容（替换默认标题）</td></tr>
-            <tr><td><code>footer</code></td><td>自定义底部内容</td></tr>
+            <tr>
+              <td><code>default</code></td>
+              <td>抽屉主体内容</td>
+            </tr>
+            <tr>
+              <td><code>header</code></td>
+              <td>自定义头部内容（替换默认标题）</td>
+            </tr>
+            <tr>
+              <td><code>footer</code></td>
+              <td>自定义底部内容</td>
+            </tr>
           </tbody>
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Events</h3>
+      <h3 class="doc-subtitle">
+        Events
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
-            <tr><th>事件名</th><th>说明</th><th>参数</th></tr>
+            <tr>
+              <th>事件名</th>
+              <th>说明</th>
+              <th>参数</th>
+            </tr>
           </thead>
           <tbody>
-            <tr><td><code>update:model-value</code></td><td>抽屉显示状态变化时触发</td><td><code>(value: boolean)</code></td></tr>
-            <tr><td><code>close</code></td><td>抽屉关闭时触发</td><td>—</td></tr>
-            <tr><td><code>open</code></td><td>抽屉打开前触发</td><td>—</td></tr>
-            <tr><td><code>opened</code></td><td>抽屉打开动画结束后触发</td><td>—</td></tr>
-            <tr><td><code>after-close</code></td><td>抽屉关闭动画结束后触发</td><td>—</td></tr>
+            <tr>
+              <td><code>update:model-value</code></td>
+              <td>抽屉显示状态变化时触发</td>
+              <td><code>(value: boolean)</code></td>
+            </tr>
+            <tr>
+              <td><code>close</code></td>
+              <td>抽屉关闭时触发</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><code>open</code></td>
+              <td>抽屉打开前触发</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><code>opened</code></td>
+              <td>抽屉打开动画结束后触发</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><code>after-close</code></td>
+              <td>抽屉关闭动画结束后触发</td>
+              <td>—</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -497,96 +718,125 @@ function handleAfterClose() {
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue'
-import { CircleCheckFilled, WarningFilled, Setting, HomeFilled, Document, UserFilled } from '@element-plus/icons-vue'
-import XlyButton from '@/components/xly-button/index.vue'
-import XlyDrawer from '@/components/xly-drawer/index.vue'
-import XlyTag from '@/components/xly-tag/index.vue'
-
-// 基础用法
-const basicVisible = ref(false)
-
-// 不同方向
-const leftVisible = ref(false)
-const rightVisible = ref(false)
-const topVisible = ref(false)
-const bottomVisible = ref(false)
-
-// 自定义尺寸
-const sizeSmall = ref(false)
-const sizeMedium = ref(false)
-const sizeLarge = ref(false)
-
-// 自定义内容
-const customVisible = ref(false)
-
-// 无遮罩
-const noMaskVisible = ref(false)
-
-// 隐藏头尾
-const noHeaderVisible = ref(false)
-
-// 事件监听
-const eventVisible = ref(false)
-const eventLogs = ref<Array<{ time: string; name: string }>>([])
-
-function addLog(name: string) {
-  const now = new Date()
-  const time = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`
-  eventLogs.value.unshift({ time, name })
-}
-
-function handleOpen() {
-  addLog('open - 抽屉即将打开')
-}
-
-function handleOpened() {
-  addLog('opened - 抽屉已完全打开')
-}
-
-function handleClose() {
-  addLog('close - 抽屉即将关闭')
-}
-
-function handleAfterClose() {
-  addLog('after-close - 抽屉已完全关闭')
-}
-
-// 业务场景
-const detailVisible = ref(false)
-const formVisible = ref(false)
-const confirmVisible = ref(false)
-
-const formData = ref({
-  username: '张明',
-  email: 'zhangming@example.com',
-  department: 'product',
-  role: 'editor',
-  remark: '',
-})
-</script>
-
 <style scoped lang="scss">
-.drawer-doc { padding: 8px 0 40px; }
-.doc-header { margin-bottom: 36px; }
-.doc-title { font-size: 26px; font-weight: 700; color: var(--el-text-color-primary); margin: 0 0 8px; letter-spacing: -0.3px; }
-.doc-desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0; line-height: 1.6; }
-.doc-section { margin-bottom: 32px; }
-.doc-section__title { font-size: 18px; font-weight: 600; color: var(--el-text-color-primary); margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--el-border-color-lighter); }
-.doc-section__desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 16px; line-height: 1.6; code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; } }
-.doc-preview { border: 1px solid var(--el-border-color-lighter); border-radius: 12px; overflow: hidden; background: var(--el-bg-color-overlay); }
-.doc-preview__body { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 24px; }
-.doc-code { border-top: 1px solid var(--el-border-color-lighter); background: var(--el-fill-color-light); padding: 16px 20px; overflow-x: auto; pre { margin: 0; padding: 0; } code { font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 13px; line-height: 1.7; color: var(--el-text-color-regular); white-space: pre; } }
-.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
-.doc-table { overflow-x: auto; table { width: 100%; border-collapse: collapse; font-size: 14px; } th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); white-space: nowrap; } th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); } td { color: var(--el-text-color-regular); } code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; } }
+.drawer-doc {
+  padding: 8px 0 40px;
+}
+.doc-header {
+  margin-bottom: 36px;
+}
+.doc-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  letter-spacing: -0.3px;
+}
+.doc-desc {
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+.doc-section {
+  margin-bottom: 32px;
+}
+.doc-section__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--el-border-color-lighter);
+}
+.doc-section__desc {
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0 0 16px;
+  line-height: 1.6;
+  code {
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+  }
+}
+.doc-preview {
+  border: 1px solid var(--el-border-color-lighter);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--el-bg-color-overlay);
+}
+.doc-preview__body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
+}
+.doc-code {
+  border-top: 1px solid var(--el-border-color-lighter);
+  background: var(--el-fill-color-light);
+  padding: 16px 20px;
+  overflow-x: auto;
+  pre {
+    margin: 0;
+    padding: 0;
+  }
+  code {
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--el-text-color-regular);
+    white-space: pre;
+  }
+}
+.doc-subtitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 20px 0 10px;
+}
+.doc-table {
+  overflow-x: auto;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+    white-space: nowrap;
+  }
+  th {
+    background: var(--el-fill-color-light);
+    font-weight: 600;
+    color: var(--el-text-color-primary);
+  }
+  td {
+    color: var(--el-text-color-regular);
+  }
+  code {
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+  }
+}
 
 // 通用样式
 .custom-header {
   display: flex;
   align-items: center;
   gap: 8px;
-  &__text {
+  .custom-header__text {
     font-size: 17px;
     font-weight: 600;
     color: var(--el-text-color-primary);
@@ -602,16 +852,18 @@ const formData = ref({
   display: flex;
   flex-direction: column;
   gap: 16px;
-  &__item {
+  .demo-form__item {
     display: flex;
     flex-direction: column;
     gap: 6px;
   }
-  &__label {
+  .demo-form__label {
     font-size: 14px;
     font-weight: 500;
     color: var(--el-text-color-primary);
-    .required { color: var(--el-color-danger); }
+    .required {
+      color: var(--el-color-danger);
+    }
   }
 }
 
@@ -620,17 +872,17 @@ const formData = ref({
   display: flex;
   flex-direction: column;
   gap: 20px;
-  &__item {
+  .settings-form__item {
     padding: 12px 0;
     border-bottom: 1px solid var(--el-border-color-lighter);
   }
-  &__label {
+  .settings-form__label {
     font-size: 15px;
     font-weight: 500;
     color: var(--el-text-color-primary);
     margin-bottom: 4px;
   }
-  &__desc {
+  .settings-form__desc {
     font-size: 13px;
     color: var(--el-text-color-secondary);
     margin: 0;
@@ -639,12 +891,12 @@ const formData = ref({
 
 // 固定面板
 .fixed-panel {
-  &__nav {
+  .fixed-panel__nav {
     display: flex;
     flex-direction: column;
     gap: 4px;
   }
-  &__nav-item {
+  .fixed-panel__nav-item {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -705,25 +957,25 @@ const formData = ref({
   border-radius: 8px;
   max-height: 200px;
   overflow-y: auto;
-  &__item {
+  .event-log__item {
     display: flex;
     align-items: center;
     gap: 12px;
     padding: 6px 0;
     font-size: 13px;
   }
-  &__time {
+  .event-log__time {
     color: var(--el-text-color-secondary);
     font-family: 'SF Mono', 'Fira Code', monospace;
   }
-  &__name {
+  .event-log__name {
     color: var(--el-text-color-regular);
   }
 }
 
 // 详情信息
 .detail-info {
-  &__header {
+  .detail-info__header {
     display: flex;
     align-items: center;
     gap: 16px;
@@ -731,7 +983,7 @@ const formData = ref({
     border-bottom: 1px solid var(--el-border-color-lighter);
     margin-bottom: 20px;
   }
-  &__avatar {
+  .detail-info__avatar {
     width: 56px;
     height: 56px;
     border-radius: 50%;
@@ -740,7 +992,7 @@ const formData = ref({
     align-items: center;
     justify-content: center;
   }
-  &__title {
+  .detail-info__title {
     h3 {
       margin: 0 0 4px;
       font-size: 18px;
@@ -753,21 +1005,21 @@ const formData = ref({
       color: var(--el-text-color-secondary);
     }
   }
-  &__list {
+  .detail-info__header__list {
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
-  &__item {
+  .detail-info__header__item {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-  &__label {
+  .detail-info__header__label {
     font-size: 14px;
     color: var(--el-text-color-secondary);
   }
-  &__value {
+  .detail-info__header__value {
     font-size: 14px;
     color: var(--el-text-color-primary);
     font-weight: 500;

@@ -1,11 +1,84 @@
+<script setup lang="ts">
+import { XlyButton, XlyImageCropper } from 'easy-ui'
+import { ElMessage } from 'element-plus'
+import { ref } from 'vue'
+
+// 基础示例
+const cropperRef = ref<InstanceType<typeof XlyImageCropper>>()
+const basicSrc = 'https://picsum.photos/seed/cropper/800/600'
+const basicResult = ref('')
+
+function onBasicConfirm(data: { dataURL: string }) {
+  basicResult.value = data.dataURL
+  ElMessage.success('裁剪成功')
+}
+
+function onBasicCancel() {
+  ElMessage.info('已取消')
+}
+
+// 固定比例示例
+// 使用同 basicSrc
+
+// 隐藏工具栏示例
+const noToolbarRef = ref<InstanceType<typeof XlyImageCropper>>()
+const noToolbarResult = ref('')
+
+function noToolbarRotate() {
+  noToolbarRef.value?.rotate(90)
+}
+
+function noToolbarReset() {
+  noToolbarRef.value?.reset()
+}
+
+async function noToolbarCrop() {
+  const result = noToolbarRef.value?.getCroppedDataURL()
+  if (result) {
+    noToolbarResult.value = result
+    ElMessage.success('已获取裁剪结果')
+  }
+}
+
+// 交互式演示
+const uploadInputRef = ref<HTMLInputElement | null>(null)
+const interactRef = ref<InstanceType<typeof XlyImageCropper>>()
+const interactSrc = ref('')
+const interactResult = ref('')
+const interactResultSize = ref('')
+
+function triggerUpload() {
+  uploadInputRef.value?.click()
+}
+
+function onFileChange(e: Event) {
+  const target = e.target as HTMLInputElement
+  const file = target.files?.[0]
+  if (file) {
+    interactSrc.value = URL.createObjectURL(file)
+    interactResult.value = ''
+  }
+}
+
+async function onInteractConfirm(data: { dataURL: string, blob: Blob | null }) {
+  interactResult.value = data.dataURL
+  if (data.blob) {
+    interactResultSize.value = `${(data.blob.size / 1024).toFixed(1)} KB`
+  }
+  ElMessage.success('裁剪成功')
+}
+</script>
+
 <template>
   <div class="cropper-doc">
     <!-- 页面标题 -->
     <div class="doc-header">
-      <h1 class="doc-title">ImageCropper 图片裁剪器</h1>
+      <h1 class="doc-title">
+        ImageCropper 图片裁剪器
+      </h1>
       <p class="doc-desc">
-        基于 <code>Cropper.js</code> 封装的图片裁剪组件，支持自由裁剪、固定比例、旋转、翻转、缩放，可导出裁剪后的
-        Canvas / Base64 / Blob。
+        基于 <code>Cropper.js</code> 封装的图片裁剪组件，支持自由裁剪、固定比例、旋转、翻转、缩放，可导出裁剪后的 Canvas
+        / Base64 / Blob。
       </p>
       <div class="doc-requires">
         <span class="doc-requires__label">依赖安装</span>
@@ -15,7 +88,9 @@
 
     <!-- 基础用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
       <p class="doc-section__desc">
         传入 <code>src</code> 显示图片，调用 <code>crop()</code> 或点击确认按钮获取裁剪结果。
       </p>
@@ -33,10 +108,11 @@
           </div>
           <div v-if="basicResult" class="cropper-result">
             <span>裁剪结果：</span>
-            <img :src="basicResult" alt="cropped" />
+            <img :src="basicResult" alt="cropped">
           </div>
         </div>
-        <XlyDocCode :code='`const cropperRef = ref()
+        <XlyDocCode
+          code="const cropperRef = ref()
 
 // 通过 ref 获取结果
 async function getCrop() {
@@ -47,56 +123,48 @@ async function getCrop() {
 // 通过事件获取结果
 function onConfirm(data) {
   console.log(data.dataURL)
-}`' />
+}"
+        />
       </div>
     </section>
 
     <!-- 固定比例裁剪 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">固定比例裁剪</h2>
+      <h2 class="doc-section__title">
+        固定比例裁剪
+      </h2>
       <p class="doc-section__desc">
-        通过 <code>aspect-ratio</code> 设置裁剪框宽高比。<code>1</code> 为正方形，
-        <code>16/9</code> 为 16:9 横版，<code>9/16</code> 为竖版。
+        通过 <code>aspect-ratio</code> 设置裁剪框宽高比。<code>1</code> 为正方形， <code>16/9</code> 为 16:9 横版，<code>9/16</code>
+        为竖版。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body cropper-ratio-group">
           <div class="cropper-ratio-item">
-            <XlyImageCropper
-              :src="basicSrc"
-              :aspect-ratio="1"
-              :toolbar="false"
-              :show-action="false"
-            />
+            <XlyImageCropper :src="basicSrc" :aspect-ratio="1" :toolbar="false" :show-action="false" />
             <span>1:1 正方形</span>
           </div>
           <div class="cropper-ratio-item">
-            <XlyImageCropper
-              :src="basicSrc"
-              :aspect-ratio="16 / 9"
-              :toolbar="false"
-              :show-action="false"
-            />
+            <XlyImageCropper :src="basicSrc" :aspect-ratio="16 / 9" :toolbar="false" :show-action="false" />
             <span>16:9 横版</span>
           </div>
           <div class="cropper-ratio-item">
-            <XlyImageCropper
-              :src="basicSrc"
-              :aspect-ratio="9 / 16"
-              :toolbar="false"
-              :show-action="false"
-            />
+            <XlyImageCropper :src="basicSrc" :aspect-ratio="9 / 16" :toolbar="false" :show-action="false" />
             <span>9:16 竖版</span>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyImageCropper :src="imgSrc" :aspect-ratio="1" />
-<XlyImageCropper :src="imgSrc" :aspect-ratio="16/9" />
-<XlyImageCropper :src="imgSrc" :aspect-ratio="9/16" />`' />
+        <XlyDocCode
+          code="<XlyImageCropper :src=&quot;imgSrc&quot; :aspect-ratio=&quot;1&quot; />
+<XlyImageCropper :src=&quot;imgSrc&quot; :aspect-ratio=&quot;16/9&quot; />
+<XlyImageCropper :src=&quot;imgSrc&quot; :aspect-ratio=&quot;9/16&quot; />"
+        />
       </div>
     </section>
 
     <!-- 隐藏工具栏 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">隐藏工具栏</h2>
+      <h2 class="doc-section__title">
+        隐藏工具栏
+      </h2>
       <p class="doc-section__desc">
         设置 <code>toolbar</code> 和 <code>show-action</code> 为 <code>false</code> 隐藏操作区，通过
         <code>ref</code> 调用方法自行控制。
@@ -104,27 +172,29 @@ function onConfirm(data) {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="cropper-no-toolbar">
-            <XlyImageCropper
-              ref="noToolbarRef"
-              :src="basicSrc"
-              :toolbar="false"
-              :show-action="false"
-            />
+            <XlyImageCropper ref="noToolbarRef" :src="basicSrc" :toolbar="false" :show-action="false" />
             <div class="cropper-no-toolbar__btns">
-              <XlyButton size="small" @click="noToolbarRotate">旋转90°</XlyButton>
-              <XlyButton size="small" @click="noToolbarReset">重置</XlyButton>
-              <XlyButton size="small" type="primary" @click="noToolbarCrop">获取裁剪</XlyButton>
+              <XlyButton size="small" @click="noToolbarRotate">
+                旋转90°
+              </XlyButton>
+              <XlyButton size="small" @click="noToolbarReset">
+                重置
+              </XlyButton>
+              <XlyButton size="small" type="primary" @click="noToolbarCrop">
+                获取裁剪
+              </XlyButton>
             </div>
           </div>
           <div v-if="noToolbarResult" class="cropper-result">
-            <img :src="noToolbarResult" alt="cropped" />
+            <img :src="noToolbarResult" alt="cropped">
           </div>
         </div>
-        <XlyDocCode :code='`<XlyImageCropper
-  ref="cropperRef"
-  :src="imgSrc"
-  :toolbar="false"
-  :show-action="false"
+        <XlyDocCode
+          code="<XlyImageCropper
+  ref=&quot;cropperRef&quot;
+  :src=&quot;imgSrc&quot;
+  :toolbar=&quot;false&quot;
+  :show-action=&quot;false&quot;
 />
 
 // 旋转
@@ -135,13 +205,16 @@ cropperRef.value.reset()
 
 // 获取裁剪结果
 const dataURL = cropperRef.value.getCroppedDataURL()
-const blob = await cropperRef.value.getCroppedBlob()`' />
+const blob = await cropperRef.value.getCroppedBlob()"
+        />
       </div>
     </section>
 
     <!-- 交互式演示 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">完整交互演示</h2>
+      <h2 class="doc-section__title">
+        完整交互演示
+      </h2>
       <p class="doc-section__desc">
         实时选择图片上传，体验完整裁剪流程。
       </p>
@@ -149,18 +222,12 @@ const blob = await cropperRef.value.getCroppedBlob()`' />
         <div class="doc-preview__body">
           <div class="cropper-interact">
             <div class="cropper-interact__uploader" @click="triggerUpload">
-              <img v-if="interactSrc" :src="interactSrc" class="cropper-interact__preview" />
+              <img v-if="interactSrc" :src="interactSrc" class="cropper-interact__preview">
               <div v-else class="cropper-interact__upload">
                 <span>+ 选择图片</span>
               </div>
             </div>
-            <input
-              ref="uploadInputRef"
-              type="file"
-              accept="image/*"
-              style="display: none"
-              @change="onFileChange"
-            />
+            <input ref="uploadInputRef" type="file" accept="image/*" style="display: none" @change="onFileChange">
             <div v-if="interactSrc" class="cropper-interact__cropper">
               <XlyImageCropper
                 ref="interactRef"
@@ -175,11 +242,12 @@ const blob = await cropperRef.value.getCroppedBlob()`' />
           </div>
           <div v-if="interactResult" class="cropper-result">
             <span>裁剪结果：</span>
-            <img :src="interactResult" alt="cropped" />
+            <img :src="interactResult" alt="cropped">
             <span class="cropper-result__size">{{ interactResultSize }}</span>
           </div>
         </div>
-        <XlyDocCode :code="`// 上传图片
+        <XlyDocCode
+          code="// 上传图片
 function triggerUpload() {
   uploadInputRef.value.click()
 }
@@ -194,13 +262,16 @@ async function onConfirm(data) {
   interactResult.value = data.dataURL
   const blob = await cropperRef.value.getCroppedBlob()
   console.log(blob.size, 'bytes')
-}`" />
+}"
+        />
       </div>
     </section>
 
     <!-- Props API -->
     <section class="doc-section">
-      <h2 class="doc-section__title">Props</h2>
+      <h2 class="doc-section__title">
+        Props
+      </h2>
       <div class="doc-table-wrapper">
         <table class="doc-table">
           <thead>
@@ -309,7 +380,9 @@ async function onConfirm(data) {
 
     <!-- Methods API -->
     <section class="doc-section">
-      <h2 class="doc-section__title">Methods</h2>
+      <h2 class="doc-section__title">
+        Methods
+      </h2>
       <div class="doc-table-wrapper">
         <table class="doc-table">
           <thead>
@@ -387,7 +460,9 @@ async function onConfirm(data) {
 
     <!-- Events API -->
     <section class="doc-section">
-      <h2 class="doc-section__title">Events</h2>
+      <h2 class="doc-section__title">
+        Events
+      </h2>
       <div class="doc-table-wrapper">
         <table class="doc-table">
           <thead>
@@ -430,78 +505,6 @@ async function onConfirm(data) {
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue'
-import { ElMessage } from 'element-plus'
-import XlyImageCropper from '@/components/xly-image-cropper/index.vue'
-import XlyButton from '@/components/xly-button/index.vue'
-
-// 基础示例
-const cropperRef = ref<InstanceType<typeof XlyImageCropper>>()
-const basicSrc = 'https://picsum.photos/seed/cropper/800/600'
-const basicResult = ref('')
-
-function onBasicConfirm(data: { dataURL: string }) {
-  basicResult.value = data.dataURL
-  ElMessage.success('裁剪成功')
-}
-
-function onBasicCancel() {
-  ElMessage.info('已取消')
-}
-
-// 固定比例示例
-// 使用同 basicSrc
-
-// 隐藏工具栏示例
-const noToolbarRef = ref<InstanceType<typeof XlyImageCropper>>()
-const noToolbarResult = ref('')
-
-function noToolbarRotate() {
-  noToolbarRef.value?.rotate(90)
-}
-
-function noToolbarReset() {
-  noToolbarRef.value?.reset()
-}
-
-async function noToolbarCrop() {
-  const result = noToolbarRef.value?.getCroppedDataURL()
-  if (result) {
-    noToolbarResult.value = result
-    ElMessage.success('已获取裁剪结果')
-  }
-}
-
-// 交互式演示
-const uploadInputRef = ref<HTMLInputElement | null>(null)
-const interactRef = ref<InstanceType<typeof XlyImageCropper>>()
-const interactSrc = ref('')
-const interactResult = ref('')
-const interactResultSize = ref('')
-
-function triggerUpload() {
-  uploadInputRef.value?.click()
-}
-
-function onFileChange(e: Event) {
-  const target = e.target as HTMLInputElement
-  const file = target.files?.[0]
-  if (file) {
-    interactSrc.value = URL.createObjectURL(file)
-    interactResult.value = ''
-  }
-}
-
-async function onInteractConfirm(data: { dataURL: string; blob: Blob | null }) {
-  interactResult.value = data.dataURL
-  if (data.blob) {
-    interactResultSize.value = `${(data.blob.size / 1024).toFixed(1)} KB`
-  }
-  ElMessage.success('裁剪成功')
-}
-</script>
-
 <style scoped lang="scss">
 /* ========== 文档页通用样式 ========== */
 .doc-header {
@@ -542,12 +545,12 @@ async function onInteractConfirm(data: { dataURL: string; blob: Blob | null }) {
   border-radius: 8px;
   font-size: 14px;
 
-  &__label {
+  .doc-requires__label {
     color: var(--el-text-color-secondary);
     font-weight: 500;
   }
 
-  &__cmd {
+  .doc-requires__cmd {
     padding: 4px 12px;
     background: #1a1a2e;
     color: #a5d6a7;
@@ -651,7 +654,7 @@ async function onInteractConfirm(data: { dataURL: string; blob: Blob | null }) {
   width: 100%;
   max-width: 400px;
 
-  &__btns {
+  .cropper-no-toolbar__btns {
     display: flex;
     gap: 8px;
     margin-top: 12px;
@@ -668,7 +671,7 @@ async function onInteractConfirm(data: { dataURL: string; blob: Blob | null }) {
   flex-wrap: wrap;
   justify-content: center;
 
-  &__uploader {
+  .cropper-interact__uploader {
     width: 120px;
     height: 120px;
     border: 2px dashed #d1d5db;
@@ -686,13 +689,13 @@ async function onInteractConfirm(data: { dataURL: string; blob: Blob | null }) {
     }
   }
 
-  &__preview {
+  .cropper-interact__preview {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  &__upload {
+  .cropper-interact__upload {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -701,7 +704,7 @@ async function onInteractConfirm(data: { dataURL: string; blob: Blob | null }) {
     font-size: 12px;
   }
 
-  &__cropper {
+  .cropper-interact__cropper {
     flex: 1;
     min-width: 280px;
     max-width: 500px;
@@ -723,7 +726,7 @@ async function onInteractConfirm(data: { dataURL: string; blob: Blob | null }) {
     border-radius: 4px;
   }
 
-  &__size {
+  .cropper-result__size {
     color: #34c759;
     font-size: 12px;
   }
@@ -747,7 +750,7 @@ async function onInteractConfirm(data: { dataURL: string; blob: Blob | null }) {
   }
 
   th {
-    background: #f8f9fb;
+    background: var(--el-fill-color-lighter);
     font-weight: 600;
     color: var(--el-text-color-primary);
     white-space: nowrap;

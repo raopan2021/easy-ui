@@ -31,28 +31,28 @@ npm install easy-ui element-plus @element-plus/icons-vue
 ### 方式一：完整安装（推荐新项目）
 
 ```ts
+import EasyUI from 'easy-ui'
 // main.ts
 import { createApp } from 'vue'
-import EasyUI from 'easy-ui'
 import App from './App.vue'
 
 const app = createApp(App)
-app.use(EasyUI)  // 自动注册 Element Plus + xly 全局服务
+app.use(EasyUI) // 自动注册 Element Plus + xly 全局服务
 app.mount('#app')
 ```
 
 ### 方式二：按需 + Tree-shaking（推荐生产项目）
 
 ```ts
+import { setupXly } from 'easy-ui'
+import ElementPlus from 'element-plus'
 // main.ts
 import { createApp } from 'vue'
-import ElementPlus from 'element-plus'
-import { setupXly } from 'easy-ui'
 import App from './App.vue'
 
 const app = createApp(App)
 app.use(ElementPlus)
-setupXly(app)  // 仅注册全局服务，组件按需导入
+setupXly(app) // 仅注册全局服务，组件按需导入
 app.mount('#app')
 ```
 
@@ -68,8 +68,8 @@ export default defineConfig({
   plugins: [
     Components({
       resolvers: [
-        xlyComponentResolver(),            // Xly* 组件自动导入
-        ElementPlusResolver({ importStyle: 'css' }),  // EP 组件
+        xlyComponentResolver(), // Xly* 组件自动导入
+        ElementPlusResolver({ importStyle: 'css' }), // EP 组件
       ],
     }),
   ],
@@ -79,7 +79,9 @@ export default defineConfig({
 ```vue
 <!-- 组件直接使用，无需 import -->
 <template>
-  <XlyButton type="primary">提交</XlyButton>
+  <XlyButton type="primary">
+    提交
+  </XlyButton>
   <XlyTable :data="list" :columns="columns" />
 </template>
 ```
@@ -106,9 +108,9 @@ const toggleDark = useToggle(isDark)
 ```scss
 // 组件样式中使用的 CSS 变量（自动跟随主题）
 .xly-card {
-  background: var(--el-bg-color-overlay);      // 亮色 #fff → 暗色 #1d1e1f
-  border-color: var(--el-border-color-light);   // 亮色 #e4e7ed → 暗色 #4c4d4f
-  color: var(--el-text-color-primary);          // 亮色 #303133 → 暗色 #e5eaf3
+  background: var(--el-bg-color-overlay); // 亮色 #fff → 暗色 #1d1e1f
+  border-color: var(--el-border-color-light); // 亮色 #e4e7ed → 暗色 #4c4d4f
+  color: var(--el-text-color-primary); // 亮色 #303133 → 暗色 #e5eaf3
 }
 ```
 
@@ -126,7 +128,7 @@ Vite/Rollup/webpack 5+ 均自动支持，无需额外配置。
 ## 🛠 全局 xly 服务
 
 ```ts
-import { xly, setupXly } from 'easy-ui'
+import { setupXly, xly } from 'easy-ui'
 
 // 安装后全局可用
 setupXly(app)
@@ -145,17 +147,17 @@ loading.close()
 xly.$msgbox.confirm('确定删除？').then(() => { /* ... */ })
 
 // 操作引导
-const tour = xly.$tour({ steps: [...] })
+const tour = xly.$tour({ steps: [1, 2, 3] })
 tour.finish()
 ```
 
 ## 📦 依赖分层
 
-| 级别 | 包 | 说明 |
-|------|-----|------|
-| **peerDependencies** | `vue` `vue-router` `element-plus` `@element-plus/icons-vue` | 消费方必须安装 |
-| **dependencies** | `@vueuse/core` `axios` `pinia` | 自动安装 |
-| **optional** | `echarts` `@logicflow/*` `cropperjs` `jsbarcode` `qrcode` `markdown-it` `pdfjs-dist` `pptx-preview` `crypto-js` `jszip` | 按需安装 |
+| 级别                 | 包                                                                                                                      | 说明           |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------- | -------------- |
+| **peerDependencies** | `vue` `vue-router` `element-plus` `@element-plus/icons-vue`                                                             | 消费方必须安装 |
+| **dependencies**     | `@vueuse/core` `axios` `pinia`                                                                                          | 自动安装       |
+| **optional**         | `echarts` `@logicflow/*` `cropperjs` `jsbarcode` `qrcode` `markdown-it` `pdfjs-dist` `pptx-preview` `crypto-js` `jszip` | 按需安装       |
 
 ## ✨ 核心优势
 

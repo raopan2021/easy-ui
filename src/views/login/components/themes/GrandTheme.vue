@@ -1,3 +1,27 @@
+<script setup lang="ts">
+import { reactive, ref } from 'vue'
+import logoUrl from '@/assets/logo.png'
+
+defineProps<{ loading?: boolean, error?: string }>()
+const emit = defineEmits<{ submit: [form: { username: string, password: string }] }>()
+
+const tags = ['健康档案', '风险预警', '数据分析', '智能报告']
+const nums = [
+  { val: '1200', unit: '+', label: '企业客户' },
+  { val: '300', unit: '万+', label: '服务人次' },
+  { val: '98', unit: '%', label: '用户满意度' },
+]
+
+const showPwd = ref(false)
+const form = reactive({ username: 'EaseUI', password: '123456' })
+
+function handleSubmit() {
+  if (form.username && form.password) {
+    emit('submit', { username: form.username, password: form.password })
+  }
+}
+</script>
+
 <template>
   <div class="t-grand">
     <!-- 背景 -->
@@ -11,7 +35,7 @@
     <!-- 顶部导航栏 -->
     <header class="t-grand__header">
       <div class="header-brand">
-        <img :src="logoUrl" alt="logo" class="header-logo" />
+        <img :src="logoUrl" alt="logo" class="header-logo">
         <span class="header-name">心灵云企业数字健康管理平台</span>
       </div>
       <div class="header-right">
@@ -27,7 +51,9 @@
           <span class="info-badge__dot" />
           安全认证系统
         </div>
-        <h2 class="info-title">数字驱动，<br />健康赋能</h2>
+        <h2 class="info-title">
+          数字驱动，<br>健康赋能
+        </h2>
         <p class="info-desc">
           为企业提供全方位员工健康管理解决方案，助力企业构建健康、高效的工作环境。
         </p>
@@ -36,9 +62,7 @@
         </div>
         <div class="info-nums">
           <div v-for="n in nums" :key="n.label" class="info-num">
-            <span class="num-val"
-              >{{ n.val }}<em>{{ n.unit }}</em></span
-            >
+            <span class="num-val">{{ n.val }}<em>{{ n.unit }}</em></span>
             <span class="num-label">{{ n.label }}</span>
           </div>
         </div>
@@ -47,8 +71,12 @@
       <!-- 右侧登录卡片 -->
       <div class="t-grand__card">
         <div class="card-top">
-          <h3 class="card-title">账号登录</h3>
-          <p class="card-sub">欢迎使用心灵云管理系统</p>
+          <h3 class="card-title">
+            账号登录
+          </h3>
+          <p class="card-sub">
+            欢迎使用心灵云管理系统
+          </p>
         </div>
 
         <!-- ========== 登录表单（内联） ========== -->
@@ -56,13 +84,7 @@
           <div class="gf-field">
             <label class="gf-label">账号</label>
             <div class="gf-input-wrap">
-              <svg
-                class="gf-input-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              >
+              <svg class="gf-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
@@ -72,20 +94,14 @@
                 class="gf-input"
                 placeholder="请输入账号"
                 autocomplete="username"
-              />
+              >
             </div>
           </div>
 
           <div class="gf-field">
             <label class="gf-label">密码</label>
             <div class="gf-input-wrap">
-              <svg
-                class="gf-input-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              >
+              <svg class="gf-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                 <path d="M7 11V7a5 5 0 0 1 10 0v4" />
               </svg>
@@ -95,7 +111,7 @@
                 class="gf-input gf-input--pwd"
                 placeholder="请输入密码"
                 autocomplete="current-password"
-              />
+              >
               <button type="button" class="gf-toggle" @click="showPwd = !showPwd">
                 <svg
                   v-if="!showPwd"
@@ -118,9 +134,7 @@
                   width="16"
                   height="16"
                 >
-                  <path
-                    d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"
-                  />
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
                   <line x1="1" y1="1" x2="23" y2="23" />
                 </svg>
               </button>
@@ -128,14 +142,7 @@
           </div>
 
           <div v-if="error" class="gf-error">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              width="14"
-              height="14"
-            >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
               <circle cx="12" cy="12" r="10" />
               <line x1="12" y1="8" x2="12" y2="12" />
               <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -143,11 +150,7 @@
             {{ error }}
           </div>
 
-          <button
-            type="submit"
-            class="gf-btn"
-            :disabled="loading || !form.username || !form.password"
-          >
+          <button type="submit" class="gf-btn" :disabled="loading || !form.username || !form.password">
             <span class="gf-btn-shimmer" />
             <span v-if="loading" class="gf-btn-spinner">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -175,14 +178,7 @@
 
           <!-- 测试账号提示 -->
           <div class="gf-hint">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              width="12"
-              height="12"
-            >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
               <circle cx="12" cy="12" r="10" />
               <line x1="12" y1="8" x2="12" y2="12" />
               <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -202,30 +198,6 @@
     </footer>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref, reactive } from 'vue'
-import logoUrl from '@/assets/logo.png'
-
-defineProps<{ loading?: boolean; error?: string }>()
-const emit = defineEmits<{ submit: [form: { username: string; password: string }] }>()
-
-const tags = ['健康档案', '风险预警', '数据分析', '智能报告']
-const nums = [
-  { val: '1200', unit: '+', label: '企业客户' },
-  { val: '300', unit: '万+', label: '服务人次' },
-  { val: '98', unit: '%', label: '用户满意度' },
-]
-
-const showPwd = ref(false)
-const form = reactive({ username: 'EaseUI', password: '123456' })
-
-function handleSubmit() {
-  if (form.username && form.password) {
-    emit('submit', { username: form.username, password: form.password })
-  }
-}
-</script>
 
 <style scoped lang="scss">
 .t-grand {
@@ -264,14 +236,14 @@ function handleSubmit() {
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
-  &--1 {
+  &.bg-halo--1 {
     width: 600px;
     height: 600px;
     background: radial-gradient(circle, rgba(79, 110, 247, 0.08), transparent 60%);
     top: -200px;
     left: -100px;
   }
-  &--2 {
+  &.bg-halo--2 {
     width: 500px;
     height: 500px;
     background: radial-gradient(circle, rgba(37, 99, 235, 0.08), transparent 60%);
@@ -653,12 +625,7 @@ function handleSubmit() {
   .gf-btn-shimmer {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      105deg,
-      transparent 30%,
-      rgba(255, 255, 255, 0.2) 50%,
-      transparent 70%
-    );
+    background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
     transform: translateX(-100%);
     pointer-events: none;
   }

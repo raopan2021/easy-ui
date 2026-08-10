@@ -1,6 +1,6 @@
-import { defineStore } from 'pinia'
-import { computed, ref, watch } from 'vue'
 import { usePreferredDark, useStorage } from '@vueuse/core'
+import { defineStore } from 'pinia'
+import { computed, watch } from 'vue'
 
 /** 主题模式：auto=跟随系统，light=浅色，dark=深色 */
 export type ThemeMode = 'auto' | 'light' | 'dark'
@@ -24,16 +24,13 @@ export const useThemeStore = defineStore('theme', () => {
 
   /** 当前是否为暗色：auto 时取系统偏好，否则取手动值 */
   const isDark = computed(() => {
-    if (mode.value === 'auto') return systemDark.value
+    if (mode.value === 'auto')
+      return systemDark.value
     return mode.value === 'dark'
   })
 
   // isDark 变化时同步 DOM，立即执行一次确保初始状态正确
-  watch(
-    isDark,
-    (val) => applyDarkClass(val),
-    { immediate: true },
-  )
+  watch(isDark, val => applyDarkClass(val), { immediate: true })
 
   /** 设置主题模式 */
   function setMode(next: ThemeMode) {

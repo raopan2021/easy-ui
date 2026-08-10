@@ -1,3 +1,38 @@
+<script setup lang="ts">
+import { reactive, ref } from 'vue'
+import logoUrl from '@/assets/logo.png'
+
+defineProps<{ loading?: boolean, error?: string }>()
+const emit = defineEmits<{ submit: [form: { username: string, password: string }] }>()
+
+const badges = [
+  {
+    text: 'SSL 加密传输',
+    icon: { vb: '0 0 24 24', d: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z' },
+  },
+  {
+    text: '数据安全合规',
+    icon: {
+      vb: '0 0 24 24',
+      d: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+    },
+  },
+  {
+    text: '7×24小时服务',
+    icon: { vb: '0 0 24 24', d: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' },
+  },
+]
+
+const showPwd = ref(false)
+const form = reactive({ username: 'EaseUI', password: '123456' })
+
+function handleSubmit() {
+  if (form.username && form.password) {
+    emit('submit', { username: form.username, password: form.password })
+  }
+}
+</script>
+
 <template>
   <div class="t-nature">
     <!-- 背景 -->
@@ -25,13 +60,17 @@
       <!-- 顶部 logo -->
       <div class="t-nature__logo">
         <div class="logo-ring-wrap">
-          <img :src="logoUrl" alt="logo" class="logo-img" />
+          <img :src="logoUrl" alt="logo" class="logo-img">
           <span class="logo-ring logo-ring--1" />
           <span class="logo-ring logo-ring--2" />
         </div>
         <div class="logo-text">
-          <h1 class="logo-name">心灵云</h1>
-          <p class="logo-tagline">数字健康 · 守护生命</p>
+          <h1 class="logo-name">
+            心灵云
+          </h1>
+          <p class="logo-tagline">
+            数字健康 · 守护生命
+          </p>
         </div>
       </div>
 
@@ -39,14 +78,7 @@
       <div class="t-nature__card">
         <div class="card-header">
           <div class="card-icon">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              width="22"
-              height="22"
-            >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22">
               <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
               <circle cx="9" cy="7" r="4" />
               <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
@@ -54,8 +86,12 @@
             </svg>
           </div>
           <div>
-            <h2 class="card-title">员工健康管理系统</h2>
-            <p class="card-sub">请使用企业账号登录</p>
+            <h2 class="card-title">
+              员工健康管理系统
+            </h2>
+            <p class="card-sub">
+              请使用企业账号登录
+            </p>
           </div>
         </div>
 
@@ -64,13 +100,7 @@
           <div class="nf-field">
             <label class="nf-label">账号</label>
             <div class="nf-input-wrap">
-              <svg
-                class="nf-input-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              >
+              <svg class="nf-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
@@ -80,20 +110,14 @@
                 class="nf-input"
                 placeholder="请输入账号"
                 autocomplete="username"
-              />
+              >
             </div>
           </div>
 
           <div class="nf-field">
             <label class="nf-label">密码</label>
             <div class="nf-input-wrap">
-              <svg
-                class="nf-input-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              >
+              <svg class="nf-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                 <path d="M7 11V7a5 5 0 0 1 10 0v4" />
               </svg>
@@ -103,7 +127,7 @@
                 class="nf-input nf-input--pwd"
                 placeholder="请输入密码"
                 autocomplete="current-password"
-              />
+              >
               <button type="button" class="nf-toggle" @click="showPwd = !showPwd">
                 <svg
                   v-if="!showPwd"
@@ -126,9 +150,7 @@
                   width="16"
                   height="16"
                 >
-                  <path
-                    d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"
-                  />
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
                   <line x1="1" y1="1" x2="23" y2="23" />
                 </svg>
               </button>
@@ -136,14 +158,7 @@
           </div>
 
           <div v-if="error" class="nf-error">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              width="14"
-              height="14"
-            >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
               <circle cx="12" cy="12" r="10" />
               <line x1="12" y1="8" x2="12" y2="12" />
               <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -151,11 +166,7 @@
             {{ error }}
           </div>
 
-          <button
-            type="submit"
-            class="nf-btn"
-            :disabled="loading || !form.username || !form.password"
-          >
+          <button type="submit" class="nf-btn" :disabled="loading || !form.username || !form.password">
             <span class="nf-btn-shimmer" />
             <span v-if="loading" class="nf-btn-spinner">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -183,14 +194,7 @@
 
           <!-- 测试账号提示 -->
           <div class="nf-hint">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              width="12"
-              height="12"
-            >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
               <circle cx="12" cy="12" r="10" />
               <line x1="12" y1="8" x2="12" y2="12" />
               <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -220,41 +224,6 @@
     </footer>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref, reactive } from 'vue'
-import logoUrl from '@/assets/logo.png'
-
-defineProps<{ loading?: boolean; error?: string }>()
-const emit = defineEmits<{ submit: [form: { username: string; password: string }] }>()
-
-const badges = [
-  {
-    text: 'SSL 加密传输',
-    icon: { vb: '0 0 24 24', d: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z' },
-  },
-  {
-    text: '数据安全合规',
-    icon: {
-      vb: '0 0 24 24',
-      d: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
-    },
-  },
-  {
-    text: '7×24小时服务',
-    icon: { vb: '0 0 24 24', d: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' },
-  },
-]
-
-const showPwd = ref(false)
-const form = reactive({ username: 'EaseUI', password: '123456' })
-
-function handleSubmit() {
-  if (form.username && form.password) {
-    emit('submit', { username: form.username, password: form.password })
-  }
-}
-</script>
 
 <style scoped lang="scss">
 .t-nature {
@@ -316,14 +285,14 @@ function handleSubmit() {
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.06);
   animation: float-up ease-in-out infinite;
-  &--1 {
+  &.float-circle--1 {
     width: 300px;
     height: 300px;
     top: -80px;
     left: -80px;
     animation-duration: 25s;
   }
-  &--2 {
+  &.float-circle--2 {
     width: 200px;
     height: 200px;
     top: 20%;
@@ -331,7 +300,7 @@ function handleSubmit() {
     animation-duration: 20s;
     animation-delay: -5s;
   }
-  &--3 {
+  &.float-circle--3 {
     width: 160px;
     height: 160px;
     bottom: 100px;
@@ -339,7 +308,7 @@ function handleSubmit() {
     animation-duration: 18s;
     animation-delay: -8s;
   }
-  &--4 {
+  &.float-circle--4 {
     width: 80px;
     height: 80px;
     top: 60%;
@@ -348,7 +317,7 @@ function handleSubmit() {
     animation-duration: 15s;
     animation-delay: -3s;
   }
-  &--5 {
+  &.float-circle--5 {
     width: 50px;
     height: 50px;
     top: 30%;
@@ -357,7 +326,7 @@ function handleSubmit() {
     animation-duration: 22s;
     animation-delay: -10s;
   }
-  &--6 {
+  &.float-circle--6 {
     width: 120px;
     height: 120px;
     bottom: 20%;
@@ -426,11 +395,11 @@ function handleSubmit() {
   position: absolute;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.25);
-  &--1 {
+  &.logo-ring--1 {
     inset: -4px;
     animation: ring-spin 8s linear infinite;
   }
-  &--2 {
+  &.logo-ring--2 {
     inset: -10px;
     border-color: rgba(255, 255, 255, 0.12);
     animation: ring-spin 12s linear infinite reverse;
@@ -646,12 +615,7 @@ function handleSubmit() {
   .nf-btn-shimmer {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      105deg,
-      transparent 30%,
-      rgba(255, 255, 255, 0.22) 50%,
-      transparent 70%
-    );
+    background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.22) 50%, transparent 70%);
     transform: translateX(-100%);
     pointer-events: none;
   }

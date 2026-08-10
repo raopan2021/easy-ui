@@ -1,8 +1,33 @@
+<script setup lang="ts">
+import { XlyButton, XlyEmpty } from 'easy-ui'
+import { ref } from 'vue'
+
+const keyword = ref('')
+
+const typeList = [
+  { type: 'default' as const, label: 'default（默认）' },
+  { type: 'search' as const, label: 'search（搜索）' },
+  { type: 'network' as const, label: 'network（网络）' },
+  { type: 'permission' as const, label: 'permission（权限）' },
+  { type: 'list' as const, label: 'list（列表）' },
+]
+
+function handleRetry() {
+  alert('重试中...')
+}
+
+function handleApply() {
+  alert('申请权限...')
+}
+</script>
+
 <template>
   <div class="empty-doc">
     <!-- 页面标题 -->
     <div class="doc-header">
-      <h1 class="doc-title">Empty 空状态</h1>
+      <h1 class="doc-title">
+        Empty 空状态
+      </h1>
       <p class="doc-desc">
         当列表数据为空、搜索无结果、无权限等场景下展示的占位插图与提示文字，提升用户体验。
       </p>
@@ -10,7 +35,9 @@
 
     <!-- 基础用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
       <p class="doc-section__desc">
         不传任何属性时，展示默认的空状态插图与"暂无数据"文字。
       </p>
@@ -18,13 +45,15 @@
         <div class="doc-preview__body">
           <XlyEmpty />
         </div>
-        <XlyDocCode :code='`<XlyEmpty />`' />
+        <XlyDocCode code="<XlyEmpty />" />
       </div>
     </section>
 
     <!-- 内置类型 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">内置类型</h2>
+      <h2 class="doc-section__title">
+        内置类型
+      </h2>
       <p class="doc-section__desc">
         通过 <code>type</code> 属性切换内置插图，涵盖常见的空状态场景。
       </p>
@@ -32,52 +61,69 @@
         <div class="doc-preview__body demo-types">
           <div v-for="item in typeList" :key="item.type" class="demo-type-item">
             <XlyEmpty :type="item.type" />
-            <div class="demo-type-label">{{ item.label }}</div>
+            <div class="demo-type-label">
+              {{ item.label }}
+            </div>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyEmpty type="default" />
-<XlyEmpty type="search" />
-<XlyEmpty type="network" />
-<XlyEmpty type="permission" />
-<XlyEmpty type="list" />`' />
+        <XlyDocCode
+          code="<XlyEmpty type=&quot;default&quot; />
+<XlyEmpty type=&quot;search&quot; />
+<XlyEmpty type=&quot;network&quot; />
+<XlyEmpty type=&quot;permission&quot; />
+<XlyEmpty type=&quot;list&quot; />"
+        />
       </div>
     </section>
 
     <!-- 不同尺寸 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">不同尺寸</h2>
+      <h2 class="doc-section__title">
+        不同尺寸
+      </h2>
       <p class="doc-section__desc">
-        通过 <code>size</code> 属性设置组件尺寸，提供 <code>small</code> / <code>default</code> / <code>large</code> 三种预设。
+        通过 <code>size</code> 属性设置组件尺寸，提供 <code>small</code> / <code>default</code> /
+        <code>large</code> 三种预设。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body demo-sizes">
           <div class="demo-size-item">
             <XlyEmpty size="small" description="小尺寸" />
-            <div class="demo-type-label">small</div>
+            <div class="demo-type-label">
+              small
+            </div>
           </div>
           <div class="demo-size-item">
             <XlyEmpty description="默认尺寸" />
-            <div class="demo-type-label">default</div>
+            <div class="demo-type-label">
+              default
+            </div>
           </div>
           <div class="demo-size-item">
             <XlyEmpty size="large" description="大尺寸" />
-            <div class="demo-type-label">large</div>
+            <div class="demo-type-label">
+              large
+            </div>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyEmpty size="small" description="小尺寸" />
-<XlyEmpty description="默认尺寸" />
-<XlyEmpty size="large" description="大尺寸" />`' />
+        <XlyDocCode
+          code="<XlyEmpty size=&quot;small&quot; description=&quot;小尺寸&quot; />
+<XlyEmpty description=&quot;默认尺寸&quot; />
+<XlyEmpty size=&quot;large&quot; description=&quot;大尺寸&quot; />"
+        />
       </div>
     </section>
 
     <!-- 自定义描述 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义描述</h2>
+      <h2 class="doc-section__title">
+        自定义描述
+      </h2>
       <p class="doc-section__desc">
         通过 <code>description</code> 属性或 <code>#description</code> 插槽自定义描述内容。
       </p>
       <div class="doc-preview">
-        <div class="doc-preview__body" style="gap: 48px;">
+        <div class="doc-preview__body" style="gap: 48px">
           <XlyEmpty description="暂时没有相关数据，稍后再试" />
           <XlyEmpty type="search">
             <template #description>
@@ -85,57 +131,73 @@
             </template>
           </XlyEmpty>
         </div>
-        <XlyDocCode :code='`<!-- 属性方式 -->
-<XlyEmpty description="暂时没有相关数据，稍后再试" />
+        <XlyDocCode
+          code="<!-- 属性方式 -->
+<XlyEmpty description=&quot;暂时没有相关数据，稍后再试&quot; />
 
 <!-- 插槽方式（支持富文本） -->
-<XlyEmpty type="search">
+<XlyEmpty type=&quot;search&quot;>
   <template #description>
-    未找到 <strong>"关键词"</strong> 相关内容
+    未找到 <strong>&quot;关键词&quot;</strong> 相关内容
   </template>
-</XlyEmpty>`' />
+</XlyEmpty>"
+        />
       </div>
     </section>
 
     <!-- 底部操作按钮 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">底部操作</h2>
+      <h2 class="doc-section__title">
+        底部操作
+      </h2>
       <p class="doc-section__desc">
         通过 <code>default</code> 默认插槽可在空状态下方放置操作按钮。
       </p>
       <div class="doc-preview">
-        <div class="doc-preview__body" style="gap: 64px;">
+        <div class="doc-preview__body" style="gap: 64px">
           <XlyEmpty description="暂无数据">
-            <XlyButton type="primary">立即创建</XlyButton>
+            <XlyButton type="primary">
+              立即创建
+            </XlyButton>
           </XlyEmpty>
           <XlyEmpty type="network" description="网络连接异常">
-            <XlyButton @click="handleRetry">重新连接</XlyButton>
-            <XlyButton type="primary" @click="handleRetry">刷新页面</XlyButton>
+            <XlyButton @click="handleRetry">
+              重新连接
+            </XlyButton>
+            <XlyButton type="primary" @click="handleRetry">
+              刷新页面
+            </XlyButton>
           </XlyEmpty>
           <XlyEmpty type="permission" description="暂无权限访问">
-            <XlyButton type="primary" @click="handleApply">申请权限</XlyButton>
+            <XlyButton type="primary" @click="handleApply">
+              申请权限
+            </XlyButton>
           </XlyEmpty>
         </div>
-        <XlyDocCode :code='`<XlyEmpty description="暂无数据">
-  <XlyButton type="primary">立即创建</XlyButton>
+        <XlyDocCode
+          code="<XlyEmpty description=&quot;暂无数据&quot;>
+  <XlyButton type=&quot;primary&quot;>立即创建</XlyButton>
 </XlyEmpty>
 
-<XlyEmpty type="network" description="网络连接异常">
+<XlyEmpty type=&quot;network&quot; description=&quot;网络连接异常&quot;>
   <XlyButton>重新连接</XlyButton>
-  <XlyButton type="primary">刷新页面</XlyButton>
-</XlyEmpty>`' />
+  <XlyButton type=&quot;primary&quot;>刷新页面</XlyButton>
+</XlyEmpty>"
+        />
       </div>
     </section>
 
     <!-- 自定义图片 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义图片</h2>
+      <h2 class="doc-section__title">
+        自定义图片
+      </h2>
       <p class="doc-section__desc">
         通过 <code>image</code> 属性传入自定义图片地址，或使用 <code>#image</code> 插槽放置任意内容。
         <code>image-size</code> 可控制图片区域宽度。
       </p>
       <div class="doc-preview">
-        <div class="doc-preview__body" style="gap: 64px;">
+        <div class="doc-preview__body" style="gap: 64px">
           <XlyEmpty
             image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
             :image-size="120"
@@ -145,32 +207,40 @@
             <template #image>
               <div class="custom-image-slot">
                 <svg viewBox="0 0 80 80" width="80" height="80" fill="none">
-                  <circle cx="40" cy="40" r="38" fill="#eef0f8" stroke="#d0d5e8" stroke-width="2"/>
+                  <circle cx="40" cy="40" r="38" fill="#eef0f8" stroke="#d0d5e8" stroke-width="2" />
                   <text x="40" y="52" font-size="30" text-anchor="middle" fill="#c8cde4">📦</text>
                 </svg>
               </div>
             </template>
           </XlyEmpty>
         </div>
-        <XlyDocCode :code='`<!-- 自定义图片地址 -->
-<XlyEmpty image="https://..." :image-size="120" description="使用自定义图片" />
+        <XlyDocCode
+          code="<!-- 自定义图片地址 -->
+<XlyEmpty image=&quot;https://...&quot; :image-size=&quot;120&quot; description=&quot;使用自定义图片&quot; />
 
 <!-- 插槽方式 -->
-<XlyEmpty description="...">
+<XlyEmpty description=&quot;...&quot;>
   <template #image>
-    <img src="..." />
+    <img src=&quot;...&quot; />
   </template>
-</XlyEmpty>`' />
+</XlyEmpty>"
+        />
       </div>
     </section>
 
     <!-- 业务场景 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">业务场景</h2>
-      <p class="doc-section__desc">在实际项目中常见的使用场景示例。</p>
+      <h2 class="doc-section__title">
+        业务场景
+      </h2>
+      <p class="doc-section__desc">
+        在实际项目中常见的使用场景示例。
+      </p>
 
       <!-- 表格空状态 -->
-      <h3 class="doc-subsection__title">表格空数据</h3>
+      <h3 class="doc-subsection__title">
+        表格空数据
+      </h3>
       <div class="doc-preview doc-preview--noborder">
         <div class="demo-table-wrap">
           <table class="demo-table">
@@ -187,7 +257,9 @@
               <tr>
                 <td colspan="5">
                   <XlyEmpty size="small" description="暂无员工数据">
-                    <XlyButton size="small" type="primary">添加员工</XlyButton>
+                    <XlyButton size="small" type="primary">
+                      添加员工
+                    </XlyButton>
                   </XlyEmpty>
                 </td>
               </tr>
@@ -197,19 +269,25 @@
       </div>
 
       <!-- 搜索无结果 -->
-      <h3 class="doc-subsection__title">搜索无结果</h3>
+      <h3 class="doc-subsection__title">
+        搜索无结果
+      </h3>
       <div class="doc-preview doc-preview--noborder">
         <div class="demo-search-result">
           <div class="demo-search-bar">
-            <input v-model="keyword" class="demo-input" placeholder="输入搜索关键词..." />
-            <XlyButton type="primary" size="small">搜索</XlyButton>
+            <input v-model="keyword" class="demo-input" placeholder="输入搜索关键词...">
+            <XlyButton type="primary" size="small">
+              搜索
+            </XlyButton>
           </div>
           <div v-if="keyword" class="demo-result-body">
             <XlyEmpty type="search">
               <template #description>
                 没有找到与 <strong style="color: #4f6ef7">"{{ keyword }}"</strong> 相关的内容
               </template>
-              <XlyButton size="small" @click="keyword = ''">清除搜索</XlyButton>
+              <XlyButton size="small" @click="keyword = ''">
+                清除搜索
+              </XlyButton>
             </XlyEmpty>
           </div>
           <div v-else class="demo-result-body demo-result-body--hint">
@@ -219,11 +297,15 @@
       </div>
 
       <!-- 卡片列表空状态 -->
-      <h3 class="doc-subsection__title">卡片列表空状态</h3>
+      <h3 class="doc-subsection__title">
+        卡片列表空状态
+      </h3>
       <div class="doc-preview doc-preview--noborder">
         <div class="demo-card-container">
           <XlyEmpty type="list" description="还没有添加任何项目">
-            <XlyButton type="primary">新建项目</XlyButton>
+            <XlyButton type="primary">
+              新建项目
+            </XlyButton>
             <XlyButton>从模板创建</XlyButton>
           </XlyEmpty>
         </div>
@@ -232,9 +314,13 @@
 
     <!-- API 文档 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">API</h2>
+      <h2 class="doc-section__title">
+        API
+      </h2>
 
-      <h3 class="doc-subtitle">Props</h3>
+      <h3 class="doc-subtitle">
+        Props
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -280,7 +366,9 @@
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Slots</h3>
+      <h3 class="doc-subtitle">
+        Slots
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -306,7 +394,9 @@
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Type 类型说明</h3>
+      <h3 class="doc-subtitle">
+        Type 类型说明
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -354,44 +444,129 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue'
-import XlyEmpty from '@/components/xly-empty/index.vue'
-import XlyButton from '@/components/xly-button/index.vue'
-
-const keyword = ref('')
-
-const typeList = [
-  { type: 'default' as const, label: 'default（默认）' },
-  { type: 'search' as const, label: 'search（搜索）' },
-  { type: 'network' as const, label: 'network（网络）' },
-  { type: 'permission' as const, label: 'permission（权限）' },
-  { type: 'list' as const, label: 'list（列表）' },
-]
-
-function handleRetry() {
-  alert('重试中...')
-}
-
-function handleApply() {
-  alert('申请权限...')
-}
-</script>
-
 <style scoped lang="scss">
-.empty-doc { padding: 8px 0 40px; }
-.doc-header { margin-bottom: 36px; }
-.doc-title { font-size: 26px; font-weight: 700; color: var(--el-text-color-primary); margin: 0 0 8px; letter-spacing: -0.3px; }
-.doc-desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0; line-height: 1.6; }
-.doc-section { margin-bottom: 32px; }
-.doc-section__title { font-size: 18px; font-weight: 600; color: var(--el-text-color-primary); margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--el-border-color-lighter); }
-.doc-subsection__title { font-size: 15px; font-weight: 600; color: var(--el-text-color-regular); margin: 24px 0 12px; }
-.doc-section__desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 16px; line-height: 1.6; code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; } }
-.doc-preview { border: 1px solid var(--el-border-color-lighter); border-radius: 12px; overflow: hidden; background: var(--el-bg-color-overlay); &--noborder { border: none; background: var(--el-fill-color-light); } }
-.doc-preview__body { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: center; gap: 16px; padding: 24px; }
-.doc-code { border-top: 1px solid var(--el-border-color-lighter); background: var(--el-fill-color-light); padding: 16px 20px; overflow-x: auto; pre { margin: 0; padding: 0; } code { font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 13px; line-height: 1.7; color: var(--el-text-color-regular); white-space: pre; } }
-.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
-.doc-table { overflow-x: auto; table { width: 100%; border-collapse: collapse; font-size: 14px; } th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); white-space: nowrap; } th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); } td { color: var(--el-text-color-regular); } code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; } }
+.empty-doc {
+  padding: 8px 0 40px;
+}
+.doc-header {
+  margin-bottom: 36px;
+}
+.doc-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  letter-spacing: -0.3px;
+}
+.doc-desc {
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+.doc-section {
+  margin-bottom: 32px;
+}
+.doc-section__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--el-border-color-lighter);
+}
+.doc-subsection__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--el-text-color-regular);
+  margin: 24px 0 12px;
+}
+.doc-section__desc {
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0 0 16px;
+  line-height: 1.6;
+  code {
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+  }
+}
+.doc-preview {
+  border: 1px solid var(--el-border-color-lighter);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--el-bg-color-overlay);
+  &.doc-preview--noborder {
+    border: none;
+    background: var(--el-fill-color-light);
+  }
+}
+.doc-preview__body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+}
+.doc-code {
+  border-top: 1px solid var(--el-border-color-lighter);
+  background: var(--el-fill-color-light);
+  padding: 16px 20px;
+  overflow-x: auto;
+  pre {
+    margin: 0;
+    padding: 0;
+  }
+  code {
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--el-text-color-regular);
+    white-space: pre;
+  }
+}
+.doc-subtitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 20px 0 10px;
+}
+.doc-table {
+  overflow-x: auto;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+    white-space: nowrap;
+  }
+  th {
+    background: var(--el-fill-color-light);
+    font-weight: 600;
+    color: var(--el-text-color-primary);
+  }
+  td {
+    color: var(--el-text-color-regular);
+  }
+  code {
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+  }
+}
 
 // 类型展示
 .demo-types {
@@ -408,7 +583,9 @@ function handleApply() {
   align-items: center;
   padding: 16px 8px 12px;
   border-right: 1px solid var(--el-border-color-lighter);
-  &:last-child { border-right: none; }
+  &:last-child {
+    border-right: none;
+  }
 }
 
 .demo-type-label {
@@ -433,7 +610,9 @@ function handleApply() {
   align-items: center;
   padding: 8px;
   border-right: 1px solid var(--el-border-color-lighter);
-  &:last-child { border-right: none; }
+  &:last-child {
+    border-right: none;
+  }
 }
 
 // 表格空状态
@@ -448,7 +627,8 @@ function handleApply() {
   border-collapse: collapse;
   font-size: 14px;
 
-  th, td {
+  th,
+  td {
     padding: 10px 12px;
     text-align: left;
     border-bottom: 1px solid var(--el-border-color-lighter);
@@ -504,7 +684,7 @@ function handleApply() {
   border-radius: 8px;
   background: var(--el-fill-color-light);
 
-  &--hint {
+  &.demo-result-body--hint {
     background: var(--el-bg-color-overlay);
   }
 }

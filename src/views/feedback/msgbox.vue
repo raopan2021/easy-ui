@@ -1,49 +1,247 @@
+<script setup lang="ts">
+import { xly, XlyButton } from 'easy-ui'
+
+// Alert 示例
+function handleAlert(type: 'info' | 'success' | 'warning' | 'danger') {
+  const messages = {
+    info: { msg: '您有 3 条未读消息，请及时查阅。', title: '消息通知' },
+    success: { msg: '账户已注册成功，欢迎使用！', title: '注册成功' },
+    warning: { msg: '此操作不可撤销，请谨慎操作。', title: '操作警告' },
+    danger: { msg: '请求失败，服务器返回错误 500。', title: '系统错误' },
+  }
+  const { msg, title } = messages[type]
+  xly.$msgbox.alert(msg, title, { type })
+}
+
+// Confirm 示例
+function handleConfirm() {
+  xly.$msgbox
+    .confirm('确定要删除该记录吗？此操作不可撤销。', '删除确认', { type: 'warning' })
+    .then(() => xly.$msg.success('记录已删除'))
+    .catch(() => xly.$msg.info('已取消'))
+}
+
+function handleConfirmDanger() {
+  xly.$msgbox
+    .confirm('即将清空所有数据，此操作不可恢复！', '危险操作', {
+      type: 'danger',
+      confirmButtonDanger: true,
+      confirmButtonText: '确认清空',
+    })
+    .then(() => xly.$msg.success('已执行清空操作'))
+    .catch(() => {})
+}
+
+function handleConfirmCancelable() {
+  xly.$msgbox
+    .confirm('是否保存当前修改内容？', '保存提示', {
+      type: 'info',
+      closeOnClickModal: true,
+    })
+    .then(() => xly.$msg.success('内容已保存'))
+    .catch(() => xly.$msg.info('放弃保存'))
+}
+
+// Prompt 示例
+function handlePrompt() {
+  xly.$msgbox
+    .prompt('请输入项目名称', '新建项目', {
+      input: { placeholder: '请输入 2-20 个字符' },
+    })
+    .then(({ value }) => xly.$msg.success(`已创建项目：${value}`))
+    .catch(() => {})
+}
+
+function handlePromptValidate() {
+  xly.$msgbox
+    .prompt('请输入手机号', '绑定手机', {
+      input: {
+        placeholder: '请输入 11 位手机号',
+        pattern: '^1[3-9]\\d{9}$',
+        patternMessage: '手机号格式不正确',
+      },
+    })
+    .then(({ value }) => xly.$msg.success(`手机号 ${value} 绑定成功`))
+    .catch(() => {})
+}
+
+function handlePromptPassword() {
+  xly.$msgbox
+    .prompt('请输入新密码', '修改密码', {
+      input: { inputType: 'password', placeholder: '请输入至少 6 位密码' },
+    })
+    .then(() => xly.$msg.success('密码修改成功'))
+    .catch(() => {})
+}
+
+function handlePromptTextarea() {
+  xly.$msgbox
+    .prompt('请输入备注内容', '添加备注', {
+      input: { inputType: 'textarea', placeholder: '请输入备注...' },
+    })
+    .then(({ value }) => xly.$msg.success(`备注已保存：${value}`))
+    .catch(() => {})
+}
+
+// async/await 示例
+async function handleAsyncAwait() {
+  try {
+    await xly.$msgbox.confirm('确定要提交审核吗？提交后将无法修改。', '提交确认', {
+      type: 'warning',
+      confirmButtonText: '提交',
+    })
+    xly.$msg.success('已提交审核，请等待处理')
+  }
+  catch {
+    xly.$msg.info('已取消提交')
+  }
+}
+
+// 自定义按钮
+function handleCustomText() {
+  xly.$msgbox
+    .confirm('检测到未保存的内容，是否离开当前页面？', '离开提示', {
+      confirmButtonText: '离开',
+      cancelButtonText: '留下',
+      type: 'warning',
+    })
+    .then(() => xly.$msg.info('已离开页面'))
+    .catch(() => xly.$msg.success('继续编辑'))
+}
+
+function handleNoClose() {
+  xly.$msgbox.confirm('请仔细阅读并确认以下操作内容。', '二次确认', {
+    showClose: false,
+    closeOnClickModal: false,
+    type: 'warning',
+  })
+}
+
+// 通用 open
+function handleOpen() {
+  xly.$msgbox.open({
+    title: '自定义弹框',
+    message: '这是一条通过 open() 方法创建的弹框，可完整控制所有配置项。',
+    type: 'success',
+    showCancelButton: true,
+    confirmButtonText: '我知道了',
+    cancelButtonText: '稍后再说',
+  })
+}
+
+function handleHtmlContent() {
+  xly.$msgbox.open({
+    title: '系统公告',
+    message:
+      '<strong>重要通知：</strong>系统将于今晚 <span style="color:#cf222e;font-weight:600">22:00 - 23:00</span> 进行例行维护，期间服务将暂时不可用，请提前做好准备。',
+    dangerouslyUseHTMLString: true,
+    type: 'warning',
+  })
+}
+
+// 业务场景
+function handleBizDelete() {
+  xly.$msgbox
+    .confirm('确定删除该用户吗？删除后数据将无法恢复。', '删除用户', {
+      type: 'danger',
+      confirmButtonDanger: true,
+      confirmButtonText: '删除',
+    })
+    .then(() => xly.$msg.success('用户已删除'))
+    .catch(() => {})
+}
+
+function handleBizRename() {
+  xly.$msgbox
+    .prompt('请输入新名称', '重命名', {
+      input: { value: '旧项目名称', placeholder: '请输入名称' },
+    })
+    .then(({ value }) => xly.$msg.success(`已重命名为：${value}`))
+    .catch(() => {})
+}
+
+function handleBizLeave() {
+  xly.$msgbox
+    .confirm('您有未保存的修改，确定要离开当前页面吗？', '离开提示', {
+      type: 'warning',
+      confirmButtonText: '离开',
+      cancelButtonText: '留下',
+    })
+    .then(() => xly.$msg.info('已离开页面'))
+    .catch(() => xly.$msg.success('继续编辑'))
+}
+</script>
+
 <template>
   <div class="msgbox-doc">
     <!-- 页面标题 -->
     <div class="doc-header">
-      <h1 class="doc-title">MsgBox 消息弹出框</h1>
+      <h1 class="doc-title">
+        MsgBox 消息弹出框
+      </h1>
       <p class="doc-desc">
-        模态弹出框组件，提供 Alert、Confirm、Prompt 三种调用模式，支持 Promise 链式调用，用法参照 Element Plus MessageBox。
+        模态弹出框组件，提供 Alert、Confirm、Prompt 三种调用模式，支持 Promise 链式调用，用法参照 Element Plus
+        MessageBox。
       </p>
     </div>
 
     <!-- Alert 弹框 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">Alert 提示框</h2>
+      <h2 class="doc-section__title">
+        Alert 提示框
+      </h2>
       <p class="doc-section__desc">
         仅包含确认按钮，用于向用户展示重要信息。通过 <code>type</code> 参数设置图标类型。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="handleAlert('info')">信息提示</XlyButton>
-          <XlyButton @click="handleAlert('success')">成功提示</XlyButton>
-          <XlyButton @click="handleAlert('warning')">警告提示</XlyButton>
-          <XlyButton @click="handleAlert('danger')">错误提示</XlyButton>
+          <XlyButton @click="handleAlert('info')">
+            信息提示
+          </XlyButton>
+          <XlyButton @click="handleAlert('success')">
+            成功提示
+          </XlyButton>
+          <XlyButton @click="handleAlert('warning')">
+            警告提示
+          </XlyButton>
+          <XlyButton @click="handleAlert('danger')">
+            错误提示
+          </XlyButton>
         </div>
-        <XlyDocCode :code="`import { xly } from '@/utils/xly'
+        <XlyDocCode
+          code="import { xly } from 'easy-ui'
 
 // 基础用法
 await xly.$msgbox.alert('您的账户已成功创建', '注册成功', { type: 'success' })
 
 // 或者简写，title 可省略（默认&quot;提示&quot;）
-await xly.$msgbox.alert('此操作不可撤销，请谨慎操作', '警告', { type: 'warning' })`" />
+await xly.$msgbox.alert('此操作不可撤销，请谨慎操作', '警告', { type: 'warning' })"
+        />
       </div>
     </section>
 
     <!-- Confirm 弹框 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">Confirm 确认框</h2>
+      <h2 class="doc-section__title">
+        Confirm 确认框
+      </h2>
       <p class="doc-section__desc">
         包含确认和取消按钮，用于需要用户二次确认的操作场景。返回 Promise，确认 resolve，取消 reject。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="handleConfirm">删除确认</XlyButton>
-          <XlyButton @click="handleConfirmDanger">危险操作</XlyButton>
-          <XlyButton @click="handleConfirmCancelable">可关闭遮罩</XlyButton>
+          <XlyButton @click="handleConfirm">
+            删除确认
+          </XlyButton>
+          <XlyButton @click="handleConfirmDanger">
+            危险操作
+          </XlyButton>
+          <XlyButton @click="handleConfirmCancelable">
+            可关闭遮罩
+          </XlyButton>
         </div>
-        <XlyDocCode :code="`// 基础 Confirm
+        <XlyDocCode
+          code="// 基础 Confirm
 xly.$msgbox.confirm('确定要删除该记录吗？此操作不可撤销。', '删除确认', {
   type: 'warning',
 })
@@ -65,35 +263,47 @@ xly.$msgbox.confirm('即将清空所有数据，此操作不可恢复！', '危�
 xly.$msgbox.confirm('是否保存当前修改？', '保存提示', {
   type: 'info',
   closeOnClickModal: true,
-})`" />
+})"
+        />
       </div>
     </section>
 
     <!-- Prompt 输入框 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">Prompt 输入框</h2>
+      <h2 class="doc-section__title">
+        Prompt 输入框
+      </h2>
       <p class="doc-section__desc">
         包含输入框的弹框，用于需要用户输入内容的场景。支持输入校验，通过 <code>pattern</code> 正则校验输入内容。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="handlePrompt">输入名称</XlyButton>
-          <XlyButton @click="handlePromptValidate">带校验规则</XlyButton>
-          <XlyButton @click="handlePromptPassword">密码输入</XlyButton>
-          <XlyButton @click="handlePromptTextarea">文本域输入</XlyButton>
+          <XlyButton @click="handlePrompt">
+            输入名称
+          </XlyButton>
+          <XlyButton @click="handlePromptValidate">
+            带校验规则
+          </XlyButton>
+          <XlyButton @click="handlePromptPassword">
+            密码输入
+          </XlyButton>
+          <XlyButton @click="handlePromptTextarea">
+            文本域输入
+          </XlyButton>
         </div>
-        <XlyDocCode :code="`// 基础 Prompt
+        <XlyDocCode
+          code="// 基础 Prompt
 xly.$msgbox.prompt('请输入项目名称', '新建项目', {
   input: { placeholder: '请输入 2-20 个字符' },
 }).then(({ value }) => {
-  xly.$msg.success(\`创建成功：\${value}\`)
+  xly.$msg.success(`创建成功：${value}`)
 })
 
 // 带正则校验
 xly.$msgbox.prompt('请输入手机号', '绑定手机', {
   input: {
     placeholder: '请输入 11 位手机号',
-    pattern: '^1[3-9]\\\\d{9}$',
+    pattern: '^1[3-9]\\d{9}$',
     patternMessage: '手机号格式不正确',
   },
 })
@@ -106,21 +316,27 @@ xly.$msgbox.prompt('请输入新密码', '修改密码', {
 // 文本域
 xly.$msgbox.prompt('请输入备注', '添加备注', {
   input: { inputType: 'textarea', placeholder: '请输入备注内容...' },
-})`" />
+})"
+        />
       </div>
     </section>
 
     <!-- async/await 用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">async / await 用法</h2>
+      <h2 class="doc-section__title">
+        async / await 用法
+      </h2>
       <p class="doc-section__desc">
         所有方法均返回 Promise，可使用 <code>async/await</code> 语法简化代码，通过 try/catch 捕获取消动作。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="handleAsyncAwait">async/await 示例</XlyButton>
+          <XlyButton @click="handleAsyncAwait">
+            async/await 示例
+          </XlyButton>
         </div>
-        <XlyDocCode :code="`async function handleDelete() {
+        <XlyDocCode
+          code="async function handleDelete() {
   try {
     await xly.$msgbox.confirm('确定删除该用户吗？', '删除用户', {
       type: 'warning',
@@ -133,22 +349,30 @@ xly.$msgbox.prompt('请输入备注', '添加备注', {
     // 用户点击&quot;取消&quot;或关闭
     xly.$msg.info('已取消操作')
   }
-}`" />
+}"
+        />
       </div>
     </section>
 
     <!-- 自定义按钮文字 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义按钮文字</h2>
+      <h2 class="doc-section__title">
+        自定义按钮文字
+      </h2>
       <p class="doc-section__desc">
         通过 <code>confirmButtonText</code> 和 <code>cancelButtonText</code> 自定义按钮的显示文字。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="handleCustomText">自定义按钮文字</XlyButton>
-          <XlyButton @click="handleNoClose">隐藏关闭图标</XlyButton>
+          <XlyButton @click="handleCustomText">
+            自定义按钮文字
+          </XlyButton>
+          <XlyButton @click="handleNoClose">
+            隐藏关闭图标
+          </XlyButton>
         </div>
-        <XlyDocCode :code="`xly.$msgbox.confirm('检测到未保存的内容，是否离开当前页面？', '离开提示', {
+        <XlyDocCode
+          code="xly.$msgbox.confirm('检测到未保存的内容，是否离开当前页面？', '离开提示', {
   confirmButtonText: '离开',
   cancelButtonText: '留下',
   type: 'warning',
@@ -158,22 +382,30 @@ xly.$msgbox.prompt('请输入备注', '添加备注', {
 xly.$msgbox.confirm('请确认以下操作', '二次确认', {
   showClose: false,
   closeOnClickModal: false,
-})`" />
+})"
+        />
       </div>
     </section>
 
     <!-- 通用 open 方法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">通用 open 方法</h2>
+      <h2 class="doc-section__title">
+        通用 open 方法
+      </h2>
       <p class="doc-section__desc">
         使用 <code>xly.$msgbox.open()</code> 可完整控制所有配置项，适合复杂场景。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="handleOpen">通用弹框</XlyButton>
-          <XlyButton @click="handleHtmlContent">HTML 内容</XlyButton>
+          <XlyButton @click="handleOpen">
+            通用弹框
+          </XlyButton>
+          <XlyButton @click="handleHtmlContent">
+            HTML 内容
+          </XlyButton>
         </div>
-        <XlyDocCode :code="`// 通用调用
+        <XlyDocCode
+          code="// 通用调用
 xly.$msgbox.open({
   title: '自定义弹框',
   message: '这是一条自定义内容',
@@ -189,21 +421,33 @@ xly.$msgbox.open({
   message: '<strong>重要通知：</strong>系统将于今晚 <span style=&quot;color:#cf222e&quot;>22:00</span> 进行维护。',
   dangerouslyUseHTMLString: true,
   type: 'warning',
-})`" />
+})"
+        />
       </div>
     </section>
 
     <!-- 业务场景 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">业务场景</h2>
-      <p class="doc-section__desc">消息弹出框在实际业务中的典型使用场景。</p>
+      <h2 class="doc-section__title">
+        业务场景
+      </h2>
+      <p class="doc-section__desc">
+        消息弹出框在实际业务中的典型使用场景。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton type="danger" @click="handleBizDelete">删除记录</XlyButton>
-          <XlyButton type="primary" @click="handleBizRename">重命名</XlyButton>
-          <XlyButton @click="handleBizLeave">离开页面</XlyButton>
+          <XlyButton type="danger" @click="handleBizDelete">
+            删除记录
+          </XlyButton>
+          <XlyButton type="primary" @click="handleBizRename">
+            重命名
+          </XlyButton>
+          <XlyButton @click="handleBizLeave">
+            离开页面
+          </XlyButton>
         </div>
-        <XlyDocCode :code="`// 删除记录
+        <XlyDocCode
+          code="// 删除记录
 async function handleDelete(id: number) {
   await xly.$msgbox.confirm('确定删除该记录？删除后不可恢复。', '删除确认', {
     type: 'danger',
@@ -228,17 +472,22 @@ router.beforeEach(async (to, from, next) => {
     })
   }
   next()
-})`" />
+})"
+        />
       </div>
     </section>
 
     <!-- API 文档 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">API</h2>
+      <h2 class="doc-section__title">
+        API
+      </h2>
 
-      <h3 class="doc-subtitle">xly.$msgbox 方法</h3>
+      <h3 class="doc-subtitle">
+        xly.$msgbox 方法
+      </h3>
       <p class="doc-section__desc" style="margin-bottom: 12px">
-        通过 <code>import { xly } from '@/utils/xly'</code> 调用 <code>xly.$msgbox</code>。
+        通过 <code>import { xly } from 'easy-ui'</code> 调用 <code>xly.$msgbox</code>。
       </p>
       <div class="doc-table">
         <table>
@@ -279,7 +528,9 @@ router.beforeEach(async (to, from, next) => {
         </table>
       </div>
 
-      <h3 class="doc-subtitle">MsgBoxOptions</h3>
+      <h3 class="doc-subtitle">
+        MsgBoxOptions
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -397,7 +648,9 @@ router.beforeEach(async (to, from, next) => {
         </table>
       </div>
 
-      <h3 class="doc-subtitle">MsgBoxInputConfig</h3>
+      <h3 class="doc-subtitle">
+        MsgBoxInputConfig
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -443,7 +696,9 @@ router.beforeEach(async (to, from, next) => {
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Promise 返回值</h3>
+      <h3 class="doc-subtitle">
+        Promise 返回值
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -456,7 +711,9 @@ router.beforeEach(async (to, from, next) => {
           <tbody>
             <tr>
               <td><code>action</code></td>
-              <td>用户操作：确认为 <code>'confirm'</code>，取消为 <code>'cancel'</code>，关闭为 <code>'close'</code></td>
+              <td>
+                用户操作：确认为 <code>'confirm'</code>，取消为 <code>'cancel'</code>，关闭为 <code>'close'</code>
+              </td>
               <td><code>'confirm' | 'cancel' | 'close'</code></td>
             </tr>
             <tr>
@@ -470,180 +727,6 @@ router.beforeEach(async (to, from, next) => {
     </section>
   </div>
 </template>
-
-<script setup lang="ts">
-import XlyButton from '@/components/xly-button/index.vue'
-import { xly } from '@/utils/xly'
-
-// Alert 示例
-function handleAlert(type: 'info' | 'success' | 'warning' | 'danger') {
-  const messages = {
-    info: { msg: '您有 3 条未读消息，请及时查阅。', title: '消息通知' },
-    success: { msg: '账户已注册成功，欢迎使用！', title: '注册成功' },
-    warning: { msg: '此操作不可撤销，请谨慎操作。', title: '操作警告' },
-    danger: { msg: '请求失败，服务器返回错误 500。', title: '系统错误' },
-  }
-  const { msg, title } = messages[type]
-  xly.$msgbox.alert(msg, title, { type })
-}
-
-// Confirm 示例
-function handleConfirm() {
-  xly.$msgbox
-    .confirm('确定要删除该记录吗？此操作不可撤销。', '删除确认', { type: 'warning' })
-    .then(() => xly.$msg.success('记录已删除'))
-    .catch(() => xly.$msg.info('已取消'))
-}
-
-function handleConfirmDanger() {
-  xly.$msgbox
-    .confirm('即将清空所有数据，此操作不可恢复！', '危险操作', {
-      type: 'danger',
-      confirmButtonDanger: true,
-      confirmButtonText: '确认清空',
-    })
-    .then(() => xly.$msg.success('已执行清空操作'))
-    .catch(() => {})
-}
-
-function handleConfirmCancelable() {
-  xly.$msgbox
-    .confirm('是否保存当前修改内容？', '保存提示', {
-      type: 'info',
-      closeOnClickModal: true,
-    })
-    .then(() => xly.$msg.success('内容已保存'))
-    .catch(() => xly.$msg.info('放弃保存'))
-}
-
-// Prompt 示例
-function handlePrompt() {
-  xly.$msgbox
-    .prompt('请输入项目名称', '新建项目', {
-      input: { placeholder: '请输入 2-20 个字符' },
-    })
-    .then(({ value }) => xly.$msg.success(`已创建项目：${value}`))
-    .catch(() => {})
-}
-
-function handlePromptValidate() {
-  xly.$msgbox
-    .prompt('请输入手机号', '绑定手机', {
-      input: {
-        placeholder: '请输入 11 位手机号',
-        pattern: '^1[3-9]\\d{9}$',
-        patternMessage: '手机号格式不正确',
-      },
-    })
-    .then(({ value }) => xly.$msg.success(`手机号 ${value} 绑定成功`))
-    .catch(() => {})
-}
-
-function handlePromptPassword() {
-  xly.$msgbox
-    .prompt('请输入新密码', '修改密码', {
-      input: { inputType: 'password', placeholder: '请输入至少 6 位密码' },
-    })
-    .then(() => xly.$msg.success('密码修改成功'))
-    .catch(() => {})
-}
-
-function handlePromptTextarea() {
-  xly.$msgbox
-    .prompt('请输入备注内容', '添加备注', {
-      input: { inputType: 'textarea', placeholder: '请输入备注...' },
-    })
-    .then(({ value }) => xly.$msg.success(`备注已保存：${value}`))
-    .catch(() => {})
-}
-
-// async/await 示例
-async function handleAsyncAwait() {
-  try {
-    await xly.$msgbox.confirm('确定要提交审核吗？提交后将无法修改。', '提交确认', {
-      type: 'warning',
-      confirmButtonText: '提交',
-    })
-    xly.$msg.success('已提交审核，请等待处理')
-  } catch {
-    xly.$msg.info('已取消提交')
-  }
-}
-
-// 自定义按钮
-function handleCustomText() {
-  xly.$msgbox
-    .confirm('检测到未保存的内容，是否离开当前页面？', '离开提示', {
-      confirmButtonText: '离开',
-      cancelButtonText: '留下',
-      type: 'warning',
-    })
-    .then(() => xly.$msg.info('已离开页面'))
-    .catch(() => xly.$msg.success('继续编辑'))
-}
-
-function handleNoClose() {
-  xly.$msgbox.confirm('请仔细阅读并确认以下操作内容。', '二次确认', {
-    showClose: false,
-    closeOnClickModal: false,
-    type: 'warning',
-  })
-}
-
-// 通用 open
-function handleOpen() {
-  xly.$msgbox.open({
-    title: '自定义弹框',
-    message: '这是一条通过 open() 方法创建的弹框，可完整控制所有配置项。',
-    type: 'success',
-    showCancelButton: true,
-    confirmButtonText: '我知道了',
-    cancelButtonText: '稍后再说',
-  })
-}
-
-function handleHtmlContent() {
-  xly.$msgbox.open({
-    title: '系统公告',
-    message:
-      '<strong>重要通知：</strong>系统将于今晚 <span style="color:#cf222e;font-weight:600">22:00 - 23:00</span> 进行例行维护，期间服务将暂时不可用，请提前做好准备。',
-    dangerouslyUseHTMLString: true,
-    type: 'warning',
-  })
-}
-
-// 业务场景
-function handleBizDelete() {
-  xly.$msgbox
-    .confirm('确定删除该用户吗？删除后数据将无法恢复。', '删除用户', {
-      type: 'danger',
-      confirmButtonDanger: true,
-      confirmButtonText: '删除',
-    })
-    .then(() => xly.$msg.success('用户已删除'))
-    .catch(() => {})
-}
-
-function handleBizRename() {
-  xly.$msgbox
-    .prompt('请输入新名称', '重命名', {
-      input: { value: '旧项目名称', placeholder: '请输入名称' },
-    })
-    .then(({ value }) => xly.$msg.success(`已重命名为：${value}`))
-    .catch(() => {})
-}
-
-function handleBizLeave() {
-  xly.$msgbox
-    .confirm('您有未保存的修改，确定要离开当前页面吗？', '离开提示', {
-      type: 'warning',
-      confirmButtonText: '离开',
-      cancelButtonText: '留下',
-    })
-    .then(() => xly.$msg.info('已离开页面'))
-    .catch(() => xly.$msg.success('继续编辑'))
-}
-</script>
 
 <style scoped lang="scss">
 .msgbox-doc {

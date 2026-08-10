@@ -1,15 +1,40 @@
+<script setup lang="ts">
+import { XlyUserPicker } from 'easy-ui'
+import { ref } from 'vue'
+
+// 单选
+const singleUser = ref<number | string | null>(null)
+
+// 多选（数组）
+const multiUsers = ref<(number | string)[]>([])
+
+// 限制数量
+const maxUsers = ref<(number | string)[]>([])
+
+// 字符串返回值
+const stringUsers = ref<string>('')
+
+// 显示部门
+const extraUsers = ref<(number | string)[]>([])
+</script>
+
 <template>
   <div class="user-picker-doc">
     <div class="doc-header">
-      <h1 class="doc-title">UserPicker 用户选择器</h1>
+      <h1 class="doc-title">
+        UserPicker 用户选择器
+      </h1>
       <p class="doc-desc">
-        模拟用户选择的组件，支持单选/多选模式，可自定义返回值类型。组件内部默认使用模拟数据，可通过组件 <code>getMockUsers</code> 方法修改接入真实接口。
+        模拟用户选择的组件，支持单选/多选模式，可自定义返回值类型。组件内部默认使用模拟数据，可通过组件
+        <code>getMockUsers</code> 方法修改接入真实接口。
       </p>
     </div>
 
     <!-- 基础用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
       <p class="doc-section__desc">
         单选模式，点击按钮打开选择器，选择用户后返回用户 id。
       </p>
@@ -21,13 +46,15 @@
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(singleUser) }}</code>
         </div>
-        <XlyDocCode :code='`<XlyUserPicker v-model="userId" placeholder="请选择用户" />`' />
+        <XlyDocCode code="<XlyUserPicker v-model=&quot;userId&quot; placeholder=&quot;请选择用户&quot; />" />
       </div>
     </section>
 
     <!-- 多选模式 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">多选模式</h2>
+      <h2 class="doc-section__title">
+        多选模式
+      </h2>
       <p class="doc-section__desc">
         设置 <code>multiple</code> 属性启用多选模式，默认返回 id 数组。
       </p>
@@ -39,13 +66,17 @@
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(multiUsers) }}</code>
         </div>
-        <XlyDocCode :code='`<XlyUserPicker v-model="userIds" multiple placeholder="请选择用户" />`' />
+        <XlyDocCode
+          code="<XlyUserPicker v-model=&quot;userIds&quot; multiple placeholder=&quot;请选择用户&quot; />"
+        />
       </div>
     </section>
 
     <!-- 限制最大数量 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">限制最大数量</h2>
+      <h2 class="doc-section__title">
+        限制最大数量
+      </h2>
       <p class="doc-section__desc">
         通过 <code>max</code> 属性限制最多选择的用户数量。
       </p>
@@ -57,13 +88,17 @@
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(maxUsers) }}</code>
         </div>
-        <XlyDocCode :code='`<XlyUserPicker v-model="userIds" multiple :max="3" placeholder="最多选择3个用户" />`' />
+        <XlyDocCode
+          code="<XlyUserPicker v-model=&quot;userIds&quot; multiple :max=&quot;3&quot; placeholder=&quot;最多选择3个用户&quot; />"
+        />
       </div>
     </section>
 
     <!-- 字符串返回值 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">字符串返回值</h2>
+      <h2 class="doc-section__title">
+        字符串返回值
+      </h2>
       <p class="doc-section__desc">
         多选模式下，设置 <code>return-type="string"</code> 可返回逗号拼接的字符串。
       </p>
@@ -75,43 +110,45 @@
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(stringUsers) }}</code>
         </div>
-        <XlyDocCode :code='`<XlyUserPicker v-model="userIdsStr" multiple return-type="string" placeholder="返回逗号字符串" />`' />
+        <XlyDocCode
+          code="<XlyUserPicker v-model=&quot;userIdsStr&quot; multiple return-type=&quot;string&quot; placeholder=&quot;返回逗号字符串&quot; />"
+        />
       </div>
     </section>
 
     <!-- 显示部门信息 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">显示部门信息</h2>
+      <h2 class="doc-section__title">
+        显示部门信息
+      </h2>
       <p class="doc-section__desc">
         设置 <code>show-extra</code> 显示用户的额外信息（如部门）。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyUserPicker
-            v-model="extraUsers"
-            multiple
-            show-extra
-            extra-key="department"
-            placeholder="显示部门信息"
-          />
+          <XlyUserPicker v-model="extraUsers" multiple show-extra extra-key="department" placeholder="显示部门信息" />
         </div>
         <div class="doc-value">
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(extraUsers) }}</code>
         </div>
-        <XlyDocCode :code='`<XlyUserPicker
-  v-model="userIds"
+        <XlyDocCode
+          code="<XlyUserPicker
+  v-model=&quot;userIds&quot;
   multiple
   show-extra
-  extra-key="department"
-  placeholder="显示部门信息"
-/>`' />
+  extra-key=&quot;department&quot;
+  placeholder=&quot;显示部门信息&quot;
+/>"
+        />
       </div>
     </section>
 
     <!-- 禁用状态 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">禁用状态</h2>
+      <h2 class="doc-section__title">
+        禁用状态
+      </h2>
       <p class="doc-section__desc">
         设置 <code>disabled</code> 属性禁用组件。
       </p>
@@ -123,17 +160,20 @@
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(singleUser) }}</code>
         </div>
-        <XlyDocCode :code='`<XlyUserPicker v-model="userId" disabled placeholder="禁用状态" />`' />
+        <XlyDocCode code="<XlyUserPicker v-model=&quot;userId&quot; disabled placeholder=&quot;禁用状态&quot; />" />
       </div>
     </section>
 
     <!-- 二开指南 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">二开指南</h2>
+      <h2 class="doc-section__title">
+        二开指南
+      </h2>
       <p class="doc-section__desc">
         组件默认使用内部模拟数据。如需接入真实接口，直接打开组件源码修改 <code>getMockUsers</code> 函数即可。
       </p>
-      <XlyDocCode :code="`// 打开 src/components/xly-user-picker/index.vue
+      <XlyDocCode
+        code="// 打开 src/components/xly-user-picker/index.vue
 // 找到 getMockUsers 函数，替换为你的真实接口调用
 
 /**
@@ -144,7 +184,7 @@
  */
 async function getMockUsers(keyword?: string): Promise<UserItem[]> {
   // 👇 替换为真实接口
-  const res = await fetch(\`/api/users?keyword=\${keyword || ''}\`)
+  const res = await fetch(`/api/users?keyword=${keyword || ''}`)
   const data = await res.json()
 
   // 返回用户对象数组，必须包含 valueKey 和 nameKey 指定的字段
@@ -154,9 +194,12 @@ async function getMockUsers(keyword?: string): Promise<UserItem[]> {
     department: item.dept,   // 对应 extra-key=&quot;department&quot;
     avatar: item.avatar,
   }))
-}`" />
+}"
+      />
 
-      <h3 class="doc-subtitle">函数签名</h3>
+      <h3 class="doc-subtitle">
+        函数签名
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -181,9 +224,13 @@ async function getMockUsers(keyword?: string): Promise<UserItem[]> {
 
     <!-- API -->
     <section class="doc-section">
-      <h2 class="doc-section__title">API</h2>
+      <h2 class="doc-section__title">
+        API
+      </h2>
 
-      <h3 class="doc-subtitle">Props</h3>
+      <h3 class="doc-subtitle">
+        Props
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -271,7 +318,9 @@ async function getMockUsers(keyword?: string): Promise<UserItem[]> {
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Events</h3>
+      <h3 class="doc-subtitle">
+        Events
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -301,7 +350,9 @@ async function getMockUsers(keyword?: string): Promise<UserItem[]> {
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Expose</h3>
+      <h3 class="doc-subtitle">
+        Expose
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -330,73 +381,86 @@ async function getMockUsers(keyword?: string): Promise<UserItem[]> {
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue'
-import XlyUserPicker from '@/components/xly-user-picker/index.vue'
-
-// 单选
-const singleUser = ref<number | string | null>(null)
-
-// 多选（数组）
-const multiUsers = ref<(number | string)[]>([])
-
-// 限制数量
-const maxUsers = ref<(number | string)[]>([])
-
-// 字符串返回值
-const stringUsers = ref<string>('')
-
-// 显示部门
-const extraUsers = ref<(number | string)[]>([])
-</script>
-
 <style scoped lang="scss">
 .user-picker-doc {
   padding: 8px 0 40px;
 }
 
-.doc-header { margin-bottom: 36px; }
+.doc-header {
+  margin-bottom: 36px;
+}
 .doc-title {
-  font-size: 26px; font-weight: 700; color: var(--el-text-color-primary);
-  margin: 0 0 8px; letter-spacing: -0.3px;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  letter-spacing: -0.3px;
 }
 .doc-desc {
-  font-size: 14px; color: var(--el-text-color-secondary); margin: 0; line-height: 1.6;
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0;
+  line-height: 1.6;
   code {
-    background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px;
-    border-radius: 4px; font-size: 13px;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
   }
 }
 
-.doc-section { margin-bottom: 32px; }
+.doc-section {
+  margin-bottom: 32px;
+}
 .doc-section__title {
-  font-size: 18px; font-weight: 600; color: var(--el-text-color-primary);
-  margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--el-border-color-lighter);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--el-border-color-lighter);
 }
 .doc-section__desc {
-  font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 16px; line-height: 1.6;
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0 0 16px;
+  line-height: 1.6;
   code {
-    background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px;
-    border-radius: 4px; font-size: 13px;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
   }
 }
 
 .doc-preview {
-  border: 1px solid var(--el-border-color-lighter); border-radius: 12px;
-  overflow: hidden; background: var(--el-bg-color-overlay);
+  border: 1px solid var(--el-border-color-lighter);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--el-bg-color-overlay);
 }
 .doc-preview__body {
   padding: 24px;
 }
 .doc-code {
-  border-top: 1px solid var(--el-border-color-lighter); background: var(--el-fill-color-light);
-  padding: 16px 20px; overflow-x: auto;
-  pre { margin: 0; padding: 0; }
+  border-top: 1px solid var(--el-border-color-lighter);
+  background: var(--el-fill-color-light);
+  padding: 16px 20px;
+  overflow-x: auto;
+  pre {
+    margin: 0;
+    padding: 0;
+  }
   code {
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
-    font-size: 13px; line-height: 1.7; color: var(--el-text-color-regular); white-space: pre;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--el-text-color-regular);
+    white-space: pre;
   }
 }
 
@@ -419,15 +483,40 @@ const extraUsers = ref<(number | string)[]>([])
   color: var(--el-color-primary);
 }
 
-.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
-.doc-table { overflow-x: auto;
-  table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); white-space: nowrap; }
-  th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); }
-  td { color: var(--el-text-color-regular); }
+.doc-subtitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 20px 0 10px;
+}
+.doc-table {
+  overflow-x: auto;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+    white-space: nowrap;
+  }
+  th {
+    background: var(--el-fill-color-light);
+    font-weight: 600;
+    color: var(--el-text-color-primary);
+  }
+  td {
+    color: var(--el-text-color-regular);
+  }
   code {
-    background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px;
-    border-radius: 4px; font-size: 13px;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
   }
 }

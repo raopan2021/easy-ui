@@ -1,353 +1,6 @@
-<template>
-  <div class="component-doc">
-    <header class="doc-header">
-      <h1 class="doc-title">级联选择器 Cascader</h1>
-      <p class="doc-desc">通过多层级联菜单逐级选择，支持懒加载、多选、搜索过滤、手风琴模式等功能。</p>
-    </header>
-
-    <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
-      <p class="doc-section__desc">
-        通过 <code>options</code> 传入树形数据，每个节点包含 <code>value</code>、<code>label</code> 和可选的 <code>children</code>。
-      </p>
-      <div class="doc-preview">
-        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px;">
-          <div style="width: 300px;">
-            <XlyCascader v-model="val1" :options="areaOptions" placeholder="请选择地区" />
-          </div>
-          <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ JSON.stringify(val1) }}</span>
-        </div>
-      </div>
-      <XlyDocCode :code="`<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; placeholder=&quot;请选择地区&quot; />
-
-const options = [
-  {
-    label: '浙江省',
-    value: 'zhejiang',
-    children: [
-      { label: '杭州市', value: 'hangzhou', children: [
-        { label: '西湖区', value: 'xihu' },
-        { label: '余杭区', value: 'yuhang' },
-      ]},
-    ],
-  },
-]`" />
-    </section>
-
-    <section class="doc-section">
-      <h2 class="doc-section__title">可清除</h2>
-      <p class="doc-section__desc">设置 <code>clearable</code> 属性后，选中值右侧会出现清除图标。</p>
-      <div class="doc-preview">
-        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px;">
-          <div style="width: 300px;">
-            <XlyCascader v-model="val2" :options="areaOptions" placeholder="可清除" clearable />
-          </div>
-        </div>
-      </div>
-      <XlyDocCode :code='`<XlyCascader v-model="value" :options="options" clearable />`' />
-    </section>
-
-    <section class="doc-section">
-      <h2 class="doc-section__title">多选</h2>
-      <p class="doc-section__desc">设置 <code>multiple</code> 属性后，可选择多个路径，选中项以标签形式展示。</p>
-      <div class="doc-preview">
-        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px;">
-          <div style="width: 400px;">
-            <XlyCascader
-              v-model="val3"
-              :options="areaOptions"
-              placeholder="可多选"
-              multiple
-              :max-tag-count="2"
-              clearable
-            />
-          </div>
-          <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ JSON.stringify(val3) }}</span>
-        </div>
-      </div>
-      <XlyDocCode :code='`<XlyCascader v-model="value" :options="options" multiple :max-tag-count="2" />`' />
-    </section>
-
-    <section class="doc-section">
-      <h2 class="doc-section__title">返回值类型</h2>
-      <p class="doc-section__desc">
-        通过 <code>valueType</code> 属性可以设置多选时返回值的类型。支持 <code>'array'</code>（返回二维数组）和 <code>'string'</code>（返回路径字符串）两种模式。
-        <code>separator</code> 属性可以自定义字符串模式下多条路径间的分隔符，默认为 <code>','</code>。路径内部使用 <code>/</code> 分隔各级节点。
-        此功能也支持默认传入字符串值，组件会自动解析为二维数组进行渲染。
-      </p>
-      <div class="doc-preview">
-        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px;">
-          <div style="width: 400px;">
-            <XlyCascader
-              v-model="val10"
-              :options="areaOptions"
-              placeholder="返回二维数组（默认）"
-              multiple
-              value-type="array"
-              clearable
-            />
-          </div>
-          <span style="font-size: 13px; color: var(--el-text-color-secondary);">当前值（二维数组）：{{ JSON.stringify(val10) }}</span>
-
-          <div style="width: 400px;">
-            <XlyCascader
-              v-model="val11"
-              :options="areaOptions"
-              placeholder="返回字符串（逗号分隔）"
-              multiple
-              value-type="string"
-              clearable
-            />
-          </div>
-          <span style="font-size: 13px; color: var(--el-text-color-secondary);">当前值（字符串）：{{ val11 }}</span>
-
-          <div style="width: 400px;">
-            <XlyCascader
-              v-model="val12"
-              :options="areaOptions"
-              placeholder="自定义分隔符（分号）"
-              multiple
-              value-type="string"
-              separator=";"
-              clearable
-            />
-          </div>
-          <span style="font-size: 13px; color: var(--el-text-color-secondary);">当前值（分号分隔）：{{ val12 }}</span>
-        </div>
-      </div>
-      <XlyDocCode :code='`// 1. 返回二维数组（默认）
-<XlyCascader v-model="value" :options="options" multiple value-type="array" />
-// 输出: [["zhejiang", "hangzhou", "xihu"], ["jiangsu", "nanjing", "xuanwu"]]
-
-// 2. 返回字符串（逗号分隔多条路径，/ 分隔路径内节点）
-<XlyCascader v-model="value" :options="options" multiple value-type="string" />
-// 输出: "zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu"
-
-// 3. 自定义分隔符
-<XlyCascader v-model="value" :options="options" multiple value-type="string" separator=";" />
-// 输出: "zhejiang/hangzhou/xihu;jiangsu/nanjing/xuanwu"
-
-// 4. 支持默认传入字符串值，组件会自动解析
-const value = ref("zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu")
-// 组件会自动将其解析为 [["zhejiang", "hangzhou", "xihu"], ["jiangsu", "nanjing", "xuanwu"]] 进行渲染`' />
-    </section>
-
-    <section class="doc-section">
-      <h2 class="doc-section__title">可搜索</h2>
-      <p class="doc-section__desc">设置 <code>filterable</code> 属性后，可通过输入关键字快速筛选选项，搜索结果展示完整路径。</p>
-      <div class="doc-preview">
-        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px;">
-          <div style="width: 300px;">
-            <XlyCascader v-model="val4" :options="areaOptions" placeholder="搜索地区..." filterable />
-          </div>
-        </div>
-      </div>
-      <XlyDocCode :code='`<XlyCascader v-model="value" :options="options" filterable />`' />
-    </section>
-
-    <section class="doc-section">
-      <h2 class="doc-section__title">禁用选项 & 禁用状态</h2>
-      <p class="doc-section__desc">通过在选项中设置 <code>disabled: true</code> 来禁用单个选项，或通过 <code>disabled</code> 属性禁用整个选择器。</p>
-      <div class="doc-preview">
-        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px;">
-          <div style="width: 300px;">
-            <XlyCascader v-model="val5" :options="disabledOptions" placeholder="含禁用选项" />
-          </div>
-          <div style="width: 300px;">
-            <XlyCascader v-model="val5" :options="areaOptions" placeholder="整组禁用" disabled />
-          </div>
-        </div>
-      </div>
-      <XlyDocCode :code='`<XlyCascader v-model="value" :options="options" />
-<XlyCascader v-model="value" :options="options" disabled />`' />
-    </section>
-
-    <section class="doc-section">
-      <h2 class="doc-section__title">不同尺寸</h2>
-      <p class="doc-section__desc">通过 <code>size</code> 属性设置三种尺寸。</p>
-      <div class="doc-preview">
-        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px;">
-          <div style="width: 300px;">
-            <XlyCascader v-model="val6" :options="areaOptions" placeholder="大尺寸" size="large" />
-          </div>
-          <div style="width: 300px;">
-            <XlyCascader v-model="val6" :options="areaOptions" placeholder="默认尺寸" />
-          </div>
-          <div style="width: 300px;">
-            <XlyCascader v-model="val6" :options="areaOptions" placeholder="小尺寸" size="small" />
-          </div>
-        </div>
-      </div>
-      <XlyDocCode :code='`<XlyCascader v-model="value" :options="options" size="large" />
-<XlyCascader v-model="value" :options="options" />
-<XlyCascader v-model="value" :options="options" size="small" />`' />
-    </section>
-
-    <section class="doc-section">
-      <h2 class="doc-section__title">选择任意层级</h2>
-      <p class="doc-section__desc">默认只能选择末级节点，设置 <code>check-strictly</code> 后可选择任意层级节点，同时非叶子节点选中后仍会展开下级菜单。</p>
-      <div class="doc-preview">
-        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px;">
-          <div style="width: 300px;">
-            <XlyCascader v-model="val7" :options="areaOptions" placeholder="可选中任意层级" check-strictly clearable  filterable multiple/>
-          </div>
-          <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ JSON.stringify(val7) }}</span>
-        </div>
-      </div>
-      <XlyDocCode :code='`<XlyCascader v-model="value" :options="options" check-strictly clearable filterable multiple/>`' />
-    </section>
-
-    <section class="doc-section">
-      <h2 class="doc-section__title">自定义字段名</h2>
-      <p class="doc-section__desc">
-        当后端返回的字段名不是 <code>value</code> / <code>label</code> / <code>children</code> 时，可以通过 <code>valueKey</code>、<code>labelKey</code>、<code>childrenKey</code> 自定义映射。
-      </p>
-      <div class="doc-preview">
-        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px;">
-          <div style="width: 300px;">
-            <XlyCascader
-              v-model="val8"
-              :options="customFieldOptions"
-              value-key="id"
-              label-key="name"
-              children-key="subList"
-              placeholder="自定义字段名"
-              clearable
-            />
-          </div>
-          <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ JSON.stringify(val8) }}</span>
-        </div>
-      </div>
-      <XlyDocCode :code="`<XlyCascader
-  v-model=&quot;value&quot;
-  :options=&quot;options&quot;
-  value-key=&quot;id&quot;
-  label-key=&quot;name&quot;
-  children-key=&quot;subList&quot;
-/>
-
-const options = [
-  {
-    name: '电子产品',
-    id: 100,
-    subList: [
-      { name: '手机', id: 101, subList: [
-        { name: 'iPhone', id: 102 },
-        { name: '华为', id: 103 },
-      ]},
-    ],
-  },
-]`" />
-    </section>
-
-    <section class="doc-section">
-      <h2 class="doc-section__title">远程搜索</h2>
-      <p class="doc-section__desc">
-        设置 <code>remote</code> 和 <code>remote-method</code> 属性启用远程搜索。搜索关键字将通过 <code>remote-method</code> 回调传入，你可以在回调中发起请求并通过组件实例的 <code>remoteOptions</code> 更新搜索结果。
-      </p>
-      <div class="doc-preview">
-        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px;">
-          <div style="width: 300px;">
-            <XlyCascader
-              ref="remoteCascaderRef"
-              v-model="val9"
-              :options="[]"
-              placeholder="远程搜索地区..."
-              filterable
-              remote
-              :remote-method="remoteCascaderSearch"
-              clearable
-            />
-          </div>
-          <span style="font-size: 13px; color: var(--el-text-color-secondary);">选中值：{{ JSON.stringify(val9) }}</span>
-        </div>
-      </div>
-      <XlyDocCode :code='`<XlyCascader
-  ref="cascaderRef"
-  v-model="value"
-  :options="[]"
-  filterable
-  remote
-  :remote-method="handleRemoteSearch"
-  clearable
-/>
-
-// 在 remoteMethod 中发起远程请求并更新搜索结果
-function handleRemoteSearch(query: string) {
-  fetchOptions(query).then(options => {
-    // 将扁平化的远程结果转换为组件需要的格式
-    cascaderRef.value?.remoteOptions.push(...)
-  })
-}`' />
-    </section>
-
-    <section class="doc-section">
-      <h3 class="doc-subtitle">API</h3>
-
-      <h3 class="doc-subtitle">Props</h3>
-      <div class="doc-table">
-        <table>
-          <thead><tr><th>属性</th><th>说明</th><th>类型</th><th>默认值</th></tr></thead>
-          <tbody>
-            <tr><td><code>modelValue</code></td><td>绑定值，单选时为路径数组，多选时为路径数组的二维数组</td><td><code>(string|number)[] | (string|number)[][]</code></td><td><code>[]</code></td></tr>
-            <tr><td><code>options</code></td><td>选项数据（树形结构）</td><td><code>CascaderNode[]</code></td><td><code>[]</code></td></tr>
-            <tr><td><code>placeholder</code></td><td>占位文本</td><td><code>string</code></td><td><code>'请选择'</code></td></tr>
-            <tr><td><code>disabled</code></td><td>是否禁用</td><td><code>boolean</code></td><td><code>false</code></td></tr>
-            <tr><td><code>clearable</code></td><td>是否可清除</td><td><code>boolean</code></td><td><code>false</code></td></tr>
-            <tr><td><code>filterable</code></td><td>是否可搜索</td><td><code>boolean</code></td><td><code>false</code></td></tr>
-            <tr><td><code>multiple</code></td><td>是否多选</td><td><code>boolean</code></td><td><code>false</code></td></tr>
-            <tr><td><code>valueType</code></td><td>多选时返回值的类型，'array' 返回二维数组，'string' 返回路径字符串（路径内用 / 分隔）</td><td><code>'array' | 'string'</code></td><td><code>'array'</code></td></tr>
-            <tr><td><code>separator</code></td><td>多选且 valueType='string' 时多条路径间的分隔符，路径内使用 / 分隔</td><td><code>string</code></td><td><code>','</code></td></tr>
-            <tr><td><code>maxTagCount</code></td><td>多选时最多显示的标签数</td><td><code>number</code></td><td><code>3</code></td></tr>
-            <tr><td><code>size</code></td><td>尺寸</td><td><code>'large' | 'default' | 'small'</code></td><td><code>'default'</code></td></tr>
-            <tr><td><code>lazyLoad</code></td><td>懒加载回调函数</td><td><code>(node, callback) =&gt; void</code></td><td>—</td></tr>
-            <tr><td><code>expandTrigger</code></td><td>展开子菜单的触发方式</td><td><code>'click' | 'hover'</code></td><td><code>'click'</code></td></tr>
-            <tr><td><code>accordion</code></td><td>是否开启手风琴模式</td><td><code>boolean</code></td><td><code>false</code></td></tr>
-            <tr><td><code>checkStrictly</code></td><td>是否可以选择任意层级节点</td><td><code>boolean</code></td><td><code>false</code></td></tr>
-            <tr><td><code>valueKey</code></td><td>选项值对应的字段名</td><td><code>string</code></td><td><code>'value'</code></td></tr>
-            <tr><td><code>labelKey</code></td><td>选项标签对应的字段名</td><td><code>string</code></td><td><code>'label'</code></td></tr>
-            <tr><td><code>childrenKey</code></td><td>子节点字段名</td><td><code>string</code></td><td><code>'children'</code></td></tr>
-            <tr><td><code>remote</code></td><td>是否启用远程搜索</td><td><code>boolean</code></td><td><code>false</code></td></tr>
-            <tr><td><code>remoteMethod</code></td><td>远程搜索方法</td><td><code>(query: string) =&gt; void</code></td><td>—</td></tr>
-            <tr><td><code>loading</code></td><td>是否显示加载中状态</td><td><code>boolean</code></td><td><code>false</code></td></tr>
-            <tr><td><code>debounce</code></td><td>远程搜索防抖延迟（毫秒）</td><td><code>number</code></td><td><code>300</code></td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3 class="doc-subtitle">CascaderNode</h3>
-      <div class="doc-table">
-        <table>
-          <thead><tr><th>字段</th><th>说明</th><th>类型</th></tr></thead>
-          <tbody>
-            <tr><td><code>value</code></td><td>节点值（必填），可通过 <code>valueKey</code> 修改</td><td><code>string | number</code></td></tr>
-            <tr><td><code>label</code></td><td>节点显示文本（必填），可通过 <code>labelKey</code> 修改</td><td><code>string</code></td></tr>
-            <tr><td><code>children</code></td><td>子节点数组，可通过 <code>childrenKey</code> 修改</td><td><code>CascaderNode[]</code></td></tr>
-            <tr><td><code>disabled</code></td><td>是否禁用</td><td><code>boolean</code></td></tr>
-            <tr><td><code>leaf</code></td><td>是否为叶子节点（用于懒加载）</td><td><code>boolean</code></td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3 class="doc-subtitle">Events</h3>
-      <div class="doc-table">
-        <table>
-          <thead><tr><th>事件名</th><th>说明</th><th>参数</th></tr></thead>
-          <tbody>
-            <tr><td><code>update:modelValue</code></td><td>值变化时触发</td><td><code>(value)</code></td></tr>
-            <tr><td><code>change</code></td><td>值变化时触发</td><td><code>(value)</code></td></tr>
-            <tr><td><code>expand-change</code></td><td>展开子菜单时触发</td><td><code>(value: (string|number)[])</code></td></tr>
-            <tr><td><code>search</code></td><td>远程搜索时触发</td><td><code>(query: string)</code></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-  </div>
-</template>
-
 <script setup lang="ts">
+import { XlyCascader } from 'easy-ui'
 import { ref } from 'vue'
-import XlyCascader from '@/components/xly-cascader/index.vue'
 
 const val1 = ref<(string | number)[]>([])
 const val2 = ref<(string | number)[]>([])
@@ -366,11 +19,13 @@ const val12 = ref<string>()
 const remoteCascaderRef = ref<InstanceType<typeof XlyCascader> | null>(null)
 
 function remoteCascaderSearch(query: string) {
-  if (!remoteCascaderRef.value) return
+  if (!remoteCascaderRef.value)
+    return
   // 模拟远程搜索：将扁平化的搜索结果推入 remoteOptions
   const cascader = remoteCascaderRef.value
   cascader.remoteOptions = []
-  if (!query) return
+  if (!query)
+    return
 
   // 从本地数据模拟搜索结果
   const q = query.toLowerCase()
@@ -383,11 +38,16 @@ function remoteCascaderSearch(query: string) {
         results.push({
           value: currentPath[0],
           label: currentLabels.join(' / '),
-          children: currentPath.length > 1 ? [{
-            value: currentPath[1],
-            label: currentLabels[1],
-            children: currentPath.length > 2 ? [{ value: currentPath[2], label: currentLabels[2] }] : [],
-          }] : [],
+          children:
+            currentPath.length > 1
+              ? [
+                  {
+                    value: currentPath[1],
+                    label: currentLabels[1],
+                    children: currentPath.length > 2 ? [{ value: currentPath[2], label: currentLabels[2] }] : [],
+                  },
+                ]
+              : [],
         })
       }
       if (node.children) {
@@ -544,28 +204,702 @@ const customFieldOptions = [
 ]
 </script>
 
+<template>
+  <div class="component-doc">
+    <header class="doc-header">
+      <h1 class="doc-title">
+        级联选择器 Cascader
+      </h1>
+      <p class="doc-desc">
+        通过多层级联菜单逐级选择，支持懒加载、多选、搜索过滤、手风琴模式等功能。
+      </p>
+    </header>
+
+    <section class="doc-section">
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>options</code> 传入树形数据，每个节点包含 <code>value</code>、<code>label</code> 和可选的
+        <code>children</code>。
+      </p>
+      <div class="doc-preview">
+        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
+          <div style="width: 300px">
+            <XlyCascader v-model="val1" :options="areaOptions" placeholder="请选择地区" />
+          </div>
+          <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ JSON.stringify(val1) }}</span>
+        </div>
+      </div>
+      <XlyDocCode
+        code="<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; placeholder=&quot;请选择地区&quot; />
+
+const options = [
+  {
+    label: '浙江省',
+    value: 'zhejiang',
+    children: [
+      { label: '杭州市', value: 'hangzhou', children: [
+        { label: '西湖区', value: 'xihu' },
+        { label: '余杭区', value: 'yuhang' },
+      ]},
+    ],
+  },
+]"
+      />
+    </section>
+
+    <section class="doc-section">
+      <h2 class="doc-section__title">
+        可清除
+      </h2>
+      <p class="doc-section__desc">
+        设置 <code>clearable</code> 属性后，选中值右侧会出现清除图标。
+      </p>
+      <div class="doc-preview">
+        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
+          <div style="width: 300px">
+            <XlyCascader v-model="val2" :options="areaOptions" placeholder="可清除" clearable />
+          </div>
+        </div>
+      </div>
+      <XlyDocCode code="<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; clearable />" />
+    </section>
+
+    <section class="doc-section">
+      <h2 class="doc-section__title">
+        多选
+      </h2>
+      <p class="doc-section__desc">
+        设置 <code>multiple</code> 属性后，可选择多个路径，选中项以标签形式展示。
+      </p>
+      <div class="doc-preview">
+        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
+          <div style="width: 400px">
+            <XlyCascader
+              v-model="val3"
+              :options="areaOptions"
+              placeholder="可多选"
+              multiple
+              :max-tag-count="2"
+              clearable
+            />
+          </div>
+          <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ JSON.stringify(val3) }}</span>
+        </div>
+      </div>
+      <XlyDocCode
+        code="<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; multiple :max-tag-count=&quot;2&quot; />"
+      />
+    </section>
+
+    <section class="doc-section">
+      <h2 class="doc-section__title">
+        返回值类型
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>valueType</code> 属性可以设置多选时返回值的类型。支持 <code>'array'</code>（返回二维数组）和
+        <code>'string'</code>（返回路径字符串）两种模式。
+        <code>separator</code> 属性可以自定义字符串模式下多条路径间的分隔符，默认为 <code>','</code>。路径内部使用
+        <code>/</code> 分隔各级节点。 此功能也支持默认传入字符串值，组件会自动解析为二维数组进行渲染。
+      </p>
+      <div class="doc-preview">
+        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
+          <div style="width: 400px">
+            <XlyCascader
+              v-model="val10"
+              :options="areaOptions"
+              placeholder="返回二维数组（默认）"
+              multiple
+              value-type="array"
+              clearable
+            />
+          </div>
+          <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值（二维数组）：{{ JSON.stringify(val10) }}</span>
+
+          <div style="width: 400px">
+            <XlyCascader
+              v-model="val11"
+              :options="areaOptions"
+              placeholder="返回字符串（逗号分隔）"
+              multiple
+              value-type="string"
+              clearable
+            />
+          </div>
+          <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值（字符串）：{{ val11 }}</span>
+
+          <div style="width: 400px">
+            <XlyCascader
+              v-model="val12"
+              :options="areaOptions"
+              placeholder="自定义分隔符（分号）"
+              multiple
+              value-type="string"
+              separator=";"
+              clearable
+            />
+          </div>
+          <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值（分号分隔）：{{ val12 }}</span>
+        </div>
+      </div>
+      <XlyDocCode
+        code="// 1. 返回二维数组（默认）
+<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; multiple value-type=&quot;array&quot; />
+// 输出: [[&quot;zhejiang&quot;, &quot;hangzhou&quot;, &quot;xihu&quot;], [&quot;jiangsu&quot;, &quot;nanjing&quot;, &quot;xuanwu&quot;]]
+
+// 2. 返回字符串（逗号分隔多条路径，/ 分隔路径内节点）
+<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; multiple value-type=&quot;string&quot; />
+// 输出: &quot;zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu&quot;
+
+// 3. 自定义分隔符
+<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; multiple value-type=&quot;string&quot; separator=&quot;;&quot; />
+// 输出: &quot;zhejiang/hangzhou/xihu;jiangsu/nanjing/xuanwu&quot;
+
+// 4. 支持默认传入字符串值，组件会自动解析
+const value = ref(&quot;zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu&quot;)
+// 组件会自动将其解析为 [[&quot;zhejiang&quot;, &quot;hangzhou&quot;, &quot;xihu&quot;], [&quot;jiangsu&quot;, &quot;nanjing&quot;, &quot;xuanwu&quot;]] 进行渲染"
+      />
+    </section>
+
+    <section class="doc-section">
+      <h2 class="doc-section__title">
+        可搜索
+      </h2>
+      <p class="doc-section__desc">
+        设置 <code>filterable</code> 属性后，可通过输入关键字快速筛选选项，搜索结果展示完整路径。
+      </p>
+      <div class="doc-preview">
+        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
+          <div style="width: 300px">
+            <XlyCascader v-model="val4" :options="areaOptions" placeholder="搜索地区..." filterable />
+          </div>
+        </div>
+      </div>
+      <XlyDocCode code="<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; filterable />" />
+    </section>
+
+    <section class="doc-section">
+      <h2 class="doc-section__title">
+        禁用选项 & 禁用状态
+      </h2>
+      <p class="doc-section__desc">
+        通过在选项中设置 <code>disabled: true</code> 来禁用单个选项，或通过 <code>disabled</code> 属性禁用整个选择器。
+      </p>
+      <div class="doc-preview">
+        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
+          <div style="width: 300px">
+            <XlyCascader v-model="val5" :options="disabledOptions" placeholder="含禁用选项" />
+          </div>
+          <div style="width: 300px">
+            <XlyCascader v-model="val5" :options="areaOptions" placeholder="整组禁用" disabled />
+          </div>
+        </div>
+      </div>
+      <XlyDocCode
+        code="<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; />
+<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; disabled />"
+      />
+    </section>
+
+    <section class="doc-section">
+      <h2 class="doc-section__title">
+        不同尺寸
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>size</code> 属性设置三种尺寸。
+      </p>
+      <div class="doc-preview">
+        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
+          <div style="width: 300px">
+            <XlyCascader v-model="val6" :options="areaOptions" placeholder="大尺寸" size="large" />
+          </div>
+          <div style="width: 300px">
+            <XlyCascader v-model="val6" :options="areaOptions" placeholder="默认尺寸" />
+          </div>
+          <div style="width: 300px">
+            <XlyCascader v-model="val6" :options="areaOptions" placeholder="小尺寸" size="small" />
+          </div>
+        </div>
+      </div>
+      <XlyDocCode
+        code="<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; size=&quot;large&quot; />
+<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; />
+<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; size=&quot;small&quot; />"
+      />
+    </section>
+
+    <section class="doc-section">
+      <h2 class="doc-section__title">
+        选择任意层级
+      </h2>
+      <p class="doc-section__desc">
+        默认只能选择末级节点，设置
+        <code>check-strictly</code> 后可选择任意层级节点，同时非叶子节点选中后仍会展开下级菜单。
+      </p>
+      <div class="doc-preview">
+        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
+          <div style="width: 300px">
+            <XlyCascader
+              v-model="val7"
+              :options="areaOptions"
+              placeholder="可选中任意层级"
+              check-strictly
+              clearable
+              filterable
+              multiple
+            />
+          </div>
+          <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ JSON.stringify(val7) }}</span>
+        </div>
+      </div>
+      <XlyDocCode
+        code="<XlyCascader v-model=&quot;value&quot; :options=&quot;options&quot; check-strictly clearable filterable multiple/>"
+      />
+    </section>
+
+    <section class="doc-section">
+      <h2 class="doc-section__title">
+        自定义字段名
+      </h2>
+      <p class="doc-section__desc">
+        当后端返回的字段名不是 <code>value</code> / <code>label</code> / <code>children</code> 时，可以通过
+        <code>valueKey</code>、<code>labelKey</code>、<code>childrenKey</code> 自定义映射。
+      </p>
+      <div class="doc-preview">
+        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
+          <div style="width: 300px">
+            <XlyCascader
+              v-model="val8"
+              :options="customFieldOptions"
+              value-key="id"
+              label-key="name"
+              children-key="subList"
+              placeholder="自定义字段名"
+              clearable
+            />
+          </div>
+          <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ JSON.stringify(val8) }}</span>
+        </div>
+      </div>
+      <XlyDocCode
+        code="<XlyCascader
+  v-model=&quot;value&quot;
+  :options=&quot;options&quot;
+  value-key=&quot;id&quot;
+  label-key=&quot;name&quot;
+  children-key=&quot;subList&quot;
+/>
+
+const options = [
+  {
+    name: '电子产品',
+    id: 100,
+    subList: [
+      { name: '手机', id: 101, subList: [
+        { name: 'iPhone', id: 102 },
+        { name: '华为', id: 103 },
+      ]},
+    ],
+  },
+]"
+      />
+    </section>
+
+    <section class="doc-section">
+      <h2 class="doc-section__title">
+        远程搜索
+      </h2>
+      <p class="doc-section__desc">
+        设置 <code>remote</code> 和 <code>remote-method</code> 属性启用远程搜索。搜索关键字将通过
+        <code>remote-method</code> 回调传入，你可以在回调中发起请求并通过组件实例的
+        <code>remoteOptions</code> 更新搜索结果。
+      </p>
+      <div class="doc-preview">
+        <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
+          <div style="width: 300px">
+            <XlyCascader
+              ref="remoteCascaderRef"
+              v-model="val9"
+              :options="[]"
+              placeholder="远程搜索地区..."
+              filterable
+              remote
+              :remote-method="remoteCascaderSearch"
+              clearable
+            />
+          </div>
+          <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ JSON.stringify(val9) }}</span>
+        </div>
+      </div>
+      <XlyDocCode
+        code="<XlyCascader
+  ref=&quot;cascaderRef&quot;
+  v-model=&quot;value&quot;
+  :options=&quot;[]&quot;
+  filterable
+  remote
+  :remote-method=&quot;handleRemoteSearch&quot;
+  clearable
+/>
+
+// 在 remoteMethod 中发起远程请求并更新搜索结果
+function handleRemoteSearch(query: string) {
+  fetchOptions(query).then(options => {
+    // 将扁平化的远程结果转换为组件需要的格式
+    cascaderRef.value?.remoteOptions.push(...)
+  })
+}"
+      />
+    </section>
+
+    <section class="doc-section">
+      <h3 class="doc-subtitle">
+        API
+      </h3>
+
+      <h3 class="doc-subtitle">
+        Props
+      </h3>
+      <div class="doc-table">
+        <table>
+          <thead>
+            <tr>
+              <th>属性</th>
+              <th>说明</th>
+              <th>类型</th>
+              <th>默认值</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>modelValue</code></td>
+              <td>绑定值，单选时为路径数组，多选时为路径数组的二维数组</td>
+              <td><code>(string|number)[] | (string|number)[][]</code></td>
+              <td><code>[]</code></td>
+            </tr>
+            <tr>
+              <td><code>options</code></td>
+              <td>选项数据（树形结构）</td>
+              <td><code>CascaderNode[]</code></td>
+              <td><code>[]</code></td>
+            </tr>
+            <tr>
+              <td><code>placeholder</code></td>
+              <td>占位文本</td>
+              <td><code>string</code></td>
+              <td><code>'请选择'</code></td>
+            </tr>
+            <tr>
+              <td><code>disabled</code></td>
+              <td>是否禁用</td>
+              <td><code>boolean</code></td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>clearable</code></td>
+              <td>是否可清除</td>
+              <td><code>boolean</code></td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>filterable</code></td>
+              <td>是否可搜索</td>
+              <td><code>boolean</code></td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>multiple</code></td>
+              <td>是否多选</td>
+              <td><code>boolean</code></td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>valueType</code></td>
+              <td>多选时返回值的类型，'array' 返回二维数组，'string' 返回路径字符串（路径内用 / 分隔）</td>
+              <td><code>'array' | 'string'</code></td>
+              <td><code>'array'</code></td>
+            </tr>
+            <tr>
+              <td><code>separator</code></td>
+              <td>多选且 valueType='string' 时多条路径间的分隔符，路径内使用 / 分隔</td>
+              <td><code>string</code></td>
+              <td><code>','</code></td>
+            </tr>
+            <tr>
+              <td><code>maxTagCount</code></td>
+              <td>多选时最多显示的标签数</td>
+              <td><code>number</code></td>
+              <td><code>3</code></td>
+            </tr>
+            <tr>
+              <td><code>size</code></td>
+              <td>尺寸</td>
+              <td><code>'large' | 'default' | 'small'</code></td>
+              <td><code>'default'</code></td>
+            </tr>
+            <tr>
+              <td><code>lazyLoad</code></td>
+              <td>懒加载回调函数</td>
+              <td><code>(node, callback) =&gt; void</code></td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><code>expandTrigger</code></td>
+              <td>展开子菜单的触发方式</td>
+              <td><code>'click' | 'hover'</code></td>
+              <td><code>'click'</code></td>
+            </tr>
+            <tr>
+              <td><code>accordion</code></td>
+              <td>是否开启手风琴模式</td>
+              <td><code>boolean</code></td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>checkStrictly</code></td>
+              <td>是否可以选择任意层级节点</td>
+              <td><code>boolean</code></td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>valueKey</code></td>
+              <td>选项值对应的字段名</td>
+              <td><code>string</code></td>
+              <td><code>'value'</code></td>
+            </tr>
+            <tr>
+              <td><code>labelKey</code></td>
+              <td>选项标签对应的字段名</td>
+              <td><code>string</code></td>
+              <td><code>'label'</code></td>
+            </tr>
+            <tr>
+              <td><code>childrenKey</code></td>
+              <td>子节点字段名</td>
+              <td><code>string</code></td>
+              <td><code>'children'</code></td>
+            </tr>
+            <tr>
+              <td><code>remote</code></td>
+              <td>是否启用远程搜索</td>
+              <td><code>boolean</code></td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>remoteMethod</code></td>
+              <td>远程搜索方法</td>
+              <td><code>(query: string) =&gt; void</code></td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><code>loading</code></td>
+              <td>是否显示加载中状态</td>
+              <td><code>boolean</code></td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>debounce</code></td>
+              <td>远程搜索防抖延迟（毫秒）</td>
+              <td><code>number</code></td>
+              <td><code>300</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="doc-subtitle">
+        CascaderNode
+      </h3>
+      <div class="doc-table">
+        <table>
+          <thead>
+            <tr>
+              <th>字段</th>
+              <th>说明</th>
+              <th>类型</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>value</code></td>
+              <td>节点值（必填），可通过 <code>valueKey</code> 修改</td>
+              <td><code>string | number</code></td>
+            </tr>
+            <tr>
+              <td><code>label</code></td>
+              <td>节点显示文本（必填），可通过 <code>labelKey</code> 修改</td>
+              <td><code>string</code></td>
+            </tr>
+            <tr>
+              <td><code>children</code></td>
+              <td>子节点数组，可通过 <code>childrenKey</code> 修改</td>
+              <td><code>CascaderNode[]</code></td>
+            </tr>
+            <tr>
+              <td><code>disabled</code></td>
+              <td>是否禁用</td>
+              <td><code>boolean</code></td>
+            </tr>
+            <tr>
+              <td><code>leaf</code></td>
+              <td>是否为叶子节点（用于懒加载）</td>
+              <td><code>boolean</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="doc-subtitle">
+        Events
+      </h3>
+      <div class="doc-table">
+        <table>
+          <thead>
+            <tr>
+              <th>事件名</th>
+              <th>说明</th>
+              <th>参数</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>update:modelValue</code></td>
+              <td>值变化时触发</td>
+              <td><code>(value)</code></td>
+            </tr>
+            <tr>
+              <td><code>change</code></td>
+              <td>值变化时触发</td>
+              <td><code>(value)</code></td>
+            </tr>
+            <tr>
+              <td><code>expand-change</code></td>
+              <td>展开子菜单时触发</td>
+              <td><code>(value: (string|number)[])</code></td>
+            </tr>
+            <tr>
+              <td><code>search</code></td>
+              <td>远程搜索时触发</td>
+              <td><code>(query: string)</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</template>
+
 <style scoped lang="scss">
-.component-doc { padding: 8px 0 40px; }
-.doc-header { margin-bottom: 36px; }
-.doc-title { font-size: 26px; font-weight: 700; color: var(--el-text-color-primary); margin: 0 0 8px; letter-spacing: -0.3px; }
-.doc-desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0; line-height: 1.6; }
-.doc-section { margin-bottom: 32px; }
-.doc-section__title { font-size: 18px; font-weight: 600; color: var(--el-text-color-primary); margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--el-border-color-lighter); }
-.doc-section__desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 16px; line-height: 1.6;
-  code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; }
+.component-doc {
+  padding: 8px 0 40px;
 }
-.doc-preview { border: 1px solid var(--el-border-color-lighter); border-radius: 12px; overflow: hidden; background: var(--el-bg-color-overlay); }
-.doc-preview__body { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 24px; }
-.doc-code { border-top: 1px solid var(--el-border-color-lighter); background: var(--el-fill-color-light); padding: 16px 20px; overflow-x: auto;
-  pre { margin: 0; padding: 0; }
-  code { font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 13px; line-height: 1.7; color: var(--el-text-color-regular); white-space: pre; }
+.doc-header {
+  margin-bottom: 36px;
 }
-.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
-.doc-table { overflow-x: auto;
-  table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); white-space: nowrap; }
-  th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); }
-  td { color: var(--el-text-color-regular); }
-  code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; }
+.doc-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  letter-spacing: -0.3px;
+}
+.doc-desc {
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+.doc-section {
+  margin-bottom: 32px;
+}
+.doc-section__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--el-border-color-lighter);
+}
+.doc-section__desc {
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0 0 16px;
+  line-height: 1.6;
+  code {
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+  }
+}
+.doc-preview {
+  border: 1px solid var(--el-border-color-lighter);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--el-bg-color-overlay);
+}
+.doc-preview__body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
+}
+.doc-code {
+  border-top: 1px solid var(--el-border-color-lighter);
+  background: var(--el-fill-color-light);
+  padding: 16px 20px;
+  overflow-x: auto;
+  pre {
+    margin: 0;
+    padding: 0;
+  }
+  code {
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--el-text-color-regular);
+    white-space: pre;
+  }
+}
+.doc-subtitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 20px 0 10px;
+}
+.doc-table {
+  overflow-x: auto;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+    white-space: nowrap;
+  }
+  th {
+    background: var(--el-fill-color-light);
+    font-weight: 600;
+    color: var(--el-text-color-primary);
+  }
+  td {
+    color: var(--el-text-color-regular);
+  }
+  code {
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+  }
 }
 </style>

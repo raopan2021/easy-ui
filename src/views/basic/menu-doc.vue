@@ -1,294 +1,6 @@
-<template>
-  <div class="menu-doc">
-    <!-- 页面标题 -->
-    <div class="menu-doc__header">
-      <h1>菜单使用指南</h1>
-      <p class="subtitle">了解如何配置菜单、实现权限控制、以及切换远程数据源</p>
-    </div>
-
-    <!-- 目录导航 -->
-    <div class="menu-doc__toc">
-      <div
-        v-for="section in sections"
-        :key="section.id"
-        class="menu-doc__toc-item"
-        :class="{ active: activeSection === section.id }"
-        @click="scrollToSection(section.id)"
-      >
-        {{ section.title }}
-      </div>
-    </div>
-
-    <!-- 内容区域 -->
-    <div class="menu-doc__content">
-      <!-- 第一部分：菜单数据结构 -->
-      <section id="structure" class="menu-doc__section">
-        <h2>菜单数据结构</h2>
-        <p>菜单配置文件位于 <code>src/data/menu.json</code>，支持最多三级的嵌套结构：</p>
-
-        <div class="code-block">
-          <div class="code-block__header">
-            <span class="code-block__lang">JSON</span>
-            <button class="code-block__copy" @click="copyCode(structureExample)">复制</button>
-          </div>
-          <pre><code>{{ structureExample }}</code></pre>
-        </div>
-
-        <div class="field-table">
-          <h4>字段说明</h4>
-          <table>
-            <thead>
-              <tr>
-                <th>字段</th>
-                <th>类型</th>
-                <th>必填</th>
-                <th>说明</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>id</code></td>
-                <td>string</td>
-                <td>是</td>
-                <td>唯一标识符，建议使用数字或点分格式（如 "1", "2-1"）</td>
-              </tr>
-              <tr>
-                <td><code>name</code></td>
-                <td>string</td>
-                <td>是</td>
-                <td>菜单显示名称，支持中英文</td>
-              </tr>
-              <tr>
-                <td><code>key</code></td>
-                <td>string</td>
-                <td>是</td>
-                <td>菜单标识，用于权限控制和路由命名</td>
-              </tr>
-              <tr>
-                <td><code>icon</code></td>
-                <td>string</td>
-                <td>否</td>
-                <td>图标名称，对应 Element Plus 图标库（如 "HomeFilled", "Grid"）</td>
-              </tr>
-              <tr>
-                <td><code>path</code></td>
-                <td>string</td>
-                <td>否</td>
-                <td>路由路径，有此字段表示可点击跳转</td>
-              </tr>
-              <tr>
-                <td><code>component</code></td>
-                <td>string</td>
-                <td>否</td>
-                <td>视图组件路径，相对于 <code>src/views/</code>（如 "home/home"）</td>
-              </tr>
-              <tr>
-                <td><code>children</code></td>
-                <td>array</td>
-                <td>否</td>
-                <td>子菜单数组，最多支持三级嵌套</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- 第二部分：本地菜单配置 -->
-      <section id="local" class="menu-doc__section">
-        <h2>本地菜单配置</h2>
-        <p>默认使用本地 JSON 文件配置菜单，文件位于 <code>src/data/menu.json</code>。</p>
-
-        <h4>优点</h4>
-        <ul class="feature-list">
-          <li>🚀 加载速度快，无需网络请求</li>
-          <li>🔧 开发调试方便，修改立即生效</li>
-          <li>📦 打包后独立运行，无后端依赖</li>
-        </ul>
-
-        <h4>适用场景</h4>
-        <ul class="feature-list">
-          <li>菜单结构相对稳定的小型项目</li>
-          <li>追求首屏加载速度的后台管理系统</li>
-          <li>原型开发阶段快速迭代</li>
-        </ul>
-      </section>
-
-      <!-- 第三部分：远程菜单配置 -->
-      <section id="remote" class="menu-doc__section">
-        <h2>远程菜单配置</h2>
-        <p>实际项目中，菜单通常由后端接口返回，便于动态控制用户可见菜单和权限。</p>
-
-        <h4>后端接口规范</h4>
-        <p>后端需返回与本地 JSON 相同结构的菜单数据：</p>
-
-        <div class="code-block">
-          <div class="code-block__header">
-            <span class="code-block__lang">API Response</span>
-            <button class="code-block__copy" @click="copyCode(apiExample)">复制</button>
-          </div>
-          <pre><code>{{ apiExample }}</code></pre>
-        </div>
-
-        <h4>切换到远程模式</h4>
-        <p>修改 <code>src/utils/menu.ts</code> 中的默认配置：</p>
-
-        <div class="code-block">
-          <div class="code-block__header">
-            <span class="code-block__lang">TypeScript</span>
-            <button class="code-block__copy" @click="copyCode(remoteConfigExample)">复制</button>
-          </div>
-          <pre><code>{{ remoteConfigExample }}</code></pre>
-        </div>
-
-        <div class="tip tip--warning">
-          <span class="tip__icon">⚠️</span>
-          <div class="tip__content">
-            <strong>注意：</strong> 远程菜单模式下，组件路径需要确保后端返回的 component 字段与 <code>src/views/</code> 下的文件路径一致。
-          </div>
-        </div>
-      </section>
-
-      <!-- 第四部分：菜单工具类 -->
-      <section id="utils" class="menu-doc__section">
-        <h2>菜单工具类</h2>
-        <p>项目提供了统一的菜单工具类 <code>src/utils/menu.ts</code>，所有菜单组件都应使用它获取菜单数据。</p>
-
-        <h4>核心 API</h4>
-        <div class="api-list">
-          <div class="api-item">
-            <code class="api-item__name">getMenuData(source, apiUrl, forceRefresh)</code>
-            <p class="api-item__desc">获取菜单数据，支持本地/远程两种模式</p>
-          </div>
-          <div class="api-item">
-            <code class="api-item__name">findMenuByPath(data, path)</code>
-            <p class="api-item__desc">根据路径查找菜单项</p>
-          </div>
-          <div class="api-item">
-            <code class="api-item__name">filterMenuByPermissions(data, permissions)</code>
-            <p class="api-item__desc">根据用户权限过滤菜单</p>
-          </div>
-          <div class="api-item">
-            <code class="api-item__name">resolveComponent(component)</code>
-            <p class="api-item__desc">解析组件路径为动态导入函数</p>
-          </div>
-        </div>
-
-        <h4>使用示例</h4>
-
-        <div class="code-block">
-          <div class="code-block__header">
-            <span class="code-block__lang">TypeScript</span>
-            <button class="code-block__copy" @click="copyCode(utilsExample)">复制</button>
-          </div>
-          <pre><code>{{ utilsExample }}</code></pre>
-        </div>
-      </section>
-
-      <!-- 第五部分：菜单权限控制 -->
-      <section id="permission" class="menu-doc__section">
-        <h2>菜单权限控制</h2>
-        <p>菜单权限控制通常分为两个层面：路由权限 和 菜单显示权限。</p>
-
-        <h4>1. 路由权限控制</h4>
-        <p>在路由守卫中校验用户是否有权限访问该路由：</p>
-
-        <div class="code-block">
-          <div class="code-block__header">
-            <span class="code-block__lang">TypeScript</span>
-            <button class="code-block__copy" @click="copyCode(routerGuardExample)">复制</button>
-          </div>
-          <pre><code>{{ routerGuardExample }}</code></pre>
-        </div>
-
-        <h4>2. 菜单显示权限</h4>
-        <p>根据用户权限过滤显示的菜单项：</p>
-
-        <div class="code-block">
-          <div class="code-block__header">
-            <span class="code-block__lang">TypeScript</span>
-            <button class="code-block__copy" @click="copyCode(filterMenuExample)">复制</button>
-          </div>
-          <pre><code>{{ filterMenuExample }}</code></pre>
-        </div>
-      </section>
-
-      <!-- 第六部分：菜单持久化 -->
-      <section id="persistence" class="menu-doc__section">
-        <h2>菜单持久化</h2>
-        <p>在实际业务中，用户的菜单配置、展开状态等可以通过以下方式进行持久化：</p>
-
-        <h4>1. 本地存储（LocalStorage）</h4>
-        <p>适用于保存用户偏好设置，如菜单展开状态：</p>
-
-        <div class="code-block">
-          <div class="code-block__header">
-            <span class="code-block__lang">TypeScript</span>
-            <button class="code-block__copy" @click="copyCode(localStorageExample)">复制</button>
-          </div>
-          <pre><code>{{ localStorageExample }}</code></pre>
-        </div>
-
-        <h4>2. 服务端存储</h4>
-        <p>适用于需要跨设备同步的用户配置：</p>
-
-        <div class="code-block">
-          <div class="code-block__header">
-            <span class="code-block__lang">TypeScript</span>
-            <button class="code-block__copy" @click="copyCode(serverStorageExample)">复制</button>
-          </div>
-          <pre><code>{{ serverStorageExample }}</code></pre>
-        </div>
-
-        <h4>3. 混合模式（推荐）</h4>
-        <p>首次加载从服务端获取，用户操作后保存到本地，下次优先读取本地：</p>
-
-        <div class="code-block">
-          <div class="code-block__header">
-            <span class="code-block__lang">TypeScript</span>
-            <button class="code-block__copy" @click="copyCode(hybridExample)">复制</button>
-          </div>
-          <pre><code>{{ hybridExample }}</code></pre>
-        </div>
-      </section>
-
-      <!-- 第七部分：常见问题 -->
-      <section id="faq" class="menu-doc__section">
-        <h2>常见问题</h2>
-
-        <div class="faq-list">
-          <div class="faq-item">
-            <h4>Q: 菜单项不显示图标怎么办？</h4>
-            <p>A: 确保 icon 字段的值是 Element Plus 图标库中存在的图标名称，格式为首字母大写的驼峰式，如 "HomeFilled" 而不是 "home-filled"。</p>
-          </div>
-
-          <div class="faq-item">
-            <h4>Q: 如何添加新的顶级菜单？</h4>
-            <p>A: 在 menu.json 中添加新的对象即可，顶级菜单不需要 path 字段。菜单会自动按照数组顺序显示。</p>
-          </div>
-
-          <div class="faq-item">
-            <h4>Q: 如何实现点击菜单不跳转，只展开子菜单？</h4>
-            <p>A: 只需要在该菜单项中不设置 path 和 component 字段，只设置 children 即可。</p>
-          </div>
-
-          <div class="faq-item">
-            <h4>Q: 远程菜单加载失败怎么处理？</h4>
-            <p>A: 工具类会自动降级使用缓存数据（如果有）。建议在 localStorage 中预存一份默认菜单作为兜底方案。</p>
-          </div>
-
-          <div class="faq-item">
-            <h4>Q: 如何实现动态路由？</h4>
-            <p>A: 使用路由守卫 + 远程菜单方案，在用户登录后获取权限菜单，动态注册路由后再跳转。</p>
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
+import { ref } from 'vue'
 
 const activeSection = ref('structure')
 
@@ -453,11 +165,332 @@ async function copyCode(code: string) {
   try {
     await navigator.clipboard.writeText(code)
     ElMessage.success('代码已复制到剪贴板')
-  } catch {
+  }
+  catch {
     ElMessage.error('复制失败，请手动复制')
   }
 }
 </script>
+
+<template>
+  <div class="menu-doc">
+    <!-- 页面标题 -->
+    <div class="menu-doc__header">
+      <h1>菜单使用指南</h1>
+      <p class="subtitle">
+        了解如何配置菜单、实现权限控制、以及切换远程数据源
+      </p>
+    </div>
+
+    <!-- 目录导航 -->
+    <div class="menu-doc__toc">
+      <div
+        v-for="section in sections"
+        :key="section.id"
+        class="menu-doc__toc-item"
+        :class="{ active: activeSection === section.id }"
+        @click="scrollToSection(section.id)"
+      >
+        {{ section.title }}
+      </div>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="menu-doc__content">
+      <!-- 第一部分：菜单数据结构 -->
+      <section id="structure" class="menu-doc__section">
+        <h2>菜单数据结构</h2>
+        <p>菜单配置文件位于 <code>src/data/menu.json</code>，支持最多三级的嵌套结构：</p>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">JSON</span>
+            <button class="code-block__copy" @click="copyCode(structureExample)">
+              复制
+            </button>
+          </div>
+          <pre><code>{{ structureExample }}</code></pre>
+        </div>
+
+        <div class="field-table">
+          <h4>字段说明</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>字段</th>
+                <th>类型</th>
+                <th>必填</th>
+                <th>说明</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>id</code></td>
+                <td>string</td>
+                <td>是</td>
+                <td>唯一标识符，建议使用数字或点分格式（如 "1", "2-1"）</td>
+              </tr>
+              <tr>
+                <td><code>name</code></td>
+                <td>string</td>
+                <td>是</td>
+                <td>菜单显示名称，支持中英文</td>
+              </tr>
+              <tr>
+                <td><code>key</code></td>
+                <td>string</td>
+                <td>是</td>
+                <td>菜单标识，用于权限控制和路由命名</td>
+              </tr>
+              <tr>
+                <td><code>icon</code></td>
+                <td>string</td>
+                <td>否</td>
+                <td>图标名称，对应 Element Plus 图标库（如 "HomeFilled", "Grid"）</td>
+              </tr>
+              <tr>
+                <td><code>path</code></td>
+                <td>string</td>
+                <td>否</td>
+                <td>路由路径，有此字段表示可点击跳转</td>
+              </tr>
+              <tr>
+                <td><code>component</code></td>
+                <td>string</td>
+                <td>否</td>
+                <td>视图组件路径，相对于 <code>src/views/</code>（如 "home/home"）</td>
+              </tr>
+              <tr>
+                <td><code>children</code></td>
+                <td>array</td>
+                <td>否</td>
+                <td>子菜单数组，最多支持三级嵌套</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 第二部分：本地菜单配置 -->
+      <section id="local" class="menu-doc__section">
+        <h2>本地菜单配置</h2>
+        <p>默认使用本地 JSON 文件配置菜单，文件位于 <code>src/data/menu.json</code>。</p>
+
+        <h4>优点</h4>
+        <ul class="feature-list">
+          <li>🚀 加载速度快，无需网络请求</li>
+          <li>🔧 开发调试方便，修改立即生效</li>
+          <li>📦 打包后独立运行，无后端依赖</li>
+        </ul>
+
+        <h4>适用场景</h4>
+        <ul class="feature-list">
+          <li>菜单结构相对稳定的小型项目</li>
+          <li>追求首屏加载速度的后台管理系统</li>
+          <li>原型开发阶段快速迭代</li>
+        </ul>
+      </section>
+
+      <!-- 第三部分：远程菜单配置 -->
+      <section id="remote" class="menu-doc__section">
+        <h2>远程菜单配置</h2>
+        <p>实际项目中，菜单通常由后端接口返回，便于动态控制用户可见菜单和权限。</p>
+
+        <h4>后端接口规范</h4>
+        <p>后端需返回与本地 JSON 相同结构的菜单数据：</p>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">API Response</span>
+            <button class="code-block__copy" @click="copyCode(apiExample)">
+              复制
+            </button>
+          </div>
+          <pre><code>{{ apiExample }}</code></pre>
+        </div>
+
+        <h4>切换到远程模式</h4>
+        <p>修改 <code>src/utils/menu.ts</code> 中的默认配置：</p>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">TypeScript</span>
+            <button class="code-block__copy" @click="copyCode(remoteConfigExample)">
+              复制
+            </button>
+          </div>
+          <pre><code>{{ remoteConfigExample }}</code></pre>
+        </div>
+
+        <div class="tip tip--warning">
+          <span class="tip__icon">⚠️</span>
+          <div class="tip__content">
+            <strong>注意：</strong> 远程菜单模式下，组件路径需要确保后端返回的 component 字段与
+            <code>src/views/</code> 下的文件路径一致。
+          </div>
+        </div>
+      </section>
+
+      <!-- 第四部分：菜单工具类 -->
+      <section id="utils" class="menu-doc__section">
+        <h2>菜单工具类</h2>
+        <p>项目提供了统一的菜单工具类 <code>src/utils/menu.ts</code>，所有菜单组件都应使用它获取菜单数据。</p>
+
+        <h4>核心 API</h4>
+        <div class="api-list">
+          <div class="api-item">
+            <code class="api-item__name">getMenuData(source, apiUrl, forceRefresh)</code>
+            <p class="api-item__desc">
+              获取菜单数据，支持本地/远程两种模式
+            </p>
+          </div>
+          <div class="api-item">
+            <code class="api-item__name">findMenuByPath(data, path)</code>
+            <p class="api-item__desc">
+              根据路径查找菜单项
+            </p>
+          </div>
+          <div class="api-item">
+            <code class="api-item__name">filterMenuByPermissions(data, permissions)</code>
+            <p class="api-item__desc">
+              根据用户权限过滤菜单
+            </p>
+          </div>
+          <div class="api-item">
+            <code class="api-item__name">resolveComponent(component)</code>
+            <p class="api-item__desc">
+              解析组件路径为动态导入函数
+            </p>
+          </div>
+        </div>
+
+        <h4>使用示例</h4>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">TypeScript</span>
+            <button class="code-block__copy" @click="copyCode(utilsExample)">
+              复制
+            </button>
+          </div>
+          <pre><code>{{ utilsExample }}</code></pre>
+        </div>
+      </section>
+
+      <!-- 第五部分：菜单权限控制 -->
+      <section id="permission" class="menu-doc__section">
+        <h2>菜单权限控制</h2>
+        <p>菜单权限控制通常分为两个层面：路由权限 和 菜单显示权限。</p>
+
+        <h4>1. 路由权限控制</h4>
+        <p>在路由守卫中校验用户是否有权限访问该路由：</p>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">TypeScript</span>
+            <button class="code-block__copy" @click="copyCode(routerGuardExample)">
+              复制
+            </button>
+          </div>
+          <pre><code>{{ routerGuardExample }}</code></pre>
+        </div>
+
+        <h4>2. 菜单显示权限</h4>
+        <p>根据用户权限过滤显示的菜单项：</p>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">TypeScript</span>
+            <button class="code-block__copy" @click="copyCode(filterMenuExample)">
+              复制
+            </button>
+          </div>
+          <pre><code>{{ filterMenuExample }}</code></pre>
+        </div>
+      </section>
+
+      <!-- 第六部分：菜单持久化 -->
+      <section id="persistence" class="menu-doc__section">
+        <h2>菜单持久化</h2>
+        <p>在实际业务中，用户的菜单配置、展开状态等可以通过以下方式进行持久化：</p>
+
+        <h4>1. 本地存储（LocalStorage）</h4>
+        <p>适用于保存用户偏好设置，如菜单展开状态：</p>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">TypeScript</span>
+            <button class="code-block__copy" @click="copyCode(localStorageExample)">
+              复制
+            </button>
+          </div>
+          <pre><code>{{ localStorageExample }}</code></pre>
+        </div>
+
+        <h4>2. 服务端存储</h4>
+        <p>适用于需要跨设备同步的用户配置：</p>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">TypeScript</span>
+            <button class="code-block__copy" @click="copyCode(serverStorageExample)">
+              复制
+            </button>
+          </div>
+          <pre><code>{{ serverStorageExample }}</code></pre>
+        </div>
+
+        <h4>3. 混合模式（推荐）</h4>
+        <p>首次加载从服务端获取，用户操作后保存到本地，下次优先读取本地：</p>
+
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">TypeScript</span>
+            <button class="code-block__copy" @click="copyCode(hybridExample)">
+              复制
+            </button>
+          </div>
+          <pre><code>{{ hybridExample }}</code></pre>
+        </div>
+      </section>
+
+      <!-- 第七部分：常见问题 -->
+      <section id="faq" class="menu-doc__section">
+        <h2>常见问题</h2>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <h4>Q: 菜单项不显示图标怎么办？</h4>
+            <p>
+              A: 确保 icon 字段的值是 Element Plus 图标库中存在的图标名称，格式为首字母大写的驼峰式，如 "HomeFilled"
+              而不是 "home-filled"。
+            </p>
+          </div>
+
+          <div class="faq-item">
+            <h4>Q: 如何添加新的顶级菜单？</h4>
+            <p>A: 在 menu.json 中添加新的对象即可，顶级菜单不需要 path 字段。菜单会自动按照数组顺序显示。</p>
+          </div>
+
+          <div class="faq-item">
+            <h4>Q: 如何实现点击菜单不跳转，只展开子菜单？</h4>
+            <p>A: 只需要在该菜单项中不设置 path 和 component 字段，只设置 children 即可。</p>
+          </div>
+
+          <div class="faq-item">
+            <h4>Q: 远程菜单加载失败怎么处理？</h4>
+            <p>A: 工具类会自动降级使用缓存数据（如果有）。建议在 localStorage 中预存一份默认菜单作为兜底方案。</p>
+          </div>
+
+          <div class="faq-item">
+            <h4>Q: 如何实现动态路由？</h4>
+            <p>A: 使用路由守卫 + 远程菜单方案，在用户登录后获取权限菜单，动态注册路由后再跳转。</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</template>
 
 <style scoped lang="scss">
 $primary: var(--el-color-primary);
@@ -471,7 +504,7 @@ $border-color: var(--el-border-color-lighter);
   margin: 0 auto;
   padding: 0 24px 60px;
 
-  &__header {
+  .menu-doc__header {
     margin-bottom: 40px;
     padding-bottom: 24px;
     border-bottom: 1px solid $border-color;
@@ -490,7 +523,7 @@ $border-color: var(--el-border-color-lighter);
     }
   }
 
-  &__toc {
+  .menu-doc__toc {
     position: sticky;
     top: 24px;
     float: right;
@@ -502,7 +535,7 @@ $border-color: var(--el-border-color-lighter);
     margin-bottom: 24px;
   }
 
-  &__toc-item {
+  .menu-doc__toc-item {
     padding: 8px 12px;
     font-size: 13px;
     color: $text-secondary;
@@ -522,11 +555,11 @@ $border-color: var(--el-border-color-lighter);
     }
   }
 
-  &__content {
+  .menu-doc__content {
     overflow: hidden;
   }
 
-  &__section {
+  .menu-doc__section {
     margin-bottom: 48px;
     padding-bottom: 48px;
     border-bottom: 1px solid $border-color;
@@ -576,7 +609,7 @@ $border-color: var(--el-border-color-lighter);
   margin: 16px 0;
   overflow: hidden;
 
-  &__header {
+  .code-block__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -585,13 +618,13 @@ $border-color: var(--el-border-color-lighter);
     border-bottom: 1px solid $border-color;
   }
 
-  &__lang {
+  .code-block__lang {
     font-size: 12px;
     font-weight: 500;
     color: $primary;
   }
 
-  &__copy {
+  .code-block__copy {
     padding: 4px 10px;
     font-size: 12px;
     color: $text-secondary;
@@ -636,7 +669,8 @@ $border-color: var(--el-border-color-lighter);
     font-size: 13px;
   }
 
-  th, td {
+  th,
+  td {
     padding: 12px 16px;
     text-align: left;
     border-bottom: 1px solid $border-color;
@@ -681,7 +715,7 @@ $border-color: var(--el-border-color-lighter);
   border-radius: 8px;
   margin: 16px 0;
 
-  &--warning {
+  &.tip--warning {
     background: var(--el-color-warning-light-9);
     border: 1px solid var(--el-color-warning-light-5);
 
@@ -690,12 +724,12 @@ $border-color: var(--el-border-color-lighter);
     }
   }
 
-  &__icon {
+  .tip__icon {
     margin-right: 12px;
     font-size: 16px;
   }
 
-  &__content {
+  .tip__content {
     font-size: 14px;
     color: $text-secondary;
     line-height: 1.6;
@@ -713,7 +747,7 @@ $border-color: var(--el-border-color-lighter);
     border-radius: 8px;
     margin-bottom: 12px;
 
-    &__name {
+    .api-item__name {
       display: block;
       font-size: 14px;
       font-weight: 500;
@@ -721,7 +755,7 @@ $border-color: var(--el-border-color-lighter);
       margin-bottom: 6px;
     }
 
-    &__desc {
+    .api-item__desc {
       font-size: 13px;
       color: $text-default;
       margin: 0;

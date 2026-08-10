@@ -1,8 +1,51 @@
+<script setup lang="ts">
+import { XlyButton, XlyWatermark } from 'easy-ui'
+import { ref } from 'vue'
+
+/** 动态水印：显示/隐藏 */
+const showDynamic = ref(true)
+const dynamicContent = ref(['动态水印', '可修改'])
+
+function toggleWatermark() {
+  showDynamic.value = !showDynamic.value
+}
+
+/** 动态水印：切换颜色 */
+const colors = [
+  'rgba(0, 0, 0, 0.15)',
+  'rgba(79, 110, 247, 0.15)',
+  'rgba(245, 108, 108, 0.15)',
+  'rgba(52, 199, 89, 0.15)',
+  'rgba(245, 166, 35, 0.15)',
+]
+const colorIndex = ref(0)
+const dynamicColor = ref(colors[0])
+
+function cycleColor() {
+  colorIndex.value = (colorIndex.value + 1) % colors.length
+  dynamicColor.value = colors[colorIndex.value]
+}
+
+/** v-watermark 指令配置 */
+const directiveOptions = {
+  content: ['指令水印', 'v-watermark'],
+  fontColor: 'rgba(79, 110, 247, 0.12)',
+  rotate: -20,
+  fontSize: 14,
+  gapX: 100,
+  gapY: 80,
+  width: 110,
+  height: 70,
+}
+</script>
+
 <template>
-  <div class="watermark-doc" v-watermark="{ content: '指令水印' }">
+  <div v-watermark="{ content: '指令水印' }" class="watermark-doc">
     <!-- 页面标题 -->
     <div class="doc-header">
-      <h1 class="doc-title">Watermark 水印</h1>
+      <h1 class="doc-title">
+        Watermark 水印
+      </h1>
       <p class="doc-desc">
         为页面或指定区域添加水印，支持文字水印、图片水印、多行内容、自定义样式、防篡改等功能。
         提供组件和指令两种使用方式。
@@ -11,10 +54,11 @@
 
     <!-- 基础文字水印 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">基础文字水印</h2>
+      <h2 class="doc-section__title">
+        基础文字水印
+      </h2>
       <p class="doc-section__desc">
-        使用 <code>&lt;XlyWatermark&gt;</code> 组件包裹内容区域，通过
-        <code>content</code> 设置水印文字。
+        使用 <code>&lt;XlyWatermark&gt;</code> 组件包裹内容区域，通过 <code>content</code> 设置水印文字。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
@@ -25,15 +69,19 @@
             </div>
           </XlyWatermark>
         </div>
-        <XlyDocCode :code='`<XlyWatermark content="内部机密">
+        <XlyDocCode
+          code="<XlyWatermark content=&quot;内部机密&quot;>
   <div>需要保护的区域</div>
-</XlyWatermark>`' />
+</XlyWatermark>"
+        />
       </div>
     </section>
 
     <!-- 多行文字水印 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">多行文字水印</h2>
+      <h2 class="doc-section__title">
+        多行文字水印
+      </h2>
       <p class="doc-section__desc">
         <code>content</code> 支持数组形式传入多行文字，适合同时显示公司名 + 日期等组合信息。
       </p>
@@ -55,19 +103,21 @@
             </div>
           </XlyWatermark>
         </div>
-        <XlyDocCode :code="`<XlyWatermark :content=&quot;['XLY Admin', '2026-03-21']&quot; :rotate=&quot;-15&quot;>
+        <XlyDocCode
+          code="<XlyWatermark :content=&quot;['XLY Admin', '2026-03-21']&quot; :rotate=&quot;-15&quot;>
   <div>多行水印区域</div>
-</XlyWatermark>`" />
+</XlyWatermark>"
+        />
       </div>
     </section>
 
     <!-- 自定义样式 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义样式</h2>
+      <h2 class="doc-section__title">
+        自定义样式
+      </h2>
       <p class="doc-section__desc">
-        通过 <code>fontColor</code>、<code>fontSize</code>、<code>rotate</code>、<code
-          >opacity</code
-        >
+        通过 <code>fontColor</code>、<code>fontSize</code>、<code>rotate</code>、<code>opacity</code>
         等属性调整水印外观。
       </p>
       <div class="doc-preview">
@@ -130,35 +180,43 @@
             </XlyWatermark>
           </div>
         </div>
-        <XlyDocCode :code='`<!-- 浅色大字 -->
+        <XlyDocCode
+          code="<!-- 浅色大字 -->
 <XlyWatermark
-  content="浅色水印"
-  font-color="rgba(0, 0, 0, 0.06)"
-  :font-size="20"
-  :width="160" :height="160"
-  :gap-x="60" :gap-y="60"
+  content=&quot;浅色水印&quot;
+  font-color=&quot;rgba(0, 0, 0, 0.06)&quot;
+  :font-size=&quot;20&quot;
+  :width=&quot;160&quot; :height=&quot;160&quot;
+  :gap-x=&quot;60&quot; :gap-y=&quot;60&quot;
 >
 
 <!-- 彩色水印 -->
 <XlyWatermark
-  content="彩色水印"
-  font-color="rgba(245, 108, 108, 0.15)"
-  :font-size="16"
->`' />
+  content=&quot;彩色水印&quot;
+  font-color=&quot;rgba(245, 108, 108, 0.15)&quot;
+  :font-size=&quot;16&quot;
+>"
+        />
       </div>
     </section>
 
     <!-- 动态属性 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">动态属性修改</h2>
-      <p class="doc-section__desc">水印属性支持响应式更新，修改后自动重绘。</p>
+      <h2 class="doc-section__title">
+        动态属性修改
+      </h2>
+      <p class="doc-section__desc">
+        水印属性支持响应式更新，修改后自动重绘。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="watermark-controls">
             <XlyButton size="small" @click="toggleWatermark">
               {{ showDynamic ? '隐藏水印' : '显示水印' }}
             </XlyButton>
-            <XlyButton size="small" type="ghost" @click="cycleColor">切换颜色</XlyButton>
+            <XlyButton size="small" type="ghost" @click="cycleColor">
+              切换颜色
+            </XlyButton>
           </div>
           <XlyWatermark
             v-if="showDynamic"
@@ -179,19 +237,23 @@
             <p>水印已隐藏，点击按钮重新显示。</p>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyWatermark
-  v-if="showWatermark"
-  :content="watermarkText"
-  :font-color="watermarkColor"
+        <XlyDocCode
+          code="<XlyWatermark
+  v-if=&quot;showWatermark&quot;
+  :content=&quot;watermarkText&quot;
+  :font-color=&quot;watermarkColor&quot;
 >
   <div>动态水印区域</div>
-</XlyWatermark>`' />
+</XlyWatermark>"
+        />
       </div>
     </section>
 
     <!-- v-watermark 指令 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">v-watermark 指令</h2>
+      <h2 class="doc-section__title">
+        v-watermark 指令
+      </h2>
       <p class="doc-section__desc">
         使用
         <code>v-watermark</code>
@@ -204,7 +266,8 @@
             <p>指令方式更简洁，适合快速添加。</p>
           </div>
         </div>
-        <XlyDocCode :code="`<div v-watermark=&quot;{ content: '指令水印' }&quot;>
+        <XlyDocCode
+          code="<div v-watermark=&quot;{ content: '指令水印' }&quot;>
   内容区域
 </div>
 
@@ -214,14 +277,19 @@
   rotate: -20,
 }&quot;>
   多行指令水印
-</div>`" />
+</div>"
+        />
       </div>
     </section>
 
     <!-- API 属性表格 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">API</h2>
-      <p class="doc-section__desc">XlyWatermark 组件属性（v-watermark 指令参数相同）</p>
+      <h2 class="doc-section__title">
+        API
+      </h2>
+      <p class="doc-section__desc">
+        XlyWatermark 组件属性（v-watermark 指令参数相同）
+      </p>
       <div class="doc-table-wrapper">
         <table class="doc-table">
           <thead>
@@ -324,48 +392,6 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue'
-import XlyWatermark from '@/components/xly-watermark/index.vue'
-import XlyButton from '@/components/xly-button/index.vue'
-
-/** 动态水印：显示/隐藏 */
-const showDynamic = ref(true)
-const dynamicContent = ref(['动态水印', '可修改'])
-
-function toggleWatermark() {
-  showDynamic.value = !showDynamic.value
-}
-
-/** 动态水印：切换颜色 */
-const colors = [
-  'rgba(0, 0, 0, 0.15)',
-  'rgba(79, 110, 247, 0.15)',
-  'rgba(245, 108, 108, 0.15)',
-  'rgba(52, 199, 89, 0.15)',
-  'rgba(245, 166, 35, 0.15)',
-]
-const colorIndex = ref(0)
-const dynamicColor = ref(colors[0])
-
-function cycleColor() {
-  colorIndex.value = (colorIndex.value + 1) % colors.length
-  dynamicColor.value = colors[colorIndex.value]
-}
-
-/** v-watermark 指令配置 */
-const directiveOptions = {
-  content: ['指令水印', 'v-watermark'],
-  fontColor: 'rgba(79, 110, 247, 0.12)',
-  rotate: -20,
-  fontSize: 14,
-  gapX: 100,
-  gapY: 80,
-  width: 110,
-  height: 70,
-}
-</script>
-
 <style scoped lang="scss">
 /* ========== 文档页通用样式 ========== */
 .doc-header {
@@ -456,7 +482,7 @@ const directiveOptions = {
 
 /* ========== 水印演示区域 ========== */
 .watermark-demo-box {
-  background: #f8f9fb;
+  background: var(--el-fill-color-lighter);
   border: 1px dashed #d0d5dd;
   border-radius: 8px;
   padding: 24px;
@@ -483,7 +509,7 @@ const directiveOptions = {
     }
   }
 
-  &--sm {
+  &.watermark-demo-box--sm {
     min-height: 120px;
   }
 }
@@ -501,7 +527,7 @@ const directiveOptions = {
   flex-direction: column;
   gap: 8px;
 
-  &__label {
+  .watermark-style-item__label {
     font-size: 13px;
     color: var(--el-text-color-secondary);
     text-align: center;
@@ -532,7 +558,7 @@ const directiveOptions = {
   }
 
   th {
-    background: #f8f9fb;
+    background: var(--el-fill-color-lighter);
     font-weight: 600;
     color: var(--el-text-color-primary);
     white-space: nowrap;

@@ -6,3 +6,12 @@ allowBuilds:
   '@vue-office/pdf': true
   esbuild: true
   vue-demi: true
+
+minimumReleaseAgeExclude:
+  - '@antfu/eslint-config@9.3.0'
+shellEmulator: true
+
+trustPolicy: off
+
+packages:
+  - 'packages/*'

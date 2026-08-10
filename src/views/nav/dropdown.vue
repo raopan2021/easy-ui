@@ -1,13 +1,32 @@
+<script setup lang="ts">
+import { XlyDropdown, XlyDropdownItem, XlyIcon } from 'easy-ui'
+import { ref } from 'vue'
+
+const clickedItem = ref('')
+
+function handleItemClick(name: string) {
+  clickedItem.value = name
+}
+</script>
+
 <template>
   <div class="component-doc">
     <div class="doc-header">
-      <h1 class="doc-title">下拉菜单 Dropdown</h1>
-      <p class="doc-desc">通过点击或悬停触发的下拉菜单，用于展示链接、操作等。</p>
+      <h1 class="doc-title">
+        下拉菜单 Dropdown
+      </h1>
+      <p class="doc-desc">
+        通过点击或悬停触发的下拉菜单，用于展示链接、操作等。
+      </p>
     </div>
 
     <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
-      <p class="doc-section__desc">最简单的用法，通过 <code>label</code> 设置触发器文本，点击即可展开。</p>
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
+      <p class="doc-section__desc">
+        最简单的用法，通过 <code>label</code> 设置触发器文本，点击即可展开。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <XlyDropdown label="下拉菜单">
@@ -15,13 +34,18 @@
               <XlyDropdownItem>黄金糕</XlyDropdownItem>
               <XlyDropdownItem>狮子头</XlyDropdownItem>
               <XlyDropdownItem>螺蛳粉</XlyDropdownItem>
-              <XlyDropdownItem disabled>双皮奶</XlyDropdownItem>
-              <XlyDropdownItem divided>蚵仔煎</XlyDropdownItem>
+              <XlyDropdownItem disabled>
+                双皮奶
+              </XlyDropdownItem>
+              <XlyDropdownItem divided>
+                蚵仔煎
+              </XlyDropdownItem>
             </template>
           </XlyDropdown>
         </div>
       </div>
-      <XlyDocCode :code='`<XlyDropdown label="下拉菜单">
+      <XlyDocCode
+        code="<XlyDropdown label=&quot;下拉菜单&quot;>
   <template #dropdown>
     <XlyDropdownItem>黄金糕</XlyDropdownItem>
     <XlyDropdownItem>狮子头</XlyDropdownItem>
@@ -29,12 +53,17 @@
     <XlyDropdownItem disabled>双皮奶</XlyDropdownItem>
     <XlyDropdownItem divided>蚵仔煎</XlyDropdownItem>
   </template>
-</XlyDropdown>`' />
+</XlyDropdown>"
+      />
     </section>
 
     <section class="doc-section">
-      <h2 class="doc-section__title">触发方式</h2>
-      <p class="doc-section__desc">可以配置为 hover 触发下拉菜单。</p>
+      <h2 class="doc-section__title">
+        触发方式
+      </h2>
+      <p class="doc-section__desc">
+        可以配置为 hover 触发下拉菜单。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <XlyDropdown label="悬停展开" trigger="hover">
@@ -46,41 +75,59 @@
           </XlyDropdown>
         </div>
       </div>
-      <XlyDocCode :code='`<XlyDropdown label="悬停展开" trigger="hover">
+      <XlyDocCode
+        code="<XlyDropdown label=&quot;悬停展开&quot; trigger=&quot;hover&quot;>
   <template #dropdown>
     <XlyDropdownItem>黄金糕</XlyDropdownItem>
     <XlyDropdownItem>狮子头</XlyDropdownItem>
     <XlyDropdownItem>螺蛳粉</XlyDropdownItem>
   </template>
-</XlyDropdown>`' />
+</XlyDropdown>"
+      />
     </section>
 
     <section class="doc-section">
-      <h2 class="doc-section__title">菜单图标</h2>
-      <p class="doc-section__desc">可以在菜单项中添加图标。</p>
+      <h2 class="doc-section__title">
+        菜单图标
+      </h2>
+      <p class="doc-section__desc">
+        可以在菜单项中添加图标。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <XlyDropdown label="带图标">
             <template #dropdown>
-              <XlyDropdownItem icon="el:Plus">黄金糕</XlyDropdownItem>
-              <XlyDropdownItem icon="el:CirclePlus">狮子头</XlyDropdownItem>
-              <XlyDropdownItem icon="el:Coffee">螺蛳粉</XlyDropdownItem>
+              <XlyDropdownItem icon="el:Plus">
+                黄金糕
+              </XlyDropdownItem>
+              <XlyDropdownItem icon="el:CirclePlus">
+                狮子头
+              </XlyDropdownItem>
+              <XlyDropdownItem icon="el:Coffee">
+                螺蛳粉
+              </XlyDropdownItem>
             </template>
           </XlyDropdown>
         </div>
       </div>
-      <XlyDocCode :code='`<XlyDropdown label="带图标">
+      <XlyDocCode
+        code="<XlyDropdown label=&quot;带图标&quot;>
   <template #dropdown>
-    <XlyDropdownItem icon="el:Plus">黄金糕</XlyDropdownItem>
-    <XlyDropdownItem icon="el:CirclePlus">狮子头</XlyDropdownItem>
-    <XlyDropdownItem icon="el:Coffee">螺蛳粉</XlyDropdownItem>
+    <XlyDropdownItem icon=&quot;el:Plus&quot;>黄金糕</XlyDropdownItem>
+    <XlyDropdownItem icon=&quot;el:CirclePlus&quot;>狮子头</XlyDropdownItem>
+    <XlyDropdownItem icon=&quot;el:Coffee&quot;>螺蛳粉</XlyDropdownItem>
   </template>
-</XlyDropdown>`' />
+</XlyDropdown>"
+      />
     </section>
 
     <section class="doc-section">
-      <h2 class="doc-section__title">分隔符</h2>
-      <p class="doc-section__desc">使用 <code>divided</code> 属性添加分隔符。</p>
+      <h2 class="doc-section__title">
+        分隔符
+      </h2>
+      <p class="doc-section__desc">
+        使用 <code>divided</code> 属性添加分隔符。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <XlyDropdown label="分隔符示例">
@@ -88,13 +135,16 @@
               <XlyDropdownItem>黄金糕</XlyDropdownItem>
               <XlyDropdownItem>狮子头</XlyDropdownItem>
               <XlyDropdownItem>螺蛳粉</XlyDropdownItem>
-              <XlyDropdownItem divided>双皮奶</XlyDropdownItem>
+              <XlyDropdownItem divided>
+                双皮奶
+              </XlyDropdownItem>
               <XlyDropdownItem>蚵仔煎</XlyDropdownItem>
             </template>
           </XlyDropdown>
         </div>
       </div>
-      <XlyDocCode :code='`<XlyDropdown label="分隔符示例">
+      <XlyDocCode
+        code="<XlyDropdown label=&quot;分隔符示例&quot;>
   <template #dropdown>
     <XlyDropdownItem>黄金糕</XlyDropdownItem>
     <XlyDropdownItem>狮子头</XlyDropdownItem>
@@ -102,35 +152,48 @@
     <XlyDropdownItem divided>双皮奶</XlyDropdownItem>
     <XlyDropdownItem>蚵仔煎</XlyDropdownItem>
   </template>
-</XlyDropdown>`' />
+</XlyDropdown>"
+      />
     </section>
 
     <section class="doc-section">
-      <h2 class="doc-section__title">禁用选项</h2>
-      <p class="doc-section__desc">使用 <code>disabled</code> 属性禁用菜单项。</p>
+      <h2 class="doc-section__title">
+        禁用选项
+      </h2>
+      <p class="doc-section__desc">
+        使用 <code>disabled</code> 属性禁用菜单项。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <XlyDropdown label="禁用示例">
             <template #dropdown>
               <XlyDropdownItem>黄金糕</XlyDropdownItem>
-              <XlyDropdownItem disabled>狮子头</XlyDropdownItem>
+              <XlyDropdownItem disabled>
+                狮子头
+              </XlyDropdownItem>
               <XlyDropdownItem>螺蛳粉</XlyDropdownItem>
             </template>
           </XlyDropdown>
         </div>
       </div>
-      <XlyDocCode :code='`<XlyDropdown label="禁用示例">
+      <XlyDocCode
+        code="<XlyDropdown label=&quot;禁用示例&quot;>
   <template #dropdown>
     <XlyDropdownItem>黄金糕</XlyDropdownItem>
     <XlyDropdownItem disabled>狮子头</XlyDropdownItem>
     <XlyDropdownItem>螺蛳粉</XlyDropdownItem>
   </template>
-</XlyDropdown>`' />
+</XlyDropdown>"
+      />
     </section>
 
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义触发器图标</h2>
-      <p class="doc-section__desc">通过默认插槽可以完全自定义触发器内容，例如使用按钮或图标。</p>
+      <h2 class="doc-section__title">
+        自定义触发器图标
+      </h2>
+      <p class="doc-section__desc">
+        通过默认插槽可以完全自定义触发器内容，例如使用按钮或图标。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <XlyDropdown>
@@ -140,52 +203,74 @@
               <XlyIcon name="el:ArrowDown" :size="12" />
             </span>
             <template #dropdown>
-              <XlyDropdownItem icon="el:User">个人信息</XlyDropdownItem>
-              <XlyDropdownItem icon="el:Lock">修改密码</XlyDropdownItem>
-              <XlyDropdownItem icon="el:SwitchButton" divided>退出登录</XlyDropdownItem>
+              <XlyDropdownItem icon="el:User">
+                个人信息
+              </XlyDropdownItem>
+              <XlyDropdownItem icon="el:Lock">
+                修改密码
+              </XlyDropdownItem>
+              <XlyDropdownItem icon="el:SwitchButton" divided>
+                退出登录
+              </XlyDropdownItem>
             </template>
           </XlyDropdown>
         </div>
       </div>
-      <XlyDocCode :code='`<XlyDropdown>
-  <span class="custom-trigger">
-    <XlyIcon name="el:Setting" :size="16" />
+      <XlyDocCode
+        code="<XlyDropdown>
+  <span class=&quot;custom-trigger&quot;>
+    <XlyIcon name=&quot;el:Setting&quot; :size=&quot;16&quot; />
     设置
-    <XlyIcon name="el:ArrowDown" :size="12" />
+    <XlyIcon name=&quot;el:ArrowDown&quot; :size=&quot;12&quot; />
   </span>
   <template #dropdown>
-    <XlyDropdownItem icon="el:User">个人信息</XlyDropdownItem>
-    <XlyDropdownItem icon="el:Lock">修改密码</XlyDropdownItem>
-    <XlyDropdownItem icon="el:SwitchButton" divided>退出登录</XlyDropdownItem>
+    <XlyDropdownItem icon=&quot;el:User&quot;>个人信息</XlyDropdownItem>
+    <XlyDropdownItem icon=&quot;el:Lock&quot;>修改密码</XlyDropdownItem>
+    <XlyDropdownItem icon=&quot;el:SwitchButton&quot; divided>退出登录</XlyDropdownItem>
   </template>
-</XlyDropdown>`' />
+</XlyDropdown>"
+      />
     </section>
 
     <section class="doc-section">
-      <h2 class="doc-section__title">点击事件</h2>
-      <p class="doc-section__desc">通过 <code>@click</code> 监听菜单项的点击事件。当前点击：<strong>{{ clickedItem || '无' }}</strong></p>
+      <h2 class="doc-section__title">
+        点击事件
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>@click</code> 监听菜单项的点击事件。当前点击：<strong>{{ clickedItem || '无' }}</strong>
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <XlyDropdown label="点击试试">
             <template #dropdown>
-              <XlyDropdownItem @click="handleItemClick('黄金糕')">黄金糕</XlyDropdownItem>
-              <XlyDropdownItem @click="handleItemClick('狮子头')">狮子头</XlyDropdownItem>
-              <XlyDropdownItem @click="handleItemClick('螺蛳粉')">螺蛳粉</XlyDropdownItem>
+              <XlyDropdownItem @click="handleItemClick('黄金糕')">
+                黄金糕
+              </XlyDropdownItem>
+              <XlyDropdownItem @click="handleItemClick('狮子头')">
+                狮子头
+              </XlyDropdownItem>
+              <XlyDropdownItem @click="handleItemClick('螺蛳粉')">
+                螺蛳粉
+              </XlyDropdownItem>
             </template>
           </XlyDropdown>
         </div>
       </div>
-      <XlyDocCode :code="`<XlyDropdown label=&quot;点击试试&quot;>
+      <XlyDocCode
+        code="<XlyDropdown label=&quot;点击试试&quot;>
   <template #dropdown>
     <XlyDropdownItem @click=&quot;handleItemClick('黄金糕')&quot;>黄金糕</XlyDropdownItem>
     <XlyDropdownItem @click=&quot;handleItemClick('狮子头')&quot;>狮子头</XlyDropdownItem>
     <XlyDropdownItem @click=&quot;handleItemClick('螺蛳粉')&quot;>螺蛳粉</XlyDropdownItem>
   </template>
-</XlyDropdown>`" />
+</XlyDropdown>"
+      />
     </section>
 
     <section class="doc-section">
-      <h3 class="doc-subtitle">Attributes</h3>
+      <h3 class="doc-subtitle">
+        Attributes
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -218,7 +303,9 @@
     </section>
 
     <section class="doc-section">
-      <h3 class="doc-subtitle">Dropdown Slots</h3>
+      <h3 class="doc-subtitle">
+        Dropdown Slots
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -242,7 +329,9 @@
     </section>
 
     <section class="doc-section">
-      <h3 class="doc-subtitle">Dropdown Item Attributes</h3>
+      <h3 class="doc-subtitle">
+        Dropdown Item Attributes
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -282,7 +371,9 @@
     </section>
 
     <section class="doc-section">
-      <h3 class="doc-subtitle">Events</h3>
+      <h3 class="doc-subtitle">
+        Events
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -304,19 +395,6 @@
     </section>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import XlyIcon from '@/components/xly-icon/index.vue'
-import XlyDropdown from '@/components/xly-dropdown/index.vue'
-import XlyDropdownItem from '@/components/xly-dropdown/dropdown-item.vue'
-
-const clickedItem = ref('')
-
-function handleItemClick(name: string) {
-  clickedItem.value = name
-}
-</script>
 
 <style scoped lang="scss">
 .component-doc {
@@ -388,15 +466,40 @@ function handleItemClick(name: string) {
   color: var(--el-text-color-primary);
   background-color: var(--el-fill-color-light);
 }
-.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
-.doc-table { overflow-x: auto;
-  table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); white-space: nowrap; }
-  th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); }
-  td { color: var(--el-text-color-regular); }
+.doc-subtitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 20px 0 10px;
+}
+.doc-table {
+  overflow-x: auto;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+    white-space: nowrap;
+  }
+  th {
+    background: var(--el-fill-color-light);
+    font-weight: 600;
+    color: var(--el-text-color-primary);
+  }
+  td {
+    color: var(--el-text-color-regular);
+  }
   code {
-    background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px;
-    border-radius: 4px; font-size: 13px;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
   }
 }

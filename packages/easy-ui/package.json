@@ -1,0 +1,90 @@
+{
+  "name": "easy-ui",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Vue 3 企业级组件库，基于 Element Plus 扩展",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*"
+  },
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build && vue-tsc -p tsconfig.lib.json",
+    "dev": "vite build --watch",
+    "type-check": "vue-tsc --noEmit -p tsconfig.json"
+  },
+  "peerDependencies": {
+    "@element-plus/icons-vue": "^2.3.2",
+    "element-plus": "^2.13.6",
+    "vue": "^3.5.29",
+    "vue-router": "^5.0.3"
+  },
+  "peerDependenciesMeta": {
+    "@logicflow/core": {
+      "optional": true
+    },
+    "@logicflow/extension": {
+      "optional": true
+    },
+    "@vue-office/docx": {
+      "optional": true
+    },
+    "@vue-office/excel": {
+      "optional": true
+    },
+    "@vue-office/pdf": {
+      "optional": true
+    },
+    "cropperjs": {
+      "optional": true
+    },
+    "crypto-js": {
+      "optional": true
+    },
+    "echarts": {
+      "optional": true
+    },
+    "highlight.js": {
+      "optional": true
+    },
+    "jsbarcode": {
+      "optional": true
+    },
+    "jszip": {
+      "optional": true
+    },
+    "markdown-it": {
+      "optional": true
+    },
+    "pdf-lib": {
+      "optional": true
+    },
+    "pdfjs-dist": {
+      "optional": true
+    },
+    "pptx-preview": {
+      "optional": true
+    },
+    "qrcode": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@vueuse/core": "^14.3.0",
+    "axios": "^1.4.0",
+    "pinia": "^3.0.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.7",
+    "@vue/tsconfig": "^0.8.1",
+    "sass-embedded": "^1.98.0",
+    "typescript": "~5.9.3",
+    "vite": "^8.1.3",
+    "vue-tsc": "^3.2.5"
+  }
+}

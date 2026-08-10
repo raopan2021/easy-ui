@@ -1,13 +1,68 @@
+<script setup lang="ts">
+import { XlyProgress } from 'easy-ui'
+import { ref } from 'vue'
+
+const uploadProgress = ref(0)
+const isUploading = ref(false)
+let timer: number | null = null
+
+// 动态颜色函数
+function dynamicColor(percentage: number) {
+  if (percentage < 30)
+    return '#f56c6c'
+  if (percentage < 70)
+    return '#e6a23c'
+  return '#67c23a'
+}
+
+// 开始上传
+function startUpload() {
+  if (isUploading.value)
+    return
+  isUploading.value = true
+  uploadProgress.value = 0
+
+  timer = setInterval(() => {
+    if (uploadProgress.value >= 100) {
+      clearInterval(timer!)
+      isUploading.value = false
+    }
+    else {
+      uploadProgress.value += Math.floor(Math.random() * 15) + 5
+      if (uploadProgress.value > 100) {
+        uploadProgress.value = 100
+      }
+    }
+  }, 300) as unknown as number
+}
+
+// 重置进度
+function resetProgress() {
+  if (timer) {
+    clearInterval(timer)
+    timer = null
+  }
+  uploadProgress.value = 0
+  isUploading.value = false
+}
+</script>
+
 <template>
   <div class="progress-doc">
     <div class="doc-header">
-      <h1 class="doc-title">进度条 Progress</h1>
-      <p class="doc-desc">用于展示操作当前进度，支持线性、圆形、仪表盘等多种样式和状态。</p>
+      <h1 class="doc-title">
+        进度条 Progress
+      </h1>
+      <p class="doc-desc">
+        用于展示操作当前进度，支持线性、圆形、仪表盘等多种样式和状态。
+      </p>
     </div>
 
     <!-- 基础用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
       <p class="doc-section__desc">
         通过 <code>percentage</code> 属性设置进度百分比（0-100）。
       </p>
@@ -30,16 +85,20 @@
             <XlyProgress :percentage="100" />
           </div>
         </div>
-        <XlyDocCode :code='`<XlyProgress :percentage="0" />
-<XlyProgress :percentage="30" />
-<XlyProgress :percentage="70" />
-<XlyProgress :percentage="100" />`' />
+        <XlyDocCode
+          code="<XlyProgress :percentage=&quot;0&quot; />
+<XlyProgress :percentage=&quot;30&quot; />
+<XlyProgress :percentage=&quot;70&quot; />
+<XlyProgress :percentage=&quot;100&quot; />"
+        />
       </div>
     </section>
 
     <!-- 不确定进度 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">不确定进度</h2>
+      <h2 class="doc-section__title">
+        不确定进度
+      </h2>
       <p class="doc-section__desc">
         设置 <code>indeterminate</code> 为 true，显示动画效果，用于加载中状态。
       </p>
@@ -47,13 +106,15 @@
         <div class="doc-preview__body">
           <XlyProgress :percentage="0" indeterminate text="加载中..." />
         </div>
-        <XlyDocCode :code='`<XlyProgress :percentage="0" indeterminate text="加载中..." />`' />
+        <XlyDocCode code="<XlyProgress :percentage=&quot;0&quot; indeterminate text=&quot;加载中...&quot; />" />
       </div>
     </section>
 
     <!-- 不同状态 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">不同状态</h2>
+      <h2 class="doc-section__title">
+        不同状态
+      </h2>
       <p class="doc-section__desc">
         通过 <code>status</code> 属性设置进度条状态，包含 normal、success、exception、warning、active。
       </p>
@@ -80,17 +141,21 @@
             <XlyProgress :percentage="40" status="active" />
           </div>
         </div>
-        <XlyDocCode :code='`<XlyProgress :percentage="50" status="normal" />
-<XlyProgress :percentage="100" status="success" />
-<XlyProgress :percentage="60" status="exception" />
-<XlyProgress :percentage="80" status="warning" />
-<XlyProgress :percentage="40" status="active" />`' />
+        <XlyDocCode
+          code="<XlyProgress :percentage=&quot;50&quot; status=&quot;normal&quot; />
+<XlyProgress :percentage=&quot;100&quot; status=&quot;success&quot; />
+<XlyProgress :percentage=&quot;60&quot; status=&quot;exception&quot; />
+<XlyProgress :percentage=&quot;80&quot; status=&quot;warning&quot; />
+<XlyProgress :percentage=&quot;40&quot; status=&quot;active&quot; />"
+        />
       </div>
     </section>
 
     <!-- 自定义颜色 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义颜色</h2>
+      <h2 class="doc-section__title">
+        自定义颜色
+      </h2>
       <p class="doc-section__desc">
         通过 <code>color</code> 属性自定义进度条颜色，支持固定颜色或动态颜色函数。
       </p>
@@ -109,7 +174,8 @@
             <XlyProgress :percentage="80" :color="dynamicColor" />
           </div>
         </div>
-        <XlyDocCode :code="`<!-- 固定颜色 -->
+        <XlyDocCode
+          code="<!-- 固定颜色 -->
 <XlyProgress :percentage=&quot;60&quot; color=&quot;#4f6ef7&quot; />
 
 <!-- 动态颜色函数 -->
@@ -120,13 +186,16 @@ const dynamicColor = (percentage) => {
   return '#67c23a'
 }
 </script>
-<XlyProgress :percentage=&quot;80&quot; :color=&quot;dynamicColor&quot; />`" />
+<XlyProgress :percentage=&quot;80&quot; :color=&quot;dynamicColor&quot; />"
+        />
       </div>
     </section>
 
     <!-- 自定义文本 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义文本</h2>
+      <h2 class="doc-section__title">
+        自定义文本
+      </h2>
       <p class="doc-section__desc">
         通过 <code>text</code> 属性自定义进度文本，设置 <code>showInfo</code> 为 false 隐藏文本。
       </p>
@@ -142,21 +211,25 @@ const dynamicColor = (percentage) => {
           </div>
           <div class="progress-demo">
             <label>隐藏文本</label>
-            <XlyProgress :percentage="45" :showInfo="false" />
+            <XlyProgress :percentage="45" :show-info="false" />
           </div>
         </div>
-        <XlyDocCode :code='`<!-- 自定义文本 -->
-<XlyProgress :percentage="60" text="上传中..." />
-<XlyProgress :percentage="85" text="85/100 已完成" />
+        <XlyDocCode
+          code="<!-- 自定义文本 -->
+<XlyProgress :percentage=&quot;60&quot; text=&quot;上传中...&quot; />
+<XlyProgress :percentage=&quot;85&quot; text=&quot;85/100 已完成&quot; />
 
 <!-- 隐藏文本 -->
-<XlyProgress :percentage="45" :showInfo="false" />`' />
+<XlyProgress :percentage=&quot;45&quot; :showInfo=&quot;false&quot; />"
+        />
       </div>
     </section>
 
     <!-- 调整轨道高度 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">调整轨道高度</h2>
+      <h2 class="doc-section__title">
+        调整轨道高度
+      </h2>
       <p class="doc-section__desc">
         通过 <code>strokeWidth</code> 属性调整轨道高度（单位 px）。
       </p>
@@ -164,26 +237,30 @@ const dynamicColor = (percentage) => {
         <div class="doc-preview__body doc-preview__body--column">
           <div class="progress-demo">
             <label>4px</label>
-            <XlyProgress :percentage="60" :strokeWidth="4" />
+            <XlyProgress :percentage="60" :stroke-width="4" />
           </div>
           <div class="progress-demo">
             <label>8px</label>
-            <XlyProgress :percentage="60" :strokeWidth="8" />
+            <XlyProgress :percentage="60" :stroke-width="8" />
           </div>
           <div class="progress-demo">
             <label>12px</label>
-            <XlyProgress :percentage="60" :strokeWidth="12" />
+            <XlyProgress :percentage="60" :stroke-width="12" />
           </div>
         </div>
-        <XlyDocCode :code='`<XlyProgress :percentage="60" :strokeWidth="4" />
-<XlyProgress :percentage="60" :strokeWidth="8" />
-<XlyProgress :percentage="60" :strokeWidth="12" />`' />
+        <XlyDocCode
+          code="<XlyProgress :percentage=&quot;60&quot; :strokeWidth=&quot;4&quot; />
+<XlyProgress :percentage=&quot;60&quot; :strokeWidth=&quot;8&quot; />
+<XlyProgress :percentage=&quot;60&quot; :strokeWidth=&quot;12&quot; />"
+        />
       </div>
     </section>
 
     <!-- 圆形进度条 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">圆形进度条</h2>
+      <h2 class="doc-section__title">
+        圆形进度条
+      </h2>
       <p class="doc-section__desc">
         设置 <code>type="circle"</code> 显示圆形进度条，通过 <code>circleSize</code> 调整尺寸。
       </p>
@@ -191,33 +268,37 @@ const dynamicColor = (percentage) => {
         <div class="doc-preview__body">
           <div class="circle-demo">
             <div class="circle-item">
-              <XlyProgress type="circle" :percentage="70" :circleSize="120" />
+              <XlyProgress type="circle" :percentage="70" :circle-size="120" />
               <span>70%</span>
             </div>
             <div class="circle-item">
-              <XlyProgress type="circle" :percentage="90" status="success" :circleSize="120" />
+              <XlyProgress type="circle" :percentage="90" status="success" :circle-size="120" />
               <span>90%</span>
             </div>
             <div class="circle-item">
-              <XlyProgress type="circle" :percentage="50" status="exception" :circleSize="120" />
+              <XlyProgress type="circle" :percentage="50" status="exception" :circle-size="120" />
               <span>50%</span>
             </div>
             <div class="circle-item">
-              <XlyProgress type="circle" :percentage="100" :circleSize="80" text="Done" />
+              <XlyProgress type="circle" :percentage="100" :circle-size="80" text="Done" />
               <span>自定义文本</span>
             </div>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyProgress type="circle" :percentage="70" />
-<XlyProgress type="circle" :percentage="90" status="success" />
-<XlyProgress type="circle" :percentage="50" status="exception" />
-<XlyProgress type="circle" :percentage="100" :circleSize="80" text="Done" />`' />
+        <XlyDocCode
+          code="<XlyProgress type=&quot;circle&quot; :percentage=&quot;70&quot; />
+<XlyProgress type=&quot;circle&quot; :percentage=&quot;90&quot; status=&quot;success&quot; />
+<XlyProgress type=&quot;circle&quot; :percentage=&quot;50&quot; status=&quot;exception&quot; />
+<XlyProgress type=&quot;circle&quot; :percentage=&quot;100&quot; :circleSize=&quot;80&quot; text=&quot;Done&quot; />"
+        />
       </div>
     </section>
 
     <!-- 仪表盘进度条 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">仪表盘进度条</h2>
+      <h2 class="doc-section__title">
+        仪表盘进度条
+      </h2>
       <p class="doc-section__desc">
         设置 <code>type="dashboard"</code> 显示仪表盘进度条，适用于展示评分、性能指标等。
       </p>
@@ -225,28 +306,32 @@ const dynamicColor = (percentage) => {
         <div class="doc-preview__body">
           <div class="dashboard-demo">
             <div class="dashboard-item">
-              <XlyProgress type="dashboard" :percentage="75" :circleSize="120" />
+              <XlyProgress type="dashboard" :percentage="75" :circle-size="120" />
               <span>75%</span>
             </div>
             <div class="dashboard-item">
-              <XlyProgress type="dashboard" :percentage="85" status="success" :circleSize="120" />
+              <XlyProgress type="dashboard" :percentage="85" status="success" :circle-size="120" />
               <span>85%</span>
             </div>
             <div class="dashboard-item">
-              <XlyProgress type="dashboard" :percentage="60" status="warning" :circleSize="120" />
+              <XlyProgress type="dashboard" :percentage="60" status="warning" :circle-size="120" />
               <span>60%</span>
             </div>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyProgress type="dashboard" :percentage="75" />
-<XlyProgress type="dashboard" :percentage="85" status="success" />
-<XlyProgress type="dashboard" :percentage="60" status="warning" />`' />
+        <XlyDocCode
+          code="<XlyProgress type=&quot;dashboard&quot; :percentage=&quot;75&quot; />
+<XlyProgress type=&quot;dashboard&quot; :percentage=&quot;85&quot; status=&quot;success&quot; />
+<XlyProgress type=&quot;dashboard&quot; :percentage=&quot;60&quot; status=&quot;warning&quot; />"
+        />
       </div>
     </section>
 
     <!-- 动态进度演示 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">动态进度演示</h2>
+      <h2 class="doc-section__title">
+        动态进度演示
+      </h2>
       <p class="doc-section__desc">
         实时更新进度的效果演示。
       </p>
@@ -257,15 +342,16 @@ const dynamicColor = (percentage) => {
             <XlyProgress :percentage="uploadProgress" status="active" text="上传中..." />
           </div>
           <div class="progress-control">
-            <button class="demo-btn demo-btn--primary" @click="startUpload" :disabled="isUploading">
+            <button class="demo-btn demo-btn--primary" :disabled="isUploading" @click="startUpload">
               {{ isUploading ? '上传中...' : '开始上传' }}
             </button>
-            <button class="demo-btn" @click="resetProgress" :disabled="isUploading">
+            <button class="demo-btn" :disabled="isUploading" @click="resetProgress">
               重置
             </button>
           </div>
         </div>
-        <XlyDocCode :code="`<template>
+        <XlyDocCode
+          code="<template>
   <XlyProgress :percentage=&quot;uploadProgress&quot; status=&quot;active&quot; text=&quot;上传中...&quot; />
   <button @click=&quot;startUpload&quot;>开始上传</button>
 </template>
@@ -289,15 +375,20 @@ const startUpload = () => {
     }
   }, 300)
 }
-</script>`" />
+</script>"
+        />
       </div>
     </section>
 
     <!-- API 文档 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">API</h2>
+      <h2 class="doc-section__title">
+        API
+      </h2>
 
-      <h3 class="doc-subtitle">Attributes</h3>
+      <h3 class="doc-subtitle">
+        Attributes
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -398,7 +489,9 @@ const startUpload = () => {
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Events</h3>
+      <h3 class="doc-subtitle">
+        Events
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -421,86 +514,66 @@ const startUpload = () => {
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue'
-import XlyProgress from '@/components/xly-progress/index.vue'
-
-const uploadProgress = ref(0)
-const isUploading = ref(false)
-let timer: number | null = null
-
-// 动态颜色函数
-const dynamicColor = (percentage: number) => {
-  if (percentage < 30) return '#f56c6c'
-  if (percentage < 70) return '#e6a23c'
-  return '#67c23a'
-}
-
-// 开始上传
-function startUpload() {
-  if (isUploading.value) return
-  isUploading.value = true
-  uploadProgress.value = 0
-
-  timer = setInterval(() => {
-    if (uploadProgress.value >= 100) {
-      clearInterval(timer!)
-      isUploading.value = false
-    } else {
-      uploadProgress.value += Math.floor(Math.random() * 15) + 5
-      if (uploadProgress.value > 100) {
-        uploadProgress.value = 100
-      }
-    }
-  }, 300) as unknown as number
-}
-
-// 重置进度
-function resetProgress() {
-  if (timer) {
-    clearInterval(timer)
-    timer = null
-  }
-  uploadProgress.value = 0
-  isUploading.value = false
-}
-</script>
-
 <style scoped lang="scss">
 .progress-doc {
   padding: 8px 0 40px;
 }
 
-.doc-header { margin-bottom: 36px; }
+.doc-header {
+  margin-bottom: 36px;
+}
 .doc-title {
-  font-size: 26px; font-weight: 700; color: var(--el-text-color-primary);
-  margin: 0 0 8px; letter-spacing: -0.3px;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  letter-spacing: -0.3px;
 }
 .doc-desc {
-  font-size: 14px; color: var(--el-text-color-secondary); margin: 0; line-height: 1.6;
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0;
+  line-height: 1.6;
 }
 
-.doc-section { margin-bottom: 32px; }
+.doc-section {
+  margin-bottom: 32px;
+}
 .doc-section__title {
-  font-size: 18px; font-weight: 600; color: var(--el-text-color-primary);
-  margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--el-border-color-lighter);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--el-border-color-lighter);
 }
 .doc-section__desc {
-  font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 16px; line-height: 1.6;
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0 0 16px;
+  line-height: 1.6;
   code {
-    background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px;
-    border-radius: 4px; font-size: 13px;
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
   }
 }
 
 .doc-preview {
-  border: 1px solid var(--el-border-color-lighter); border-radius: 12px;
-  overflow: hidden; background: var(--el-bg-color-overlay);
+  border: 1px solid var(--el-border-color-lighter);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--el-bg-color-overlay);
 }
 .doc-preview__body {
-  display: flex; flex-wrap: wrap; align-items: center;
-  gap: 12px; padding: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
 }
 .doc-preview__body--column {
   flex-direction: column;
@@ -508,21 +581,51 @@ function resetProgress() {
   gap: 20px;
 }
 .doc-code {
-  border-top: 1px solid var(--el-border-color-lighter); background: var(--el-fill-color-light);
-  padding: 16px 20px; overflow-x: auto;
-  pre { margin: 0; padding: 0; }
+  border-top: 1px solid var(--el-border-color-lighter);
+  background: var(--el-fill-color-light);
+  padding: 16px 20px;
+  overflow-x: auto;
+  pre {
+    margin: 0;
+    padding: 0;
+  }
   code {
     font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
-    font-size: 13px; line-height: 1.7; color: var(--el-text-color-regular); white-space: pre;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--el-text-color-regular);
+    white-space: pre;
   }
 }
 
-.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
-.doc-table { overflow-x: auto;
-  table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); white-space: nowrap; }
-  th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); }
-  td { color: var(--el-text-color-regular); }
+.doc-subtitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 20px 0 10px;
+}
+.doc-table {
+  overflow-x: auto;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+    white-space: nowrap;
+  }
+  th {
+    background: var(--el-fill-color-light);
+    font-weight: 600;
+    color: var(--el-text-color-primary);
+  }
+  td {
+    color: var(--el-text-color-regular);
+  }
 }
 
 // 进度条演示

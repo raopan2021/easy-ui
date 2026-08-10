@@ -1,14 +1,24 @@
+<script setup lang="ts">
+import { XlyStatistic } from 'easy-ui'
+</script>
+
 <template>
   <div class="statistic-doc">
     <!-- 页面标题 -->
     <div class="doc-header">
-      <h1 class="doc-title">Statistic 统计数值</h1>
-      <p class="doc-desc">现代简约风格的统计数值组件，图标在标题左侧，优化了视觉层次和整体美感。</p>
+      <h1 class="doc-title">
+        Statistic 统计数值
+      </h1>
+      <p class="doc-desc">
+        现代简约风格的统计数值组件，图标在标题左侧，优化了视觉层次和整体美感。
+      </p>
     </div>
 
     <!-- 基础用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
       <p class="doc-section__desc">
         通过 <code>variant</code> 属性设置样式变体，图标位于标题左侧，视觉层次更清晰。
       </p>
@@ -19,61 +29,44 @@
           <XlyStatistic title="营收金额" :value="324150" prefix="¥" suffix="元" variant="warning" />
           <XlyStatistic title="错误率" :value="2.4" suffix="%" variant="danger" />
         </div>
-        <XlyDocCode :code='`<XlyStatistic title="用户数量" :value="8925" suffix="人" variant="primary" />
-<XlyStatistic title="订单数量" :value="1284" suffix="单" variant="success" />
-<XlyStatistic title="营收金额" :value="324150" prefix="¥" suffix="元" variant="warning" />
-<XlyStatistic title="错误率" :value="2.4" suffix="%" variant="danger" />`' />
+        <XlyDocCode
+          code="<XlyStatistic title=&quot;用户数量&quot; :value=&quot;8925&quot; suffix=&quot;人&quot; variant=&quot;primary&quot; />
+<XlyStatistic title=&quot;订单数量&quot; :value=&quot;1284&quot; suffix=&quot;单&quot; variant=&quot;success&quot; />
+<XlyStatistic title=&quot;营收金额&quot; :value=&quot;324150&quot; prefix=&quot;¥&quot; suffix=&quot;元&quot; variant=&quot;warning&quot; />
+<XlyStatistic title=&quot;错误率&quot; :value=&quot;2.4&quot; suffix=&quot;%&quot; variant=&quot;danger&quot; />"
+        />
       </div>
     </section>
 
     <!-- 图标用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">图标用法</h2>
+      <h2 class="doc-section__title">
+        图标用法
+      </h2>
       <p class="doc-section__desc">
         通过 <code>icon</code> 属性添加图标，图标在标题左侧，图标背景色与变体颜色协调。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyStatistic
-            title="用户统计"
-            :value="12543"
-            suffix="人"
-            icon="el:User"
-            variant="primary"
-          />
-          <XlyStatistic
-            title="订单统计"
-            :value="8925"
-            suffix="单"
-            icon="el:ShoppingCart"
-            variant="success"
-          />
-          <XlyStatistic
-            title="收入统计"
-            :value="324150"
-            prefix="¥"
-            suffix="元"
-            icon="el:DataLine"
-            variant="warning"
-          />
-          <XlyStatistic
-            title="错误统计"
-            :value="12"
-            suffix="个"
-            icon="el:DataLine"
-            variant="danger"
-          />
+          <XlyStatistic title="用户统计" :value="12543" suffix="人" icon="el:User" variant="primary" />
+          <XlyStatistic title="订单统计" :value="8925" suffix="单" icon="el:ShoppingCart" variant="success" />
+          <XlyStatistic title="收入统计" :value="324150" prefix="¥" suffix="元" icon="el:DataLine" variant="warning" />
+          <XlyStatistic title="错误统计" :value="12" suffix="个" icon="el:DataLine" variant="danger" />
         </div>
-        <XlyDocCode :code='`<XlyStatistic title="用户统计" :value="12543" suffix="人" icon="el:User" variant="primary" />
-<XlyStatistic title="订单统计" :value="8925" suffix="单" icon="el:ShoppingCart" variant="success" />
-<XlyStatistic title="收入统计" :value="324150" prefix="¥" suffix="元" icon="el:DataLine" variant="warning" />
-<XlyStatistic title="错误统计" :value="12" suffix="个" icon="el:DataLine" variant="danger" />`' />
+        <XlyDocCode
+          code="<XlyStatistic title=&quot;用户统计&quot; :value=&quot;12543&quot; suffix=&quot;人&quot; icon=&quot;el:User&quot; variant=&quot;primary&quot; />
+<XlyStatistic title=&quot;订单统计&quot; :value=&quot;8925&quot; suffix=&quot;单&quot; icon=&quot;el:ShoppingCart&quot; variant=&quot;success&quot; />
+<XlyStatistic title=&quot;收入统计&quot; :value=&quot;324150&quot; prefix=&quot;¥&quot; suffix=&quot;元&quot; icon=&quot;el:DataLine&quot; variant=&quot;warning&quot; />
+<XlyStatistic title=&quot;错误统计&quot; :value=&quot;12&quot; suffix=&quot;个&quot; icon=&quot;el:DataLine&quot; variant=&quot;danger&quot; />"
+        />
       </div>
     </section>
 
     <!-- 前后缀 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">前后缀</h2>
+      <h2 class="doc-section__title">
+        前后缀
+      </h2>
       <p class="doc-section__desc">
         通过 <code>prefix</code> 和 <code>suffix</code> 属性设置数值的前缀和后缀。
       </p>
@@ -83,26 +76,25 @@
           <XlyStatistic title="用户增长" :value="24.8" suffix="%" variant="success" />
           <XlyStatistic title="响应时间" :value="2.4" suffix="秒" variant="info" />
         </div>
-        <XlyDocCode :code='`<XlyStatistic title="本月营收" :value="892500" prefix="¥" suffix="元" variant="primary" />
-<XlyStatistic title="用户增长" :value="24.8" suffix="%" variant="success" />
-<XlyStatistic title="响应时间" :value="2.4" suffix="秒" variant="info" />`' />
+        <XlyDocCode
+          code="<XlyStatistic title=&quot;本月营收&quot; :value=&quot;892500&quot; prefix=&quot;¥&quot; suffix=&quot;元&quot; variant=&quot;primary&quot; />
+<XlyStatistic title=&quot;用户增长&quot; :value=&quot;24.8&quot; suffix=&quot;%&quot; variant=&quot;success&quot; />
+<XlyStatistic title=&quot;响应时间&quot; :value=&quot;2.4&quot; suffix=&quot;秒&quot; variant=&quot;info&quot; />"
+        />
       </div>
     </section>
 
     <!-- 尺寸 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">不同尺寸</h2>
-      <p class="doc-section__desc">通过 <code>size</code> 属性设置组件尺寸，支持 sm / md / lg。</p>
+      <h2 class="doc-section__title">
+        不同尺寸
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>size</code> 属性设置组件尺寸，支持 sm / md / lg。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyStatistic
-            title="今日新增"
-            :value="324"
-            suffix="人"
-            size="sm"
-            variant="primary"
-            icon="el:User"
-          />
+          <XlyStatistic title="今日新增" :value="324" suffix="人" size="sm" variant="primary" icon="el:User" />
           <XlyStatistic
             title="本月销售额"
             :value="892500"
@@ -122,15 +114,19 @@
             icon="el:Location"
           />
         </div>
-        <XlyDocCode :code='`<XlyStatistic title="今日新增" :value="324" suffix="人" size="sm" variant="primary" icon="el:User" />
-<XlyStatistic title="本月销售额" :value="892500" prefix="¥" suffix="元" size="md" variant="success" icon="el:DataLine" />
-<XlyStatistic title="年度目标" :value="12500000" prefix="¥" suffix="万元" size="lg" variant="warning" icon="el:Location" />`' />
+        <XlyDocCode
+          code="<XlyStatistic title=&quot;今日新增&quot; :value=&quot;324&quot; suffix=&quot;人&quot; size=&quot;sm&quot; variant=&quot;primary&quot; icon=&quot;el:User&quot; />
+<XlyStatistic title=&quot;本月销售额&quot; :value=&quot;892500&quot; prefix=&quot;¥&quot; suffix=&quot;元&quot; size=&quot;md&quot; variant=&quot;success&quot; icon=&quot;el:DataLine&quot; />
+<XlyStatistic title=&quot;年度目标&quot; :value=&quot;12500000&quot; prefix=&quot;¥&quot; suffix=&quot;万元&quot; size=&quot;lg&quot; variant=&quot;warning&quot; icon=&quot;el:Location&quot; />"
+        />
       </div>
     </section>
 
     <!-- 趋势标签 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">趋势标签</h2>
+      <h2 class="doc-section__title">
+        趋势标签
+      </h2>
       <p class="doc-section__desc">
         通过 <code>trend</code> 和 <code>trendLabel</code> 属性展示数据变化趋势。
       </p>
@@ -155,15 +151,21 @@
             icon="el:DataLine"
           />
         </div>
-        <XlyDocCode :code='`<XlyStatistic title="营收增长" :value="32.4" suffix="%" variant="success" trend="up" trend-label="环比 +5.2%" icon="el:DataLine" />
-<XlyStatistic title="用户流失" :value="8.6" suffix="%" variant="danger" trend="down" trend-label="环比 -1.8%" icon="el:DataLine" />`' />
+        <XlyDocCode
+          code="<XlyStatistic title=&quot;营收增长&quot; :value=&quot;32.4&quot; suffix=&quot;%&quot; variant=&quot;success&quot; trend=&quot;up&quot; trend-label=&quot;环比 +5.2%&quot; icon=&quot;el:DataLine&quot; />
+<XlyStatistic title=&quot;用户流失&quot; :value=&quot;8.6&quot; suffix=&quot;%&quot; variant=&quot;danger&quot; trend=&quot;down&quot; trend-label=&quot;环比 -1.8%&quot; icon=&quot;el:DataLine&quot; />"
+        />
       </div>
     </section>
 
     <!-- 说明文字 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">说明文字</h2>
-      <p class="doc-section__desc">通过 <code>extra</code> 属性添加底部说明文字。</p>
+      <h2 class="doc-section__title">
+        说明文字
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>extra</code> 属性添加底部说明文字。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <XlyStatistic
@@ -184,29 +186,33 @@
             extra="基于 1,254 条用户评价，NPS 得分 +42"
           />
         </div>
-        <XlyDocCode :code='`<XlyStatistic
-  title="本月收入"
-  :value="892500"
-  prefix="¥"
-  suffix="元"
-  variant="primary"
-  icon="el:DataLine"
-  extra="较上月增长 12.5%，完成季度目标的 85%"
+        <XlyDocCode
+          code="<XlyStatistic
+  title=&quot;本月收入&quot;
+  :value=&quot;892500&quot;
+  prefix=&quot;¥&quot;
+  suffix=&quot;元&quot;
+  variant=&quot;primary&quot;
+  icon=&quot;el:DataLine&quot;
+  extra=&quot;较上月增长 12.5%，完成季度目标的 85%&quot;
 />
 <XlyStatistic
-  title="用户满意度"
-  :value="4.85"
-  suffix="/5.0"
-  variant="success"
-  icon="el:DataLine"
-  extra="基于 1,254 条用户评价，NPS 得分 +42"
-/>`' />
+  title=&quot;用户满意度&quot;
+  :value=&quot;4.85&quot;
+  suffix=&quot;/5.0&quot;
+  variant=&quot;success&quot;
+  icon=&quot;el:DataLine&quot;
+  extra=&quot;基于 1,254 条用户评价，NPS 得分 +42&quot;
+/>"
+        />
       </div>
     </section>
 
     <!-- 组合展示 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">组合展示</h2>
+      <h2 class="doc-section__title">
+        组合展示
+      </h2>
       <p class="doc-section__desc">
         在实际业务场景中，统计数值常以组合形式出现，适合仪表盘等场景。
       </p>
@@ -255,45 +261,51 @@
             />
           </div>
         </div>
-        <XlyDocCode :code='`<div class="dashboard-grid">
+        <XlyDocCode
+          code="<div class=&quot;dashboard-grid&quot;>
   <XlyStatistic
-    title="总用户数"
-    :value="12543"
-    suffix="人"
-    variant="primary"
-    icon="el:User"
-    :bordered="true"
-    :hoverable="true"
+    title=&quot;总用户数&quot;
+    :value=&quot;12543&quot;
+    suffix=&quot;人&quot;
+    variant=&quot;primary&quot;
+    icon=&quot;el:User&quot;
+    :bordered=&quot;true&quot;
+    :hoverable=&quot;true&quot;
   />
   <XlyStatistic
-    title="本月收入"
-    :value="892500"
-    prefix="¥"
-    suffix="元"
-    variant="success"
-    icon="el:DataLine"
-    :bordered="true"
-    :hoverable="true"
-    trend="up"
-    trend-label="+12.5%"
+    title=&quot;本月收入&quot;
+    :value=&quot;892500&quot;
+    prefix=&quot;¥&quot;
+    suffix=&quot;元&quot;
+    variant=&quot;success&quot;
+    icon=&quot;el:DataLine&quot;
+    :bordered=&quot;true&quot;
+    :hoverable=&quot;true&quot;
+    trend=&quot;up&quot;
+    trend-label=&quot;+12.5%&quot;
   />
   <XlyStatistic
-    title="订单数量"
-    :value="1284"
-    suffix="单"
-    variant="warning"
-    icon="el:DataLine"
-    :bordered="true"
-    :hoverable="true"
+    title=&quot;订单数量&quot;
+    :value=&quot;1284&quot;
+    suffix=&quot;单&quot;
+    variant=&quot;warning&quot;
+    icon=&quot;el:DataLine&quot;
+    :bordered=&quot;true&quot;
+    :hoverable=&quot;true&quot;
   />
-</div>`' />
+</div>"
+        />
       </div>
     </section>
 
     <!-- API 文档 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">API</h2>
-      <h3 class="doc-subtitle">Props</h3>
+      <h2 class="doc-section__title">
+        API
+      </h2>
+      <h3 class="doc-subtitle">
+        Props
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -401,10 +413,6 @@
     </section>
   </div>
 </template>
-
-<script setup lang="ts">
-import XlyStatistic from '@/components/xly-statistic/index.vue'
-</script>
 
 <style scoped lang="scss">
 .statistic-doc {

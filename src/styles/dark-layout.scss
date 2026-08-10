@@ -37,7 +37,9 @@ html.dark {
   /* 用户下拉菜单 */
   .header__user-dropdown {
     background: #1d1e1f;
-    box-shadow: 0 8px 30px rgb(0 0 0 / 45%), 0 2px 8px rgb(0 0 0 / 35%);
+    box-shadow:
+      0 8px 30px rgb(0 0 0 / 45%),
+      0 2px 8px rgb(0 0 0 / 35%);
   }
 
   .header__user-dropdown-email {

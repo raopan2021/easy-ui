@@ -37,7 +37,8 @@ export function xlyComponentResolver(): ComponentResolver {
     type: 'component',
 
     resolve(name: string) {
-      if (!name.startsWith('Xly')) return
+      if (!name.startsWith('Xly'))
+        return
 
       // 所有组件统一从主入口导入，消费方打包工具负责 tree-shaking
       // 特殊名称（别名 / 子组件）需要显式导出映射

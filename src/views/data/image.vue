@@ -1,14 +1,40 @@
+<script setup lang="ts">
+import { XlyAvatar, XlyImage } from 'easy-ui'
+
+// 示例图片
+const singleImage = 'https://picsum.photos/400/300?random=1'
+const twoImages = ['https://picsum.photos/400/300?random=2', 'https://picsum.photos/400/300?random=3']
+const threeImages = [
+  'https://picsum.photos/400/300?random=4',
+  'https://picsum.photos/400/300?random=5',
+  'https://picsum.photos/400/300?random=6',
+]
+const fourImages = [
+  'https://picsum.photos/400/300?random=7',
+  'https://picsum.photos/400/300?random=8',
+  'https://picsum.photos/400/300?random=9',
+  'https://picsum.photos/400/300?random=10',
+]
+const manyImages = Array.from({ length: 12 }, (_, i) => `https://picsum.photos/400/300?random=${i + 20}`)
+</script>
+
 <template>
   <div class="image-doc">
     <!-- 页面标题 -->
     <div class="doc-header">
-      <h1 class="doc-title">Image 图片</h1>
-      <p class="doc-desc">图片展示组件，支持多种数据格式、懒加载加载、预览放大等功能。</p>
+      <h1 class="doc-title">
+        Image 图片
+      </h1>
+      <p class="doc-desc">
+        图片展示组件，支持多种数据格式、懒加载加载、预览放大等功能。
+      </p>
     </div>
 
     <!-- 基础用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
       <p class="doc-section__desc">
         通过 <code>src</code> 属性传入图片地址，支持数组或逗号拼接的字符串。
       </p>
@@ -16,21 +42,27 @@
         <div class="doc-preview__body">
           <XlyImage :src="singleImage" alt="单张图片" />
         </div>
-        <XlyDocCode :code="`<!-- 单张图片 -->
+        <XlyDocCode
+          code="<!-- 单张图片 -->
 <XlyImage :src=&quot;singleImage&quot; />
 
 <!-- 数组形式 -->
 <XlyImage :src=&quot;['url1', 'url2', 'url3']&quot; />
 
 <!-- 逗号拼接字符串 -->
-<XlyImage src=&quot;url1, url2, url3&quot; />`" />
+<XlyImage src=&quot;url1, url2, url3&quot; />"
+        />
       </div>
     </section>
 
     <!-- 不同数量展示 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">不同数量展示</h2>
-      <p class="doc-section__desc">根据图片数量自动调整布局，支持单图和多图展示。</p>
+      <h2 class="doc-section__title">
+        不同数量展示
+      </h2>
+      <p class="doc-section__desc">
+        根据图片数量自动调整布局，支持单图和多图展示。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="image-row">
@@ -52,16 +84,20 @@
             </div>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyImage :src="singleImage" />
-<XlyImage :src="twoImages" />
-<XlyImage :src="threeImages" />
-<XlyImage :src="fourImages" />`' />
+        <XlyDocCode
+          code="<XlyImage :src=&quot;singleImage&quot; />
+<XlyImage :src=&quot;twoImages&quot; />
+<XlyImage :src=&quot;threeImages&quot; />
+<XlyImage :src=&quot;fourImages&quot; />"
+        />
       </div>
     </section>
 
     <!-- 自定义显示数量 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义显示数量</h2>
+      <h2 class="doc-section__title">
+        自定义显示数量
+      </h2>
       <p class="doc-section__desc">
         通过 <code>max</code> 属性设置多图模式下显示的图片数量，超出部分显示 +N 提示。
       </p>
@@ -78,15 +114,21 @@
             </div>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyImage :src="manyImages" :max="1" />
-<XlyImage :src="manyImages" :max="2" />`' />
+        <XlyDocCode
+          code="<XlyImage :src=&quot;manyImages&quot; :max=&quot;1&quot; />
+<XlyImage :src=&quot;manyImages&quot; :max=&quot;2&quot; />"
+        />
       </div>
     </section>
 
     <!-- 图片填充模式 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">图片填充模式</h2>
-      <p class="doc-section__desc">通过 <code>fit</code> 属性设置图片的填充方式。</p>
+      <h2 class="doc-section__title">
+        图片填充模式
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>fit</code> 属性设置图片的填充方式。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="image-row">
@@ -108,16 +150,20 @@
             </div>
           </div>
         </div>
-        <XlyDocCode :code='`<XlyImage :src="singleImage" fit="fill" />
-<XlyImage :src="singleImage" fit="contain" />
-<XlyImage :src="singleImage" fit="cover" />
-<XlyImage :src="singleImage" fit="scale-down" />`' />
+        <XlyDocCode
+          code="<XlyImage :src=&quot;singleImage&quot; fit=&quot;fill&quot; />
+<XlyImage :src=&quot;singleImage&quot; fit=&quot;contain&quot; />
+<XlyImage :src=&quot;singleImage&quot; fit=&quot;cover&quot; />
+<XlyImage :src=&quot;singleImage&quot; fit=&quot;scale-down&quot; />"
+        />
       </div>
     </section>
 
     <!-- 自定义尺寸 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义尺寸</h2>
+      <h2 class="doc-section__title">
+        自定义尺寸
+      </h2>
       <p class="doc-section__desc">
         通过 <code>width</code> 和 <code>height</code> 属性设置图片尺寸。<br>
         <strong>如果只设置其中一个，宽高将使用相同的值（正方形）。</strong>
@@ -143,22 +189,26 @@
             </div>
           </div>
         </div>
-        <XlyDocCode :code='`<!-- 只设置一个尺寸，宽高相同 -->
-<XlyImage :src="singleImage" :width="80" />  <!-- 80x80 -->
-<XlyImage :src="singleImage" :width="60" />  <!-- 60x60 -->
+        <XlyDocCode
+          code="<!-- 只设置一个尺寸，宽高相同 -->
+<XlyImage :src=&quot;singleImage&quot; :width=&quot;80&quot; />  <!-- 80x80 -->
+<XlyImage :src=&quot;singleImage&quot; :width=&quot;60&quot; />  <!-- 60x60 -->
 
 <!-- 同时设置宽高 -->
-<XlyImage :src="singleImage" :width="120" :height="80" />
+<XlyImage :src=&quot;singleImage&quot; :width=&quot;120&quot; :height=&quot;80&quot; />
 
 <!-- 字符串形式 -->
-<XlyImage :src="singleImage" width="80px" />
-<XlyImage :src="singleImage" width="100%" />`' />
+<XlyImage :src=&quot;singleImage&quot; width=&quot;80px&quot; />
+<XlyImage :src=&quot;singleImage&quot; width=&quot;100%&quot; />"
+        />
       </div>
     </section>
 
     <!-- 预览功能 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">预览功能</h2>
+      <h2 class="doc-section__title">
+        预览功能
+      </h2>
       <p class="doc-section__desc">
         设置 <code>preview</code> 属性开启预览，点击图片可放大查看。支持滚轮缩放、拖拽移动、旋转、左右切换。
       </p>
@@ -166,13 +216,15 @@
         <div class="doc-preview__body">
           <XlyImage :src="fourImages" :preview="true" />
         </div>
-        <XlyDocCode :code='`<XlyImage :src="fourImages" :preview="true" />`' />
+        <XlyDocCode code="<XlyImage :src=&quot;fourImages&quot; :preview=&quot;true&quot; />" />
       </div>
     </section>
 
     <!-- 自定义预览操作 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义预览操作</h2>
+      <h2 class="doc-section__title">
+        自定义预览操作
+      </h2>
       <p class="doc-section__desc">
         通过 <code>previewActions</code> 属性自定义预览界面的操作按钮。
       </p>
@@ -193,40 +245,56 @@
             </div>
           </div>
         </div>
-        <XlyDocCode :code="`<!-- 仅缩放 -->
+        <XlyDocCode
+          code="<!-- 仅缩放 -->
 <XlyImage :src=&quot;singleImage&quot; :preview=&quot;true&quot; :preview-actions=&quot;['zoomIn', 'zoomOut']&quot; />
 
 <!-- 仅旋转 -->
-<XlyImage :src=&quot;singleImage&quot; :preview=&quot;true&quot; :preview-actions=&quot;['rotateLeft', 'rotateRight', 'reset']&quot; />`" />
+<XlyImage :src=&quot;singleImage&quot; :preview=&quot;true&quot; :preview-actions=&quot;['rotateLeft', 'rotateRight', 'reset']&quot; />"
+        />
       </div>
     </section>
 
     <!-- 业务场景 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">业务场景</h2>
+      <h2 class="doc-section__title">
+        业务场景
+      </h2>
 
-      <h3 class="doc-subtitle">商品图片</h3>
+      <h3 class="doc-subtitle">
+        商品图片
+      </h3>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="product-card">
             <XlyImage :src="fourImages" />
             <div class="product-info">
-              <div class="product-title">AirPods Pro 无线耳机</div>
-              <div class="product-price">¥1999.00</div>
+              <div class="product-title">
+                AirPods Pro 无线耳机
+              </div>
+              <div class="product-price">
+                ¥1999.00
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <h3 class="doc-subtitle">用户相册</h3>
+      <h3 class="doc-subtitle">
+        用户相册
+      </h3>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="user-album">
             <div class="album-header">
               <XlyAvatar>紫</XlyAvatar>
               <div class="album-info">
-                <div class="album-title">旅行照片</div>
-                <div class="album-count">12 张照片</div>
+                <div class="album-title">
+                  旅行照片
+                </div>
+                <div class="album-count">
+                  12 张照片
+                </div>
               </div>
             </div>
             <XlyImage :src="manyImages" :max="6" />
@@ -234,16 +302,22 @@
         </div>
       </div>
 
-      <h3 class="doc-subtitle">聊天消息中的图片</h3>
+      <h3 class="doc-subtitle">
+        聊天消息中的图片
+      </h3>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="chat-messages">
             <div class="chat-message">
               <XlyAvatar>张</XlyAvatar>
               <div class="chat-content">
-                <div class="chat-bubble">这是现场的照片</div>
+                <div class="chat-bubble">
+                  这是现场的照片
+                </div>
                 <XlyImage :src="threeImages" :max="3" />
-                <div class="chat-time">10:30</div>
+                <div class="chat-time">
+                  10:30
+                </div>
               </div>
             </div>
           </div>
@@ -253,9 +327,13 @@
 
     <!-- API 文档 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">API</h2>
+      <h2 class="doc-section__title">
+        API
+      </h2>
 
-      <h3 class="doc-subtitle">Props</h3>
+      <h3 class="doc-subtitle">
+        Props
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -331,7 +409,9 @@
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Events</h3>
+      <h3 class="doc-subtitle">
+        Events
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -356,7 +436,9 @@
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Slots</h3>
+      <h3 class="doc-subtitle">
+        Slots
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -376,23 +458,6 @@
     </section>
   </div>
 </template>
-
-<script setup lang="ts">
-import XlyAvatar from '@/components/xly-avatar/index.vue'
-import XlyImage from '@/components/xly-image/index.vue'
-
-// 示例图片
-const singleImage = 'https://picsum.photos/400/300?random=1'
-const twoImages = ['https://picsum.photos/400/300?random=2', 'https://picsum.photos/400/300?random=3']
-const threeImages = ['https://picsum.photos/400/300?random=4', 'https://picsum.photos/400/300?random=5', 'https://picsum.photos/400/300?random=6']
-const fourImages = [
-  'https://picsum.photos/400/300?random=7',
-  'https://picsum.photos/400/300?random=8',
-  'https://picsum.photos/400/300?random=9',
-  'https://picsum.photos/400/300?random=10',
-]
-const manyImages = Array.from({ length: 12 }, (_, i) => `https://picsum.photos/400/300?random=${i + 20}`)
-</script>
 
 <style scoped lang="scss">
 .image-doc {
@@ -628,7 +693,7 @@ const manyImages = Array.from({ length: 12 }, (_, i) => `https://picsum.photos/4
 
 .chat-bubble {
   padding: 10px 14px;
-  background: #f0f2f8;
+  background: var(--el-fill-color-light);
   border-radius: 12px;
   font-size: 14px;
   color: var(--el-text-color-regular);

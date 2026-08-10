@@ -1,3 +1,92 @@
+<script setup lang="ts">
+import { onMounted, onUnmounted, reactive, ref } from 'vue'
+import logoUrl from '@/assets/logo.png'
+
+defineProps<{ loading?: boolean, error?: string }>()
+const emit = defineEmits<{ submit: [form: { username: string, password: string }] }>()
+
+const canvasRef = ref<HTMLCanvasElement | null>(null)
+let animId = 0
+
+interface Particle {
+  x: number
+  y: number
+  vx: number
+  vy: number
+  r: number
+  a: number
+}
+let pts: Particle[] = []
+
+function initCanvas() {
+  const c = canvasRef.value
+  if (!c)
+    return
+  const ctx = c.getContext('2d')
+  if (!ctx)
+    return
+
+  c.width = window.innerWidth
+  c.height = window.innerHeight
+
+  pts = Array.from({ length: 90 }, () => ({
+    x: Math.random() * c.width,
+    y: Math.random() * c.height,
+    vx: (Math.random() - 0.5) * 0.5,
+    vy: (Math.random() - 0.5) * 0.5,
+    r: Math.random() * 1.6 + 0.3,
+    a: Math.random() * 0.6 + 0.2,
+  }))
+
+  cancelAnimationFrame(animId)
+
+  const draw = () => {
+    ctx.clearRect(0, 0, c.width, c.height)
+    pts.forEach((p) => {
+      p.x += p.vx
+      p.y += p.vy
+      if (p.x < 0 || p.x > c.width)
+        p.vx *= -1
+      if (p.y < 0 || p.y > c.height)
+        p.vy *= -1
+      ctx.beginPath()
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
+      ctx.fillStyle = `rgba(79,110,247,${p.a * 0.5})`
+      ctx.fill()
+    })
+    for (let i = 0; i < pts.length; i++) {
+      for (let j = i + 1; j < pts.length; j++) {
+        const dx = pts[i].x - pts[j].x
+        const dy = pts[i].y - pts[j].y
+        const d = Math.sqrt(dx * dx + dy * dy)
+        if (d < 110) {
+          ctx.beginPath()
+          ctx.moveTo(pts[i].x, pts[i].y)
+          ctx.lineTo(pts[j].x, pts[j].y)
+          ctx.strokeStyle = `rgba(79,110,247,${(1 - d / 110) * 0.18})`
+          ctx.lineWidth = 0.5
+          ctx.stroke()
+        }
+      }
+    }
+    animId = requestAnimationFrame(draw)
+  }
+  draw()
+}
+
+onMounted(() => initCanvas())
+onUnmounted(() => cancelAnimationFrame(animId))
+
+const showPwd = ref(false)
+const form = reactive({ username: 'EaseUI', password: '123456' })
+
+function handleSubmit() {
+  if (form.username && form.password) {
+    emit('submit', { username: form.username, password: form.password })
+  }
+}
+</script>
+
 <template>
   <div class="t-dark">
     <canvas ref="canvasRef" class="t-dark__canvas" aria-hidden="true" />
@@ -19,12 +108,16 @@
         <div class="scan-line" aria-hidden="true" />
 
         <div class="t-dark__logo">
-          <img :src="logoUrl" alt="logo" />
+          <img :src="logoUrl" alt="logo">
           <div class="logo-ring" />
         </div>
 
-        <h1 class="t-dark__title">心灵云管理系统</h1>
-        <p class="t-dark__sub">XINGLING CLOUD PLATFORM</p>
+        <h1 class="t-dark__title">
+          心灵云管理系统
+        </h1>
+        <p class="t-dark__sub">
+          XINGLING CLOUD PLATFORM
+        </p>
 
         <!-- 状态指示器 -->
         <div class="status-bar">
@@ -38,13 +131,7 @@
           <div class="df-field">
             <label class="df-label">账号</label>
             <div class="df-input-wrap">
-              <svg
-                class="df-input-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              >
+              <svg class="df-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
@@ -54,20 +141,14 @@
                 class="df-input"
                 placeholder="请输入账号"
                 autocomplete="username"
-              />
+              >
             </div>
           </div>
 
           <div class="df-field">
             <label class="df-label">密码</label>
             <div class="df-input-wrap">
-              <svg
-                class="df-input-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              >
+              <svg class="df-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                 <path d="M7 11V7a5 5 0 0 1 10 0v4" />
               </svg>
@@ -77,7 +158,7 @@
                 class="df-input df-input--pwd"
                 placeholder="请输入密码"
                 autocomplete="current-password"
-              />
+              >
               <button type="button" class="df-toggle" @click="showPwd = !showPwd">
                 <svg
                   v-if="!showPwd"
@@ -100,9 +181,7 @@
                   width="16"
                   height="16"
                 >
-                  <path
-                    d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"
-                  />
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
                   <line x1="1" y1="1" x2="23" y2="23" />
                 </svg>
               </button>
@@ -110,14 +189,7 @@
           </div>
 
           <div v-if="error" class="df-error">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              width="14"
-              height="14"
-            >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
               <circle cx="12" cy="12" r="10" />
               <line x1="12" y1="8" x2="12" y2="12" />
               <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -125,11 +197,7 @@
             {{ error }}
           </div>
 
-          <button
-            type="submit"
-            class="df-btn"
-            :disabled="loading || !form.username || !form.password"
-          >
+          <button type="submit" class="df-btn" :disabled="loading || !form.username || !form.password">
             <span class="df-btn-shimmer" />
             <span v-if="loading" class="df-btn-spinner">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -157,14 +225,7 @@
 
           <!-- 测试账号提示 -->
           <div class="df-hint">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              width="12"
-              height="12"
-            >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
               <circle cx="12" cy="12" r="10" />
               <line x1="12" y1="8" x2="12" y2="12" />
               <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -194,91 +255,6 @@
     </footer>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref, reactive, onMounted, onUnmounted } from 'vue'
-import logoUrl from '@/assets/logo.png'
-
-defineProps<{ loading?: boolean; error?: string }>()
-const emit = defineEmits<{ submit: [form: { username: string; password: string }] }>()
-
-const canvasRef = ref<HTMLCanvasElement | null>(null)
-let animId = 0
-
-interface Particle {
-  x: number
-  y: number
-  vx: number
-  vy: number
-  r: number
-  a: number
-}
-let pts: Particle[] = []
-
-function initCanvas() {
-  const c = canvasRef.value
-  if (!c) return
-  const ctx = c.getContext('2d')
-  if (!ctx) return
-
-  c.width = window.innerWidth
-  c.height = window.innerHeight
-
-  pts = Array.from({ length: 90 }, () => ({
-    x: Math.random() * c.width,
-    y: Math.random() * c.height,
-    vx: (Math.random() - 0.5) * 0.5,
-    vy: (Math.random() - 0.5) * 0.5,
-    r: Math.random() * 1.6 + 0.3,
-    a: Math.random() * 0.6 + 0.2,
-  }))
-
-  cancelAnimationFrame(animId)
-
-  const draw = () => {
-    ctx.clearRect(0, 0, c.width, c.height)
-    pts.forEach((p) => {
-      p.x += p.vx
-      p.y += p.vy
-      if (p.x < 0 || p.x > c.width) p.vx *= -1
-      if (p.y < 0 || p.y > c.height) p.vy *= -1
-      ctx.beginPath()
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-      ctx.fillStyle = `rgba(79,110,247,${p.a * 0.5})`
-      ctx.fill()
-    })
-    for (let i = 0; i < pts.length; i++) {
-      for (let j = i + 1; j < pts.length; j++) {
-        const dx = pts[i].x - pts[j].x,
-          dy = pts[i].y - pts[j].y
-        const d = Math.sqrt(dx * dx + dy * dy)
-        if (d < 110) {
-          ctx.beginPath()
-          ctx.moveTo(pts[i].x, pts[i].y)
-          ctx.lineTo(pts[j].x, pts[j].y)
-          ctx.strokeStyle = `rgba(79,110,247,${(1 - d / 110) * 0.18})`
-          ctx.lineWidth = 0.5
-          ctx.stroke()
-        }
-      }
-    }
-    animId = requestAnimationFrame(draw)
-  }
-  draw()
-}
-
-onMounted(() => initCanvas())
-onUnmounted(() => cancelAnimationFrame(animId))
-
-const showPwd = ref(false)
-const form = reactive({ username: 'EaseUI', password: '123456' })
-
-function handleSubmit() {
-  if (form.username && form.password) {
-    emit('submit', { username: form.username, password: form.password })
-  }
-}
-</script>
 
 <style scoped lang="scss">
 .t-dark {
@@ -612,12 +588,7 @@ function handleSubmit() {
   .df-btn-shimmer {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      105deg,
-      transparent 30%,
-      rgba(255, 255, 255, 0.18) 50%,
-      transparent 70%
-    );
+    background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.18) 50%, transparent 70%);
     transform: translateX(-100%);
     pointer-events: none;
   }
@@ -689,10 +660,10 @@ function handleSubmit() {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  &--left {
+  &.side-lines--left {
     align-items: flex-end;
   }
-  &--right {
+  &.side-lines--right {
     align-items: flex-start;
   }
 }

@@ -1,3 +1,18 @@
+<script setup lang="ts">
+import { ArrowLeft, HomeFilled } from '@element-plus/icons-vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+function goHome() {
+  router.push('/')
+}
+
+function goBack() {
+  router.back()
+}
+</script>
+
 <template>
   <div class="exception-page">
     <div class="exception-content">
@@ -26,7 +41,17 @@
           <rect x="290" y="215" width="18" height="18" rx="2" fill="#c4cded" />
           <rect x="320" y="215" width="18" height="18" rx="2" fill="#c4cded" />
           <!-- 404 数字 -->
-          <text x="140" y="180" font-family="Arial Black, sans-serif" font-size="100" font-weight="900" fill="#4f6ef7" opacity="0.9">404</text>
+          <text
+            x="140"
+            y="180"
+            font-family="Arial Black, sans-serif"
+            font-size="100"
+            font-weight="900"
+            fill="#4f6ef7"
+            opacity="0.9"
+          >
+            404
+          </text>
           <!-- 问号 -->
           <text x="260" y="150" font-family="Arial, sans-serif" font-size="40" fill="#8e8ea0">?</text>
         </svg>
@@ -34,8 +59,12 @@
 
       <!-- 错误信息 -->
       <div class="exception-info">
-        <h1 class="exception-title">页面不存在</h1>
-        <p class="exception-desc">抱歉，您访问的页面已经迷路啦，请检查网址是否正确</p>
+        <h1 class="exception-title">
+          页面不存在
+        </h1>
+        <p class="exception-desc">
+          抱歉，您访问的页面已经迷路啦，请检查网址是否正确
+        </p>
       </div>
 
       <!-- 操作按钮 -->
@@ -52,21 +81,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { HomeFilled, ArrowLeft } from '@element-plus/icons-vue'
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
-
-function goHome() {
-  router.push('/')
-}
-
-function goBack() {
-  router.back()
-}
-</script>
 
 <style scoped lang="scss">
 $primary: var(--el-color-primary);

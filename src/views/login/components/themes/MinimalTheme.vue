@@ -1,3 +1,26 @@
+<script setup lang="ts">
+import { reactive, ref } from 'vue'
+import logoUrl from '@/assets/logo.png'
+
+defineProps<{ loading?: boolean, error?: string }>()
+const emit = defineEmits<{ submit: [form: { username: string, password: string }] }>()
+
+const stats = [
+  { num: '500+', label: '合作企业' },
+  { num: '100万+', label: '服务用户' },
+  { num: '99.9%', label: '系统稳定性' },
+]
+
+const showPwd = ref(false)
+const form = reactive({ username: 'EaseUI', password: '123456' })
+
+function handleSubmit() {
+  if (form.username && form.password) {
+    emit('submit', { username: form.username, password: form.password })
+  }
+}
+</script>
+
 <template>
   <div class="t-minimal">
     <!-- 左侧插图区 -->
@@ -8,9 +31,13 @@
         <span class="art-circle art-circle--3" />
         <!-- 核心内容 -->
         <div class="art-content">
-          <img :src="logoUrl" alt="logo" class="art-logo" />
-          <h2 class="art-title">心灵云</h2>
-          <p class="art-desc">专注企业数字健康管理<br />让每一份关怀都精准抵达</p>
+          <img :src="logoUrl" alt="logo" class="art-logo">
+          <h2 class="art-title">
+            心灵云
+          </h2>
+          <p class="art-desc">
+            专注企业数字健康管理<br>让每一份关怀都精准抵达
+          </p>
           <div class="art-stats">
             <div v-for="s in stats" :key="s.label" class="stat-item">
               <span class="stat-num">{{ s.num }}</span>
@@ -25,10 +52,14 @@
     <div class="t-minimal__right">
       <div class="form-wrap">
         <div class="form-head">
-          <img :src="logoUrl" alt="logo" class="form-logo" />
+          <img :src="logoUrl" alt="logo" class="form-logo">
           <div>
-            <h2 class="form-title">欢迎登录</h2>
-            <p class="form-sub">心灵云企业健康管理平台</p>
+            <h2 class="form-title">
+              欢迎登录
+            </h2>
+            <p class="form-sub">
+              心灵云企业健康管理平台
+            </p>
           </div>
         </div>
 
@@ -37,13 +68,7 @@
           <div class="mf-field">
             <label class="mf-label">账号</label>
             <div class="mf-input-wrap">
-              <svg
-                class="mf-input-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              >
+              <svg class="mf-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                 <circle cx="12" cy="7" r="4" />
               </svg>
@@ -53,20 +78,14 @@
                 class="mf-input"
                 placeholder="请输入账号"
                 autocomplete="username"
-              />
+              >
             </div>
           </div>
 
           <div class="mf-field">
             <label class="mf-label">密码</label>
             <div class="mf-input-wrap">
-              <svg
-                class="mf-input-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-              >
+              <svg class="mf-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                 <path d="M7 11V7a5 5 0 0 1 10 0v4" />
               </svg>
@@ -76,7 +95,7 @@
                 class="mf-input mf-input--pwd"
                 placeholder="请输入密码"
                 autocomplete="current-password"
-              />
+              >
               <button type="button" class="mf-toggle" @click="showPwd = !showPwd">
                 <svg
                   v-if="!showPwd"
@@ -99,9 +118,7 @@
                   width="16"
                   height="16"
                 >
-                  <path
-                    d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"
-                  />
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
                   <line x1="1" y1="1" x2="23" y2="23" />
                 </svg>
               </button>
@@ -109,14 +126,7 @@
           </div>
 
           <div v-if="error" class="mf-error">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              width="14"
-              height="14"
-            >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
               <circle cx="12" cy="12" r="10" />
               <line x1="12" y1="8" x2="12" y2="12" />
               <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -124,11 +134,7 @@
             {{ error }}
           </div>
 
-          <button
-            type="submit"
-            class="mf-btn"
-            :disabled="loading || !form.username || !form.password"
-          >
+          <button type="submit" class="mf-btn" :disabled="loading || !form.username || !form.password">
             <span class="mf-btn-shimmer" />
             <span v-if="loading" class="mf-btn-spinner">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -156,14 +162,7 @@
 
           <!-- 测试账号提示 -->
           <div class="mf-hint">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              width="12"
-              height="12"
-            >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
               <circle cx="12" cy="12" r="10" />
               <line x1="12" y1="8" x2="12" y2="12" />
               <line x1="12" y1="16" x2="12.01" y2="16" />
@@ -172,7 +171,9 @@
           </div>
         </form>
 
-        <p class="form-tip">© 2025 心灵云 · 隐私政策 · 服务协议</p>
+        <p class="form-tip">
+          © 2025 心灵云 · 隐私政策 · 服务协议
+        </p>
       </div>
     </div>
   </div>
@@ -186,29 +187,6 @@
     <span>版权所有 · 违法必究</span>
   </footer>
 </template>
-
-<script setup lang="ts">
-import { ref, reactive } from 'vue'
-import logoUrl from '@/assets/logo.png'
-
-defineProps<{ loading?: boolean; error?: string }>()
-const emit = defineEmits<{ submit: [form: { username: string; password: string }] }>()
-
-const stats = [
-  { num: '500+', label: '合作企业' },
-  { num: '100万+', label: '服务用户' },
-  { num: '99.9%', label: '系统稳定性' },
-]
-
-const showPwd = ref(false)
-const form = reactive({ username: 'EaseUI', password: '123456' })
-
-function handleSubmit() {
-  if (form.username && form.password) {
-    emit('submit', { username: form.username, password: form.password })
-  }
-}
-</script>
 
 <style scoped lang="scss">
 .t-minimal {
@@ -240,7 +218,7 @@ function handleSubmit() {
 .art-circle {
   position: absolute;
   border-radius: 50%;
-  &--1 {
+  &.art-circle--1 {
     width: 520px;
     height: 520px;
     border: 1px solid rgba(79, 110, 247, 0.1);
@@ -248,7 +226,7 @@ function handleSubmit() {
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  &--2 {
+  &.art-circle--2 {
     width: 360px;
     height: 360px;
     border: 1px solid rgba(79, 110, 247, 0.08);
@@ -257,7 +235,7 @@ function handleSubmit() {
     transform: translate(-50%, -50%);
     animation: spin-slow 35s linear infinite;
   }
-  &--3 {
+  &.art-circle--3 {
     width: 220px;
     height: 220px;
     background: radial-gradient(circle, rgba(79, 110, 247, 0.06), transparent);
@@ -548,12 +526,7 @@ function handleSubmit() {
   .mf-btn-shimmer {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      105deg,
-      transparent 30%,
-      rgba(255, 255, 255, 0.22) 50%,
-      transparent 70%
-    );
+    background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.22) 50%, transparent 70%);
     transform: translateX(-100%);
     pointer-events: none;
   }

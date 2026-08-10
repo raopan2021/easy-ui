@@ -1,3 +1,20 @@
+<script setup lang="ts">
+export interface ThemeConfig {
+  id: string
+  name: string
+  color: string
+}
+
+defineProps<{
+  modelValue: string
+  themes: ThemeConfig[]
+}>()
+
+defineEmits<{
+  'update:modelValue': [id: string]
+}>()
+</script>
+
 <template>
   <div class="theme-switcher">
     <span class="ts-label">切换风格</span>
@@ -17,23 +34,6 @@
   </div>
 </template>
 
-<script setup lang="ts">
-export interface ThemeConfig {
-  id: string
-  name: string
-  color: string
-}
-
-defineProps<{
-  modelValue: string
-  themes: ThemeConfig[]
-}>()
-
-defineEmits<{
-  'update:modelValue': [id: string]
-}>()
-</script>
-
 <style scoped lang="scss">
 .theme-switcher {
   position: fixed;
@@ -46,15 +46,15 @@ defineEmits<{
   background: rgba(15, 18, 36, 0.6);
   backdrop-filter: blur(20px) saturate(1.5);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.13);
+  border: 1px solid rgba(255, 255, 255, 0.13);
   border-radius: 48px;
   padding: 7px 14px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.22);
 }
 
 .ts-label {
   font-size: 12px;
-  color: rgba(255,255,255,0.65);
+  color: rgba(255, 255, 255, 0.65);
   font-weight: 500;
   white-space: nowrap;
   margin-right: 4px;
@@ -78,12 +78,12 @@ defineEmits<{
   background: transparent;
 
   &.active {
-    background: rgba(255,255,255,0.11);
-    border-color: rgba(255,255,255,0.22);
+    background: rgba(255, 255, 255, 0.11);
+    border-color: rgba(255, 255, 255, 0.22);
   }
 
   &:hover:not(.active) {
-    background: rgba(255,255,255,0.07);
+    background: rgba(255, 255, 255, 0.07);
   }
 }
 
@@ -92,18 +92,22 @@ defineEmits<{
   height: 10px;
   border-radius: 50%;
   flex-shrink: 0;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
 }
 
 .ts-name {
   font-size: 11px;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255, 255, 255, 0.7);
   white-space: nowrap;
 }
 
 /* 小屏隐藏名称 */
 @media (max-width: 600px) {
-  .ts-name { display: none; }
-  .ts-item { padding: 0 7px; }
+  .ts-name {
+    display: none;
+  }
+  .ts-item {
+    padding: 0 7px;
+  }
 }
 </style>

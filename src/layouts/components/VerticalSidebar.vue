@@ -1,11 +1,78 @@
+<script setup lang="ts">
+import type { MenuItem } from '@/utils/menu'
+import { ArrowRight } from '@element-plus/icons-vue'
+import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { flattenMenu, getMenuData } from '@/utils/menu'
+
+const router = useRouter()
+
+const menuList = ref<MenuItem[]>([])
+
+onMounted(async () => {
+  const menuData = await getMenuData()
+  menuList.value = flattenMenu(menuData)
+})
+
+function resetActive() {
+  menuList.value.forEach((m) => {
+    m.active = false
+    m.open = false
+    if (m.children) {
+      m.children.forEach((c) => {
+        c.active = false
+        c.open = false
+        if (c.children)
+          c.children.forEach(g => (g.active = false))
+      })
+    }
+  })
+}
+
+function handleMenuClick(item: MenuItem) {
+  if (item.children?.length) {
+    item.open = !item.open
+  }
+  else if (item.path) {
+    resetActive()
+    item.active = true
+    router.push(item.path)
+  }
+}
+
+function handleChildClick(child: MenuItem, parent: MenuItem) {
+  resetActive()
+  parent.active = true
+  parent.open = true
+  if (child.children?.length) {
+    child.active = true
+    child.open = !child.open
+  }
+  else {
+    if (child.path) {
+      child.active = true
+      router.push(child.path)
+    }
+  }
+}
+
+function handleGrandClick(grand: MenuItem, child: MenuItem, parent: MenuItem) {
+  resetActive()
+  parent.active = true
+  parent.open = true
+  child.active = true
+  child.open = true
+  grand.active = true
+  if (grand.path) {
+    router.push(grand.path)
+  }
+}
+</script>
+
 <template>
   <aside class="vertical-sidebar">
     <div class="vertical-sidebar__menu">
-      <div
-        v-for="item in menuList"
-        :key="item.id"
-        class="vertical-sidebar__item"
-      >
+      <div v-for="item in menuList" :key="item.id" class="vertical-sidebar__item">
         <!-- 主菜单 -->
         <div
           class="vertical-sidebar__main"
@@ -64,73 +131,6 @@
   </aside>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { ArrowRight } from '@element-plus/icons-vue'
-import { getMenuData, flattenMenu, type MenuItem } from '@/utils/menu'
-
-const router = useRouter()
-
-const menuList = ref<MenuItem[]>([])
-
-onMounted(async () => {
-  const menuData = await getMenuData()
-  menuList.value = flattenMenu(menuData)
-})
-
-function resetActive() {
-  menuList.value.forEach((m) => {
-    m.active = false
-    m.open = false
-    if (m.children) {
-      m.children.forEach((c) => {
-        c.active = false
-        c.open = false
-        if (c.children) c.children.forEach((g) => (g.active = false))
-      })
-    }
-  })
-}
-
-function handleMenuClick(item: MenuItem) {
-  if (item.children?.length) {
-    item.open = !item.open
-  } else if (item.path) {
-    resetActive()
-    item.active = true
-    router.push(item.path)
-  }
-}
-
-function handleChildClick(child: MenuItem, parent: MenuItem) {
-  resetActive()
-  parent.active = true
-  parent.open = true
-  if (child.children?.length) {
-    child.active = true
-    child.open = !child.open
-  } else {
-    if (child.path) {
-      child.active = true
-      router.push(child.path)
-    }
-  }
-}
-
-function handleGrandClick(grand: MenuItem, child: MenuItem, parent: MenuItem) {
-  resetActive()
-  parent.active = true
-  parent.open = true
-  child.active = true
-  child.open = true
-  grand.active = true
-  if (grand.path) {
-    router.push(grand.path)
-  }
-}
-</script>
-
 <style scoped lang="scss">
 $primary: var(--el-color-primary);
 $text-primary: var(--el-text-color-primary);
@@ -156,16 +156,16 @@ $border-color: var(--el-border-color-lighter);
     border-radius: 2px;
   }
 
-  &__menu {
+  .vertical-sidebar__menu {
     padding: 12px 0;
   }
 
-  &__item {
+  .vertical-sidebar__item {
     margin: 0 12px;
     margin-bottom: 4px;
   }
 
-  &__main {
+  .vertical-sidebar__main {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -199,31 +199,31 @@ $border-color: var(--el-border-color-lighter);
     }
   }
 
-  &__icon {
+  .vertical-sidebar__icon {
     font-size: 16px;
     color: $text-secondary;
     flex-shrink: 0;
   }
 
-  &__name {
+  .vertical-sidebar__name {
     flex: 1;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
-  &__arrow {
+  .vertical-sidebar__arrow {
     font-size: 12px;
     color: $text-secondary;
     flex-shrink: 0;
     transition: transform 0.2s;
   }
 
-  &__submenu {
+  .vertical-sidebar__submenu {
     padding: 4px 0 8px 38px;
   }
 
-  &__submenu-item {
+  .vertical-sidebar__submenu-item {
     padding: 10px 12px;
     color: $text-regular;
     font-size: 13px;
@@ -248,7 +248,7 @@ $border-color: var(--el-border-color-lighter);
   }
 
   // 有三级菜单的父级
-  &__submenu-parent {
+  .vertical-sidebar__submenu-parent {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -279,12 +279,12 @@ $border-color: var(--el-border-color-lighter);
   }
 
   // 三级菜单
-  &__third-menu {
+  .vertical-sidebar__third-menu {
     padding-left: 16px;
     margin-bottom: 4px;
   }
 
-  &__third-menu-item {
+  .vertical-sidebar__third-menu-item {
     padding: 10px 12px;
     color: $text-regular;
     font-size: 13px;

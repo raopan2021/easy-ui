@@ -1,19 +1,136 @@
+<script setup lang="ts">
+import { XlySearchForm } from 'easy-ui'
+import { ref } from 'vue'
+
+// 基础用法
+const searchData1 = ref({})
+const basicItems = [
+  { prop: 'name', label: '姓名', type: 'input' },
+  {
+    prop: 'status',
+    label: '状态',
+    type: 'select',
+    options: [
+      { label: '启用', value: 1 },
+      { label: '禁用', value: 0 },
+    ],
+  },
+]
+
+// 多种类型
+const searchData2 = ref({
+  beginDate: '',
+  endDate: '',
+  beginTime: '',
+  endTime: '',
+  beginDateTime: '',
+  endDateTime: '',
+})
+const multipleTypeItems = [
+  { prop: 'keyword', label: '关键词', type: 'input', placeholder: '请输入关键词' },
+  {
+    prop: 'type',
+    label: '类型',
+    type: 'select',
+    options: [
+      { label: '类型A', value: 'A' },
+      { label: '类型B', value: 'B' },
+      { label: '类型C', value: 'C' },
+    ],
+  },
+  { prop: 'date', label: '日期', type: 'date', placeholder: '请选择日期' },
+  {
+    prop: 'beginDate',
+    label: '日期范围',
+    type: 'daterange',
+    endProp: 'endDate',
+    startPlaceholder: '开始日期',
+    endPlaceholder: '结束日期',
+    span: 6,
+  },
+  {
+    prop: 'beginTime',
+    label: '时间范围',
+    type: 'timerange',
+    endProp: 'endTime',
+    startPlaceholder: '开始时间',
+    endPlaceholder: '结束时间',
+    span: 6,
+  },
+  {
+    prop: 'beginDateTime',
+    label: '日期时间范围',
+    type: 'datetimerange',
+    endProp: 'endDateTime',
+    showSeconds: true,
+    startPlaceholder: '开始时间',
+    endPlaceholder: '结束时间',
+    span: 6,
+  },
+]
+
+// 自定义列宽
+const searchData3 = ref({})
+const spanItems = [
+  { prop: 'name', label: '姓名', type: 'input', span: 6 },
+  { prop: 'phone', label: '手机号', type: 'input', span: 6 },
+  { prop: 'email', label: '邮箱', type: 'input', span: 6 },
+  { prop: 'address', label: '地址', type: 'input', span: 12 },
+]
+
+// 展开/收起
+const searchData4 = ref({})
+const expandItems = [
+  { prop: 'name', label: '姓名', type: 'input' },
+  { prop: 'phone', label: '手机号', type: 'input' },
+  { prop: 'email', label: '邮箱', type: 'input' },
+  { prop: 'address', label: '地址', type: 'input', hiddenWhenCollapsed: true },
+  { prop: 'remark', label: '备注', type: 'textarea', rows: 2, hiddenWhenCollapsed: true },
+]
+
+// 自定义字段
+const searchData5 = ref({})
+const customItems = [
+  { prop: 'name', label: '姓名', type: 'input' },
+  { prop: 'department', label: '部门', type: 'custom' },
+]
+const departmentOptions = [
+  { label: '技术部', value: 'tech' },
+  { label: '产品部', value: 'product' },
+  { label: '市场部', value: 'marketing' },
+]
+
+// 搜索处理
+function handleSearch(data: any) {
+  console.log('搜索数据:', data)
+}
+</script>
+
 <template>
   <div class="component-doc">
     <header class="doc-header">
-      <h1 class="doc-title">搜索表单 SearchForm</h1>
-      <p class="doc-desc">基于 xly 组件库的搜索表单,支持多种表单控件、展开/收起等功能。</p>
+      <h1 class="doc-title">
+        搜索表单 SearchForm
+      </h1>
+      <p class="doc-desc">
+        基于 xly 组件库的搜索表单,支持多种表单控件、展开/收起等功能。
+      </p>
     </header>
 
     <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
-      <p class="doc-section__desc">最简单的搜索表单,通过 <code>items</code> 配置搜索项。</p>
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
+      <p class="doc-section__desc">
+        最简单的搜索表单,通过 <code>items</code> 配置搜索项。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <XlySearchForm v-model="searchData1" :items="basicItems" @search="handleSearch" />
         </div>
       </div>
-      <XlyDocCode :code="`<template>
+      <XlyDocCode
+        code="<template>
   <XlySearchForm v-model=&quot;searchData&quot; :items=&quot;items&quot; @search=&quot;handleSearch&quot; />
 </template>
 
@@ -31,18 +148,24 @@ const items = [
 const handleSearch = (data) => {
   console.log('搜索数据:', data)
 }
-</script>`" />
+</script>"
+      />
     </section>
 
     <section class="doc-section">
-      <h2 class="doc-section__title">多种类型</h2>
-      <p class="doc-section__desc">支持输入框、选择器、日期选择器等多种类型。</p>
+      <h2 class="doc-section__title">
+        多种类型
+      </h2>
+      <p class="doc-section__desc">
+        支持输入框、选择器、日期选择器等多种类型。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <XlySearchForm v-model="searchData2" :items="multipleTypeItems" @search="handleSearch" />
         </div>
       </div>
-      <XlyDocCode :code="`const items = [
+      <XlyDocCode
+        code="const items = [
   { prop: 'keyword', label: '关键词', type: 'input', placeholder: '请输入关键词' },
   { prop: 'type', label: '类型', type: 'select', options: [
     { label: '类型A', value: 'A' },
@@ -55,42 +178,47 @@ const handleSearch = (data) => {
 ]
 
 // 结果会直接绑定到两个属性
-// { beginDate: '2024-01-01', endDate: '2024-01-31' }`" />
+// { beginDate: '2024-01-01', endDate: '2024-01-31' }"
+      />
     </section>
 
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义列宽</h2>
-      <p class="doc-section__desc">通过 <code>span</code> 属性控制每个表单项占据的列数。</p>
+      <h2 class="doc-section__title">
+        自定义列宽
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>span</code> 属性控制每个表单项占据的列数。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <XlySearchForm v-model="searchData3" :items="spanItems" @search="handleSearch" />
         </div>
       </div>
-      <XlyDocCode :code="`const items = [
+      <XlyDocCode
+        code="const items = [
   { prop: 'name', label: '姓名', type: 'input', span: 6 },
   { prop: 'phone', label: '手机号', type: 'input', span: 6 },
   { prop: 'email', label: '邮箱', type: 'input', span: 6 },
   { prop: 'address', label: '地址', type: 'input', span: 12 }
-]`" />
+]"
+      />
     </section>
 
     <section class="doc-section">
-      <h2 class="doc-section__title">展开/收起</h2>
+      <h2 class="doc-section__title">
+        展开/收起
+      </h2>
       <p class="doc-section__desc">
         通过 <code>show-expand-button</code> 显示展开按钮,配合
         <code>hidden-when-collapsed</code> 控制某些字段在收起时隐藏。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlySearchForm
-            v-model="searchData4"
-            :items="expandItems"
-            show-expand-button
-            @search="handleSearch"
-          />
+          <XlySearchForm v-model="searchData4" :items="expandItems" show-expand-button @search="handleSearch" />
         </div>
       </div>
-      <XlyDocCode :code="`const items = [
+      <XlyDocCode
+        code="const items = [
   { prop: 'name', label: '姓名', type: 'input' },
   { prop: 'phone', label: '手机号', type: 'input' },
   { prop: 'email', label: '邮箱', type: 'input' },
@@ -103,28 +231,34 @@ const handleSearch = (data) => {
   :items=&quot;items&quot;
   show-expand-button
   @search=&quot;handleSearch&quot;
-/>`" />
+/>"
+      />
     </section>
 
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义字段</h2>
-      <p class="doc-section__desc">通过 <code>type="custom"</code> 和插槽实现自定义字段。</p>
+      <h2 class="doc-section__title">
+        自定义字段
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>type="custom"</code> 和插槽实现自定义字段。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <XlySearchForm v-model="searchData5" :items="customItems" @search="handleSearch">
-            <template #field-department="{ modelValue, item, formData, updateModelValue }">
+            <template #field-department="{ modelValue, updateModelValue }">
               <XlySelect
                 :model-value="modelValue"
-                @update:model-value="updateModelValue"
                 placeholder="请选择部门"
                 :options="departmentOptions"
                 clearable
+                @update:model-value="updateModelValue"
               />
             </template>
           </XlySearchForm>
         </div>
       </div>
-      <XlyDocCode :code="`<XlySearchForm v-model=&quot;searchData&quot; :items=&quot;items&quot; @search=&quot;handleSearch&quot;>
+      <XlyDocCode
+        code="<XlySearchForm v-model=&quot;searchData&quot; :items=&quot;items&quot; @search=&quot;handleSearch&quot;>
   <template #field-department=&quot;{ modelValue, item, formData, updateModelValue }&quot;>
     <XlySelect
       :model-value=&quot;modelValue&quot;
@@ -138,13 +272,18 @@ const handleSearch = (data) => {
 
 const items = [
   { prop: 'department', label: '部门', type: 'custom' }
-]`" />
+]"
+      />
     </section>
 
     <section class="doc-section">
-      <h2 class="doc-section__title">API 文档</h2>
+      <h2 class="doc-section__title">
+        API 文档
+      </h2>
       <div class="doc-api">
-        <h3 class="doc-api__title">SearchForm Props</h3>
+        <h3 class="doc-api__title">
+          SearchForm Props
+        </h3>
         <div class="doc-table">
           <table>
             <thead>
@@ -220,7 +359,9 @@ const items = [
           </table>
         </div>
 
-        <h3 class="doc-api__title">SearchItem 配置项</h3>
+        <h3 class="doc-api__title">
+          SearchItem 配置项
+        </h3>
         <div class="doc-table">
           <table>
             <thead>
@@ -254,8 +395,8 @@ const items = [
                 <td>type</td>
                 <td>组件类型</td>
                 <td>
-                  'input' | 'textarea' | 'select' | 'date' | 'daterange' | 'datetime' |
-                  'datetimerange' | 'time' | 'timerange' | 'cascader' | 'custom'
+                  'input' | 'textarea' | 'select' | 'date' | 'daterange' | 'datetime' | 'datetimerange' | 'time' |
+                  'timerange' | 'cascader' | 'custom'
                 </td>
                 <td>'input'</td>
               </tr>
@@ -407,7 +548,9 @@ const items = [
           </table>
         </div>
 
-        <h3 class="doc-api__title">Events</h3>
+        <h3 class="doc-api__title">
+          Events
+        </h3>
         <div class="doc-table">
           <table>
             <thead>
@@ -442,7 +585,9 @@ const items = [
           </table>
         </div>
 
-        <h3 class="doc-api__title">Slots</h3>
+        <h3 class="doc-api__title">
+          Slots
+        </h3>
         <div class="doc-table">
           <table>
             <thead>
@@ -465,114 +610,6 @@ const items = [
     </section>
   </div>
 </template>
-
-<script setup lang="ts">
-import { ref } from 'vue'
-import XlySearchForm from '@/components/xly-search-form/index.vue'
-
-// 基础用法
-const   searchData1 = ref({})
-const basicItems = [
-  { prop: 'name', label: '姓名', type: 'input' },
-  {
-    prop: 'status',
-    label: '状态',
-    type: 'select',
-    options: [
-      { label: '启用', value: 1 },
-      { label: '禁用', value: 0 },
-    ],
-  },
-]
-
-// 多种类型
-const searchData2 = ref({
-  beginDate: '',
-  endDate: '',
-  beginTime: '',
-  endTime: '',
-  beginDateTime: '',
-  endDateTime: '',
-})
-const multipleTypeItems = [
-  { prop: 'keyword', label: '关键词', type: 'input', placeholder: '请输入关键词' },
-  {
-    prop: 'type',
-    label: '类型',
-    type: 'select',
-    options: [
-      { label: '类型A', value: 'A' },
-      { label: '类型B', value: 'B' },
-      { label: '类型C', value: 'C' },
-    ],
-  },
-  { prop: 'date', label: '日期', type: 'date', placeholder: '请选择日期' },
-  {
-    prop: 'beginDate',
-    label: '日期范围',
-    type: 'daterange',
-    endProp: 'endDate',
-    startPlaceholder: '开始日期',
-    endPlaceholder: '结束日期',
-    span: 6,
-  },
-  {
-    prop: 'beginTime',
-    label: '时间范围',
-    type: 'timerange',
-    endProp: 'endTime',
-    startPlaceholder: '开始时间',
-    endPlaceholder: '结束时间',
-    span: 6,
-  },
-  {
-    prop: 'beginDateTime',
-    label: '日期时间范围',
-    type: 'datetimerange',
-    endProp: 'endDateTime',
-    showSeconds: true,
-    startPlaceholder: '开始时间',
-    endPlaceholder: '结束时间',
-    span: 6,
-  },
-]
-
-// 自定义列宽
-const searchData3 = ref({})
-const spanItems = [
-  { prop: 'name', label: '姓名', type: 'input', span: 6 },
-  { prop: 'phone', label: '手机号', type: 'input', span: 6 },
-  { prop: 'email', label: '邮箱', type: 'input', span: 6 },
-  { prop: 'address', label: '地址', type: 'input', span: 12 },
-]
-
-// 展开/收起
-const searchData4 = ref({})
-const expandItems = [
-  { prop: 'name', label: '姓名', type: 'input' },
-  { prop: 'phone', label: '手机号', type: 'input' },
-  { prop: 'email', label: '邮箱', type: 'input' },
-  { prop: 'address', label: '地址', type: 'input', hiddenWhenCollapsed: true },
-  { prop: 'remark', label: '备注', type: 'textarea', rows: 2, hiddenWhenCollapsed: true },
-]
-
-// 自定义字段
-const searchData5 = ref({})
-const customItems = [
-  { prop: 'name', label: '姓名', type: 'input' },
-  { prop: 'department', label: '部门', type: 'custom' },
-]
-const departmentOptions = [
-  { label: '技术部', value: 'tech' },
-  { label: '产品部', value: 'product' },
-  { label: '市场部', value: 'marketing' },
-]
-
-// 搜索处理
-const handleSearch = (data: any) => {
-  console.log('搜索数据:', data)
-}
-</script>
 
 <style scoped lang="scss">
 .component-doc {

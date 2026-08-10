@@ -1,245 +1,9 @@
-<template>
-  <div class="t-corp">
-    <!-- 背景 -->
-    <div class="t-corp__bg" aria-hidden="true">
-      <div class="bg-base" />
-      <div class="bg-lines">
-        <span v-for="i in 8" :key="i" class="bg-line" :style="`animation-delay:${i * 0.4}s`" />
-      </div>
-      <div class="bg-corner bg-corner--tl" />
-      <div class="bg-corner bg-corner--br" />
-    </div>
-
-    <!-- 页眉 -->
-    <header class="t-corp__header">
-      <div class="h-left">
-        <img :src="logoUrl" alt="logo" class="h-logo" />
-        <div class="h-divider" />
-        <span class="h-title">心灵云集团管理系统</span>
-      </div>
-      <div class="h-right">
-        <span class="h-time">{{ timeStr }}</span>
-        <span class="h-date">{{ dateStr }}</span>
-      </div>
-    </header>
-
-    <!-- 主体 -->
-    <main class="t-corp__main">
-      <!-- 左侧装饰 -->
-      <div class="t-corp__accent" aria-hidden="true">
-        <div class="accent-line" />
-        <div class="accent-dot" />
-        <div class="accent-line" />
-      </div>
-
-      <!-- 左侧文字 -->
-      <div class="t-corp__left">
-        <div class="corp-badge">ENTERPRISE EDITION</div>
-        <h2 class="corp-title">安全 · 可靠<br /><span>心灵云集团信息系统</span></h2>
-        <p class="corp-desc">
-          面向大型企业的安全管控体系，集成多因子认证、权限管理、操作审计于一体，保障企业数据资产安全。
-        </p>
-
-        <div class="corp-certs">
-          <div v-for="c in certs" :key="c" class="cert-item">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              width="18"
-              height="18"
-            >
-              <path
-                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
-              />
-            </svg>
-            <span>{{ c }}</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 分隔线 -->
-      <div class="t-corp__sep" aria-hidden="true">
-        <div class="sep-line" />
-        <div class="sep-diamond" />
-        <div class="sep-line" />
-      </div>
-
-      <!-- 右侧登录卡片 -->
-      <div class="t-corp__card">
-        <div class="card-top-bar" />
-        <div class="card-inner">
-          <div class="card-head">
-            <div class="card-head__logo">
-              <img :src="logoUrl" alt="logo" />
-            </div>
-            <div>
-              <h3 class="card-head__title">账号认证登录</h3>
-              <p class="card-head__sub">请使用您的企业账号</p>
-            </div>
-          </div>
-
-          <!-- ========== 登录表单（内联） ========== -->
-          <form class="corp-form" @submit.prevent="handleSubmit">
-            <div class="corpf-field">
-              <label class="corpf-label">账号</label>
-              <div class="corpf-input-wrap">
-                <svg
-                  class="corpf-input-icon"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                >
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                  <circle cx="12" cy="7" r="4" />
-                </svg>
-                <input
-                  v-model="form.username"
-                  type="text"
-                  class="corpf-input"
-                  placeholder="请输入账号"
-                  autocomplete="username"
-                />
-              </div>
-            </div>
-
-            <div class="corpf-field">
-              <label class="corpf-label">密码</label>
-              <div class="corpf-input-wrap">
-                <svg
-                  class="corpf-input-icon"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                >
-                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                </svg>
-                <input
-                  v-model="form.password"
-                  :type="showPwd ? 'text' : 'password'"
-                  class="corpf-input corpf-input--pwd"
-                  placeholder="请输入密码"
-                  autocomplete="current-password"
-                />
-                <button type="button" class="corpf-toggle" @click="showPwd = !showPwd">
-                  <svg
-                    v-if="!showPwd"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    width="16"
-                    height="16"
-                  >
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
-                  <svg
-                    v-else
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    width="16"
-                    height="16"
-                  >
-                    <path
-                      d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"
-                    />
-                    <line x1="1" y1="1" x2="23" y2="23" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            <div v-if="error" class="corpf-error">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                width="14"
-                height="14"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <line x1="12" y1="8" x2="12" y2="12" />
-                <line x1="12" y1="16" x2="12.01" y2="16" />
-              </svg>
-              {{ error }}
-            </div>
-
-            <button
-              type="submit"
-              class="corpf-btn"
-              :disabled="loading || !form.username || !form.password"
-            >
-              <span class="corpf-btn-shimmer" />
-              <span v-if="loading" class="corpf-btn-spinner">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <path d="M12 2a10 10 0 0 1 10 10" />
-                </svg>
-              </span>
-              <template v-else>
-                <span class="corpf-btn-text">立即登录</span>
-                <span class="corpf-btn-arrow">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </span>
-              </template>
-              <span v-if="loading" class="corpf-btn-text">验证中...</span>
-            </button>
-
-            <!-- 测试账号提示 -->
-            <div class="corpf-hint">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                width="12"
-                height="12"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <line x1="12" y1="8" x2="12" y2="12" />
-                <line x1="12" y1="16" x2="12.01" y2="16" />
-              </svg>
-              测试账号: EaseUI / 密码: 123456
-            </div>
-          </form>
-        </div>
-        <div class="card-bottom-bar" />
-      </div>
-    </main>
-
-    <footer class="t-corp__footer">
-      <span>© 2025 心灵云科技集团有限公司</span>
-      <span class="footer-dot">·</span>
-      <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener">蜀ICP备19027113号</a>
-      <span class="footer-dot">·</span>
-      <span>版权所有 · 违法必究</span>
-    </footer>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { ref, reactive, onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, reactive, ref } from 'vue'
 import logoUrl from '@/assets/logo.png'
 
-defineProps<{ loading?: boolean; error?: string }>()
-const emit = defineEmits<{ submit: [form: { username: string; password: string }] }>()
+defineProps<{ loading?: boolean, error?: string }>()
+const emit = defineEmits<{ submit: [form: { username: string, password: string }] }>()
 
 const certs = ['等保三级认证', '国家信息安全标准', '企业数据合规认证']
 
@@ -272,6 +36,211 @@ function handleSubmit() {
   }
 }
 </script>
+
+<template>
+  <div class="t-corp">
+    <!-- 背景 -->
+    <div class="t-corp__bg" aria-hidden="true">
+      <div class="bg-base" />
+      <div class="bg-lines">
+        <span v-for="i in 8" :key="i" class="bg-line" :style="`animation-delay:${i * 0.4}s`" />
+      </div>
+      <div class="bg-corner bg-corner--tl" />
+      <div class="bg-corner bg-corner--br" />
+    </div>
+
+    <!-- 页眉 -->
+    <header class="t-corp__header">
+      <div class="h-left">
+        <img :src="logoUrl" alt="logo" class="h-logo">
+        <div class="h-divider" />
+        <span class="h-title">心灵云集团管理系统</span>
+      </div>
+      <div class="h-right">
+        <span class="h-time">{{ timeStr }}</span>
+        <span class="h-date">{{ dateStr }}</span>
+      </div>
+    </header>
+
+    <!-- 主体 -->
+    <main class="t-corp__main">
+      <!-- 左侧装饰 -->
+      <div class="t-corp__accent" aria-hidden="true">
+        <div class="accent-line" />
+        <div class="accent-dot" />
+        <div class="accent-line" />
+      </div>
+
+      <!-- 左侧文字 -->
+      <div class="t-corp__left">
+        <div class="corp-badge">
+          ENTERPRISE EDITION
+        </div>
+        <h2 class="corp-title">
+          安全 · 可靠<br><span>心灵云集团信息系统</span>
+        </h2>
+        <p class="corp-desc">
+          面向大型企业的安全管控体系，集成多因子认证、权限管理、操作审计于一体，保障企业数据资产安全。
+        </p>
+
+        <div class="corp-certs">
+          <div v-for="c in certs" :key="c" class="cert-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18">
+              <path
+                d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+              />
+            </svg>
+            <span>{{ c }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 分隔线 -->
+      <div class="t-corp__sep" aria-hidden="true">
+        <div class="sep-line" />
+        <div class="sep-diamond" />
+        <div class="sep-line" />
+      </div>
+
+      <!-- 右侧登录卡片 -->
+      <div class="t-corp__card">
+        <div class="card-top-bar" />
+        <div class="card-inner">
+          <div class="card-head">
+            <div class="card-head__logo">
+              <img :src="logoUrl" alt="logo">
+            </div>
+            <div>
+              <h3 class="card-head__title">
+                账号认证登录
+              </h3>
+              <p class="card-head__sub">
+                请使用您的企业账号
+              </p>
+            </div>
+          </div>
+
+          <!-- ========== 登录表单（内联） ========== -->
+          <form class="corp-form" @submit.prevent="handleSubmit">
+            <div class="corpf-field">
+              <label class="corpf-label">账号</label>
+              <div class="corpf-input-wrap">
+                <svg class="corpf-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+                <input
+                  v-model="form.username"
+                  type="text"
+                  class="corpf-input"
+                  placeholder="请输入账号"
+                  autocomplete="username"
+                >
+              </div>
+            </div>
+
+            <div class="corpf-field">
+              <label class="corpf-label">密码</label>
+              <div class="corpf-input-wrap">
+                <svg class="corpf-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+                <input
+                  v-model="form.password"
+                  :type="showPwd ? 'text' : 'password'"
+                  class="corpf-input corpf-input--pwd"
+                  placeholder="请输入密码"
+                  autocomplete="current-password"
+                >
+                <button type="button" class="corpf-toggle" @click="showPwd = !showPwd">
+                  <svg
+                    v-if="!showPwd"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    width="16"
+                    height="16"
+                  >
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                  <svg
+                    v-else
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    width="16"
+                    height="16"
+                  >
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
+                    <line x1="1" y1="1" x2="23" y2="23" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div v-if="error" class="corpf-error">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+              {{ error }}
+            </div>
+
+            <button type="submit" class="corpf-btn" :disabled="loading || !form.username || !form.password">
+              <span class="corpf-btn-shimmer" />
+              <span v-if="loading" class="corpf-btn-spinner">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M12 2a10 10 0 0 1 10 10" />
+                </svg>
+              </span>
+              <template v-else>
+                <span class="corpf-btn-text">立即登录</span>
+                <span class="corpf-btn-arrow">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </span>
+              </template>
+              <span v-if="loading" class="corpf-btn-text">验证中...</span>
+            </button>
+
+            <!-- 测试账号提示 -->
+            <div class="corpf-hint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
+              测试账号: EaseUI / 密码: 123456
+            </div>
+          </form>
+        </div>
+        <div class="card-bottom-bar" />
+      </div>
+    </main>
+
+    <footer class="t-corp__footer">
+      <span>© 2025 心灵云科技集团有限公司</span>
+      <span class="footer-dot">·</span>
+      <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener">蜀ICP备19027113号</a>
+      <span class="footer-dot">·</span>
+      <span>版权所有 · 违法必究</span>
+    </footer>
+  </div>
+</template>
 
 <style scoped lang="scss">
 $gold: #d4af37;
@@ -339,12 +308,12 @@ $dark-card: #111422;
   width: 200px;
   height: 200px;
   border: 1px solid rgba(212, 175, 55, 0.12);
-  &--tl {
+  &.bg-corner--tl {
     top: -60px;
     left: -60px;
     border-radius: 50%;
   }
-  &--br {
+  &.bg-corner--br {
     bottom: -60px;
     right: -60px;
     border-radius: 50%;
@@ -756,12 +725,7 @@ $dark-card: #111422;
   .corpf-btn-shimmer {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      105deg,
-      transparent 30%,
-      rgba(255, 255, 255, 0.3) 50%,
-      transparent 70%
-    );
+    background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
     transform: translateX(-100%);
     pointer-events: none;
   }

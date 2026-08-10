@@ -1,8 +1,28 @@
+<script setup lang="ts">
+import { xly, XlyButton } from 'easy-ui'
+
+function handleSave() {
+  setTimeout(() => {
+    xly.$msg.success('数据已成功保存', { title: '操作成功' })
+  }, 500)
+}
+
+function handleDelete() {
+  xly.$msg.danger('删除失败，您没有操作权限', { title: '操作失败' })
+}
+
+function handleCopy() {
+  xly.$msg.text('内容已复制到剪贴板')
+}
+</script>
+
 <template>
   <div class="message-doc">
     <!-- 页面标题 -->
     <div class="doc-header">
-      <h1 class="doc-title">Message 消息提示</h1>
+      <h1 class="doc-title">
+        Message 消息提示
+      </h1>
       <p class="doc-desc">
         全局消息提示组件，支持多种类型、弹出位置、自定义标题、进度条、鼠标悬停暂停自动关闭等功能。
       </p>
@@ -10,98 +30,134 @@
 
     <!-- 基础用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
       <p class="doc-section__desc">
         通过统一入口 <code>xly.$msg</code> 调用消息提示。默认 3 秒后自动关闭。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="xly.$msg.success('保存成功')">成功消息</XlyButton>
-          <XlyButton @click="xly.$msg.warning('请注意，余额即将不足')">警告消息</XlyButton>
-          <XlyButton @click="xly.$msg.danger('操作失败，请重试')">错误消息</XlyButton>
-          <XlyButton @click="xly.$msg.info('您有一条新消息')">信息消息</XlyButton>
-          <XlyButton @click="xly.$msg.text('这是一条纯文本提示')">纯文本</XlyButton>
+          <XlyButton @click="xly.$msg.success('保存成功')">
+            成功消息
+          </XlyButton>
+          <XlyButton @click="xly.$msg.warning('请注意，余额即将不足')">
+            警告消息
+          </XlyButton>
+          <XlyButton @click="xly.$msg.danger('操作失败，请重试')">
+            错误消息
+          </XlyButton>
+          <XlyButton @click="xly.$msg.info('您有一条新消息')">
+            信息消息
+          </XlyButton>
+          <XlyButton @click="xly.$msg.text('这是一条纯文本提示')">
+            纯文本
+          </XlyButton>
         </div>
-        <XlyDocCode :code="`import { xly } from '@/utils/xly'
+        <XlyDocCode
+          code="import { xly } from 'easy-ui'
 
 xly.$msg.success('保存成功')
 xly.$msg.warning('请注意')
 xly.$msg.danger('操作失败')
 xly.$msg.info('新消息')
-xly.$msg.text('纯文本')`" />
+xly.$msg.text('纯文本')"
+        />
       </div>
     </section>
 
     <!-- 带标题 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">带标题的消息</h2>
+      <h2 class="doc-section__title">
+        带标题的消息
+      </h2>
       <p class="doc-section__desc">
         通过 <code>title</code> 参数为消息添加标题，让信息层次更清晰。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="xly.$msg.success('数据已成功保存到数据库', { title: '操作成功' })"
-            >带标题成功</XlyButton
-          >
-          <XlyButton @click="xly.$msg.danger('网络连接已断开，请检查网络设置', { title: '连接错误' })"
-            >带标题错误</XlyButton
-          >
+          <XlyButton @click="xly.$msg.success('数据已成功保存到数据库', { title: '操作成功' })">
+            带标题成功
+          </XlyButton>
+          <XlyButton @click="xly.$msg.danger('网络连接已断开，请检查网络设置', { title: '连接错误' })">
+            带标题错误
+          </XlyButton>
         </div>
-        <XlyDocCode :code="`xly.$msg.success('数据已保存到数据库', { title: '操作成功' })
-xly.$msg.danger('网络连接已断开', { title: '连接错误' })`" />
+        <XlyDocCode
+          code="xly.$msg.success('数据已保存到数据库', { title: '操作成功' })
+xly.$msg.danger('网络连接已断开', { title: '连接错误' })"
+        />
       </div>
     </section>
 
     <!-- 自定义弹出位置 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义弹出位置</h2>
+      <h2 class="doc-section__title">
+        自定义弹出位置
+      </h2>
       <p class="doc-section__desc">
         通过 <code>position</code> 参数设置消息弹出位置，支持 6 个方向。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="xly.$msg.info('顶部居中', { position: 'top' })">顶部居中</XlyButton>
-          <XlyButton @click="xly.$msg.info('左上角', { position: 'top-left' })">左上角</XlyButton>
-          <XlyButton @click="xly.$msg.info('右上角', { position: 'top-right' })">右上角</XlyButton>
-          <XlyButton @click="xly.$msg.info('底部居中', { position: 'bottom' })">底部居中</XlyButton>
-          <XlyButton @click="xly.$msg.info('左下角', { position: 'bottom-left' })">左下角</XlyButton>
-          <XlyButton @click="xly.$msg.info('右下角', { position: 'bottom-right' })">右下角</XlyButton>
+          <XlyButton @click="xly.$msg.info('顶部居中', { position: 'top' })">
+            顶部居中
+          </XlyButton>
+          <XlyButton @click="xly.$msg.info('左上角', { position: 'top-left' })">
+            左上角
+          </XlyButton>
+          <XlyButton @click="xly.$msg.info('右上角', { position: 'top-right' })">
+            右上角
+          </XlyButton>
+          <XlyButton @click="xly.$msg.info('底部居中', { position: 'bottom' })">
+            底部居中
+          </XlyButton>
+          <XlyButton @click="xly.$msg.info('左下角', { position: 'bottom-left' })">
+            左下角
+          </XlyButton>
+          <XlyButton @click="xly.$msg.info('右下角', { position: 'bottom-right' })">
+            右下角
+          </XlyButton>
         </div>
-        <XlyDocCode :code="`xly.$msg.info('右上角提示', { position: 'top-right' })
-xly.$msg.success('左下角提示', { position: 'bottom-left' })`" />
+        <XlyDocCode
+          code="xly.$msg.info('右上角提示', { position: 'top-right' })
+xly.$msg.success('左下角提示', { position: 'bottom-left' })"
+        />
       </div>
     </section>
 
     <!-- 进度条 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">进度条</h2>
+      <h2 class="doc-section__title">
+        进度条
+      </h2>
       <p class="doc-section__desc">
         通过 <code>showProgress: true</code> 显示倒计时进度条，直观展示消息剩余显示时间。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton
-            @click="
-              xly.$msg.success('保存成功，即将自动关闭', { showProgress: true, duration: 5000 })
-            "
-            >成功 + 进度条</XlyButton
-          >
-          <XlyButton
-            @click="xly.$msg.danger('错误信息，5秒后关闭', { showProgress: true, duration: 5000 })"
-            >错误 + 进度条</XlyButton
-          >
-          <XlyButton @click="xly.$msg.info('提示信息', { showProgress: true, duration: 5000 })"
-            >信息 + 进度条</XlyButton
-          >
+          <XlyButton @click="xly.$msg.success('保存成功，即将自动关闭', { showProgress: true, duration: 5000 })">
+            成功 + 进度条
+          </XlyButton>
+          <XlyButton @click="xly.$msg.danger('错误信息，5秒后关闭', { showProgress: true, duration: 5000 })">
+            错误 + 进度条
+          </XlyButton>
+          <XlyButton @click="xly.$msg.info('提示信息', { showProgress: true, duration: 5000 })">
+            信息 + 进度条
+          </XlyButton>
         </div>
-        <XlyDocCode :code="`xly.$msg.success('保存成功', { showProgress: true, duration: 5000 })
-xly.$msg.danger('操作失败', { showProgress: true, duration: 5000 })`" />
+        <XlyDocCode
+          code="xly.$msg.success('保存成功', { showProgress: true, duration: 5000 })
+xly.$msg.danger('操作失败', { showProgress: true, duration: 5000 })"
+        />
       </div>
     </section>
 
     <!-- 悬停暂停 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">悬停暂停</h2>
+      <h2 class="doc-section__title">
+        悬停暂停
+      </h2>
       <p class="doc-section__desc">
         鼠标悬停在消息上时自动暂停倒计时，移开后继续倒计时，方便用户阅读较长的消息内容。
       </p>
@@ -114,53 +170,70 @@ xly.$msg.danger('操作失败', { showProgress: true, duration: 5000 })`" />
                 { duration: 5000, showProgress: true, title: '悬停暂停提示' },
               )
             "
-            >长消息 + 进度条</XlyButton
           >
+            长消息 + 进度条
+          </XlyButton>
         </div>
-        <XlyDocCode :code="`// 鼠标悬停自动暂停，移开继续
+        <XlyDocCode
+          code="// 鼠标悬停自动暂停，移开继续
 xly.$msg.info('这是一条较长的消息...', {
   duration: 5000,
   showProgress: true,
   title: '悬停暂停提示'
-})`" />
+})"
+        />
       </div>
     </section>
 
     <!-- 持久消息 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">持久消息</h2>
+      <h2 class="doc-section__title">
+        持久消息
+      </h2>
       <p class="doc-section__desc">
         设置 <code>duration: 0</code> 使消息不会自动关闭，需要用户手动点击关闭按钮。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton
-            @click="
-              xly.$msg.warning('系统正在升级中，请稍后操作', { duration: 0, title: '系统通知' })
-            "
-            >持久消息</XlyButton
-          >
-          <XlyButton @click="xly.$msg.closeAll()">清除所有</XlyButton>
+          <XlyButton @click="xly.$msg.warning('系统正在升级中，请稍后操作', { duration: 0, title: '系统通知' })">
+            持久消息
+          </XlyButton>
+          <XlyButton @click="xly.$msg.closeAll()">
+            清除所有
+          </XlyButton>
         </div>
-        <XlyDocCode :code="`// duration 设为 0 不自动关闭
+        <XlyDocCode
+          code="// duration 设为 0 不自动关闭
 xly.$msg.warning('系统正在升级中', { duration: 0, title: '系统通知' })
 
 // 手动清除所有
-xly.$msg.closeAll()`" />
+xly.$msg.closeAll()"
+        />
       </div>
     </section>
 
     <!-- 业务场景 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">业务场景</h2>
-      <p class="doc-section__desc">消息提示在实际业务中的常见用法。</p>
+      <h2 class="doc-section__title">
+        业务场景
+      </h2>
+      <p class="doc-section__desc">
+        消息提示在实际业务中的常见用法。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton type="primary" @click="handleSave">保存数据</XlyButton>
-          <XlyButton type="danger" @click="handleDelete">删除记录</XlyButton>
-          <XlyButton @click="handleCopy">复制内容</XlyButton>
+          <XlyButton type="primary" @click="handleSave">
+            保存数据
+          </XlyButton>
+          <XlyButton type="danger" @click="handleDelete">
+            删除记录
+          </XlyButton>
+          <XlyButton @click="handleCopy">
+            复制内容
+          </XlyButton>
         </div>
-        <XlyDocCode :code="`function handleSave() {
+        <XlyDocCode
+          code="function handleSave() {
   setTimeout(() => {
     xly.$msg.success('保存成功', { title: '操作成功' })
   }, 500)
@@ -172,21 +245,27 @@ function handleDelete() {
 
 function handleCopy() {
   xly.$msg.text('内容已复制到剪贴板')
-}`" />
+}"
+        />
       </div>
     </section>
 
     <!-- API 文档 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">API</h2>
+      <h2 class="doc-section__title">
+        API
+      </h2>
 
-      <h3 class="doc-subtitle">xly.$msg</h3>
+      <h3 class="doc-subtitle">
+        xly.$msg
+      </h3>
       <p class="doc-section__desc" style="margin-bottom: 12px">
-        通过统一入口 <code>import { xly } from '@/utils/xly'</code>，
-        在任意位置调用 <code>xly.$msg</code> 消息方法。
+        通过统一入口 <code>import { xly } from 'easy-ui'</code>， 在任意位置调用 <code>xly.$msg</code> 消息方法。
       </p>
 
-      <h3 class="doc-subtitle">方法</h3>
+      <h3 class="doc-subtitle">
+        方法
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -231,7 +310,9 @@ function handleCopy() {
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Options</h3>
+      <h3 class="doc-subtitle">
+        Options
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -277,10 +358,7 @@ function handleCopy() {
               <td><code>position</code></td>
               <td>弹出位置</td>
               <td>
-                <code
-                  >'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' |
-                  'bottom-right'</code
-                >
+                <code>'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right'</code>
               </td>
               <td><code>'top'</code></td>
             </tr>
@@ -314,25 +392,6 @@ function handleCopy() {
     </section>
   </div>
 </template>
-
-<script setup lang="ts">
-import XlyButton from '@/components/xly-button/index.vue'
-import { xly } from '@/utils/xly'
-
-function handleSave() {
-  setTimeout(() => {
-    xly.$msg.success('数据已成功保存', { title: '操作成功' })
-  }, 500)
-}
-
-function handleDelete() {
-  xly.$msg.danger('删除失败，您没有操作权限', { title: '操作失败' })
-}
-
-function handleCopy() {
-  xly.$msg.text('内容已复制到剪贴板')
-}
-</script>
 
 <style scoped lang="scss">
 .message-doc {

@@ -1,8 +1,53 @@
+<script setup lang="ts">
+import { CircleCheckFilled, WarningFilled } from '@element-plus/icons-vue'
+import { XlyButton, XlyModal } from 'easy-ui'
+import { ref } from 'vue'
+
+const basicVisible = ref(false)
+const smallVisible = ref(false)
+const defaultVisible = ref(false)
+const largeVisible = ref(false)
+const fullVisible = ref(false)
+const customVisible = ref(false)
+const zoomVisible = ref(false)
+const slideUpVisible = ref(false)
+const slideDownVisible = ref(false)
+const fadeVisible = ref(false)
+const customContentVisible = ref(false)
+const noMaskVisible = ref(false)
+const placementCenter = ref(false)
+const placementTop = ref(false)
+const placementTopLeft = ref(false)
+const placementTopRight = ref(false)
+const placementBottom = ref(false)
+const placementBottomLeft = ref(false)
+const placementBottomRight = ref(false)
+const placementLeft = ref(false)
+const placementRight = ref(false)
+const noHeaderVisible = ref(false)
+const noFooterVisible = ref(false)
+const onlyBodyVisible = ref(false)
+const loadingVisible = ref(false)
+const confirmLoading = ref(false)
+function handleConfirm() {
+  confirmLoading.value = true
+  setTimeout(() => {
+    confirmLoading.value = false
+    loadingVisible.value = false
+  }, 2000)
+}
+const deleteVisible = ref(false)
+const formVisible = ref(false)
+const successVisible = ref(false)
+</script>
+
 <template>
   <div class="modal-doc">
     <!-- 页面标题 -->
     <div class="doc-header">
-      <h1 class="doc-title">Modal 弹窗</h1>
+      <h1 class="doc-title">
+        Modal 弹窗
+      </h1>
       <p class="doc-desc">
         企业级对话框组件，支持多种尺寸、动画效果、自定义插槽，内置确认/取消操作。
       </p>
@@ -10,45 +55,64 @@
 
     <!-- 基础用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
       <p class="doc-section__desc">
         通过 <code>v-model</code> 控制弹窗显示与隐藏，<code>title</code> 设置标题。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="basicVisible = true">打开弹窗</XlyButton>
+          <XlyButton @click="basicVisible = true">
+            打开弹窗
+          </XlyButton>
           <XlyModal v-model="basicVisible" title="基础弹窗">
             <p>这是一个基础弹窗，点击遮罩或关闭按钮可关闭。</p>
           </XlyModal>
         </div>
-        <XlyDocCode :code='`<XlyButton @click="visible = true">打开弹窗</XlyButton>
-<XlyModal v-model="visible" title="基础弹窗">
+        <XlyDocCode
+          code="<XlyButton @click=&quot;visible = true&quot;>打开弹窗</XlyButton>
+<XlyModal v-model=&quot;visible&quot; title=&quot;基础弹窗&quot;>
   <p>这是一个基础弹窗。</p>
-</XlyModal>`' />
+</XlyModal>"
+        />
       </div>
     </section>
 
     <!-- 不同尺寸 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">不同尺寸</h2>
+      <h2 class="doc-section__title">
+        不同尺寸
+      </h2>
       <p class="doc-section__desc">
-        通过 <code>size</code> 属性设置弹窗尺寸，提供 <code>small</code>(480px) /
-        <code>default</code>(560px) / <code>large</code>(780px) /
-        <code>fullscreen</code> 四种规格。也可通过 <code>width</code> 属性自定义宽度。
+        通过 <code>size</code> 属性设置弹窗尺寸，提供 <code>small</code>(480px) / <code>default</code>(560px) /
+        <code>large</code>(780px) / <code>fullscreen</code> 四种规格。也可通过 <code>width</code> 属性自定义宽度。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="smallVisible = true">小型弹窗</XlyButton>
-          <XlyButton @click="defaultVisible = true">默认弹窗</XlyButton>
-          <XlyButton @click="largeVisible = true">大型弹窗</XlyButton>
-          <XlyButton @click="fullVisible = true">全屏弹窗</XlyButton>
-          <XlyButton @click="customVisible = true">自定义宽度</XlyButton>
+          <XlyButton @click="smallVisible = true">
+            小型弹窗
+          </XlyButton>
+          <XlyButton @click="defaultVisible = true">
+            默认弹窗
+          </XlyButton>
+          <XlyButton @click="largeVisible = true">
+            大型弹窗
+          </XlyButton>
+          <XlyButton @click="fullVisible = true">
+            全屏弹窗
+          </XlyButton>
+          <XlyButton @click="customVisible = true">
+            自定义宽度
+          </XlyButton>
         </div>
-        <XlyDocCode :code='`<XlyModal v-model="visible" title="小型" size="small">...</XlyModal>
-<XlyModal v-model="visible" title="默认" size="default">...</XlyModal>
-<XlyModal v-model="visible" title="大型" size="large">...</XlyModal>
-<XlyModal v-model="visible" title="全屏" size="fullscreen">...</XlyModal>
-<XlyModal v-model="visible" title="自定义" width="400px">...</XlyModal>`' />
+        <XlyDocCode
+          code="<XlyModal v-model=&quot;visible&quot; title=&quot;小型&quot; size=&quot;small&quot;>...</XlyModal>
+<XlyModal v-model=&quot;visible&quot; title=&quot;默认&quot; size=&quot;default&quot;>...</XlyModal>
+<XlyModal v-model=&quot;visible&quot; title=&quot;大型&quot; size=&quot;large&quot;>...</XlyModal>
+<XlyModal v-model=&quot;visible&quot; title=&quot;全屏&quot; size=&quot;fullscreen&quot;>...</XlyModal>
+<XlyModal v-model=&quot;visible&quot; title=&quot;自定义&quot; width=&quot;400px&quot;>...</XlyModal>"
+        />
       </div>
 
       <XlyModal v-model="smallVisible" title="小型弹窗" size="small">
@@ -70,23 +134,34 @@
 
     <!-- 动画效果 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">动画效果</h2>
+      <h2 class="doc-section__title">
+        动画效果
+      </h2>
       <p class="doc-section__desc">
         通过 <code>transition</code> 属性设置弹窗动画，支持
-        <code>zoom</code
-        >（缩放）、<code>slide-up</code>（从下方滑入）、<code>slide-down</code>（从上方滑入）、<code>fade</code>（淡入）四种效果。
+        <code>zoom</code>（缩放）、<code>slide-up</code>（从下方滑入）、<code>slide-down</code>（从上方滑入）、<code>fade</code>（淡入）四种效果。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="zoomVisible = true">缩放动画</XlyButton>
-          <XlyButton @click="slideUpVisible = true">上滑动画</XlyButton>
-          <XlyButton @click="slideDownVisible = true">下滑动画</XlyButton>
-          <XlyButton @click="fadeVisible = true">淡入动画</XlyButton>
+          <XlyButton @click="zoomVisible = true">
+            缩放动画
+          </XlyButton>
+          <XlyButton @click="slideUpVisible = true">
+            上滑动画
+          </XlyButton>
+          <XlyButton @click="slideDownVisible = true">
+            下滑动画
+          </XlyButton>
+          <XlyButton @click="fadeVisible = true">
+            淡入动画
+          </XlyButton>
         </div>
-        <XlyDocCode :code='`<XlyModal v-model="visible" title="缩放" transition="zoom">...</XlyModal>
-<XlyModal v-model="visible" title="上滑" transition="slide-up">...</XlyModal>
-<XlyModal v-model="visible" title="下滑" transition="slide-down">...</XlyModal>
-<XlyModal v-model="visible" title="淡入" transition="fade">...</XlyModal>`' />
+        <XlyDocCode
+          code="<XlyModal v-model=&quot;visible&quot; title=&quot;缩放&quot; transition=&quot;zoom&quot;>...</XlyModal>
+<XlyModal v-model=&quot;visible&quot; title=&quot;上滑&quot; transition=&quot;slide-up&quot;>...</XlyModal>
+<XlyModal v-model=&quot;visible&quot; title=&quot;下滑&quot; transition=&quot;slide-down&quot;>...</XlyModal>
+<XlyModal v-model=&quot;visible&quot; title=&quot;淡入&quot; transition=&quot;fade&quot;>...</XlyModal>"
+        />
       </div>
 
       <XlyModal v-model="zoomVisible" title="缩放动画" transition="zoom">
@@ -105,24 +180,44 @@
 
     <!-- 自定义弹出位置 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义弹出位置</h2>
+      <h2 class="doc-section__title">
+        自定义弹出位置
+      </h2>
       <p class="doc-section__desc">
-        通过 <code>placement</code> 属性设置弹窗弹出位置，支持 9 个方向。还可通过
-        <code>offset</code> 属性微调偏移量。
+        通过 <code>placement</code> 属性设置弹窗弹出位置，支持 9 个方向。还可通过 <code>offset</code> 属性微调偏移量。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="placementCenter = true">居中（默认）</XlyButton>
-          <XlyButton @click="placementTop = true">顶部居中</XlyButton>
-          <XlyButton @click="placementTopLeft = true">左上角</XlyButton>
-          <XlyButton @click="placementTopRight = true">右上角</XlyButton>
-          <XlyButton @click="placementBottom = true">底部居中</XlyButton>
-          <XlyButton @click="placementBottomLeft = true">左下角</XlyButton>
-          <XlyButton @click="placementBottomRight = true">右下角</XlyButton>
-          <XlyButton @click="placementLeft = true">左侧居中</XlyButton>
-          <XlyButton @click="placementRight = true">右侧居中</XlyButton>
+          <XlyButton @click="placementCenter = true">
+            居中（默认）
+          </XlyButton>
+          <XlyButton @click="placementTop = true">
+            顶部居中
+          </XlyButton>
+          <XlyButton @click="placementTopLeft = true">
+            左上角
+          </XlyButton>
+          <XlyButton @click="placementTopRight = true">
+            右上角
+          </XlyButton>
+          <XlyButton @click="placementBottom = true">
+            底部居中
+          </XlyButton>
+          <XlyButton @click="placementBottomLeft = true">
+            左下角
+          </XlyButton>
+          <XlyButton @click="placementBottomRight = true">
+            右下角
+          </XlyButton>
+          <XlyButton @click="placementLeft = true">
+            左侧居中
+          </XlyButton>
+          <XlyButton @click="placementRight = true">
+            右侧居中
+          </XlyButton>
         </div>
-        <XlyDocCode :code="`<!-- 居中（默认） -->
+        <XlyDocCode
+          code="<!-- 居中（默认） -->
 <XlyModal v-model=&quot;visible&quot; placement=&quot;center&quot;>...</XlyModal>
 <!-- 顶部居中 -->
 <XlyModal v-model=&quot;visible&quot; placement=&quot;top&quot;>...</XlyModal>
@@ -130,7 +225,8 @@
 <XlyModal v-model=&quot;visible&quot; placement=&quot;top-right&quot;
   :offset=&quot;{ x: '20px', y: '20px' }&quot;>...</XlyModal>
 <!-- 左侧居中 -->
-<XlyModal v-model=&quot;visible&quot; placement=&quot;left&quot;>...</XlyModal>`" />
+<XlyModal v-model=&quot;visible&quot; placement=&quot;left&quot;>...</XlyModal>"
+        />
       </div>
 
       <XlyModal v-model="placementCenter" title="居中（默认）" size="small">
@@ -164,46 +260,60 @@
 
     <!-- 自定义内容 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义内容</h2>
+      <h2 class="doc-section__title">
+        自定义内容
+      </h2>
       <p class="doc-section__desc">
         通过 <code>#header</code>、默认插槽和 <code>#footer</code> 完全自定义弹窗内容。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="customContentVisible = true">自定义弹窗</XlyButton>
+          <XlyButton @click="customContentVisible = true">
+            自定义弹窗
+          </XlyButton>
         </div>
-        <XlyDocCode :code='`<XlyModal v-model="visible" :show-footer="false">
+        <XlyDocCode
+          code="<XlyModal v-model=&quot;visible&quot; :show-footer=&quot;false&quot;>
   <template #header>
-    <div style="display:flex;align-items:center;gap:8px">
-      <el-icon color="#4f6ef7"><WarningFilled /></el-icon>
-      <span style="color:#1a1a2e;font-weight:600">确认删除</span>
+    <div style=&quot;display:flex;align-items:center;gap:8px&quot;>
+      <el-icon color=&quot;#4f6ef7&quot;><WarningFilled /></el-icon>
+      <span style=&quot;color:#1a1a2e;font-weight:600&quot;>确认删除</span>
     </div>
   </template>
   <p>确定要删除该记录吗？此操作不可撤销。</p>
   <template #footer>
-    <div style="display:flex;justify-content:flex-end;gap:10px">
-      <XlyButton type="text" @click="visible = false">取消</XlyButton>
-      <XlyButton type="danger" @click="handleDelete">确认删除</XlyButton>
+    <div style=&quot;display:flex;justify-content:flex-end;gap:10px&quot;>
+      <XlyButton type=&quot;text&quot; @click=&quot;visible = false&quot;>取消</XlyButton>
+      <XlyButton type=&quot;danger&quot; @click=&quot;handleDelete&quot;>确认删除</XlyButton>
     </div>
   </template>
-</XlyModal>`' />
+</XlyModal>"
+        />
       </div>
 
       <XlyModal v-model="customContentVisible" :show-footer="false">
         <template #header>
           <div class="custom-header">
-            <el-icon color="#f56c6c" :size="20"><WarningFilled /></el-icon>
+            <el-icon color="#f56c6c" :size="20">
+              <WarningFilled />
+            </el-icon>
             <span class="custom-header__text">确认删除</span>
           </div>
         </template>
         <div class="custom-body">
           <p>确定要删除该记录吗？此操作不可撤销。</p>
-          <p class="custom-body__sub">删除后数据将无法恢复，请谨慎操作。</p>
+          <p class="custom-body__sub">
+            删除后数据将无法恢复，请谨慎操作。
+          </p>
         </div>
         <template #footer>
           <div class="custom-footer">
-            <XlyButton type="text" @click="customContentVisible = false">取消</XlyButton>
-            <XlyButton type="danger" @click="customContentVisible = false">确认删除</XlyButton>
+            <XlyButton type="text" @click="customContentVisible = false">
+              取消
+            </XlyButton>
+            <XlyButton type="danger" @click="customContentVisible = false">
+              确认删除
+            </XlyButton>
           </div>
         </template>
       </XlyModal>
@@ -211,7 +321,9 @@
 
     <!-- 无遮罩 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">无遮罩弹窗</h2>
+      <h2 class="doc-section__title">
+        无遮罩弹窗
+      </h2>
       <p class="doc-section__desc">
         通过
         <code>:show-mask="false"</code>
@@ -219,12 +331,16 @@
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="noMaskVisible = true">无遮罩弹窗</XlyButton>
+          <XlyButton @click="noMaskVisible = true">
+            无遮罩弹窗
+          </XlyButton>
         </div>
-        <XlyDocCode :code='`<XlyModal v-model="visible" title="悬浮面板" :show-mask="false"
-  placement="center">
+        <XlyDocCode
+          code="<XlyModal v-model=&quot;visible&quot; title=&quot;悬浮面板&quot; :show-mask=&quot;false&quot;
+  placement=&quot;center&quot;>
   <p>这是一个没有遮罩的弹窗。</p>
-</XlyModal>`' />
+</XlyModal>"
+        />
       </div>
 
       <XlyModal
@@ -241,20 +357,30 @@
 
     <!-- 无头无尾 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">隐藏头尾</h2>
+      <h2 class="doc-section__title">
+        隐藏头尾
+      </h2>
       <p class="doc-section__desc">
         通过 <code>:show-header="false"</code> 和
         <code>:show-footer="false"</code> 隐藏弹窗头部和底部，适合纯展示或自定义布局。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="noHeaderVisible = true">无头部弹窗</XlyButton>
-          <XlyButton @click="noFooterVisible = true">无底部弹窗</XlyButton>
-          <XlyButton @click="onlyBodyVisible = true">纯内容弹窗</XlyButton>
+          <XlyButton @click="noHeaderVisible = true">
+            无头部弹窗
+          </XlyButton>
+          <XlyButton @click="noFooterVisible = true">
+            无底部弹窗
+          </XlyButton>
+          <XlyButton @click="onlyBodyVisible = true">
+            纯内容弹窗
+          </XlyButton>
         </div>
-        <XlyDocCode :code='`<XlyModal v-model="visible" :show-header="false">...</XlyModal>
-<XlyModal v-model="visible" :show-footer="false">...</XlyModal>
-<XlyModal v-model="visible" :show-header="false" :show-footer="false">...</XlyModal>`' />
+        <XlyDocCode
+          code="<XlyModal v-model=&quot;visible&quot; :show-header=&quot;false&quot;>...</XlyModal>
+<XlyModal v-model=&quot;visible&quot; :show-footer=&quot;false&quot;>...</XlyModal>
+<XlyModal v-model=&quot;visible&quot; :show-header=&quot;false&quot; :show-footer=&quot;false&quot;>...</XlyModal>"
+        />
       </div>
 
       <XlyModal v-model="noHeaderVisible" :show-header="false" title="无头部">
@@ -265,27 +391,36 @@
       </XlyModal>
       <XlyModal v-model="onlyBodyVisible" :show-header="false" :show-footer="false" size="small">
         <div style="text-align: center; padding: 20px 0">
-          <el-icon color="#34c759" :size="48"><CircleCheckFilled /></el-icon>
+          <el-icon color="#34c759" :size="48">
+            <CircleCheckFilled />
+          </el-icon>
           <p style="margin-top: 16px; font-size: 16px; font-weight: 600; color: var(--el-text-color-primary)">
             操作成功
           </p>
-          <p style="margin-top: 8px; font-size: 14px; color: var(--el-text-color-secondary)">数据已成功保存</p>
+          <p style="margin-top: 8px; font-size: 14px; color: var(--el-text-color-secondary)">
+            数据已成功保存
+          </p>
         </div>
       </XlyModal>
     </section>
 
     <!-- 确认加载 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">确认加载</h2>
+      <h2 class="doc-section__title">
+        确认加载
+      </h2>
       <p class="doc-section__desc">
         通过 <code>confirm-loading</code> 属性让确认按钮进入加载状态，适用于异步提交场景。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton @click="loadingVisible = true">提交表单</XlyButton>
+          <XlyButton @click="loadingVisible = true">
+            提交表单
+          </XlyButton>
         </div>
-        <XlyDocCode :code='`<XlyModal v-model="visible" title="提交确认" :confirm-loading="loading"
-  @confirm="handleSubmit" @cancel="handleCancel">
+        <XlyDocCode
+          code="<XlyModal v-model=&quot;visible&quot; title=&quot;提交确认&quot; :confirm-loading=&quot;loading&quot;
+  @confirm=&quot;handleSubmit&quot; @cancel=&quot;handleCancel&quot;>
   <p>确认提交该表单数据吗？</p>
 </XlyModal>
 
@@ -296,7 +431,8 @@ function handleSubmit() {
     loading.value = false
     visible.value = false
   }, 2000)
-}`' />
+}"
+        />
       </div>
 
       <XlyModal
@@ -312,31 +448,49 @@ function handleSubmit() {
 
     <!-- 业务场景 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">业务场景</h2>
-      <p class="doc-section__desc">弹窗在实际业务中的常见用法。</p>
+      <h2 class="doc-section__title">
+        业务场景
+      </h2>
+      <p class="doc-section__desc">
+        弹窗在实际业务中的常见用法。
+      </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <XlyButton type="danger" @click="deleteVisible = true">删除确认</XlyButton>
-          <XlyButton type="primary" @click="formVisible = true">表单弹窗</XlyButton>
-          <XlyButton type="success" @click="successVisible = true">成功提示</XlyButton>
+          <XlyButton type="danger" @click="deleteVisible = true">
+            删除确认
+          </XlyButton>
+          <XlyButton type="primary" @click="formVisible = true">
+            表单弹窗
+          </XlyButton>
+          <XlyButton type="success" @click="successVisible = true">
+            成功提示
+          </XlyButton>
         </div>
       </div>
 
       <XlyModal v-model="deleteVisible" :show-footer="false" size="small">
         <template #header>
           <div class="custom-header">
-            <el-icon color="#f56c6c" :size="20"><WarningFilled /></el-icon>
+            <el-icon color="#f56c6c" :size="20">
+              <WarningFilled />
+            </el-icon>
             <span class="custom-header__text">删除确认</span>
           </div>
         </template>
         <div class="custom-body">
           <p>确定要删除选中的 <strong>3</strong> 条记录吗？</p>
-          <p class="custom-body__sub">此操作不可撤销，删除后数据将无法恢复。</p>
+          <p class="custom-body__sub">
+            此操作不可撤销，删除后数据将无法恢复。
+          </p>
         </div>
         <template #footer>
           <div class="custom-footer">
-            <XlyButton type="text" @click="deleteVisible = false">取消</XlyButton>
-            <XlyButton type="danger" @click="deleteVisible = false">确认删除</XlyButton>
+            <XlyButton type="text" @click="deleteVisible = false">
+              取消
+            </XlyButton>
+            <XlyButton type="danger" @click="deleteVisible = false">
+              确认删除
+            </XlyButton>
           </div>
         </template>
       </XlyModal>
@@ -366,13 +520,7 @@ function handleSubmit() {
         </div>
       </XlyModal>
 
-      <XlyModal
-        v-model="successVisible"
-        :show-header="false"
-        :show-footer="false"
-        size="small"
-        transition="zoom"
-      >
+      <XlyModal v-model="successVisible" :show-header="false" :show-footer="false" size="small" transition="zoom">
         <div style="text-align: center; padding: 24px 0">
           <div
             style="
@@ -386,21 +534,31 @@ function handleSubmit() {
               margin-bottom: 16px;
             "
           >
-            <el-icon color="#34c759" :size="28"><CircleCheckFilled /></el-icon>
+            <el-icon color="#34c759" :size="28">
+              <CircleCheckFilled />
+            </el-icon>
           </div>
-          <p style="margin: 0 0 8px; font-size: 16px; font-weight: 600; color: var(--el-text-color-primary)">操作成功</p>
+          <p style="margin: 0 0 8px; font-size: 16px; font-weight: 600; color: var(--el-text-color-primary)">
+            操作成功
+          </p>
           <p style="margin: 0 0 20px; font-size: 14px; color: var(--el-text-color-secondary); line-height: 1.6">
             用户数据已成功保存
           </p>
-          <XlyButton type="primary" @click="successVisible = false">我知道了</XlyButton>
+          <XlyButton type="primary" @click="successVisible = false">
+            我知道了
+          </XlyButton>
         </div>
       </XlyModal>
     </section>
 
     <!-- API 文档 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">API</h2>
-      <h3 class="doc-subtitle">Props</h3>
+      <h2 class="doc-section__title">
+        API
+      </h2>
+      <h3 class="doc-subtitle">
+        Props
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -439,7 +597,10 @@ function handleSubmit() {
             <tr>
               <td><code>placement</code></td>
               <td>弹窗弹出位置</td>
-              <td><code>'center' | 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right' | 'left' | 'right'</code></td>
+              <td>
+                <code>'center' | 'top' | 'top-left' | 'top-right' | 'bottom' | 'bottom-left' | 'bottom-right' | 'left' |
+                  'right'</code>
+              </td>
               <td><code>'center'</code></td>
             </tr>
             <tr>
@@ -512,34 +673,82 @@ function handleSubmit() {
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Slots</h3>
+      <h3 class="doc-subtitle">
+        Slots
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
-            <tr><th>插槽名</th><th>说明</th></tr>
+            <tr>
+              <th>插槽名</th>
+              <th>说明</th>
+            </tr>
           </thead>
           <tbody>
-            <tr><td><code>default</code></td><td>弹窗主体内容</td></tr>
-            <tr><td><code>header</code></td><td>自定义头部内容（替换默认标题）</td></tr>
-            <tr><td><code>footer</code></td><td>自定义底部内容（替换默认按钮）</td></tr>
+            <tr>
+              <td><code>default</code></td>
+              <td>弹窗主体内容</td>
+            </tr>
+            <tr>
+              <td><code>header</code></td>
+              <td>自定义头部内容（替换默认标题）</td>
+            </tr>
+            <tr>
+              <td><code>footer</code></td>
+              <td>自定义底部内容（替换默认按钮）</td>
+            </tr>
           </tbody>
         </table>
       </div>
 
-      <h3 class="doc-subtitle">Events</h3>
+      <h3 class="doc-subtitle">
+        Events
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
-            <tr><th>事件名</th><th>说明</th><th>参数</th></tr>
+            <tr>
+              <th>事件名</th>
+              <th>说明</th>
+              <th>参数</th>
+            </tr>
           </thead>
           <tbody>
-            <tr><td><code>update:model-value</code></td><td>弹窗显示状态变化时触发</td><td><code>(value: boolean)</code></td></tr>
-            <tr><td><code>confirm</code></td><td>点击确认按钮时触发</td><td>—</td></tr>
-            <tr><td><code>cancel</code></td><td>点击取消按钮时触发</td><td>—</td></tr>
-            <tr><td><code>close</code></td><td>弹窗关闭时触发</td><td>—</td></tr>
-            <tr><td><code>open</code></td><td>弹窗打开前触发</td><td>—</td></tr>
-            <tr><td><code>opened</code></td><td>弹窗打开动画结束后触发</td><td>—</td></tr>
-            <tr><td><code>after-close</code></td><td>弹窗关闭动画结束后触发</td><td>—</td></tr>
+            <tr>
+              <td><code>update:model-value</code></td>
+              <td>弹窗显示状态变化时触发</td>
+              <td><code>(value: boolean)</code></td>
+            </tr>
+            <tr>
+              <td><code>confirm</code></td>
+              <td>点击确认按钮时触发</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><code>cancel</code></td>
+              <td>点击取消按钮时触发</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><code>close</code></td>
+              <td>弹窗关闭时触发</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><code>open</code></td>
+              <td>弹窗打开前触发</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><code>opened</code></td>
+              <td>弹窗打开动画结束后触发</td>
+              <td>—</td>
+            </tr>
+            <tr>
+              <td><code>after-close</code></td>
+              <td>弹窗关闭动画结束后触发</td>
+              <td>—</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -547,65 +756,164 @@ function handleSubmit() {
   </div>
 </template>
 
-<script setup lang="ts">
-import { ref } from 'vue'
-import { CircleCheckFilled, WarningFilled } from '@element-plus/icons-vue'
-import XlyButton from '@/components/xly-button/index.vue'
-import XlyModal from '@/components/xly-modal/index.vue'
-
-const basicVisible = ref(false)
-const smallVisible = ref(false)
-const defaultVisible = ref(false)
-const largeVisible = ref(false)
-const fullVisible = ref(false)
-const customVisible = ref(false)
-const zoomVisible = ref(false)
-const slideUpVisible = ref(false)
-const slideDownVisible = ref(false)
-const fadeVisible = ref(false)
-const customContentVisible = ref(false)
-const noMaskVisible = ref(false)
-const placementCenter = ref(false)
-const placementTop = ref(false)
-const placementTopLeft = ref(false)
-const placementTopRight = ref(false)
-const placementBottom = ref(false)
-const placementBottomLeft = ref(false)
-const placementBottomRight = ref(false)
-const placementLeft = ref(false)
-const placementRight = ref(false)
-const noHeaderVisible = ref(false)
-const noFooterVisible = ref(false)
-const onlyBodyVisible = ref(false)
-const loadingVisible = ref(false)
-const confirmLoading = ref(false)
-function handleConfirm() {
-  confirmLoading.value = true
-  setTimeout(() => {
-    confirmLoading.value = false
-    loadingVisible.value = false
-  }, 2000)
-}
-const deleteVisible = ref(false)
-const formVisible = ref(false)
-const successVisible = ref(false)
-</script>
-
 <style scoped lang="scss">
-.modal-doc {  padding: 8px 0 40px; }
-.doc-header { margin-bottom: 36px; }
-.doc-title { font-size: 26px; font-weight: 700; color: var(--el-text-color-primary); margin: 0 0 8px; letter-spacing: -0.3px; }
-.doc-desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0; line-height: 1.6; }
-.doc-section { margin-bottom: 32px; }
-.doc-section__title { font-size: 18px; font-weight: 600; color: var(--el-text-color-primary); margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--el-border-color-lighter); }
-.doc-section__desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 16px; line-height: 1.6; code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; } }
-.doc-preview { border: 1px solid var(--el-border-color-lighter); border-radius: 12px; overflow: hidden; background: var(--el-bg-color-overlay); }
-.doc-preview__body { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 24px; }
-.doc-code { border-top: 1px solid var(--el-border-color-lighter); background: var(--el-fill-color-light); padding: 16px 20px; overflow-x: auto; pre { margin: 0; padding: 0; } code { font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 13px; line-height: 1.7; color: var(--el-text-color-regular); white-space: pre; } }
-.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
-.doc-table { overflow-x: auto; table { width: 100%; border-collapse: collapse; font-size: 14px; } th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); white-space: nowrap; } th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); } td { color: var(--el-text-color-regular); } code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; } }
-.custom-header { display: flex; align-items: center; gap: 8px; &__text { font-size: 17px; font-weight: 600; color: var(--el-text-color-primary); } }
-.custom-body { p { margin: 0 0 8px; color: var(--el-text-color-regular); line-height: 1.7; strong { color: var(--el-text-color-primary); } } &__sub { font-size: 13px !important; color: var(--el-text-color-secondary) !important; } }
-.custom-footer { display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
-.demo-form { display: flex; flex-direction: column; gap: 16px; &__item { display: flex; flex-direction: column; gap: 6px; } &__label { font-size: 14px; font-weight: 500; color: var(--el-text-color-primary); .required { color: var(--el-color-danger); } } }
+.modal-doc {
+  padding: 8px 0 40px;
+}
+.doc-header {
+  margin-bottom: 36px;
+}
+.doc-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  letter-spacing: -0.3px;
+}
+.doc-desc {
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+.doc-section {
+  margin-bottom: 32px;
+}
+.doc-section__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--el-border-color-lighter);
+}
+.doc-section__desc {
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0 0 16px;
+  line-height: 1.6;
+  code {
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+  }
+}
+.doc-preview {
+  border: 1px solid var(--el-border-color-lighter);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--el-bg-color-overlay);
+}
+.doc-preview__body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 24px;
+}
+.doc-code {
+  border-top: 1px solid var(--el-border-color-lighter);
+  background: var(--el-fill-color-light);
+  padding: 16px 20px;
+  overflow-x: auto;
+  pre {
+    margin: 0;
+    padding: 0;
+  }
+  code {
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--el-text-color-regular);
+    white-space: pre;
+  }
+}
+.doc-subtitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 20px 0 10px;
+}
+.doc-table {
+  overflow-x: auto;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+    white-space: nowrap;
+  }
+  th {
+    background: var(--el-fill-color-light);
+    font-weight: 600;
+    color: var(--el-text-color-primary);
+  }
+  td {
+    color: var(--el-text-color-regular);
+  }
+  code {
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+  }
+}
+.custom-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  .custom-header__text {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--el-text-color-primary);
+  }
+}
+.custom-body {
+  p {
+    margin: 0 0 8px;
+    color: var(--el-text-color-regular);
+    line-height: 1.7;
+    strong {
+      color: var(--el-text-color-primary);
+    }
+  }
+  .custom-body__sub {
+    font-size: 13px !important;
+    color: var(--el-text-color-secondary) !important;
+  }
+}
+.custom-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.demo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  .demo-form__item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .demo-form__label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--el-text-color-primary);
+    .required {
+      color: var(--el-color-danger);
+    }
+  }
+}
 </style>

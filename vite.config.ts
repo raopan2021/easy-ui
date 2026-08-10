@@ -1,11 +1,12 @@
 import { fileURLToPath, URL } from 'node:url'
 
-import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
+import { defineConfig } from 'vite'
 import viteCompression from 'vite-plugin-compression'
+import { xlyComponentResolver } from './packages/easy-ui/src/utils/xlyComponentResolver.ts'
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -25,7 +26,7 @@ export default defineConfig(({ mode }) => ({
     // 自动按需导入组件
     Components({
       dts: 'src/types/import/components.d.ts',
-      resolvers: [ElementPlusResolver()],
+      resolvers: [xlyComponentResolver(), ElementPlusResolver()],
     }),
     // 压缩
     viteCompression({
@@ -41,34 +42,28 @@ export default defineConfig(({ mode }) => ({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
+    // Vite 默认 extensions 不含 .vue，显式添加以支持无扩展名导入
+    extensions: ['.mjs', '.js', '.mts', '.ts', '.jsx', '.tsx', '.json', '.vue'],
+    // 确保 workspace 包使用同一份 vue / element-plus 实例
+    dedupe: ['vue', 'element-plus'],
   },
   css: {
-    // 使用 Lightning CSS 替代 PostCSS 作为 CSS 转换引擎，提升热更新与打包阶段的 CSS 处理速度
     transformer: 'lightningcss',
     lightningcss: {
-      // 与 build.target: "esnext" 保持一致，仅对现代浏览器未支持的语法做降级
-      targets: {
-        chrome: 111,
-        edge: 111,
-        firefox: 128,
-        safari: 16,
-      },
+      targets: { chrome: 111, edge: 111, firefox: 128, safari: 16 },
     },
   },
   server: {
     port: 3000,
     open: true,
-    // 预热文件以提前转换和缓存结果，降低启动期间的初始页面加载时长
     warmup: {
       clientFiles: ['./index.html', './src/{views,components,layouts}/*'],
     },
   },
   optimizeDeps: {
-    // Vite 8: 排除 unplugin-auto-import 虚拟模块，避免 Rolldown 预构建时丢失注入
-    exclude: ['unimport'],
+    exclude: ['easy-ui', 'unimport'],
   },
   esbuild: {
-    // 生产构建移除 console 与 debugger
     drop: mode === 'production' ? ['console', 'debugger'] : [],
   },
   build: {
@@ -87,7 +82,8 @@ export default defineConfig(({ mode }) => ({
     rolldownOptions: {
       // 屏蔽 @vueuse/core 的纯标注注释警告（第三方包，不影响构建）
       onwarn(warning, defaultHandler) {
-        if (/@vueuse\/core/.test(warning.id || '') && warning.message.includes('PURE')) return
+        if (/@vueuse\/core/.test(warning.id || '') && warning.message.includes('PURE'))
+          return
         defaultHandler(warning)
       },
       // 静态资源分类打包
@@ -96,9 +92,7 @@ export default defineConfig(({ mode }) => ({
         chunkFileNames(chunkInfo) {
           // manualChunks 分离的第三方库不加 hash，其余加 hash
           const manualNames = ['vue-vendor', 'element-plus']
-          return manualNames.includes(chunkInfo.name)
-            ? 'static/js/[name].js'
-            : 'static/js/[name]-[hash].js'
+          return manualNames.includes(chunkInfo.name) ? 'static/js/[name].js' : 'static/js/[name]-[hash].js'
         },
         // 入口文件打包后的命名
         entryFileNames: 'static/js/[name]-[hash].js',
@@ -109,11 +103,11 @@ export default defineConfig(({ mode }) => ({
         manualChunks(id: string) {
           if (id.includes('node_modules')) {
             // vue 运行时核心：每个页面都依赖，体积稳定，单独分包利于浏览器长期缓存
-            if (/[/\\]node_modules[/\\](vue|vue-router|pinia|@vue)[/\\]/.test(id)) {
+            if (/[/\\]node_modules[/\\](?:vue|vue-router|pinia|@vue)[/\\]/.test(id)) {
               return 'vue-vendor'
             }
             // element-plus 及其图标库
-            if (/[/\\]node_modules[/\\](element-plus|@element-plus)[/\\]/.test(id)) {
+            if (/[/\\]node_modules[/\\](?:element-plus|@element-plus)[/\\]/.test(id)) {
               return 'element-plus'
             }
           }

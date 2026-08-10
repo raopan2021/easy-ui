@@ -8,13 +8,13 @@ html.dark {
     background: var(--el-bg-color);
     border-color: var(--el-border-color);
 
-    &__node-label {
+    .xly-dept-tree__node-label {
       color: var(--el-text-color-regular);
     }
-    &__node:hover > .xly-dept-tree__node-label {
+    .xly-dept-tree__node:hover > .xly-dept-tree__node-label {
       background: var(--el-fill-color-light);
     }
-    &__node.is-active > .xly-dept-tree__node-label {
+    .xly-dept-tree__node.is-active > .xly-dept-tree__node-label {
       background: var(--el-fill-color-light);
       color: var(--el-color-primary);
     }
@@ -31,54 +31,54 @@ html.dark {
   .xly-gantt {
     background: var(--el-bg-color);
 
-    &__header {
+    .xly-gantt__header {
       background: var(--el-fill-color-light);
       border-color: var(--el-border-color);
     }
 
-    &__sidebar-header {
+    .xly-gantt__sidebar-header {
       background: var(--el-fill-color-light);
       border-color: var(--el-border-color);
     }
 
-    &__sidebar-cell {
+    .xly-gantt__sidebar-cell {
       border-color: var(--el-border-color);
       color: var(--el-text-color-regular);
     }
 
-    &__cell {
+    .xly-gantt__cell {
       border-color: var(--el-border-color-lighter);
     }
 
-    &__bar {
+    .xly-gantt__bar {
       color: #fff;
     }
 
-    &__today-line {
+    .xly-gantt__today-line {
       background: var(--el-color-danger);
     }
 
-    &__header-cell {
+    .xly-gantt__header-cell {
       border-color: var(--el-border-color);
       color: var(--el-text-color-secondary);
     }
 
-    &__header-cell--today {
+    .xly-gantt__header-cell--today {
       background: rgba(239, 68, 68, 0.1);
     }
   }
 
   /* ===== 聊天 ===== */
   .xly-chat {
-    &__message--assistant {
+    .xly-chat__message--assistant {
       background: var(--el-fill-color-lighter);
     }
 
-    &__avatar {
+    .xly-chat__avatar {
       background: var(--el-fill-color);
     }
 
-    &__message-content {
+    .xly-chat__message-content {
       background: var(--el-bg-color-overlay);
       border-color: var(--el-border-color);
     }
@@ -88,16 +88,16 @@ html.dark {
     background: var(--el-fill-color-lighter);
     border-color: var(--el-border-color);
 
-    &__textarea {
+    .xly-chat-input__textarea {
       color: var(--el-text-color-primary);
       background: transparent;
     }
 
-    &__textarea::placeholder {
+    .xly-chat-input__textarea::placeholder {
       color: var(--el-text-color-placeholder);
     }
 
-    &__send-btn {
+    .xly-chat-input__send-btn {
       color: var(--el-text-color-secondary);
     }
   }

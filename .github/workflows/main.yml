@@ -1,20 +1,21 @@
-name: Sync Gitee to GitHub
+name: Sync GitHub to Gitee
 
 on:
-  schedule:
-    - cron: '0 23 * * *'
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - name: Mirror Gitee to GitHub (force push)
+      - name: Mirror GitHub to Gitee
         run: |
           set -x
-          git clone --mirror https://gitee.com/yun_hua_admin/ease-ui.git gitee-mirror
-          cd gitee-mirror
-          git remote add github https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-          # 强制推送所有分支（不删除目标仓库中多余的分支）
-          git push --force --all github
-          git push --force --tags github
+          git clone --mirror https://github.com/${{ github.repository }}.git github-mirror
+          cd github-mirror
+          git remote add gitee https://${{ secrets.GITEE_TOKEN }}@gitee.com/yun_hua_admin/ease-ui.git
+          # 强制推送所有分支和标签（不删除目标仓库中多余的分支）
+          git push --force --all gitee
+          git push --force --tags gitee

@@ -1,8 +1,15 @@
+<script setup lang="ts">
+import { CircleCheckFilled, Message, Star } from '@element-plus/icons-vue'
+import { XlyTag, XlyTimeline, XlyTimelineItem } from 'easy-ui'
+</script>
+
 <template>
   <div class="timeline-doc">
     <!-- 页面标题 -->
     <div class="doc-header">
-      <h1 class="doc-title">Timeline 时间线</h1>
+      <h1 class="doc-title">
+        Timeline 时间线
+      </h1>
       <p class="doc-desc">
         垂直展示时间流信息，用于记录项目进度、订单状态、活动流程等。
       </p>
@@ -10,7 +17,9 @@
 
     <!-- 基础用法 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">基础用法</h2>
+      <h2 class="doc-section__title">
+        基础用法
+      </h2>
       <p class="doc-section__desc">
         最简单的时间线，通过默认插槽添加节点内容。
       </p>
@@ -35,26 +44,30 @@
             </XlyTimelineItem>
           </XlyTimeline>
         </div>
-        <XlyDocCode :code='`<XlyTimeline>
-  <XlyTimelineItem status="finish" timestamp="2024-01-15">
+        <XlyDocCode
+          code="<XlyTimeline>
+  <XlyTimelineItem status=&quot;finish&quot; timestamp=&quot;2024-01-15&quot;>
     <h4>项目启动</h4>
     <p>完成项目立项和团队组建</p>
   </XlyTimelineItem>
-  <XlyTimelineItem status="process" timestamp="2024-02-15">
+  <XlyTimelineItem status=&quot;process&quot; timestamp=&quot;2024-02-15&quot;>
     <h4>开发阶段</h4>
     <p>正在进行核心功能开发</p>
   </XlyTimelineItem>
-  <XlyTimelineItem status="wait" timestamp="2024-03-01">
+  <XlyTimelineItem status=&quot;wait&quot; timestamp=&quot;2024-03-01&quot;>
     <h4>测试阶段</h4>
     <p>计划进行系统测试</p>
   </XlyTimelineItem>
-</XlyTimeline>`' />
+</XlyTimeline>"
+        />
       </div>
     </section>
 
     <!-- 不同状态 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">不同状态</h2>
+      <h2 class="doc-section__title">
+        不同状态
+      </h2>
       <p class="doc-section__desc">
         通过 <code>status</code> 属性设置节点状态：
         <code>finish</code>（完成）、<code>process</code>（进行中）、<code>wait</code>（待处理）、<code>error</code>（错误）。
@@ -80,18 +93,23 @@
             </XlyTimelineItem>
           </XlyTimeline>
         </div>
-        <XlyDocCode :code='`<XlyTimelineItem status="finish">...</XlyTimelineItem>
-<XlyTimelineItem status="process">...</XlyTimelineItem>
-<XlyTimelineItem status="wait">...</XlyTimelineItem>
-<XlyTimelineItem status="error">...</XlyTimelineItem>`' />
+        <XlyDocCode
+          code="<XlyTimelineItem status=&quot;finish&quot;>...</XlyTimelineItem>
+<XlyTimelineItem status=&quot;process&quot;>...</XlyTimelineItem>
+<XlyTimelineItem status=&quot;wait&quot;>...</XlyTimelineItem>
+<XlyTimelineItem status=&quot;error&quot;>...</XlyTimelineItem>"
+        />
       </div>
     </section>
 
     <!-- 自定义节点图标 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">自定义节点图标</h2>
+      <h2 class="doc-section__title">
+        自定义节点图标
+      </h2>
       <p class="doc-section__desc">
-        通过 <code>icon</code> 属性直接传入图标名称，使用已有的 <code>XlyIcon</code> 组件。支持 Element Plus 图标（<code>el:xxx</code>）和 SVG 图标（<code>svg:xxx</code>）。
+        通过 <code>icon</code> 属性直接传入图标名称，使用已有的 <code>XlyIcon</code> 组件。支持 Element Plus
+        图标（<code>el:xxx</code>）和 SVG 图标（<code>svg:xxx</code>）。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
@@ -114,23 +132,27 @@
             </XlyTimelineItem>
           </XlyTimeline>
         </div>
-        <XlyDocCode :code='`<XlyTimelineItem status="finish" icon="el:Check">
+        <XlyDocCode
+          code="<XlyTimelineItem status=&quot;finish&quot; icon=&quot;el:Check&quot;>
   <h4>自定义图标</h4>
 </XlyTimelineItem>
 
-<XlyTimelineItem status="process" icon="el:Loading">
+<XlyTimelineItem status=&quot;process&quot; icon=&quot;el:Loading&quot;>
   <h4>加载中</h4>
 </XlyTimelineItem>
 
-<XlyTimelineItem status="wait" icon="el:Clock">
+<XlyTimelineItem status=&quot;wait&quot; icon=&quot;el:Clock&quot;>
   <h4>待处理</h4>
-</XlyTimelineItem>`' />
+</XlyTimelineItem>"
+        />
       </div>
     </section>
 
     <!-- 时间戳插槽 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">时间戳</h2>
+      <h2 class="doc-section__title">
+        时间戳
+      </h2>
       <p class="doc-section__desc">
         通过 <code>timestamp</code> 属性或 <code>#timestamp</code> 插槽添加时间信息。
       </p>
@@ -157,8 +179,9 @@
             </XlyTimelineItem>
           </XlyTimeline>
         </div>
-        <XlyDocCode :code='`<!-- 使用 timestamp 属性 -->
-<XlyTimelineItem timestamp="2024-01-15 09:30">
+        <XlyDocCode
+          code="<!-- 使用 timestamp 属性 -->
+<XlyTimelineItem timestamp=&quot;2024-01-15 09:30&quot;>
   ...
 </XlyTimelineItem>
 
@@ -168,48 +191,71 @@
     <span>2024-02-01 14:30</span>
   </template>
   ...
-</XlyTimelineItem>`' />
+</XlyTimelineItem>"
+        />
       </div>
     </section>
 
     <!-- 简洁模式 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">简洁模式</h2>
+      <h2 class="doc-section__title">
+        简洁模式
+      </h2>
       <p class="doc-section__desc">
         不显示时间戳，仅展示关键节点信息。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
           <XlyTimeline>
-            <XlyTimelineItem status="finish">创建订单 #20240301</XlyTimelineItem>
-            <XlyTimelineItem status="finish">支付成功</XlyTimelineItem>
-            <XlyTimelineItem status="process">商品打包中</XlyTimelineItem>
-            <XlyTimelineItem status="wait">等待发货</XlyTimelineItem>
-            <XlyTimelineItem status="wait">确认收货</XlyTimelineItem>
+            <XlyTimelineItem status="finish">
+              创建订单 #20240301
+            </XlyTimelineItem>
+            <XlyTimelineItem status="finish">
+              支付成功
+            </XlyTimelineItem>
+            <XlyTimelineItem status="process">
+              商品打包中
+            </XlyTimelineItem>
+            <XlyTimelineItem status="wait">
+              等待发货
+            </XlyTimelineItem>
+            <XlyTimelineItem status="wait">
+              确认收货
+            </XlyTimelineItem>
           </XlyTimeline>
         </div>
-        <XlyDocCode :code='`<XlyTimeline>
-  <XlyTimelineItem status="finish">创建订单 #20240301</XlyTimelineItem>
-  <XlyTimelineItem status="finish">支付成功</XlyTimelineItem>
-  <XlyTimelineItem status="process">商品打包中</XlyTimelineItem>
-  <XlyTimelineItem status="wait">等待发货</XlyTimelineItem>
-  <XlyTimelineItem status="wait">确认收货</XlyTimelineItem>
-</XlyTimeline>`' />
+        <XlyDocCode
+          code="<XlyTimeline>
+  <XlyTimelineItem status=&quot;finish&quot;>创建订单 #20240301</XlyTimelineItem>
+  <XlyTimelineItem status=&quot;finish&quot;>支付成功</XlyTimelineItem>
+  <XlyTimelineItem status=&quot;process&quot;>商品打包中</XlyTimelineItem>
+  <XlyTimelineItem status=&quot;wait&quot;>等待发货</XlyTimelineItem>
+  <XlyTimelineItem status=&quot;wait&quot;>确认收货</XlyTimelineItem>
+</XlyTimeline>"
+        />
       </div>
     </section>
 
     <!-- 业务场景 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">业务场景</h2>
-      <p class="doc-section__desc">时间线在实际业务中的常见用法。</p>
+      <h2 class="doc-section__title">
+        业务场景
+      </h2>
+      <p class="doc-section__desc">
+        时间线在实际业务中的常见用法。
+      </p>
 
       <!-- 订单追踪 -->
-      <h3 class="doc-subsection__title">订单物流追踪</h3>
+      <h3 class="doc-subsection__title">
+        订单物流追踪
+      </h3>
       <div class="doc-preview doc-preview--noborder">
         <div class="order-tracker">
           <div class="order-tracker__header">
             <span>运单号：SF1234567890</span>
-            <XlyTag type="primary" size="small">运输中</XlyTag>
+            <XlyTag type="primary" size="small">
+              运输中
+            </XlyTag>
           </div>
           <XlyTimeline>
             <XlyTimelineItem status="finish" timestamp="2024-03-20 10:30">
@@ -247,7 +293,9 @@
       </div>
 
       <!-- 活动记录 -->
-      <h3 class="doc-subsection__title">用户活动记录</h3>
+      <h3 class="doc-subsection__title">
+        用户活动记录
+      </h3>
       <div class="doc-preview doc-preview--noborder">
         <div class="activity-list">
           <XlyTimeline>
@@ -289,7 +337,9 @@
       </div>
 
       <!-- 审核流程 -->
-      <h3 class="doc-subsection__title">审批流程</h3>
+      <h3 class="doc-subsection__title">
+        审批流程
+      </h3>
       <div class="doc-preview doc-preview--noborder">
         <div class="approval-flow">
           <XlyTimeline>
@@ -299,7 +349,9 @@
                   <span class="approval-item__title">提交申请</span>
                   <span class="approval-item__time">03-20 09:00</span>
                 </div>
-                <p class="approval-item__desc">张明 提交了请假申请（3天）</p>
+                <p class="approval-item__desc">
+                  张明 提交了请假申请（3天）
+                </p>
               </div>
             </XlyTimelineItem>
             <XlyTimelineItem status="finish" timestamp="2024-03-20 10:30">
@@ -308,7 +360,9 @@
                   <span class="approval-item__title">直属主管审批</span>
                   <span class="approval-item__time">03-20 10:30</span>
                 </div>
-                <p class="approval-item__desc">李华 审批通过</p>
+                <p class="approval-item__desc">
+                  李华 审批通过
+                </p>
               </div>
             </XlyTimelineItem>
             <XlyTimelineItem status="process" timestamp="2024-03-20 11:00">
@@ -317,7 +371,9 @@
                   <span class="approval-item__title">部门经理审批</span>
                   <span class="approval-item__time">03-20 11:00</span>
                 </div>
-                <p class="approval-item__desc">等待王芳审批</p>
+                <p class="approval-item__desc">
+                  等待王芳审批
+                </p>
               </div>
             </XlyTimelineItem>
             <XlyTimelineItem status="wait">
@@ -325,7 +381,9 @@
                 <div class="approval-item__header">
                   <span class="approval-item__title">HR备案</span>
                 </div>
-                <p class="approval-item__desc">审批通过后自动备案</p>
+                <p class="approval-item__desc">
+                  审批通过后自动备案
+                </p>
               </div>
             </XlyTimelineItem>
           </XlyTimeline>
@@ -335,9 +393,13 @@
 
     <!-- API 文档 -->
     <section class="doc-section">
-      <h2 class="doc-section__title">API</h2>
+      <h2 class="doc-section__title">
+        API
+      </h2>
 
-      <h3 class="doc-subtitle">Timeline Props</h3>
+      <h3 class="doc-subtitle">
+        Timeline Props
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -371,7 +433,9 @@
         </table>
       </div>
 
-      <h3 class="doc-subtitle">TimelineItem Props</h3>
+      <h3 class="doc-subtitle">
+        TimelineItem Props
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
@@ -399,16 +463,30 @@
         </table>
       </div>
 
-      <h3 class="doc-subtitle">TimelineItem Slots</h3>
+      <h3 class="doc-subtitle">
+        TimelineItem Slots
+      </h3>
       <div class="doc-table">
         <table>
           <thead>
-            <tr><th>插槽名</th><th>说明</th></tr>
+            <tr>
+              <th>插槽名</th>
+              <th>说明</th>
+            </tr>
           </thead>
           <tbody>
-            <tr><td><code>default</code></td><td>节点内容</td></tr>
-            <tr><td><code>dot</code></td><td>自定义节点图标</td></tr>
-            <tr><td><code>timestamp</code></td><td>自定义时间戳</td></tr>
+            <tr>
+              <td><code>default</code></td>
+              <td>节点内容</td>
+            </tr>
+            <tr>
+              <td><code>dot</code></td>
+              <td>自定义节点图标</td>
+            </tr>
+            <tr>
+              <td><code>timestamp</code></td>
+              <td>自定义时间戳</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -416,27 +494,128 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { CircleCheckFilled, Clock, Message, Star } from '@element-plus/icons-vue'
-import XlyTimeline from '@/components/xly-timeline/index.vue'
-import XlyTimelineItem from '@/components/xly-timeline/timeline-item.vue'
-import XlyTag from '@/components/xly-tag/index.vue'
-</script>
-
 <style scoped lang="scss">
-.timeline-doc { padding: 8px 0 40px; }
-.doc-header { margin-bottom: 36px; }
-.doc-title { font-size: 26px; font-weight: 700; color: var(--el-text-color-primary); margin: 0 0 8px; letter-spacing: -0.3px; }
-.doc-desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0; line-height: 1.6; }
-.doc-section { margin-bottom: 32px; }
-.doc-section__title { font-size: 18px; font-weight: 600; color: var(--el-text-color-primary); margin: 0 0 8px; padding-bottom: 10px; border-bottom: 1px solid var(--el-border-color-lighter); }
-.doc-subsection__title { font-size: 15px; font-weight: 600; color: var(--el-text-color-regular); margin: 24px 0 12px; }
-.doc-section__desc { font-size: 14px; color: var(--el-text-color-secondary); margin: 0 0 16px; line-height: 1.6; code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; } }
-.doc-preview { border: 1px solid var(--el-border-color-lighter); border-radius: 12px; overflow: hidden; background: var(--el-bg-color-overlay); &--noborder { border: none; background: var(--el-fill-color-light); } }
-.doc-preview__body { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 16px; padding: 24px; }
-.doc-code { border-top: 1px solid var(--el-border-color-lighter); background: var(--el-fill-color-light); padding: 16px 20px; overflow-x: auto; pre { margin: 0; padding: 0; } code { font-family: 'SF Mono', 'Fira Code', Consolas, monospace; font-size: 13px; line-height: 1.7; color: var(--el-text-color-regular); white-space: pre; } }
-.doc-subtitle { font-size: 15px; font-weight: 600; color: var(--el-text-color-primary); margin: 20px 0 10px; }
-.doc-table { overflow-x: auto; table { width: 100%; border-collapse: collapse; font-size: 14px; } th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--el-border-color-lighter); white-space: nowrap; } th { background: var(--el-fill-color-light); font-weight: 600; color: var(--el-text-color-primary); } td { color: var(--el-text-color-regular); } code { background: var(--el-fill-color-light); color: var(--el-color-primary); padding: 2px 6px; border-radius: 4px; font-size: 13px; font-family: 'SF Mono', 'Fira Code', Consolas, monospace; } }
+.timeline-doc {
+  padding: 8px 0 40px;
+}
+.doc-header {
+  margin-bottom: 36px;
+}
+.doc-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  letter-spacing: -0.3px;
+}
+.doc-desc {
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+.doc-section {
+  margin-bottom: 32px;
+}
+.doc-section__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 0 0 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--el-border-color-lighter);
+}
+.doc-subsection__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--el-text-color-regular);
+  margin: 24px 0 12px;
+}
+.doc-section__desc {
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  margin: 0 0 16px;
+  line-height: 1.6;
+  code {
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+  }
+}
+.doc-preview {
+  border: 1px solid var(--el-border-color-lighter);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--el-bg-color-overlay);
+  &.doc-preview--noborder {
+    border: none;
+    background: var(--el-fill-color-light);
+  }
+}
+.doc-preview__body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px;
+}
+.doc-code {
+  border-top: 1px solid var(--el-border-color-lighter);
+  background: var(--el-fill-color-light);
+  padding: 16px 20px;
+  overflow-x: auto;
+  pre {
+    margin: 0;
+    padding: 0;
+  }
+  code {
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--el-text-color-regular);
+    white-space: pre;
+  }
+}
+.doc-subtitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  margin: 20px 0 10px;
+}
+.doc-table {
+  overflow-x: auto;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+    white-space: nowrap;
+  }
+  th {
+    background: var(--el-fill-color-light);
+    font-weight: 600;
+    color: var(--el-text-color-primary);
+  }
+  td {
+    color: var(--el-text-color-regular);
+  }
+  code {
+    background: var(--el-fill-color-light);
+    color: var(--el-color-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: 'SF Mono', 'Fira Code', Consolas, monospace;
+  }
+}
 
 // 业务场景样式
 .custom-timestamp {
@@ -457,7 +636,7 @@ import XlyTag from '@/components/xly-tag/index.vue'
 // 订单追踪
 .order-tracker {
   padding: 16px 24px;
-  &__header {
+  .order-tracker__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -493,7 +672,7 @@ import XlyTag from '@/components/xly-tag/index.vue'
 .activity-item {
   display: flex;
   gap: 12px;
-  &__icon {
+  .activity-item__icon {
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -514,7 +693,7 @@ import XlyTag from '@/components/xly-tag/index.vue'
       color: var(--el-color-warning);
     }
   }
-  &__content {
+  .activity-item__content {
     flex: 1;
     h4 {
       margin: 0 0 2px;
@@ -536,22 +715,22 @@ import XlyTag from '@/components/xly-tag/index.vue'
 }
 
 .approval-item {
-  &__header {
+  .approval-item__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 4px;
   }
-  &__title {
+  .approval-item__title {
     font-size: 14px;
     font-weight: 500;
     color: var(--el-text-color-primary);
   }
-  &__time {
+  .approval-item__time {
     font-size: 12px;
     color: var(--el-text-color-secondary);
   }
-  &__desc {
+  .approval-item__desc {
     margin: 0;
     font-size: 13px;
     color: var(--el-text-color-secondary);

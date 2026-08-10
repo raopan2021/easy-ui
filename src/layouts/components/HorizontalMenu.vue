@@ -1,3 +1,67 @@
+<script setup lang="ts">
+import type { MenuItem } from '@/utils/menu'
+import { ArrowDown, ArrowRight } from '@element-plus/icons-vue'
+import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { flattenMenu, getMenuData } from '@/utils/menu'
+
+const router = useRouter()
+
+// 菜单列表
+const menuList = ref<MenuItem[]>([])
+const hoveredItem = ref<MenuItem | null>(null)
+const hoveredChild = ref<MenuItem | null>(null)
+
+// 初始化菜单
+onMounted(async () => {
+  const menuData = await getMenuData()
+  menuList.value = flattenMenu(menuData)
+  // 默认展开第一个
+  if (menuList.value.length > 0) {
+    menuList.value[0].active = true
+  }
+})
+
+// 点击菜单
+function handleMenuClick(item: MenuItem) {
+  // 关闭其他菜单
+  menuList.value.forEach((m) => {
+    m.active = false
+    if (m.children) {
+      m.children.forEach(c => (c.active = false))
+    }
+  })
+
+  if (item.children?.length) {
+    item.open = !item.open
+    item.active = true
+  }
+  else if (item.path) {
+    item.active = true
+    router.push(item.path)
+  }
+}
+
+// 点击子菜单
+function handleSubMenuClick(child: MenuItem) {
+  if (child.children?.length) {
+    child.active = !child.active
+  }
+  else if (child.path) {
+    child.active = true
+    router.push(child.path)
+  }
+}
+
+// 点击三级菜单
+function handleGrandClick(grand: MenuItem, _child: MenuItem) {
+  grand.active = true
+  if (grand.path) {
+    router.push(grand.path)
+  }
+}
+</script>
+
 <template>
   <nav class="horizontal-menu">
     <div
@@ -19,11 +83,7 @@
 
       <!-- 下拉子菜单 -->
       <Transition name="dropdown">
-        <div
-          v-if="item.children?.length && hoveredItem === item"
-          class="horizontal-menu__dropdown"
-          @click.stop
-        >
+        <div v-if="item.children?.length && hoveredItem === item" class="horizontal-menu__dropdown" @click.stop>
           <template v-for="child in item.children" :key="child.id">
             <!-- 有三级菜单 -->
             <div
@@ -66,67 +126,6 @@
   </nav>
 </template>
 
-<script setup lang="ts">
-import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
-import { ArrowDown, ArrowRight } from '@element-plus/icons-vue'
-import { getMenuData, flattenMenu, type MenuItem } from '@/utils/menu'
-
-const router = useRouter()
-
-// 菜单列表
-const menuList = ref<MenuItem[]>([])
-const hoveredItem = ref<MenuItem | null>(null)
-const hoveredChild = ref<MenuItem | null>(null)
-
-// 初始化菜单
-onMounted(async () => {
-  const menuData = await getMenuData()
-  menuList.value = flattenMenu(menuData)
-  // 默认展开第一个
-  if (menuList.value.length > 0) {
-    menuList.value[0].active = true
-  }
-})
-
-// 点击菜单
-function handleMenuClick(item: MenuItem) {
-  // 关闭其他菜单
-  menuList.value.forEach((m) => {
-    m.active = false
-    if (m.children) {
-      m.children.forEach((c) => (c.active = false))
-    }
-  })
-
-  if (item.children?.length) {
-    item.open = !item.open
-    item.active = true
-  } else if (item.path) {
-    item.active = true
-    router.push(item.path)
-  }
-}
-
-// 点击子菜单
-function handleSubMenuClick(child: MenuItem) {
-  if (child.children?.length) {
-    child.active = !child.active
-  } else if (child.path) {
-    child.active = true
-    router.push(child.path)
-  }
-}
-
-// 点击三级菜单
-function handleGrandClick(grand: MenuItem, child: MenuItem) {
-  grand.active = true
-  if (grand.path) {
-    router.push(grand.path)
-  }
-}
-</script>
-
 <style scoped lang="scss">
 $primary: var(--el-color-primary);
 $text-primary: var(--el-text-color-primary);
@@ -140,7 +139,7 @@ $bg-hover: var(--el-color-primary-light-9);
   padding: 0 24px;
   background: var(--el-fill-color-light);
 
-  &__item {
+  .horizontal-menu__item {
     position: relative;
     display: flex;
     align-items: center;
@@ -163,16 +162,16 @@ $bg-hover: var(--el-color-primary-light-9);
     }
   }
 
-  &__icon {
+  .horizontal-menu__icon {
     font-size: 16px;
   }
 
-  &__arrow {
+  .horizontal-menu__arrow {
     font-size: 12px;
     margin-left: 2px;
   }
 
-  &__dropdown {
+  .horizontal-menu__dropdown {
     position: absolute;
     top: 100%;
     left: 0;
@@ -184,7 +183,7 @@ $bg-hover: var(--el-color-primary-light-9);
     z-index: 100;
   }
 
-  &__dropdown-item {
+  .horizontal-menu__dropdown-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -206,17 +205,17 @@ $bg-hover: var(--el-color-primary-light-9);
     }
   }
 
-  &__dropdown-arrow {
+  .horizontal-menu__dropdown-arrow {
     font-size: 12px;
   }
 
   // 有子菜单的项
-  &__dropdown-item--has-child {
+  .horizontal-menu__dropdown-item--has-child {
     position: relative;
   }
 
   // 三级下拉
-  &__third-dropdown {
+  .horizontal-menu__third-dropdown {
     position: absolute;
     top: 0;
     left: 100%;

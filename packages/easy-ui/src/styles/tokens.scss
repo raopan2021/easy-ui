@@ -1,0 +1,90 @@
+// =============================================================
+// EasyUI 公共颜色令牌（Design Tokens）
+// -------------------------------------------------------------
+// 集中管理「跨组件复用」的自定义颜色值（hex / rgba）。
+// - Element Plus 已有的 CSS 变量（--el-*）不在此重复定义，组件样式直接使用
+// - 仅存放组件间重复使用的自定义颜色，单组件独有颜色保留在组件内
+//
+// 使用方式（组件 <style lang="scss"> 顶部）：
+//   @use '../../styles/tokens' as *;
+// =============================================================
+
+// ---- 品牌色 ----
+$brand-blue: #4f6ef7;
+$brand-blue-dark: #3d5ce5;
+$brand-blue-light: #eef1ff;
+
+// ---- 品牌蓝透明背景 / 边框 ----
+$primary-bg: rgba(79, 110, 247, 0.08);
+$primary-bg-strong: rgba(79, 110, 247, 0.1);
+$primary-border: rgba(79, 110, 247, 0.25);
+
+// ---- 自定义语义色（区别于 Element Plus 默认色板） ----
+$color-success: #34c759;
+$color-warning: #f5a623;
+$color-danger: #f56c6c;
+$color-info: #8e8ea0;
+
+// 语义色透明背景 / 边框 / 悬停
+$success-bg: rgba(52, 199, 89, 0.1);
+$success-border: rgba(52, 199, 89, 0.25);
+$success-hover: rgba(52, 199, 89, 0.65);
+$warning-bg: rgba(245, 166, 35, 0.1);
+$warning-border: rgba(245, 166, 35, 0.25);
+$warning-hover: rgba(245, 166, 35, 0.65);
+$danger-bg: rgba(245, 108, 108, 0.1);
+$danger-border: rgba(245, 108, 108, 0.25);
+$danger-hover: rgba(245, 108, 108, 0.65);
+$info-bg: rgba(142, 142, 160, 0.1);
+$info-border: rgba(142, 142, 160, 0.25);
+$info-hover: rgba(142, 142, 160, 0.65);
+
+// ---- 中性色 ----
+$white: #fff;
+$black: #000;
+$text-regular: #606266;
+$text-secondary: #909399;
+$border-light: #e5e7eb;
+$border-strong: #d7e0ea;
+$bg-dark: #1e1e2e;
+
+// ---- 信息卡片语义浅底（独立色相体系） ----
+$blue-bg: rgba(59, 130, 246, 0.15);
+$green-bg: rgba(16, 185, 129, 0.15);
+$orange-bg: rgba(245, 158, 11, 0.15);
+$red-bg: rgba(239, 68, 68, 0.15);
+
+// ---- 表格 / 标签页中性底色 ----
+$bg-header: #f8fafc;
+$bg-stripe: #fcfdff;
+$bg-selected: #f0f7ff;
+$bg-card: #f5f7fa;
+$bg-segment: #f2f3f7;
+
+// ---- 描述列表文本 / 边框层级 ----
+$text-heading: #1a1a2e;
+$text-body: #4a4a6a;
+$text-label: #8e8ea0;
+$text-subtle: #b0b0c0;
+$border-subtle: #e8eaed;
+$border-faint: #f2f3f7;
+$bg-soft: #f8f9fa;
+
+// ---- 标签 / 进度条 ----
+$tag-default-bg: #f4f4f5;
+$progress-warning: #ff9f0a;
+
+// ---- 文件类型色 ----
+$file-excel: #16a34a;
+$file-ppt: #ea580c;
+$file-image: #7c3aed;
+$file-video: #0891b2;
+$file-other: #64748b;
+
+// ---- 遮罩 / 半透明 ----
+$mask: rgba(0, 0, 0, 0.45);
+$mask-mid: rgba(0, 0, 0, 0.5);
+$mask-heavy: rgba(0, 0, 0, 0.7);
+$mask-solid: rgba(0, 0, 0, 0.85);
+$white-dim: rgba(255, 255, 255, 0.5);
+$white-muted: rgba(255, 255, 255, 0.8);

@@ -1,144 +1,22 @@
-<template>
-  <div class="crud-demo">
-    <!-- 搜索区域 -->
-    <XlySearchForm
-      ref="searchFormRef"
-      :items="searchItems"
-      :model-value="searchData"
-      :show-expand-button="false"
-      @search="handleSearch"
-      @reset="handleReset"
-    />
-
-    <!-- 表格区域 -->
-    <XlyTable
-      ref="tableRef"
-      :data="tableData"
-      :columns="tableColumns"
-      :loading="tableLoading"
-      :total="total"
-      :page="pagination.page"
-      :page-size="pagination.pageSize"
-      :show-index="true"
-      :selectable="true"
-      show-refresh
-      show-export
-      show-column-settings
-      :selection-mode="'multiple'"
-      pagination-position="right"
-      @refresh="handleRefresh"
-      @selection-change="handleSelectionChange"
-      @page-change="handlePageChange"
-      @page-size-change="handlePageSizeChange"
-      style="margin-top: 20px"
-    >
-      <template #toolbar>
-        <XlyButton type="primary" size="small" @click="openAddModal"> 新增 </XlyButton>
-      </template>
-      <!-- 状态列自定义 -->
-      <template #col-status="{ row }">
-        <XlyTag :type="row.status === 1 ? 'success' : 'info'" size="small">
-          {{ row.status === 1 ? '启用' : '禁用' }}
-        </XlyTag>
-      </template>
-
-      <!-- 操作列 -->
-      <template #action="{ row }">
-        <div class="action-buttons">
-          <XlyButton link type="primary" size="small" @click="openViewModal(row)"> 查看 </XlyButton>
-          <XlyButton link type="primary" size="small" @click="openEditModal(row)"> 编辑 </XlyButton>
-          <XlyButton link size="small" type="danger" @click="handleDelete(row)"> 删除 </XlyButton>
-        </div>
-      </template>
-    </XlyTable>
-
-    <!-- 新增/编辑弹窗 -->
-    <XlyModal
-      v-model="formModal.visible"
-      :title="formModal.isEdit ? '编辑用户' : '新增用户'"
-      width="520px"
-      @confirm="handleFormSubmit"
-      @cancel="formModal.visible = false"
-    >
-      <XlyForm ref="formRef" :model="formData" :rules="formRules" label-width="80px">
-        <XlyFormItem label="用户名" prop="name">
-          <XlyInput v-model="formData.name" placeholder="请输入用户名" />
-        </XlyFormItem>
-        <XlyFormItem label="邮箱" prop="email">
-          <XlyInput v-model="formData.email" placeholder="请输入邮箱" />
-        </XlyFormItem>
-        <XlyFormItem label="手机号" prop="phone">
-          <XlyInput v-model="formData.phone" placeholder="请输入手机号" />
-        </XlyFormItem>
-        <XlyFormItem label="部门" prop="dept">
-          <XlySelect v-model="formData.dept" placeholder="请选择部门" :options="deptOptions" />
-        </XlyFormItem>
-        <XlyFormItem label="状态" prop="status">
-          <XlySelect v-model="formData.status" placeholder="请选择状态" :options="statusOptions" />
-        </XlyFormItem>
-        <XlyFormItem label="备注" prop="remark">
-          <XlyInput v-model="formData.remark" type="textarea" placeholder="请输入备注" :rows="3" />
-        </XlyFormItem>
-      </XlyForm>
-    </XlyModal>
-
-    <!-- 查看详情弹窗 -->
-    <XlyModal
-      v-model="viewModal.visible"
-      title="用户详情"
-      width="50%"
-      :show-confirm="false"
-      @cancel="viewModal.visible = false"
-    >
-      <XlyDescriptions :column="2" border>
-        <XlyDescriptionsItem label="用户ID">{{ viewData.id }}</XlyDescriptionsItem>
-        <XlyDescriptionsItem label="用户名">{{ viewData.name }}</XlyDescriptionsItem>
-        <XlyDescriptionsItem label="邮箱">{{ viewData.email }}</XlyDescriptionsItem>
-        <XlyDescriptionsItem label="手机号">{{ viewData.phone }}</XlyDescriptionsItem>
-        <XlyDescriptionsItem label="部门">{{ viewData.deptName }}</XlyDescriptionsItem>
-        <XlyDescriptionsItem label="状态">
-          <XlyTag :type="viewData.status === 1 ? 'success' : 'info'" size="small">
-            {{ viewData.status === 1 ? '启用' : '禁用' }}
-          </XlyTag>
-        </XlyDescriptionsItem>
-        <XlyDescriptionsItem label="创建时间">{{ viewData.createTime }}</XlyDescriptionsItem>
-        <XlyDescriptionsItem label="备注">{{ viewData.remark || '-' }}</XlyDescriptionsItem>
-      </XlyDescriptions>
-    </XlyModal>
-
-    <!-- 删除确认弹窗 -->
-    <XlyModal
-      v-model="deleteModal.visible"
-      title="确认删除"
-      width="400px"
-      @confirm="confirmDelete"
-      @cancel="deleteModal.visible = false"
-    >
-      <div class="delete-tip">
-        <el-icon color="#ef4444" :size="24"><WarningFilled /></el-icon>
-        <p>
-          确定要删除用户 <strong>{{ deleteData.name }}</strong> 吗？
-        </p>
-        <p class="delete-tip__sub">此操作不可恢复，请谨慎操作。</p>
-      </div>
-    </XlyModal>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { ref, reactive, onMounted } from 'vue'
-import XlySearchForm from '@/components/xly-search-form/index.vue'
-import XlyTable from '@/components/xly-table/index.vue'
-import XlyModal from '@/components/xly-modal/index.vue'
-import XlyForm from '@/components/xly-form/index.vue'
-import XlyFormItem from '@/components/xly-form/xly-form-item.vue'
-import XlyInput from '@/components/xly-input/index.vue'
-import XlySelect from '@/components/xly-select/index.vue'
-import XlyButton from '@/components/xly-button/index.vue'
-import XlyDescriptions from '@/components/xly-descriptions/index.vue'
-import XlyDescriptionsItem from '@/components/xly-descriptions/item.vue'
-import { xly } from '@/utils/xly'
-import { email, minLength, min, required } from '@/components/xly-form/utils'
+import {
+  email,
+  min,
+  minLength,
+  required,
+  xly,
+  XlyButton,
+  XlyDescriptions,
+  XlyDescriptionsItem,
+  XlyForm,
+  XlyFormItem,
+  XlyInput,
+  XlyModal,
+  XlySearchForm,
+  XlySelect,
+  XlyTable,
+} from 'easy-ui'
+import { onMounted, reactive, ref } from 'vue'
 
 defineOptions({ name: 'CrudDemo' })
 
@@ -175,7 +53,7 @@ const searchItems = [
   },
 ]
 
-function handleSearch(data: Record<string, any>) {
+function handleSearch(_data: Record<string, any>) {
   pagination.page = 1
   fetchTableData()
 }
@@ -293,30 +171,32 @@ function openEditModal(row: Record<string, any>) {
 
 async function handleFormSubmit() {
   const isValid = await formRef.value?.validate().catch(() => false)
-  if (!isValid) return
+  if (!isValid)
+    return
 
   formModal.loading = true
   try {
     // 模拟 API 调用
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    await new Promise(resolve => setTimeout(resolve, 1000))
 
     if (formModal.isEdit) {
       // 编辑
-      const index = tableData.value.findIndex((item) => item.id === formData.id)
+      const index = tableData.value.findIndex(item => item.id === formData.id)
       if (index !== -1) {
         tableData.value[index] = {
           ...tableData.value[index],
           ...formData,
-          deptName: deptOptions.find((d) => d.value === formData.dept)?.label || '',
+          deptName: deptOptions.find(d => d.value === formData.dept)?.label || '',
         }
       }
       xly.$msg.success('数据已成功保存', { title: '操作成功' })
-    } else {
+    }
+    else {
       // 新增
       const newRow = {
         id: Date.now().toString(),
         ...formData,
-        deptName: deptOptions.find((d) => d.value === formData.dept)?.label || '',
+        deptName: deptOptions.find(d => d.value === formData.dept)?.label || '',
         createTime: new Date().toLocaleString('zh-CN'),
       }
       tableData.value.unshift(newRow)
@@ -325,9 +205,11 @@ async function handleFormSubmit() {
     }
 
     formModal.visible = false
-  } catch (error) {
+  }
+  catch {
     xly.$msg.success('数据保存失败', { title: '操作失败' })
-  } finally {
+  }
+  finally {
     formModal.loading = false
   }
 }
@@ -361,7 +243,7 @@ function handleDelete(row: Record<string, any>) {
 async function confirmDelete() {
   try {
     // 从表格数据中移除
-    const index = tableData.value.findIndex((item) => item.id === deleteData.id)
+    const index = tableData.value.findIndex(item => item.id === deleteData.id)
     if (index !== -1) {
       tableData.value.splice(index, 1)
       total.value--
@@ -369,7 +251,8 @@ async function confirmDelete() {
 
     xly.$msg.success('数据已成功删除', { title: '操作成功' })
     deleteModal.visible = false
-  } catch (error) {
+  }
+  catch {
     // 用户取消
   }
 }
@@ -408,15 +291,15 @@ async function fetchTableData() {
   tableLoading.value = true
   try {
     // 模拟 API 延迟
-    await new Promise((resolve) => setTimeout(resolve, 500))
+    await new Promise(resolve => setTimeout(resolve, 500))
 
     // 模拟搜索过滤
     let filtered = [...allMockData]
     if (searchData.name) {
-      filtered = filtered.filter((item) => item.name.includes(searchData.name))
+      filtered = filtered.filter(item => item.name.includes(searchData.name))
     }
     if (searchData.status !== null && searchData.status !== '') {
-      filtered = filtered.filter((item) => item.status === searchData.status)
+      filtered = filtered.filter(item => item.status === searchData.status)
     }
     // 日期范围过滤
     if (searchData.beginDate || searchData.endDate) {
@@ -433,7 +316,8 @@ async function fetchTableData() {
     const end = start + pagination.pageSize
     tableData.value = filtered.slice(start, end)
     total.value = filtered.length
-  } finally {
+  }
+  finally {
     tableLoading.value = false
   }
 }
@@ -443,6 +327,159 @@ onMounted(() => {
   fetchTableData()
 })
 </script>
+
+<template>
+  <div class="crud-demo">
+    <!-- 搜索区域 -->
+    <XlySearchForm
+      ref="searchFormRef"
+      :items="searchItems"
+      :model-value="searchData"
+      :show-expand-button="false"
+      @search="handleSearch"
+      @reset="handleReset"
+    />
+
+    <!-- 表格区域 -->
+    <XlyTable
+      ref="tableRef"
+      :data="tableData"
+      :columns="tableColumns"
+      :loading="tableLoading"
+      :total="total"
+      :page="pagination.page"
+      :page-size="pagination.pageSize"
+      :show-index="true"
+      :selectable="true"
+      show-refresh
+      show-export
+      show-column-settings
+      selection-mode="multiple"
+      pagination-position="right"
+      style="margin-top: 20px"
+      @refresh="handleRefresh"
+      @selection-change="handleSelectionChange"
+      @page-change="handlePageChange"
+      @page-size-change="handlePageSizeChange"
+    >
+      <template #toolbar>
+        <XlyButton type="primary" size="small" @click="openAddModal">
+          新增
+        </XlyButton>
+      </template>
+      <!-- 状态列自定义 -->
+      <template #col-status="{ row }">
+        <XlyTag :type="row.status === 1 ? 'success' : 'info'" size="small">
+          {{ row.status === 1 ? '启用' : '禁用' }}
+        </XlyTag>
+      </template>
+
+      <!-- 操作列 -->
+      <template #action="{ row }">
+        <div class="action-buttons">
+          <XlyButton link type="primary" size="small" @click="openViewModal(row)">
+            查看
+          </XlyButton>
+          <XlyButton link type="primary" size="small" @click="openEditModal(row)">
+            编辑
+          </XlyButton>
+          <XlyButton link size="small" type="danger" @click="handleDelete(row)">
+            删除
+          </XlyButton>
+        </div>
+      </template>
+    </XlyTable>
+
+    <!-- 新增/编辑弹窗 -->
+    <XlyModal
+      v-model="formModal.visible"
+      :title="formModal.isEdit ? '编辑用户' : '新增用户'"
+      width="520px"
+      @confirm="handleFormSubmit"
+      @cancel="formModal.visible = false"
+    >
+      <XlyForm ref="formRef" :model="formData" :rules="formRules" label-width="80px">
+        <XlyFormItem label="用户名" prop="name">
+          <XlyInput v-model="formData.name" placeholder="请输入用户名" />
+        </XlyFormItem>
+        <XlyFormItem label="邮箱" prop="email">
+          <XlyInput v-model="formData.email" placeholder="请输入邮箱" />
+        </XlyFormItem>
+        <XlyFormItem label="手机号" prop="phone">
+          <XlyInput v-model="formData.phone" placeholder="请输入手机号" />
+        </XlyFormItem>
+        <XlyFormItem label="部门" prop="dept">
+          <XlySelect v-model="formData.dept" placeholder="请选择部门" :options="deptOptions" />
+        </XlyFormItem>
+        <XlyFormItem label="状态" prop="status">
+          <XlySelect v-model="formData.status" placeholder="请选择状态" :options="statusOptions" />
+        </XlyFormItem>
+        <XlyFormItem label="备注" prop="remark">
+          <XlyInput v-model="formData.remark" type="textarea" placeholder="请输入备注" :rows="3" />
+        </XlyFormItem>
+      </XlyForm>
+    </XlyModal>
+
+    <!-- 查看详情弹窗 -->
+    <XlyModal
+      v-model="viewModal.visible"
+      title="用户详情"
+      width="50%"
+      :show-confirm="false"
+      @cancel="viewModal.visible = false"
+    >
+      <XlyDescriptions :column="2" border>
+        <XlyDescriptionsItem label="用户ID">
+          {{ viewData.id }}
+        </XlyDescriptionsItem>
+        <XlyDescriptionsItem label="用户名">
+          {{ viewData.name }}
+        </XlyDescriptionsItem>
+        <XlyDescriptionsItem label="邮箱">
+          {{ viewData.email }}
+        </XlyDescriptionsItem>
+        <XlyDescriptionsItem label="手机号">
+          {{ viewData.phone }}
+        </XlyDescriptionsItem>
+        <XlyDescriptionsItem label="部门">
+          {{ viewData.deptName }}
+        </XlyDescriptionsItem>
+        <XlyDescriptionsItem label="状态">
+          <XlyTag :type="viewData.status === 1 ? 'success' : 'info'" size="small">
+            {{ viewData.status === 1 ? '启用' : '禁用' }}
+          </XlyTag>
+        </XlyDescriptionsItem>
+        <XlyDescriptionsItem label="创建时间">
+          {{ viewData.createTime }}
+        </XlyDescriptionsItem>
+        <XlyDescriptionsItem label="备注">
+          {{ viewData.remark || '-' }}
+        </XlyDescriptionsItem>
+      </XlyDescriptions>
+    </XlyModal>
+
+    <!-- 删除确认弹窗 -->
+    <XlyModal
+      v-model="deleteModal.visible"
+      title="确认删除"
+      width="400px"
+      @confirm="confirmDelete"
+      @cancel="deleteModal.visible = false"
+    >
+      <div class="delete-tip">
+        <el-icon color="#ef4444" :size="24">
+          <WarningFilled />
+        </el-icon>
+        <p>
+          确定要删除用户 <strong>{{ deleteData.name }}</strong> 吗？
+        </p>
+        <p class="delete-tip__sub">
+          此操作不可恢复，请谨慎操作。
+        </p>
+      </div>
+    </XlyModal>
+  </div>
+</template>
 
 <style scoped lang="scss">
 .crud-demo {
