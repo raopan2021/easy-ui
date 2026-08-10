@@ -333,15 +333,15 @@ defineExpose({ redraw: draw })
 </script>
 
 <template>
-  <div ref="containerRef" class="xly-watermark" :style="{ position: relative ? 'relative' : undefined }">
+  <div ref="containerRef" class="easy-watermark" :style="{ position: relative ? 'relative' : undefined }">
     <slot />
-    <canvas ref="canvasRef" class="xly-watermark__canvas" :style="canvasStyle" />
+    <canvas ref="canvasRef" class="easy-watermark__canvas" :style="canvasStyle" />
   </div>
 </template>
 
 <style scoped lang="scss">
-.xly-watermark {
-  .xly-watermark__canvas {
+.easy-watermark {
+  .easy-watermark__canvas {
     pointer-events: none;
   }
 }

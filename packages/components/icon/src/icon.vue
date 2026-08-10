@@ -6,7 +6,7 @@ import { getSvgContent } from './svg-map'
 
 defineOptions({ name: 'EasyIcon' })
 
-const props = withDefaults(defineProps<XlyIconProps>(), {
+const props = withDefaults(defineProps<EasyIconProps>(), {
   size: undefined,
   color: undefined,
   iconClass: undefined,
@@ -18,7 +18,7 @@ const emit = defineEmits<{
   (e: 'click', event: MouseEvent): void
 }>()
 
-export interface XlyIconProps {
+export interface EasyIconProps {
   /**
    * 图标名称，通过前缀区分类型：
    * - `el:Search` / `el:arrow-down` → Element Plus 图标
@@ -79,11 +79,11 @@ const svgContent = computed(() => {
 /** 解析图片路径 */
 const resolvedImageSrc = computed<string>(() => {
   const src = parsed.value.value
-  console.warn('[XlyIcon] Original src:', src)
+  console.warn('[EasyIcon] Original src:', src)
 
   // http(s):// 开头的网络图片，直接使用
   if (src.startsWith('http://') || src.startsWith('https://')) {
-    console.warn('[XlyIcon] Using as network URL')
+    console.warn('[EasyIcon] Using as network URL')
     return src
   }
 
@@ -92,19 +92,19 @@ const resolvedImageSrc = computed<string>(() => {
     try {
       // 将 @/ 替换为 /src/，new URL 需要绝对路径
       const absolutePath = src.replace(/^@\//, '/src/')
-      console.warn('[XlyIcon] Converting @/ path:', absolutePath, 'from', import.meta.url)
+      console.warn('[EasyIcon] Converting @/ path:', absolutePath, 'from', import.meta.url)
       const result = new URL(absolutePath, import.meta.url).href
-      console.warn('[XlyIcon] Resolved to:', result)
+      console.warn('[EasyIcon] Resolved to:', result)
       return result
     }
     catch (error) {
-      console.error('[XlyIcon] Failed to resolve @/ path:', src, error)
+      console.error('[EasyIcon] Failed to resolve @/ path:', src, error)
       return src
     }
   }
 
   // 相对路径和其他情况，直接使用
-  console.warn('[XlyIcon] Using as-is (relative path)')
+  console.warn('[EasyIcon] Using as-is (relative path)')
   return src
 })
 
@@ -125,19 +125,19 @@ function handleClick(event: MouseEvent) {
 
 function handleImageLoad(event: Event) {
   const img = event.target as HTMLImageElement
-  console.warn('[XlyIcon] Image loaded successfully:', props.name, '→', img.src)
+  console.warn('[EasyIcon] Image loaded successfully:', props.name, '→', img.src)
 }
 
 function handleImageError(event: Event) {
   const img = event.target as HTMLImageElement
   console.error(
-    '[XlyIcon] Failed to load image:',
+    '[EasyIcon] Failed to load image:',
     props.name,
     '\n尝试加载的 URL:',
     img.src,
     '\n支持的用法：',
-    '- 网络图片: <XlyIcon name="https://example.com/icon.png" />',
-    '- Vite 别名: <XlyIcon name="@/assets/icon/img.png" />',
+    '- 网络图片: <EasyIcon name="https://example.com/icon.png" />',
+    '- Vite 别名: <EasyIcon name="@/assets/icon/img.png" />',
     '- import URL: import imgUrl from "@/assets/icon.png?url"',
   )
   img.style.display = 'none'
@@ -146,8 +146,8 @@ function handleImageError(event: Event) {
 
 <template>
   <i
-    class="xly-icon"
-    :class="[iconClass, { 'xly-icon--clickable': clickable }]"
+    class="easy-icon"
+    :class="[iconClass, { 'easy-icon--clickable': clickable }]"
     :style="rootStyle"
     @click="handleClick"
   >
@@ -159,7 +159,7 @@ function handleImageError(event: Event) {
     <!-- 自定义 SVG 图标 (svg:xxx → assets/icon/svg/) -->
     <span
       v-else-if="mode === 'svg'"
-      class="xly-icon__svg"
+      class="easy-icon__svg"
       :style="{
         width: size ? `${size}px` : undefined,
         height: size ? `${size}px` : undefined,
@@ -173,7 +173,7 @@ function handleImageError(event: Event) {
       v-else-if="mode === 'image'"
       :src="resolvedImageSrc"
       :alt="alt"
-      class="xly-icon__img"
+      class="easy-icon__img"
       :style="{
         width: size ? `${size}px` : undefined,
         height: size ? `${size}px` : undefined,
@@ -186,7 +186,7 @@ function handleImageError(event: Event) {
 </template>
 
 <style scoped lang="scss">
-.xly-icon {
+.easy-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -195,7 +195,7 @@ function handleImageError(event: Event) {
   font-size: inherit;
   color: inherit;
 
-  &.xly-icon--clickable {
+  &.easy-icon--clickable {
     cursor: pointer;
     transition: opacity 0.2s ease;
 
@@ -209,7 +209,7 @@ function handleImageError(event: Event) {
   }
 }
 
-.xly-icon__svg {
+.easy-icon__svg {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -222,7 +222,7 @@ function handleImageError(event: Event) {
   }
 }
 
-.xly-icon__img {
+.easy-icon__img {
   display: inline-block;
   object-fit: contain;
   vertical-align: -0.15em;

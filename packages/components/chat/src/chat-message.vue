@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import MarkdownIt from 'markdown-it'
 import { computed, onUpdated, ref } from 'vue'
-import XlyIcon from '../../icon'
+import EasyIcon from '../../icon'
 
 export interface ChatAttachment {
   name: string
@@ -230,7 +230,7 @@ function handleAttachmentClick(attachment: ChatAttachment) {
 
 <template>
   <div
-    class="xly-chat-message"
+    class="easy-chat-message"
     :class="{
       'is-user': message.role === 'user',
       'is-assistant': message.role === 'assistant',
@@ -238,24 +238,24 @@ function handleAttachmentClick(attachment: ChatAttachment) {
     }"
   >
     <!-- 头像 -->
-    <div v-if="showAvatar" class="xly-chat-message__avatar">
+    <div v-if="showAvatar" class="easy-chat-message__avatar">
       <slot name="avatar" :message="message">
         <img v-if="message.avatar" :src="message.avatar" :alt="message.role">
-        <XlyIcon v-else-if="message.role === 'user'" name="el:User" />
-        <XlyIcon v-else-if="message.role === 'assistant'" name="el:ChatDotRound" />
-        <XlyIcon v-else name="el:InfoFilled" />
+        <EasyIcon v-else-if="message.role === 'user'" name="el:User" />
+        <EasyIcon v-else-if="message.role === 'assistant'" name="el:ChatDotRound" />
+        <EasyIcon v-else name="el:InfoFilled" />
       </slot>
     </div>
 
     <!-- 消息内容 -->
-    <div class="xly-chat-message__content">
+    <div class="easy-chat-message__content">
       <!-- 用户名 -->
-      <div v-if="message.name && showName" class="xly-chat-message__name">
+      <div v-if="message.name && showName" class="easy-chat-message__name">
         {{ message.name }}
       </div>
 
       <!-- 时间 -->
-      <div v-if="message.time && showTime" class="xly-chat-message__time">
+      <div v-if="message.time && showTime" class="easy-chat-message__time">
         {{ formatTime(message.time) }}
       </div>
 
@@ -263,24 +263,24 @@ function handleAttachmentClick(attachment: ChatAttachment) {
       <div
         v-if="message.content && message.content.trim()"
         ref="textRef"
-        class="xly-chat-message__text"
+        class="easy-chat-message__text"
         :class="{ 'is-typing': isTyping }"
         v-html="renderedMarkdown"
       />
 
       <!-- 附件列表 -->
-      <div v-if="message.attachments && message.attachments.length > 0" class="xly-chat-message__attachments">
+      <div v-if="message.attachments && message.attachments.length > 0" class="easy-chat-message__attachments">
         <div
           v-for="(attachment, index) in message.attachments"
           :key="index"
-          class="xly-chat-message__attachment"
+          class="easy-chat-message__attachment"
           @click="handleAttachmentClick(attachment)"
         >
           <!-- 图片附件 -->
           <img v-if="isImage(attachment)" :src="attachment.url" :alt="attachment.name">
           <!-- 其他附件 -->
-          <div v-else class="xly-chat-message__attachment-file">
-            <XlyIcon name="el:Document" />
+          <div v-else class="easy-chat-message__attachment-file">
+            <EasyIcon name="el:Document" />
             <span class="file-name">{{ attachment.name }}</span>
             <span class="size">{{ formatSize(attachment.size) }}</span>
           </div>
@@ -291,21 +291,21 @@ function handleAttachmentClick(attachment: ChatAttachment) {
       <slot name="content" :message="message" />
 
       <!-- 操作按钮 -->
-      <div v-if="showActions" class="xly-chat-message__actions">
+      <div v-if="showActions" class="easy-chat-message__actions">
         <slot name="actions" :message="message">
-          <button v-if="allowCopy" class="xly-chat-message__action-btn" title="复制" @click="handleCopy">
-            <XlyIcon name="el:DocumentCopy" />
+          <button v-if="allowCopy" class="easy-chat-message__action-btn" title="复制" @click="handleCopy">
+            <EasyIcon name="el:DocumentCopy" />
           </button>
           <button
             v-if="allowRegenerate && message.role === 'assistant'"
-            class="xly-chat-message__action-btn"
+            class="easy-chat-message__action-btn"
             title="重新生成"
             @click="handleRegenerate"
           >
-            <XlyIcon name="el:Refresh" />
+            <EasyIcon name="el:Refresh" />
           </button>
-          <button v-if="allowDelete" class="xly-chat-message__action-btn" title="删除" @click="handleDelete">
-            <XlyIcon name="el:Delete" />
+          <button v-if="allowDelete" class="easy-chat-message__action-btn" title="删除" @click="handleDelete">
+            <EasyIcon name="el:Delete" />
           </button>
         </slot>
       </div>
@@ -314,7 +314,7 @@ function handleAttachmentClick(attachment: ChatAttachment) {
 </template>
 
 <style scoped lang="scss">
-.xly-chat-message {
+.easy-chat-message {
   display: flex;
   gap: 12px;
   margin-bottom: 20px;
@@ -323,18 +323,18 @@ function handleAttachmentClick(attachment: ChatAttachment) {
   &.is-user {
     flex-direction: row-reverse;
 
-    .xly-chat-message__content {
+    .easy-chat-message__content {
       align-items: flex-end;
     }
 
-    .xly-chat-message__text {
+    .easy-chat-message__text {
       background: linear-gradient(135deg, var(--el-color-primary) 0%, var(--el-color-primary) 100%);
       color: var(--el-color-white);
     }
   }
 
   &.is-assistant {
-    .xly-chat-message__text {
+    .easy-chat-message__text {
       background: var(--el-fill-color-light);
       color: var(--el-text-color-primary);
     }
@@ -343,7 +343,7 @@ function handleAttachmentClick(attachment: ChatAttachment) {
   &.is-system {
     justify-content: center;
 
-    .xly-chat-message__content {
+    .easy-chat-message__content {
       background: var(--el-fill-color-light);
       padding: 8px 16px;
       border-radius: 4px;
@@ -364,7 +364,7 @@ function handleAttachmentClick(attachment: ChatAttachment) {
   }
 }
 
-.xly-chat-message__avatar {
+.easy-chat-message__avatar {
   flex-shrink: 0;
   width: 40px;
   height: 40px;
@@ -384,7 +384,7 @@ function handleAttachmentClick(attachment: ChatAttachment) {
   }
 }
 
-.xly-chat-message__content {
+.easy-chat-message__content {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -392,20 +392,20 @@ function handleAttachmentClick(attachment: ChatAttachment) {
   max-width: calc(100% - 52px);
 }
 
-.xly-chat-message__name {
+.easy-chat-message__name {
   font-size: 13px;
   font-weight: 500;
   color: var(--el-text-color-regular);
   margin-bottom: 4px;
 }
 
-.xly-chat-message__time {
+.easy-chat-message__time {
   font-size: 12px;
   color: var(--el-text-color-placeholder);
   margin-bottom: 4px;
 }
 
-.xly-chat-message__text {
+.easy-chat-message__text {
   padding: 12px 16px;
   border-radius: 12px;
   line-height: 1.6;
@@ -526,14 +526,14 @@ function handleAttachmentClick(attachment: ChatAttachment) {
   }
 }
 
-.xly-chat-message__attachments {
+.easy-chat-message__attachments {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 12px;
   margin-top: 12px;
 }
 
-.xly-chat-message__attachment {
+.easy-chat-message__attachment {
   cursor: pointer;
   border-radius: 8px;
   overflow: hidden;
@@ -554,7 +554,7 @@ function handleAttachmentClick(attachment: ChatAttachment) {
   }
 }
 
-.xly-chat-message__attachment-file {
+.easy-chat-message__attachment-file {
   padding: 16px;
   background: var(--el-fill-color-lighter);
   display: flex;
@@ -566,7 +566,7 @@ function handleAttachmentClick(attachment: ChatAttachment) {
   min-height: 120px;
   border: 1px solid transparent;
 
-  .xly-chat-message__attachment:hover & {
+  .easy-chat-message__attachment:hover & {
     border-color: var(--el-color-primary);
   }
 
@@ -596,19 +596,19 @@ function handleAttachmentClick(attachment: ChatAttachment) {
   }
 }
 
-.xly-chat-message__actions {
+.easy-chat-message__actions {
   display: flex;
   gap: 8px;
   margin-top: 8px;
   opacity: 0;
   transition: opacity 0.2s;
 
-  .xly-chat-message:hover & {
+  .easy-chat-message:hover & {
     opacity: 1;
   }
 }
 
-.xly-chat-message__action-btn {
+.easy-chat-message__action-btn {
   background: var(--el-fill-color-light);
   border: none;
   border-radius: 6px;

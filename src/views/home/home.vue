@@ -10,18 +10,18 @@ import EasyUI from 'easy-ui'
 import App from './App.vue'
 
 const app = createApp(App)
-app.use(EasyUI)  // 自动注册 Element Plus + 全局 xly 服务
+app.use(EasyUI)  // 自动注册 Element Plus + 全局 easy 服务
 app.mount('#app')`
 
 const lightInstallCode = `// main.ts
 import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
-import { setupXly, xlyComponentResolver } from 'easy-ui'
+import { setupEasy, easyComponentResolver } from 'easy-ui'
 import App from './App.vue'
 
 const app = createApp(App)
 app.use(ElementPlus)
-setupXly(app)
+setupEasy(app)
 app.mount('#app')`
 
 const autoImportCode = `// vite.config.ts
@@ -32,7 +32,7 @@ export default defineConfig({
   plugins: [
     Components({
       resolvers: [
-        xlyComponentResolver(),            // Easy* 自动导入
+        easyComponentResolver(),            // Easy* 自动导入
         ElementPlusResolver({ importStyle: 'css' }),
       ],
     }),
@@ -42,8 +42,8 @@ export default defineConfig({
 const features = [
   { title: 'Tree-shaking', desc: '按需引入组件，只打包你实际使用的部分，不浪费 KB。' },
   { title: '暗色模式', desc: 'html.dark 一键切换，所有组件无缝适配，无需额外配置。' },
-  { title: '自动导入', desc: 'xlyComponentResolver 配合 unplugin-vue-components，组件即写即用。' },
-  { title: '命令式 API', desc: 'xly.$msg / xly.$loading 一行代码调用，告别模板指令。' },
+  { title: '自动导入', desc: 'easyComponentResolver 配合 unplugin-vue-components，组件即写即用。' },
+  { title: '命令式 API', desc: 'easy.$msg / easy.$loading 一行代码调用，告别模板指令。' },
 ]
 
 const componentGroups = [

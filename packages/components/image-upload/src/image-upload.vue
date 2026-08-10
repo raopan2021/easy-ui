@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 
-defineOptions({ name: 'XlyUpload' })
+defineOptions({ name: 'EasyUpload' })
 
 const props = withDefaults(defineProps<Props>(), {
   modelValue: () => [],
@@ -512,16 +512,16 @@ defineExpose({
 </script>
 
 <template>
-  <div class="xly-upload" :class="{ 'is-disabled': disabled }">
+  <div class="easy-upload" :class="{ 'is-disabled': disabled }">
     <!-- 图片列表 -->
-    <div class="xly-upload__list">
+    <div class="easy-upload__list">
       <!-- 已上传图片 -->
-      <TransitionGroup name="xly-upload-fade">
+      <TransitionGroup name="easy-upload-fade">
         <div
           v-for="(item, index) in fileList"
           :key="item.uid"
-          class="xly-upload__item"
-          :class="[`xly-upload__item--${item.status}`]"
+          class="easy-upload__item"
+          :class="[`easy-upload__item--${item.status}`]"
           :style="itemStyle"
         >
           <!-- 预览图 -->
@@ -529,14 +529,14 @@ defineExpose({
             v-if="item.url"
             :src="item.url"
             :alt="item.name"
-            class="xly-upload__img"
+            class="easy-upload__img"
             :style="{ objectFit: fit }"
             @click="handlePreview(index)"
           >
 
           <!-- 上传进度 -->
-          <div v-if="item.status === 'uploading'" class="xly-upload__progress">
-            <div class="xly-upload__progress-ring">
+          <div v-if="item.status === 'uploading'" class="easy-upload__progress">
+            <div class="easy-upload__progress-ring">
               <svg viewBox="0 0 36 36" class="progress-svg">
                 <circle
                   class="progress-track"
@@ -565,7 +565,7 @@ defineExpose({
           </div>
 
           <!-- 错误遮罩 -->
-          <div v-if="item.status === 'error'" class="xly-upload__error-mask">
+          <div v-if="item.status === 'error'" class="easy-upload__error-mask">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#fff" stroke-width="2">
               <circle cx="12" cy="12" r="10" />
               <line x1="15" y1="9" x2="9" y2="15" />
@@ -575,11 +575,11 @@ defineExpose({
           </div>
 
           <!-- 操作遮罩（hover 显示） -->
-          <div v-if="!disabled && item.status !== 'uploading'" class="xly-upload__actions">
+          <div v-if="!disabled && item.status !== 'uploading'" class="easy-upload__actions">
             <!-- 预览 -->
             <span
               v-if="item.url && previewable"
-              class="xly-upload__action"
+              class="easy-upload__action"
               title="预览"
               @click.stop="handlePreview(index)"
             >
@@ -589,7 +589,7 @@ defineExpose({
               </svg>
             </span>
             <!-- 删除 -->
-            <span class="xly-upload__action xly-upload__action--danger" title="删除" @click.stop="handleRemove(index)">
+            <span class="easy-upload__action easy-upload__action--danger" title="删除" @click.stop="handleRemove(index)">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="3 6 5 6 21 6" />
                 <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
@@ -600,7 +600,7 @@ defineExpose({
           </div>
 
           <!-- 状态角标 -->
-          <div v-if="item.status === 'success'" class="xly-upload__badge">
+          <div v-if="item.status === 'success'" class="easy-upload__badge">
             <svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="#fff" stroke-width="2">
               <polyline points="2 6 5 9 10 3" />
             </svg>
@@ -611,7 +611,7 @@ defineExpose({
       <!-- 上传触发区域 -->
       <div
         v-if="!disabled && !isMaxReached"
-        class="xly-upload__trigger"
+        class="easy-upload__trigger"
         :class="{ 'is-dragover': isDragover }"
         :style="itemStyle"
         @click="handleTriggerClick"
@@ -620,12 +620,12 @@ defineExpose({
         @drop.prevent="handleDrop"
       >
         <slot name="trigger">
-          <div class="xly-upload__trigger-inner">
+          <div class="easy-upload__trigger-inner">
             <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5">
               <line x1="12" y1="5" x2="12" y2="19" />
               <line x1="5" y1="12" x2="19" y2="12" />
             </svg>
-            <span v-if="triggerText" class="xly-upload__trigger-text">{{ triggerText }}</span>
+            <span v-if="triggerText" class="easy-upload__trigger-text">{{ triggerText }}</span>
           </div>
         </slot>
       </div>
@@ -636,13 +636,13 @@ defineExpose({
         type="file"
         :accept="accept"
         :multiple="multiple && (limit === undefined || limit > 1)"
-        class="xly-upload__input"
+        class="easy-upload__input"
         @change="handleInputChange"
       >
     </div>
 
     <!-- 提示文字 -->
-    <div v-if="tip || $slots.tip" class="xly-upload__tip">
+    <div v-if="tip || $slots.tip" class="easy-upload__tip">
       <slot name="tip">
         {{ tip }}
       </slot>
@@ -650,15 +650,15 @@ defineExpose({
 
     <!-- 图片预览弹窗 -->
     <Teleport to="body">
-      <Transition name="xly-upload-preview">
+      <Transition name="easy-upload-preview">
         <div
           v-if="previewVisible"
-          class="xly-upload-preview-modal"
+          class="easy-upload-preview-modal"
           @click.self="previewVisible = false"
           @wheel.prevent="handlePreviewWheel"
         >
           <!-- 关闭 -->
-          <button class="xly-upload-preview__close" @click="previewVisible = false">
+          <button class="easy-upload-preview__close" @click="previewVisible = false">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5">
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
@@ -668,7 +668,7 @@ defineExpose({
           <!-- 上一张 -->
           <button
             v-if="previewUrlList.length > 1"
-            class="xly-upload-preview__arrow xly-upload-preview__arrow--prev"
+            class="easy-upload-preview__arrow easy-upload-preview__arrow--prev"
             @click="previewPrev"
           >
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -677,11 +677,11 @@ defineExpose({
           </button>
 
           <!-- 图片 -->
-          <div class="xly-upload-preview__body" @mousedown="handlePreviewDragStart">
+          <div class="easy-upload-preview__body" @mousedown="handlePreviewDragStart">
             <img
               :src="previewUrlList[previewIndex]"
               :style="previewImgStyle"
-              class="xly-upload-preview__img"
+              class="easy-upload-preview__img"
               draggable="false"
             >
           </div>
@@ -689,7 +689,7 @@ defineExpose({
           <!-- 下一张 -->
           <button
             v-if="previewUrlList.length > 1"
-            class="xly-upload-preview__arrow xly-upload-preview__arrow--next"
+            class="easy-upload-preview__arrow easy-upload-preview__arrow--next"
             @click="previewNext"
           >
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -698,9 +698,9 @@ defineExpose({
           </button>
 
           <!-- 底部工具栏 -->
-          <div class="xly-upload-preview__footer">
-            <span class="xly-upload-preview__count">{{ previewIndex + 1 }} / {{ previewUrlList.length }}</span>
-            <div class="xly-upload-preview__toolbar">
+          <div class="easy-upload-preview__footer">
+            <span class="easy-upload-preview__count">{{ previewIndex + 1 }} / {{ previewUrlList.length }}</span>
+            <div class="easy-upload-preview__toolbar">
               <button class="preview-btn" title="缩小" @click="previewZoomOut">
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                   <circle cx="11" cy="11" r="8" />
@@ -749,7 +749,7 @@ $radius: 8px;
 $transition: all 0.2s ease;
 
 // ==================== 组件容器 ====================
-.xly-upload {
+.easy-upload {
   display: inline-block;
 
   &.is-disabled {
@@ -759,7 +759,7 @@ $transition: all 0.2s ease;
 }
 
 // ==================== 文件列表 ====================
-.xly-upload__list {
+.easy-upload__list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -767,7 +767,7 @@ $transition: all 0.2s ease;
 }
 
 // ==================== 单个文件项 ====================
-.xly-upload__item {
+.easy-upload__item {
   position: relative;
   border-radius: $radius;
   overflow: hidden;
@@ -776,31 +776,31 @@ $transition: all 0.2s ease;
   flex-shrink: 0;
   cursor: default;
 
-  &.xly-upload__item--success {
+  &.easy-upload__item--success {
     border-color: transparent;
 
-    &:hover .xly-upload__actions {
+    &:hover .easy-upload__actions {
       opacity: 1;
     }
   }
 
-  &.xly-upload__item--uploading {
+  &.easy-upload__item--uploading {
     border-color: var(--el-color-primary);
   }
 
-  &.xly-upload__item--error {
+  &.easy-upload__item--error {
     border-color: var(--el-color-danger);
   }
 }
 
-.xly-upload__img {
+.easy-upload__img {
   width: 100%;
   height: 100%;
   display: block;
 }
 
 // ==================== 进度覆盖层 ====================
-.xly-upload__progress {
+.easy-upload__progress {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
@@ -809,7 +809,7 @@ $transition: all 0.2s ease;
   justify-content: center;
 }
 
-.xly-upload__progress-ring {
+.easy-upload__progress-ring {
   position: relative;
   width: 40px;
   height: 40px;
@@ -834,7 +834,7 @@ $transition: all 0.2s ease;
 }
 
 // ==================== 错误遮罩 ====================
-.xly-upload__error-mask {
+.easy-upload__error-mask {
   position: absolute;
   inset: 0;
   background: rgba(255, 59, 48, 0.75);
@@ -848,7 +848,7 @@ $transition: all 0.2s ease;
 }
 
 // ==================== 操作遮罩 ====================
-.xly-upload__actions {
+.easy-upload__actions {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
@@ -860,7 +860,7 @@ $transition: all 0.2s ease;
   transition: opacity 0.2s ease;
 }
 
-.xly-upload__action {
+.easy-upload__action {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -877,13 +877,13 @@ $transition: all 0.2s ease;
     transform: scale(1.1);
   }
 
-  &.xly-upload__action--danger:hover {
+  &.easy-upload__action--danger:hover {
     background: var(--el-fill-color-light);
   }
 }
 
 // ==================== 成功角标 ====================
-.xly-upload__badge {
+.easy-upload__badge {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -897,7 +897,7 @@ $transition: all 0.2s ease;
 }
 
 // ==================== 触发区域 ====================
-.xly-upload__trigger {
+.easy-upload__trigger {
   border: 1.5px dashed var(--el-border-color);
   border-radius: $radius;
   background: var(--el-fill-color-light);
@@ -916,7 +916,7 @@ $transition: all 0.2s ease;
   }
 }
 
-.xly-upload__trigger-inner {
+.easy-upload__trigger-inner {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -924,24 +924,24 @@ $transition: all 0.2s ease;
   color: var(--el-text-color-placeholder);
   transition: color 0.2s;
 
-  .xly-upload__trigger:hover &,
-  .xly-upload__trigger.is-dragover & {
+  .easy-upload__trigger:hover &,
+  .easy-upload__trigger.is-dragover & {
     color: var(--el-color-primary);
   }
 }
 
-.xly-upload__trigger-text {
+.easy-upload__trigger-text {
   font-size: 12px;
   line-height: 1;
 }
 
 // ==================== 隐藏 input ====================
-.xly-upload__input {
+.easy-upload__input {
   display: none;
 }
 
 // ==================== 提示文字 ====================
-.xly-upload__tip {
+.easy-upload__tip {
   margin-top: 8px;
   font-size: 12px;
   color: var(--el-text-color-secondary);
@@ -949,7 +949,7 @@ $transition: all 0.2s ease;
 }
 
 // ==================== 预览弹窗 ====================
-.xly-upload-preview-modal {
+.easy-upload-preview-modal {
   position: fixed;
   inset: 0;
   z-index: 3000;
@@ -959,7 +959,7 @@ $transition: all 0.2s ease;
   justify-content: center;
 }
 
-.xly-upload-preview__close {
+.easy-upload-preview__close {
   position: absolute;
   top: 16px;
   right: 16px;
@@ -981,7 +981,7 @@ $transition: all 0.2s ease;
   }
 }
 
-.xly-upload-preview__body {
+.easy-upload-preview__body {
   max-width: calc(100% - 120px);
   max-height: calc(100vh - 120px);
   display: flex;
@@ -990,7 +990,7 @@ $transition: all 0.2s ease;
   overflow: hidden;
 }
 
-.xly-upload-preview__img {
+.easy-upload-preview__img {
   max-width: 100%;
   max-height: calc(100vh - 120px);
   object-fit: contain;
@@ -998,7 +998,7 @@ $transition: all 0.2s ease;
   display: block;
 }
 
-.xly-upload-preview__arrow {
+.easy-upload-preview__arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -1019,15 +1019,15 @@ $transition: all 0.2s ease;
     background: rgba(255, 255, 255, 0.3);
   }
 
-  &.xly-upload-preview__arrow--prev {
+  &.easy-upload-preview__arrow--prev {
     left: 16px;
   }
-  &.xly-upload-preview__arrow--next {
+  &.easy-upload-preview__arrow--next {
     right: 16px;
   }
 }
 
-.xly-upload-preview__footer {
+.easy-upload-preview__footer {
   position: absolute;
   bottom: 20px;
   left: 50%;
@@ -1038,12 +1038,12 @@ $transition: all 0.2s ease;
   gap: 10px;
 }
 
-.xly-upload-preview__count {
+.easy-upload-preview__count {
   font-size: 13px;
   color: rgba(255, 255, 255, 0.7);
 }
 
-.xly-upload-preview__toolbar {
+.easy-upload-preview__toolbar {
   display: flex;
   gap: 4px;
   background: rgba(0, 0, 0, 0.5);
@@ -1071,24 +1071,24 @@ $transition: all 0.2s ease;
 }
 
 // ==================== 过渡动画 ====================
-.xly-upload-fade-enter-active,
-.xly-upload-fade-leave-active {
+.easy-upload-fade-enter-active,
+.easy-upload-fade-leave-active {
   transition: all 0.25s ease;
 }
 
-.xly-upload-fade-enter-from,
-.xly-upload-fade-leave-to {
+.easy-upload-fade-enter-from,
+.easy-upload-fade-leave-to {
   opacity: 0;
   transform: scale(0.85);
 }
 
-.xly-upload-preview-enter-active,
-.xly-upload-preview-leave-active {
+.easy-upload-preview-enter-active,
+.easy-upload-preview-leave-active {
   transition: opacity 0.25s ease;
 }
 
-.xly-upload-preview-enter-from,
-.xly-upload-preview-leave-to {
+.easy-upload-preview-enter-from,
+.easy-upload-preview-leave-to {
   opacity: 0;
 }
 </style>

@@ -2,7 +2,7 @@ import type { RouteLocationNormalized } from 'vue-router'
 import { defineStore } from 'pinia'
 import { computed, ref, watchEffect } from 'vue'
 
-const STORAGE_KEY = 'xly-worktab'
+const STORAGE_KEY = 'easy-worktab'
 const STORAGE_VERSION = 1
 const HOME_PATH = '/'
 

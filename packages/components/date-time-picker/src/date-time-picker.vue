@@ -437,7 +437,7 @@ function handleBlur() {
 
 function handlePanelMouseDown(e: MouseEvent) {
   const target = e.target as HTMLElement
-  const isInput = target.closest('.xly-dtp-time__input-area')
+  const isInput = target.closest('.easy-dtp-time__input-area')
   if (!isInput) {
     e.preventDefault()
   }
@@ -478,16 +478,16 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="xly-date-time-picker" :class="[`xly-date-time-picker--${size}`, { 'is-disabled': disabled }]">
+  <div class="easy-date-time-picker" :class="[`easy-date-time-picker--${size}`, { 'is-disabled': disabled }]">
     <div
       ref="wrapperRef"
-      class="xly-date-time-picker__wrapper"
+      class="easy-date-time-picker__wrapper"
       :class="{ 'is-focus': focusing, 'is-hover': hovering && !disabled }"
       @mouseenter="hovering = true"
       @mouseleave="hovering = false"
     >
       <!-- 前缀图标 -->
-      <span class="xly-date-time-picker__prefix">
+      <span class="easy-date-time-picker__prefix">
         <slot name="prefix">
           <el-icon><Calendar /></el-icon>
         </slot>
@@ -496,7 +496,7 @@ onBeforeUnmount(() => {
       <!-- 输入 -->
       <input
         ref="inputRef"
-        class="xly-date-time-picker__input"
+        class="easy-date-time-picker__input"
         :value="displayValue"
         :placeholder="placeholder"
         :disabled="disabled"
@@ -507,41 +507,41 @@ onBeforeUnmount(() => {
       >
 
       <!-- 清除 -->
-      <span v-if="clearable && modelValue && !disabled" class="xly-date-time-picker__clear" @click.stop="clear">
+      <span v-if="clearable && modelValue && !disabled" class="easy-date-time-picker__clear" @click.stop="clear">
         <el-icon><Close /></el-icon>
       </span>
     </div>
 
     <!-- 选择面板 -->
     <Teleport to="body">
-      <Transition name="xly-dtp-fade">
+      <Transition name="easy-dtp-fade">
         <div
           v-if="panelVisible"
           ref="panelRef"
-          class="xly-date-time-picker__panel"
+          class="easy-date-time-picker__panel"
           :style="panelStyle"
           @mousedown="handlePanelMouseDown"
         >
           <!-- 左侧：日期选择 -->
-          <div class="xly-dtp__date-section">
+          <div class="easy-dtp__date-section">
             <!-- 头部：年月切换 -->
-            <div class="xly-dtp-date__header">
-              <el-icon class="xly-dtp-date__nav" @click="prevMonth">
+            <div class="easy-dtp-date__header">
+              <el-icon class="easy-dtp-date__nav" @click="prevMonth">
                 <ArrowLeft />
               </el-icon>
-              <span class="xly-dtp-date__title" @click="toggleYearMode">{{ panelTitle }}</span>
-              <el-icon class="xly-dtp-date__nav" @click="nextMonth">
+              <span class="easy-dtp-date__title" @click="toggleYearMode">{{ panelTitle }}</span>
+              <el-icon class="easy-dtp-date__nav" @click="nextMonth">
                 <ArrowRight />
               </el-icon>
             </div>
 
             <!-- 年份选择 -->
-            <div v-if="yearMode" class="xly-dtp-date__body">
-              <div class="xly-dtp-date__year-grid">
+            <div v-if="yearMode" class="easy-dtp-date__body">
+              <div class="easy-dtp-date__year-grid">
                 <div
                   v-for="year in yearRange"
                   :key="year"
-                  class="xly-dtp-date__year-cell"
+                  class="easy-dtp-date__year-cell"
                   :class="{
                     'is-current': year === currentYear,
                     'is-selected': year === panelYear,
@@ -554,15 +554,15 @@ onBeforeUnmount(() => {
             </div>
 
             <!-- 日历 -->
-            <div v-else class="xly-dtp-date__body">
-              <div class="xly-dtp-date__weekdays">
+            <div v-else class="easy-dtp-date__body">
+              <div class="easy-dtp-date__weekdays">
                 <span v-for="w in weekdays" :key="w">{{ w }}</span>
               </div>
-              <div class="xly-dtp-date__days">
+              <div class="easy-dtp-date__days">
                 <div
                   v-for="(day, i) in calendarDays"
                   :key="i"
-                  class="xly-dtp-date__day"
+                  class="easy-dtp-date__day"
                   :class="{
                     'is-other': !day.isCurrentMonth,
                     'is-today': day.isToday,
@@ -577,12 +577,12 @@ onBeforeUnmount(() => {
           </div>
 
           <!-- 右侧：时间选择 -->
-          <div class="xly-dtp__time-section">
+          <div class="easy-dtp__time-section">
             <!-- 手动输入区 -->
-            <div class="xly-dtp-time__input-area">
+            <div class="easy-dtp-time__input-area">
               <input
                 ref="hoursInputRef"
-                class="xly-dtp-time__time-input"
+                class="easy-dtp-time__time-input"
                 maxlength="2"
                 @input="onTimeInput($event, 'hours')"
                 @blur="onTimeBlur($event, 'hours')"
@@ -590,10 +590,10 @@ onBeforeUnmount(() => {
                 @keydown.up.prevent="adjustInput('hours', -1)"
                 @keydown.enter.prevent="focusNextInput('minutes')"
               >
-              <span class="xly-dtp-time__input-sep">:</span>
+              <span class="easy-dtp-time__input-sep">:</span>
               <input
                 ref="minutesInputRef"
-                class="xly-dtp-time__time-input"
+                class="easy-dtp-time__time-input"
                 maxlength="2"
                 @input="onTimeInput($event, 'minutes')"
                 @blur="onTimeBlur($event, 'minutes')"
@@ -602,10 +602,10 @@ onBeforeUnmount(() => {
                 @keydown.enter.prevent="showSeconds ? focusNextInput('seconds') : confirm()"
               >
               <template v-if="showSeconds">
-                <span class="xly-dtp-time__input-sep">:</span>
+                <span class="easy-dtp-time__input-sep">:</span>
                 <input
                   ref="secondsInputRef"
-                  class="xly-dtp-time__time-input"
+                  class="easy-dtp-time__time-input"
                   maxlength="2"
                   @input="onTimeInput($event, 'seconds')"
                   @blur="onTimeBlur($event, 'seconds')"
@@ -617,15 +617,15 @@ onBeforeUnmount(() => {
             </div>
 
             <!-- 滚动列表面板 -->
-            <div class="xly-dtp-time__body">
+            <div class="easy-dtp-time__body">
               <!-- 时 -->
-              <div class="xly-dtp-time__column">
-                <div class="xly-dtp-time__list-wrap">
-                  <div ref="hoursListRef" class="xly-dtp-time__list" @scroll.passive="onScroll($event, 'hours')">
+              <div class="easy-dtp-time__column">
+                <div class="easy-dtp-time__list-wrap">
+                  <div ref="hoursListRef" class="easy-dtp-time__list" @scroll.passive="onScroll($event, 'hours')">
                     <div
                       v-for="h in 24"
                       :key="h - 1"
-                      class="xly-dtp-time__item"
+                      class="easy-dtp-time__item"
                       :class="{ 'is-selected': h - 1 === panelHours }"
                       @click="selectTimeUnit('hours', h - 1)"
                     >
@@ -635,16 +635,16 @@ onBeforeUnmount(() => {
                 </div>
               </div>
 
-              <span class="xly-dtp-time__sep">:</span>
+              <span class="easy-dtp-time__sep">:</span>
 
               <!-- 分 -->
-              <div class="xly-dtp-time__column">
-                <div class="xly-dtp-time__list-wrap">
-                  <div ref="minutesListRef" class="xly-dtp-time__list" @scroll.passive="onScroll($event, 'minutes')">
+              <div class="easy-dtp-time__column">
+                <div class="easy-dtp-time__list-wrap">
+                  <div ref="minutesListRef" class="easy-dtp-time__list" @scroll.passive="onScroll($event, 'minutes')">
                     <div
                       v-for="m in 60"
                       :key="m - 1"
-                      class="xly-dtp-time__item"
+                      class="easy-dtp-time__item"
                       :class="{ 'is-selected': m - 1 === panelMinutes }"
                       @click="selectTimeUnit('minutes', m - 1)"
                     >
@@ -656,14 +656,14 @@ onBeforeUnmount(() => {
 
               <!-- 秒 -->
               <template v-if="showSeconds">
-                <span class="xly-dtp-time__sep">:</span>
-                <div class="xly-dtp-time__column">
-                  <div class="xly-dtp-time__list-wrap">
-                    <div ref="secondsListRef" class="xly-dtp-time__list" @scroll.passive="onScroll($event, 'seconds')">
+                <span class="easy-dtp-time__sep">:</span>
+                <div class="easy-dtp-time__column">
+                  <div class="easy-dtp-time__list-wrap">
+                    <div ref="secondsListRef" class="easy-dtp-time__list" @scroll.passive="onScroll($event, 'seconds')">
                       <div
                         v-for="s in 60"
                         :key="s - 1"
-                        class="xly-dtp-time__item"
+                        class="easy-dtp-time__item"
                         :class="{ 'is-selected': s - 1 === panelSeconds }"
                         @click="selectTimeUnit('seconds', s - 1)"
                       >
@@ -677,11 +677,11 @@ onBeforeUnmount(() => {
           </div>
 
           <!-- 底部按钮 -->
-          <div class="xly-dtp__footer">
-            <button class="xly-dtp__btn xly-dtp__btn--now" @click="setNow">
+          <div class="easy-dtp__footer">
+            <button class="easy-dtp__btn easy-dtp__btn--now" @click="setNow">
               此刻
             </button>
-            <button class="xly-dtp__btn xly-dtp__btn--primary" @click="confirm">
+            <button class="easy-dtp__btn easy-dtp__btn--primary" @click="confirm">
               确定
             </button>
           </div>
@@ -697,31 +697,31 @@ onBeforeUnmount(() => {
 $radius: 8px;
 $transition: all 0.2s ease;
 
-.xly-date-time-picker {
+.easy-date-time-picker {
   display: inline-flex;
   width: 100%;
 
-  &.xly-date-time-picker--large .xly-date-time-picker__wrapper {
+  &.easy-date-time-picker--large .easy-date-time-picker__wrapper {
     height: 44px;
   }
-  &.xly-date-time-picker--large .xly-date-time-picker__input {
+  &.easy-date-time-picker--large .easy-date-time-picker__input {
     font-size: 15px;
   }
-  &.xly-date-time-picker--default .xly-date-time-picker__wrapper {
+  &.easy-date-time-picker--default .easy-date-time-picker__wrapper {
     height: 36px;
   }
-  &.xly-date-time-picker--default .xly-date-time-picker__input {
+  &.easy-date-time-picker--default .easy-date-time-picker__input {
     font-size: 14px;
   }
-  &.xly-date-time-picker--small .xly-date-time-picker__wrapper {
+  &.easy-date-time-picker--small .easy-date-time-picker__wrapper {
     height: 30px;
   }
-  &.xly-date-time-picker--small .xly-date-time-picker__input {
+  &.easy-date-time-picker--small .easy-date-time-picker__input {
     font-size: 13px;
   }
 }
 
-.xly-date-time-picker__wrapper {
+.easy-date-time-picker__wrapper {
   flex: 1;
   display: inline-flex;
   align-items: center;
@@ -741,7 +741,7 @@ $transition: all 0.2s ease;
   }
 }
 
-.xly-date-time-picker__prefix {
+.easy-date-time-picker__prefix {
   display: inline-flex;
   align-items: center;
   margin-right: 6px;
@@ -749,7 +749,7 @@ $transition: all 0.2s ease;
   flex-shrink: 0;
 }
 
-.xly-date-time-picker__input {
+.easy-date-time-picker__input {
   flex: 1;
   border: none;
   outline: none;
@@ -763,7 +763,7 @@ $transition: all 0.2s ease;
   }
 }
 
-.xly-date-time-picker__clear {
+.easy-date-time-picker__clear {
   display: inline-flex;
   cursor: pointer;
   color: var(--el-text-color-placeholder);
@@ -779,7 +779,7 @@ $transition: all 0.2s ease;
 
 $radius: 8px;
 
-.xly-date-time-picker__panel {
+.easy-date-time-picker__panel {
   position: fixed;
   z-index: 2000;
   display: flex;
@@ -794,19 +794,19 @@ $radius: 8px;
 }
 
 // 日期区
-.xly-dtp__date-section {
+.easy-dtp__date-section {
   border-right: 1px solid var(--el-border-color);
   padding: 8px;
 }
 
-.xly-dtp-date__header {
+.easy-dtp-date__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 4px 8px 8px;
 }
 
-.xly-dtp-date__nav {
+.easy-dtp-date__nav {
   display: inline-flex;
   cursor: pointer;
   color: var(--el-text-color-regular);
@@ -818,7 +818,7 @@ $radius: 8px;
   }
 }
 
-.xly-dtp-date__title {
+.easy-dtp-date__title {
   font-size: 15px;
   font-weight: 600;
   color: var(--el-text-color-regular);
@@ -830,7 +830,7 @@ $radius: 8px;
   }
 }
 
-.xly-dtp-date__weekdays {
+.easy-dtp-date__weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   padding: 4px 0;
@@ -845,14 +845,14 @@ $radius: 8px;
   }
 }
 
-.xly-dtp-date__days {
+.easy-dtp-date__days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 2px;
   padding: 4px 0;
 }
 
-.xly-dtp-date__day {
+.easy-dtp-date__day {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -882,14 +882,14 @@ $radius: 8px;
   }
 }
 
-.xly-dtp-date__year-grid {
+.easy-dtp-date__year-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
   padding: 8px;
 }
 
-.xly-dtp-date__year-cell {
+.easy-dtp-date__year-cell {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -914,7 +914,7 @@ $radius: 8px;
 }
 
 // 时间区
-.xly-dtp__time-section {
+.easy-dtp__time-section {
   padding: 8px;
   display: flex;
   flex-direction: column;
@@ -922,7 +922,7 @@ $radius: 8px;
 }
 
 // 手动输入区
-.xly-dtp-time__input-area {
+.easy-dtp-time__input-area {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -932,7 +932,7 @@ $radius: 8px;
   margin-bottom: 8px;
 }
 
-.xly-dtp-time__time-input {
+.easy-dtp-time__time-input {
   width: 44px;
   height: 32px;
   text-align: center;
@@ -954,7 +954,7 @@ $radius: 8px;
   }
 }
 
-.xly-dtp-time__input-sep {
+.easy-dtp-time__input-sep {
   font-size: 16px;
   font-weight: 600;
   color: var(--el-text-color-placeholder);
@@ -962,7 +962,7 @@ $radius: 8px;
 }
 
 // 滚动列表区
-.xly-dtp-time__body {
+.easy-dtp-time__body {
   display: flex;
   align-items: stretch;
   position: relative;
@@ -982,12 +982,12 @@ $radius: 8px;
   }
 }
 
-.xly-dtp-time__column {
+.easy-dtp-time__column {
   width: 48px;
   position: relative;
 }
 
-.xly-dtp-time__sep {
+.easy-dtp-time__sep {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -998,12 +998,12 @@ $radius: 8px;
   flex-shrink: 0;
 }
 
-.xly-dtp-time__list-wrap {
+.easy-dtp-time__list-wrap {
   height: 224px;
   overflow: hidden;
 }
 
-.xly-dtp-time__list {
+.easy-dtp-time__list {
   height: 100%;
   overflow-y: auto;
   scroll-snap-type: y mandatory;
@@ -1013,7 +1013,7 @@ $radius: 8px;
   }
 }
 
-.xly-dtp-time__item {
+.easy-dtp-time__item {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1038,7 +1038,7 @@ $radius: 8px;
 }
 
 // 底部
-.xly-dtp__footer {
+.easy-dtp__footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1046,7 +1046,7 @@ $radius: 8px;
   border-top: 1px solid var(--el-border-color);
 }
 
-.xly-dtp__btn {
+.easy-dtp__btn {
   padding: 4px 12px;
   border: none;
   background: transparent;
@@ -1058,14 +1058,14 @@ $radius: 8px;
   transition: all 0.15s;
   line-height: 1.5;
 
-  &.xly-dtp__btn--now {
+  &.easy-dtp__btn--now {
     color: var(--el-text-color-placeholder);
     &:hover {
       color: var(--el-color-primary);
     }
   }
 
-  &.xly-dtp__btn--primary {
+  &.easy-dtp__btn--primary {
     background: transparent;
     color: var(--el-color-primary);
     font-weight: 500;
@@ -1077,15 +1077,15 @@ $radius: 8px;
 }
 
 // 过渡
-.xly-dtp-fade-enter-active,
-.xly-dtp-fade-leave-active {
+.easy-dtp-fade-enter-active,
+.easy-dtp-fade-leave-active {
   transition:
     opacity 0.15s ease,
     transform 0.15s ease;
   transform-origin: top center;
 }
-.xly-dtp-fade-enter-from,
-.xly-dtp-fade-leave-to {
+.easy-dtp-fade-enter-from,
+.easy-dtp-fade-leave-to {
   opacity: 0;
   transform: scaleY(0.95) translateY(-4px);
 }

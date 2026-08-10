@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, inject, ref } from 'vue'
 
-import XlyIcon from '../../icon'
+import EasyIcon from '../../icon'
 import { timelineItemProps } from './timeline-item'
 
 defineOptions({
@@ -66,7 +66,7 @@ const nodeIconSize = computed(() => {
       <slot v-if="$slots.dot" name="dot" />
 
       <!-- 图标（支持自定义或默认状态图标） -->
-      <XlyIcon v-else-if="displayIcon" :name="displayIcon" :size="nodeIconSize" />
+      <EasyIcon v-else-if="displayIcon" :name="displayIcon" :size="nodeIconSize" />
     </div>
 
     <!-- 内容区域 -->

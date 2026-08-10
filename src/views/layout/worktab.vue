@@ -415,7 +415,7 @@ function addTab(route: RouteLocationNormalized) {
       </h3>
       <div class="doc-tip doc-tip--info">
         <strong>✅ 已内置：</strong>Store 通过 <code>watchEffect</code> 自动将标签页列表和激活状态保存到
-        <code>localStorage</code>（key: <code>xly-worktab</code>），页面刷新时自动恢复。
+        <code>localStorage</code>（key: <code>easy-worktab</code>），页面刷新时自动恢复。
       </div>
       <p class="doc-section__desc">
         如需禁用持久化或更换存储 key，修改 <code>src/stores/tabs.ts</code> 顶部的
@@ -444,7 +444,7 @@ $bg-hover: #f5f7fa;      // 悬浮标签背景
 // 标签尺寸：
 .worktab-item { height: 28px; padding: 0 10px; font-size: 13px; max-width: 160px; }
 // 标签栏高度：
-.xly-worktab { height: 40px; }"
+.easy-worktab { height: 40px; }"
       />
 
       <h3 class="doc-subtitle">
@@ -480,7 +480,7 @@ function addTab(route: RouteLocationNormalized) {
       </h3>
       <div class="doc-tip doc-tip--info">
         <strong>✅ 已内置：</strong>Store 已使用 <code>watchEffect</code> 和 <code>localStorage</code> 实现持久化，key
-        为 <code>xly-worktab</code>。无需额外配置。
+        为 <code>easy-worktab</code>。无需额外配置。
       </div>
       <p class="doc-section__desc">
         如需关闭持久化或使用其他存储方式（如 IndexedDB），修改 <code>src/stores/tabs.ts</code> 中的

@@ -256,7 +256,7 @@ function focusNextInput(unit: 'hours' | 'minutes' | 'seconds') {
 // ========== 外部事件 ==========
 function handlePanelMouseDown(e: MouseEvent) {
   const target = e.target as HTMLElement
-  const isInput = target.closest('.xly-time-panel__input-area')
+  const isInput = target.closest('.easy-time-panel__input-area')
   if (!isInput) {
     e.preventDefault()
   }
@@ -308,16 +308,16 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="xly-time-picker" :class="[`xly-time-picker--${size}`, { 'is-disabled': disabled }]">
+  <div class="easy-time-picker" :class="[`easy-time-picker--${size}`, { 'is-disabled': disabled }]">
     <div
       ref="wrapperRef"
-      class="xly-time-picker__wrapper"
+      class="easy-time-picker__wrapper"
       :class="{ 'is-focus': focusing, 'is-hover': hovering && !disabled }"
       @mouseenter="hovering = true"
       @mouseleave="hovering = false"
     >
       <!-- 前缀图标 -->
-      <span class="xly-time-picker__prefix">
+      <span class="easy-time-picker__prefix">
         <slot name="prefix">
           <el-icon><Clock /></el-icon>
         </slot>
@@ -326,7 +326,7 @@ onBeforeUnmount(() => {
       <!-- 时间输入（只读，点击打开弹窗） -->
       <input
         ref="inputRef"
-        class="xly-time-picker__input"
+        class="easy-time-picker__input"
         :value="displayValue"
         :placeholder="placeholder"
         :disabled="disabled"
@@ -337,26 +337,26 @@ onBeforeUnmount(() => {
       >
 
       <!-- 清除 -->
-      <span v-if="clearable && modelValue && !disabled" class="xly-time-picker__clear" @click.stop="clear">
+      <span v-if="clearable && modelValue && !disabled" class="easy-time-picker__clear" @click.stop="clear">
         <el-icon><Close /></el-icon>
       </span>
     </div>
 
     <!-- 时间面板 -->
     <Teleport to="body">
-      <Transition name="xly-time-picker-fade">
+      <Transition name="easy-time-picker-fade">
         <div
           v-if="panelVisible"
           ref="panelRef"
-          class="xly-time-picker__panel"
+          class="easy-time-picker__panel"
           :style="panelStyle"
           @mousedown="handlePanelMouseDown"
         >
           <!-- 手动输入区 -->
-          <div class="xly-time-panel__input-area">
+          <div class="easy-time-panel__input-area">
             <input
               ref="hoursInputRef"
-              class="xly-time-panel__time-input"
+              class="easy-time-panel__time-input"
               maxlength="2"
               :value="String(panelHours).padStart(2, '0')"
               @input="onTimeInput($event, 'hours')"
@@ -365,10 +365,10 @@ onBeforeUnmount(() => {
               @keydown.up.prevent="adjustInput('hours', -1)"
               @keydown.enter.prevent="focusNextInput('minutes')"
             >
-            <span class="xly-time-panel__input-sep">:</span>
+            <span class="easy-time-panel__input-sep">:</span>
             <input
               ref="minutesInputRef"
-              class="xly-time-panel__time-input"
+              class="easy-time-panel__time-input"
               maxlength="2"
               @input="onTimeInput($event, 'minutes')"
               @blur="onTimeBlur($event, 'minutes')"
@@ -377,10 +377,10 @@ onBeforeUnmount(() => {
               @keydown.enter.prevent="showSeconds ? focusNextInput('seconds') : confirm()"
             >
             <template v-if="showSeconds">
-              <span class="xly-time-panel__input-sep">:</span>
+              <span class="easy-time-panel__input-sep">:</span>
               <input
                 ref="secondsInputRef"
-                class="xly-time-panel__time-input"
+                class="easy-time-panel__time-input"
                 maxlength="2"
                 @input="onTimeInput($event, 'seconds')"
                 @blur="onTimeBlur($event, 'seconds')"
@@ -392,15 +392,15 @@ onBeforeUnmount(() => {
           </div>
 
           <!-- 滚动列表区 -->
-          <div class="xly-time-panel__body">
+          <div class="easy-time-panel__body">
             <!-- 时 -->
-            <div class="xly-time-panel__column">
-              <div class="xly-time-panel__list-wrap">
-                <div ref="hoursListRef" class="xly-time-panel__list" @scroll.passive="onScroll($event, 'hours')">
+            <div class="easy-time-panel__column">
+              <div class="easy-time-panel__list-wrap">
+                <div ref="hoursListRef" class="easy-time-panel__list" @scroll.passive="onScroll($event, 'hours')">
                   <div
                     v-for="h in 24"
                     :key="h - 1"
-                    class="xly-time-panel__item"
+                    class="easy-time-panel__item"
                     :class="{ 'is-selected': h - 1 === panelHours }"
                     @click="selectHour(h - 1)"
                   >
@@ -410,16 +410,16 @@ onBeforeUnmount(() => {
               </div>
             </div>
 
-            <span class="xly-time-panel__sep">:</span>
+            <span class="easy-time-panel__sep">:</span>
 
             <!-- 分 -->
-            <div class="xly-time-panel__column">
-              <div class="xly-time-panel__list-wrap">
-                <div ref="minutesListRef" class="xly-time-panel__list" @scroll.passive="onScroll($event, 'minutes')">
+            <div class="easy-time-panel__column">
+              <div class="easy-time-panel__list-wrap">
+                <div ref="minutesListRef" class="easy-time-panel__list" @scroll.passive="onScroll($event, 'minutes')">
                   <div
                     v-for="m in 60"
                     :key="m - 1"
-                    class="xly-time-panel__item"
+                    class="easy-time-panel__item"
                     :class="{ 'is-selected': m - 1 === panelMinutes }"
                     @click="selectMinute(m - 1)"
                   >
@@ -431,14 +431,14 @@ onBeforeUnmount(() => {
 
             <!-- 秒（可选） -->
             <template v-if="showSeconds">
-              <span class="xly-time-panel__sep">:</span>
-              <div class="xly-time-panel__column">
-                <div class="xly-time-panel__list-wrap">
-                  <div ref="secondsListRef" class="xly-time-panel__list" @scroll.passive="onScroll($event, 'seconds')">
+              <span class="easy-time-panel__sep">:</span>
+              <div class="easy-time-panel__column">
+                <div class="easy-time-panel__list-wrap">
+                  <div ref="secondsListRef" class="easy-time-panel__list" @scroll.passive="onScroll($event, 'seconds')">
                     <div
                       v-for="s in 60"
                       :key="s - 1"
-                      class="xly-time-panel__item"
+                      class="easy-time-panel__item"
                       :class="{ 'is-selected': s - 1 === panelSeconds }"
                       @click="selectSecond(s - 1)"
                     >
@@ -451,11 +451,11 @@ onBeforeUnmount(() => {
           </div>
 
           <!-- 底部按钮 -->
-          <div class="xly-time-panel__footer">
-            <button class="xly-time-panel__btn xly-time-panel__btn--now" @click="setNow">
+          <div class="easy-time-panel__footer">
+            <button class="easy-time-panel__btn easy-time-panel__btn--now" @click="setNow">
               此刻
             </button>
-            <button class="xly-time-panel__btn xly-time-panel__btn--primary" @click="confirm">
+            <button class="easy-time-panel__btn easy-time-panel__btn--primary" @click="confirm">
               确定
             </button>
           </div>
@@ -471,31 +471,31 @@ onBeforeUnmount(() => {
 $radius: 8px;
 $transition: all 0.2s ease;
 
-.xly-time-picker {
+.easy-time-picker {
   display: inline-flex;
   width: 100%;
 
-  &.xly-time-picker--large .xly-time-picker__wrapper {
+  &.easy-time-picker--large .easy-time-picker__wrapper {
     height: 44px;
   }
-  &.xly-time-picker--large .xly-time-picker__input {
+  &.easy-time-picker--large .easy-time-picker__input {
     font-size: 15px;
   }
-  &.xly-time-picker--default .xly-time-picker__wrapper {
+  &.easy-time-picker--default .easy-time-picker__wrapper {
     height: 36px;
   }
-  &.xly-time-picker--default .xly-time-picker__input {
+  &.easy-time-picker--default .easy-time-picker__input {
     font-size: 14px;
   }
-  &.xly-time-picker--small .xly-time-picker__wrapper {
+  &.easy-time-picker--small .easy-time-picker__wrapper {
     height: 30px;
   }
-  &.xly-time-picker--small .xly-time-picker__input {
+  &.easy-time-picker--small .easy-time-picker__input {
     font-size: 13px;
   }
 }
 
-.xly-time-picker__wrapper {
+.easy-time-picker__wrapper {
   flex: 1;
   display: inline-flex;
   align-items: center;
@@ -515,7 +515,7 @@ $transition: all 0.2s ease;
   }
 }
 
-.xly-time-picker__prefix {
+.easy-time-picker__prefix {
   display: inline-flex;
   align-items: center;
   margin-right: 6px;
@@ -523,7 +523,7 @@ $transition: all 0.2s ease;
   flex-shrink: 0;
 }
 
-.xly-time-picker__input {
+.easy-time-picker__input {
   flex: 1;
   border: none;
   outline: none;
@@ -536,7 +536,7 @@ $transition: all 0.2s ease;
   }
 }
 
-.xly-time-picker__clear {
+.easy-time-picker__clear {
   display: inline-flex;
   cursor: pointer;
   color: var(--el-text-color-placeholder);
@@ -553,7 +553,7 @@ $transition: all 0.2s ease;
 $radius: 8px;
 
 // ========== 时间面板（Teleport 到 body，不能 scoped）==========
-.xly-time-picker__panel {
+.easy-time-picker__panel {
   position: fixed;
   z-index: 2000;
   width: auto;
@@ -568,7 +568,7 @@ $radius: 8px;
 }
 
 // 手动输入区
-.xly-time-panel__input-area {
+.easy-time-panel__input-area {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -577,7 +577,7 @@ $radius: 8px;
   gap: 2px;
 }
 
-.xly-time-panel__time-input {
+.easy-time-panel__time-input {
   width: 44px;
   height: 32px;
   text-align: center;
@@ -599,7 +599,7 @@ $radius: 8px;
   }
 }
 
-.xly-time-panel__input-sep {
+.easy-time-panel__input-sep {
   font-size: 16px;
   font-weight: 600;
   color: var(--el-text-color-placeholder);
@@ -607,7 +607,7 @@ $radius: 8px;
 }
 
 // 滚动列表区
-.xly-time-panel__body {
+.easy-time-panel__body {
   display: flex;
   align-items: stretch;
   position: relative;
@@ -627,12 +627,12 @@ $radius: 8px;
   }
 }
 
-.xly-time-panel__column {
+.easy-time-panel__column {
   width: 48px;
   position: relative;
 }
 
-.xly-time-panel__sep {
+.easy-time-panel__sep {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -643,12 +643,12 @@ $radius: 8px;
   flex-shrink: 0;
 }
 
-.xly-time-panel__list-wrap {
+.easy-time-panel__list-wrap {
   height: 224px;
   overflow: hidden;
 }
 
-.xly-time-panel__list {
+.easy-time-panel__list {
   height: 100%;
   overflow-y: auto;
   scroll-snap-type: y mandatory;
@@ -658,7 +658,7 @@ $radius: 8px;
   }
 }
 
-.xly-time-panel__item {
+.easy-time-panel__item {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -683,14 +683,14 @@ $radius: 8px;
 }
 
 // 底部
-.xly-time-panel__footer {
+.easy-time-panel__footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 4px 8px;
 }
 
-.xly-time-panel__btn {
+.easy-time-panel__btn {
   padding: 4px 12px;
   border: none;
   background: transparent;
@@ -702,14 +702,14 @@ $radius: 8px;
   transition: all 0.15s;
   line-height: 1.5;
 
-  &.xly-time-panel__btn--now {
+  &.easy-time-panel__btn--now {
     color: var(--el-text-color-placeholder);
     &:hover {
       color: var(--el-color-primary);
     }
   }
 
-  &.xly-time-panel__btn--primary {
+  &.easy-time-panel__btn--primary {
     background: transparent;
     color: var(--el-color-primary);
     font-weight: 500;
@@ -721,14 +721,14 @@ $radius: 8px;
 }
 
 // 过渡
-.xly-time-picker-fade-enter-active,
-.xly-time-picker-fade-leave-active {
+.easy-time-picker-fade-enter-active,
+.easy-time-picker-fade-leave-active {
   transition:
     opacity 0.15s ease,
     transform 0.15s ease;
 }
-.xly-time-picker-fade-enter-from,
-.xly-time-picker-fade-leave-to {
+.easy-time-picker-fade-enter-from,
+.easy-time-picker-fade-leave-to {
   opacity: 0;
   transform: scaleY(0.95) translateY(-4px);
 }
@@ -736,13 +736,13 @@ $radius: 8px;
 
 <style lang="scss">
 /* ========== Dark Mode ========== */
-html.dark .xly-time-panel__input-area {
+html.dark .easy-time-panel__input-area {
   border-bottom-color: var(--el-border-color);
 }
-html.dark .xly-time-panel__body::before {
+html.dark .easy-time-panel__body::before {
   background: rgba(79, 110, 247, 0.12);
 }
-html.dark .xly-time-picker__panel {
+html.dark .easy-time-picker__panel {
   box-shadow:
     0 4px 20px rgba(0, 0, 0, 0.2),
     0 0 1px rgba(0, 0, 0, 0.3);

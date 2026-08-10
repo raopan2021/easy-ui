@@ -6,30 +6,30 @@ import { EasyMsgBox, setupEasyMsgBox } from '../../../components/msgbox'
 import { vEasyTour } from '../../../components/tour'
 
 /**
- * xly 全局工具对象
+ * easy 全局工具对象
  *
  * 使用方式：
  * ```ts
- * import { xly } from 'easy-ui'
+ * import { easy } from 'easy-ui'
  *
  * // 消息提示
- * xly.$msg.success('操作成功')
- * xly.$msg.warning('注意')
- * xly.$msg.danger('出错了')
- * xly.$msg.info('提示信息')
+ * easy.$msg.success('操作成功')
+ * easy.$msg.warning('注意')
+ * easy.$msg.danger('出错了')
+ * easy.$msg.info('提示信息')
  *
  * // 加载
- * const loading = xly.$loading.open({ text: '加载中...' })
+ * const loading = easy.$loading.open({ text: '加载中...' })
  * loading.close()
- * xly.$loading.fullscreen('加载中...')
- * xly.$loading.container('.my-box', '加载中...')
+ * easy.$loading.fullscreen('加载中...')
+ * easy.$loading.container('.my-box', '加载中...')
  *
  * // 操作引导
- * const tour = xly.$tour({ steps: [...] })
+ * const tour = easy.$tour({ steps: [...] })
  * tour.finish()
  * ```
  */
-export const xly = {
+export const easy = {
   /** 消息提示 */
   $msg: EasyMsg,
   /** 加载 */
@@ -43,34 +43,34 @@ export const xly = {
 }
 
 /**
- * 全局安装 xly 服务
+ * 全局安装 easy 服务
  *
  * 在 main.ts 中调用：
  * ```ts
- * import { setupXly } from 'easy-ui'
- * setupXly(app)
+ * import { setupEasy } from 'easy-ui'
+ * setupEasy(app)
  * ```
  *
  * 安装后任意组件中直接使用：
- * - 脚本：`xly.$msg.success('成功')` / `xly.$loading.open()`
- * - 模板：`@click="xly.$msg.success('成功')"`
+ * - 脚本：`easy.$msg.success('成功')` / `easy.$loading.open()`
+ * - 模板：`@click="easy.$msg.success('成功')"`
  */
-export function setupXly(app: App) {
+export function setupEasy(app: App) {
   // 挂载消息提示组件容器
   setupEasyMessage(app)
 
   // 挂载消息弹出框容器
   setupEasyMsgBox(app)
 
-  // 同时挂载两处，确保 script setup 和模板都能访问 xly
-  app.config.globalProperties.xly = xly
-  app.provide('__XLY__', xly)
+  // 同时挂载两处，确保 script setup 和模板都能访问 easy
+  app.config.globalProperties.easy = easy
+  app.provide('__EASY__', easy)
 
   // mixin 注入到每个组件的渲染上下文
   app.mixin({
     computed: {
-      xly() {
-        return xly
+      easy() {
+        return easy
       },
     },
   })

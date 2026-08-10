@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import * as EpIcons from '@element-plus/icons-vue'
-import { EasyIcon, getSvgIconNames, xly } from 'easy-ui'
+import { easy, EasyIcon, getSvgIconNames } from 'easy-ui'
 import { computed } from 'vue'
 
 /** 常用基础 Element Plus 图标 */
@@ -40,7 +40,7 @@ const allEpIcons = Object.keys(EpIcons)
 
 /** 图标点击事件 */
 function handleIconClick(name: string) {
-  xly.$msg.info(`点击了图标: ${name}`)
+  easy.$msg.info(`点击了图标: ${name}`)
 }
 
 /** 复制图标使用代码 */
@@ -49,10 +49,10 @@ function copyIconName(name: string) {
   navigator.clipboard
     .writeText(code)
     .then(() => {
-      xly.$msg.success(`已复制: ${code}`)
+      easy.$msg.success(`已复制: ${code}`)
     })
     .catch(() => {
-      xly.$msg.warning('复制失败，请手动复制')
+      easy.$msg.warning('复制失败，请手动复制')
     })
 }
 </script>

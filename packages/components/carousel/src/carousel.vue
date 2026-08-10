@@ -83,7 +83,7 @@ const slideDirection = ref<'forward' | 'backward'>('forward')
 // ===== 计算属性 =====
 
 const transitionName = computed(() => {
-  const prefix = props.direction === 'vertical' ? 'xly-slide-v' : 'xly-slide'
+  const prefix = props.direction === 'vertical' ? 'easy-slide-v' : 'easy-slide'
   return slideDirection.value === 'forward' ? `${prefix}-forward` : `${prefix}-backward`
 })
 
@@ -259,34 +259,34 @@ defineExpose({
 
 <template>
   <div
-    class="xly-carousel"
+    class="easy-carousel"
     :class="{
-      'xly-carousel--vertical': direction === 'vertical',
-      'xly-carousel--3d': mode === '3d',
+      'easy-carousel--vertical': direction === 'vertical',
+      'easy-carousel--3d': mode === '3d',
     }"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
   >
     <!-- 轮播容器 -->
-    <div ref="containerRef" class="xly-carousel__container" :style="containerStyle">
+    <div ref="containerRef" class="easy-carousel__container" :style="containerStyle">
       <!-- ===== 普通模式 ===== -->
-      <TransitionGroup v-if="mode === 'slide'" :name="transitionName" tag="div" class="xly-carousel__track">
+      <TransitionGroup v-if="mode === 'slide'" :name="transitionName" tag="div" class="easy-carousel__track">
         <div
           v-for="(item, index) in items"
           v-show="index === currentIndex"
           :key="itemKey ? item[itemKey] : index"
-          class="xly-carousel__item"
+          class="easy-carousel__item"
           :class="{ 'is-active': index === currentIndex }"
         >
           <slot name="item" :item="item" :index="index">
-            <img v-if="typeof item === 'string'" :src="item" :alt="`carousel-${index}`" class="xly-carousel__img">
+            <img v-if="typeof item === 'string'" :src="item" :alt="`carousel-${index}`" class="easy-carousel__img">
             <img
               v-else-if="(item as Record<string, unknown>).src"
               :src="(item as Record<string, unknown>).src as string"
               :alt="`carousel-${index}`"
-              class="xly-carousel__img"
+              class="easy-carousel__img"
             >
-            <div v-else class="xly-carousel__custom-item">
+            <div v-else class="easy-carousel__custom-item">
               {{ item }}
             </div>
           </slot>
@@ -294,12 +294,12 @@ defineExpose({
       </TransitionGroup>
 
       <!-- ===== 3D 模式 ===== -->
-      <div v-else-if="mode === '3d'" class="xly-carousel__perspective">
-        <div class="xly-carousel__3d-track" :style="track3dStyle">
+      <div v-else-if="mode === '3d'" class="easy-carousel__perspective">
+        <div class="easy-carousel__3d-track" :style="track3dStyle">
           <div
             v-for="(item, index) in items"
             :key="itemKey ? item[itemKey] : index"
-            class="xly-carousel__3d-item"
+            class="easy-carousel__3d-item"
             :class="{
               'is-active': index === currentIndex,
               'is-prev': index === prevIndex,
@@ -307,14 +307,14 @@ defineExpose({
             :style="getItem3dStyle(index)"
           >
             <slot name="item" :item="item" :index="index">
-              <img v-if="typeof item === 'string'" :src="item" :alt="`carousel-${index}`" class="xly-carousel__img">
+              <img v-if="typeof item === 'string'" :src="item" :alt="`carousel-${index}`" class="easy-carousel__img">
               <img
                 v-else-if="(item as Record<string, unknown>).src"
                 :src="(item as Record<string, unknown>).src as string"
                 :alt="`carousel-${index}`"
-                class="xly-carousel__img"
+                class="easy-carousel__img"
               >
-              <div v-else class="xly-carousel__custom-item">
+              <div v-else class="easy-carousel__custom-item">
                 {{ item }}
               </div>
             </slot>
@@ -324,17 +324,17 @@ defineExpose({
     </div>
 
     <!-- 标题 -->
-    <div v-if="showTitle && currentTitle" class="xly-carousel__title">
+    <div v-if="showTitle && currentTitle" class="easy-carousel__title">
       <slot name="title" :item="items[currentIndex]" :index="currentIndex">
-        <span class="xly-carousel__title-text">{{ currentTitle }}</span>
-        <span v-if="showCounter" class="xly-carousel__counter"> {{ currentIndex + 1 }} / {{ items.length }} </span>
+        <span class="easy-carousel__title-text">{{ currentTitle }}</span>
+        <span v-if="showCounter" class="easy-carousel__counter"> {{ currentIndex + 1 }} / {{ items.length }} </span>
       </slot>
     </div>
 
     <!-- 左右箭头 -->
     <template v-if="showArrows && arrow !== 'never'">
       <button
-        class="xly-carousel__arrow xly-carousel__arrow--left"
+        class="easy-carousel__arrow easy-carousel__arrow--left"
         :class="{ 'is-hidden': arrow === 'hover' && !isHovering }"
         @click="prev"
       >
@@ -349,7 +349,7 @@ defineExpose({
         </svg>
       </button>
       <button
-        class="xly-carousel__arrow xly-carousel__arrow--right"
+        class="easy-carousel__arrow easy-carousel__arrow--right"
         :class="{ 'is-hidden': arrow === 'hover' && !isHovering }"
         @click="next"
       >
@@ -368,13 +368,13 @@ defineExpose({
     <!-- 指示器 -->
     <div
       v-if="showDots"
-      class="xly-carousel__dots"
-      :class="[`xly-carousel__dots--${dotPosition}`, { 'xly-carousel__dots--number': dotType === 'number' }]"
+      class="easy-carousel__dots"
+      :class="[`easy-carousel__dots--${dotPosition}`, { 'easy-carousel__dots--number': dotType === 'number' }]"
     >
       <template v-if="dotType === 'number'">
         <!-- 数字指示器 -->
-        <div class="xly-carousel__number">
-          <button class="xly-carousel__number-btn" @click="prev">
+        <div class="easy-carousel__number">
+          <button class="easy-carousel__number-btn" @click="prev">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M15 18L9 12L15 6"
@@ -385,10 +385,10 @@ defineExpose({
               />
             </svg>
           </button>
-          <span class="xly-carousel__number-current">{{ String(currentIndex + 1) }}</span>
-          <span class="xly-carousel__number-sep">/</span>
-          <span class="xly-carousel__number-total">{{ String(items.length) }}</span>
-          <button class="xly-carousel__number-btn" @click="next">
+          <span class="easy-carousel__number-current">{{ String(currentIndex + 1) }}</span>
+          <span class="easy-carousel__number-sep">/</span>
+          <span class="easy-carousel__number-total">{{ String(items.length) }}</span>
+          <button class="easy-carousel__number-btn" @click="next">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M9 6L15 12L9 18"
@@ -406,14 +406,14 @@ defineExpose({
         <button
           v-for="(_, index) in items"
           :key="index"
-          class="xly-carousel__dot"
+          class="easy-carousel__dot"
           :class="{
             'is-active': index === currentIndex,
-            [`xly-carousel__dot--${dotType}`]: true,
+            [`easy-carousel__dot--${dotType}`]: true,
           }"
           @click="goTo(index)"
         >
-          <span v-if="dotType === 'line'" class="xly-carousel__dot-inner" />
+          <span v-if="dotType === 'line'" class="easy-carousel__dot-inner" />
         </button>
       </template>
     </div>
@@ -427,7 +427,7 @@ defineExpose({
 
 $transition: all 0.3s ease;
 
-.xly-carousel {
+.easy-carousel {
   position: relative;
   width: 100%;
   overflow: hidden;
@@ -439,26 +439,26 @@ $transition: all 0.3s ease;
   }
 }
 
-.xly-carousel--vertical {
-  .xly-carousel__container {
+.easy-carousel--vertical {
+  .easy-carousel__container {
     height: 300px;
   }
 }
 
 /* ========== 容器 ========== */
-.xly-carousel__container {
+.easy-carousel__container {
   position: relative;
   width: 100%;
   height: 200px;
 }
 
-.xly-carousel__track {
+.easy-carousel__track {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-.xly-carousel__item {
+.easy-carousel__item {
   position: absolute;
   top: 0;
   left: 0;
@@ -469,14 +469,14 @@ $transition: all 0.3s ease;
   justify-content: center;
 }
 
-.xly-carousel__img {
+.easy-carousel__img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.xly-carousel__custom-item {
+.easy-carousel__custom-item {
   width: 100%;
   height: 100%;
   display: flex;
@@ -488,7 +488,7 @@ $transition: all 0.3s ease;
 }
 
 /* ========== 标题 ========== */
-.xly-carousel__title {
+.easy-carousel__title {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -503,7 +503,7 @@ $transition: all 0.3s ease;
   pointer-events: none;
 }
 
-.xly-carousel__title-text {
+.easy-carousel__title-text {
   font-size: 16px;
   font-weight: 600;
   color: var(--el-color-white);
@@ -511,7 +511,7 @@ $transition: all 0.3s ease;
   line-height: 1.4;
 }
 
-.xly-carousel__counter {
+.easy-carousel__counter {
   flex-shrink: 0;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.8);
@@ -523,14 +523,14 @@ $transition: all 0.3s ease;
 }
 
 /* ========== 3D 模式 ========== */
-.xly-carousel--3d {
-  .xly-carousel__container {
+.easy-carousel--3d {
+  .easy-carousel__container {
     height: 260px;
     perspective: 1200px;
   }
 }
 
-.xly-carousel__perspective {
+.easy-carousel__perspective {
   width: 100%;
   height: 100%;
   display: flex;
@@ -539,14 +539,14 @@ $transition: all 0.3s ease;
   perspective: 1200px;
 }
 
-.xly-carousel__3d-track {
+.easy-carousel__3d-track {
   position: relative;
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
 }
 
-.xly-carousel__3d-item {
+.easy-carousel__3d-item {
   position: absolute;
   top: 0;
   left: 0;
@@ -580,7 +580,7 @@ $transition: all 0.3s ease;
 }
 
 /* ========== 箭头 ========== */
-.xly-carousel__arrow {
+.easy-carousel__arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -614,25 +614,25 @@ $transition: all 0.3s ease;
   }
 }
 
-.xly-carousel__arrow--left {
+.easy-carousel__arrow--left {
   left: 12px;
 }
-.xly-carousel__arrow--right {
+.easy-carousel__arrow--right {
   right: 12px;
 }
 
 /* 垂直模式箭头位置调整 */
-.xly-carousel--vertical {
-  .xly-carousel__arrow {
+.easy-carousel--vertical {
+  .easy-carousel__arrow {
     top: auto;
     left: 50%;
     transform: translateX(-50%);
 
-    &.xly-carousel__arrow--left {
+    &.easy-carousel__arrow--left {
       top: 12px;
       transform: translateX(-50%);
     }
-    &.xly-carousel__arrow--right {
+    &.easy-carousel__arrow--right {
       bottom: 12px;
       top: auto;
       transform: translateX(-50%);
@@ -641,27 +641,27 @@ $transition: all 0.3s ease;
 }
 
 /* ========== 指示器 ========== */
-.xly-carousel__dots {
+.easy-carousel__dots {
   position: absolute;
   z-index: 10;
   display: flex;
   gap: 8px;
 }
 
-.xly-carousel__dots--bottom {
+.easy-carousel__dots--bottom {
   bottom: 12px;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.xly-carousel__dots--left {
+.easy-carousel__dots--left {
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
   flex-direction: column;
 }
 
-.xly-carousel__dots--right {
+.easy-carousel__dots--right {
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
@@ -669,11 +669,11 @@ $transition: all 0.3s ease;
 }
 
 // 有标题时指示器上移
-.xly-carousel__title ~ .xly-carousel__dots--bottom {
+.easy-carousel__title ~ .easy-carousel__dots--bottom {
   bottom: 52px;
 }
 
-.xly-carousel__dot {
+.easy-carousel__dot {
   border: none;
   cursor: pointer;
   background: transparent;
@@ -684,7 +684,7 @@ $transition: all 0.3s ease;
   transition: $transition;
 }
 
-.xly-carousel__dot--dot {
+.easy-carousel__dot--dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -702,14 +702,14 @@ $transition: all 0.3s ease;
   }
 }
 
-.xly-carousel__dot--line {
+.easy-carousel__dot--line {
   width: 24px;
   height: 4px;
   border-radius: 2px;
   background: $white-dim;
   overflow: hidden;
 
-  .xly-carousel__dot-inner {
+  .easy-carousel__dot-inner {
     display: block;
     width: 100%;
     height: 100%;
@@ -721,7 +721,7 @@ $transition: all 0.3s ease;
 
   &.is-active {
     background: rgba(255, 255, 255, 0.3);
-    .xly-carousel__dot-inner {
+    .easy-carousel__dot-inner {
       background: $white;
       transform: scaleX(1);
     }
@@ -729,7 +729,7 @@ $transition: all 0.3s ease;
 }
 
 /* ========== 数字指示器 ========== */
-.xly-carousel__dots--number {
+.easy-carousel__dots--number {
   gap: 0;
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(8px);
@@ -741,7 +741,7 @@ $transition: all 0.3s ease;
   }
 }
 
-.xly-carousel__number {
+.easy-carousel__number {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -750,7 +750,7 @@ $transition: all 0.3s ease;
   user-select: none;
 }
 
-.xly-carousel__number-btn {
+.easy-carousel__number-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -773,18 +773,18 @@ $transition: all 0.3s ease;
   }
 }
 
-.xly-carousel__number-current {
+.easy-carousel__number-current {
   font-size: 16px;
   min-width: 24px;
   text-align: center;
 }
 
-.xly-carousel__number-sep {
+.easy-carousel__number-sep {
   opacity: 0.5;
   font-weight: 400;
 }
 
-.xly-carousel__number-total {
+.easy-carousel__number-total {
   font-size: 13px;
   opacity: 0.6;
   min-width: 24px;
@@ -792,49 +792,49 @@ $transition: all 0.3s ease;
 }
 
 /* ========== 过渡动画 - 水平 ========== */
-.xly-slide-forward-enter-active,
-.xly-slide-forward-leave-active,
-.xly-slide-backward-enter-active,
-.xly-slide-backward-leave-active {
+.easy-slide-forward-enter-active,
+.easy-slide-forward-leave-active,
+.easy-slide-backward-enter-active,
+.easy-slide-backward-leave-active {
   transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.xly-slide-forward-enter-from {
+.easy-slide-forward-enter-from {
   transform: translateX(100%);
   opacity: 0.5;
 }
-.xly-slide-forward-leave-to {
+.easy-slide-forward-leave-to {
   transform: translateX(-100%);
   opacity: 0.5;
 }
-.xly-slide-backward-enter-from {
+.easy-slide-backward-enter-from {
   transform: translateX(-100%);
   opacity: 0.5;
 }
-.xly-slide-backward-leave-to {
+.easy-slide-backward-leave-to {
   transform: translateX(100%);
   opacity: 0.5;
 }
 
 /* ========== 过渡动画 - 垂直 ========== */
-.xly-slide-v-forward-enter-active,
-.xly-slide-v-forward-leave-active,
-.xly-slide-v-backward-enter-active,
-.xly-slide-v-backward-leave-active {
+.easy-slide-v-forward-enter-active,
+.easy-slide-v-forward-leave-active,
+.easy-slide-v-backward-enter-active,
+.easy-slide-v-backward-leave-active {
   transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
-.xly-slide-v-forward-enter-from {
+.easy-slide-v-forward-enter-from {
   transform: translateY(100%);
   opacity: 0.5;
 }
-.xly-slide-v-forward-leave-to {
+.easy-slide-v-forward-leave-to {
   transform: translateY(-100%);
   opacity: 0.5;
 }
-.xly-slide-v-backward-enter-from {
+.easy-slide-v-backward-enter-from {
   transform: translateY(-100%);
   opacity: 0.5;
 }
-.xly-slide-v-backward-leave-to {
+.easy-slide-v-backward-leave-to {
   transform: translateY(100%);
   opacity: 0.5;
 }

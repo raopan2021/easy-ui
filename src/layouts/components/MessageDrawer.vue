@@ -399,10 +399,10 @@ function handleClear() {
 
 <style scoped lang="scss">
 // ========== 覆盖 drawer body padding ==========
-:deep(.xly-drawer__body) {
+:deep(.easy-drawer__body) {
   padding: 0 24px 16px;
 }
-:deep(.xly-drawer__footer) {
+:deep(.easy-drawer__footer) {
   padding: 12px 24px 20px;
 }
 

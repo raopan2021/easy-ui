@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import XlyForm, { EasyFormItem as XlyFormItem } from '../../../../form'
-import XlyInput from '../../../../input'
-import XlyRadio, { EasyRadioGroup as XlyRadioGroup } from '../../../../radio'
-import XlySelect from '../../../../select'
+import EasyForm, { EasyFormItem } from '../../../../form'
+import EasyInput from '../../../../input'
+import EasyRadio, { EasyRadioGroup } from '../../../../radio'
+import EasySelect from '../../../../select'
 
 const props = defineProps({
   modelValue: {
@@ -40,7 +40,7 @@ defineExpose({ validate })
 </script>
 
 <template>
-  <XlyForm
+  <EasyForm
     ref="nodeExtRef"
     class="nodeExtForm"
     :model="form"
@@ -48,7 +48,7 @@ defineExpose({ validate })
     :disabled="disabled"
     label-position="left"
   >
-    <XlyFormItem
+    <EasyFormItem
       v-for="(item, index) in formList"
       :key="index"
       :label="`${item.label}：`"
@@ -56,11 +56,11 @@ defineExpose({ validate })
       :rules="[{ required: item.must, message: `${item.label}不能为空`, trigger: ['blur', 'change'] }]"
     >
       <!-- 单行文本 -->
-      <XlyInput v-if="item.type === 1" v-model="form[item.code]" placeholder="请输入" />
+      <EasyInput v-if="item.type === 1" v-model="form[item.code]" placeholder="请输入" />
       <!-- 多行文本 -->
-      <XlyInput v-else-if="item.type === 2" v-model="form[item.code]" :rows="2" type="textarea" placeholder="请输入" />
+      <EasyInput v-else-if="item.type === 2" v-model="form[item.code]" :rows="2" type="textarea" placeholder="请输入" />
       <!-- 下拉选择 -->
-      <XlySelect
+      <EasySelect
         v-else-if="item.type === 3"
         v-model="form[item.code]"
         clearable
@@ -69,15 +69,15 @@ defineExpose({ validate })
       />
       <!-- Radio / Checkbox -->
       <div v-else-if="item.type === 4">
-        <XlyRadioGroup v-if="!item.multiple" v-model="form[item.code]">
+        <EasyRadioGroup v-if="!item.multiple" v-model="form[item.code]">
           <el-row :gutter="20">
             <el-col v-for="(dItem, dIndex) in item.dict" :key="dIndex" :span="item.dict.length < 3 ? undefined : 8">
-              <XlyRadio :label="String(dItem.value)">
+              <EasyRadio :label="String(dItem.value)">
                 {{ dItem.label }}
-              </XlyRadio>
+              </EasyRadio>
             </el-col>
           </el-row>
-        </XlyRadioGroup>
+        </EasyRadioGroup>
         <el-checkbox-group v-else v-model="form[item.code]">
           <el-row :gutter="20">
             <el-col v-for="(dItem, dIndex) in item.dict" :key="dIndex" :span="item.dict.length < 3 ? undefined : 8">
@@ -88,8 +88,8 @@ defineExpose({ validate })
           </el-row>
         </el-checkbox-group>
       </div>
-    </XlyFormItem>
-  </XlyForm>
+    </EasyFormItem>
+  </EasyForm>
 </template>
 
 <style scoped lang="scss"></style>

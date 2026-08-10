@@ -118,3 +118,74 @@ function handleClick(index: number, e: MouseEvent) {
     </span>
   </div>
 </template>
+
+<style scoped lang="scss">
+$transition: all 0.15s ease;
+
+.easy-rate {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  &.easy-rate--large .easy-rate__icon {
+    width: 28px;
+    height: 28px;
+  }
+  &.easy-rate--default .easy-rate__icon {
+    width: 22px;
+    height: 22px;
+  }
+  &.easy-rate--small .easy-rate__icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  &.is-disabled {
+    cursor: not-allowed;
+    .easy-rate__item {
+      cursor: not-allowed;
+    }
+  }
+}
+
+.easy-rate__item {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+  transition: transform $transition;
+
+  &:hover {
+    transform: scale(1.15);
+  }
+}
+
+/* 空星背景 */
+.easy-rate__icon {
+  fill: v-bind(voidColor);
+  transition: fill $transition;
+  display: block;
+}
+
+/* 半星：只显示左半边 */
+.easy-rate__icon-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  clip-path: inset(0 50% 0 0);
+  fill: v-bind(color);
+}
+
+/* 满星：完全覆盖 */
+.easy-rate__icon-full {
+  position: absolute;
+  top: 0;
+  left: 0;
+  fill: v-bind(color);
+}
+
+.easy-rate__text {
+  margin-left: 6px;
+  font-size: 14px;
+  color: var(--el-text-color-regular);
+}
+</style>

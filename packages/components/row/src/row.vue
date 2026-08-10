@@ -33,7 +33,7 @@ const gutterValue = computed(() => {
 provide(ROW_GUTTER_KEY, gutterValue)
 
 const rowClasses = computed(() => [
-  `xly-row--${props.tag === 'div' ? 'default' : props.tag}`,
+  `easy-row--${props.tag === 'div' ? 'default' : props.tag}`,
   {
     'is-justify-start': props.justify === 'start',
     'is-justify-end': props.justify === 'end',
@@ -61,13 +61,13 @@ const rowStyle = computed(() => {
 </script>
 
 <template>
-  <div class="xly-row" :class="rowClasses" :style="rowStyle">
+  <div class="easy-row" :class="rowClasses" :style="rowStyle">
     <slot />
   </div>
 </template>
 
 <style scoped lang="scss">
-.xly-row {
+.easy-row {
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;

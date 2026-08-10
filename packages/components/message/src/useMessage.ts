@@ -1,12 +1,12 @@
 import type { Ref } from 'vue'
-import type XlyMessage from './index'
+import type EasyMessage from './index'
 import type { MessageOptions } from './message'
 import { ref } from 'vue'
 
 export type { MessageOptions }
 
 export function useMessage() {
-  const messageRef = ref<InstanceType<typeof XlyMessage> | null>(null)
+  const messageRef = ref<InstanceType<typeof EasyMessage> | null>(null)
 
   function success(message: string, opts?: Omit<MessageOptions, 'message' | 'type'>) {
     messageRef.value?.success(message, opts)
@@ -33,7 +33,7 @@ export function useMessage() {
   }
 
   return {
-    messageRef: messageRef as Ref<InstanceType<typeof XlyMessage> | null>,
+    messageRef: messageRef as Ref<InstanceType<typeof EasyMessage> | null>,
     success,
     warning,
     danger,

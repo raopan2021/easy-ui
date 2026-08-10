@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, ref, watch } from 'vue'
-import XlyIcon from '../../icon'
+import EasyIcon from '../../icon'
 
 export interface ChatAttachment {
   name: string
@@ -227,27 +227,27 @@ defineExpose({
 </script>
 
 <template>
-  <div class="xly-chat-input">
+  <div class="easy-chat-input">
     <!-- 附件预览 -->
-    <div v-if="attachments.length > 0" class="xly-chat-input__attachments">
-      <div v-for="(attachment, index) in attachments" :key="index" class="xly-chat-input__attachment">
+    <div v-if="attachments.length > 0" class="easy-chat-input__attachments">
+      <div v-for="(attachment, index) in attachments" :key="index" class="easy-chat-input__attachment">
         <img v-if="isImage(attachment)" :src="attachment.url" :alt="attachment.name">
-        <div v-else class="xly-chat-input__attachment-file">
-          <XlyIcon name="el:Document" />
+        <div v-else class="easy-chat-input__attachment-file">
+          <EasyIcon name="el:Document" />
           <span>{{ attachment.name }}</span>
         </div>
-        <button class="xly-chat-input__attachment-close" @click="removeAttachment(index)">
-          <XlyIcon name="el:Close" :size="12" />
+        <button class="easy-chat-input__attachment-close" @click="removeAttachment(index)">
+          <EasyIcon name="el:Close" :size="12" />
         </button>
       </div>
     </div>
 
     <!-- 输入框区域 -->
-    <div class="xly-chat-input__wrapper">
-      <div class="xly-chat-input__toolbar">
+    <div class="easy-chat-input__wrapper">
+      <div class="easy-chat-input__toolbar">
         <!-- 上传附件按钮 -->
-        <button v-if="allowUpload" class="xly-chat-input__toolbar-btn" title="上传附件" @click="handleFileSelect">
-          <XlyIcon name="el:Paperclip" />
+        <button v-if="allowUpload" class="easy-chat-input__toolbar-btn" title="上传附件" @click="handleFileSelect">
+          <EasyIcon name="el:Paperclip" />
         </button>
         <input
           ref="fileInputRef"
@@ -265,7 +265,7 @@ defineExpose({
       <textarea
         ref="textareaRef"
         v-model="inputValue"
-        class="xly-chat-input__textarea"
+        class="easy-chat-input__textarea"
         :placeholder="placeholder"
         :disabled="disabled"
         :readonly="readonly"
@@ -279,42 +279,42 @@ defineExpose({
 
       <!-- 发送按钮 -->
       <button
-        class="xly-chat-input__send-btn"
+        class="easy-chat-input__send-btn"
         :class="{ 'is-disabled': !canSend }"
         :disabled="disabled || readonly || !canSend"
         @click="handleSend"
       >
-        <XlyIcon name="el:Promotion" />
+        <EasyIcon name="el:Promotion" />
       </button>
     </div>
 
     <!-- 提示信息 -->
-    <div v-if="showCharCount && maxlength" class="xly-chat-input__footer">
+    <div v-if="showCharCount && maxlength" class="easy-chat-input__footer">
       <span>{{ inputValue.length }} / {{ maxlength }}</span>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-$xly-radius: 12px;
+$easy-radius: 12px;
 
-.xly-chat-input {
+.easy-chat-input {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.xly-chat-input__attachments {
+.easy-chat-input__attachments {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   padding: 12px;
   background: var(--el-fill-color-light);
-  border-radius: $xly-radius;
+  border-radius: $easy-radius;
   border: 1px solid var(--el-border-color);
 }
 
-.xly-chat-input__attachment {
+.easy-chat-input__attachment {
   position: relative;
   width: 80px;
   height: 80px;
@@ -330,7 +330,7 @@ $xly-radius: 12px;
   }
 }
 
-.xly-chat-input__attachment-file {
+.easy-chat-input__attachment-file {
   width: 100%;
   height: 100%;
   display: flex;
@@ -358,7 +358,7 @@ $xly-radius: 12px;
   }
 }
 
-.xly-chat-input__attachment-close {
+.easy-chat-input__attachment-close {
   position: absolute;
   top: 4px;
   right: 4px;
@@ -380,14 +380,14 @@ $xly-radius: 12px;
   }
 }
 
-.xly-chat-input__wrapper {
+.easy-chat-input__wrapper {
   display: flex;
   align-items: flex-end;
   gap: 8px;
   padding: 12px;
   background: var(--el-bg-color);
   border: 1px solid var(--el-border-color);
-  border-radius: $xly-radius;
+  border-radius: $easy-radius;
   transition:
     border-color 0.2s,
     box-shadow 0.2s;
@@ -398,13 +398,13 @@ $xly-radius: 12px;
   }
 }
 
-.xly-chat-input__toolbar {
+.easy-chat-input__toolbar {
   display: flex;
   gap: 4px;
   padding-bottom: 8px;
 }
 
-.xly-chat-input__toolbar-btn {
+.easy-chat-input__toolbar-btn {
   width: 32px;
   height: 32px;
   border-radius: 6px;
@@ -424,7 +424,7 @@ $xly-radius: 12px;
   }
 }
 
-.xly-chat-input__textarea {
+.easy-chat-input__textarea {
   flex: 1;
   border: none;
   outline: none;
@@ -448,7 +448,7 @@ $xly-radius: 12px;
   }
 }
 
-.xly-chat-input__send-btn {
+.easy-chat-input__send-btn {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -480,7 +480,7 @@ $xly-radius: 12px;
   }
 }
 
-.xly-chat-input__footer {
+.easy-chat-input__footer {
   display: flex;
   justify-content: flex-end;
   font-size: 12px;

@@ -60,7 +60,7 @@ function collapseAllRows() {
 }
 
 // 展开行示例代码
-const expandExampleCode = `<span class="code-tag">&lt;xly-table</span>
+const expandExampleCode = `<span class="code-tag">&lt;easy-table</span>
   <span class="code-attr">ref</span>=<span class="code-string">"tableRef"</span>
   <span class="code-attr">:columns</span>=<span class="code-string">"columns"</span>
   <span class="code-attr">:data</span>=<span class="code-string">"data"</span>
@@ -79,7 +79,7 @@ const expandExampleCode = `<span class="code-tag">&lt;xly-table</span>
       }
     <span class="code-tag">&lt;/div&gt;</span>
   <span class="code-tag">&lt;/template&gt;</span>
-<span class="code-tag">&lt;/xly-table&gt;</span>
+<span class="code-tag">&lt;/easy-table&gt;</span>
 
 <span class="code-comment">// 数据结构（树形父子）</span>
 <span class="code-keyword">const</span> data = [

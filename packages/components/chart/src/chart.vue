@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, getCurrentInstance, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, getCurrentInstance, nextTick, onActivated, onMounted, onUnmounted, ref, watch } from 'vue'
 
 // ========== 类型定义 ==========
 export interface ChartSerie {
@@ -136,7 +136,7 @@ const emit = defineEmits<{
 
 // ========== 唯一实例 id（解决多图表 clipPath id 冲突）==========
 const uid = getCurrentInstance()?.uid ?? Math.random().toString(36).slice(2)
-const clipPathId = `xly-plot-clip-${uid}`
+const clipPathId = `easy-plot-clip-${uid}`
 
 // ========== 响应式状态 ==========
 const rootRef = ref<HTMLElement | null>(null)
@@ -1316,7 +1316,7 @@ function onHBarClick(item: HBarItem) {
 function onDragStart(e: MouseEvent) {
   if (!scrollable.value)
     return
-  if ((e.target as Element).classList.contains('xly-chart__scrollbar-thumb'))
+  if ((e.target as Element).classList.contains('easy-chart__scrollbar-thumb'))
     return
   isDragging.value = true
   dragStartX.value = e.clientX
@@ -1447,7 +1447,7 @@ function onClickOutsideDownload(e: MouseEvent) {
 }
 
 function getSvgElement(): SVGSVGElement | null {
-  return bodyRef.value?.querySelector('svg.xly-chart__svg') ?? null
+  return bodyRef.value?.querySelector('svg.easy-chart__svg') ?? null
 }
 
 function getDownloadFileName(ext: string): string {
@@ -1496,10 +1496,10 @@ function downloadAs(format: 'png' | 'svg') {
   const inlineStyle = document.createElementNS('http://www.w3.org/2000/svg', 'style')
   inlineStyle.textContent = `
     text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
-    .xly-chart__grid-line { stroke: #f1f1f4; stroke-width: 1; }
-    .xly-chart__axis-line { stroke: #e4e4e7; stroke-width: 1; }
-    .xly-chart__axis-text { font-size: 11px; fill: #a1a1aa; }
-    .xly-chart__tooltip-line { display: none; }
+    .easy-chart__grid-line { stroke: #f1f1f4; stroke-width: 1; }
+    .easy-chart__axis-line { stroke: #e4e4e7; stroke-width: 1; }
+    .easy-chart__axis-text { font-size: 11px; fill: #a1a1aa; }
+    .easy-chart__tooltip-line { display: none; }
   `
   svgClone.insertBefore(inlineStyle, svgClone.firstChild)
   const svgStr = serializer.serializeToString(svgClone)
@@ -1705,6 +1705,8 @@ function triggerDownload(url: string, filename: string) {
 
 onMounted(() => {
   nextTick(updateSize)
+  // 初次挂载时布局可能尚未完全稳定（懒加载路由/异步 chunk），双 rAF 后再测一次确保宽度正确
+  requestAnimationFrame(() => requestAnimationFrame(updateSize))
   resizeObserver.value = new ResizeObserver(updateSize)
   if (bodyRef.value)
     resizeObserver.value.observe(bodyRef.value)
@@ -1713,6 +1715,11 @@ onMounted(() => {
   document.addEventListener('mouseup', stopDrag)
   document.addEventListener('mousemove', onScrollbarDragMove)
   document.addEventListener('mouseup', stopScrollbarDrag)
+})
+
+// KeepAlive 缓存下切回页面时立即重测（元素从 display:none 恢复显示后尺寸才稳定）
+onActivated(() => {
+  nextTick(updateSize)
 })
 
 onUnmounted(() => {
@@ -1752,23 +1759,23 @@ watch(
 <template>
   <div
     ref="rootRef"
-    class="xly-chart"
+    class="easy-chart"
     :class="{ [`legend-${legendPosition}`]: legendPosition === 'left' || legendPosition === 'right' }"
     :style="{ width: computedWidth, height: computedHeight }"
   >
     <!-- 标题 + 下载按钮 -->
-    <div class="xly-chart__header" :class="{ 'has-content': title || subtitle }">
-      <div class="xly-chart__header-left">
-        <div v-if="title" class="xly-chart__title">
+    <div class="easy-chart__header" :class="{ 'has-content': title || subtitle }">
+      <div class="easy-chart__header-left">
+        <div v-if="title" class="easy-chart__title">
           {{ title }}
         </div>
-        <div v-if="subtitle" class="xly-chart__subtitle">
+        <div v-if="subtitle" class="easy-chart__subtitle">
           {{ subtitle }}
         </div>
       </div>
       <!-- 下载按钮 -->
-      <div v-if="showDownload" ref="downloadRef" class="xly-chart__download">
-        <button class="xly-chart__download-btn" title="下载图表" @click.stop="toggleDownloadMenu">
+      <div v-if="showDownload" ref="downloadRef" class="easy-chart__download">
+        <button class="easy-chart__download-btn" title="下载图表" @click.stop="toggleDownloadMenu">
           <svg
             width="15"
             height="15"
@@ -1785,8 +1792,8 @@ watch(
           </svg>
         </button>
         <!-- 下载菜单 -->
-        <div v-if="downloadMenuVisible" class="xly-chart__download-menu">
-          <div class="xly-chart__download-item" @click="downloadAs('png')">
+        <div v-if="downloadMenuVisible" class="easy-chart__download-menu">
+          <div class="easy-chart__download-item" @click="downloadAs('png')">
             <svg
               width="13"
               height="13"
@@ -1803,7 +1810,7 @@ watch(
             </svg>
             下载 PNG
           </div>
-          <div class="xly-chart__download-item" @click="downloadAs('svg')">
+          <div class="easy-chart__download-item" @click="downloadAs('svg')">
             <svg
               width="13"
               height="13"
@@ -1826,31 +1833,31 @@ watch(
     <!-- 图例 -->
     <div
       v-if="showLegend && legendItems.length > 0"
-      class="xly-chart__legend"
-      :class="`xly-chart__legend--${legendPosition}`"
+      class="easy-chart__legend"
+      :class="`easy-chart__legend--${legendPosition}`"
     >
       <div
         v-for="item in legendItems"
         :key="item.name"
-        class="xly-chart__legend-item"
+        class="easy-chart__legend-item"
         :class="{ 'is-hidden': hiddenSeries.has(item.name) }"
         @click="toggleSeries(item.name)"
       >
         <span
-          class="xly-chart__legend-dot"
+          class="easy-chart__legend-dot"
           :style="{
             background: item.color,
             borderRadius: type === 'line' || item.isLine ? '50%' : '2px',
           }"
         />
-        <span class="xly-chart__legend-label">{{ item.name }}</span>
+        <span class="easy-chart__legend-label">{{ item.name }}</span>
       </div>
     </div>
 
     <!-- SVG 绘图区 -->
     <div
       ref="bodyRef"
-      class="xly-chart__body"
+      class="easy-chart__body"
       :class="{ 'is-scrollable': scrollable, 'is-dragging': isDragging }"
       @wheel.prevent="onWheel"
     >
@@ -1858,7 +1865,7 @@ watch(
         v-if="svgWidth > 0"
         :width="svgWidth"
         :height="svgHeight"
-        class="xly-chart__svg"
+        class="easy-chart__svg"
         @mousemove="onMouseMove"
         @mouseleave="onMouseLeave"
         @mousedown="onDragStart"
@@ -1874,7 +1881,7 @@ watch(
         <template v-if="type === 'line' || type === 'bar' || type === 'stack' || type === 'mixed'">
           <!-- 背景网格 -->
           <!-- 网格线 -->
-          <g v-if="showGrid" class="xly-chart__grid">
+          <g v-if="showGrid" class="easy-chart__grid">
             <!-- mixed 模式：以左轴（柱状）刻度为网格基准 -->
             <template v-if="type === 'mixed'">
               <line
@@ -1884,7 +1891,7 @@ watch(
                 :y1="getMixedBarY(tick)"
                 :x2="svgWidth - padding.right"
                 :y2="getMixedBarY(tick)"
-                class="xly-chart__grid-line"
+                class="easy-chart__grid-line"
               />
             </template>
             <template v-else>
@@ -1895,19 +1902,19 @@ watch(
                 :y1="getY(tick)"
                 :x2="svgWidth - padding.right"
                 :y2="getY(tick)"
-                class="xly-chart__grid-line"
+                class="easy-chart__grid-line"
               />
             </template>
           </g>
 
           <!-- Y轴（左） -->
-          <g class="xly-chart__axis-y">
+          <g class="easy-chart__axis-y">
             <line
               :x1="padding.left"
               :y1="padding.top"
               :x2="padding.left"
               :y2="svgHeight - padding.bottom"
-              class="xly-chart__axis-line"
+              class="easy-chart__axis-line"
             />
             <!-- mixed 模式：左轴（柱状）刻度 -->
             <template v-if="type === 'mixed'">
@@ -1915,7 +1922,7 @@ watch(
                 <text
                   :x="padding.left - 8"
                   :y="getMixedBarY(tick)"
-                  class="xly-chart__axis-text"
+                  class="easy-chart__axis-text"
                   text-anchor="end"
                   dominant-baseline="middle"
                 >
@@ -1929,7 +1936,7 @@ watch(
                 <text
                   :x="padding.left - 8"
                   :y="getY(tick)"
-                  class="xly-chart__axis-text"
+                  class="easy-chart__axis-text"
                   text-anchor="end"
                   dominant-baseline="middle"
                 >
@@ -1940,19 +1947,19 @@ watch(
           </g>
 
           <!-- 右 Y 轴（折线系列，仅 mixed 模式） -->
-          <g v-if="type === 'mixed'" class="xly-chart__axis-y-right">
+          <g v-if="type === 'mixed'" class="easy-chart__axis-y-right">
             <line
               :x1="svgWidth - padding.right"
               :y1="padding.top"
               :x2="svgWidth - padding.right"
               :y2="svgHeight - padding.bottom"
-              class="xly-chart__axis-line"
+              class="easy-chart__axis-line"
             />
             <g v-for="(tick, i) in mixedLineYTicks" :key="`myrt-${i}`">
               <text
                 :x="svgWidth - padding.right + 8"
                 :y="getMixedLineY(tick)"
-                class="xly-chart__axis-text"
+                class="easy-chart__axis-text"
                 text-anchor="start"
                 dominant-baseline="middle"
               >
@@ -1962,13 +1969,13 @@ watch(
           </g>
 
           <!-- X轴 -->
-          <g class="xly-chart__axis-x">
+          <g class="easy-chart__axis-x">
             <line
               :x1="padding.left"
               :y1="svgHeight - padding.bottom"
               :x2="svgWidth - padding.right"
               :y2="svgHeight - padding.bottom"
-              class="xly-chart__axis-line"
+              class="easy-chart__axis-line"
             />
             <!-- X轴标签随 scroll 偏移，并裁剪 -->
             <g :clip-path="`url(#${clipPathId})`">
@@ -1976,7 +1983,7 @@ watch(
                 <text
                   :x="getXCenter(i)"
                   :y="svgHeight - padding.bottom + 18"
-                  class="xly-chart__axis-text"
+                  class="easy-chart__axis-text"
                   text-anchor="middle"
                 >
                   {{ label }}
@@ -2004,7 +2011,7 @@ watch(
                   fill="none"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  class="xly-chart__line"
+                  class="easy-chart__line"
                 />
                 <!-- 数据点 -->
                 <template v-for="(val, i) in serie.data" :key="`lp-${i}`">
@@ -2016,7 +2023,7 @@ watch(
                     :fill="activeIndex === i ? serie.color || defaultColors[si % defaultColors.length] : '#fff'"
                     :stroke="serie.color || defaultColors[si % defaultColors.length]"
                     stroke-width="2.5"
-                    class="xly-chart__point"
+                    class="easy-chart__point"
                     @click="onBarLineClick(i)"
                   />
                   <!-- 数据标签 -->
@@ -2027,7 +2034,7 @@ watch(
                       :y="getY(v) - 10"
                       text-anchor="middle"
                       dominant-baseline="auto"
-                      class="xly-chart__data-label"
+                      class="easy-chart__data-label"
                       :fill="serie.color || defaultColors[si % defaultColors.length]"
                     >
                       {{ formatValue(v) }}
@@ -2052,7 +2059,7 @@ watch(
                   :rx="barRadius"
                   :ry="barRadius"
                   :opacity="activeIndex !== -1 && activeIndex !== i ? 0.55 : 1"
-                  class="xly-chart__bar"
+                  class="easy-chart__bar"
                   @click="onBarLineClick(i)"
                 />
                 <!-- 数据标签 -->
@@ -2063,7 +2070,7 @@ watch(
                     :y="getY(val) - 5"
                     text-anchor="middle"
                     dominant-baseline="auto"
-                    class="xly-chart__data-label"
+                    class="easy-chart__data-label"
                     :fill="getSerieColor(serie, si, i)"
                   >
                     {{ formatValue(val) }}
@@ -2088,7 +2095,7 @@ watch(
                     :rx="si === visibleSeries.length - 1 ? barRadius : 0"
                     :ry="si === visibleSeries.length - 1 ? barRadius : 0"
                     :opacity="activeIndex !== -1 && activeIndex !== i ? 0.55 : 1"
-                    class="xly-chart__bar"
+                    class="easy-chart__bar"
                     @click="onBarLineClick(i)"
                   />
                   <!-- 数据标签：在每段中间显示各自的值，高度足够时才显示 -->
@@ -2098,7 +2105,7 @@ watch(
                     :y="seg.y + seg.h / 2"
                     text-anchor="middle"
                     dominant-baseline="middle"
-                    class="xly-chart__data-label"
+                    class="easy-chart__data-label"
                     fill="#fff"
                   >
                     {{ formatValue(seg.val) }}
@@ -2124,7 +2131,7 @@ watch(
                   :rx="barRadius"
                   :ry="barRadius"
                   :opacity="activeIndex !== -1 && activeIndex !== i ? 0.55 : 1"
-                  class="xly-chart__bar"
+                  class="easy-chart__bar"
                   @click="onBarLineClick(i)"
                 />
                 <!-- 数据标签 -->
@@ -2135,7 +2142,7 @@ watch(
                     :y="getMixedBarY(val) - 5"
                     text-anchor="middle"
                     dominant-baseline="auto"
-                    class="xly-chart__data-label"
+                    class="easy-chart__data-label"
                     :fill="getSerieColor(serie, serie._origIdx!, i)"
                   >
                     {{ formatValue(val) }}
@@ -2159,7 +2166,7 @@ watch(
                   fill="none"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  class="xly-chart__line"
+                  class="easy-chart__line"
                 />
                 <!-- 数据点 -->
                 <template v-for="(val, i) in serie.data" :key="`mlp-${i}`">
@@ -2171,7 +2178,7 @@ watch(
                     :fill="activeIndex === i ? getSerieColor(serie, serie._origIdx!) : '#fff'"
                     :stroke="getSerieColor(serie, serie._origIdx!)"
                     stroke-width="2.5"
-                    class="xly-chart__point"
+                    class="easy-chart__point"
                     @click="onBarLineClick(i)"
                   />
                   <!-- 数据标签 -->
@@ -2182,7 +2189,7 @@ watch(
                       :y="getMixedLineY(v) - 10"
                       text-anchor="middle"
                       dominant-baseline="auto"
-                      class="xly-chart__data-label"
+                      class="easy-chart__data-label"
                       :fill="getSerieColor(serie, serie._origIdx!)"
                     >
                       {{ formatValue(v) }}
@@ -2203,11 +2210,11 @@ watch(
             :y1="padding.top"
             :x2="getXCenter(activeIndex)"
             :y2="svgHeight - padding.bottom"
-            class="xly-chart__tooltip-line"
+            class="easy-chart__tooltip-line"
           />
 
           <!-- 滚动条 -->
-          <g v-if="scrollable" class="xly-chart__scrollbar">
+          <g v-if="scrollable" class="easy-chart__scrollbar">
             <!-- 轨道 -->
             <rect
               :x="padding.left"
@@ -2215,7 +2222,7 @@ watch(
               :width="plotWidth"
               height="4"
               rx="2"
-              class="xly-chart__scrollbar-track"
+              class="easy-chart__scrollbar-track"
             />
             <!-- 滑块 -->
             <rect
@@ -2224,7 +2231,7 @@ watch(
               :width="scrollbarThumbW"
               height="6"
               rx="3"
-              class="xly-chart__scrollbar-thumb"
+              class="easy-chart__scrollbar-thumb"
               @mousedown.stop="onScrollbarDragStart"
             />
           </g>
@@ -2240,7 +2247,7 @@ watch(
               :fill="slice.color"
               :opacity="activePieIndex !== -1 && activePieIndex !== i ? 0.6 : 1"
               :transform="activePieIndex === i ? `translate(${slice.offsetX * 8}, ${slice.offsetY * 8})` : ''"
-              class="xly-chart__pie-slice"
+              class="easy-chart__pie-slice"
               @mouseenter="onPieEnter(i, $event)"
               @mouseleave="onPieLeave"
               @click="onPieClick(i)"
@@ -2255,7 +2262,7 @@ watch(
                 :y="slice.labelY"
                 text-anchor="middle"
                 dominant-baseline="middle"
-                class="xly-chart__pie-label"
+                class="easy-chart__pie-label"
               >
                 {{ slice.percent }}%
               </text>
@@ -2263,7 +2270,7 @@ watch(
             <!-- 环形图中心 -->
             <template v-if="type === 'donut'">
               <circle :r="donutInnerRadius" fill="white" />
-              <text v-if="donutLabel" text-anchor="middle" dominant-baseline="middle" class="xly-chart__donut-label">
+              <text v-if="donutLabel" text-anchor="middle" dominant-baseline="middle" class="easy-chart__donut-label">
                 {{ donutLabel }}
               </text>
               <text
@@ -2271,7 +2278,7 @@ watch(
                 text-anchor="middle"
                 dominant-baseline="middle"
                 y="18"
-                class="xly-chart__donut-value"
+                class="easy-chart__donut-value"
               >
                 {{ donutValue }}
               </text>
@@ -2288,7 +2295,7 @@ watch(
               :d="item.path"
               :fill="item.color"
               :opacity="activeFunnelIndex !== -1 && activeFunnelIndex !== i ? 0.55 : 1"
-              class="xly-chart__funnel-item"
+              class="easy-chart__funnel-item"
               @mouseenter="onFunnelEnter(i, $event)"
               @mouseleave="onFunnelLeave"
               @click="onFunnelClick(i)"
@@ -2300,7 +2307,7 @@ watch(
                 :y="item.labelY - 8"
                 text-anchor="middle"
                 dominant-baseline="middle"
-                class="xly-chart__funnel-label"
+                class="easy-chart__funnel-label"
               >
                 {{ item.name }}
               </text>
@@ -2309,7 +2316,7 @@ watch(
                 :y="item.labelY + 10"
                 text-anchor="middle"
                 dominant-baseline="middle"
-                class="xly-chart__funnel-value"
+                class="easy-chart__funnel-value"
               >
                 {{ formatValue(item.value) }} ({{ item.percent }}%)
               </text>
@@ -2328,7 +2335,7 @@ watch(
               :y1="padding.top"
               :x2="getHBarTickX(tick)"
               :y2="svgHeight - padding.bottom"
-              class="xly-chart__grid-line"
+              class="easy-chart__grid-line"
             />
           </g>
           <!-- X轴底部刻度数值 -->
@@ -2338,14 +2345,14 @@ watch(
               :y1="svgHeight - padding.bottom"
               :x2="svgWidth - padding.right"
               :y2="svgHeight - padding.bottom"
-              class="xly-chart__axis-line"
+              class="easy-chart__axis-line"
             />
             <text
               v-for="(tick, i) in hbarXTicks"
               :key="`hxt-${i}`"
               :x="getHBarTickX(tick)"
               :y="svgHeight - padding.bottom + 14"
-              class="xly-chart__axis-text"
+              class="easy-chart__axis-text"
               text-anchor="middle"
             >
               {{ formatValue(tick) }}
@@ -2358,14 +2365,14 @@ watch(
               :y1="padding.top"
               :x2="padding.left"
               :y2="svgHeight - padding.bottom"
-              class="xly-chart__axis-line"
+              class="easy-chart__axis-line"
             />
             <text
               v-for="(label, di) in labels ?? []"
               :key="`hyl-${di}`"
               :x="padding.left - 8"
               :y="padding.top + hbarRowH * di + hbarRowH / 2"
-              class="xly-chart__axis-text"
+              class="easy-chart__axis-text"
               text-anchor="end"
               dominant-baseline="middle"
             >
@@ -2383,7 +2390,7 @@ watch(
               :rx="barRadius"
               :ry="barRadius"
               :opacity="activeHBarIndex !== -1 && activeHBarIndex !== item.dataIdx ? 0.55 : 1"
-              class="xly-chart__bar"
+              class="easy-chart__bar"
               @click="onHBarClick(item)"
             />
             <!-- 数值标签 -->
@@ -2391,7 +2398,7 @@ watch(
               v-if="item.barW > 20"
               :x="item.valX"
               :y="item.barY + item.barH / 2"
-              class="xly-chart__hbar-val"
+              class="easy-chart__hbar-val"
               dominant-baseline="middle"
             >
               {{ formatValue(item.value) }}
@@ -2404,7 +2411,7 @@ watch(
             :y="padding.top + hbarRowH * activeHBarIndex"
             :width="plotWidth"
             :height="hbarRowH"
-            class="xly-chart__hbar-hover"
+            class="easy-chart__hbar-hover"
           />
         </template>
 
@@ -2435,7 +2442,7 @@ watch(
             :stroke-width="gaugeTrackW"
             fill="none"
             stroke-linecap="round"
-            class="xly-chart__gauge-progress"
+            class="easy-chart__gauge-progress"
           />
           <!-- 刻度文字（靠近轨道外圈，不画线） -->
           <text
@@ -2443,25 +2450,25 @@ watch(
             :key="`gtick-${i}`"
             :x="tick.lx"
             :y="tick.ly"
-            class="xly-chart__axis-text"
+            class="easy-chart__axis-text"
             text-anchor="middle"
             dominant-baseline="middle"
           >
             {{ tick.label }}
           </text>
           <!-- 指针 -->
-          <path :d="gaugeNeedle.path" fill="#374151" opacity="0.88" class="xly-chart__gauge-needle" />
+          <path :d="gaugeNeedle.path" fill="#374151" opacity="0.88" class="easy-chart__gauge-needle" />
           <circle :cx="gaugeNeedle.cx" :cy="gaugeNeedle.cy" r="7" fill="#374151" />
           <circle :cx="gaugeNeedle.cx" :cy="gaugeNeedle.cy" r="3" fill="#fff" />
           <!-- 中心数值 -->
-          <text :x="gaugeCx" :y="gaugeCy + gaugeR * 0.36" text-anchor="middle" class="xly-chart__gauge-val">
+          <text :x="gaugeCx" :y="gaugeCy + gaugeR * 0.36" text-anchor="middle" class="easy-chart__gauge-val">
             {{ formatValue(gaugeValue) }}{{ gaugeUnit }}
           </text>
         </template>
       </svg>
 
       <!-- 空状态 -->
-      <div v-if="isEmpty" class="xly-chart__empty">
+      <div v-if="isEmpty" class="easy-chart__empty">
         <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
           <rect x="4" y="28" width="8" height="16" rx="2" fill="#e4e4e7" />
           <rect x="20" y="18" width="8" height="26" rx="2" fill="#e4e4e7" />
@@ -2472,21 +2479,21 @@ watch(
     </div>
 
     <!-- Tooltip：挂在根容器上，避免被 body 的 overflow:hidden 裁剪 -->
-    <div v-if="tooltip.visible" class="xly-chart__tooltip" :style="{ left: `${tooltip.x}px`, top: `${tooltip.y}px` }">
-      <div class="xly-chart__tooltip-title">
+    <div v-if="tooltip.visible" class="easy-chart__tooltip" :style="{ left: `${tooltip.x}px`, top: `${tooltip.y}px` }">
+      <div class="easy-chart__tooltip-title">
         {{ tooltip.title }}
       </div>
-      <div v-for="item in tooltip.items" :key="item.name" class="xly-chart__tooltip-item">
-        <span class="xly-chart__tooltip-dot" :style="{ background: item.color }" />
-        <span class="xly-chart__tooltip-name">{{ item.name }}</span>
-        <span class="xly-chart__tooltip-val">{{ formatValue(item.value) }}</span>
+      <div v-for="item in tooltip.items" :key="item.name" class="easy-chart__tooltip-item">
+        <span class="easy-chart__tooltip-dot" :style="{ background: item.color }" />
+        <span class="easy-chart__tooltip-name">{{ item.name }}</span>
+        <span class="easy-chart__tooltip-val">{{ formatValue(item.value) }}</span>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.xly-chart {
+.easy-chart {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -2502,21 +2509,21 @@ watch(
     flex-wrap: wrap;
 
     // 标题栏独占一行
-    .xly-chart__header {
+    .easy-chart__header {
       flex: 0 0 100%;
       order: -2;
     }
   }
-  &.legend-right .xly-chart__legend {
+  &.legend-right .easy-chart__legend {
     order: 1;
   }
-  &.legend-left .xly-chart__legend {
+  &.legend-left .easy-chart__legend {
     order: -1;
   }
 }
 
 // 标题
-.xly-chart__header {
+.easy-chart__header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -2529,29 +2536,29 @@ watch(
     padding: 14px 18px 4px;
   }
 }
-.xly-chart__header-left {
+.easy-chart__header-left {
   flex: 1;
   min-width: 0;
 }
-.xly-chart__title {
+.easy-chart__title {
   font-size: 15px;
   font-weight: 600;
   color: var(--el-text-color-primary);
   line-height: 1.4;
 }
-.xly-chart__subtitle {
+.easy-chart__subtitle {
   font-size: 12px;
   color: var(--el-text-color-secondary);
   margin-top: 2px;
 }
 
 // 下载按钮
-.xly-chart__download {
+.easy-chart__download {
   position: relative;
   flex-shrink: 0;
   padding-top: 2px;
 }
-.xly-chart__download-btn {
+.easy-chart__download-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2576,7 +2583,7 @@ watch(
     transform: scale(0.95);
   }
 }
-.xly-chart__download-menu {
+.easy-chart__download-menu {
   position: absolute;
   top: calc(100% + 6px);
   right: 0;
@@ -2602,7 +2609,7 @@ watch(
     }
   }
 }
-.xly-chart__download-item {
+.easy-chart__download-item {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -2630,34 +2637,34 @@ watch(
 }
 
 // 图例
-.xly-chart__legend {
+.easy-chart__legend {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
   padding: 6px 18px;
   flex-shrink: 0;
 
-  &.xly-chart__legend--top {
+  &.easy-chart__legend--top {
     order: -1;
     padding-bottom: 4px;
   }
-  &.xly-chart__legend--bottom {
+  &.easy-chart__legend--bottom {
     padding-top: 4px;
   }
-  &.xly-chart__legend--left {
+  &.easy-chart__legend--left {
     flex-direction: column;
     padding: 14px 0 14px 8px;
     width: 120px;
     flex-shrink: 0;
   }
-  &.xly-chart__legend--right {
+  &.easy-chart__legend--right {
     flex-direction: column;
     padding: 14px 8px 14px 0;
     width: 120px;
     flex-shrink: 0;
   }
 }
-.xly-chart__legend-item {
+.easy-chart__legend-item {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -2667,20 +2674,20 @@ watch(
     opacity: 0.35;
   }
 }
-.xly-chart__legend-dot {
+.easy-chart__legend-dot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
   flex-shrink: 0;
 }
-.xly-chart__legend-label {
+.easy-chart__legend-label {
   font-size: 12px;
   color: var(--el-text-color-secondary);
   white-space: nowrap;
 }
 
 // 绘图区
-.xly-chart__body {
+.easy-chart__body {
   flex: 1;
   position: relative;
   min-height: 0;
@@ -2688,32 +2695,32 @@ watch(
   overflow: hidden;
 }
 
-.xly-chart__svg {
+.easy-chart__svg {
   display: block;
   overflow: visible;
 }
 
 // 网格线
-.xly-chart__grid-line {
+.easy-chart__grid-line {
   stroke: #f1f1f4;
   stroke-width: 1;
 }
 
 // 坐标轴
-.xly-chart__axis-line {
+.easy-chart__axis-line {
   stroke: var(--el-border-color);
   stroke-width: 1;
 }
-.xly-chart__axis-text {
+.easy-chart__axis-text {
   font-size: 11px;
   fill: var(--el-text-color-secondary);
 }
 
 // 折线
-.xly-chart__line {
+.easy-chart__line {
   transition: d 0.3s ease;
 }
-.xly-chart__point {
+.easy-chart__point {
   cursor: pointer;
   transition:
     r 0.15s,
@@ -2721,14 +2728,14 @@ watch(
 }
 
 // 数据标签（折线/柱状图）
-.xly-chart__data-label {
+.easy-chart__data-label {
   font-size: 11px;
   font-weight: 600;
   pointer-events: none;
 }
 
 // 饼图/环形图切片标签
-.xly-chart__pie-label {
+.easy-chart__pie-label {
   font-size: 11px;
   font-weight: 700;
   fill: #fff;
@@ -2737,13 +2744,13 @@ watch(
 }
 
 // 柱子
-.xly-chart__bar {
+.easy-chart__bar {
   cursor: pointer;
   transition: opacity 0.2s;
 }
 
 // 饼图
-.xly-chart__pie-slice {
+.easy-chart__pie-slice {
   cursor: pointer;
   transition:
     transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -2751,7 +2758,7 @@ watch(
 }
 
 // 触发竖线
-.xly-chart__tooltip-line {
+.easy-chart__tooltip-line {
   stroke: var(--el-text-color-placeholder);
   stroke-width: 1;
   stroke-dasharray: 4 3;
@@ -2759,7 +2766,7 @@ watch(
 }
 
 // Tooltip
-.xly-chart__tooltip {
+.easy-chart__tooltip {
   position: absolute;
   background: rgba(30, 30, 40, 0.92);
   color: var(--el-color-white);
@@ -2786,39 +2793,39 @@ watch(
     }
   }
 }
-.xly-chart__tooltip-title {
+.easy-chart__tooltip-title {
   font-weight: 600;
   margin-bottom: 4px;
   color: rgba(255, 255, 255, 0.7);
   font-size: 11px;
 }
-.xly-chart__tooltip-item {
+.easy-chart__tooltip-item {
   display: flex;
   align-items: center;
   gap: 6px;
 }
-.xly-chart__tooltip-dot {
+.easy-chart__tooltip-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
   flex-shrink: 0;
 }
-.xly-chart__tooltip-name {
+.easy-chart__tooltip-name {
   flex: 1;
   color: rgba(255, 255, 255, 0.85);
 }
-.xly-chart__tooltip-val {
+.easy-chart__tooltip-val {
   font-weight: 600;
   color: var(--el-color-white);
 }
 
 // 环形中心文字
-.xly-chart__donut-label {
+.easy-chart__donut-label {
   font-size: 12px;
   fill: var(--el-text-color-secondary);
   y: -10px;
 }
-.xly-chart__donut-value {
+.easy-chart__donut-value {
   font-size: 18px;
   font-weight: 700;
   fill: var(--el-text-color-primary);
@@ -2826,7 +2833,7 @@ watch(
 }
 
 // 空状态
-.xly-chart__empty {
+.easy-chart__empty {
   position: absolute;
   inset: 0;
   display: flex;
@@ -2839,40 +2846,40 @@ watch(
 }
 
 // 漏斗图
-.xly-chart__funnel-item {
+.easy-chart__funnel-item {
   cursor: pointer;
   transition: opacity 0.2s;
 }
-.xly-chart__funnel-label {
+.easy-chart__funnel-label {
   font-size: 13px;
   font-weight: 600;
   fill: #fff;
   pointer-events: none;
 }
-.xly-chart__funnel-value {
+.easy-chart__funnel-value {
   font-size: 11px;
   fill: rgba(255, 255, 255, 0.85);
   pointer-events: none;
 }
 
 // 横向滚动
-.xly-chart__body {
+.easy-chart__body {
   &.is-scrollable {
-    .xly-chart__svg {
+    .easy-chart__svg {
       cursor: grab;
     }
   }
   &.is-dragging {
-    .xly-chart__svg {
+    .easy-chart__svg {
       cursor: grabbing;
     }
   }
 }
 
-.xly-chart__scrollbar-track {
+.easy-chart__scrollbar-track {
   fill: #f1f1f4;
 }
-.xly-chart__scrollbar-thumb {
+.easy-chart__scrollbar-thumb {
   fill: #c4c4cc;
   cursor: pointer;
   transition: fill 0.15s;
@@ -2883,23 +2890,23 @@ watch(
 }
 
 // 横向柱状图
-.xly-chart__hbar-val {
+.easy-chart__hbar-val {
   font-size: 11px;
   fill: var(--el-text-color-secondary);
 }
-.xly-chart__hbar-hover {
+.easy-chart__hbar-hover {
   fill: #f4f5f7;
   pointer-events: none;
   opacity: 0.6;
 }
 
-.xly-chart__gauge-progress {
+.easy-chart__gauge-progress {
   transition: d 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.xly-chart__gauge-needle {
+.easy-chart__gauge-needle {
   transition: d 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.xly-chart__gauge-val {
+.easy-chart__gauge-val {
   font-size: 22px;
   font-weight: 700;
   fill: var(--el-text-color-primary);

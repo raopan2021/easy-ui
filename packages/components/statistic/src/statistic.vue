@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
-import XlyIcon from '../../icon'
+import EasyIcon from '../../icon'
 
 defineOptions({ name: 'EasyStatistic' })
 
@@ -125,20 +125,20 @@ watch(
 
 <template>
   <div
-    class="xly-statistic"
+    class="easy-statistic"
     :class="[
-      `xly-statistic--${size}`,
-      `xly-statistic--${variant}`,
-      { 'xly-statistic--bordered': bordered },
-      { 'xly-statistic--hoverable': hoverable },
+      `easy-statistic--${size}`,
+      `easy-statistic--${variant}`,
+      { 'easy-statistic--bordered': bordered },
+      { 'easy-statistic--hoverable': hoverable },
     ]"
   >
     <!-- 标题区域 -->
-    <div v-if="title || $slots.title || icon" class="xly-statistic-header">
-      <div v-if="icon" class="xly-statistic-icon">
-        <XlyIcon :name="icon" />
+    <div v-if="title || $slots.title || icon" class="easy-statistic-header">
+      <div v-if="icon" class="easy-statistic-icon">
+        <EasyIcon :name="icon" />
       </div>
-      <div class="xly-statistic-title">
+      <div class="easy-statistic-title">
         <slot name="title">
           {{ title }}
         </slot>
@@ -146,21 +146,21 @@ watch(
     </div>
 
     <!-- 数值区域 -->
-    <div class="xly-statistic-value">
+    <div class="easy-statistic-value">
       <!-- 前缀 -->
-      <div v-if="prefix || $slots.prefix" class="xly-statistic-prefix">
+      <div v-if="prefix || $slots.prefix" class="easy-statistic-prefix">
         <slot name="prefix">
           {{ prefix }}
         </slot>
       </div>
 
       <!-- 主数值 -->
-      <div ref="valueRef" class="xly-statistic-number" :class="{ 'xly-statistic-number--animated': animated }">
+      <div ref="valueRef" class="easy-statistic-number" :class="{ 'easy-statistic-number--animated': animated }">
         {{ formattedValue }}
       </div>
 
       <!-- 后缀 -->
-      <div v-if="suffix || $slots.suffix" class="xly-statistic-suffix">
+      <div v-if="suffix || $slots.suffix" class="easy-statistic-suffix">
         <slot name="suffix">
           {{ suffix }}
         </slot>
@@ -168,11 +168,11 @@ watch(
     </div>
 
     <!-- 趋势 -->
-    <div v-if="trend" class="xly-statistic-trend">
-      <div class="xly-statistic-trend-icon" :class="`xly-statistic-trend--${trend}`">
-        <XlyIcon :name="trend === 'up' ? 'el:Top' : 'el:Bottom'" />
+    <div v-if="trend" class="easy-statistic-trend">
+      <div class="easy-statistic-trend-icon" :class="`easy-statistic-trend--${trend}`">
+        <EasyIcon :name="trend === 'up' ? 'el:Top' : 'el:Bottom'" />
       </div>
-      <div class="xly-statistic-trend-text">
+      <div class="easy-statistic-trend-text">
         <slot name="trendLabel">
           {{ trendLabel }}
         </slot>
@@ -180,7 +180,7 @@ watch(
     </div>
 
     <!-- 说明 -->
-    <div v-if="extra || $slots.extra" class="xly-statistic-extra">
+    <div v-if="extra || $slots.extra" class="easy-statistic-extra">
       <slot name="extra">
         {{ extra }}
       </slot>
@@ -189,7 +189,7 @@ watch(
 </template>
 
 <style scoped lang="scss">
-.xly-statistic {
+.easy-statistic {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -199,67 +199,67 @@ watch(
   transition: all 0.2s ease;
 
   // 边框模式
-  &.xly-statistic--bordered {
+  &.easy-statistic--bordered {
     border: 1px solid #e5e7eb;
   }
 
   // 悬浮效果
-  &.xly-statistic--hoverable:hover {
+  &.easy-statistic--hoverable:hover {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     transform: translateY(-2px);
   }
 
   // 尺寸
-  &.xly-statistic--sm {
+  &.easy-statistic--sm {
     padding: 16px;
     gap: 8px;
     border-radius: 12px;
 
-    .xly-statistic-number {
+    .easy-statistic-number {
       font-size: 28px;
     }
 
-    .xly-statistic-title {
+    .easy-statistic-title {
       font-size: 12px;
     }
 
-    .xly-statistic-icon {
+    .easy-statistic-icon {
       width: 28px;
       height: 28px;
       font-size: 14px;
     }
   }
 
-  &.xly-statistic--md {
-    .xly-statistic-number {
+  &.easy-statistic--md {
+    .easy-statistic-number {
       font-size: 36px;
     }
 
-    .xly-statistic-title {
+    .easy-statistic-title {
       font-size: 14px;
     }
 
-    .xly-statistic-icon {
+    .easy-statistic-icon {
       width: 36px;
       height: 36px;
       font-size: 16px;
     }
   }
 
-  &.xly-statistic--lg {
+  &.easy-statistic--lg {
     padding: 28px;
     gap: 16px;
     border-radius: 20px;
 
-    .xly-statistic-number {
+    .easy-statistic-number {
       font-size: 48px;
     }
 
-    .xly-statistic-title {
+    .easy-statistic-title {
       font-size: 16px;
     }
 
-    .xly-statistic-icon {
+    .easy-statistic-icon {
       width: 44px;
       height: 44px;
       font-size: 20px;
@@ -267,56 +267,56 @@ watch(
   }
 
   // 变体颜色
-  &.xly-statistic--default {
-    .xly-statistic-number {
+  &.easy-statistic--default {
+    .easy-statistic-number {
       color: var(--el-text-color-primary);
     }
 
-    .xly-statistic-icon {
+    .easy-statistic-icon {
       background: #f3f4f6;
       color: var(--el-text-color-regular);
     }
   }
 
-  &.xly-statistic--primary {
-    .xly-statistic-number {
+  &.easy-statistic--primary {
+    .easy-statistic-number {
       color: #3b82f6;
     }
 
-    .xly-statistic-icon {
+    .easy-statistic-icon {
       background: #eff6ff;
       color: #3b82f6;
     }
   }
 
-  &.xly-statistic--success {
-    .xly-statistic-number {
+  &.easy-statistic--success {
+    .easy-statistic-number {
       color: #10b981;
     }
 
-    .xly-statistic-icon {
+    .easy-statistic-icon {
       background: #ecfdf5;
       color: #10b981;
     }
   }
 
-  &.xly-statistic--warning {
-    .xly-statistic-number {
+  &.easy-statistic--warning {
+    .easy-statistic-number {
       color: #f59e0b;
     }
 
-    .xly-statistic-icon {
+    .easy-statistic-icon {
       background: #fffbeb;
       color: #f59e0b;
     }
   }
 
-  &.xly-statistic--danger {
-    .xly-statistic-number {
+  &.easy-statistic--danger {
+    .easy-statistic-number {
       color: #ef4444;
     }
 
-    .xly-statistic-icon {
+    .easy-statistic-icon {
       background: #fef2f2;
       color: #ef4444;
     }
@@ -324,25 +324,25 @@ watch(
 }
 
 // 标题区域
-.xly-statistic-header {
+.easy-statistic-header {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.xly-statistic-icon {
+.easy-statistic-icon {
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
   transition: transform 0.2s ease;
 
-  .xly-statistic--hoverable:hover & {
+  .easy-statistic--hoverable:hover & {
     transform: scale(1.05);
   }
 }
 
-.xly-statistic-title {
+.easy-statistic-title {
   color: var(--el-text-color-regular);
   font-weight: 500;
   letter-spacing: 0.01em;
@@ -353,34 +353,34 @@ watch(
 }
 
 // 数值区域
-.xly-statistic-value {
+.easy-statistic-value {
   display: flex;
   align-items: baseline;
   gap: 6px;
   margin-top: 4px;
 }
 
-.xly-statistic-number {
+.easy-statistic-number {
   font-weight: 700;
   line-height: 1;
   font-feature-settings: 'tnum';
   font-variant-numeric: tabular-nums;
   transition: color 0.2s ease;
 
-  &.xly-statistic-number--animated {
+  &.easy-statistic-number--animated {
     animation: number-pulse 1.5s ease-in-out infinite;
   }
 }
 
-.xly-statistic-prefix,
-.xly-statistic-suffix {
+.easy-statistic-prefix,
+.easy-statistic-suffix {
   color: var(--el-text-color-placeholder);
   font-size: 0.75em;
   font-weight: 500;
 }
 
 // 趋势
-.xly-statistic-trend {
+.easy-statistic-trend {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -391,11 +391,11 @@ watch(
   width: fit-content;
   margin-top: 4px;
 
-  &.xly-statistic-trend--up {
+  &.easy-statistic-trend--up {
     background: rgba(16, 185, 129, 0.1);
     color: #10b981;
 
-    .xly-statistic-trend-icon {
+    .easy-statistic-trend-icon {
       color: #10b981;
     }
 
@@ -404,11 +404,11 @@ watch(
     }
   }
 
-  &.xly-statistic-trend--down {
+  &.easy-statistic-trend--down {
     background: rgba(239, 68, 68, 0.1);
     color: #ef4444;
 
-    .xly-statistic-trend-icon {
+    .easy-statistic-trend-icon {
       color: #ef4444;
     }
 
@@ -427,7 +427,7 @@ watch(
 }
 
 // 说明
-.xly-statistic-extra {
+.easy-statistic-extra {
   margin-top: 8px;
   color: var(--el-text-color-placeholder);
   font-size: 13px;
@@ -451,43 +451,43 @@ watch(
 
 // 响应式
 @media (max-width: 768px) {
-  .xly-statistic--lg .xly-statistic-number {
+  .easy-statistic--lg .easy-statistic-number {
     font-size: 40px;
   }
 
-  .xly-statistic {
+  .easy-statistic {
     padding: 20px;
   }
 }
 
-html.dark .xly-statistic {
+html.dark .easy-statistic {
   background: var(--el-bg-color-overlay);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-  &.xly-statistic--bordered {
+  &.easy-statistic--bordered {
     border-color: var(--el-border-color);
   }
-  &.xly-statistic--hoverable:hover {
+  &.easy-statistic--hoverable:hover {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   }
-  &.xly-statistic--default {
-    .xly-statistic-number {
+  &.easy-statistic--default {
+    .easy-statistic-number {
       color: var(--el-text-color-primary);
     }
-    .xly-statistic-icon {
+    .easy-statistic-icon {
       background: var(--el-fill-color-light);
       color: var(--el-text-color-secondary);
     }
   }
-  &.xly-statistic--primary .xly-statistic-icon {
+  &.easy-statistic--primary .easy-statistic-icon {
     background: rgba(59, 130, 246, 0.15);
   }
-  &.xly-statistic--success .xly-statistic-icon {
+  &.easy-statistic--success .easy-statistic-icon {
     background: rgba(16, 185, 129, 0.15);
   }
-  &.xly-statistic--warning .xly-statistic-icon {
+  &.easy-statistic--warning .easy-statistic-icon {
     background: rgba(245, 158, 11, 0.15);
   }
-  &.xly-statistic--danger .xly-statistic-icon {
+  &.easy-statistic--danger .easy-statistic-icon {
     background: rgba(239, 68, 68, 0.15);
   }
 }

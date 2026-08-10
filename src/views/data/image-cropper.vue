@@ -639,7 +639,7 @@ async function onConfirm(data) {
   gap: 8px;
   width: 200px;
 
-  :deep(.xly-image-cropper__view) {
+  :deep(.easy-image-cropper__view) {
     height: 200px;
   }
 

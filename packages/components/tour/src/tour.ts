@@ -1,7 +1,7 @@
 /* eslint-disable ts/no-use-before-define */
 import type { TourProps, TourStep } from './tour.vue'
 import { createApp, h, nextTick, ref } from 'vue'
-import XlyTourComp from './tour.vue'
+import EasyTourComp from './tour.vue'
 
 export interface TourOptions extends Omit<TourProps, 'modelValue'> {
   /** 引导步骤列表 */
@@ -51,7 +51,7 @@ function createTour(options: TourOptions): TourInstance {
   const app = createApp({
     setup() {
       return () =>
-        h(XlyTourComp, {
+        h(EasyTourComp, {
           ...props,
           steps,
           'modelValue': visible.value,
@@ -82,7 +82,7 @@ function createTour(options: TourOptions): TourInstance {
   // 获取组件内部引用
   let componentRef: any = null
   nextTick(() => {
-    componentRef = container.querySelector('.xly-tour-popover')?.__vueParentComponent
+    componentRef = container.querySelector('.easy-tour-popover')?.__vueParentComponent
   })
 
   function destroy() {
@@ -155,10 +155,10 @@ function createTour(options: TourOptions): TourInstance {
  *
  * 使用方式：
  * ```ts
- * import { xly } from '../../../easy-ui/src/utils/xly'
+ * import { easy } from 'easy-ui'
  *
  * // 启动引导
- * const tour = xly.$tour({
+ * const tour = easy.$tour({
  *   steps: [
  *     { target: '#step1', title: '第一步', description: '欢迎！' },
  *     { target: '#step2', title: '第二步', description: '这是功能区域' },
@@ -174,7 +174,7 @@ function createTour(options: TourOptions): TourInstance {
  * tour.finish()
  * ```
  */
-export function XlyTour(options: TourOptions): TourInstance {
+export function EasyTour(options: TourOptions): TourInstance {
   return createTour(options)
 }
 

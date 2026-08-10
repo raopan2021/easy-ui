@@ -171,7 +171,7 @@ defineExpose({
 </script>
 
 <template>
-  <div class="xly-worktab">
+  <div class="easy-worktab">
     <!-- 左滚动按钮 -->
     <button v-show="canScrollLeft" class="worktab-scroll-btn worktab-scroll-btn--left" @click="scrollBy(-scrollStep)">
       <svg
@@ -496,7 +496,7 @@ defineExpose({
 $radius: 6px;
 $transition: all 0.15s ease;
 
-.xly-worktab {
+.easy-worktab {
   display: flex;
   align-items: center;
   height: 46px;
@@ -768,48 +768,48 @@ $transition: all 0.15s ease;
 </style>
 
 <style lang="scss">
-html.dark .xly-worktab {
+html.dark .easy-worktab {
   border-bottom-color: var(--el-border-color);
 }
-html.dark .xly-worktab__scroll-btn,
-html.dark .xly-worktab__action-btn {
+html.dark .easy-worktab__scroll-btn,
+html.dark .easy-worktab__action-btn {
   color: var(--el-text-color-secondary);
 }
-html.dark .xly-worktab__scroll-btn:hover,
-html.dark .xly-worktab__action-btn:hover {
+html.dark .easy-worktab__scroll-btn:hover,
+html.dark .easy-worktab__action-btn:hover {
   color: var(--el-text-color-primary);
   background: var(--el-fill-color-light);
 }
-html.dark .xly-worktab__item {
+html.dark .easy-worktab__item {
   color: var(--el-text-color-regular);
   border-color: var(--el-border-color);
 }
-html.dark .xly-worktab__item:hover:not(.is-active) {
+html.dark .easy-worktab__item:hover:not(.is-active) {
   border-color: var(--el-border-color-darker);
   color: var(--el-text-color-primary);
 }
-html.dark .xly-worktab__item--close:hover {
+html.dark .easy-worktab__item--close:hover {
   background: rgba(239, 68, 68, 0.15);
 }
-html.dark .xly-worktab__divider {
+html.dark .easy-worktab__divider {
   background: var(--el-border-color);
 }
-html.dark .xly-worktab__ctx {
+html.dark .easy-worktab__ctx {
   background: var(--el-bg-color-overlay);
   border-color: var(--el-border-color);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
-html.dark .xly-worktab__ctx__item {
+html.dark .easy-worktab__ctx__item {
   color: var(--el-text-color-regular);
 }
-html.dark .xly-worktab__ctx__item svg {
+html.dark .easy-worktab__ctx__item svg {
   color: var(--el-text-color-secondary);
 }
-html.dark .xly-worktab__ctx__item:hover:not(.is-disabled) {
+html.dark .easy-worktab__ctx__item:hover:not(.is-disabled) {
   background: rgba(79, 110, 247, 0.12);
   color: var(--el-color-primary);
 }
-html.dark .xly-worktab__ctx__divider {
+html.dark .easy-worktab__ctx__divider {
   background: var(--el-border-color);
 }
 </style>

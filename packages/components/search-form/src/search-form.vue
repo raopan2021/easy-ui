@@ -1,21 +1,21 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, reactive, ref, watch } from 'vue'
-import XlyButton from '../../button'
-import XlyCascader from '../../cascader'
-import XlyDatePicker from '../../date-picker'
-import XlyDateRangePicker from '../../date-range-picker'
-import XlyDateTimePicker from '../../date-time-picker'
-import XlyDateTimeRangePicker from '../../date-time-range-picker'
-import { EasyForm as XlyForm, EasyFormItem as XlyFormItem } from '../../form'
-import XlyIcon from '../../icon'
-import XlyInput from '../../input'
-import XlyInputRange from '../../input-range'
-import XlySelect from '../../select'
-import XlyTimePicker from '../../time-picker'
-import XlyTimeRangePicker from '../../time-range-picker'
+import EasyButton from '../../button'
+import EasyCascader from '../../cascader'
+import EasyDatePicker from '../../date-picker'
+import EasyDateRangePicker from '../../date-range-picker'
+import EasyDateTimePicker from '../../date-time-picker'
+import EasyDateTimeRangePicker from '../../date-time-range-picker'
+import { EasyForm, EasyFormItem } from '../../form'
+import EasyIcon from '../../icon'
+import EasyInput from '../../input'
+import EasyInputRange from '../../input-range'
+import EasySelect from '../../select'
+import EasyTimePicker from '../../time-picker'
+import EasyTimeRangePicker from '../../time-range-picker'
 
 defineOptions({
-  name: 'XlySearchForm',
+  name: 'EasySearchForm',
 })
 
 const props = withDefaults(defineProps<Props>(), {
@@ -273,7 +273,7 @@ const searchActionsStyle = computed<Record<string, string>>(() =>
 async function measureActions() {
   await nextTick()
   const actionsEl = searchActionsRef.value?.$el as HTMLElement | undefined
-  const control = actionsEl?.querySelector('.xly-form-item__control') as HTMLElement | null
+  const control = actionsEl?.querySelector('.easy-form-item__control') as HTMLElement | null
   const gridEl = actionsEl?.closest('.search-grid-form') as HTMLElement | null
   if (!control || !gridEl)
     return
@@ -322,13 +322,13 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="xly-search-form">
+  <div class="easy-search-form">
     <!-- 自定义插槽 top -->
     <slot name="top" />
 
     <div class="search-form-body">
       <!-- 搜索表单 -->
-      <XlyForm
+      <EasyForm
         ref="formRef"
         :model="formData"
         :rules="rules"
@@ -338,7 +338,7 @@ onUnmounted(() => {
         class="search-grid-form"
       >
         <template v-for="item in visibleItems" :key="item.prop">
-          <XlyFormItem
+          <EasyFormItem
             v-if="!item.hide"
             :label="item.label"
             :prop="item.prop"
@@ -347,7 +347,7 @@ onUnmounted(() => {
             :style="getGridItemStyle(item)"
           >
             <!-- 输入框 -->
-            <XlyInput
+            <EasyInput
               v-if="item.type === 'input' || !item.type"
               v-model="formData[item.prop]"
               :placeholder="item.placeholder || `请输入${item.label}`"
@@ -362,7 +362,7 @@ onUnmounted(() => {
             />
 
             <!-- 文本域 -->
-            <XlyInput
+            <EasyInput
               v-else-if="item.type === 'textarea'"
               v-model="formData[item.prop]"
               type="textarea"
@@ -376,7 +376,7 @@ onUnmounted(() => {
             />
 
             <!-- 数值/文本范围输入（min ~ max） -->
-            <XlyInputRange
+            <EasyInputRange
               v-else-if="item.type === 'range'"
               v-model:start="formData[item.prop]"
               v-model:end="formData[item.endProp]"
@@ -393,7 +393,7 @@ onUnmounted(() => {
             />
 
             <!-- 选择器 -->
-            <XlySelect
+            <EasySelect
               v-else-if="item.type === 'select'"
               v-model="formData[item.prop]"
               :placeholder="item.placeholder || `请选择${item.label}`"
@@ -407,7 +407,7 @@ onUnmounted(() => {
             />
 
             <!-- 级联选择器 -->
-            <XlyCascader
+            <EasyCascader
               v-else-if="item.type === 'cascader'"
               v-model="formData[item.prop]"
               :placeholder="item.placeholder || `请选择${item.label}`"
@@ -421,7 +421,7 @@ onUnmounted(() => {
             />
 
             <!-- 日期选择器 -->
-            <XlyDatePicker
+            <EasyDatePicker
               v-else-if="item.type === 'date'"
               v-model="formData[item.prop]"
               :placeholder="item.placeholder || `请选择${item.label}`"
@@ -432,7 +432,7 @@ onUnmounted(() => {
             />
 
             <!-- 日期范围选择器 -->
-            <XlyDateRangePicker
+            <EasyDateRangePicker
               v-else-if="item.type === 'daterange'"
               v-model:start="formData[item.prop]"
               v-model:end="formData[item.endProp]"
@@ -447,7 +447,7 @@ onUnmounted(() => {
             />
 
             <!-- 日期时间选择器 -->
-            <XlyDateTimePicker
+            <EasyDateTimePicker
               v-else-if="item.type === 'datetime'"
               v-model="formData[item.prop]"
               :placeholder="item.placeholder || `请选择${item.label}`"
@@ -458,7 +458,7 @@ onUnmounted(() => {
             />
 
             <!-- 日期时间范围选择器 -->
-            <XlyDateTimeRangePicker
+            <EasyDateTimeRangePicker
               v-else-if="item.type === 'datetimerange'"
               v-model:start="formData[item.prop]"
               v-model:end="formData[item.endProp]"
@@ -473,7 +473,7 @@ onUnmounted(() => {
             />
 
             <!-- 时间选择器 -->
-            <XlyTimePicker
+            <EasyTimePicker
               v-else-if="item.type === 'time'"
               v-model="formData[item.prop]"
               :placeholder="item.placeholder || `请选择${item.label}`"
@@ -483,7 +483,7 @@ onUnmounted(() => {
             />
 
             <!-- 时间范围选择器 -->
-            <XlyTimeRangePicker
+            <EasyTimeRangePicker
               v-else-if="item.type === 'timerange'"
               v-model:start="formData[item.prop]"
               v-model:end="formData[item.endProp]"
@@ -505,35 +505,35 @@ onUnmounted(() => {
               :form-data="formData"
               @update:model-value="(val: any) => (formData[item.prop] = val)"
             />
-          </XlyFormItem>
+          </EasyFormItem>
         </template>
 
-        <XlyFormItem ref="searchActionsRef" class="search-actions" :style="searchActionsStyle">
+        <EasyFormItem ref="searchActionsRef" class="search-actions" :style="searchActionsStyle">
           <!-- 自定义插槽 -->
           <slot name="custom-button" />
 
-          <XlyButton type="primary" :size="size" :loading="loading" @click="handleSearch">
+          <EasyButton type="primary" :size="size" :loading="loading" @click="handleSearch">
             <template #icon>
-              <XlyIcon name="el:Search" :size="16" />
+              <EasyIcon name="el:Search" :size="16" />
             </template>
             {{ searchButtonText }}
-          </XlyButton>
+          </EasyButton>
           <span class="action-divider" />
-          <XlyButton type="ghost" :size="size" @click="handleReset">
+          <EasyButton type="ghost" :size="size" @click="handleReset">
             <template #icon>
-              <XlyIcon name="el:Refresh" :size="16" />
+              <EasyIcon name="el:Refresh" :size="16" />
             </template>
             {{ resetButtonText }}
-          </XlyButton>
+          </EasyButton>
           <span v-if="showExpandButton" class="action-divider" />
-        </XlyFormItem>
-      </XlyForm>
+        </EasyFormItem>
+      </EasyForm>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.xly-search-form {
+.easy-search-form {
   width: 100%;
   background: var(--el-bg-color);
   border-radius: 8px;
@@ -554,7 +554,7 @@ onUnmounted(() => {
     gap: 16px;
     align-items: flex-end;
 
-    .xly-form-item {
+    .easy-form-item {
       width: auto !important;
       min-width: 250px !important;
       margin-right: 0 !important;
@@ -565,12 +565,12 @@ onUnmounted(() => {
   .search-actions {
     width: auto;
 
-    :deep(.xly-form-item__label) {
+    :deep(.easy-form-item__label) {
       display: none;
     }
 
-    :deep(.xly-form-item__content) {
-      .xly-form-item__control {
+    :deep(.easy-form-item__content) {
+      .easy-form-item__control {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
@@ -578,7 +578,7 @@ onUnmounted(() => {
       }
 
       // 测量时强制单行、不收缩，得到内容自然宽度
-      .xly-form-item__control.is-measuring {
+      .easy-form-item__control.is-measuring {
         flex-wrap: nowrap;
 
         > * {
@@ -596,11 +596,11 @@ onUnmounted(() => {
 
 <style lang="scss">
 /* ========== Dark Mode ========== */
-html.dark .xly-search-form {
+html.dark .easy-search-form {
   background: var(--el-bg-color);
   border-color: var(--el-border-color);
 }
-html.dark .xly-search-form__title {
+html.dark .easy-search-form__title {
   color: var(--el-text-color-primary);
 }
 </style>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { BadgeInstance } from 'easy-ui'
-import { xly } from 'easy-ui'
+import { easy } from 'easy-ui'
 import { ref } from 'vue'
 
 const newMsg = 8
@@ -17,7 +17,7 @@ function toggleBadge() {
     hasBadge.value = false
   }
   else if (btnRef.value) {
-    badgeInstance = xly.$badge.open(btnRef.value.$el, { value: 5, type: 'danger' })
+    badgeInstance = easy.$badge.open(btnRef.value.$el, { value: 5, type: 'danger' })
     hasBadge.value = true
   }
 }
@@ -49,7 +49,7 @@ function togglePos(btnRef: any, position: string) {
     posBadges.value.delete(key)
   }
   else if (btnRef.value) {
-    const badge = xly.$badge.open(btnRef.value.$el, { value: 5, position })
+    const badge = easy.$badge.open(btnRef.value.$el, { value: 5, position })
     posBadges.value.set(key, badge)
   }
 }
@@ -85,7 +85,7 @@ function toggleType(btnRef: any, type: string) {
     typeBadges.value.delete(key)
   }
   else if (btnRef.value) {
-    const badge = xly.$badge.open(btnRef.value.$el, { value: 5, type })
+    const badge = easy.$badge.open(btnRef.value.$el, { value: 5, type })
     typeBadges.value.set(key, badge)
   }
 }
@@ -113,7 +113,7 @@ function toggleColor(btnRef: any, color: string) {
     colorBadges.value.delete(key)
   }
   else if (btnRef.value) {
-    const badge = xly.$badge.open(btnRef.value.$el, { value: 'NEW', color })
+    const badge = easy.$badge.open(btnRef.value.$el, { value: 'NEW', color })
     colorBadges.value.set(key, badge)
   }
 }
@@ -137,7 +137,7 @@ function toggleCircle(btnRef: any, circle: boolean) {
     circleBadges.value.delete(key)
   }
   else if (btnRef.value) {
-    const badge = xly.$badge.open(btnRef.value.$el, { value: 5, circle })
+    const badge = easy.$badge.open(btnRef.value.$el, { value: 5, circle })
     circleBadges.value.set(key, badge)
   }
 }
@@ -443,7 +443,7 @@ type=&quot;info&quot;     // 灰色"
         命令式调用
       </h2>
       <p class="doc-section__desc">
-        通过 <code>xly.$badge</code> 动态添加/移除徽标。
+        通过 <code>easy.$badge</code> 动态添加/移除徽标。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
@@ -452,10 +452,10 @@ type=&quot;info&quot;     // 灰色"
           </easy-button>
         </div>
         <EasyDocCode
-          code="import { xly } from 'easy-ui'
+          code="import { easy } from 'easy-ui'
 
 // 在元素上显示徽标
-const badge = xly.$badge.open(el, { value: 5 })
+const badge = easy.$badge.open(el, { value: 5 })
 
 // 更新徽标值
 badge.setValue(10)
@@ -485,10 +485,10 @@ badge.close()"
           </easy-button>
         </div>
         <EasyDocCode
-          code="xly.$badge.open(el, { value: 5, position: 'top-left' })
-xly.$badge.open(el, { value: 5, position: 'top-right' })
-xly.$badge.open(el, { value: 5, position: 'bottom-left' })
-xly.$badge.open(el, { value: 5, position: 'bottom-right' })"
+          code="easy.$badge.open(el, { value: 5, position: 'top-left' })
+easy.$badge.open(el, { value: 5, position: 'top-right' })
+easy.$badge.open(el, { value: 5, position: 'bottom-left' })
+easy.$badge.open(el, { value: 5, position: 'bottom-right' })"
         />
       </div>
 
@@ -515,11 +515,11 @@ xly.$badge.open(el, { value: 5, position: 'bottom-right' })"
           </easy-button>
         </div>
         <EasyDocCode
-          code="xly.$badge.open(el, { value: 5, type: 'primary' })
-xly.$badge.open(el, { value: 5, type: 'success' })
-xly.$badge.open(el, { value: 5, type: 'warning' })
-xly.$badge.open(el, { value: 5, type: 'danger' })
-xly.$badge.open(el, { value: 5, type: 'info' })"
+          code="easy.$badge.open(el, { value: 5, type: 'primary' })
+easy.$badge.open(el, { value: 5, type: 'success' })
+easy.$badge.open(el, { value: 5, type: 'warning' })
+easy.$badge.open(el, { value: 5, type: 'danger' })
+easy.$badge.open(el, { value: 5, type: 'info' })"
         />
       </div>
 
@@ -540,9 +540,9 @@ xly.$badge.open(el, { value: 5, type: 'info' })"
           </easy-button>
         </div>
         <EasyDocCode
-          code="xly.$badge.open(el, { value: 'NEW', color: '#ff0000' })
-xly.$badge.open(el, { value: 'NEW', color: '#10b981' })
-xly.$badge.open(el, { value: 'NEW', color: '#8b5cf6' })"
+          code="easy.$badge.open(el, { value: 'NEW', color: '#ff0000' })
+easy.$badge.open(el, { value: 'NEW', color: '#10b981' })
+easy.$badge.open(el, { value: 'NEW', color: '#8b5cf6' })"
         />
       </div>
 
@@ -561,10 +561,10 @@ xly.$badge.open(el, { value: 'NEW', color: '#8b5cf6' })"
         </div>
         <EasyDocCode
           code="// 椭圆（默认）
-xly.$badge.open(el, { value: 5 })
+easy.$badge.open(el, { value: 5 })
 
 // 圆形
-xly.$badge.open(el, { value: 5, circle: true })"
+easy.$badge.open(el, { value: 5, circle: true })"
         />
       </div>
     </section>

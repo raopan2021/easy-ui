@@ -581,7 +581,7 @@ import { EasyCol, EasyRow } from 'easy-ui'
   background-color: #b39ddb;
 }
 
-:deep(.xly-row) {
+:deep(.easy-row) {
   width: 100%;
   margin-bottom: 12px;
   &:last-child {

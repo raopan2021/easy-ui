@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import XlyButton from '../../button'
+import EasyButton from '../../button'
 
 defineOptions({ name: 'EasyModal', inheritAttrs: false })
 
@@ -166,7 +166,7 @@ const modalStyle = computed(() => {
   return style
 })
 
-const modalClass = computed(() => [`xly-modal--${props.size}`, props.customClass])
+const modalClass = computed(() => [`easy-modal--${props.size}`, props.customClass])
 
 function handleClose() {
   emit('update:modelValue', false)
@@ -230,24 +230,24 @@ watch(
 
 <template>
   <Teleport to="body">
-    <Transition name="xly-modal-fade">
+    <Transition name="easy-modal-fade">
       <div
         v-if="modelValue"
-        class="xly-modal-mask"
-        :class="{ 'xly-modal-mask--transparent': !showMask }"
+        class="easy-modal-mask"
+        :class="{ 'easy-modal-mask--transparent': !showMask }"
         :style="maskStyle"
         @click.self="handleMaskClick"
       >
-        <Transition :name="`xly-modal-${transition}`" appear>
-          <div v-if="modelValue" ref="modalRef" class="xly-modal" :class="modalClass" :style="modalStyle">
+        <Transition :name="`easy-modal-${transition}`" appear>
+          <div v-if="modelValue" ref="modalRef" class="easy-modal" :class="modalClass" :style="modalStyle">
             <!-- 头部 -->
-            <div v-if="showHeader" class="xly-modal__header">
-              <div class="xly-modal__title">
+            <div v-if="showHeader" class="easy-modal__header">
+              <div class="easy-modal__title">
                 <slot name="header">
                   <span>{{ title }}</span>
                 </slot>
               </div>
-              <button v-if="showClose" class="xly-modal__close" @click="handleClose">
+              <button v-if="showClose" class="easy-modal__close" @click="handleClose">
                 <svg
                   viewBox="0 0 24 24"
                   width="1em"
@@ -264,20 +264,20 @@ watch(
             </div>
 
             <!-- 主体 -->
-            <div class="xly-modal__body">
+            <div class="easy-modal__body">
               <slot />
             </div>
 
             <!-- 底部 -->
-            <div v-if="$slots.footer || showFooter" class="xly-modal__footer">
+            <div v-if="$slots.footer || showFooter" class="easy-modal__footer">
               <slot name="footer">
-                <div class="xly-modal__footer-actions">
-                  <XlyButton type="text" @click="handleCancel">
+                <div class="easy-modal__footer-actions">
+                  <EasyButton type="text" @click="handleCancel">
                     {{ cancelText }}
-                  </XlyButton>
-                  <XlyButton v-if="showConfirm" type="primary" :loading="confirmLoading" @click="handleConfirm">
+                  </EasyButton>
+                  <EasyButton v-if="showConfirm" type="primary" :loading="confirmLoading" @click="handleConfirm">
                     {{ confirmText }}
-                  </XlyButton>
+                  </EasyButton>
                 </div>
               </slot>
             </div>
@@ -299,7 +299,7 @@ $shadow:
 $transition-fast: 0.2s ease;
 
 /* ========== 遮罩层 ========== */
-.xly-modal-mask {
+.easy-modal-mask {
   position: fixed;
   inset: 0;
   z-index: 2000;
@@ -311,7 +311,7 @@ $transition-fast: 0.2s ease;
   padding: 20px;
   transition: background-color 0.25s ease;
 
-  &.xly-modal-mask--transparent {
+  &.easy-modal-mask--transparent {
     background-color: transparent;
   }
 
@@ -321,7 +321,7 @@ $transition-fast: 0.2s ease;
 }
 
 /* ========== 弹窗主体 ========== */
-.xly-modal {
+.easy-modal {
   position: relative;
   background-color: var(--el-bg-color);
   border-radius: $radius;
@@ -331,7 +331,7 @@ $transition-fast: 0.2s ease;
   flex-direction: column;
   max-width: calc(100vw - 40px);
 
-  &.xly-modal--fullscreen {
+  &.easy-modal--fullscreen {
     border-radius: 0;
     max-width: 100%;
     height: 100vh;
@@ -343,7 +343,7 @@ $transition-fast: 0.2s ease;
 }
 
 /* ========== 头部 ========== */
-.xly-modal__header {
+.easy-modal__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -351,7 +351,7 @@ $transition-fast: 0.2s ease;
   user-select: none;
 }
 
-.xly-modal__title {
+.easy-modal__title {
   font-size: 17px;
   font-weight: 600;
   color: var(--el-text-color-primary);
@@ -360,7 +360,7 @@ $transition-fast: 0.2s ease;
   min-width: 0;
 }
 
-.xly-modal__close {
+.easy-modal__close {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -385,7 +385,7 @@ $transition-fast: 0.2s ease;
 }
 
 /* ========== 主体 ========== */
-.xly-modal__body {
+.easy-modal__body {
   padding: 4px 24px 20px;
   font-size: 14px;
   color: var(--el-text-color-secondary);
@@ -404,11 +404,11 @@ $transition-fast: 0.2s ease;
 }
 
 /* ========== 底部 ========== */
-.xly-modal__footer {
+.easy-modal__footer {
   padding: 12px 24px 20px;
 }
 
-.xly-modal__footer-actions {
+.easy-modal__footer-actions {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -418,74 +418,74 @@ $transition-fast: 0.2s ease;
 /* ========== 动画 ========== */
 
 // 遮罩淡入淡出
-.xly-modal-fade-enter-active {
+.easy-modal-fade-enter-active {
   transition: opacity 0.25s ease;
 }
-.xly-modal-fade-leave-active {
+.easy-modal-fade-leave-active {
   transition: opacity 0.2s ease;
 }
-.xly-modal-fade-enter-from,
-.xly-modal-fade-leave-to {
+.easy-modal-fade-enter-from,
+.easy-modal-fade-leave-to {
   opacity: 0;
 }
 
 // 弹窗缩放
-.xly-modal-zoom-enter-active {
+.easy-modal-zoom-enter-active {
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.xly-modal-zoom-leave-active {
+.easy-modal-zoom-leave-active {
   transition: all 0.2s ease;
 }
-.xly-modal-zoom-enter-from {
+.easy-modal-zoom-enter-from {
   opacity: 0;
   transform: scale(0.85) translateY(10px);
 }
-.xly-modal-zoom-leave-to {
+.easy-modal-zoom-leave-to {
   opacity: 0;
   transform: scale(0.95);
 }
 
 // 弹窗从下方滑入
-.xly-modal-slide-up-enter-active {
+.easy-modal-slide-up-enter-active {
   transition: all 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
 }
-.xly-modal-slide-up-leave-active {
+.easy-modal-slide-up-leave-active {
   transition: all 0.2s ease;
 }
-.xly-modal-slide-up-enter-from {
+.easy-modal-slide-up-enter-from {
   opacity: 0;
   transform: translateY(40px);
 }
-.xly-modal-slide-up-leave-to {
+.easy-modal-slide-up-leave-to {
   opacity: 0;
   transform: translateY(20px);
 }
 
 // 弹窗从上方滑入
-.xly-modal-slide-down-enter-active {
+.easy-modal-slide-down-enter-active {
   transition: all 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
 }
-.xly-modal-slide-down-leave-active {
+.easy-modal-slide-down-leave-active {
   transition: all 0.2s ease;
 }
-.xly-modal-slide-down-enter-from {
+.easy-modal-slide-down-enter-from {
   opacity: 0;
   transform: translateY(-40px);
 }
-.xly-modal-slide-down-leave-to {
+.easy-modal-slide-down-leave-to {
   opacity: 0;
   transform: translateY(-20px);
 }
 
 // 弹窗淡入
-.xly-modal-fade-enter-active {
+.easy-modal-fade-enter-active {
   transition: all 0.3s ease;
 }
-.xly-modal-fade-leave-active {
+.easy-modal-fade-leave-active {
   transition: all 0.2s ease;
 }
-.xly-modal-fade-enter-from,
-.xly-modal-fade-leave-to {
+.easy-modal-fade-enter-from,
+.easy-modal-fade-leave-to {
   opacity: 0;
   transform: translateY(8px);
 }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import XlyIcon from '../../icon'
+import EasyIcon from '../../icon'
 import { progressProps } from './progress'
 
 defineOptions({ name: 'EasyProgress' })
@@ -94,13 +94,13 @@ const barStyle = computed(() => {
       <!-- 文本信息 -->
       <div v-if="showInfo" class="easy-progress__text">
         <span v-if="status === 'success'" class="easy-progress__status">
-          <XlyIcon name="el:CircleCheck" />
+          <EasyIcon name="el:CircleCheck" />
         </span>
         <span v-else-if="status === 'exception'" class="easy-progress__status">
-          <XlyIcon name="el:CircleClose" />
+          <EasyIcon name="el:CircleClose" />
         </span>
         <span v-else-if="status === 'warning'" class="easy-progress__status">
-          <XlyIcon name="el:Warning" />
+          <EasyIcon name="el:Warning" />
         </span>
         <span v-else class="easy-progress__percentage">
           {{ text || `${displayPercentage}%` }}
@@ -140,13 +140,13 @@ const barStyle = computed(() => {
       <!-- 文本信息 -->
       <div v-if="showInfo" class="easy-progress__text">
         <span v-if="status === 'success'" class="easy-progress__status">
-          <XlyIcon name="el:CircleCheck" />
+          <EasyIcon name="el:CircleCheck" />
         </span>
         <span v-else-if="status === 'exception'" class="easy-progress__status">
-          <XlyIcon name="el:CircleClose" />
+          <EasyIcon name="el:CircleClose" />
         </span>
         <span v-else-if="status === 'warning'" class="easy-progress__status">
-          <XlyIcon name="el:Warning" />
+          <EasyIcon name="el:Warning" />
         </span>
         <span v-else class="easy-progress__percentage">
           {{ text || `${displayPercentage}%` }}
@@ -183,13 +183,13 @@ const barStyle = computed(() => {
       <!-- 文本信息 -->
       <div v-if="showInfo" class="easy-progress__text">
         <span v-if="status === 'success'" class="easy-progress__status">
-          <XlyIcon name="el:CircleCheck" />
+          <EasyIcon name="el:CircleCheck" />
         </span>
         <span v-else-if="status === 'exception'" class="easy-progress__status">
-          <XlyIcon name="el:CircleClose" />
+          <EasyIcon name="el:CircleClose" />
         </span>
         <span v-else-if="status === 'warning'" class="easy-progress__status">
-          <XlyIcon name="el:Warning" />
+          <EasyIcon name="el:Warning" />
         </span>
         <span v-else class="easy-progress__percentage">
           {{ text || `${displayPercentage}%` }}

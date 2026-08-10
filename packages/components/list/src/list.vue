@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import XlyEmpty from '../../empty'
-import XlyLoading from '../../loading'
+import EasyEmpty from '../../empty'
+import EasyLoading from '../../loading'
 
 defineOptions({ name: 'EasyList' })
 
@@ -79,39 +79,39 @@ function isImageUrl(url: string): boolean {
 </script>
 
 <template>
-  <div class="xly-list" :class="{ 'xly-list--bordered': bordered }">
+  <div class="easy-list" :class="{ 'easy-list--bordered': bordered }">
     <!-- 头部 -->
-    <div v-if="header || $slots.header" class="xly-list__header">
+    <div v-if="header || $slots.header" class="easy-list__header">
       <slot name="header">
         {{ header }}
       </slot>
     </div>
 
     <!-- 内容区 -->
-    <div class="xly-list__body" :style="{ maxHeight }">
+    <div class="easy-list__body" :style="{ maxHeight }">
       <!-- 加载中 -->
-      <div v-if="loading" class="xly-list__loading">
-        <XlyLoading size="20px" />
+      <div v-if="loading" class="easy-list__loading">
+        <EasyLoading size="20px" />
         <span>加载中...</span>
       </div>
 
       <!-- 空状态 -->
-      <div v-else-if="!list || list.length === 0" class="xly-list__empty">
+      <div v-else-if="!list || list.length === 0" class="easy-list__empty">
         <slot name="empty">
-          <XlyEmpty v-if="showEmpty" :description="emptyText" />
+          <EasyEmpty v-if="showEmpty" :description="emptyText" />
           <span v-else>{{ emptyText }}</span>
         </slot>
       </div>
 
       <!-- 列表内容 -->
-      <div v-else class="xly-list__content">
+      <div v-else class="easy-list__content">
         <div
           v-for="(item, index) in list"
           :key="getKey(item, index)"
-          class="xly-list__item"
+          class="easy-list__item"
           :class="{
-            'xly-list__item--hoverable': hoverable,
-            'xly-list__item--clickable': clickable,
+            'easy-list__item--hoverable': hoverable,
+            'easy-list__item--clickable': clickable,
           }"
           @click="handleItemClick(item, index)"
         >
@@ -119,19 +119,19 @@ function isImageUrl(url: string): boolean {
           <slot v-if="$slots.default" :item="item" :index="index" />
           <!-- 默认渲染 -->
           <template v-else>
-            <div v-if="avatar && avatar !== ''" class="xly-list__item-avatar">
+            <div v-if="avatar && avatar !== ''" class="easy-list__item-avatar">
               <img v-if="isImageUrl(item[avatar])" :src="item[avatar]" alt="">
               <span v-else>{{ getFieldValue(item, avatar) }}</span>
             </div>
-            <div class="xly-list__item-content">
-              <div class="xly-list__item-title">
+            <div class="easy-list__item-content">
+              <div class="easy-list__item-title">
                 {{ getFieldValue(item, title) }}
               </div>
-              <div v-if="description" class="xly-list__item-desc">
+              <div v-if="description" class="easy-list__item-desc">
                 {{ getFieldValue(item, description) }}
               </div>
             </div>
-            <div v-if="$slots.extra || extra" class="xly-list__item-extra">
+            <div v-if="$slots.extra || extra" class="easy-list__item-extra">
               <slot name="extra" :item="item" :index="index">
                 {{ getFieldValue(item, extra!) }}
               </slot>
@@ -142,7 +142,7 @@ function isImageUrl(url: string): boolean {
     </div>
 
     <!-- 底部 -->
-    <div v-if="footer || $slots.footer" class="xly-list__footer">
+    <div v-if="footer || $slots.footer" class="easy-list__footer">
       <slot name="footer">
         {{ footer }}
       </slot>
@@ -151,17 +151,17 @@ function isImageUrl(url: string): boolean {
 </template>
 
 <style scoped lang="scss">
-.xly-list {
+.easy-list {
   width: 100%;
 
-  &.xly-list--bordered {
+  &.easy-list--bordered {
     border: 1px solid #f2f3f7;
     border-radius: 8px;
     overflow: hidden;
   }
 }
 
-.xly-list__header {
+.easy-list__header {
   padding: 12px 16px;
   font-size: 14px;
   font-weight: 600;
@@ -170,11 +170,11 @@ function isImageUrl(url: string): boolean {
   border-bottom: 1px solid #f2f3f7;
 }
 
-.xly-list__body {
+.easy-list__body {
   overflow-y: auto;
 }
 
-.xly-list__loading {
+.easy-list__loading {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -184,7 +184,7 @@ function isImageUrl(url: string): boolean {
   font-size: 14px;
 }
 
-.xly-list__empty {
+.easy-list__empty {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -193,11 +193,11 @@ function isImageUrl(url: string): boolean {
   font-size: 14px;
 }
 
-.xly-list__content {
+.easy-list__content {
   // 默认列表样式
 }
 
-.xly-list__item {
+.easy-list__item {
   display: flex;
   align-items: center;
   padding: 12px 16px;
@@ -208,16 +208,16 @@ function isImageUrl(url: string): boolean {
     border-bottom: none;
   }
 
-  &.xly-list__item--hoverable:hover {
+  &.easy-list__item--hoverable:hover {
     background: var(--el-fill-color-light);
   }
 
-  &.xly-list__item--clickable {
+  &.easy-list__item--clickable {
     cursor: pointer;
   }
 }
 
-.xly-list__item-avatar {
+.easy-list__item-avatar {
   flex-shrink: 0;
   width: 40px;
   height: 40px;
@@ -238,12 +238,12 @@ function isImageUrl(url: string): boolean {
   }
 }
 
-.xly-list__item-content {
+.easy-list__item-content {
   flex: 1;
   min-width: 0;
 }
 
-.xly-list__item-title {
+.easy-list__item-title {
   font-size: 14px;
   color: var(--el-text-color-primary);
   line-height: 1.5;
@@ -252,7 +252,7 @@ function isImageUrl(url: string): boolean {
   white-space: nowrap;
 }
 
-.xly-list__item-desc {
+.easy-list__item-desc {
   font-size: 13px;
   color: var(--el-text-color-secondary);
   line-height: 1.5;
@@ -262,14 +262,14 @@ function isImageUrl(url: string): boolean {
   white-space: nowrap;
 }
 
-.xly-list__item-extra {
+.easy-list__item-extra {
   flex-shrink: 0;
   margin-left: 12px;
   color: var(--el-text-color-secondary);
   font-size: 13px;
 }
 
-.xly-list__footer {
+.easy-list__footer {
   padding: 12px 16px;
   font-size: 14px;
   color: var(--el-text-color-secondary);

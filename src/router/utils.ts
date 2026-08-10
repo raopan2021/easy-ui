@@ -12,7 +12,7 @@ const componentCache = new Map<string, (() => Promise<Component>) | undefined>()
 /**
  * 根据 component 字段解析对应的组件路径
  * component 值直接对应 src/views 下的文件路径（去掉 .vue 后缀）
- *   "xly/button"    → views/xly/button.vue
+ *   "easy/button"    → views/easy/button.vue
  *   "home/home"     → views/home/home.vue
  */
 function resolveComponentPath(component: string): (() => Promise<Component>) | undefined {

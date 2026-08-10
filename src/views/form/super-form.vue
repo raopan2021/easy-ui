@@ -929,7 +929,7 @@ const typeMap: Record<string, Component> = {
 .is-error {
   :deep(.el-input__wrapper),
   :deep(.el-select__wrapper),
-  :deep(.xly-number__wrapper) {  // 👈 添加新组件的选择器
+  :deep(.easy-number__wrapper) {  // 👈 添加新组件的选择器
     box-shadow: 0 0 0 1px #f56c6c inset;
   }
 }"

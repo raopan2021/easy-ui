@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { closeMessage, groupedList, handleMouseEnter, handleMouseLeave, positions, XlyMsg } from './message'
+import { closeMessage, EasyMsg, groupedList, handleMouseEnter, handleMouseLeave, positions } from './message'
 
 defineOptions({ name: 'EasyMessage' })
 
-defineExpose(XlyMsg)
+defineExpose(EasyMsg)
 </script>
 
 <template>
@@ -11,22 +11,22 @@ defineExpose(XlyMsg)
     <template v-for="pos in positions" :key="pos">
       <TransitionGroup
         v-if="groupedList[pos]?.length"
-        name="xly-message"
+        name="easy-message"
         tag="div"
-        class="xly-message-container"
-        :class="`xly-message-container--${pos}`"
+        class="easy-message-container"
+        :class="`easy-message-container--${pos}`"
       >
         <div
           v-for="item in groupedList[pos]"
           :key="item.id"
-          class="xly-message"
-          :class="[`xly-message--${item.type}`, { 'xly-message--closable': item.closable }, item.customClass || '']"
+          class="easy-message"
+          :class="[`easy-message--${item.type}`, { 'easy-message--closable': item.closable }, item.customClass || '']"
           :style="item.customStyle"
           @mouseenter="handleMouseEnter(item)"
           @mouseleave="handleMouseLeave(item)"
         >
           <!-- 图标 -->
-          <div v-if="item.type !== 'text'" class="xly-message__icon">
+          <div v-if="item.type !== 'text'" class="easy-message__icon">
             <svg
               v-if="item.type === 'success'"
               viewBox="0 0 24 24"
@@ -89,13 +89,13 @@ defineExpose(XlyMsg)
           </div>
 
           <!-- 内容 -->
-          <div class="xly-message__content">
-            <span v-if="item.title" class="xly-message__title">{{ item.title }}</span>
-            <span class="xly-message__text">{{ item.message }}</span>
+          <div class="easy-message__content">
+            <span v-if="item.title" class="easy-message__title">{{ item.title }}</span>
+            <span class="easy-message__text">{{ item.message }}</span>
           </div>
 
           <!-- 关闭按钮 -->
-          <button v-if="item.closable" class="xly-message__close" @click="closeMessage(item.id)">
+          <button v-if="item.closable" class="easy-message__close" @click="closeMessage(item.id)">
             <svg
               viewBox="0 0 24 24"
               width="1em"
@@ -111,10 +111,10 @@ defineExpose(XlyMsg)
           </button>
 
           <!-- 进度条 -->
-          <div v-if="item.showProgress" class="xly-message__progress">
+          <div v-if="item.showProgress" class="easy-message__progress">
             <div
-              class="xly-message__progress-bar"
-              :class="`xly-message__progress-bar--${item.type}`"
+              class="easy-message__progress-bar"
+              :class="`easy-message__progress-bar--${item.type}`"
               :style="{ animationDuration: `${item.duration}ms` }"
             />
           </div>
@@ -138,7 +138,7 @@ $shadow-md:
 $transition-fast: 0.2s ease;
 
 /* ========== 容器 ========== */
-.xly-message-container {
+.easy-message-container {
   position: fixed;
   z-index: 3000;
   display: flex;
@@ -147,41 +147,41 @@ $transition-fast: 0.2s ease;
   pointer-events: none;
   max-width: 420px;
 
-  &.xly-message-container--top {
+  &.easy-message-container--top {
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
   }
 
-  &.xly-message-container--top-left {
+  &.easy-message-container--top-left {
     top: 20px;
     left: 20px;
   }
 
-  &.xly-message-container--top-right {
+  &.easy-message-container--top-right {
     top: 20px;
     right: 20px;
   }
 
-  &.xly-message-container--bottom {
+  &.easy-message-container--bottom {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
   }
 
-  &.xly-message-container--bottom-left {
+  &.easy-message-container--bottom-left {
     bottom: 20px;
     left: 20px;
   }
 
-  &.xly-message-container--bottom-right {
+  &.easy-message-container--bottom-right {
     bottom: 20px;
     right: 20px;
   }
 }
 
 /* ========== 消息项 ========== */
-.xly-message {
+.easy-message {
   position: relative;
   display: flex;
   align-items: flex-start;
@@ -199,65 +199,65 @@ $transition-fast: 0.2s ease;
 }
 
 /* ========== 类型样式 ========== */
-.xly-message--success {
+.easy-message--success {
   background-color: var(--el-color-success-light-9);
   border-color: var(--el-color-success-light-5);
 
-  .xly-message__icon {
+  .easy-message__icon {
     color: var(--el-color-success);
   }
 
-  .xly-message__title {
+  .easy-message__title {
     color: var(--el-color-success);
   }
 }
 
-.xly-message--warning {
+.easy-message--warning {
   background-color: var(--el-color-warning-light-9);
   border-color: var(--el-color-warning-light-5);
 
-  .xly-message__icon {
+  .easy-message__icon {
     color: var(--el-color-warning);
   }
 
-  .xly-message__title {
+  .easy-message__title {
     color: var(--el-color-warning);
   }
 }
 
-.xly-message--danger {
+.easy-message--danger {
   background-color: var(--el-color-danger-light-9);
   border-color: var(--el-color-danger-light-5);
 
-  .xly-message__icon {
+  .easy-message__icon {
     color: var(--el-color-danger);
   }
 
-  .xly-message__title {
+  .easy-message__title {
     color: var(--el-color-danger);
   }
 }
 
-.xly-message--info {
+.easy-message--info {
   background-color: var(--el-color-info-light-9);
   border-color: var(--el-color-info-light-5);
 
-  .xly-message__icon {
+  .easy-message__icon {
     color: var(--el-color-info);
   }
 
-  .xly-message__title {
+  .easy-message__title {
     color: var(--el-color-info);
   }
 }
 
-.xly-message--text {
+.easy-message--text {
   background-color: var(--el-bg-color);
   border-color: #ebedf2;
 }
 
 /* ========== 图标 ========== */
-.xly-message__icon {
+.easy-message__icon {
   flex-shrink: 0;
   font-size: 18px;
   line-height: 1.4;
@@ -265,7 +265,7 @@ $transition-fast: 0.2s ease;
 }
 
 /* ========== 内容 ========== */
-.xly-message__content {
+.easy-message__content {
   flex: 1;
   min-width: 0;
   display: flex;
@@ -273,14 +273,14 @@ $transition-fast: 0.2s ease;
   gap: 2px;
 }
 
-.xly-message__title {
+.easy-message__title {
   font-size: 14px;
   font-weight: 600;
   line-height: 1.4;
   color: var(--el-text-color-primary);
 }
 
-.xly-message__text {
+.easy-message__text {
   font-size: 13px;
   line-height: 1.6;
   color: var(--el-text-color-secondary);
@@ -288,7 +288,7 @@ $transition-fast: 0.2s ease;
 }
 
 /* ========== 关闭按钮 ========== */
-.xly-message__close {
+.easy-message__close {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -310,7 +310,7 @@ $transition-fast: 0.2s ease;
 }
 
 /* ========== 进度条 ========== */
-.xly-message__progress {
+.easy-message__progress {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -320,35 +320,35 @@ $transition-fast: 0.2s ease;
   overflow: hidden;
 }
 
-.xly-message__progress-bar {
+.easy-message__progress-bar {
   height: 100%;
   width: 100%;
   transform-origin: left;
-  animation: xly-progress-shrink linear forwards;
+  animation: easy-progress-shrink linear forwards;
   border-radius: 0 0 $radius $radius;
 
-  &.xly-message__progress-bar--success {
+  &.easy-message__progress-bar--success {
     background-color: $color-success;
   }
 
-  &.xly-message__progress-bar--warning {
+  &.easy-message__progress-bar--warning {
     background-color: $progress-warning;
   }
 
-  &.xly-message__progress-bar--danger {
+  &.easy-message__progress-bar--danger {
     background-color: $color-danger;
   }
 
-  &.xly-message__progress-bar--info {
+  &.easy-message__progress-bar--info {
     background-color: $brand-blue;
   }
 
-  &.xly-message__progress-bar--text {
+  &.easy-message__progress-bar--text {
     background-color: #c0c0d0;
   }
 }
 
-@keyframes xly-progress-shrink {
+@keyframes easy-progress-shrink {
   from {
     transform: scaleX(1);
   }
@@ -359,25 +359,25 @@ $transition-fast: 0.2s ease;
 }
 
 /* ========== 过渡动画 ========== */
-.xly-message-enter-active {
+.easy-message-enter-active {
   transition: all 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
 }
 
-.xly-message-leave-active {
+.easy-message-leave-active {
   transition: all 0.2s ease;
 }
 
-.xly-message-enter-from {
+.easy-message-enter-from {
   opacity: 0;
   transform: translateY(-12px) scale(0.95);
 }
 
-.xly-message-leave-to {
+.easy-message-leave-to {
   opacity: 0;
   transform: translateX(30px) scale(0.95);
 }
 
-.xly-message-move {
+.easy-message-move {
   transition: transform 0.25s ease;
 }
 </style>

@@ -132,16 +132,16 @@ defineExpose({ show, hide, toggle })
 <template>
   <div
     ref="triggerRef"
-    class="xly-dropdown"
+    class="easy-dropdown"
     @click="handleClick"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
   >
     <!-- 触发器：优先使用 slot，否则用 label prop -->
     <slot>
-      <span class="xly-dropdown__trigger">
+      <span class="easy-dropdown__trigger">
         {{ label }}
-        <svg class="xly-dropdown__arrow" :class="{ 'is-open': visible }" viewBox="0 0 1024 1024" width="12" height="12">
+        <svg class="easy-dropdown__arrow" :class="{ 'is-open': visible }" viewBox="0 0 1024 1024" width="12" height="12">
           <path
             d="M512 714.667c-8.533 0-17.067-2.134-23.467-8.534L168.533 386.133c-12.8-12.8-12.8-32 0-44.8 12.8-12.8 32-12.8 44.8 0L512 640l298.667-298.667c12.8-12.8 32-12.8 44.8 0 12.8 12.8 12.8 32 0 44.8L535.467 706.133c-6.4 6.4-14.934 8.534-23.467 8.534z"
             fill="currentColor"
@@ -152,11 +152,11 @@ defineExpose({ show, hide, toggle })
 
     <!-- 下拉菜单：Teleport 到 body 避免被 overflow:hidden 裁剪 -->
     <Teleport to="body">
-      <transition name="xly-dropdown-fade">
+      <transition name="easy-dropdown-fade">
         <ul
           v-show="visible"
           ref="menuRef"
-          class="xly-dropdown-menu"
+          class="easy-dropdown-menu"
           :style="menuStyle"
           @mouseenter="handleMenuMouseEnter"
           @mouseleave="handleMenuMouseLeave"
@@ -169,11 +169,11 @@ defineExpose({ show, hide, toggle })
 </template>
 
 <style scoped>
-.xly-dropdown {
+.easy-dropdown {
   display: inline-block;
 }
 
-.xly-dropdown__trigger {
+.easy-dropdown__trigger {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -184,22 +184,22 @@ defineExpose({ show, hide, toggle })
   user-select: none;
 }
 
-.xly-dropdown__trigger:hover {
+.easy-dropdown__trigger:hover {
   color: var(--primary-color, #4f6ef7);
 }
 
-.xly-dropdown__arrow {
+.easy-dropdown__arrow {
   transition: transform 0.25s ease;
 }
 
-.xly-dropdown__arrow.is-open {
+.easy-dropdown__arrow.is-open {
   transform: rotate(180deg);
 }
 </style>
 
 <style>
 /* 全局样式，因为 Teleport 到 body 后 scoped 不生效 */
-.xly-dropdown-menu {
+.easy-dropdown-menu {
   padding: 8px 0;
   margin: 0;
   list-style: none;
@@ -211,21 +211,21 @@ defineExpose({ show, hide, toggle })
     0 3px 6px -4px rgba(0, 0, 0, 0.12);
 }
 
-.xly-dropdown-fade-enter-active,
-.xly-dropdown-fade-leave-active {
+.easy-dropdown-fade-enter-active,
+.easy-dropdown-fade-leave-active {
   transition:
     opacity 0.2s ease,
     transform 0.2s ease;
 }
 
-.xly-dropdown-fade-enter-from,
-.xly-dropdown-fade-leave-to {
+.easy-dropdown-fade-enter-from,
+.easy-dropdown-fade-leave-to {
   opacity: 0;
   transform: translateY(-4px);
 }
 
 /* ========== Dark Mode ========== */
-html.dark .xly-dropdown-menu {
+html.dark .easy-dropdown-menu {
   background: var(--el-bg-color-overlay);
   border-color: var(--el-border-color);
   box-shadow:

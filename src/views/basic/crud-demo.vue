@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {
+  easy,
   EasyButton,
   EasyDescriptions,
   EasyDescriptionsItem,
@@ -14,7 +15,6 @@ import {
   min,
   minLength,
   required,
-  xly,
 } from 'easy-ui'
 import { onMounted, reactive, ref } from 'vue'
 
@@ -189,7 +189,7 @@ async function handleFormSubmit() {
           deptName: deptOptions.find(d => d.value === formData.dept)?.label || '',
         }
       }
-      xly.$msg.success('数据已成功保存', { title: '操作成功' })
+      easy.$msg.success('数据已成功保存', { title: '操作成功' })
     }
     else {
       // 新增
@@ -201,13 +201,13 @@ async function handleFormSubmit() {
       }
       tableData.value.unshift(newRow)
       total.value++
-      xly.$msg.success('数据已成功保存', { title: '操作成功' })
+      easy.$msg.success('数据已成功保存', { title: '操作成功' })
     }
 
     formModal.visible = false
   }
   catch {
-    xly.$msg.success('数据保存失败', { title: '操作失败' })
+    easy.$msg.success('数据保存失败', { title: '操作失败' })
   }
   finally {
     formModal.loading = false
@@ -249,7 +249,7 @@ async function confirmDelete() {
       total.value--
     }
 
-    xly.$msg.success('数据已成功删除', { title: '操作成功' })
+    easy.$msg.success('数据已成功删除', { title: '操作成功' })
     deleteModal.visible = false
   }
   catch {

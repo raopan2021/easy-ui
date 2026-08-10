@@ -288,16 +288,16 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="xly-date-picker" :class="[`xly-date-picker--${size}`, { 'is-disabled': disabled }]">
+  <div class="easy-date-picker" :class="[`easy-date-picker--${size}`, { 'is-disabled': disabled }]">
     <div
       ref="wrapperRef"
-      class="xly-date-picker__wrapper"
+      class="easy-date-picker__wrapper"
       :class="{ 'is-focus': focusing, 'is-hover': hovering && !disabled }"
       @mouseenter="hovering = true"
       @mouseleave="hovering = false"
     >
       <!-- 前缀图标 -->
-      <span class="xly-date-picker__prefix">
+      <span class="easy-date-picker__prefix">
         <slot name="prefix">
           <el-icon><Calendar /></el-icon>
         </slot>
@@ -306,7 +306,7 @@ onBeforeUnmount(() => {
       <!-- 日期输入 -->
       <input
         ref="inputRef"
-        class="xly-date-picker__input"
+        class="easy-date-picker__input"
         :value="displayValue"
         :placeholder="placeholder"
         :disabled="disabled"
@@ -317,37 +317,37 @@ onBeforeUnmount(() => {
       >
 
       <!-- 清除 -->
-      <span v-if="clearable && modelValue && !disabled" class="xly-date-picker__clear" @click.stop="clear">
+      <span v-if="clearable && modelValue && !disabled" class="easy-date-picker__clear" @click.stop="clear">
         <el-icon><Close /></el-icon>
       </span>
     </div>
 
     <!-- 日期选择面板 -->
     <Teleport to="body">
-      <Transition name="xly-date-picker-fade">
-        <div v-if="panelVisible" ref="panelRef" class="xly-date-picker__panel" :style="panelStyle" @mousedown.prevent>
+      <Transition name="easy-date-picker-fade">
+        <div v-if="panelVisible" ref="panelRef" class="easy-date-picker__panel" :style="panelStyle" @mousedown.prevent>
           <!-- 头部：年月切换 -->
-          <div class="xly-date-panel__header">
-            <el-icon class="xly-date-panel__nav" @click="prevMonth">
+          <div class="easy-date-panel__header">
+            <el-icon class="easy-date-panel__nav" @click="prevMonth">
               <ArrowLeft />
             </el-icon>
             <span
-              class="xly-date-panel__title"
+              class="easy-date-panel__title"
               :class="{ 'is-title-clickable': type !== 'year' }"
               @click="toggleYearMode"
             >{{ panelTitle }}</span>
-            <el-icon class="xly-date-panel__nav" @click="nextMonth">
+            <el-icon class="easy-date-panel__nav" @click="nextMonth">
               <ArrowRight />
             </el-icon>
           </div>
 
           <!-- 年份选择 -->
-          <div v-if="type === 'year' || yearMode" class="xly-date-panel__body">
-            <div class="xly-date-panel__year-grid">
+          <div v-if="type === 'year' || yearMode" class="easy-date-panel__body">
+            <div class="easy-date-panel__year-grid">
               <div
                 v-for="year in yearRange"
                 :key="year"
-                class="xly-date-panel__year-cell"
+                class="easy-date-panel__year-cell"
                 :class="{
                   'is-current': year === currentYear && type !== 'month',
                   'is-selected': isYearSelected(year),
@@ -360,12 +360,12 @@ onBeforeUnmount(() => {
           </div>
 
           <!-- 月份选择 -->
-          <div v-else-if="type?.startsWith('month')" class="xly-date-panel__body">
-            <div class="xly-date-panel__month-grid">
+          <div v-else-if="type?.startsWith('month')" class="easy-date-panel__body">
+            <div class="easy-date-panel__month-grid">
               <div
                 v-for="(m, i) in months"
                 :key="i"
-                class="xly-date-panel__month-cell"
+                class="easy-date-panel__month-cell"
                 :class="{
                   'is-current': i === currentMonth && panelYear === currentYear,
                   'is-selected': isMonthSelected(i),
@@ -378,17 +378,17 @@ onBeforeUnmount(() => {
           </div>
 
           <!-- 日历（日期模式） -->
-          <div v-else class="xly-date-panel__body">
+          <div v-else class="easy-date-panel__body">
             <!-- 星期标题 -->
-            <div class="xly-date-panel__weekdays">
+            <div class="easy-date-panel__weekdays">
               <span v-for="w in weekdays" :key="w">{{ w }}</span>
             </div>
             <!-- 日期网格 -->
-            <div class="xly-date-panel__days">
+            <div class="easy-date-panel__days">
               <div
                 v-for="(day, i) in calendarDays"
                 :key="i"
-                class="xly-date-panel__day"
+                class="easy-date-panel__day"
                 :class="{
                   'is-other': !day.isCurrentMonth,
                   'is-today': day.isToday,
@@ -415,31 +415,31 @@ onBeforeUnmount(() => {
 $radius: 8px;
 $transition: all 0.2s ease;
 
-.xly-date-picker {
+.easy-date-picker {
   display: inline-flex;
   width: 100%;
 
-  &.xly-date-picker--large .xly-date-picker__wrapper {
+  &.easy-date-picker--large .easy-date-picker__wrapper {
     height: 44px;
   }
-  &.xly-date-picker--large .xly-date-picker__input {
+  &.easy-date-picker--large .easy-date-picker__input {
     font-size: 15px;
   }
-  &.xly-date-picker--default .xly-date-picker__wrapper {
+  &.easy-date-picker--default .easy-date-picker__wrapper {
     height: 36px;
   }
-  &.xly-date-picker--default .xly-date-picker__input {
+  &.easy-date-picker--default .easy-date-picker__input {
     font-size: 14px;
   }
-  &.xly-date-picker--small .xly-date-picker__wrapper {
+  &.easy-date-picker--small .easy-date-picker__wrapper {
     height: 30px;
   }
-  &.xly-date-picker--small .xly-date-picker__input {
+  &.easy-date-picker--small .easy-date-picker__input {
     font-size: 13px;
   }
 }
 
-.xly-date-picker__wrapper {
+.easy-date-picker__wrapper {
   flex: 1;
   display: inline-flex;
   align-items: center;
@@ -459,7 +459,7 @@ $transition: all 0.2s ease;
   }
 }
 
-.xly-date-picker__prefix {
+.easy-date-picker__prefix {
   display: inline-flex;
   align-items: center;
   margin-right: 6px;
@@ -467,7 +467,7 @@ $transition: all 0.2s ease;
   flex-shrink: 0;
 }
 
-.xly-date-picker__input {
+.easy-date-picker__input {
   flex: 1;
   border: none;
   outline: none;
@@ -481,7 +481,7 @@ $transition: all 0.2s ease;
   }
 }
 
-.xly-date-picker__clear {
+.easy-date-picker__clear {
   display: inline-flex;
   cursor: pointer;
   color: var(--el-text-color-placeholder);
@@ -492,7 +492,7 @@ $transition: all 0.2s ease;
 }
 
 // ========== 触发器样式（scoped）==========
-.xly-date-picker__clear {
+.easy-date-picker__clear {
   display: inline-flex;
   cursor: pointer;
   color: var(--el-text-color-placeholder);
@@ -509,7 +509,7 @@ $transition: all 0.2s ease;
 $radius: 8px;
 
 // ========== 选择面板（Teleport 到 body，不能 scoped）==========
-.xly-date-picker__panel {
+.easy-date-picker__panel {
   position: fixed;
   z-index: 2000;
   width: 300px;
@@ -523,14 +523,14 @@ $radius: 8px;
   user-select: none;
 }
 
-.xly-date-panel__header {
+.easy-date-panel__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 4px 8px 8px;
 }
 
-.xly-date-panel__nav {
+.easy-date-panel__nav {
   display: inline-flex;
   cursor: pointer;
   color: var(--el-text-color-regular);
@@ -542,7 +542,7 @@ $radius: 8px;
   }
 }
 
-.xly-date-panel__title {
+.easy-date-panel__title {
   font-size: 15px;
   font-weight: 600;
   color: var(--el-text-color-regular);
@@ -557,7 +557,7 @@ $radius: 8px;
   }
 }
 
-.xly-date-panel__weekdays {
+.easy-date-panel__weekdays {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   padding: 4px 0;
@@ -572,14 +572,14 @@ $radius: 8px;
   }
 }
 
-.xly-date-panel__days {
+.easy-date-panel__days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 2px;
   padding: 4px 0;
 }
 
-.xly-date-panel__day {
+.easy-date-panel__day {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -621,14 +621,14 @@ $radius: 8px;
   }
 }
 
-.xly-date-panel__month-grid {
+.easy-date-panel__month-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
   padding: 8px;
 }
 
-.xly-date-panel__month-cell {
+.easy-date-panel__month-cell {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -652,14 +652,14 @@ $radius: 8px;
   }
 }
 
-.xly-date-panel__year-grid {
+.easy-date-panel__year-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 8px;
   padding: 8px;
 }
 
-.xly-date-panel__year-cell {
+.easy-date-panel__year-cell {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -683,31 +683,31 @@ $radius: 8px;
   }
 }
 
-.xly-date-picker-fade-enter-active,
-.xly-date-picker-fade-leave-active {
+.easy-date-picker-fade-enter-active,
+.easy-date-picker-fade-leave-active {
   transition:
     opacity 0.15s ease,
     transform 0.15s ease;
   transform-origin: top center;
 }
-.xly-date-picker-fade-enter-from,
-.xly-date-picker-fade-leave-to {
+.easy-date-picker-fade-enter-from,
+.easy-date-picker-fade-leave-to {
   opacity: 0;
   transform: scaleY(0.95) translateY(-4px);
 }
 
 /* ========== Dark Mode ========== */
-html.dark .xly-date-panel__day.is-other {
+html.dark .easy-date-panel__day.is-other {
   color: var(--el-text-color-placeholder);
 }
-html.dark .xly-date-panel__day:hover:not(.is-other):not(.is-selected) {
+html.dark .easy-date-panel__day:hover:not(.is-other):not(.is-selected) {
   background: rgba(79, 110, 247, 0.12);
 }
-html.dark .xly-date-panel__month-cell:hover:not(.is-selected),
-html.dark .xly-date-panel__year-cell:hover:not(.is-selected) {
+html.dark .easy-date-panel__month-cell:hover:not(.is-selected),
+html.dark .easy-date-panel__year-cell:hover:not(.is-selected) {
   background: rgba(79, 110, 247, 0.12);
 }
-html.dark .xly-date-picker__panel {
+html.dark .easy-date-picker__panel {
   box-shadow:
     0 4px 20px rgba(0, 0, 0, 0.2),
     0 0 1px rgba(0, 0, 0, 0.3);

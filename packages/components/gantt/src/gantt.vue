@@ -629,7 +629,7 @@ function handleBarClick(task) {
 function onTimelineScroll(e) {
   scrollLeft.value = e.target.scrollLeft
   // 同步头部水平滚动
-  const header = timelineRef.value?.querySelector('.xly-gantt__timeline-header')
+  const header = timelineRef.value?.querySelector('.easy-gantt__timeline-header')
   if (header)
     header.scrollLeft = e.target.scrollLeft
 }
@@ -647,8 +647,8 @@ function onSidebarScroll(e) {
 }
 function scrollToToday() {
   if (timelineRef.value && todayX.value > 0) {
-    const header = timelineRef.value.querySelector('.xly-gantt__timeline-header')
-    const body = timelineRef.value.querySelector('.xly-gantt__timeline-body')
+    const header = timelineRef.value.querySelector('.easy-gantt__timeline-header')
+    const body = timelineRef.value.querySelector('.easy-gantt__timeline-body')
     const containerWidth = header ? header.clientWidth : timelineRef.value.clientWidth
     if (header)
       header.scrollLeft = todayX.value - containerWidth / 2
@@ -659,7 +659,7 @@ function scrollToToday() {
 function scrollToDate(date) {
   if (timelineRef.value) {
     const x = getTimeX(parseDate(date))
-    const header = timelineRef.value.querySelector('.xly-gantt__timeline-header')
+    const header = timelineRef.value.querySelector('.easy-gantt__timeline-header')
     const containerWidth = header ? header.clientWidth : timelineRef.value.clientWidth
     header.scrollLeft = x - containerWidth / 2
   }
@@ -684,10 +684,10 @@ watch(
 </script>
 
 <template>
-  <div ref="rootRef" class="xly-gantt">
+  <div ref="rootRef" class="easy-gantt">
     <!-- 头部工具栏 -->
-    <div class="xly-gantt__header">
-      <div v-if="title" class="xly-gantt__title">
+    <div class="easy-gantt__header">
+      <div v-if="title" class="easy-gantt__title">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
           <line x1="16" y1="2" x2="16" y2="6" />
@@ -696,8 +696,8 @@ watch(
         </svg>
         {{ title }}
       </div>
-      <div class="xly-gantt__actions">
-        <div v-if="showViewSwitch" class="xly-gantt__view-switch">
+      <div class="easy-gantt__actions">
+        <div v-if="showViewSwitch" class="easy-gantt__view-switch">
           <button
             v-for="view in views"
             :key="view.value"
@@ -707,7 +707,7 @@ watch(
             {{ view.label }}
           </button>
         </div>
-        <div v-if="zoomable" class="xly-gantt__zoom">
+        <div v-if="zoomable" class="easy-gantt__zoom">
           <button :disabled="scale <= 0.5" title="缩小" @click="zoomOut">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <circle cx="11" cy="11" r="8" />
@@ -715,7 +715,7 @@ watch(
               <line x1="8" y1="11" x2="14" y2="11" />
             </svg>
           </button>
-          <span class="xly-gantt__zoom-level">{{ Math.round(scale * 100) }}%</span>
+          <span class="easy-gantt__zoom-level">{{ Math.round(scale * 100) }}%</span>
           <button :disabled="scale >= 3" title="放大" @click="zoomIn">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <circle cx="11" cy="11" r="8" />
@@ -728,30 +728,30 @@ watch(
       </div>
     </div>
 
-    <div class="xly-gantt__body">
+    <div class="easy-gantt__body">
       <!-- 左侧任务列表 -->
       <div
-        class="xly-gantt__sidebar"
+        class="easy-gantt__sidebar"
         :class="{ 'is-auto': sidebarWidth === 'auto' }"
         :style="sidebarWidth !== 'auto' ? { width: `${sidebarWidth}px` } : {}"
       >
         <!-- 多列表头 -->
-        <div class="xly-gantt__sidebar-header">
+        <div class="easy-gantt__sidebar-header">
           <div
             v-for="(col, ci) in columns"
             :key="ci"
-            class="xly-gantt__sidebar-header-cell"
+            class="easy-gantt__sidebar-header-cell"
             :style="getHeaderColumnStyle(col, ci)"
           >
             {{ col.label }}
           </div>
         </div>
         <!-- 多列内容 -->
-        <div ref="sidebarBodyRef" class="xly-gantt__sidebar-body" @scroll="onSidebarScroll">
+        <div ref="sidebarBodyRef" class="easy-gantt__sidebar-body" @scroll="onSidebarScroll">
           <div
             v-for="task in flatTasks"
             :key="task.id"
-            class="xly-gantt__task-row"
+            class="easy-gantt__task-row"
             :class="{
               'is-group': task.isGroup,
               'is-milestone': task.isMilestone,
@@ -764,7 +764,7 @@ watch(
             <div
               v-for="(col, ci) in columns"
               :key="ci"
-              class="xly-gantt__task-cell"
+              class="easy-gantt__task-cell"
               :class="{ 'is-first': ci === 0 }"
               :style="getColumnStyle(col, ci, task)"
             >
@@ -772,7 +772,7 @@ watch(
               <template v-if="ci === 0">
                 <button
                   v-if="task.children && task.children.length > 0"
-                  class="xly-gantt__toggle"
+                  class="easy-gantt__toggle"
                   @click="toggleTask(task)"
                 >
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
@@ -781,7 +781,7 @@ watch(
                   </svg>
                 </button>
 
-                <span class="xly-gantt__task-icon">
+                <span class="easy-gantt__task-icon">
                   <template v-if="task.isMilestone">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none">
                       <polygon
@@ -801,7 +801,7 @@ watch(
                   </template>
                 </span>
 
-                <span class="xly-gantt__task-name" :title="task.name">{{ task.name }}</span>
+                <span class="easy-gantt__task-name" :title="task.name">{{ task.name }}</span>
               </template>
               <!-- 其他列：显示对应字段 -->
               <template v-else>
@@ -815,10 +815,10 @@ watch(
       </div>
 
       <!-- 右侧时间轴 -->
-      <div ref="timelineRef" class="xly-gantt__timeline" @scroll="onTimelineScroll">
+      <div ref="timelineRef" class="easy-gantt__timeline" @scroll="onTimelineScroll">
         <!-- 固定头部 -->
-        <div class="xly-gantt__timeline-header">
-          <svg :width="timelineWidth * scale" :height="headerHeight" class="xly-gantt__svg-header">
+        <div class="easy-gantt__timeline-header">
+          <svg :width="timelineWidth * scale" :height="headerHeight" class="easy-gantt__svg-header">
             <defs>
               <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
                 <polygon points="0 0, 10 3.5, 0 7" fill="var(--el-text-color-placeholder)" />
@@ -832,7 +832,7 @@ watch(
                 v-if="header.yearLabel"
                 :x="getTimeX(parseDate(header.year)) + 8"
                 y="22"
-                class="xly-gantt__header-year"
+                class="easy-gantt__header-year"
               >
                 {{ header.yearLabel }}
               </text>
@@ -842,13 +842,13 @@ watch(
                   :y="cell.y"
                   :width="cell.width - 1"
                   :height="cell.height - 1"
-                  class="xly-gantt__header-cell"
+                  class="easy-gantt__header-cell"
                   :class="{ 'is-weekend': cell.isWeekend }"
                 />
                 <text
                   :x="cell.x + cell.width / 2"
                   :y="cell.y + cell.height / 2"
-                  class="xly-gantt__header-text"
+                  class="easy-gantt__header-text"
                   text-anchor="middle"
                   dominant-baseline="middle"
                 >
@@ -867,16 +867,16 @@ watch(
             />
             <!-- 今日红线头部 -->
             <g v-if="todayX >= 0">
-              <line :x1="todayX" :y1="0" :x2="todayX" :y2="headerHeight" class="xly-gantt__today-line" />
+              <line :x1="todayX" :y1="0" :x2="todayX" :y2="headerHeight" class="easy-gantt__today-line" />
               <circle :cx="todayX" cy="0" r="3" fill="#ef4444" />
-              <text :x="todayX + 8" y="14" class="xly-gantt__today-label">今天</text>
+              <text :x="todayX + 8" y="14" class="easy-gantt__today-label">今天</text>
             </g>
           </svg>
         </div>
 
         <!-- 可滚动内容 -->
-        <div ref="timelineBodyRef" class="xly-gantt__timeline-body" @scroll="onTimelineBodyScroll">
-          <svg :width="timelineWidth * scale" :height="flatTasks.length * rowHeight" class="xly-gantt__svg-body">
+        <div ref="timelineBodyRef" class="easy-gantt__timeline-body" @scroll="onTimelineBodyScroll">
+          <svg :width="timelineWidth * scale" :height="flatTasks.length * rowHeight" class="easy-gantt__svg-body">
             <!-- SVG 定义 -->
             <defs>
               <marker id="body-arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
@@ -891,7 +891,7 @@ watch(
                 :y="ti * rowHeight"
                 :width="timelineWidth * scale"
                 :height="rowHeight"
-                class="xly-gantt__row-bg"
+                class="easy-gantt__row-bg"
                 :class="{ 'is-even': ti % 2 === 0 }"
               />
 
@@ -918,7 +918,7 @@ watch(
                   "
                   :height="barHeight"
                   :rx="6"
-                  class="xly-gantt__bar"
+                  class="easy-gantt__bar"
                   :class="task.colorClass || 'is-default'"
                   @click="handleBarClick(task)"
                   @mouseenter="(e) => showTooltip(e, task)"
@@ -937,14 +937,14 @@ watch(
                   "
                   :height="barHeight"
                   :rx="6"
-                  class="xly-gantt__bar-progress"
+                  class="easy-gantt__bar-progress"
                 />
                 <!-- 进度文字 -->
                 <text
                   v-if="task.progress !== undefined && task.progress > 0"
                   :x="getTimeX(parseDate(task.startDate)) + 10"
                   :y="ti * rowHeight + rowHeight / 2"
-                  class="xly-gantt__bar-progress-text"
+                  class="easy-gantt__bar-progress-text"
                   dominant-baseline="middle"
                 >
                   {{ task.progress }}%
@@ -968,7 +968,7 @@ watch(
               <g v-if="task.isMilestone && task.startDate">
                 <polygon
                   :points="getMilestonePoints(ti)"
-                  class="xly-gantt__milestone"
+                  class="easy-gantt__milestone"
                   :class="task.colorClass || 'is-default'"
                   @click="handleBarClick(task)"
                   @mouseenter="(e) => showTooltip(e, task)"
@@ -982,7 +982,7 @@ watch(
                 :y1="(ti + 1) * rowHeight"
                 :x2="timelineWidth * scale"
                 :y2="(ti + 1) * rowHeight"
-                class="xly-gantt__row-border"
+                class="easy-gantt__row-border"
               />
             </g>
 
@@ -993,21 +993,21 @@ watch(
                 :y1="0"
                 :x2="todayX"
                 :y2="flatTasks.length * rowHeight"
-                class="xly-gantt__today-line"
+                class="easy-gantt__today-line"
               />
             </g>
           </svg>
         </div>
 
         <!-- Tooltip -->
-        <Transition name="xly-gantt-fade">
+        <Transition name="easy-gantt-fade">
           <div
             v-if="tooltipVisible"
-            class="xly-gantt__tooltip"
+            class="easy-gantt__tooltip"
             :style="{ left: `${tooltipX}px`, top: `${tooltipY}px` }"
           >
-            <div class="xly-gantt__tooltip-header">
-              <span class="xly-gantt__tooltip-icon" :class="tooltipData?.colorClass || 'is-default'">
+            <div class="easy-gantt__tooltip-header">
+              <span class="easy-gantt__tooltip-icon" :class="tooltipData?.colorClass || 'is-default'">
                 <svg v-if="tooltipData?.isMilestone" width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
                   <polygon
                     points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
@@ -1027,20 +1027,20 @@ watch(
               </span>
               {{ tooltipData?.name }}
             </div>
-            <div class="xly-gantt__tooltip-body">
-              <div v-if="tooltipData?.startDate" class="xly-gantt__tooltip-row">
+            <div class="easy-gantt__tooltip-body">
+              <div v-if="tooltipData?.startDate" class="easy-gantt__tooltip-row">
                 <span class="label">开始时间</span>
                 <span class="value">{{ tooltipData?.startDate }}</span>
               </div>
-              <div v-if="tooltipData?.endDate" class="xly-gantt__tooltip-row">
+              <div v-if="tooltipData?.endDate" class="easy-gantt__tooltip-row">
                 <span class="label">结束时间</span>
                 <span class="value">{{ tooltipData?.endDate }}</span>
               </div>
-              <div v-if="tooltipData?.progress !== undefined" class="xly-gantt__tooltip-row">
+              <div v-if="tooltipData?.progress !== undefined" class="easy-gantt__tooltip-row">
                 <span class="label">完成进度</span>
                 <span class="value-progress">{{ tooltipData?.progress }}%</span>
               </div>
-              <div v-if="tooltipData?.assignee" class="xly-gantt__tooltip-row">
+              <div v-if="tooltipData?.assignee" class="easy-gantt__tooltip-row">
                 <span class="label">负责人</span>
                 <span class="value">{{ tooltipData?.assignee }}</span>
               </div>
@@ -1053,7 +1053,7 @@ watch(
 </template>
 
 <style scoped lang="scss">
-.xly-gantt {
+.easy-gantt {
   display: flex;
   flex-direction: column;
   border-radius: 16px;
@@ -1066,7 +1066,7 @@ watch(
   height: v-bind(height);
 
   // 现代白色头部
-  .xly-gantt__header {
+  .easy-gantt__header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1076,7 +1076,7 @@ watch(
     border-bottom: 1px solid var(--el-border-color);
   }
 
-  .xly-gantt__title {
+  .easy-gantt__title {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -1090,14 +1090,14 @@ watch(
     }
   }
 
-  .xly-gantt__actions {
+  .easy-gantt__actions {
     display: flex;
     align-items: center;
     gap: 16px;
   }
 
   // 极简按钮组
-  .xly-gantt__view-switch {
+  .easy-gantt__view-switch {
     display: flex;
     background: var(--el-fill-color-light);
     border-radius: 10px;
@@ -1130,7 +1130,7 @@ watch(
     }
   }
 
-  .xly-gantt__zoom {
+  .easy-gantt__zoom {
     display: flex;
     align-items: center;
     gap: 4px;
@@ -1160,7 +1160,7 @@ watch(
     }
   }
 
-  .xly-gantt__zoom-level {
+  .easy-gantt__zoom-level {
     font-size: 12px;
     color: var(--el-text-color-regular)-tertiary;
     min-width: 40px;
@@ -1168,13 +1168,13 @@ watch(
     font-weight: 500;
   }
 
-  .xly-gantt__body {
+  .easy-gantt__body {
     display: flex;
     overflow: hidden;
     height: calc(100% - 60px);
   }
 
-  .xly-gantt__sidebar {
+  .easy-gantt__sidebar {
     flex-shrink: 0;
     border-right: 1px solid var(--el-border-color);
     background: var(--el-fill-color-light);
@@ -1187,7 +1187,7 @@ watch(
     }
   }
 
-  .xly-gantt__sidebar-header {
+  .easy-gantt__sidebar-header {
     display: flex;
     height: 52px;
     border-bottom: 1px solid var(--el-border-color);
@@ -1195,7 +1195,7 @@ watch(
     overflow: hidden;
   }
 
-  .xly-gantt__sidebar-header-cell {
+  .easy-gantt__sidebar-header-cell {
     display: flex;
     align-items: center;
     padding: 0 12px;
@@ -1212,7 +1212,7 @@ watch(
     }
   }
 
-  .xly-gantt__sidebar-body {
+  .easy-gantt__sidebar-body {
     flex: 1;
     overflow-y: auto;
     background: var(--el-fill-color-light);
@@ -1232,7 +1232,7 @@ watch(
     }
   }
 
-  .xly-gantt__task-row {
+  .easy-gantt__task-row {
     display: flex;
     align-items: center;
     border-bottom: 1px solid var(--el-border-color)-light;
@@ -1245,11 +1245,11 @@ watch(
     }
 
     &.is-milestone {
-      .xly-gantt__task-name {
+      .easy-gantt__task-name {
         color: var(--el-color-warning);
         font-weight: 500;
       }
-      .xly-gantt__task-icon {
+      .easy-gantt__task-icon {
         color: var(--el-color-warning);
       }
     }
@@ -1259,7 +1259,7 @@ watch(
     }
   }
 
-  .xly-gantt__task-cell {
+  .easy-gantt__task-cell {
     display: flex;
     align-items: center;
     padding: 0 12px;
@@ -1277,7 +1277,7 @@ watch(
     }
   }
 
-  .xly-gantt__toggle {
+  .easy-gantt__toggle {
     width: 20px;
     height: 20px;
     display: flex;
@@ -1297,13 +1297,13 @@ watch(
     }
   }
 
-  .xly-gantt__task-icon {
+  .easy-gantt__task-icon {
     display: flex;
     align-items: center;
     color: var(--el-text-color-regular)-tertiary;
   }
 
-  .xly-gantt__task-name {
+  .easy-gantt__task-name {
     flex: 1;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1312,7 +1312,7 @@ watch(
     font-size: 13px;
   }
 
-  .xly-gantt__timeline {
+  .easy-gantt__timeline {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -1320,7 +1320,7 @@ watch(
     background: var(--el-fill-color-light);
   }
 
-  .xly-gantt__timeline-header {
+  .easy-gantt__timeline-header {
     flex-shrink: 0;
     overflow-x: auto;
     overflow-y: hidden;
@@ -1331,27 +1331,27 @@ watch(
     }
   }
 
-  .xly-gantt__timeline-body {
+  .easy-gantt__timeline-body {
     flex: 1;
     overflow: auto;
     background: var(--el-fill-color-light);
   }
 
-  .xly-gantt__svg-header {
+  .easy-gantt__svg-header {
     display: block;
   }
-  .xly-gantt__svg-body {
+  .easy-gantt__svg-body {
     display: block;
   }
 
-  .xly-gantt__header-year {
+  .easy-gantt__header-year {
     font-size: 12px;
     font-weight: 600;
     fill: var(--el-text-color-regular);
     letter-spacing: -0.2px;
   }
 
-  .xly-gantt__header-cell {
+  .easy-gantt__header-cell {
     fill: var(--el-fill-color-light);
     stroke: var(--el-border-color)-light;
     stroke-width: 1;
@@ -1361,28 +1361,28 @@ watch(
     }
   }
 
-  .xly-gantt__header-text {
+  .easy-gantt__header-text {
     font-size: 11px;
     fill: var(--el-text-color-secondary);
     font-weight: 500;
     letter-spacing: 0.2px;
   }
 
-  .xly-gantt__today-line {
+  .easy-gantt__today-line {
     stroke: var(--el-color-danger);
     stroke-width: 1.5;
     stroke-dasharray: 4 2;
     opacity: 0.8;
   }
 
-  .xly-gantt__today-label {
+  .easy-gantt__today-label {
     font-size: 11px;
     fill: var(--el-color-danger);
     font-weight: 600;
     letter-spacing: 0.3px;
   }
 
-  .xly-gantt__row-bg {
+  .easy-gantt__row-bg {
     fill: var(--el-fill-color-light);
 
     &.is-even,
@@ -1391,13 +1391,13 @@ watch(
     }
   }
 
-  .xly-gantt__row-border {
+  .easy-gantt__row-border {
     stroke: var(--el-border-color)-light;
     stroke-width: 1;
   }
 
   // 扁平化任务条
-  .xly-gantt__bar {
+  .easy-gantt__bar {
     cursor: pointer;
     transition:
       filter 0.15s ease,
@@ -1424,19 +1424,19 @@ watch(
     }
   }
 
-  .xly-gantt__bar-progress {
+  .easy-gantt__bar-progress {
     fill: rgba(255, 255, 255, 0.35);
     pointer-events: none;
   }
 
-  .xly-gantt__bar-progress-text {
+  .easy-gantt__bar-progress-text {
     font-size: 10px;
     fill: var(--el-color-white);
     font-weight: 600;
     letter-spacing: 0.2px;
   }
 
-  .xly-gantt__milestone {
+  .easy-gantt__milestone {
     cursor: pointer;
     transition: filter 0.15s ease;
 
@@ -1461,7 +1461,7 @@ watch(
     }
   }
 
-  .xly-gantt__dependency {
+  .easy-gantt__dependency {
     fill: none;
     stroke: var(--el-text-color-placeholder);
     stroke-width: 1.5;
@@ -1469,7 +1469,7 @@ watch(
   }
 
   // 极简Tooltip
-  .xly-gantt__tooltip {
+  .easy-gantt__tooltip {
     position: fixed;
     z-index: 99999;
     background: rgba(0, 0, 0, 0.85);
@@ -1484,7 +1484,7 @@ watch(
     overflow: hidden;
   }
 
-  .xly-gantt__tooltip-header {
+  .easy-gantt__tooltip-header {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -1495,7 +1495,7 @@ watch(
     font-size: 13px;
   }
 
-  .xly-gantt__tooltip-icon {
+  .easy-gantt__tooltip-icon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1525,11 +1525,11 @@ watch(
     }
   }
 
-  .xly-gantt__tooltip-body {
+  .easy-gantt__tooltip-body {
     padding: 10px 14px;
   }
 
-  .xly-gantt__tooltip-row {
+  .easy-gantt__tooltip-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1551,14 +1551,14 @@ watch(
   }
 }
 
-.xly-gantt-fade-enter-active,
-.xly-gantt-fade-leave-active {
+.easy-gantt-fade-enter-active,
+.easy-gantt-fade-leave-active {
   transition:
     opacity 0.15s,
     transform 0.15s;
 }
-.xly-gantt-fade-enter-from,
-.xly-gantt-fade-leave-to {
+.easy-gantt-fade-enter-from,
+.easy-gantt-fade-leave-to {
   opacity: 0;
   transform: translateY(-4px);
 }

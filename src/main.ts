@@ -1,6 +1,6 @@
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 // easy-ui 全局服务 + 组件
-import { EasyDocCode, setupWatermarkDirective, setupXly } from 'easy-ui'
+import { EasyDocCode, setupEasy, setupWatermarkDirective } from 'easy-ui'
 
 // Element Plus
 import ElementPlus from 'element-plus'
@@ -36,8 +36,8 @@ app.use(router)
 // 初始化主题（订阅系统偏好并同步 <html> 的 dark class）
 useThemeStore()
 
-// 全局安装 xly 服务（消息提示、加载等）
-setupXly(app)
+// 全局安装 easy 服务（消息提示、加载等）
+setupEasy(app)
 
 // 全局注册水印指令
 setupWatermarkDirective(app)

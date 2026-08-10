@@ -4,17 +4,17 @@
  * ============================================================ */
 html.dark {
   /* ===== 部门树 ===== */
-  .xly-dept-tree {
+  .easy-dept-tree {
     background: var(--el-bg-color);
     border-color: var(--el-border-color);
 
-    .xly-dept-tree__node-label {
+    .easy-dept-tree__node-label {
       color: var(--el-text-color-regular);
     }
-    .xly-dept-tree__node:hover > .xly-dept-tree__node-label {
+    .easy-dept-tree__node:hover > .easy-dept-tree__node-label {
       background: var(--el-fill-color-light);
     }
-    .xly-dept-tree__node.is-active > .xly-dept-tree__node-label {
+    .easy-dept-tree__node.is-active > .easy-dept-tree__node-label {
       background: var(--el-fill-color-light);
       color: var(--el-color-primary);
     }
@@ -28,76 +28,76 @@ html.dark {
   }
 
   /* ===== 甘特图 ===== */
-  .xly-gantt {
+  .easy-gantt {
     background: var(--el-bg-color);
 
-    .xly-gantt__header {
+    .easy-gantt__header {
       background: var(--el-fill-color-light);
       border-color: var(--el-border-color);
     }
 
-    .xly-gantt__sidebar-header {
+    .easy-gantt__sidebar-header {
       background: var(--el-fill-color-light);
       border-color: var(--el-border-color);
     }
 
-    .xly-gantt__sidebar-cell {
+    .easy-gantt__sidebar-cell {
       border-color: var(--el-border-color);
       color: var(--el-text-color-regular);
     }
 
-    .xly-gantt__cell {
+    .easy-gantt__cell {
       border-color: var(--el-border-color-lighter);
     }
 
-    .xly-gantt__bar {
+    .easy-gantt__bar {
       color: #fff;
     }
 
-    .xly-gantt__today-line {
+    .easy-gantt__today-line {
       background: var(--el-color-danger);
     }
 
-    .xly-gantt__header-cell {
+    .easy-gantt__header-cell {
       border-color: var(--el-border-color);
       color: var(--el-text-color-secondary);
     }
 
-    .xly-gantt__header-cell--today {
+    .easy-gantt__header-cell--today {
       background: rgba(239, 68, 68, 0.1);
     }
   }
 
   /* ===== 聊天 ===== */
-  .xly-chat {
-    .xly-chat__message--assistant {
+  .easy-chat {
+    .easy-chat__message--assistant {
       background: var(--el-fill-color-lighter);
     }
 
-    .xly-chat__avatar {
+    .easy-chat__avatar {
       background: var(--el-fill-color);
     }
 
-    .xly-chat__message-content {
+    .easy-chat__message-content {
       background: var(--el-bg-color-overlay);
       border-color: var(--el-border-color);
     }
   }
 
-  .xly-chat-input {
+  .easy-chat-input {
     background: var(--el-fill-color-lighter);
     border-color: var(--el-border-color);
 
-    .xly-chat-input__textarea {
+    .easy-chat-input__textarea {
       color: var(--el-text-color-primary);
       background: transparent;
     }
 
-    .xly-chat-input__textarea::placeholder {
+    .easy-chat-input__textarea::placeholder {
       color: var(--el-text-color-placeholder);
     }
 
-    .xly-chat-input__send-btn {
+    .easy-chat-input__send-btn {
       color: var(--el-text-color-secondary);
     }
   }

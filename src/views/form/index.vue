@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {
+  easy,
   EasyButton,
   EasyDatePicker,
   EasyForm,
@@ -12,7 +13,6 @@ import {
   minLength,
   phone,
   required,
-  xly,
 } from 'easy-ui'
 import { reactive, ref } from 'vue'
 
@@ -43,17 +43,17 @@ const departmentOptions = [
 async function submitBasicForm() {
   const valid = await basicFormRef.value?.validate()
   if (valid) {
-    xly.$msg.success('表单校验通过！')
+    easy.$msg.success('表单校验通过！')
     console.log('表单数据:', { ...basicForm })
   }
   else {
-    xly.$msg.danger('请检查表单填写是否正确')
+    easy.$msg.danger('请检查表单填写是否正确')
   }
 }
 
 function resetBasicForm() {
   basicFormRef.value?.resetFields()
-  xly.$msg.info('表单已重置')
+  easy.$msg.info('表单已重置')
 }
 
 /** ===== 日期时间 ===== */
@@ -349,7 +349,7 @@ const options = [
         校验规则 API
       </h2>
       <p class="doc-section__desc">
-        内置常用校验规则，从 <code>xly-form/utils</code> 引入。
+        内置常用校验规则，从 <code>easy-form/utils</code> 引入。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
@@ -531,8 +531,8 @@ const options = [
 }
 
 .input-demo-item {
-  .xly-input,
-  .xly-select {
+  .easy-input,
+  .easy-select {
     flex: 1;
     max-width: 320px;
   }

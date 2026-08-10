@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyButton, xly } from 'easy-ui'
+import { easy, EasyButton } from 'easy-ui'
 
 // Alert 示例
 function handleAlert(type: 'info' | 'success' | 'warning' | 'danger') {
@@ -10,50 +10,50 @@ function handleAlert(type: 'info' | 'success' | 'warning' | 'danger') {
     danger: { msg: '请求失败，服务器返回错误 500。', title: '系统错误' },
   }
   const { msg, title } = messages[type]
-  xly.$msgbox.alert(msg, title, { type })
+  easy.$msgbox.alert(msg, title, { type })
 }
 
 // Confirm 示例
 function handleConfirm() {
-  xly.$msgbox
+  easy.$msgbox
     .confirm('确定要删除该记录吗？此操作不可撤销。', '删除确认', { type: 'warning' })
-    .then(() => xly.$msg.success('记录已删除'))
-    .catch(() => xly.$msg.info('已取消'))
+    .then(() => easy.$msg.success('记录已删除'))
+    .catch(() => easy.$msg.info('已取消'))
 }
 
 function handleConfirmDanger() {
-  xly.$msgbox
+  easy.$msgbox
     .confirm('即将清空所有数据，此操作不可恢复！', '危险操作', {
       type: 'danger',
       confirmButtonDanger: true,
       confirmButtonText: '确认清空',
     })
-    .then(() => xly.$msg.success('已执行清空操作'))
+    .then(() => easy.$msg.success('已执行清空操作'))
     .catch(() => {})
 }
 
 function handleConfirmCancelable() {
-  xly.$msgbox
+  easy.$msgbox
     .confirm('是否保存当前修改内容？', '保存提示', {
       type: 'info',
       closeOnClickModal: true,
     })
-    .then(() => xly.$msg.success('内容已保存'))
-    .catch(() => xly.$msg.info('放弃保存'))
+    .then(() => easy.$msg.success('内容已保存'))
+    .catch(() => easy.$msg.info('放弃保存'))
 }
 
 // Prompt 示例
 function handlePrompt() {
-  xly.$msgbox
+  easy.$msgbox
     .prompt('请输入项目名称', '新建项目', {
       input: { placeholder: '请输入 2-20 个字符' },
     })
-    .then(({ value }) => xly.$msg.success(`已创建项目：${value}`))
+    .then(({ value }) => easy.$msg.success(`已创建项目：${value}`))
     .catch(() => {})
 }
 
 function handlePromptValidate() {
-  xly.$msgbox
+  easy.$msgbox
     .prompt('请输入手机号', '绑定手机', {
       input: {
         placeholder: '请输入 11 位手机号',
@@ -61,56 +61,56 @@ function handlePromptValidate() {
         patternMessage: '手机号格式不正确',
       },
     })
-    .then(({ value }) => xly.$msg.success(`手机号 ${value} 绑定成功`))
+    .then(({ value }) => easy.$msg.success(`手机号 ${value} 绑定成功`))
     .catch(() => {})
 }
 
 function handlePromptPassword() {
-  xly.$msgbox
+  easy.$msgbox
     .prompt('请输入新密码', '修改密码', {
       input: { inputType: 'password', placeholder: '请输入至少 6 位密码' },
     })
-    .then(() => xly.$msg.success('密码修改成功'))
+    .then(() => easy.$msg.success('密码修改成功'))
     .catch(() => {})
 }
 
 function handlePromptTextarea() {
-  xly.$msgbox
+  easy.$msgbox
     .prompt('请输入备注内容', '添加备注', {
       input: { inputType: 'textarea', placeholder: '请输入备注...' },
     })
-    .then(({ value }) => xly.$msg.success(`备注已保存：${value}`))
+    .then(({ value }) => easy.$msg.success(`备注已保存：${value}`))
     .catch(() => {})
 }
 
 // async/await 示例
 async function handleAsyncAwait() {
   try {
-    await xly.$msgbox.confirm('确定要提交审核吗？提交后将无法修改。', '提交确认', {
+    await easy.$msgbox.confirm('确定要提交审核吗？提交后将无法修改。', '提交确认', {
       type: 'warning',
       confirmButtonText: '提交',
     })
-    xly.$msg.success('已提交审核，请等待处理')
+    easy.$msg.success('已提交审核，请等待处理')
   }
   catch {
-    xly.$msg.info('已取消提交')
+    easy.$msg.info('已取消提交')
   }
 }
 
 // 自定义按钮
 function handleCustomText() {
-  xly.$msgbox
+  easy.$msgbox
     .confirm('检测到未保存的内容，是否离开当前页面？', '离开提示', {
       confirmButtonText: '离开',
       cancelButtonText: '留下',
       type: 'warning',
     })
-    .then(() => xly.$msg.info('已离开页面'))
-    .catch(() => xly.$msg.success('继续编辑'))
+    .then(() => easy.$msg.info('已离开页面'))
+    .catch(() => easy.$msg.success('继续编辑'))
 }
 
 function handleNoClose() {
-  xly.$msgbox.confirm('请仔细阅读并确认以下操作内容。', '二次确认', {
+  easy.$msgbox.confirm('请仔细阅读并确认以下操作内容。', '二次确认', {
     showClose: false,
     closeOnClickModal: false,
     type: 'warning',
@@ -119,7 +119,7 @@ function handleNoClose() {
 
 // 通用 open
 function handleOpen() {
-  xly.$msgbox.open({
+  easy.$msgbox.open({
     title: '自定义弹框',
     message: '这是一条通过 open() 方法创建的弹框，可完整控制所有配置项。',
     type: 'success',
@@ -130,7 +130,7 @@ function handleOpen() {
 }
 
 function handleHtmlContent() {
-  xly.$msgbox.open({
+  easy.$msgbox.open({
     title: '系统公告',
     message:
       '<strong>重要通知：</strong>系统将于今晚 <span style="color:#cf222e;font-weight:600">22:00 - 23:00</span> 进行例行维护，期间服务将暂时不可用，请提前做好准备。',
@@ -141,34 +141,34 @@ function handleHtmlContent() {
 
 // 业务场景
 function handleBizDelete() {
-  xly.$msgbox
+  easy.$msgbox
     .confirm('确定删除该用户吗？删除后数据将无法恢复。', '删除用户', {
       type: 'danger',
       confirmButtonDanger: true,
       confirmButtonText: '删除',
     })
-    .then(() => xly.$msg.success('用户已删除'))
+    .then(() => easy.$msg.success('用户已删除'))
     .catch(() => {})
 }
 
 function handleBizRename() {
-  xly.$msgbox
+  easy.$msgbox
     .prompt('请输入新名称', '重命名', {
       input: { value: '旧项目名称', placeholder: '请输入名称' },
     })
-    .then(({ value }) => xly.$msg.success(`已重命名为：${value}`))
+    .then(({ value }) => easy.$msg.success(`已重命名为：${value}`))
     .catch(() => {})
 }
 
 function handleBizLeave() {
-  xly.$msgbox
+  easy.$msgbox
     .confirm('您有未保存的修改，确定要离开当前页面吗？', '离开提示', {
       type: 'warning',
       confirmButtonText: '离开',
       cancelButtonText: '留下',
     })
-    .then(() => xly.$msg.info('已离开页面'))
-    .catch(() => xly.$msg.success('继续编辑'))
+    .then(() => easy.$msg.info('已离开页面'))
+    .catch(() => easy.$msg.success('继续编辑'))
 }
 </script>
 
@@ -209,13 +209,13 @@ function handleBizLeave() {
           </EasyButton>
         </div>
         <EasyDocCode
-          code="import { xly } from 'easy-ui'
+          code="import { easy } from 'easy-ui'
 
 // 基础用法
-await xly.$msgbox.alert('您的账户已成功创建', '注册成功', { type: 'success' })
+await easy.$msgbox.alert('您的账户已成功创建', '注册成功', { type: 'success' })
 
 // 或者简写，title 可省略（默认&quot;提示&quot;）
-await xly.$msgbox.alert('此操作不可撤销，请谨慎操作', '警告', { type: 'warning' })"
+await easy.$msgbox.alert('此操作不可撤销，请谨慎操作', '警告', { type: 'warning' })"
         />
       </div>
     </section>
@@ -242,25 +242,25 @@ await xly.$msgbox.alert('此操作不可撤销，请谨慎操作', '警告', { t
         </div>
         <EasyDocCode
           code="// 基础 Confirm
-xly.$msgbox.confirm('确定要删除该记录吗？此操作不可撤销。', '删除确认', {
+easy.$msgbox.confirm('确定要删除该记录吗？此操作不可撤销。', '删除确认', {
   type: 'warning',
 })
   .then(() => {
-    xly.$msg.success('删除成功')
+    easy.$msg.success('删除成功')
   })
   .catch(() => {
     // 用户取消
   })
 
 // 危险操作：确认按钮变红
-xly.$msgbox.confirm('即将清空所有数据，此操作不可恢复！', '危险操作', {
+easy.$msgbox.confirm('即将清空所有数据，此操作不可恢复！', '危险操作', {
   type: 'danger',
   confirmButtonDanger: true,
   confirmButtonText: '确认清空',
 })
 
 // 点击遮罩可关闭
-xly.$msgbox.confirm('是否保存当前修改？', '保存提示', {
+easy.$msgbox.confirm('是否保存当前修改？', '保存提示', {
   type: 'info',
   closeOnClickModal: true,
 })"
@@ -293,14 +293,14 @@ xly.$msgbox.confirm('是否保存当前修改？', '保存提示', {
         </div>
         <EasyDocCode
           code="// 基础 Prompt
-xly.$msgbox.prompt('请输入项目名称', '新建项目', {
+easy.$msgbox.prompt('请输入项目名称', '新建项目', {
   input: { placeholder: '请输入 2-20 个字符' },
 }).then(({ value }) => {
-  xly.$msg.success(`创建成功：${value}`)
+  easy.$msg.success(`创建成功：${value}`)
 })
 
 // 带正则校验
-xly.$msgbox.prompt('请输入手机号', '绑定手机', {
+easy.$msgbox.prompt('请输入手机号', '绑定手机', {
   input: {
     placeholder: '请输入 11 位手机号',
     pattern: '^1[3-9]\\d{9}$',
@@ -309,12 +309,12 @@ xly.$msgbox.prompt('请输入手机号', '绑定手机', {
 })
 
 // 密码输入框
-xly.$msgbox.prompt('请输入新密码', '修改密码', {
+easy.$msgbox.prompt('请输入新密码', '修改密码', {
   input: { inputType: 'password', placeholder: '请输入至少 6 位密码' },
 })
 
 // 文本域
-xly.$msgbox.prompt('请输入备注', '添加备注', {
+easy.$msgbox.prompt('请输入备注', '添加备注', {
   input: { inputType: 'textarea', placeholder: '请输入备注内容...' },
 })"
         />
@@ -338,16 +338,16 @@ xly.$msgbox.prompt('请输入备注', '添加备注', {
         <EasyDocCode
           code="async function handleDelete() {
   try {
-    await xly.$msgbox.confirm('确定删除该用户吗？', '删除用户', {
+    await easy.$msgbox.confirm('确定删除该用户吗？', '删除用户', {
       type: 'warning',
       confirmButtonDanger: true,
     })
     // 用户点击&quot;确定&quot;
     await deleteUser(userId)
-    xly.$msg.success('删除成功')
+    easy.$msg.success('删除成功')
   } catch {
     // 用户点击&quot;取消&quot;或关闭
-    xly.$msg.info('已取消操作')
+    easy.$msg.info('已取消操作')
   }
 }"
         />
@@ -372,14 +372,14 @@ xly.$msgbox.prompt('请输入备注', '添加备注', {
           </EasyButton>
         </div>
         <EasyDocCode
-          code="xly.$msgbox.confirm('检测到未保存的内容，是否离开当前页面？', '离开提示', {
+          code="easy.$msgbox.confirm('检测到未保存的内容，是否离开当前页面？', '离开提示', {
   confirmButtonText: '离开',
   cancelButtonText: '留下',
   type: 'warning',
 })
 
 // 隐藏右上角关闭按钮
-xly.$msgbox.confirm('请确认以下操作', '二次确认', {
+easy.$msgbox.confirm('请确认以下操作', '二次确认', {
   showClose: false,
   closeOnClickModal: false,
 })"
@@ -393,7 +393,7 @@ xly.$msgbox.confirm('请确认以下操作', '二次确认', {
         通用 open 方法
       </h2>
       <p class="doc-section__desc">
-        使用 <code>xly.$msgbox.open()</code> 可完整控制所有配置项，适合复杂场景。
+        使用 <code>easy.$msgbox.open()</code> 可完整控制所有配置项，适合复杂场景。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
@@ -406,7 +406,7 @@ xly.$msgbox.confirm('请确认以下操作', '二次确认', {
         </div>
         <EasyDocCode
           code="// 通用调用
-xly.$msgbox.open({
+easy.$msgbox.open({
   title: '自定义弹框',
   message: '这是一条自定义内容',
   type: 'success',
@@ -416,7 +416,7 @@ xly.$msgbox.open({
 })
 
 // HTML 内容（确保内容安全可信）
-xly.$msgbox.open({
+easy.$msgbox.open({
   title: '公告',
   message: '<strong>重要通知：</strong>系统将于今晚 <span style=&quot;color:#cf222e&quot;>22:00</span> 进行维护。',
   dangerouslyUseHTMLString: true,
@@ -449,24 +449,24 @@ xly.$msgbox.open({
         <EasyDocCode
           code="// 删除记录
 async function handleDelete(id: number) {
-  await xly.$msgbox.confirm('确定删除该记录？删除后不可恢复。', '删除确认', {
+  await easy.$msgbox.confirm('确定删除该记录？删除后不可恢复。', '删除确认', {
     type: 'danger',
     confirmButtonDanger: true,
     confirmButtonText: '删除',
   })
   await api.delete(id)
-  xly.$msg.success('删除成功')
+  easy.$msg.success('删除成功')
 }
 
 // 重命名
-xly.$msgbox.prompt('请输入新名称', '重命名', {
+easy.$msgbox.prompt('请输入新名称', '重命名', {
   input: { value: currentName, placeholder: '请输入名称' },
 }).then(({ value }) => rename(value))
 
 // 离开页面前确认
 router.beforeEach(async (to, from, next) => {
   if (hasUnsavedChanges.value) {
-    await xly.$msgbox.confirm('有未保存的修改，确定离开吗？', '提示', {
+    await easy.$msgbox.confirm('有未保存的修改，确定离开吗？', '提示', {
       confirmButtonText: '离开',
       cancelButtonText: '留下',
     })
@@ -484,10 +484,10 @@ router.beforeEach(async (to, from, next) => {
       </h2>
 
       <h3 class="doc-subtitle">
-        xly.$msgbox 方法
+        easy.$msgbox 方法
       </h3>
       <p class="doc-section__desc" style="margin-bottom: 12px">
-        通过 <code>import { xly } from 'easy-ui'</code> 调用 <code>xly.$msgbox</code>。
+        通过 <code>import { easy } from 'easy-ui'</code> 调用 <code>easy.$msgbox</code>。
       </p>
       <div class="doc-table">
         <table>

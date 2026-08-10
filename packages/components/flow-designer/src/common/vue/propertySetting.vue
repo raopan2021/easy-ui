@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import XlyModal from '../../../../modal'
+import EasyModal from '../../../../modal'
 import between from './between'
 import end from './end'
 import serial from './gateway'
@@ -343,7 +343,7 @@ defineExpose({
 
 <template>
   <div>
-    <XlyModal v-model="drawer" :title="title" width="40%" @close="handleClose" @confirm="handleClose">
+    <EasyModal v-model="drawer" :title="title" width="40%" @close="handleClose" @confirm="handleClose">
       <div style="height: 500px">
         <component
           :is="componentType"
@@ -359,7 +359,7 @@ defineExpose({
           </template>
         </component>
       </div>
-    </XlyModal>
+    </EasyModal>
   </div>
 </template>
 

@@ -90,3 +90,93 @@ export default {
     </span>
   </div>
 </template>
+
+<style scoped lang="scss">
+/* ========== 设计令牌 ========== */
+
+/* ========== 基础头像 ========== */
+.easy-avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: var(--el-fill-color-light);
+  color: var(--el-text-color-regular);
+  flex-shrink: 0;
+  user-select: none;
+  cursor: pointer;
+
+  &:hover {
+    .easy-avatar__image {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.easy-avatar--small {
+  width: 32px;
+  height: 32px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+.easy-avatar--default {
+  width: 40px;
+  height: 40px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+.easy-avatar--large {
+  width: 56px;
+  height: 56px;
+  font-size: 18px;
+  border-radius: 8px;
+}
+
+.easy-avatar--circle {
+  border-radius: 50% !important;
+
+  &.easy-avatar--small {
+    border-radius: 16px !important;
+  }
+}
+
+.easy-avatar--square {
+  border-radius: 6px;
+}
+
+/* ========== 头像图片 ========== */
+.easy-avatar__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+/* ========== 头像文字 ========== */
+.easy-avatar__text {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: inherit;
+  font-weight: 500;
+  color: inherit;
+  line-height: 1;
+}
+
+/* ========== 头像图标 ========== */
+.easy-avatar__icon {
+  width: 60%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--el-text-color-regular);
+  opacity: 0.7;
+}
+</style>

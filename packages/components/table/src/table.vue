@@ -1,11 +1,11 @@
 <script setup lang="ts">
 /* eslint-disable ts/no-use-before-define */
 import { computed, onMounted, onUnmounted, reactive, ref, useSlots, watch } from 'vue'
-import XlyButton from '../../button'
-import XlyIcon from '../../icon'
-import XlySelect from '../../select'
+import EasyButton from '../../button'
+import EasyIcon from '../../icon'
+import EasySelect from '../../select'
 
-defineOptions({ name: 'XlyTable' })
+defineOptions({ name: 'EasyTable' })
 
 /* ====================================================
    Props & Emits
@@ -258,11 +258,11 @@ const toolbarRightVisible = computed(() => {
    样式
 ==================================================== */
 const tableClass = computed(() => ({
-  'xly-table--border': props.border,
-  'xly-table--stripe': props.stripe,
-  'xly-table--compact': props.compact,
-  'xly-table--highlight': props.highlight,
-  'xly-table--loading': props.loading,
+  'easy-table--border': props.border,
+  'easy-table--stripe': props.stripe,
+  'easy-table--compact': props.compact,
+  'easy-table--highlight': props.highlight,
+  'easy-table--loading': props.loading,
 }))
 
 const containerStyle = computed(() => {
@@ -1265,31 +1265,31 @@ defineExpose({
 </script>
 
 <template>
-  <div ref="tableRootRef" class="xly-table" :class="tableClass">
+  <div ref="tableRootRef" class="easy-table" :class="tableClass">
     <!-- 工具栏（左侧或右侧有内容时才显示） -->
-    <div v-if="toolbarLeftVisible || toolbarRightVisible" class="xly-table__toolbar">
+    <div v-if="toolbarLeftVisible || toolbarRightVisible" class="easy-table__toolbar">
       <!-- 左侧区域：始终渲染，flex:1 填充空间，左侧无内容时右侧按钮靠左 -->
-      <div class="xly-table__toolbar-left">
-        <span v-if="title" class="xly-table__title">{{ title }}</span>
+      <div class="easy-table__toolbar-left">
+        <span v-if="title" class="easy-table__title">{{ title }}</span>
         <slot name="toolbar" />
         <slot name="toolbar-left" />
       </div>
       <!-- 右侧区域：始终渲染 -->
-      <div v-if="toolbarRightVisible" class="xly-table__toolbar-right">
+      <div v-if="toolbarRightVisible" class="easy-table__toolbar-right">
         <!-- 刷新按钮 -->
-        <XlyButton v-if="showRefresh" type="ghost" size="small" shape="circle" @click="handleRefresh">
+        <EasyButton v-if="showRefresh" type="ghost" size="small" shape="circle" @click="handleRefresh">
           <template #icon>
-            <XlyIcon name="el:Refresh" :size="16" />
+            <EasyIcon name="el:Refresh" :size="16" />
           </template>
-        </XlyButton>
+        </EasyButton>
         <!-- 导出按钮 -->
-        <XlyButton v-if="showExport" type="ghost" size="small" shape="circle" @click="handleExport">
+        <EasyButton v-if="showExport" type="ghost" size="small" shape="circle" @click="handleExport">
           <template #icon>
-            <XlyIcon name="el:Download" :size="16" />
+            <EasyIcon name="el:Download" :size="16" />
           </template>
-        </XlyButton>
+        </EasyButton>
         <!-- 列设置按钮 -->
-        <XlyButton
+        <EasyButton
           v-if="showColumnSettings"
           type="ghost"
           size="small"
@@ -1297,60 +1297,60 @@ defineExpose({
           @click="showColumnSettingsPanel = true"
         >
           <template #icon>
-            <XlyIcon name="el:Operation" :size="16" />
+            <EasyIcon name="el:Operation" :size="16" />
           </template>
-        </XlyButton>
+        </EasyButton>
         <slot name="toolbar-right" />
       </div>
     </div>
 
     <!-- 表格容器 -->
-    <div class="xly-table__container" :style="containerStyle">
-      <table class="xly-table__inner" :style="{ minWidth: tableMinWidth }">
+    <div class="easy-table__container" :style="containerStyle">
+      <table class="easy-table__inner" :style="{ minWidth: tableMinWidth }">
         <!-- 表头 -->
-        <thead class="xly-table__thead">
+        <thead class="easy-table__thead">
           <tr>
             <!-- 树形展开列 -->
-            <th v-if="tree" class="xly-table__th xly-table__th--tree-expand" />
+            <th v-if="tree" class="easy-table__th easy-table__th--tree-expand" />
             <!-- 普通展开列 -->
-            <th v-else-if="expandable" class="xly-table__th xly-table__th--expand" />
+            <th v-else-if="expandable" class="easy-table__th easy-table__th--expand" />
             <!-- 选择列 - 多选模式 -->
-            <th v-if="selectable && selectionMode === 'multiple'" class="xly-table__th xly-table__th--selection">
-              <label class="xly-table__checkbox">
+            <th v-if="selectable && selectionMode === 'multiple'" class="easy-table__th easy-table__th--selection">
+              <label class="easy-table__checkbox">
                 <input
                   type="checkbox"
                   :checked="isAllSelected"
                   :indeterminate="isIndeterminate"
                   @change="handleSelectAll"
                 >
-                <span class="xly-table__checkbox-inner" />
+                <span class="easy-table__checkbox-inner" />
               </label>
             </th>
             <!-- 选择列 - 单选模式 -->
-            <th v-if="selectable && selectionMode === 'single'" class="xly-table__th xly-table__th--selection" />
+            <th v-if="selectable && selectionMode === 'single'" class="easy-table__th easy-table__th--selection" />
             <!-- 序号列 -->
-            <th v-if="showIndex" class="xly-table__th xly-table__th--index">
+            <th v-if="showIndex" class="easy-table__th easy-table__th--index">
               {{ indexLabel }}
             </th>
             <!-- 数据列 -->
             <th
               v-for="col in visibleColumns"
               :key="col.prop"
-              class="xly-table__th"
+              class="easy-table__th"
               :class="[
-                col.align ? `xly-table__th--${col.align}` : '',
+                col.align ? `easy-table__th--${col.align}` : '',
                 col.sortable ? 'is-sortable' : '',
                 sortState.key === col.prop ? 'is-sorted' : '',
-                col.fixed ? `xly-table__th--fixed xly-table__th--fixed-${col.fixed}` : '',
+                col.fixed ? `easy-table__th--fixed easy-table__th--fixed-${col.fixed}` : '',
               ]"
               :style="getColStyle(col)"
               @click="col.sortable ? handleSort(col.prop) : undefined"
             >
-              <span class="xly-table__th-inner">
-                <span class="xly-table__th-label">{{ col.name }}</span>
-                <span v-if="col.sortable" class="xly-table__sort-icons">
+              <span class="easy-table__th-inner">
+                <span class="easy-table__th-label">{{ col.name }}</span>
+                <span v-if="col.sortable" class="easy-table__sort-icons">
                   <svg
-                    class="xly-table__sort-icon"
+                    class="easy-table__sort-icon"
                     :class="{
                       'is-active': sortState.key === col.prop && sortState.order === 'asc',
                     }"
@@ -1361,7 +1361,7 @@ defineExpose({
                     <path d="M12 7l-5 5h10z" fill="currentColor" />
                   </svg>
                   <svg
-                    class="xly-table__sort-icon"
+                    class="easy-table__sort-icon"
                     :class="{
                       'is-active': sortState.key === col.prop && sortState.order === 'desc',
                     }"
@@ -1377,8 +1377,8 @@ defineExpose({
             <!-- 操作列 -->
             <th
               v-if="$slots.action"
-              class="xly-table__th xly-table__th--action"
-              :class="actionFixed ? `xly-table__th--fixed xly-table__th--fixed-${actionFixed}` : ''"
+              class="easy-table__th easy-table__th--action"
+              :class="actionFixed ? `easy-table__th--fixed easy-table__th--fixed-${actionFixed}` : ''"
               :style="
                 actionFixed
                   ? {
@@ -1394,13 +1394,13 @@ defineExpose({
         </thead>
 
         <!-- 表体 -->
-        <tbody class="xly-table__tbody">
+        <tbody class="easy-table__tbody">
           <!-- 数据行 -->
           <!-- 树形模式渲染 -->
           <template v-if="tree">
             <template v-for="node in treeFlatData" :key="node.key">
               <tr
-                class="xly-table__tr is-tree-node"
+                class="easy-table__tr is-tree-node"
                 :class="{
                   'is-selected': isRowSelected(node.row),
                   'is-tree-expanded': node.expanded,
@@ -1409,10 +1409,10 @@ defineExpose({
               >
                 >
                 <!-- 树形展开列（只在第一列前显示） -->
-                <td class="xly-table__td xly-table__td--tree-expand">
+                <td class="easy-table__td easy-table__td--tree-expand">
                   <span
                     v-if="node.hasChildren"
-                    class="xly-table__tree-icon"
+                    class="easy-table__tree-icon"
                     :class="{
                       'is-expanded': node.expanded,
                       'is-loading': node.loading,
@@ -1432,7 +1432,7 @@ defineExpose({
                     </svg>
                     <svg
                       v-else
-                      class="xly-table__loading-icon"
+                      class="easy-table__loading-icon"
                       viewBox="0 0 24 24"
                       width="16"
                       height="16"
@@ -1445,38 +1445,38 @@ defineExpose({
                   </span>
                 </td>
                 <!-- 选择列 - 多选模式 -->
-                <td v-if="selectable && selectionMode === 'multiple'" class="xly-table__td xly-table__td--selection">
-                  <label class="xly-table__checkbox" @click.stop>
+                <td v-if="selectable && selectionMode === 'multiple'" class="easy-table__td easy-table__td--selection">
+                  <label class="easy-table__checkbox" @click.stop>
                     <input type="checkbox" :checked="isRowSelected(node.row)" @change="handleRowSelect(node.row)">
-                    <span class="xly-table__checkbox-inner" />
+                    <span class="easy-table__checkbox-inner" />
                   </label>
                 </td>
                 <!-- 选择列 - 单选模式 -->
-                <td v-if="selectable && selectionMode === 'single'" class="xly-table__td xly-table__td--selection">
-                  <label class="xly-table__radio" @click.stop="handleRowSelect(node.row)">
-                    <span class="xly-table__radio-inner" :class="{ 'is-checked': isRowSelected(node.row) }" />
+                <td v-if="selectable && selectionMode === 'single'" class="easy-table__td easy-table__td--selection">
+                  <label class="easy-table__radio" @click.stop="handleRowSelect(node.row)">
+                    <span class="easy-table__radio-inner" :class="{ 'is-checked': isRowSelected(node.row) }" />
                   </label>
                 </td>
                 <!-- 序号列 -->
-                <td v-if="showIndex" class="xly-table__td xly-table__td--index">
+                <td v-if="showIndex" class="easy-table__td easy-table__td--index">
                   {{ node.treeIndex }}
                 </td>
                 <!-- 数据列 -->
                 <td
                   v-for="(col, colIndex) in visibleColumns"
                   :key="col.prop"
-                  class="xly-table__td"
+                  class="easy-table__td"
                   :class="[
-                    col.align ? `xly-table__td--${col.align}` : '',
-                    col.fixed ? `xly-table__td--fixed xly-table__td--fixed-${col.fixed}` : '',
-                    colIndex === 0 ? 'xly-table__td--tree-first' : '',
+                    col.align ? `easy-table__td--${col.align}` : '',
+                    col.fixed ? `easy-table__td--fixed easy-table__td--fixed-${col.fixed}` : '',
+                    colIndex === 0 ? 'easy-table__td--tree-first' : '',
                   ]"
                   :style="getColStyle(col)"
                 >
                   <!-- 第一列需要添加缩进 -->
                   <template v-if="colIndex === 0">
                     <span
-                      class="xly-table__tree-indent"
+                      class="easy-table__tree-indent"
                       :style="{
                         paddingLeft: `${node.level * treeIndentSize}px`,
                       }"
@@ -1490,7 +1490,7 @@ defineExpose({
                         index: 0,
                       }"
                     >
-                      <span class="xly-table__cell-text" :class="{ 'is-ellipsis': col.ellipsis }">{{
+                      <span class="easy-table__cell-text" :class="{ 'is-ellipsis': col.ellipsis }">{{
                         formatCell(node.row, col)
                       }}</span>
                     </slot>
@@ -1505,7 +1505,7 @@ defineExpose({
                         index: 0,
                       }"
                     >
-                      <span class="xly-table__cell-text" :class="{ 'is-ellipsis': col.ellipsis }">{{
+                      <span class="easy-table__cell-text" :class="{ 'is-ellipsis': col.ellipsis }">{{
                         formatCell(node.row, col)
                       }}</span>
                     </slot>
@@ -1514,8 +1514,8 @@ defineExpose({
                 <!-- 操作列 -->
                 <td
                   v-if="$slots.action"
-                  class="xly-table__td xly-table__td--action"
-                  :class="actionFixed ? `xly-table__td--fixed xly-table__td--fixed-${actionFixed}` : ''"
+                  class="easy-table__td easy-table__td--action"
+                  :class="actionFixed ? `easy-table__td--fixed easy-table__td--fixed-${actionFixed}` : ''"
                   :style="
                     actionFixed
                       ? {
@@ -1536,7 +1536,7 @@ defineExpose({
             <template v-for="item in displayDataWithExpand" :key="item.key">
               <!-- 主数据行 -->
               <tr
-                class="xly-table__tr"
+                class="easy-table__tr"
                 :class="{
                   'is-selected': isRowSelected(item.row),
                   'is-stripe': stripe && item.index % 2 === 1,
@@ -1549,9 +1549,9 @@ defineExpose({
                 "
               >
                 <!-- 展开列 -->
-                <td v-if="expandable" class="xly-table__td xly-table__td--expand">
+                <td v-if="expandable" class="easy-table__td easy-table__td--expand">
                   <span
-                    class="xly-table__expand-icon"
+                    class="easy-table__expand-icon"
                     :class="{ 'is-expanded': item.expanded }"
                     @click.stop="toggleRowExpand(item.row, item.index)"
                   >
@@ -1561,30 +1561,30 @@ defineExpose({
                   </span>
                 </td>
                 <!-- 选择列 - 多选模式 -->
-                <td v-if="selectable && selectionMode === 'multiple'" class="xly-table__td xly-table__td--selection">
-                  <label class="xly-table__checkbox" @click.stop>
+                <td v-if="selectable && selectionMode === 'multiple'" class="easy-table__td easy-table__td--selection">
+                  <label class="easy-table__checkbox" @click.stop>
                     <input type="checkbox" :checked="isRowSelected(item.row)" @change="handleRowSelect(item.row)">
-                    <span class="xly-table__checkbox-inner" />
+                    <span class="easy-table__checkbox-inner" />
                   </label>
                 </td>
                 <!-- 选择列 - 单选模式 -->
-                <td v-if="selectable && selectionMode === 'single'" class="xly-table__td xly-table__td--selection">
-                  <label class="xly-table__radio" @click.stop="handleRowSelect(item.row)">
-                    <span class="xly-table__radio-inner" :class="{ 'is-checked': isRowSelected(item.row) }" />
+                <td v-if="selectable && selectionMode === 'single'" class="easy-table__td easy-table__td--selection">
+                  <label class="easy-table__radio" @click.stop="handleRowSelect(item.row)">
+                    <span class="easy-table__radio-inner" :class="{ 'is-checked': isRowSelected(item.row) }" />
                   </label>
                 </td>
                 <!-- 序号列 -->
-                <td v-if="showIndex" class="xly-table__td xly-table__td--index">
+                <td v-if="showIndex" class="easy-table__td easy-table__td--index">
                   {{ getRowIndex(item.index) }}
                 </td>
                 <!-- 数据列 -->
                 <td
                   v-for="col in visibleColumns"
                   :key="col.prop"
-                  class="xly-table__td"
+                  class="easy-table__td"
                   :class="[
-                    col.align ? `xly-table__td--${col.align}` : '',
-                    col.fixed ? `xly-table__td--fixed xly-table__td--fixed-${col.fixed}` : '',
+                    col.align ? `easy-table__td--${col.align}` : '',
+                    col.fixed ? `easy-table__td--fixed easy-table__td--fixed-${col.fixed}` : '',
                   ]"
                   :style="getColStyle(col)"
                 >
@@ -1598,7 +1598,7 @@ defineExpose({
                     }"
                   >
                     <span
-                      class="xly-table__cell-text"
+                      class="easy-table__cell-text"
                       :class="{ 'is-ellipsis': col.ellipsis }"
                       @mouseenter="
                         col.ellipsis && showCellTooltip($event, String(getCellValue(item.row, col.prop) ?? ''))
@@ -1611,8 +1611,8 @@ defineExpose({
                 <!-- 操作列 -->
                 <td
                   v-if="$slots.action"
-                  class="xly-table__td xly-table__td--action"
-                  :class="actionFixed ? `xly-table__td--fixed xly-table__td--fixed-${actionFixed}` : ''"
+                  class="easy-table__td easy-table__td--action"
+                  :class="actionFixed ? `easy-table__td--fixed easy-table__td--fixed-${actionFixed}` : ''"
                   :style="
                     actionFixed
                       ? {
@@ -1627,8 +1627,8 @@ defineExpose({
               </tr>
 
               <!-- 展开行内容 -->
-              <tr v-if="item.expanded && hasExpandSlot" class="xly-table__expand-row">
-                <td :colspan="totalColCount" class="xly-table__expand-cell">
+              <tr v-if="item.expanded && hasExpandSlot" class="easy-table__expand-row">
+                <td :colspan="totalColCount" class="easy-table__expand-cell">
                   <slot name="expand" v-bind="{ row: item.row, index: item.index }" />
                 </td>
               </tr>
@@ -1637,35 +1637,35 @@ defineExpose({
         </tbody>
 
         <!-- 合计行（不支持选择/选中） -->
-        <tfoot v-if="hasSummary" class="xly-table__tfoot">
-          <tr class="xly-table__summary-row">
+        <tfoot v-if="hasSummary" class="easy-table__tfoot">
+          <tr class="easy-table__summary-row">
             <!-- 树形/展开占位列 -->
-            <td v-if="tree || expandable" class="xly-table__td xly-table__td--summary-placeholder" />
+            <td v-if="tree || expandable" class="easy-table__td easy-table__td--summary-placeholder" />
             <!-- 选择列占位：合计行不参与选择，显示为空格占位 -->
-            <td v-if="selectable" class="xly-table__td xly-table__td--summary-placeholder xly-table__td--no-select" />
+            <td v-if="selectable" class="easy-table__td easy-table__td--summary-placeholder easy-table__td--no-select" />
             <!-- 序号列 → 显示"合计"标签 -->
-            <td v-if="showIndex" class="xly-table__td xly-table__td--summary-label">
+            <td v-if="showIndex" class="easy-table__td easy-table__td--summary-label">
               {{ summaryLabel }}
             </td>
             <!-- 数据列 -->
             <td
               v-for="(col, colIdx) in visibleColumns"
               :key="col.prop"
-              class="xly-table__td xly-table__td--summary"
+              class="easy-table__td easy-table__td--summary"
               :class="[
-                col.align ? `xly-table__td--${col.align}` : '',
-                col.fixed ? `xly-table__td--fixed xly-table__td--fixed-${col.fixed}` : '',
+                col.align ? `easy-table__td--${col.align}` : '',
+                col.fixed ? `easy-table__td--fixed easy-table__td--fixed-${col.fixed}` : '',
               ]"
               :style="getColStyle(col)"
             >
               <!-- 没有序号列时，第一列显示合计标签 -->
               <template v-if="!showIndex && colIdx === 0">
-                <span class="xly-table__summary-title">{{ summaryLabel }}</span>
-                <span v-if="summaryRow[col.prop]?.value" class="xly-table__summary-sep"> / </span>
+                <span class="easy-table__summary-title">{{ summaryLabel }}</span>
+                <span v-if="summaryRow[col.prop]?.value" class="easy-table__summary-sep"> / </span>
                 <template v-if="summaryRow[col.prop]?.value">
                   <span
                     v-if="summaryMixed && (summaryRow[col.prop].type === 'sum' || summaryRow[col.prop].type === 'avg')"
-                    class="xly-table__summary-badge" :class="[`xly-table__summary-badge--${summaryRow[col.prop].type}`]"
+                    class="easy-table__summary-badge" :class="[`easy-table__summary-badge--${summaryRow[col.prop].type}`]"
                   >{{ summaryRow[col.prop].type === 'sum' ? '合计' : '均值' }}</span>
                   <span>{{ summaryRow[col.prop].value }}</span>
                 </template>
@@ -1674,7 +1674,7 @@ defineExpose({
                 <template v-if="summaryRow[col.prop]?.type === 'sum' || summaryRow[col.prop]?.type === 'avg'">
                   <span
                     v-if="summaryMixed"
-                    class="xly-table__summary-badge" :class="[`xly-table__summary-badge--${summaryRow[col.prop].type}`]"
+                    class="easy-table__summary-badge" :class="[`easy-table__summary-badge--${summaryRow[col.prop].type}`]"
                   >{{ summaryRow[col.prop].type === 'sum' ? '合计' : '均值' }}</span>
                   <span>{{ summaryRow[col.prop].value }}</span>
                 </template>
@@ -1688,19 +1688,19 @@ defineExpose({
       </table>
 
       <!-- 加载状态 - 始终显示（首次加载 / 刷新均用相同动画） -->
-      <div v-if="loading" class="xly-table__empty" :class="{ 'xly-table__loading-overlay': displayData.length > 0 }">
-        <div class="xly-table__loading">
-          <div class="xly-table__loading-spinner">
-            <div v-for="i in 5" :key="i" class="xly-table__loading-bar" :style="{ animationDelay: `${i * 0.1}s` }" />
+      <div v-if="loading" class="easy-table__empty" :class="{ 'easy-table__loading-overlay': displayData.length > 0 }">
+        <div class="easy-table__loading">
+          <div class="easy-table__loading-spinner">
+            <div v-for="i in 5" :key="i" class="easy-table__loading-bar" :style="{ animationDelay: `${i * 0.1}s` }" />
           </div>
-          <span v-if="loadingText" class="xly-table__loading-text">{{ loadingText }}</span>
+          <span v-if="loadingText" class="easy-table__loading-text">{{ loadingText }}</span>
         </div>
       </div>
 
       <!-- 空状态 - 放在表格外，避免因列过多滚动出视口 -->
-      <div v-if="!loading && displayData.length === 0" class="xly-table__empty">
+      <div v-if="!loading && displayData.length === 0" class="easy-table__empty">
         <slot name="empty">
-          <svg viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="xly-table__empty-icon">
+          <svg viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="easy-table__empty-icon">
             <rect x="4" y="10" width="72" height="46" rx="4" fill="#f5f7fa" stroke="#e2e4ed" stroke-width="1.5" />
             <rect x="4" y="10" width="72" height="14" rx="4" fill="#eef0f6" stroke="#e2e4ed" stroke-width="1.5" />
             <rect x="14" y="32" width="26" height="4" rx="2" fill="#dde0ea" />
@@ -1708,7 +1708,7 @@ defineExpose({
             <rect x="46" y="32" width="20" height="4" rx="2" fill="#dde0ea" />
             <rect x="46" y="42" width="12" height="4" rx="2" fill="#dde0ea" />
           </svg>
-          <p class="xly-table__empty-text">
+          <p class="easy-table__empty-text">
             {{ emptyText }}
           </p>
         </slot>
@@ -1718,16 +1718,16 @@ defineExpose({
     <!-- 分页 -->
     <div
       v-if="pagination && total > 0"
-      class="xly-table__pagination"
-      :class="`xly-table__pagination--${props.paginationPosition}`"
+      class="easy-table__pagination"
+      :class="`easy-table__pagination--${props.paginationPosition}`"
     >
       <!-- 总数 -->
-      <span class="xly-table__pagination-total">共 {{ total }} 条</span>
+      <span class="easy-table__pagination-total">共 {{ total }} 条</span>
 
       <!-- 页码按钮 -->
-      <div class="xly-table__pagination-pages">
+      <div class="easy-table__pagination-pages">
         <button
-          class="xly-table__page-btn xly-table__page-btn--prev"
+          class="easy-table__page-btn easy-table__page-btn--prev"
           :disabled="currentPage <= 1"
           @click="handlePageChange(currentPage - 1)"
         >
@@ -1748,7 +1748,7 @@ defineExpose({
         <button
           v-for="p in pageNumbers"
           :key="p"
-          class="xly-table__page-btn"
+          class="easy-table__page-btn"
           :class="{
             'is-current': p === currentPage,
             'is-ellipsis': p === '...',
@@ -1765,7 +1765,7 @@ defineExpose({
         </button>
 
         <button
-          class="xly-table__page-btn xly-table__page-btn--next"
+          class="easy-table__page-btn easy-table__page-btn--next"
           :disabled="currentPage >= totalPages"
           @click="handlePageChange(currentPage + 1)"
         >
@@ -1785,30 +1785,30 @@ defineExpose({
       </div>
 
       <!-- 页码输入 -->
-      <div v-if="showPageInput" class="xly-table__pagination-jump">
+      <div v-if="showPageInput" class="easy-table__pagination-jump">
         <span>跳至</span>
         <input
           v-model.number="jumpPageInput"
           type="number"
-          class="xly-table__pagination-input"
+          class="easy-table__pagination-input"
           :min="1"
           :max="totalPages"
           @keyup.enter="handleJumpPageEnter"
         >
         <span>页</span>
-        <button class="xly-table__pagination-go" @click="handleJumpPage">
+        <button class="easy-table__pagination-go" @click="handleJumpPage">
           Go
         </button>
       </div>
 
       <!-- 每页条数选择 -->
-      <XlySelect
+      <EasySelect
         v-if="showPageSize"
         v-model="currentPageSize"
         :options="pageSizeSelectOptions"
         size="small"
         style="width: 120px"
-        class="xly-table__page-size-select"
+        class="easy-table__page-size-select"
         @change="handlePageSizeChange"
       />
     </div>
@@ -1816,13 +1816,13 @@ defineExpose({
     <!-- 列设置面板 -->
     <div
       v-if="showColumnSettingsPanel"
-      class="xly-table__column-settings-overlay"
+      class="easy-table__column-settings-overlay"
       @click="showColumnSettingsPanel = false"
     >
-      <div class="xly-table__column-settings-panel" @click.stop>
-        <div class="xly-table__column-settings-header">
+      <div class="easy-table__column-settings-panel" @click.stop>
+        <div class="easy-table__column-settings-header">
           <h3>列设置</h3>
-          <button class="xly-table__column-settings-close" @click="showColumnSettingsPanel = false">
+          <button class="easy-table__column-settings-close" @click="showColumnSettingsPanel = false">
             <svg
               viewBox="0 0 24 24"
               width="20"
@@ -1838,11 +1838,11 @@ defineExpose({
             </svg>
           </button>
         </div>
-        <div class="xly-table__column-settings-body">
+        <div class="easy-table__column-settings-body">
           <div
             v-for="(col, index) in localColumns"
             :key="col.prop"
-            class="xly-table__column-settings-item"
+            class="easy-table__column-settings-item"
             :draggable="isColumnDraggable(col) && props.columnDraggable"
             :class="{
               'is-dragging': dragState.draggingIndex === index,
@@ -1855,7 +1855,7 @@ defineExpose({
             @dragend="handleDragEnd"
           >
             <div
-              class="xly-table__column-settings-drag-handle"
+              class="easy-table__column-settings-drag-handle"
               :class="{
                 'is-disabled': !isColumnDraggable(col) || !props.columnDraggable,
               }"
@@ -1878,7 +1878,7 @@ defineExpose({
                 <line x1="16" y1="18" x2="16" y2="18" />
               </svg>
             </div>
-            <label class="xly-table__column-settings-label">
+            <label class="easy-table__column-settings-label">
               <input
                 type="checkbox"
                 :checked="col.visible !== false"
@@ -1888,11 +1888,11 @@ defineExpose({
             </label>
           </div>
         </div>
-        <div class="xly-table__column-settings-footer">
-          <button class="xly-table__column-settings-btn--reset" @click="resetColumnVisibility">
+        <div class="easy-table__column-settings-footer">
+          <button class="easy-table__column-settings-btn--reset" @click="resetColumnVisibility">
             重置
           </button>
-          <button class="xly-table__column-settings-btn--confirm" @click="showColumnSettingsPanel = false">
+          <button class="easy-table__column-settings-btn--confirm" @click="showColumnSettingsPanel = false">
             确定
           </button>
         </div>
@@ -1901,10 +1901,10 @@ defineExpose({
 
     <!-- Ellipsis Tooltip -->
     <Teleport to="body">
-      <Transition name="xly-tooltip-fade">
+      <Transition name="easy-tooltip-fade">
         <div
           v-if="tooltipState.visible"
-          class="xly-table__tooltip"
+          class="easy-table__tooltip"
           :style="{ left: `${tooltipState.x}px`, top: `${tooltipState.y}px` }"
         >
           {{ tooltipState.content }}
@@ -1927,7 +1927,7 @@ $shadow-sticky: 10px 0 24px rgba(15, 23, 42, 0.06);
 $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 
 /* ========== 容器 ========== */
-.xly-table {
+.easy-table {
   background: var(--el-bg-color);
   border-radius: $radius-lg;
   border: 1px solid $border-strong;
@@ -1944,9 +1944,9 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: $shadow-md;
   }
 
-  &.xly-table--border {
-    .xly-table__th,
-    .xly-table__td {
+  &.easy-table--border {
+    .easy-table__th,
+    .easy-table__td {
       border-right: 1px solid $border-strong;
 
       &:last-child {
@@ -1955,22 +1955,22 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
   }
 
-  &.xly-table--compact {
-    .xly-table__th,
-    .xly-table__td {
+  &.easy-table--compact {
+    .easy-table__th,
+    .easy-table__td {
       padding: 10px 14px;
       font-size: 13px;
     }
   }
 
-  &.xly-table--loading {
+  &.easy-table--loading {
     opacity: 0.72;
     pointer-events: none;
   }
 }
 
 /* ========== 工具栏 ========== */
-.xly-table__toolbar {
+.easy-table__toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1979,20 +1979,20 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   border-bottom: 1px solid var(--el-border-color);
 }
 
-.xly-table__toolbar-left {
+.easy-table__toolbar-left {
   flex: 1;
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.xly-table__toolbar-right {
+.easy-table__toolbar-right {
   display: flex;
   align-items: center;
   gap: 12px;
 }
 
-.xly-table__title {
+.easy-table__title {
   font-size: 15px;
   font-weight: 600;
   color: var(--el-text-color-primary);
@@ -2000,7 +2000,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ========== 容器 ========== */
-.xly-table__container {
+.easy-table__container {
   position: relative;
   overflow-x: auto;
   overflow-y: auto;
@@ -2025,20 +2025,20 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ========== 表格主体 ========== */
-.xly-table__inner {
+.easy-table__inner {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
 }
 
 /* ========== 表头 ========== */
-.xly-table__thead {
+.easy-table__thead {
   position: sticky;
   top: 0;
   z-index: 2;
 }
 
-.xly-table__th {
+.easy-table__th {
   padding: 12px 14px;
   text-align: left;
   font-size: 13px;
@@ -2059,24 +2059,24 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     border-right: none;
   }
 
-  &.xly-table__th--center {
+  &.easy-table__th--center {
     text-align: center;
   }
 
-  &.xly-table__th--right {
+  &.easy-table__th--right {
     text-align: right;
   }
 
-  &.xly-table__th--selection,
-  &.xly-table__th--index,
-  &.xly-table__th--expand,
-  &.xly-table__th--tree-expand {
+  &.easy-table__th--selection,
+  &.easy-table__th--index,
+  &.easy-table__th--expand,
+  &.easy-table__th--tree-expand {
     width: 48px;
     text-align: center;
     color: var(--el-text-color-secondary);
   }
 
-  &.xly-table__th--action {
+  &.easy-table__th--action {
     text-align: center;
     white-space: nowrap;
   }
@@ -2097,21 +2097,21 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
-.xly-table__th-inner {
+.easy-table__th-inner {
   display: inline-flex;
   align-items: center;
   gap: 6px;
 }
 
 /* ========== 排序图标 ========== */
-.xly-table__sort-icons {
+.easy-table__sort-icons {
   display: inline-flex;
   flex-direction: column;
   gap: 0;
   margin-left: 4px;
 }
 
-.xly-table__sort-icon {
+.easy-table__sort-icon {
   display: block;
   color: var(--el-text-color-disabled);
   font-size: 8px;
@@ -2124,18 +2124,18 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ========== 行 ========== */
-.xly-table__tr {
+.easy-table__tr {
   transition: $transition;
   cursor: default;
 
   &.is-stripe {
-    > .xly-table__td {
+    > .easy-table__td {
       background: $bg-stripe;
     }
   }
 
   &.is-selected {
-    > .xly-table__td {
+    > .easy-table__td {
       background: $bg-selected !important;
     }
   }
@@ -2145,12 +2145,12 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
-.xly-table--highlight .xly-table__tbody .xly-table__tr:hover > .xly-table__td {
+.easy-table--highlight .easy-table__tbody .easy-table__tr:hover > .easy-table__td {
   background: var(--el-fill-color-light);
 }
 
 /* ========== 单元格 ========== */
-.xly-table__td {
+.easy-table__td {
   padding: 12px 14px;
   color: var(--el-text-color-regular);
   border-bottom: 1px solid var(--el-border-color);
@@ -2167,17 +2167,17 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     border-right: none;
   }
 
-  &.xly-table__td--center {
+  &.easy-table__td--center {
     text-align: center;
   }
 
-  &.xly-table__td--right {
+  &.easy-table__td--right {
     text-align: right;
   }
 
-  &.xly-table__td--selection,
-  &.xly-table__td--index,
-  &.xly-table__td--expand {
+  &.easy-table__td--selection,
+  &.easy-table__td--index,
+  &.easy-table__td--expand {
     text-align: center;
     color: var(--el-text-color-secondary);
     font-size: 13px;
@@ -2185,13 +2185,13 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     font-variant-numeric: tabular-nums;
   }
 
-  &.xly-table__td--action {
+  &.easy-table__td--action {
     text-align: center;
     white-space: nowrap;
   }
 }
 
-.xly-table__cell-text {
+.easy-table__cell-text {
   &.is-ellipsis {
     display: block;
     overflow: hidden;
@@ -2203,7 +2203,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ========== 复选框 ========== */
-.xly-table__checkbox {
+.easy-table__checkbox {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2219,7 +2219,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     height: 0;
   }
 
-  .xly-table__checkbox-inner {
+  .easy-table__checkbox-inner {
     display: inline-block;
     width: 18px;
     height: 18px;
@@ -2245,7 +2245,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
   }
 
-  input:checked ~ .xly-table__checkbox-inner {
+  input:checked ~ .easy-table__checkbox-inner {
     background: var(--el-color-primary);
     border-color: var(--el-color-primary);
 
@@ -2254,7 +2254,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
   }
 
-  input:indeterminate ~ .xly-table__checkbox-inner {
+  input:indeterminate ~ .easy-table__checkbox-inner {
     background: var(--el-color-primary);
     border-color: var(--el-color-primary);
 
@@ -2269,18 +2269,18 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
   }
 
-  &:hover .xly-table__checkbox-inner {
+  &:hover .easy-table__checkbox-inner {
     border-color: var(--el-color-primary);
   }
 }
 
 /* 单选按钮 */
-.xly-table__radio {
+.easy-table__radio {
   display: inline-flex;
   align-items: center;
   cursor: pointer;
 
-  .xly-table__radio-inner {
+  .easy-table__radio-inner {
     display: inline-block;
     width: 18px;
     height: 18px;
@@ -2313,13 +2313,13 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
   }
 
-  &:hover .xly-table__radio-inner {
+  &:hover .easy-table__radio-inner {
     border-color: var(--el-color-primary);
   }
 }
 
 /* ========== 加载状态 ========== */
-.xly-table__loading {
+.easy-table__loading {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2329,27 +2329,27 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   color: var(--el-text-color-secondary);
 }
 
-.xly-table__loading-spinner {
+.easy-table__loading-spinner {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.xly-table__loading-bar {
+.easy-table__loading-bar {
   width: 4px;
   height: 28px;
   border-radius: 2px;
   background: var(--el-color-primary);
-  animation: xly-loading-wave 1s ease-in-out infinite;
+  animation: easy-loading-wave 1s ease-in-out infinite;
   opacity: 0.6;
 }
 
-.xly-table__loading-text {
+.easy-table__loading-text {
   font-size: 14px;
   color: var(--el-text-color-secondary);
 }
 
-@keyframes xly-loading-wave {
+@keyframes easy-loading-wave {
   0%,
   100% {
     transform: scaleY(0.4);
@@ -2363,7 +2363,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ========== 空 / 加载状态 ========== */
-.xly-table__empty {
+.easy-table__empty {
   position: sticky;
   left: 0;
   display: flex;
@@ -2376,7 +2376,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 // 加载时已有数据 → 绝对定位覆盖，隐藏旧数据
-.xly-table__loading-overlay {
+.easy-table__loading-overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
@@ -2384,13 +2384,13 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(2px);
 }
 
-.xly-table__empty-icon {
+.easy-table__empty-icon {
   width: 120px;
   height: 90px;
   opacity: 0.38;
 }
 
-.xly-table__empty-text {
+.easy-table__empty-text {
   color: var(--el-text-color-secondary);
   font-size: 14px;
   margin: 0;
@@ -2398,7 +2398,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ========== 分页 ========== */
-.xly-table__pagination {
+.easy-table__pagination {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -2407,20 +2407,20 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   background: var(--el-bg-color);
   border-top: 1px solid var(--el-border-color);
 
-  &.xly-table__pagination--left {
+  &.easy-table__pagination--left {
     justify-content: flex-start;
   }
 
-  &.xly-table__pagination--center {
+  &.easy-table__pagination--center {
     justify-content: center;
   }
 
-  &.xly-table__pagination--right {
+  &.easy-table__pagination--right {
     justify-content: flex-end;
   }
 }
 
-.xly-table__pagination-total {
+.easy-table__pagination-total {
   font-size: 13px;
   color: var(--el-text-color-secondary);
   font-weight: 500;
@@ -2428,13 +2428,13 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   padding-right: 4px;
 }
 
-.xly-table__pagination-pages {
+.easy-table__pagination-pages {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.xly-table__page-btn {
+.easy-table__page-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2458,8 +2458,8 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     background: rgba(79, 110, 247, 0.1);
   }
 
-  &.xly-table__page-btn--prev,
-  &.xly-table__page-btn--next {
+  &.easy-table__page-btn--prev,
+  &.easy-table__page-btn--next {
     padding: 0 12px;
   }
 
@@ -2494,12 +2494,12 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
-.xly-table__page-size-select {
+.easy-table__page-size-select {
   width: 100px;
   min-width: 100px;
 }
 
-.xly-table__pagination-jump {
+.easy-table__pagination-jump {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -2508,7 +2508,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   margin-left: 16px;
 }
 
-.xly-table__pagination-input {
+.easy-table__pagination-input {
   width: 50px;
   height: 36px;
   padding: 0 10px;
@@ -2532,7 +2532,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
-.xly-table__pagination-go {
+.easy-table__pagination-go {
   height: 36px;
   padding: 0 16px;
   border: 1px solid var(--el-border-color);
@@ -2557,7 +2557,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 
 /* ========== 列设置 ========== */
 
-.xly-table__column-settings-overlay {
+.easy-table__column-settings-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -2568,10 +2568,10 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: xly-fade-in 0.2s ease;
+  animation: easy-fade-in 0.2s ease;
 }
 
-@keyframes xly-fade-in {
+@keyframes easy-fade-in {
   from {
     opacity: 0;
   }
@@ -2581,7 +2581,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
-.xly-table__column-settings-panel {
+.easy-table__column-settings-panel {
   background: var(--el-bg-color);
   border-radius: $radius-lg;
   box-shadow: $shadow-md;
@@ -2590,11 +2590,11 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   max-height: 70vh;
   display: flex;
   flex-direction: column;
-  animation: xly-slide-up 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: easy-slide-up 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid $border-strong;
 }
 
-@keyframes xly-slide-up {
+@keyframes easy-slide-up {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -2606,7 +2606,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
-.xly-table__column-settings-header {
+.easy-table__column-settings-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2622,7 +2622,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
-.xly-table__column-settings-close {
+.easy-table__column-settings-close {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2641,14 +2641,14 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
-.xly-table__column-settings-body {
+.easy-table__column-settings-body {
   flex: 1;
   overflow-y: auto;
   padding: 12px 24px;
   background: var(--el-bg-color);
 }
 
-.xly-table__column-settings-item {
+.easy-table__column-settings-item {
   padding: 8px 0;
   display: flex;
   align-items: center;
@@ -2674,7 +2674,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
-.xly-table__column-settings-drag-handle {
+.easy-table__column-settings-drag-handle {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2698,7 +2698,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
-.xly-table__column-settings-label {
+.easy-table__column-settings-label {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -2720,7 +2720,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
-.xly-table__column-settings-footer {
+.easy-table__column-settings-footer {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -2729,8 +2729,8 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   border-top: 1px solid var(--el-border-color);
 }
 
-.xly-table__column-settings-btn--reset,
-.xly-table__column-settings-btn--confirm {
+.easy-table__column-settings-btn--reset,
+.easy-table__column-settings-btn--confirm {
   padding: 8px 20px;
   border-radius: $radius-md;
   font-size: 14px;
@@ -2740,7 +2740,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   border: 1px solid transparent;
 }
 
-.xly-table__column-settings-btn--reset {
+.easy-table__column-settings-btn--reset {
   background: var(--el-bg-color);
   color: var(--el-text-color-regular);
   border-color: var(--el-border-color);
@@ -2751,7 +2751,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
-.xly-table__column-settings-btn--confirm {
+.easy-table__column-settings-btn--confirm {
   background: var(--el-color-primary);
   color: #fff;
   box-shadow: 0 6px 14px rgba(79, 110, 247, 0.2);
@@ -2762,22 +2762,22 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ========== 列固定 ========== */
-.xly-table__th--fixed,
-.xly-table__td--fixed {
+.easy-table__th--fixed,
+.easy-table__td--fixed {
   position: sticky;
   z-index: 1;
 }
 
-.xly-table__th--fixed {
+.easy-table__th--fixed {
   background: $bg-header;
 }
 
-.xly-table__td--fixed {
+.easy-table__td--fixed {
   background: var(--el-bg-color);
 }
 
-.xly-table__th--fixed,
-.xly-table__td--fixed {
+.easy-table__th--fixed,
+.easy-table__td--fixed {
   &::after {
     content: '';
     position: absolute;
@@ -2787,8 +2787,8 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     background: var(--el-border-color);
   }
 
-  &.xly-table__th--fixed-left,
-  &.xly-table__td--fixed-left {
+  &.easy-table__th--fixed-left,
+  &.easy-table__td--fixed-left {
     // left 值由 JS 动态计算注入（fixedOffsets），支持多列 fixed-left 依次排列
     box-shadow: 8px 0 14px rgba(16, 24, 40, 0.06);
 
@@ -2797,8 +2797,8 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     }
   }
 
-  &.xly-table__th--fixed-right,
-  &.xly-table__td--fixed-right {
+  &.easy-table__th--fixed-right,
+  &.easy-table__td--fixed-right {
     // right 值由 JS 动态计算注入（fixedOffsets），支持多列 fixed-right 依次排列
     box-shadow: -8px 0 14px rgba(16, 24, 40, 0.06);
 
@@ -2808,22 +2808,22 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
-.xly-table__th--fixed {
+.easy-table__th--fixed {
   z-index: 3;
 }
 
 /* ========== 合计行 ========== */
-.xly-table__tfoot {
+.easy-table__tfoot {
   position: sticky;
   bottom: 0;
   z-index: 2;
 }
 
-.xly-table__summary-row {
-  background: var(--xly-table-summary-bg, #{$bg-header});
+.easy-table__summary-row {
+  background: var(--easy-table-summary-bg, #{$bg-header});
   border-top: 1px solid $border-strong;
 
-  .xly-table__td {
+  .easy-table__td {
     font-weight: 600;
     font-size: 13px;
     color: var(--el-text-color-primary);
@@ -2832,41 +2832,41 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   // 合计行中的固定列也需要 sticky + 正确背景色（覆盖默认 #fff）
-  .xly-table__td--fixed {
-    background: var(--xly-table-summary-bg, #{$bg-header});
+  .easy-table__td--fixed {
+    background: var(--easy-table-summary-bg, #{$bg-header});
     z-index: 2;
   }
 }
 
-.xly-table__td--summary-label {
+.easy-table__td--summary-label {
   color: var(--el-text-color-secondary);
   font-weight: 600;
   text-align: center;
 }
 
-.xly-table__td--summary-placeholder {
+.easy-table__td--summary-placeholder {
   // 占位单元格，不显示内容
 }
 
 // 合计行的选择列：禁止一切交互，光标改为默认
-.xly-table__td--no-select {
+.easy-table__td--no-select {
   pointer-events: none;
   cursor: default;
   user-select: none;
 }
 
-.xly-table__summary-title {
+.easy-table__summary-title {
   color: var(--el-text-color-secondary);
   font-weight: 500;
 }
 
-.xly-table__summary-sep {
+.easy-table__summary-sep {
   color: var(--el-text-color-secondary);
   margin: 0 2px;
 }
 
 // 合计行类型标签：区分"合计"和"均值"
-.xly-table__summary-badge {
+.easy-table__summary-badge {
   display: inline-block;
   font-size: 11px;
   font-weight: 600;
@@ -2876,19 +2876,19 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   margin-right: 5px;
   vertical-align: middle;
 
-  &.xly-table__summary-badge--sum {
+  &.easy-table__summary-badge--sum {
     color: #1677ff;
     background: #e6f0ff;
   }
 
-  &.xly-table__summary-badge--avg {
+  &.easy-table__summary-badge--avg {
     color: #07a35a;
     background: #e6f9f0;
   }
 }
 
 /* ========== Ellipsis Tooltip ========== */
-.xly-table__tooltip {
+.easy-table__tooltip {
   position: fixed;
   z-index: 9999;
   max-width: 320px;
@@ -2906,19 +2906,19 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translate(12px, -50%);
 
   // 右侧溢出时翻转到左侧
-  &.xly-tooltip-fade-enter-active,
-  &.xly-tooltip-fade-leave-active {
+  &.easy-tooltip-fade-enter-active,
+  &.easy-tooltip-fade-leave-active {
     transition: opacity 0.15s ease;
   }
 
-  &.xly-tooltip-fade-enter-from,
-  &.xly-tooltip-fade-leave-to {
+  &.easy-tooltip-fade-enter-from,
+  &.easy-tooltip-fade-leave-to {
     opacity: 0;
   }
 }
 
 /* ========== 展开图标 ========== */
-.xly-table__expand-icon {
+.easy-table__expand-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2947,18 +2947,18 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ========== 树形数据 ========== */
-.xly-table__td--tree-expand {
+.easy-table__td--tree-expand {
   width: 32px;
   padding: 0 8px;
   text-align: center;
 }
 
-.xly-table__td--tree-first {
+.easy-table__td--tree-first {
   display: flex;
   align-items: center;
 }
 
-.xly-table__tree-icon {
+.easy-table__tree-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2989,11 +2989,11 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
-.xly-table__loading-icon {
-  animation: xly-rotate 1s linear infinite;
+.easy-table__loading-icon {
+  animation: easy-rotate 1s linear infinite;
 }
 
-@keyframes xly-rotate {
+@keyframes easy-rotate {
   from {
     transform: rotate(0deg);
   }
@@ -3003,7 +3003,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
-.xly-table__tree-indent {
+.easy-table__tree-indent {
   display: inline-block;
   width: 0;
   height: 1px;
@@ -3011,14 +3011,14 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 // 树形节点行样式
-.xly-table__tr.is-tree-node {
+.easy-table__tr.is-tree-node {
   &:hover > td {
     background: var(--el-fill-color-light);
   }
 }
 
 /* ========== 展开行 ========== */
-.xly-table__expand-row {
+.easy-table__expand-row {
   background: var(--el-fill-color-light);
 
   td {
@@ -3031,7 +3031,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
-.xly-table__expand-cell {
+.easy-table__expand-cell {
   padding: 16px 20px;
   transition: all 0.3s ease;
   background: var(--el-fill-color-light);
@@ -3045,7 +3045,7 @@ $transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 
 <!-- ========== Dark Mode Overrides ========== -->
 <style lang="scss">
-html.dark .xly-table {
+html.dark .easy-table {
   background: var(--el-bg-color);
   border-color: var(--el-border-color);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
@@ -3056,17 +3056,17 @@ html.dark .xly-table {
 }
 
 /* Toolbar */
-html.dark .xly-table__toolbar {
+html.dark .easy-table__toolbar {
   background: var(--el-bg-color);
   border-bottom-color: var(--el-border-color-light);
 }
 
-html.dark .xly-table__title {
+html.dark .easy-table__title {
   color: var(--el-text-color-primary);
 }
 
 /* Container & Scrollbar */
-html.dark .xly-table__container {
+html.dark .easy-table__container {
   background: var(--el-bg-color);
   scrollbar-color: var(--el-border-color-lighter) transparent;
 
@@ -3076,30 +3076,30 @@ html.dark .xly-table__container {
 }
 
 /* Table Head */
-html.dark .xly-table__th {
+html.dark .easy-table__th {
   color: var(--el-text-color-primary);
   background: var(--el-fill-color-lighter);
   border-bottom-color: var(--el-border-color);
 }
 
-html.dark .xly-table__th--selection,
-html.dark .xly-table__th--index,
-html.dark .xly-table__th--expand,
-html.dark .xly-table__th--tree-expand {
+html.dark .easy-table__th--selection,
+html.dark .easy-table__th--index,
+html.dark .easy-table__th--expand,
+html.dark .easy-table__th--tree-expand {
   color: var(--el-text-color-secondary);
 }
 
-html.dark .xly-table__th.is-sortable:hover {
+html.dark .easy-table__th.is-sortable:hover {
   color: var(--el-color-primary);
   background: var(--el-fill-color-light);
 }
 
-html.dark .xly-table__th.is-sorted {
+html.dark .easy-table__th.is-sorted {
   color: var(--el-color-primary);
   background: rgba(79, 110, 247, 0.12);
 }
 
-html.dark .xly-table__sort-icon {
+html.dark .easy-table__sort-icon {
   color: var(--el-text-color-disabled);
 
   &.is-active {
@@ -3108,113 +3108,113 @@ html.dark .xly-table__sort-icon {
 }
 
 /* Rows */
-html.dark .xly-table__tr.is-stripe > .xly-table__td {
+html.dark .easy-table__tr.is-stripe > .easy-table__td {
   background: var(--el-fill-color-lighter);
 }
 
-html.dark .xly-table__tr.is-selected > .xly-table__td {
+html.dark .easy-table__tr.is-selected > .easy-table__td {
   background: rgba(79, 110, 247, 0.15) !important;
 }
 
-html.dark .xly-table--highlight .xly-table__tbody .xly-table__tr:hover > .xly-table__td {
+html.dark .easy-table--highlight .easy-table__tbody .easy-table__tr:hover > .easy-table__td {
   background: var(--el-fill-color-light);
 }
 
-html.dark .xly-table__tr.is-tree-node:hover > td {
+html.dark .easy-table__tr.is-tree-node:hover > td {
   background: var(--el-fill-color-light);
 }
 
 /* Cells */
-html.dark .xly-table__td {
+html.dark .easy-table__td {
   color: var(--el-text-color-regular);
   border-bottom-color: var(--el-border-color-light);
   background: var(--el-bg-color);
 }
 
-html.dark .xly-table__td--selection,
-html.dark .xly-table__td--index,
-html.dark .xly-table__td--expand {
+html.dark .easy-table__td--selection,
+html.dark .easy-table__td--index,
+html.dark .easy-table__td--expand {
   color: var(--el-text-color-secondary);
 }
 
 /* Fixed columns */
-html.dark .xly-table__td--fixed {
+html.dark .easy-table__td--fixed {
   background: var(--el-bg-color);
 }
 
-html.dark .xly-table__th--fixed {
+html.dark .easy-table__th--fixed {
   background: var(--el-fill-color-lighter);
 }
 
-html.dark .xly-table__th--fixed::after,
-html.dark .xly-table__td--fixed::after {
+html.dark .easy-table__th--fixed::after,
+html.dark .easy-table__td--fixed::after {
   background: var(--el-border-color-light);
 }
 
-html.dark .xly-table__th--fixed-left,
-html.dark .xly-table__td--fixed-left {
+html.dark .easy-table__th--fixed-left,
+html.dark .easy-table__td--fixed-left {
   box-shadow: 6px 0 12px rgba(0, 0, 0, 0.25);
 }
 
-html.dark .xly-table__th--fixed-right,
-html.dark .xly-table__td--fixed-right {
+html.dark .easy-table__th--fixed-right,
+html.dark .easy-table__td--fixed-right {
   box-shadow: -6px 0 12px rgba(0, 0, 0, 0.25);
 }
 
 /* Checkbox & Radio */
-html.dark .xly-table__checkbox .xly-table__checkbox-inner {
+html.dark .easy-table__checkbox .easy-table__checkbox-inner {
   border-color: var(--el-border-color);
   background: var(--el-fill-color);
 }
 
-html.dark .xly-table__radio .xly-table__radio-inner {
+html.dark .easy-table__radio .easy-table__radio-inner {
   border-color: var(--el-border-color);
   background: var(--el-fill-color);
 }
 
 /* Loading */
-html.dark .xly-table__loading {
+html.dark .easy-table__loading {
   color: var(--el-text-color-secondary);
 }
 
-html.dark .xly-table__loading-text {
+html.dark .easy-table__loading-text {
   color: var(--el-text-color-secondary);
 }
 
 /* Empty State */
-html.dark .xly-table__empty-text {
+html.dark .easy-table__empty-text {
   color: var(--el-text-color-secondary);
 }
 
-html.dark .xly-table__empty-icon rect {
+html.dark .easy-table__empty-icon rect {
   fill: var(--el-fill-color);
   stroke: var(--el-border-color);
 }
 
-html.dark .xly-table__empty-icon rect:nth-child(2) {
+html.dark .easy-table__empty-icon rect:nth-child(2) {
   fill: var(--el-fill-color-lighter);
   stroke: var(--el-border-color);
 }
 
-html.dark .xly-table__empty-icon rect:nth-child(3),
-html.dark .xly-table__empty-icon rect:nth-child(4),
-html.dark .xly-table__empty-icon rect:nth-child(5),
-html.dark .xly-table__empty-icon rect:nth-child(6),
-html.dark .xly-table__empty-icon rect:nth-child(7) {
+html.dark .easy-table__empty-icon rect:nth-child(3),
+html.dark .easy-table__empty-icon rect:nth-child(4),
+html.dark .easy-table__empty-icon rect:nth-child(5),
+html.dark .easy-table__empty-icon rect:nth-child(6),
+html.dark .easy-table__empty-icon rect:nth-child(7) {
   fill: var(--el-border-color-lighter);
 }
 
 /* Pagination */
-html.dark .xly-table__pagination {
+html.dark .easy-table__pagination {
   background: var(--el-bg-color);
   border-top-color: var(--el-border-color-light);
 }
 
-html.dark .xly-table__pagination-total {
+html.dark .easy-table__pagination-total {
   color: var(--el-text-color-secondary);
 }
 
-html.dark .xly-table__page-btn {
+html.dark .easy-table__page-btn {
   border-color: var(--el-border-color-light);
   background: var(--el-fill-color);
   color: var(--el-text-color-regular);
@@ -3226,162 +3226,162 @@ html.dark .xly-table__page-btn {
   }
 }
 
-html.dark .xly-table__page-btn.is-current {
+html.dark .easy-table__page-btn.is-current {
   background: var(--el-color-primary);
   border-color: var(--el-color-primary);
 }
 
-html.dark .xly-table__page-btn.is-ellipsis {
+html.dark .easy-table__page-btn.is-ellipsis {
   color: var(--el-text-color-secondary);
 }
 
-html.dark .xly-table__pagination-input {
+html.dark .easy-table__pagination-input {
   border-color: var(--el-border-color-light);
   color: var(--el-text-color-regular);
   background: var(--el-fill-color);
 }
 
-html.dark .xly-table__pagination-go {
+html.dark .easy-table__pagination-go {
   border-color: var(--el-border-color-light);
   background: var(--el-fill-color);
   color: var(--el-text-color-regular);
 }
 
-html.dark .xly-table__pagination-go:hover {
+html.dark .easy-table__pagination-go:hover {
   border-color: var(--el-color-primary);
   color: var(--el-color-primary);
   background: rgba(79, 110, 247, 0.1);
 }
 
 /* Column Settings */
-html.dark .xly-table__column-settings-overlay {
+html.dark .easy-table__column-settings-overlay {
   background: rgba(0, 0, 0, 0.6);
 }
 
-html.dark .xly-table__column-settings-panel {
+html.dark .easy-table__column-settings-panel {
   background: var(--el-bg-color-overlay);
   border-color: var(--el-border-color);
 }
 
-html.dark .xly-table__column-settings-header {
+html.dark .easy-table__column-settings-header {
   background: var(--el-bg-color-overlay);
   border-bottom-color: var(--el-border-color-light);
 }
 
-html.dark .xly-table__column-settings-header h3 {
+html.dark .easy-table__column-settings-header h3 {
   color: var(--el-text-color-primary);
 }
 
-html.dark .xly-table__column-settings-close {
+html.dark .easy-table__column-settings-close {
   color: var(--el-text-color-secondary);
 }
 
-html.dark .xly-table__column-settings-close:hover {
+html.dark .easy-table__column-settings-close:hover {
   background: var(--el-fill-color);
   color: var(--el-text-color-regular);
 }
 
-html.dark .xly-table__column-settings-body {
+html.dark .easy-table__column-settings-body {
   background: var(--el-bg-color-overlay);
 }
 
-html.dark .xly-table__column-settings-item:hover:not(.is-disabled) {
+html.dark .easy-table__column-settings-item:hover:not(.is-disabled) {
   background: var(--el-fill-color);
 }
 
-html.dark .xly-table__column-settings-item.is-drag-over {
+html.dark .easy-table__column-settings-item.is-drag-over {
   background: rgba(79, 110, 247, 0.12);
 }
 
-html.dark .xly-table__column-settings-drag-handle {
+html.dark .easy-table__column-settings-drag-handle {
   color: var(--el-text-color-disabled);
 }
 
-html.dark .xly-table__column-settings-label {
+html.dark .easy-table__column-settings-label {
   color: var(--el-text-color-regular);
 }
 
-html.dark .xly-table__column-settings-footer {
+html.dark .easy-table__column-settings-footer {
   border-top-color: var(--el-border-color-light);
 }
 
-html.dark .xly-table__column-settings-btn--reset {
+html.dark .easy-table__column-settings-btn--reset {
   background: var(--el-fill-color);
   color: var(--el-text-color-regular);
   border-color: var(--el-border-color-light);
 }
 
-html.dark .xly-table__column-settings-btn--confirm {
+html.dark .easy-table__column-settings-btn--confirm {
   box-shadow: none;
 }
 
 /* Expand Row */
-html.dark .xly-table__expand-row {
+html.dark .easy-table__expand-row {
   background: var(--el-fill-color-lighter);
 }
 
-html.dark .xly-table__expand-row td {
+html.dark .easy-table__expand-row td {
   border-bottom-color: var(--el-border-color-light);
 }
 
-html.dark .xly-table__expand-cell {
+html.dark .easy-table__expand-cell {
   background: var(--el-fill-color-extra-light);
 }
 
 /* Expand & Tree Icons */
-html.dark .xly-table__expand-icon {
+html.dark .easy-table__expand-icon {
   color: var(--el-text-color-secondary);
 }
 
-html.dark .xly-table__expand-icon:hover {
+html.dark .easy-table__expand-icon:hover {
   color: var(--el-color-primary);
   background: rgba(79, 110, 247, 0.12);
 }
 
-html.dark .xly-table__tree-icon {
+html.dark .easy-table__tree-icon {
   color: var(--el-text-color-secondary);
 }
 
-html.dark .xly-table__tree-icon:hover {
+html.dark .easy-table__tree-icon:hover {
   color: var(--el-color-primary);
   background: rgba(79, 110, 247, 0.12);
 }
 
 /* Summary Row */
-html.dark .xly-table__summary-row {
-  --xly-table-summary-bg: var(--el-fill-color-lighter);
+html.dark .easy-table__summary-row {
+  --easy-table-summary-bg: var(--el-fill-color-lighter);
   border-top-color: var(--el-border-color);
 }
 
-html.dark .xly-table__summary-row .xly-table__td {
+html.dark .easy-table__summary-row .easy-table__td {
   color: var(--el-text-color-primary);
 }
 
-html.dark .xly-table__td--summary-label {
+html.dark .easy-table__td--summary-label {
   color: var(--el-text-color-secondary);
 }
 
-html.dark .xly-table__summary-title {
+html.dark .easy-table__summary-title {
   color: var(--el-text-color-secondary);
 }
 
-html.dark .xly-table__summary-sep {
+html.dark .easy-table__summary-sep {
   color: var(--el-text-color-secondary);
 }
 
 /* Summary Badges */
-html.dark .xly-table__summary-badge--sum {
+html.dark .easy-table__summary-badge--sum {
   color: #5b8dd9;
   background: rgba(91, 141, 217, 0.15);
 }
 
-html.dark .xly-table__summary-badge--avg {
+html.dark .easy-table__summary-badge--avg {
   color: #4ecca0;
   background: rgba(78, 204, 160, 0.15);
 }
 
 /* Tooltip */
-html.dark .xly-table__tooltip {
+html.dark .easy-table__tooltip {
   background: rgba(30, 30, 30, 0.95);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
 }

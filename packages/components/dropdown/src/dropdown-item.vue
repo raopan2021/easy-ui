@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import XlyIcon from '../../icon'
+import EasyIcon from '../../icon'
 
 const props = withDefaults(
   defineProps<{
@@ -29,20 +29,20 @@ function handleClick(event: MouseEvent) {
 
 <template>
   <li
-    class="xly-dropdown-item"
+    class="easy-dropdown-item"
     :class="{
       'is-disabled': disabled,
       'is-divided': divided,
     }"
     @click="handleClick"
   >
-    <XlyIcon v-if="icon" :name="icon" :size="14" class="xly-dropdown-item__icon" />
+    <EasyIcon v-if="icon" :name="icon" :size="14" class="easy-dropdown-item__icon" />
     <slot />
   </li>
 </template>
 
 <style scoped>
-.xly-dropdown-item {
+.easy-dropdown-item {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -57,24 +57,24 @@ function handleClick(event: MouseEvent) {
   line-height: 22px;
 }
 
-.xly-dropdown-item:hover {
+.easy-dropdown-item:hover {
   background-color: var(--hover-bg-color, var(--el-fill-color-light));
   color: var(--primary-color, var(--el-color-primary));
 }
 
-.xly-dropdown-item.is-disabled {
+.easy-dropdown-item.is-disabled {
   color: var(--disabled-text-color, var(--el-text-color-placeholder));
   cursor: not-allowed;
   pointer-events: none;
 }
 
-.xly-dropdown-item.is-divided {
+.easy-dropdown-item.is-divided {
   border-top: 1px solid var(--border-color, var(--el-border-color));
   margin-top: 6px;
   padding-top: 14px;
 }
 
-.xly-dropdown-item__icon {
+.easy-dropdown-item__icon {
   flex-shrink: 0;
 }
 </style>

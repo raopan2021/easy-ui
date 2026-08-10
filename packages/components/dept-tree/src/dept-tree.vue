@@ -135,15 +135,15 @@ function handleToggle(node: TreeNode, expanded: boolean) {
 </script>
 
 <template>
-  <div class="xly-dept-tree">
-    <div v-if="loading" class="xly-dept-tree__loading">
-      <XlyIcon name="el:Loading" class="xly-dept-tree__loading-icon" />
+  <div class="easy-dept-tree">
+    <div v-if="loading" class="easy-dept-tree__loading">
+      <EasyIcon name="el:Loading" class="easy-dept-tree__loading-icon" />
       <span>加载中...</span>
     </div>
-    <div v-else-if="emptyText && treeData.length === 0" class="xly-dept-tree__empty">
+    <div v-else-if="emptyText && treeData.length === 0" class="easy-dept-tree__empty">
       {{ emptyText }}
     </div>
-    <div v-else class="xly-dept-tree__content">
+    <div v-else class="easy-dept-tree__content">
       <DeptNode
         v-for="node in treeData"
         :key="node[nodeKey.id]"

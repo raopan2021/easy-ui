@@ -44,7 +44,7 @@ $themes: (
 );
 
 // 组件主体
-.xly-json-viewer {
+.easy-json-viewer {
   font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
   font-size: 13px;
   line-height: 1.6;
@@ -53,13 +53,13 @@ $themes: (
   overflow: hidden;
   background: map.get(map.get($themes, light), bg);
 
-  &.xly-json-viewer--dark {
+  &.easy-json-viewer--dark {
     border-color: map.get(map.get($themes, dark), border);
     background: map.get(map.get($themes, dark), bg);
   }
 
   // 工具栏
-  .xly-json-viewer__toolbar {
+  .easy-json-viewer__toolbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -67,20 +67,20 @@ $themes: (
     background: map.get(map.get($themes, light), toolbar-bg);
     border-bottom: 1px solid map.get(map.get($themes, light), border);
 
-    .xly-json-viewer--dark & {
+    .easy-json-viewer--dark & {
       background: map.get(map.get($themes, dark), toolbar-bg);
       border-bottom-color: map.get(map.get($themes, dark), border);
     }
   }
 
-  .xly-json-viewer__toolbar-left,
-  .xly-json-viewer__toolbar-right {
+  .easy-json-viewer__toolbar-left,
+  .easy-json-viewer__toolbar-right {
     display: flex;
     align-items: center;
     gap: 8px;
   }
 
-  .xly-json-viewer__btn {
+  .easy-json-viewer__btn {
     display: inline-flex;
     align-items: center;
     gap: 4px;
@@ -92,7 +92,7 @@ $themes: (
     cursor: pointer;
     transition: all 0.2s;
 
-    .xly-json-viewer--dark & {
+    .easy-json-viewer--dark & {
       color: map.get(map.get($themes, dark), text);
       background: map.get(map.get($themes, dark), toolbar-btn-bg);
     }
@@ -100,41 +100,41 @@ $themes: (
     &:hover {
       background: map.get(map.get($themes, light), toolbar-btn-hover);
 
-      .xly-json-viewer--dark & {
+      .easy-json-viewer--dark & {
         background: map.get(map.get($themes, dark), toolbar-btn-hover);
       }
     }
 
-    .xly-icon {
+    .easy-icon {
       font-size: 14px;
     }
   }
 
   // 内容区
-  .xly-json-viewer__content {
+  .easy-json-viewer__content {
     overflow: auto;
     max-height: v-bind('props.maxHeight || "none"');
     background: map.get(map.get($themes, light), content-bg);
 
-    .xly-json-viewer--dark & {
+    .easy-json-viewer--dark & {
       background: map.get(map.get($themes, dark), content-bg);
     }
   }
 
-  .xly-json-viewer__pre {
+  .easy-json-viewer__pre {
     margin: 0;
     padding: 16px 16px 16px 0;
     white-space: pre-wrap;
     word-break: break-all;
   }
 
-  .xly-json-viewer__empty {
+  .easy-json-viewer__empty {
     padding: 24px;
     text-align: center;
     color: map.get(map.get($themes, light), text-secondary);
     font-size: 14px;
 
-    .xly-json-viewer--dark & {
+    .easy-json-viewer--dark & {
       color: map.get(map.get($themes, dark), text-secondary);
     }
   }
@@ -157,35 +157,35 @@ $themes: (
 
 .json-string {
   color: map.get(map.get($themes, light), string);
-  .xly-json-viewer--dark & {
+  .easy-json-viewer--dark & {
     color: map.get(map.get($themes, dark), string);
   }
 }
 
 .json-number {
   color: map.get(map.get($themes, light), number);
-  .xly-json-viewer--dark & {
+  .easy-json-viewer--dark & {
     color: map.get(map.get($themes, dark), number);
   }
 }
 
 .json-boolean {
   color: map.get(map.get($themes, light), boolean);
-  .xly-json-viewer--dark & {
+  .easy-json-viewer--dark & {
     color: map.get(map.get($themes, dark), boolean);
   }
 }
 
 .json-null {
   color: map.get(map.get($themes, light), null);
-  .xly-json-viewer--dark & {
+  .easy-json-viewer--dark & {
     color: map.get(map.get($themes, dark), null);
   }
 }
 
 .json-primitive {
   color: map.get(map.get($themes, light), text);
-  .xly-json-viewer--dark & {
+  .easy-json-viewer--dark & {
     color: map.get(map.get($themes, dark), text);
   }
 }
@@ -193,7 +193,7 @@ $themes: (
 // 括号（根节点强制靠左）
 .json-bracket {
   color: map.get(map.get($themes, light), bracket);
-  .xly-json-viewer--dark & {
+  .easy-json-viewer--dark & {
     color: map.get(map.get($themes, dark), bracket);
   }
 }
@@ -213,7 +213,7 @@ $themes: (
   &.json-key--dark {
     color: map.get(map.get($themes, dark), key);
   }
-  .xly-json-viewer--dark & {
+  .easy-json-viewer--dark & {
     color: map.get(map.get($themes, dark), key);
   }
 }
@@ -228,7 +228,7 @@ $themes: (
   &.json-collapsed--dark {
     color: map.get(map.get($themes, dark), collapsed);
   }
-  .xly-json-viewer--dark & {
+  .easy-json-viewer--dark & {
     color: map.get(map.get($themes, dark), collapsed);
   }
 }
@@ -245,13 +245,13 @@ $themes: (
   font-size: 10px;
   vertical-align: middle;
 
-  .xly-json-viewer--dark & {
+  .easy-json-viewer--dark & {
     color: map.get(map.get($themes, dark), text-secondary);
   }
 
   &:hover {
     color: map.get(map.get($themes, light), text);
-    .xly-json-viewer--dark & {
+    .easy-json-viewer--dark & {
       color: map.get(map.get($themes, dark), text);
     }
   }
@@ -264,14 +264,14 @@ $themes: (
 
 // 冒号
 .json-colon {
-  .xly-json-viewer--dark & {
+  .easy-json-viewer--dark & {
     color: map.get(map.get($themes, dark), text);
   }
 }
 
 // 逗号
 .json-comma {
-  .xly-json-viewer--dark & {
+  .easy-json-viewer--dark & {
     color: map.get(map.get($themes, dark), text);
   }
 }

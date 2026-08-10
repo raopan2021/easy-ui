@@ -4,10 +4,10 @@
  * 使用方式：
  * ```ts
  * // vite.config.ts
- * import { EasyUiResolver } from 'easy-ui'
+ * import { easyComponentResolver } from 'easy-ui'
  * import Components from 'unplugin-vue-components/vite'
  *
- * Components({ resolvers: [EasyUiResolver()] })
+ * Components({ resolvers: [easyComponentResolver()] })
  * ```
  *
  * 规则：
@@ -18,7 +18,7 @@ import type { ComponentResolver } from 'unplugin-vue-components'
 /** 库包名 — 消费方 import 的来源 */
 const LIB = 'easy-ui'
 
-export function xlyComponentResolver(): ComponentResolver {
+export function easyComponentResolver(): ComponentResolver {
   return {
     type: 'component',
 

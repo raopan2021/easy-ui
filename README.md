@@ -1,4 +1,4 @@
-﻿# Easy UI
+# Easy UI
 
 <p align="center">
   <img src="https://img.shields.io/badge/Vue-3.5+-brightgreen.svg" alt="Vue 3.5+">
@@ -37,14 +37,14 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 const app = createApp(App)
-app.use(EasyUI) // 自动注册 Element Plus + xly 全局服务
+app.use(EasyUI) // 自动注册 Element Plus + easy 全局服务
 app.mount('#app')
 ```
 
 ### 方式二：按需 + Tree-shaking（推荐生产项目）
 
 ```ts
-import { setupXly } from 'easy-ui'
+import { setupEasy } from 'easy-ui'
 import ElementPlus from 'element-plus'
 // main.ts
 import { createApp } from 'vue'
@@ -52,7 +52,7 @@ import App from './App.vue'
 
 const app = createApp(App)
 app.use(ElementPlus)
-setupXly(app) // 仅注册全局服务，组件按需导入
+setupEasy(app) // 仅注册全局服务，组件按需导入
 app.mount('#app')
 ```
 
@@ -60,7 +60,7 @@ app.mount('#app')
 
 ```ts
 // vite.config.ts
-import { xlyComponentResolver } from 'easy-ui'
+import { easyComponentResolver } from 'easy-ui'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 
@@ -68,7 +68,7 @@ export default defineConfig({
   plugins: [
     Components({
       resolvers: [
-        xlyComponentResolver(), // Xly* 组件自动导入
+        easyComponentResolver(), // Easy* 组件自动导入
         ElementPlusResolver({ importStyle: 'css' }), // EP 组件
       ],
     }),
@@ -79,10 +79,10 @@ export default defineConfig({
 ```vue
 <!-- 组件直接使用，无需 import -->
 <template>
-  <XlyButton type="primary">
+  <EasyButton type="primary">
     提交
-  </XlyButton>
-  <XlyTable :data="list" :columns="columns" />
+  </EasyButton>
+  <EasyTable :data="list" :columns="columns" />
 </template>
 ```
 
@@ -107,7 +107,7 @@ const toggleDark = useToggle(isDark)
 
 ```scss
 // 组件样式中使用的 CSS 变量（自动跟随主题）
-.xly-card {
+.easy-card {
   background: var(--el-bg-color-overlay); // 亮色 #fff → 暗色 #1d1e1f
   border-color: var(--el-border-color-light); // 亮色 #e4e7ed → 暗色 #4c4d4f
   color: var(--el-text-color-primary); // 亮色 #303133 → 暗色 #e5eaf3
@@ -119,35 +119,35 @@ const toggleDark = useToggle(isDark)
 `easy-ui` 支持完整的 tree-shaking，仅打包实际使用的组件：
 
 ```
-只使用 XlyButton → 仅引入 dist/components/xly-button/index.mjs (~3KB)
-只使用 XlyTable  → 仅引入 dist/components/xly-table/index.mjs (~15KB)
+只使用 EasyButton → 仅引入 dist/components/easy-button/index.mjs (~3KB)
+只使用 EasyTable  → 仅引入 dist/components/easy-table/index.mjs (~15KB)
 ```
 
 Vite/Rollup/webpack 5+ 均自动支持，无需额外配置。
 
-## 🛠 全局 xly 服务
+## 🛠 全局 easy 服务
 
 ```ts
-import { setupXly, xly } from 'easy-ui'
+import { setupEasy, easy } from 'easy-ui'
 
 // 安装后全局可用
-setupXly(app)
+setupEasy(app)
 
 // 消息提示
-xly.$msg.success('操作成功')
-xly.$msg.warning('请注意')
-xly.$msg.danger('操作失败')
-xly.$msg.info('提示信息')
+easy.$msg.success('操作成功')
+easy.$msg.warning('请注意')
+easy.$msg.danger('操作失败')
+easy.$msg.info('提示信息')
 
 // 加载状态
-const loading = xly.$loading.open('加载中...')
+const loading = easy.$loading.open('加载中...')
 loading.close()
 
 // 消息弹窗
-xly.$msgbox.confirm('确定删除？').then(() => { /* ... */ })
+easy.$msgbox.confirm('确定删除？').then(() => { /* ... */ })
 
 // 操作引导
-const tour = xly.$tour({ steps: [1, 2, 3] })
+const tour = easy.$tour({ steps: [1, 2, 3] })
 tour.finish()
 ```
 
@@ -171,7 +171,7 @@ tour.finish()
 
 ### 命令式 API
 
-`xly.$msg` / `xly.$loading` / `xly.$msgbox` / `xly.$tour` — 消息提示、加载、弹窗全部支持命令式调用，一行代码搞定。
+`easy.$msg` / `easy.$loading` / `easy.$msgbox` / `easy.$tour` — 消息提示、加载、弹窗全部支持命令式调用，一行代码搞定。
 
 ---
 
@@ -181,20 +181,20 @@ tour.finish()
 ease-ui/
 ├── src/
 │   ├── components/          # 组件源码（每个组件独立目录）
-│   │   ├── xly-button/      # 按钮
-│   │   ├── xly-table/       # 表格
-│   │   ├── xly-form/        # 表单
+│   │   ├── easy-button/      # 按钮
+│   │   ├── easy-table/       # 表格
+│   │   ├── easy-form/        # 表单
 │   │   └── ...              # 65+ 组件
 │   ├── utils/
-│   │   ├── xly.ts           # 全局服务 API
-│   │   └── xlyComponentResolver.ts  # 自动导入解析器
+│   │   ├── easy.ts           # 全局服务 API
+│   │   └── easyComponentResolver.ts  # 自动导入解析器
 │   └── index.ts             # 库入口
 ├── vite.config.lib.ts       # 库模式构建配置
 ├── tsconfig.lib.json        # 类型声明生成配置
 ├── dist/                    # 构建产物（发布到 npm）
 │   ├── index.mjs            # 统一入口
 │   └── components/          # 按组件拆分
-│       └── xly-button/
+│       └── easy-button/
 │           ├── index.mjs    # 组件 JS
 │           └── index.css    # 组件 CSS
 └── package.json

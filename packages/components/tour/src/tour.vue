@@ -453,14 +453,14 @@ onUnmounted(() => {
     <!-- 遮罩层 -->
     <div
       v-if="visible && steps.length > 0 && currentStep"
-      class="xly-tour-overlay"
+      class="easy-tour-overlay"
       :style="overlayStyle"
       @click.self="onOverlayClick"
     >
       <!-- 高亮区域 -->
       <div
         v-if="showMask"
-        class="xly-tour-highlight"
+        class="easy-tour-highlight"
         :class="{ 'is-round': currentStep.highlightRadius }"
         :style="highlightStyle"
       />
@@ -470,25 +470,25 @@ onUnmounted(() => {
     <div
       v-show="visible && steps.length > 0 && currentStep"
       ref="popoverRef"
-      class="xly-tour-popover"
+      class="easy-tour-popover"
       :class="[
-        `xly-tour-popover--${effectivePlacement}`,
+        `easy-tour-popover--${effectivePlacement}`,
         { 'is-arrow-hidden': !showArrow, 'is-visible': positionReady },
       ]"
       :style="popoverStyle"
     >
       <!-- 箭头 -->
-      <div v-if="showArrow && positionReady" class="xly-tour-arrow" />
+      <div v-if="showArrow && positionReady" class="easy-tour-arrow" />
 
       <!-- 内容区 -->
-      <div class="xly-tour-content">
+      <div class="easy-tour-content">
         <!-- 标题栏 -->
-        <div v-if="currentStep.title" class="xly-tour-header">
-          <div class="xly-tour-title">
-            <span class="xly-tour-title__text">{{ currentStep.title }}</span>
-            <span v-if="showStepIndex" class="xly-tour-title__index"> {{ current + 1 }} / {{ total }} </span>
+        <div v-if="currentStep.title" class="easy-tour-header">
+          <div class="easy-tour-title">
+            <span class="easy-tour-title__text">{{ currentStep.title }}</span>
+            <span v-if="showStepIndex" class="easy-tour-title__index"> {{ current + 1 }} / {{ total }} </span>
           </div>
-          <button v-if="showClose" class="xly-tour-close" @click="handleClose">
+          <button v-if="showClose" class="easy-tour-close" @click="handleClose">
             <svg
               viewBox="0 0 24 24"
               width="14"
@@ -506,28 +506,28 @@ onUnmounted(() => {
         </div>
 
         <!-- 描述内容 -->
-        <div class="xly-tour-body">
-          <p v-if="currentStep.description" class="xly-tour-description">
+        <div class="easy-tour-body">
+          <p v-if="currentStep.description" class="easy-tour-description">
             {{ currentStep.description }}
           </p>
           <slot :current="current" :step="currentStep" :total="total" />
         </div>
 
         <!-- 底部操作栏 -->
-        <div class="xly-tour-footer">
-          <div class="xly-tour-footer__left">
+        <div class="easy-tour-footer">
+          <div class="easy-tour-footer__left">
             <slot name="prev" :current="current" :step="currentStep" :total="total">
-              <button v-if="showPrev" class="xly-tour-btn xly-tour-btn--default" @click="handlePrev">
+              <button v-if="showPrev" class="easy-tour-btn easy-tour-btn--default" @click="handlePrev">
                 {{ prevText }}
               </button>
             </slot>
           </div>
-          <div class="xly-tour-footer__right">
+          <div class="easy-tour-footer__right">
             <slot name="next" :current="current" :step="currentStep" :total="total">
-              <button v-if="isLast" class="xly-tour-btn xly-tour-btn--primary" @click="handleFinish">
+              <button v-if="isLast" class="easy-tour-btn easy-tour-btn--primary" @click="handleFinish">
                 {{ finishText }}
               </button>
-              <button v-else class="xly-tour-btn xly-tour-btn--primary" @click="handleNext">
+              <button v-else class="easy-tour-btn easy-tour-btn--primary" @click="handleNext">
                 {{ nextText }}
               </button>
             </slot>
@@ -540,7 +540,7 @@ onUnmounted(() => {
 
 <style scoped lang="scss">
 /* 遮罩层 */
-.xly-tour-overlay {
+.easy-tour-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -550,7 +550,7 @@ onUnmounted(() => {
 }
 
 /* 高亮区域 */
-.xly-tour-highlight {
+.easy-tour-highlight {
   position: fixed;
   border-radius: 4px;
   box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.45);
@@ -568,7 +568,7 @@ onUnmounted(() => {
 }
 
 /* 气泡卡片 */
-.xly-tour-popover {
+.easy-tour-popover {
   position: fixed;
   z-index: 9002;
   background: var(--el-bg-color);
@@ -589,7 +589,7 @@ onUnmounted(() => {
     transform: scale(1);
   }
 
-  .xly-tour-content {
+  .easy-tour-content {
     padding: 16px 20px 12px;
   }
 
@@ -600,7 +600,7 @@ onUnmounted(() => {
 }
 
 /* 箭头 */
-.xly-tour-arrow {
+.easy-tour-arrow {
   position: absolute;
   width: 10px;
   height: 10px;
@@ -613,55 +613,55 @@ onUnmounted(() => {
   }
 }
 
-.xly-tour-popover--bottom .xly-tour-arrow {
+.easy-tour-popover--bottom .easy-tour-arrow {
   top: -5px;
   left: 50%;
   margin-left: -5px;
 }
 
-.xly-tour-popover--top .xly-tour-arrow {
+.easy-tour-popover--top .easy-tour-arrow {
   bottom: -5px;
   left: 50%;
   margin-left: -5px;
 }
 
-.xly-tour-popover--left .xly-tour-arrow {
+.easy-tour-popover--left .easy-tour-arrow {
   right: -5px;
   top: 50%;
   margin-top: -5px;
 }
 
-.xly-tour-popover--right .xly-tour-arrow {
+.easy-tour-popover--right .easy-tour-arrow {
   left: -5px;
   top: 50%;
   margin-top: -5px;
 }
 
-.is-arrow-hidden .xly-tour-arrow {
+.is-arrow-hidden .easy-tour-arrow {
   display: none;
 }
 
 /* 标题栏 */
-.xly-tour-header {
+.easy-tour-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 8px;
 }
 
-.xly-tour-title {
+.easy-tour-title {
   display: flex;
   align-items: center;
   gap: 8px;
 
-  .xly-tour-title__text {
+  .easy-tour-title__text {
     font-size: 16px;
     font-weight: 600;
     color: var(--el-text-color-primary);
     line-height: 1.4;
   }
 
-  .xly-tour-title__index {
+  .easy-tour-title__index {
     font-size: 12px;
     font-weight: 500;
     color: var(--tour-color, #4f6ef7);
@@ -673,7 +673,7 @@ onUnmounted(() => {
   }
 }
 
-.xly-tour-close {
+.easy-tour-close {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -704,11 +704,11 @@ onUnmounted(() => {
 }
 
 /* 描述内容 */
-.xly-tour-body {
+.easy-tour-body {
   margin-bottom: 16px;
 }
 
-.xly-tour-description {
+.easy-tour-description {
   font-size: 14px;
   color: var(--el-text-color-regular);
   line-height: 1.6;
@@ -720,20 +720,20 @@ onUnmounted(() => {
 }
 
 /* 底部操作栏 */
-.xly-tour-footer {
+.easy-tour-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  .xly-tour-footer__left,
-  .xly-tour-footer__right {
+  .easy-tour-footer__left,
+  .easy-tour-footer__right {
     display: flex;
     align-items: center;
     gap: 8px;
   }
 }
 
-.xly-tour-btn {
+.easy-tour-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -749,7 +749,7 @@ onUnmounted(() => {
   white-space: nowrap;
 }
 
-.xly-tour-btn--default {
+.easy-tour-btn--default {
   background: #f3f4f6;
   color: var(--el-text-color-regular);
 
@@ -767,7 +767,7 @@ onUnmounted(() => {
   }
 }
 
-.xly-tour-btn--primary {
+.easy-tour-btn--primary {
   background: var(--tour-color, #4f6ef7);
   color: var(--el-color-white);
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import XlyForm, { EasyFormItem as XlyFormItem } from '../../../../form'
-import XlyInput from '../../../../input'
+import EasyForm, { EasyFormItem } from '../../../../form'
+import EasyInput from '../../../../input'
 
 const props = defineProps({
   modelValue: {
@@ -22,11 +22,11 @@ const formRef = ref()
 
 <template>
   <div>
-    <XlyForm ref="formRef" :model="form" label-width="120px" :disabled="disabled" class="endForm">
-      <XlyFormItem label="节点编码" prop="nodeCode">
-        <XlyInput v-model="form.nodeCode" :disabled="disabled" />
-      </XlyFormItem>
-    </XlyForm>
+    <EasyForm ref="formRef" :model="form" label-width="120px" :disabled="disabled" class="endForm">
+      <EasyFormItem label="节点编码" prop="nodeCode">
+        <EasyInput v-model="form.nodeCode" :disabled="disabled" />
+      </EasyFormItem>
+    </EasyForm>
   </div>
 </template>
 

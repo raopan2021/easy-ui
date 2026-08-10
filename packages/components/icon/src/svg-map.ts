@@ -2,7 +2,7 @@
  * SVG 图标加载器
  *
  * 自动扫描 src/assets/icon/svg/ 目录下所有 .svg 文件，
- * 将其内容缓存供 XlyIcon 组件使用。
+ * 将其内容缓存供 EasyIcon 组件使用。
  *
  * 使用方式：
  * - name="svg:edit" → 渲染 assets/icon/svg/edit.svg

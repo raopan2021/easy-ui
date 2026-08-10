@@ -38,13 +38,13 @@ provide('easyRadioGroup', {
 </script>
 
 <template>
-  <div class="xly-radio-group" :class="[`xly-radio-group--${size}`, { 'is-disabled': disabled }]" role="radiogroup">
+  <div class="easy-radio-group" :class="[`easy-radio-group--${size}`, { 'is-disabled': disabled }]" role="radiogroup">
     <slot />
   </div>
 </template>
 
 <style scoped lang="scss">
-.xly-radio-group {
+.easy-radio-group {
   display: inline-flex;
   flex-wrap: wrap;
   gap: 16px;

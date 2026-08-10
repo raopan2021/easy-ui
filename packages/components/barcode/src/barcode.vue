@@ -175,9 +175,9 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="xly-barcode">
-    <svg ref="svgRef" class="xly-barcode__svg" />
-    <div v-if="!content" class="xly-barcode__placeholder">
+  <div class="easy-barcode">
+    <svg ref="svgRef" class="easy-barcode__svg" />
+    <div v-if="!content" class="easy-barcode__placeholder">
       <slot name="placeholder">
         <span>请输入内容</span>
       </slot>
@@ -186,16 +186,16 @@ onMounted(async () => {
 </template>
 
 <style scoped lang="scss">
-.xly-barcode {
+.easy-barcode {
   position: relative;
   display: inline-block;
 
-  .xly-barcode__svg {
+  .easy-barcode__svg {
     display: block;
     /*SVG 由 JS 动态设置 width/height 属性，scoped 样式不再覆盖 */
   }
 
-  .xly-barcode__placeholder {
+  .easy-barcode__placeholder {
     position: absolute;
     top: 0;
     left: 0;

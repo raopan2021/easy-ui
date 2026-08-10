@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import XlyButton from '../../button'
-import XlyIcon from '../../icon'
+import EasyButton from '../../button'
+import EasyIcon from '../../icon'
 
 type ImageFit = 'fill' | 'contain' | 'cover' | 'none' | 'scale-down'
 
@@ -294,18 +294,18 @@ watch(previewVisible, (val) => {
 </script>
 
 <template>
-  <div class="xly-image" :class="[`xly-image--${displayMode}`]">
+  <div class="easy-image" :class="[`easy-image--${displayMode}`]">
     <!-- 单图模式 -->
     <template v-if="displayImages.length === 1">
-      <div class="xly-image__single" :style="singleStyle" @click="handlePreview(0)">
+      <div class="easy-image__single" :style="singleStyle" @click="handlePreview(0)">
         <img
           :src="displayImages[0]"
           :alt="alt"
-          class="xly-image__img"
+          class="easy-image__img"
           :style="{ objectFit: fit }"
           @error="handleError"
         >
-        <div v-if="$slots.overlay" class="xly-image__overlay">
+        <div v-if="$slots.overlay" class="easy-image__overlay">
           <slot name="overlay" />
         </div>
       </div>
@@ -313,11 +313,11 @@ watch(previewVisible, (val) => {
 
     <!-- 多图模式 -->
     <template v-else>
-      <div class="xly-image__list" :style="listStyle">
-        <div v-for="(img, index) in visibleImages" :key="index" class="xly-image__item" @click="handlePreview(index)">
-          <img :src="img" :alt="alt" class="xly-image__img" :style="{ objectFit: fit }" @error="handleError">
+      <div class="easy-image__list" :style="listStyle">
+        <div v-for="(img, index) in visibleImages" :key="index" class="easy-image__item" @click="handlePreview(index)">
+          <img :src="img" :alt="alt" class="easy-image__img" :style="{ objectFit: fit }" @error="handleError">
           <!-- 超出提示：显示在最后一个可见图片上 -->
-          <div v-if="index === visibleImages.length - 1 && hideCount > 0" class="xly-image__mask">
+          <div v-if="index === visibleImages.length - 1 && hideCount > 0" class="easy-image__mask">
             <span>+{{ hideCount }}</span>
           </div>
         </div>
@@ -326,18 +326,18 @@ watch(previewVisible, (val) => {
 
     <!-- 预览弹窗 -->
     <Teleport to="body">
-      <div v-if="previewVisible" class="xly-image-preview" @click.self="closePreview" @wheel.prevent="handleWheel">
+      <div v-if="previewVisible" class="easy-image-preview" @click.self="closePreview" @wheel.prevent="handleWheel">
         <!-- 关闭按钮（右上角） -->
-        <div class="xly-image-preview__close">
-          <XlyButton type="text" @click="closePreview">
-            <XlyIcon name="el:Close" />
-          </XlyButton>
+        <div class="easy-image-preview__close">
+          <EasyButton type="text" @click="closePreview">
+            <EasyIcon name="el:Close" />
+          </EasyButton>
         </div>
 
         <!-- 图片容器（居中） -->
         <div
           ref="previewContainerRef"
-          class="xly-image-preview__container"
+          class="easy-image-preview__container"
           style="display: block; grid-template-columns: unset"
           @mousedown="handleDragStart"
         >
@@ -345,67 +345,67 @@ watch(previewVisible, (val) => {
             ref="previewImgRef"
             :src="previewSrc"
             :style="previewImgStyle"
-            class="xly-image-preview__img"
+            class="easy-image-preview__img"
             style="width: auto; height: auto; max-width: 100%; max-height: 100%"
             @error="handleError"
           >
         </div>
 
         <!-- 左侧切换按钮 -->
-        <XlyButton
+        <EasyButton
           v-if="displayImages.length > 1 && hasAction('prev')"
-          class="xly-image-preview__arrow xly-image-preview__arrow--left"
+          class="easy-image-preview__arrow easy-image-preview__arrow--left"
           type="text"
           @click="prevImage"
         >
-          <XlyIcon name="el:ArrowLeft" :size="30" />
-        </XlyButton>
+          <EasyIcon name="el:ArrowLeft" :size="30" />
+        </EasyButton>
 
         <!-- 右侧切换按钮 -->
-        <XlyButton
+        <EasyButton
           v-if="displayImages.length > 1 && hasAction('next')"
-          class="xly-image-preview__arrow xly-image-preview__arrow--right"
+          class="easy-image-preview__arrow easy-image-preview__arrow--right"
           type="text"
           @click="nextImage"
         >
-          <XlyIcon name="el:ArrowRight" :size="30" />
-        </XlyButton>
+          <EasyIcon name="el:ArrowRight" :size="30" />
+        </EasyButton>
 
         <!-- 底部控制栏 -->
-        <div class="xly-image-preview__footer">
+        <div class="easy-image-preview__footer">
           <!-- 指示器 -->
-          <div v-if="displayImages.length > 1" class="xly-image-preview__indicators">
+          <div v-if="displayImages.length > 1" class="easy-image-preview__indicators">
             <span
               v-for="(_, index) in displayImages"
               :key="index"
-              class="xly-image-preview__indicator"
+              class="easy-image-preview__indicator"
               :class="{ 'is-active': index === previewIndex }"
               @click="previewIndex = index"
             />
           </div>
 
           <!-- 图片信息 -->
-          <div class="xly-image-preview__info">
+          <div class="easy-image-preview__info">
             {{ previewIndex + 1 }} / {{ displayImages.length }}
           </div>
 
           <!-- 操作栏 -->
-          <div class="xly-image-preview__toolbar">
-            <XlyButton v-if="hasAction('zoomOut')" type="text" @click="zoomOut">
-              <XlyIcon name="el:ZoomOut" />
-            </XlyButton>
-            <XlyButton v-if="hasAction('zoomIn')" type="text" @click="zoomIn">
-              <XlyIcon name="el:ZoomIn" />
-            </XlyButton>
-            <XlyButton v-if="hasAction('rotateLeft')" type="text" @click="rotateLeft">
-              <XlyIcon name="el:RefreshLeft" />
-            </XlyButton>
-            <XlyButton v-if="hasAction('rotateRight')" type="text" @click="rotateRight">
-              <XlyIcon name="el:RefreshRight" />
-            </XlyButton>
-            <XlyButton v-if="hasAction('reset')" type="text" @click="resetTransform">
-              <XlyIcon name="el:Refresh" />
-            </XlyButton>
+          <div class="easy-image-preview__toolbar">
+            <EasyButton v-if="hasAction('zoomOut')" type="text" @click="zoomOut">
+              <EasyIcon name="el:ZoomOut" />
+            </EasyButton>
+            <EasyButton v-if="hasAction('zoomIn')" type="text" @click="zoomIn">
+              <EasyIcon name="el:ZoomIn" />
+            </EasyButton>
+            <EasyButton v-if="hasAction('rotateLeft')" type="text" @click="rotateLeft">
+              <EasyIcon name="el:RefreshLeft" />
+            </EasyButton>
+            <EasyButton v-if="hasAction('rotateRight')" type="text" @click="rotateRight">
+              <EasyIcon name="el:RefreshRight" />
+            </EasyButton>
+            <EasyButton v-if="hasAction('reset')" type="text" @click="resetTransform">
+              <EasyIcon name="el:Refresh" />
+            </EasyButton>
           </div>
         </div>
       </div>
@@ -421,9 +421,9 @@ watch(previewVisible, (val) => {
 $radius-base: 8px;
 
 /* ========== 图片组件 ========== */
-.xly-image {
-  &.xly-image--single {
-    .xly-image__single {
+.easy-image {
+  &.easy-image--single {
+    .easy-image__single {
       width: 120px;
       height: 120px;
       border-radius: $radius-base;
@@ -432,21 +432,21 @@ $radius-base: 8px;
     }
   }
 
-  &.xly-image--grid {
+  &.easy-image--grid {
     // 使用 flex 布局，不再需要 grid
   }
 }
 
-.xly-image__single {
+.easy-image__single {
   position: relative;
 }
 
-.xly-image__list {
+.easy-image__list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 
-  .xly-image__item {
+  .easy-image__item {
     position: relative;
     width: var(--image-width, 120px);
     height: var(--image-height, 120px);
@@ -457,22 +457,22 @@ $radius-base: 8px;
   }
 }
 
-.xly-image__item {
+.easy-image__item {
   &:hover {
-    .xly-image__img {
+    .easy-image__img {
       transform: scale(1.05);
     }
   }
 }
 
-.xly-image__img {
+.easy-image__img {
   width: 100%;
   height: 100%;
   transition: transform 0.3s ease;
   display: block;
 }
 
-.xly-image__overlay {
+.easy-image__overlay {
   position: absolute;
   inset: 0;
   display: flex;
@@ -483,13 +483,13 @@ $radius-base: 8px;
   opacity: 0;
   transition: opacity 0.3s;
 
-  .xly-image__single:hover &,
-  .xly-image__item:hover & {
+  .easy-image__single:hover &,
+  .easy-image__item:hover & {
     opacity: 1;
   }
 }
 
-.xly-image__mask {
+.easy-image__mask {
   position: absolute;
   inset: 0;
   display: flex;
@@ -502,7 +502,7 @@ $radius-base: 8px;
 }
 
 /* ========== 预览弹窗 ========== */
-.xly-image-preview {
+.easy-image-preview {
   position: fixed;
   inset: 0;
   z-index: 2000;
@@ -513,13 +513,13 @@ $radius-base: 8px;
   font-size: 0;
   line-height: 0;
 
-  .xly-image-preview__close {
+  .easy-image-preview__close {
     position: absolute;
     top: 20px;
     right: 20px;
     z-index: 10;
 
-    .xly-button {
+    .easy-button {
       color: $white;
       padding: 8px;
 
@@ -530,7 +530,7 @@ $radius-base: 8px;
     }
   }
 
-  .xly-image-preview__container {
+  .easy-image-preview__container {
     display: block !important;
     grid-template-columns: unset !important;
     max-width: calc(100% - 140px) !important;
@@ -542,7 +542,7 @@ $radius-base: 8px;
     }
   }
 
-  .xly-image-preview__img {
+  .easy-image-preview__img {
     display: block !important;
     width: auto !important;
     height: auto !important;
@@ -552,7 +552,7 @@ $radius-base: 8px;
     user-select: none;
   }
 
-  .xly-image-preview__arrow {
+  .easy-image-preview__arrow {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -573,16 +573,16 @@ $radius-base: 8px;
       color: $white;
     }
 
-    &.xly-image-preview__arrow--left {
+    &.easy-image-preview__arrow--left {
       left: 20px;
     }
 
-    &.xly-image-preview__arrow--right {
+    &.easy-image-preview__arrow--right {
       right: 20px;
     }
   }
 
-  .xly-image-preview__footer {
+  .easy-image-preview__footer {
     position: absolute;
     bottom: 20px;
     left: 50%;
@@ -593,12 +593,12 @@ $radius-base: 8px;
     gap: 12px;
   }
 
-  .xly-image-preview__indicators {
+  .easy-image-preview__indicators {
     display: flex;
     gap: 8px;
   }
 
-  .xly-image-preview__indicator {
+  .easy-image-preview__indicator {
     width: 8px;
     height: 8px;
     background: rgba(255, 255, 255, 0.5);
@@ -613,7 +613,7 @@ $radius-base: 8px;
     }
   }
 
-  .xly-image-preview__info {
+  .easy-image-preview__info {
     color: $white;
     font-size: 14px;
     padding: 12px;
@@ -621,7 +621,7 @@ $radius-base: 8px;
     border-radius: 16px;
   }
 
-  .xly-image-preview__toolbar {
+  .easy-image-preview__toolbar {
     display: flex;
     align-items: center;
     gap: 4px;
@@ -629,7 +629,7 @@ $radius-base: 8px;
     background: rgba(0, 0, 0, 0.5);
     border-radius: 24px;
 
-    .xly-button {
+    .easy-button {
       color: $white;
       padding: 8px;
       border-radius: 50%;

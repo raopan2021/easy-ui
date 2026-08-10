@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import XlyForm, { EasyFormItem as XlyFormItem } from '../../../../form'
-import XlyInput from '../../../../input'
+import EasyForm, { EasyFormItem } from '../../../../form'
+import EasyInput from '../../../../input'
 
 const props = defineProps({
   modelValue: {
@@ -38,14 +38,14 @@ function nodeNameChange() {
 
 <template>
   <div>
-    <XlyForm ref="formRef" :model="form" label-width="120px" :disabled="disabled" class="gatewayForm">
-      <XlyFormItem label="节点编码" prop="nodeCode">
-        <XlyInput v-model="form.nodeCode" :disabled="disabled" />
-      </XlyFormItem>
-      <XlyFormItem label="节点名称" prop="nodeName">
-        <XlyInput ref="nodeInput" v-model="form.nodeName" :disabled="disabled" @change="nodeNameChange" />
-      </XlyFormItem>
-    </XlyForm>
+    <EasyForm ref="formRef" :model="form" label-width="120px" :disabled="disabled" class="gatewayForm">
+      <EasyFormItem label="节点编码" prop="nodeCode">
+        <EasyInput v-model="form.nodeCode" :disabled="disabled" />
+      </EasyFormItem>
+      <EasyFormItem label="节点名称" prop="nodeName">
+        <EasyInput ref="nodeInput" v-model="form.nodeName" :disabled="disabled" @change="nodeNameChange" />
+      </EasyFormItem>
+    </EasyForm>
   </div>
 </template>
 

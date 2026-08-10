@@ -113,7 +113,7 @@ function handleSearch(data: any) {
         搜索表单 SearchForm
       </h1>
       <p class="doc-desc">
-        基于 xly 组件库的搜索表单,支持多种表单控件、展开/收起等功能。
+        基于 easy 组件库的搜索表单,支持多种表单控件、展开/收起等功能。
       </p>
     </header>
 

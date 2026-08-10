@@ -2,7 +2,7 @@
 import type { ComputedRef, Ref } from 'vue'
 import { computed, inject, onMounted, onUnmounted } from 'vue'
 
-import XlyIcon from '../../icon'
+import EasyIcon from '../../icon'
 import { stepProps } from './step'
 
 defineOptions({ name: 'EasyStep' })
@@ -145,13 +145,13 @@ const lineStatus = computed(() => {
           <!-- 自定义图标 -->
           <slot name="icon">
             <template v-if="icon">
-              <XlyIcon :name="icon" :size="16" color="currentColor" />
+              <EasyIcon :name="icon" :size="16" color="currentColor" />
             </template>
             <template v-else-if="currentStatus === 'success' || currentStatus === 'finish'">
-              <XlyIcon name="el:Check" :size="16" color="currentColor" />
+              <EasyIcon name="el:Check" :size="16" color="currentColor" />
             </template>
             <template v-else-if="currentStatus === 'error'">
-              <XlyIcon name="el:Close" :size="16" color="currentColor" />
+              <EasyIcon name="el:Close" :size="16" color="currentColor" />
             </template>
             <span v-else class="easy-step__number">{{ index + 1 }}</span>
           </slot>
@@ -254,7 +254,7 @@ const lineStatus = computed(() => {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.easy-step__icon :deep(.xly-icon) {
+.easy-step__icon :deep(.easy-icon) {
   display: flex;
   align-items: center;
   justify-content: center;

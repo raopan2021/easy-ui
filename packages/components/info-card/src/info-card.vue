@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import XlyIcon from '../../icon'
+import EasyIcon from '../../icon'
 
 export interface InfoCardDescItem {
   /** 描述文本 */
@@ -179,26 +179,26 @@ function handleImageError(e: Event) {
 </script>
 
 <template>
-  <div class="xly-info-card" :class="cardClass" :style="cardStyle" @click="handleClick">
+  <div class="easy-info-card" :class="cardClass" :style="cardStyle" @click="handleClick">
     <!-- 左侧图片 -->
-    <div v-if="image" class="xly-info-card__image">
+    <div v-if="image" class="easy-info-card__image">
       <img :src="image" :alt="title" @error="handleImageError">
     </div>
 
     <!-- 中间内容区 -->
-    <div class="xly-info-card__content">
+    <div class="easy-info-card__content">
       <!-- 标题行：图标 + 标题 + 状态标签 -->
-      <div class="xly-info-card__header">
-        <div class="xly-info-card__title-wrap">
-          <span v-if="icon" class="xly-info-card__icon" :style="iconStyle">
-            <XlyIcon :name="icon" :size="iconSize" />
+      <div class="easy-info-card__header">
+        <div class="easy-info-card__title-wrap">
+          <span v-if="icon" class="easy-info-card__icon" :style="iconStyle">
+            <EasyIcon :name="icon" :size="iconSize" />
           </span>
-          <span class="xly-info-card__title" :style="titleStyle">{{ title }}</span>
+          <span class="easy-info-card__title" :style="titleStyle">{{ title }}</span>
         </div>
         <span
           v-if="status"
-          class="xly-info-card__status"
-          :class="[`xly-info-card__status--${statusType}`]"
+          class="easy-info-card__status"
+          :class="[`easy-info-card__status--${statusType}`]"
           :style="statusStyle"
         >
           {{ status }}
@@ -206,17 +206,17 @@ function handleImageError(e: Event) {
       </div>
 
       <!-- 描述信息列表 -->
-      <div class="xly-info-card__body">
-        <div v-for="(item, index) in descriptionList" :key="index" class="xly-info-card__desc-item" :style="descStyle">
-          <XlyIcon v-if="item.icon" :name="item.icon" :size="12" class="xly-info-card__desc-icon" :style="descStyle" />
-          <span v-else class="xly-info-card__desc-dot" :style="dotStyle" />
-          <span class="xly-info-card__desc-text">{{ item.text }}</span>
+      <div class="easy-info-card__body">
+        <div v-for="(item, index) in descriptionList" :key="index" class="easy-info-card__desc-item" :style="descStyle">
+          <EasyIcon v-if="item.icon" :name="item.icon" :size="12" class="easy-info-card__desc-icon" :style="descStyle" />
+          <span v-else class="easy-info-card__desc-dot" :style="dotStyle" />
+          <span class="easy-info-card__desc-text">{{ item.text }}</span>
         </div>
       </div>
     </div>
 
     <!-- 右侧额外操作区 -->
-    <div v-if="$slots.action" class="xly-info-card__action">
+    <div v-if="$slots.action" class="easy-info-card__action">
       <slot name="action" />
     </div>
   </div>
@@ -230,7 +230,7 @@ $radius: 10px;
 $radius-image: 6px;
 
 /* ========== 卡片主体 ========== */
-.xly-info-card {
+.easy-info-card {
   display: flex;
   align-items: flex-start;
   gap: 14px;
@@ -263,7 +263,7 @@ $radius-image: 6px;
 }
 
 /* ========== 左侧图片 ========== */
-.xly-info-card__image {
+.easy-info-card__image {
   flex-shrink: 0;
   width: 80px;
   height: 60px;
@@ -280,7 +280,7 @@ $radius-image: 6px;
 }
 
 /* ========== 中间内容区 ========== */
-.xly-info-card__content {
+.easy-info-card__content {
   flex: 1;
   min-width: 0;
   display: flex;
@@ -289,14 +289,14 @@ $radius-image: 6px;
 }
 
 /* ========== 标题行 ========== */
-.xly-info-card__header {
+.easy-info-card__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
 }
 
-.xly-info-card__title-wrap {
+.easy-info-card__title-wrap {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -304,7 +304,7 @@ $radius-image: 6px;
   flex: 1;
 }
 
-.xly-info-card__icon {
+.easy-info-card__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -312,7 +312,7 @@ $radius-image: 6px;
   color: var(--el-text-color-primary);
 }
 
-.xly-info-card__title {
+.easy-info-card__title {
   font-size: 15px;
   font-weight: 600;
   color: var(--el-text-color-primary);
@@ -323,7 +323,7 @@ $radius-image: 6px;
 }
 
 /* ========== 状态标签 ========== */
-.xly-info-card__status {
+.easy-info-card__status {
   flex-shrink: 0;
   padding: 3px 10px;
   font-size: 12px;
@@ -332,40 +332,40 @@ $radius-image: 6px;
   white-space: nowrap;
   line-height: 1.4;
 
-  &.xly-info-card__status--default {
+  &.easy-info-card__status--default {
     background: rgba(255, 255, 255, 0.1);
     color: var(--el-text-color-secondary);
   }
 
-  &.xly-info-card__status--primary {
+  &.easy-info-card__status--primary {
     background: $blue-bg;
     color: #60a5fa;
   }
 
-  &.xly-info-card__status--success {
+  &.easy-info-card__status--success {
     background: $green-bg;
     color: #34d399;
   }
 
-  &.xly-info-card__status--warning {
+  &.easy-info-card__status--warning {
     background: $orange-bg;
     color: #fbbf24;
   }
 
-  &.xly-info-card__status--danger {
+  &.easy-info-card__status--danger {
     background: $red-bg;
     color: #f87171;
   }
 }
 
 /* ========== 描述信息 ========== */
-.xly-info-card__body {
+.easy-info-card__body {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-.xly-info-card__desc-item {
+.easy-info-card__desc-item {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -374,12 +374,12 @@ $radius-image: 6px;
   line-height: 1.4;
 }
 
-.xly-info-card__desc-icon {
+.easy-info-card__desc-icon {
   flex-shrink: 0;
   color: var(--el-text-color-placeholder);
 }
 
-.xly-info-card__desc-dot {
+.easy-info-card__desc-dot {
   width: 4px;
   height: 4px;
   border-radius: 50%;
@@ -387,14 +387,14 @@ $radius-image: 6px;
   flex-shrink: 0;
 }
 
-.xly-info-card__desc-text {
+.easy-info-card__desc-text {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 /* ========== 右侧操作区 ========== */
-.xly-info-card__action {
+.easy-info-card__action {
   flex-shrink: 0;
   display: flex;
   align-items: center;

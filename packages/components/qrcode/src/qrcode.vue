@@ -203,9 +203,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="xly-qrcode" :style="{ width: `${size}px`, height: `${size}px` }">
-    <canvas ref="canvasRef" class="xly-qrcode__canvas" />
-    <div v-if="!content" class="xly-qrcode__placeholder">
+  <div class="easy-qrcode" :style="{ width: `${size}px`, height: `${size}px` }">
+    <canvas ref="canvasRef" class="easy-qrcode__canvas" />
+    <div v-if="!content" class="easy-qrcode__placeholder">
       <slot name="placeholder">
         <span>请输入内容</span>
       </slot>
@@ -214,15 +214,15 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
-.xly-qrcode {
+.easy-qrcode {
   position: relative;
   display: inline-block;
 
-  .xly-qrcode__canvas {
+  .easy-qrcode__canvas {
     display: block;
   }
 
-  .xly-qrcode__placeholder {
+  .easy-qrcode__placeholder {
     position: absolute;
     top: 0;
     left: 0;

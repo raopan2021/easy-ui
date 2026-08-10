@@ -4,14 +4,14 @@
 // ============================================================
 import type { App } from 'vue'
 import ElementPlus from 'element-plus'
-import { setupXly } from './utils/xly'
-import { xlyComponentResolver as _easyUiResolver } from './utils/xlyComponentResolver'
+import { setupEasy } from './utils/easy'
+import { easyComponentResolver as _easyUiResolver } from './utils/easyComponentResolver'
 
 // ──── 组件 / 子组件 / 函数式 API / 工具（统一由 components 聚合导出） ────
 export * from '../../components'
 
-// ──── 全局 xly 服务 ────
-export { setupXly, xly } from './utils/xly'
+// ──── 全局 easy 服务 ────
+export { easy, setupEasy } from './utils/easy'
 export type {
   BadgeInstance,
   BadgeOptions,
@@ -24,16 +24,16 @@ export type {
   MsgBoxType,
   TourInstance,
   TourOptions,
-} from './utils/xly'
+} from './utils/easy'
 
 // ──── 自动导入解析器 ────
-export { xlyComponentResolver } from './utils/xlyComponentResolver'
+export { easyComponentResolver } from './utils/easyComponentResolver'
 export const EasyUiResolver = _easyUiResolver
 
 // ──── 默认安装（app.use） ────
 export function install(app: App) {
   app.use(ElementPlus)
-  setupXly(app)
+  setupEasy(app)
 }
 
 export default { install }

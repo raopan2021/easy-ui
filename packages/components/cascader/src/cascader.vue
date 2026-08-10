@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /* eslint-disable ts/no-use-before-define */
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import XlyIcon from '../../icon'
+import EasyIcon from '../../icon'
 
 defineOptions({ name: 'EasyCascader' })
 
@@ -85,33 +85,33 @@ export interface CascaderProps {
   /** 菜单项自定义类名，可以是字符串或函数。如果是函数，接收当前节点和层级作为参数，返回类名字符串
    * @example
    * // 字符串形式：所有菜单项应用相同样式类
-   * <xly-cascader :menu-node-class="'custom-menu-item'" />
+   * <easy-cascader :menu-node-class="'custom-menu-item'" />
    *
    * @example
    * // 函数形式：根据节点数据动态应用样式类
-   * <xly-cascader :menu-node-class="(node, level) => node.value === 'special' ? 'highlight-item' : ''" />
+   * <easy-cascader :menu-node-class="(node, level) => node.value === 'special' ? 'highlight-item' : ''" />
    *
    * @example
    * // 根据层级应用不同样式类
-   * <xly-cascader :menu-node-class="(node, level) => level === 0 ? 'first-level' : 'sub-level'" />
+   * <easy-cascader :menu-node-class="(node, level) => level === 0 ? 'first-level' : 'sub-level'" />
    */
   menuNodeClass?: string | ((node: CascaderNode, level: number) => string)
   /** 菜单项自定义样式，可以是字符串或函数。如果是函数，接收当前节点和层级作为参数，返回样式字符串
    * @example
    * // 字符串形式：所有菜单项应用相同样式
-   * <xly-cascader :menu-node-style="'color: red; font-weight: bold;'" />
+   * <easy-cascader :menu-node-style="'color: red; font-weight: bold;'" />
    *
    * @example
    * // 函数形式：根据节点数据动态应用样式
-   * <xly-cascader :menu-node-style="(node, level) => node.value === 'special' ? 'color: #ff4d4f;' : ''" />
+   * <easy-cascader :menu-node-style="(node, level) => node.value === 'special' ? 'color: #ff4d4f;' : ''" />
    *
    * @example
    * // 根据层级应用不同样式
-   * <xly-cascader :menu-node-style="(node, level) => level === 0 ? 'font-size: 15px;' : 'font-size: 14px;'" />
+   * <easy-cascader :menu-node-style="(node, level) => level === 0 ? 'font-size: 15px;' : 'font-size: 14px;'" />
    *
    * @example
    * // 根据节点属性应用样式
-   * <xly-cascader :menu-node-style="(node, level) => node.disabled ? 'color: #ccc; cursor: not-allowed;' : ''" />
+   * <easy-cascader :menu-node-style="(node, level) => node.disabled ? 'color: #ccc; cursor: not-allowed;' : ''" />
    */
   menuNodeStyle?: string | ((node: CascaderNode, level: number) => string)
 }
@@ -782,86 +782,86 @@ defineExpose({
 </script>
 
 <template>
-  <div class="xly-cascader" :class="[`xly-cascader--${size}`, { 'is-disabled': disabled, 'is-focus': panelVisible }]">
+  <div class="easy-cascader" :class="[`easy-cascader--${size}`, { 'is-disabled': disabled, 'is-focus': panelVisible }]">
     <!-- 触发器 -->
     <div
       ref="triggerRef"
-      class="xly-cascader__wrapper"
+      class="easy-cascader__wrapper"
       :class="{ 'is-hover': hovering && !disabled, 'has-tags': multiple && selectedLabels.length > 0 }"
       @click="togglePanel"
       @mouseenter="hovering = true"
       @mouseleave="hovering = false"
     >
       <!-- 多选标签 -->
-      <div v-if="multiple && selectedLabels.length" ref="tagsContainerRef" class="xly-cascader__tags">
-        <span v-for="(tag, i) in visibleLabels" :key="i" :ref="(el) => setTagRef(el, i)" class="xly-cascader__tag">
+      <div v-if="multiple && selectedLabels.length" ref="tagsContainerRef" class="easy-cascader__tags">
+        <span v-for="(tag, i) in visibleLabels" :key="i" :ref="(el) => setTagRef(el, i)" class="easy-cascader__tag">
           {{ tag }}
-          <span class="xly-cascader__tag-close" @click.stop="removeSelected(i)">
-            <XlyIcon name="el:Close" :size="12" />
+          <span class="easy-cascader__tag-close" @click.stop="removeSelected(i)">
+            <EasyIcon name="el:Close" :size="12" />
           </span>
         </span>
-        <span v-if="hiddenCount > 0" class="xly-cascader__tag xly-cascader__tag--count">+{{ hiddenCount }}</span>
+        <span v-if="hiddenCount > 0" class="easy-cascader__tag easy-cascader__tag--count">+{{ hiddenCount }}</span>
       </div>
 
       <!-- 单选显示 -->
-      <span v-else class="xly-cascader__value" :class="{ 'is-placeholder': !selectedLabels.length }">
+      <span v-else class="easy-cascader__value" :class="{ 'is-placeholder': !selectedLabels.length }">
         {{ selectedLabels.length ? displayLabel : placeholder }}
       </span>
 
       <!-- 后缀 -->
-      <span class="xly-cascader__suffix">
-        <span v-if="clearable && hasValue && !disabled" class="xly-cascader__clear" @click.stop="clear">
-          <XlyIcon name="el:Close" />
+      <span class="easy-cascader__suffix">
+        <span v-if="clearable && hasValue && !disabled" class="easy-cascader__clear" @click.stop="clear">
+          <EasyIcon name="el:Close" />
         </span>
-        <XlyIcon name="el:ArrowDown" class="xly-cascader__arrow" :class="{ 'is-reverse': panelVisible }" />
+        <EasyIcon name="el:ArrowDown" class="easy-cascader__arrow" :class="{ 'is-reverse': panelVisible }" />
       </span>
     </div>
 
     <!-- 下拉面板 -->
     <Teleport to="body">
-      <Transition name="xly-cascader-zoom">
-        <div v-if="panelVisible" ref="panelRef" class="xly-cascader__panel" :style="panelStyle" @mousedown.prevent>
+      <Transition name="easy-cascader-zoom">
+        <div v-if="panelVisible" ref="panelRef" class="easy-cascader__panel" :style="panelStyle" @mousedown.prevent>
           <!-- 搜索框 -->
-          <div v-if="filterable" class="xly-cascader__search">
+          <div v-if="filterable" class="easy-cascader__search">
             <input
               ref="searchRef"
               v-model="searchQuery"
-              class="xly-cascader__search-input"
+              class="easy-cascader__search-input"
               placeholder="搜索..."
               @input="handleSearch"
             >
           </div>
 
           <!-- 搜索结果模式 -->
-          <div v-if="filterable && searchQuery" class="xly-cascader__search-results">
+          <div v-if="filterable && searchQuery" class="easy-cascader__search-results">
             <div
               v-for="(result, idx) in searchResults"
               :key="idx"
-              class="xly-cascader__search-item"
+              class="easy-cascader__search-item"
               :class="{ 'is-selected': isSearchResultSelected(result.path) }"
               @click="selectSearchResult(result)"
             >
-              <span v-if="multiple" class="xly-cascader__search-check">
-                <XlyIcon v-if="isSearchResultSelected(result.path)" name="el:Check" />
+              <span v-if="multiple" class="easy-cascader__search-check">
+                <EasyIcon v-if="isSearchResultSelected(result.path)" name="el:Check" />
               </span>
-              <span class="xly-cascader__search-path">
+              <span class="easy-cascader__search-path">
                 <span v-for="(label, li) in result.pathLabels" :key="li">
-                  {{ label }}<span v-if="li < result.pathLabels.length - 1" class="xly-cascader__search-sep"> / </span>
+                  {{ label }}<span v-if="li < result.pathLabels.length - 1" class="easy-cascader__search-sep"> / </span>
                 </span>
               </span>
             </div>
-            <div v-if="searchResults.length === 0" class="xly-cascader__empty">
+            <div v-if="searchResults.length === 0" class="easy-cascader__empty">
               {{ props.loading ? '加载中...' : '暂无数据' }}
             </div>
           </div>
 
           <!-- 级联菜单模式 -->
-          <div v-else class="xly-cascader__menu">
-            <div v-for="(menu, level) in activeMenus" :key="level" class="xly-cascader__menu-list">
+          <div v-else class="easy-cascader__menu">
+            <div v-for="(menu, level) in activeMenus" :key="level" class="easy-cascader__menu-list">
               <div
                 v-for="node in menu"
                 :key="getNodeKey(node)"
-                class="xly-cascader__menu-item"
+                class="easy-cascader__menu-item"
                 :class="[
                   {
                     'is-active': isNodeInActivePath(node, level),
@@ -876,22 +876,22 @@ defineExpose({
                 <!-- 多选模式：勾选框用于选择 -->
                 <span
                   v-if="multiple"
-                  class="xly-cascader__menu-checkbox"
+                  class="easy-cascader__menu-checkbox"
                   @click.stop="handleCheckboxClick(node, level)"
                 >
-                  <XlyIcon v-if="isNodeChecked(node)" name="el:Check" />
+                  <EasyIcon v-if="isNodeChecked(node)" name="el:Check" />
                 </span>
                 <!-- 文本区域：多选模式下点击展开下一级，单选模式下点击直接选择 -->
                 <span
-                  class="xly-cascader__menu-label"
+                  class="easy-cascader__menu-label"
                   @click="multiple ? handleNodeClick(node, level) : handleNodeClickAndSelect(node, level)"
                 >
                   {{ node[labelKey] }}
                 </span>
-                <XlyIcon v-if="!isLeaf(node)" name="el:ArrowRight" class="xly-cascader__menu-arrow" />
-                <span v-if="node._loading" class="xly-cascader__menu-loading">...</span>
+                <EasyIcon v-if="!isLeaf(node)" name="el:ArrowRight" class="easy-cascader__menu-arrow" />
+                <span v-if="node._loading" class="easy-cascader__menu-loading">...</span>
               </div>
-              <div v-if="menu.length === 0" class="xly-cascader__empty">
+              <div v-if="menu.length === 0" class="easy-cascader__empty">
                 暂无数据
               </div>
             </div>
@@ -908,39 +908,39 @@ defineExpose({
 $radius: 8px;
 $transition: all 0.2s ease;
 
-.xly-cascader {
+.easy-cascader {
   display: inline-flex;
   width: 100%;
 
-  &.xly-cascader--large .xly-cascader__wrapper {
+  &.easy-cascader--large .easy-cascader__wrapper {
     min-height: 44px;
   }
-  &.xly-cascader--large .xly-cascader__wrapper.has-tags {
+  &.easy-cascader--large .easy-cascader__wrapper.has-tags {
     min-height: 44px;
   }
-  &.xly-cascader--large .xly-cascader__value {
+  &.easy-cascader--large .easy-cascader__value {
     font-size: 15px;
   }
-  &.xly-cascader--default .xly-cascader__wrapper {
+  &.easy-cascader--default .easy-cascader__wrapper {
     min-height: 36px;
   }
-  &.xly-cascader--default .xly-cascader__wrapper.has-tags {
+  &.easy-cascader--default .easy-cascader__wrapper.has-tags {
     min-height: 36px;
   }
-  &.xly-cascader--default .xly-cascader__value {
+  &.easy-cascader--default .easy-cascader__value {
     font-size: 14px;
   }
-  &.xly-cascader--small .xly-cascader__wrapper {
+  &.easy-cascader--small .easy-cascader__wrapper {
     min-height: 30px;
   }
-  &.xly-cascader--small .xly-cascader__wrapper.has-tags {
+  &.easy-cascader--small .easy-cascader__wrapper.has-tags {
     min-height: 30px;
   }
-  &.xly-cascader--small .xly-cascader__value {
+  &.easy-cascader--small .easy-cascader__value {
     font-size: 13px;
   }
 
-  .xly-cascader__wrapper {
+  .easy-cascader__wrapper {
     width: 100%;
     display: inline-flex;
     align-items: center;
@@ -958,12 +958,12 @@ $transition: all 0.2s ease;
     }
   }
 
-  &.is-focus .xly-cascader__wrapper {
+  &.is-focus .easy-cascader__wrapper {
     border-color: var(--el-color-primary);
     box-shadow: 0 0 0 2px $primary-bg;
   }
 
-  .xly-cascader__value {
+  .easy-cascader__value {
     flex: 1;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -975,7 +975,7 @@ $transition: all 0.2s ease;
     }
   }
 
-  .xly-cascader__tags {
+  .easy-cascader__tags {
     flex: 1;
     display: flex;
     flex-wrap: nowrap;
@@ -985,7 +985,7 @@ $transition: all 0.2s ease;
     min-width: 0;
   }
 
-  .xly-cascader__tag {
+  .easy-cascader__tag {
     display: inline-flex;
     align-items: center;
     gap: 2px;
@@ -1000,12 +1000,12 @@ $transition: all 0.2s ease;
     text-overflow: ellipsis;
     flex-shrink: 0;
 
-    &.xly-cascader--count {
+    &.easy-cascader--count {
       background: rgba(79, 110, 247, 0.12);
     }
   }
 
-  .xly-cascader__tag-close {
+  .easy-cascader__tag-close {
     display: inline-flex;
     cursor: pointer;
     border-radius: 50%;
@@ -1015,7 +1015,7 @@ $transition: all 0.2s ease;
     }
   }
 
-  .xly-cascader__suffix {
+  .easy-cascader__suffix {
     display: inline-flex;
     align-items: center;
     gap: 4px;
@@ -1024,7 +1024,7 @@ $transition: all 0.2s ease;
     flex-shrink: 0;
   }
 
-  .xly-cascader__clear {
+  .easy-cascader__clear {
     display: inline-flex;
     cursor: pointer;
     border-radius: 50%;
@@ -1034,7 +1034,7 @@ $transition: all 0.2s ease;
     }
   }
 
-  .xly-cascader__arrow {
+  .easy-cascader__arrow {
     transition: transform 0.2s ease;
     &.is-reverse {
       transform: rotate(180deg);
@@ -1048,7 +1048,7 @@ $transition: all 0.2s ease;
 
 $radius: 8px;
 
-.xly-cascader__panel {
+.easy-cascader__panel {
   position: fixed;
   z-index: 2000;
   background: var(--el-bg-color);
@@ -1060,12 +1060,12 @@ $radius: 8px;
   overflow: hidden;
 }
 
-.xly-cascader__search {
+.easy-cascader__search {
   padding: 8px;
   border-bottom: 1px solid var(--el-border-color);
 }
 
-.xly-cascader__search-input {
+.easy-cascader__search-input {
   width: 100%;
   height: 30px;
   padding: 0 10px;
@@ -1085,12 +1085,12 @@ $radius: 8px;
   }
 }
 
-.xly-cascader__search-results {
+.easy-cascader__search-results {
   max-height: 274px;
   overflow-y: auto;
 }
 
-.xly-cascader__search-item {
+.easy-cascader__search-item {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -1110,30 +1110,30 @@ $radius: 8px;
   }
 }
 
-.xly-cascader__search-check {
+.easy-cascader__search-check {
   width: 16px;
   display: inline-flex;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.xly-cascader__search-path {
+.easy-cascader__search-path {
   flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.xly-cascader__search-sep {
+.easy-cascader__search-sep {
   color: var(--el-text-color-placeholder);
 }
 
-.xly-cascader__menu {
+.easy-cascader__menu {
   display: flex;
   max-height: 300px;
 }
 
-.xly-cascader__menu-list {
+.easy-cascader__menu-list {
   min-width: 160px;
   max-height: 300px;
   overflow-y: auto;
@@ -1145,7 +1145,7 @@ $radius: 8px;
   }
 }
 
-.xly-cascader__menu-item {
+.easy-cascader__menu-item {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -1169,7 +1169,7 @@ $radius: 8px;
   }
 }
 
-.xly-cascader__menu-checkbox {
+.easy-cascader__menu-checkbox {
   width: 16px;
   height: 16px;
   display: inline-flex;
@@ -1186,45 +1186,45 @@ $radius: 8px;
     border-color: var(--el-color-primary);
   }
 
-  &:has(.xly-icon) {
+  &:has(.easy-icon) {
     background: var(--el-color-primary);
     border-color: var(--el-color-primary);
   }
 }
 
-.xly-cascader__menu-label {
+.easy-cascader__menu-label {
   flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.xly-cascader__menu-arrow {
+.easy-cascader__menu-arrow {
   color: var(--el-text-color-placeholder);
   flex-shrink: 0;
 }
 
-.xly-cascader__menu-loading {
+.easy-cascader__menu-loading {
   color: var(--el-color-primary);
   font-size: 12px;
 }
 
-.xly-cascader__empty {
+.easy-cascader__empty {
   padding: 16px;
   text-align: center;
   color: var(--el-text-color-placeholder);
   font-size: 13px;
 }
 
-.xly-cascader-zoom-enter-active,
-.xly-cascader-zoom-leave-active {
+.easy-cascader-zoom-enter-active,
+.easy-cascader-zoom-leave-active {
   transition:
     opacity 0.15s ease,
     transform 0.15s ease;
   transform-origin: top center;
 }
-.xly-cascader-zoom-enter-from,
-.xly-cascader-zoom-leave-to {
+.easy-cascader-zoom-enter-from,
+.easy-cascader-zoom-leave-to {
   opacity: 0;
   transform: scaleY(0.9) translateY(-4px);
 }
@@ -1232,45 +1232,45 @@ $radius: 8px;
 
 <style lang="scss">
 /* ========== Dark Mode ========== */
-html.dark .xly-cascader__placeholder {
+html.dark .easy-cascader__placeholder {
   color: var(--el-text-color-placeholder);
 }
-html.dark .xly-cascader__label {
+html.dark .easy-cascader__label {
   color: var(--el-text-color-primary);
 }
-html.dark .xly-cascader__clear {
+html.dark .easy-cascader__clear {
   color: var(--el-text-color-secondary);
 }
-html.dark .xly-cascader__arrow.is-reverse {
+html.dark .easy-cascader__arrow.is-reverse {
   color: var(--el-text-color-placeholder);
 }
-html.dark .xly-cascader__menu {
+html.dark .easy-cascader__menu {
   background: var(--el-bg-color-overlay);
   border-color: var(--el-border-color);
   box-shadow: 0 6px 16px 0 rgba(0, 0, 0, 0.2);
 }
-html.dark .xly-cascader__node__label {
+html.dark .easy-cascader__node__label {
   color: var(--el-text-color-regular);
 }
-html.dark .xly-cascader__node:hover:not(.is-disabled) {
+html.dark .easy-cascader__node:hover:not(.is-disabled) {
   background: var(--el-fill-color-light);
 }
-html.dark .xly-cascader__node.is-active:not(.is-disabled) {
+html.dark .easy-cascader__node.is-active:not(.is-disabled) {
   background: var(--el-fill-color-light);
   color: var(--el-color-primary);
 }
-html.dark .xly-cascader__node.is-disabled .xly-cascader__node__label {
+html.dark .easy-cascader__node.is-disabled .easy-cascader__node__label {
   color: var(--el-text-color-disabled);
 }
-html.dark .xly-cascader__menu-search {
+html.dark .easy-cascader__menu-search {
   background: var(--el-bg-color);
   border-bottom-color: var(--el-border-color);
 }
-html.dark .xly-cascader__menu-search .search-input {
+html.dark .easy-cascader__menu-search .search-input {
   background: var(--el-fill-color-lighter);
   color: var(--el-text-color-primary);
 }
-html.dark .xly-cascader__menu-tag {
+html.dark .easy-cascader__menu-tag {
   background: var(--el-fill-color-lighter);
   border-color: var(--el-border-color);
 }

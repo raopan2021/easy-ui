@@ -347,11 +347,11 @@ const pageData = ref({
           "
         >
 <span style="color:#50a3f5;">&lt;!-- 🔌 复制功能：如不需要，删除以下一行 --&gt;</span>
-&lt;span v-if="showCopy" class="xly-json-viewer__btn" ...&gt;
+&lt;span v-if="showCopy" class="easy-json-viewer__btn" ...&gt;
 
 <span style="color:#50a3f5;">&lt;!-- 🔌 展开/折叠功能：如不需要，删除以下两行 --&gt;</span>
-&lt;span v-if="showExpand" class="xly-json-viewer__btn" title="展开全部" ...&gt;
-&lt;span v-if="showExpand" class="xly-json-viewer__btn" title="折叠全部" ...&gt;
+&lt;span v-if="showExpand" class="easy-json-viewer__btn" title="展开全部" ...&gt;
+&lt;span v-if="showExpand" class="easy-json-viewer__btn" title="折叠全部" ...&gt;
 </pre>
       </div>
     </section>
@@ -509,7 +509,7 @@ const pageData = ref({
     color: var(--el-text-color-secondary);
   }
 
-  .xly-json-viewer {
+  .easy-json-viewer {
     width: 100%;
     max-width: 600px;
   }

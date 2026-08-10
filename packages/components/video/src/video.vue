@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
-import XlyButton from '../../button'
-import XlyIcon from '../../icon'
+import EasyButton from '../../button'
+import EasyIcon from '../../icon'
 
 // 弹幕类型
 interface Danmaku {
@@ -399,7 +399,7 @@ function setPlaybackRate(rate: number) {
 
 // 切换全屏
 function toggleFullscreen() {
-  const container = videoRef.value?.parentElement?.closest('.xly-video')
+  const container = videoRef.value?.parentElement?.closest('.easy-video')
   if (!container)
     return
 
@@ -808,10 +808,10 @@ watch(
 </script>
 
 <template>
-  <div class="xly-video-wrapper">
+  <div class="easy-video-wrapper">
     <!-- 视频播放器容器 -->
     <div
-      class="xly-video"
+      class="easy-video"
       :class="{ 'is-fullscreen': isFullscreen, 'is-hover': controlsVisible }"
       :style="containerStyle"
       @mouseenter="showControls"
@@ -821,9 +821,9 @@ watch(
       @dblclick="handleDblclick"
     >
       <!-- 封面图 -->
-      <div v-if="showPoster && !hasPlayed" class="xly-video__poster" @click="play">
-        <img v-if="posterSrc" :src="posterSrc" class="xly-video__poster-img">
-        <div v-else class="xly-video__poster-placeholder">
+      <div v-if="showPoster && !hasPlayed" class="easy-video__poster" @click="play">
+        <img v-if="posterSrc" :src="posterSrc" class="easy-video__poster-img">
+        <div v-else class="easy-video__poster-placeholder">
           <svg viewBox="0 0 24 24" width="64" height="64">
             <path
               fill="currentColor"
@@ -831,7 +831,7 @@ watch(
             />
           </svg>
         </div>
-        <div class="xly-video__play-btn">
+        <div class="easy-video__play-btn">
           <svg viewBox="0 0 24 24" width="48" height="48">
             <path fill="currentColor" d="M8 5v14l11-7z" />
           </svg>
@@ -841,7 +841,7 @@ watch(
       <!-- 视频元素 -->
       <video
         ref="videoRef"
-        class="xly-video__player"
+        class="easy-video__player"
         crossorigin="anonymous"
         :src="src"
         :poster="!showPoster || hasPlayed ? undefined : posterSrc"
@@ -860,44 +860,44 @@ watch(
       />
 
       <!-- 弹幕层 -->
-      <div v-if="danmakuEnabled" ref="danmakuContainerRef" class="xly-video__danmaku-container">
+      <div v-if="danmakuEnabled" ref="danmakuContainerRef" class="easy-video__danmaku-container">
         <div
           v-for="dm in activeDanmaku"
           v-show="danmakuVisible"
           :key="dm.id"
-          class="xly-video__danmaku-item"
+          class="easy-video__danmaku-item"
           :class="dm.mode"
           :style="dm.style"
         >
-          <span class="xly-video__danmaku-text">{{ danmaku.text }}</span>
+          <span class="easy-video__danmaku-text">{{ danmaku.text }}</span>
         </div>
       </div>
 
       <!-- 加载中遮罩 -->
-      <div v-if="isLoading" class="xly-video__loading">
-        <div class="xly-video__spinner" />
+      <div v-if="isLoading" class="easy-video__loading">
+        <div class="easy-video__spinner" />
       </div>
 
       <!-- 控制栏 -->
       <div
         v-show="controlsVisible || !isPlaying || isFullscreen"
-        class="xly-video__controls"
+        class="easy-video__controls"
         :class="{ 'is-show': controlsVisible || !isPlaying || isFullscreen }"
         @click.stop
         @dblclick.stop
       >
         <!-- 进度条 -->
-        <div class="xly-video__progress-wrap" @click.stop @dblclick.stop>
-          <div class="xly-video__progress" @click="seekTo">
-            <div class="xly-video__progress-buffered" :style="{ width: `${bufferedPercent}%` }" />
-            <div class="xly-video__progress-played" :style="{ width: `${playedPercent}%` }">
-              <div class="xly-video__progress-thumb" />
+        <div class="easy-video__progress-wrap" @click.stop @dblclick.stop>
+          <div class="easy-video__progress" @click="seekTo">
+            <div class="easy-video__progress-buffered" :style="{ width: `${bufferedPercent}%` }" />
+            <div class="easy-video__progress-played" :style="{ width: `${playedPercent}%` }">
+              <div class="easy-video__progress-thumb" />
             </div>
             <!-- 弹幕预览点 -->
             <template v-for="dm in danmakuPoints" :key="dm.time">
               <div
                 v-if="danmakuEnabled"
-                class="xly-video__progress-danmaku"
+                class="easy-video__progress-danmaku"
                 :style="{ left: `${dm.percent}%` }"
                 :title="dm.text"
               />
@@ -906,11 +906,11 @@ watch(
         </div>
 
         <!-- 控制按钮 -->
-        <div class="xly-video__controls-inner">
+        <div class="easy-video__controls-inner">
           <!-- 左侧控制 -->
-          <div class="xly-video__controls-left">
+          <div class="easy-video__controls-left">
             <!-- 播放/暂停  -->
-            <div class="xly-video__btn-play" @click="togglePlay">
+            <div class="easy-video__btn-play" @click="togglePlay">
               <svg v-if="isPlaying" viewBox="0 0 24 24" width="20" height="20">
                 <path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
               </svg>
@@ -920,31 +920,31 @@ watch(
             </div>
 
             <!-- 当前时间 / 总时长 -->
-            <div class="xly-video__time">
+            <div class="easy-video__time">
               {{ formatTime(currentTime) }} / {{ formatTime(duration) }}
             </div>
           </div>
 
           <!-- 右侧控制 - 按B站图片顺序 -->
-          <div class="xly-video__controls-right">
+          <div class="easy-video__controls-right">
             <!-- 弹幕开关 -->
             <div
               v-if="danmakuEnabled && showDanmakuToggle"
-              class="xly-video__btn"
+              class="easy-video__btn"
               :class="{ 'is-active': danmakuVisible }"
               @click.stop="toggleDanmaku"
             >
-              <span class="xly-video__btn-text">{{ danmakuVisible ? '弹幕' : '弹幕' }}</span>
+              <span class="easy-video__btn-text">{{ danmakuVisible ? '弹幕' : '弹幕' }}</span>
             </div>
 
             <!-- 播放速度 -->
-            <div v-if="showSpeed" class="xly-video__speed" @click.stop="toggleSpeedMenu">
-              <span class="xly-video__speed-text">{{ playbackRate }}x</span>
-              <div v-show="speedMenuVisible" class="xly-video__speed-menu">
+            <div v-if="showSpeed" class="easy-video__speed" @click.stop="toggleSpeedMenu">
+              <span class="easy-video__speed-text">{{ playbackRate }}x</span>
+              <div v-show="speedMenuVisible" class="easy-video__speed-menu">
                 <div
                   v-for="rate in playbackRates"
                   :key="rate"
-                  class="xly-video__speed-item"
+                  class="easy-video__speed-item"
                   :class="{ 'is-active': playbackRate === rate }"
                   @click.stop="setPlaybackRate(rate)"
                 >
@@ -956,12 +956,12 @@ watch(
             <!-- 音量控制 -->
             <div
               v-if="showVolume"
-              class="xly-video__volume"
+              class="easy-video__volume"
               @mouseenter="handleVolumeEnter"
               @mouseleave="handleVolumeLeave"
             >
               <!-- 静音按钮 -->
-              <div class="xly-video__volume-btn" @click.stop="toggleMute">
+              <div class="easy-video__volume-btn" @click.stop="toggleMute">
                 <!-- 静音图标 -->
                 <svg v-if="isMuted || volumePercent === 0" viewBox="0 0 24 24" width="20" height="20">
                   <path
@@ -993,21 +993,21 @@ watch(
               </div>
 
               <!-- 水平音量滑块 -->
-              <div class="xly-video__volume-slider">
-                <div class="xly-video__volume-track" @mousedown="startVolumeDrag" @click.stop="handleVolumeClick">
-                  <div class="xly-video__volume-progress" :style="{ width: `${volumePercent}%` }" />
-                  <div class="xly-video__volume-handle" :style="{ left: `${volumePercent}%` }" />
+              <div class="easy-video__volume-slider">
+                <div class="easy-video__volume-track" @mousedown="startVolumeDrag" @click.stop="handleVolumeClick">
+                  <div class="easy-video__volume-progress" :style="{ width: `${volumePercent}%` }" />
+                  <div class="easy-video__volume-handle" :style="{ left: `${volumePercent}%` }" />
                 </div>
               </div>
 
               <!-- 音量数值 -->
-              <div class="xly-video__volume-value" :class="{ 'is-muted': isMuted }">
+              <div class="easy-video__volume-value" :class="{ 'is-muted': isMuted }">
                 {{ Math.round(volumePercent) }}
               </div>
             </div>
 
             <!-- 全屏 - 始终显示 -->
-            <div class="xly-video__btn" @click="toggleFullscreen">
+            <div class="easy-video__btn" @click="toggleFullscreen">
               <svg v-if="isFullscreen" viewBox="0 0 24 24" width="18" height="18">
                 <path
                   fill="currentColor"
@@ -1026,7 +1026,7 @@ watch(
       </div>
 
       <!-- 大播放按钮（暂停时显示） -->
-      <div v-if="!isPlaying && hasPlayed" class="xly-video__big-play" @click="play">
+      <div v-if="!isPlaying && hasPlayed" class="easy-video__big-play" @click="play">
         <svg viewBox="0 0 24 24" width="56" height="56">
           <path fill="currentColor" d="M8 5v14l11-7z" />
         </svg>
@@ -1034,23 +1034,23 @@ watch(
 
       <!-- 弹幕列表面板 -->
       <transition name="slide-right">
-        <div v-if="danmakuEnabled && danmakuListVisible" class="xly-video__danmaku-panel" @click.stop>
-          <div class="xly-video__danmaku-panel-header">
+        <div v-if="danmakuEnabled && danmakuListVisible" class="easy-video__danmaku-panel" @click.stop>
+          <div class="easy-video__danmaku-panel-header">
             <span>弹幕列表</span>
-            <span class="xly-video__danmaku-panel-count">{{ danmakuList.length }}条</span>
-            <XlyButton type="text" size="small" @click="danmakuListVisible = false">
-              <XlyIcon name="el:Close" :size="16" />
-            </XlyButton>
+            <span class="easy-video__danmaku-panel-count">{{ danmakuList.length }}条</span>
+            <EasyButton type="text" size="small" @click="danmakuListVisible = false">
+              <EasyIcon name="el:Close" :size="16" />
+            </EasyButton>
           </div>
-          <div class="xly-video__danmaku-panel-list">
+          <div class="easy-video__danmaku-panel-list">
             <div
               v-for="(dm, index) in danmakuList"
               :key="index"
-              class="xly-video__danmaku-panel-item"
+              class="easy-video__danmaku-panel-item"
               @click="seekToTime(dm.time)"
             >
-              <span class="xly-video__danmaku-panel-time">{{ formatTime(dm.time) }}</span>
-              <span class="xly-video__danmaku-panel-text" :style="{ color: dm.color }">{{ dm.text }}</span>
+              <span class="easy-video__danmaku-panel-time">{{ formatTime(dm.time) }}</span>
+              <span class="easy-video__danmaku-panel-text" :style="{ color: dm.color }">{{ dm.text }}</span>
             </div>
           </div>
         </div>
@@ -1058,13 +1058,13 @@ watch(
     </div>
 
     <!-- 弹幕输入区域（播放器下方）- 完全按B站图片 -->
-    <div v-if="danmakuEnabled && showDanmakuInput" class="xly-video__danmaku-bar">
-      <div class="xly-video__danmaku-bar-inner">
+    <div v-if="danmakuEnabled && showDanmakuInput" class="easy-video__danmaku-bar">
+      <div class="easy-video__danmaku-bar-inner">
         <!-- 左侧：弹幕数 + 图标 -->
-        <div class="xly-video__danmaku-left">
-          <span class="xly-video__danmaku-info">
+        <div class="easy-video__danmaku-left">
+          <span class="easy-video__danmaku-info">
             已装填
-            <span class="xly-video__danmaku-count" @click.stop="toggleDanmakuList">
+            <span class="easy-video__danmaku-count" @click.stop="toggleDanmakuList">
               {{ danmakuList.length }}
             </span>
             条弹幕
@@ -1073,11 +1073,11 @@ watch(
         </div>
 
         <!-- 中间：输入框 -->
-        <div class="xly-video__danmaku-input-area">
+        <div class="easy-video__danmaku-input-area">
           <input
             v-model="danmakuInputText"
             type="text"
-            class="xly-video__danmaku-input"
+            class="easy-video__danmaku-input"
             placeholder="发个友善的弹幕见证当下"
             maxlength="20"
             @keydown.enter.stop="handleSendDanmaku"
@@ -1085,19 +1085,19 @@ watch(
         </div>
 
         <!-- 右侧：颜色选择 + 发送 -->
-        <div class="xly-video__danmaku-right">
+        <div class="easy-video__danmaku-right">
           <!-- 颜色选择器 -->
-          <div class="xly-video__danmaku-color-picker" @click.stop>
-            <div class="xly-video__danmaku-color-btn" @click.stop="toggleColorPicker">
-              <span class="xly-video__danmaku-color-current" :style="{ background: danmakuColor }" />
+          <div class="easy-video__danmaku-color-picker" @click.stop>
+            <div class="easy-video__danmaku-color-btn" @click.stop="toggleColorPicker">
+              <span class="easy-video__danmaku-color-current" :style="{ background: danmakuColor }" />
             </div>
             <!-- 颜色选择面板 -->
             <transition name="fade">
-              <div v-show="colorPickerVisible" class="xly-video__danmaku-color-panel">
+              <div v-show="colorPickerVisible" class="easy-video__danmaku-color-panel">
                 <div
                   v-for="color in danmakuColors"
                   :key="color"
-                  class="xly-video__danmaku-color-item"
+                  class="easy-video__danmaku-color-item"
                   :class="{ 'is-active': danmakuColor === color }"
                   :style="{ background: color }"
                   @click.stop="selectColor(color)"
@@ -1112,7 +1112,7 @@ watch(
 
           <button
             type="button"
-            class="xly-video__danmaku-send"
+            class="easy-video__danmaku-send"
             :disabled="!danmakuInputText.trim() || isSending"
             @click.stop="handleSendDanmaku"
           >
@@ -1147,12 +1147,12 @@ $transition-fast: 0.15s;
 $transition-normal: 0.25s;
 
 /* ========== 外包装 ========== */
-.xly-video-wrapper {
+.easy-video-wrapper {
   width: 100%;
 }
 
 /* ========== 视频容器 ========== */
-.xly-video {
+.easy-video {
   position: relative;
   width: 100%;
   background: $color-black;
@@ -1165,13 +1165,13 @@ $transition-normal: 0.25s;
   }
 
   &:hover {
-    .xly-video__controls {
+    .easy-video__controls {
       opacity: 1;
     }
   }
 
   /* 封面图 */
-  .xly-video__poster {
+  .easy-video__poster {
     position: absolute;
     inset: 0;
     z-index: 2;
@@ -1191,13 +1191,13 @@ $transition-normal: 0.25s;
       justify-content: center;
       background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
 
-      .xly-icon {
+      .easy-icon {
         color: var(--el-fill-color-light);
       }
     }
   }
 
-  .xly-video__play-btn {
+  .easy-video__play-btn {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1229,7 +1229,7 @@ $transition-normal: 0.25s;
   }
 
   /* 视频播放器 */
-  .xly-video__player {
+  .easy-video__player {
     position: absolute;
     top: 0;
     left: 0;
@@ -1241,7 +1241,7 @@ $transition-normal: 0.25s;
   }
 
   /* 加载中 */
-  .xly-video__loading {
+  .easy-video__loading {
     position: absolute;
     inset: 0;
     z-index: 3;
@@ -1251,7 +1251,7 @@ $transition-normal: 0.25s;
     background: rgba(0, 0, 0, 0.5);
   }
 
-  .xly-video__spinner {
+  .easy-video__spinner {
     width: 40px;
     height: 40px;
     border: 3px solid rgba($color-white, 0.2);
@@ -1267,7 +1267,7 @@ $transition-normal: 0.25s;
   }
 
   /* 大播放按钮 */
-  .xly-video__big-play {
+  .easy-video__big-play {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1301,7 +1301,7 @@ $transition-normal: 0.25s;
   }
 
   /* ========== 弹幕层 ========== */
-  .xly-video__danmaku-container {
+  .easy-video__danmaku-container {
     position: absolute;
     top: 0;
     left: 0;
@@ -1312,7 +1312,7 @@ $transition-normal: 0.25s;
     overflow: hidden;
   }
 
-  .xly-video__danmaku-item {
+  .easy-video__danmaku-item {
     position: absolute;
     white-space: nowrap;
     font-size: 18px;
@@ -1339,12 +1339,12 @@ $transition-normal: 0.25s;
     }
   }
 
-  .xly-video__danmaku-text {
+  .easy-video__danmaku-text {
     display: block;
   }
 
   /* ========== 控制栏 ========== */
-  .xly-video__controls {
+  .easy-video__controls {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -1360,20 +1360,20 @@ $transition-normal: 0.25s;
     }
   }
 
-  .xly-video__controls-inner {
+  .easy-video__controls-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
 
-  .xly-video__controls-left,
-  .xly-video__controls-right {
+  .easy-video__controls-left,
+  .easy-video__controls-right {
     display: flex;
     align-items: center;
     gap: 2px;
   }
 
-  .xly-video__btn {
+  .easy-video__btn {
     display: flex;
     align-items: center;
     gap: 4px;
@@ -1392,14 +1392,14 @@ $transition-normal: 0.25s;
       background: var(--el-color-primary-light-9);
     }
 
-    .xly-video__btn-text {
+    .easy-video__btn-text {
       font-size: 13px;
       font-weight: 500;
     }
   }
 
   /* 无圆圈播放按钮 */
-  .xly-video__btn-play {
+  .easy-video__btn-play {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1415,12 +1415,12 @@ $transition-normal: 0.25s;
   }
 
   /* 清晰度按钮 */
-  .xly-video__quality {
+  .easy-video__quality {
     font-size: 12px;
     color: $color-text-muted;
   }
 
-  .xly-video__time {
+  .easy-video__time {
     color: $color-text-light;
     font-size: 13px;
     margin-left: 12px;
@@ -1429,12 +1429,12 @@ $transition-normal: 0.25s;
   }
 
   /* 进度条 */
-  .xly-video__progress-wrap {
+  .easy-video__progress-wrap {
     padding: 10px 0;
     cursor: pointer;
   }
 
-  .xly-video__progress {
+  .easy-video__progress {
     position: relative;
     height: 4px;
     background: var(--el-fill-color-light);
@@ -1444,14 +1444,14 @@ $transition-normal: 0.25s;
     &:hover {
       height: 5px;
 
-      .xly-video__progress-thumb {
+      .easy-video__progress-thumb {
         opacity: 1;
         transform: translateY(-50%) scale(1);
       }
     }
   }
 
-  .xly-video__progress-buffered {
+  .easy-video__progress-buffered {
     position: absolute;
     top: 0;
     left: 0;
@@ -1460,7 +1460,7 @@ $transition-normal: 0.25s;
     border-radius: 2px;
   }
 
-  .xly-video__progress-played {
+  .easy-video__progress-played {
     position: absolute;
     top: 0;
     left: 0;
@@ -1469,7 +1469,7 @@ $transition-normal: 0.25s;
     border-radius: 2px;
   }
 
-  .xly-video__progress-thumb {
+  .easy-video__progress-thumb {
     position: absolute;
     right: -6px;
     top: 50%;
@@ -1483,7 +1483,7 @@ $transition-normal: 0.25s;
     transition: all $transition-fast;
   }
 
-  .xly-video__progress-danmaku {
+  .easy-video__progress-danmaku {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -1501,7 +1501,7 @@ $transition-normal: 0.25s;
   }
 
   /* 播放速度 */
-  .xly-video__speed {
+  .easy-video__speed {
     position: relative;
     cursor: pointer;
 
@@ -1567,7 +1567,7 @@ $transition-normal: 0.25s;
   }
 
   /* 音量 */
-  .xly-video__volume {
+  .easy-video__volume {
     position: relative;
     display: flex;
     align-items: center;
@@ -1610,7 +1610,7 @@ $transition-normal: 0.25s;
       &:hover {
         height: 6px;
 
-        .xly-video__volume-handle {
+        .easy-video__volume-handle {
           opacity: 1;
           transform: translate(-50%, -50%) scale(1);
         }
@@ -1663,7 +1663,7 @@ $transition-normal: 0.25s;
   }
 
   /* ========== 弹幕列表面板 ========== */
-  .xly-video__danmaku-panel {
+  .easy-video__danmaku-panel {
     position: absolute;
     top: 0;
     right: 0;
@@ -1686,7 +1686,7 @@ $transition-normal: 0.25s;
       font-weight: 600;
       color: $color-white;
 
-      .xly-video__danmaku-panel-count {
+      .easy-video__danmaku-panel-count {
         margin-left: auto;
         margin-right: 6px;
         font-size: 12px;
@@ -1753,14 +1753,14 @@ $transition-normal: 0.25s;
 }
 
 /* ========== 弹幕工具栏（播放器下方）- 完全按B站图片 ========== */
-.xly-video__danmaku-bar {
+.easy-video__danmaku-bar {
   background: var(--el-bg-color);
   border-radius: 0 0 8px 8px;
   border: 1px solid var(--el-border-color);
   border-top: none;
 }
 
-.xly-video__danmaku-bar-inner {
+.easy-video__danmaku-bar-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1769,19 +1769,19 @@ $transition-normal: 0.25s;
 }
 
 /* 左侧 */
-.xly-video__danmaku-left {
+.easy-video__danmaku-left {
   display: flex;
   align-items: center;
   gap: 12px;
   flex-shrink: 0;
 }
 
-.xly-video__danmaku-info {
+.easy-video__danmaku-info {
   font-size: 12px;
   color: var(--el-text-color-secondary);
 }
 
-.xly-video__danmaku-count {
+.easy-video__danmaku-count {
   cursor: pointer;
   border-bottom: 1px solid var(--el-border-color);
   padding-bottom: 1px;
@@ -1793,7 +1793,7 @@ $transition-normal: 0.25s;
   }
 }
 
-.xly-video__danmaku-icon-btn {
+.easy-video__danmaku-icon-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1809,7 +1809,7 @@ $transition-normal: 0.25s;
 }
 
 /* 中间：输入框 */
-.xly-video__danmaku-input-area {
+.easy-video__danmaku-input-area {
   flex: 1;
   display: flex;
   align-items: center;
@@ -1825,14 +1825,14 @@ $transition-normal: 0.25s;
   }
 }
 
-.xly-video__danmaku-input-a {
+.easy-video__danmaku-input-a {
   font-size: 14px;
   color: var(--el-text-color-placeholder);
   margin-right: 8px;
   font-family: Arial, sans-serif;
 }
 
-.xly-video__danmaku-input {
+.easy-video__danmaku-input {
   flex: 1;
   border: none;
   background: transparent;
@@ -1847,14 +1847,14 @@ $transition-normal: 0.25s;
 }
 
 /* 右侧 */
-.xly-video__danmaku-right {
+.easy-video__danmaku-right {
   display: flex;
   align-items: center;
   gap: 16px;
   flex-shrink: 0;
 }
 
-.xly-video__danmaku-tip {
+.easy-video__danmaku-tip {
   display: flex;
   align-items: center;
   gap: 2px;
@@ -1867,7 +1867,7 @@ $transition-normal: 0.25s;
   }
 }
 
-.xly-video__danmaku-send {
+.easy-video__danmaku-send {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1893,11 +1893,11 @@ $transition-normal: 0.25s;
 }
 
 /* 颜色选择器 */
-.xly-video__danmaku-color-picker {
+.easy-video__danmaku-color-picker {
   position: relative;
 }
 
-.xly-video__danmaku-color-btn {
+.easy-video__danmaku-color-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1912,7 +1912,7 @@ $transition-normal: 0.25s;
   }
 }
 
-.xly-video__danmaku-color-current {
+.easy-video__danmaku-color-current {
   width: 18px;
   height: 18px;
   border-radius: 3px;
@@ -1920,7 +1920,7 @@ $transition-normal: 0.25s;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
-.xly-video__danmaku-color-panel {
+.easy-video__danmaku-color-panel {
   position: absolute;
   bottom: 100%;
   right: 0;
@@ -1935,7 +1935,7 @@ $transition-normal: 0.25s;
   z-index: 100;
 }
 
-.xly-video__danmaku-color-item {
+.easy-video__danmaku-color-item {
   width: 24px;
   height: 24px;
   border-radius: 4px;
@@ -1973,32 +1973,32 @@ $transition-normal: 0.25s;
 
 <style lang="scss">
 /* ========== 视频播放器 Dark Mode ========== */
-html.dark .xly-video {
+html.dark .easy-video {
   background: #111;
 }
-html.dark .xly-video__danmaku-bar {
+html.dark .easy-video__danmaku-bar {
   background: var(--el-bg-color);
   border-color: var(--el-border-color);
 }
-html.dark .xly-video__danmaku-input-area {
+html.dark .easy-video__danmaku-input-area {
   background: var(--el-fill-color-light);
 }
-html.dark .xly-video__danmaku-input {
+html.dark .easy-video__danmaku-input {
   color: var(--el-text-color-primary);
 }
-html.dark .xly-video__danmaku-input::placeholder {
+html.dark .easy-video__danmaku-input::placeholder {
   color: var(--el-text-color-placeholder);
 }
-html.dark .xly-video__danmaku-icon-btn {
+html.dark .easy-video__danmaku-icon-btn {
   color: var(--el-text-color-secondary);
 }
-html.dark .xly-video__danmaku-info {
+html.dark .easy-video__danmaku-info {
   color: var(--el-text-color-secondary);
 }
-html.dark .xly-video__danmaku-tip {
+html.dark .easy-video__danmaku-tip {
   color: var(--el-text-color-secondary);
 }
-html.dark .xly-video__danmaku-send:disabled {
+html.dark .easy-video__danmaku-send:disabled {
   background: var(--el-fill-color);
   color: var(--el-text-color-disabled);
 }

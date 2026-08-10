@@ -483,7 +483,7 @@ const tableRows = computed<TableRow[]>(() => {
 </script>
 
 <template>
-  <div class="xly-permission">
+  <div class="easy-permission">
     <!-- 全选 -->
     <div v-if="showSelectAll" class="permission-header">
       <el-checkbox
@@ -625,7 +625,7 @@ const tableRows = computed<TableRow[]>(() => {
 </template>
 
 <style scoped>
-.xly-permission {
+.easy-permission {
   width: 100%;
 }
 

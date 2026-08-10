@@ -2,21 +2,21 @@
 /* eslint-disable vue/no-mutating-props */
 import type { Component } from 'vue'
 import { computed, onMounted, reactive, ref, watch } from 'vue'
-import XlyCascader from '../../cascader'
-import XlyCol from '../../col'
-import XlyDatePicker from '../../date-picker'
-import XlyDateRangePicker from '../../date-range-picker'
-import XlyDateTimePicker from '../../date-time-picker'
-import XlyDateTimeRangePicker from '../../date-time-range-picker'
-import XlyImageUpload from '../../image-upload'
-import XlyInput from '../../input'
-import XlyRate from '../../rate'
-import XlyRow from '../../row'
-import XlySelect from '../../select'
-import XlySwitch from '../../switch'
-import XlyTimePicker from '../../time-picker'
-import XlyTimeRangePicker from '../../time-range-picker'
-import XlyUserPicker from '../../user-picker'
+import EasyCascader from '../../cascader'
+import EasyCol from '../../col'
+import EasyDatePicker from '../../date-picker'
+import EasyDateRangePicker from '../../date-range-picker'
+import EasyDateTimePicker from '../../date-time-picker'
+import EasyDateTimeRangePicker from '../../date-time-range-picker'
+import EasyImageUpload from '../../image-upload'
+import EasyInput from '../../input'
+import EasyRate from '../../rate'
+import EasyRow from '../../row'
+import EasySelect from '../../select'
+import EasySwitch from '../../switch'
+import EasyTimePicker from '../../time-picker'
+import EasyTimeRangePicker from '../../time-range-picker'
+import EasyUserPicker from '../../user-picker'
 
 // ============ 类型定义 ============
 
@@ -68,19 +68,19 @@ const emit = defineEmits<{
 
 // 组件类型映射表
 const typeMap: Record<string, Component> = {
-  input: XlyInput,
-  select: XlySelect,
-  datePicker: XlyDatePicker,
-  dateRangePicker: XlyDateRangePicker,
-  dateTimePicker: XlyDateTimePicker,
-  dateTimeRangePicker: XlyDateTimeRangePicker,
-  timePicker: XlyTimePicker,
-  timeRangePicker: XlyTimeRangePicker,
-  cascader: XlyCascader,
-  switch: XlySwitch,
-  rate: XlyRate,
-  imageUpload: XlyImageUpload,
-  user: XlyUserPicker,
+  input: EasyInput,
+  select: EasySelect,
+  datePicker: EasyDatePicker,
+  dateRangePicker: EasyDateRangePicker,
+  dateTimePicker: EasyDateTimePicker,
+  dateTimeRangePicker: EasyDateTimeRangePicker,
+  timePicker: EasyTimePicker,
+  timeRangePicker: EasyTimeRangePicker,
+  cascader: EasyCascader,
+  switch: EasySwitch,
+  rate: EasyRate,
+  imageUpload: EasyImageUpload,
+  user: EasyUserPicker,
 }
 
 /** 校验规则 */
@@ -181,9 +181,9 @@ function getComponent(field: SuperField): Component {
     return field.component
   }
   if (field.type) {
-    return typeMap[field.type] || XlyInput
+    return typeMap[field.type] || EasyInput
   }
-  return XlyInput
+  return EasyInput
 }
 
 // 是否为双绑定组件（日期范围等）
@@ -379,27 +379,27 @@ defineExpose({
 </script>
 
 <template>
-  <form class="xly-super-form" :class="`xly-super-form--${size}`" @submit.prevent>
-    <XlyRow :gutter="20">
-      <XlyCol
+  <form class="easy-super-form" :class="`easy-super-form--${size}`" @submit.prevent>
+    <EasyRow :gutter="20">
+      <EasyCol
         v-for="field in fieldList"
         :key="field.prop"
         :span="field.span ?? defaultSpan"
-        class="xly-super-form__item"
+        class="easy-super-form__item"
         :class="[{ 'is-error': errors[getErrorKey(field)] }]"
       >
         <!-- 标签 -->
         <label
           v-if="field.showLabel !== false"
-          class="xly-super-form__label"
+          class="easy-super-form__label"
           :style="{ width: getFieldLabelWidth(field) }"
         >
-          <span v-if="field.required" class="xly-super-form__required">*</span>
+          <span v-if="field.required" class="easy-super-form__required">*</span>
           {{ field.label || field.prop }}
         </label>
 
         <!-- 控件 -->
-        <div class="xly-super-form__control">
+        <div class="easy-super-form__control">
           <!-- 双绑定组件（如日期范围） -->
           <template v-if="isDualBinding(field)">
             <component
@@ -428,22 +428,22 @@ defineExpose({
           </template>
 
           <!-- 错误信息 -->
-          <div v-if="errors[getErrorKey(field)]" class="xly-super-form__error">
+          <div v-if="errors[getErrorKey(field)]" class="easy-super-form__error">
             {{ errors[getErrorKey(field)] }}
           </div>
         </div>
-      </XlyCol>
-    </XlyRow>
+      </EasyCol>
+    </EasyRow>
   </form>
 </template>
 
 <style scoped lang="scss">
-.xly-super-form {
+.easy-super-form {
   width: 100%;
 }
 
 /* 通用 item 样式 */
-.xly-super-form__item {
+.easy-super-form__item {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -453,18 +453,18 @@ defineExpose({
 }
 
 /* 垂直布局 */
-.xly-super-form__item--vertical {
+.easy-super-form__item--vertical {
   flex-direction: column;
   align-items: flex-start;
 
-  .xly-super-form__label {
+  .easy-super-form__label {
     text-align: left;
     margin-bottom: 4px;
   }
 }
 
 /* 标签样式 */
-.xly-super-form__label {
+.easy-super-form__label {
   flex-shrink: 0;
   margin-right: 8px;
   text-align: right;
@@ -473,18 +473,18 @@ defineExpose({
   color: var(--el-text-color-primary);
 }
 
-.xly-super-form__required {
+.easy-super-form__required {
   color: var(--el-color-danger);
   margin-right: 2px;
 }
 
-.xly-super-form__control {
+.easy-super-form__control {
   flex: 1;
   min-width: 200px;
   max-width: 100%;
 }
 
-.xly-super-form__error {
+.easy-super-form__error {
   font-size: 12px;
   color: var(--el-color-danger);
   margin-top: 4px;
@@ -492,8 +492,8 @@ defineExpose({
 }
 
 /* 错误状态 */
-.xly-super-form__item.is-error :deep(.el-input__wrapper),
-.xly-super-form__item.is-error :deep(.el-select__wrapper) {
+.easy-super-form__item.is-error :deep(.el-input__wrapper),
+.easy-super-form__item.is-error :deep(.el-select__wrapper) {
   box-shadow: 0 0 0 1px #f56c6c inset;
 }
 </style>

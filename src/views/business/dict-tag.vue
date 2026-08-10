@@ -237,7 +237,7 @@ const tableData = [
         图标配置
       </h2>
       <p class="doc-section__desc">
-        字典数据中设置 <code>icon</code> 字段即可在 Tag 左侧显示图标。图标使用 <code>xly-icon</code> 组件，名称需加
+        字典数据中设置 <code>icon</code> 字段即可在 Tag 左侧显示图标。图标使用 <code>easy-icon</code> 组件，名称需加
         <code>el:</code> 前缀（如 <code>el:User</code>）表示 Element Plus 内置图标。
       </p>
       <div class="doc-preview">
@@ -270,10 +270,10 @@ const tableData = [
           "
         >
 <span style="color:#50a3f5;">&lt;!-- 🔌 图标：如不需要图标，删除以下一行 --&gt;</span>
-&lt;xly-icon v-if="singleItem.icon" :name="singleItem.icon" /&gt;
+&lt;easy-icon v-if="singleItem.icon" :name="singleItem.icon" /&gt;
 
 <span style="color:#50a3f5;">&lt;!-- 🔌 图标：如不需要图标，删除以下一行 --&gt;</span>
-&lt;xly-icon v-if="item.icon" :name="item.icon" /&gt;
+&lt;easy-icon v-if="item.icon" :name="item.icon" /&gt;
 </pre>
       </div>
     </section>
@@ -529,7 +529,7 @@ async function fetchDictList(dictType: string): Promise<DictItem[]> {
             <tr>
               <td><code>icon</code></td>
               <td>
-                前置图标，使用 xly-icon 组件。<code>el:xxx</code> 表示 Element Plus 图标（如
+                前置图标，使用 easy-icon 组件。<code>el:xxx</code> 表示 Element Plus 图标（如
                 <code>el:User</code>）。不传则不显示
               </td>
               <td><code>string</code></td>

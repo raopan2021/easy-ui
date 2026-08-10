@@ -6,7 +6,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 import viteCompression from 'vite-plugin-compression'
-import { xlyComponentResolver } from './packages/easy-ui/src/utils/xlyComponentResolver.ts'
+import { easyComponentResolver } from './packages/easy-ui/src/utils/easyComponentResolver.ts'
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -28,7 +28,7 @@ export default defineConfig(({ mode }) => ({
     // 自动按需导入组件
     Components({
       dts: 'src/types/import/components.d.ts',
-      resolvers: [xlyComponentResolver(), ElementPlusResolver()],
+      resolvers: [easyComponentResolver(), ElementPlusResolver()],
     }),
     // 压缩
     viteCompression({

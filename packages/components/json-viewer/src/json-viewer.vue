@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { VNode } from 'vue'
 import { computed, defineComponent, h, ref, watch } from 'vue'
-import { xly } from '@/utils/xly'
 
 defineOptions({ name: 'EasyJsonViewer' })
 
@@ -301,7 +300,7 @@ function handleCopy() {
     return
   const str = typeof parsedData.value === 'string' ? parsedData.value : JSON.stringify(parsedData.value, null, 2)
   navigator.clipboard.writeText(str).then(() => {
-    xly.$msg.success('已复制到剪贴板')
+    easy.$msg.success('已复制到剪贴板')
   })
 }
 
@@ -317,34 +316,34 @@ watch(
 </script>
 
 <template>
-  <div class="xly-json-viewer" :class="[`xly-json-viewer--${resolvedTheme}`]" :style="{ width }">
+  <div class="easy-json-viewer" :class="[`easy-json-viewer--${resolvedTheme}`]" :style="{ width }">
     <!-- 工具栏 -->
-    <div v-if="showToolbar" class="xly-json-viewer__toolbar">
-      <span class="xly-json-viewer__toolbar-left">
-        <span v-if="showCopy" class="xly-json-viewer__btn" title="复制" @click="handleCopy">
-          <XlyIcon name="el:CopyDocument" />
+    <div v-if="showToolbar" class="easy-json-viewer__toolbar">
+      <span class="easy-json-viewer__toolbar-left">
+        <span v-if="showCopy" class="easy-json-viewer__btn" title="复制" @click="handleCopy">
+          <EasyIcon name="el:CopyDocument" />
           <span>复制</span>
         </span>
       </span>
-      <span class="xly-json-viewer__toolbar-right">
-        <span v-if="showExpand" class="xly-json-viewer__btn" title="展开全部" @click="handleExpandAll">
-          <XlyIcon name="el:ArrowDown" />
+      <span class="easy-json-viewer__toolbar-right">
+        <span v-if="showExpand" class="easy-json-viewer__btn" title="展开全部" @click="handleExpandAll">
+          <EasyIcon name="el:ArrowDown" />
           <span>展开</span>
         </span>
-        <span v-if="showExpand" class="xly-json-viewer__btn" title="折叠全部" @click="handleCollapseAll">
-          <XlyIcon name="el:ArrowUp" />
+        <span v-if="showExpand" class="easy-json-viewer__btn" title="折叠全部" @click="handleCollapseAll">
+          <EasyIcon name="el:ArrowUp" />
           <span>折叠</span>
         </span>
       </span>
     </div>
 
     <!-- JSON 内容 -->
-    <div class="xly-json-viewer__content" :style="{ maxHeight }">
+    <div class="easy-json-viewer__content" :style="{ maxHeight }">
       <pre
         v-if="parsedData !== null"
-        class="xly-json-viewer__pre"
+        class="easy-json-viewer__pre"
       ><JsonNode :data="parsedData" path="root" :depth="0" :max-depth="currentDepth" :theme="resolvedTheme" :expanded-set="expandedSet" :collapsed-set="collapsedSet" @toggle="toggleNode" /></pre>
-      <div v-else class="xly-json-viewer__empty">
+      <div v-else class="easy-json-viewer__empty">
         暂无数据
       </div>
     </div>

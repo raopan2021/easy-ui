@@ -135,7 +135,7 @@ const activeSpan = computed(() => {
 })
 
 // provide 给子组件 FormItem 使用
-provide('xlyFormContext', {
+provide('easyFormContext', {
   labelWidth: props.labelWidth,
   labelPosition: props.labelPosition,
   span: activeSpan,
@@ -151,8 +151,8 @@ defineExpose({ validate, validateField, resetFields, clearValidate, submit })
 
 <template>
   <form
-    class="xly-form"
-    :class="[`xly-form--${size}`, { 'is-inline': inline, 'is-label-top': labelPosition === 'top' }]"
+    class="easy-form"
+    :class="[`easy-form--${size}`, { 'is-inline': inline, 'is-label-top': labelPosition === 'top' }]"
     @submit.prevent
   >
     <slot />
@@ -160,23 +160,23 @@ defineExpose({ validate, validateField, resetFields, clearValidate, submit })
 </template>
 
 <style scoped lang="scss">
-.xly-form {
+.easy-form {
   width: 100%;
 
-  &.xly-form--large {
-    .xly-form-item__label {
+  &.easy-form--large {
+    .easy-form-item__label {
       font-size: 15px;
     }
   }
 
-  &.xly-form--default {
-    .xly-form-item__label {
+  &.easy-form--default {
+    .easy-form-item__label {
       font-size: 14px;
     }
   }
 
-  &.xly-form--small {
-    .xly-form-item__label {
+  &.easy-form--small {
+    .easy-form-item__label {
       font-size: 13px;
     }
   }
@@ -186,7 +186,7 @@ defineExpose({ validate, validateField, resetFields, clearValidate, submit })
     flex-wrap: wrap;
     align-items: flex-start;
 
-    :deep(.xly-form-item) {
+    :deep(.easy-form-item) {
       margin-right: 16px;
       margin-bottom: 20px;
     }

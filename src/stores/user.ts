@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
 
-const TOKEN_KEY = 'xly-token'
+const TOKEN_KEY = 'easy-token'
 
 export const useUserStore = defineStore('user', () => {
   // 从 localStorage 恢复 token
@@ -17,7 +17,7 @@ export const useUserStore = defineStore('user', () => {
     await new Promise(resolve => setTimeout(resolve, 800))
 
     // 模拟 token（实际项目中替换为后端返回的 token）
-    const fakeToken = `xly-${Date.now()}-${username}`
+    const fakeToken = `easy-${Date.now()}-${username}`
     token.value = fakeToken
     localStorage.setItem(TOKEN_KEY, fakeToken)
   }

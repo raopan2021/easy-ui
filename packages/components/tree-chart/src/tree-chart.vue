@@ -332,7 +332,7 @@ function updateConnectionLines() {
   const lineColor = mergedNodeConfig.value.lineColor || '#94a3b8'
 
   // 更新画布尺寸
-  const rootEl = canvas.querySelector('.xly-tree-Chart__root') as HTMLElement
+  const rootEl = canvas.querySelector('.easy-tree-Chart__root') as HTMLElement
   if (rootEl) {
     const rootRect = rootEl.getBoundingClientRect()
     canvasWidth.value = Math.max(2000, rootRect.width + 80)
@@ -493,14 +493,14 @@ function updateConnectionLines() {
   }
 
   // 从根节点开始收集（支持多棵树和单棵树模式）
-  const rootWrappers = canvas.querySelectorAll('.xly-tree-Chart__root > .tree-node-wrapper')
+  const rootWrappers = canvas.querySelectorAll('.easy-tree-Chart__root > .tree-node-wrapper')
   rootWrappers.forEach((wrapper) => {
     collectConnections(wrapper)
   })
 
   // 多棵树模式下，也收集每棵树内部的连接线
   if (hasMultipleTrees.value) {
-    const treeWrappers = canvas.querySelectorAll('.xly-tree-Chart__tree-wrapper')
+    const treeWrappers = canvas.querySelectorAll('.easy-tree-Chart__tree-wrapper')
     treeWrappers.forEach((treeWrapper) => {
       const wrappers = treeWrapper.querySelectorAll('.tree-node-wrapper')
       wrappers.forEach((wrapper) => {
@@ -601,16 +601,16 @@ defineExpose({
 </script>
 
 <template>
-  <div ref="containerRef" class="xly-tree-Chart">
+  <div ref="containerRef" class="easy-tree-Chart">
     <!-- 控制栏 -->
-    <div v-if="showToolbar" class="xly-tree-Chart__toolbar">
-      <div class="xly-tree-Chart__toolbar-left">
+    <div v-if="showToolbar" class="easy-tree-Chart__toolbar">
+      <div class="easy-tree-Chart__toolbar-left">
         <slot name="toolbar" />
       </div>
-      <div class="xly-tree-Chart__toolbar-right">
+      <div class="easy-tree-Chart__toolbar-right">
         <!-- 布局切换 -->
         <button
-          class="xly-tree-Chart__btn"
+          class="easy-tree-Chart__btn"
           :class="{ 'is-active': internalLayout === 'horizontal' }"
           title="横向布局"
           @click="setLayout('horizontal')"
@@ -621,7 +621,7 @@ defineExpose({
           </svg>
         </button>
         <button
-          class="xly-tree-Chart__btn"
+          class="easy-tree-Chart__btn"
           :class="{ 'is-active': internalLayout === 'vertical' }"
           title="竖向布局"
           @click="setLayout('vertical')"
@@ -631,17 +631,17 @@ defineExpose({
             <rect x="14" y="3" width="4" height="12" rx="1" />
           </svg>
         </button>
-        <div class="xly-tree-Chart__divider" />
+        <div class="easy-tree-Chart__divider" />
         <!-- 缩放控制 -->
-        <button class="xly-tree-Chart__btn" title="缩小" @click="zoomOut">
+        <button class="easy-tree-Chart__btn" title="缩小" @click="zoomOut">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="11" cy="11" r="8" />
             <line x1="21" y1="21" x2="16.65" y2="16.65" />
             <line x1="8" y1="11" x2="14" y2="11" />
           </svg>
         </button>
-        <span class="xly-tree-Chart__zoom-text">{{ Math.round(scale * 100) }}%</span>
-        <button class="xly-tree-Chart__btn" title="放大" @click="zoomIn">
+        <span class="easy-tree-Chart__zoom-text">{{ Math.round(scale * 100) }}%</span>
+        <button class="easy-tree-Chart__btn" title="放大" @click="zoomIn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="11" cy="11" r="8" />
             <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -649,7 +649,7 @@ defineExpose({
             <line x1="8" y1="11" x2="14" y2="11" />
           </svg>
         </button>
-        <button class="xly-tree-Chart__btn" title="重置视图" @click="resetView">
+        <button class="easy-tree-Chart__btn" title="重置视图" @click="resetView">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
             <path d="M3 3v5h5" />
@@ -661,7 +661,7 @@ defineExpose({
     <!-- 画布容器 -->
     <div
       ref="canvasWrapperRef"
-      class="xly-tree-Chart__canvas-wrapper"
+      class="easy-tree-Chart__canvas-wrapper"
       :class="{ 'is-panning': isPanning }"
       :style="canvasWrapperStyle"
       @mousedown="onMouseDown"
@@ -672,11 +672,11 @@ defineExpose({
       @contextmenu.prevent
     >
       <!-- 画布内容 -->
-      <div ref="canvasRef" class="xly-tree-Chart__canvas" :style="canvasStyle">
+      <div ref="canvasRef" class="easy-tree-Chart__canvas" :style="canvasStyle">
         <!-- SVG 连接线层 -->
         <svg
           ref="linesSvgRef"
-          class="xly-tree-Chart__lines"
+          class="easy-tree-Chart__lines"
           :width="canvasWidth"
           :height="canvasHeight"
           :viewBox="`0 0 ${canvasWidth} ${canvasHeight}`"
@@ -687,14 +687,14 @@ defineExpose({
         </svg>
 
         <!-- 递归渲染树节点 -->
-        <div class="xly-tree-Chart__root" :class="`xly-tree-Chart__root--${internalLayout}`">
+        <div class="easy-tree-Chart__root" :class="`easy-tree-Chart__root--${internalLayout}`">
           <!-- 多棵树模式 -->
           <template v-if="hasMultipleTrees">
             <div
               v-for="(treeData, treeIndex) in props.trees"
               :key="`tree-${treeIndex}`"
-              class="xly-tree-Chart__tree-wrapper"
-              :class="`xly-tree-Chart__tree-wrapper--${internalLayout}`"
+              class="easy-tree-Chart__tree-wrapper"
+              :class="`easy-tree-Chart__tree-wrapper--${internalLayout}`"
             >
               <TreeNode
                 v-for="(node, index) in treeData"
@@ -733,7 +733,7 @@ defineExpose({
       </div>
 
       <!-- 空状态 -->
-      <div v-if="isEmpty" class="xly-tree-Chart__empty">
+      <div v-if="isEmpty" class="easy-tree-Chart__empty">
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <circle cx="12" cy="12" r="10" />
           <path d="M12 8v4M12 16h.01" />
@@ -745,7 +745,7 @@ defineExpose({
 </template>
 
 <style scoped lang="scss">
-.xly-tree-Chart {
+.easy-tree-Chart {
   display: flex;
   flex-direction: column;
   width: v-bind('props.width');
@@ -759,7 +759,7 @@ defineExpose({
 }
 
 // 工具栏
-.xly-tree-Chart__toolbar {
+.easy-tree-Chart__toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -770,14 +770,14 @@ defineExpose({
   gap: 8px;
 }
 
-.xly-tree-Chart__toolbar-left,
-.xly-tree-Chart__toolbar-right {
+.easy-tree-Chart__toolbar-left,
+.easy-tree-Chart__toolbar-right {
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-.xly-tree-Chart__btn {
+.easy-tree-Chart__btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -810,7 +810,7 @@ defineExpose({
   }
 }
 
-.xly-tree-Chart__zoom-text {
+.easy-tree-Chart__zoom-text {
   min-width: 48px;
   text-align: center;
   font-size: 12px;
@@ -818,7 +818,7 @@ defineExpose({
   font-variant-numeric: tabular-nums;
 }
 
-.xly-tree-Chart__divider {
+.easy-tree-Chart__divider {
   width: 1px;
   height: 20px;
   background: var(--el-border-color);
@@ -826,7 +826,7 @@ defineExpose({
 }
 
 // 画布容器
-.xly-tree-Chart__canvas-wrapper {
+.easy-tree-Chart__canvas-wrapper {
   flex: 1;
   overflow: hidden;
   position: relative;
@@ -837,14 +837,14 @@ defineExpose({
   }
 }
 
-.xly-tree-Chart__canvas {
+.easy-tree-Chart__canvas {
   position: relative;
   width: max-content;
   min-width: 100%;
   min-height: 100%;
 }
 
-.xly-tree-Chart__lines {
+.easy-tree-Chart__lines {
   position: absolute;
   top: 0;
   left: 0;
@@ -852,14 +852,14 @@ defineExpose({
   z-index: 0;
 }
 
-.xly-tree-Chart__root {
+.easy-tree-Chart__root {
   position: relative;
   padding: 40px;
   z-index: 1;
   min-width: 100%;
   min-height: 100%;
 
-  &.xly-tree-Chart__root--horizontal {
+  &.easy-tree-Chart__root--horizontal {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -868,7 +868,7 @@ defineExpose({
     gap: 40px;
   }
 
-  &.xly-tree-Chart__root--vertical {
+  &.easy-tree-Chart__root--vertical {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -877,15 +877,15 @@ defineExpose({
 }
 
 // 多棵树容器
-.xly-tree-Chart__tree-wrapper {
-  &.xly-tree-Chart__tree-wrapper--horizontal {
+.easy-tree-Chart__tree-wrapper {
+  &.easy-tree-Chart__tree-wrapper--horizontal {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 60px;
   }
 
-  &.xly-tree-Chart__tree-wrapper--vertical {
+  &.easy-tree-Chart__tree-wrapper--vertical {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -894,7 +894,7 @@ defineExpose({
 }
 
 // 空状态
-.xly-tree-Chart__empty {
+.easy-tree-Chart__empty {
   position: absolute;
   inset: 0;
   display: flex;

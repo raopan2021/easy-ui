@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { ChatAttachment, ChatMessage } from './chat-message.vue'
 import { nextTick, ref, watch } from 'vue'
-import XlyIcon from '../../icon'
-import XlyChatInput from './chat-input.vue'
-import XlyChatMessage from './chat-message.vue'
+import EasyIcon from '../../icon'
+import EasyChatInput from './chat-input.vue'
+import EasyChatMessage from './chat-message.vue'
 
 defineOptions({ name: 'EasyChat' })
 
@@ -99,7 +99,7 @@ export interface ChatProps {
 }
 
 const messagesContainerRef = ref<HTMLElement | null>(null)
-const inputRef = ref<InstanceType<typeof XlyChatInput> | null>(null)
+const inputRef = ref<InstanceType<typeof EasyChatInput> | null>(null)
 const inputValue = ref('')
 const showScrollToBottom = ref(false)
 const isScrollingTop = ref(false) // 标记是否正在滚动到顶部
@@ -208,21 +208,21 @@ defineExpose({
 </script>
 
 <template>
-  <div class="xly-chat" :class="{ 'is-disabled': disabled }">
+  <div class="easy-chat" :class="{ 'is-disabled': disabled }">
     <!-- 消息列表 -->
-    <div ref="messagesContainerRef" class="xly-chat__messages" @scroll="handleScroll">
+    <div ref="messagesContainerRef" class="easy-chat__messages" @scroll="handleScroll">
       <!-- 欢迎消息/空状态 -->
-      <div v-if="messages.length === 0" class="xly-chat__empty">
+      <div v-if="messages.length === 0" class="easy-chat__empty">
         <slot name="empty">
-          <div class="xly-chat__empty-content">
-            <XlyIcon name="el:ChatDotRound" :size="48" />
+          <div class="easy-chat__empty-content">
+            <EasyIcon name="el:ChatDotRound" :size="48" />
             <p>开始对话吧！</p>
           </div>
         </slot>
       </div>
 
       <!-- 消息列表 -->
-      <XlyChatMessage
+      <EasyChatMessage
         v-for="message in messages"
         :key="message.id || messageIndex(message)"
         :message="message"
@@ -253,23 +253,23 @@ defineExpose({
         <template v-if="slots.actions" #actions="{ message: msg }">
           <slot name="actions" :message="msg" />
         </template>
-      </XlyChatMessage>
+      </EasyChatMessage>
 
       <!-- 加载更多指示器 -->
-      <div v-if="loading" class="xly-chat__loading">
-        <XlyIcon name="el:Loading" class="xly-chat__loading-icon" />
+      <div v-if="loading" class="easy-chat__loading">
+        <EasyIcon name="el:Loading" class="easy-chat__loading-icon" />
         <span>AI 正在思考...</span>
       </div>
 
       <!-- 滚动到底部按钮 -->
-      <button v-if="showScrollToBottom" class="xly-chat__scroll-btn" @click="scrollToBottom">
-        <XlyIcon name="el:ArrowDown" />
+      <button v-if="showScrollToBottom" class="easy-chat__scroll-btn" @click="scrollToBottom">
+        <EasyIcon name="el:ArrowDown" />
       </button>
     </div>
 
     <!-- 输入框 -->
-    <div v-if="!disabled" class="xly-chat__input-wrapper">
-      <XlyChatInput
+    <div v-if="!disabled" class="easy-chat__input-wrapper">
+      <EasyChatInput
         ref="inputRef"
         v-model="inputValue"
         :placeholder="placeholder"
@@ -294,20 +294,20 @@ defineExpose({
         <template v-if="slots['input-toolbar']" #toolbar>
           <slot name="input-toolbar" />
         </template>
-      </XlyChatInput>
+      </EasyChatInput>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-$xly-radius: 12px;
+$easy-radius: 12px;
 
-.xly-chat {
+.easy-chat {
   display: flex;
   flex-direction: column;
   height: 100%;
   background: var(--el-bg-color);
-  border-radius: $xly-radius;
+  border-radius: $easy-radius;
   overflow: hidden;
 
   &.is-disabled {
@@ -316,7 +316,7 @@ $xly-radius: 12px;
   }
 }
 
-.xly-chat__messages {
+.easy-chat__messages {
   flex: 1;
   overflow-y: auto;
   padding: 20px;
@@ -341,14 +341,14 @@ $xly-radius: 12px;
   }
 }
 
-.xly-chat__empty {
+.easy-chat__empty {
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.xly-chat__empty-content {
+.easy-chat__empty-content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -362,7 +362,7 @@ $xly-radius: 12px;
   }
 }
 
-.xly-chat__loading {
+.easy-chat__loading {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -374,7 +374,7 @@ $xly-radius: 12px;
   color: var(--el-text-color-secondary);
 }
 
-.xly-chat__loading-icon {
+.easy-chat__loading-icon {
   animation: spin 1s linear infinite;
 }
 
@@ -387,7 +387,7 @@ $xly-radius: 12px;
   }
 }
 
-.xly-chat__scroll-btn {
+.easy-chat__scroll-btn {
   position: absolute;
   bottom: 20px;
   right: 20px;
@@ -427,7 +427,7 @@ $xly-radius: 12px;
   }
 }
 
-.xly-chat__input-wrapper {
+.easy-chat__input-wrapper {
   padding: 16px 20px;
   border-top: 1px solid var(--el-border-color);
   background: var(--el-bg-color);

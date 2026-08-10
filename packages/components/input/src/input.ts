@@ -35,13 +35,23 @@ export const inputProps = buildProps({
     default: undefined,
   },
   showWordLimit: Boolean,
-  /** 前缀图标名称，使用 XlyIcon 的 name 格式，如 `el:Search`、`svg:edit` */
+  /** 前缀图标名称，使用 EasyIcon 的 name 格式，如 `el:Search`、`svg:edit` */
   prefixIcon: {
     type: String,
     default: undefined,
   },
-  /** 后缀图标名称，使用 XlyIcon 的 name 格式，如 `el:Calendar`、`svg:edit` */
+  /** 后缀图标名称，使用 EasyIcon 的 name 格式，如 `el:Calendar`、`svg:edit` */
   suffixIcon: {
+    type: String,
+    default: undefined,
+  },
+  /** 前置文本（如 URL 协议头），自动显示在输入框左侧 */
+  prefix: {
+    type: String,
+    default: undefined,
+  },
+  /** 后置文本，自动显示在输入框右侧 */
+  suffix: {
     type: String,
     default: undefined,
   },

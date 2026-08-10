@@ -203,56 +203,56 @@ function buildColorStyle(color: string) {
 </script>
 
 <template>
-  <span v-if="!multiple" class="xly-dict-tag__single">
-    <span v-if="loading" class="xly-dict-tag__loading">
-      <span class="xly-dict-tag__dot" />
+  <span v-if="!multiple" class="easy-dict-tag__single">
+    <span v-if="loading" class="easy-dict-tag__loading">
+      <span class="easy-dict-tag__dot" />
     </span>
     <template v-else-if="singleItem">
       <span
-        class="xly-tag"
+        class="easy-tag"
         :class="[
-          `xly-tag--${singleItem.type || 'default'}`,
-          `xly-tag--${size}`,
-          `xly-tag--${effect}`,
+          `easy-tag--${singleItem.type || 'default'}`,
+          `easy-tag--${size}`,
+          `easy-tag--${effect}`,
           { 'is-round': round },
         ]"
         :style="singleItem.color ? buildColorStyle(singleItem.color) : {}"
       >
         <!-- 🔌 图标：如不需要图标，删除以下一行 -->
-        <xly-icon v-if="singleItem.icon" :name="singleItem.icon" />
-        <span class="xly-tag__text">{{ singleItem[labelField] }}</span>
+        <easy-icon v-if="singleItem.icon" :name="singleItem.icon" />
+        <span class="easy-tag__text">{{ singleItem[labelField] }}</span>
       </span>
     </template>
-    <span v-else-if="value !== undefined && value !== null && value !== ''" class="xly-dict-tag__fallback">
+    <span v-else-if="value !== undefined && value !== null && value !== ''" class="easy-dict-tag__fallback">
       {{ value }}
     </span>
   </span>
 
   <!-- 多选模式 -->
-  <span v-else class="xly-dict-tag__multiple">
-    <span v-if="loading" class="xly-dict-tag__loading">
-      <span class="xly-dict-tag__dot" />
+  <span v-else class="easy-dict-tag__multiple">
+    <span v-if="loading" class="easy-dict-tag__loading">
+      <span class="easy-dict-tag__dot" />
     </span>
     <template v-else>
       <template v-if="multipleItems.length > 0">
         <span
           v-for="item in multipleItems"
           :key="item[valueField]"
-          class="xly-tag"
+          class="easy-tag"
           :class="[
-            `xly-tag--${item.type || 'default'}`,
-            `xly-tag--${size}`,
-            `xly-tag--${effect}`,
+            `easy-tag--${item.type || 'default'}`,
+            `easy-tag--${size}`,
+            `easy-tag--${effect}`,
             { 'is-round': round },
           ]"
           :style="item.color ? buildColorStyle(item.color) : {}"
         >
           <!-- 🔌 图标：如不需要图标，删除以下一行 -->
-          <xly-icon v-if="item.icon" :name="item.icon" />
-          <span class="xly-tag__text">{{ item[labelField] }}</span>
+          <easy-icon v-if="item.icon" :name="item.icon" />
+          <span class="easy-tag__text">{{ item[labelField] }}</span>
         </span>
       </template>
-      <span v-else-if="hasValue" class="xly-dict-tag__fallback">
+      <span v-else-if="hasValue" class="easy-dict-tag__fallback">
         {{ Array.isArray(value) ? (value as string[]).join('，') : value }}
       </span>
     </template>
@@ -263,14 +263,14 @@ function buildColorStyle(color: string) {
 @use '../../../easy-ui/src/styles/tokens' as *;
 
 /* ====================================================
-   复用 xly-tag 核心样式（独立副本，避免跨组件依赖）
+   复用 easy-tag 核心样式（独立副本，避免跨组件依赖）
 ==================================================== */
 $radius: 6px;
 $radius-round: 100px;
 $transition: all 0.2s ease;
 
-.xly-dict-tag__single,
-.xly-dict-tag__multiple {
+.easy-dict-tag__single,
+.easy-dict-tag__multiple {
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
@@ -278,19 +278,19 @@ $transition: all 0.2s ease;
 }
 
 /* 加载占位点 */
-.xly-dict-tag__loading {
+.easy-dict-tag__loading {
   display: inline-flex;
   align-items: center;
 }
-.xly-dict-tag__dot {
+.easy-dict-tag__dot {
   display: inline-block;
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background: #c0c4cc;
-  animation: xly-dict-blink 1s ease-in-out infinite;
+  animation: easy-dict-blink 1s ease-in-out infinite;
 }
-@keyframes xly-dict-blink {
+@keyframes easy-dict-blink {
   0%,
   100% {
     opacity: 0.3;
@@ -303,15 +303,15 @@ $transition: all 0.2s ease;
 }
 
 /* 降级显示（未匹配到字典项时直接显示值） */
-.xly-dict-tag__fallback {
+.easy-dict-tag__fallback {
   font-size: 13px;
   color: $text-regular;
 }
 
 /* ====================================================
-   Tag 基础样式（独立于 xly-tag 组件）
+   Tag 基础样式（独立于 easy-tag 组件）
 ==================================================== */
-.xly-tag {
+.easy-tag {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -332,13 +332,13 @@ $transition: all 0.2s ease;
     border-radius: $radius-round;
   }
 
-  &.xly-tag--large {
+  &.easy-tag--large {
     height: 34px;
     font-size: 14px;
     padding: 0 14px;
     gap: 5px;
   }
-  &.xly-tag--small {
+  &.easy-tag--small {
     height: 22px;
     font-size: 12px;
     padding: 0 7px;
@@ -346,108 +346,108 @@ $transition: all 0.2s ease;
   }
 
   /* --- default --- */
-  &.xly-tag--default {
-    &.xly-tag--light {
+  &.easy-tag--default {
+    &.easy-tag--light {
       color: var(--el-text-color-regular);
       background-color: var(--el-fill-color-light);
       border-color: var(--el-border-color);
     }
-    &.xly-tag--plain {
+    &.easy-tag--plain {
       color: var(--el-text-color-regular);
       background-color: transparent;
       border-color: var(--el-border-color);
     }
-    &.xly-tag--dark {
+    &.easy-tag--dark {
       color: #fff;
       background-color: #909399;
       border-color: #909399;
     }
   }
   /* --- primary --- */
-  &.xly-tag--primary {
-    &.xly-tag--light {
+  &.easy-tag--primary {
+    &.easy-tag--light {
       color: var(--el-color-primary);
       background-color: $primary-bg-strong;
       border-color: $primary-border;
     }
-    &.xly-tag--plain {
+    &.easy-tag--plain {
       color: var(--el-color-primary);
       background-color: transparent;
       border-color: var(--el-color-primary);
     }
-    &.xly-tag--dark {
+    &.easy-tag--dark {
       color: #fff;
       background-color: var(--el-color-primary);
       border-color: var(--el-color-primary);
     }
   }
   /* --- success --- */
-  &.xly-tag--success {
-    &.xly-tag--light {
+  &.easy-tag--success {
+    &.easy-tag--light {
       color: var(--el-color-success);
       background-color: $success-bg;
       border-color: $success-border;
     }
-    &.xly-tag--plain {
+    &.easy-tag--plain {
       color: var(--el-color-success);
       background-color: transparent;
       border-color: var(--el-color-success);
     }
-    &.xly-tag--dark {
+    &.easy-tag--dark {
       color: #fff;
       background-color: var(--el-color-success);
       border-color: var(--el-color-success);
     }
   }
   /* --- warning --- */
-  &.xly-tag--warning {
-    &.xly-tag--light {
+  &.easy-tag--warning {
+    &.easy-tag--light {
       color: var(--el-color-warning);
       background-color: $warning-bg;
       border-color: $warning-border;
     }
-    &.xly-tag--plain {
+    &.easy-tag--plain {
       color: var(--el-color-warning);
       background-color: transparent;
       border-color: var(--el-color-warning);
     }
-    &.xly-tag--dark {
+    &.easy-tag--dark {
       color: #fff;
       background-color: var(--el-color-warning);
       border-color: var(--el-color-warning);
     }
   }
   /* --- danger --- */
-  &.xly-tag--danger {
-    &.xly-tag--light {
+  &.easy-tag--danger {
+    &.easy-tag--light {
       color: var(--el-color-danger);
       background-color: rgba(255, 59, 48, 0.1);
       border-color: rgba(255, 59, 48, 0.25);
     }
-    &.xly-tag--plain {
+    &.easy-tag--plain {
       color: var(--el-color-danger);
       background-color: transparent;
       border-color: var(--el-color-danger);
     }
-    &.xly-tag--dark {
+    &.easy-tag--dark {
       color: #fff;
       background-color: var(--el-color-danger);
       border-color: var(--el-color-danger);
     }
   }
   /* --- info --- */
-  &.xly-tag--info {
-    &.xly-tag--light {
+  &.easy-tag--info {
+    &.easy-tag--light {
       color: var(--el-color-info);
       background-color: $info-bg;
       border-color: $info-border;
     }
-    &.xly-tag--plain {
+    &.easy-tag--plain {
       color: var(--el-color-info);
       background-color: transparent;
       border-color: var(--el-color-info);
     }
-    &.xly-tag--dark {
+    &.easy-tag--dark {
       color: #fff;
       background-color: var(--el-color-info);
       border-color: var(--el-color-info);
@@ -455,26 +455,26 @@ $transition: all 0.2s ease;
   }
 }
 
-.xly-tag__text {
+.easy-tag__text {
   line-height: 1;
 }
 </style>
 
 <style lang="scss">
 /* ========== Dark Mode ========== */
-html.dark .xly-dict-tag__fallback {
+html.dark .easy-dict-tag__fallback {
   color: var(--el-text-color-regular);
 }
-html.dark .xly-tag--default.xly-tag--light {
+html.dark .easy-tag--default.easy-tag--light {
   color: var(--el-text-color-secondary);
   background-color: var(--el-fill-color);
   border-color: var(--el-border-color);
 }
-html.dark .xly-tag--default.xly-tag--dark {
+html.dark .easy-tag--default.easy-tag--dark {
   background-color: #666;
   border-color: #666;
 }
-html.dark .xly-tag--default.xly-tag--plain {
+html.dark .easy-tag--default.easy-tag--plain {
   color: var(--el-text-color-secondary);
   border-color: var(--el-border-color);
 }

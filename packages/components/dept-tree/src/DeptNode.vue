@@ -79,13 +79,13 @@ function handleToggle() {
         :class="{ 'dept-node__toggle--expanded': isExpanded }"
         @click.stop="handleToggle"
       >
-        <XlyIcon name="el:ArrowRight" />
+        <EasyIcon name="el:ArrowRight" />
       </span>
       <span v-else class="dept-node__toggle-placeholder" />
 
       <!-- 节点图标 -->
       <span class="dept-node__icon">
-        <XlyIcon :name="hasChildren ? 'el:OfficeBuilding' : 'el:UserFilled'" />
+        <EasyIcon :name="hasChildren ? 'el:OfficeBuilding' : 'el:UserFilled'" />
       </span>
 
       <!-- 节点标签 -->

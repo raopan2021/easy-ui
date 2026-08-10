@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import XlyInput from '../../input'
+import EasyInput from '../../input'
 
 export interface InputRangeProps {
   /** 开始值 */
@@ -37,7 +37,7 @@ export interface InputRangeProps {
 }
 
 defineOptions({
-  name: 'XlyInputRange',
+  name: 'EasyInputRange',
 })
 
 const props = withDefaults(defineProps<InputRangeProps>(), {
@@ -80,10 +80,10 @@ function handleEnter() {
 </script>
 
 <template>
-  <div class="xly-input-range" :class="[`xly-input-range--${size}`, { 'is-disabled': disabled }]">
+  <div class="easy-input-range" :class="[`easy-input-range--${size}`, { 'is-disabled': disabled }]">
     <!-- 开始输入框 -->
-    <div class="xly-input-range__start">
-      <XlyInput
+    <div class="easy-input-range__start">
+      <EasyInput
         :model-value="start"
         :type="inputType"
         :placeholder="startPlaceholder || '最小值'"
@@ -98,11 +98,11 @@ function handleEnter() {
     </div>
 
     <!-- 分隔符 -->
-    <span class="xly-input-range__separator">{{ separator }}</span>
+    <span class="easy-input-range__separator">{{ separator }}</span>
 
     <!-- 结束输入框 -->
-    <div class="xly-input-range__end">
-      <XlyInput
+    <div class="easy-input-range__end">
+      <EasyInput
         :model-value="end"
         :type="inputType"
         :placeholder="endPlaceholder || '最大值'"
@@ -119,7 +119,7 @@ function handleEnter() {
 </template>
 
 <style scoped lang="scss">
-.xly-input-range {
+.easy-input-range {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -130,15 +130,15 @@ function handleEnter() {
     cursor: not-allowed;
   }
 
-  .xly-input-range__separator {
+  .easy-input-range__separator {
     color: var(--el-text-color-placeholder);
     font-size: 14px;
     flex-shrink: 0;
     user-select: none;
   }
 
-  .xly-input-range__start,
-  .xly-input-range__end {
+  .easy-input-range__start,
+  .easy-input-range__end {
     flex: 1;
     min-width: 0;
   }

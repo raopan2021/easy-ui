@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { LoadingInstance } from 'easy-ui'
-import { EasyLoading, xly } from 'easy-ui'
+import { easy, EasyLoading } from 'easy-ui'
 import { ref } from 'vue'
 
 const loadingTypes = [
@@ -41,7 +41,7 @@ function toggleContainerLoading() {
 
 // 使用全局 API 显示全屏加载
 function showApiFullscreenLoading() {
-  apiLoading = xly.$loading.open({
+  apiLoading = easy.$loading.open({
     type: currentType.value,
     text: '全局 API 加载中...',
   })
@@ -53,7 +53,7 @@ function showApiFullscreenLoading() {
 
 // 使用全局 API 显示容器内加载
 function showApiContainerLoading() {
-  containerApiLoading = xly.$loading.open({
+  containerApiLoading = easy.$loading.open({
     target: '.api-container-box',
     type: 'wave',
     text: '数据加载中...',
@@ -66,12 +66,12 @@ function showApiContainerLoading() {
 
 // 使用快捷方法
 function showQuickFullscreen() {
-  const loading = xly.$loading.fullscreen('快捷全屏加载...')
+  const loading = easy.$loading.fullscreen('快捷全屏加载...')
   setTimeout(() => loading.close(), 2000)
 }
 
 function showQuickContainer() {
-  const loading = xly.$loading.container('.api-container-box', '快捷容器加载...')
+  const loading = easy.$loading.container('.api-container-box', '快捷容器加载...')
   setTimeout(() => loading.close(), 2000)
 }
 </script>
@@ -359,7 +359,7 @@ function showQuickContainer() {
         命令式调用
       </h2>
       <p class="doc-section__desc">
-        通过 <code>xly.$loading</code> 在任意位置调用，无需在模板中写组件。统一入口：<code>import { xly } from 'easy-ui'</code>
+        通过 <code>easy.$loading</code> 在任意位置调用，无需在模板中写组件。统一入口：<code>import { easy } from 'easy-ui'</code>
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body doc-preview__body--column">
@@ -367,10 +367,10 @@ function showQuickContainer() {
             <h4>全屏加载</h4>
             <div class="demo-actions">
               <button class="demo-btn demo-btn--primary" @click="showApiFullscreenLoading">
-                xly.$loading.open()
+                easy.$loading.open()
               </button>
               <button class="demo-btn" @click="showQuickFullscreen">
-                xly.$loading.fullscreen()
+                easy.$loading.fullscreen()
               </button>
             </div>
           </div>
@@ -387,31 +387,31 @@ function showQuickContainer() {
             </div>
             <div class="demo-actions">
               <button class="demo-btn demo-btn--primary" @click="showApiContainerLoading">
-                xly.$loading.open({ target })
+                easy.$loading.open({ target })
               </button>
               <button class="demo-btn" @click="showQuickContainer">
-                xly.$loading.container()
+                easy.$loading.container()
               </button>
             </div>
           </div>
         </div>
         <EasyDocCode
-          code="import { xly } from 'easy-ui'
+          code="import { easy } from 'easy-ui'
 
 // 全屏加载
-const loading = xly.$loading.open({ text: '加载中...' })
+const loading = easy.$loading.open({ text: '加载中...' })
 loading.close()
 
 // 容器内加载（传入选择器或 HTMLElement）
-const loading = xly.$loading.open({
+const loading = easy.$loading.open({
   target: '.my-container',
   text: '数据加载中...',
   type: 'wave'
 })
 
 // 快捷方法
-xly.$loading.fullscreen('加载中...')
-xly.$loading.container('.my-container')
+easy.$loading.fullscreen('加载中...')
+easy.$loading.container('.my-container')
 
 // 动态更新
 loading.setProgress(50)
@@ -530,7 +530,7 @@ loading.setText('处理中...')"
       </div>
 
       <h3 class="doc-subtitle">
-        命令式 API (xly.$loading)
+        命令式 API (easy.$loading)
       </h3>
       <div class="doc-table">
         <table>

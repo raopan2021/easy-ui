@@ -163,7 +163,7 @@ export function findParentMenu(data: MenuItem[], path: string): MenuItem | null 
 /**
  * 菜单持久化存储键名
  */
-export const MENU_STORAGE_KEY = 'xly_menu_permissions'
+export const MENU_STORAGE_KEY = 'easy_menu_permissions'
 
 /**
  * 保存用户菜单权限到本地存储

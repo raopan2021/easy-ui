@@ -85,17 +85,17 @@ watch(
 
 <template>
   <Teleport to="body">
-    <Transition name="xly-msgbox-fade">
+    <Transition name="easy-msgbox-fade">
       <div
         v-if="state.visible"
-        class="xly-msgbox-overlay xly-msgbox-overlay--center"
+        class="easy-msgbox-overlay easy-msgbox-overlay--center"
 
         @click.self="handleOverlayClick"
       >
-        <Transition name="xly-msgbox-zoom">
+        <Transition name="easy-msgbox-zoom">
           <div
             v-if="state.visible"
-            class="xly-msgbox"
+            class="easy-msgbox"
             :class="[state.options.customClass]"
             role="dialog"
             aria-modal="true"
@@ -104,7 +104,7 @@ watch(
             <!-- 关闭按钮 -->
             <button
               v-if="state.options.showClose !== false"
-              class="xly-msgbox__close"
+              class="easy-msgbox__close"
               aria-label="关闭"
               @click="handleClose"
             >
@@ -123,11 +123,11 @@ watch(
             </button>
 
             <!-- 头部：图标 + 标题 -->
-            <div class="xly-msgbox__header" :class="{ 'xly-msgbox__header--no-title': !state.options.title }">
+            <div class="easy-msgbox__header" :class="{ 'easy-msgbox__header--no-title': !state.options.title }">
               <div
                 v-if="showIcon"
-                class="xly-msgbox__icon"
-                :class="`xly-msgbox__icon--${state.options.type || 'info'}`"
+                class="easy-msgbox__icon"
+                :class="`easy-msgbox__icon--${state.options.type || 'info'}`"
               >
                 <!-- success -->
                 <svg
@@ -185,29 +185,29 @@ watch(
                   <line x1="12" y1="8" x2="12.01" y2="8" />
                 </svg>
               </div>
-              <span v-if="state.options.title" class="xly-msgbox__title">{{ state.options.title }}</span>
+              <span v-if="state.options.title" class="easy-msgbox__title">{{ state.options.title }}</span>
             </div>
 
             <!-- 内容 -->
-            <div class="xly-msgbox__body">
+            <div class="easy-msgbox__body">
               <!-- eslint-disable-next-line vue/no-v-html -->
               <p
                 v-if="state.options.dangerouslyUseHTMLString"
-                class="xly-msgbox__message"
+                class="easy-msgbox__message"
                 v-html="state.options.message"
               />
-              <p v-else class="xly-msgbox__message">
+              <p v-else class="easy-msgbox__message">
                 {{ state.options.message }}
               </p>
 
               <!-- 输入框 -->
-              <div v-if="state.options.showInput" class="xly-msgbox__input-wrap">
+              <div v-if="state.options.showInput" class="easy-msgbox__input-wrap">
                 <textarea
                   v-if="state.options.input?.inputType === 'textarea'"
                   ref="inputRef"
                   v-model="state.inputValue"
-                  class="xly-msgbox__input xly-msgbox__input--textarea"
-                  :class="{ 'xly-msgbox__input--error': state.inputError }"
+                  class="easy-msgbox__input easy-msgbox__input--textarea"
+                  :class="{ 'easy-msgbox__input--error': state.inputError }"
                   :placeholder="state.options.input?.placeholder || ''"
                   rows="3"
                   @keydown.enter.ctrl="handleConfirm"
@@ -216,23 +216,23 @@ watch(
                   v-else
                   ref="inputRef"
                   v-model="state.inputValue"
-                  class="xly-msgbox__input"
-                  :class="{ 'xly-msgbox__input--error': state.inputError }"
+                  class="easy-msgbox__input"
+                  :class="{ 'easy-msgbox__input--error': state.inputError }"
                   :type="state.options.input?.inputType || 'text'"
                   :placeholder="state.options.input?.placeholder || ''"
                   @keydown.enter="handleConfirm"
                 >
-                <Transition name="xly-msgbox-err">
-                  <span v-if="state.inputError" class="xly-msgbox__input-error">{{ state.inputError }}</span>
+                <Transition name="easy-msgbox-err">
+                  <span v-if="state.inputError" class="easy-msgbox__input-error">{{ state.inputError }}</span>
                 </Transition>
               </div>
             </div>
 
             <!-- 按钮区 -->
-            <div class="xly-msgbox__footer">
+            <div class="easy-msgbox__footer">
               <button
                 v-if="state.options.showCancelButton !== false && state.options.showCancelButton"
-                class="xly-msgbox__btn xly-msgbox__btn--cancel"
+                class="easy-msgbox__btn easy-msgbox__btn--cancel"
                 :disabled="state.loading"
                 @click="handleCancel"
               >
@@ -240,14 +240,14 @@ watch(
               </button>
               <button
                 v-if="state.options.showConfirmButton !== false"
-                class="xly-msgbox__btn xly-msgbox__btn--confirm"
+                class="easy-msgbox__btn easy-msgbox__btn--confirm"
                 :class="{
-                  'xly-msgbox__btn--danger': state.options.confirmButtonDanger,
+                  'easy-msgbox__btn--danger': state.options.confirmButtonDanger,
                 }"
                 :disabled="state.loading"
                 @click="handleConfirm"
               >
-                <span v-if="state.loading" class="xly-msgbox__btn-loader" />
+                <span v-if="state.loading" class="easy-msgbox__btn-loader" />
                 {{ state.options.confirmButtonText || '确定' }}
               </button>
             </div>
@@ -269,7 +269,7 @@ $shadow-dialog:
   0 2px 8px rgba(0, 0, 0, 0.06);
 
 /* ========== 遮罩层 ========== */
-.xly-msgbox-overlay {
+.easy-msgbox-overlay {
   position: fixed;
   inset: 0;
   z-index: 3100;
@@ -280,7 +280,7 @@ $shadow-dialog:
 }
 
 /* ========== 弹框主体 ========== */
-.xly-msgbox {
+.easy-msgbox {
   position: relative;
   width: 420px;
   max-width: calc(100vw - 32px);
@@ -292,7 +292,7 @@ $shadow-dialog:
 }
 
 /* ========== 关闭按钮 ========== */
-.xly-msgbox__close {
+.easy-msgbox__close {
   position: absolute;
   top: 14px;
   right: 14px;
@@ -318,19 +318,19 @@ $shadow-dialog:
 }
 
 /* ========== 头部 ========== */
-.xly-msgbox__header {
+.easy-msgbox__header {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 22px 48px 0 22px;
 
-  &.xly-msgbox__header--no-title {
+  &.easy-msgbox__header--no-title {
     padding-bottom: 4px;
   }
 }
 
 /* ========== 图标 ========== */
-.xly-msgbox__icon {
+.easy-msgbox__icon {
   flex-shrink: 0;
   width: 22px;
   height: 22px;
@@ -343,25 +343,25 @@ $shadow-dialog:
     height: 100%;
   }
 
-  &.xly-msgbox__icon--success {
+  &.easy-msgbox__icon--success {
     color: var(--el-color-success);
   }
 
-  &.xly-msgbox__icon--warning {
+  &.easy-msgbox__icon--warning {
     color: var(--el-color-warning);
   }
 
-  &.xly-msgbox__icon--danger {
+  &.easy-msgbox__icon--danger {
     color: var(--el-color-danger);
   }
 
-  &.xly-msgbox__icon--info {
+  &.easy-msgbox__icon--info {
     color: var(--el-color-info);
   }
 }
 
 /* ========== 标题 ========== */
-.xly-msgbox__title {
+.easy-msgbox__title {
   font-size: 16px;
   font-weight: 600;
   color: var(--el-text-color-primary);
@@ -369,11 +369,11 @@ $shadow-dialog:
 }
 
 /* ========== 内容区 ========== */
-.xly-msgbox__body {
+.easy-msgbox__body {
   padding: 12px 22px 0;
 }
 
-.xly-msgbox__message {
+.easy-msgbox__message {
   margin: 0;
   font-size: 14px;
   line-height: 1.7;
@@ -382,14 +382,14 @@ $shadow-dialog:
 }
 
 /* ========== 输入框 ========== */
-.xly-msgbox__input-wrap {
+.easy-msgbox__input-wrap {
   margin-top: 14px;
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-.xly-msgbox__input {
+.easy-msgbox__input {
   width: 100%;
   box-sizing: border-box;
   height: 38px;
@@ -416,12 +416,12 @@ $shadow-dialog:
     box-shadow: 0 0 0 3px rgba(79, 110, 247, 0.12);
   }
 
-  &.xly-msgbox__input--error {
+  &.easy-msgbox__input--error {
     border-color: var(--el-color-danger) !important;
     box-shadow: 0 0 0 3px rgba(207, 34, 46, 0.1) !important;
   }
 
-  &.xly-msgbox__input--textarea {
+  &.easy-msgbox__input--textarea {
     height: auto;
     padding: 8px 12px;
     resize: vertical;
@@ -429,21 +429,21 @@ $shadow-dialog:
   }
 }
 
-.xly-msgbox__input-error {
+.easy-msgbox__input-error {
   font-size: 12px;
   color: var(--el-color-danger);
   line-height: 1.4;
 }
 
 /* ========== 按钮区 ========== */
-.xly-msgbox__footer {
+.easy-msgbox__footer {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
   padding: 18px 22px 20px;
 }
 
-.xly-msgbox__btn {
+.easy-msgbox__btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -463,7 +463,7 @@ $shadow-dialog:
     cursor: not-allowed;
   }
 
-  &.xly-msgbox__btn--cancel {
+  &.easy-msgbox__btn--cancel {
     background: var(--el-fill-color-light);
     color: var(--el-text-color-secondary);
     border-color: var(--el-border-color);
@@ -478,7 +478,7 @@ $shadow-dialog:
     }
   }
 
-  &.xly-msgbox__btn--confirm {
+  &.easy-msgbox__btn--confirm {
     background: var(--el-color-primary);
     color: #ffffff;
     border-color: var(--el-color-primary);
@@ -493,7 +493,7 @@ $shadow-dialog:
     }
   }
 
-  &.xly-msgbox__btn--danger {
+  &.easy-msgbox__btn--danger {
     background: var(--el-color-danger) !important;
     border-color: var(--el-color-danger) !important;
 
@@ -505,68 +505,68 @@ $shadow-dialog:
 }
 
 /* ========== 按钮 loading 图标 ========== */
-.xly-msgbox__btn-loader {
+.easy-msgbox__btn-loader {
   width: 13px;
   height: 13px;
   border: 2px solid rgba(255, 255, 255, 0.4);
   border-top-color: var(--el-bg-color);
   border-radius: 50%;
-  animation: xly-msgbox-spin 0.6s linear infinite;
+  animation: easy-msgbox-spin 0.6s linear infinite;
   flex-shrink: 0;
 }
 
-@keyframes xly-msgbox-spin {
+@keyframes easy-msgbox-spin {
   to {
     transform: rotate(360deg);
   }
 }
 
 /* ========== 过渡动画 ========== */
-.xly-msgbox-fade-enter-active,
-.xly-msgbox-fade-leave-active {
+.easy-msgbox-fade-enter-active,
+.easy-msgbox-fade-leave-active {
   transition: opacity 0.22s ease;
 }
 
-.xly-msgbox-fade-enter-from,
-.xly-msgbox-fade-leave-to {
+.easy-msgbox-fade-enter-from,
+.easy-msgbox-fade-leave-to {
   opacity: 0;
 }
 
-.xly-msgbox-zoom-enter-active {
+.easy-msgbox-zoom-enter-active {
   transition:
     opacity 0.22s ease,
     transform 0.22s cubic-bezier(0.34, 1.3, 0.64, 1);
 }
 
-.xly-msgbox-zoom-leave-active {
+.easy-msgbox-zoom-leave-active {
   transition:
     opacity 0.15s ease,
     transform 0.15s ease;
 }
 
-.xly-msgbox-zoom-enter-from,
-.xly-msgbox-zoom-leave-to {
+.easy-msgbox-zoom-enter-from,
+.easy-msgbox-zoom-leave-to {
   opacity: 0;
   transform: scale(0.92);
 }
 
 /* 输入错误提示动画 */
-.xly-msgbox-err-enter-active {
+.easy-msgbox-err-enter-active {
   transition:
     opacity 0.18s,
     transform 0.18s;
 }
 
-.xly-msgbox-err-leave-active {
+.easy-msgbox-err-leave-active {
   transition: opacity 0.12s;
 }
 
-.xly-msgbox-err-enter-from {
+.easy-msgbox-err-enter-from {
   opacity: 0;
   transform: translateY(-4px);
 }
 
-.xly-msgbox-err-leave-to {
+.easy-msgbox-err-leave-to {
   opacity: 0;
 }
 </style>

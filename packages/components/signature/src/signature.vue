@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
-import XlyIcon from '../../icon'
+import EasyIcon from '../../icon'
 
 defineOptions({ name: 'EasySignature' })
 
@@ -18,7 +18,7 @@ const props = withDefaults(
     canvasBgColor?: string
     /** 占位提示文字 */
     placeholder?: string
-    /** 占位提示图标（XlyIcon 格式） */
+    /** 占位提示图标（EasyIcon 格式） */
     placeholderIcon?: string
     /** 是否显示工具栏 */
     showToolbar?: boolean
@@ -82,7 +82,24 @@ let ctx: CanvasRenderingContext2D | null = null
 let isDrawing = false
 let lastX = 0
 let lastY = 0
-const currentPenColor = ref(props.penColor)
+
+/** light 模式默认笔画色 */
+const DEFAULT_PEN = '#1a1a2e'
+/** dark 模式默认笔画色（浅色，保证在深色画布上可辨识） */
+const DARK_PEN = '#e4e4e7'
+
+function isDarkMode(): boolean {
+  return document.documentElement.classList.contains('dark')
+}
+
+/** 解析默认笔画色：用户显式自定义则始终使用；否则 dark 模式自动用浅色 */
+function resolvePenColor(): string {
+  if (props.penColor && props.penColor !== DEFAULT_PEN)
+    return props.penColor
+  return isDarkMode() ? DARK_PEN : DEFAULT_PEN
+}
+
+const currentPenColor = ref(resolvePenColor())
 const currentPenSize = ref(props.penSize)
 const canUndo = ref(false)
 const hasContent = ref(false)
@@ -157,10 +174,18 @@ function initCanvas() {
 
 onMounted(() => {
   nextTick(() => initCanvas())
+  // 监听 html.dark class 变化：用户未自定义笔画色时，随主题自动切换默认笔画色
+  themeObserver = new MutationObserver(() => {
+    if (!props.penColor || props.penColor === DEFAULT_PEN) {
+      currentPenColor.value = resolvePenColor()
+    }
+  })
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
 })
 
 onUnmounted(() => {
   history.length = 0
+  themeObserver?.disconnect()
 })
 
 // 监听尺寸变化
@@ -173,6 +198,8 @@ watch(
 
 // 窗口 resize
 let resizeObserver: ResizeObserver | null = null
+// 主题切换监听（dark class 变化时更新默认笔画色）
+let themeObserver: MutationObserver | null = null
 onMounted(() => {
   if (wrapperRef.value && !props.width) {
     resizeObserver = new ResizeObserver(() => {
@@ -367,40 +394,40 @@ defineExpose({
 </script>
 
 <template>
-  <div ref="wrapperRef" class="xly-signature" :class="signatureClass" :style="signatureStyle">
+  <div ref="wrapperRef" class="easy-signature" :class="signatureClass" :style="signatureStyle">
     <!-- 工具栏 -->
-    <div v-if="showToolbar" class="xly-signature__toolbar">
-      <div class="xly-signature__toolbar-left">
+    <div v-if="showToolbar" class="easy-signature__toolbar">
+      <div class="easy-signature__toolbar-left">
         <slot name="toolbar-left" />
       </div>
-      <div class="xly-signature__toolbar-center">
+      <div class="easy-signature__toolbar-center">
         <!-- 画笔粗细 -->
-        <div v-if="showPenSize" class="xly-signature__pen-size">
-          <span class="xly-signature__pen-label">粗细</span>
-          <div class="xly-signature__pen-options">
+        <div v-if="showPenSize" class="easy-signature__pen-size">
+          <span class="easy-signature__pen-label">粗细</span>
+          <div class="easy-signature__pen-options">
             <button
               v-for="size in penSizes"
               :key="size"
-              class="xly-signature__pen-btn"
+              class="easy-signature__pen-btn"
               :class="{ 'is-active': currentPenSize === size }"
               :title="`${size}px`"
               @click="setPenSize(size)"
             >
               <span
-                class="xly-signature__pen-dot"
+                class="easy-signature__pen-dot"
                 :style="{ width: `${Math.max(size, 4)}px`, height: `${Math.max(size, 4)}px` }"
               />
             </button>
           </div>
         </div>
         <!-- 画笔颜色 -->
-        <div v-if="showPenColor" class="xly-signature__pen-color">
-          <span class="xly-signature__pen-label">颜色</span>
-          <div class="xly-signature__pen-options">
+        <div v-if="showPenColor" class="easy-signature__pen-color">
+          <span class="easy-signature__pen-label">颜色</span>
+          <div class="easy-signature__pen-options">
             <button
               v-for="color in penColors"
               :key="color"
-              class="xly-signature__color-btn"
+              class="easy-signature__color-btn"
               :class="{ 'is-active': currentPenColor === color }"
               :style="{ backgroundColor: color }"
               @click="setPenColor(color)"
@@ -408,9 +435,9 @@ defineExpose({
           </div>
         </div>
       </div>
-      <div class="xly-signature__toolbar-right">
+      <div class="easy-signature__toolbar-right">
         <!-- 撤销 -->
-        <button v-if="showUndo" class="xly-signature__tool-btn" :disabled="!canUndo" title="撤销" @click="undo">
+        <button v-if="showUndo" class="easy-signature__tool-btn" :disabled="!canUndo" title="撤销" @click="undo">
           <svg
             viewBox="0 0 24 24"
             width="16"
@@ -427,7 +454,7 @@ defineExpose({
           <span v-if="toolbarText">撤销</span>
         </button>
         <!-- 清空 -->
-        <button v-if="showClear" class="xly-signature__tool-btn" :disabled="!hasContent" title="清空" @click="clear">
+        <button v-if="showClear" class="easy-signature__tool-btn" :disabled="!hasContent" title="清空" @click="clear">
           <svg
             viewBox="0 0 24 24"
             width="16"
@@ -447,7 +474,7 @@ defineExpose({
         <slot name="toolbar-right">
           <button
             v-if="showConfirm"
-            class="xly-signature__tool-btn xly-signature__tool-btn--primary"
+            class="easy-signature__tool-btn easy-signature__tool-btn--primary"
             :disabled="!hasContent"
             title="确认签名"
             @click="confirm"
@@ -471,17 +498,17 @@ defineExpose({
     </div>
 
     <!-- 画布区域 -->
-    <div class="xly-signature__canvas-wrap" :style="canvasWrapStyle">
+    <div class="easy-signature__canvas-wrap" :style="canvasWrapStyle">
       <!-- 提示文字 -->
-      <div v-if="showPlaceholder && !hasContent" class="xly-signature__placeholder">
+      <div v-if="showPlaceholder && !hasContent" class="easy-signature__placeholder">
         <slot name="placeholder">
-          <XlyIcon v-if="placeholderIcon" :name="placeholderIcon" :size="24" />
-          <span class="xly-signature__placeholder-text">{{ placeholder }}</span>
+          <EasyIcon v-if="placeholderIcon" :name="placeholderIcon" :size="24" />
+          <span class="easy-signature__placeholder-text">{{ placeholder }}</span>
         </slot>
       </div>
       <canvas
         ref="canvasRef"
-        class="xly-signature__canvas"
+        class="easy-signature__canvas"
         :style="canvasBgColor ? { backgroundColor: canvasBgColor } : {}"
         @mousedown="onPointerDown"
         @mousemove="onPointerMove"
@@ -503,7 +530,7 @@ $radius: 8px;
 $transition: all 0.2s ease;
 
 /* ========== 签名板主体 ========== */
-.xly-signature {
+.easy-signature {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--el-border-color);
@@ -523,7 +550,7 @@ $transition: all 0.2s ease;
 }
 
 /* ========== 工具栏 ========== */
-.xly-signature__toolbar {
+.easy-signature__toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -534,14 +561,14 @@ $transition: all 0.2s ease;
   min-height: 40px;
 }
 
-.xly-signature__toolbar-left {
+.easy-signature__toolbar-left {
   display: flex;
   align-items: center;
   gap: 8px;
   min-width: 0;
 }
 
-.xly-signature__toolbar-center {
+.easy-signature__toolbar-center {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -549,7 +576,7 @@ $transition: all 0.2s ease;
   justify-content: center;
 }
 
-.xly-signature__toolbar-right {
+.easy-signature__toolbar-right {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -557,26 +584,26 @@ $transition: all 0.2s ease;
 }
 
 /* ========== 画笔选项 ========== */
-.xly-signature__pen-size,
-.xly-signature__pen-color {
+.easy-signature__pen-size,
+.easy-signature__pen-color {
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
-.xly-signature__pen-label {
+.easy-signature__pen-label {
   font-size: 12px;
   color: var(--el-text-color-placeholder);
   white-space: nowrap;
 }
 
-.xly-signature__pen-options {
+.easy-signature__pen-options {
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-.xly-signature__pen-btn {
+.easy-signature__pen-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -598,13 +625,13 @@ $transition: all 0.2s ease;
   }
 }
 
-.xly-signature__pen-dot {
+.easy-signature__pen-dot {
   display: block;
   border-radius: 50%;
   background: var(--el-text-color-primary);
 }
 
-.xly-signature__color-btn {
+.easy-signature__color-btn {
   width: 20px;
   height: 20px;
   border: 2px solid transparent;
@@ -624,7 +651,7 @@ $transition: all 0.2s ease;
 }
 
 /* ========== 工具按钮 ========== */
-.xly-signature__tool-btn {
+.easy-signature__tool-btn {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -649,7 +676,7 @@ $transition: all 0.2s ease;
     cursor: not-allowed;
   }
 
-  &.xly-signature__tool-btn--primary {
+  &.easy-signature__tool-btn--primary {
     background: var(--el-color-primary);
     border-color: var(--el-color-primary);
     color: var(--el-color-white);
@@ -673,22 +700,22 @@ $transition: all 0.2s ease;
 }
 
 /* ========== Dark Mode ========== */
-.xly-signature {
+.easy-signature {
   html.dark & {
-    .xly-signature__tool-btn:hover:not(:disabled) {
+    .easy-signature__tool-btn:hover:not(:disabled) {
       background: rgba(79, 110, 247, 0.1);
     }
   }
 }
 
 /* ========== 画布区域 ========== */
-.xly-signature__canvas-wrap {
+.easy-signature__canvas-wrap {
   position: relative;
   flex: 1;
   overflow: hidden;
 }
 
-.xly-signature__canvas {
+.easy-signature__canvas {
   display: block;
   width: 100%;
   height: 100%;
@@ -698,7 +725,7 @@ $transition: all 0.2s ease;
 }
 
 /* ========== 占位提示 ========== */
-.xly-signature__placeholder {
+.easy-signature__placeholder {
   position: absolute;
   inset: 0;
   display: flex;
@@ -711,7 +738,7 @@ $transition: all 0.2s ease;
   transition: opacity 0.3s;
 }
 
-.xly-signature__placeholder-text {
+.easy-signature__placeholder-text {
   font-size: 14px;
   user-select: none;
 }
@@ -719,22 +746,22 @@ $transition: all 0.2s ease;
 
 <style lang="scss">
 /* ========== Dark Mode ========== */
-html.dark .xly-signature {
+html.dark .easy-signature {
   border-color: var(--el-border-color);
   background: var(--el-bg-color);
 }
-html.dark .xly-signature__toolbar {
+html.dark .easy-signature__toolbar {
   background: var(--el-fill-color-light);
   border-bottom-color: var(--el-border-color);
 }
-html.dark .xly-signature__pen-btn:hover {
+html.dark .easy-signature__pen-btn:hover {
   background: var(--el-fill-color);
 }
-html.dark .xly-signature__tool-btn {
+html.dark .easy-signature__tool-btn {
   background: var(--el-bg-color);
   border-color: var(--el-border-color);
 }
-html.dark .xly-signature__tool-btn:hover:not(:disabled) {
+html.dark .easy-signature__tool-btn:hover:not(:disabled) {
   background: rgba(79, 110, 247, 0.1);
 }
 </style>

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import XlyButton from '../../../../button'
-import XlyForm, { EasyFormItem as XlyFormItem } from '../../../../form'
-import XlyInput from '../../../../input'
-import XlySelect from '../../../../select'
-import XlyTable from '../../../../table'
-import XlyTabs, { EasyTabPane as XlyTabPane } from '../../../../tabs'
+import EasyButton from '../../../../button'
+import EasyForm, { EasyFormItem } from '../../../../form'
+import EasyInput from '../../../../input'
+import EasySelect from '../../../../select'
+import EasyTable from '../../../../table'
+import EasyTabs, { EasyTabPane } from '../../../../tabs'
 
 const props = defineProps({
   modelValue: {
@@ -81,26 +81,26 @@ function handleDeleteRow(index: number) {
 
 <template>
   <div>
-    <XlyTabs v-model="tabsValue" type="line">
-      <XlyTabPane name="basic" label="基础设置">
-        <XlyForm ref="formRef" :model="form" label-width="100px" :disabled="disabled" class="startForm">
+    <EasyTabs v-model="tabsValue" type="line">
+      <EasyTabPane name="basic" label="基础设置">
+        <EasyForm ref="formRef" :model="form" label-width="100px" :disabled="disabled" class="startForm">
           <slot name="form-item-task-name" :model="form" field="nodeCode">
-            <XlyFormItem label="节点编码" prop="nodeCode">
-              <XlyInput v-model="form.nodeCode" :disabled="disabled" />
-            </XlyFormItem>
+            <EasyFormItem label="节点编码" prop="nodeCode">
+              <EasyInput v-model="form.nodeCode" :disabled="disabled" />
+            </EasyFormItem>
           </slot>
           <slot name="form-item-task-name" :model="form" field="nodeName">
-            <XlyFormItem label="节点名称" prop="nodeName">
-              <XlyInput ref="nodeInput" v-model="form.nodeName" :disabled="disabled" @change="nodeNameChange" />
-            </XlyFormItem>
+            <EasyFormItem label="节点名称" prop="nodeName">
+              <EasyInput ref="nodeInput" v-model="form.nodeName" :disabled="disabled" @change="nodeNameChange" />
+            </EasyFormItem>
           </slot>
-        </XlyForm>
-      </XlyTabPane>
+        </EasyForm>
+      </EasyTabPane>
 
-      <XlyTabPane name="listener" label="监听器">
+      <EasyTabPane name="listener" label="监听器">
         <div class="listenerPane">
           <slot name="form-item-task-listenerType" :model="form" field="listenerType">
-            <XlyTable
+            <EasyTable
               :data="form.listenerRows || []"
               :columns="listenerColumns"
               :pagination="false"
@@ -109,7 +109,7 @@ function handleDeleteRow(index: number) {
             >
               <!-- 类型列 -->
               <template #col-listenerType="{ row }">
-                <XlySelect
+                <EasySelect
                   v-model="row.listenerType"
                   :options="listenerTypeOptions"
                   placeholder="请选择"
@@ -118,22 +118,22 @@ function handleDeleteRow(index: number) {
               </template>
               <!-- 路径列 -->
               <template #col-listenerPath="{ row }">
-                <XlyInput v-model="row.listenerPath" placeholder="请输入" :disabled="disabled" />
+                <EasyInput v-model="row.listenerPath" placeholder="请输入" :disabled="disabled" />
               </template>
               <!-- 操作列 -->
               <template v-if="!disabled" #action="{ index }">
-                <XlyButton type="danger" size="small" @click="handleDeleteRow(index)">
+                <EasyButton type="danger" size="small" @click="handleDeleteRow(index)">
                   删除
-                </XlyButton>
+                </EasyButton>
               </template>
-            </XlyTable>
-            <XlyButton v-if="!disabled" type="primary" style="margin-top: 10px" @click="handleAddRow">
+            </EasyTable>
+            <EasyButton v-if="!disabled" type="primary" style="margin-top: 10px" @click="handleAddRow">
               增加行
-            </XlyButton>
+            </EasyButton>
           </slot>
         </div>
-      </XlyTabPane>
-    </XlyTabs>
+      </EasyTabPane>
+    </EasyTabs>
   </div>
 </template>
 

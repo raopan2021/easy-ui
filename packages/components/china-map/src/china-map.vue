@@ -478,15 +478,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="xly-china-map" :style="{ width: computedWidth, height: computedHeight }">
+  <div class="easy-china-map" :style="{ width: computedWidth, height: computedHeight }">
     <!-- 标题区域 -->
-    <div class="xly-china-map__header">
-      <div v-if="title || subtitle" class="xly-china-map__title-wrap">
-        <span v-if="title" class="xly-china-map__title">{{ title }}</span>
-        <span v-if="subtitle" class="xly-china-map__subtitle">{{ subtitle }}</span>
+    <div class="easy-china-map__header">
+      <div v-if="title || subtitle" class="easy-china-map__title-wrap">
+        <span v-if="title" class="easy-china-map__title">{{ title }}</span>
+        <span v-if="subtitle" class="easy-china-map__subtitle">{{ subtitle }}</span>
       </div>
       <!-- 切换模式 Tab（tooltip-mode="switch" 时显示） -->
-      <div v-if="isMultiDataset && tooltipMode === 'switch'" class="xly-china-map__dataset-tabs">
+      <div v-if="isMultiDataset && tooltipMode === 'switch'" class="easy-china-map__dataset-tabs">
         <button
           v-for="(ds, index) in datasets"
           :key="index"
@@ -498,7 +498,7 @@ onMounted(() => {
         </button>
       </div>
       <!-- 对比模式标签（tooltip-mode="compare" 时显示） -->
-      <div v-else-if="isMultiDataset && tooltipMode === 'compare'" class="xly-china-map__dataset-tags">
+      <div v-else-if="isMultiDataset && tooltipMode === 'compare'" class="easy-china-map__dataset-tags">
         <span
           v-for="(ds, index) in datasets"
           :key="index"
@@ -513,7 +513,7 @@ onMounted(() => {
     <!-- 地图主体 -->
     <div
       ref="containerRef"
-      class="xly-china-map__body"
+      class="easy-china-map__body"
       :class="{ 'is-dragging': isDragging }"
       @wheel.prevent="onWheel"
       @mousedown="onMouseDown"
@@ -523,7 +523,7 @@ onMounted(() => {
     >
       <svg
         ref="svgRef"
-        class="xly-china-map__svg"
+        class="easy-china-map__svg"
         :viewBox="`0 0 ${SVG_W} ${SVG_H}`"
         xmlns="http://www.w3.org/2000/svg"
         @mouseleave="hideTooltip"
@@ -543,7 +543,7 @@ onMounted(() => {
         <!-- 地图内容（带缩放变换） -->
         <g :transform="`translate(${translateX}, ${translateY}) scale(${scale})`">
           <!-- 省份路径 -->
-          <g class="xly-china-map__provinces">
+          <g class="easy-china-map__provinces">
             <g
               v-for="province in provinces"
               :key="province.name"
@@ -558,7 +558,7 @@ onMounted(() => {
                 :fill="getProvinceColor(province.name)"
                 :stroke="strokeColor"
                 :stroke-width="province.scale ? strokeWidth / province.scale : strokeWidth"
-                class="xly-china-map__province"
+                class="easy-china-map__province"
                 :class="{ 'is-active': activeProvince === province.name, 'is-hover': hoverProvince === province.name }"
                 @mouseenter="onProvinceEnter(province, $event)"
                 @mouseleave="onProvinceLeave"
@@ -568,7 +568,7 @@ onMounted(() => {
           </g>
 
           <!-- 扩展线（用于港澳台等小区域） -->
-          <g class="xly-china-map__extension-lines">
+          <g class="easy-china-map__extension-lines">
             <template v-for="province in provinces" :key="`ext-${province.name}`">
               <g v-if="province.extensionLine">
                 <!-- 扩展线本身 -->
@@ -577,20 +577,20 @@ onMounted(() => {
                   :y1="province.extensionLine.fromY"
                   :x2="province.extensionLine.toX"
                   :y2="province.extensionLine.toY"
-                  class="xly-china-map__extension-line"
+                  class="easy-china-map__extension-line"
                 />
               </g>
             </template>
           </g>
 
           <!-- 省份名称标签 -->
-          <g v-if="showLabel" class="xly-china-map__labels">
+          <g v-if="showLabel" class="easy-china-map__labels">
             <text
               v-for="province in provinces"
               :key="`label-${province.name}`"
               :x="province.labelX"
               :y="province.labelY"
-              class="xly-china-map__label"
+              class="easy-china-map__label"
               :class="{ 'is-full': labelMode === 'full' }"
               text-anchor="middle"
               dominant-baseline="middle"
@@ -600,14 +600,14 @@ onMounted(() => {
           </g>
 
           <!-- 数据标记气泡 -->
-          <g v-if="showBubble && dataMap.size" class="xly-china-map__bubbles">
+          <g v-if="showBubble && dataMap.size" class="easy-china-map__bubbles">
             <template v-for="province in provinces" :key="`bubble-${province.name}`">
               <circle
                 v-if="dataMap.get(province.name)"
                 :cx="province.labelX"
                 :cy="province.labelY"
                 :r="getBubbleRadius(province.name)"
-                class="xly-china-map__bubble"
+                class="easy-china-map__bubble"
                 :fill="bubbleColor"
                 :fill-opacity="0.5"
                 @mouseenter="onProvinceEnter(province, $event)"
@@ -620,7 +620,7 @@ onMounted(() => {
       </svg>
 
       <!-- 图例 -->
-      <div v-if="showLegend && legendItems.length" class="xly-china-map__legend">
+      <div v-if="showLegend && legendItems.length" class="easy-china-map__legend">
         <div class="legend-title">
           {{ legendTitle }}
         </div>
@@ -637,7 +637,7 @@ onMounted(() => {
       </div>
 
       <!-- 缩放控制 -->
-      <div v-if="zoomable" class="xly-china-map__zoom-controls">
+      <div v-if="zoomable" class="easy-china-map__zoom-controls">
         <button class="zoom-btn" title="放大" @click.stop="zoomIn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="11" cy="11" r="8" />
@@ -670,7 +670,7 @@ onMounted(() => {
       <div
         v-show="tooltip.visible"
         ref="tooltipRef"
-        class="xly-china-map__tooltip"
+        class="easy-china-map__tooltip"
         :style="{ left: `${tooltip.x}px`, top: `${tooltip.y}px` }"
       >
         <div class="tooltip-title">
@@ -703,14 +703,14 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
-.xly-china-map {
+.easy-china-map {
   display: flex;
   flex-direction: column;
   position: relative;
   font-family: inherit;
   user-select: none;
 
-  .xly-china-map__header {
+  .easy-china-map__header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -718,33 +718,33 @@ onMounted(() => {
     padding: 0 4px;
   }
 
-  .xly-china-map__title-wrap {
+  .easy-china-map__title-wrap {
     display: flex;
     flex-direction: column;
     gap: 2px;
   }
 
-  .xly-china-map__title {
+  .easy-china-map__title {
     font-size: 15px;
     font-weight: 600;
     color: var(--el-text-color-primary);
     line-height: 1.4;
   }
 
-  .xly-china-map__subtitle {
+  .easy-china-map__subtitle {
     font-size: 12px;
     color: #8e8ea0;
     line-height: 1.4;
   }
 
   // 数据集标签（纯展示）
-  .xly-china-map__dataset-tags {
+  .easy-china-map__dataset-tags {
     display: flex;
     gap: 6px;
     flex-shrink: 0;
   }
 
-  .xly-china-map__body {
+  .easy-china-map__body {
     flex: 1;
     position: relative;
     overflow: hidden;
@@ -755,13 +755,13 @@ onMounted(() => {
     }
   }
 
-  .xly-china-map__svg {
+  .easy-china-map__svg {
     width: 100%;
     height: 100%;
     display: block;
   }
 
-  .xly-china-map__province {
+  .easy-china-map__province {
     cursor: pointer;
     transition:
       filter 0.2s ease,
@@ -776,7 +776,7 @@ onMounted(() => {
     }
   }
 
-  .xly-china-map__label {
+  .easy-china-map__label {
     font-size: 10px;
     fill: #374151;
     pointer-events: none;
@@ -788,14 +788,14 @@ onMounted(() => {
   }
 
   // 扩展线样式（用于港澳台等小区域）
-  .xly-china-map__extension-line {
+  .easy-china-map__extension-line {
     stroke: #9ca3af;
     stroke-width: 1;
     stroke-dasharray: 3 2;
     pointer-events: none;
   }
 
-  .xly-china-map__bubble {
+  .easy-china-map__bubble {
     cursor: pointer;
     transition: r 0.3s ease;
     stroke: var(--el-color-white);
@@ -803,7 +803,7 @@ onMounted(() => {
   }
 
   // 图例
-  .xly-china-map__legend {
+  .easy-china-map__legend {
     position: absolute;
     right: 12px;
     bottom: 12px;
@@ -838,7 +838,7 @@ onMounted(() => {
   }
 
   // 缩放控件
-  .xly-china-map__zoom-controls {
+  .easy-china-map__zoom-controls {
     position: absolute;
     left: 12px;
     bottom: 12px;
@@ -896,7 +896,7 @@ onMounted(() => {
 </style>
 
 <style lang="scss">
-.xly-china-map__tooltip {
+.easy-china-map__tooltip {
   position: fixed;
   z-index: 9999;
   background: rgba(30, 32, 50, 0.92);

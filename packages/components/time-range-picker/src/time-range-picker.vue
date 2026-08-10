@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import XlyTimePicker from '../../time-picker'
+import EasyTimePicker from '../../time-picker'
 
 export interface TimeRangePickerProps {
   /** 开始时间值 */
@@ -61,10 +61,10 @@ function handleEndChange(value: string) {
 </script>
 
 <template>
-  <div class="xly-time-range-picker" :class="[`xly-time-range-picker--${size}`, { 'is-disabled': disabled }]">
+  <div class="easy-time-range-picker" :class="[`easy-time-range-picker--${size}`, { 'is-disabled': disabled }]">
     <!-- 开始时间选择器 -->
-    <div class="xly-time-range-picker__start">
-      <XlyTimePicker
+    <div class="easy-time-range-picker__start">
+      <EasyTimePicker
         :model-value="start"
         :placeholder="startPlaceholder || '开始时间'"
         :disabled="disabled"
@@ -77,11 +77,11 @@ function handleEndChange(value: string) {
     </div>
 
     <!-- 分隔符 -->
-    <span class="xly-time-range-picker__separator">{{ separator }}</span>
+    <span class="easy-time-range-picker__separator">{{ separator }}</span>
 
     <!-- 结束时间选择器 -->
-    <div class="xly-time-range-picker__end">
-      <XlyTimePicker
+    <div class="easy-time-range-picker__end">
+      <EasyTimePicker
         :model-value="end"
         :placeholder="endPlaceholder || '结束时间'"
         :disabled="disabled"
@@ -96,7 +96,7 @@ function handleEndChange(value: string) {
 </template>
 
 <style scoped lang="scss">
-.xly-time-range-picker {
+.easy-time-range-picker {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -107,51 +107,51 @@ function handleEndChange(value: string) {
     cursor: not-allowed;
   }
 
-  .xly-time-range-picker__separator {
+  .easy-time-range-picker__separator {
     color: var(--el-text-color-placeholder);
     font-size: 14px;
     flex-shrink: 0;
     user-select: none;
   }
 
-  .xly-time-range-picker__start,
-  .xly-time-range-picker__end {
+  .easy-time-range-picker__start,
+  .easy-time-range-picker__end {
     flex: 1;
     min-width: 0;
   }
 
   // 尺寸变体
-  &.xly-time-range-picker--large {
-    :deep(.xly-time-picker) {
-      .xly-time-picker__wrapper {
+  &.easy-time-range-picker--large {
+    :deep(.easy-time-picker) {
+      .easy-time-picker__wrapper {
         height: 40px;
         padding: 0 15px;
       }
-      .xly-time-picker__input {
+      .easy-time-picker__input {
         font-size: 14px;
       }
     }
   }
 
-  &.xly-time-range-picker--default {
-    :deep(.xly-time-picker) {
-      .xly-time-picker__wrapper {
+  &.easy-time-range-picker--default {
+    :deep(.easy-time-picker) {
+      .easy-time-picker__wrapper {
         height: 32px;
         padding: 0 12px;
       }
-      .xly-time-picker__input {
+      .easy-time-picker__input {
         font-size: 14px;
       }
     }
   }
 
-  &.xly-time-range-picker--small {
-    :deep(.xly-time-picker) {
-      .xly-time-picker__wrapper {
+  &.easy-time-range-picker--small {
+    :deep(.easy-time-picker) {
+      .easy-time-picker__wrapper {
         height: 28px;
         padding: 0 10px;
       }
-      .xly-time-picker__input {
+      .easy-time-picker__input {
         font-size: 13px;
       }
     }

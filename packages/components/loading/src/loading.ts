@@ -1,7 +1,7 @@
 import type { App } from 'vue'
 import type { LoadingProps } from './loading.vue'
 import { createApp, h, ref } from 'vue'
-import XlyLoadingComp from './loading.vue'
+import EasyLoadingComp from './loading.vue'
 
 export interface LoadingOptions extends Omit<LoadingProps, 'modelValue'> {
   /** 目标容器，可以是选择器字符串或 HTMLElement，不传则全屏 */
@@ -77,7 +77,7 @@ function createLoading(options: LoadingOptions = {}): LoadingInstance {
 
   // 创建容器
   const container = document.createElement('div')
-  container.className = 'xly-loading-global-container'
+  container.className = 'easy-loading-global-container'
   mountTarget.appendChild(container)
 
   // 创建响应式数据
@@ -88,7 +88,7 @@ function createLoading(options: LoadingOptions = {}): LoadingInstance {
   // 创建应用实例
   const app = createApp({
     render() {
-      return h(XlyLoadingComp, {
+      return h(EasyLoadingComp, {
         ...props,
         'modelValue': visible.value,
         'fullscreen': isFullscreen,
@@ -155,14 +155,14 @@ function createLoading(options: LoadingOptions = {}): LoadingInstance {
  *
  * 使用方式：
  * ```ts
- * import { XlyLoading } from '@/components/xly-loading'
+ * import { EasyLoading } from '@/components/easy-loading'
  *
  * // 全屏加载
- * const loading = XlyLoading.open({ text: '加载中...' })
+ * const loading = EasyLoading.open({ text: '加载中...' })
  * loading.close()
  *
  * // 容器内加载
- * const loading = XlyLoading.open({
+ * const loading = EasyLoading.open({
  *   target: '.my-container',  // 或 document.querySelector('.my-container')
  *   text: '数据加载中...'
  * })
@@ -174,7 +174,7 @@ function createLoading(options: LoadingOptions = {}): LoadingInstance {
  * loading.setText('处理中...')
  * ```
  */
-export const XlyLoading = {
+export const EasyLoading = {
   /**
    * 打开 Loading
    * @param options 配置选项或文本字符串
@@ -238,22 +238,22 @@ export const XlyLoading = {
  * 安装全局 Loading
  * 在 main.ts 中调用：
  * ```ts
- * import { setupXlyLoading } from './install'
- * setupXlyLoading(app)
+ * import { setupEasyLoading } from './install'
+ * setupEasyLoading(app)
  * ```
  */
-export function setupXlyLoading(app: App) {
+export function setupEasyLoading(app: App) {
   // 挂载到全局属性
-  app.config.globalProperties.$loading = XlyLoading
+  app.config.globalProperties.$loading = EasyLoading
 
   // 提供注入
-  app.provide('__XLY_LOADING__', XlyLoading)
+  app.provide('__EASY_LOADING__', EasyLoading)
 
   // mixin 让模板中可以直接访问
   app.mixin({
     computed: {
       $loading() {
-        return XlyLoading
+        return EasyLoading
       },
     },
   })

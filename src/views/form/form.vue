@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {
   custom,
+  easy,
   EasyButton,
   EasyCascader,
   EasyDatePicker,
@@ -18,7 +19,6 @@ import {
   min,
   minLength,
   required,
-  xly,
 } from 'easy-ui'
 import { reactive, ref } from 'vue'
 
@@ -81,7 +81,7 @@ const departmentOptions = [
 async function submitFull() {
   const valid = await fullFormRef.value?.validate()
   if (valid)
-    xly.$msg.success('提交成功')
+    easy.$msg.success('提交成功')
 }
 
 function resetFull() {
@@ -115,7 +115,7 @@ const customRules = {
 async function submitCustom() {
   const valid = await customFormRef.value?.validate()
   if (valid)
-    xly.$msg.success('自定义校验通过')
+    easy.$msg.success('自定义校验通过')
 }
 
 // ========== 简化规则示例 ==========
@@ -138,7 +138,7 @@ const simpleRules = {
 async function submitSimple() {
   const valid = await simpleFormRef.value?.validate()
   if (valid)
-    xly.$msg.success('简化规则校验通过')
+    easy.$msg.success('简化规则校验通过')
 }
 
 function resetSimple() {
@@ -157,7 +157,7 @@ const simplestForm = reactive({
 async function submitSimplest() {
   const valid = await simplestFormRef.value?.validate()
   if (valid)
-    xly.$msg.success('校验通过')
+    easy.$msg.success('校验通过')
 }
 
 function resetSimplest() {

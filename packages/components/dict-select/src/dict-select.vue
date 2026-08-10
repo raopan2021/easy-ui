@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { SelectOption } from '../../select'
 import { computed, onMounted, ref, watch } from 'vue'
-import XlySelect from '../../select'
+import EasySelect from '../../select'
 
 defineOptions({ name: 'EasyDictSelect' })
 
@@ -182,8 +182,8 @@ onMounted(loadDict)
 watch(() => props.dictType, loadDict)
 
 // ============================================================
-// 将字典数据转换为 XlySelect 所需的 options 格式
-// 字段名映射由 XlySelect 的 valueKey / labelKey 控制
+// 将字典数据转换为 EasySelect 所需的 options 格式
+// 字段名映射由 EasySelect 的 valueKey / labelKey 控制
 // ============================================================
 const normalizedOptions = computed<SelectOption[]>(() => {
   return dictList.value.map((item) => {
@@ -199,7 +199,7 @@ const normalizedOptions = computed<SelectOption[]>(() => {
 })
 
 // ============================================================
-// valueType 映射：组件属性 valueFormat → XlySelect 的 valueType
+// valueType 映射：组件属性 valueFormat → EasySelect 的 valueType
 // ============================================================
 const valueType = computed(() => {
   if (!props.multiple)
@@ -239,7 +239,7 @@ defineExpose({ reload: loadDict, dictList })
 </script>
 
 <template>
-  <XlySelect
+  <EasySelect
     :model-value="modelValue"
     :options="normalizedOptions"
     :placeholder="placeholder"
@@ -254,7 +254,7 @@ defineExpose({ reload: loadDict, dictList })
     :label-key="labelField"
     :loading="loading"
     :max-tag-count="maxTagCount"
-    class="xly-dict-select"
+    class="easy-dict-select"
     v-bind="$attrs"
     @update:model-value="handleChange"
     @change="handleChange"
@@ -263,7 +263,7 @@ defineExpose({ reload: loadDict, dictList })
 </template>
 
 <style scoped lang="scss">
-.xly-dict-select {
+.easy-dict-select {
   width: 100%;
 }
 </style>

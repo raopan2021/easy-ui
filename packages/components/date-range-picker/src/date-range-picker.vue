@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import XlyDatePicker from '../../date-picker'
+import EasyDatePicker from '../../date-picker'
 
 export interface DateRangePickerProps {
   /** 开始日期值 */
@@ -64,10 +64,10 @@ function handleEndChange(value: string) {
 </script>
 
 <template>
-  <div class="xly-date-range-picker" :class="[`xly-date-range-picker--${size}`, { 'is-disabled': disabled }]">
+  <div class="easy-date-range-picker" :class="[`easy-date-range-picker--${size}`, { 'is-disabled': disabled }]">
     <!-- 开始日期选择器 -->
-    <div class="xly-date-range-picker__start">
-      <XlyDatePicker
+    <div class="easy-date-range-picker__start">
+      <EasyDatePicker
         :model-value="start"
         :placeholder="startPlaceholder || '开始日期'"
         :disabled="disabled"
@@ -81,11 +81,11 @@ function handleEndChange(value: string) {
     </div>
 
     <!-- 分隔符 -->
-    <span class="xly-date-range-picker__separator">{{ separator }}</span>
+    <span class="easy-date-range-picker__separator">{{ separator }}</span>
 
     <!-- 结束日期选择器 -->
-    <div class="xly-date-range-picker__end">
-      <XlyDatePicker
+    <div class="easy-date-range-picker__end">
+      <EasyDatePicker
         :model-value="end"
         :placeholder="endPlaceholder || '结束日期'"
         :disabled="disabled"
@@ -101,7 +101,7 @@ function handleEndChange(value: string) {
 </template>
 
 <style scoped lang="scss">
-.xly-date-range-picker {
+.easy-date-range-picker {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -112,51 +112,51 @@ function handleEndChange(value: string) {
     cursor: not-allowed;
   }
 
-  .xly-date-range-picker__separator {
+  .easy-date-range-picker__separator {
     color: var(--el-text-color-placeholder);
     font-size: 14px;
     flex-shrink: 0;
     user-select: none;
   }
 
-  .xly-date-range-picker__start,
-  .xly-date-range-picker__end {
+  .easy-date-range-picker__start,
+  .easy-date-range-picker__end {
     flex: 1;
     min-width: 0;
   }
 
   // 尺寸变体
-  &.xly-date-range-picker--large {
-    :deep(.xly-date-picker) {
-      .xly-date-picker__wrapper {
+  &.easy-date-range-picker--large {
+    :deep(.easy-date-picker) {
+      .easy-date-picker__wrapper {
         height: 40px;
         padding: 0 15px;
       }
-      .xly-date-picker__input {
+      .easy-date-picker__input {
         font-size: 14px;
       }
     }
   }
 
-  &.xly-date-range-picker--default {
-    :deep(.xly-date-picker) {
-      .xly-date-picker__wrapper {
+  &.easy-date-range-picker--default {
+    :deep(.easy-date-picker) {
+      .easy-date-picker__wrapper {
         height: 32px;
         padding: 0 12px;
       }
-      .xly-date-picker__input {
+      .easy-date-picker__input {
         font-size: 14px;
       }
     }
   }
 
-  &.xly-date-range-picker--small {
-    :deep(.xly-date-picker) {
-      .xly-date-picker__wrapper {
+  &.easy-date-range-picker--small {
+    :deep(.easy-date-picker) {
+      .easy-date-picker__wrapper {
         height: 28px;
         padding: 0 10px;
       }
-      .xly-date-picker__input {
+      .easy-date-picker__input {
         font-size: 13px;
       }
     }

@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { EasyButton, xly } from 'easy-ui'
+import { easy, EasyButton } from 'easy-ui'
 
 function handleSave() {
   setTimeout(() => {
-    xly.$msg.success('数据已成功保存', { title: '操作成功' })
+    easy.$msg.success('数据已成功保存', { title: '操作成功' })
   }, 500)
 }
 
 function handleDelete() {
-  xly.$msg.danger('删除失败，您没有操作权限', { title: '操作失败' })
+  easy.$msg.danger('删除失败，您没有操作权限', { title: '操作失败' })
 }
 
 function handleCopy() {
-  xly.$msg.text('内容已复制到剪贴板')
+  easy.$msg.text('内容已复制到剪贴板')
 }
 </script>
 
@@ -34,34 +34,34 @@ function handleCopy() {
         基础用法
       </h2>
       <p class="doc-section__desc">
-        通过统一入口 <code>xly.$msg</code> 调用消息提示。默认 3 秒后自动关闭。
+        通过统一入口 <code>easy.$msg</code> 调用消息提示。默认 3 秒后自动关闭。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyButton @click="xly.$msg.success('保存成功')">
+          <EasyButton @click="easy.$msg.success('保存成功')">
             成功消息
           </EasyButton>
-          <EasyButton @click="xly.$msg.warning('请注意，余额即将不足')">
+          <EasyButton @click="easy.$msg.warning('请注意，余额即将不足')">
             警告消息
           </EasyButton>
-          <EasyButton @click="xly.$msg.danger('操作失败，请重试')">
+          <EasyButton @click="easy.$msg.danger('操作失败，请重试')">
             错误消息
           </EasyButton>
-          <EasyButton @click="xly.$msg.info('您有一条新消息')">
+          <EasyButton @click="easy.$msg.info('您有一条新消息')">
             信息消息
           </EasyButton>
-          <EasyButton @click="xly.$msg.text('这是一条纯文本提示')">
+          <EasyButton @click="easy.$msg.text('这是一条纯文本提示')">
             纯文本
           </EasyButton>
         </div>
         <EasyDocCode
-          code="import { xly } from 'easy-ui'
+          code="import { easy } from 'easy-ui'
 
-xly.$msg.success('保存成功')
-xly.$msg.warning('请注意')
-xly.$msg.danger('操作失败')
-xly.$msg.info('新消息')
-xly.$msg.text('纯文本')"
+easy.$msg.success('保存成功')
+easy.$msg.warning('请注意')
+easy.$msg.danger('操作失败')
+easy.$msg.info('新消息')
+easy.$msg.text('纯文本')"
         />
       </div>
     </section>
@@ -76,16 +76,16 @@ xly.$msg.text('纯文本')"
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyButton @click="xly.$msg.success('数据已成功保存到数据库', { title: '操作成功' })">
+          <EasyButton @click="easy.$msg.success('数据已成功保存到数据库', { title: '操作成功' })">
             带标题成功
           </EasyButton>
-          <EasyButton @click="xly.$msg.danger('网络连接已断开，请检查网络设置', { title: '连接错误' })">
+          <EasyButton @click="easy.$msg.danger('网络连接已断开，请检查网络设置', { title: '连接错误' })">
             带标题错误
           </EasyButton>
         </div>
         <EasyDocCode
-          code="xly.$msg.success('数据已保存到数据库', { title: '操作成功' })
-xly.$msg.danger('网络连接已断开', { title: '连接错误' })"
+          code="easy.$msg.success('数据已保存到数据库', { title: '操作成功' })
+easy.$msg.danger('网络连接已断开', { title: '连接错误' })"
         />
       </div>
     </section>
@@ -100,28 +100,28 @@ xly.$msg.danger('网络连接已断开', { title: '连接错误' })"
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyButton @click="xly.$msg.info('顶部居中', { position: 'top' })">
+          <EasyButton @click="easy.$msg.info('顶部居中', { position: 'top' })">
             顶部居中
           </EasyButton>
-          <EasyButton @click="xly.$msg.info('左上角', { position: 'top-left' })">
+          <EasyButton @click="easy.$msg.info('左上角', { position: 'top-left' })">
             左上角
           </EasyButton>
-          <EasyButton @click="xly.$msg.info('右上角', { position: 'top-right' })">
+          <EasyButton @click="easy.$msg.info('右上角', { position: 'top-right' })">
             右上角
           </EasyButton>
-          <EasyButton @click="xly.$msg.info('底部居中', { position: 'bottom' })">
+          <EasyButton @click="easy.$msg.info('底部居中', { position: 'bottom' })">
             底部居中
           </EasyButton>
-          <EasyButton @click="xly.$msg.info('左下角', { position: 'bottom-left' })">
+          <EasyButton @click="easy.$msg.info('左下角', { position: 'bottom-left' })">
             左下角
           </EasyButton>
-          <EasyButton @click="xly.$msg.info('右下角', { position: 'bottom-right' })">
+          <EasyButton @click="easy.$msg.info('右下角', { position: 'bottom-right' })">
             右下角
           </EasyButton>
         </div>
         <EasyDocCode
-          code="xly.$msg.info('右上角提示', { position: 'top-right' })
-xly.$msg.success('左下角提示', { position: 'bottom-left' })"
+          code="easy.$msg.info('右上角提示', { position: 'top-right' })
+easy.$msg.success('左下角提示', { position: 'bottom-left' })"
         />
       </div>
     </section>
@@ -136,19 +136,19 @@ xly.$msg.success('左下角提示', { position: 'bottom-left' })"
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyButton @click="xly.$msg.success('保存成功，即将自动关闭', { showProgress: true, duration: 5000 })">
+          <EasyButton @click="easy.$msg.success('保存成功，即将自动关闭', { showProgress: true, duration: 5000 })">
             成功 + 进度条
           </EasyButton>
-          <EasyButton @click="xly.$msg.danger('错误信息，5秒后关闭', { showProgress: true, duration: 5000 })">
+          <EasyButton @click="easy.$msg.danger('错误信息，5秒后关闭', { showProgress: true, duration: 5000 })">
             错误 + 进度条
           </EasyButton>
-          <EasyButton @click="xly.$msg.info('提示信息', { showProgress: true, duration: 5000 })">
+          <EasyButton @click="easy.$msg.info('提示信息', { showProgress: true, duration: 5000 })">
             信息 + 进度条
           </EasyButton>
         </div>
         <EasyDocCode
-          code="xly.$msg.success('保存成功', { showProgress: true, duration: 5000 })
-xly.$msg.danger('操作失败', { showProgress: true, duration: 5000 })"
+          code="easy.$msg.success('保存成功', { showProgress: true, duration: 5000 })
+easy.$msg.danger('操作失败', { showProgress: true, duration: 5000 })"
         />
       </div>
     </section>
@@ -165,7 +165,7 @@ xly.$msg.danger('操作失败', { showProgress: true, duration: 5000 })"
         <div class="doc-preview__body">
           <EasyButton
             @click="
-              xly.$msg.info(
+              easy.$msg.info(
                 '这是一条较长的消息提示，鼠标悬停在此处会暂停关闭倒计时，移开后继续倒计时。适用于需要用户仔细阅读的场景。',
                 { duration: 5000, showProgress: true, title: '悬停暂停提示' },
               )
@@ -176,7 +176,7 @@ xly.$msg.danger('操作失败', { showProgress: true, duration: 5000 })"
         </div>
         <EasyDocCode
           code="// 鼠标悬停自动暂停，移开继续
-xly.$msg.info('这是一条较长的消息...', {
+easy.$msg.info('这是一条较长的消息...', {
   duration: 5000,
   showProgress: true,
   title: '悬停暂停提示'
@@ -195,19 +195,19 @@ xly.$msg.info('这是一条较长的消息...', {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyButton @click="xly.$msg.warning('系统正在升级中，请稍后操作', { duration: 0, title: '系统通知' })">
+          <EasyButton @click="easy.$msg.warning('系统正在升级中，请稍后操作', { duration: 0, title: '系统通知' })">
             持久消息
           </EasyButton>
-          <EasyButton @click="xly.$msg.closeAll()">
+          <EasyButton @click="easy.$msg.closeAll()">
             清除所有
           </EasyButton>
         </div>
         <EasyDocCode
           code="// duration 设为 0 不自动关闭
-xly.$msg.warning('系统正在升级中', { duration: 0, title: '系统通知' })
+easy.$msg.warning('系统正在升级中', { duration: 0, title: '系统通知' })
 
 // 手动清除所有
-xly.$msg.closeAll()"
+easy.$msg.closeAll()"
         />
       </div>
     </section>
@@ -235,16 +235,16 @@ xly.$msg.closeAll()"
         <EasyDocCode
           code="function handleSave() {
   setTimeout(() => {
-    xly.$msg.success('保存成功', { title: '操作成功' })
+    easy.$msg.success('保存成功', { title: '操作成功' })
   }, 500)
 }
 
 function handleDelete() {
-  xly.$msg.danger('删除失败，权限不足', { title: '操作失败' })
+  easy.$msg.danger('删除失败，权限不足', { title: '操作失败' })
 }
 
 function handleCopy() {
-  xly.$msg.text('内容已复制到剪贴板')
+  easy.$msg.text('内容已复制到剪贴板')
 }"
         />
       </div>
@@ -257,10 +257,10 @@ function handleCopy() {
       </h2>
 
       <h3 class="doc-subtitle">
-        xly.$msg
+        easy.$msg
       </h3>
       <p class="doc-section__desc" style="margin-bottom: 12px">
-        通过统一入口 <code>import { xly } from 'easy-ui'</code>， 在任意位置调用 <code>xly.$msg</code> 消息方法。
+        通过统一入口 <code>import { easy } from 'easy-ui'</code>， 在任意位置调用 <code>easy.$msg</code> 消息方法。
       </p>
 
       <h3 class="doc-subtitle">

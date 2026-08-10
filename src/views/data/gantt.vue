@@ -387,7 +387,7 @@ const clickedTask = ref(null)
 // 点击任务
 function handleTaskClick(task) {
   clickedTask.value = task
-  xly.$msg.success(`点击了任务: ${task.name}`)
+  easy.$msg.success(`点击了任务: ${task.name}`)
 }
 
 // 头像颜色数组
@@ -684,7 +684,7 @@ const tasks = [
 
 function handleTaskClick(task) {
   console.log('点击任务:', task)
-  xly.$msg.success(`点击了: ${task.name}`)
+  easy.$msg.success(`点击了: ${task.name}`)
 }"
         />
       </div>
@@ -1101,7 +1101,7 @@ function zoomOut() {
     min-height: 300px;
   }
 
-  :deep(.xly-gantt) {
+  :deep(.easy-gantt) {
     border: none;
   }
 }
@@ -1169,7 +1169,7 @@ function zoomOut() {
   height: 500px;
   overflow: hidden;
 
-  :deep(.xly-gantt) {
+  :deep(.easy-gantt) {
     height: 100%;
     border: none;
   }
@@ -1180,7 +1180,7 @@ function zoomOut() {
   height: 420px;
   overflow: hidden;
 
-  :deep(.xly-gantt) {
+  :deep(.easy-gantt) {
     height: 100%;
     border: none;
   }

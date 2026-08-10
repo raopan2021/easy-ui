@@ -417,23 +417,23 @@ function getFileIconComponent(url: string) {
 </script>
 
 <template>
-  <div class="xly-file-preview">
+  <div class="easy-file-preview">
     <!-- 文件列表 -->
-    <div class="xly-file-preview__list">
+    <div class="easy-file-preview__list">
       <div
         v-for="(file, index) in normalizedFiles"
         :key="index"
-        class="xly-file-preview__item"
+        class="easy-file-preview__item"
         @click="openPreview(file)"
       >
-        <div class="xly-file-preview__icon" :class="`xly-file-preview__icon--${getFileType(file.url)}`">
+        <div class="easy-file-preview__icon" :class="`easy-file-preview__icon--${getFileType(file.url)}`">
           <component :is="getFileIcon(file.url)" />
         </div>
-        <div class="xly-file-preview__info">
-          <span class="xly-file-preview__name" :title="file.name">{{ file.name }}</span>
-          <span v-if="file.size" class="xly-file-preview__size">{{ formatSize(file.size) }}</span>
+        <div class="easy-file-preview__info">
+          <span class="easy-file-preview__name" :title="file.name">{{ file.name }}</span>
+          <span v-if="file.size" class="easy-file-preview__size">{{ formatSize(file.size) }}</span>
         </div>
-        <button class="xly-file-preview__btn" title="预览">
+        <button class="easy-file-preview__btn" title="预览">
           <svg
             viewBox="0 0 24 24"
             width="16"
@@ -449,7 +449,7 @@ function getFileIconComponent(url: string) {
           </svg>
         </button>
       </div>
-      <div v-if="normalizedFiles.length === 0" class="xly-file-preview__empty">
+      <div v-if="normalizedFiles.length === 0" class="easy-file-preview__empty">
         <svg
           viewBox="0 0 24 24"
           width="32"
@@ -468,24 +468,24 @@ function getFileIconComponent(url: string) {
 
     <!-- 预览弹窗 -->
     <Teleport to="body">
-      <Transition name="xly-fp-fade">
-        <div v-if="visible" class="xly-fp-mask" @click.self="closePreview">
-          <Transition name="xly-fp-zoom" appear>
-            <div v-if="visible" class="xly-fp-dialog">
+      <Transition name="easy-fp-fade">
+        <div v-if="visible" class="easy-fp-mask" @click.self="closePreview">
+          <Transition name="easy-fp-zoom" appear>
+            <div v-if="visible" class="easy-fp-dialog">
               <!-- 头部 -->
-              <div class="xly-fp-header">
-                <div class="xly-fp-header__left">
-                  <div class="xly-fp-header__icon" :class="`xly-fp-header__icon--${currentType}`">
+              <div class="easy-fp-header">
+                <div class="easy-fp-header__left">
+                  <div class="easy-fp-header__icon" :class="`easy-fp-header__icon--${currentType}`">
                     <component :is="currentIcon" />
                   </div>
-                  <div class="xly-fp-header__info">
-                    <span class="xly-fp-header__name" :title="currentFile?.name">{{ currentFile?.name }}</span>
-                    <span v-if="currentFile?.size" class="xly-fp-header__size">{{ formatSize(currentFile.size) }}</span>
+                  <div class="easy-fp-header__info">
+                    <span class="easy-fp-header__name" :title="currentFile?.name">{{ currentFile?.name }}</span>
+                    <span v-if="currentFile?.size" class="easy-fp-header__size">{{ formatSize(currentFile.size) }}</span>
                   </div>
                 </div>
-                <div class="xly-fp-header__actions">
-                  <div v-if="normalizedFiles.length > 1" class="xly-fp-nav">
-                    <button class="xly-fp-nav__btn" :disabled="currentIndex <= 0" title="上一个" @click="navigate(-1)">
+                <div class="easy-fp-header__actions">
+                  <div v-if="normalizedFiles.length > 1" class="easy-fp-nav">
+                    <button class="easy-fp-nav__btn" :disabled="currentIndex <= 0" title="上一个" @click="navigate(-1)">
                       <svg
                         viewBox="0 0 24 24"
                         width="16"
@@ -498,9 +498,9 @@ function getFileIconComponent(url: string) {
                         <polyline points="15 18 9 12 15 6" />
                       </svg>
                     </button>
-                    <span class="xly-fp-nav__text">{{ currentIndex + 1 }} / {{ normalizedFiles.length }}</span>
+                    <span class="easy-fp-nav__text">{{ currentIndex + 1 }} / {{ normalizedFiles.length }}</span>
                     <button
-                      class="xly-fp-nav__btn"
+                      class="easy-fp-nav__btn"
                       :disabled="currentIndex >= normalizedFiles.length - 1"
                       title="下一个"
                       @click="navigate(1)"
@@ -518,7 +518,7 @@ function getFileIconComponent(url: string) {
                       </svg>
                     </button>
                   </div>
-                  <a class="xly-fp-action-btn" :href="currentFile?.url" :download="currentFile?.name" title="下载">
+                  <a class="easy-fp-action-btn" :href="currentFile?.url" :download="currentFile?.name" title="下载">
                     <svg
                       viewBox="0 0 24 24"
                       width="16"
@@ -533,7 +533,7 @@ function getFileIconComponent(url: string) {
                       <line x1="12" y1="15" x2="12" y2="3" />
                     </svg>
                   </a>
-                  <a class="xly-fp-action-btn" :href="currentFile?.url" target="_blank" title="在新标签页打开">
+                  <a class="easy-fp-action-btn" :href="currentFile?.url" target="_blank" title="在新标签页打开">
                     <svg
                       viewBox="0 0 24 24"
                       width="16"
@@ -548,7 +548,7 @@ function getFileIconComponent(url: string) {
                       <line x1="10" y1="14" x2="21" y2="3" />
                     </svg>
                   </a>
-                  <button class="xly-fp-action-btn xly-fp-close" title="关闭" @click="closePreview">
+                  <button class="easy-fp-action-btn easy-fp-close" title="关闭" @click="closePreview">
                     <svg
                       viewBox="0 0 24 24"
                       width="16"
@@ -566,23 +566,23 @@ function getFileIconComponent(url: string) {
               </div>
 
               <!-- 内容区 -->
-              <div class="xly-fp-body">
+              <div class="easy-fp-body">
                 <!-- Loading 遮罩 -->
-                <div v-if="loading" class="xly-fp-loading">
-                  <div class="xly-fp-loading__spinner" />
+                <div v-if="loading" class="easy-fp-loading">
+                  <div class="easy-fp-loading__spinner" />
                   <span>{{ loadingText }}</span>
                 </div>
 
                 <!-- PDF（vue-office/pdf） -->
                 <template v-if="currentType === 'pdf' && officeSrc">
-                  <VueOfficePdf :src="officeSrc" class="xly-fp-office-viewer" @rendered="onRendered" @error="onError" />
+                  <VueOfficePdf :src="officeSrc" class="easy-fp-office-viewer" @rendered="onRendered" @error="onError" />
                 </template>
 
                 <!-- Word（vue-office/docx） -->
                 <template v-else-if="currentType === 'word' && !officeError">
                   <VueOfficeDocx
                     :src="officeSrc"
-                    class="xly-fp-office-viewer"
+                    class="easy-fp-office-viewer"
                     @rendered="onRendered"
                     @error="onError"
                   />
@@ -592,7 +592,7 @@ function getFileIconComponent(url: string) {
                 <template v-else-if="currentType === 'excel' && !officeError">
                   <VueOfficeExcel
                     :src="officeSrc"
-                    class="xly-fp-office-viewer"
+                    class="easy-fp-office-viewer"
                     @rendered="onRendered"
                     @error="onError"
                   />
@@ -600,18 +600,18 @@ function getFileIconComponent(url: string) {
 
                 <!-- Office 错误提示 -->
                 <template v-else-if="officeError && ['pdf', 'word', 'excel'].includes(currentType)">
-                  <div class="xly-fp-unsupported">
-                    <div class="xly-fp-unsupported__icon" :class="`xly-fp-unsupported__icon--${currentType}`">
+                  <div class="easy-fp-unsupported">
+                    <div class="easy-fp-unsupported__icon" :class="`easy-fp-unsupported__icon--${currentType}`">
                       <component :is="currentIcon" />
                     </div>
-                    <h3 class="xly-fp-unsupported__title">
+                    <h3 class="easy-fp-unsupported__title">
                       无法预览此文件
                     </h3>
-                    <p class="xly-fp-unsupported__desc">
+                    <p class="easy-fp-unsupported__desc">
                       {{ officeError }}
                     </p>
-                    <div class="xly-fp-unsupported__actions">
-                      <a class="xly-fp-btn xly-fp-btn--primary" :href="currentFile?.url" :download="currentFile?.name">
+                    <div class="easy-fp-unsupported__actions">
+                      <a class="easy-fp-btn easy-fp-btn--primary" :href="currentFile?.url" :download="currentFile?.name">
                         <svg
                           viewBox="0 0 24 24"
                           width="14"
@@ -635,23 +635,23 @@ function getFileIconComponent(url: string) {
                 <div
                   v-else-if="currentType === 'ppt' && !officeError"
                   ref="pptContainerRef"
-                  class="xly-fp-ppt-container"
+                  class="easy-fp-ppt-container"
                 />
 
                 <!-- PPT 错误提示 -->
                 <template v-else-if="currentType === 'ppt' && officeError">
-                  <div class="xly-fp-unsupported">
-                    <div class="xly-fp-unsupported__icon xly-fp-unsupported__icon--ppt">
+                  <div class="easy-fp-unsupported">
+                    <div class="easy-fp-unsupported__icon easy-fp-unsupported__icon--ppt">
                       <component :is="currentIcon" />
                     </div>
-                    <h3 class="xly-fp-unsupported__title">
+                    <h3 class="easy-fp-unsupported__title">
                       无法预览此文件
                     </h3>
-                    <p class="xly-fp-unsupported__desc">
+                    <p class="easy-fp-unsupported__desc">
                       {{ officeError }}
                     </p>
-                    <div class="xly-fp-unsupported__actions">
-                      <a class="xly-fp-btn xly-fp-btn--primary" :href="currentFile?.url" :download="currentFile?.name">
+                    <div class="easy-fp-unsupported__actions">
+                      <a class="easy-fp-btn easy-fp-btn--primary" :href="currentFile?.url" :download="currentFile?.name">
                         <svg
                           viewBox="0 0 24 24"
                           width="14"
@@ -673,31 +673,31 @@ function getFileIconComponent(url: string) {
 
                 <!-- 图片 -->
                 <template v-else-if="currentType === 'image'">
-                  <div class="xly-fp-image-wrap">
-                    <img :src="currentFile?.url" :alt="currentFile?.name" class="xly-fp-image">
+                  <div class="easy-fp-image-wrap">
+                    <img :src="currentFile?.url" :alt="currentFile?.name" class="easy-fp-image">
                   </div>
                 </template>
 
                 <!-- 视频 -->
                 <template v-else-if="currentType === 'video'">
-                  <div class="xly-fp-video-wrap">
-                    <video :src="currentFile?.url" controls class="xly-fp-video" />
+                  <div class="easy-fp-video-wrap">
+                    <video :src="currentFile?.url" controls class="easy-fp-video" />
                   </div>
                 </template>
 
                 <!-- 不支持的文件类型 -->
                 <template v-else-if="currentType === 'file'">
-                  <div class="xly-fp-unsupported">
-                    <div class="xly-fp-unsupported__icon xly-fp-unsupported__icon--file">
+                  <div class="easy-fp-unsupported">
+                    <div class="easy-fp-unsupported__icon easy-fp-unsupported__icon--file">
                       <FileIcon />
                     </div>
-                    <h3 class="xly-fp-unsupported__title">
+                    <h3 class="easy-fp-unsupported__title">
                       暂不支持此格式预览
                     </h3>
-                    <p class="xly-fp-unsupported__desc">
+                    <p class="easy-fp-unsupported__desc">
                       文件类型：<code>{{ getExt(currentFile?.url ?? '') }}</code>
                     </p>
-                    <a class="xly-fp-btn xly-fp-btn--primary" :href="currentFile?.url" :download="currentFile?.name">
+                    <a class="easy-fp-btn easy-fp-btn--primary" :href="currentFile?.url" :download="currentFile?.name">
                       <svg
                         viewBox="0 0 24 24"
                         width="14"
@@ -733,25 +733,25 @@ $shadow:
 $transition: 0.2s ease;
 
 @mixin tc($t, $c) {
-  .xly-file-preview__icon--#{$t},
-  .xly-fp-header__icon--#{$t},
-  .xly-fp-unsupported__icon--#{$t} {
+  .easy-file-preview__icon--#{$t},
+  .easy-fp-header__icon--#{$t},
+  .easy-fp-unsupported__icon--#{$t} {
     color: $c;
     background-color: rgba($c, 0.1);
   }
 }
 
-.xly-file-preview {
+.easy-file-preview {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-.xly-file-preview__list {
+.easy-file-preview__list {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
-.xly-file-preview__item {
+.easy-file-preview__item {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -766,13 +766,13 @@ $transition: 0.2s ease;
     background: var(--el-fill-color-light);
     border-color: rgba(var(--el-color-primary), 0.3);
     box-shadow: 0 2px 8px rgba(var(--el-color-primary), 0.08);
-    .xly-file-preview__btn {
+    .easy-file-preview__btn {
       opacity: 1;
       color: var(--el-color-primary);
     }
   }
 }
-.xly-file-preview__icon {
+.easy-file-preview__icon {
   flex-shrink: 0;
   width: 36px;
   height: 36px;
@@ -794,14 +794,14 @@ $transition: 0.2s ease;
   @include tc(video, $file-video);
   @include tc(file, $file-other);
 }
-.xly-file-preview__info {
+.easy-file-preview__info {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
-.xly-file-preview__name {
+.easy-file-preview__name {
   font-size: 13px;
   font-weight: 500;
   color: var(--el-text-color-primary);
@@ -809,11 +809,11 @@ $transition: 0.2s ease;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.xly-file-preview__size {
+.easy-file-preview__size {
   font-size: 12px;
   color: var(--el-text-color-placeholder);
 }
-.xly-file-preview__btn {
+.easy-file-preview__btn {
   flex-shrink: 0;
   width: 28px;
   height: 28px;
@@ -831,7 +831,7 @@ $transition: 0.2s ease;
     background: rgba(var(--el-color-primary), 0.08);
   }
 }
-.xly-file-preview__empty {
+.easy-file-preview__empty {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -844,7 +844,7 @@ $transition: 0.2s ease;
   }
 }
 
-.xly-fp-mask {
+.easy-fp-mask {
   position: fixed;
   inset: 0;
   z-index: 2100;
@@ -855,7 +855,7 @@ $transition: 0.2s ease;
   padding: 20px;
   backdrop-filter: blur(2px);
 }
-.xly-fp-dialog {
+.easy-fp-dialog {
   width: min(92vw, 1100px);
   height: min(90vh, 800px);
   background: var(--el-bg-color);
@@ -866,7 +866,7 @@ $transition: 0.2s ease;
   overflow: hidden;
   position: relative;
 }
-.xly-fp-header {
+.easy-fp-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -876,14 +876,14 @@ $transition: 0.2s ease;
   gap: 12px;
   z-index: 10;
 }
-.xly-fp-header__left {
+.easy-fp-header__left {
   display: flex;
   align-items: center;
   gap: 10px;
   min-width: 0;
   flex: 1;
 }
-.xly-fp-header__icon {
+.easy-fp-header__icon {
   flex-shrink: 0;
   width: 36px;
   height: 36px;
@@ -905,13 +905,13 @@ $transition: 0.2s ease;
   @include tc(video, $file-video);
   @include tc(file, $file-other);
 }
-.xly-fp-header__info {
+.easy-fp-header__info {
   min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
-.xly-fp-header__name {
+.easy-fp-header__name {
   font-size: 14px;
   font-weight: 600;
   color: var(--el-text-color-primary);
@@ -920,17 +920,17 @@ $transition: 0.2s ease;
   white-space: nowrap;
   max-width: 500px;
 }
-.xly-fp-header__size {
+.easy-fp-header__size {
   font-size: 12px;
   color: var(--el-text-color-placeholder);
 }
-.xly-fp-header__actions {
+.easy-fp-header__actions {
   display: flex;
   align-items: center;
   gap: 4px;
   flex-shrink: 0;
 }
-.xly-fp-nav {
+.easy-fp-nav {
   display: flex;
   align-items: center;
   gap: 2px;
@@ -938,7 +938,7 @@ $transition: 0.2s ease;
   padding: 0 4px;
   border-right: 1px solid var(--el-border-color);
 }
-.xly-fp-nav__btn {
+.easy-fp-nav__btn {
   width: 28px;
   height: 28px;
   display: flex;
@@ -959,13 +959,13 @@ $transition: 0.2s ease;
     cursor: not-allowed;
   }
 }
-.xly-fp-nav__text {
+.easy-fp-nav__text {
   font-size: 12px;
   color: var(--el-text-color-placeholder);
   padding: 0 6px;
   white-space: nowrap;
 }
-.xly-fp-action-btn {
+.easy-fp-action-btn {
   width: 32px;
   height: 32px;
   display: inline-flex;
@@ -983,23 +983,23 @@ $transition: 0.2s ease;
     color: var(--el-color-primary);
   }
 }
-.xly-fp-close:hover {
+.easy-fp-close:hover {
   background: var(--el-color-danger-light-9) !important;
   color: var(--el-color-danger) !important;
 }
 
-.xly-fp-body {
+.easy-fp-body {
   flex: 1;
   position: relative;
   overflow: hidden;
   background: var(--el-fill-color-lighter);
 }
-.xly-fp-office-viewer {
+.easy-fp-office-viewer {
   width: 100%;
   height: 100%;
   overflow: auto;
 }
-.xly-fp-ppt-container {
+.easy-fp-ppt-container {
   position: absolute;
   inset: 0;
   overflow: auto;
@@ -1008,7 +1008,7 @@ $transition: 0.2s ease;
 }
 
 // vue-office/docx 样式覆盖
-.xly-fp-office-viewer :deep(.docx-wrapper) {
+.easy-fp-office-viewer :deep(.docx-wrapper) {
   background: var(--el-fill-color) !important;
   padding: 20px 0 !important;
   & > section.docx {
@@ -1018,12 +1018,12 @@ $transition: 0.2s ease;
 }
 
 // vue-office/excel 样式覆盖
-.xly-fp-office-viewer :deep(.excel-container) {
+.easy-fp-office-viewer :deep(.excel-container) {
   width: 100% !important;
   height: 100% !important;
 }
 
-.xly-fp-loading {
+.easy-fp-loading {
   position: absolute;
   inset: 0;
   display: flex;
@@ -1036,7 +1036,7 @@ $transition: 0.2s ease;
   background: rgba(248, 250, 252, 0.92);
   z-index: 10;
 }
-.xly-fp-loading__spinner {
+.easy-fp-loading__spinner {
   width: 32px;
   height: 32px;
   border: 3px solid var(--el-border-color);
@@ -1050,7 +1050,7 @@ $transition: 0.2s ease;
   }
 }
 
-.xly-fp-image-wrap {
+.easy-fp-image-wrap {
   width: 100%;
   height: 100%;
   display: flex;
@@ -1059,14 +1059,14 @@ $transition: 0.2s ease;
   padding: 20px;
   background: repeating-conic-gradient(#e2e8f0 0% 25%, transparent 0% 50%) 0 0 / 16px 16px;
 }
-.xly-fp-image {
+.easy-fp-image {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
   border-radius: 4px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
 }
-.xly-fp-video-wrap {
+.easy-fp-video-wrap {
   width: 100%;
   height: 100%;
   display: flex;
@@ -1074,12 +1074,12 @@ $transition: 0.2s ease;
   justify-content: center;
   background: #000;
 }
-.xly-fp-video {
+.easy-fp-video {
   max-width: 100%;
   max-height: 100%;
 }
 
-.xly-fp-unsupported {
+.easy-fp-unsupported {
   position: absolute;
   inset: 0;
   display: flex;
@@ -1090,7 +1090,7 @@ $transition: 0.2s ease;
   padding: 40px;
   text-align: center;
 }
-.xly-fp-unsupported__icon {
+.easy-fp-unsupported__icon {
   width: 72px;
   height: 72px;
   border-radius: 16px;
@@ -1111,13 +1111,13 @@ $transition: 0.2s ease;
   @include tc(video, $file-video);
   @include tc(file, $file-other);
 }
-.xly-fp-unsupported__title {
+.easy-fp-unsupported__title {
   font-size: 16px;
   font-weight: 600;
   color: var(--el-text-color-primary);
   margin: 0;
 }
-.xly-fp-unsupported__desc {
+.easy-fp-unsupported__desc {
   font-size: 13px;
   color: var(--el-text-color-placeholder);
   line-height: 1.6;
@@ -1130,12 +1130,12 @@ $transition: 0.2s ease;
     color: var(--el-text-color-secondary);
   }
 }
-.xly-fp-unsupported__actions {
+.easy-fp-unsupported__actions {
   display: flex;
   gap: 8px;
   margin-top: 4px;
 }
-.xly-fp-btn {
+.easy-fp-btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -1153,7 +1153,7 @@ $transition: 0.2s ease;
     border-color: rgba(var(--el-color-primary), 0.4);
     color: var(--el-color-primary);
   }
-  &.xly-fp-btn--primary {
+  &.easy-fp-btn--primary {
     background: var(--el-color-primary);
     border-color: var(--el-color-primary);
     color: #fff;
@@ -1164,27 +1164,27 @@ $transition: 0.2s ease;
   }
 }
 
-.xly-fp-fade-enter-active {
+.easy-fp-fade-enter-active {
   transition: opacity 0.25s ease;
 }
-.xly-fp-fade-leave-active {
+.easy-fp-fade-leave-active {
   transition: opacity 0.2s ease;
 }
-.xly-fp-fade-enter-from,
-.xly-fp-fade-leave-to {
+.easy-fp-fade-enter-from,
+.easy-fp-fade-leave-to {
   opacity: 0;
 }
-.xly-fp-zoom-enter-active {
+.easy-fp-zoom-enter-active {
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.xly-fp-zoom-leave-active {
+.easy-fp-zoom-leave-active {
   transition: all 0.2s ease;
 }
-.xly-fp-zoom-enter-from {
+.easy-fp-zoom-enter-from {
   opacity: 0;
   transform: scale(0.88) translateY(12px);
 }
-.xly-fp-zoom-leave-to {
+.easy-fp-zoom-leave-to {
   opacity: 0;
   transform: scale(0.95);
 }

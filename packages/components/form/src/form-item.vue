@@ -34,7 +34,7 @@ const formContext = inject<{
   registerField: (prop: string, rules: Rule[]) => void
   unregisterField: (prop: string) => void
   getMergedRules?: () => Record<string, Rule[]>
-} | null>('xlyFormContext', null)
+} | null>('easyFormContext', null)
 
 // 处理 required 属性，将其转换为规则
 const effectiveRules = computed<Rule[]>(() => {
@@ -179,8 +179,8 @@ async function validateField(trigger?: 'change' | 'blur'): Promise<boolean> {
   return !error
 }
 
-// 向子组件（如 XlyInput）提供校验入口
-provide<FormItemContext>('xlyFormItemContext', {
+// 向子组件（如 EasyInput）提供校验入口
+provide<FormItemContext>('easyFormItemContext', {
   validateField,
   prop: props.prop,
 })
@@ -188,7 +188,7 @@ provide<FormItemContext>('xlyFormItemContext', {
 
 <template>
   <div
-    class="xly-form-item"
+    class="easy-form-item"
     :class="{
       'is-error': !!errorMessage,
       'is-required': isRequired,
@@ -197,19 +197,19 @@ provide<FormItemContext>('xlyFormItemContext', {
     }"
     :style="itemStyle"
   >
-    <label v-if="label" class="xly-form-item__label" :style="{ width: labelWidth || undefined }">
-      <span class="xly-form-item__label-text">{{ label }}</span>
+    <label v-if="label" class="easy-form-item__label" :style="{ width: labelWidth || undefined }">
+      <span class="easy-form-item__label-text">{{ label }}</span>
     </label>
-    <div class="xly-form-item__content">
-      <div class="xly-form-item__control">
+    <div class="easy-form-item__content">
+      <div class="easy-form-item__control">
         <slot />
       </div>
-      <Transition name="xly-form-error-fade">
-        <div v-if="errorMessage" class="xly-form-item__error">
+      <Transition name="easy-form-error-fade">
+        <div v-if="errorMessage" class="easy-form-item__error">
           {{ errorMessage }}
         </div>
       </Transition>
-      <div v-if="$slots.tip && !errorMessage" class="xly-form-item__tip">
+      <div v-if="$slots.tip && !errorMessage" class="easy-form-item__tip">
         <slot name="tip" />
       </div>
     </div>
@@ -219,7 +219,7 @@ provide<FormItemContext>('xlyFormItemContext', {
 <style scoped lang="scss">
 $transition: all 0.2s ease;
 
-.xly-form-item {
+.easy-form-item {
   display: flex;
   align-items: flex-start;
   width: 100%;
@@ -230,7 +230,7 @@ $transition: all 0.2s ease;
   &.is-label-top {
     flex-direction: column;
 
-    .xly-form-item__label {
+    .easy-form-item__label {
       width: 100% !important;
       padding-top: 0;
       padding-bottom: 8px;
@@ -238,12 +238,12 @@ $transition: all 0.2s ease;
       text-align: left;
     }
 
-    .xly-form-item__content {
+    .easy-form-item__content {
       width: 100%;
     }
 
     // 无 label 时，补上 label 占位高度，使控件与其他有 label 的表单项对齐
-    &.is-no-label .xly-form-item__content {
+    &.is-no-label .easy-form-item__content {
       padding-top: calc(14px * 1.4 + 8px);
     }
   }
@@ -260,7 +260,7 @@ $transition: all 0.2s ease;
   }
 
   &.is-required {
-    .xly-form-item__label-text::before {
+    .easy-form-item__label-text::before {
       content: '*';
       color: var(--el-color-danger);
       margin-right: 4px;
@@ -268,7 +268,7 @@ $transition: all 0.2s ease;
   }
 }
 
-.xly-form-item__label {
+.easy-form-item__label {
   flex-shrink: 0;
   padding-top: 6px;
   text-align: right;
@@ -276,14 +276,14 @@ $transition: all 0.2s ease;
   box-sizing: border-box;
 }
 
-.xly-form-item__label-text {
+.easy-form-item__label-text {
   font-size: 14px;
   color: var(--el-text-color-primary);
   font-weight: 500;
   line-height: 1.4;
 }
 
-.xly-form-item__content {
+.easy-form-item__content {
   flex: 1;
   min-width: 0;
   position: relative;
@@ -293,11 +293,11 @@ $transition: all 0.2s ease;
   min-height: 36px;
 }
 
-.xly-form-item__control {
+.easy-form-item__control {
   width: 100%;
 }
 
-.xly-form-item__error {
+.easy-form-item__error {
   font-size: 12px;
   color: var(--el-color-danger);
   line-height: 1.4;
@@ -309,32 +309,32 @@ $transition: all 0.2s ease;
   z-index: 1;
 }
 
-.xly-form-item__tip {
+.easy-form-item__tip {
   font-size: 12px;
   color: var(--el-text-color-placeholder);
   line-height: 1.4;
   margin-top: 4px;
 }
 
-.xly-form-error-fade-enter-active,
-.xly-form-error-fade-leave-active {
+.easy-form-error-fade-enter-active,
+.easy-form-error-fade-leave-active {
   transition: opacity 0.2s ease;
 }
-.xly-form-error-fade-enter-from,
-.xly-form-error-fade-leave-to {
+.easy-form-error-fade-enter-from,
+.easy-form-error-fade-leave-to {
   opacity: 0;
 }
 </style>
 
 <style lang="scss">
 /* ========== Dark Mode ========== */
-html.dark .xly-form-item__label {
+html.dark .easy-form-item__label {
   color: var(--el-text-color-regular);
 }
-html.dark .xly-form-item .label-desc {
+html.dark .easy-form-item .label-desc {
   color: var(--el-text-color-placeholder);
 }
-html.dark .is-required .xly-form-item__label::before {
+html.dark .is-required .easy-form-item__label::before {
   color: var(--el-color-danger);
 }
 </style>

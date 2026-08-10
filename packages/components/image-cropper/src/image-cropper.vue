@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Cropper from 'cropperjs'
 import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import XlyButton from '../../button'
+import EasyButton from '../../button'
 import 'cropperjs/dist/cropper.css'
 
 defineOptions({ name: 'EasyImageCropper' })
@@ -116,7 +116,7 @@ function initCropper(): void {
 
 /** 图片加载失败 */
 function onImgError() {
-  console.error('[XlyImageCropper] 图片加载失败:', props.src)
+  console.error('[EasyImageCropper] 图片加载失败:', props.src)
 }
 
 /** 销毁裁剪器 */
@@ -330,12 +330,12 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="xly-image-cropper">
+  <div class="easy-image-cropper">
     <!-- 工具栏 -->
-    <div v-if="toolbar" class="xly-image-cropper__toolbar">
-      <div class="xly-image-cropper__group">
+    <div v-if="toolbar" class="easy-image-cropper__toolbar">
+      <div class="easy-image-cropper__group">
         <el-tooltip content="左旋转90°" placement="top">
-          <button class="xly-image-cropper__btn" @click="onRotate(-90)">
+          <button class="easy-image-cropper__btn" @click="onRotate(-90)">
             <svg
               width="18"
               height="18"
@@ -352,7 +352,7 @@ onBeforeUnmount(() => {
           </button>
         </el-tooltip>
         <el-tooltip content="右旋转90°" placement="top">
-          <button class="xly-image-cropper__btn" @click="onRotate(90)">
+          <button class="easy-image-cropper__btn" @click="onRotate(90)">
             <svg
               width="18"
               height="18"
@@ -369,10 +369,10 @@ onBeforeUnmount(() => {
           </button>
         </el-tooltip>
       </div>
-      <div class="xly-image-cropper__sep" />
-      <div class="xly-image-cropper__group">
+      <div class="easy-image-cropper__sep" />
+      <div class="easy-image-cropper__group">
         <el-tooltip content="左右翻转" placement="top">
-          <button class="xly-image-cropper__btn" @click="onScaleX">
+          <button class="easy-image-cropper__btn" @click="onScaleX">
             <svg
               width="18"
               height="18"
@@ -391,7 +391,7 @@ onBeforeUnmount(() => {
           </button>
         </el-tooltip>
         <el-tooltip content="上下翻转" placement="top">
-          <button class="xly-image-cropper__btn" @click="onScaleY">
+          <button class="easy-image-cropper__btn" @click="onScaleY">
             <svg
               width="18"
               height="18"
@@ -410,10 +410,10 @@ onBeforeUnmount(() => {
           </button>
         </el-tooltip>
       </div>
-      <div class="xly-image-cropper__sep" />
-      <div class="xly-image-cropper__group">
+      <div class="easy-image-cropper__sep" />
+      <div class="easy-image-cropper__group">
         <el-tooltip content="放大" placement="top">
-          <button class="xly-image-cropper__btn" @click="onZoom(0.1)">
+          <button class="easy-image-cropper__btn" @click="onZoom(0.1)">
             <svg
               width="18"
               height="18"
@@ -431,7 +431,7 @@ onBeforeUnmount(() => {
           </button>
         </el-tooltip>
         <el-tooltip content="缩小" placement="top">
-          <button class="xly-image-cropper__btn" @click="onZoom(-0.1)">
+          <button class="easy-image-cropper__btn" @click="onZoom(-0.1)">
             <svg
               width="18"
               height="18"
@@ -449,10 +449,10 @@ onBeforeUnmount(() => {
           </button>
         </el-tooltip>
       </div>
-      <div class="xly-image-cropper__sep" />
-      <div class="xly-image-cropper__group">
+      <div class="easy-image-cropper__sep" />
+      <div class="easy-image-cropper__group">
         <el-tooltip content="重置" placement="top">
-          <button class="xly-image-cropper__btn xly-image-cropper__btn--reset" @click="onReset">
+          <button class="easy-image-cropper__btn easy-image-cropper__btn--reset" @click="onReset">
             <svg
               width="18"
               height="18"
@@ -473,17 +473,17 @@ onBeforeUnmount(() => {
     </div>
 
     <!-- 裁剪区域 -->
-    <div class="xly-image-cropper__view">
+    <div class="easy-image-cropper__view">
       <img
         v-if="src"
         ref="imgRef"
-        class="xly-image-cropper__img"
+        class="easy-image-cropper__img"
         :src="src"
         :alt="alt"
         style="display: block; max-width: 100%"
         @error="onImgError"
       >
-      <div v-else class="xly-image-cropper__placeholder">
+      <div v-else class="easy-image-cropper__placeholder">
         <svg width="48" height="48" viewBox="0 0 48 48" fill="#ccc">
           <rect x="6" y="10" width="36" height="28" rx="2" stroke="#ccc" stroke-width="2" fill="none" />
           <circle cx="16" cy="20" r="4" stroke="#ccc" stroke-width="2" fill="none" />
@@ -494,21 +494,21 @@ onBeforeUnmount(() => {
     </div>
 
     <!-- 操作按钮 -->
-    <div v-if="$slots.action || showAction" class="xly-image-cropper__action">
+    <div v-if="$slots.action || showAction" class="easy-image-cropper__action">
       <slot name="action">
-        <XlyButton @click="handleCancel">
+        <EasyButton @click="handleCancel">
           取消
-        </XlyButton>
-        <XlyButton type="primary" @click="handleConfirm">
+        </EasyButton>
+        <EasyButton type="primary" @click="handleConfirm">
           确认裁剪
-        </XlyButton>
+        </EasyButton>
       </slot>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.xly-image-cropper {
+.easy-image-cropper {
   display: flex;
   flex-direction: column;
   background: var(--el-bg-color);
@@ -516,7 +516,7 @@ onBeforeUnmount(() => {
   overflow: hidden;
   border: 1px solid #e0e0e0;
 
-  .xly-image-cropper__toolbar {
+  .easy-image-cropper__toolbar {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -526,13 +526,13 @@ onBeforeUnmount(() => {
     flex-shrink: 0;
   }
 
-  .xly-image-cropper__group {
+  .easy-image-cropper__group {
     display: flex;
     align-items: center;
     gap: 4px;
   }
 
-  .xly-image-cropper__sep {
+  .easy-image-cropper__sep {
     width: 1px;
     height: 28px;
     background: var(--el-border-color-lighter);
@@ -540,7 +540,7 @@ onBeforeUnmount(() => {
     flex-shrink: 0;
   }
 
-  .xly-image-cropper__btn {
+  .easy-image-cropper__btn {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -574,7 +574,7 @@ onBeforeUnmount(() => {
       transform: scale(0.95);
     }
 
-    &.xly-image-cropper__btn--reset {
+    &.easy-image-cropper__btn--reset {
       color: var(--el-text-color-placeholder);
 
       svg {
@@ -593,7 +593,7 @@ onBeforeUnmount(() => {
     }
   }
 
-  .xly-image-cropper__view {
+  .easy-image-cropper__view {
     position: relative;
     width: 100%;
     height: 400px;
@@ -626,7 +626,7 @@ onBeforeUnmount(() => {
     }
   }
 
-  .xly-image-cropper__placeholder {
+  .easy-image-cropper__placeholder {
     position: absolute;
     inset: 0;
     display: flex;
@@ -640,7 +640,7 @@ onBeforeUnmount(() => {
     pointer-events: none;
   }
 
-  .xly-image-cropper__action {
+  .easy-image-cropper__action {
     display: flex;
     justify-content: flex-end;
     gap: 8px;
@@ -654,13 +654,13 @@ onBeforeUnmount(() => {
 
 <style lang="scss">
 /* ========== Dark Mode ========== */
-html.dark .xly-image-cropper__btn:hover {
+html.dark .easy-image-cropper__btn:hover {
   background: rgba(79, 110, 247, 0.12);
 }
-html.dark .xly-image-cropper__btn--reset:hover {
+html.dark .easy-image-cropper__btn--reset:hover {
   background: rgba(239, 68, 68, 0.1);
 }
-html.dark .xly-image-cropper__view {
+html.dark .easy-image-cropper__view {
   background: #333;
 }
 </style>

@@ -112,11 +112,11 @@ function openMsgBox(options: MsgBoxOptions): Promise<{ action: MsgBoxAction, val
 // 对外 API
 // ==============================
 
-export const XlyMsgBox = {
+export const EasyMsgBox = {
   /**
    * Alert 弹框 —— 仅确认按钮
    * @example
-   * await xly.$msgbox.alert('请注意保存数据', '提示')
+   * await easy.$msgbox.alert('请注意保存数据', '提示')
    */
   alert(
     message: string,
@@ -135,7 +135,7 @@ export const XlyMsgBox = {
   /**
    * Confirm 弹框 —— 确认 + 取消
    * @example
-   * xly.$msgbox.confirm('确定要删除该记录吗？', '删除确认', { type: 'warning' })
+   * easy.$msgbox.confirm('确定要删除该记录吗？', '删除确认', { type: 'warning' })
    *   .then(() => doDelete())
    *   .catch(() => {})
    */
@@ -156,7 +156,7 @@ export const XlyMsgBox = {
   /**
    * Prompt 弹框 —— 带输入框
    * @example
-   * xly.$msgbox.prompt('请输入用户名', '创建用户')
+   * easy.$msgbox.prompt('请输入用户名', '创建用户')
    *   .then(({ value }) => console.log(value))
    *   .catch(() => {})
    */
@@ -178,7 +178,7 @@ export const XlyMsgBox = {
   /**
    * 通用弹框
    * @example
-   * xly.$msgbox({ message: '自定义内容', title: '标题', type: 'success' })
+   * easy.$msgbox({ message: '自定义内容', title: '标题', type: 'success' })
    */
   open(options: MsgBoxOptions): Promise<{ action: MsgBoxAction, value?: string }> {
     return openMsgBox(options)

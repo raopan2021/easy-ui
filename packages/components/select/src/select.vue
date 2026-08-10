@@ -2,7 +2,7 @@
 import type { SelectEmits, SelectOption } from './select'
 
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import XlyIcon from '../../icon'
+import EasyIcon from '../../icon'
 
 import { selectProps } from './select'
 
@@ -463,7 +463,7 @@ defineExpose({
       <!-- 前缀 -->
       <span v-if="$slots.prefix || prefixIcon" class="easy-select__prefix">
         <slot name="prefix" />
-        <XlyIcon v-if="!$slots.prefix && prefixIcon" :name="prefixIcon" />
+        <EasyIcon v-if="!$slots.prefix && prefixIcon" :name="prefixIcon" />
       </span>
 
       <!-- 多选标签 -->
@@ -471,7 +471,7 @@ defineExpose({
         <span v-for="(label, i) in visibleLabels" :key="i" :ref="(el) => setTagRef(el, i)" class="easy-select__tag">
           {{ label }}
           <span class="easy-select__tag-close" @click.stop="removeTag(i)">
-            <XlyIcon name="el:Close" :size="12" />
+            <EasyIcon name="el:Close" :size="12" />
           </span>
         </span>
         <span v-if="hiddenCount > 0" class="easy-select__tag easy-select__tag--count">+{{ hiddenCount }}</span>
@@ -486,13 +486,13 @@ defineExpose({
       <span class="easy-select__suffix">
         <!-- 清除 -->
         <span v-if="clearable && hasValue && !disabled" class="easy-select__clear" @click.stop="clear">
-          <XlyIcon name="el:Close" />
+          <EasyIcon name="el:Close" />
         </span>
         <!-- 自定义后缀 -->
         <slot name="suffix" />
-        <XlyIcon v-if="!$slots.suffix && suffixIcon" :name="suffixIcon" />
+        <EasyIcon v-if="!$slots.suffix && suffixIcon" :name="suffixIcon" />
         <!-- 箭头 -->
-        <XlyIcon name="el:ArrowDown" class="easy-select__arrow" :class="{ 'is-reverse': visible }" />
+        <EasyIcon name="el:ArrowDown" class="easy-select__arrow" :class="{ 'is-reverse': visible }" />
       </span>
     </div>
 
@@ -535,7 +535,7 @@ defineExpose({
             >
               <!-- 多选复选框 -->
               <span v-if="multiple" class="easy-select__option-check">
-                <XlyIcon v-if="isSelected(option[valueKey])" name="el:Check" />
+                <EasyIcon v-if="isSelected(option[valueKey])" name="el:Check" />
               </span>
               <!-- 默认选项内容 -->
               <span v-if="!slots.option" class="easy-select__option-label">{{ option[labelKey] }}</span>
@@ -551,3 +551,150 @@ defineExpose({
     </Teleport>
   </div>
 </template>
+
+<style scoped lang="scss">
+@use '../../../easy-ui/src/styles/tokens' as *;
+
+$radius: 8px;
+$transition: all 0.2s ease;
+
+.easy-select {
+  display: inline-flex;
+  width: 100%;
+  position: relative;
+
+  &.easy-select--large .easy-select__wrapper {
+    height: 44px;
+  }
+  &.easy-select--large .easy-select__value {
+    font-size: 15px;
+  }
+  &.easy-select--default .easy-select__wrapper {
+    height: 36px;
+  }
+  &.easy-select--default .easy-select__value {
+    font-size: 14px;
+  }
+  &.easy-select--small .easy-select__wrapper {
+    height: 30px;
+  }
+  &.easy-select--small .easy-select__value {
+    font-size: 13px;
+  }
+
+  .easy-select__wrapper {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 12px;
+    background-color: var(--el-bg-color);
+    border: 1px solid var(--el-border-color);
+    border-radius: $radius;
+    cursor: pointer;
+    transition: $transition;
+    user-select: none;
+    box-sizing: border-box;
+
+    &.is-hover:not(.is-disabled) {
+      border-color: var(--el-border-color-hover);
+    }
+  }
+
+  &.is-focus .easy-select__wrapper {
+    border-color: var(--el-color-primary);
+    box-shadow: 0 0 0 2px $primary-bg;
+  }
+
+  &.is-disabled .easy-select__wrapper {
+    background-color: var(--el-fill-color-light);
+    cursor: not-allowed;
+  }
+
+  .easy-select__prefix {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 6px;
+    color: var(--el-text-color-placeholder);
+    flex-shrink: 0;
+  }
+
+  .easy-select__value {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--el-text-color-regular);
+
+    &.is-placeholder {
+      color: var(--el-text-color-placeholder);
+    }
+  }
+
+  .easy-select__tags {
+    flex: 1;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 4px;
+    overflow: hidden;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .easy-select__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 1px 6px;
+    background: $primary-bg;
+    color: var(--el-color-primary);
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    max-width: 100%;
+
+    &.easy-select--count {
+      background: rgba(79, 110, 247, 0.12);
+    }
+  }
+
+  .easy-select__tag-close {
+    display: inline-flex;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.15s;
+
+    &:hover {
+      background: rgba(79, 110, 247, 0.15);
+    }
+  }
+
+  .easy-select__suffix {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 6px;
+    color: var(--el-text-color-placeholder);
+    flex-shrink: 0;
+  }
+
+  .easy-select__clear {
+    display: inline-flex;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: color 0.15s;
+    &:hover {
+      color: var(--el-text-color-regular);
+    }
+  }
+
+  .easy-select__arrow {
+    transition: transform 0.2s ease;
+    &.is-reverse {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// ========== 过渡动画（Teleport 到 body，不能 scoped）==========
+</style>

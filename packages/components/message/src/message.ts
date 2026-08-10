@@ -131,7 +131,7 @@ export function closeMessage(id: number) {
 }
 
 /** 消息实例方法 */
-export const XlyMsg = {
+export const EasyMsg = {
   /** 成功提示 */
   success: (message: string, opts?: Omit<MessageOptions, 'message' | 'type'>) =>
     createMessage({ ...opts, message, type: 'success' }),
@@ -155,7 +155,7 @@ export const XlyMsg = {
   },
 }
 
-/** @deprecated 请使用 XlyMsg */
+/** @deprecated 请使用 EasyMsg */
 export const messageMethods = {
   /** 成功提示 */
   success: (message: string, opts?: Omit<MessageOptions, 'message' | 'type'>) =>

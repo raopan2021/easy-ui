@@ -3,7 +3,7 @@ import type { FormItemContext } from '../../form'
 
 import type { InputEmits } from './input'
 import { computed, inject, nextTick, ref } from 'vue'
-import XlyIcon from '../../icon'
+import EasyIcon from '../../icon'
 
 import { inputProps } from './input'
 
@@ -20,8 +20,8 @@ const hovering = ref(false)
 const isComposing = ref(false)
 const passwordVisible = ref(false)
 
-// 若被包裹在 XlyFormItem 中，可主动触发字段级校验
-const formItemContext = inject<FormItemContext | null>('xlyFormItemContext', null)
+// 若被包裹在 EasyFormItem 中，可主动触发字段级校验
+const formItemContext = inject<FormItemContext | null>('easyFormItemContext', null)
 
 // textarea 样式
 const textareaStyle = computed(() => ({
@@ -37,7 +37,7 @@ const wrapperClass = computed(() => [
 ])
 
 const showSuffix = computed(() => {
-  return props.clearable || props.type === 'password' || !!props.suffixIcon || !!slots.suffix
+  return props.clearable || props.type === 'password' || !!props.suffixIcon || !!props.suffix || !!slots.suffix
 })
 
 const wrapperInnerClass = computed(() => ({
@@ -288,8 +288,9 @@ defineExpose({ focus, blur, select, inputRef })
 <template>
   <div class="easy-input" :class="wrapperClass">
     <!-- 前置内容 -->
-    <div v-if="$slots.prepend && type !== 'textarea'" class="easy-input__prepend">
+    <div v-if="($slots.prepend || prefix) && type !== 'textarea'" class="easy-input__prepend">
       <slot name="prepend" />
+      <span v-if="prefix && !$slots.prepend" class="easy-input__prepend-text">{{ prefix }}</span>
     </div>
 
     <div
@@ -301,7 +302,7 @@ defineExpose({ focus, blur, select, inputRef })
       <!-- 前缀图标 -->
       <span v-if="$slots.prefix || prefixIcon" class="easy-input__prefix">
         <slot name="prefix" />
-        <XlyIcon v-if="!$slots.prefix && prefixIcon" :name="prefixIcon" />
+        <EasyIcon v-if="!$slots.prefix && prefixIcon" :name="prefixIcon" />
       </span>
 
       <!-- textarea -->
@@ -359,14 +360,15 @@ defineExpose({ focus, blur, select, inputRef })
       <span v-if="showSuffix" class="easy-input__suffix">
         <!-- 清除按钮 -->
         <span v-if="clearable && modelValue && !disabled && !readonly" class="easy-input__clear" @click="clear">
-          <XlyIcon name="el:Close" />
+          <EasyIcon name="el:Close" />
         </span>
         <!-- 密码显示/隐藏切换 -->
         <span v-if="type === 'password' && modelValue" class="easy-input__password-toggle" @click="togglePassword">
-          <XlyIcon :name="passwordVisible ? 'el:View' : 'el:Hide'" />
+          <EasyIcon :name="passwordVisible ? 'el:View' : 'el:Hide'" />
         </span>
         <slot name="suffix" />
-        <XlyIcon v-if="!$slots.suffix && suffixIcon" :name="suffixIcon" />
+        <span v-if="suffix && !$slots.suffix" class="easy-input__suffix-text">{{ suffix }}</span>
+        <EasyIcon v-if="!$slots.suffix && suffixIcon" :name="suffixIcon" />
       </span>
     </div>
 
@@ -376,3 +378,218 @@ defineExpose({ focus, blur, select, inputRef })
     </div>
   </div>
 </template>
+
+<style scoped lang="scss">
+$radius: 8px;
+
+$transition: all 0.2s ease;
+
+.easy-input {
+  display: inline-flex;
+  width: 100%;
+  position: relative;
+
+  // ========== 尺寸 ==========
+  &.easy-input--large .easy-input__wrapper {
+    height: 44px;
+  }
+
+  &.easy-input--large .easy-input__inner {
+    font-size: 15px;
+  }
+
+  &.easy-input--large .easy-input__prepend,
+  &.easy-input--large .easy-input__append {
+    font-size: 14px;
+  }
+
+  &.easy-input--default .easy-input__wrapper {
+    height: 36px;
+  }
+
+  &.easy-input--default .easy-input__inner {
+    font-size: 14px;
+  }
+
+  &.easy-input--default .easy-input__prepend,
+  &.easy-input--default .easy-input__append {
+    font-size: 14px;
+  }
+
+  &.easy-input--small .easy-input__wrapper {
+    height: 30px;
+  }
+
+  &.easy-input--small .easy-input__inner {
+    font-size: 13px;
+  }
+
+  &.easy-input--small .easy-input__prepend,
+  &.easy-input--small .easy-input__append {
+    font-size: 12px;
+  }
+
+  // ========== 前后置 ==========
+  .easy-input__prepend,
+  .easy-input__append {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px;
+    background-color: var(--el-fill-color-light);
+    color: var(--el-text-color-regular);
+    border: 1px solid var(--el-border-color);
+    white-space: nowrap;
+    font-weight: 500;
+  }
+
+  .easy-input__prepend {
+    border-right: none;
+    border-radius: $radius 0 0 $radius;
+  }
+
+  .easy-input__append {
+    border-left: none;
+    border-radius: 0 $radius $radius 0;
+  }
+
+  .easy-input__prepend + .easy-input__wrapper {
+    border-radius: 0 $radius $radius 0;
+  }
+
+  // ========== 输入区域 ==========
+  .easy-input__wrapper {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 12px;
+    background-color: var(--el-bg-color);
+    border: 1px solid var(--el-border-color);
+    border-radius: $radius;
+    transition: $transition;
+    box-sizing: border-box;
+    cursor: text;
+
+    &.is-hover:not(.is-disabled) {
+      border-color: var(--el-border-color-darker);
+    }
+
+    &.is-focus:not(.is-disabled) {
+      border-color: var(--el-color-primary);
+      box-shadow: 0 0 0 2px rgba(79, 110, 247, 0.08);
+    }
+
+    &.is-disabled {
+      background-color: var(--el-fill-color-light);
+      cursor: not-allowed;
+    }
+
+    &.has-prefix {
+      padding-left: 8px;
+    }
+
+    &.has-suffix {
+      padding-right: 8px;
+    }
+
+    // textarea 模式
+    &.is-textarea {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      height: auto;
+      min-height: auto;
+      position: relative;
+    }
+  }
+
+  .easy-input__inner {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--el-text-color-regular);
+    font-family: inherit;
+    box-sizing: border-box;
+
+    &::placeholder {
+      color: var(--el-text-color-placeholder);
+    }
+
+    &:disabled {
+      color: var(--el-text-color-disabled);
+      cursor: not-allowed;
+    }
+
+    // textarea 样式
+    &.easy-input--textarea {
+      padding: 8px 12px;
+      line-height: 1.5;
+      font-family: inherit;
+      min-height: auto;
+      box-sizing: border-box;
+      overflow: auto;
+      height: auto;
+      flex: none;
+    }
+  }
+
+  // ========== 前缀/后缀 ==========
+  .easy-input__prefix,
+  .easy-input__suffix {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--el-text-color-placeholder);
+    transition: color $transition;
+    flex-shrink: 0;
+  }
+
+  .easy-input__prefix {
+    margin-right: 4px;
+  }
+
+  .easy-input__suffix {
+    margin-left: 4px;
+  }
+
+  .easy-input__clear,
+  .easy-input__password-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--el-text-color-placeholder);
+    cursor: pointer;
+    transition: color $transition;
+    border-radius: 50%;
+
+    &:hover {
+      color: var(--el-text-color-regular);
+    }
+  }
+
+  // ========== 字数统计 ==========
+  .easy-input__word-limit {
+    flex-shrink: 0;
+    margin-left: 8px;
+    font-size: 12px;
+    color: var(--el-text-color-placeholder);
+
+    // textarea 模式下的字数统计
+    .is-textarea & {
+      position: absolute;
+      right: 30px;
+      bottom: 8px;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 0;
+      z-index: 10;
+      pointer-events: none;
+    }
+  }
+}
+</style>

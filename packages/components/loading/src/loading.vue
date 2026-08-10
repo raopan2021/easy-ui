@@ -66,9 +66,9 @@ const bodyOverflow = ref('')
 
 // 计算属性
 const wrapperClasses = computed(() => [
-  'xly-loading',
-  `xly-loading--${props.type}`,
-  `xly-loading--${getSizeClass()}`,
+  'easy-loading',
+  `easy-loading--${props.type}`,
+  `easy-loading--${getSizeClass()}`,
   {
     'is-fullscreen': props.fullscreen,
     'is-container-fullscreen': props.containerFullscreen,
@@ -91,7 +91,7 @@ const maskStyle = computed(() => ({
   backgroundColor: props.maskColor,
 }))
 
-const spinnerClasses = computed(() => ['xly-loading-spinner', `spinner--${props.type}`])
+const spinnerClasses = computed(() => ['easy-loading-spinner', `spinner--${props.type}`])
 
 const spinnerStyle = computed(() => {
   const size = getSizeValue()
@@ -206,15 +206,15 @@ defineExpose({
 </script>
 
 <template>
-  <div v-if="visible" class="xly-loading-wrapper" :class="wrapperClasses" :style="wrapperStyle">
+  <div v-if="visible" class="easy-loading-wrapper" :class="wrapperClasses" :style="wrapperStyle">
     <!-- 遮罩层 -->
-    <div v-if="mask" class="xly-loading-mask" :style="maskStyle" />
+    <div v-if="mask" class="easy-loading-mask" :style="maskStyle" />
 
     <!-- 加载内容区域 -->
-    <div class="xly-loading-content" :style="contentStyle">
+    <div class="easy-loading-content" :style="contentStyle">
       <!-- 加载动画 -->
-      <div class="xly-loading-spinner" :class="spinnerClasses" :style="spinnerStyle">
-        <!-- 加载状态 - 竖条波浪效果（参照 xly-table__loading） -->
+      <div class="easy-loading-spinner" :class="spinnerClasses" :style="spinnerStyle">
+        <!-- 加载状态 - 竖条波浪效果（参照 easy-table__loading） -->
         <template v-if="type === 'wave1'">
           <div class="wave1-container">
             <div class="wave1-spinner">
@@ -278,12 +278,12 @@ defineExpose({
       </div>
 
       <!-- 加载文本 -->
-      <div v-if="text" class="xly-loading-text" :style="{ color: textColor }">
+      <div v-if="text" class="easy-loading-text" :style="{ color: textColor }">
         {{ text }}
       </div>
 
       <!-- 自定义插槽内容 -->
-      <div v-if="$slots.default" class="xly-loading-custom">
+      <div v-if="$slots.default" class="easy-loading-custom">
         <slot />
       </div>
     </div>
@@ -291,7 +291,7 @@ defineExpose({
 </template>
 
 <style scoped lang="scss">
-.xly-loading-wrapper {
+.easy-loading-wrapper {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -329,7 +329,7 @@ defineExpose({
   }
 }
 
-.xly-loading-mask {
+.easy-loading-mask {
   position: absolute;
   top: 0;
   left: 0;
@@ -340,7 +340,7 @@ defineExpose({
   backdrop-filter: blur(1px);
 }
 
-.xly-loading-content {
+.easy-loading-content {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -357,7 +357,7 @@ defineExpose({
 }
 
 html.dark {
-  .xly-loading-content {
+  .easy-loading-content {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
   }
 }
@@ -422,10 +422,10 @@ html.dark {
   }
 }
 
-// wave1 竖条波浪效果（参照 xly-table__loading）
-// 去除 xly-loading-content 的卡片装饰，保持与 xly-table__loading 一致的干净外观
-.xly-loading--wave1 {
-  .xly-loading-content {
+// wave1 竖条波浪效果（参照 easy-table__loading）
+// 去除 easy-loading-content 的卡片装饰，保持与 easy-table__loading 一致的干净外观
+.easy-loading--wave1 {
+  .easy-loading-content {
     background: transparent;
     backdrop-filter: none;
     padding: 0;
@@ -435,7 +435,7 @@ html.dark {
     gap: 16px;
   }
 
-  .xly-loading-text {
+  .easy-loading-text {
     font-size: 14px;
     color: var(--el-text-color-secondary);
   }
@@ -562,7 +562,7 @@ html.dark {
 }
 
 // 文本样式
-.xly-loading-text {
+.easy-loading-text {
   font-size: 14px;
   font-weight: 500;
   text-align: center;
@@ -572,37 +572,37 @@ html.dark {
 }
 
 // 尺寸变体
-.xly-loading--small {
-  .xly-loading-spinner {
+.easy-loading--small {
+  .easy-loading-spinner {
     width: 24px;
     height: 24px;
   }
 
-  .xly-loading-text {
+  .easy-loading-text {
     font-size: 12px;
   }
 }
 
-.xly-loading--medium {
-  .xly-loading-spinner {
+.easy-loading--medium {
+  .easy-loading-spinner {
     width: 32px;
     height: 32px;
   }
 }
 
-.xly-loading--large {
-  .xly-loading-spinner {
+.easy-loading--large {
+  .easy-loading-spinner {
     width: 48px;
     height: 48px;
   }
 
-  .xly-loading-text {
+  .easy-loading-text {
     font-size: 16px;
   }
 }
 
 // 过渡动画
-.xly-loading-wrapper {
+.easy-loading-wrapper {
   transition: opacity 0.3s ease;
 
   &:not(.is-visible) {

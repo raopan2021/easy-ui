@@ -76,7 +76,7 @@ const drawerStyle = computed(() => {
   return style
 })
 
-const drawerClass = computed(() => [`xly-drawer--${props.direction}`, props.customClass])
+const drawerClass = computed(() => [`easy-drawer--${props.direction}`, props.customClass])
 
 function handleClose() {
   emit('update:modelValue', false)
@@ -131,23 +131,23 @@ watch(
 
 <template>
   <Teleport to="body">
-    <Transition name="xly-drawer-fade">
+    <Transition name="easy-drawer-fade">
       <div
         v-if="modelValue"
-        class="xly-drawer-mask"
-        :class="{ 'xly-drawer-mask--transparent': !showMask }"
+        class="easy-drawer-mask"
+        :class="{ 'easy-drawer-mask--transparent': !showMask }"
         @click.self="handleMaskClick"
       >
-        <Transition :name="`xly-drawer-${direction}`" appear>
-          <div v-if="modelValue" ref="drawerRef" class="xly-drawer" :class="drawerClass" :style="drawerStyle">
+        <Transition :name="`easy-drawer-${direction}`" appear>
+          <div v-if="modelValue" ref="drawerRef" class="easy-drawer" :class="drawerClass" :style="drawerStyle">
             <!-- 头部 -->
-            <div v-if="showHeader" class="xly-drawer__header">
-              <div class="xly-drawer__title">
+            <div v-if="showHeader" class="easy-drawer__header">
+              <div class="easy-drawer__title">
                 <slot name="header">
                   <span>{{ title }}</span>
                 </slot>
               </div>
-              <button v-if="showClose" class="xly-drawer__close" @click="handleClose">
+              <button v-if="showClose" class="easy-drawer__close" @click="handleClose">
                 <svg
                   viewBox="0 0 24 24"
                   width="1em"
@@ -164,12 +164,12 @@ watch(
             </div>
 
             <!-- 主体 -->
-            <div class="xly-drawer__body">
+            <div class="easy-drawer__body">
               <slot />
             </div>
 
             <!-- 底部 -->
-            <div v-if="$slots.footer" class="xly-drawer__footer">
+            <div v-if="$slots.footer" class="easy-drawer__footer">
               <slot name="footer" />
             </div>
           </div>
@@ -185,7 +185,7 @@ $radius: 14px;
 $transition-fast: 0.2s ease;
 
 /* ========== 遮罩层 ========== */
-.xly-drawer-mask {
+.easy-drawer-mask {
   position: fixed;
   inset: 0;
   z-index: 2000;
@@ -193,7 +193,7 @@ $transition-fast: 0.2s ease;
   overflow: hidden;
   transition: background-color 0.25s ease;
 
-  &.xly-drawer-mask--transparent {
+  &.easy-drawer-mask--transparent {
     background-color: transparent;
   }
 
@@ -203,7 +203,7 @@ $transition-fast: 0.2s ease;
 }
 
 /* ========== 抽屉主体 ========== */
-.xly-drawer {
+.easy-drawer {
   position: absolute;
   background-color: var(--el-bg-color);
   box-shadow: var(--el-box-shadow);
@@ -211,28 +211,28 @@ $transition-fast: 0.2s ease;
   flex-direction: column;
   overflow: hidden;
 
-  &.xly-drawer--left {
+  &.easy-drawer--left {
     top: 0;
     left: 0;
     height: 100vh;
     border-radius: 0 $radius $radius 0;
   }
 
-  &.xly-drawer--right {
+  &.easy-drawer--right {
     top: 0;
     right: 0;
     height: 100vh;
     border-radius: $radius 0 0 $radius;
   }
 
-  &.xly-drawer--top {
+  &.easy-drawer--top {
     top: 0;
     left: 0;
     width: 100vw;
     border-radius: 0 0 $radius $radius;
   }
 
-  &.xly-drawer--bottom {
+  &.easy-drawer--bottom {
     bottom: 0;
     left: 0;
     width: 100vw;
@@ -241,7 +241,7 @@ $transition-fast: 0.2s ease;
 }
 
 /* ========== 头部 ========== */
-.xly-drawer__header {
+.easy-drawer__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -250,7 +250,7 @@ $transition-fast: 0.2s ease;
   flex-shrink: 0;
 }
 
-.xly-drawer__title {
+.easy-drawer__title {
   font-size: 17px;
   font-weight: 600;
   color: var(--el-text-color-primary);
@@ -259,7 +259,7 @@ $transition-fast: 0.2s ease;
   min-width: 0;
 }
 
-.xly-drawer__close {
+.easy-drawer__close {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -284,7 +284,7 @@ $transition-fast: 0.2s ease;
 }
 
 /* ========== 主体 ========== */
-.xly-drawer__body {
+.easy-drawer__body {
   padding: 4px 24px 20px;
   font-size: 14px;
   color: var(--el-text-color-secondary);
@@ -303,7 +303,7 @@ $transition-fast: 0.2s ease;
 }
 
 /* ========== 底部 ========== */
-.xly-drawer__footer {
+.easy-drawer__footer {
   padding: 12px 24px 20px;
   flex-shrink: 0;
   border-top: 1px solid var(--el-border-color);
@@ -312,77 +312,77 @@ $transition-fast: 0.2s ease;
 /* ========== 动画 ========== */
 
 // 遮罩淡入淡出
-.xly-drawer-fade-enter-active {
+.easy-drawer-fade-enter-active {
   transition: opacity 0.25s ease;
 }
-.xly-drawer-fade-leave-active {
+.easy-drawer-fade-leave-active {
   transition: opacity 0.2s ease;
 }
-.xly-drawer-fade-enter-from,
-.xly-drawer-fade-leave-to {
+.easy-drawer-fade-enter-from,
+.easy-drawer-fade-leave-to {
   opacity: 0;
 }
 
 // 左侧滑入
-.xly-drawer-left-enter-active {
+.easy-drawer-left-enter-active {
   transition: all 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
 }
-.xly-drawer-left-leave-active {
+.easy-drawer-left-leave-active {
   transition: all 0.25s ease;
 }
-.xly-drawer-left-enter-from {
+.easy-drawer-left-enter-from {
   opacity: 0;
   transform: translateX(-100%);
 }
-.xly-drawer-left-leave-to {
+.easy-drawer-left-leave-to {
   opacity: 0;
   transform: translateX(-100%);
 }
 
 // 右侧滑入
-.xly-drawer-right-enter-active {
+.easy-drawer-right-enter-active {
   transition: all 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
 }
-.xly-drawer-right-leave-active {
+.easy-drawer-right-leave-active {
   transition: all 0.25s ease;
 }
-.xly-drawer-right-enter-from {
+.easy-drawer-right-enter-from {
   opacity: 0;
   transform: translateX(100%);
 }
-.xly-drawer-right-leave-to {
+.easy-drawer-right-leave-to {
   opacity: 0;
   transform: translateX(100%);
 }
 
 // 顶部滑入
-.xly-drawer-top-enter-active {
+.easy-drawer-top-enter-active {
   transition: all 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
 }
-.xly-drawer-top-leave-active {
+.easy-drawer-top-leave-active {
   transition: all 0.25s ease;
 }
-.xly-drawer-top-enter-from {
+.easy-drawer-top-enter-from {
   opacity: 0;
   transform: translateY(-100%);
 }
-.xly-drawer-top-leave-to {
+.easy-drawer-top-leave-to {
   opacity: 0;
   transform: translateY(-100%);
 }
 
 // 底部滑入
-.xly-drawer-bottom-enter-active {
+.easy-drawer-bottom-enter-active {
   transition: all 0.35s cubic-bezier(0.34, 1.3, 0.64, 1);
 }
-.xly-drawer-bottom-leave-active {
+.easy-drawer-bottom-leave-active {
   transition: all 0.25s ease;
 }
-.xly-drawer-bottom-enter-from {
+.easy-drawer-bottom-enter-from {
   opacity: 0;
   transform: translateY(100%);
 }
-.xly-drawer-bottom-leave-to {
+.easy-drawer-bottom-leave-to {
   opacity: 0;
   transform: translateY(100%);
 }

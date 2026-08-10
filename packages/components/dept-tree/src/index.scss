@@ -1,11 +1,11 @@
 // 组件主体
-.xly-dept-tree {
+.easy-dept-tree {
   width: 100%;
   background: transparent;
   user-select: none;
 
-  .xly-dept-tree__loading,
-  .xly-dept-tree__empty {
+  .easy-dept-tree__loading,
+  .easy-dept-tree__empty {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -15,12 +15,12 @@
     font-size: 15px;
   }
 
-  .xly-dept-tree__loading-icon {
+  .easy-dept-tree__loading-icon {
     font-size: 18px;
     animation: spin 1s linear infinite;
   }
 
-  .xly-dept-tree__content {
+  .easy-dept-tree__content {
     padding: 0;
   }
 }
