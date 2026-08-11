@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import { computed, getCurrentInstance, ref, watch } from 'vue'
 import EasyModal from '../../../../modal'
-import between from './between'
-import end from './end'
-import serial from './gateway'
-import skip from './skip'
-import start from './start'
+import between from './between.vue'
+import end from './end.vue'
+import serial from './gateway.vue'
+import skip from './skip.vue'
+import start from './start.vue'
 
 const props = defineProps({
   value: {
@@ -51,7 +52,7 @@ const props = defineProps({
 
 const parallel = serial
 
-const { proxy } = getCurrentInstance()
+const proxy = getCurrentInstance()!.proxy!
 
 const COMPONENT_LIST = {
   start,
@@ -63,7 +64,7 @@ const COMPONENT_LIST = {
 }
 
 const drawer = ref(false)
-const form = ref({})
+const form = ref<any>({})
 const objId = ref(undefined)
 const nodeCode = ref(null)
 const title = computed(() => {
@@ -89,7 +90,7 @@ const title = computed(() => {
 const componentType = computed(() => {
   if (!props.node || !props.node.type)
     return
-  return COMPONENT_LIST[props.node.type]
+  return (COMPONENT_LIST as Record<string, any>)[props.node.type]
 })
 
 watch(
@@ -137,7 +138,7 @@ watch(
         n.properties.formCustom = JSON.stringify(n.properties) === '{}' ? 'N' : n.properties.formCustom || ''
         const listenerTypes = n.properties.listenerType ? n.properties.listenerType.split(',') : []
         const listenerPaths = n.properties.listenerPath ? n.properties.listenerPath.split('@@') : []
-        n.properties.listenerRows = listenerTypes.map((type, index) => ({
+        n.properties.listenerRows = listenerTypes.map((type: any, index: number) => ({
           listenerType: type,
           listenerPath: listenerPaths[index],
         }))
@@ -224,7 +225,7 @@ watch(
 
 // 监听：监听器路类型数组
 watch(
-  () => form.value.listenerRows?.map(e => e.listenerType),
+  () => form.value.listenerRows?.map((e: any) => e.listenerType),
   (n) => {
     // 监听监听器类型变化并更新
     props.lf.setProperties(objId.value, {
@@ -235,7 +236,7 @@ watch(
 
 // 监听：监听器路径数组
 watch(
-  () => form.value.listenerRows?.map(e => e.listenerPath),
+  () => form.value.listenerRows?.map((e: any) => e.listenerPath),
   (n) => {
     // 监听监听器类型变化并更新
     props.lf.setProperties(objId.value, {
@@ -302,14 +303,15 @@ function show() {
 }
 
 async function handleClose() {
-  if (!props.disabled && typeof proxy.$refs[componentType.value?.name]?.validate === 'function') {
+  const targetRef: any = proxy.$refs[componentType.value?.name]
+  if (!props.disabled && typeof targetRef?.validate === 'function') {
     // 校验表单必填项
-    await proxy.$refs[componentType.value.name]
+    await targetRef
       .validate()
       .then(() => {
         handleDrawer()
       })
-      .catch((_err) => {
+      .catch((_err: any) => {
 
       })
   }

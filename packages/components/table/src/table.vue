@@ -106,7 +106,7 @@ export interface TableColumn {
   /** 列唯一标识，也是数据字段的 key */
   prop: string
   /** 列标题 */
-  name: string
+  name?: string
   /** 列宽度 */
   width?: number | string
   /** 最小宽度 */
@@ -820,7 +820,7 @@ const treeFlatData = computed<TreeNode[]>(() => {
         treeIndex, // 带层级的序号字符串，如 "1", "1-2", "1-2-1"
         expanded,
         loading,
-        hasChildren: showExpandIcon,
+        hasChildren: showExpandIcon ?? false,
         key,
       })
 

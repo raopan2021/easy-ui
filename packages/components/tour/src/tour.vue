@@ -145,7 +145,7 @@ const highlightStyle = computed(() => {
     boxShadow: `0 0 0 9999px ${props.maskColor}`,
     zIndex: props.zIndex + 1,
     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-    pointerEvents: 'none',
+    pointerEvents: 'none' as const,
   }
 })
 

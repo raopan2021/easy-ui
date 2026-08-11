@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { View } from '@element-plus/icons-vue'
-import { ElMessage } from 'element-plus'
 import { computed, h, ref, watch } from 'vue'
 import { downloadFile, previewFile } from '../../../easy-ui/src/utils/file'
+import { EasyMsg } from '../../message'
 
 // ============================================================
 // 🧪 Mock 接口区（组件库演示用，未接入真实后端）
@@ -162,7 +162,7 @@ export interface UploadFileItem {
 // Props 定义
 // ============================================================
 
-interface Props {
+export interface Props {
   /** v-model 绑定值，支持对象数组或 JSON 字符串 */
   modelValue?: UploadFileItem[] | string
   /** 返回值模式：array 返回对象数组，string 返回 JSON 字符串 */
@@ -556,7 +556,7 @@ async function uploadFile(file: File) {
   // 内置校验
   const validateError = validateFile(file)
   if (validateError) {
-    ElMessage.warning(validateError)
+    EasyMsg.warning(validateError)
     emit('validate-error', validateError, file)
     return
   }
@@ -580,7 +580,7 @@ async function uploadFile(file: File) {
   if (!props.autoNetworkUpload) {
     item.status = 'success'
     item.percent = 100
-    ElMessage.success(`${item.name} 添加成功`)
+    EasyMsg.success(`${item.name} 添加成功`)
     emit('success', { ...item })
     emitUpdate()
     return
@@ -629,13 +629,13 @@ async function networkUpload(opts: { file: File, item: UploadFileItem }) {
     item.percent = 100
     item.justUploaded = true
 
-    ElMessage.success(`${item.name} 上传成功`)
+    EasyMsg.success(`${item.name} 上传成功`)
     emit('success', { ...item })
     emitUpdate()
   }
   catch (error) {
     item.status = 'error'
-    ElMessage.error(`${item.name} 上传失败`)
+    EasyMsg.danger(`${item.name} 上传失败`)
     emit('error', error as Error, { ...item })
   }
 }
@@ -670,12 +670,12 @@ async function handleRemove(index: number) {
 
       // 3. 删除本地页面文件
       const removed = fileList.value.splice(index, 1)[0]
-      ElMessage.success(`${removed.name} 已删除`)
+      EasyMsg.success(`${removed.name} 已删除`)
       emit('remove', removed, [...fileList.value])
       emitUpdate()
     }
     catch {
-      ElMessage.error(`${item.name} 删除失败`)
+      EasyMsg.danger(`${item.name} 删除失败`)
     }
   }
 }

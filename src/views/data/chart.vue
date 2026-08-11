@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyCard, EasyChart } from 'easy-ui'
+import { EasyCard, EasyChart } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 // ===== 折线图数据 =====

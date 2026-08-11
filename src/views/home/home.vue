@@ -6,7 +6,7 @@ const installCmd = `npm install easy-ui element-plus @element-plus/icons-vue`
 
 const fullInstallCode = `// main.ts
 import { createApp } from 'vue'
-import EasyUI from 'easy-ui'
+import EasyUI from '@raopan/easy-ui'
 import App from './App.vue'
 
 const app = createApp(App)
@@ -16,7 +16,7 @@ app.mount('#app')`
 const lightInstallCode = `// main.ts
 import { createApp } from 'vue'
 import ElementPlus from 'element-plus'
-import { setupEasy, easyComponentResolver } from 'easy-ui'
+import { setupEasy, easyComponentResolver } from '@raopan/easy-ui'
 import App from './App.vue'
 
 const app = createApp(App)

@@ -2,11 +2,20 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "rootDir": "..",
+    // build 声明生成不编译 .js（避免 preact 等 TS2742 不可命名错误），
+    // flow-designer 的 .js 模块由 noImplicitAny:false 抑制 TS7016；
+    // easy-ui type-check（tsconfig.json）单独用 allowJs:true
+    "allowJs": false,
+    // 组件代码为 xly-admin-pro 迁移的宽松基线，声明生成不强制严格空值/隐式 any
+    "strict": false,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
     "declaration": true,
     "declarationDir": "./dist",
     "emitDeclarationOnly": true,
+    "noEmit": false,
     "outDir": "./dist"
   },
-  "include": ["src/index.ts", "src/utils/**/*", "../components/**/*"],
-  "exclude": ["src/**/__tests__/*"]
+  "include": ["src/index.ts", "file-preview.ts", "flow-designer.ts", "src/utils/**/*", "../components/**/*"],
+  "exclude": ["src/**/__tests__/*", "../components/**/__tests__/*"]
 }

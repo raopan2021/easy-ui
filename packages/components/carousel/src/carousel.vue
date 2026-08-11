@@ -274,7 +274,7 @@ defineExpose({
         <div
           v-for="(item, index) in items"
           v-show="index === currentIndex"
-          :key="itemKey ? item[itemKey] : index"
+          :key="itemKey ? (item as any)[itemKey] : index"
           class="easy-carousel__item"
           :class="{ 'is-active': index === currentIndex }"
         >
@@ -298,7 +298,7 @@ defineExpose({
         <div class="easy-carousel__3d-track" :style="track3dStyle">
           <div
             v-for="(item, index) in items"
-            :key="itemKey ? item[itemKey] : index"
+            :key="itemKey ? (item as any)[itemKey] : index"
             class="easy-carousel__3d-item"
             :class="{
               'is-active': index === currentIndex,

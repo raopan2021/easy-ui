@@ -20,7 +20,7 @@
  * ]
  */
 import type { Component } from 'vue'
-import type { FieldRule } from './index'
+import type { FieldRule } from './super-form.vue'
 
 // 字段配置选项
 export interface FieldOptions {

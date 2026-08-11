@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasySelect } from 'easy-ui'
+import { EasySelect } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 const val1 = ref<string | number>('beijing')

@@ -76,7 +76,9 @@ const hasValue = computed(() => {
 // 将 modelValue 转换为数组（内部统一使用数组处理）
 const internalValue = computed<(string | number | boolean)[]>(() => {
   if (!props.multiple) {
-    return props.modelValue !== undefined && props.modelValue !== null ? [props.modelValue] : []
+    return props.modelValue !== undefined && props.modelValue !== null
+      ? [props.modelValue as string | number | boolean]
+      : []
   }
 
   const val = props.modelValue
@@ -404,7 +406,7 @@ watch(searchQuery, (val) => {
     debounceTimer = setTimeout(async () => {
       emit('search', val)
       // 如果 remoteMethod 返回 Promise，自动等待并更新 remoteOptions
-      const result = props.remoteMethod(val)
+      const result = props.remoteMethod?.(val)
       if (result instanceof Promise) {
         const data = await result
         remoteOptions.value = data || []

@@ -19,7 +19,7 @@ import {
   min,
   minLength,
   required,
-} from 'easy-ui'
+} from '@raopan/easy-ui'
 import { reactive, ref } from 'vue'
 
 // ========== 完整表单 ==========
@@ -474,7 +474,7 @@ function resetSimplest() {
         </div>
       </div>
       <EasyDocCode
-        code="import {  required, custom, min, max  } from 'easy-ui'
+        code="import {  required, custom, min, max  } from '@raopan/easy-ui'
 
 const rules = {
   password: [required('请输入密码')],

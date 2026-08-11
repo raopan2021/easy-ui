@@ -13,7 +13,7 @@ import {
   minLength,
   phone,
   required,
-} from 'easy-ui'
+} from '@raopan/easy-ui'
 import { reactive, ref } from 'vue'
 
 /** ===== 基础表单 ===== */

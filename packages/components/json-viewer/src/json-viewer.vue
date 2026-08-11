@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type { VNode } from 'vue'
+import { useDark } from '@vueuse/core'
+import { EasyMsg } from '../../message'
 import { computed, defineComponent, h, ref, watch } from 'vue'
 
 defineOptions({ name: 'EasyJsonViewer' })
@@ -34,7 +36,7 @@ interface NodeProps {
   path: string
   depth: number
   maxDepth: number
-  theme: 'light' | 'dark'
+  theme: string
   expandedSet: Set<string>
   collapsedSet: Set<string>
 }
@@ -77,7 +79,7 @@ const JsonNode = defineComponent({
     // 子项数量
     const itemCount = computed(() => {
       const d = nodeProps.data
-      if (d === null || !isExpandable.value)
+      if (d === null || d === undefined || !isExpandable.value)
         return 0
       if (Array.isArray(d))
         return d.length
@@ -300,7 +302,7 @@ function handleCopy() {
     return
   const str = typeof parsedData.value === 'string' ? parsedData.value : JSON.stringify(parsedData.value, null, 2)
   navigator.clipboard.writeText(str).then(() => {
-    easy.$msg.success('已复制到剪贴板')
+    EasyMsg.success('已复制到剪贴板')
   })
 }
 

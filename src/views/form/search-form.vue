@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasySearchForm } from 'easy-ui'
+import { EasySearchForm } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 // 基础用法

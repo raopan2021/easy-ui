@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyStatistic } from 'easy-ui'
+import { EasyStatistic } from '@raopan/easy-ui'
 </script>
 
 <template>

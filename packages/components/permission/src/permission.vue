@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { CheckboxValueType } from 'element-plus'
 import { computed } from 'vue'
 
 defineOptions({ name: 'EasyPermission' })
@@ -168,7 +169,7 @@ function fillAncestors(ids: Set<string | number>): Set<string | number> {
   return result
 }
 
-function onNodeToggle(nodeId: string | number, checked: boolean) {
+function onNodeToggle(nodeId: string | number, checked: CheckboxValueType) {
   const currentSet = new Set(props.modelValue)
 
   if (checked) {
@@ -218,7 +219,7 @@ const rootState = computed<CheckState>(() => {
   return 'half'
 })
 
-function onRootToggle(checked: boolean) {
+function onRootToggle(checked: CheckboxValueType) {
   if (checked) {
     const result = fillAncestors(new Set(enabledLeafIds.value))
     emitUpdate([...result])
@@ -490,7 +491,7 @@ const tableRows = computed<TableRow[]>(() => {
         :model-value="rootState === 'checked'"
         :indeterminate="rootState === 'half'"
         :disabled="disabled"
-        @change="onRootToggle"
+        @change="(val: CheckboxValueType) => onRootToggle(val)"
       >
         {{ selectAllText }}
       </el-checkbox>
@@ -527,7 +528,7 @@ const tableRows = computed<TableRow[]>(() => {
               :model-value="getNodeState(row.moduleId) === 'checked'"
               :indeterminate="getNodeState(row.moduleId) === 'half'"
               :disabled="disabled || row.moduleDisabled"
-              @change="(val: boolean) => onNodeToggle(row.moduleId, val)"
+              @change="(val: CheckboxValueType) => onNodeToggle(row.moduleId, val)"
             >
               {{ row.moduleLabel }}
             </el-checkbox>
@@ -557,7 +558,7 @@ const tableRows = computed<TableRow[]>(() => {
                   :model-value="getNodeState(item._id) === 'checked'"
                   :indeterminate="getNodeState(item._id) === 'half'"
                   :disabled="disabled || item._disabled"
-                  @change="(val: boolean) => onNodeToggle(item._id, val)"
+                  @change="(val: CheckboxValueType) => onNodeToggle(item._id, val)"
                 >
                   {{ item._label }}
                 </el-checkbox>
@@ -568,7 +569,7 @@ const tableRows = computed<TableRow[]>(() => {
                   :model-value="getNodeState(row.action._id) === 'checked'"
                   :indeterminate="getNodeState(row.action._id) === 'half'"
                   :disabled="disabled || row.action._disabled"
-                  @change="(val: boolean) => onNodeToggle(row.action._id, val)"
+                  @change="(val: CheckboxValueType) => onNodeToggle(row.action!._id, val)"
                 >
                   {{ row.action._label }}
                 </el-checkbox>
@@ -584,7 +585,7 @@ const tableRows = computed<TableRow[]>(() => {
                 :model-value="getNodeState(item._id) === 'checked'"
                 :indeterminate="getNodeState(item._id) === 'half'"
                 :disabled="disabled || item._disabled"
-                @change="(val: boolean) => onNodeToggle(item._id, val)"
+                @change="(val: CheckboxValueType) => onNodeToggle(item._id, val)"
               >
                 {{ item._label }}
               </el-checkbox>
@@ -599,7 +600,7 @@ const tableRows = computed<TableRow[]>(() => {
                 :model-value="getNodeState(item._id) === 'checked'"
                 :indeterminate="getNodeState(item._id) === 'half'"
                 :disabled="disabled || item._disabled"
-                @change="(val: boolean) => onNodeToggle(item._id, val)"
+                @change="(val: CheckboxValueType) => onNodeToggle(item._id, val)"
               >
                 {{ item._label }}
               </el-checkbox>

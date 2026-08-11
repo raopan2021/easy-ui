@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { easy, EasyButton } from 'easy-ui'
+import { easy, EasyButton } from '@raopan/easy-ui'
 
 // Alert 示例
 function handleAlert(type: 'info' | 'success' | 'warning' | 'danger') {
@@ -209,7 +209,7 @@ function handleBizLeave() {
           </EasyButton>
         </div>
         <EasyDocCode
-          code="import { easy } from 'easy-ui'
+          code="import { easy } from '@raopan/easy-ui'
 
 // 基础用法
 await easy.$msgbox.alert('您的账户已成功创建', '注册成功', { type: 'success' })
@@ -487,7 +487,7 @@ router.beforeEach(async (to, from, next) => {
         easy.$msgbox 方法
       </h3>
       <p class="doc-section__desc" style="margin-bottom: 12px">
-        通过 <code>import { easy } from 'easy-ui'</code> 调用 <code>easy.$msgbox</code>。
+        通过 <code>import { easy } from '@raopan/easy-ui'</code> 调用 <code>easy.$msgbox</code>。
       </p>
       <div class="doc-table">
         <table>

@@ -55,7 +55,7 @@ function setNodeExtRef(el: any, name: string) {
   else nodeExtRefs.delete(name)
 }
 
-const rules = reactive({
+const rules = reactive<Record<string, any[]>>({
   nodeRatio: [
     { required: false, message: '请输入', trigger: 'change' },
     {
@@ -216,7 +216,7 @@ defineExpose({ validate })
               </template>
               <EasySelect
                 v-model="form.anyNodeSkip"
-                :options="filteredNodes.map((d) => ({ label: d.text.value, value: d.id }))"
+                :options="filteredNodes.map((d: any) => ({ label: d.text.value, value: d.id }))"
                 clearable
                 style="width: 80%"
               />

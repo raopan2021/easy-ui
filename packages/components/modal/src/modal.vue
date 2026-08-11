@@ -156,7 +156,7 @@ const maskStyle = computed(() => {
 const modalStyle = computed(() => {
   const width = props.width ?? sizeMap[props.size]
   const style: Record<string, string> = {
-    width,
+    width: String(width),
   }
   if (props.size === 'fullscreen') {
     style.width = '100%'

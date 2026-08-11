@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { PPTXPreviewer as PptxPreviewerType } from 'pptx-preview/dist/index'
 import VueOfficeDocx from '@vue-office/docx/lib/v3/vue-office-docx.mjs'
 import VueOfficeExcel from '@vue-office/excel/lib/v3/vue-office-excel.mjs'
 import VueOfficePdf from '@vue-office/pdf/lib/v3/vue-office-pdf.mjs'
@@ -71,7 +70,7 @@ const loadingText = ref('加载中...')
 const officeSrc = ref<string | ArrayBuffer | Blob>('')
 const officeError = ref('')
 const pptContainerRef = ref<HTMLElement | null>(null)
-let pptPreviewer: PptxPreviewerType | null = null
+let pptPreviewer: ReturnType<typeof initPptxPreview> | null = null
 
 const currentFile = computed(() => normalizedFiles.value[currentIndex.value])
 const currentType = computed(() => getFileType(currentFile.value?.url ?? ''))

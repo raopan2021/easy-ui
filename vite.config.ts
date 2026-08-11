@@ -1,12 +1,18 @@
-import { fileURLToPath, URL } from 'node:url'
+import type { ViteCompression } from './build/compress.ts'
 
+import process from 'node:process'
+import { fileURLToPath, URL } from 'node:url'
 import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
-import viteCompression from 'vite-plugin-compression'
+import { configCompressPlugin } from './build/compress.ts'
+import { viteBuildInfo } from './build/info.ts'
 import { easyComponentResolver } from './packages/easy-ui/src/utils/easyComponentResolver.ts'
+
+// 压缩策略由环境变量 VITE_COMPRESSION 控制（默认 gzip），见 build/compress.ts
+const VITE_COMPRESSION = (process.env.VITE_COMPRESSION || 'gzip') as ViteCompression
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -30,15 +36,10 @@ export default defineConfig(({ mode }) => ({
       dts: 'src/types/import/components.d.ts',
       resolvers: [easyComponentResolver(), ElementPlusResolver()],
     }),
-    // 压缩
-    viteCompression({
-      verbose: false, // 是否在控制台输出压缩结果
-      disable: false, // 是否禁用
-      algorithm: 'gzip', // 压缩算法
-      ext: '.gz', // 压缩后的文件名后缀
-      threshold: 10240, // 只有大小大于该值的资源会被处理 10240B = 10KB
-      deleteOriginFile: false, // 压缩后是否删除原文件
-    }),
+    // 打包信息提示（欢迎 + 产物大小 + 构建耗时）
+    viteBuildInfo(),
+    // 可配置压缩（gzip / brotli / both），由 VITE_COMPRESSION 环境变量控制
+    configCompressPlugin(VITE_COMPRESSION),
   ],
   resolve: {
     alias: {
@@ -59,11 +60,11 @@ export default defineConfig(({ mode }) => ({
     port: 3000,
     open: true,
     warmup: {
-      clientFiles: ['./index.html', './src/{views,components,layouts}/*'],
+      clientFiles: ['./index.html', './{views,components,layouts}/*'],
     },
   },
   optimizeDeps: {
-    exclude: ['easy-ui', 'unimport'],
+    exclude: ['@raopan/easy-ui', 'unimport'],
   },
   esbuild: {
     drop: mode === 'production' ? ['console', 'debugger'] : [],

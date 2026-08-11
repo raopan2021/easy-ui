@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyButton, EasyWatermark } from 'easy-ui'
+import { EasyButton, EasyWatermark } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 /** 动态水印：显示/隐藏 */

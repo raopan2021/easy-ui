@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, inject, ref } from 'vue'
+import { computed, inject } from 'vue'
 
 import EasyIcon from '../../icon'
 import { timelineItemProps } from './timeline-item'
@@ -16,9 +16,9 @@ const timeline = inject<{
   reverse: { value: boolean }
   itemCount: { value: number }
 }>('easy-timeline', {
-  direction: { value: ref('vertical') },
-  reverse: { value: ref(false) },
-  itemCount: { value: ref(1) },
+  direction: { value: 'vertical' },
+  reverse: { value: false },
+  itemCount: { value: 1 },
 })
 
 const computedDirection = computed(() => {

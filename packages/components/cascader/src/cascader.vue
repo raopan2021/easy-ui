@@ -45,7 +45,7 @@ export interface CascaderNode {
 }
 
 export interface CascaderProps {
-  modelValue?: (string | number)[] | (string | number)[][] | any[][]
+  modelValue?: string | (string | number)[] | (string | number)[][] | any[][]
   options?: CascaderNode[]
   placeholder?: string
   disabled?: boolean
@@ -668,8 +668,9 @@ function handleSearch() {
   if (props.remote && props.remoteMethod) {
     if (debounceTimer)
       clearTimeout(debounceTimer)
+    const remoteMethod = props.remoteMethod
     debounceTimer = setTimeout(() => {
-      props.remoteMethod(searchQuery.value)
+      remoteMethod?.(searchQuery.value)
       emit('search', searchQuery.value)
     }, props.debounce)
     return

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyInput } from 'easy-ui'
+import { EasyInput } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 const val1 = ref('')

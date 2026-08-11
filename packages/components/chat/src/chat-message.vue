@@ -107,7 +107,7 @@ onUpdated(() => {
       cursor.textContent = '|'
 
       // 找到最后一个文本节点
-      const textNodes = []
+      const textNodes: Node[] = []
       const walk = (node: Node) => {
         if (node.nodeType === Node.TEXT_NODE && node.textContent && node.textContent.trim()) {
           textNodes.push(node)

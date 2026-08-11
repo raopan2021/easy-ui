@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyDropdown, EasyDropdownItem, EasyIcon } from 'easy-ui'
+import { EasyDropdown, EasyDropdownItem, EasyIcon } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 const clickedItem = ref('')

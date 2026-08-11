@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyList } from 'easy-ui'
+import { EasyList } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 const listData = ref([

@@ -1,6 +1,6 @@
 import type { Ref } from 'vue'
-import type EasyMessage from './index'
 import type { MessageOptions } from './message'
+import type EasyMessage from './message.vue'
 import { ref } from 'vue'
 
 export type { MessageOptions }

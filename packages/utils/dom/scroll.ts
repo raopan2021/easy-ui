@@ -7,7 +7,7 @@ export function isScroll(el: HTMLElement, isVertical?: boolean): boolean {
     { undefined: 'overflow', true: 'overflow-y', false: 'overflow-x' } as const
   )[String(isVertical)]!
 
-  const overflow = getComputedStyle(el)[key]
+  const overflow = (getComputedStyle(el) as unknown as Record<string, string>)[key]
   return /scroll|auto|overlay/.test(overflow)
 }
 

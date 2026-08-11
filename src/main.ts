@@ -1,6 +1,6 @@
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 // easy-ui 全局服务 + 组件
-import { EasyDocCode, setupEasy, setupWatermarkDirective } from 'easy-ui'
+import { EasyDocCode, setupEasy, setupWatermarkDirective } from '@raopan/easy-ui'
 
 // Element Plus
 import ElementPlus from 'element-plus'
@@ -18,6 +18,7 @@ import '@/styles/theme.css'
 // 导入公共样式
 import '@/styles/index.scss'
 import 'element-plus/dist/index.css'
+import '@raopan/easy-ui/dist/easy-ui.css'
 
 const app = createApp(App)
 

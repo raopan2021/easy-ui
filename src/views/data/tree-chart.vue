@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { TreeChartNode } from 'easy-ui'
-import { EasyTreeChart } from 'easy-ui'
+import type { TreeChartNode } from '@raopan/easy-ui'
+import { EasyTreeChart } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 // ===== 数据结构示例 =====
@@ -669,7 +669,7 @@ function onToggleExpand(node: TreeChartNode, expanded: boolean) {
           <EasyTreeChart :data="structureData" :height="350" />
         </div>
         <EasyDocCode
-          code="import type { TreeChartNode } from 'easy-ui'
+          code="import type { TreeChartNode } from '@raopan/easy-ui'
 
 const treeData: TreeChartNode[] = [
   {

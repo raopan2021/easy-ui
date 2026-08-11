@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useDark } from '@vueuse/core'
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import TreeNode from './tree-node.vue'
 
@@ -103,11 +104,11 @@ const props = withDefaults(
   }>(),
   {
     data: () => [],
-    trees: null,
+    trees: () => [],
     nodeConfig: () => ({}),
     layout: 'horizontal',
     defaultExpandAll: true,
-    expandedKeys: null,
+    expandedKeys: () => [],
     showToolbar: true,
     colors: () => ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#06b6d4', '#84cc16'],
     minScale: 0.3,
@@ -288,7 +289,7 @@ function onMouseUp() {
   isPanning.value = false
 }
 
-function handleNodeClick(node: TreeChatNode, nodePath: TreeChatNode[]) {
+function handleNodeClick(node: any, nodePath: any = [node]) {
   emit('node-click', node, nodePath)
 }
 

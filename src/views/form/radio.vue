@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyRadio, EasyRadioGroup } from 'easy-ui'
+import { EasyRadio, EasyRadioGroup } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 const val1 = ref<string | number | boolean>()

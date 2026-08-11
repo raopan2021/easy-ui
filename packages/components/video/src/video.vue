@@ -4,7 +4,7 @@ import EasyButton from '../../button'
 import EasyIcon from '../../icon'
 
 // 弹幕类型
-interface Danmaku {
+export interface Danmaku {
   id: number
   text: string
   time: number // 出现时间(秒)
@@ -157,6 +157,7 @@ const activeDanmaku = ref<(Danmaku & { style: Record<string, string>, offset: nu
 const danmakuTrackCount = 10 // 轨道数量
 // 记录每个弹幕ID对应的轨道（确保弹幕始终在同一轨道）
 const danmakuTrackMap = new Map<number, number>()
+const danmakuTracks = ref<number[]>(new Array(danmakuTrackCount).fill(0))
 // 记录每个轨道的"释放时间"，用于避免轨道冲突
 const trackReleaseTime = new Map<number, number>()
 // 滚动时长（秒）
@@ -869,7 +870,7 @@ watch(
           :class="dm.mode"
           :style="dm.style"
         >
-          <span class="easy-video__danmaku-text">{{ danmaku.text }}</span>
+          <span class="easy-video__danmaku-text">{{ dm.text }}</span>
         </div>
       </div>
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyCol, EasyRow } from 'easy-ui'
+import { EasyCol, EasyRow } from '@raopan/easy-ui'
 </script>
 
 <template>

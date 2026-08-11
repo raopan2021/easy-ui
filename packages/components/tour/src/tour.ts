@@ -82,7 +82,7 @@ function createTour(options: TourOptions): TourInstance {
   // 获取组件内部引用
   let componentRef: any = null
   nextTick(() => {
-    componentRef = container.querySelector('.easy-tour-popover')?.__vueParentComponent
+    componentRef = (container.querySelector('.easy-tour-popover') as any)?.__vueParentComponent
   })
 
   function destroy() {
@@ -155,7 +155,7 @@ function createTour(options: TourOptions): TourInstance {
  *
  * 使用方式：
  * ```ts
- * import { easy } from 'easy-ui'
+ * import { easy } from '@raopan/easy-ui'
  *
  * // 启动引导
  * const tour = easy.$tour({
@@ -177,5 +177,3 @@ function createTour(options: TourOptions): TourInstance {
 export function EasyTour(options: TourOptions): TourInstance {
   return createTour(options)
 }
-
-export type { TourInstance, TourOptions }

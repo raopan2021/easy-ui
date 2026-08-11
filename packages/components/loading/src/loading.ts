@@ -24,7 +24,7 @@ export interface LoadingOptions extends Omit<LoadingProps, 'modelValue'> {
   customClass?: string
 }
 
-interface LoadingInstance {
+export interface LoadingInstance {
   /** 关闭加载 */
   close: () => void
   /** 设置进度（仅 ring 类型有效） */
@@ -258,5 +258,3 @@ export function setupEasyLoading(app: App) {
     },
   })
 }
-
-export type { LoadingInstance, LoadingOptions }

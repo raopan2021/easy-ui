@@ -11,7 +11,7 @@ const props = withDefaults(defineProps<RowProps>(), {
   tag: 'div',
 })
 
-interface RowProps {
+export interface RowProps {
   /** 栅格间隔，支持像素值或响应式对象 { xs, sm, md, lg, xl } */
   gutter?: number | { xs?: number, sm?: number, md?: number, lg?: number, xl?: number }
   /** flex 布局，水平排列方式 */

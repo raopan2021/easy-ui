@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Check, Delete, Download, Edit, Plus, RefreshLeft, Search, Upload } from '@element-plus/icons-vue'
-import { EasyButton } from 'easy-ui'
+import { EasyButton } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 const loading = ref(false)

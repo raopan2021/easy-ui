@@ -78,7 +78,7 @@ export interface UploadFile {
   raw?: File
 }
 
-interface Props {
+export interface Props {
   /** v-model 绑定值，支持字符串数组或逗号拼接字符串 */
   modelValue?: string[] | string
   /** 返回值模式：array 返回数组，string 返回逗号拼接（每项 encodeURIComponent 编码） */
@@ -306,7 +306,7 @@ async function networkUpload(opts: { file: File, item: UploadFile }) {
   formData.append(fieldName, file)
   // 添加额外参数
   Object.entries(data).forEach(([key, value]) => {
-    formData.append(key, value)
+    formData.append(key, value as string | Blob)
   })
 
   try {

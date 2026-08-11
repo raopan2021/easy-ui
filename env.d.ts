@@ -7,9 +7,7 @@ declare module '*.vue' {
   export default component
 }
 
-declare module 'vue-router' {
-  interface RouteMeta {
-    /** 是否为公开页面（无需登录即可访问） */
-    public?: boolean
-  }
-}
+// @vue-office 系列无官方类型声明，提供空声明
+declare module '@vue-office/docx/lib/v3/vue-office-docx.mjs'
+declare module '@vue-office/excel/lib/v3/vue-office-excel.mjs'
+declare module '@vue-office/pdf/lib/v3/vue-office-pdf.mjs'

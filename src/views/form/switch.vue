@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasySwitch } from 'easy-ui'
+import { EasySwitch } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 const value1 = ref(true)

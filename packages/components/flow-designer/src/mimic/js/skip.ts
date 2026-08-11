@@ -8,7 +8,7 @@ class SkipModel extends CurvedEdgeModel {
     this.isHitable = false // 细粒度控制边是否对用户操作进行反应
   }
 
-  getEdgeStyle() {
+  getEdgeStyle(): any {
     return setCommonStyle(super.getEdgeStyle(), this.properties, 'skip', 'mimic')
   }
 
@@ -66,7 +66,7 @@ class SkipView extends CurvedEdge {
       // 如果上一个节点是互斥网关，并且网关后节点大于1个，也就是说是互斥网关结束节点时
       if ((model.sourceNode.type as string) === 'serial' && nextEdge.length > 1) {
         const midPoint = [points[0][0], points[0][1] + offsetY - 10]
-        plusElements = this.getForeignObject(midPoint, style.stroke, model.text.value)
+        plusElements = this.getForeignObject(midPoint, style.stroke ?? '', model.text.value ?? '')
       }
       else if (!model.properties.chartStatusColor) {
         const midPoint = [points[0][0], points[0][1] + offsetY]
@@ -87,7 +87,7 @@ class SkipView extends CurvedEdge {
       // 判断是否由横线变为竖线，并且是互斥网关
       if (model.sourceNode && (model.sourceNode.type as string) === 'serial' && p0[1] === p1[1] && p0[0] !== p1[0]) {
         const midPoint = [p2[0], p1[1] + offsetY]
-        plusElements = this.getForeignObject(midPoint, style.stroke, model.text.value)
+        plusElements = this.getForeignObject(midPoint, style.stroke ?? '', model.text.value ?? '')
       }
     }
 
@@ -190,7 +190,7 @@ class SkipView extends CurvedEdge {
     return this.getAddElements(midPoint, null)
   }
 
-  private getAddElements(midPoint: number[], obj, isCondition: boolean = false) {
+  private getAddElements(midPoint: number[], obj: any, isCondition: boolean = false) {
     if (!obj) {
       const x = midPoint[0]
       const y = midPoint[1]
@@ -247,13 +247,13 @@ class SkipView extends CurvedEdge {
     }
     else {
       return {
-        onMouseEnter: (e) => {
+        onMouseEnter: (e: any) => {
           this.props.graphModel.eventCenter.emit('show:EdgeTooltip', {
             e,
             id: this.props.model.id,
           })
         },
-        onMouseLeave: (e) => {
+        onMouseLeave: (e: any) => {
           setTimeout(() => {
             if (!(window as any).isTooltipHovered) {
               this.props.graphModel.eventCenter.emit('hide:EdgeTooltip', e)

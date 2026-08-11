@@ -262,7 +262,7 @@ defineExpose({
       </div>
 
       <!-- 滚动到底部按钮 -->
-      <button v-if="showScrollToBottom" class="easy-chat__scroll-btn" @click="scrollToBottom">
+      <button v-if="showScrollToBottom" class="easy-chat__scroll-btn" @click="scrollToBottom()">
         <EasyIcon name="el:ArrowDown" />
       </button>
     </div>

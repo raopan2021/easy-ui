@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyAvatar, EasyImage } from 'easy-ui'
+import { EasyAvatar, EasyImage } from '@raopan/easy-ui'
 
 // 示例图片
 const singleImage = 'https://picsum.photos/400/300?random=1'

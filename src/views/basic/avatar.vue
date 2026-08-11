@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyAvatar, EasyButton, EasyTag } from 'easy-ui'
+import { EasyAvatar, EasyButton, EasyTag } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 // 头像组数据

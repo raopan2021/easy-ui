@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useFormFields } from 'easy-ui'
+import { useFormFields } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 const {
@@ -336,7 +336,7 @@ async function submitFull() {
         </div>
       </div>
       <EasyDocCode
-        code="import {  useFormFields  } from 'easy-ui'
+        code="import {  useFormFields  } from '@raopan/easy-ui'
 
 const { input, textarea, password, rules } = useFormFields()
 
@@ -368,7 +368,7 @@ const fields = [
         </div>
       </div>
       <EasyDocCode
-        code="import {  useFormFields  } from 'easy-ui'
+        code="import {  useFormFields  } from '@raopan/easy-ui'
 
 const { select, cascader } = useFormFields()
 
@@ -419,7 +419,7 @@ const fields = [
         </div>
       </div>
       <EasyDocCode
-        code="import {  useFormFields  } from 'easy-ui'
+        code="import {  useFormFields  } from '@raopan/easy-ui'
 
 const { datePicker, dateRangePicker } = useFormFields()
 
@@ -455,7 +455,7 @@ const fields = [
         </div>
       </div>
       <EasyDocCode
-        code="import {  useFormFields  } from 'easy-ui'
+        code="import {  useFormFields  } from '@raopan/easy-ui'
 
 const { dateTimePicker, dateTimeRangePicker } = useFormFields()
 
@@ -487,7 +487,7 @@ const fields = [
         </div>
       </div>
       <EasyDocCode
-        code="import {  useFormFields  } from 'easy-ui'
+        code="import {  useFormFields  } from '@raopan/easy-ui'
 
 const { timePicker, timeRangePicker } = useFormFields()
 
@@ -519,7 +519,7 @@ const fields = [
         </div>
       </div>
       <EasyDocCode
-        code="import {  useFormFields  } from 'easy-ui'
+        code="import {  useFormFields  } from '@raopan/easy-ui'
 
 const { select } = useFormFields()
 
@@ -560,7 +560,7 @@ const fields = [
         </div>
       </div>
       <EasyDocCode
-        code="import {  useFormFields  } from 'easy-ui'
+        code="import {  useFormFields  } from '@raopan/easy-ui'
 
 const { inputSlot } = useFormFields()
 
@@ -590,7 +590,7 @@ const fields = [
         </div>
       </div>
       <EasyDocCode
-        code="import {  useFormFields  } from 'easy-ui'
+        code="import {  useFormFields  } from '@raopan/easy-ui'
 
 const { input, rules } = useFormFields()
 
@@ -646,7 +646,7 @@ const fields = [
         </div>
       </div>
       <EasyDocCode
-        code="import {  useFormFields  } from 'easy-ui'
+        code="import {  useFormFields  } from '@raopan/easy-ui'
 import { ElInput } from 'element-plus'
 const { custom } = useFormFields()
 
@@ -679,7 +679,7 @@ const fields = [
         </div>
       </div>
       <EasyDocCode
-        code="import {  useFormFields  } from 'easy-ui'
+        code="import {  useFormFields  } from '@raopan/easy-ui'
 
 const { sw, rate } = useFormFields()
 
@@ -705,7 +705,7 @@ const fields = [
         </div>
       </div>
       <EasyDocCode
-        code="import {  useFormFields  } from 'easy-ui'
+        code="import {  useFormFields  } from '@raopan/easy-ui'
 
 const { input } = useFormFields()
 
@@ -736,7 +736,7 @@ const fields = [
         </div>
       </div>
       <EasyDocCode
-        code="import {  useFormFields  } from 'easy-ui'
+        code="import {  useFormFields  } from '@raopan/easy-ui'
 
 const { input, select, sw, rules } = useFormFields()
 
@@ -771,7 +771,7 @@ const fields = [
         </div>
       </div>
       <EasyDocCode
-        code="import {  useFormFields  } from 'easy-ui'
+        code="import {  useFormFields  } from '@raopan/easy-ui'
 
 const {
   input, textarea, select,
@@ -833,7 +833,7 @@ import {
   EasyButton,
   EasyNumber,
   EasySuperForm,
-} from 'easy-ui'
+} from '@raopan/easy-ui'
 
 const { input, select, rules } = useFormFields()
 
@@ -939,7 +939,7 @@ const typeMap: Record<string, Component> = {
         步骤三：使用新组件
       </h3>
       <EasyDocCode
-        code="import {  useFormFields  } from 'easy-ui'
+        code="import {  useFormFields  } from '@raopan/easy-ui'
 
 const { number } = useFormFields()
 
@@ -956,7 +956,7 @@ const fields = [
         如果你只是想偶尔使用某个自定义组件，不需要修改源码，可以使用 <code>custom()</code> 生成器：
       </p>
       <EasyDocCode
-        code="import {  useFormFields  } from 'easy-ui'
+        code="import {  useFormFields  } from '@raopan/easy-ui'
 
 const { custom } = useFormFields()
 

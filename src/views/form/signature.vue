@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasySignature } from 'easy-ui'
+import { EasySignature } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 defineOptions({ name: 'SignatureDoc' })

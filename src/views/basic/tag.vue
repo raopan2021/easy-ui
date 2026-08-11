@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyTag } from 'easy-ui'
+import { EasyTag } from '@raopan/easy-ui'
 import { nextTick, ref } from 'vue'
 
 // 可关闭标签数据

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyIcon } from 'easy-ui'
+import { EasyIcon } from '@raopan/easy-ui'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useMenuLayoutStore } from '@/stores/menuLayout'

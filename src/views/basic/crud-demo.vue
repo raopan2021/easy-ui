@@ -15,7 +15,7 @@ import {
   min,
   minLength,
   required,
-} from 'easy-ui'
+} from '@raopan/easy-ui'
 import { onMounted, reactive, ref } from 'vue'
 
 defineOptions({ name: 'CrudDemo' })

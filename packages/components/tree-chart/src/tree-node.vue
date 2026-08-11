@@ -38,24 +38,24 @@ const nodeColor = computed(() => {
 
 // 展开状态
 const isExpanded = computed(() => {
-  const key = props.node[props.nodeConfig.keyField]
+  const key = props.node[props.nodeConfig.keyField as string]
   return props.expandedKeys?.has(key) ?? false
 })
 
 // 是否有子节点
 const hasChildren = computed(() => {
-  const children = props.node[props.nodeConfig.childrenField]
+  const children = props.node[props.nodeConfig.childrenField as string]
   return children && Array.isArray(children) && children.length > 0
 })
 
 // 子节点列表
 const children = computed(() => {
-  return props.node[props.nodeConfig.childrenField] || []
+  return props.node[props.nodeConfig.childrenField as string] || []
 })
 
 // 节点是否处于加载中
 const isLoading = computed(() => {
-  const key = props.node[props.nodeConfig.keyField]
+  const key = props.node[props.nodeConfig.keyField as string]
   return props.loadingKeys?.has(key) ?? false
 })
 
@@ -136,8 +136,8 @@ const nodeType = computed(() => {
       :style="{ '--node-color': nodeColor, ...nodeVars }"
       @click="handleNodeClick"
     >
-      <span class="tree-node__title">{{ node[nodeConfig.titleField] }}</span>
-      <span v-if="node[nodeConfig.descField]" class="tree-node__desc">{{ node[nodeConfig.descField] }}</span>
+      <span class="tree-node__title">{{ node[nodeConfig.titleField as string] }}</span>
+      <span v-if="node[nodeConfig.descField as string]" class="tree-node__desc">{{ node[nodeConfig.descField as string] }}</span>
       <!-- 加载中状态 -->
       <span v-if="isLoading" class="tree-node__loading">
         <svg class="tree-node__loading-icon" width="16" height="16" viewBox="0 0 24 24">
@@ -211,7 +211,7 @@ const nodeType = computed(() => {
     <div v-if="hasChildren && isExpanded" class="tree-children">
       <TreeNode
         v-for="(child, index) in children"
-        :key="child[nodeConfig.keyField] ?? index"
+        :key="child[nodeConfig.keyField as string] ?? index"
         :node="child"
         :node-config="nodeConfig"
         :layout="layout"

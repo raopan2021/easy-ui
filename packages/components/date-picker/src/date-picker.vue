@@ -234,13 +234,13 @@ function isMonthSelected(month: number) {
   return props.modelValue === `${panelYear.value}-${String(month + 1).padStart(2, '0')}`
 }
 
-function isRangeStart() {
+function isRangeStart(_day: unknown) {
   return false
 }
-function isRangeEnd() {
+function isRangeEnd(_day: unknown) {
   return false
 }
-function isInRange() {
+function isInRange(_day: unknown) {
   return false
 }
 

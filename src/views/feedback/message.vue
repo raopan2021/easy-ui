@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { easy, EasyButton } from 'easy-ui'
+import { easy, EasyButton } from '@raopan/easy-ui'
 
 function handleSave() {
   setTimeout(() => {
@@ -55,7 +55,7 @@ function handleCopy() {
           </EasyButton>
         </div>
         <EasyDocCode
-          code="import { easy } from 'easy-ui'
+          code="import { easy } from '@raopan/easy-ui'
 
 easy.$msg.success('保存成功')
 easy.$msg.warning('请注意')
@@ -260,7 +260,7 @@ function handleCopy() {
         easy.$msg
       </h3>
       <p class="doc-section__desc" style="margin-bottom: 12px">
-        通过统一入口 <code>import { easy } from 'easy-ui'</code>， 在任意位置调用 <code>easy.$msg</code> 消息方法。
+        通过统一入口 <code>import { easy } from '@raopan/easy-ui'</code>， 在任意位置调用 <code>easy.$msg</code> 消息方法。
       </p>
 
       <h3 class="doc-subtitle">

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyButton, EasyUpload } from 'easy-ui'
+import { EasyButton, EasyUpload } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 // ---- 基础用法 ----

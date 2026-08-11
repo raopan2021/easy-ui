@@ -12,7 +12,7 @@ class ParallelView extends GatewayView {
     height: number,
     textValue: string,
     style: { stroke: string, fill: string },
-  ) {
+  ): any {
     // 创建一个包含图标和文本的容器
     return h('g', {}, [
       // 图标 SVG

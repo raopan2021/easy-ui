@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyCarousel } from 'easy-ui'
+import { EasyCarousel } from '@raopan/easy-ui'
 
 const basicImages = [
   'https://picsum.photos/seed/carousel-a/800/400',

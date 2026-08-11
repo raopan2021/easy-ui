@@ -1108,7 +1108,8 @@ const gaugeArcs = computed((): GaugeArc[] => {
   const r = gaugeR.value
   const colors = props.colors?.length ? props.colors : ['#3b82f6', '#10b981', '#f59e0b', '#ef4444']
   // 如果 data 传了区段信息就按 data 分段，否则按 4 等分上色
-  const segments = props.data?.length ? props.data : colors.map((c, _i) => ({ name: '', value: 1, color: c }))
+  const segments: Array<{ name: string, value: number, color?: string }>
+    = props.data?.length ? props.data : colors.map((c, _i) => ({ name: '', value: 1, color: c }))
   const total = segments.reduce((s, d) => s + d.value, 0)
   let cur = GAUGE_START_DEG
   return segments.map((seg, i) => {

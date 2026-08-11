@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { CircleCheckFilled, WarningFilled } from '@element-plus/icons-vue'
-import { EasyButton, EasyModal } from 'easy-ui'
+import { EasyButton, EasyModal } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 const basicVisible = ref(false)

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import * as EpIcons from '@element-plus/icons-vue'
-import { easy, EasyIcon, getSvgIconNames } from 'easy-ui'
+import { easy, EasyIcon, getSvgIconNames } from '@raopan/easy-ui'
 import { computed } from 'vue'
 
 /** 常用基础 Element Plus 图标 */

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyFilePreview } from 'easy-ui'
+import { EasyFilePreview } from '@raopan/easy-ui/file-preview'
 
 // ==================== OSS 公网示例文件 ====================
 const OSS = 'https://Easyoa.oss-cn-hangzhou.aliyuncs.com/xly/test'

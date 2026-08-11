@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyWorktab } from 'easy-ui'
+import { EasyWorktab } from '@raopan/easy-ui'
 import { computed, nextTick, ref, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
 import menuData from '@/data/menu.json'

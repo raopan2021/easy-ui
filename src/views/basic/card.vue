@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyButton, EasyCard, EasyIcon } from 'easy-ui'
+import { EasyButton, EasyCard, EasyIcon } from '@raopan/easy-ui'
 </script>
 
 <template>

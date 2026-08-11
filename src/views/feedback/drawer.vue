@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { CircleCheckFilled, Document, HomeFilled, Setting, UserFilled, WarningFilled } from '@element-plus/icons-vue'
-import { EasyButton, EasyDrawer, EasyTag } from 'easy-ui'
+import { EasyButton, EasyDrawer, EasyTag } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 // 基础用法

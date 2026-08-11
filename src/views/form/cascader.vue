@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyCascader } from 'easy-ui'
+import { EasyCascader } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 const val1 = ref<(string | number)[]>([])

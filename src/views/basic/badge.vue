@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { BadgeInstance } from 'easy-ui'
-import { easy } from 'easy-ui'
+import type { BadgeInstance } from '@raopan/easy-ui'
+import { easy } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 const newMsg = 8
@@ -452,7 +452,7 @@ type=&quot;info&quot;     // 灰色"
           </easy-button>
         </div>
         <EasyDocCode
-          code="import { easy } from 'easy-ui'
+          code="import { easy } from '@raopan/easy-ui'
 
 // 在元素上显示徽标
 const badge = easy.$badge.open(el, { value: 5 })

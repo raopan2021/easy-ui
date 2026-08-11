@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyDrawer } from 'easy-ui'
+import { EasyDrawer } from '@raopan/easy-ui'
 import { computed, ref } from 'vue'
 
 defineOptions({ name: 'MessageDrawer' })

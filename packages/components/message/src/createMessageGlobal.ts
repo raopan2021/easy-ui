@@ -12,4 +12,4 @@
  * msg.success('操作成功')
  * ```
  */
-export { useEasyMessage as EasyMessage } from './install'
+export { useMessage as EasyMessage } from './useMessage'

@@ -49,7 +49,7 @@ export interface SuperField {
   /** 结束日期/时间字段名（范围组件用） */
   endProp?: string
   /** 远程搜索方法（用于 select/cascader 组件） */
-  remoteMethod?: (query: string, instance: any) => void
+  remoteMethod?: (query: string, instance: any) => any[] | Promise<any[]> | void
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -96,11 +96,11 @@ export interface FieldRule {
 }
 
 /** 通用对象 */
-interface AnyObj { [key: string]: any }
+export interface AnyObj { [key: string]: any }
 
 // ============ Props ============
 
-interface Props {
+export interface Props {
   /** 表单数据对象（支持双向绑定） */
   modelValue?: AnyObj
   /** 字段配置 */
@@ -222,7 +222,7 @@ function getFieldProps(field: SuperField): Record<string, any> {
       }
 
       // 用户返回数组或 Promise，组件自动填充
-      let result = field.remoteMethod!(query)
+      let result = field.remoteMethod!(query, instance)
       if (result instanceof Promise) {
         result = await result
       }
@@ -405,7 +405,7 @@ defineExpose({
             <component
               :is="getComponent(field)"
               v-bind="getFieldProps(field)"
-              :ref="(el) => setFieldRef(field.prop, el)"
+              :ref="(el: any) => setFieldRef(field.prop, el)"
               v-model:start="formData[field.startProp!]"
               v-model:end="formData[field.endProp!]"
             />
@@ -415,7 +415,7 @@ defineExpose({
             <component
               :is="getComponent(field)"
               v-bind="getFieldProps(field)"
-              :ref="(el) => setFieldRef(field.prop, el)"
+              :ref="(el: any) => setFieldRef(field.prop, el)"
               v-model="formData[field.prop]"
             >
               <template v-if="field.props?.prefix" #prepend>

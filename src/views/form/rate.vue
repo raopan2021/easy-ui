@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyRate } from 'easy-ui'
+import { EasyRate } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 const val1 = ref(3)

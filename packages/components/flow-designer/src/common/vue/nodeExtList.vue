@@ -5,6 +5,15 @@ import EasyInput from '../../../../input'
 import EasyRadio, { EasyRadioGroup } from '../../../../radio'
 import EasySelect from '../../../../select'
 
+interface ExtField {
+  label: string
+  code: string
+  must: boolean
+  type: number
+  multiple?: boolean
+  dict?: Array<{ label: string, value: string }>
+}
+
 const props = defineProps({
   modelValue: {
     type: Object,
@@ -13,7 +22,7 @@ const props = defineProps({
     },
   },
   formList: {
-    type: Array,
+    type: Array as () => ExtField[],
     default() {
       return []
     },
@@ -53,7 +62,7 @@ defineExpose({ validate })
       :key="index"
       :label="`${item.label}：`"
       :prop="item.code"
-      :rules="[{ required: item.must, message: `${item.label}不能为空`, trigger: ['blur', 'change'] }]"
+      :rules="[{ required: item.must, message: `${item.label}不能为空`, trigger: ['blur', 'change'] }] as any"
     >
       <!-- 单行文本 -->
       <EasyInput v-if="item.type === 1" v-model="form[item.code]" placeholder="请输入" />
@@ -65,13 +74,13 @@ defineExpose({ validate })
         v-model="form[item.code]"
         clearable
         :multiple="item.multiple || false"
-        :options="item.dict.map((d: any) => ({ label: d.label, value: d.value }))"
+        :options="item.dict!.map((d: any) => ({ label: d.label, value: d.value }))"
       />
       <!-- Radio / Checkbox -->
       <div v-else-if="item.type === 4">
         <EasyRadioGroup v-if="!item.multiple" v-model="form[item.code]">
           <el-row :gutter="20">
-            <el-col v-for="(dItem, dIndex) in item.dict" :key="dIndex" :span="item.dict.length < 3 ? undefined : 8">
+            <el-col v-for="(dItem, dIndex) in item.dict!" :key="dIndex" :span="item.dict!.length < 3 ? undefined : 8">
               <EasyRadio :label="String(dItem.value)">
                 {{ dItem.label }}
               </EasyRadio>
@@ -80,7 +89,7 @@ defineExpose({ validate })
         </EasyRadioGroup>
         <el-checkbox-group v-else v-model="form[item.code]">
           <el-row :gutter="20">
-            <el-col v-for="(dItem, dIndex) in item.dict" :key="dIndex" :span="item.dict.length < 3 ? undefined : 8">
+            <el-col v-for="(dItem, dIndex) in item.dict!" :key="dIndex" :span="item.dict!.length < 3 ? undefined : 8">
               <el-checkbox :label="String(dItem.value)">
                 {{ dItem.label }}
               </el-checkbox>

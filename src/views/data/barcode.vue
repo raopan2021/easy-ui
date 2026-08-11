@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyBarcode, EasyButton } from 'easy-ui'
+import { EasyBarcode, EasyButton } from '@raopan/easy-ui'
 import { ElInput, ElMessage } from 'element-plus'
 import { ref } from 'vue'
 

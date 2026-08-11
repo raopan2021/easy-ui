@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { MapDataItem, MapDataSet } from 'easy-ui'
-import { EasyChinaMap } from 'easy-ui'
+import type { MapDataItem, MapDataSet } from '@raopan/easy-ui'
+import { EasyChinaMap } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 // ===== 标签模式 =====

@@ -1,5 +1,5 @@
 <script setup>
-import { EasyGantt } from 'easy-ui'
+import { EasyGantt } from '@raopan/easy-ui'
 import { ElAvatar } from 'element-plus'
 import { ref } from 'vue'
 

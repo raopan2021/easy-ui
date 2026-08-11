@@ -10,7 +10,7 @@
  */
 
 /** SVG 文件内容原始映射（Vite import.meta.glob 生成，eager 模式同步加载） */
-const svgModules = import.meta.glob<{ default: string }>('../../assets/icon/svg/*.svg', {
+const svgModules = import.meta.glob<string>('../../assets/icon/svg/*.svg', {
   query: '?raw',
   import: 'default',
   eager: true,

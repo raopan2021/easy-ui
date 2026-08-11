@@ -42,23 +42,23 @@ const iconMap: Record<string, string> = {
 
 // 仅保留定位相关的 inline style，其余全部交给 CSS class
 const tooltipPosition = computed(() => ({
-  top: `${props.position.y - 80}px`,
-  left: `${props.position.x}px`,
+  top: `${props.position!.y - 80}px`,
+  left: `${props.position!.x}px`,
   position: 'absolute' as const,
   pointerEvents: 'auto' as const,
 }))
 
 function handleTooltipEnter() {
-  window.isTooltipHovered = true
+  ;(window as any).isTooltipHovered = true
 }
 
 function handleTooltipLeave() {
-  window.isTooltipHovered = false
+  ;(window as any).isTooltipHovered = false
   emit('close-tooltip')
 }
 
 function handleClick(item: { icon: string, label: string }) {
-  const content = {
+  const content: Record<string, any> = {
     label: item.label,
     icon: item.icon === 'check' ? 'between' : item.icon,
   }

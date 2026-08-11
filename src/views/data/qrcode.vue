@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyButton, EasyQrcode } from 'easy-ui'
+import { EasyButton, EasyQrcode } from '@raopan/easy-ui'
 import { ElInput, ElMessage } from 'element-plus'
 import { ref } from 'vue'
 

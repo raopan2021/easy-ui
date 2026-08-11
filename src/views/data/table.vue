@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { TableColumn } from 'easy-ui'
-import { EasyTable, EasyTag } from 'easy-ui'
+import type { TableColumn } from '@raopan/easy-ui'
+import { EasyTable, EasyTag } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 /* -------------------- 展开行 -------------------- */

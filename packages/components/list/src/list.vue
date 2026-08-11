@@ -91,7 +91,7 @@ function isImageUrl(url: string): boolean {
     <div class="easy-list__body" :style="{ maxHeight }">
       <!-- 加载中 -->
       <div v-if="loading" class="easy-list__loading">
-        <EasyLoading size="20px" />
+        <EasyLoading :size="20" />
         <span>加载中...</span>
       </div>
 

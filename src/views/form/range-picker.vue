@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyDateRangePicker, EasyDateTimeRangePicker, EasyTimeRangePicker } from 'easy-ui'
+import { EasyDateRangePicker, EasyDateTimeRangePicker, EasyTimeRangePicker } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 // 日期范围

@@ -10,7 +10,7 @@ import { vEasyTour } from '../../../components/tour'
  *
  * 使用方式：
  * ```ts
- * import { easy } from 'easy-ui'
+ * import { easy } from '@raopan/easy-ui'
  *
  * // 消息提示
  * easy.$msg.success('操作成功')
@@ -47,7 +47,7 @@ export const easy = {
  *
  * 在 main.ts 中调用：
  * ```ts
- * import { setupEasy } from 'easy-ui'
+ * import { setupEasy } from '@raopan/easy-ui'
  * setupEasy(app)
  * ```
  *

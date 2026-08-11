@@ -34,4 +34,18 @@ export default antfu({
   rules: {
     'no-console': ['error', { allow: ['warn', 'error'] }],
   },
+}, {
+  // 单元测试：使用 test 关键字 + 中文描述；vi.mock 后导入被测模块是 vitest 惯例
+  files: ['**/__tests__/**/*.{ts,tsx}'],
+  rules: {
+    'test/consistent-test-it': 'off',
+    'test/prefer-lowercase-title': 'off',
+    'import/first': 'off',
+  },
+}, {
+  // build 目录（打包脚本）：允许 console.log 输出进度/提示
+  files: ['build/**/*.ts'],
+  rules: {
+    'no-console': 'off',
+  },
 })

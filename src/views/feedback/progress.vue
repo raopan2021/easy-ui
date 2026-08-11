@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyProgress } from 'easy-ui'
+import { EasyProgress } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 const uploadProgress = ref(0)

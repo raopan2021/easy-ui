@@ -126,7 +126,7 @@ export interface SearchItem {
   hiddenWhenCollapsed?: boolean
 }
 
-interface Props {
+export interface Props {
   /** 搜索项配置 */
   items?: SearchItem[]
   /** 初始数据 */
@@ -267,7 +267,7 @@ const searchActionsRef = ref()
 const spanColumns = ref(1)
 let resizeObserver: ResizeObserver | null = null
 const searchActionsStyle = computed<Record<string, string>>(() =>
-  spanColumns.value > 1 ? { gridColumn: `span ${spanColumns.value}` } : {},
+  spanColumns.value > 1 ? { gridColumn: `span ${spanColumns.value}` } : { gridColumn: 'auto' },
 )
 // 测量按钮区自然总宽，计算需要占据的单元格数
 async function measureActions() {
@@ -379,7 +379,7 @@ onUnmounted(() => {
             <EasyInputRange
               v-else-if="item.type === 'range'"
               v-model:start="formData[item.prop]"
-              v-model:end="formData[item.endProp]"
+              v-model:end="formData[item.endProp!]"
               :start-placeholder="item.startPlaceholder"
               :end-placeholder="item.endPlaceholder"
               :clearable="item.clearable !== false"
@@ -435,7 +435,7 @@ onUnmounted(() => {
             <EasyDateRangePicker
               v-else-if="item.type === 'daterange'"
               v-model:start="formData[item.prop]"
-              v-model:end="formData[item.endProp]"
+              v-model:end="formData[item.endProp!]"
               :start-placeholder="item.startPlaceholder"
               :end-placeholder="item.endPlaceholder"
               :clearable="item.clearable !== false"
@@ -461,7 +461,7 @@ onUnmounted(() => {
             <EasyDateTimeRangePicker
               v-else-if="item.type === 'datetimerange'"
               v-model:start="formData[item.prop]"
-              v-model:end="formData[item.endProp]"
+              v-model:end="formData[item.endProp!]"
               :start-placeholder="item.startPlaceholder"
               :end-placeholder="item.endPlaceholder"
               :clearable="item.clearable !== false"
@@ -486,7 +486,7 @@ onUnmounted(() => {
             <EasyTimeRangePicker
               v-else-if="item.type === 'timerange'"
               v-model:start="formData[item.prop]"
-              v-model:end="formData[item.endProp]"
+              v-model:end="formData[item.endProp!]"
               :start-placeholder="item.startPlaceholder"
               :end-placeholder="item.endPlaceholder"
               :clearable="item.clearable !== false"

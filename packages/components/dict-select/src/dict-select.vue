@@ -240,7 +240,7 @@ defineExpose({ reload: loadDict, dictList })
 
 <template>
   <EasySelect
-    :model-value="modelValue"
+    :model-value="modelValue as any"
     :options="normalizedOptions"
     :placeholder="placeholder"
     :disabled="disabled"

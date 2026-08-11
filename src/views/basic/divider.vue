@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyDivider, EasyTag } from 'easy-ui'
+import { EasyDivider, EasyTag } from '@raopan/easy-ui'
 </script>
 
 <template>

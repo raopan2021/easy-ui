@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyButton, EasyImageCropper } from 'easy-ui'
+import { EasyButton, EasyImageCropper } from '@raopan/easy-ui'
 import { ElMessage } from 'element-plus'
 import { ref } from 'vue'
 

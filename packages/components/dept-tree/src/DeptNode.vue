@@ -96,7 +96,7 @@ function handleToggle() {
     <div v-if="hasChildren && isExpanded" class="dept-node__children">
       <DeptNode
         v-for="child in nodeChildren"
-        :key="child[nodeKey.id]"
+        :key="String(child[nodeKey.id])"
         :node="child"
         :node-key="nodeKey"
         :node-style="nodeStyle"
@@ -107,7 +107,7 @@ function handleToggle() {
         :expanded-set="expandedSet"
         :depth="depth + 1"
         @select="$emit('select', $event)"
-        @toggle="$emit('toggle', $event, arguments[1])"
+        @toggle="(node, expanded) => $emit('toggle', node, expanded)"
       />
     </div>
   </div>

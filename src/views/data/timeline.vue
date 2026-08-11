@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { CircleCheckFilled, Message, Star } from '@element-plus/icons-vue'
-import { EasyTag, EasyTimeline, EasyTimelineItem } from 'easy-ui'
+import { EasyTag, EasyTimeline, EasyTimelineItem } from '@raopan/easy-ui'
 </script>
 
 <template>

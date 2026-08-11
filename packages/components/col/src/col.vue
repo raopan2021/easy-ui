@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<ColProps>(), {
   pull: undefined,
 })
 
-interface ColProps {
+export interface ColProps {
   /** 栅格占位格数（0-24） */
   span?: number
   /** 栅格左侧间隔格数 */

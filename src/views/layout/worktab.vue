@@ -319,7 +319,7 @@ worktabRef.value?.onTabsChange()"
         code="<script setup lang=&quot;ts&quot;>
 import { ref, watch, nextTick } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
-import { EasyWorktab } from 'easy-ui'
+import { EasyWorktab } from '@raopan/easy-ui'
 import { useTabsStore } from '@/stores/tabs'
 
 const route = useRoute()

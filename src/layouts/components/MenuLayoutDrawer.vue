@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { MenuLayout } from '@/stores/menuLayout'
-import { EasyDrawer } from 'easy-ui'
+import { EasyDrawer } from '@raopan/easy-ui'
 import { computed } from 'vue'
 import { useMenuLayoutStore } from '@/stores/menuLayout'
 

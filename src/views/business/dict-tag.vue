@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyDictTag } from 'easy-ui'
+import { EasyDictTag } from '@raopan/easy-ui'
 
 const tableData = [
   { name: '张三', status: '1', role: 'admin', gender: '1', roles: 'admin,editor' },

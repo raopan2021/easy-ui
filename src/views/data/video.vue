@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyVideo } from 'easy-ui'
+import { EasyVideo } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 // 弹幕类型

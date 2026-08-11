@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyButton, EasyEmpty } from 'easy-ui'
+import { EasyButton, EasyEmpty } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 const keyword = ref('')

@@ -1,28 +1,89 @@
 {
-  "name": "easy-ui",
-  "type": "module",
+  "name": "@raopan/easy-ui",
   "version": "1.0.0",
+  "type": "module",
   "description": "Vue 3 企业级组件库，基于 Element Plus 扩展",
-  "sideEffects": false,
-  "exports": {
-    ".": "./src/index.ts",
-    "./*": "./src/*"
+  "license": "MIT",
+  "author": "莫名 (1447455287@qq.com)",
+  "keywords": [
+    "vue",
+    "vue3",
+    "component-library",
+    "element-plus",
+    "easy-ui",
+    "ui"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raopan2021/easy-ui.git"
   },
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
+  "homepage": "https://github.com/raopan2021/easy-ui#readme",
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "sideEffects": [
+    "**/*.css",
+    "**/*.scss",
+    "**/*.vue",
+    "dist/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/easy-ui/src/index.d.ts",
+      "import": "./dist/index.mjs"
+    },
+    "./file-preview": {
+      "types": "./dist/easy-ui/file-preview.d.ts",
+      "import": "./dist/file-preview.mjs"
+    },
+    "./flow-designer": {
+      "types": "./dist/easy-ui/flow-designer.d.ts",
+      "import": "./dist/flow-designer.mjs"
+    },
+    "./dist/easy-ui.css": "./dist/easy-ui.css",
+    "./dist/index.mjs": "./dist/index.mjs",
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/easy-ui/src/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
-    "build": "vite build && vue-tsc -p tsconfig.lib.json",
+    "build": "vite build && pnpm build:types",
+    "build:types": "vue-tsc -p tsconfig.lib.json",
     "dev": "vite build --watch",
-    "type-check": "vue-tsc --noEmit -p tsconfig.json"
+    "type-check": "vue-tsc --noEmit -p tsconfig.json",
+    "prepublishOnly": "pnpm build"
   },
   "peerDependencies": {
     "@element-plus/icons-vue": "^2.3.2",
     "element-plus": "^2.13.6",
     "vue": "^3.5.29",
-    "vue-router": "^5.0.3"
+    "vue-router": "^5.0.3",
+    "@logicflow/core": "^2.1.11",
+    "@logicflow/extension": "^2.1.15",
+    "@vue-office/docx": "^1.6.3",
+    "@vue-office/excel": "^1.7.14",
+    "@vue-office/pdf": "^2.0.10",
+    "cropperjs": "1.6.2",
+    "crypto-js": "^4.2.0",
+    "echarts": "^6.0.0",
+    "highlight.js": "^11.11.1",
+    "jsbarcode": "^3.12.3",
+    "jszip": "^3.10.1",
+    "markdown-it": "^14.1.1",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "2.16.105",
+    "pptx-preview": "^1.0.7",
+    "qrcode": "^1.5.4"
   },
   "peerDependenciesMeta": {
     "@logicflow/core": {

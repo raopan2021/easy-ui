@@ -222,7 +222,7 @@ function handleRemove(user: UserItem) {
     const idx = currentValues.findIndex(v => String(v) === String(value))
     if (idx > -1) {
       currentValues.splice(idx, 1)
-      emitValue(currentValues)
+      emitValue(currentValues as any)
     }
   }
   else {

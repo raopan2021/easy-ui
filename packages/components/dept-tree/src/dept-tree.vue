@@ -21,7 +21,7 @@ const emit = defineEmits<{
   toggle: [node: TreeNode, expanded: boolean]
 }>()
 
-interface TreeNode {
+export interface TreeNode {
   id?: string | number
   pid?: string | number
   label?: string
@@ -29,14 +29,14 @@ interface TreeNode {
   [key: string]: unknown
 }
 
-interface NodeKey {
+export interface NodeKey {
   id: string
   pid?: string
   label?: string
   children?: string
 }
 
-interface Props {
+export interface Props {
   data?: TreeNode[] | null
   nodeKey?: NodeKey
   nodeStyle?: Record<string, string>
@@ -73,7 +73,7 @@ function buildTree(list: TreeNode[], nodeKey: NodeKey): TreeNode[] {
 
   // 建立映射
   list.forEach((item) => {
-    const id = item[idKey]
+    const id = item[idKey] as string | number | undefined
     if (id !== undefined) {
       map.set(id, { ...item, [childrenKey]: item[childrenKey] || [] })
     }
@@ -81,19 +81,19 @@ function buildTree(list: TreeNode[], nodeKey: NodeKey): TreeNode[] {
 
   // 构建树
   list.forEach((item) => {
-    const id = item[idKey]
-    const pid = item[pidKey]
+    const id = item[idKey] as string | number | undefined
+    const pid = item[pidKey] as string | number | undefined
 
     if (pid === undefined || pid === null || pid === '') {
-      roots.push(map.get(id)!)
+      roots.push(map.get(id as string | number)!)
     }
     else {
-      const parent = map.get(pid)
+      const parent = map.get(pid as string | number)
       if (parent) {
-        ;(parent[childrenKey] as TreeNode[]).push(map.get(id)!)
+        ;(parent[childrenKey] as TreeNode[]).push(map.get(id as string | number)!)
       }
       else {
-        roots.push(map.get(id)!)
+        roots.push(map.get(id as string | number)!)
       }
     }
   })
@@ -116,8 +116,8 @@ watch(
 
 // 处理选中
 function handleSelect(node: TreeNode) {
-  const id = node[props.nodeKey.id]
-  selectedId.value = id
+  const id = node[props.nodeKey.id] as string | number | undefined
+  selectedId.value = id ?? null
   emit('select', node)
 }
 
@@ -146,7 +146,7 @@ function handleToggle(node: TreeNode, expanded: boolean) {
     <div v-else class="easy-dept-tree__content">
       <DeptNode
         v-for="node in treeData"
-        :key="node[nodeKey.id]"
+        :key="String(node[nodeKey.id])"
         :node="node"
         :node-key="nodeKey"
         :node-style="nodeStyle"

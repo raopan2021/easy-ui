@@ -3,7 +3,7 @@ const NODE_TYPE_MAP = { 0: 'start', 1: 'between', 2: 'end', 3: 'serial', 4: 'par
 /**
  * 将warm-flow的定义json数据转成LogicFlow支持的数据格式
  * @param {*} json
- * @returns LogicFlow的数据
+ * @returns {any} LogicFlow的数据
  */
 export function json2LogicFlowJson(definition) {
   const graphData = {
@@ -247,11 +247,11 @@ export function logicFlowJsonToWarmFlow(data) {
 }
 
 /**
- * @param {object} style - 样式对象
- * @param {object} properties - 属性对象
- * @param {object} type - 类型
- * @param {object} nodeType - 分类
- * @returns {object} 返回样式对象
+ * @param {any} style - 样式对象
+ * @param {any} properties - 属性对象
+ * @param {string} nodeType - 类型
+ * @param {string} type - 分类
+ * @returns {any} 返回样式对象
  */
 export function setCommonStyle(style, properties, nodeType, type) {
   // 从 chartStatusColor 数组中提取颜色值

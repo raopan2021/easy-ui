@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { easy, EasyTour } from 'easy-ui'
+import { easy, EasyTour } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 // ==================== 基础用法 ====================
@@ -296,7 +296,7 @@ function onTourChange(current: number) {
         命令式调用
       </h2>
       <p class="doc-section__desc">
-        通过 <code>easy.$tour</code> 快速启动引导，无需在模板中写组件。统一入口：<code>import { easy } from 'easy-ui'</code>
+        通过 <code>easy.$tour</code> 快速启动引导，无需在模板中写组件。统一入口：<code>import { easy } from '@raopan/easy-ui'</code>
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body doc-preview__body--column">
@@ -319,7 +319,7 @@ function onTourChange(current: number) {
           </div>
         </div>
         <EasyDocCode
-          code="import { easy } from 'easy-ui'
+          code="import { easy } from '@raopan/easy-ui'
 
 // 命令式启动引导
 easy.$tour({

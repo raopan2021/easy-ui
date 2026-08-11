@@ -37,7 +37,7 @@ function formatNumber(num: number, precision: number = 0): string {
   return formattedInteger
 }
 
-interface Props {
+export interface Props {
   // 基础
   title?: string
   value: number | string
@@ -85,31 +85,33 @@ const formattedValue = computed(() => {
 })
 
 // 数值增长动画
-onMounted(() => {
-  if (props.animated && typeof props.value === 'number') {
-    const startTime = Date.now()
-    const startValue = 0
-    const endValue = props.value
+function startAnimate() {
+  if (!props.animated || typeof props.value !== 'number')
+    return
+  const startTime = Date.now()
+  const startValue = 0
+  const endValue = props.value
 
-    const animate = () => {
-      const elapsed = Date.now() - startTime
-      const progress = Math.min(elapsed / props.animationDuration!, 1)
+  const animate = () => {
+    const elapsed = Date.now() - startTime
+    const progress = Math.min(elapsed / props.animationDuration!, 1)
 
-      // 缓动函数
-      const easeProgress = progress === 1 ? 1 : 1 - 2 ** (-10 * progress)
-      animatedValue.value = startValue + (endValue - startValue) * easeProgress
+    // 缓动函数
+    const easeProgress = progress === 1 ? 1 : 1 - 2 ** (-10 * progress)
+    animatedValue.value = startValue + (endValue - startValue) * easeProgress
 
-      if (progress < 1) {
-        requestAnimationFrame(animate)
-      }
-      else {
-        emit('animationComplete')
-      }
+    if (progress < 1) {
+      requestAnimationFrame(animate)
     }
-
-    requestAnimationFrame(animate)
+    else {
+      emit('animationComplete')
+    }
   }
-})
+
+  requestAnimationFrame(animate)
+}
+
+onMounted(startAnimate)
 
 // 监听数值变化
 watch(
@@ -117,7 +119,7 @@ watch(
   (newVal) => {
     if (props.animated && typeof newVal === 'number') {
       animatedValue.value = 0
-      onMounted()
+      startAnimate()
     }
   },
 )

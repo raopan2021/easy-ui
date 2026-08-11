@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyIcon, EasyStep, EasySteps } from 'easy-ui'
+import { EasyIcon, EasyStep, EasySteps } from '@raopan/easy-ui'
 import { computed, ref } from 'vue'
 
 const basicActive = ref(1)

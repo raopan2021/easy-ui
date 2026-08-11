@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyTimePicker } from 'easy-ui'
+import { EasyTimePicker } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 const val1 = ref('')

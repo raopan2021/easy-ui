@@ -196,7 +196,8 @@ function buildOptions(
 ): MsgBoxOptions {
   if (typeof title === 'object') {
     // title 实际上是 options 对象
-    return { message, ...title }
+    const { message: customMessage, ...rest } = title
+    return { message: customMessage ?? message, ...rest }
   }
   return { message, title: title || '提示', ...options }
 }

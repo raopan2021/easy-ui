@@ -6,10 +6,11 @@ export function getStyle(element: HTMLElement, styleName: keyof CSSStyleDeclarat
 
   const value = element.style[styleName]
   if (value)
-    return value
+    return typeof value === 'string' ? value : undefined
 
   const computed = document.defaultView?.getComputedStyle(element, '')
-  return computed ? computed[styleName] : undefined
+  const v = computed ? computed[styleName] : undefined
+  return typeof v === 'string' ? v : undefined
 }
 
 export function classNameToArray(cls = '') {

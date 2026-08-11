@@ -2,10 +2,15 @@
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.tsbuildinfo",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "paths": {
       "@/*": ["./src/*"]
     },
-    "noUncheckedIndexedAccess": true
+    "types": ["vite/client"],
+    "allowJs": true,
+    "checkJs": false,
+    // 库组件代码为宽松写法（从 xly-admin-pro 迁移），覆盖基类 @vue/tsconfig 的默认值
+    "noUncheckedIndexedAccess": false
   },
   "include": ["src/**/*", "src/**/*.vue"],
   "exclude": ["src/**/__tests__/*"]

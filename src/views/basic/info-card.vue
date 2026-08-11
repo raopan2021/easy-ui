@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyInfoCard } from 'easy-ui'
+import { EasyInfoCard } from '@raopan/easy-ui'
 import { ElMessage } from 'element-plus'
 
 const demoImage = 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=200&h=150&fit=crop'

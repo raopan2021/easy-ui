@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { ChatAttachment, ChatMessage } from 'easy-ui'
-import { EasyChat, EasyChatInput } from 'easy-ui'
+import type { ChatAttachment, ChatMessage } from '@raopan/easy-ui'
+import { EasyChat, EasyChatInput } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 // 输入框组件

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyUserPicker } from 'easy-ui'
+import { EasyUserPicker } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 // 单选

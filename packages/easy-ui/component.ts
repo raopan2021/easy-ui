@@ -23,9 +23,7 @@ import { EasyDocCode } from '../components/doc-code'
 import { EasyDrawer } from '../components/drawer'
 import { EasyDropdown, EasyDropdownItem } from '../components/dropdown'
 import { EasyEmpty } from '../components/empty'
-import { EasyFilePreview } from '../components/file-preview'
 import { EasyFileUpload } from '../components/file-upload'
-import { EasyFlowDesigner } from '../components/flow-designer'
 import { EasyForm, EasyFormItem } from '../components/form'
 import { EasyGantt } from '../components/gantt'
 import { EasyIcon } from '../components/icon'
@@ -94,9 +92,7 @@ const Components: Plugin[] = [
   EasyDropdown,
   EasyDropdownItem,
   EasyEmpty,
-  EasyFilePreview,
   EasyFileUpload,
-  EasyFlowDesigner,
   EasyForm,
   EasyFormItem,
   EasyGantt,

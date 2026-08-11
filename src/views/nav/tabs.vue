@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { EasyTabPane, EasyTabs } from 'easy-ui'
+import { EasyTabPane, EasyTabs } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 const activeTab1 = ref('user')

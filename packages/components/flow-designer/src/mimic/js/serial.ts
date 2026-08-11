@@ -15,7 +15,7 @@ class SerialView extends GatewayView {
       stroke: string
       fill: string
     },
-  ) {
+  ): any {
     return h('g', {}, [
       // 图标 SVG
       h(

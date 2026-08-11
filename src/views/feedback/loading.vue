@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { LoadingInstance } from 'easy-ui'
-import { easy, EasyLoading } from 'easy-ui'
+import type { LoadingInstance } from '@raopan/easy-ui'
+import { easy, EasyLoading } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
 const loadingTypes = [
@@ -359,7 +359,7 @@ function showQuickContainer() {
         命令式调用
       </h2>
       <p class="doc-section__desc">
-        通过 <code>easy.$loading</code> 在任意位置调用，无需在模板中写组件。统一入口：<code>import { easy } from 'easy-ui'</code>
+        通过 <code>easy.$loading</code> 在任意位置调用，无需在模板中写组件。统一入口：<code>import { easy } from '@raopan/easy-ui'</code>
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body doc-preview__body--column">
@@ -396,7 +396,7 @@ function showQuickContainer() {
           </div>
         </div>
         <EasyDocCode
-          code="import { easy } from 'easy-ui'
+          code="import { easy } from '@raopan/easy-ui'
 
 // 全屏加载
 const loading = easy.$loading.open({ text: '加载中...' })

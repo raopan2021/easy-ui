@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import LogicFlow from '@logicflow/core'
 import { DndPanel, InsertNodeInPolyline, Menu, Snapshot } from '@logicflow/extension'
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, getCurrentInstance, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import initClassicsData from './classics/initClassicsData.json'
 import BetweenC from './classics/js/between'
 import EndC from './classics/js/end'
@@ -10,7 +10,7 @@ import SerialC from './classics/js/serial'
 import SkipC from './classics/js/skip'
 import StartC from './classics/js/start'
 import { getPreviousNodes, isClassics, json2LogicFlowJson, logicFlowJsonToWarmFlow } from './common/js/tool'
-import PropertySetting from './common/vue/propertySetting'
+import PropertySetting from './common/vue/propertySetting.vue'
 import initJson from './init.json'
 import initMimicData from './mimic/initMimicData.json'
 import BetweenM from './mimic/js/between'
@@ -20,7 +20,7 @@ import ParallelM from './mimic/js/parallel'
 import SerialM from './mimic/js/serial'
 import SkipM from './mimic/js/skip'
 import StartM from './mimic/js/start'
-import EdgeTooltip from './mimic/vue/EdgeTooltip'
+import EdgeTooltip from './mimic/vue/EdgeTooltip.vue'
 import '@logicflow/core/lib/style/index.css'
 import '@logicflow/extension/lib/style/index.css'
 
@@ -32,15 +32,15 @@ const emit = defineEmits<{
   save: [value: any]
 }>()
 
-const { proxy } = getCurrentInstance()
+const proxy = getCurrentInstance()!.proxy!
 
-const lf = ref(null)
+const lf = ref<any>(null)
 const definitionId = ref('')
-const nodeClick = ref(null)
+const nodeClick = ref<any>(null)
 const disabled = ref(false)
-const propertySettingRef = ref({})
-const logicJson = ref({})
-const jsonString = ref('')
+const propertySettingRef = ref<any>({})
+const logicJson = ref<any>({})
+const jsonString = ref<any>('')
 const skipConditionShow = ref(true)
 const nodes = ref([])
 const skips = ref([])
@@ -48,9 +48,9 @@ const isDark = ref(false)
 const activeStep = ref(1) // 初始化当前步骤为0（开始）
 const onlyDesignShow = ref(true)
 const defFlowId = ref(null)
-const dataJson = ref('')
+const dataJson = ref<any>('')
 
-interface Props {
+export interface Props {
   flow?: any
 }
 
@@ -83,7 +83,7 @@ function initFlow(flow: any) {
   if (flow) {
     defFlowId.value = flow.id
     dataJson.value = flow
-    if (!dataJson.value.nodeList && dataJson.value.nodeList.length > 0) {
+    if (!dataJson.value.nodeList || dataJson.value.nodeList.length === 0) {
       dataJson.value.nodeList = initJson
     }
 
@@ -123,7 +123,7 @@ const tooltipVisible = ref(false)
 const tooltipPosition = ref({ x: 0, y: 0 })
 const tooltipEdge = ref({})
 
-function handleOptionClick(item) {
+function handleOptionClick(item: any) {
   if (item.icon === 'between') {
     addBetweenNode(lf.value, item.tooltipEdge)
   }
@@ -133,9 +133,9 @@ function handleOptionClick(item) {
   tooltipVisible.value = false
 }
 
-async function handleStepClick(index) {
+async function handleStepClick(index: number) {
   if (activeStep.value === 0 && !onlyDesignShow.value) {
-    const validate = await proxy.$refs.baseInfoRef.validate()
+    const validate = await (proxy.$refs.baseInfoRef as any).validate()
     if (!validate)
       return
   }
@@ -156,7 +156,7 @@ function initLogicFlow() {
   if (proxy.$refs.containerRef) {
     use()
     lf.value = new LogicFlow({
-      container: proxy.$refs.containerRef,
+      container: proxy.$refs.containerRef as HTMLElement,
       textEdit: false, // 是否开启文本编辑。
       snapToGrid: true, // 是否开启网格吸附，开启后拖动节点会有以网格大小为补步长移动
       hideAnchors: !isClassics(logicJson.value.modelValue), // 是否隐藏节点的锚点，静默模式下默认隐藏。
@@ -174,9 +174,6 @@ function initLogicFlow() {
           color: isDark.value ? '#666' : '#ccc',
           thickness: 1,
         },
-        background: {
-          backgroundColor: 'var(--el-bg-color)',
-        },
       },
       keyboard: isClassics(logicJson.value.modelValue)
         ? {
@@ -187,13 +184,13 @@ function initLogicFlow() {
                 callback: () => {
                   const elements = lf.value.getSelectElements(true)
                   lf.value.clearSelectElements()
-                  elements.edges.forEach(edge => lf.value.deleteEdge(edge.id))
-                  elements.nodes.forEach(node => lf.value.deleteNode(node.id))
+                  elements.edges.forEach((edge: any) => lf.value.deleteEdge(edge.id))
+                  elements.nodes.forEach((node: any) => lf.value.deleteNode(node.id))
                 },
               },
             ],
           }
-        : {},
+        : { enabled: false } as any,
     })
     lf.value.setTheme({
       snapline: {
@@ -233,7 +230,7 @@ watch(isDark, (_v) => {
  * data为 {type: string, data?: any}
  * @param e
  */
-function listeningMessage(e) {
+function listeningMessage(e: any) {
   const { data } = e
   switch (data.type) {
     case 'theme-dark': {
@@ -301,7 +298,7 @@ function getBaseInfo() {
   if (onlyDesignShow.value) {
     return
   }
-  const baseInfoData = proxy.$refs.baseInfoRef.getFormData()
+  const baseInfoData = (proxy.$refs.baseInfoRef as any).getFormData()
   logicJson.value = {
     ...logicJson.value,
     ...baseInfoData,
@@ -332,9 +329,8 @@ function handleModelValueUpdate() {
 
 async function saveJsonModel() {
   if (!onlyDesignShow.value) {
-    const validate = await proxy.$refs.baseInfoRef.validate()
+    const validate = await (proxy.$refs.baseInfoRef as any).validate()
     if (!validate) {
-      loadingInstance.close()
       return
     }
   }
@@ -407,7 +403,7 @@ function initEvent() {
 
   if (!isClassics(logicJson.value.modelValue)) {
     // 更新节点名称
-    eventCenter.on('update:nodeName', (data) => {
+    eventCenter.on('update:nodeName', (data: any) => {
       lf.value.updateText(data.id, data.nodeName)
       lf.value.setProperties(data.id, {
         nodeName: data.nodeName,
@@ -415,14 +411,14 @@ function initEvent() {
     })
 
     // 网关节点单击事件
-    eventCenter.on('node:click', (args) => {
+    eventCenter.on('node:click', (args: any) => {
       nodeClick.value = args.data
       if (['serial', 'parallel'].includes(nodeClick.value.type)) {
         gatewayAddNode(lf.value, nodeClick.value)
       }
     })
 
-    eventCenter.on('edit:node', (args) => {
+    eventCenter.on('edit:node', (args: any) => {
       if (args.click) {
         nodeClick.value = lf.value.getNodeModelById(args.id)
         const graphData = lf.value.getGraphData()
@@ -435,7 +431,7 @@ function initEvent() {
     })
 
     // 单击边
-    eventCenter.on('show:EdgeSetting', (args) => {
+    eventCenter.on('show:EdgeSetting', (args: any) => {
       nodeClick.value = lf.value.getEdgeModelById(args.id)
       const nodeModel = lf.value.getNodeModelById(nodeClick.value.sourceNodeId)
       skipConditionShow.value = nodeModel.type === 'serial'
@@ -448,7 +444,7 @@ function initEvent() {
     })
 
     // 鼠标进入边
-    eventCenter.on('show:EdgeTooltip', (args) => {
+    eventCenter.on('show:EdgeTooltip', (args: any) => {
       tooltipVisible.value = true
       tooltipPosition.value = { x: args.e.clientX, y: args.e.clientY }
       tooltipEdge.value = lf.value.getEdgeModelById(args.id)
@@ -458,14 +454,14 @@ function initEvent() {
       tooltipVisible.value = false
     })
     // 删除节点事件
-    eventCenter.on('delete:node', (args) => {
+    eventCenter.on('delete:node', (args: any) => {
       const nodeModel = lf.value.getNodeModelById(args.id)
       removeNode(lf.value, nodeModel)
     })
   }
   else {
     // 中间节点双击事件
-    eventCenter.on('node:dbclick', (args) => {
+    eventCenter.on('node:dbclick', (args: any) => {
       nodeClick.value = args.data
       const graphData = lf.value.getGraphData()
       nodes.value = graphData.nodes
@@ -476,7 +472,7 @@ function initEvent() {
     })
 
     // 边双击事件
-    eventCenter.on('edge:dbclick  ', (args) => {
+    eventCenter.on('edge:dbclick  ', (args: any) => {
       nodeClick.value = args.data
       const nodeModel = lf.value.getNodeModelById(nodeClick.value.sourceNodeId)
       skipConditionShow.value = nodeModel.type === 'serial'
@@ -489,13 +485,13 @@ function initEvent() {
     })
   }
 
-  eventCenter.on('edge:add', (args) => {
+  eventCenter.on('edge:add', (args: any) => {
     const graphData = lf.value.getGraphData()
     const previousNodes = getPreviousNodes(graphData.nodes, graphData.edges, args.data.sourceNodeId)
     lf.value.changeEdgeType(args.data.id, 'skip')
     // 修改边类型
     lf.value.setProperties(args.data.id, {
-      skipType: previousNodes.some(node => node.id === args.data.targetNodeId) ? 'REJECT' : 'PASS',
+      skipType: previousNodes.some((node: any) => node.id === args.data.targetNodeId) ? 'REJECT' : 'PASS',
     })
   })
 
@@ -507,7 +503,7 @@ function initEvent() {
   })
 }
 
-async function zoomViewport(zoom) {
+async function zoomViewport(zoom: any) {
   lf.value.zoom(zoom)
   // 将内容平移至画布中心
   if (isClassics(logicJson.value.modelValue)) {
@@ -515,7 +511,7 @@ async function zoomViewport(zoom) {
   }
 }
 
-async function undoOrRedo(undo) {
+async function undoOrRedo(undo: any) {
   if (undo) {
     lf.value.undo(undo)
   }
