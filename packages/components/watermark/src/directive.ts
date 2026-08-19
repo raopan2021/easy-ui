@@ -53,6 +53,12 @@ function renderWatermark(canvas: HTMLCanvasElement, container: HTMLElement, opti
     imageWidth = 120,
   } = options
 
+  // dark 模式默认用浅色水印，保证在深色背景上可辨识
+  const isDark = document.documentElement.classList.contains('dark')
+  const resolvedFontColor = fontColor && fontColor !== 'rgba(0, 0, 0, 0.15)'
+    ? fontColor
+    : isDark ? 'rgba(255, 255, 255, 0.15)' : fontColor
+
   // 统一 content 为数组
   const lines: string[] = Array.isArray(content) ? content.filter(Boolean) : content ? [content] : []
 
@@ -80,7 +86,7 @@ function renderWatermark(canvas: HTMLCanvasElement, container: HTMLElement, opti
     img.onerror = () => {
       if (lines.length > 0) {
         ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`
-        ctx.fillStyle = fontColor
+        ctx.fillStyle = resolvedFontColor
         ctx.textAlign = 'center'
         ctx.textBaseline = 'middle'
         ctx.fillText(lines[0], 0, 0)
@@ -94,7 +100,7 @@ function renderWatermark(canvas: HTMLCanvasElement, container: HTMLElement, opti
       return
 
     ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`
-    ctx.fillStyle = fontColor
+    ctx.fillStyle = resolvedFontColor
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
 
@@ -144,6 +150,13 @@ const watermarkDirective: Directive<HTMLElement, WatermarkOptions> = {
     })
     ro.observe(el)
     ;(el as any)._watermarkRO = ro
+
+    // 监听主题切换（html.dark class），变化时重绘水印
+    const to = new MutationObserver(() => {
+      renderWatermark(canvas, el, options)
+    })
+    to.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    ;(el as any)._watermarkThemeObserver = to
   },
 
   updated(el, binding) {
@@ -157,6 +170,8 @@ const watermarkDirective: Directive<HTMLElement, WatermarkOptions> = {
   unmounted(el) {
     const ro = (el as any)._watermarkRO as ResizeObserver | undefined
     ro?.disconnect()
+    const to = (el as any)._watermarkThemeObserver as MutationObserver | undefined
+    to?.disconnect()
     const canvas = el.querySelector('canvas[data-watermark]')
     canvas?.remove()
   },

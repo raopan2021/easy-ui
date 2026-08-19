@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ArrowLeft, HomeFilled } from '@element-plus/icons-vue'
+
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -69,14 +69,14 @@ function goBack() {
 
       <!-- 操作按钮 -->
       <div class="exception-actions">
-        <el-button type="primary" @click="goHome">
-          <el-icon><HomeFilled /></el-icon>
+        <EasyButton type="primary" @click="goHome">
+          <EasyIcon name="el:HomeFilled" />
           返回首页
-        </el-button>
-        <el-button @click="goBack">
-          <el-icon><ArrowLeft /></el-icon>
+        </EasyButton>
+        <EasyButton @click="goBack">
+          <EasyIcon name="el:ArrowLeft" />
           返回上一页
-        </el-button>
+        </EasyButton>
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { EasyButton, EasyQrcode } from '@raopan/easy-ui'
-import { ElInput, ElMessage } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import { ref } from 'vue'
 
 const qrRef = ref<InstanceType<typeof EasyQrcode>>()
@@ -221,7 +221,7 @@ function onError(error: Error) {
         <div class="doc-preview__body">
           <div class="qrcode-interactive">
             <div class="qrcode-interactive__left">
-              <ElInput
+              <EasyInput
                 v-model="dynamicContent"
                 type="textarea"
                 :rows="3"
@@ -273,9 +273,9 @@ function handleGetDataUrl() {
           <EasyQrcode content="https://ease-ui.com" :size="200" @generated="onGenerated" @error="onError" />
           <div v-if="eventLog.length" class="qrcode-event-log">
             <div v-for="(log, index) in eventLog" :key="index" class="qrcode-event-log__item">
-              <el-tag :type="log.type === 'success' ? 'success' : 'danger'" size="small">
+              <EasyTag :type="log.type === 'success' ? 'success' : 'danger'" size="small">
                 {{ log.type === 'success' ? 'success' : 'error' }}
-              </el-tag>
+              </EasyTag>
               <span>{{ log.message }}</span>
             </div>
           </div>

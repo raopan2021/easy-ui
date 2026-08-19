@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { FormInstance, FormRules } from 'element-plus'
+import type { TableColumn } from '@raopan/easy-ui'
 import { Plus } from '@element-plus/icons-vue'
 import { ElMessage } from 'element-plus'
 import { onMounted, reactive, ref } from 'vue'
@@ -160,6 +161,16 @@ const page = ref(1)
 const pageSize = ref(10)
 const total = ref(0)
 
+const columns: TableColumn[] = [
+  { prop: 'id', name: 'ID', width: 70 },
+  { prop: 'name', name: '角色名称', minWidth: 130 },
+  { prop: 'code', name: '角色编码', minWidth: 150 },
+  { prop: 'description', name: '描述', minWidth: 200, ellipsis: true },
+  { prop: 'status', name: '状态', width: 80, align: 'center' },
+  { prop: 'userCount', name: '用户数', width: 80, align: 'center' },
+  { prop: 'createTime', name: '创建时间', width: 170 },
+]
+
 function fetchData() {
   loading.value = true
   setTimeout(() => {
@@ -294,77 +305,67 @@ onMounted(() => fetchData())
 
     <!-- 搜索栏 -->
     <div class="search-bar">
-      <el-input
+      <EasyInput
         v-model="searchKeyword"
         placeholder="搜索角色名称"
         clearable
         style="width: 260px"
         @keyup.enter="doSearch"
       />
-      <el-button type="primary" @click="doSearch">
+      <EasyButton type="primary" @click="doSearch">
         查询
-      </el-button>
-      <el-button @click="resetSearch">
+      </EasyButton>
+      <EasyButton @click="resetSearch">
         重置
-      </el-button>
+      </EasyButton>
     </div>
 
     <!-- 操作栏 -->
     <div class="action-bar">
-      <el-button type="primary" @click="handleAdd">
+      <EasyButton type="primary" @click="handleAdd">
         <el-icon><Plus /></el-icon>新增角色
-      </el-button>
+      </EasyButton>
     </div>
 
     <!-- 数据表格 -->
-    <el-table v-loading="loading" :data="tableData" stripe border style="width: 100%">
-      <el-table-column prop="id" label="ID" width="70" />
-      <el-table-column prop="name" label="角色名称" min-width="130" />
-      <el-table-column prop="code" label="角色编码" min-width="150" />
-      <el-table-column prop="description" label="描述" min-width="200" show-overflow-tooltip />
-      <el-table-column prop="status" label="状态" width="80" align="center">
-        <template #default="{ row }">
-          <el-tag :type="row.status === 1 ? 'success' : 'info'" size="small">
-            {{ row.status === 1 ? '启用' : '禁用' }}
-          </el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column label="用户数" width="80" prop="userCount" align="center" />
-      <el-table-column label="创建时间" width="170">
-        <template #default="{ row }">
-          {{ row.createTime }}
-        </template>
-      </el-table-column>
-      <el-table-column label="操作" width="240" fixed="right">
-        <template #default="{ row }">
-          <el-button link type="primary" size="small" @click="handleEdit(row)">
-            编辑
-          </el-button>
-          <el-button link type="primary" size="small" @click="handleAssignPermission(row)">
-            分配权限
-          </el-button>
-          <el-popconfirm title="确定删除该角色？" @confirm="handleDelete(row)">
-            <template #reference>
-              <el-button link type="danger" size="small">
-                删除
-              </el-button>
-            </template>
-          </el-popconfirm>
-        </template>
-      </el-table-column>
-    </el-table>
-
-    <div class="pagination-wrap">
-      <el-pagination
-        v-model:current-page="page"
-        v-model:page-size="pageSize"
-        :total="total"
-        :page-sizes="[10, 20, 50]"
-        layout="total, sizes, prev, pager, next, jumper"
-        @size-change="fetchData"
-        @current-change="fetchData"
-      />
-    </div>
+    <EasyTable
+      v-loading="loading"
+      :data="tableData"
+      :columns="columns"
+      stripe
+      border
+      :pagination="true"
+      :total="total"
+      :page="page"
+      :page-size="pageSize"
+      :page-size-options="[10, 20, 50]"
+      action-label="操作"
+      :action-width="240"
+      action-fixed="right"
+      @page-change="(p: number) => { page.value = p; fetchData() }"
+      @page-size-change="(s: number) => { pageSize.value = s; fetchData() }"
+    >
+      <template #col-status="{ row }">
+        <EasyTag :type="row.status === 1 ? 'success' : 'info'" size="small">
+          {{ row.status === 1 ? '启用' : '禁用' }}
+        </EasyTag>
+      </template>
+      <template #action="{ row }">
+        <EasyButton link type="primary" size="small" @click="handleEdit(row)">
+          编辑
+        </EasyButton>
+        <EasyButton link type="primary" size="small" @click="handleAssignPermission(row)">
+          分配权限
+        </EasyButton>
+        <el-popconfirm title="确定删除该角色？" @confirm="handleDelete(row)">
+          <template #reference>
+            <EasyButton link type="danger" size="small">
+              删除
+            </EasyButton>
+          </template>
+        </el-popconfirm>
+      </template>
+    </EasyTable>
 
     <!-- 新增 / 编辑弹窗 -->
     <el-dialog
@@ -376,32 +377,32 @@ onMounted(() => fetchData())
     >
       <el-form ref="formRef" :model="dialog.form" :rules="formRules" label-width="90px">
         <el-form-item label="角色名称" prop="name">
-          <el-input v-model="dialog.form.name" placeholder="请输入角色名称" />
+          <EasyInput v-model="dialog.form.name" placeholder="请输入角色名称" />
         </el-form-item>
         <el-form-item label="角色编码" prop="code">
-          <el-input v-model="dialog.form.code" placeholder="请输入角色编码" :disabled="dialog.isEdit" />
+          <EasyInput v-model="dialog.form.code" placeholder="请输入角色编码" :disabled="dialog.isEdit" />
         </el-form-item>
         <el-form-item label="描述" prop="description">
-          <el-input v-model="dialog.form.description" type="textarea" :rows="3" placeholder="请输入角色描述" />
+          <EasyInput v-model="dialog.form.description" type="textarea" :rows="3" placeholder="请输入角色描述" />
         </el-form-item>
         <el-form-item label="状态" prop="status">
-          <el-radio-group v-model="dialog.form.status">
-            <el-radio :value="1">
+          <EasyRadioGroup v-model="dialog.form.status">
+            <EasyRadio :label="1">
               启用
-            </el-radio>
-            <el-radio :value="0">
+            </EasyRadio>
+            <EasyRadio :label="0">
               禁用
-            </el-radio>
-          </el-radio-group>
+            </EasyRadio>
+          </EasyRadioGroup>
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialog.visible = false">
+        <EasyButton @click="dialog.visible = false">
           取消
-        </el-button>
-        <el-button type="primary" :loading="dialog.loading" @click="handleSubmit">
+        </EasyButton>
+        <EasyButton type="primary" :loading="dialog.loading" @click="handleSubmit">
           确定
-        </el-button>
+        </EasyButton>
       </template>
     </el-dialog>
 
@@ -423,12 +424,12 @@ onMounted(() => fetchData())
         style="max-height: 400px; overflow: auto"
       />
       <template #footer>
-        <el-button @click="permDialog.visible = false">
+        <EasyButton @click="permDialog.visible = false">
           取消
-        </el-button>
-        <el-button type="primary" @click="handlePermSubmit">
+        </EasyButton>
+        <EasyButton type="primary" @click="handlePermSubmit">
           保存权限
-        </el-button>
+        </EasyButton>
       </template>
     </el-dialog>
   </div>

@@ -611,9 +611,9 @@ function getSimpleLunar(y: number, m: number, d: number): string {
                     {{ ev.desc }}
                   </div>
                 </div>
-                <el-tag :style="{ background: ev.color, color: '#fff', border: 'none' }" size="small">
+                <EasyTag :style="{ background: ev.color, color: '#fff', border: 'none' }" size="small">
                   {{ ev.tag }}
-                </el-tag>
+                </EasyTag>
               </div>
             </div>
           </div>
@@ -648,7 +648,7 @@ const events = [
           <div class="add-event-form">
             <span class="add-event-form__label">当前日期：</span>
             <span class="add-event-form__date">{{ currentDateStr }}</span>
-            <el-input v-model="newEvent.title" placeholder="事件标题" style="width: 200px" size="small" />
+            <EasyInput v-model="newEvent.title" placeholder="事件标题" style="width: 200px" size="small" />
             <el-time-picker
               v-model="newEvent.timeVal"
               placeholder="时间"
@@ -657,16 +657,16 @@ const events = [
               size="small"
               style="width: 140px"
             />
-            <el-select v-model="newEvent.tag" placeholder="标签" size="small" style="width: 100px">
-              <el-option label="会议" value="会议" />
-              <el-option label="任务" value="任务" />
-              <el-option label="提醒" value="提醒" />
-              <el-option label="评审" value="评审" />
-              <el-option label="休假" value="休假" />
-            </el-select>
-            <el-button size="small" type="primary" @click="addEvent">
+            <EasySelect
+              v-model="newEvent.tag"
+              placeholder="标签"
+              size="small"
+              :options="[{ label: '会议', value: '会议' }, { label: '任务', value: '任务' }, { label: '提醒', value: '提醒' }, { label: '评审', value: '评审' }, { label: '休假', value: '休假' }]"
+              style="width: 100px"
+            />
+            <EasyButton size="small" type="primary" @click="addEvent">
               添加
-            </el-button>
+            </EasyButton>
           </div>
         </div>
         <EasyDocCode
@@ -683,25 +683,25 @@ const events = [
 
     <!-- 事件详情弹窗 -->
     <el-dialog v-model="eventDetail.visible" title="事件详情" width="420px">
-      <el-descriptions :column="1" border>
-        <el-descriptions-item label="标题">
+      <EasyDescriptions :column="1" :bordered="true">
+        <EasyDescriptionsItem label="标题">
           {{ eventDetail.title }}
-        </el-descriptions-item>
-        <el-descriptions-item label="日期">
+        </EasyDescriptionsItem>
+        <EasyDescriptionsItem label="日期">
           {{ eventDetail.date }}
-        </el-descriptions-item>
-        <el-descriptions-item label="时间">
+        </EasyDescriptionsItem>
+        <EasyDescriptionsItem label="时间">
           {{ eventDetail.time }}
-        </el-descriptions-item>
-        <el-descriptions-item label="标签">
-          <el-tag :style="{ background: eventDetail.color, color: '#fff', border: 'none' }" size="small">
+        </EasyDescriptionsItem>
+        <EasyDescriptionsItem label="标签">
+          <EasyTag :style="{ background: eventDetail.color, color: '#fff', border: 'none' }" size="small">
             {{ eventDetail.tag }}
-          </el-tag>
-        </el-descriptions-item>
-        <el-descriptions-item v-if="eventDetail.desc" label="描述">
+          </EasyTag>
+        </EasyDescriptionsItem>
+        <EasyDescriptionsItem v-if="eventDetail.desc" label="描述">
           {{ eventDetail.desc }}
-        </el-descriptions-item>
-      </el-descriptions>
+        </EasyDescriptionsItem>
+      </EasyDescriptions>
     </el-dialog>
 
     <!-- API 文档 -->

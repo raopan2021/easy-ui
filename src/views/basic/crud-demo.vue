@@ -467,9 +467,7 @@ onMounted(() => {
       @cancel="deleteModal.visible = false"
     >
       <div class="delete-tip">
-        <el-icon color="#ef4444" :size="24">
-          <WarningFilled />
-        </el-icon>
+        <EasyIcon name="el:WarningFilled" color="#ef4444" :size="24" />
         <p>
           确定要删除用户 <strong>{{ deleteData.name }}</strong> 吗？
         </p>

@@ -494,31 +494,35 @@ function handleAfterClose() {
         <div class="demo-form">
           <div class="demo-form__item">
             <label class="demo-form__label">用户名 <span class="required">*</span></label>
-            <el-input v-model="formData.username" placeholder="请输入用户名" size="default" />
+            <EasyInput v-model="formData.username" placeholder="请输入用户名" size="default" />
           </div>
           <div class="demo-form__item">
             <label class="demo-form__label">邮箱 <span class="required">*</span></label>
-            <el-input v-model="formData.email" placeholder="请输入邮箱" size="default" />
+            <EasyInput v-model="formData.email" placeholder="请输入邮箱" size="default" />
           </div>
           <div class="demo-form__item">
             <label class="demo-form__label">部门</label>
-            <el-select v-model="formData.department" placeholder="请选择部门" size="default" style="width: 100%">
-              <el-option label="产品研发部" value="product" />
-              <el-option label="市场营销部" value="marketing" />
-              <el-option label="人力资源部" value="hr" />
-            </el-select>
+            <EasySelect
+              v-model="formData.department"
+              placeholder="请选择部门"
+              size="default"
+              :options="[{ label: '产品研发部', value: 'product' }, { label: '市场营销部', value: 'marketing' }, { label: '人力资源部', value: 'hr' }]"
+              style="width: 100%"
+            />
           </div>
           <div class="demo-form__item">
             <label class="demo-form__label">角色</label>
-            <el-select v-model="formData.role" placeholder="请选择角色" size="default" style="width: 100%">
-              <el-option label="管理员" value="admin" />
-              <el-option label="编辑者" value="editor" />
-              <el-option label="查看者" value="viewer" />
-            </el-select>
+            <EasySelect
+              v-model="formData.role"
+              placeholder="请选择角色"
+              size="default"
+              :options="[{ label: '管理员', value: 'admin' }, { label: '编辑者', value: 'editor' }, { label: '查看者', value: 'viewer' }]"
+              style="width: 100%"
+            />
           </div>
           <div class="demo-form__item">
             <label class="demo-form__label">备注</label>
-            <el-input v-model="formData.remark" type="textarea" placeholder="请输入备注" :rows="3" />
+            <EasyInput v-model="formData.remark" type="textarea" placeholder="请输入备注" :rows="3" />
           </div>
         </div>
         <template #footer>

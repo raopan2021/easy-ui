@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { TableColumn } from '@raopan/easy-ui'
 import { Delete, Download } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { onMounted, reactive, ref } from 'vue'
@@ -105,6 +106,18 @@ const page = ref(1)
 const pageSize = ref(10)
 const total = ref(0)
 
+const columns: TableColumn[] = [
+  { prop: 'id', name: 'ID', width: 70 },
+  { prop: 'operator', name: '操作人', minWidth: 110 },
+  { prop: 'module', name: '操作模块', width: 110 },
+  { prop: 'type', name: '操作类型', width: 90, align: 'center' },
+  { prop: 'content', name: '操作内容', minWidth: 220, ellipsis: true },
+  { prop: 'ip', name: 'IP 地址', width: 140 },
+  { prop: 'success', name: '状态', width: 80, align: 'center' },
+  { prop: 'duration', name: '耗时', width: 80, align: 'center' },
+  { prop: 'createTime', name: '操作时间', width: 170 },
+]
+
 function fetchData() {
   loading.value = true
   setTimeout(() => {
@@ -186,23 +199,21 @@ onMounted(() => fetchData())
 
     <!-- 搜索栏 -->
     <div class="search-bar">
-      <el-input
+      <EasyInput
         v-model="searchForm.keyword"
         placeholder="操作人 / 操作内容"
         clearable
         style="width: 220px"
         @keyup.enter="handleSearch"
       />
-      <el-select v-model="searchForm.module" placeholder="操作模块" clearable style="width: 140px">
-        <el-option v-for="m in moduleOptions" :key="m" :label="m" :value="m" />
-      </el-select>
-      <el-select v-model="searchForm.type" placeholder="操作类型" clearable style="width: 130px">
-        <el-option label="新增" value="INSERT" />
-        <el-option label="修改" value="UPDATE" />
-        <el-option label="删除" value="DELETE" />
-        <el-option label="导出" value="EXPORT" />
-        <el-option label="登录" value="LOGIN" />
-      </el-select>
+      <EasySelect v-model="searchForm.module" placeholder="操作模块" clearable :options="moduleOptions" style="width: 140px" />
+      <EasySelect
+        v-model="searchForm.type"
+        placeholder="操作类型"
+        clearable
+        :options="[{ label: '新增', value: 'INSERT' }, { label: '修改', value: 'UPDATE' }, { label: '删除', value: 'DELETE' }, { label: '导出', value: 'EXPORT' }, { label: '登录', value: 'LOGIN' }]"
+        style="width: 130px"
+      />
       <el-date-picker
         v-model="searchForm.dateRange"
         type="daterange"
@@ -212,117 +223,107 @@ onMounted(() => fetchData())
         value-format="YYYY-MM-DD"
         style="width: 260px"
       />
-      <el-button type="primary" @click="handleSearch">
+      <EasyButton type="primary" @click="handleSearch">
         查询
-      </el-button>
-      <el-button @click="handleReset">
+      </EasyButton>
+      <EasyButton @click="handleReset">
         重置
-      </el-button>
+      </EasyButton>
     </div>
 
     <!-- 操作栏 -->
     <div class="action-bar">
-      <el-button @click="handleExport">
+      <EasyButton @click="handleExport">
         <el-icon><Download /></el-icon>导出日志
-      </el-button>
-      <el-button @click="handleClear">
+      </EasyButton>
+      <EasyButton @click="handleClear">
         <el-icon><Delete /></el-icon>清空日志
-      </el-button>
+      </EasyButton>
     </div>
 
     <!-- 数据表格 -->
-    <el-table ref="tableRef" v-loading="loading" :data="tableData" stripe border style="width: 100%">
-      <el-table-column prop="id" label="ID" width="70" />
-      <el-table-column prop="operator" label="操作人" min-width="110" />
-      <el-table-column prop="module" label="操作模块" width="110" />
-      <el-table-column label="操作类型" width="90" align="center">
-        <template #default="{ row }">
-          <el-tag :type="typeTagMap[row.type] || 'info'" size="small" effect="plain">
-            {{ row.type }}
-          </el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column prop="content" label="操作内容" min-width="220" show-overflow-tooltip />
-      <el-table-column prop="ip" label="IP 地址" width="140" />
-      <el-table-column label="状态" width="80" align="center">
-        <template #default="{ row }">
-          <el-tag :type="row.success ? 'success' : 'danger'" size="small">
-            {{ row.success ? '成功' : '失败' }}
-          </el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column label="耗时" width="80" align="center">
-        <template #default="{ row }">
-          {{ row.duration }}ms
-        </template>
-      </el-table-column>
-      <el-table-column label="操作时间" width="170">
-        <template #default="{ row }">
-          {{ row.createTime }}
-        </template>
-      </el-table-column>
-      <el-table-column label="操作" width="80" fixed="right" align="center">
-        <template #default="{ row }">
-          <el-button link type="primary" size="small" @click="handleDetail(row)">
-            详情
-          </el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-
-    <div class="pagination-wrap">
-      <el-pagination
-        v-model:current-page="page"
-        v-model:page-size="pageSize"
-        :total="total"
-        :page-sizes="[10, 20, 50, 100]"
-        layout="total, sizes, prev, pager, next, jumper"
-        @size-change="fetchData"
-        @current-change="fetchData"
-      />
-    </div>
+    <EasyTable
+      ref="tableRef"
+      v-loading="loading"
+      :data="tableData"
+      :columns="columns"
+      stripe
+      border
+      :pagination="true"
+      :total="total"
+      :page="page"
+      :page-size="pageSize"
+      :page-size-options="[10, 20, 50, 100]"
+      action-label="操作"
+      :action-width="80"
+      action-fixed="right"
+      @page-change="(p: number) => { page.value = p; fetchData() }"
+      @page-size-change="(s: number) => { pageSize.value = s; fetchData() }"
+    >
+      <template #col-type="{ row }">
+        <EasyTag :type="typeTagMap[row.type] || 'info'" size="small" effect="plain">
+          {{ row.type }}
+        </EasyTag>
+      </template>
+      <template #col-success="{ row }">
+        <EasyTag :type="row.success ? 'success' : 'danger'" size="small">
+          {{ row.success ? '成功' : '失败' }}
+        </EasyTag>
+      </template>
+      <template #col-duration="{ row }">
+        {{ row.duration }}ms
+      </template>
+      <template #col-createTime="{ row }">
+        {{ row.createTime }}
+      </template>
+      <template #action="{ row }">
+        <EasyButton link type="primary" size="small" @click="handleDetail(row)">
+          详情
+        </EasyButton>
+      </template>
+    </EasyTable>
 
     <!-- 日志详情弹窗 -->
     <el-dialog v-model="detailVisible" title="日志详情" width="550px">
-      <el-descriptions :column="1" border>
-        <el-descriptions-item label="日志 ID">
+      <EasyDescriptions :column="1" :bordered="true">
+        <EasyDescriptionsItem label="日志 ID">
           {{ detailData.id }}
-        </el-descriptions-item>
-        <el-descriptions-item label="操作人">
+        </EasyDescriptionsItem>
+        <EasyDescriptionsItem label="操作人">
           {{ detailData.operator }}
-        </el-descriptions-item>
-        <el-descriptions-item label="操作模块">
+        </EasyDescriptionsItem>
+        <EasyDescriptionsItem label="操作模块">
           {{ detailData.module }}
-        </el-descriptions-item>
-        <el-descriptions-item label="操作类型">
-          <el-tag :type="typeTagMap[detailData.type] || 'info'" size="small">
+        </EasyDescriptionsItem>
+        <EasyDescriptionsItem label="操作类型">
+          <EasyTag :type="typeTagMap[detailData.type] || 'info'" size="small">
             {{ detailData.type }}
-          </el-tag>
-        </el-descriptions-item>
-        <el-descriptions-item label="操作内容">
+          </EasyTag>
+        </EasyDescriptionsItem>
+        <EasyDescriptionsItem label="操作内容">
           {{ detailData.content }}
-        </el-descriptions-item>
-        <el-descriptions-item label="请求参数">
+        </EasyDescriptionsItem>
+        <EasyDescriptionsItem label="请求参数">
           <pre class="detail-json">{{ detailData.params }}</pre>
-        </el-descriptions-item>
-        <el-descriptions-item label="IP 地址">
+        </EasyDescriptionsItem>
+        <EasyDescriptionsItem label="IP 地址">
           {{ detailData.ip }}
-        </el-descriptions-item>
-        <el-descriptions-item label="设备信息">
+        </EasyDescriptionsItem>
+        <EasyDescriptionsItem label="设备信息">
           {{ detailData.userAgent }}
-        </el-descriptions-item>
-        <el-descriptions-item label="状态">
-          <el-tag :type="detailData.success ? 'success' : 'danger'" size="small">
+        </EasyDescriptionsItem>
+        <EasyDescriptionsItem label="状态">
+          <EasyTag :type="detailData.success ? 'success' : 'danger'" size="small">
             {{ detailData.success ? '成功' : '失败' }}
-          </el-tag>
-        </el-descriptions-item>
-        <el-descriptions-item v-if="!detailData.success" label="错误信息">
+          </EasyTag>
+        </EasyDescriptionsItem>
+        <EasyDescriptionsItem v-if="!detailData.success" label="错误信息">
           <span style="color: var(--el-color-danger)">{{ detailData.errorMsg }}</span>
-        </el-descriptions-item>
-        <el-descriptions-item label="操作时间">
+        </EasyDescriptionsItem>
+        <EasyDescriptionsItem label="操作时间">
           {{ detailData.createTime }}
-        </el-descriptions-item>
-      </el-descriptions>
+        </EasyDescriptionsItem>
+      </EasyDescriptions>
     </el-dialog>
   </div>
 </template>

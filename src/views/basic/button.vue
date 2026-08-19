@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Check, Delete, Download, Edit, Plus, RefreshLeft, Search, Upload } from '@element-plus/icons-vue'
+
 import { EasyButton } from '@raopan/easy-ui'
 import { ref } from 'vue'
 
@@ -164,17 +164,17 @@ function handleLoad() {
           </EasyButton>
           <EasyButton shape="circle">
             <template #icon>
-              <el-icon><Search /></el-icon>
+              <EasyIcon name="el:Search" />
             </template>
           </EasyButton>
           <EasyButton shape="circle" type="success">
             <template #icon>
-              <el-icon><Plus /></el-icon>
+              <EasyIcon name="el:Plus" />
             </template>
           </EasyButton>
           <EasyButton shape="circle" type="danger">
             <template #icon>
-              <el-icon><Delete /></el-icon>
+              <EasyIcon name="el:Delete" />
             </template>
           </EasyButton>
         </div>
@@ -300,36 +300,36 @@ function handleLoad() {
         <div class="doc-preview__body">
           <EasyButton>
             <template #icon>
-              <el-icon><Search /></el-icon>
+              <EasyIcon name="el:Search" />
             </template>
             搜索
           </EasyButton>
           <EasyButton type="success">
             <template #icon>
-              <el-icon><Plus /></el-icon>
+              <EasyIcon name="el:Plus" />
             </template>
             新增
           </EasyButton>
           <EasyButton type="danger">
             <template #icon>
-              <el-icon><Delete /></el-icon>
+              <EasyIcon name="el:Delete" />
             </template>
             删除
           </EasyButton>
           <EasyButton type="warning">
             <template #icon>
-              <el-icon><Edit /></el-icon>
+              <EasyIcon name="el:Edit" />
             </template>
             编辑
           </EasyButton>
         </div>
         <EasyDocCode
           code="<EasyButton>
-  <template #icon><el-icon><Search /></el-icon></template>
+  <template #icon><EasyIcon name=&quot;el:Search&quot; /></template>
   搜索
 </EasyButton>
 <EasyButton type=&quot;success&quot;>
-  <template #icon><el-icon><Plus /></el-icon></template>
+  <template #icon><EasyIcon name=&quot;el:Plus&quot; /></template>
   新增
 </EasyButton>"
         />
@@ -349,13 +349,13 @@ function handleLoad() {
           <div class="button-group">
             <EasyButton bold type="primary">
               <template #icon>
-                <el-icon><Check /></el-icon>
+                <EasyIcon name="el:Check" />
               </template>
               提交审核
             </EasyButton>
             <EasyButton type="ghost">
               <template #icon>
-                <el-icon><RefreshLeft /></el-icon>
+                <EasyIcon name="el:RefreshLeft" />
               </template>
               重置
             </EasyButton>
@@ -366,19 +366,19 @@ function handleLoad() {
           <div class="button-group" style="margin-top: 12px">
             <EasyButton type="danger" size="small">
               <template #icon>
-                <el-icon><Delete /></el-icon>
+                <EasyIcon name="el:Delete" />
               </template>
               批量删除
             </EasyButton>
             <EasyButton type="primary" size="small">
               <template #icon>
-                <el-icon><Download /></el-icon>
+                <EasyIcon name="el:Download" />
               </template>
               导出数据
             </EasyButton>
             <EasyButton type="success" size="small">
               <template #icon>
-                <el-icon><Upload /></el-icon>
+                <EasyIcon name="el:Upload" />
               </template>
               导入数据
             </EasyButton>
@@ -387,22 +387,22 @@ function handleLoad() {
         <EasyDocCode
           code="<!-- 表单操作 -->
 <EasyButton bold type=&quot;primary&quot;>
-  <template #icon><el-icon><Check /></el-icon></template>
+  <template #icon><EasyIcon name=&quot;el:Check&quot; /></template>
   提交审核
 </EasyButton>
 <EasyButton type=&quot;ghost&quot;>
-  <template #icon><el-icon><RefreshLeft /></el-icon></template>
+  <template #icon><EasyIcon name=&quot;el:RefreshLeft&quot; /></template>
   重置
 </EasyButton>
 <EasyButton type=&quot;text&quot;>取消</EasyButton>
 
 <!-- 工具栏操作 -->
 <EasyButton type=&quot;danger&quot; size=&quot;small&quot;>
-  <template #icon><el-icon><Delete /></el-icon></template>
+  <template #icon><EasyIcon name=&quot;el:Delete&quot; /></template>
   批量删除
 </EasyButton>
 <EasyButton type=&quot;primary&quot; size=&quot;small&quot;>
-  <template #icon><el-icon><Download /></el-icon></template>
+  <template #icon><EasyIcon name=&quot;el:Download&quot; /></template>
   导出数据
 </EasyButton>"
         />

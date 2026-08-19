@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { FormInstance, FormRules } from 'element-plus'
+import type { TableColumn } from '@raopan/easy-ui'
 import { Delete, Plus, RefreshRight, Search } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { onMounted, reactive, ref } from 'vue'
@@ -110,6 +111,16 @@ const loading = ref(false)
 const tableData = ref<DataRuleItem[]>([])
 const selectedIds = ref<number[]>([])
 const pagination = reactive({ page: 1, pageSize: 10, total: 0 })
+
+const columns: TableColumn[] = [
+  { prop: 'id', name: 'ID', width: 70 },
+  { prop: 'name', name: '规则名称', minWidth: 160 },
+  { prop: 'scope', name: '适用范围', width: 100 },
+  { prop: 'tableName', name: '数据表', width: 160 },
+  { prop: 'filterExpr', name: '过滤条件', minWidth: 220 },
+  { prop: 'status', name: '状态', width: 90 },
+  { prop: 'createTime', name: '创建时间', width: 170 },
+]
 
 function handleSelectionChange(rows: DataRuleItem[]) {
   selectedIds.value = rows.map(r => r.id)
@@ -244,7 +255,7 @@ onMounted(() => fetchData())
     </div>
 
     <div class="search-bar">
-      <el-input
+      <EasyInput
         v-model="searchForm.keyword"
         placeholder="搜索规则名称/数据表"
         clearable
@@ -252,90 +263,84 @@ onMounted(() => fetchData())
         @keyup.enter="handleSearch"
         @clear="handleSearch"
       />
-      <el-select
+      <EasySelect
         v-model="searchForm.scope"
         placeholder="适用范围"
         clearable
+        :options="[{ label: '全部', value: 'all' }, { label: '部门', value: 'dept' }, { label: '个人', value: 'self' }]"
         style="width: 140px"
         @change="handleSearch"
-      >
-        <el-option label="全部" value="all" />
-        <el-option label="部门" value="dept" />
-        <el-option label="个人" value="self" />
-      </el-select>
-      <el-select v-model="searchForm.status" placeholder="状态" clearable style="width: 120px" @change="handleSearch">
-        <el-option label="启用" :value="1" />
-        <el-option label="禁用" :value="0" />
-      </el-select>
-      <el-button type="primary" @click="handleSearch">
+      />
+      <EasySelect
+        v-model="searchForm.status"
+        placeholder="状态"
+        clearable
+        :options="[{ label: '启用', value: 1 }, { label: '禁用', value: 0 }]"
+        style="width: 120px"
+        @change="handleSearch"
+      />
+      <EasyButton type="primary" @click="handleSearch">
         <el-icon><Search /></el-icon>查询
-      </el-button>
-      <el-button @click="handleReset">
+      </EasyButton>
+      <EasyButton @click="handleReset">
         <el-icon><RefreshRight /></el-icon>重置
-      </el-button>
+      </EasyButton>
     </div>
 
     <div class="action-bar">
-      <el-button type="primary" @click="handleAdd">
+      <EasyButton type="primary" @click="handleAdd">
         <el-icon><Plus /></el-icon>新增规则
-      </el-button>
-      <el-button type="danger" :disabled="!selectedIds.length" @click="handleBatchDelete">
+      </EasyButton>
+      <EasyButton type="danger" :disabled="!selectedIds.length" @click="handleBatchDelete">
         <el-icon><Delete /></el-icon>批量删除
-      </el-button>
+      </EasyButton>
     </div>
 
-    <el-table v-loading="loading" :data="tableData" stripe border @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="50" />
-      <el-table-column prop="id" label="ID" width="70" />
-      <el-table-column prop="name" label="规则名称" min-width="160" />
-      <el-table-column prop="scope" label="适用范围" width="100">
-        <template #default="{ row }">
-          <el-tag :type="scopeMap[row.scope]?.tag" size="small">
-            {{ scopeMap[row.scope]?.label }}
-          </el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column prop="tableName" label="数据表" width="160" />
-      <el-table-column prop="filterExpr" label="过滤条件" min-width="220">
-        <template #default="{ row }">
-          <el-tooltip :content="row.filterExpr" placement="top" :show-after="300">
-            <span class="filter-expr">{{ row.filterExpr }}</span>
-          </el-tooltip>
-        </template>
-      </el-table-column>
-      <el-table-column prop="status" label="状态" width="90">
-        <template #default="{ row }">
-          <el-switch :model-value="row.status === 1" @change="(val: boolean) => handleToggleStatus(row, val)" />
-        </template>
-      </el-table-column>
-      <el-table-column prop="createTime" label="创建时间" width="170" />
-      <el-table-column label="操作" width="160" fixed="right">
-        <template #default="{ row }">
-          <el-button link type="primary" size="small" @click="handleEdit(row)">
-            编辑
-          </el-button>
-          <el-popconfirm title="确定删除？" @confirm="handleDelete(row)">
-            <template #reference>
-              <el-button link type="danger" size="small">
-                删除
-              </el-button>
-            </template>
-          </el-popconfirm>
-        </template>
-      </el-table-column>
-    </el-table>
-
-    <div class="pagination-wrap">
-      <el-pagination
-        v-model:current-page="pagination.page"
-        v-model:page-size="pagination.pageSize"
-        :total="pagination.total"
-        :page-sizes="[10, 20, 50, 100]"
-        layout="total, sizes, prev, pager, next, jumper"
-        @size-change="fetchData"
-        @current-change="fetchData"
-      />
-    </div>
+    <EasyTable
+      v-loading="loading"
+      :data="tableData"
+      :columns="columns"
+      selection-mode="multiple"
+      stripe
+      border
+      :pagination="true"
+      :total="pagination.total"
+      :page="pagination.page"
+      :page-size="pagination.pageSize"
+      :page-size-options="[10, 20, 50, 100]"
+      action-label="操作"
+      :action-width="160"
+      action-fixed="right"
+      @selection-change="handleSelectionChange"
+      @page-change="(p: number) => { pagination.page = p; fetchData() }"
+      @page-size-change="(s: number) => { pagination.pageSize = s; fetchData() }"
+    >
+      <template #col-scope="{ row }">
+        <EasyTag :type="scopeMap[row.scope]?.tag" size="small">
+          {{ scopeMap[row.scope]?.label }}
+        </EasyTag>
+      </template>
+      <template #col-filterExpr="{ row }">
+        <el-tooltip :content="row.filterExpr" placement="top" :show-after="300">
+          <span class="filter-expr">{{ row.filterExpr }}</span>
+        </el-tooltip>
+      </template>
+      <template #col-status="{ row }">
+        <EasySwitch :model-value="row.status === 1" @change="(val: boolean) => handleToggleStatus(row, val)" />
+      </template>
+      <template #action="{ row }">
+        <EasyButton link type="primary" size="small" @click="handleEdit(row)">
+          编辑
+        </EasyButton>
+        <el-popconfirm title="确定删除？" @confirm="handleDelete(row)">
+          <template #reference>
+            <EasyButton link type="danger" size="small">
+              删除
+            </EasyButton>
+          </template>
+        </el-popconfirm>
+      </template>
+    </EasyTable>
 
     <el-dialog
       v-model="dialog.visible"
@@ -346,28 +351,26 @@ onMounted(() => fetchData())
     >
       <el-form ref="formRef" :model="dialog.form" :rules="formRules" label-width="100px">
         <el-form-item label="规则名称" prop="name">
-          <el-input v-model="dialog.form.name" placeholder="请输入规则名称" maxlength="30" />
+          <EasyInput v-model="dialog.form.name" placeholder="请输入规则名称" maxlength="30" />
         </el-form-item>
         <el-form-item label="适用范围" prop="scope">
-          <el-radio-group v-model="dialog.form.scope">
-            <el-radio value="all">
+          <EasyRadioGroup v-model="dialog.form.scope">
+            <EasyRadio label="all">
               全部数据
-            </el-radio>
-            <el-radio value="dept">
+            </EasyRadio>
+            <EasyRadio label="dept">
               本部门及子部门
-            </el-radio>
-            <el-radio value="self">
+            </EasyRadio>
+            <EasyRadio label="self">
               仅本人数据
-            </el-radio>
-          </el-radio-group>
+            </EasyRadio>
+          </EasyRadioGroup>
         </el-form-item>
         <el-form-item label="数据表" prop="tableName">
-          <el-select v-model="dialog.form.tableName" placeholder="请选择" style="width: 100%">
-            <el-option v-for="t in tableOptions" :key="t.value" :label="t.label" :value="t.value" />
-          </el-select>
+          <EasySelect v-model="dialog.form.tableName" placeholder="请选择" :options="tableOptions" style="width: 100%" />
         </el-form-item>
         <el-form-item label="过滤条件" prop="filterExpr">
-          <el-input
+          <EasyInput
             v-model="dialog.form.filterExpr"
             type="textarea"
             :rows="3"
@@ -375,16 +378,16 @@ onMounted(() => fetchData())
           />
         </el-form-item>
         <el-form-item label="状态" prop="status">
-          <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0" />
+          <EasySwitch v-model="dialog.form.status" :active-value="1" :inactive-value="0" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialog.visible = false">
+        <EasyButton @click="dialog.visible = false">
           取消
-        </el-button>
-        <el-button type="primary" :loading="dialog.loading" @click="handleSubmit">
+        </EasyButton>
+        <EasyButton type="primary" :loading="dialog.loading" @click="handleSubmit">
           确定
-        </el-button>
+        </EasyButton>
       </template>
     </el-dialog>
   </div>

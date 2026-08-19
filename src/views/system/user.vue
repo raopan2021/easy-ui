@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { FormInstance, FormRules } from 'element-plus'
+import type { TableColumn } from '@raopan/easy-ui'
 import { Delete, Plus } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { onMounted, reactive, ref } from 'vue'
@@ -110,6 +111,17 @@ const tableData = ref<User[]>([])
 const selectedIds = ref<number[]>([])
 
 const pagination = reactive({ page: 1, pageSize: 10, total: 0 })
+
+const columns: TableColumn[] = [
+  { prop: 'id', name: 'ID', width: 70 },
+  { prop: 'username', name: '用户名', minWidth: 120 },
+  { prop: 'nickname', name: '昵称', minWidth: 120 },
+  { prop: 'phone', name: '手机号', minWidth: 130 },
+  { prop: 'email', name: '邮箱', minWidth: 180 },
+  { prop: 'deptName', name: '所属部门', minWidth: 130 },
+  { prop: 'status', name: '状态', width: 80, align: 'center' },
+  { prop: 'createTime', name: '创建时间', width: 170 },
+]
 
 function handleSelectionChange(rows: User[]) {
   selectedIds.value = rows.map(r => r.id)
@@ -302,102 +314,92 @@ onMounted(() => {
 
     <!-- 搜索栏 -->
     <div class="search-bar">
-      <el-input
+      <EasyInput
         v-model="searchForm.keyword"
         placeholder="搜索用户名 / 手机号 / 邮箱"
         clearable
         style="width: 260px"
         @keyup.enter="handleSearch"
       />
-      <el-select v-model="searchForm.status" placeholder="用户状态" clearable style="width: 140px">
-        <el-option label="启用" :value="1" />
-        <el-option label="禁用" :value="0" />
-      </el-select>
-      <el-select v-model="searchForm.deptId" placeholder="所属部门" clearable style="width: 160px">
-        <el-option v-for="d in deptOptions" :key="d.id" :label="d.name" :value="d.id" />
-      </el-select>
-      <el-button type="primary" @click="handleSearch">
+      <EasySelect
+        v-model="searchForm.status"
+        placeholder="用户状态"
+        clearable
+        :options="[{ label: '启用', value: 1 }, { label: '禁用', value: 0 }]"
+        style="width: 140px"
+      />
+      <EasySelect
+        v-model="searchForm.deptId"
+        placeholder="所属部门"
+        clearable
+        :options="deptOptions"
+        label-key="name"
+        value-key="id"
+        style="width: 160px"
+      />
+      <EasyButton type="primary" @click="handleSearch">
         查询
-      </el-button>
-      <el-button @click="handleReset">
+      </EasyButton>
+      <EasyButton @click="handleReset">
         重置
-      </el-button>
+      </EasyButton>
     </div>
 
     <!-- 操作栏 -->
     <div class="action-bar">
-      <el-button type="primary" @click="handleAdd">
+      <EasyButton type="primary" @click="handleAdd">
         <el-icon><Plus /></el-icon>新增用户
-      </el-button>
-      <el-button :disabled="!selectedIds.length" @click="handleBatchDelete">
+      </EasyButton>
+      <EasyButton :disabled="!selectedIds.length" @click="handleBatchDelete">
         <el-icon><Delete /></el-icon>批量删除
-      </el-button>
+      </EasyButton>
     </div>
 
     <!-- 数据表格 -->
-    <el-table
+    <EasyTable
       ref="tableRef"
       v-loading="loading"
       :data="tableData"
+      :columns="columns"
+      selection-mode="multiple"
       stripe
       border
-      style="width: 100%"
+      :pagination="true"
+      :total="pagination.total"
+      :page="pagination.page"
+      :page-size="pagination.pageSize"
+      :page-size-options="[10, 20, 50, 100]"
+      action-label="操作"
+      :action-width="200"
+      action-fixed="right"
       @selection-change="handleSelectionChange"
+      @page-change="(p: number) => { pagination.page = p; fetchData() }"
+      @page-size-change="(s: number) => { pagination.pageSize = s; fetchData() }"
     >
-      <el-table-column type="selection" width="50" />
-      <el-table-column prop="id" label="ID" width="70" />
-      <el-table-column prop="username" label="用户名" min-width="120" />
-      <el-table-column prop="nickname" label="昵称" min-width="120" />
-      <el-table-column prop="phone" label="手机号" min-width="130" />
-      <el-table-column prop="email" label="邮箱" min-width="180" />
-      <el-table-column prop="deptName" label="所属部门" min-width="130" />
-      <el-table-column prop="status" label="状态" width="80" align="center">
-        <template #default="{ row }">
-          <el-switch
-            :model-value="row.status === 1"
-            inline-prompt
-            active-text="启"
-            inactive-text="禁"
-            @change="(val: boolean) => handleToggleStatus(row, val)"
-          />
-        </template>
-      </el-table-column>
-      <el-table-column label="创建时间" width="170">
-        <template #default="{ row }">
-          {{ row.createTime }}
-        </template>
-      </el-table-column>
-      <el-table-column label="操作" width="200" fixed="right">
-        <template #default="{ row }">
-          <el-button link type="primary" size="small" @click="handleEdit(row)">
-            编辑
-          </el-button>
-          <el-button link type="primary" size="small" @click="handleResetPwd(row)">
-            重置密码
-          </el-button>
-          <el-popconfirm title="确定删除该用户？" @confirm="handleDelete(row)">
-            <template #reference>
-              <el-button link type="danger" size="small">
-                删除
-              </el-button>
-            </template>
-          </el-popconfirm>
-        </template>
-      </el-table-column>
-    </el-table>
-
-    <!-- 分页 -->
-    <div class="pagination-wrap">
-      <el-pagination
-        v-model:current-page="pagination.page"
-        v-model:page-size="pagination.pageSize"
-        :total="pagination.total"
-        :page-sizes="[10, 20, 50, 100]"
-        layout="total, sizes, prev, pager, next, jumper"
-        @size-change="fetchData"
-        @current-change="fetchData"
-      />
-    </div>
+      <template #col-status="{ row }">
+        <EasySwitch
+          :model-value="row.status === 1"
+          active-text="启"
+          inactive-text="禁"
+          @change="(val: boolean) => handleToggleStatus(row, val)"
+        />
+      </template>
+      <template #action="{ row }">
+        <EasyButton link type="primary" size="small" @click="handleEdit(row)">
+          编辑
+        </EasyButton>
+        <EasyButton link type="primary" size="small" @click="handleResetPwd(row)">
+          重置密码
+        </EasyButton>
+        <el-popconfirm title="确定删除该用户？" @confirm="handleDelete(row)">
+          <template #reference>
+            <EasyButton link type="danger" size="small">
+              删除
+            </EasyButton>
+          </template>
+        </el-popconfirm>
+      </template>
+    </EasyTable>
 
     <!-- 新增 / 编辑 弹窗 -->
     <el-dialog
@@ -409,43 +411,48 @@ onMounted(() => {
     >
       <el-form ref="formRef" :model="dialog.form" :rules="formRules" label-width="90px">
         <el-form-item label="用户名" prop="username">
-          <el-input v-model="dialog.form.username" placeholder="请输入用户名" :disabled="dialog.isEdit" />
+          <EasyInput v-model="dialog.form.username" placeholder="请输入用户名" :disabled="dialog.isEdit" />
         </el-form-item>
         <el-form-item v-if="!dialog.isEdit" label="密码" prop="password">
           <el-input v-model="dialog.form.password" type="password" placeholder="请输入密码" show-password />
         </el-form-item>
         <el-form-item label="昵称" prop="nickname">
-          <el-input v-model="dialog.form.nickname" placeholder="请输入昵称" />
+          <EasyInput v-model="dialog.form.nickname" placeholder="请输入昵称" />
         </el-form-item>
         <el-form-item label="手机号" prop="phone">
-          <el-input v-model="dialog.form.phone" placeholder="请输入手机号" />
+          <EasyInput v-model="dialog.form.phone" placeholder="请输入手机号" />
         </el-form-item>
         <el-form-item label="邮箱" prop="email">
-          <el-input v-model="dialog.form.email" placeholder="请输入邮箱" />
+          <EasyInput v-model="dialog.form.email" placeholder="请输入邮箱" />
         </el-form-item>
         <el-form-item label="所属部门" prop="deptId">
-          <el-select v-model="dialog.form.deptId" placeholder="请选择部门" style="width: 100%">
-            <el-option v-for="d in deptOptions" :key="d.id" :label="d.name" :value="d.id" />
-          </el-select>
+          <EasySelect
+            v-model="dialog.form.deptId"
+            placeholder="请选择部门"
+            :options="deptOptions"
+            label-key="name"
+            value-key="id"
+            style="width: 100%"
+          />
         </el-form-item>
         <el-form-item label="状态" prop="status">
-          <el-radio-group v-model="dialog.form.status">
-            <el-radio :value="1">
+          <EasyRadioGroup v-model="dialog.form.status">
+            <EasyRadio :label="1">
               启用
-            </el-radio>
-            <el-radio :value="0">
+            </EasyRadio>
+            <EasyRadio :label="0">
               禁用
-            </el-radio>
-          </el-radio-group>
+            </EasyRadio>
+          </EasyRadioGroup>
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialog.visible = false">
+        <EasyButton @click="dialog.visible = false">
           取消
-        </el-button>
-        <el-button type="primary" :loading="dialog.loading" @click="handleSubmit">
+        </EasyButton>
+        <EasyButton type="primary" :loading="dialog.loading" @click="handleSubmit">
           确定
-        </el-button>
+        </EasyButton>
       </template>
     </el-dialog>
   </div>

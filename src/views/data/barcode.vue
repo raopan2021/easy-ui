@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { EasyBarcode, EasyButton } from '@raopan/easy-ui'
-import { ElInput, ElMessage } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import { ref } from 'vue'
 
 const barcodeRef = ref<InstanceType<typeof EasyBarcode>>()
@@ -202,7 +202,7 @@ function onError(error: Error) {
         <div class="doc-preview__body">
           <div class="barcode-interactive">
             <div class="barcode-interactive__left">
-              <ElInput
+              <EasyInput
                 v-model="dynamicContent"
                 type="textarea"
                 :rows="3"
@@ -253,9 +253,9 @@ function handleDownloadPNG() {
           <EasyBarcode content="EVENT-TEST" :height="100" @generated="onGenerated" @error="onError" />
           <div v-if="eventLog.length" class="barcode-event-log">
             <div v-for="(log, index) in eventLog" :key="index" class="barcode-event-log__item">
-              <el-tag :type="log.type === 'success' ? 'success' : 'danger'" size="small">
+              <EasyTag :type="log.type === 'success' ? 'success' : 'danger'" size="small">
                 {{ log.type }}
-              </el-tag>
+              </EasyTag>
               <span>{{ log.message }}</span>
             </div>
           </div>

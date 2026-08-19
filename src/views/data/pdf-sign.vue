@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Close } from '@element-plus/icons-vue'
+
 import { nextTick, onMounted, ref } from 'vue'
 
 // ===== 签名数据 =====
@@ -269,9 +269,9 @@ onMounted(() => {
                     >
                       <img v-if="sig.type === 'stamp'" :src="sig.data" alt="印章" class="signature-stamp">
                       <canvas v-else class="signature-canvas-small" :width="160" :height="60" />
-                      <el-button class="signature-item__del" size="small" circle link @click.stop="removeSig(idx)">
-                        <el-icon><Close /></el-icon>
-                      </el-button>
+                      <EasyButton class="signature-item__del" size="small" circle link @click.stop="removeSig(idx)">
+                        <EasyIcon name="el:Close" />
+                      </EasyButton>
                     </div>
                   </div>
                   <p>&nbsp;</p>
@@ -292,8 +292,8 @@ onMounted(() => {
 
             <!-- 签名面板 -->
             <div class="sign-panel">
-              <el-tabs model-value="handwrite">
-                <el-tab-pane label="手写签名" name="handwrite">
+              <EasyTabs model-value="handwrite">
+                <EasyTabPane label="手写签名" name="handwrite">
                   <canvas
                     ref="drawCanvasRef"
                     :width="300"
@@ -308,23 +308,23 @@ onMounted(() => {
                     @touchend="stopDraw"
                   />
                   <div class="draw-actions">
-                    <el-button size="small" @click="clearCanvas">
+                    <EasyButton size="small" @click="clearCanvas">
                       清空
-                    </el-button>
-                    <el-button size="small" type="primary" @click="addSignature">
+                    </EasyButton>
+                    <EasyButton size="small" type="primary" @click="addSignature">
                       添加签名
-                    </el-button>
+                    </EasyButton>
                   </div>
-                </el-tab-pane>
-                <el-tab-pane label="签章" name="stamp">
+                </EasyTabPane>
+                <EasyTabPane label="签章" name="stamp">
                   <div class="stamp-list">
                     <div v-for="(stamp, idx) in stamps" :key="idx" class="stamp-item" @click="addStamp(stamp)">
                       <img :src="stamp" alt="印章" class="stamp-thumb">
                       <span>印章 {{ idx + 1 }}</span>
                     </div>
                   </div>
-                </el-tab-pane>
-              </el-tabs>
+                </EasyTabPane>
+              </EasyTabs>
             </div>
           </div>
         </div>

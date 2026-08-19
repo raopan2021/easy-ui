@@ -419,7 +419,7 @@ onMounted(() => fetchData())
     </div>
 
     <div class="search-bar">
-      <el-input
+      <EasyInput
         v-model="searchForm.keyword"
         placeholder="搜索权限名称/编码"
         clearable
@@ -427,29 +427,32 @@ onMounted(() => fetchData())
         @keyup.enter="handleSearch"
         @clear="handleSearch"
       />
-      <el-select v-model="searchForm.type" placeholder="权限类型" clearable style="width: 140px" @change="handleSearch">
-        <el-option label="菜单" value="menu" />
-        <el-option label="按钮" value="button" />
-        <el-option label="接口" value="api" />
-      </el-select>
-      <el-button type="primary" @click="handleSearch">
+      <EasySelect
+        v-model="searchForm.type"
+        placeholder="权限类型"
+        clearable
+        :options="[{ label: '菜单', value: 'menu' }, { label: '按钮', value: 'button' }, { label: '接口', value: 'api' }]"
+        style="width: 140px"
+        @change="handleSearch"
+      />
+      <EasyButton type="primary" @click="handleSearch">
         <el-icon><Search /></el-icon>查询
-      </el-button>
-      <el-button @click="handleReset">
+      </EasyButton>
+      <EasyButton @click="handleReset">
         <el-icon><RefreshRight /></el-icon>重置
-      </el-button>
+      </EasyButton>
     </div>
 
     <div class="action-bar">
-      <el-button type="primary" @click="handleAddModule">
+      <EasyButton type="primary" @click="handleAddModule">
         <el-icon><FolderAdd /></el-icon>新增模块
-      </el-button>
-      <el-button type="success" @click="handleAddPermission">
+      </EasyButton>
+      <EasyButton type="success" @click="handleAddPermission">
         <el-icon><Plus /></el-icon>新增权限点
-      </el-button>
-      <el-button type="danger" :disabled="!selectedRows.length" @click="handleBatchDelete">
+      </EasyButton>
+      <EasyButton type="danger" :disabled="!selectedRows.length" @click="handleBatchDelete">
         <el-icon><Delete /></el-icon>批量删除
-      </el-button>
+      </EasyButton>
       <span v-if="selectedRows.length" style="color: var(--el-text-color-secondary); font-size: 13px; margin-left: 8px">
         已选 {{ selectedRows.length }} 项
       </span>
@@ -469,41 +472,41 @@ onMounted(() => fetchData())
       <el-table-column prop="name" label="名称" min-width="180">
         <template #default="{ row }">
           <span :style="{ fontWeight: row.type === 'module' ? 600 : 400 }">{{ row.name }}</span>
-          <el-tag v-if="row.type === 'module'" size="small" type="info" style="margin-left: 8px">
+          <EasyTag v-if="row.type === 'module'" size="small" type="info" style="margin-left: 8px">
             模块
-          </el-tag>
+          </EasyTag>
         </template>
       </el-table-column>
       <el-table-column prop="code" label="编码" width="200" />
       <el-table-column prop="type" label="类型" width="100">
         <template #default="{ row }">
-          <el-tag v-if="row.type !== 'module'" :type="typeMap[row.type]?.tag" size="small">
+          <EasyTag v-if="row.type !== 'module'" :type="typeMap[row.type]?.tag" size="small">
             {{ typeMap[row.type]?.label || row.type }}
-          </el-tag>
+          </EasyTag>
         </template>
       </el-table-column>
       <el-table-column prop="sort" label="排序" width="80" align="center" />
       <el-table-column prop="status" label="状态" width="90">
         <template #default="{ row }">
-          <el-tag :type="row.status === 1 ? 'success' : 'danger'" size="small">
+          <EasyTag :type="row.status === 1 ? 'success' : 'danger'" size="small">
             {{ row.status === 1 ? '启用' : '禁用' }}
-          </el-tag>
+          </EasyTag>
         </template>
       </el-table-column>
       <el-table-column prop="createTime" label="创建时间" width="170" />
       <el-table-column label="操作" width="220" fixed="right">
         <template #default="{ row }">
-          <el-button link type="primary" size="small" @click="handleEdit(row)">
+          <EasyButton link type="primary" size="small" @click="handleEdit(row)">
             编辑
-          </el-button>
-          <el-button v-if="row.type === 'module'" link type="success" size="small" @click="handleAddChild(row)">
+          </EasyButton>
+          <EasyButton v-if="row.type === 'module'" link type="success" size="small" @click="handleAddChild(row)">
             添加子权限
-          </el-button>
+          </EasyButton>
           <el-popconfirm title="确定删除该项及其子项？" @confirm="handleDelete(row)">
             <template #reference>
-              <el-button link type="danger" size="small">
+              <EasyButton link type="danger" size="small">
                 删除
-              </el-button>
+              </EasyButton>
             </template>
           </el-popconfirm>
         </template>
@@ -519,38 +522,38 @@ onMounted(() => fetchData())
     >
       <el-form ref="formRef" :model="dialog.form" :rules="formRules" label-width="90px">
         <el-form-item v-if="dialog.form.type === 'module'" label="模块名称" prop="name">
-          <el-input v-model="dialog.form.name" placeholder="请输入模块名称" maxlength="30" />
+          <EasyInput v-model="dialog.form.name" placeholder="请输入模块名称" maxlength="30" />
         </el-form-item>
         <el-form-item v-else label="权限名称" prop="name">
-          <el-input v-model="dialog.form.name" placeholder="请输入权限名称" maxlength="30" />
+          <EasyInput v-model="dialog.form.name" placeholder="请输入权限名称" maxlength="30" />
         </el-form-item>
         <el-form-item label="权限编码" prop="code">
-          <el-input v-model="dialog.form.code" placeholder="如 system:user:add" maxlength="50" />
+          <EasyInput v-model="dialog.form.code" placeholder="如 system:user:add" maxlength="50" />
         </el-form-item>
         <el-form-item v-if="dialog.form.type !== 'module'" label="权限类型" prop="type">
-          <el-select v-model="dialog.form.type" placeholder="请选择">
-            <el-option label="菜单" value="menu" />
-            <el-option label="按钮" value="button" />
-            <el-option label="接口" value="api" />
-          </el-select>
+          <EasySelect
+            v-model="dialog.form.type"
+            placeholder="请选择"
+            :options="[{ label: '菜单', value: 'menu' }, { label: '按钮', value: 'button' }, { label: '接口', value: 'api' }]"
+          />
         </el-form-item>
         <el-form-item v-if="dialog.form.parentId" label="上级模块">
-          <el-input :model-value="parentName" disabled />
+          <EasyInput :model-value="parentName" disabled />
         </el-form-item>
         <el-form-item label="排序号" prop="sort">
           <el-input-number v-model="dialog.form.sort" :min="0" :max="999" style="width: 140px" />
         </el-form-item>
         <el-form-item label="状态" prop="status">
-          <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0" />
+          <EasySwitch v-model="dialog.form.status" :active-value="1" :inactive-value="0" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialog.visible = false">
+        <EasyButton @click="dialog.visible = false">
           取消
-        </el-button>
-        <el-button type="primary" :loading="dialog.loading" @click="handleSubmit">
+        </EasyButton>
+        <EasyButton type="primary" :loading="dialog.loading" @click="handleSubmit">
           确定
-        </el-button>
+        </EasyButton>
       </template>
     </el-dialog>
   </div>

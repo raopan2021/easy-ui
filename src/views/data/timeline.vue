@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CircleCheckFilled, Message, Star } from '@element-plus/icons-vue'
+
 import { EasyTag, EasyTimeline, EasyTimelineItem } from '@raopan/easy-ui'
 </script>
 
@@ -302,7 +302,7 @@ import { EasyTag, EasyTimeline, EasyTimelineItem } from '@raopan/easy-ui'
             <EasyTimelineItem status="finish" timestamp="2024-03-24 15:30">
               <div class="activity-item">
                 <div class="activity-item__icon success">
-                  <el-icon><CircleCheckFilled /></el-icon>
+                  <EasyIcon name="el:CircleCheckFilled" />
                 </div>
                 <div class="activity-item__content">
                   <h4>订单完成</h4>
@@ -313,7 +313,7 @@ import { EasyTag, EasyTimeline, EasyTimelineItem } from '@raopan/easy-ui'
             <EasyTimelineItem status="finish" timestamp="2024-03-24 14:20">
               <div class="activity-item">
                 <div class="activity-item__icon primary">
-                  <el-icon><Message /></el-icon>
+                  <EasyIcon name="el:Message" />
                 </div>
                 <div class="activity-item__content">
                   <h4>发表评论</h4>
@@ -324,7 +324,7 @@ import { EasyTag, EasyTimeline, EasyTimelineItem } from '@raopan/easy-ui'
             <EasyTimelineItem status="finish" timestamp="2024-03-24 10:00">
               <div class="activity-item">
                 <div class="activity-item__icon warning">
-                  <el-icon><Star /></el-icon>
+                  <EasyIcon name="el:Star" />
                 </div>
                 <div class="activity-item__content">
                   <h4>收藏课程</h4>

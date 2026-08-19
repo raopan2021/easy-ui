@@ -277,12 +277,12 @@ onMounted(() => {
       <div class="dict-left">
         <div class="dict-panel-header">
           <span class="dict-panel-title">字典类型</span>
-          <el-button type="primary" size="small" @click="handleAddType">
+          <EasyButton type="primary" size="small" @click="handleAddType">
             <el-icon><Plus /></el-icon>新增
-          </el-button>
+          </EasyButton>
         </div>
         <div class="dict-panel-search">
-          <el-input
+          <EasyInput
             v-model="typeSearch.keyword"
             placeholder="搜索类型"
             size="small"
@@ -305,23 +305,23 @@ onMounted(() => {
           <el-table-column prop="code" label="编码" width="110" />
           <el-table-column prop="status" label="状态" width="60">
             <template #default="{ row }">
-              <el-tag :type="row.status === 1 ? 'success' : 'danger'" size="small">
+              <EasyTag :type="row.status === 1 ? 'success' : 'danger'" size="small">
                 {{
                   row.status === 1 ? '正常' : '停用'
                 }}
-              </el-tag>
+              </EasyTag>
             </template>
           </el-table-column>
           <el-table-column label="操作" width="100">
             <template #default="{ row }">
-              <el-button link type="primary" size="small" @click.stop="handleEditType(row)">
+              <EasyButton link type="primary" size="small" @click.stop="handleEditType(row)">
                 编辑
-              </el-button>
+              </EasyButton>
               <el-popconfirm title="确定删除？" @confirm="handleDeleteType(row)">
                 <template #reference>
-                  <el-button link type="danger" size="small" @click.stop>
+                  <EasyButton link type="danger" size="small" @click.stop>
                     删除
-                  </el-button>
+                  </EasyButton>
                 </template>
               </el-popconfirm>
             </template>
@@ -340,12 +340,12 @@ onMounted(() => {
               </span>
             </template>
           </span>
-          <el-button type="primary" size="small" :disabled="!selectedType" @click="handleAddData">
+          <EasyButton type="primary" size="small" :disabled="!selectedType" @click="handleAddData">
             <el-icon><Plus /></el-icon>新增
-          </el-button>
+          </EasyButton>
         </div>
         <div class="dict-panel-search">
-          <el-input
+          <EasyInput
             v-model="dataSearch.keyword"
             placeholder="搜索标签/值"
             size="small"
@@ -364,29 +364,29 @@ onMounted(() => {
             <el-table-column prop="value" label="字典值" width="140" />
             <el-table-column prop="tagType" label="回显样式" width="100">
               <template #default="{ row }">
-                <el-tag :type="row.tagType" size="small">
+                <EasyTag :type="row.tagType" size="small">
                   {{ row.label }}
-                </el-tag>
+                </EasyTag>
               </template>
             </el-table-column>
             <el-table-column prop="sort" label="排序" width="70" align="center" />
             <el-table-column prop="status" label="状态" width="70">
               <template #default="{ row }">
-                <el-tag :type="row.status === 1 ? 'success' : 'danger'" size="small">
+                <EasyTag :type="row.status === 1 ? 'success' : 'danger'" size="small">
                   {{ row.status === 1 ? '正常' : '停用' }}
-                </el-tag>
+                </EasyTag>
               </template>
             </el-table-column>
             <el-table-column label="操作" width="140" fixed="right">
               <template #default="{ row }">
-                <el-button link type="primary" size="small" @click="handleEditData(row)">
+                <EasyButton link type="primary" size="small" @click="handleEditData(row)">
                   编辑
-                </el-button>
+                </EasyButton>
                 <el-popconfirm title="确定删除？" @confirm="handleDeleteData(row)">
                   <template #reference>
-                    <el-button link type="danger" size="small">
+                    <EasyButton link type="danger" size="small">
                       删除
-                    </el-button>
+                    </EasyButton>
                   </template>
                 </el-popconfirm>
               </template>
@@ -419,22 +419,22 @@ onMounted(() => {
     >
       <el-form ref="typeFormRef" :model="typeDialog.form" :rules="typeFormRules" label-width="80px">
         <el-form-item label="类型名称" prop="name">
-          <el-input v-model="typeDialog.form.name" placeholder="如: 用户性别" maxlength="20" />
+          <EasyInput v-model="typeDialog.form.name" placeholder="如: 用户性别" maxlength="20" />
         </el-form-item>
         <el-form-item label="类型编码" prop="code">
-          <el-input v-model="typeDialog.form.code" placeholder="如: sys_user_sex" maxlength="30" />
+          <EasyInput v-model="typeDialog.form.code" placeholder="如: sys_user_sex" maxlength="30" />
         </el-form-item>
         <el-form-item label="状态">
-          <el-switch v-model="typeDialog.form.status" :active-value="1" :inactive-value="0" />
+          <EasySwitch v-model="typeDialog.form.status" :active-value="1" :inactive-value="0" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="typeDialog.visible = false">
+        <EasyButton @click="typeDialog.visible = false">
           取消
-        </el-button>
-        <el-button type="primary" :loading="typeDialog.loading" @click="handleTypeSubmit">
+        </EasyButton>
+        <EasyButton type="primary" :loading="typeDialog.loading" @click="handleTypeSubmit">
           确定
-        </el-button>
+        </EasyButton>
       </template>
     </el-dialog>
 
@@ -448,37 +448,37 @@ onMounted(() => {
     >
       <el-form ref="dataFormRef" :model="dataDialog.form" :rules="dataFormRules" label-width="90px">
         <el-form-item label="字典标签" prop="label">
-          <el-input v-model="dataDialog.form.label" placeholder="如: 男" maxlength="20" />
+          <EasyInput v-model="dataDialog.form.label" placeholder="如: 男" maxlength="20" />
         </el-form-item>
         <el-form-item label="字典值" prop="value">
-          <el-input v-model="dataDialog.form.value" placeholder="如: 0" maxlength="20" />
+          <EasyInput v-model="dataDialog.form.value" placeholder="如: 0" maxlength="20" />
         </el-form-item>
         <el-form-item label="回显样式" prop="tagType">
           <el-select v-model="dataDialog.form.tagType" placeholder="请选择">
             <el-option value="primary">
-              <el-tag type="primary" size="small">
+              <EasyTag type="primary" size="small">
                 primary
-              </el-tag>
+              </EasyTag>
             </el-option>
             <el-option value="success">
-              <el-tag type="success" size="small">
+              <EasyTag type="success" size="small">
                 success
-              </el-tag>
+              </EasyTag>
             </el-option>
             <el-option value="warning">
-              <el-tag type="warning" size="small">
+              <EasyTag type="warning" size="small">
                 warning
-              </el-tag>
+              </EasyTag>
             </el-option>
             <el-option value="danger">
-              <el-tag type="danger" size="small">
+              <EasyTag type="danger" size="small">
                 danger
-              </el-tag>
+              </EasyTag>
             </el-option>
             <el-option value="info">
-              <el-tag type="info" size="small">
+              <EasyTag type="info" size="small">
                 info
-              </el-tag>
+              </EasyTag>
             </el-option>
           </el-select>
         </el-form-item>
@@ -486,16 +486,16 @@ onMounted(() => {
           <el-input-number v-model="dataDialog.form.sort" :min="0" :max="999" style="width: 140px" />
         </el-form-item>
         <el-form-item label="状态">
-          <el-switch v-model="dataDialog.form.status" :active-value="1" :inactive-value="0" />
+          <EasySwitch v-model="dataDialog.form.status" :active-value="1" :inactive-value="0" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dataDialog.visible = false">
+        <EasyButton @click="dataDialog.visible = false">
           取消
-        </el-button>
-        <el-button type="primary" :loading="dataDialog.loading" @click="handleDataSubmit">
+        </EasyButton>
+        <EasyButton type="primary" :loading="dataDialog.loading" @click="handleDataSubmit">
           确定
-        </el-button>
+        </EasyButton>
       </template>
     </el-dialog>
   </div>

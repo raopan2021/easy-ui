@@ -499,23 +499,24 @@ function handleSubmit() {
         <div class="demo-form">
           <div class="demo-form__item">
             <label class="demo-form__label">用户名 <span class="required">*</span></label>
-            <el-input placeholder="请输入用户名" size="default" />
+            <EasyInput placeholder="请输入用户名" size="default" />
           </div>
           <div class="demo-form__item">
             <label class="demo-form__label">邮箱 <span class="required">*</span></label>
-            <el-input placeholder="请输入邮箱" size="default" />
+            <EasyInput placeholder="请输入邮箱" size="default" />
           </div>
           <div class="demo-form__item">
             <label class="demo-form__label">角色</label>
-            <el-select placeholder="请选择角色" size="default" style="width: 100%">
-              <el-option label="管理员" value="admin" />
-              <el-option label="编辑者" value="editor" />
-              <el-option label="查看者" value="viewer" />
-            </el-select>
+            <EasySelect
+              placeholder="请选择角色"
+              size="default"
+              :options="[{ label: '管理员', value: 'admin' }, { label: '编辑者', value: 'editor' }, { label: '查看者', value: 'viewer' }]"
+              style="width: 100%"
+            />
           </div>
           <div class="demo-form__item">
             <label class="demo-form__label">备注</label>
-            <el-input type="textarea" placeholder="请输入备注" :rows="3" />
+            <EasyInput type="textarea" placeholder="请输入备注" :rows="3" />
           </div>
         </div>
       </EasyModal>

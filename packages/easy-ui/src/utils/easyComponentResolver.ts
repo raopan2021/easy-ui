@@ -26,6 +26,8 @@ const LIB = '@raopan/easy-ui'
 const SUB_ENTRY: Record<string, string> = {
   EasyFilePreview: 'file-preview',
   EasyFlowDesigner: 'flow-designer',
+  EasyMarkdown: 'markdown',
+  EasyRichText: 'richtext',
 }
 
 export function easyComponentResolver(): ComponentResolver {

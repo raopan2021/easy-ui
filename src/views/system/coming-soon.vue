@@ -23,12 +23,12 @@
       该模块正在抓紧开发，敬请期待
     </p>
     <div class="coming-soon__meta">
-      <el-tag type="info" effect="plain">
+      <EasyTag type="info" effect="plain">
         状态：规划中
-      </el-tag>
-      <el-tag type="warning" effect="plain">
+      </EasyTag>
+      <EasyTag type="warning" effect="plain">
         预计上线：2026 Q3
-      </el-tag>
+      </EasyTag>
     </div>
   </div>
 </template>

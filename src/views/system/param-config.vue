@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { FormInstance, FormRules } from 'element-plus'
+import type { TableColumn } from '@raopan/easy-ui'
 import { Delete, Plus, RefreshRight, Search } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { onMounted, reactive, ref } from 'vue'
@@ -120,6 +121,16 @@ const loading = ref(false)
 const tableData = ref<ParamItem[]>([])
 const selectedIds = ref<number[]>([])
 const pagination = reactive({ page: 1, pageSize: 10, total: 0 })
+
+const columns: TableColumn[] = [
+  { prop: 'id', name: 'ID', width: 70 },
+  { prop: 'key', name: '参数键', width: 200 },
+  { prop: 'value', name: '参数值', minWidth: 180 },
+  { prop: 'type', name: '类型', width: 90 },
+  { prop: 'remark', name: '备注', minWidth: 150 },
+  { prop: 'status', name: '状态', width: 90 },
+  { prop: 'createTime', name: '创建时间', width: 170 },
+]
 
 function handleSelectionChange(rows: ParamItem[]) {
   selectedIds.value = rows.map(r => r.id)
@@ -292,7 +303,7 @@ onMounted(() => fetchData())
     </div>
 
     <div class="search-bar">
-      <el-input
+      <EasyInput
         v-model="searchForm.keyword"
         placeholder="搜索参数键"
         clearable
@@ -300,105 +311,102 @@ onMounted(() => fetchData())
         @keyup.enter="handleSearch"
         @clear="handleSearch"
       />
-      <el-select v-model="searchForm.type" placeholder="参数类型" clearable style="width: 130px" @change="handleSearch">
-        <el-option label="文本" value="text" />
-        <el-option label="数字" value="number" />
-        <el-option label="布尔" value="boolean" />
-        <el-option label="JSON" value="json" />
-      </el-select>
-      <el-select v-model="searchForm.status" placeholder="状态" clearable style="width: 120px" @change="handleSearch">
-        <el-option label="启用" :value="1" />
-        <el-option label="禁用" :value="0" />
-      </el-select>
-      <el-button type="primary" @click="handleSearch">
+      <EasySelect
+        v-model="searchForm.type"
+        placeholder="参数类型"
+        clearable
+        :options="[{ label: '文本', value: 'text' }, { label: '数字', value: 'number' }, { label: '布尔', value: 'boolean' }, { label: 'JSON', value: 'json' }]"
+        style="width: 130px"
+        @change="handleSearch"
+      />
+      <EasySelect
+        v-model="searchForm.status"
+        placeholder="状态"
+        clearable
+        :options="[{ label: '启用', value: 1 }, { label: '禁用', value: 0 }]"
+        style="width: 120px"
+        @change="handleSearch"
+      />
+      <EasyButton type="primary" @click="handleSearch">
         <el-icon><Search /></el-icon>查询
-      </el-button>
-      <el-button @click="handleReset">
+      </EasyButton>
+      <EasyButton @click="handleReset">
         <el-icon><RefreshRight /></el-icon>重置
-      </el-button>
+      </EasyButton>
     </div>
 
     <div class="action-bar">
-      <el-button type="primary" @click="handleAdd">
+      <EasyButton type="primary" @click="handleAdd">
         <el-icon><Plus /></el-icon>新增参数
-      </el-button>
-      <el-button type="danger" :disabled="!selectedIds.length" @click="handleBatchDelete">
+      </EasyButton>
+      <EasyButton type="danger" :disabled="!selectedIds.length" @click="handleBatchDelete">
         <el-icon><Delete /></el-icon>批量删除
-      </el-button>
+      </EasyButton>
     </div>
 
-    <el-table v-loading="loading" :data="tableData" stripe border @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="50" />
-      <el-table-column prop="id" label="ID" width="70" />
-      <el-table-column prop="key" label="参数键" width="200">
-        <template #default="{ row }">
-          <code class="param-key">{{ row.key }}</code>
+    <EasyTable
+      v-loading="loading"
+      :data="tableData"
+      :columns="columns"
+      selection-mode="multiple"
+      stripe
+      border
+      :pagination="true"
+      :total="pagination.total"
+      :page="pagination.page"
+      :page-size="pagination.pageSize"
+      :page-size-options="[10, 20, 50, 100]"
+      action-label="操作"
+      :action-width="160"
+      action-fixed="right"
+      @selection-change="handleSelectionChange"
+      @page-change="(p: number) => { pagination.page = p; fetchData() }"
+      @page-size-change="(s: number) => { pagination.pageSize = s; fetchData() }"
+    >
+      <template #col-key="{ row }">
+        <code class="param-key">{{ row.key }}</code>
+      </template>
+      <template #col-value="{ row }">
+        <template v-if="row.type === 'boolean'">
+          <EasyTag :type="row.value === 'true' ? 'success' : 'danger'" size="small">
+            {{
+              row.value === 'true' ? '是' : '否'
+            }}
+          </EasyTag>
         </template>
-      </el-table-column>
-      <el-table-column prop="value" label="参数值" min-width="180">
-        <template #default="{ row }">
-          <template v-if="row.type === 'boolean'">
-            <el-tag :type="row.value === 'true' ? 'success' : 'danger'" size="small">
-              {{
-                row.value === 'true' ? '是' : '否'
-              }}
-            </el-tag>
+        <template v-else-if="row.type === 'json'">
+          <el-tooltip :content="row.value" placement="top" :show-after="300">
+            <span class="param-value">{{ row.value.slice(0, 40) }}{{ row.value.length > 40 ? '...' : '' }}</span>
+          </el-tooltip>
+        </template>
+        <template v-else>
+          <span>{{ row.value }}</span>
+        </template>
+      </template>
+      <template #col-type="{ row }">
+        <EasyTag :type="typeMap[row.type]?.tag" size="small">
+          {{ typeMap[row.type]?.label }}
+        </EasyTag>
+      </template>
+      <template #col-remark="{ row }">
+        <span style="color: var(--el-text-color-secondary); font-size: 13px">{{ row.remark || '-' }}</span>
+      </template>
+      <template #col-status="{ row }">
+        <EasySwitch :model-value="row.status === 1" @change="(val: boolean) => handleToggleStatus(row, val)" />
+      </template>
+      <template #action="{ row }">
+        <EasyButton link type="primary" size="small" @click="handleEdit(row)">
+          编辑
+        </EasyButton>
+        <el-popconfirm title="确定删除？" @confirm="handleDelete(row)">
+          <template #reference>
+            <EasyButton link type="danger" size="small">
+              删除
+            </EasyButton>
           </template>
-          <template v-else-if="row.type === 'json'">
-            <el-tooltip :content="row.value" placement="top" :show-after="300">
-              <span class="param-value">{{ row.value.slice(0, 40) }}{{ row.value.length > 40 ? '...' : '' }}</span>
-            </el-tooltip>
-          </template>
-          <template v-else>
-            <span>{{ row.value }}</span>
-          </template>
-        </template>
-      </el-table-column>
-      <el-table-column prop="type" label="类型" width="90">
-        <template #default="{ row }">
-          <el-tag :type="typeMap[row.type]?.tag" size="small">
-            {{ typeMap[row.type]?.label }}
-          </el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column prop="remark" label="备注" min-width="150">
-        <template #default="{ row }">
-          <span style="color: var(--el-text-color-secondary); font-size: 13px">{{ row.remark || '-' }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column prop="status" label="状态" width="90">
-        <template #default="{ row }">
-          <el-switch :model-value="row.status === 1" @change="(val: boolean) => handleToggleStatus(row, val)" />
-        </template>
-      </el-table-column>
-      <el-table-column prop="createTime" label="创建时间" width="170" />
-      <el-table-column label="操作" width="160" fixed="right">
-        <template #default="{ row }">
-          <el-button link type="primary" size="small" @click="handleEdit(row)">
-            编辑
-          </el-button>
-          <el-popconfirm title="确定删除？" @confirm="handleDelete(row)">
-            <template #reference>
-              <el-button link type="danger" size="small">
-                删除
-              </el-button>
-            </template>
-          </el-popconfirm>
-        </template>
-      </el-table-column>
-    </el-table>
-
-    <div class="pagination-wrap">
-      <el-pagination
-        v-model:current-page="pagination.page"
-        v-model:page-size="pagination.pageSize"
-        :total="pagination.total"
-        :page-sizes="[10, 20, 50, 100]"
-        layout="total, sizes, prev, pager, next, jumper"
-        @size-change="fetchData"
-        @current-change="fetchData"
-      />
-    </div>
+        </el-popconfirm>
+      </template>
+    </EasyTable>
 
     <el-dialog
       v-model="dialog.visible"
@@ -409,44 +417,44 @@ onMounted(() => fetchData())
     >
       <el-form ref="formRef" :model="dialog.form" :rules="formRules" label-width="90px">
         <el-form-item label="参数键" prop="key">
-          <el-input v-model="dialog.form.key" placeholder="如: upload.max_size" maxlength="50" />
+          <EasyInput v-model="dialog.form.key" placeholder="如: upload.max_size" maxlength="50" />
         </el-form-item>
         <el-form-item label="参数类型" prop="type">
-          <el-select v-model="dialog.form.type" placeholder="请选择类型" @change="onTypeChange">
-            <el-option label="文本" value="text" />
-            <el-option label="数字" value="number" />
-            <el-option label="布尔" value="boolean" />
-            <el-option label="JSON" value="json" />
-          </el-select>
+          <EasySelect
+            v-model="dialog.form.type"
+            placeholder="请选择类型"
+            :options="[{ label: '文本', value: 'text' }, { label: '数字', value: 'number' }, { label: '布尔', value: 'boolean' }, { label: 'JSON', value: 'json' }]"
+            @change="onTypeChange"
+          />
         </el-form-item>
         <el-form-item label="参数值" prop="value">
           <template v-if="dialog.form.type === 'number'">
             <el-input-number v-model="dialog.form.numberValue" style="width: 100%" />
           </template>
           <template v-else-if="dialog.form.type === 'boolean'">
-            <el-switch v-model="dialog.form.boolValue" active-text="true" inactive-text="false" />
+            <EasySwitch v-model="dialog.form.boolValue" active-text="true" inactive-text="false" />
           </template>
           <template v-else-if="dialog.form.type === 'json'">
-            <el-input v-model="dialog.form.value" type="textarea" :rows="4" placeholder="{&quot;key&quot;: &quot;value&quot;}" />
+            <EasyInput v-model="dialog.form.value" type="textarea" :rows="4" placeholder="{&quot;key&quot;: &quot;value&quot;}" />
           </template>
           <template v-else>
-            <el-input v-model="dialog.form.value" placeholder="请输入参数值" />
+            <EasyInput v-model="dialog.form.value" placeholder="请输入参数值" />
           </template>
         </el-form-item>
         <el-form-item label="备注" prop="remark">
-          <el-input v-model="dialog.form.remark" type="textarea" :rows="2" placeholder="参数说明（选填）" />
+          <EasyInput v-model="dialog.form.remark" type="textarea" :rows="2" placeholder="参数说明（选填）" />
         </el-form-item>
         <el-form-item label="状态" prop="status">
-          <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0" />
+          <EasySwitch v-model="dialog.form.status" :active-value="1" :inactive-value="0" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialog.visible = false">
+        <EasyButton @click="dialog.visible = false">
           取消
-        </el-button>
-        <el-button type="primary" :loading="dialog.loading" @click="handleSubmit">
+        </EasyButton>
+        <EasyButton type="primary" :loading="dialog.loading" @click="handleSubmit">
           确定
-        </el-button>
+        </EasyButton>
       </template>
     </el-dialog>
   </div>

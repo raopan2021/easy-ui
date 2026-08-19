@@ -106,18 +106,14 @@ watch(
       <template v-for="item in menuList" :key="item.id">
         <!-- 根级叶子节点（首页等） -->
         <el-menu-item v-if="!item.children?.length" :index="item.path || item.id">
-          <el-icon v-if="item.icon">
-            <component :is="item.icon" />
-          </el-icon>
+          <EasyIcon v-if="item.icon" :name="`el:${item.icon}`" class="fixed-sidebar__menu-icon" />
           <span>{{ item.name }}</span>
         </el-menu-item>
 
         <!-- 根级分组 -->
         <el-sub-menu v-else :index="item.id">
           <template #title>
-            <el-icon v-if="item.icon">
-              <component :is="item.icon" />
-            </el-icon>
+            <EasyIcon v-if="item.icon" :name="`el:${item.icon}`" class="fixed-sidebar__menu-icon" />
             <span>{{ item.name }}</span>
           </template>
 
@@ -147,6 +143,11 @@ watch(
 .sidebar {
   flex-shrink: 0;
   min-height: 0;
+}
+
+.fixed-sidebar__menu-icon {
+  margin-right: 4px;
+  font-size: 16px;
 }
 
 .sidebar-menu {

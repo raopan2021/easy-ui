@@ -44,6 +44,14 @@
       "types": "./dist/easy-ui/flow-designer.d.ts",
       "import": "./dist/flow-designer.mjs"
     },
+    "./markdown": {
+      "types": "./dist/easy-ui/markdown.d.ts",
+      "import": "./dist/markdown.mjs"
+    },
+    "./richtext": {
+      "types": "./dist/easy-ui/richtext.d.ts",
+      "import": "./dist/richtext.mjs"
+    },
     "./dist/easy-ui.css": "./dist/easy-ui.css",
     "./dist/index.mjs": "./dist/index.mjs",
     "./package.json": "./package.json"
@@ -73,6 +81,8 @@
     "@vue-office/docx": "^1.6.3",
     "@vue-office/excel": "^1.7.14",
     "@vue-office/pdf": "^2.0.10",
+    "@wangeditor/editor": "^5.1.23",
+    "@wangeditor/editor-for-vue": "^5.1.12",
     "cropperjs": "1.6.2",
     "crypto-js": "^4.2.0",
     "echarts": "^6.0.0",
@@ -99,6 +109,12 @@
       "optional": true
     },
     "@vue-office/pdf": {
+      "optional": true
+    },
+    "@wangeditor/editor": {
+      "optional": true
+    },
+    "@wangeditor/editor-for-vue": {
       "optional": true
     },
     "cropperjs": {

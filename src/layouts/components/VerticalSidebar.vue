@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { MenuItem } from '@/utils/menu'
-import { ArrowRight } from '@element-plus/icons-vue'
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { flattenMenu, getMenuData } from '@/utils/menu'
@@ -79,13 +78,9 @@ function handleGrandClick(grand: MenuItem, child: MenuItem, parent: MenuItem) {
           :class="{ active: item.active, expanded: item.open }"
           @click="handleMenuClick(item)"
         >
-          <ElIcon v-if="item.icon" class="vertical-sidebar__icon">
-            <component :is="item.icon" />
-          </ElIcon>
+          <EasyIcon v-if="item.icon" class="vertical-sidebar__icon" :name="`el:${item.icon}`" />
           <span class="vertical-sidebar__name">{{ item.name }}</span>
-          <ElIcon v-if="item.children?.length" class="vertical-sidebar__arrow">
-            <ArrowRight />
-          </ElIcon>
+          <EasyIcon v-if="item.children?.length" class="vertical-sidebar__arrow" name="el:ArrowRight" />
         </div>
 
         <!-- 子菜单 -->
@@ -99,9 +94,7 @@ function handleGrandClick(grand: MenuItem, child: MenuItem, parent: MenuItem) {
               @click="handleChildClick(child, item)"
             >
               <span>{{ child.name }}</span>
-              <ElIcon class="vertical-sidebar__arrow">
-                <ArrowRight />
-              </ElIcon>
+              <EasyIcon class="vertical-sidebar__arrow" name="el:ArrowRight" />
             </div>
             <!-- 无三级菜单 -->
             <div

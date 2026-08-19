@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { MenuItem } from '@/utils/menu'
-import { ArrowDown, ArrowRight } from '@element-plus/icons-vue'
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { flattenMenu, getMenuData } from '@/utils/menu'
@@ -73,13 +72,9 @@ function handleGrandClick(grand: MenuItem, _child: MenuItem) {
       @mouseenter="hoveredItem = item"
       @mouseleave="hoveredItem = null"
     >
-      <ElIcon v-if="item.icon" class="horizontal-menu__icon">
-        <component :is="item.icon" />
-      </ElIcon>
+      <EasyIcon v-if="item.icon" class="horizontal-menu__icon" :name="`el:${item.icon}`" />
       <span>{{ item.name }}</span>
-      <ElIcon v-if="item.children?.length" class="horizontal-menu__arrow">
-        <ArrowDown />
-      </ElIcon>
+      <EasyIcon v-if="item.children?.length" class="horizontal-menu__arrow" name="el:ArrowDown" />
 
       <!-- 下拉子菜单 -->
       <Transition name="dropdown">
@@ -94,9 +89,7 @@ function handleGrandClick(grand: MenuItem, _child: MenuItem) {
               @mouseleave="hoveredChild = null"
             >
               <span>{{ child.name }}</span>
-              <ElIcon class="horizontal-menu__dropdown-arrow">
-                <ArrowRight />
-              </ElIcon>
+              <EasyIcon class="horizontal-menu__dropdown-arrow" name="el:ArrowRight" />
               <!-- 三级菜单 -->
               <div v-if="child.children?.length && hoveredChild === child" class="horizontal-menu__third-dropdown">
                 <div

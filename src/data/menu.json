@@ -414,6 +414,20 @@
         "key": "signature",
         "path": "/form/signature",
         "component": "form/signature"
+      },
+      {
+        "id": "4-18",
+        "name": "富文本 RichText",
+        "key": "richtext",
+        "path": "/form/richtext",
+        "component": "form/richtext"
+      },
+      {
+        "id": "4-19",
+        "name": "Markdown 编辑器",
+        "key": "markdown",
+        "path": "/form/markdown",
+        "component": "form/markdown"
       }
     ]
   },

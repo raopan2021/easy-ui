@@ -65,6 +65,24 @@ const canvasRef = ref<HTMLCanvasElement | null>(null)
 
 let mutationObserver: MutationObserver | null = null
 let resizeObserver: ResizeObserver | null = null
+let themeObserver: MutationObserver | null = null
+
+/** dark 模式默认水印色（浅色，保证在深色背景上可辨识） */
+const DARK_FONT_COLOR = 'rgba(255, 255, 255, 0.15)'
+
+/** 检测当前是否为 dark 模式（EP 通过 html.dark class 标记） */
+function isDarkMode(): boolean {
+  return document.documentElement.classList.contains('dark')
+}
+
+const isDark = ref(isDarkMode())
+
+/** 解析实际水印颜色：用户显式自定义则始终使用；否则 dark 模式自动用浅色 */
+const resolvedFontColor = computed(() => {
+  if (props.fontColor && props.fontColor !== 'rgba(0, 0, 0, 0.15)')
+    return props.fontColor
+  return isDark.value ? DARK_FONT_COLOR : props.fontColor
+})
 
 /** 统一 content 为数组形式 */
 function normalizeContent(): string[] {
@@ -110,7 +128,7 @@ function generateTileUrl(): string {
       return ''
 
     ctx.font = `${props.fontWeight} ${props.fontSize}px ${props.fontFamily}`
-    ctx.fillStyle = props.fontColor
+    ctx.fillStyle = resolvedFontColor.value
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
 
@@ -174,7 +192,7 @@ async function generateTileUrlAsync(): Promise<string> {
     const lines = normalizeContent()
     if (lines.length > 0) {
       ctx.font = `${props.fontWeight} ${props.fontSize}px ${props.fontFamily}`
-      ctx.fillStyle = props.fontColor
+      ctx.fillStyle = resolvedFontColor.value
       ctx.textAlign = 'center'
       ctx.textBaseline = 'middle'
       ctx.fillText(lines[0] || 'Watermark', 0, 0)
@@ -279,6 +297,21 @@ function initResizeObserver() {
   resizeObserver.observe(containerRef.value)
 }
 
+/** 监听主题切换（html.dark class），变化时重绘水印 */
+function initThemeObserver() {
+  themeObserver = new MutationObserver(() => {
+    const next = isDarkMode()
+    if (next !== isDark.value) {
+      isDark.value = next
+      nextTick(draw)
+    }
+  })
+  themeObserver.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ['class'],
+  })
+}
+
 /** Canvas 样式 */
 const canvasStyle = computed(() => ({
   zIndex: props.zIndex,
@@ -310,6 +343,7 @@ watch(
     props.imageWidth,
     props.zIndex,
     props.offset,
+    isDark,
   ],
   () => nextTick(draw),
   { deep: true },
@@ -320,12 +354,14 @@ onMounted(() => {
     draw()
     initResizeObserver()
     initMutationObserver()
+    initThemeObserver()
   })
 })
 
 onBeforeUnmount(() => {
   resizeObserver?.disconnect()
   mutationObserver?.disconnect()
+  themeObserver?.disconnect()
 })
 
 /** 暴露重绘方法 */

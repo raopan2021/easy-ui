@@ -311,7 +311,7 @@ onMounted(() => fetchData())
     </div>
 
     <div class="search-bar">
-      <el-input
+      <EasyInput
         v-model="searchForm.keyword"
         placeholder="搜索部门名称/编码"
         clearable
@@ -319,24 +319,24 @@ onMounted(() => fetchData())
         @keyup.enter="handleSearch"
         @clear="handleSearch"
       />
-      <el-button type="primary" @click="handleSearch">
+      <EasyButton type="primary" @click="handleSearch">
         <el-icon><Search /></el-icon>查询
-      </el-button>
-      <el-button @click="handleReset">
+      </EasyButton>
+      <EasyButton @click="handleReset">
         <el-icon><RefreshRight /></el-icon>重置
-      </el-button>
+      </EasyButton>
     </div>
 
     <div class="action-bar">
-      <el-button type="primary" @click="handleAddRoot">
+      <EasyButton type="primary" @click="handleAddRoot">
         <el-icon><Plus /></el-icon>新增根部门
-      </el-button>
-      <el-button @click="expandAll">
+      </EasyButton>
+      <EasyButton @click="expandAll">
         展开全部
-      </el-button>
-      <el-button @click="collapseAll">
+      </EasyButton>
+      <EasyButton @click="collapseAll">
         折叠全部
-      </el-button>
+      </EasyButton>
     </div>
 
     <el-table
@@ -362,25 +362,25 @@ onMounted(() => fetchData())
       <el-table-column prop="sort" label="排序" width="80" align="center" />
       <el-table-column prop="status" label="状态" width="90">
         <template #default="{ row }">
-          <el-tag :type="row.status === 1 ? 'success' : 'danger'" size="small">
+          <EasyTag :type="row.status === 1 ? 'success' : 'danger'" size="small">
             {{ row.status === 1 ? '正常' : '禁用' }}
-          </el-tag>
+          </EasyTag>
         </template>
       </el-table-column>
       <el-table-column prop="createTime" label="创建时间" width="170" />
       <el-table-column label="操作" width="200" fixed="right">
         <template #default="{ row }">
-          <el-button link type="primary" size="small" @click="handleEdit(row)">
+          <EasyButton link type="primary" size="small" @click="handleEdit(row)">
             编辑
-          </el-button>
-          <el-button link type="success" size="small" @click="handleAddChild(row)">
+          </EasyButton>
+          <EasyButton link type="success" size="small" @click="handleAddChild(row)">
             新增子部门
-          </el-button>
+          </EasyButton>
           <el-popconfirm title="确定删除该部门及其子部门？" @confirm="handleDelete(row)">
             <template #reference>
-              <el-button link type="danger" size="small">
+              <EasyButton link type="danger" size="small">
                 删除
-              </el-button>
+              </EasyButton>
             </template>
           </el-popconfirm>
         </template>
@@ -396,13 +396,13 @@ onMounted(() => fetchData())
     >
       <el-form ref="formRef" :model="dialog.form" :rules="formRules" label-width="100px">
         <el-form-item label="部门名称" prop="name">
-          <el-input v-model="dialog.form.name" placeholder="请输入部门名称" maxlength="20" />
+          <EasyInput v-model="dialog.form.name" placeholder="请输入部门名称" maxlength="20" />
         </el-form-item>
         <el-form-item label="部门编码" prop="code">
-          <el-input v-model="dialog.form.code" placeholder="如: tech_dept" maxlength="30" />
+          <EasyInput v-model="dialog.form.code" placeholder="如: tech_dept" maxlength="30" />
         </el-form-item>
         <el-form-item label="负责人" prop="leader">
-          <el-input v-model="dialog.form.leader" placeholder="请输入负责人姓名" maxlength="20" />
+          <EasyInput v-model="dialog.form.leader" placeholder="请输入负责人姓名" maxlength="20" />
         </el-form-item>
         <el-form-item label="上级部门" prop="parentId">
           <el-tree-select
@@ -419,16 +419,16 @@ onMounted(() => fetchData())
           <el-input-number v-model="dialog.form.sort" :min="0" :max="999" style="width: 140px" />
         </el-form-item>
         <el-form-item label="状态" prop="status">
-          <el-switch v-model="dialog.form.status" :active-value="1" :inactive-value="0" />
+          <EasySwitch v-model="dialog.form.status" :active-value="1" :inactive-value="0" />
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialog.visible = false">
+        <EasyButton @click="dialog.visible = false">
           取消
-        </el-button>
-        <el-button type="primary" :loading="dialog.loading" @click="handleSubmit">
+        </EasyButton>
+        <EasyButton type="primary" :loading="dialog.loading" @click="handleSubmit">
           确定
-        </el-button>
+        </EasyButton>
       </template>
     </el-dialog>
   </div>

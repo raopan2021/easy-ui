@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { FormInstance, FormRules } from 'element-plus'
+import type { TableColumn } from '@raopan/easy-ui'
 import { Delete, Plus, RefreshRight, Search } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { computed, onMounted, reactive, ref } from 'vue'
@@ -153,6 +154,17 @@ const loading = ref(false)
 const tableData = ref<PersonItem[]>([])
 const selectedIds = ref<number[]>([])
 const pagination = reactive({ page: 1, pageSize: 10, total: 0 })
+
+const columns: TableColumn[] = [
+  { prop: 'id', name: 'ID', width: 70 },
+  { prop: 'name', name: '姓名', width: 100 },
+  { prop: 'empNo', name: '工号', width: 120 },
+  { prop: 'deptName', name: '所属部门', width: 130 },
+  { prop: 'postName', name: '岗位', width: 140 },
+  { prop: 'phone', name: '手机号', width: 130 },
+  { prop: 'status', name: '状态', width: 80 },
+  { prop: 'createTime', name: '入职时间', width: 170 },
+]
 
 function handleSelectionChange(rows: PersonItem[]) {
   selectedIds.value = rows.map(r => r.id)
@@ -310,7 +322,7 @@ onMounted(() => fetchData())
     </div>
 
     <div class="search-bar">
-      <el-input
+      <EasyInput
         v-model="searchForm.keyword"
         placeholder="搜索姓名/工号/手机号"
         clearable
@@ -318,82 +330,88 @@ onMounted(() => fetchData())
         @keyup.enter="handleSearch"
         @clear="handleSearch"
       />
-      <el-select
+      <EasySelect
         v-model="searchForm.deptId"
         placeholder="所属部门"
         clearable
+        :options="deptOptions"
+        label-key="name"
+        value-key="id"
         style="width: 160px"
         @change="onDeptFilterChange"
-      >
-        <el-option v-for="d in deptOptions" :key="d.id" :label="d.name" :value="d.id" />
-      </el-select>
-      <el-select v-model="searchForm.postId" placeholder="岗位" clearable style="width: 160px" @change="handleSearch">
-        <el-option v-for="p in filteredPosts" :key="p.id" :label="p.name" :value="p.id" />
-      </el-select>
-      <el-select v-model="searchForm.status" placeholder="状态" clearable style="width: 120px" @change="handleSearch">
-        <el-option label="在职" :value="1" />
-        <el-option label="离职" :value="0" />
-      </el-select>
-      <el-button type="primary" @click="handleSearch">
+      />
+      <EasySelect
+        v-model="searchForm.postId"
+        placeholder="岗位"
+        clearable
+        :options="filteredPosts"
+        label-key="name"
+        value-key="id"
+        style="width: 160px"
+        @change="handleSearch"
+      />
+      <EasySelect
+        v-model="searchForm.status"
+        placeholder="状态"
+        clearable
+        :options="[{ label: '在职', value: 1 }, { label: '离职', value: 0 }]"
+        style="width: 120px"
+        @change="handleSearch"
+      />
+      <EasyButton type="primary" @click="handleSearch">
         <el-icon><Search /></el-icon>查询
-      </el-button>
-      <el-button @click="handleReset">
+      </EasyButton>
+      <EasyButton @click="handleReset">
         <el-icon><RefreshRight /></el-icon>重置
-      </el-button>
+      </EasyButton>
     </div>
 
     <div class="action-bar">
-      <el-button type="primary" @click="handleAdd">
+      <EasyButton type="primary" @click="handleAdd">
         <el-icon><Plus /></el-icon>新增人员
-      </el-button>
-      <el-button type="danger" :disabled="!selectedIds.length" @click="handleBatchDelete">
+      </EasyButton>
+      <EasyButton type="danger" :disabled="!selectedIds.length" @click="handleBatchDelete">
         <el-icon><Delete /></el-icon>批量删除
-      </el-button>
+      </EasyButton>
     </div>
 
-    <el-table v-loading="loading" :data="tableData" stripe border @selection-change="handleSelectionChange">
-      <el-table-column type="selection" width="50" />
-      <el-table-column prop="id" label="ID" width="70" />
-      <el-table-column prop="name" label="姓名" width="100" />
-      <el-table-column prop="empNo" label="工号" width="120" />
-      <el-table-column prop="deptName" label="所属部门" width="130" />
-      <el-table-column prop="postName" label="岗位" width="140" />
-      <el-table-column prop="phone" label="手机号" width="130" />
-      <el-table-column prop="status" label="状态" width="80">
-        <template #default="{ row }">
-          <el-tag :type="row.status === 1 ? 'success' : 'danger'" size="small">
-            {{ row.status === 1 ? '在职' : '离职' }}
-          </el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column prop="createTime" label="入职时间" width="170" />
-      <el-table-column label="操作" width="160" fixed="right">
-        <template #default="{ row }">
-          <el-button link type="primary" size="small" @click="handleEdit(row)">
-            编辑
-          </el-button>
-          <el-popconfirm title="确定移除？" @confirm="handleDelete(row)">
-            <template #reference>
-              <el-button link type="danger" size="small">
-                删除
-              </el-button>
-            </template>
-          </el-popconfirm>
-        </template>
-      </el-table-column>
-    </el-table>
-
-    <div class="pagination-wrap">
-      <el-pagination
-        v-model:current-page="pagination.page"
-        v-model:page-size="pagination.pageSize"
-        :total="pagination.total"
-        :page-sizes="[10, 20, 50, 100]"
-        layout="total, sizes, prev, pager, next, jumper"
-        @size-change="fetchData"
-        @current-change="fetchData"
-      />
-    </div>
+    <EasyTable
+      v-loading="loading"
+      :data="tableData"
+      :columns="columns"
+      selection-mode="multiple"
+      stripe
+      border
+      :pagination="true"
+      :total="pagination.total"
+      :page="pagination.page"
+      :page-size="pagination.pageSize"
+      :page-size-options="[10, 20, 50, 100]"
+      action-label="操作"
+      :action-width="160"
+      action-fixed="right"
+      @selection-change="handleSelectionChange"
+      @page-change="(p: number) => { pagination.page = p; fetchData() }"
+      @page-size-change="(s: number) => { pagination.pageSize = s; fetchData() }"
+    >
+      <template #col-status="{ row }">
+        <EasyTag :type="row.status === 1 ? 'success' : 'danger'" size="small">
+          {{ row.status === 1 ? '在职' : '离职' }}
+        </EasyTag>
+      </template>
+      <template #action="{ row }">
+        <EasyButton link type="primary" size="small" @click="handleEdit(row)">
+          编辑
+        </EasyButton>
+        <el-popconfirm title="确定移除？" @confirm="handleDelete(row)">
+          <template #reference>
+            <EasyButton link type="danger" size="small">
+              删除
+            </EasyButton>
+          </template>
+        </el-popconfirm>
+      </template>
+    </EasyTable>
 
     <el-dialog
       v-model="dialog.visible"
@@ -404,26 +422,37 @@ onMounted(() => fetchData())
     >
       <el-form ref="formRef" :model="dialog.form" :rules="formRules" label-width="90px">
         <el-form-item label="姓名" prop="name">
-          <el-input v-model="dialog.form.name" placeholder="请输入姓名" maxlength="20" />
+          <EasyInput v-model="dialog.form.name" placeholder="请输入姓名" maxlength="20" />
         </el-form-item>
         <el-form-item label="工号" prop="empNo">
-          <el-input v-model="dialog.form.empNo" placeholder="请输入工号" maxlength="20" />
+          <EasyInput v-model="dialog.form.empNo" placeholder="请输入工号" maxlength="20" />
         </el-form-item>
         <el-form-item label="所属部门" prop="deptId">
-          <el-select v-model="dialog.form.deptId" placeholder="请选择部门" style="width: 100%" @change="onDeptChange">
-            <el-option v-for="d in deptOptions" :key="d.id" :label="d.name" :value="d.id" />
-          </el-select>
+          <EasySelect
+            v-model="dialog.form.deptId"
+            placeholder="请选择部门"
+            :options="deptOptions"
+            label-key="name"
+            value-key="id"
+            style="width: 100%"
+            @change="onDeptChange"
+          />
         </el-form-item>
         <el-form-item label="岗位" prop="postId">
-          <el-select v-model="dialog.form.postId" placeholder="请选择岗位" style="width: 100%">
-            <el-option v-for="p in dialogPosts" :key="p.id" :label="p.name" :value="p.id" />
-          </el-select>
+          <EasySelect
+            v-model="dialog.form.postId"
+            placeholder="请选择岗位"
+            :options="dialogPosts"
+            label-key="name"
+            value-key="id"
+            style="width: 100%"
+          />
         </el-form-item>
         <el-form-item label="手机号" prop="phone">
-          <el-input v-model="dialog.form.phone" placeholder="请输入手机号" maxlength="11" />
+          <EasyInput v-model="dialog.form.phone" placeholder="请输入手机号" maxlength="11" />
         </el-form-item>
         <el-form-item label="状态" prop="status">
-          <el-switch
+          <EasySwitch
             v-model="dialog.form.status"
             :active-value="1"
             :inactive-value="0"
@@ -433,12 +462,12 @@ onMounted(() => fetchData())
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button @click="dialog.visible = false">
+        <EasyButton @click="dialog.visible = false">
           取消
-        </el-button>
-        <el-button type="primary" :loading="dialog.loading" @click="handleSubmit">
+        </EasyButton>
+        <EasyButton type="primary" :loading="dialog.loading" @click="handleSubmit">
           确定
-        </el-button>
+        </EasyButton>
       </template>
     </el-dialog>
   </div>

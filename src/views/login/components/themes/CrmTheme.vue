@@ -70,9 +70,9 @@ const handleLogin = () => formRef.value?.validate(valid => valid && emit('submit
             </el-checkbox>
           </el-form-item>
           <el-form-item>
-            <el-button type="primary" size="large" :loading="loading" class="submit-btn" @click="handleLogin">
+            <EasyButton type="primary" size="large" :loading="loading" class="submit-btn" @click="handleLogin">
               登 录
-            </el-button>
+            </EasyButton>
           </el-form-item>
         </el-form>
         <p class="test-hint">
