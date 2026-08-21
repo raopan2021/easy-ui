@@ -3,6 +3,8 @@
 # 前提：仓库 Settings → Pages → Source 选择 "GitHub Actions"
 # 部署路径：https://<user>.github.io/easy-ui/（vite.config.ts 依据 GH_PAGES 设置 base）
 #
+# 同时构建 template-admin 管理后台，产物作为 artifact 上传（可下载后部署到自有服务器）
+#
 name: Deploy EasyUI site to Pages
 
 on:
@@ -29,7 +31,7 @@ jobs:
   # ── 构建工作 ──
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 40
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -49,6 +51,14 @@ jobs:
         uses: actions/configure-pages@v4
       - name: Install dependencies
         run: pnpm install --frozen-lockfile # 严格按 pnpm-lock.yaml 安装
+      - name: Build @raopan/easy-ui lib
+        # template-admin 通过 file:../packages/easy-ui 引用 easy-ui，构建前需先产出 dist。
+        # 注意：根 package.json 的 build:lib 会自动执行 template-admin install（本地开发便利），
+        # CI 中为避免与下方显式的 frozen install 重复/冲突，此处仅构建不触发自动 install。
+        run: pnpm --filter @raopan/easy-ui build
+      - name: Install template-admin dependencies
+        # template-admin 是独立 workspace（拥有独立 pnpm-lock.yaml），需单独安装
+        run: pnpm --dir template-admin install --frozen-lockfile
       - name: Build with EasyUI
         env:
           # 文档站部署在 GitHub Pages 子路径 /easy-ui/ 下，vite.config.ts 据此设置 base
@@ -57,7 +67,16 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: docs/dist
+      - name: Build template-admin
+        # 输出目录为 template-admin/dist/admin（见 template-admin/.env 的 VITE_OUTDIR）
+        run: pnpm build:admin
+      - name: Upload template-admin artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: template-admin-dist
+          path: template-admin/dist/admin
+          if-no-files-found: error
 
   # ── 部署工作 ──
   deploy:

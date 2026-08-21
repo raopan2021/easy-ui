@@ -16,3 +16,4 @@ trustPolicy: off
 
 packages:
   - 'packages/*'
+  - 'docs'

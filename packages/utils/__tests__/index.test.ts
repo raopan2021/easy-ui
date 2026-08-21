@@ -34,3 +34,18 @@ describe('numbers', () => {
     expect(addUnit('')).toBeUndefined()
   })
 })
+
+describe('download', () => {
+  it('downloadBlob 创建 blob 链接并触发下载', () => {
+    const { downloadBlob } = utils
+    const clickSpy = vi.fn()
+    const revokeSpy = vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => {})
+    vi.spyOn(URL, 'createObjectURL').mockReturnValue('blob:mock')
+    vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(clickSpy)
+
+    downloadBlob('# Hello', 'test.md', 'text/markdown;charset=utf-8')
+
+    expect(clickSpy).toHaveBeenCalledTimes(1)
+    expect(revokeSpy).toHaveBeenCalledWith('blob:mock')
+  })
+})

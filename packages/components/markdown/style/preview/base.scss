@@ -1,0 +1,137 @@
+// ============================================================
+// EasyMarkdown 默认主题 — 预览区样式（SCSS 嵌套版）
+// 由 markdown.vue 的 scoped <style> 提取而来，改为全局选择器：
+// 统一以 .easy-markdown 类名前缀隔离，避免污染外部页面。
+// ============================================================
+
+.easy-markdown {
+  .easy-markdown__preview {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--el-text-color-regular);
+    word-break: break-word;
+
+    .easy-markdown__empty {
+      color: var(--el-text-color-placeholder);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 1.2em 0 0.6em;
+      color: var(--el-text-color-primary);
+      line-height: 1.4;
+    }
+    h1 {
+      font-size: 24px;
+    }
+    h2 {
+      font-size: 20px;
+    }
+    h3 {
+      font-size: 17px;
+    }
+    h4 {
+      font-size: 15px;
+    }
+
+    p {
+      margin: 0.8em 0;
+    }
+
+    pre {
+      background: var(--el-fill-color-light);
+      border-radius: 6px;
+      padding: 12px 14px;
+      overflow: auto;
+    }
+
+    code {
+      font-family: 'SF Mono', Consolas, 'Courier New', monospace;
+    }
+
+    :not(pre) > code {
+      background: var(--el-fill-color-light);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 0.9em;
+      color: var(--el-color-primary);
+    }
+
+    blockquote {
+      border-left: 4px solid var(--el-border-color);
+      margin: 1em 0;
+      padding: 0 1em;
+      color: var(--el-text-color-secondary);
+    }
+
+    table {
+      border-collapse: collapse;
+      margin: 1em 0;
+      max-width: 100%;
+    }
+    th,
+    td {
+      border: 1px solid var(--el-border-color-lighter);
+      padding: 8px 12px;
+    }
+    th {
+      background: var(--el-fill-color-light);
+      font-weight: 500;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    a {
+      color: var(--el-color-primary);
+    }
+
+    /* 默认主题的代码高亮配色（基于 Element Plus 变量） */
+    .hljs-comment,
+    .hljs-quote {
+      color: var(--el-text-color-placeholder);
+      font-style: italic;
+    }
+    .hljs-keyword,
+    .hljs-literal,
+    .hljs-selector-tag,
+    .hljs-doctag {
+      color: var(--el-color-danger);
+    }
+    .hljs-string,
+    .hljs-regexp,
+    .hljs-number,
+    .hljs-meta .hljs-string {
+      color: var(--el-color-success);
+    }
+    .hljs-title,
+    .hljs-section,
+    .hljs-name,
+    .hljs-selector-id,
+    .hljs-selector-class,
+    .hljs-type,
+    .hljs-built_in,
+    .hljs-builtin-name {
+      color: var(--el-color-primary);
+    }
+    .hljs-attr,
+    .hljs-template-variable,
+    .hljs-variable {
+      color: var(--el-color-warning);
+    }
+    .hljs-meta {
+      color: var(--el-text-color-secondary);
+    }
+    .hljs-emphasis {
+      font-style: italic;
+    }
+    .hljs-strong {
+      font-weight: 600;
+    }
+  }
+}

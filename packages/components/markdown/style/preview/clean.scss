@@ -1,0 +1,125 @@
+// ============================================================
+// EasyMarkdown 简约主题 — 预览区样式（SCSS 嵌套版，含 dark 模式）
+// 浅色：克制的灰阶排版；dark：灰阶深色适配
+// ============================================================
+
+/* ──── 浅色模式 ──── */
+.easy-markdown[data-theme='clean'] {
+  .easy-markdown__preview {
+    color: #121314;
+    font-size: 14px;
+
+    h1 {
+      font-size: 22px;
+      color: #000;
+      border-bottom: 3px double #999;
+      padding-bottom: 7px;
+    }
+    h2 {
+      font-size: 19px;
+      color: #333;
+      border-bottom: 1px solid #dbdbdb;
+      padding-bottom: 7px;
+    }
+    h3,
+    h4 {
+      font-size: 16px;
+      color: #333;
+    }
+    h5,
+    h6 {
+      font-size: 14px;
+      color: #333;
+    }
+
+    p {
+      color: #444;
+      font-weight: 300;
+    }
+
+    pre {
+      background: #f5f7f8;
+      padding: 18px;
+    }
+
+    :not(pre) > code {
+      background: transparent;
+      color: #c1788b;
+      padding: 2px 4px 2px 0;
+    }
+
+    blockquote {
+      border-left-color: #ddd;
+      color: #777;
+    }
+
+    td {
+      border-color: #eaeaea;
+    }
+    th {
+      background: #7b8184;
+      border-color: #72777b;
+      color: #fff;
+      font-weight: 300;
+    }
+
+    a {
+      color: #5286bc;
+      text-decoration: underline;
+    }
+  }
+}
+
+/* ──── dark 模式 ──── */
+html.dark .easy-markdown[data-theme='clean'] {
+  .easy-markdown__preview {
+    color: #e6e6e6;
+
+    h1 {
+      color: #fff;
+      border-bottom: 3px double #666;
+    }
+    h2 {
+      color: #e0e0e0;
+      border-bottom-color: #444;
+    }
+    h3,
+    h4 {
+      color: #e0e0e0;
+    }
+    h5,
+    h6 {
+      color: #e0e0e0;
+    }
+
+    p {
+      color: #a8a8a8;
+    }
+
+    pre {
+      background: #161b22;
+    }
+
+    :not(pre) > code {
+      background: transparent;
+      color: #e0a08c;
+    }
+
+    blockquote {
+      border-left-color: #444;
+      color: #999;
+    }
+
+    td {
+      border-color: #3a3a3a;
+    }
+    th {
+      background: #4a4f55;
+      border-color: #3a3a3a;
+    }
+
+    a {
+      color: #7cb0e8;
+    }
+  }
+}

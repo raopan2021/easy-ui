@@ -1,0 +1,66 @@
+/* 暗色主题通用业务页面变量 */
+@mixin app-theme-dark {
+  --app-bg: #0f1218;
+  --app-text-primary: #e5e7eb;
+  --app-text-secondary: #9ca3af;
+  --app-text-tertiary: #9ca3af;
+  --app-card-bg: #1a1d24;
+  --app-card-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --app-card-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --app-card-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --app-border-color: #2d3039;
+  --app-hover-bg: rgba(255, 255, 255, 0.05);
+  --app-tag-blue-bg: rgba(25, 118, 210, 0.15);
+  --app-tag-blue-text: #90caf9;
+  --app-tag-light-blue-bg: rgba(0, 131, 143, 0.15);
+  --app-tag-light-blue-text: #4dd0e1;
+  --app-icon-blue-bg: rgba(26, 115, 232, 0.15);
+  --app-icon-blue-color: #8ab4f8;
+  --app-icon-green-bg: rgba(52, 168, 83, 0.15);
+  --app-icon-green-color: #81c784;
+  --app-icon-orange-bg: rgba(251, 188, 4, 0.15);
+  --app-icon-orange-color: #ffd54f;
+  --app-loading-text: #9ca3af;
+  --app-color-approved: #81c784;
+  --app-color-rejected: #ef5350;
+}
+
+/* 亮色主题业务页面通用变量 */
+@mixin app-theme-light {
+  --app-bg: #f5f7fa;
+  --app-text-primary: #333;
+  --app-text-secondary: #666;
+  --app-text-tertiary: #6b7280;
+  --app-card-bg: #ffffff;
+  --app-card-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --app-card-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+  --app-card-shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.15);
+  --app-border-color: #eee;
+  --app-hover-bg: #f5f7fa;
+  --app-tag-blue-bg: #e3f2fd;
+  --app-tag-blue-text: #1976d2;
+  --app-tag-light-blue-bg: #e0f7fa;
+  --app-tag-light-blue-text: #00838f;
+  --app-icon-blue-bg: #e8f0fe;
+  --app-icon-blue-color: #1a73e8;
+  --app-icon-green-bg: #e6f4ea;
+  --app-icon-green-color: #34a853;
+  --app-icon-orange-bg: #fef7e0;
+  --app-icon-orange-color: #fbbc04;
+  --app-loading-text: #999;
+  --app-color-approved: #34a853;
+  --app-color-rejected: #f44336;
+}
+
+html[data-theme="light"] {
+  --pure-theme-sub-menu-active-text: #000000d9;
+  --pure-theme-menu-bg: #fff;
+  --pure-theme-menu-hover: #f6f6f6;
+  --pure-theme-sub-menu-bg: #fff;
+  --pure-theme-menu-text: rgb(0 0 0 / 60%);
+  --pure-theme-sidebar-logo: #fff;
+  --pure-theme-menu-title-hover: #000;
+  --pure-theme-menu-active-before: #4091f7;
+
+  @include app-theme-light;
+}

@@ -1,0 +1,30 @@
+/* EasyMarkdown 导出文档公共基础样式（打印保留颜色 + 排版骨架） */
+@page {
+  size: auto;
+  margin: 0mm;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  word-break: break-word;
+}
+img {
+  max-width: 100%;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+pre code {
+  display: block;
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+}

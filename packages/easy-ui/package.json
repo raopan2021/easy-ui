@@ -1,6 +1,6 @@
 {
   "name": "@raopan/easy-ui",
-  "version": "1.0.0",
+  "version": "1.2.3",
   "type": "module",
   "description": "Vue 3 企业级组件库，基于 Element Plus 扩展",
   "license": "MIT",
@@ -53,6 +53,7 @@
       "import": "./dist/richtext.mjs"
     },
     "./dist/easy-ui.css": "./dist/easy-ui.css",
+    "./dist/index.css": "./dist/easy-ui.css",
     "./dist/index.mjs": "./dist/index.mjs",
     "./package.json": "./package.json"
   },

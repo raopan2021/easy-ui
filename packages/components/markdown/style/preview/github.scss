@@ -1,0 +1,119 @@
+// ============================================================
+// EasyMarkdown GitHub 主题 — 预览区样式（SCSS 嵌套版，含 dark 模式）
+// 浅色：GitHub 官方色板；dark：GitHub Dark 色板
+// ============================================================
+
+/* ──── 浅色模式 ──── */
+.easy-markdown[data-theme='github'] {
+  .easy-markdown__preview {
+    color: #24292e;
+    font-size: 14px;
+    line-height: 1.6;
+
+    h1,
+    h2 {
+      border-bottom: 1px solid #eaecef;
+      padding-bottom: 0.3em;
+    }
+    h1 {
+      font-size: 2em;
+    }
+    h2 {
+      font-size: 1.5em;
+    }
+    h3 {
+      font-size: 1.25em;
+    }
+    h4 {
+      font-size: 1em;
+    }
+    h5 {
+      font-size: 0.875em;
+    }
+    h6 {
+      font-size: 0.85em;
+      color: #6a737d;
+    }
+
+    pre {
+      background: #f6f8fa;
+      border-radius: 3px;
+      padding: 16px;
+    }
+
+    :not(pre) > code {
+      background: rgba(27, 31, 35, 0.05);
+      border-radius: 3px;
+      padding: 0.2em 0.4em;
+      color: #24292e;
+    }
+
+    blockquote {
+      border-left: 0.25em solid #dfe2e5;
+      color: #6a737d;
+      padding: 0 1em;
+    }
+
+    th,
+    td {
+      border-color: #dfe2e5;
+    }
+    th {
+      background: #f6f8fa;
+    }
+    tr {
+      border-top: 1px solid #c6cbd1;
+    }
+
+    a {
+      color: #0366d6;
+    }
+  }
+}
+
+/* ──── dark 模式（GitHub Dark 色板） ──── */
+html.dark .easy-markdown[data-theme='github'] {
+  .easy-markdown__preview {
+    color: #e6edf3;
+
+    h1,
+    h2 {
+      border-bottom-color: #30363d;
+    }
+    h6 {
+      color: #8b949e;
+    }
+
+    pre {
+      background: #161b22;
+    }
+
+    :not(pre) > code {
+      background: rgba(110, 118, 129, 0.4);
+      color: #e6edf3;
+    }
+
+    blockquote {
+      border-left-color: #30363d;
+      color: #8b949e;
+    }
+
+    th,
+    td {
+      border-color: #30363d;
+    }
+    th {
+      background: #21262d;
+    }
+    tr {
+      border-top-color: #21262d;
+    }
+    tr:nth-child(2n) {
+      background: #161b22;
+    }
+
+    a {
+      color: #58a6ff;
+    }
+  }
+}

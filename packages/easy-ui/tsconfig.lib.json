@@ -16,6 +16,6 @@
     "noEmit": false,
     "outDir": "./dist"
   },
-  "include": ["src/index.ts", "file-preview.ts", "flow-designer.ts", "src/utils/**/*", "../components/**/*"],
+  "include": ["src/index.ts", "file-preview.ts", "flow-designer.ts", "markdown.ts", "richtext.ts", "src/utils/**/*", "../components/**/*"],
   "exclude": ["src/**/__tests__/*", "../components/**/__tests__/*"]
 }

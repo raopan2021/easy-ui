@@ -1,6 +1,8 @@
 import { h } from '@logicflow/core'
 import { CurvedEdge, CurvedEdgeModel } from '@logicflow/extension'
-import { getCurvedEdgePath } from '@logicflow/extension/lib/materials/curved-edge'
+// 注意：必须使用带 /index.js 的完整路径。
+// @logicflow/extension 无 exports 字段，Node ESM 不支持目录导入（ERR_UNSUPPORTED_DIR_IMPORT）
+import { getCurvedEdgePath } from '@logicflow/extension/lib/materials/curved-edge/index.js'
 import { setCommonStyle } from '../../common/js/tool'
 
 class SkipModel extends CurvedEdgeModel {

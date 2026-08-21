@@ -1,6 +1,7 @@
 export * from './arrays'
 export * from './browser'
 export * from './dom'
+export * from './download'
 export * from './easings'
 export * from './error'
 export * from './functions'

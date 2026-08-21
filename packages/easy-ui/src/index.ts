@@ -7,9 +7,6 @@ import ElementPlus from 'element-plus'
 import { setupEasy } from './utils/easy'
 import { easyComponentResolver as _easyUiResolver } from './utils/easyComponentResolver'
 
-// ──── 组件 / 子组件 / 函数式 API / 工具（统一由 components 聚合导出） ────
-export * from '../../components'
-
 // ──── 样式聚合入口（确保主入口 dist/index.css 包含所有组件样式） ────
 // 每个组件的 .vue <style scoped> 块通过 style/css.ts 显式触发 CSS 提取
 import '../../components/avatar/style/css'
@@ -36,9 +33,7 @@ import '../../components/doc-code/style/css'
 import '../../components/drawer/style/css'
 import '../../components/dropdown/style/css'
 import '../../components/empty/style/css'
-import '../../components/file-preview/style/css'
 import '../../components/file-upload/style/css'
-import '../../components/flow-designer/style/css'
 import '../../components/form/style/css'
 import '../../components/gantt/style/css'
 import '../../components/icon/style/css'
@@ -79,6 +74,9 @@ import '../../components/user-picker/style/css'
 import '../../components/video/style/css'
 import '../../components/watermark/style/css'
 import '../../components/worktab/style/css'
+
+// ──── 组件 / 子组件 / 函数式 API / 工具（统一由 components 聚合导出） ────
+export * from '../../components'
 
 // ──── 全局 easy 服务 ────
 export { easy, setupEasy } from './utils/easy'

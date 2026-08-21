@@ -23,7 +23,7 @@ export default antfu({
   },
 }, {
   // demo 页面：console/alert 属于演示行为，其余规则不放松
-  files: ['src/views/**/*.vue'],
+  files: ['docs/src/views/**/*.vue'],
   rules: {
     'no-console': 'off',
     'no-alert': 'off',
@@ -44,7 +44,7 @@ export default antfu({
   },
 }, {
   // build 目录（打包脚本）：允许 console.log 输出进度/提示
-  files: ['build/**/*.ts'],
+  files: ['docs/build/**/*.ts'],
   rules: {
     'no-console': 'off',
   },

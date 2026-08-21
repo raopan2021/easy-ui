@@ -10,7 +10,7 @@ export default defineConfig({
   plugins: [vue(), VueJsx()],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@': fileURLToPath(new URL('./docs/src', import.meta.url)),
     },
     dedupe: ['vue', 'element-plus'],
   },

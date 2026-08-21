@@ -4,6 +4,156 @@
 
 ---
 
+## [1.2.3] - 2026-08-21
+
+### ✨ 新增
+
+- 新增富文本、md组件，优化水印
+- 文档添加目录
+- 系统添加dark切换
+### 🐛 修复
+
+- refactor: 还原 doc 至 src/ 并修复 easy-ui 组件库样式与构建
+- refactor: 统一 xly 前缀为 easy 并修复组件运行时问题
+### 🎨 优化
+
+- search-form优化
+- dark切换优化
+### ♻️ 重构
+
+- refactor: 组件库迁移收尾 — 全面切换 Easy* 命名并移除旧 xly-* 目录
+- 重构：组件迁移至 packages/easy-ui 包 + antfu ESLint 接入
+### 🛠 工程化
+
+- ci: 对齐 CI pnpm 版本到 11（lockfileVersion 9.0 兼容）
+- 组件样式
+### 🔧 其他
+
+- 组件导出使用
+- code复制展开
+- 组件更新
+- 依赖问题
+- 初始化
+
+---
+## [1.2.2] - 2026-08-21
+
+### ✨ 新增
+
+- 新增富文本、md组件，优化水印
+- 文档添加目录
+- 系统添加dark切换
+### 🐛 修复
+
+- refactor: 还原 doc 至 src/ 并修复 easy-ui 组件库样式与构建
+- refactor: 统一 xly 前缀为 easy 并修复组件运行时问题
+### 🎨 优化
+
+- search-form优化
+- dark切换优化
+### ♻️ 重构
+
+- refactor: 组件库迁移收尾 — 全面切换 Easy* 命名并移除旧 xly-* 目录
+- 重构：组件迁移至 packages/easy-ui 包 + antfu ESLint 接入
+### 🛠 工程化
+
+- ci: 对齐 CI pnpm 版本到 11（lockfileVersion 9.0 兼容）
+- 组件样式
+### 🔧 其他
+
+- 组件导出使用
+- code复制展开
+- 组件更新
+- 依赖问题
+- 初始化
+
+---
+## [1.2.1] - 2026-08-21
+
+### ✨ 新增
+
+- 新增富文本、md组件，优化水印
+- 文档添加目录
+- 系统添加dark切换
+### 🐛 修复
+
+- refactor: 还原 doc 至 src/ 并修复 easy-ui 组件库样式与构建
+- refactor: 统一 xly 前缀为 easy 并修复组件运行时问题
+### 🎨 优化
+
+- search-form优化
+- dark切换优化
+### ♻️ 重构
+
+- refactor: 组件库迁移收尾 — 全面切换 Easy* 命名并移除旧 xly-* 目录
+- 重构：组件迁移至 packages/easy-ui 包 + antfu ESLint 接入
+### 🛠 工程化
+
+- ci: 对齐 CI pnpm 版本到 11（lockfileVersion 9.0 兼容）
+- 组件样式
+### 🔧 其他
+
+- 组件导出使用
+- code复制展开
+- 组件更新
+- 依赖问题
+- 初始化
+
+---
+## [1.2.0] - 2026-08-21
+
+### ✨ 新增
+
+- 新增富文本、md组件，优化水印
+- 文档添加目录
+- 系统添加dark切换
+### 🐛 修复
+
+- refactor: 还原 doc 至 src/ 并修复 easy-ui 组件库样式与构建
+- refactor: 统一 xly 前缀为 easy 并修复组件运行时问题
+### 🎨 优化
+
+- search-form优化
+- dark切换优化
+### ♻️ 重构
+
+- refactor: 组件库迁移收尾 — 全面切换 Easy* 命名并移除旧 xly-* 目录
+- 重构：组件迁移至 packages/easy-ui 包 + antfu ESLint 接入
+### 🛠 工程化
+
+- ci: 对齐 CI pnpm 版本到 11（lockfileVersion 9.0 兼容）
+- 组件样式
+### 🔧 其他
+
+- 组件导出使用
+- code复制展开
+- 组件更新
+- 依赖问题
+- 初始化
+
+---
+## [1.1.0] - 2026-08-21
+
+### ✨ 新增组件
+
+- **`EasyMarkdown`** — Markdown 编辑器，支持编辑/分屏/预览三种视图、主题切换（默认/GitHub/Clean，可自定义）、`.md` / `.html` / `.pdf` 三种格式导出下载、工具栏保存按钮。独立子入口：`@raopan/easy-ui/markdown`
+- **`EasyRichText`** — 富文本编辑器，基于 `@wangeditor/editor`。独立子入口：`@raopan/easy-ui/richtext`
+
+### 🎨 优化
+
+- **`EasyWatermark`** 水印组件优化
+- **`EasyInputRange`** 区间输入组件优化
+- **`EasySearchForm`** 搜索表单优化
+- **`EasyChart`** 图表组件优化
+
+### 🛠 工程化
+
+- **构建产物拆分**：`index.mjs`（主入口）完全解耦可选 peer 依赖，新增 `easy-base` 共享 chunk；`file-preview` / `flow-designer` / `markdown` / `richtext` 四个独立子入口自包含，未安装 optional 依赖的项目加载主入口不再崩溃
+- **CSS 提取**：第三方组件 CSS（cropperjs / @vue-office / @wangeditor）由 Rolldown 提取进 `dist/easy-ui.css`，JS 产物中不再残留 `import 'xxx.css'`
+- **类型声明**：补齐 `markdown` / `richtext` 子入口的 `.d.ts` 生成
+
+---
+
 ## [1.0.0] - 2026-08-10
 
 **EasyUI 正式发布 🎉** — Vue 3 企业级组件库，基于 Element Plus 扩展，首版稳定发布。
