@@ -458,6 +458,8 @@ defineExpose({
 
     &--edit {
       border-right: 1px solid var(--el-border-color-lighter);
+      // 编辑区滚动交由内部 textarea 处理，避免外层 pane 再产生一条滚动条
+      overflow: hidden;
     }
 
     &--preview {
@@ -472,6 +474,7 @@ defineExpose({
     border: none;
     outline: none;
     resize: none;
+    box-sizing: border-box; // 保证 height:100% 包含 padding，防止 textarea 溢出产生双重滚动
     font-family: 'SF Mono', Consolas, 'Courier New', monospace;
     font-size: 14px;
     line-height: 1.7;

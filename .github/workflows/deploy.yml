@@ -75,9 +75,13 @@ jobs:
         run: pnpm build:admin
       - name: Merge template-admin into site
         # 合并 admin 产物到 docs/dist/admin，一次部署同时上线 docs + admin
+        # GitHub Pages 无 SPA fallback：为 docs 与 admin 各复制 index.html 为 404.html，
+        # 深层路由 / 不存在路径会回退到应用入口，由 vue-router 渲染内置 404 页面
         run: |
+          cp docs/dist/index.html docs/dist/404.html
           mkdir -p docs/dist/admin
           cp -r template-admin/dist/admin/. docs/dist/admin/
+          cp docs/dist/admin/index.html docs/dist/admin/404.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
