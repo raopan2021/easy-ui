@@ -14,8 +14,8 @@ const userStore = useUserStore()
 const menuLayoutStore = useMenuLayoutStore()
 const themeStore = useThemeStore()
 
-// template-admin 后台管理模板入口地址（独立项目，默认 dev 端口 8848）
-const adminUrl = import.meta.env.VITE_ADMIN_URL || 'http://localhost:8848/admin/'
+// template-admin 后台管理模板入口地址（独立项目，默认 dev 端口 3100）
+const adminUrl = import.meta.env.VITE_ADMIN_URL || 'http://localhost:3100/admin/'
 
 // 主题按钮图标与提示：auto=显示器 / light=太阳 / dark=月亮
 const themeIcon = computed(() => {
