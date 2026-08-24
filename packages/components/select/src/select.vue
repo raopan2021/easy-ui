@@ -697,6 +697,134 @@ $transition: all 0.2s ease;
     }
   }
 }
+</style>
 
-// ========== 过渡动画（Teleport 到 body，不能 scoped）==========
+<!-- ========== 下拉面板样式（Teleport 到 body，必须全局，不能 scoped）========== -->
+<style lang="scss">
+@use '../../../easy-ui/src/styles/tokens' as *;
+
+.easy-select__dropdown {
+  position: fixed;
+  z-index: 3000;
+  box-sizing: border-box;
+  padding: 6px;
+  background: var(--el-bg-color);
+  border: 1px solid var(--el-border-color-light);
+  border-radius: 8px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.14);
+
+  .easy-select__search {
+    display: flex;
+    gap: 8px;
+    padding: 2px 2px 8px;
+
+    .easy-select__search-input {
+      flex: 1;
+      min-width: 0;
+      height: 28px;
+      padding: 0 10px;
+      box-sizing: border-box;
+      border: 1px solid var(--el-border-color);
+      border-radius: 6px;
+      background: var(--el-fill-color-blank);
+      color: var(--el-text-color-regular);
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s;
+
+      &:focus {
+        border-color: var(--el-color-primary);
+      }
+    }
+
+    .easy-select__search-btn {
+      flex-shrink: 0;
+      height: 28px;
+      padding: 0 10px;
+      border: none;
+      border-radius: 6px;
+      background: var(--el-color-primary);
+      color: #fff;
+      font-size: 12px;
+      cursor: pointer;
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .easy-select__list {
+    max-height: 220px;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .easy-select__option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--el-text-color-regular);
+    cursor: pointer;
+    user-select: none;
+    transition:
+      background-color 0.15s,
+      color 0.15s;
+
+    &:hover {
+      background: var(--el-fill-color-light);
+    }
+
+    &.is-selected {
+      color: var(--el-color-primary);
+      font-weight: 500;
+    }
+
+    &.is-disabled {
+      color: var(--el-text-color-placeholder);
+      cursor: not-allowed;
+    }
+
+    .easy-select__option-check {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      color: var(--el-color-primary);
+    }
+
+    .easy-select__option-label {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  .easy-select__empty {
+    padding: 12px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--el-text-color-placeholder);
+  }
+}
+
+// 过渡动画
+.easy-select-zoom-enter-active,
+.easy-select-zoom-leave-active {
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
+}
+
+.easy-select-zoom-enter-from,
+.easy-select-zoom-leave-to {
+  opacity: 0;
+  transform: scale(0.95) translateY(-4px);
+}
 </style>

@@ -4,13 +4,12 @@ import DropdownItem from '../src/dropdown-item.vue'
 import Dropdown from '../src/dropdown.vue'
 
 function renderDropdown(props: Record<string, any> = {}, items: string[] = ['选项一', '选项二']) {
-  return mount(() => (
-    <Dropdown {...props}>
-      {{
-        dropdown: () => items.map(t => <DropdownItem>{t}</DropdownItem>),
-      }}
-    </Dropdown>
-  ))
+  return mount(Dropdown, {
+    props: { ...props },
+    slots: {
+      dropdown: () => items.map(t => <DropdownItem>{t}</DropdownItem>),
+    },
+  })
 }
 
 describe('Dropdown 下拉菜单组件', () => {
@@ -21,6 +20,7 @@ describe('Dropdown 下拉菜单组件', () => {
 
   it('默认菜单初始隐藏', () => {
     const wrapper = renderDropdown()
+    expect(wrapper.vm.isOpen()).toBe(false)
     expect(wrapper.find('.easy-dropdown-menu').exists()).toBe(false)
   })
 
@@ -28,9 +28,10 @@ describe('Dropdown 下拉菜单组件', () => {
     const wrapper = renderDropdown()
     await wrapper.find('.easy-dropdown').trigger('click')
     await nextTick()
-    const menu = document.body.querySelector('.easy-dropdown-menu')
-    expect(menu).toBeTruthy()
-    expect(menu!.querySelectorAll('.easy-dropdown-item').length).toBe(2)
+    expect(wrapper.vm.isOpen()).toBe(true)
+    const menu = wrapper.find('.easy-dropdown-menu')
+    expect(menu.exists()).toBe(true)
+    expect(menu.findAll('.easy-dropdown-item').length).toBe(2)
     wrapper.unmount()
   })
 
@@ -40,9 +41,44 @@ describe('Dropdown 下拉菜单组件', () => {
     await nextTick()
     await wrapper.find('.easy-dropdown').trigger('click')
     await nextTick()
-    const menu = document.body.querySelector('.easy-dropdown-menu')
-    expect(menu).toBeTruthy()
-    expect((menu as HTMLElement).style.display).toBe('none')
+    expect(wrapper.vm.isOpen()).toBe(false)
+    wrapper.unmount()
+  })
+
+  it('点击菜单项后关闭菜单', async () => {
+    const wrapper = renderDropdown()
+    await wrapper.find('.easy-dropdown').trigger('click')
+    await nextTick()
+    await wrapper.find('.easy-dropdown-item').trigger('click')
+    await nextTick()
+    expect(wrapper.vm.isOpen()).toBe(false)
+    wrapper.unmount()
+  })
+
+  it('DropdownItem 独立点击触发 click 事件', async () => {
+    const onClick = vi.fn()
+    const wrapper = mount(() => <DropdownItem onClick={onClick}>选项</DropdownItem>)
+    await wrapper.find('.easy-dropdown-item').trigger('click')
+    await nextTick()
+    expect(onClick).toHaveBeenCalledTimes(1)
+  })
+
+  it('点击菜单项后触发使用方 click 事件（选择生效）', async () => {
+    const onClick = vi.fn()
+    const wrapper = mount(Dropdown, {
+      props: { label: '点击试试' },
+      slots: {
+        dropdown: () => <DropdownItem onClick={onClick}>黄金糕</DropdownItem>,
+      },
+    })
+    await wrapper.find('.easy-dropdown').trigger('click')
+    await nextTick()
+    await wrapper.find('.easy-dropdown-item').trigger('click')
+    await nextTick()
+    // 使用方选择逻辑生效
+    expect(onClick).toHaveBeenCalledTimes(1)
+    // 且菜单同步关闭
+    expect(wrapper.vm.isOpen()).toBe(false)
     wrapper.unmount()
   })
 
@@ -50,17 +86,27 @@ describe('Dropdown 下拉菜单组件', () => {
     const wrapper = renderDropdown()
     await wrapper.find('.easy-dropdown').trigger('click')
     await nextTick()
-    const menu = document.body.querySelector('.easy-dropdown-menu')!
-    expect(menu.textContent).toContain('选项一')
-    expect(menu.textContent).toContain('选项二')
+    expect(wrapper.find('.easy-dropdown-menu').text()).toContain('选项一')
+    expect(wrapper.find('.easy-dropdown-menu').text()).toContain('选项二')
     wrapper.unmount()
   })
 
-  it('expose show/hide/toggle 方法', () => {
+  it('expose show/hide/toggle/isOpen 方法', () => {
     const wrapper = mount(Dropdown, { props: { label: '操作' } })
-    const vm = wrapper.vm as unknown as { show: () => void, hide: () => void, toggle: () => void }
+    const vm = wrapper.vm as unknown as {
+      show: () => void
+      hide: () => void
+      toggle: () => void
+      isOpen: () => boolean
+    }
     expect(typeof vm.show).toBe('function')
     expect(typeof vm.hide).toBe('function')
     expect(typeof vm.toggle).toBe('function')
+    expect(typeof vm.isOpen).toBe('function')
+    expect(vm.isOpen()).toBe(false)
+    vm.show()
+    expect(vm.isOpen()).toBe(true)
+    vm.hide()
+    expect(vm.isOpen()).toBe(false)
   })
 })

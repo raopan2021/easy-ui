@@ -9,11 +9,21 @@ const md1 = ref(`# EasyMarkdown 在线编辑器
 
 ## 功能特性
 
-- 实时分屏预览
-- 代码块语法高亮
-- 保存事件回调
+- 实时分屏预览 + 滚动联动
+- 代码块语法高亮与行号
+- Tab 缩进 / Shift+Tab 反缩进 / Ctrl+S 保存
+- GitHub 任务列表与 callout 提示
+- Mermaid 图表渲染（可选，需要安装 mermaid）
 - 多主题预览与导出（默认 / GitHub / 简约）
 - 导出下载 .md / .html / .pdf
+
+## 任务列表
+
+- [x] 支持 GitHub 任务列表
+- [ ] 支持 callout 提示
+
+> [!NOTE] 这是一条提示
+> 参考 solomd 项目的渲染能力沉淀。
 
 ## 代码示例
 
@@ -25,7 +35,7 @@ function onSave(value: string) {
 }
 \`\`\`
 
-## 表格支持
+## 表格支持（AI 导出容错）
 
 | 功能 | 说明 |
 | ---- | ---- |
@@ -72,14 +82,35 @@ function onSave(value: string) {
         点击「保存」触发 <code>save</code> 事件；
       </p>
       <p class="doc-section__desc">
-        「下载」下拉选择 .md 导出源码、.html 导出渲染后的完整 HTML 页面，.pdf 调用浏览器打印对话框，选择「另存为 PDF」即可生成 PDF。
+        「下载」下拉支持多种格式：.md 源码、.html 完整页面、.docx Word 文档、.pdf 直接生成文件（html2pdf.js）、打印 PDF（浏览器打印对话框另存）、.png / .jpg / .webp 图片。
+      </p>
+      <p class="doc-section__desc">
+        Word 导出由 docx 库直接生成（无需打开浏览器对话框）；直接生成 PDF 依赖 html2pdf.js；图片导出依赖 html2canvas。以上均为可选依赖，未安装时对应格式自动忽略。
+      </p>
+      <p class="doc-section__desc">
+        编辑区支持 <code>Tab</code> / <code>Shift+Tab</code> 缩进、<code>Ctrl+S</code> 保存、Enter 自动续行缩进；通过 <code>line-numbers</code> 显示行号，<code>code-block-line-numbers</code> 为预览代码块加行号。
+      </p>
+      <p class="doc-section__desc">
+        预览层内置 GitHub 任务列表、callout 提示（<code>[!NOTE]</code> 等）、表格分隔行修复等容错渲染；设置 <code>mermaid</code> 后可渲染 Mermaid 图表；<code>fill</code> 让组件高度自适应占满容器。
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyMarkdown v-model="md1" :height="420" @save="onSave" />
+          <EasyMarkdown
+            v-model="md1"
+            :height="420"
+            line-numbers
+            code-block-line-numbers
+            @save="onSave"
+          />
         </div>
         <EasyDocCode
-          code="<EasyMarkdown v-model=&quot;md&quot; :height=&quot;420&quot; @save=&quot;onSave&quot; />"
+          code="<EasyMarkdown
+  v-model=&quot;md&quot;
+  :height=&quot;420&quot;
+  line-numbers
+  code-block-line-numbers
+  @save=&quot;onSave&quot;
+/>"
         />
       </div>
     </section>
@@ -130,9 +161,39 @@ function onSave(value: string) {
             </tr>
             <tr>
               <td><code>height</code></td>
-              <td>编辑/预览区高度（像素）</td>
+              <td>编辑/预览区高度（像素），fill 为 true 时忽略</td>
               <td><code>number</code></td>
               <td><code>400</code></td>
+            </tr>
+            <tr>
+              <td><code>fill</code></td>
+              <td>高度占满父容器剩余空间（父容器建议 flex 布局或定高）</td>
+              <td><code>boolean</code></td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>lineNumbers</code></td>
+              <td>编辑区显示行号</td>
+              <td><code>boolean</code></td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>codeBlockLineNumbers</code></td>
+              <td>预览区代码块显示行号</td>
+              <td><code>boolean</code></td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>mermaid</code></td>
+              <td>渲染 Mermaid 图表（需要安装 mermaid，未安装自动降级为代码块）</td>
+              <td><code>boolean</code></td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>softWrap</code></td>
+              <td>编辑区是否软换行</td>
+              <td><code>boolean</code></td>
+              <td><code>true</code></td>
             </tr>
             <tr>
               <td><code>disabled</code></td>
@@ -193,7 +254,7 @@ function onSave(value: string) {
             <tr>
               <td><code>download</code></td>
               <td>导出文件时触发</td>
-              <td><code>type: 'md' \| 'html' \| 'pdf', value: string</code></td>
+              <td><code>type: 'md' \| 'html' \| 'docx' \| 'pdf' \| 'pdf-file' \| 'png' \| 'jpeg' \| 'webp', value: string</code></td>
             </tr>
             <tr>
               <td><code>update:theme</code></td>
@@ -235,6 +296,18 @@ function onSave(value: string) {
             <tr>
               <td><code>downloadPdf()</code></td>
               <td>通过浏览器打印对话框另存为 PDF</td>
+            </tr>
+            <tr>
+              <td><code>downloadPdfFile()</code></td>
+              <td>直接生成 PDF 文件（需安装 html2pdf.js）</td>
+            </tr>
+            <tr>
+              <td><code>downloadDocx()</code></td>
+              <td>直接生成 Word .docx 文件（需安装 docx）</td>
+            </tr>
+            <tr>
+              <td><code>downloadImage(type)</code></td>
+              <td>导出图片（png / jpeg / webp，需安装 html2canvas）</td>
             </tr>
             <tr>
               <td><code>setTheme(key)</code></td>

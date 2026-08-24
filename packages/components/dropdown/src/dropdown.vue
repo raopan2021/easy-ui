@@ -22,7 +22,9 @@ const menuRef = ref<HTMLElement | null>(null)
 const menuPosition = ref({ top: 0, left: 0, minWidth: 0 })
 
 const menuStyle = computed(() => ({
-  position: 'absolute' as const,
+  // fixed 定位：脱离文档流，不受祖先 overflow:hidden 裁剪，且避免 Teleport 导致
+  // slot 内组件（DropdownItem）的事件监听器丢失（onClick 无法触发）
+  position: 'fixed' as const,
   top: `${menuPosition.value.top}px`,
   left: `${menuPosition.value.left}px`,
   minWidth: `${menuPosition.value.minWidth}px`,
@@ -34,8 +36,8 @@ function updatePosition() {
     return
   const rect = triggerRef.value.getBoundingClientRect()
   menuPosition.value = {
-    top: rect.bottom + 4 + window.scrollY,
-    left: rect.left + window.scrollX,
+    top: rect.bottom + 4,
+    left: rect.left,
     minWidth: rect.width,
   }
 }
@@ -58,8 +60,12 @@ function toggle() {
   }
 }
 
-function handleClick() {
+function handleClick(event: MouseEvent) {
   if (props.trigger === 'click') {
+    // 点击菜单内部（菜单项）时不触发 toggle：菜单项由 handleMenuClick 负责关闭，
+    // 否则 hide() 后事件冒泡到触发器会再次 toggle 打开菜单
+    if (menuRef.value?.contains(event.target as Node))
+      return
     toggle()
   }
 }
@@ -98,6 +104,13 @@ function handleMenuMouseLeave() {
   }
 }
 
+function handleMenuClick(event: MouseEvent) {
+  // 点击菜单项（选项）后关闭；点击菜单自身空白区域不关闭
+  if (event.target !== menuRef.value) {
+    hide()
+  }
+}
+
 function handleClickOutside(event: MouseEvent) {
   const target = event.target as Element | null
   if (!target)
@@ -126,7 +139,12 @@ onUnmounted(() => {
   clearHoverTimer()
 })
 
-defineExpose({ show, hide, toggle })
+defineExpose({
+  show,
+  hide,
+  toggle,
+  isOpen: () => visible.value,
+})
 </script>
 
 <template>
@@ -150,21 +168,20 @@ defineExpose({ show, hide, toggle })
       </span>
     </slot>
 
-    <!-- 下拉菜单：Teleport 到 body 避免被 overflow:hidden 裁剪 -->
-    <Teleport to="body">
-      <transition name="easy-dropdown-fade">
-        <ul
-          v-show="visible"
-          ref="menuRef"
-          class="easy-dropdown-menu"
-          :style="menuStyle"
-          @mouseenter="handleMenuMouseEnter"
-          @mouseleave="handleMenuMouseLeave"
-        >
-          <slot name="dropdown" />
-        </ul>
-      </transition>
-    </Teleport>
+    <!-- 下拉菜单：fixed 定位脱离文档流，不依赖 Teleport（Teleport 会导致 slot 内组件事件丢失） -->
+    <transition name="easy-dropdown-fade">
+      <ul
+        v-if="visible"
+        ref="menuRef"
+        class="easy-dropdown-menu"
+        :style="menuStyle"
+        @mouseenter="handleMenuMouseEnter"
+        @mouseleave="handleMenuMouseLeave"
+        @click="handleMenuClick"
+      >
+        <slot name="dropdown" />
+      </ul>
+    </transition>
   </div>
 </template>
 

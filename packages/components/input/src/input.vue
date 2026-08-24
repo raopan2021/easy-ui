@@ -309,7 +309,7 @@ defineExpose({ focus, blur, select, inputRef })
       <template v-if="type === 'textarea'">
         <textarea
           ref="inputRef"
-          class="easy-input__inner easy-input__inner--textarea"
+          class="easy-input__inner easy-input--textarea"
           :value="modelValue"
           :placeholder="placeholder"
           :disabled="disabled"

@@ -1,0 +1,184 @@
+// EasyMarkdown 组件核心样式（scoped，由 markdown.vue 以 <style scoped src> 引入）
+.easy-markdown {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  border: 1px solid var(--el-border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--el-bg-color);
+
+  &.is-disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  // 占满父容器剩余空间（父容器为 flex 时 flex:1 生效，块级定高时 height:100% 生效）
+  &.is-fill {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 0%;
+    height: 100%;
+    min-height: 0;
+
+    .easy-markdown__body {
+      flex: 1;
+      height: auto;
+      min-height: 0;
+    }
+  }
+
+  .easy-markdown__toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+    background: var(--el-fill-color-blank);
+
+    > * {
+      min-width: 0;
+    }
+  }
+
+  .easy-markdown__views {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 3px;
+    border-radius: 6px;
+    background: var(--el-fill-color-light);
+  }
+
+  .easy-markdown__view-btn {
+    // 基础外观由 EasyButton (type="text") 提供
+    &.is-active {
+      background: var(--el-bg-color);
+      color: var(--el-color-primary);
+      font-weight: 500;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  .easy-markdown__actions {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 8px;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .easy-markdown__theme-select,
+  .easy-markdown__download-select {
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 100%;
+    width: 130px;
+  }
+
+  .easy-markdown__body {
+    display: flex;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+
+    &.is-edit .easy-markdown__pane--edit,
+    &.is-preview .easy-markdown__pane--preview {
+      flex: 1;
+    }
+
+    &.is-split .easy-markdown__pane {
+      flex: 1;
+    }
+  }
+
+  .easy-markdown__pane {
+    flex: 1;
+    min-width: 0;
+    max-width: 100%;
+    height: 100%;
+    overflow: auto;
+
+    &--edit {
+      border-right: 1px solid var(--el-border-color-lighter);
+      // 编辑区滚动交由内部 textarea 处理，避免外层 pane 再产生一条滚动条
+      overflow: hidden;
+    }
+
+    &--preview {
+      padding: 16px 20px;
+    }
+  }
+
+  // 编辑区容器（行号 gutter 的定位上下文）
+  .easy-markdown__edit {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+  }
+
+  .easy-markdown__gutter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 42px;
+    overflow: hidden;
+    user-select: none;
+    background: var(--el-fill-color-light);
+    border-right: 1px solid var(--el-border-color-lighter);
+  }
+
+  .easy-markdown__gutter-inner {
+    padding-top: 16px;
+    will-change: transform;
+  }
+
+  .easy-markdown__gutter-line {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    padding-right: 8px;
+    font-family: 'SF Mono', Consolas, 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--el-text-color-placeholder);
+  }
+
+  .easy-markdown__textarea {
+    width: 100%;
+    height: 100%;
+    padding: 16px 20px;
+    border: none;
+    outline: none;
+    resize: none;
+    box-sizing: border-box; // 保证 height:100% 包含 padding，防止 textarea 溢出产生双重滚动
+    font-family: 'SF Mono', Consolas, 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--el-text-color-primary);
+    background: var(--el-bg-color);
+
+    &.is-with-gutter {
+      padding-left: 58px;
+    }
+
+    &.is-no-wrap {
+      white-space: pre;
+      overflow-x: auto;
+    }
+  }
+}

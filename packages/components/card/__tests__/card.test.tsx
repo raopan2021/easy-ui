@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils'
+import { nextTick } from 'vue'
 import Card from '../src/card.vue'
 
 describe('Card 卡片组件', () => {
@@ -73,5 +74,69 @@ describe('Card 卡片组件', () => {
   it('icon 属性渲染在标题内', () => {
     const wrapper = mount(() => <Card title="标题" icon="star">内容</Card>)
     expect(wrapper.find('.easy-card__icon').text()).toBe('star')
+  })
+
+  it('fill 添加占满剩余空间的类名', () => {
+    const wrapper = mount(() => <Card fill>内容</Card>)
+    expect(wrapper.classes()).toContain('is-fill')
+  })
+
+  it('height 属性应用到卡片高度', () => {
+    const wrapper = mount(() => <Card height={300}>内容</Card>)
+    const el = wrapper.find('.easy-card').element as HTMLElement
+    expect(el.style.height).toBe('300px')
+  })
+
+  it('resizable 渲染拖拽手柄', () => {
+    const wrapper = mount(() => <Card resizable>内容</Card>)
+    expect(wrapper.classes()).toContain('is-resizable')
+    expect(wrapper.find('.easy-card__resizer').exists()).toBe(true)
+  })
+
+  it('拖拽调整高度并触发 resize / update:height 事件', async () => {
+    const onResize = vi.fn()
+    const onUpdateHeight = vi.fn()
+    const wrapper = mount(() => <Card resizable minHeight={100} onResize={onResize} onUpdate:height={onUpdateHeight}>内容</Card>)
+    const resizer = wrapper.find('.easy-card__resizer')
+
+    await resizer.trigger('mousedown', { clientY: 0 })
+    document.dispatchEvent(new MouseEvent('mousemove', { clientY: 80 }))
+    await nextTick()
+    const el = wrapper.find('.easy-card').element as HTMLElement
+    expect(parseInt(el.style.height)).toBe(100) // minHeight 兜底
+    expect(onResize).toHaveBeenCalledWith(100)
+    expect(onUpdateHeight).toHaveBeenCalledWith(100)
+
+    document.dispatchEvent(new MouseEvent('mousemove', { clientY: 180 }))
+    await nextTick()
+    expect(parseInt(el.style.height)).toBe(180)
+
+    document.dispatchEvent(new MouseEvent('mouseup'))
+    // 结束后拖拽不再生效
+    document.dispatchEvent(new MouseEvent('mousemove', { clientY: 260 }))
+    expect(parseInt(el.style.height)).toBe(180)
+  })
+
+  it('外部 v-model:height 优先于内部拖拽值', async () => {
+    const wrapper = mount(() => <Card resizable height={300} minHeight={100}>内容</Card>)
+    const el = wrapper.find('.easy-card').element as HTMLElement
+    expect(el.style.height).toBe('300px')
+
+    const resizer = wrapper.find('.easy-card__resizer')
+    await resizer.trigger('mousedown', { clientY: 0 })
+    document.dispatchEvent(new MouseEvent('mousemove', { clientY: 150 }))
+    // 受控高度不被内部拖拽覆盖
+    expect(el.style.height).toBe('300px')
+    document.dispatchEvent(new MouseEvent('mouseup'))
+  })
+
+  it('disabled 时拖拽不生效', async () => {
+    const onResize = vi.fn()
+    const wrapper = mount(() => <Card resizable disabled onResize={onResize}>内容</Card>)
+    const resizer = wrapper.find('.easy-card__resizer')
+    await resizer.trigger('mousedown', { clientY: 0 })
+    document.dispatchEvent(new MouseEvent('mousemove', { clientY: 100 }))
+    expect(onResize).not.toHaveBeenCalled()
+    document.dispatchEvent(new MouseEvent('mouseup'))
   })
 })

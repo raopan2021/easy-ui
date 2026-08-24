@@ -1,0 +1,137 @@
+// ============================================================
+// EasyMarkdown 通用增强样式
+// 任务列表 / GitHub callout / Mermaid 图表 / 代码块行号
+// 独立于三套预览主题，最后引入以覆盖主题中的 blockquote / pre 基础样式
+// ============================================================
+
+.easy-markdown .easy-markdown__preview {
+  /* 任务列表 */
+  .contains-task-list {
+    list-style: none;
+    padding-left: 0.4em;
+  }
+  .task-list-item {
+    list-style: none;
+
+    .task-list-item-checkbox {
+      margin-right: 6px;
+      vertical-align: middle;
+      accent-color: var(--el-color-primary);
+      pointer-events: none;
+    }
+  }
+
+  /* GitHub 风格 callout */
+  blockquote.md-callout {
+    margin: 1em 0;
+    padding: 12px 16px;
+    border-left: 4px solid var(--el-color-primary);
+    border-radius: 6px;
+    background: var(--el-color-primary-light-9);
+    color: var(--el-text-color-regular);
+
+    > p:first-child {
+      margin-top: 0;
+    }
+    > p:last-child {
+      margin-bottom: 0;
+    }
+  }
+  blockquote.md-callout::before {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  blockquote.md-callout--note {
+    border-left-color: var(--el-color-primary);
+    background: var(--el-color-primary-light-9);
+
+    &::before {
+      content: 'NOTE';
+      color: var(--el-color-primary);
+    }
+  }
+  blockquote.md-callout--tip {
+    border-left-color: var(--el-color-success);
+    background: var(--el-color-success-light-9);
+
+    &::before {
+      content: 'TIP';
+      color: var(--el-color-success);
+    }
+  }
+  blockquote.md-callout--important {
+    border-left-color: #8250df;
+    background: #f6e9ff;
+
+    &::before {
+      content: 'IMPORTANT';
+      color: #8250df;
+    }
+  }
+  blockquote.md-callout--warning {
+    border-left-color: var(--el-color-warning);
+    background: var(--el-color-warning-light-9);
+
+    &::before {
+      content: 'WARNING';
+      color: var(--el-color-warning);
+    }
+  }
+  blockquote.md-callout--caution {
+    border-left-color: var(--el-color-danger);
+    background: var(--el-color-danger-light-9);
+
+    &::before {
+      content: 'CAUTION';
+      color: var(--el-color-danger);
+    }
+  }
+
+  /* Mermaid 图表 */
+  .easy-markdown__mermaid {
+    display: flex;
+    justify-content: center;
+    margin: 1.2em 0;
+
+    svg {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  /* 代码块行号 */
+  pre.cb-numbered {
+    position: relative;
+    padding-left: 3.6em;
+    counter-reset: easy-cb-line;
+  }
+  pre.cb-numbered code {
+    display: block;
+  }
+  .cb-line {
+    display: block;
+    position: relative;
+    counter-increment: easy-cb-line;
+  }
+  .cb-line::before {
+    content: counter(easy-cb-line);
+    position: absolute;
+    left: -3.1em;
+    width: 2.7em;
+    text-align: right;
+    color: var(--el-text-color-placeholder);
+    user-select: none;
+    pointer-events: none;
+  }
+}
+
+/* dark 模式下 important callout 使用柔和的深色背景 */
+html.dark .easy-markdown .easy-markdown__preview blockquote.md-callout--important {
+  border-left-color: #a78bfa;
+  background: rgba(130, 80, 223, 0.15);
+
+  &::before {
+    color: #a78bfa;
+  }
+}

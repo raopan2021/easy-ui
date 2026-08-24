@@ -330,6 +330,66 @@ import { EasyButton, EasyCard, EasyIcon } from '@raopan/easy-ui'
       </div>
     </section>
 
+    <!-- Card 占满剩余空间 -->
+    <section class="doc-section">
+      <h2 class="doc-section__title">
+        Card 占满剩余空间
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>fill</code> 属性让卡片高度自适应占满父容器剩余空间（父容器需为 flex 布局或定高），内容区自动滚动。
+      </p>
+      <div class="doc-preview">
+        <div class="doc-preview__body doc-preview__body--fill">
+          <EasyCard fill title="占满剩余空间的卡片" style="width: 380px">
+            <p class="base-text">
+              该卡片设置了 <code>fill</code>，高度会自动撑满左侧灰色父容器剩余空间。
+            </p>
+            <p class="base-text">
+              父容器使用 flex 纵向布局时，<code>fill</code> 等价于 <code>flex: 1 1 0%</code>；
+              块级定高父容器中则使用 <code>height: 100%</code>。内容超出时 body 区域出现滚动条。
+            </p>
+            <p class="base-text muted">
+              拖动浏览器窗口或调整父容器高度，可观察卡片实时自适应。
+            </p>
+          </EasyCard>
+        </div>
+        <EasyDocCode
+          code="<div class=&quot;container&quot; style=&quot;display:flex; flex-direction:column; height:320px&quot;>
+  <EasyCard fill title=&quot;占满剩余空间&quot;>
+    <p>内容...</p>
+  </EasyCard>
+</div>"
+        />
+      </div>
+    </section>
+
+    <!-- Card 高度手动调整 -->
+    <section class="doc-section">
+      <h2 class="doc-section__title">
+        Card 高度手动调整
+      </h2>
+      <p class="doc-section__desc">
+        通过 <code>resizable</code> 属性开启底部拖拽手柄，可手动调整卡片高度；配合 <code>height</code>（支持 v-model:height）受控使用。
+      </p>
+      <div class="doc-preview">
+        <div class="doc-preview__body">
+          <EasyCard resizable title="可拖拽调整高度" style="width: 380px">
+            <p class="base-text">
+              将鼠标悬停在卡片底部中央，出现拖拽手柄后按住上下拖动即可调整高度。
+            </p>
+            <p class="base-text">
+              默认最小高度 <code>120px</code>，可通过 <code>min-height</code> / <code>max-height</code> 属性约束范围。
+            </p>
+          </EasyCard>
+        </div>
+        <EasyDocCode
+          code="<EasyCard resizable title=&quot;可拖拽调整高度&quot;>
+  <p>内容...</p>
+</EasyCard>"
+        />
+      </div>
+    </section>
+
     <!-- API 文档 -->
     <section class="doc-section">
       <h2 class="doc-section__title">
@@ -391,6 +451,36 @@ import { EasyButton, EasyCard, EasyIcon } from '@raopan/easy-ui'
               <td>是否悬浮上浮</td>
               <td><code>boolean</code></td>
               <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>fill</code></td>
+              <td>高度占满父容器剩余空间（父容器建议 flex 布局或定高）</td>
+              <td><code>boolean</code></td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>resizable</code></td>
+              <td>是否允许通过底部拖拽手柄手动调整高度</td>
+              <td><code>boolean</code></td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>height</code></td>
+              <td>卡片高度（支持 v-model:height，拖拽时自动更新）</td>
+              <td><code>number</code></td>
+              <td><code>—</code></td>
+            </tr>
+            <tr>
+              <td><code>minHeight</code></td>
+              <td>拖拽调整高度的最小值（像素）</td>
+              <td><code>number</code></td>
+              <td><code>120</code></td>
+            </tr>
+            <tr>
+              <td><code>maxHeight</code></td>
+              <td>拖拽调整高度的最大值（像素）</td>
+              <td><code>number</code></td>
+              <td><code>—</code></td>
             </tr>
           </tbody>
         </table>
@@ -503,6 +593,13 @@ import { EasyButton, EasyCard, EasyIcon } from '@raopan/easy-ui'
   flex-wrap: wrap;
   gap: 16px;
   padding: 20px;
+
+  &--fill {
+    display: flex;
+    flex-direction: column;
+    height: 320px;
+    align-items: flex-start;
+  }
 }
 
 .doc-code {

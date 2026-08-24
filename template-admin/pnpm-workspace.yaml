@@ -1,13 +1,15 @@
-allowBuilds:
-  '@parcel/watcher': true
-  esbuild: true
+# template-admin 为独立项目（不在上级 workspace 的 packages 列表中），
+# 通过此文件声明 catalog / overrides / 允许运行的依赖构建脚本，
+# 避免 pnpm install 因 catalog 缺失或未批准构建而失败。
 catalog:
-  vite: npm:@voidzero-dev/vite-plus-core@0.2.9
   vite-plus: 0.2.9
+
 overrides:
-  vite: 'catalog:'
-peerDependencyRules:
-  allowAny:
-    - vite
-  allowedVersions:
-    vite: '*'
+  vite: npm:@voidzero-dev/vite-plus-core@0.2.9
+
+allowBuilds:
+  core-js: true
+  esbuild: true
+  sass-embedded: true
+  '@parcel/watcher': true
+  vue-demi: true
