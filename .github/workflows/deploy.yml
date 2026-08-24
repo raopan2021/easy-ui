@@ -71,7 +71,9 @@ jobs:
           # 覆盖 .env 中的 /admin/，使产物适配 GitHub Pages 子路径 /easy-ui/admin/
           # （vite loadEnv 中 process.env 优先于 .env 文件）
           VITE_PUBLIC_PATH: '/easy-ui/admin/'
-          VITE_ROUTER_HISTORY: 'h5,/easy-ui/admin/'
+          # hash 模式：GitHub Pages 无 SPA fallback 且多 SPA 无法用 404.html 分发，
+          # hash 路由刷新只请求根路径，深层路由不 404
+          VITE_ROUTER_HISTORY: 'hash,/easy-ui/admin/'
         run: pnpm build:admin
       - name: Merge template-admin into site
         # 合并 admin 产物到 docs/dist/admin，一次部署同时上线 docs + admin
