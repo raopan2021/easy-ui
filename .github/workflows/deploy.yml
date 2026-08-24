@@ -3,7 +3,7 @@
 # 前提：仓库 Settings → Pages → Source 选择 "GitHub Actions"
 # 部署路径：https://<user>.github.io/easy-ui/（vite.config.ts 依据 GH_PAGES 设置 base）
 #
-# 同时构建 template-admin 管理后台，产物作为 artifact 上传（可下载后部署到自有服务器）
+# 同时构建 template-admin 管理后台，合并部署到 /easy-ui/admin/ 子路径，并上传 artifact 供下载
 #
 name: Deploy EasyUI site to Pages
 
@@ -63,14 +63,25 @@ jobs:
         env:
           # 文档站部署在 GitHub Pages 子路径 /easy-ui/ 下，vite.config.ts 据此设置 base
           GH_PAGES: 'true'
+          # 后台模板入口地址（HeaderLayout 的 VITE_ADMIN_URL），指向合并部署的 admin 子路径
+          VITE_ADMIN_URL: 'https://raopan2021.github.io/easy-ui/admin/'
         run: pnpm build
+      - name: Build template-admin
+        env:
+          # 覆盖 .env 中的 /admin/，使产物适配 GitHub Pages 子路径 /easy-ui/admin/
+          # （vite loadEnv 中 process.env 优先于 .env 文件）
+          VITE_PUBLIC_PATH: '/easy-ui/admin/'
+          VITE_ROUTER_HISTORY: 'h5,/easy-ui/admin/'
+        run: pnpm build:admin
+      - name: Merge template-admin into site
+        # 合并 admin 产物到 docs/dist/admin，一次部署同时上线 docs + admin
+        run: |
+          mkdir -p docs/dist/admin
+          cp -r template-admin/dist/admin/. docs/dist/admin/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: docs/dist
-      - name: Build template-admin
-        # 输出目录为 template-admin/dist/admin（见 template-admin/.env 的 VITE_OUTDIR）
-        run: pnpm build:admin
       - name: Upload template-admin artifact
         uses: actions/upload-artifact@v4
         with:
