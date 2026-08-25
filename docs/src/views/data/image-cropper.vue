@@ -97,8 +97,10 @@ async function onInteractConfirm(data: { dataURL: string, blob: Blob | null }) {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="cropper-demo-wrapper">
-            <EasyImageCropper ref="cropperRef" :src="basicSrc" toolbar show-action @confirm="onBasicConfirm"
-              @cancel="onBasicCancel" />
+            <EasyImageCropper
+              ref="cropperRef" :src="basicSrc" toolbar show-action @confirm="onBasicConfirm"
+              @cancel="onBasicCancel"
+            />
           </div>
           <div v-if="basicResult" class="cropper-result">
             <span>裁剪结果：</span>
@@ -223,8 +225,10 @@ const blob = await cropperRef.value.getCroppedBlob()"
             </div>
             <input ref="uploadInputRef" type="file" accept="image/*" style="display: none" @change="onFileChange">
             <div v-if="interactSrc" class="cropper-interact__cropper">
-              <EasyImageCropper ref="interactRef" :src="interactSrc" toolbar show-action :output-quality="0.9"
-                output-type="png" @confirm="onInteractConfirm" />
+              <EasyImageCropper
+                ref="interactRef" :src="interactSrc" toolbar show-action :output-quality="0.9"
+                output-type="png" @confirm="onInteractConfirm"
+              />
             </div>
           </div>
           <div v-if="interactResult" class="cropper-result">

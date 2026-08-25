@@ -59,8 +59,10 @@ const { cardClass, cardStyle, titleStyle, iconStyle, descStyle, dotStyle, status
           </span>
           <span class="easy-info-card__title" :style="titleStyle">{{ title }}</span>
         </div>
-        <span v-if="status" class="easy-info-card__status" :class="[`easy-info-card__status--${statusType}`]"
-          :style="statusStyle">
+        <span
+          v-if="status" class="easy-info-card__status" :class="[`easy-info-card__status--${statusType}`]"
+          :style="statusStyle"
+        >
           {{ status }}
         </span>
       </div>

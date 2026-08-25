@@ -78,15 +78,19 @@ defineExpose({
       </div>
       <div class="easy-tree-Chart__toolbar-right">
         <!-- 布局切换 -->
-        <button class="easy-tree-Chart__btn" :class="{ 'is-active': internalLayout === 'horizontal' }" title="横向布局"
-          @click="setLayout('horizontal')">
+        <button
+          class="easy-tree-Chart__btn" :class="{ 'is-active': internalLayout === 'horizontal' }" title="横向布局"
+          @click="setLayout('horizontal')"
+        >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="3" y="6" width="18" height="4" rx="1" />
             <rect x="3" y="14" width="12" height="4" rx="1" />
           </svg>
         </button>
-        <button class="easy-tree-Chart__btn" :class="{ 'is-active': internalLayout === 'vertical' }" title="竖向布局"
-          @click="setLayout('vertical')">
+        <button
+          class="easy-tree-Chart__btn" :class="{ 'is-active': internalLayout === 'vertical' }" title="竖向布局"
+          @click="setLayout('vertical')"
+        >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="6" y="3" width="4" height="18" rx="1" />
             <rect x="14" y="3" width="4" height="12" rx="1" />
@@ -120,14 +124,18 @@ defineExpose({
     </div>
 
     <!-- 画布容器 -->
-    <div ref="canvasWrapperRef" class="easy-tree-Chart__canvas-wrapper" :class="{ 'is-panning': isPanning }"
+    <div
+      ref="canvasWrapperRef" class="easy-tree-Chart__canvas-wrapper" :class="{ 'is-panning': isPanning }"
       :style="canvasWrapperStyle" @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp"
-      @mouseleave="onMouseUp" @wheel.prevent="onWheel" @contextmenu.prevent>
+      @mouseleave="onMouseUp" @wheel.prevent="onWheel" @contextmenu.prevent
+    >
       <!-- 画布内容 -->
       <div ref="canvasRef" class="easy-tree-Chart__canvas" :style="canvasStyle">
         <!-- SVG 连接线层 -->
-        <svg ref="linesSvgRef" class="easy-tree-Chart__lines" :width="canvasWidth" :height="canvasHeight"
-          :viewBox="`0 0 ${canvasWidth} ${canvasHeight}`">
+        <svg
+          ref="linesSvgRef" class="easy-tree-Chart__lines" :width="canvasWidth" :height="canvasHeight"
+          :viewBox="`0 0 ${canvasWidth} ${canvasHeight}`"
+        >
           <g v-for="link in connectionLines" :key="link.id">
             <path :d="link.path" :stroke="link.color" stroke-width="1.5" fill="none" stroke-linecap="square" />
           </g>
@@ -137,20 +145,26 @@ defineExpose({
         <div class="easy-tree-Chart__root" :class="`easy-tree-Chart__root--${internalLayout}`">
           <!-- 多棵树模式 -->
           <template v-if="hasMultipleTrees">
-            <div v-for="(treeData, treeIndex) in props.trees" :key="`tree-${treeIndex}`"
-              class="easy-tree-Chart__tree-wrapper" :class="`easy-tree-Chart__tree-wrapper--${internalLayout}`">
-              <TreeNode v-for="(node, index) in treeData" :key="getNodeKey(node, index, `tree-${treeIndex}`)"
+            <div
+              v-for="(treeData, treeIndex) in props.trees" :key="`tree-${treeIndex}`"
+              class="easy-tree-Chart__tree-wrapper" :class="`easy-tree-Chart__tree-wrapper--${internalLayout}`"
+            >
+              <TreeNode
+                v-for="(node, index) in treeData" :key="getNodeKey(node, index, `tree-${treeIndex}`)"
                 :node="node" :node-config="mergedNodeConfig" :layout="internalLayout" :level="0" :colors="colors"
                 :default-expand-all="defaultExpandAll" :expanded-keys="currentExpandedKeys" :expandable="expandable"
-                @node-click="handleNodeClick" @toggle-expand="handleToggleExpand" />
+                @node-click="handleNodeClick" @toggle-expand="handleToggleExpand"
+              />
             </div>
           </template>
           <!-- 单棵树模式 -->
           <template v-else>
-            <TreeNode v-for="(node, index) in data" :key="getNodeKey(node, index)" :node="node"
+            <TreeNode
+              v-for="(node, index) in data" :key="getNodeKey(node, index)" :node="node"
               :node-config="mergedNodeConfig" :layout="internalLayout" :level="0" :colors="colors"
               :default-expand-all="defaultExpandAll" :expanded-keys="currentExpandedKeys" :expandable="expandable"
-              @node-click="handleNodeClick" @toggle-expand="handleToggleExpand" />
+              @node-click="handleNodeClick" @toggle-expand="handleToggleExpand"
+            />
           </template>
         </div>
       </div>

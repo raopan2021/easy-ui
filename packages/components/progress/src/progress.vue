@@ -56,12 +56,16 @@ const {
     <template v-else-if="type === 'circle'">
       <svg class="easy-progress__svg" viewBox="0 0 120 120" :width="circleSize" :height="circleSize">
         <!-- 轨道 -->
-        <circle class="easy-progress__track" cx="60" cy="60" :r="radius" fill="none" :stroke="trackColorValue"
-          :stroke-width="strokeWidth" />
+        <circle
+          class="easy-progress__track" cx="60" cy="60" :r="radius" fill="none" :stroke="trackColorValue"
+          :stroke-width="strokeWidth"
+        />
         <!-- 进度 -->
-        <circle class="easy-progress__bar" cx="60" cy="60" :r="radius" fill="none" :stroke="colorValue"
+        <circle
+          class="easy-progress__bar" cx="60" cy="60" :r="radius" fill="none" :stroke="colorValue"
           :stroke-width="strokeWidth" :stroke-dasharray="circumference" :stroke-dashoffset="dashOffset"
-          transform="rotate(-90 60 60)" :class="{ 'easy-progress__bar--animated': animated }" />
+          transform="rotate(-90 60 60)" :class="{ 'easy-progress__bar--animated': animated }"
+        />
       </svg>
 
       <!-- 文本信息 -->
@@ -85,12 +89,16 @@ const {
     <template v-else-if="type === 'dashboard'">
       <svg class="easy-progress__svg" viewBox="0 0 120 120" :width="circleSize" :height="circleSize">
         <!-- 轨道（半圆） -->
-        <path class="easy-progress__track" d="M 10 60 A 50 50 0 1 1 110 60" fill="none" :stroke="trackColorValue"
-          :stroke-width="strokeWidth" stroke-linecap="round" />
+        <path
+          class="easy-progress__track" d="M 10 60 A 50 50 0 1 1 110 60" fill="none" :stroke="trackColorValue"
+          :stroke-width="strokeWidth" stroke-linecap="round"
+        />
         <!-- 进度（半圆） -->
-        <path class="easy-progress__bar" d="M 10 60 A 50 50 0 1 1 110 60" fill="none" :stroke="colorValue"
+        <path
+          class="easy-progress__bar" d="M 10 60 A 50 50 0 1 1 110 60" fill="none" :stroke="colorValue"
           :stroke-width="strokeWidth" :stroke-dasharray="halfCircumference" :stroke-dashoffset="dashOffset"
-          stroke-linecap="round" :class="{ 'easy-progress__bar--animated': animated }" />
+          stroke-linecap="round" :class="{ 'easy-progress__bar--animated': animated }"
+        />
       </svg>
 
       <!-- 文本信息 -->

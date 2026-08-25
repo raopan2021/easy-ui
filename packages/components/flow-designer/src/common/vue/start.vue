@@ -52,12 +52,16 @@ export type { StartEmits, StartProps } from './start-types'
       <EasyTabPane name="listener" label="监听器">
         <div class="listenerPane">
           <slot name="form-item-task-listenerType" :model="form" field="listenerType">
-            <EasyTable :data="form.listenerRows || []" :columns="listenerColumns" :pagination="false"
-              :show-index="false" style="width: 100%">
+            <EasyTable
+              :data="form.listenerRows || []" :columns="listenerColumns" :pagination="false"
+              :show-index="false" style="width: 100%"
+            >
               <!-- 类型列 -->
               <template #col-listenerType="{ row }">
-                <EasySelect v-model="row.listenerType" :options="listenerTypeOptions" placeholder="请选择"
-                  :disabled="disabled" />
+                <EasySelect
+                  v-model="row.listenerType" :options="listenerTypeOptions" placeholder="请选择"
+                  :disabled="disabled"
+                />
               </template>
               <!-- 路径列 -->
               <template #col-listenerPath="{ row }">

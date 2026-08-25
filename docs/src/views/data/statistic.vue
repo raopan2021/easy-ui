@@ -95,10 +95,14 @@ import { EasyStatistic } from '@raopan/easy-ui'
       <div class="doc-preview">
         <div class="doc-preview__body">
           <EasyStatistic title="今日新增" :value="324" suffix="人" size="sm" variant="primary" icon="el:User" />
-          <EasyStatistic title="本月销售额" :value="892500" prefix="¥" suffix="元" size="md" variant="success"
-            icon="el:DataLine" />
-          <EasyStatistic title="年度目标" :value="12500000" prefix="¥" suffix="万元" size="lg" variant="warning"
-            icon="el:Location" />
+          <EasyStatistic
+            title="本月销售额" :value="892500" prefix="¥" suffix="元" size="md" variant="success"
+            icon="el:DataLine"
+          />
+          <EasyStatistic
+            title="年度目标" :value="12500000" prefix="¥" suffix="万元" size="lg" variant="warning"
+            icon="el:Location"
+          />
         </div>
         <EasyDocCode
           code="<EasyStatistic title=&quot;今日新增&quot; :value=&quot;324&quot; suffix=&quot;人&quot; size=&quot;sm&quot; variant=&quot;primary&quot; icon=&quot;el:User&quot; />
@@ -118,10 +122,14 @@ import { EasyStatistic } from '@raopan/easy-ui'
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyStatistic title="营收增长" :value="32.4" suffix="%" variant="success" trend="up" trend-label="环比 +5.2%"
-            icon="el:DataLine" />
-          <EasyStatistic title="用户流失" :value="8.6" suffix="%" variant="danger" trend="down" trend-label="环比 -1.8%"
-            icon="el:DataLine" />
+          <EasyStatistic
+            title="营收增长" :value="32.4" suffix="%" variant="success" trend="up" trend-label="环比 +5.2%"
+            icon="el:DataLine"
+          />
+          <EasyStatistic
+            title="用户流失" :value="8.6" suffix="%" variant="danger" trend="down" trend-label="环比 -1.8%"
+            icon="el:DataLine"
+          />
         </div>
         <EasyDocCode
           code="<EasyStatistic title=&quot;营收增长&quot; :value=&quot;32.4&quot; suffix=&quot;%&quot; variant=&quot;success&quot; trend=&quot;up&quot; trend-label=&quot;环比 +5.2%&quot; icon=&quot;el:DataLine&quot; />
@@ -140,10 +148,14 @@ import { EasyStatistic } from '@raopan/easy-ui'
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyStatistic title="本月收入" :value="892500" prefix="¥" suffix="元" variant="primary" icon="el:DataLine"
-            extra="较上月增长 12.5%，完成季度目标的 85%" />
-          <EasyStatistic title="用户满意度" :value="4.85" suffix="/5.0" variant="success" icon="el:DataLine"
-            extra="基于 1,254 条用户评价，NPS 得分 +42" />
+          <EasyStatistic
+            title="本月收入" :value="892500" prefix="¥" suffix="元" variant="primary" icon="el:DataLine"
+            extra="较上月增长 12.5%，完成季度目标的 85%"
+          />
+          <EasyStatistic
+            title="用户满意度" :value="4.85" suffix="/5.0" variant="success" icon="el:DataLine"
+            extra="基于 1,254 条用户评价，NPS 得分 +42"
+          />
         </div>
         <EasyDocCode
           code="<EasyStatistic
@@ -178,14 +190,22 @@ import { EasyStatistic } from '@raopan/easy-ui'
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="dashboard-grid">
-            <EasyStatistic title="总用户数" :value="12543" suffix="人" variant="primary" icon="el:User" :bordered="true"
-              :hoverable="true" />
-            <EasyStatistic title="本月收入" :value="892500" prefix="¥" suffix="元" variant="success" icon="el:DataLine"
-              :bordered="true" :hoverable="true" trend="up" trend-label="+12.5%" />
-            <EasyStatistic title="订单数量" :value="1284" suffix="单" variant="warning" icon="el:DataLine" :bordered="true"
-              :hoverable="true" />
-            <EasyStatistic title="转化率" :value="24.8" suffix="%" variant="info" icon="el:DataLine" :bordered="true"
-              :hoverable="true" extra="较上月提升 3.2%" />
+            <EasyStatistic
+              title="总用户数" :value="12543" suffix="人" variant="primary" icon="el:User" :bordered="true"
+              :hoverable="true"
+            />
+            <EasyStatistic
+              title="本月收入" :value="892500" prefix="¥" suffix="元" variant="success" icon="el:DataLine"
+              :bordered="true" :hoverable="true" trend="up" trend-label="+12.5%"
+            />
+            <EasyStatistic
+              title="订单数量" :value="1284" suffix="单" variant="warning" icon="el:DataLine" :bordered="true"
+              :hoverable="true"
+            />
+            <EasyStatistic
+              title="转化率" :value="24.8" suffix="%" variant="info" icon="el:DataLine" :bordered="true"
+              :hoverable="true" extra="较上月提升 3.2%"
+            />
           </div>
         </div>
         <EasyDocCode

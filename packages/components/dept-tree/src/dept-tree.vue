@@ -37,10 +37,12 @@ export type { DeptTreeEmits, DeptTreeProps, NodeKey, Props, TreeNode } from './t
       {{ emptyText }}
     </div>
     <div v-else class="easy-dept-tree__content">
-      <DeptNode v-for="node in treeData" :key="String(node[nodeKey.id])" :node="node" :node-key="nodeKey"
+      <DeptNode
+        v-for="node in treeData" :key="String(node[nodeKey.id])" :node="node" :node-key="nodeKey"
         :node-style="nodeStyle" :highlight-current="highlightCurrent" :expand-all="expandAll"
         :default-expand-level="defaultExpandLevel" :selected-id="selectedId" :expanded-set="expandedSet"
-        @select="handleSelect" @toggle="handleToggle" />
+        @select="handleSelect" @toggle="handleToggle"
+      />
     </div>
   </div>
 </template>

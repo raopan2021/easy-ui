@@ -121,8 +121,10 @@ defineExpose({
           <div class="easy-user-picker__list">
             <div v-if="loading" class="easy-user-picker__loading">
               <svg class="easy-user-picker__spinner" width="24" height="24" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="60"
-                  stroke-dashoffset="20" />
+                <circle
+                  cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="60"
+                  stroke-dashoffset="20"
+                />
               </svg>
               <span>加载中...</span>
             </div>
@@ -139,8 +141,10 @@ defineExpose({
               >
                 <div class="easy-user-picker__item-check">
                   <svg v-if="isSelected(user)" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M3 7L6 10L11 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round" />
+                    <path
+                      d="M3 7L6 10L11 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
                   </svg>
                 </div>
                 <img v-if="user[avatarKey]" :src="user[avatarKey]" class="easy-user-picker__item-avatar">

@@ -252,8 +252,10 @@ function handleCreate(newValue) {
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 400px">
-            <EasySelect v-model="val4" :options="cityOptions" placeholder="可多选" multiple :max-tag-count="3" clearable
-              filterable allow-create />
+            <EasySelect
+              v-model="val4" :options="cityOptions" placeholder="可多选" multiple :max-tag-count="3" clearable
+              filterable allow-create
+            />
           </div>
           <div style="font-size: 13px; color: var(--el-text-color-secondary)">
             当前值：{{ JSON.stringify(val4) }}
@@ -276,20 +278,26 @@ function handleCreate(newValue) {
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 400px">
-            <EasySelect v-model="val10" :options="cityOptions" placeholder="返回数组（默认）" multiple value-type="array"
-              clearable />
+            <EasySelect
+              v-model="val10" :options="cityOptions" placeholder="返回数组（默认）" multiple value-type="array"
+              clearable
+            />
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值（数组）：{{ JSON.stringify(val10) }}</span>
 
           <div style="width: 400px">
-            <EasySelect v-model="val11" :options="cityOptions" placeholder="返回字符串（逗号分隔）" multiple value-type="string"
-              clearable />
+            <EasySelect
+              v-model="val11" :options="cityOptions" placeholder="返回字符串（逗号分隔）" multiple value-type="string"
+              clearable
+            />
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值（字符串）：{{ val11 }}</span>
 
           <div style="width: 400px">
-            <EasySelect v-model="val12" :options="cityOptions" placeholder="自定义分隔符（分号）" multiple value-type="string"
-              separator=";" clearable />
+            <EasySelect
+              v-model="val12" :options="cityOptions" placeholder="自定义分隔符（分号）" multiple value-type="string"
+              separator=";" clearable
+            />
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值（分号分隔）：{{ val12 }}</span>
         </div>
@@ -328,8 +336,10 @@ const value = ref(&quot;beijing,shanghai,guangzhou&quot;)
             <EasySelect v-model="val5" :options="disabledOptions" placeholder="含禁用选项" />
           </div>
           <div style="width: 300px">
-            <EasySelect v-model="val5" :options="customDisabledOptions" placeholder="箭头函数直接写禁用逻辑"
-              :disabled-key="(item) => item.stock === 0" />
+            <EasySelect
+              v-model="val5" :options="customDisabledOptions" placeholder="箭头函数直接写禁用逻辑"
+              :disabled-key="(item) => item.stock === 0"
+            />
           </div>
           <div style="width: 300px">
             <EasySelect v-model="val5" :options="cityOptions" placeholder="整组禁用" disabled />
@@ -399,8 +409,10 @@ function isItemDisabled(option: any) {
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <EasySelect v-model="val7" :options="userOptions" placeholder="请选择用户" label-key="name" value-key="id"
-              clearable />
+            <EasySelect
+              v-model="val7" :options="userOptions" placeholder="请选择用户" label-key="name" value-key="id"
+              clearable
+            />
           </div>
           <div style="font-size: 13px; color: var(--el-text-color-secondary)">
             当前值：{{ val7 ?? '未选择' }}
@@ -459,8 +471,10 @@ const userOptions = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <EasySelect v-model="val8" :options="remoteSelectOptions" placeholder="输入关键字远程搜索..." filterable remote
-              :remote-method="remoteSelectSearch" :loading="remoteLoading" clearable />
+            <EasySelect
+              v-model="val8" :options="remoteSelectOptions" placeholder="输入关键字远程搜索..." filterable remote
+              :remote-method="remoteSelectSearch" :loading="remoteLoading" clearable
+            />
           </div>
           <div style="font-size: 13px; color: var(--el-text-color-secondary)">
             当前值：{{ val8 ?? '未选择' }}

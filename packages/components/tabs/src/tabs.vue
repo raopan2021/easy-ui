@@ -35,10 +35,14 @@ const {
     <div class="easy-tabs__header" :class="{ 'is-sticky': sticky }" :style="sticky ? { top: stickyTop } : undefined">
       <div class="easy-tabs__nav-wrap">
         <!-- 左滚动按钮 -->
-        <span v-if="scrollable && scrollOffset > 0" class="easy-tabs__nav-btn easy-tabs__nav-btn--prev"
-          @click="scrollBy(-scrollStep)">
-          <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round">
+        <span
+          v-if="scrollable && scrollOffset > 0" class="easy-tabs__nav-btn easy-tabs__nav-btn--prev"
+          @click="scrollBy(-scrollStep)"
+        >
+          <svg
+            viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round"
+          >
             <polyline points="15 18 9 12 15 6" />
           </svg>
         </span>
@@ -67,10 +71,14 @@ const {
         </div>
 
         <!-- 右滚动按钮 -->
-        <span v-if="scrollable && canScrollRight" class="easy-tabs__nav-btn easy-tabs__nav-btn--next"
-          @click="scrollBy(scrollStep)">
-          <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round">
+        <span
+          v-if="scrollable && canScrollRight" class="easy-tabs__nav-btn easy-tabs__nav-btn--next"
+          @click="scrollBy(scrollStep)"
+        >
+          <svg
+            viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round"
+          >
             <polyline points="9 18 15 12 9 6" />
           </svg>
         </span>

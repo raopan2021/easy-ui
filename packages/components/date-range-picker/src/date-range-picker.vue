@@ -35,9 +35,11 @@ export type { DateRangePickerEmits, DateRangePickerProps } from './date-range-pi
   <div class="easy-date-range-picker" :class="[`easy-date-range-picker--${size}`, { 'is-disabled': disabled }]">
     <!-- 开始日期选择器 -->
     <div class="easy-date-range-picker__start">
-      <EasyDatePicker :model-value="start" :placeholder="startPlaceholder || '开始日期'" :disabled="disabled"
+      <EasyDatePicker
+        :model-value="start" :placeholder="startPlaceholder || '开始日期'" :disabled="disabled"
         :readonly="readonly" :clearable="clearable" :format="format" :value-format="valueFormat" :size="size"
-        @update:model-value="handleStartChange" />
+        @update:model-value="handleStartChange"
+      />
     </div>
 
     <!-- 分隔符 -->
@@ -45,9 +47,11 @@ export type { DateRangePickerEmits, DateRangePickerProps } from './date-range-pi
 
     <!-- 结束日期选择器 -->
     <div class="easy-date-range-picker__end">
-      <EasyDatePicker :model-value="end" :placeholder="endPlaceholder || '结束日期'" :disabled="disabled"
+      <EasyDatePicker
+        :model-value="end" :placeholder="endPlaceholder || '结束日期'" :disabled="disabled"
         :readonly="readonly" :clearable="clearable" :format="format" :value-format="valueFormat" :size="size"
-        @update:model-value="handleEndChange" />
+        @update:model-value="handleEndChange"
+      />
     </div>
   </div>
 </template>

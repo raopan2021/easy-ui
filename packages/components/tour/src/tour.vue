@@ -82,11 +82,15 @@ defineExpose({
 <template>
   <Teleport to="body">
     <!-- 遮罩层 -->
-    <div v-if="visible && steps.length > 0 && currentStep" class="easy-tour-overlay" :style="overlayStyle"
-      @click.self="onOverlayClick">
+    <div
+      v-if="visible && steps.length > 0 && currentStep" class="easy-tour-overlay" :style="overlayStyle"
+      @click.self="onOverlayClick"
+    >
       <!-- 高亮区域 -->
-      <div v-if="showMask" class="easy-tour-highlight" :class="{ 'is-round': currentStep.highlightRadius }"
-        :style="highlightStyle" />
+      <div
+        v-if="showMask" class="easy-tour-highlight" :class="{ 'is-round': currentStep.highlightRadius }"
+        :style="highlightStyle"
+      />
     </div>
 
     <!-- 气泡卡片：始终在 visible 时渲染，用 opacity/visibility 控制显隐 -->
@@ -112,8 +116,10 @@ defineExpose({
             <span v-if="showStepIndex" class="easy-tour-title__index"> {{ current + 1 }} / {{ total }} </span>
           </div>
           <button v-if="showClose" class="easy-tour-close" @click="handleClose">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"
+            >
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>

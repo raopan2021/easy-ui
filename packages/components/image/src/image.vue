@@ -90,21 +90,29 @@ const {
         </div>
 
         <!-- 图片容器（居中） -->
-        <div ref="previewContainerRef" class="easy-image-preview__container"
-          style="display: block; grid-template-columns: unset" @mousedown="handleDragStart">
-          <img ref="previewImgRef" :src="previewSrc" :style="previewImgStyle" class="easy-image-preview__img"
-            style="width: auto; height: auto; max-width: 100%; max-height: 100%" @error="handleError">
+        <div
+          ref="previewContainerRef" class="easy-image-preview__container"
+          style="display: block; grid-template-columns: unset" @mousedown="handleDragStart"
+        >
+          <img
+            ref="previewImgRef" :src="previewSrc" :style="previewImgStyle" class="easy-image-preview__img"
+            style="width: auto; height: auto; max-width: 100%; max-height: 100%" @error="handleError"
+          >
         </div>
 
         <!-- 左侧切换按钮 -->
-        <EasyButton v-if="displayImages.length > 1 && hasAction('prev')"
-          class="easy-image-preview__arrow easy-image-preview__arrow--left" type="text" @click="prevImage">
+        <EasyButton
+          v-if="displayImages.length > 1 && hasAction('prev')"
+          class="easy-image-preview__arrow easy-image-preview__arrow--left" type="text" @click="prevImage"
+        >
           <EasyIcon name="el:ArrowLeft" :size="30" />
         </EasyButton>
 
         <!-- 右侧切换按钮 -->
-        <EasyButton v-if="displayImages.length > 1 && hasAction('next')"
-          class="easy-image-preview__arrow easy-image-preview__arrow--right" type="text" @click="nextImage">
+        <EasyButton
+          v-if="displayImages.length > 1 && hasAction('next')"
+          class="easy-image-preview__arrow easy-image-preview__arrow--right" type="text" @click="nextImage"
+        >
           <EasyIcon name="el:ArrowRight" :size="30" />
         </EasyButton>
 
@@ -112,8 +120,10 @@ const {
         <div class="easy-image-preview__footer">
           <!-- 指示器 -->
           <div v-if="displayImages.length > 1" class="easy-image-preview__indicators">
-            <span v-for="(_, index) in displayImages" :key="index" class="easy-image-preview__indicator"
-              :class="{ 'is-active': index === previewIndex }" @click="previewIndex = index" />
+            <span
+              v-for="(_, index) in displayImages" :key="index" class="easy-image-preview__indicator"
+              :class="{ 'is-active': index === previewIndex }" @click="previewIndex = index"
+            />
           </div>
 
           <!-- 图片信息 -->

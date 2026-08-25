@@ -130,8 +130,10 @@ function formatDataUrlSize(dataUrl: string): string {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="sig-demo" style="max-width: 500px">
-            <EasySignature ref="pureSigRef" :height="160" :show-toolbar="false" :show-placeholder="false"
-              canvas-bg-color="#fafafa" pen-color="#1a1a2e" :radius="0" placeholder="" />
+            <EasySignature
+              ref="pureSigRef" :height="160" :show-toolbar="false" :show-placeholder="false"
+              canvas-bg-color="#fafafa" pen-color="#1a1a2e" :radius="0" placeholder=""
+            />
             <div class="sig-actions">
               <button class="sig-action-btn" @click="pureSigRef?.undo()">
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">

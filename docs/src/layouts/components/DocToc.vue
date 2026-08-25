@@ -25,8 +25,10 @@ function indentClass(level: number): string {
       目录
     </div>
     <ul class="doc-toc__list">
-      <li v-for="item in items" :key="item.id" class="doc-toc__item"
-        :class="[indentClass(item.level), { 'is-active': item.id === activeId }]">
+      <li
+        v-for="item in items" :key="item.id" class="doc-toc__item"
+        :class="[indentClass(item.level), { 'is-active': item.id === activeId }]"
+      >
         <a href="javascript:;" class="doc-toc__link" @click.prevent="emit('select', item.id)">
           {{ item.label }}
         </a>
@@ -71,15 +73,19 @@ function indentClass(level: number): string {
     &--l1 {
       padding-left: 8px;
     }
+
     &--l2 {
       padding-left: 20px;
     }
+
     &--l3 {
       padding-left: 32px;
     }
+
     &--l4 {
       padding-left: 44px;
     }
+
     &--l5 {
       padding-left: 56px;
     }

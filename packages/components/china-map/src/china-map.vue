@@ -85,25 +85,33 @@ const {
       </div>
       <!-- 切换模式 Tab（tooltip-mode="switch" 时显示） -->
       <div v-if="isMultiDataset && tooltipMode === 'switch'" class="easy-china-map__dataset-tabs">
-        <button v-for="(ds, index) in datasets" :key="index" class="dataset-tab"
-          :class="{ 'is-active': currentDatasetIndex === index }" @click="currentDatasetIndex = index">
+        <button
+          v-for="(ds, index) in datasets" :key="index" class="dataset-tab"
+          :class="{ 'is-active': currentDatasetIndex === index }" @click="currentDatasetIndex = index"
+        >
           {{ ds.name }}
         </button>
       </div>
       <!-- 对比模式标签（tooltip-mode="compare" 时显示） -->
       <div v-else-if="isMultiDataset && tooltipMode === 'compare'" class="easy-china-map__dataset-tags">
-        <span v-for="(ds, index) in datasets" :key="index" class="dataset-tag"
-          :style="ds.colorRange ? { background: ds.colorRange[1], borderColor: ds.colorRange[1] } : {}">
+        <span
+          v-for="(ds, index) in datasets" :key="index" class="dataset-tag"
+          :style="ds.colorRange ? { background: ds.colorRange[1], borderColor: ds.colorRange[1] } : {}"
+        >
           {{ ds.name }}
         </span>
       </div>
     </div>
 
     <!-- 地图主体 -->
-    <div ref="containerRef" class="easy-china-map__body" :class="{ 'is-dragging': isDragging }" @wheel.prevent="onWheel"
-      @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp" @mouseleave="onMouseUp">
-      <svg ref="svgRef" class="easy-china-map__svg" :viewBox="`0 0 ${SVG_W} ${SVG_H}`"
-        xmlns="http://www.w3.org/2000/svg" @mouseleave="hideTooltip" @mousemove="onSvgMouseMove">
+    <div
+      ref="containerRef" class="easy-china-map__body" :class="{ 'is-dragging': isDragging }" @wheel.prevent="onWheel"
+      @mousedown="onMouseDown" @mousemove="onMouseMove" @mouseup="onMouseUp" @mouseleave="onMouseUp"
+    >
+      <svg
+        ref="svgRef" class="easy-china-map__svg" :viewBox="`0 0 ${SVG_W} ${SVG_H}`"
+        xmlns="http://www.w3.org/2000/svg" @mouseleave="hideTooltip" @mousemove="onSvgMouseMove"
+      >
         <!-- 阴影滤镜 -->
         <defs>
           <filter id="map-shadow" x="-5%" y="-5%" width="110%" height="110%">
@@ -128,12 +136,14 @@ const {
                   : ''
               "
             >
-              <path :d="province.path" :fill="getProvinceColor(province.name)" :stroke="strokeColor"
+              <path
+                :d="province.path" :fill="getProvinceColor(province.name)" :stroke="strokeColor"
                 :stroke-width="province.scale ? strokeWidth / province.scale : strokeWidth"
                 class="easy-china-map__province"
                 :class="{ 'is-active': activeProvince === province.name, 'is-hover': hoverProvince === province.name }"
                 @mouseenter="onProvinceEnter(province, $event)" @mouseleave="onProvinceLeave"
-                @click="onProvinceClick(province)" />
+                @click="onProvinceClick(province)"
+              />
             </g>
           </g>
 
@@ -142,17 +152,21 @@ const {
             <template v-for="province in provinces" :key="`ext-${province.name}`">
               <g v-if="province.extensionLine">
                 <!-- 扩展线本身 -->
-                <line :x1="province.extensionLine.fromX" :y1="province.extensionLine.fromY"
-                  :x2="province.extensionLine.toX" :y2="province.extensionLine.toY" class="easy-china-map__extension-line" />
+                <line
+                  :x1="province.extensionLine.fromX" :y1="province.extensionLine.fromY"
+                  :x2="province.extensionLine.toX" :y2="province.extensionLine.toY" class="easy-china-map__extension-line"
+                />
               </g>
             </template>
           </g>
 
           <!-- 省份名称标签 -->
           <g v-if="showLabel" class="easy-china-map__labels">
-            <text v-for="province in provinces" :key="`label-${province.name}`" :x="province.labelX"
+            <text
+              v-for="province in provinces" :key="`label-${province.name}`" :x="province.labelX"
               :y="province.labelY" class="easy-china-map__label" :class="{ 'is-full': labelMode === 'full' }"
-              text-anchor="middle" dominant-baseline="middle">
+              text-anchor="middle" dominant-baseline="middle"
+            >
               {{ labelMode === 'full' ? province.name : province.shortName }}
             </text>
           </g>
@@ -160,10 +174,12 @@ const {
           <!-- 数据标记气泡 -->
           <g v-if="showBubble && dataMap.size" class="easy-china-map__bubbles">
             <template v-for="province in provinces" :key="`bubble-${province.name}`">
-              <circle v-if="dataMap.get(province.name)" :cx="province.labelX" :cy="province.labelY"
+              <circle
+                v-if="dataMap.get(province.name)" :cx="province.labelX" :cy="province.labelY"
                 :r="getBubbleRadius(province.name)" class="easy-china-map__bubble" :fill="bubbleColor" :fill-opacity="0.5"
                 @mouseenter="onProvinceEnter(province, $event)" @mouseleave="onProvinceLeave"
-                @click="onProvinceClick(province)" />
+                @click="onProvinceClick(province)"
+              />
             </template>
           </g>
         </g>
@@ -175,8 +191,10 @@ const {
           {{ legendTitle }}
         </div>
         <div class="legend-gradient">
-          <div class="legend-gradient__bar"
-            :style="{ background: `linear-gradient(to right, ${colorRange[0]}, ${colorRange[1]})` }" />
+          <div
+            class="legend-gradient__bar"
+            :style="{ background: `linear-gradient(to right, ${colorRange[0]}, ${colorRange[1]})` }"
+          />
           <div class="legend-gradient__labels">
             <span>{{ formatValue(legendMin) }}</span>
             <span>{{ formatValue(legendMax) }}</span>
@@ -215,8 +233,10 @@ const {
 
     <!-- Tooltip -->
     <Teleport to="body">
-      <div v-show="tooltip.visible" ref="tooltipRef" class="easy-china-map__tooltip"
-        :style="{ left: `${tooltip.x}px`, top: `${tooltip.y}px` }">
+      <div
+        v-show="tooltip.visible" ref="tooltipRef" class="easy-china-map__tooltip"
+        :style="{ left: `${tooltip.x}px`, top: `${tooltip.y}px` }"
+      >
         <div class="tooltip-title">
           {{ tooltip.title }}
         </div>

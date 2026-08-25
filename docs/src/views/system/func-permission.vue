@@ -419,11 +419,15 @@ onMounted(() => fetchData())
     </div>
 
     <div class="search-bar">
-      <EasyInput v-model="searchForm.keyword" placeholder="搜索权限名称/编码" clearable style="width: 240px"
-        @keyup.enter="handleSearch" @clear="handleSearch" />
-      <EasySelect v-model="searchForm.type" placeholder="权限类型" clearable
+      <EasyInput
+        v-model="searchForm.keyword" placeholder="搜索权限名称/编码" clearable style="width: 240px"
+        @keyup.enter="handleSearch" @clear="handleSearch"
+      />
+      <EasySelect
+        v-model="searchForm.type" placeholder="权限类型" clearable
         :options="[{ label: '菜单', value: 'menu' }, { label: '按钮', value: 'button' }, { label: '接口', value: 'api' }]"
-        style="width: 140px" @change="handleSearch" />
+        style="width: 140px" @change="handleSearch"
+      />
       <EasyButton type="primary" @click="handleSearch">
         <el-icon><Search /></el-icon>查询
       </EasyButton>
@@ -447,8 +451,10 @@ onMounted(() => fetchData())
       </span>
     </div>
 
-    <el-table v-loading="loading" :data="treeData" row-key="id" stripe border default-expand-all
-      :tree-props="{ children: 'children', hasChildren: 'hasChildren' }" @selection-change="handleSelectionChange">
+    <el-table
+      v-loading="loading" :data="treeData" row-key="id" stripe border default-expand-all
+      :tree-props="{ children: 'children', hasChildren: 'hasChildren' }" @selection-change="handleSelectionChange"
+    >
       <el-table-column type="selection" width="50" />
       <el-table-column prop="name" label="名称" min-width="180">
         <template #default="{ row }">
@@ -494,8 +500,10 @@ onMounted(() => fetchData())
       </el-table-column>
     </el-table>
 
-    <el-dialog v-model="dialog.visible" :title="dialogTitle" width="520px" :close-on-click-modal="false"
-      @close="handleDialogClose">
+    <el-dialog
+      v-model="dialog.visible" :title="dialogTitle" width="520px" :close-on-click-modal="false"
+      @close="handleDialogClose"
+    >
       <el-form ref="formRef" :model="dialog.form" :rules="formRules" label-width="90px">
         <el-form-item v-if="dialog.form.type === 'module'" label="模块名称" prop="name">
           <EasyInput v-model="dialog.form.name" placeholder="请输入模块名称" maxlength="30" />
@@ -507,8 +515,10 @@ onMounted(() => fetchData())
           <EasyInput v-model="dialog.form.code" placeholder="如 system:user:add" maxlength="50" />
         </el-form-item>
         <el-form-item v-if="dialog.form.type !== 'module'" label="权限类型" prop="type">
-          <EasySelect v-model="dialog.form.type" placeholder="请选择"
-            :options="[{ label: '菜单', value: 'menu' }, { label: '按钮', value: 'button' }, { label: '接口', value: 'api' }]" />
+          <EasySelect
+            v-model="dialog.form.type" placeholder="请选择"
+            :options="[{ label: '菜单', value: 'menu' }, { label: '按钮', value: 'button' }, { label: '接口', value: 'api' }]"
+          />
         </el-form-item>
         <el-form-item v-if="dialog.form.parentId" label="上级模块">
           <EasyInput :model-value="parentName" disabled />

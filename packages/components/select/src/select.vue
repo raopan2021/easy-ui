@@ -56,8 +56,10 @@ defineExpose({
 <template>
   <div class="easy-select" :class="[`easy-select--${size}`, { 'is-disabled': disabled, 'is-focus': visible }]">
     <!-- 触发器 -->
-    <div ref="triggerRef" class="easy-select__wrapper" :class="{ 'is-hover': hovering && !disabled }"
-      @click="toggleDropdown" @mouseenter="hovering = true" @mouseleave="hovering = false">
+    <div
+      ref="triggerRef" class="easy-select__wrapper" :class="{ 'is-hover': hovering && !disabled }"
+      @click="toggleDropdown" @mouseenter="hovering = true" @mouseleave="hovering = false"
+    >
       <!-- 前缀 -->
       <span v-if="$slots.prefix || prefixIcon" class="easy-select__prefix">
         <slot name="prefix" />
@@ -100,10 +102,14 @@ defineExpose({
         <div v-if="visible" ref="dropdownRef" class="easy-select__dropdown" :style="dropdownStyle">
           <!-- 搜索框 -->
           <div v-if="effectiveFilterable" class="easy-select__search">
-            <input ref="searchRef" v-model="searchQuery" class="easy-select__search-input" placeholder="搜索..."
-              @keydown.stop>
-            <button v-if="allowCreate" class="easy-select__search-btn"
-              :disabled="!searchQuery.trim() || isQueryExisting" @click="handleCreateOption">
+            <input
+              ref="searchRef" v-model="searchQuery" class="easy-select__search-input" placeholder="搜索..."
+              @keydown.stop
+            >
+            <button
+              v-if="allowCreate" class="easy-select__search-btn"
+              :disabled="!searchQuery.trim() || isQueryExisting" @click="handleCreateOption"
+            >
               添加
             </button>
           </div>

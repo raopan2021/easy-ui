@@ -246,8 +246,10 @@ const handleSearch = (data) => {
         <div class="doc-preview__body">
           <EasySearchForm v-model="searchData5" :items="customItems" @search="handleSearch">
             <template #field-department="{ modelValue, updateModelValue }">
-              <EasySelect :model-value="modelValue" placeholder="请选择部门" :options="departmentOptions" clearable
-                @update:model-value="updateModelValue" />
+              <EasySelect
+                :model-value="modelValue" placeholder="请选择部门" :options="departmentOptions" clearable
+                @update:model-value="updateModelValue"
+              />
             </template>
           </EasySearchForm>
         </div>

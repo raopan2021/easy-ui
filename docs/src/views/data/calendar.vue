@@ -516,8 +516,10 @@ function getSimpleLunar(y: number, m: number, d: number): string {
                   <span v-if="day.lunar" class="cal-day-cell__lunar">{{ day.lunar }}</span>
                 </div>
                 <div class="cal-day-cell__events">
-                  <div v-for="(ev, ei) in getEventsForDate(day.date).slice(0, 3)" :key="ei" class="cal-event"
-                    :style="{ background: ev.color }" :title="ev.title" @click.stop="openEvent(ev)">
+                  <div
+                    v-for="(ev, ei) in getEventsForDate(day.date).slice(0, 3)" :key="ei" class="cal-event"
+                    :style="{ background: ev.color }" :title="ev.title" @click.stop="openEvent(ev)"
+                  >
                     {{ ev.title }}
                   </div>
                   <div v-if="getEventsForDate(day.date).length > 3" class="cal-event-more" @click.stop="goDay(day.date)">
@@ -532,8 +534,10 @@ function getSimpleLunar(y: number, m: number, d: number): string {
           <div v-else-if="viewMode === 'week'" class="cal-week">
             <div class="cal-week-header cal-week-header--timeline">
               <div class="cal-week-header__gutter" />
-              <div v-for="d in weekViewDays" :key="d.dateStr" class="cal-week-header__item"
-                :class="{ 'is-today': d.isToday }">
+              <div
+                v-for="d in weekViewDays" :key="d.dateStr" class="cal-week-header__item"
+                :class="{ 'is-today': d.isToday }"
+              >
                 <div class="cal-week-header__day">
                   {{ d.dayName }}
                 </div>
@@ -552,8 +556,10 @@ function getSimpleLunar(y: number, m: number, d: number): string {
                 <div v-for="(d, di) in weekViewDays" :key="di" class="cal-week-col">
                   <div v-for="h in 24" :key="h" class="cal-week-hour" :class="{ 'is-current': isCurrentHour(d, h - 1) }" />
                   <!-- 事件条 -->
-                  <div v-for="(ev, ei) in getEventsForDate(d.dateStr)" :key="ei" class="cal-week-event"
-                    :style="weekEventStyle(ev)" @click="openEvent(ev)">
+                  <div
+                    v-for="(ev, ei) in getEventsForDate(d.dateStr)" :key="ei" class="cal-week-event"
+                    :style="weekEventStyle(ev)" @click="openEvent(ev)"
+                  >
                     <span class="cal-week-event__title">{{ ev.title }}</span>
                   </div>
                 </div>
@@ -570,8 +576,10 @@ function getSimpleLunar(y: number, m: number, d: number): string {
               <div v-if="!currentDayEvents.length" class="cal-empty">
                 当天暂无事件
               </div>
-              <div v-for="(ev, ei) in currentDayEvents" :key="ei" class="cal-day-event"
-                :style="{ borderLeftColor: ev.color }">
+              <div
+                v-for="(ev, ei) in currentDayEvents" :key="ei" class="cal-day-event"
+                :style="{ borderLeftColor: ev.color }"
+              >
                 <div class="cal-day-event__time">
                   {{ ev.time }}
                 </div>
@@ -621,11 +629,15 @@ const events = [
             <span class="add-event-form__label">当前日期：</span>
             <span class="add-event-form__date">{{ currentDateStr }}</span>
             <EasyInput v-model="newEvent.title" placeholder="事件标题" style="width: 200px" size="small" />
-            <el-time-picker v-model="newEvent.timeVal" placeholder="时间" format="HH:mm" value-format="HH:mm" size="small"
-              style="width: 140px" />
-            <EasySelect v-model="newEvent.tag" placeholder="标签" size="small"
+            <el-time-picker
+              v-model="newEvent.timeVal" placeholder="时间" format="HH:mm" value-format="HH:mm" size="small"
+              style="width: 140px"
+            />
+            <EasySelect
+              v-model="newEvent.tag" placeholder="标签" size="small"
               :options="[{ label: '会议', value: '会议' }, { label: '任务', value: '任务' }, { label: '提醒', value: '提醒' }, { label: '评审', value: '评审' }, { label: '休假', value: '休假' }]"
-              style="width: 100px" />
+              style="width: 100px"
+            />
             <EasyButton size="small" type="primary" @click="addEvent">
               添加
             </EasyButton>

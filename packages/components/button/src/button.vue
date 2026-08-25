@@ -20,10 +20,14 @@ export type { ButtonEmits, ButtonProps } from './button'
   <button class="easy-button" :class="buttonClass" :disabled="disabled || loading" :type="htmlType" @click="handleClick">
     <span v-if="loading" class="easy-button__loading">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-linecap="round"
-          stroke-dasharray="31.4 31.4" stroke-dashoffset="10">
-          <animateTransform attributeName="transform" type="rotate" values="0 12 12;360 12 12" dur="0.75s"
-            repeatCount="indefinite" />
+        <circle
+          cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-linecap="round"
+          stroke-dasharray="31.4 31.4" stroke-dashoffset="10"
+        >
+          <animateTransform
+            attributeName="transform" type="rotate" values="0 12 12;360 12 12" dur="0.75s"
+            repeatCount="indefinite"
+          />
         </circle>
       </svg>
     </span>

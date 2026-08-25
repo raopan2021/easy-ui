@@ -72,9 +72,11 @@ const {
 
 <template>
   <div class="easy-date-time-picker" :class="[`easy-date-time-picker--${size}`, { 'is-disabled': disabled }]">
-    <div ref="wrapperRef" class="easy-date-time-picker__wrapper"
+    <div
+      ref="wrapperRef" class="easy-date-time-picker__wrapper"
       :class="{ 'is-focus': focusing, 'is-hover': hovering && !disabled }" @mouseenter="hovering = true"
-      @mouseleave="hovering = false">
+      @mouseleave="hovering = false"
+    >
       <!-- 前缀图标 -->
       <span class="easy-date-time-picker__prefix">
         <slot name="prefix">
@@ -83,8 +85,10 @@ const {
       </span>
 
       <!-- 输入 -->
-      <input ref="inputRef" class="easy-date-time-picker__input" :value="displayValue" :placeholder="placeholder"
-        :disabled="disabled" :readonly="true" @focus="handleFocus" @blur="handleBlur" @click="openPicker">
+      <input
+        ref="inputRef" class="easy-date-time-picker__input" :value="displayValue" :placeholder="placeholder"
+        :disabled="disabled" :readonly="true" @focus="handleFocus" @blur="handleBlur" @click="openPicker"
+      >
 
       <!-- 清除 -->
       <span v-if="clearable && modelValue && !disabled" class="easy-date-time-picker__clear" @click.stop="clear">
@@ -95,8 +99,10 @@ const {
     <!-- 选择面板 -->
     <Teleport to="body">
       <Transition name="easy-dtp-fade">
-        <div v-if="panelVisible" ref="panelRef" class="easy-date-time-picker__panel" :style="panelStyle"
-          @mousedown="handlePanelMouseDown">
+        <div
+          v-if="panelVisible" ref="panelRef" class="easy-date-time-picker__panel" :style="panelStyle"
+          @mousedown="handlePanelMouseDown"
+        >
           <!-- 左侧：日期选择 -->
           <div class="easy-dtp__date-section">
             <!-- 头部：年月切换 -->
@@ -155,21 +161,27 @@ const {
           <div class="easy-dtp__time-section">
             <!-- 手动输入区 -->
             <div class="easy-dtp-time__input-area">
-              <input ref="hoursInputRef" class="easy-dtp-time__time-input" maxlength="2"
+              <input
+                ref="hoursInputRef" class="easy-dtp-time__time-input" maxlength="2"
                 @input="onTimeInput($event, 'hours')" @blur="onTimeBlur($event, 'hours')"
                 @keydown.down.prevent="adjustInput('hours', 1)" @keydown.up.prevent="adjustInput('hours', -1)"
-                @keydown.enter.prevent="focusNextInput('minutes')">
+                @keydown.enter.prevent="focusNextInput('minutes')"
+              >
               <span class="easy-dtp-time__input-sep">:</span>
-              <input ref="minutesInputRef" class="easy-dtp-time__time-input" maxlength="2"
+              <input
+                ref="minutesInputRef" class="easy-dtp-time__time-input" maxlength="2"
                 @input="onTimeInput($event, 'minutes')" @blur="onTimeBlur($event, 'minutes')"
                 @keydown.down.prevent="adjustInput('minutes', 1)" @keydown.up.prevent="adjustInput('minutes', -1)"
-                @keydown.enter.prevent="showSeconds ? focusNextInput('seconds') : confirm()">
+                @keydown.enter.prevent="showSeconds ? focusNextInput('seconds') : confirm()"
+              >
               <template v-if="showSeconds">
                 <span class="easy-dtp-time__input-sep">:</span>
-                <input ref="secondsInputRef" class="easy-dtp-time__time-input" maxlength="2"
+                <input
+                  ref="secondsInputRef" class="easy-dtp-time__time-input" maxlength="2"
                   @input="onTimeInput($event, 'seconds')" @blur="onTimeBlur($event, 'seconds')"
                   @keydown.down.prevent="adjustInput('seconds', 1)" @keydown.up.prevent="adjustInput('seconds', -1)"
-                  @keydown.enter.prevent="confirm()">
+                  @keydown.enter.prevent="confirm()"
+                >
               </template>
             </div>
 
@@ -179,8 +191,10 @@ const {
               <div class="easy-dtp-time__column">
                 <div class="easy-dtp-time__list-wrap">
                   <div ref="hoursListRef" class="easy-dtp-time__list" @scroll.passive="onScroll($event, 'hours')">
-                    <div v-for="h in 24" :key="h - 1" class="easy-dtp-time__item"
-                      :class="{ 'is-selected': h - 1 === panelHours }" @click="selectTimeUnit('hours', h - 1)">
+                    <div
+                      v-for="h in 24" :key="h - 1" class="easy-dtp-time__item"
+                      :class="{ 'is-selected': h - 1 === panelHours }" @click="selectTimeUnit('hours', h - 1)"
+                    >
                       {{ String(h - 1).padStart(2, '0') }}
                     </div>
                   </div>
@@ -193,8 +207,10 @@ const {
               <div class="easy-dtp-time__column">
                 <div class="easy-dtp-time__list-wrap">
                   <div ref="minutesListRef" class="easy-dtp-time__list" @scroll.passive="onScroll($event, 'minutes')">
-                    <div v-for="m in 60" :key="m - 1" class="easy-dtp-time__item"
-                      :class="{ 'is-selected': m - 1 === panelMinutes }" @click="selectTimeUnit('minutes', m - 1)">
+                    <div
+                      v-for="m in 60" :key="m - 1" class="easy-dtp-time__item"
+                      :class="{ 'is-selected': m - 1 === panelMinutes }" @click="selectTimeUnit('minutes', m - 1)"
+                    >
                       {{ String(m - 1).padStart(2, '0') }}
                     </div>
                   </div>
@@ -207,8 +223,10 @@ const {
                 <div class="easy-dtp-time__column">
                   <div class="easy-dtp-time__list-wrap">
                     <div ref="secondsListRef" class="easy-dtp-time__list" @scroll.passive="onScroll($event, 'seconds')">
-                      <div v-for="s in 60" :key="s - 1" class="easy-dtp-time__item"
-                        :class="{ 'is-selected': s - 1 === panelSeconds }" @click="selectTimeUnit('seconds', s - 1)">
+                      <div
+                        v-for="s in 60" :key="s - 1" class="easy-dtp-time__item"
+                        :class="{ 'is-selected': s - 1 === panelSeconds }" @click="selectTimeUnit('seconds', s - 1)"
+                      >
                         {{ String(s - 1).padStart(2, '0') }}
                       </div>
                     </div>

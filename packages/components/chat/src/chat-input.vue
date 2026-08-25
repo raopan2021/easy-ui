@@ -82,20 +82,26 @@ export type { ChatAttachment, ChatInputEmits, ChatInputProps } from './chat-inpu
         <button v-if="allowUpload" class="easy-chat-input__toolbar-btn" title="上传附件" @click="handleFileSelect">
           <EasyIcon name="el:Paperclip" />
         </button>
-        <input ref="fileInputRef" type="file" :accept="accept" :multiple="multiple" style="display: none"
-          @change="handleFileChange">
+        <input
+          ref="fileInputRef" type="file" :accept="accept" :multiple="multiple" style="display: none"
+          @change="handleFileChange"
+        >
 
         <!-- 其他工具按钮插槽 -->
         <slot name="toolbar" />
       </div>
 
-      <textarea ref="textareaRef" v-model="inputValue" class="easy-chat-input__textarea" :placeholder="placeholder"
+      <textarea
+        ref="textareaRef" v-model="inputValue" class="easy-chat-input__textarea" :placeholder="placeholder"
         :disabled="disabled" :readonly="readonly" :maxlength="maxlength" :rows="rows" @keydown="handleKeydown"
-        @input="handleInput" @focus="handleFocus" @blur="handleBlur" />
+        @input="handleInput" @focus="handleFocus" @blur="handleBlur"
+      />
 
       <!-- 发送按钮 -->
-      <button class="easy-chat-input__send-btn" :class="{ 'is-disabled': !canSend }"
-        :disabled="disabled || readonly || !canSend" @click="handleSend">
+      <button
+        class="easy-chat-input__send-btn" :class="{ 'is-disabled': !canSend }"
+        :disabled="disabled || readonly || !canSend" @click="handleSend"
+      >
         <EasyIcon name="el:Promotion" />
       </button>
     </div>

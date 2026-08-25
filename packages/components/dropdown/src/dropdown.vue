@@ -39,23 +39,29 @@ export type { DropdownProps } from './types'
 </script>
 
 <template>
-  <div ref="triggerRef" class="easy-dropdown" @click="handleClick" @mouseenter="handleMouseEnter"
-    @mouseleave="handleMouseLeave">
+  <div
+    ref="triggerRef" class="easy-dropdown" @click="handleClick" @mouseenter="handleMouseEnter"
+    @mouseleave="handleMouseLeave"
+  >
     <!-- 触发器：优先使用 slot，否则用 label prop -->
     <slot>
       <span class="easy-dropdown__trigger">
         {{ label }}
         <svg class="easy-dropdown__arrow" :class="{ 'is-open': visible }" viewBox="0 0 1024 1024" width="12" height="12">
-          <path d="M512 714.667c-8.533 0-17.067-2.134-23.467-8.534L168.533 386.133c-12.8-12.8-12.8-32 0-44.8 12.8-12.8 32-12.8 44.8 0L512 640l298.667-298.667c12.8-12.8 32-12.8 44.8 0 12.8 12.8 12.8 32 0 44.8L535.467 706.133c-6.4 6.4-14.934 8.534-23.467 8.534z"
-            fill="currentColor" />
+          <path
+            d="M512 714.667c-8.533 0-17.067-2.134-23.467-8.534L168.533 386.133c-12.8-12.8-12.8-32 0-44.8 12.8-12.8 32-12.8 44.8 0L512 640l298.667-298.667c12.8-12.8 32-12.8 44.8 0 12.8 12.8 12.8 32 0 44.8L535.467 706.133c-6.4 6.4-14.934 8.534-23.467 8.534z"
+            fill="currentColor"
+          />
         </svg>
       </span>
     </slot>
 
     <!-- 下拉菜单：fixed 定位脱离文档流，不依赖 Teleport（Teleport 会导致 slot 内组件事件丢失） -->
     <transition name="easy-dropdown-fade">
-      <ul v-if="visible" ref="menuRef" class="easy-dropdown-menu" :style="menuStyle" @mouseenter="handleMenuMouseEnter"
-        @mouseleave="handleMenuMouseLeave" @click="handleMenuClick">
+      <ul
+        v-if="visible" ref="menuRef" class="easy-dropdown-menu" :style="menuStyle" @mouseenter="handleMenuMouseEnter"
+        @mouseleave="handleMenuMouseLeave" @click="handleMenuClick"
+      >
         <slot name="dropdown" />
       </ul>
     </transition>

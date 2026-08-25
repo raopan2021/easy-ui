@@ -44,8 +44,10 @@ const { displayHeaders, tableRows } = usePermissionTable(props, getItemDisabled)
   <div class="easy-permission">
     <!-- 全选 -->
     <div v-if="showSelectAll" class="permission-header">
-      <el-checkbox :model-value="rootState === 'checked'" :indeterminate="rootState === 'half'" :disabled="disabled"
-        @change="(val: CheckboxValueType) => onRootToggle(val)">
+      <el-checkbox
+        :model-value="rootState === 'checked'" :indeterminate="rootState === 'half'" :disabled="disabled"
+        @change="(val: CheckboxValueType) => onRootToggle(val)"
+      >
         {{ selectAllText }}
       </el-checkbox>
     </div>
@@ -77,37 +79,47 @@ const { displayHeaders, tableRows } = usePermissionTable(props, getItemDisabled)
         <tr v-for="row in tableRows" :key="row.key">
           <!-- 模块列（一级及以上显示） -->
           <td v-if="maxLevel >= 1 && row.isModuleFirst" :rowspan="row.moduleRowspan" class="cell-module">
-            <el-checkbox :model-value="getNodeState(row.moduleId) === 'checked'"
+            <el-checkbox
+              :model-value="getNodeState(row.moduleId) === 'checked'"
               :indeterminate="getNodeState(row.moduleId) === 'half'" :disabled="disabled || row.moduleDisabled"
-              @change="(val: CheckboxValueType) => onNodeToggle(row.moduleId, val)">
+              @change="(val: CheckboxValueType) => onNodeToggle(row.moduleId, val)"
+            >
               {{ row.moduleLabel }}
             </el-checkbox>
           </td>
           <!-- 页面列（二级及以上显示） -->
           <td v-if="maxLevel >= 2 && row.isPageFirst && row.pageId" :rowspan="row.pageRowspan || 1" class="cell-page">
-            <el-checkbox :model-value="getNodeState(row.pageId) === 'checked'"
+            <el-checkbox
+              :model-value="getNodeState(row.pageId) === 'checked'"
               :indeterminate="getNodeState(row.pageId) === 'half'" :disabled="disabled || row.pageDisabled"
-              @change="(val: boolean) => onNodeToggle(row.pageId, val)">
+              @change="(val: boolean) => onNodeToggle(row.pageId, val)"
+            >
               {{ row.pageLabel }}
             </el-checkbox>
           </td>
           <!-- 操作列（三级用actions数组横向排列，四五级用单个action） -->
-          <td v-if="maxLevel >= 3"
-            :class="[maxLevel >= 4 ? 'cell-l3' : 'cell-action', maxLevel === 3 ? 'cell-last' : '']">
+          <td
+            v-if="maxLevel >= 3"
+            :class="[maxLevel >= 4 ? 'cell-l3' : 'cell-action', maxLevel === 3 ? 'cell-last' : '']"
+          >
             <div class="item-list">
               <template v-if="row.actions.length > 0">
                 <!-- 三级：多个操作横向排列 -->
-                <el-checkbox v-for="item in row.actions" :key="item._id"
+                <el-checkbox
+                  v-for="item in row.actions" :key="item._id"
                   :model-value="getNodeState(item._id) === 'checked'" :indeterminate="getNodeState(item._id) === 'half'"
-                  :disabled="disabled || item._disabled" @change="(val: CheckboxValueType) => onNodeToggle(item._id, val)">
+                  :disabled="disabled || item._disabled" @change="(val: CheckboxValueType) => onNodeToggle(item._id, val)"
+                >
                   {{ item._label }}
                 </el-checkbox>
               </template>
               <template v-else-if="row.action">
                 <!-- 四五级：单个操作 -->
-                <el-checkbox :model-value="getNodeState(row.action._id) === 'checked'"
+                <el-checkbox
+                  :model-value="getNodeState(row.action._id) === 'checked'"
                   :indeterminate="getNodeState(row.action._id) === 'half'" :disabled="disabled || row.action._disabled"
-                  @change="(val: CheckboxValueType) => onNodeToggle(row.action!._id, val)">
+                  @change="(val: CheckboxValueType) => onNodeToggle(row.action!._id, val)"
+                >
                   {{ row.action._label }}
                 </el-checkbox>
               </template>
@@ -116,9 +128,11 @@ const { displayHeaders, tableRows } = usePermissionTable(props, getItemDisabled)
           <!-- 功能列（四级） -->
           <td v-if="maxLevel >= 4" class="cell-l4" :class="[maxLevel === 4 ? 'cell-last' : '']">
             <div class="item-list">
-              <el-checkbox v-for="item in row.features" :key="item._id"
+              <el-checkbox
+                v-for="item in row.features" :key="item._id"
                 :model-value="getNodeState(item._id) === 'checked'" :indeterminate="getNodeState(item._id) === 'half'"
-                :disabled="disabled || item._disabled" @change="(val: CheckboxValueType) => onNodeToggle(item._id, val)">
+                :disabled="disabled || item._disabled" @change="(val: CheckboxValueType) => onNodeToggle(item._id, val)"
+              >
                 {{ item._label }}
               </el-checkbox>
             </div>
@@ -126,9 +140,11 @@ const { displayHeaders, tableRows } = usePermissionTable(props, getItemDisabled)
           <!-- 数据列（五级） -->
           <td v-if="maxLevel >= 5" class="cell-l5 cell-last">
             <div class="item-list">
-              <el-checkbox v-for="item in row.dataItems" :key="item._id"
+              <el-checkbox
+                v-for="item in row.dataItems" :key="item._id"
                 :model-value="getNodeState(item._id) === 'checked'" :indeterminate="getNodeState(item._id) === 'half'"
-                :disabled="disabled || item._disabled" @change="(val: CheckboxValueType) => onNodeToggle(item._id, val)">
+                :disabled="disabled || item._disabled" @change="(val: CheckboxValueType) => onNodeToggle(item._id, val)"
+              >
                 {{ item._label }}
               </el-checkbox>
             </div>

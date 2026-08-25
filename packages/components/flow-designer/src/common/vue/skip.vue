@@ -35,10 +35,14 @@ export type { SkipProps } from './skip-types'
       <EasyFormItem v-if="skipConditionShow" label="跳转条件">
         <div class="conditionRow">
           <EasyInput v-if="!spelFlag" v-model="form.condition" placeholder="条件名" class="conditionName" />
-          <EasySelect v-model="form.conditionType" placeholder="请选择条件方式" class="conditionType"
-            :class="{ 'is-spel': spelFlag }" :options="conditionTypeOptions" @change="changeOper" />
-          <EasyInput v-model="form.conditionValue" placeholder="条件值" class="conditionValue"
-            :class="{ 'is-spel': spelFlag }" />
+          <EasySelect
+            v-model="form.conditionType" placeholder="请选择条件方式" class="conditionType"
+            :class="{ 'is-spel': spelFlag }" :options="conditionTypeOptions" @change="changeOper"
+          />
+          <EasyInput
+            v-model="form.conditionValue" placeholder="条件值" class="conditionValue"
+            :class="{ 'is-spel': spelFlag }"
+          />
         </div>
         <div class="placeholder mt5">
           跳转条件字段需要与表单中字段名称一致,否则会出现流程异常

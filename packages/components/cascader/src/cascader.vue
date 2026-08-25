@@ -84,9 +84,11 @@ defineExpose({ blur, remoteOptions })
 <template>
   <div class="easy-cascader" :class="[`easy-cascader--${size}`, { 'is-disabled': disabled, 'is-focus': panelVisible }]">
     <!-- 触发器 -->
-    <div ref="triggerRef" class="easy-cascader__wrapper"
+    <div
+      ref="triggerRef" class="easy-cascader__wrapper"
       :class="{ 'is-hover': hovering && !disabled, 'has-tags': multiple && selectedLabels.length > 0 }"
-      @click="togglePanel" @mouseenter="hovering = true" @mouseleave="hovering = false">
+      @click="togglePanel" @mouseenter="hovering = true" @mouseleave="hovering = false"
+    >
       <!-- 多选标签 -->
       <div v-if="multiple && selectedLabels.length" ref="tagsContainerRef" class="easy-cascader__tags">
         <span v-for="(tag, i) in visibleLabels" :key="i" :ref="(el) => setTagRef(el, i)" class="easy-cascader__tag">
@@ -118,14 +120,18 @@ defineExpose({ blur, remoteOptions })
         <div v-if="panelVisible" ref="panelRef" class="easy-cascader__panel" :style="panelStyle" @mousedown.prevent>
           <!-- 搜索框 -->
           <div v-if="filterable" class="easy-cascader__search">
-            <input ref="searchRef" v-model="searchQuery" class="easy-cascader__search-input" placeholder="搜索..."
-              @input="handleSearch">
+            <input
+              ref="searchRef" v-model="searchQuery" class="easy-cascader__search-input" placeholder="搜索..."
+              @input="handleSearch"
+            >
           </div>
 
           <!-- 搜索结果模式 -->
           <div v-if="filterable && searchQuery" class="easy-cascader__search-results">
-            <div v-for="(result, idx) in searchResults" :key="idx" class="easy-cascader__search-item"
-              :class="{ 'is-selected': isSearchResultSelected(result.path) }" @click="selectSearchResult(result)">
+            <div
+              v-for="(result, idx) in searchResults" :key="idx" class="easy-cascader__search-item"
+              :class="{ 'is-selected': isSearchResultSelected(result.path) }" @click="selectSearchResult(result)"
+            >
               <span v-if="multiple" class="easy-cascader__search-check">
                 <EasyIcon v-if="isSearchResultSelected(result.path)" name="el:Check" />
               </span>
@@ -159,13 +165,17 @@ defineExpose({ blur, remoteOptions })
                 @mouseenter="handleNodeHover(node, level)"
               >
                 <!-- 多选模式：勾选框用于选择 -->
-                <span v-if="multiple" class="easy-cascader__menu-checkbox"
-                  @click.stop="handleCheckboxClick(node, level)">
+                <span
+                  v-if="multiple" class="easy-cascader__menu-checkbox"
+                  @click.stop="handleCheckboxClick(node, level)"
+                >
                   <EasyIcon v-if="isNodeChecked(node)" name="el:Check" />
                 </span>
                 <!-- 文本区域：多选模式下点击展开下一级，单选模式下点击直接选择 -->
-                <span class="easy-cascader__menu-label"
-                  @click="multiple ? handleNodeClick(node, level) : handleNodeClickAndSelect(node, level)">
+                <span
+                  class="easy-cascader__menu-label"
+                  @click="multiple ? handleNodeClick(node, level) : handleNodeClickAndSelect(node, level)"
+                >
                   {{ node[labelKey] }}
                 </span>
                 <EasyIcon v-if="!isLeaf(node)" name="el:ArrowRight" class="easy-cascader__menu-arrow" />

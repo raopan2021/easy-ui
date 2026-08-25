@@ -199,14 +199,20 @@ onMounted(() => fetchData())
 
     <!-- 搜索栏 -->
     <div class="search-bar">
-      <EasyInput v-model="searchForm.keyword" placeholder="操作人 / 操作内容" clearable style="width: 220px"
-        @keyup.enter="handleSearch" />
+      <EasyInput
+        v-model="searchForm.keyword" placeholder="操作人 / 操作内容" clearable style="width: 220px"
+        @keyup.enter="handleSearch"
+      />
       <EasySelect v-model="searchForm.module" placeholder="操作模块" clearable :options="moduleOptions" style="width: 140px" />
-      <EasySelect v-model="searchForm.type" placeholder="操作类型" clearable
+      <EasySelect
+        v-model="searchForm.type" placeholder="操作类型" clearable
         :options="[{ label: '新增', value: 'INSERT' }, { label: '修改', value: 'UPDATE' }, { label: '删除', value: 'DELETE' }, { label: '导出', value: 'EXPORT' }, { label: '登录', value: 'LOGIN' }]"
-        style="width: 130px" />
-      <el-date-picker v-model="searchForm.dateRange" type="daterange" range-separator="至" start-placeholder="开始日期"
-        end-placeholder="结束日期" value-format="YYYY-MM-DD" style="width: 260px" />
+        style="width: 130px"
+      />
+      <el-date-picker
+        v-model="searchForm.dateRange" type="daterange" range-separator="至" start-placeholder="开始日期"
+        end-placeholder="结束日期" value-format="YYYY-MM-DD" style="width: 260px"
+      />
       <EasyButton type="primary" @click="handleSearch">
         查询
       </EasyButton>
@@ -226,10 +232,12 @@ onMounted(() => fetchData())
     </div>
 
     <!-- 数据表格 -->
-    <EasyTable ref="tableRef" v-loading="loading" :data="tableData" :columns="columns" stripe border :pagination="true"
+    <EasyTable
+      ref="tableRef" v-loading="loading" :data="tableData" :columns="columns" stripe border :pagination="true"
       :total="total" :page="page" :page-size="pageSize" :page-size-options="[10, 20, 50, 100]" action-label="操作"
       :action-width="80" action-fixed="right" @page-change="(p: number) => { page.value = p; fetchData() }"
-      @page-size-change="(s: number) => { pageSize.value = s; fetchData() }">
+      @page-size-change="(s: number) => { pageSize.value = s; fetchData() }"
+    >
       <template #col-type="{ row }">
         <EasyTag :type="typeTagMap[row.type] || 'info'" size="small" effect="plain">
           {{ row.type }}

@@ -34,9 +34,11 @@ const { handleStartChange, handleEndChange, handleEnter } = useInputRange(props,
   <div class="easy-input-range" :class="[`easy-input-range--${size}`, { 'is-disabled': disabled }]">
     <!-- 开始输入框 -->
     <div class="easy-input-range__start">
-      <EasyInput :model-value="start" :type="inputType" :placeholder="startPlaceholder || '最小值'" :disabled="disabled"
+      <EasyInput
+        :model-value="start" :type="inputType" :placeholder="startPlaceholder || '最小值'" :disabled="disabled"
         :readonly="readonly" :clearable="clearable" :maxlength="maxlength" :size="size"
-        @update:model-value="handleStartChange" @keyup.enter="handleEnter" />
+        @update:model-value="handleStartChange" @keyup.enter="handleEnter"
+      />
     </div>
 
     <!-- 分隔符 -->
@@ -44,9 +46,11 @@ const { handleStartChange, handleEndChange, handleEnter } = useInputRange(props,
 
     <!-- 结束输入框 -->
     <div class="easy-input-range__end">
-      <EasyInput :model-value="end" :type="inputType" :placeholder="endPlaceholder || '最大值'" :disabled="disabled"
+      <EasyInput
+        :model-value="end" :type="inputType" :placeholder="endPlaceholder || '最大值'" :disabled="disabled"
         :readonly="readonly" :clearable="clearable" :maxlength="maxlength" :size="size"
-        @update:model-value="handleEndChange" @keyup.enter="handleEnter" />
+        @update:model-value="handleEndChange" @keyup.enter="handleEnter"
+      />
     </div>
   </div>
 </template>

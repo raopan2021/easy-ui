@@ -69,13 +69,17 @@ export type { ChatAttachment, ChatMessage, ChatMessageEmits, ChatMessageProps } 
       </div>
 
       <!-- Markdown 内容 -->
-      <div v-if="message.content && message.content.trim()" ref="textRef" class="easy-chat-message__text"
-        :class="{ 'is-typing': isTyping }" v-html="renderedMarkdown" />
+      <div
+        v-if="message.content && message.content.trim()" ref="textRef" class="easy-chat-message__text"
+        :class="{ 'is-typing': isTyping }" v-html="renderedMarkdown"
+      />
 
       <!-- 附件列表 -->
       <div v-if="message.attachments && message.attachments.length > 0" class="easy-chat-message__attachments">
-        <div v-for="(attachment, index) in message.attachments" :key="index" class="easy-chat-message__attachment"
-          @click="handleAttachmentClick(attachment)">
+        <div
+          v-for="(attachment, index) in message.attachments" :key="index" class="easy-chat-message__attachment"
+          @click="handleAttachmentClick(attachment)"
+        >
           <!-- 图片附件 -->
           <img v-if="isImage(attachment)" :src="attachment.url" :alt="attachment.name">
           <!-- 其他附件 -->
@@ -96,8 +100,10 @@ export type { ChatAttachment, ChatMessage, ChatMessageEmits, ChatMessageProps } 
           <button v-if="allowCopy" class="easy-chat-message__action-btn" title="复制" @click="handleCopy">
             <EasyIcon name="el:DocumentCopy" />
           </button>
-          <button v-if="allowRegenerate && message.role === 'assistant'" class="easy-chat-message__action-btn"
-            title="重新生成" @click="handleRegenerate">
+          <button
+            v-if="allowRegenerate && message.role === 'assistant'" class="easy-chat-message__action-btn"
+            title="重新生成" @click="handleRegenerate"
+          >
             <EasyIcon name="el:Refresh" />
           </button>
           <button v-if="allowDelete" class="easy-chat-message__action-btn" title="删除" @click="handleDelete">

@@ -57,8 +57,10 @@ defineExpose({ focus, blur, select, inputRef })
       <span v-if="prefix && !$slots.prepend" class="easy-input__prepend-text">{{ prefix }}</span>
     </div>
 
-    <div class="easy-input__wrapper" :class="[wrapperInnerClass, { 'is-textarea': type === 'textarea' }]"
-      @mouseenter="hovering = true" @mouseleave="hovering = false">
+    <div
+      class="easy-input__wrapper" :class="[wrapperInnerClass, { 'is-textarea': type === 'textarea' }]"
+      @mouseenter="hovering = true" @mouseleave="hovering = false"
+    >
       <!-- 前缀图标 -->
       <span v-if="$slots.prefix || prefixIcon" class="easy-input__prefix">
         <slot name="prefix" />
@@ -67,10 +69,12 @@ defineExpose({ focus, blur, select, inputRef })
 
       <!-- textarea -->
       <template v-if="type === 'textarea'">
-        <textarea ref="inputRef" class="easy-input__inner easy-input--textarea" :value="modelValue"
+        <textarea
+          ref="inputRef" class="easy-input__inner easy-input--textarea" :value="modelValue"
           :placeholder="placeholder" :disabled="disabled" :readonly="readonly" :maxlength="maxlength" :rows="rows"
           :style="textareaStyle" @input="handleInput" @focus="handleFocus" @blur="handleBlur" @keydown="handleKeydown"
-          @compositionstart="isComposing = true" @compositionend="handleCompositionEnd" />
+          @compositionstart="isComposing = true" @compositionend="handleCompositionEnd"
+        />
         <!-- 字数统计 -->
         <span v-if="showWordLimit && maxlength" class="easy-input__word-limit">
           {{ (modelValue as string || '').length }}/{{ maxlength }}
@@ -78,11 +82,13 @@ defineExpose({ focus, blur, select, inputRef })
       </template>
 
       <!-- input -->
-      <input v-else ref="inputRef" class="easy-input__inner" :type="currentType" :value="modelValue"
+      <input
+        v-else ref="inputRef" class="easy-input__inner" :type="currentType" :value="modelValue"
         :placeholder="placeholder" :disabled="disabled" :readonly="readonly" :maxlength="maxlength"
         :autocomplete="autocomplete" :inputmode="inputmodeValue" @input="handleInput" @focus="handleFocus"
         @blur="handleBlur" @keydown="handleKeydown" @compositionstart="isComposing = true"
-        @compositionend="handleCompositionEnd">
+        @compositionend="handleCompositionEnd"
+      >
 
       <!-- 字数统计（非 textarea） -->
       <span v-if="type !== 'textarea' && showWordLimit && maxlength" class="easy-input__word-limit">

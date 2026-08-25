@@ -90,8 +90,10 @@ onUnmounted(() => {
       <div class="header__logo">
         <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="32" height="32" rx="8" fill="#4f6ef7" />
-          <path d="M8 16C8 11.582 11.582 8 16 8C20.418 8 24 11.582 24 16" stroke="#fff" stroke-width="2.5"
-            stroke-linecap="round" />
+          <path
+            d="M8 16C8 11.582 11.582 8 16 8C20.418 8 24 11.582 24 16" stroke="#fff" stroke-width="2.5"
+            stroke-linecap="round"
+          />
           <circle cx="16" cy="18" r="4" fill="#fff" />
         </svg>
       </div>
@@ -102,8 +104,10 @@ onUnmounted(() => {
     <HorizontalMenu v-if="menuLayoutStore.currentLayout === 'horizontal'" class="header__horizontal-menu" />
 
     <!-- 右侧：功能操作区 -->
-    <div class="header__actions"
-      :class="{ 'header__actions--horizontal': menuLayoutStore.currentLayout === 'horizontal' }">
+    <div
+      class="header__actions"
+      :class="{ 'header__actions--horizontal': menuLayoutStore.currentLayout === 'horizontal' }"
+    >
       <!-- template-admin 后台模板入口 -->
       <a class="header__action-btn" :href="adminUrl" target="_blank" rel="noopener" title="打开后台管理模板 template-admin">
         <EasyIcon name="el:Monitor" :size="18" />
@@ -138,8 +142,10 @@ onUnmounted(() => {
           <EasyIcon name="el:User" :size="18" color="#fff" />
         </div>
         <span class="header__username">Admin</span>
-        <EasyIcon class="header__arrow" :class="{ 'is-open': showUserMenu }" name="el:ArrowDown" :size="12"
-          color="#8e8ea0" />
+        <EasyIcon
+          class="header__arrow" :class="{ 'is-open': showUserMenu }" name="el:ArrowDown" :size="12"
+          color="#8e8ea0"
+        />
       </div>
 
       <!-- 用户下拉菜单 -->

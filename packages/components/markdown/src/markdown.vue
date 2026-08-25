@@ -115,59 +115,77 @@ defineExpose({
     <!-- 工具栏 -->
     <div v-if="showToolbar" class="easy-markdown__toolbar">
       <div class="easy-markdown__views">
-        <EasyButton type="text" size="small" class="easy-markdown__view-btn" :class="{ 'is-active': view === 'edit' }"
-          :disabled="disabled" @click="setView('edit')">
+        <EasyButton
+          type="text" size="small" class="easy-markdown__view-btn" :class="{ 'is-active': view === 'edit' }"
+          :disabled="disabled" @click="setView('edit')"
+        >
           编辑
         </EasyButton>
-        <EasyButton type="text" size="small" class="easy-markdown__view-btn" :class="{ 'is-active': view === 'split' }"
-          :disabled="disabled" @click="setView('split')">
+        <EasyButton
+          type="text" size="small" class="easy-markdown__view-btn" :class="{ 'is-active': view === 'split' }"
+          :disabled="disabled" @click="setView('split')"
+        >
           分屏
         </EasyButton>
-        <EasyButton type="text" size="small" class="easy-markdown__view-btn"
-          :class="{ 'is-active': view === 'preview' }" :disabled="disabled" @click="setView('preview')">
+        <EasyButton
+          type="text" size="small" class="easy-markdown__view-btn"
+          :class="{ 'is-active': view === 'preview' }" :disabled="disabled" @click="setView('preview')"
+        >
           预览
         </EasyButton>
       </div>
 
       <div class="easy-markdown__actions">
-        <EasySelect v-model="currentTheme" class="easy-markdown__theme-select" :options="themeOptions" value-key="key"
-          :disabled="disabled" placeholder="切换主题" size="small" @change="handleThemeChange" />
+        <EasySelect
+          v-model="currentTheme" class="easy-markdown__theme-select" :options="themeOptions" value-key="key"
+          :disabled="disabled" placeholder="切换主题" size="small" @change="handleThemeChange"
+        />
         <EasyButton type="primary" size="small" class="easy-markdown__action" :disabled="disabled" @click="handleSave">
           保存
         </EasyButton>
-        <EasySelect v-model="downloadType" class="easy-markdown__download-select" :options="downloadOptions"
-          :disabled="disabled" placeholder="下载文档" size="small" @change="handleDownloadChange" />
+        <EasySelect
+          v-model="downloadType" class="easy-markdown__download-select" :options="downloadOptions"
+          :disabled="disabled" placeholder="下载文档" size="small" @change="handleDownloadChange"
+        />
       </div>
     </div>
 
     <!-- 主体区域 -->
-    <div class="easy-markdown__body" :class="{
-      'is-edit': view === 'edit',
-      'is-preview': view === 'preview',
-      'is-split': view === 'split',
-    }" :style="bodyStyle">
+    <div
+      class="easy-markdown__body" :class="{
+        'is-edit': view === 'edit',
+        'is-preview': view === 'preview',
+        'is-split': view === 'split',
+      }" :style="bodyStyle"
+    >
       <!-- 编辑区 -->
       <div v-show="view === 'edit' || view === 'split'" class="easy-markdown__pane easy-markdown__pane--edit">
         <div class="easy-markdown__edit">
           <div v-if="lineNumbers" class="easy-markdown__gutter" aria-hidden="true">
             <div class="easy-markdown__gutter-inner" :style="{ transform: `translateY(${-scrollTop}px)` }">
-              <div v-for="(h, i) in lineHeights" :key="i" class="easy-markdown__gutter-line"
-                :style="{ height: `${h}px` }">
+              <div
+                v-for="(h, i) in lineHeights" :key="i" class="easy-markdown__gutter-line"
+                :style="{ height: `${h}px` }"
+              >
                 {{ i + 1 }}
               </div>
             </div>
           </div>
-          <textarea ref="textareaEl" class="easy-markdown__textarea" :class="{
-            'is-with-gutter': lineNumbers,
-            'is-no-wrap': !softWrap,
-          }" :value="modelValue" :placeholder="placeholder" :disabled="disabled" :spellcheck="false"
-            :wrap="softWrap ? 'soft' : 'off'" @input="handleInput" @keydown="handleKeydown" @scroll="onEditScroll" />
+          <textarea
+            ref="textareaEl" class="easy-markdown__textarea" :class="{
+              'is-with-gutter': lineNumbers,
+              'is-no-wrap': !softWrap,
+            }" :value="modelValue" :placeholder="placeholder" :disabled="disabled" :spellcheck="false"
+            :wrap="softWrap ? 'soft' : 'off'" @input="handleInput" @keydown="handleKeydown" @scroll="onEditScroll"
+          />
         </div>
       </div>
 
       <!-- 预览区 -->
-      <div v-show="view === 'preview' || view === 'split'" ref="previewEl"
-        class="easy-markdown__pane easy-markdown__pane--preview" @scroll="onPreviewScroll">
+      <div
+        v-show="view === 'preview' || view === 'split'" ref="previewEl"
+        class="easy-markdown__pane easy-markdown__pane--preview" @scroll="onPreviewScroll"
+      >
         <div class="easy-markdown__preview markdown-body" v-html="renderedHtml" />
       </div>
     </div>

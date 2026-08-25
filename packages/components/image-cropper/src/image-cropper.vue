@@ -54,8 +54,10 @@ export type { CropData, ImageCropperEmits, ImageCropperProps } from './types'
       <div class="easy-image-cropper__group">
         <el-tooltip content="左旋转90°" placement="top">
           <button class="easy-image-cropper__btn" @click="onRotate(-90)">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"
+            >
               <path d="M2.5 2v6h6M2.66 15.57a10 10 0 1 0 .57-8.38" />
             </svg>
             <span>左旋</span>
@@ -63,8 +65,10 @@ export type { CropData, ImageCropperEmits, ImageCropperProps } from './types'
         </el-tooltip>
         <el-tooltip content="右旋转90°" placement="top">
           <button class="easy-image-cropper__btn" @click="onRotate(90)">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"
+            >
               <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38" />
             </svg>
             <span>右旋</span>
@@ -75,8 +79,10 @@ export type { CropData, ImageCropperEmits, ImageCropperProps } from './types'
       <div class="easy-image-cropper__group">
         <el-tooltip content="左右翻转" placement="top">
           <button class="easy-image-cropper__btn" @click="onScaleX">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"
+            >
               <path d="M8 3H5a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h3M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3M12 20v2M12 2v2" />
             </svg>
             <span>镜像</span>
@@ -84,8 +90,10 @@ export type { CropData, ImageCropperEmits, ImageCropperProps } from './types'
         </el-tooltip>
         <el-tooltip content="上下翻转" placement="top">
           <button class="easy-image-cropper__btn" @click="onScaleY">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"
+            >
               <path d="M3 8V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v3M3 16v3a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-3M20 12H4M2 12h2" />
             </svg>
             <span>翻转</span>
@@ -96,8 +104,10 @@ export type { CropData, ImageCropperEmits, ImageCropperProps } from './types'
       <div class="easy-image-cropper__group">
         <el-tooltip content="放大" placement="top">
           <button class="easy-image-cropper__btn" @click="onZoom(0.1)">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"
+            >
               <circle cx="11" cy="11" r="8" />
               <path d="m21 21-4.35-4.35M11 8v6M8 11h6" />
             </svg>
@@ -106,8 +116,10 @@ export type { CropData, ImageCropperEmits, ImageCropperProps } from './types'
         </el-tooltip>
         <el-tooltip content="缩小" placement="top">
           <button class="easy-image-cropper__btn" @click="onZoom(-0.1)">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"
+            >
               <circle cx="11" cy="11" r="8" />
               <path d="m21 21-4.35-4.35M8 11h6" />
             </svg>
@@ -119,8 +131,10 @@ export type { CropData, ImageCropperEmits, ImageCropperProps } from './types'
       <div class="easy-image-cropper__group">
         <el-tooltip content="重置" placement="top">
           <button class="easy-image-cropper__btn easy-image-cropper__btn--reset" @click="onReset">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"
+            >
               <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
               <path d="M3 3v5h5" />
             </svg>
@@ -132,8 +146,10 @@ export type { CropData, ImageCropperEmits, ImageCropperProps } from './types'
 
     <!-- 裁剪区域 -->
     <div class="easy-image-cropper__view">
-      <img v-if="src" ref="imgRef" class="easy-image-cropper__img" :src="src" :alt="alt"
-        style="display: block; max-width: 100%" @error="onImgError">
+      <img
+        v-if="src" ref="imgRef" class="easy-image-cropper__img" :src="src" :alt="alt"
+        style="display: block; max-width: 100%" @error="onImgError"
+      >
       <div v-else class="easy-image-cropper__placeholder">
         <svg width="48" height="48" viewBox="0 0 48 48" fill="#ccc">
           <rect x="6" y="10" width="36" height="28" rx="2" stroke="#ccc" stroke-width="2" fill="none" />

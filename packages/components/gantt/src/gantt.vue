@@ -206,8 +206,10 @@ watch(
       </div>
       <div class="easy-gantt__actions">
         <div v-if="showViewSwitch" class="easy-gantt__view-switch">
-          <button v-for="view in views" :key="view.value" :class="{ 'is-active': currentView === view.value }"
-            @click="currentView = view.value">
+          <button
+            v-for="view in views" :key="view.value" :class="{ 'is-active': currentView === view.value }"
+            @click="currentView = view.value"
+          >
             {{ view.label }}
           </button>
         </div>
@@ -234,12 +236,16 @@ watch(
 
     <div class="easy-gantt__body">
       <!-- 左侧任务列表 -->
-      <div class="easy-gantt__sidebar" :class="{ 'is-auto': sidebarWidth === 'auto' }"
-        :style="sidebarWidth !== 'auto' ? { width: `${sidebarWidth}px` } : {}">
+      <div
+        class="easy-gantt__sidebar" :class="{ 'is-auto': sidebarWidth === 'auto' }"
+        :style="sidebarWidth !== 'auto' ? { width: `${sidebarWidth}px` } : {}"
+      >
         <!-- 多列表头 -->
         <div class="easy-gantt__sidebar-header">
-          <div v-for="(col, ci) in columns" :key="ci" class="easy-gantt__sidebar-header-cell"
-            :style="getHeaderColumnStyle(col, ci)">
+          <div
+            v-for="(col, ci) in columns" :key="ci" class="easy-gantt__sidebar-header-cell"
+            :style="getHeaderColumnStyle(col, ci)"
+          >
             {{ col.label }}
           </div>
         </div>
@@ -258,12 +264,16 @@ watch(
             :style="{ height: `${rowHeight}px` }"
           >
             <!-- 遍历渲染每列 -->
-            <div v-for="(col, ci) in columns" :key="ci" class="easy-gantt__task-cell" :class="{ 'is-first': ci === 0 }"
-              :style="getColumnStyle(col, ci, task)">
+            <div
+              v-for="(col, ci) in columns" :key="ci" class="easy-gantt__task-cell" :class="{ 'is-first': ci === 0 }"
+              :style="getColumnStyle(col, ci, task)"
+            >
               <!-- 第一列特殊处理：包含展开按钮和图标 -->
               <template v-if="ci === 0">
-                <button v-if="task.children && task.children.length > 0" class="easy-gantt__toggle"
-                  @click="toggleTask(task)">
+                <button
+                  v-if="task.children && task.children.length > 0" class="easy-gantt__toggle"
+                  @click="toggleTask(task)"
+                >
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
                     <polyline v-if="task.expanded" points="6 9 12 15 18 9" />
                     <polyline v-else points="9 18 15 12 9 6" />
@@ -315,22 +325,30 @@ watch(
             <rect x="0" y="0" :width="timelineWidth * scale" :height="headerHeight" fill="var(--el-fill-color-lighter)" />
             <!-- 年/月/周 头部 -->
             <g v-for="(header, hi) in timelineHeaders" :key="`h${hi}`">
-              <text v-if="header.yearLabel" :x="getTimeX(parseDate(header.year)) + 8" y="22"
-                class="easy-gantt__header-year">
+              <text
+                v-if="header.yearLabel" :x="getTimeX(parseDate(header.year)) + 8" y="22"
+                class="easy-gantt__header-year"
+              >
                 {{ header.yearLabel }}
               </text>
               <g v-for="(cell, ci) in header.cells" :key="`c${hi}-${ci}`">
-                <rect :x="cell.x" :y="cell.y" :width="cell.width - 1" :height="cell.height - 1"
-                  class="easy-gantt__header-cell" :class="{ 'is-weekend': cell.isWeekend }" />
-                <text :x="cell.x + cell.width / 2" :y="cell.y + cell.height / 2" class="easy-gantt__header-text"
-                  text-anchor="middle" dominant-baseline="middle">
+                <rect
+                  :x="cell.x" :y="cell.y" :width="cell.width - 1" :height="cell.height - 1"
+                  class="easy-gantt__header-cell" :class="{ 'is-weekend': cell.isWeekend }"
+                />
+                <text
+                  :x="cell.x + cell.width / 2" :y="cell.y + cell.height / 2" class="easy-gantt__header-text"
+                  text-anchor="middle" dominant-baseline="middle"
+                >
                   {{ cell.label }}
                 </text>
               </g>
             </g>
             <!-- 头部底部边框 -->
-            <line x1="0" :y1="headerHeight" :x2="timelineWidth * scale" :y2="headerHeight"
-              stroke="var(--el-border-color)" stroke-width="1" />
+            <line
+              x1="0" :y1="headerHeight" :x2="timelineWidth * scale" :y2="headerHeight"
+              stroke="var(--el-border-color)" stroke-width="1"
+            />
             <!-- 今日红线头部 -->
             <g v-if="todayX >= 0">
               <line :x1="todayX" :y1="0" :x2="todayX" :y2="headerHeight" class="easy-gantt__today-line" />
@@ -352,8 +370,10 @@ watch(
             <!-- 任务条 -->
             <g v-for="(task, ti) in flatTasks" :key="`t${task.id}`">
               <!-- 行背景 -->
-              <rect :x="0" :y="ti * rowHeight" :width="timelineWidth * scale" :height="rowHeight"
-                class="easy-gantt__row-bg" :class="{ 'is-even': ti % 2 === 0 }" />
+              <rect
+                :x="0" :y="ti * rowHeight" :width="timelineWidth * scale" :height="rowHeight"
+                class="easy-gantt__row-bg" :class="{ 'is-even': ti % 2 === 0 }"
+              />
 
               <!-- 任务条 -->
               <g v-if="!task.isMilestone && task.startDate && task.endDate">
@@ -400,30 +420,38 @@ watch(
                   class="easy-gantt__bar-progress"
                 />
                 <!-- 进度文字 -->
-                <text v-if="task.progress !== undefined && task.progress > 0"
+                <text
+                  v-if="task.progress !== undefined && task.progress > 0"
                   :x="getTimeX(parseDate(task.startDate)) + 10" :y="ti * rowHeight + rowHeight / 2"
-                  class="easy-gantt__bar-progress-text" dominant-baseline="middle">
+                  class="easy-gantt__bar-progress-text" dominant-baseline="middle"
+                >
                   {{ task.progress }}%
                 </text>
                 <!-- 依赖箭头 -->
                 <g v-if="task.dependencies && task.dependencies.length > 0">
                   <!-- 渲染前清空角使用记录 -->
-                  <path v-for="(depId, di) in (clearCornerUsage(), task.dependencies)" :key="`${depId}-${di}`"
+                  <path
+                    v-for="(depId, di) in (clearCornerUsage(), task.dependencies)" :key="`${depId}-${di}`"
                     :d="getDependencyPath(task, getTaskById(depId), ti)" :stroke="getDepColor(depId)" fill="none"
-                    stroke-width="1.5" marker-end="url(#body-arrowhead)" />
+                    stroke-width="1.5" marker-end="url(#body-arrowhead)"
+                  />
                 </g>
               </g>
 
               <!-- 里程碑 -->
               <g v-if="task.isMilestone && task.startDate">
-                <polygon :points="getMilestonePoints(ti)" class="easy-gantt__milestone"
+                <polygon
+                  :points="getMilestonePoints(ti)" class="easy-gantt__milestone"
                   :class="task.colorClass || 'is-default'" @click="handleBarClick(task)"
-                  @mouseenter="(e) => showTooltip(e, task)" @mouseleave="hideTooltip" />
+                  @mouseenter="(e) => showTooltip(e, task)" @mouseleave="hideTooltip"
+                />
               </g>
 
               <!-- 行底部边框 -->
-              <line :x1="0" :y1="(ti + 1) * rowHeight" :x2="timelineWidth * scale" :y2="(ti + 1) * rowHeight"
-                class="easy-gantt__row-border" />
+              <line
+                :x1="0" :y1="(ti + 1) * rowHeight" :x2="timelineWidth * scale" :y2="(ti + 1) * rowHeight"
+                class="easy-gantt__row-border"
+              />
             </g>
 
             <!-- 今日红线 - 内容区 -->
@@ -435,15 +463,19 @@ watch(
 
         <!-- Tooltip -->
         <Transition name="easy-gantt-fade">
-          <div v-if="tooltipVisible" class="easy-gantt__tooltip"
-            :style="{ left: `${tooltipX}px`, top: `${tooltipY}px` }">
+          <div
+            v-if="tooltipVisible" class="easy-gantt__tooltip"
+            :style="{ left: `${tooltipX}px`, top: `${tooltipY}px` }"
+          >
             <div class="easy-gantt__tooltip-header">
               <span class="easy-gantt__tooltip-icon" :class="tooltipData?.colorClass || 'is-default'">
                 <svg v-if="tooltipData?.isMilestone" width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
                   <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                 </svg>
-                <svg v-else width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                  stroke-width="2">
+                <svg
+                  v-else width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2"
+                >
                   <rect x="3" y="3" width="18" height="18" rx="2" />
                 </svg>
               </span>

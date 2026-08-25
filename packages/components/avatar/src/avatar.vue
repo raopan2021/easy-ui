@@ -29,15 +29,19 @@ export type { AvatarEmits, AvatarProps } from './avatar'
 
 <template>
   <div class="easy-avatar" :class="avatarClass" :style="avatarStyle" @click="handleClick">
-    <img v-if="(src || srcSet) && !hasLoadError" class="easy-avatar__image" :src="src" :srcset="srcSet" :alt="alt"
-      @error="handleError">
+    <img
+      v-if="(src || srcSet) && !hasLoadError" class="easy-avatar__image" :src="src" :srcset="srcSet" :alt="alt"
+      @error="handleError"
+    >
     <span v-else-if="isShowText" class="easy-avatar__text">
       <slot />
     </span>
     <span v-else class="easy-avatar__icon">
       <slot name="icon">
-        <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="1.5"
-          stroke-linecap="round" stroke-linejoin="round">
+        <svg
+          viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round"
+        >
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
           <circle cx="12" cy="7" r="4" />
         </svg>

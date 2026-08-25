@@ -130,16 +130,20 @@ const {
 <template>
   <div class="easy-video-wrapper">
     <!-- 视频播放器容器 -->
-    <div class="easy-video" :class="{ 'is-fullscreen': isFullscreen, 'is-hover': controlsVisible }"
+    <div
+      class="easy-video" :class="{ 'is-fullscreen': isFullscreen, 'is-hover': controlsVisible }"
       :style="containerStyle" @mouseenter="showControls" @mouseleave="hideControls" @mousemove="handleMouseMove"
-      @click="handleClick" @dblclick="handleDblclick">
+      @click="handleClick" @dblclick="handleDblclick"
+    >
       <!-- 封面图 -->
       <div v-if="showPoster && !hasPlayed" class="easy-video__poster" @click="play">
         <img v-if="posterSrc" :src="posterSrc" class="easy-video__poster-img">
         <div v-else class="easy-video__poster-placeholder">
           <svg viewBox="0 0 24 24" width="64" height="64">
-            <path fill="currentColor"
-              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
+            <path
+              fill="currentColor"
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"
+            />
           </svg>
         </div>
         <div class="easy-video__play-btn">
@@ -150,15 +154,19 @@ const {
       </div>
 
       <!-- 视频元素 -->
-      <video ref="videoRef" class="easy-video__player" crossorigin="anonymous" :src="src"
+      <video
+        ref="videoRef" class="easy-video__player" crossorigin="anonymous" :src="src"
         :poster="!showPoster || hasPlayed ? undefined : posterSrc" :autoplay="autoplay" :muted="muted" :loop="loop"
         :preload="preload" @play="handlePlay" @pause="handlePause" @ended="handleEnded" @timeupdate="handleTimeUpdate"
-        @loadedmetadata="handleLoadedMetadata" @waiting="handleWaiting" @canplay="handleCanPlay" @error="handleError" />
+        @loadedmetadata="handleLoadedMetadata" @waiting="handleWaiting" @canplay="handleCanPlay" @error="handleError"
+      />
 
       <!-- 弹幕层 -->
       <div v-if="danmakuEnabled" ref="danmakuContainerRef" class="easy-video__danmaku-container">
-        <div v-for="dm in activeDanmaku" v-show="danmakuVisible" :key="dm.id" class="easy-video__danmaku-item"
-          :class="dm.mode" :style="dm.style">
+        <div
+          v-for="dm in activeDanmaku" v-show="danmakuVisible" :key="dm.id" class="easy-video__danmaku-item"
+          :class="dm.mode" :style="dm.style"
+        >
           <span class="easy-video__danmaku-text">{{ dm.text }}</span>
         </div>
       </div>
@@ -169,8 +177,10 @@ const {
       </div>
 
       <!-- 控制栏 -->
-      <div v-show="controlsVisible || !isPlaying || isFullscreen" class="easy-video__controls"
-        :class="{ 'is-show': controlsVisible || !isPlaying || isFullscreen }" @click.stop @dblclick.stop>
+      <div
+        v-show="controlsVisible || !isPlaying || isFullscreen" class="easy-video__controls"
+        :class="{ 'is-show': controlsVisible || !isPlaying || isFullscreen }" @click.stop @dblclick.stop
+      >
         <!-- 进度条 -->
         <div class="easy-video__progress-wrap" @click.stop @dblclick.stop>
           <div class="easy-video__progress" @click="seekTo">
@@ -180,8 +190,10 @@ const {
             </div>
             <!-- 弹幕预览点 -->
             <template v-for="dm in danmakuPoints" :key="dm.time">
-              <div v-if="danmakuEnabled" class="easy-video__progress-danmaku" :style="{ left: `${dm.percent}%` }"
-                :title="dm.text" />
+              <div
+                v-if="danmakuEnabled" class="easy-video__progress-danmaku" :style="{ left: `${dm.percent}%` }"
+                :title="dm.text"
+              />
             </template>
           </div>
         </div>
@@ -209,8 +221,10 @@ const {
           <!-- 右侧控制 - 按B站图片顺序 -->
           <div class="easy-video__controls-right">
             <!-- 弹幕开关 -->
-            <div v-if="danmakuEnabled && showDanmakuToggle" class="easy-video__btn"
-              :class="{ 'is-active': danmakuVisible }" @click.stop="toggleDanmaku">
+            <div
+              v-if="danmakuEnabled && showDanmakuToggle" class="easy-video__btn"
+              :class="{ 'is-active': danmakuVisible }" @click.stop="toggleDanmaku"
+            >
               <span class="easy-video__btn-text">{{ danmakuVisible ? '弹幕' : '弹幕' }}</span>
             </div>
 
@@ -218,37 +232,49 @@ const {
             <div v-if="showSpeed" class="easy-video__speed" @click.stop="toggleSpeedMenu">
               <span class="easy-video__speed-text">{{ playbackRate }}x</span>
               <div v-show="speedMenuVisible" class="easy-video__speed-menu">
-                <div v-for="rate in playbackRates" :key="rate" class="easy-video__speed-item"
-                  :class="{ 'is-active': playbackRate === rate }" @click.stop="setPlaybackRate(rate)">
+                <div
+                  v-for="rate in playbackRates" :key="rate" class="easy-video__speed-item"
+                  :class="{ 'is-active': playbackRate === rate }" @click.stop="setPlaybackRate(rate)"
+                >
                   {{ rate }}x
                 </div>
               </div>
             </div>
 
             <!-- 音量控制 -->
-            <div v-if="showVolume" class="easy-video__volume" @mouseenter="handleVolumeEnter"
-              @mouseleave="handleVolumeLeave">
+            <div
+              v-if="showVolume" class="easy-video__volume" @mouseenter="handleVolumeEnter"
+              @mouseleave="handleVolumeLeave"
+            >
               <!-- 静音按钮 -->
               <div class="easy-video__volume-btn" @click.stop="toggleMute">
                 <!-- 静音图标 -->
                 <svg v-if="isMuted || volumePercent === 0" viewBox="0 0 24 24" width="20" height="20">
-                  <path fill="currentColor"
-                    d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
+                  <path
+                    fill="currentColor"
+                    d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"
+                  />
                 </svg>
                 <!-- 低音量图标 -->
                 <svg v-else-if="volumePercent < 30" viewBox="0 0 24 24" width="20" height="20">
-                  <path fill="currentColor"
-                    d="M18.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM5 9v6h4l5 5V4L9 9H5z" />
+                  <path
+                    fill="currentColor"
+                    d="M18.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM5 9v6h4l5 5V4L9 9H5z"
+                  />
                 </svg>
                 <!-- 中音量图标 -->
                 <svg v-else-if="volumePercent < 70" viewBox="0 0 24 24" width="20" height="20">
-                  <path fill="currentColor"
-                    d="M18.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM5 9v6h4l5 5V4L9 9H5zm6.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z" />
+                  <path
+                    fill="currentColor"
+                    d="M18.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM5 9v6h4l5 5V4L9 9H5zm6.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"
+                  />
                 </svg>
                 <!-- 高音量图标 -->
                 <svg v-else viewBox="0 0 24 24" width="20" height="20">
-                  <path fill="currentColor"
-                    d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+                  <path
+                    fill="currentColor"
+                    d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"
+                  />
                 </svg>
               </div>
 
@@ -269,12 +295,16 @@ const {
             <!-- 全屏 - 始终显示 -->
             <div class="easy-video__btn" @click="toggleFullscreen">
               <svg v-if="isFullscreen" viewBox="0 0 24 24" width="18" height="18">
-                <path fill="currentColor"
-                  d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z" />
+                <path
+                  fill="currentColor"
+                  d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"
+                />
               </svg>
               <svg v-else viewBox="0 0 24 24" width="18" height="18">
-                <path fill="currentColor"
-                  d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
+                <path
+                  fill="currentColor"
+                  d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"
+                />
               </svg>
             </div>
           </div>
@@ -299,8 +329,10 @@ const {
             </EasyButton>
           </div>
           <div class="easy-video__danmaku-panel-list">
-            <div v-for="(dm, index) in danmakuList" :key="index" class="easy-video__danmaku-panel-item"
-              @click="seekToTime(dm.time)">
+            <div
+              v-for="(dm, index) in danmakuList" :key="index" class="easy-video__danmaku-panel-item"
+              @click="seekToTime(dm.time)"
+            >
               <span class="easy-video__danmaku-panel-time">{{ formatTime(dm.time) }}</span>
               <span class="easy-video__danmaku-panel-text" :style="{ color: dm.color }">{{ dm.text }}</span>
             </div>
@@ -326,8 +358,10 @@ const {
 
         <!-- 中间：输入框 -->
         <div class="easy-video__danmaku-input-area">
-          <input v-model="danmakuInputText" type="text" class="easy-video__danmaku-input" placeholder="发个友善的弹幕见证当下"
-            maxlength="20" @keydown.enter.stop="handleSendDanmaku">
+          <input
+            v-model="danmakuInputText" type="text" class="easy-video__danmaku-input" placeholder="发个友善的弹幕见证当下"
+            maxlength="20" @keydown.enter.stop="handleSendDanmaku"
+          >
         </div>
 
         <!-- 右侧：颜色选择 + 发送 -->
@@ -340,9 +374,11 @@ const {
             <!-- 颜色选择面板 -->
             <transition name="fade">
               <div v-show="colorPickerVisible" class="easy-video__danmaku-color-panel">
-                <div v-for="color in danmakuColors" :key="color" class="easy-video__danmaku-color-item"
+                <div
+                  v-for="color in danmakuColors" :key="color" class="easy-video__danmaku-color-item"
                   :class="{ 'is-active': danmakuColor === color }" :style="{ background: color }"
-                  @click.stop="selectColor(color)">
+                  @click.stop="selectColor(color)"
+                >
                   <svg v-if="danmakuColor === color" viewBox="0 0 24 24" width="14" height="14">
                     <path fill="#fff" d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
                   </svg>
@@ -351,8 +387,10 @@ const {
             </transition>
           </div>
 
-          <button type="button" class="easy-video__danmaku-send" :disabled="!danmakuInputText.trim() || isSending"
-            @click.stop="handleSendDanmaku">
+          <button
+            type="button" class="easy-video__danmaku-send" :disabled="!danmakuInputText.trim() || isSending"
+            @click.stop="handleSendDanmaku"
+          >
             发送
           </button>
         </div>

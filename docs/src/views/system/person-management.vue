@@ -322,14 +322,22 @@ onMounted(() => fetchData())
     </div>
 
     <div class="search-bar">
-      <EasyInput v-model="searchForm.keyword" placeholder="搜索姓名/工号/手机号" clearable style="width: 220px"
-        @keyup.enter="handleSearch" @clear="handleSearch" />
-      <EasySelect v-model="searchForm.deptId" placeholder="所属部门" clearable :options="deptOptions" label-key="name"
-        value-key="id" style="width: 160px" @change="onDeptFilterChange" />
-      <EasySelect v-model="searchForm.postId" placeholder="岗位" clearable :options="filteredPosts" label-key="name"
-        value-key="id" style="width: 160px" @change="handleSearch" />
-      <EasySelect v-model="searchForm.status" placeholder="状态" clearable
-        :options="[{ label: '在职', value: 1 }, { label: '离职', value: 0 }]" style="width: 120px" @change="handleSearch" />
+      <EasyInput
+        v-model="searchForm.keyword" placeholder="搜索姓名/工号/手机号" clearable style="width: 220px"
+        @keyup.enter="handleSearch" @clear="handleSearch"
+      />
+      <EasySelect
+        v-model="searchForm.deptId" placeholder="所属部门" clearable :options="deptOptions" label-key="name"
+        value-key="id" style="width: 160px" @change="onDeptFilterChange"
+      />
+      <EasySelect
+        v-model="searchForm.postId" placeholder="岗位" clearable :options="filteredPosts" label-key="name"
+        value-key="id" style="width: 160px" @change="handleSearch"
+      />
+      <EasySelect
+        v-model="searchForm.status" placeholder="状态" clearable
+        :options="[{ label: '在职', value: 1 }, { label: '离职', value: 0 }]" style="width: 120px" @change="handleSearch"
+      />
       <EasyButton type="primary" @click="handleSearch">
         <el-icon><Search /></el-icon>查询
       </EasyButton>
@@ -347,11 +355,13 @@ onMounted(() => fetchData())
       </EasyButton>
     </div>
 
-    <EasyTable v-loading="loading" :data="tableData" :columns="columns" selection-mode="multiple" stripe border
+    <EasyTable
+      v-loading="loading" :data="tableData" :columns="columns" selection-mode="multiple" stripe border
       :pagination="true" :total="pagination.total" :page="pagination.page" :page-size="pagination.pageSize"
       :page-size-options="[10, 20, 50, 100]" action-label="操作" :action-width="160" action-fixed="right"
       @selection-change="handleSelectionChange" @page-change="(p: number) => { pagination.page = p; fetchData() }"
-      @page-size-change="(s: number) => { pagination.pageSize = s; fetchData() }">
+      @page-size-change="(s: number) => { pagination.pageSize = s; fetchData() }"
+    >
       <template #col-status="{ row }">
         <EasyTag :type="row.status === 1 ? 'success' : 'danger'" size="small">
           {{ row.status === 1 ? '在职' : '离职' }}
@@ -371,8 +381,10 @@ onMounted(() => fetchData())
       </template>
     </EasyTable>
 
-    <el-dialog v-model="dialog.visible" :title="dialog.isEdit ? '编辑人员' : '新增人员'" width="520px"
-      :close-on-click-modal="false" @close="handleDialogClose">
+    <el-dialog
+      v-model="dialog.visible" :title="dialog.isEdit ? '编辑人员' : '新增人员'" width="520px"
+      :close-on-click-modal="false" @close="handleDialogClose"
+    >
       <el-form ref="formRef" :model="dialog.form" :rules="formRules" label-width="90px">
         <el-form-item label="姓名" prop="name">
           <EasyInput v-model="dialog.form.name" placeholder="请输入姓名" maxlength="20" />
@@ -381,19 +393,25 @@ onMounted(() => fetchData())
           <EasyInput v-model="dialog.form.empNo" placeholder="请输入工号" maxlength="20" />
         </el-form-item>
         <el-form-item label="所属部门" prop="deptId">
-          <EasySelect v-model="dialog.form.deptId" placeholder="请选择部门" :options="deptOptions" label-key="name"
-            value-key="id" style="width: 100%" @change="onDeptChange" />
+          <EasySelect
+            v-model="dialog.form.deptId" placeholder="请选择部门" :options="deptOptions" label-key="name"
+            value-key="id" style="width: 100%" @change="onDeptChange"
+          />
         </el-form-item>
         <el-form-item label="岗位" prop="postId">
-          <EasySelect v-model="dialog.form.postId" placeholder="请选择岗位" :options="dialogPosts" label-key="name"
-            value-key="id" style="width: 100%" />
+          <EasySelect
+            v-model="dialog.form.postId" placeholder="请选择岗位" :options="dialogPosts" label-key="name"
+            value-key="id" style="width: 100%"
+          />
         </el-form-item>
         <el-form-item label="手机号" prop="phone">
           <EasyInput v-model="dialog.form.phone" placeholder="请输入手机号" maxlength="11" />
         </el-form-item>
         <el-form-item label="状态" prop="status">
-          <EasySwitch v-model="dialog.form.status" :active-value="1" :inactive-value="0" active-text="在职"
-            inactive-text="离职" />
+          <EasySwitch
+            v-model="dialog.form.status" :active-value="1" :inactive-value="0" active-text="在职"
+            inactive-text="离职"
+          />
         </el-form-item>
       </el-form>
       <template #footer>

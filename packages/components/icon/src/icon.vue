@@ -32,8 +32,10 @@ export type { EasyIconEmits, EasyIconProps } from './types'
 </script>
 
 <template>
-  <i class="easy-icon" :class="[iconClass, { 'easy-icon--clickable': clickable }]" :style="rootStyle"
-    @click="handleClick">
+  <i
+    class="easy-icon" :class="[iconClass, { 'easy-icon--clickable': clickable }]" :style="rootStyle"
+    @click="handleClick"
+  >
     <!-- Element Plus 图标 (el:xxx) -->
     <el-icon v-if="mode === 'element'" :size="size" :color="color">
       <component :is="epComponent" />

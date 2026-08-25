@@ -21,17 +21,23 @@ export type { NodeExtListProps } from './node-ext-list-types'
 </script>
 
 <template>
-  <EasyForm ref="nodeExtRef" class="nodeExtForm" :model="form" label-width="100px" :disabled="disabled"
-    label-position="left">
-    <EasyFormItem v-for="(item, index) in formList" :key="index" :label="`${item.label}：`" :prop="item.code"
-      :rules="[{ required: item.must, message: `${item.label}不能为空`, trigger: ['blur', 'change'] }] as any">
+  <EasyForm
+    ref="nodeExtRef" class="nodeExtForm" :model="form" label-width="100px" :disabled="disabled"
+    label-position="left"
+  >
+    <EasyFormItem
+      v-for="(item, index) in formList" :key="index" :label="`${item.label}：`" :prop="item.code"
+      :rules="[{ required: item.must, message: `${item.label}不能为空`, trigger: ['blur', 'change'] }] as any"
+    >
       <!-- 单行文本 -->
       <EasyInput v-if="item.type === 1" v-model="form[item.code]" placeholder="请输入" />
       <!-- 多行文本 -->
       <EasyInput v-else-if="item.type === 2" v-model="form[item.code]" :rows="2" type="textarea" placeholder="请输入" />
       <!-- 下拉选择 -->
-      <EasySelect v-else-if="item.type === 3" v-model="form[item.code]" clearable :multiple="item.multiple || false"
-        :options="item.dict!.map((d: any) => ({ label: d.label, value: d.value }))" />
+      <EasySelect
+        v-else-if="item.type === 3" v-model="form[item.code]" clearable :multiple="item.multiple || false"
+        :options="item.dict!.map((d: any) => ({ label: d.label, value: d.value }))"
+      />
       <!-- Radio / Checkbox -->
       <div v-else-if="item.type === 4">
         <EasyRadioGroup v-if="!item.multiple" v-model="form[item.code]">

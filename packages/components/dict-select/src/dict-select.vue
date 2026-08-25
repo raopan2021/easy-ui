@@ -42,11 +42,13 @@ export type { DictOption, DictSelectEmits, DictSelectProps } from './types'
 </script>
 
 <template>
-  <EasySelect :model-value="modelValue as any" :options="normalizedOptions" :placeholder="placeholder"
+  <EasySelect
+    :model-value="modelValue as any" :options="normalizedOptions" :placeholder="placeholder"
     :disabled="disabled" :clearable="clearable" :filterable="filterable" :multiple="multiple" :size="size"
     :value-type="valueType" :separator="separator" :value-key="returnField" :label-key="labelField" :loading="loading"
     :max-tag-count="maxTagCount" class="easy-dict-select" v-bind="$attrs" @update:model-value="handleChange"
-    @change="handleChange" @clear="handleClear" />
+    @change="handleChange" @clear="handleClear"
+  />
 </template>
 
 <!-- 组件核心样式（scoped，独立维护在 dict-select-style.scss） -->

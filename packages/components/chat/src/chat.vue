@@ -87,11 +87,13 @@ export type { ChatEmits, ChatProps } from './chat-types'
       </div>
 
       <!-- 消息列表 -->
-      <EasyChatMessage v-for="message in messages" :key="message.id || messageIndex(message)" :message="message"
+      <EasyChatMessage
+        v-for="message in messages" :key="message.id || messageIndex(message)" :message="message"
         :show-avatar="showAvatar" :show-name="showName" :show-time="showTime" :show-actions="showActions"
         :allow-copy="allowCopy" :allow-regenerate="allowRegenerate" :allow-delete="allowDelete"
         :typing-speed="typingSpeed" @copy="handleCopy" @regenerate="handleRegenerate" @delete="handleDelete"
-        @attachment-click="handleAttachmentClick">
+        @attachment-click="handleAttachmentClick"
+      >
         <!-- 自定义头像插槽 -->
         <template v-if="slots.avatar" #avatar="{ message: msg }">
           <slot name="avatar" :message="msg" />
@@ -122,11 +124,13 @@ export type { ChatEmits, ChatProps } from './chat-types'
 
     <!-- 输入框 -->
     <div v-if="!disabled" class="easy-chat__input-wrapper">
-      <EasyChatInput ref="inputRef" v-model="inputValue" :placeholder="placeholder" :disabled="loading"
+      <EasyChatInput
+        ref="inputRef" v-model="inputValue" :placeholder="placeholder" :disabled="loading"
         :readonly="readonly" :maxlength="maxlength" :show-char-count="showCharCount" :allow-upload="allowUpload"
         :accept="accept" :multiple="multiple" :max-attachments="maxAttachments" :autofocus="autofocus" :rows="rows"
         :min-rows="minRows" :max-rows="maxRows" @send="handleSend" @upload="handleUpload" @focus="handleFocus"
-        @blur="handleBlur">
+        @blur="handleBlur"
+      >
         <!-- 输入框工具栏插槽 -->
         <template v-if="slots['input-toolbar']" #toolbar>
           <slot name="input-toolbar" />

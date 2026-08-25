@@ -713,13 +713,17 @@ const data = [
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 16px">
           <div>
             <span class="doc-preview__label">简单配置（status=2 禁用）：</span>
-            <easy-permission v-model="values.fieldDisabled" :data="dataFieldDisabled" disabled-field="status"
-              :disabled-value="2" />
+            <easy-permission
+              v-model="values.fieldDisabled" :data="dataFieldDisabled" disabled-field="status"
+              :disabled-value="2"
+            />
           </div>
           <div>
             <span class="doc-preview__label">简单配置（type in [1,2] 禁用）：</span>
-            <easy-permission v-model="values.fieldDisabled2" :data="dataFieldDisabled2" disabled-field="type"
-              :disabled-value="[1, 2]" />
+            <easy-permission
+              v-model="values.fieldDisabled2" :data="dataFieldDisabled2" disabled-field="type"
+              :disabled-value="[1, 2]"
+            />
           </div>
           <div>
             <span class="doc-preview__label">函数判断（复杂逻辑）：</span>

@@ -3,8 +3,10 @@
     <div class="coming-soon__icon">
       <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="40" cy="40" r="38" stroke="var(--el-color-primary-light-5)" stroke-width="2" fill="none" />
-        <path d="M40 22v20l14 8" stroke="var(--el-color-primary)" stroke-width="2.5" stroke-linecap="round"
-          stroke-linejoin="round" />
+        <path
+          d="M40 22v20l14 8" stroke="var(--el-color-primary)" stroke-width="2.5" stroke-linecap="round"
+          stroke-linejoin="round"
+        />
         <circle cx="40" cy="40" r="5" fill="var(--el-color-primary-light-3)" opacity="0.3">
           <animate attributeName="r" values="3;6;3" dur="2s" repeatCount="indefinite" />
           <animate attributeName="opacity" values="0.3;0.6;0.3" dur="2s" repeatCount="indefinite" />

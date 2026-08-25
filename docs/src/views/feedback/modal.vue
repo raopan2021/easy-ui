@@ -343,8 +343,10 @@ const successVisible = ref(false)
         />
       </div>
 
-      <EasyModal v-model="noMaskVisible" title="悬浮面板" :show-mask="false" :show-footer="false" placement="center"
-        size="small">
+      <EasyModal
+        v-model="noMaskVisible" title="悬浮面板" :show-mask="false" :show-footer="false" placement="center"
+        size="small"
+      >
         <p>没有遮罩层的弹窗，背景完全透明，适合悬浮面板场景。</p>
       </EasyModal>
     </section>
@@ -429,8 +431,10 @@ function handleSubmit() {
         />
       </div>
 
-      <EasyModal v-model="loadingVisible" title="提交确认" :confirm-loading="confirmLoading" @confirm="handleConfirm"
-        @cancel="loadingVisible = false">
+      <EasyModal
+        v-model="loadingVisible" title="提交确认" :confirm-loading="confirmLoading" @confirm="handleConfirm"
+        @cancel="loadingVisible = false"
+      >
         <p>确认提交该表单数据吗？提交后将进入审核流程。</p>
       </EasyModal>
     </section>
@@ -496,9 +500,11 @@ function handleSubmit() {
           </div>
           <div class="demo-form__item">
             <label class="demo-form__label">角色</label>
-            <EasySelect placeholder="请选择角色" size="default"
+            <EasySelect
+              placeholder="请选择角色" size="default"
               :options="[{ label: '管理员', value: 'admin' }, { label: '编辑者', value: 'editor' }, { label: '查看者', value: 'viewer' }]"
-              style="width: 100%" />
+              style="width: 100%"
+            />
           </div>
           <div class="demo-form__item">
             <label class="demo-form__label">备注</label>

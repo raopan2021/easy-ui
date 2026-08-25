@@ -174,8 +174,10 @@ const pdfCode = `<!-- PDF 使用 @vue-office/pdf Canvas 渲染 -->
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyFilePreview :files="customFieldFiles"
-            :field-names="{ name: 'fileName', url: 'fileUrl', size: 'fileSize' }" />
+          <EasyFilePreview
+            :files="customFieldFiles"
+            :field-names="{ name: 'fileName', url: 'fileUrl', size: 'fileSize' }"
+          />
         </div>
         <EasyDocCode :code="customFieldCode" />
       </div>
@@ -228,8 +230,10 @@ const pdfCode = `<!-- PDF 使用 @vue-office/pdf Canvas 渲染 -->
         <div class="doc-preview__body">
           <div class="office-notice">
             <div class="office-notice__icon">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round">
+              <svg
+                viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round"
+              >
                 <circle cx="12" cy="12" r="10" />
                 <line x1="12" y1="16" x2="12" y2="12" />
                 <line x1="12" y1="8" x2="12.01" y2="8" />

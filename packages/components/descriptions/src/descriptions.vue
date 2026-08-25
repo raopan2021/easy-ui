@@ -84,8 +84,10 @@ const {
     <!-- 内容网格 (垂直布局) -->
     <div v-else class="easy-descriptions__body easy-descriptions__body--vertical">
       <div class="easy-descriptions__grid">
-        <div v-for="(item, idx) in items" :key="idx" class="easy-descriptions__item" :class="getItemClass(idx)"
-          :style="{ gridColumn: `span ${item.span}` }">
+        <div
+          v-for="(item, idx) in items" :key="idx" class="easy-descriptions__item" :class="getItemClass(idx)"
+          :style="{ gridColumn: `span ${item.span}` }"
+        >
           <div class="easy-descriptions__label easy-descriptions__label--vertical">
             <EasyIcon v-if="item.icon" :name="item.icon" :size="13" class="label-icon" />
             <span class="label-text">{{ item.label }}</span>

@@ -98,8 +98,10 @@ function showQuickContainer() {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="loading-types">
-            <div v-for="type in loadingTypes" :key="type.value" class="type-item"
-              :class="{ 'is-active': currentType === type.value }" @click="currentType = type.value">
+            <div
+              v-for="type in loadingTypes" :key="type.value" class="type-item"
+              :class="{ 'is-active': currentType === type.value }" @click="currentType = type.value"
+            >
               <EasyLoading :model-value="true" :type="type.value" :mask="false" size="large" />
               <span class="type-label">{{ type.label }}</span>
             </div>
@@ -203,8 +205,10 @@ function showQuickContainer() {
         <div class="doc-preview__body">
           <div class="loading-colors">
             <div class="color-item">
-              <EasyLoading :model-value="true" type="spinner" color="#4f6ef7" text="蓝色" text-color="#4f6ef7"
-                :mask="false" />
+              <EasyLoading
+                :model-value="true" type="spinner" color="#4f6ef7" text="蓝色" text-color="#4f6ef7"
+                :mask="false"
+              />
             </div>
             <div class="color-item">
               <EasyLoading :model-value="true" type="wave" color="#10b981" text="绿色" text-color="#10b981" :mask="false" />
@@ -213,8 +217,10 @@ function showQuickContainer() {
               <EasyLoading :model-value="true" type="pulse" color="#f59e0b" text="橙色" text-color="#f59e0b" :mask="false" />
             </div>
             <div class="color-item">
-              <EasyLoading :model-value="true" type="ring" color="#ec4899" text="粉色" text-color="#ec4899" :mask="false"
-                progress="75" />
+              <EasyLoading
+                :model-value="true" type="ring" color="#ec4899" text="粉色" text-color="#ec4899" :mask="false"
+                progress="75"
+              />
             </div>
           </div>
         </div>
@@ -237,8 +243,10 @@ function showQuickContainer() {
       <div class="doc-preview">
         <div class="doc-preview__body doc-preview__body--column">
           <div class="ring-progress-demo">
-            <EasyLoading :model-value="true" type="ring" :progress="ringProgress" :mask="false" size="large"
-              text="上传中..." />
+            <EasyLoading
+              :model-value="true" type="ring" :progress="ringProgress" :mask="false" size="large"
+              text="上传中..."
+            />
             <div class="progress-control">
               <span>进度: {{ ringProgress }}%</span>
               <input v-model.number="ringProgress" type="range" min="0" max="100">

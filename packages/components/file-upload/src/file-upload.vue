@@ -61,9 +61,11 @@ defineExpose({ open, clear, getFileList })
       <!-- ----------------------------------------
            上传按钮（放在最上面）
       ---------------------------------------- -->
-      <div v-if="!disabled && !isMaxReached" class="easy-upload__trigger" :class="{ 'is-dragover': isDragover }"
+      <div
+        v-if="!disabled && !isMaxReached" class="easy-upload__trigger" :class="{ 'is-dragover': isDragover }"
         @click="handleTriggerClick" @dragover.prevent="isDragover = true" @dragleave.prevent="isDragover = false"
-        @drop.prevent="handleDrop">
+        @drop.prevent="handleDrop"
+      >
         <!-- 自定义触发区域插槽 -->
         <slot name="trigger">
           <div class="easy-upload__trigger-inner">
@@ -88,9 +90,11 @@ defineExpose({ open, clear, getFileList })
            已上传文件列表
       ---------------------------------------- -->
       <TransitionGroup name="easy-upload-fade">
-        <div v-for="(item, index) in fileList" :key="item.id" class="easy-upload__item"
+        <div
+          v-for="(item, index) in fileList" :key="item.id" class="easy-upload__item"
           :class="[`easy-upload__item--${item.status}`, { 'easy-upload__item--just-uploaded': item.justUploaded }]"
-          @animationend="item.justUploaded = false">
+          @animationend="item.justUploaded = false"
+        >
           <!-- 文件图标 -->
           <div class="easy-upload__file-icon">
             <component :is="getFileIcon(item)" />
@@ -115,15 +119,19 @@ defineExpose({ open, clear, getFileList })
           <!-- 操作按钮 -->
           <div v-if="item.status !== 'uploading'" class="easy-upload__actions">
             <!-- 预览 -->
-            <button v-if="item.url && downloadable" class="easy-upload__btn easy-upload__btn--preview" title="预览"
-              @click.stop="handlePreview(item)">
+            <button
+              v-if="item.url && downloadable" class="easy-upload__btn easy-upload__btn--preview" title="预览"
+              @click.stop="handlePreview(item)"
+            >
               <el-icon>
                 <View />
               </el-icon>
             </button>
             <!-- 下载 -->
-            <button v-if="item.url && downloadable" class="easy-upload__btn easy-upload__btn--download" title="下载"
-              @click.stop="handleDownload(item)">
+            <button
+              v-if="item.url && downloadable" class="easy-upload__btn easy-upload__btn--download" title="下载"
+              @click.stop="handleDownload(item)"
+            >
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="7 10 12 15 17 10" />
@@ -131,8 +139,10 @@ defineExpose({ open, clear, getFileList })
               </svg>
             </button>
             <!-- 删除 -->
-            <button v-if="!disabled" class="easy-upload__btn easy-upload__btn--delete" title="删除"
-              @click.stop="handleRemove(index)">
+            <button
+              v-if="!disabled" class="easy-upload__btn easy-upload__btn--delete" title="删除"
+              @click.stop="handleRemove(index)"
+            >
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="3 6 5 6 21 6" />
                 <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
@@ -172,8 +182,10 @@ defineExpose({ open, clear, getFileList })
     </div>
 
     <!-- 隐藏的文件输入框 -->
-    <input ref="inputRef" type="file" :accept="accept" :multiple="multiple && (limit === undefined || limit > 1)"
-      class="easy-upload__input" @change="handleInputChange">
+    <input
+      ref="inputRef" type="file" :accept="accept" :multiple="multiple && (limit === undefined || limit > 1)"
+      class="easy-upload__input" @change="handleInputChange"
+    >
   </div>
 </template>
 

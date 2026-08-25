@@ -187,8 +187,10 @@ const propsList = [
       </p>
       <div class="doc-preview">
         <div class="preview-row wrap">
-          <easy-dict-select v-model="multi1" dict-type="approve_status" multiple collapse-tags collapse-tags-tooltip
-            placeholder="请选择审批状态（多选）" style="width: 300px" />
+          <easy-dict-select
+            v-model="multi1" dict-type="approve_status" multiple collapse-tags collapse-tags-tooltip
+            placeholder="请选择审批状态（多选）" style="width: 300px"
+          />
           <span class="preview-value">当前值：<code>{{ JSON.stringify(multi1) }}</code></span>
         </div>
         <EasyDocCode :code="code2" />
@@ -206,8 +208,10 @@ const propsList = [
       </p>
       <div class="doc-preview">
         <div class="preview-row wrap">
-          <easy-dict-select v-model="multi2" dict-type="order_status" multiple value-format="string" filterable
-            placeholder="请选择订单状态（多选，逗号格式）" style="width: 300px" />
+          <easy-dict-select
+            v-model="multi2" dict-type="order_status" multiple value-format="string" filterable
+            placeholder="请选择订单状态（多选，逗号格式）" style="width: 300px"
+          />
           <span class="preview-value">当前值：<code>{{ JSON.stringify(multi2) }}</code></span>
         </div>
         <EasyDocCode :code="code3" />
@@ -225,8 +229,10 @@ const propsList = [
       </p>
       <div class="doc-preview">
         <div class="preview-row">
-          <easy-dict-select v-model="custom1" dict-type="user_status" label-field="labelValue"
-            placeholder="请选择（labelField=labelValue 显示英文代码）" style="width: 280px" />
+          <easy-dict-select
+            v-model="custom1" dict-type="user_status" label-field="labelValue"
+            placeholder="请选择（labelField=labelValue 显示英文代码）" style="width: 280px"
+          />
           <span class="preview-value">当前值：<code>{{ JSON.stringify(custom1) }}</code></span>
         </div>
         <EasyDocCode :code="code4" />
@@ -244,8 +250,10 @@ const propsList = [
       </p>
       <div class="doc-preview">
         <div class="preview-row">
-          <easy-dict-select v-model="custom2" dict-type="user_status" return-field="labelValue"
-            placeholder="返回 labelValue（英文代码）" style="width: 300px" />
+          <easy-dict-select
+            v-model="custom2" dict-type="user_status" return-field="labelValue"
+            placeholder="返回 labelValue（英文代码）" style="width: 300px"
+          />
           <span class="preview-value">当前值：<code>{{ JSON.stringify(custom2) }}</code></span>
         </div>
         <EasyDocCode :code="code4_1" />
@@ -262,8 +270,10 @@ const propsList = [
       </p>
       <div class="doc-preview">
         <div class="preview-row wrap">
-          <easy-dict-select v-model="event1" dict-type="role_type" placeholder="选择角色" style="width: 220px"
-            @change="handleChange" />
+          <easy-dict-select
+            v-model="event1" dict-type="role_type" placeholder="选择角色" style="width: 220px"
+            @change="handleChange"
+          />
           <span v-if="eventResult" class="preview-value">
             change 回调：<code>{{ JSON.stringify(eventResult) }}</code>
           </span>

@@ -60,9 +60,11 @@ const {
 
 <template>
   <div class="easy-time-picker" :class="[`easy-time-picker--${size}`, { 'is-disabled': disabled }]">
-    <div ref="wrapperRef" class="easy-time-picker__wrapper"
+    <div
+      ref="wrapperRef" class="easy-time-picker__wrapper"
       :class="{ 'is-focus': focusing, 'is-hover': hovering && !disabled }" @mouseenter="hovering = true"
-      @mouseleave="hovering = false">
+      @mouseleave="hovering = false"
+    >
       <!-- 前缀图标 -->
       <span class="easy-time-picker__prefix">
         <slot name="prefix">
@@ -71,8 +73,10 @@ const {
       </span>
 
       <!-- 时间输入（只读，点击打开弹窗） -->
-      <input ref="inputRef" class="easy-time-picker__input" :value="displayValue" :placeholder="placeholder"
-        :disabled="disabled" :readonly="true" @focus="handleFocus" @blur="handleBlur" @click="openPanel">
+      <input
+        ref="inputRef" class="easy-time-picker__input" :value="displayValue" :placeholder="placeholder"
+        :disabled="disabled" :readonly="true" @focus="handleFocus" @blur="handleBlur" @click="openPanel"
+      >
 
       <!-- 清除 -->
       <span v-if="clearable && modelValue && !disabled" class="easy-time-picker__clear" @click.stop="clear">
@@ -83,25 +87,33 @@ const {
     <!-- 时间面板 -->
     <Teleport to="body">
       <Transition name="easy-time-picker-fade">
-        <div v-if="panelVisible" ref="panelRef" class="easy-time-picker__panel" :style="panelStyle"
-          @mousedown="handlePanelMouseDown">
+        <div
+          v-if="panelVisible" ref="panelRef" class="easy-time-picker__panel" :style="panelStyle"
+          @mousedown="handlePanelMouseDown"
+        >
           <!-- 手动输入区 -->
           <div class="easy-time-panel__input-area">
-            <input ref="hoursInputRef" class="easy-time-panel__time-input" maxlength="2"
+            <input
+              ref="hoursInputRef" class="easy-time-panel__time-input" maxlength="2"
               :value="String(panelHours).padStart(2, '0')" @input="onTimeInput($event, 'hours')"
               @blur="onTimeBlur($event, 'hours')" @keydown.down.prevent="adjustInput('hours', 1)"
-              @keydown.up.prevent="adjustInput('hours', -1)" @keydown.enter.prevent="focusNextInput('minutes')">
+              @keydown.up.prevent="adjustInput('hours', -1)" @keydown.enter.prevent="focusNextInput('minutes')"
+            >
             <span class="easy-time-panel__input-sep">:</span>
-            <input ref="minutesInputRef" class="easy-time-panel__time-input" maxlength="2"
+            <input
+              ref="minutesInputRef" class="easy-time-panel__time-input" maxlength="2"
               @input="onTimeInput($event, 'minutes')" @blur="onTimeBlur($event, 'minutes')"
               @keydown.down.prevent="adjustInput('minutes', 1)" @keydown.up.prevent="adjustInput('minutes', -1)"
-              @keydown.enter.prevent="showSeconds ? focusNextInput('seconds') : confirm()">
+              @keydown.enter.prevent="showSeconds ? focusNextInput('seconds') : confirm()"
+            >
             <template v-if="showSeconds">
               <span class="easy-time-panel__input-sep">:</span>
-              <input ref="secondsInputRef" class="easy-time-panel__time-input" maxlength="2"
+              <input
+                ref="secondsInputRef" class="easy-time-panel__time-input" maxlength="2"
                 @input="onTimeInput($event, 'seconds')" @blur="onTimeBlur($event, 'seconds')"
                 @keydown.down.prevent="adjustInput('seconds', 1)" @keydown.up.prevent="adjustInput('seconds', -1)"
-                @keydown.enter.prevent="confirm">
+                @keydown.enter.prevent="confirm"
+              >
             </template>
           </div>
 
@@ -111,8 +123,10 @@ const {
             <div class="easy-time-panel__column">
               <div class="easy-time-panel__list-wrap">
                 <div ref="hoursListRef" class="easy-time-panel__list" @scroll.passive="onScroll($event, 'hours')">
-                  <div v-for="h in 24" :key="h - 1" class="easy-time-panel__item"
-                    :class="{ 'is-selected': h - 1 === panelHours }" @click="selectHour(h - 1)">
+                  <div
+                    v-for="h in 24" :key="h - 1" class="easy-time-panel__item"
+                    :class="{ 'is-selected': h - 1 === panelHours }" @click="selectHour(h - 1)"
+                  >
                     {{ String(h - 1).padStart(2, '0') }}
                   </div>
                 </div>
@@ -125,8 +139,10 @@ const {
             <div class="easy-time-panel__column">
               <div class="easy-time-panel__list-wrap">
                 <div ref="minutesListRef" class="easy-time-panel__list" @scroll.passive="onScroll($event, 'minutes')">
-                  <div v-for="m in 60" :key="m - 1" class="easy-time-panel__item"
-                    :class="{ 'is-selected': m - 1 === panelMinutes }" @click="selectMinute(m - 1)">
+                  <div
+                    v-for="m in 60" :key="m - 1" class="easy-time-panel__item"
+                    :class="{ 'is-selected': m - 1 === panelMinutes }" @click="selectMinute(m - 1)"
+                  >
                     {{ String(m - 1).padStart(2, '0') }}
                   </div>
                 </div>
@@ -139,8 +155,10 @@ const {
               <div class="easy-time-panel__column">
                 <div class="easy-time-panel__list-wrap">
                   <div ref="secondsListRef" class="easy-time-panel__list" @scroll.passive="onScroll($event, 'seconds')">
-                    <div v-for="s in 60" :key="s - 1" class="easy-time-panel__item"
-                      :class="{ 'is-selected': s - 1 === panelSeconds }" @click="selectSecond(s - 1)">
+                    <div
+                      v-for="s in 60" :key="s - 1" class="easy-time-panel__item"
+                      :class="{ 'is-selected': s - 1 === panelSeconds }" @click="selectSecond(s - 1)"
+                    >
                       {{ String(s - 1).padStart(2, '0') }}
                     </div>
                   </div>

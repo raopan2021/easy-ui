@@ -82,8 +82,10 @@ const currentColorConfig = computed(() => {
               上一步
             </button>
             <span class="step-indicator">步骤 {{ basicActive + 1 }} / {{ basicSteps.length }}</span>
-            <button class="demo-btn demo-btn--primary" :disabled="basicActive >= basicSteps.length - 1"
-              @click="basicNext">
+            <button
+              class="demo-btn demo-btn--primary" :disabled="basicActive >= basicSteps.length - 1"
+              @click="basicNext"
+            >
               下一步
               <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="9 18 15 12 9 6" />
@@ -270,8 +272,10 @@ const currentColorConfig = computed(() => {
       <div class="doc-preview">
         <div class="doc-preview__body doc-preview__body--column">
           <div class="color-tabs">
-            <button v-for="preset in colorPresets" :key="preset.name" type="button" class="color-tab"
-              :class="{ 'is-active': currentColorPreset === preset.name }" @click="currentColorPreset = preset.name">
+            <button
+              v-for="preset in colorPresets" :key="preset.name" type="button" class="color-tab"
+              :class="{ 'is-active': currentColorPreset === preset.name }" @click="currentColorPreset = preset.name"
+            >
               <span class="color-dot" :style="{ background: preset.color.primary }" />
               {{ preset.label }}
             </button>

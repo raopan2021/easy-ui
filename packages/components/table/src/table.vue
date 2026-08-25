@@ -180,8 +180,10 @@ export type { TableEmits, TableProps } from './table'
           </template>
         </EasyButton>
         <!-- 列设置按钮 -->
-        <EasyButton v-if="showColumnSettings" type="ghost" size="small" shape="circle"
-          @click="showColumnSettingsPanel = true">
+        <EasyButton
+          v-if="showColumnSettings" type="ghost" size="small" shape="circle"
+          @click="showColumnSettingsPanel = true"
+        >
           <template #icon>
             <EasyIcon name="el:Operation" :size="16" />
           </template>
@@ -203,8 +205,10 @@ export type { TableEmits, TableProps } from './table'
             <!-- 选择列 - 多选模式 -->
             <th v-if="selectable && selectionMode === 'multiple'" class="easy-table__th easy-table__th--selection">
               <label class="easy-table__checkbox">
-                <input type="checkbox" :checked="isAllSelected" :indeterminate="isIndeterminate"
-                  @change="handleSelectAll">
+                <input
+                  type="checkbox" :checked="isAllSelected" :indeterminate="isIndeterminate"
+                  @change="handleSelectAll"
+                >
                 <span class="easy-table__checkbox-inner" />
               </label>
             </th>
@@ -301,12 +305,16 @@ export type { TableEmits, TableProps } from './table'
                     }"
                     @click.stop="toggleTreeExpand(node.row)"
                   >
-                    <svg v-if="!node.loading" viewBox="0 0 24 24" width="16" height="16" fill="none"
-                      stroke="currentColor" stroke-width="2">
+                    <svg
+                      v-if="!node.loading" viewBox="0 0 24 24" width="16" height="16" fill="none"
+                      stroke="currentColor" stroke-width="2"
+                    >
                       <polyline points="9 18 15 12 9 6" />
                     </svg>
-                    <svg v-else class="easy-table__loading-icon" viewBox="0 0 24 24" width="16" height="16" fill="none"
-                      stroke="currentColor" stroke-width="2">
+                    <svg
+                      v-else class="easy-table__loading-icon" viewBox="0 0 24 24" width="16" height="16" fill="none"
+                      stroke="currentColor" stroke-width="2"
+                    >
                       <circle cx="12" cy="12" r="10" stroke-dasharray="60" stroke-dashoffset="20" />
                     </svg>
                   </span>
@@ -417,8 +425,10 @@ export type { TableEmits, TableProps } from './table'
               >
                 <!-- 展开列 -->
                 <td v-if="expandable" class="easy-table__td easy-table__td--expand">
-                  <span class="easy-table__expand-icon" :class="{ 'is-expanded': item.expanded }"
-                    @click.stop="toggleRowExpand(item.row, item.index)">
+                  <span
+                    class="easy-table__expand-icon" :class="{ 'is-expanded': item.expanded }"
+                    @click.stop="toggleRowExpand(item.row, item.index)"
+                  >
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
                       <polyline points="9 18 15 12 9 6" />
                     </svg>
@@ -527,15 +537,19 @@ export type { TableEmits, TableProps } from './table'
                 <span class="easy-table__summary-title">{{ summaryLabel }}</span>
                 <span v-if="summaryRow[col.prop]?.value" class="easy-table__summary-sep"> / </span>
                 <template v-if="summaryRow[col.prop]?.value">
-                  <span v-if="summaryMixed && (summaryRow[col.prop].type === 'sum' || summaryRow[col.prop].type === 'avg')"
-                    class="easy-table__summary-badge" :class="[`easy-table__summary-badge--${summaryRow[col.prop].type}`]">{{ summaryRow[col.prop].type === 'sum' ? '合计' : '均值' }}</span>
+                  <span
+                    v-if="summaryMixed && (summaryRow[col.prop].type === 'sum' || summaryRow[col.prop].type === 'avg')"
+                    class="easy-table__summary-badge" :class="[`easy-table__summary-badge--${summaryRow[col.prop].type}`]"
+                  >{{ summaryRow[col.prop].type === 'sum' ? '合计' : '均值' }}</span>
                   <span>{{ summaryRow[col.prop].value }}</span>
                 </template>
               </template>
               <template v-else>
                 <template v-if="summaryRow[col.prop]?.type === 'sum' || summaryRow[col.prop]?.type === 'avg'">
-                  <span v-if="summaryMixed" class="easy-table__summary-badge"
-                    :class="[`easy-table__summary-badge--${summaryRow[col.prop].type}`]">{{ summaryRow[col.prop].type === 'sum' ? '合计' : '均值' }}</span>
+                  <span
+                    v-if="summaryMixed" class="easy-table__summary-badge"
+                    :class="[`easy-table__summary-badge--${summaryRow[col.prop].type}`]"
+                  >{{ summaryRow[col.prop].type === 'sum' ? '合计' : '均值' }}</span>
                   <span>{{ summaryRow[col.prop].value }}</span>
                 </template>
                 <template v-else>
@@ -576,17 +590,23 @@ export type { TableEmits, TableProps } from './table'
     </div>
 
     <!-- 分页 -->
-    <div v-if="pagination && total > 0" class="easy-table__pagination"
-      :class="`easy-table__pagination--${props.paginationPosition}`">
+    <div
+      v-if="pagination && total > 0" class="easy-table__pagination"
+      :class="`easy-table__pagination--${props.paginationPosition}`"
+    >
       <!-- 总数 -->
       <span class="easy-table__pagination-total">共 {{ total }} 条</span>
 
       <!-- 页码按钮 -->
       <div class="easy-table__pagination-pages">
-        <button class="easy-table__page-btn easy-table__page-btn--prev" :disabled="currentPage <= 1"
-          @click="handlePageChange(currentPage - 1)">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
+        <button
+          class="easy-table__page-btn easy-table__page-btn--prev" :disabled="currentPage <= 1"
+          @click="handlePageChange(currentPage - 1)"
+        >
+          <svg
+            viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"
+          >
             <polyline points="15 18 9 12 15 6" />
           </svg>
         </button>
@@ -610,10 +630,14 @@ export type { TableEmits, TableProps } from './table'
           </template>
         </button>
 
-        <button class="easy-table__page-btn easy-table__page-btn--next" :disabled="currentPage >= totalPages"
-          @click="handlePageChange(currentPage + 1)">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
+        <button
+          class="easy-table__page-btn easy-table__page-btn--next" :disabled="currentPage >= totalPages"
+          @click="handlePageChange(currentPage + 1)"
+        >
+          <svg
+            viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"
+          >
             <polyline points="9 18 15 12 9 6" />
           </svg>
         </button>
@@ -622,8 +646,10 @@ export type { TableEmits, TableProps } from './table'
       <!-- 页码输入 -->
       <div v-if="showPageInput" class="easy-table__pagination-jump">
         <span>跳至</span>
-        <input v-model.number="jumpPageInput" type="number" class="easy-table__pagination-input" :min="1"
-          :max="totalPages" @keyup.enter="handleJumpPageEnter">
+        <input
+          v-model.number="jumpPageInput" type="number" class="easy-table__pagination-input" :min="1"
+          :max="totalPages" @keyup.enter="handleJumpPageEnter"
+        >
         <span>页</span>
         <button class="easy-table__pagination-go" @click="handleJumpPage">
           Go
@@ -631,19 +657,25 @@ export type { TableEmits, TableProps } from './table'
       </div>
 
       <!-- 每页条数选择 -->
-      <EasySelect v-if="showPageSize" v-model="currentPageSize" :options="pageSizeSelectOptions" size="small"
-        style="width: 120px" class="easy-table__page-size-select" @change="handlePageSizeChange" />
+      <EasySelect
+        v-if="showPageSize" v-model="currentPageSize" :options="pageSizeSelectOptions" size="small"
+        style="width: 120px" class="easy-table__page-size-select" @change="handlePageSizeChange"
+      />
     </div>
 
     <!-- 列设置面板 -->
-    <div v-if="showColumnSettingsPanel" class="easy-table__column-settings-overlay"
-      @click="showColumnSettingsPanel = false">
+    <div
+      v-if="showColumnSettingsPanel" class="easy-table__column-settings-overlay"
+      @click="showColumnSettingsPanel = false"
+    >
       <div class="easy-table__column-settings-panel" @click.stop>
         <div class="easy-table__column-settings-header">
           <h3>列设置</h3>
           <button class="easy-table__column-settings-close" @click="showColumnSettingsPanel = false">
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"
+            >
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
@@ -671,8 +703,10 @@ export type { TableEmits, TableProps } from './table'
                 'is-disabled': !isColumnDraggable(col) || !props.columnDraggable,
               }"
             >
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round">
+              <svg
+                viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"
+              >
                 <line x1="8" y1="6" x2="8" y2="6" />
                 <line x1="8" y1="12" x2="8" y2="12" />
                 <line x1="8" y1="18" x2="8" y2="18" />
@@ -682,8 +716,10 @@ export type { TableEmits, TableProps } from './table'
               </svg>
             </div>
             <label class="easy-table__column-settings-label">
-              <input type="checkbox" :checked="col.visible !== false"
-                @change="handleColumnVisibleChange(col.prop, $event)">
+              <input
+                type="checkbox" :checked="col.visible !== false"
+                @change="handleColumnVisibleChange(col.prop, $event)"
+              >
               <span>{{ col.name }}</span>
             </label>
           </div>
@@ -702,8 +738,10 @@ export type { TableEmits, TableProps } from './table'
     <!-- Ellipsis Tooltip -->
     <Teleport to="body">
       <Transition name="easy-tooltip-fade">
-        <div v-if="tooltipState.visible" class="easy-table__tooltip"
-          :style="{ left: `${tooltipState.x}px`, top: `${tooltipState.y}px` }">
+        <div
+          v-if="tooltipState.visible" class="easy-table__tooltip"
+          :style="{ left: `${tooltipState.x}px`, top: `${tooltipState.y}px` }"
+        >
           {{ tooltipState.content }}
         </div>
       </Transition>

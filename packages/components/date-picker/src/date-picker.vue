@@ -62,9 +62,11 @@ const {
 
 <template>
   <div class="easy-date-picker" :class="[`easy-date-picker--${size}`, { 'is-disabled': disabled }]">
-    <div ref="wrapperRef" class="easy-date-picker__wrapper"
+    <div
+      ref="wrapperRef" class="easy-date-picker__wrapper"
       :class="{ 'is-focus': focusing, 'is-hover': hovering && !disabled }" @mouseenter="hovering = true"
-      @mouseleave="hovering = false">
+      @mouseleave="hovering = false"
+    >
       <!-- 前缀图标 -->
       <span class="easy-date-picker__prefix">
         <slot name="prefix">
@@ -73,8 +75,10 @@ const {
       </span>
 
       <!-- 日期输入 -->
-      <input ref="inputRef" class="easy-date-picker__input" :value="displayValue" :placeholder="placeholder"
-        :disabled="disabled" :readonly="readonly" @focus="handleFocus" @blur="handleBlur" @click="openPicker">
+      <input
+        ref="inputRef" class="easy-date-picker__input" :value="displayValue" :placeholder="placeholder"
+        :disabled="disabled" :readonly="readonly" @focus="handleFocus" @blur="handleBlur" @click="openPicker"
+      >
 
       <!-- 清除 -->
       <span v-if="clearable && modelValue && !disabled" class="easy-date-picker__clear" @click.stop="clear">
@@ -91,8 +95,10 @@ const {
             <el-icon class="easy-date-panel__nav" @click="prevMonth">
               <ArrowLeft />
             </el-icon>
-            <span class="easy-date-panel__title" :class="{ 'is-title-clickable': type !== 'year' }"
-              @click="toggleYearMode">{{ panelTitle }}</span>
+            <span
+              class="easy-date-panel__title" :class="{ 'is-title-clickable': type !== 'year' }"
+              @click="toggleYearMode"
+            >{{ panelTitle }}</span>
             <el-icon class="easy-date-panel__nav" @click="nextMonth">
               <ArrowRight />
             </el-icon>

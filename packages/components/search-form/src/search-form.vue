@@ -71,81 +71,109 @@ defineExpose({
 
     <div class="search-form-body">
       <!-- 搜索表单 -->
-      <EasyForm ref="formRef" :model="formData" :rules="rules" :inline="inline" :size="size" :disabled="disabled"
-        class="search-grid-form">
+      <EasyForm
+        ref="formRef" :model="formData" :rules="rules" :inline="inline" :size="size" :disabled="disabled"
+        class="search-grid-form"
+      >
         <template v-for="item in visibleItems" :key="item.prop">
-          <EasyFormItem v-if="!item.hide" :label="item.label" :prop="item.prop" :required="item.required"
-            :span="item.span" :style="getGridItemStyle(item)">
+          <EasyFormItem
+            v-if="!item.hide" :label="item.label" :prop="item.prop" :required="item.required"
+            :span="item.span" :style="getGridItemStyle(item)"
+          >
             <!-- 输入框 -->
-            <EasyInput v-if="item.type === 'input' || !item.type" v-model="formData[item.prop]"
+            <EasyInput
+              v-if="item.type === 'input' || !item.type" v-model="formData[item.prop]"
               :placeholder="item.placeholder || `请输入${item.label}`" :clearable="item.clearable !== false"
               :disabled="item.disabled || disabled" :readonly="item.readonly" :maxlength="item.maxlength"
               :show-word-limit="item.showWordLimit" :prefix-icon="item.prefixIcon" :suffix-icon="item.suffixIcon"
-              @keyup.enter="handleSearch" />
+              @keyup.enter="handleSearch"
+            />
 
             <!-- 文本域 -->
-            <EasyInput v-else-if="item.type === 'textarea'" v-model="formData[item.prop]" type="textarea"
+            <EasyInput
+              v-else-if="item.type === 'textarea'" v-model="formData[item.prop]" type="textarea"
               :placeholder="item.placeholder || `请输入${item.label}`" :clearable="item.clearable !== false"
               :disabled="item.disabled || disabled" :readonly="item.readonly" :maxlength="item.maxlength"
-              :show-word-limit="item.showWordLimit" :rows="item.rows || 2" />
+              :show-word-limit="item.showWordLimit" :rows="item.rows || 2"
+            />
 
             <!-- 数值/文本范围输入（min ~ max） -->
-            <EasyInputRange v-else-if="item.type === 'range'" v-model:start="formData[item.prop]"
+            <EasyInputRange
+              v-else-if="item.type === 'range'" v-model:start="formData[item.prop]"
               v-model:end="formData[item.endProp!]" :start-placeholder="item.startPlaceholder"
               :end-placeholder="item.endPlaceholder" :clearable="item.clearable !== false"
               :disabled="item.disabled || disabled" :readonly="item.readonly" :maxlength="item.maxlength"
-              :input-type="item.inputType" :separator="item.rangeSeparator" :size="size" @keyup:enter="handleSearch" />
+              :input-type="item.inputType" :separator="item.rangeSeparator" :size="size" @keyup:enter="handleSearch"
+            />
 
             <!-- 选择器 -->
-            <EasySelect v-else-if="item.type === 'select'" v-model="formData[item.prop]"
+            <EasySelect
+              v-else-if="item.type === 'select'" v-model="formData[item.prop]"
               :placeholder="item.placeholder || `请选择${item.label}`" :clearable="item.clearable !== false"
               :disabled="item.disabled || disabled" :multiple="item.multiple" :filterable="item.filterable"
-              :options="item.options" :value-type="item.valueType" :separator="item.separator" />
+              :options="item.options" :value-type="item.valueType" :separator="item.separator"
+            />
 
             <!-- 级联选择器 -->
-            <EasyCascader v-else-if="item.type === 'cascader'" v-model="formData[item.prop]"
+            <EasyCascader
+              v-else-if="item.type === 'cascader'" v-model="formData[item.prop]"
               :placeholder="item.placeholder || `请选择${item.label}`" :clearable="item.clearable !== false"
               :disabled="item.disabled || disabled" :multiple="item.multiple" :filterable="item.filterable"
-              :options="item.cascaderOptions" :value-type="item.valueType" :separator="item.separator" />
+              :options="item.cascaderOptions" :value-type="item.valueType" :separator="item.separator"
+            />
 
             <!-- 日期选择器 -->
-            <EasyDatePicker v-else-if="item.type === 'date'" v-model="formData[item.prop]"
+            <EasyDatePicker
+              v-else-if="item.type === 'date'" v-model="formData[item.prop]"
               :placeholder="item.placeholder || `请选择${item.label}`" :clearable="item.clearable !== false"
-              :disabled="item.disabled || disabled" :format="item.format" :value-format="item.valueFormat" />
+              :disabled="item.disabled || disabled" :format="item.format" :value-format="item.valueFormat"
+            />
 
             <!-- 日期范围选择器 -->
-            <EasyDateRangePicker v-else-if="item.type === 'daterange'" v-model:start="formData[item.prop]"
+            <EasyDateRangePicker
+              v-else-if="item.type === 'daterange'" v-model:start="formData[item.prop]"
               v-model:end="formData[item.endProp!]" :start-placeholder="item.startPlaceholder"
               :end-placeholder="item.endPlaceholder" :clearable="item.clearable !== false"
               :disabled="item.disabled || disabled" :format="item.format" :value-format="item.valueFormat"
-              :separator="item.rangeSeparator" :size="size" />
+              :separator="item.rangeSeparator" :size="size"
+            />
 
             <!-- 日期时间选择器 -->
-            <EasyDateTimePicker v-else-if="item.type === 'datetime'" v-model="formData[item.prop]"
+            <EasyDateTimePicker
+              v-else-if="item.type === 'datetime'" v-model="formData[item.prop]"
               :placeholder="item.placeholder || `请选择${item.label}`" :clearable="item.clearable !== false"
-              :disabled="item.disabled || disabled" :format="item.format" :show-seconds="item.showSeconds" />
+              :disabled="item.disabled || disabled" :format="item.format" :show-seconds="item.showSeconds"
+            />
 
             <!-- 日期时间范围选择器 -->
-            <EasyDateTimeRangePicker v-else-if="item.type === 'datetimerange'" v-model:start="formData[item.prop]"
+            <EasyDateTimeRangePicker
+              v-else-if="item.type === 'datetimerange'" v-model:start="formData[item.prop]"
               v-model:end="formData[item.endProp!]" :start-placeholder="item.startPlaceholder"
               :end-placeholder="item.endPlaceholder" :clearable="item.clearable !== false"
               :disabled="item.disabled || disabled" :format="item.format" :show-seconds="item.showSeconds"
-              :separator="item.rangeSeparator" :size="size" />
+              :separator="item.rangeSeparator" :size="size"
+            />
 
             <!-- 时间选择器 -->
-            <EasyTimePicker v-else-if="item.type === 'time'" v-model="formData[item.prop]"
+            <EasyTimePicker
+              v-else-if="item.type === 'time'" v-model="formData[item.prop]"
               :placeholder="item.placeholder || `请选择${item.label}`" :clearable="item.clearable !== false"
-              :disabled="item.disabled || disabled" :format="item.format" />
+              :disabled="item.disabled || disabled" :format="item.format"
+            />
 
             <!-- 时间范围选择器 -->
-            <EasyTimeRangePicker v-else-if="item.type === 'timerange'" v-model:start="formData[item.prop]"
+            <EasyTimeRangePicker
+              v-else-if="item.type === 'timerange'" v-model:start="formData[item.prop]"
               v-model:end="formData[item.endProp!]" :start-placeholder="item.startPlaceholder"
               :end-placeholder="item.endPlaceholder" :clearable="item.clearable !== false"
-              :disabled="item.disabled || disabled" :format="item.format" :separator="item.rangeSeparator" :size="size" />
+              :disabled="item.disabled || disabled" :format="item.format" :separator="item.rangeSeparator" :size="size"
+            />
 
             <!-- 自定义插槽 -->
-            <slot v-else-if="item.type === 'custom'" :name="`field-${item.prop}`" :model-value="formData[item.prop]"
-              :item="item" :form-data="formData" @update:model-value="(val: any) => (formData[item.prop] = val)" />
+            <slot
+              v-else-if="item.type === 'custom'" :name="`field-${item.prop}`" :model-value="formData[item.prop]"
+              :item="item" :form-data="formData" @update:model-value="(val: any) => (formData[item.prop] = val)"
+            />
           </EasyFormItem>
         </template>
 

@@ -196,9 +196,11 @@ function handleToggle(node: any, expanded: boolean) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyDeptTree :data="customData"
+          <EasyDeptTree
+            :data="customData"
             :node-key="{ id: 'deptId', pid: 'parentId', label: 'deptName', children: 'subDepts' }"
-            :default-expand-level="1" />
+            :default-expand-level="1"
+          />
         </div>
         <EasyDocCode
           code="<EasyDeptTree

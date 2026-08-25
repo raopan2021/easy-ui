@@ -82,13 +82,17 @@ defineExpose({
     <div ref="containerRef" class="easy-carousel__container" :style="containerStyle">
       <!-- ===== 普通模式 ===== -->
       <TransitionGroup v-if="mode === 'slide'" :name="transitionName" tag="div" class="easy-carousel__track">
-        <div v-for="(item, index) in items" v-show="index === currentIndex"
+        <div
+          v-for="(item, index) in items" v-show="index === currentIndex"
           :key="itemKey ? (item as any)[itemKey] : index" class="easy-carousel__item"
-          :class="{ 'is-active': index === currentIndex }">
+          :class="{ 'is-active': index === currentIndex }"
+        >
           <slot name="item" :item="item" :index="index">
             <img v-if="typeof item === 'string'" :src="item" :alt="`carousel-${index}`" class="easy-carousel__img">
-            <img v-else-if="(item as Record<string, unknown>).src"
-              :src="(item as Record<string, unknown>).src as string" :alt="`carousel-${index}`" class="easy-carousel__img">
+            <img
+              v-else-if="(item as Record<string, unknown>).src"
+              :src="(item as Record<string, unknown>).src as string" :alt="`carousel-${index}`" class="easy-carousel__img"
+            >
             <div v-else class="easy-carousel__custom-item">
               {{ item }}
             </div>
@@ -111,9 +115,11 @@ defineExpose({
           >
             <slot name="item" :item="item" :index="index">
               <img v-if="typeof item === 'string'" :src="item" :alt="`carousel-${index}`" class="easy-carousel__img">
-              <img v-else-if="(item as Record<string, unknown>).src"
+              <img
+                v-else-if="(item as Record<string, unknown>).src"
                 :src="(item as Record<string, unknown>).src as string" :alt="`carousel-${index}`"
-                class="easy-carousel__img">
+                class="easy-carousel__img"
+              >
               <div v-else class="easy-carousel__custom-item">
                 {{ item }}
               </div>
@@ -133,32 +139,44 @@ defineExpose({
 
     <!-- 左右箭头 -->
     <template v-if="showArrows && arrow !== 'never'">
-      <button class="easy-carousel__arrow easy-carousel__arrow--left"
-        :class="{ 'is-hidden': arrow === 'hover' && !isHovering }" @click="prev">
+      <button
+        class="easy-carousel__arrow easy-carousel__arrow--left"
+        :class="{ 'is-hidden': arrow === 'hover' && !isHovering }" @click="prev"
+      >
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round" />
+          <path
+            d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
       </button>
-      <button class="easy-carousel__arrow easy-carousel__arrow--right"
-        :class="{ 'is-hidden': arrow === 'hover' && !isHovering }" @click="next">
+      <button
+        class="easy-carousel__arrow easy-carousel__arrow--right"
+        :class="{ 'is-hidden': arrow === 'hover' && !isHovering }" @click="next"
+      >
         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-            stroke-linejoin="round" />
+          <path
+            d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
       </button>
     </template>
 
     <!-- 指示器 -->
-    <div v-if="showDots" class="easy-carousel__dots"
-      :class="[`easy-carousel__dots--${dotPosition}`, { 'easy-carousel__dots--number': dotType === 'number' }]">
+    <div
+      v-if="showDots" class="easy-carousel__dots"
+      :class="[`easy-carousel__dots--${dotPosition}`, { 'easy-carousel__dots--number': dotType === 'number' }]"
+    >
       <template v-if="dotType === 'number'">
         <!-- 数字指示器 -->
         <div class="easy-carousel__number">
           <button class="easy-carousel__number-btn" @click="prev">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" />
+              <path
+                d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round"
+              />
             </svg>
           </button>
           <span class="easy-carousel__number-current">{{ String(currentIndex + 1) }}</span>
@@ -166,8 +184,10 @@ defineExpose({
           <span class="easy-carousel__number-total">{{ String(items.length) }}</span>
           <button class="easy-carousel__number-btn" @click="next">
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" />
+              <path
+                d="M9 6L15 12L9 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round"
+              />
             </svg>
           </button>
         </div>

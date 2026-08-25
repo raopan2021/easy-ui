@@ -274,8 +274,10 @@ import { EasyButton, EasyDescriptions, EasyDescriptionsItem, EasyIcon } from '@r
             </EasyDescriptionsItem>
             <EasyDescriptionsItem label="绩效评级">
               <div class="rating-row">
-                <EasyIcon v-for="i in 5" :key="i" name="el:StarFilled" :size="15"
-                  :class="i <= 4 ? 'star-on' : 'star-off'" />
+                <EasyIcon
+                  v-for="i in 5" :key="i" name="el:StarFilled" :size="15"
+                  :class="i <= 4 ? 'star-on' : 'star-off'"
+                />
                 <span class="rating-text">4.0 / 5.0</span>
               </div>
             </EasyDescriptionsItem>

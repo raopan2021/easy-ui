@@ -32,8 +32,10 @@ defineExpose({
   <div class="easy-worktab">
     <!-- 左滚动按钮 -->
     <button v-show="canScrollLeft" class="worktab-scroll-btn worktab-scroll-btn--left" @click="scrollBy(-scrollStep)">
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"
-        stroke-linecap="round" stroke-linejoin="round">
+      <svg
+        viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round"
+      >
         <polyline points="15 18 9 12 15 6" />
       </svg>
     </button>
@@ -56,8 +58,10 @@ defineExpose({
           <span class="worktab-item__title">{{ tab.title }}</span>
           <!-- 关闭按钮 -->
           <button v-if="!tab.affix" class="worktab-item__close" @click.stop="handleClose(tab.path)">
-            <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5"
-              stroke-linecap="round" stroke-linejoin="round">
+            <svg
+              viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round"
+            >
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
@@ -68,8 +72,10 @@ defineExpose({
 
     <!-- 右滚动按钮 -->
     <button v-show="canScrollRight" class="worktab-scroll-btn worktab-scroll-btn--right" @click="scrollBy(scrollStep)">
-      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"
-        stroke-linecap="round" stroke-linejoin="round">
+      <svg
+        viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round"
+      >
         <polyline points="9 18 15 12 9 6" />
       </svg>
     </button>
@@ -80,8 +86,10 @@ defineExpose({
     <!-- 操作按钮 -->
     <el-dropdown trigger="click" @command="handleCommand">
       <button class="worktab-action-btn" title="更多操作">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round">
+        <svg
+          viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round"
+        >
           <circle cx="12" cy="5" r="1.2" fill="currentColor" />
           <circle cx="12" cy="12" r="1.2" fill="currentColor" />
           <circle cx="12" cy="19" r="1.2" fill="currentColor" />
@@ -90,8 +98,10 @@ defineExpose({
       <template #dropdown>
         <el-dropdown-menu>
           <el-dropdown-item command="refresh">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px">
+            <svg
+              viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px"
+            >
               <polyline points="23 4 23 10 17 10" />
               <polyline points="1 20 1 14 7 14" />
               <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
@@ -99,40 +109,50 @@ defineExpose({
             刷新当前
           </el-dropdown-item>
           <el-dropdown-item command="close-current" divided>
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px">
+            <svg
+              viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px"
+            >
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
             关闭当前
           </el-dropdown-item>
           <el-dropdown-item command="close-left">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px">
+            <svg
+              viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px"
+            >
               <polyline points="15 18 9 12 15 6" />
               <line x1="3" y1="12" x2="21" y2="12" />
             </svg>
             关闭左侧
           </el-dropdown-item>
           <el-dropdown-item command="close-right">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px">
+            <svg
+              viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px"
+            >
               <polyline points="9 18 15 12 9 6" />
               <line x1="3" y1="12" x2="21" y2="12" />
             </svg>
             关闭右侧
           </el-dropdown-item>
           <el-dropdown-item command="close-other">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px">
+            <svg
+              viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px"
+            >
               <circle cx="12" cy="12" r="10" />
               <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
             </svg>
             关闭其他
           </el-dropdown-item>
           <el-dropdown-item command="close-all">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px">
+            <svg
+              viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" style="margin-right: 8px"
+            >
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
               <line x1="18" y1="6" x2="6" y2="18" />
@@ -148,28 +168,38 @@ defineExpose({
   <!-- 右键菜单 -->
   <Teleport to="body">
     <Transition name="ctx-fade">
-      <div v-if="contextMenu.visible" class="worktab-ctx"
-        :style="{ left: `${contextMenu.x}px`, top: `${contextMenu.y}px` }" @click.stop>
-        <div class="worktab-ctx__item" :class="{ 'is-disabled': contextMenu.tab?.affix }"
-          @click="ctxAction('close-current')">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
+      <div
+        v-if="contextMenu.visible" class="worktab-ctx"
+        :style="{ left: `${contextMenu.x}px`, top: `${contextMenu.y}px` }" @click.stop
+      >
+        <div
+          class="worktab-ctx__item" :class="{ 'is-disabled': contextMenu.tab?.affix }"
+          @click="ctxAction('close-current')"
+        >
+          <svg
+            viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"
+          >
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
           关闭
         </div>
         <div class="worktab-ctx__item" @click="ctxAction('close-left')">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
+          <svg
+            viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"
+          >
             <polyline points="15 18 9 12 15 6" />
             <line x1="3" y1="12" x2="21" y2="12" />
           </svg>
           关闭左侧
         </div>
         <div class="worktab-ctx__item" @click="ctxAction('close-right')">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
+          <svg
+            viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"
+          >
             <polyline points="9 18 15 12 9 6" />
             <line x1="3" y1="12" x2="21" y2="12" />
           </svg>
@@ -177,16 +207,20 @@ defineExpose({
         </div>
         <div class="worktab-ctx__divider" />
         <div class="worktab-ctx__item" @click="ctxAction('close-other')">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
+          <svg
+            viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"
+          >
             <circle cx="12" cy="12" r="10" />
             <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
           </svg>
           关闭其他
         </div>
         <div class="worktab-ctx__item" @click="ctxAction('close-all')">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
+          <svg
+            viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"
+          >
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
@@ -194,8 +228,10 @@ defineExpose({
         </div>
         <div class="worktab-ctx__divider" />
         <div class="worktab-ctx__item" @click="ctxAction('refresh')">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
+          <svg
+            viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"
+          >
             <polyline points="23 4 23 10 17 10" />
             <polyline points="1 20 1 14 7 14" />
             <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />

@@ -184,8 +184,10 @@ async function copyCode(code: string) {
 
     <!-- 目录导航 -->
     <div class="menu-doc__toc">
-      <div v-for="section in sections" :key="section.id" class="menu-doc__toc-item"
-        :class="{ active: activeSection === section.id }" @click="scrollToSection(section.id)">
+      <div
+        v-for="section in sections" :key="section.id" class="menu-doc__toc-item"
+        :class="{ active: activeSection === section.id }" @click="scrollToSection(section.id)"
+      >
         {{ section.title }}
       </div>
     </div>

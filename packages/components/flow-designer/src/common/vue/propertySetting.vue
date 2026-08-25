@@ -35,8 +35,10 @@ export type { PropertySettingProps } from './property-setting-types'
   <div>
     <EasyModal v-model="drawer" :title="title" width="40%" @close="handleClose" @confirm="handleClose">
       <div style="height: 500px">
-        <component :is="componentType" :ref="componentType.name" v-model="form" :disabled="disabled"
-          :skip-condition-show="skipConditionShow" :nodes="nodes" :skips="skips">
+        <component
+          :is="componentType" :ref="componentType.name" v-model="form" :disabled="disabled"
+          :skip-condition-show="skipConditionShow" :nodes="nodes" :skips="skips"
+        >
           <template v-for="(item, key) in $slots" #[key]="data">
             <slot :name="key" v-bind="data || {}" />
           </template>

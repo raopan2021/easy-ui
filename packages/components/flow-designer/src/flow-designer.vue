@@ -70,15 +70,19 @@ export type { FlowDesignerEmits, FlowDesignerProps, Props } from './flow-designe
       </div>
 
       <div v-show="activeStep === 1" ref="containerRef" class="container">
-        <PropertySetting ref="propertySettingRef" :node="nodeClick" :lf="lf" :disabled="disabled"
-          :skip-condition-show="skipConditionShow" :nodes="nodes" :skips="skips" />
+        <PropertySetting
+          ref="propertySettingRef" :node="nodeClick" :lf="lf" :disabled="disabled"
+          :skip-condition-show="skipConditionShow" :nodes="nodes" :skips="skips"
+        />
       </div>
     </el-header>
   </div>
 
   <!-- 弹框组件 -->
-  <EdgeTooltip v-if="tooltipVisible" :position="tooltipPosition" :tooltip-edge="tooltipEdge"
-    @option-click="handleOptionClick" @close-tooltip="tooltipVisible = false" />
+  <EdgeTooltip
+    v-if="tooltipVisible" :position="tooltipPosition" :tooltip-edge="tooltipEdge"
+    @option-click="handleOptionClick" @close-tooltip="tooltipVisible = false"
+  />
 </template>
 
 <!-- 组件核心样式（scoped，独立维护在 flow-designer-style.scss） -->

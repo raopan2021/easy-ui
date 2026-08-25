@@ -361,8 +361,10 @@ function handleSend(content: string, attachments: ChatAttachment[]) {
       </p>
       <div class="demo-preview">
         <div class="chat-container" style="height: 500px">
-          <EasyChat ref="chatRef2" v-model:messages="messages2" enable-typing :typing-speed="50" placeholder="输入消息..."
-            @send="handleSend2" />
+          <EasyChat
+            ref="chatRef2" v-model:messages="messages2" enable-typing :typing-speed="50" placeholder="输入消息..."
+            @send="handleSend2"
+          />
         </div>
       </div>
       <div class="demo-code">
@@ -465,8 +467,10 @@ messages.value.push({
       </p>
       <div class="demo-preview">
         <div class="chat-container" style="height: 500px">
-          <EasyChat ref="chatRef4" v-model:messages="messages4" allow-upload :max-attachments="3"
-            placeholder="输入消息或上传附件..." @send="handleSend4" @upload="handleUpload4" />
+          <EasyChat
+            ref="chatRef4" v-model:messages="messages4" allow-upload :max-attachments="3"
+            placeholder="输入消息或上传附件..." @send="handleSend4" @upload="handleUpload4"
+          />
         </div>
       </div>
       <div class="demo-code">
@@ -505,8 +509,10 @@ function handleUpload(files: File[]) {
       </p>
       <div class="demo-preview">
         <div class="chat-container" style="height: 500px">
-          <EasyChat ref="chatRef5" v-model:messages="messages5" :loading="loading5" placeholder="输入消息..."
-            @send="handleSend5" @scroll-to-top="handleScrollToTop5" />
+          <EasyChat
+            ref="chatRef5" v-model:messages="messages5" :loading="loading5" placeholder="输入消息..."
+            @send="handleSend5" @scroll-to-top="handleScrollToTop5"
+          />
         </div>
       </div>
       <div class="demo-code">
@@ -541,8 +547,10 @@ async function handleScrollToTop() {
       </p>
       <div class="demo-preview">
         <div class="chat-container" style="height: 200px">
-          <EasyChatInput v-model="inputValue" placeholder="请输入消息..." :allow-upload="true" :max-attachments="3"
-            :maxlength="500" show-char-count @send="handleSendInput" @upload="handleUploadInput" />
+          <EasyChatInput
+            v-model="inputValue" placeholder="请输入消息..." :allow-upload="true" :max-attachments="3"
+            :maxlength="500" show-char-count @send="handleSendInput" @upload="handleUploadInput"
+          />
         </div>
       </div>
       <div class="demo-code">

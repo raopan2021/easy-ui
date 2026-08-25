@@ -303,13 +303,19 @@ onMounted(() => fetchData())
     </div>
 
     <div class="search-bar">
-      <EasyInput v-model="searchForm.keyword" placeholder="搜索参数键" clearable style="width: 220px"
-        @keyup.enter="handleSearch" @clear="handleSearch" />
-      <EasySelect v-model="searchForm.type" placeholder="参数类型" clearable
+      <EasyInput
+        v-model="searchForm.keyword" placeholder="搜索参数键" clearable style="width: 220px"
+        @keyup.enter="handleSearch" @clear="handleSearch"
+      />
+      <EasySelect
+        v-model="searchForm.type" placeholder="参数类型" clearable
         :options="[{ label: '文本', value: 'text' }, { label: '数字', value: 'number' }, { label: '布尔', value: 'boolean' }, { label: 'JSON', value: 'json' }]"
-        style="width: 130px" @change="handleSearch" />
-      <EasySelect v-model="searchForm.status" placeholder="状态" clearable
-        :options="[{ label: '启用', value: 1 }, { label: '禁用', value: 0 }]" style="width: 120px" @change="handleSearch" />
+        style="width: 130px" @change="handleSearch"
+      />
+      <EasySelect
+        v-model="searchForm.status" placeholder="状态" clearable
+        :options="[{ label: '启用', value: 1 }, { label: '禁用', value: 0 }]" style="width: 120px" @change="handleSearch"
+      />
       <EasyButton type="primary" @click="handleSearch">
         <el-icon><Search /></el-icon>查询
       </EasyButton>
@@ -327,11 +333,13 @@ onMounted(() => fetchData())
       </EasyButton>
     </div>
 
-    <EasyTable v-loading="loading" :data="tableData" :columns="columns" selection-mode="multiple" stripe border
+    <EasyTable
+      v-loading="loading" :data="tableData" :columns="columns" selection-mode="multiple" stripe border
       :pagination="true" :total="pagination.total" :page="pagination.page" :page-size="pagination.pageSize"
       :page-size-options="[10, 20, 50, 100]" action-label="操作" :action-width="160" action-fixed="right"
       @selection-change="handleSelectionChange" @page-change="(p: number) => { pagination.page = p; fetchData() }"
-      @page-size-change="(s: number) => { pagination.pageSize = s; fetchData() }">
+      @page-size-change="(s: number) => { pagination.pageSize = s; fetchData() }"
+    >
       <template #col-key="{ row }">
         <code class="param-key">{{ row.key }}</code>
       </template>
@@ -377,16 +385,20 @@ onMounted(() => fetchData())
       </template>
     </EasyTable>
 
-    <el-dialog v-model="dialog.visible" :title="dialog.isEdit ? '编辑参数' : '新增参数'" width="540px"
-      :close-on-click-modal="false" @close="handleDialogClose">
+    <el-dialog
+      v-model="dialog.visible" :title="dialog.isEdit ? '编辑参数' : '新增参数'" width="540px"
+      :close-on-click-modal="false" @close="handleDialogClose"
+    >
       <el-form ref="formRef" :model="dialog.form" :rules="formRules" label-width="90px">
         <el-form-item label="参数键" prop="key">
           <EasyInput v-model="dialog.form.key" placeholder="如: upload.max_size" maxlength="50" />
         </el-form-item>
         <el-form-item label="参数类型" prop="type">
-          <EasySelect v-model="dialog.form.type" placeholder="请选择类型"
+          <EasySelect
+            v-model="dialog.form.type" placeholder="请选择类型"
             :options="[{ label: '文本', value: 'text' }, { label: '数字', value: 'number' }, { label: '布尔', value: 'boolean' }, { label: 'JSON', value: 'json' }]"
-            @change="onTypeChange" />
+            @change="onTypeChange"
+          />
         </el-form-item>
         <el-form-item label="参数值" prop="value">
           <template v-if="dialog.form.type === 'number'">

@@ -19,8 +19,10 @@ defineEmits<{
   <div class="theme-switcher">
     <span class="ts-label">切换风格</span>
     <div class="ts-list">
-      <button v-for="t in themes" :key="t.id" class="ts-item" :class="{ active: modelValue === t.id }" :title="t.name"
-        @click="$emit('update:modelValue', t.id)">
+      <button
+        v-for="t in themes" :key="t.id" class="ts-item" :class="{ active: modelValue === t.id }" :title="t.name"
+        @click="$emit('update:modelValue', t.id)"
+      >
         <span class="ts-dot" :style="{ background: t.color }" />
         <span class="ts-name">{{ t.name }}</span>
       </button>

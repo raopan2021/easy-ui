@@ -46,9 +46,11 @@ function handleSubmit() {
           <ul class="brand-features">
             <li v-for="f in features" :key="f">
               <svg viewBox="0 0 20 20" fill="currentColor" width="15" height="15">
-                <path fill-rule="evenodd"
+                <path
+                  fill-rule="evenodd"
                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                  clip-rule="evenodd" />
+                  clip-rule="evenodd"
+                />
               </svg>
               {{ f }}
             </li>
@@ -91,16 +93,22 @@ function handleSubmit() {
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                 <path d="M7 11V7a5 5 0 0 1 10 0v4" />
               </svg>
-              <input v-model="form.password" :type="showPwd ? 'text' : 'password'" class="cf-input cf-input--pwd"
-                placeholder="请输入密码" autocomplete="current-password">
+              <input
+                v-model="form.password" :type="showPwd ? 'text' : 'password'" class="cf-input cf-input--pwd"
+                placeholder="请输入密码" autocomplete="current-password"
+              >
               <button type="button" class="cf-toggle" @click="showPwd = !showPwd">
-                <svg v-if="!showPwd" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16"
-                  height="16">
+                <svg
+                  v-if="!showPwd" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16"
+                  height="16"
+                >
                   <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                   <circle cx="12" cy="12" r="3" />
                 </svg>
-                <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16"
-                  height="16">
+                <svg
+                  v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16"
+                  height="16"
+                >
                   <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
                   <line x1="1" y1="1" x2="23" y2="23" />
                 </svg>
@@ -127,8 +135,10 @@ function handleSubmit() {
             <template v-else>
               <span class="cf-btn-text">立即登录</span>
               <span class="cf-btn-arrow">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-                  stroke-linejoin="round">
+                <svg
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
                   <line x1="5" y1="12" x2="19" y2="12" />
                   <polyline points="12 5 19 12 12 19" />
                 </svg>

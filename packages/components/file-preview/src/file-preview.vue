@@ -53,8 +53,10 @@ const {
   <div class="easy-file-preview">
     <!-- 文件列表 -->
     <div class="easy-file-preview__list">
-      <div v-for="(file, index) in normalizedFiles" :key="index" class="easy-file-preview__item"
-        @click="openPreview(file)">
+      <div
+        v-for="(file, index) in normalizedFiles" :key="index" class="easy-file-preview__item"
+        @click="openPreview(file)"
+      >
         <div class="easy-file-preview__icon" :class="`easy-file-preview__icon--${getFileType(file.url)}`">
           <component :is="getFileIcon(file.url)" />
         </div>
@@ -63,16 +65,20 @@ const {
           <span v-if="file.size" class="easy-file-preview__size">{{ formatSize(file.size) }}</span>
         </div>
         <button class="easy-file-preview__btn" title="预览">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
+          <svg
+            viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"
+          >
             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
             <circle cx="12" cy="12" r="3" />
           </svg>
         </button>
       </div>
       <div v-if="normalizedFiles.length === 0" class="easy-file-preview__empty">
-        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"
-          stroke-linecap="round">
+        <svg
+          viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round"
+        >
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
           <polyline points="14 2 14 8 20 8" />
         </svg>
@@ -100,39 +106,51 @@ const {
                 <div class="easy-fp-header__actions">
                   <div v-if="normalizedFiles.length > 1" class="easy-fp-nav">
                     <button class="easy-fp-nav__btn" :disabled="currentIndex <= 0" title="上一个" @click="navigate(-1)">
-                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round">
+                      <svg
+                        viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round"
+                      >
                         <polyline points="15 18 9 12 15 6" />
                       </svg>
                     </button>
                     <span class="easy-fp-nav__text">{{ currentIndex + 1 }} / {{ normalizedFiles.length }}</span>
-                    <button class="easy-fp-nav__btn" :disabled="currentIndex >= normalizedFiles.length - 1" title="下一个"
-                      @click="navigate(1)">
-                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round">
+                    <button
+                      class="easy-fp-nav__btn" :disabled="currentIndex >= normalizedFiles.length - 1" title="下一个"
+                      @click="navigate(1)"
+                    >
+                      <svg
+                        viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round"
+                      >
                         <polyline points="9 18 15 12 9 6" />
                       </svg>
                     </button>
                   </div>
                   <a class="easy-fp-action-btn" :href="currentFile?.url" :download="currentFile?.name" title="下载">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
-                      stroke-linecap="round">
+                    <svg
+                      viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round"
+                    >
                       <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                       <polyline points="7 10 12 15 17 10" />
                       <line x1="12" y1="15" x2="12" y2="3" />
                     </svg>
                   </a>
                   <a class="easy-fp-action-btn" :href="currentFile?.url" target="_blank" title="在新标签页打开">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
-                      stroke-linecap="round">
+                    <svg
+                      viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round"
+                    >
                       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                       <polyline points="15 3 21 3 21 9" />
                       <line x1="10" y1="14" x2="21" y2="3" />
                     </svg>
                   </a>
                   <button class="easy-fp-action-btn easy-fp-close" title="关闭" @click="closePreview">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
-                      stroke-linecap="round">
+                    <svg
+                      viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round"
+                    >
                       <line x1="18" y1="6" x2="6" y2="18" />
                       <line x1="6" y1="6" x2="18" y2="18" />
                     </svg>
@@ -177,8 +195,10 @@ const {
                     </p>
                     <div class="easy-fp-unsupported__actions">
                       <a class="easy-fp-btn easy-fp-btn--primary" :href="currentFile?.url" :download="currentFile?.name">
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
-                          stroke-width="2" stroke-linecap="round">
+                        <svg
+                          viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+                          stroke-width="2" stroke-linecap="round"
+                        >
                           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                           <polyline points="7 10 12 15 17 10" />
                           <line x1="12" y1="15" x2="12" y2="3" />
@@ -190,8 +210,10 @@ const {
                 </template>
 
                 <!-- PPT（pptx-preview） -->
-                <div v-else-if="currentType === 'ppt' && !officeError" ref="pptContainerRef"
-                  class="easy-fp-ppt-container" />
+                <div
+                  v-else-if="currentType === 'ppt' && !officeError" ref="pptContainerRef"
+                  class="easy-fp-ppt-container"
+                />
 
                 <!-- PPT 错误提示 -->
                 <template v-else-if="currentType === 'ppt' && officeError">
@@ -207,8 +229,10 @@ const {
                     </p>
                     <div class="easy-fp-unsupported__actions">
                       <a class="easy-fp-btn easy-fp-btn--primary" :href="currentFile?.url" :download="currentFile?.name">
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
-                          stroke-width="2" stroke-linecap="round">
+                        <svg
+                          viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+                          stroke-width="2" stroke-linecap="round"
+                        >
                           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                           <polyline points="7 10 12 15 17 10" />
                           <line x1="12" y1="15" x2="12" y2="3" />
@@ -246,8 +270,10 @@ const {
                       文件类型：<code>{{ getExt(currentFile?.url ?? '') }}</code>
                     </p>
                     <a class="easy-fp-btn easy-fp-btn--primary" :href="currentFile?.url" :download="currentFile?.name">
-                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round">
+                      <svg
+                        viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round"
+                      >
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                         <polyline points="7 10 12 15 17 10" />
                         <line x1="12" y1="15" x2="12" y2="3" />

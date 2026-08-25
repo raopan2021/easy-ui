@@ -75,8 +75,10 @@ defineExpose({
         <template v-if="type === 'wave1'">
           <div class="wave1-container">
             <div class="wave1-spinner">
-              <div v-for="i in 5" :key="i" class="wave1-bar"
-                :style="{ animationDelay: `${i * 0.1}s`, backgroundColor: color }" />
+              <div
+                v-for="i in 5" :key="i" class="wave1-bar"
+                :style="{ animationDelay: `${i * 0.1}s`, backgroundColor: color }"
+              />
             </div>
           </div>
         </template>
@@ -105,8 +107,10 @@ defineExpose({
           <div class="ring-container">
             <svg class="ring-svg" viewBox="0 0 50 50">
               <circle class="ring-bg" cx="25" cy="25" r="20" :stroke="backgroundColor" stroke-width="4" fill="none" />
-              <circle class="ring-progress" cx="25" cy="25" r="20" :stroke="color" stroke-width="4" fill="none"
-                stroke-linecap="round" :stroke-dasharray="circumference" :stroke-dashoffset="progressOffset" />
+              <circle
+                class="ring-progress" cx="25" cy="25" r="20" :stroke="color" stroke-width="4" fill="none"
+                stroke-linecap="round" :stroke-dasharray="circumference" :stroke-dashoffset="progressOffset"
+              />
             </svg>
           </div>
         </template>

@@ -56,11 +56,15 @@ defineExpose({
 <template>
   <form class="easy-super-form" :class="`easy-super-form--${size}`" @submit.prevent>
     <EasyRow :gutter="20">
-      <EasyCol v-for="field in fieldList" :key="field.prop" :span="field.span ?? defaultSpan"
-        class="easy-super-form__item" :class="[{ 'is-error': errors[getErrorKey(field)] }]">
+      <EasyCol
+        v-for="field in fieldList" :key="field.prop" :span="field.span ?? defaultSpan"
+        class="easy-super-form__item" :class="[{ 'is-error': errors[getErrorKey(field)] }]"
+      >
         <!-- 标签 -->
-        <label v-if="field.showLabel !== false" class="easy-super-form__label"
-          :style="{ width: getFieldLabelWidth(field) }">
+        <label
+          v-if="field.showLabel !== false" class="easy-super-form__label"
+          :style="{ width: getFieldLabelWidth(field) }"
+        >
           <span v-if="field.required" class="easy-super-form__required">*</span>
           {{ field.label || field.prop }}
         </label>
@@ -69,14 +73,18 @@ defineExpose({
         <div class="easy-super-form__control">
           <!-- 双绑定组件（如日期范围） -->
           <template v-if="isDualBinding(field)">
-            <component :is="getComponent(field)" v-bind="getFieldProps(field)"
+            <component
+              :is="getComponent(field)" v-bind="getFieldProps(field)"
               :ref="(el: any) => setFieldRef(field.prop, el)" v-model:start="formData[field.startProp!]"
-              v-model:end="formData[field.endProp!]" />
+              v-model:end="formData[field.endProp!]"
+            />
           </template>
           <!-- 普通组件 -->
           <template v-else>
-            <component :is="getComponent(field)" v-bind="getFieldProps(field)"
-              :ref="(el: any) => setFieldRef(field.prop, el)" v-model="formData[field.prop]">
+            <component
+              :is="getComponent(field)" v-bind="getFieldProps(field)"
+              :ref="(el: any) => setFieldRef(field.prop, el)" v-model="formData[field.prop]"
+            >
               <template v-if="field.props?.prefix" #prepend>
                 {{ field.props?.prefix }}
               </template>

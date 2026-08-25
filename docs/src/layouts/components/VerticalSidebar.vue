@@ -73,8 +73,10 @@ function handleGrandClick(grand: MenuItem, child: MenuItem, parent: MenuItem) {
     <div class="vertical-sidebar__menu">
       <div v-for="item in menuList" :key="item.id" class="vertical-sidebar__item">
         <!-- 主菜单 -->
-        <div class="vertical-sidebar__main" :class="{ active: item.active, expanded: item.open }"
-          @click="handleMenuClick(item)">
+        <div
+          class="vertical-sidebar__main" :class="{ active: item.active, expanded: item.open }"
+          @click="handleMenuClick(item)"
+        >
           <EasyIcon v-if="item.icon" class="vertical-sidebar__icon" :name="`el:${item.icon}`" />
           <span class="vertical-sidebar__name">{{ item.name }}</span>
           <EasyIcon v-if="item.children?.length" class="vertical-sidebar__arrow" name="el:ArrowRight" />
@@ -84,20 +86,26 @@ function handleGrandClick(grand: MenuItem, child: MenuItem, parent: MenuItem) {
         <div v-if="item.children?.length && item.open" class="vertical-sidebar__submenu">
           <template v-for="child in item.children" :key="child.id">
             <!-- 有三级菜单 -->
-            <div v-if="child.children?.length" class="vertical-sidebar__submenu-parent"
-              :class="{ active: child.active, expanded: child.open }" @click="handleChildClick(child, item)">
+            <div
+              v-if="child.children?.length" class="vertical-sidebar__submenu-parent"
+              :class="{ active: child.active, expanded: child.open }" @click="handleChildClick(child, item)"
+            >
               <span>{{ child.name }}</span>
               <EasyIcon class="vertical-sidebar__arrow" name="el:ArrowRight" />
             </div>
             <!-- 无三级菜单 -->
-            <div v-else class="vertical-sidebar__submenu-item" :class="{ active: child.active }"
-              @click="handleChildClick(child, item)">
+            <div
+              v-else class="vertical-sidebar__submenu-item" :class="{ active: child.active }"
+              @click="handleChildClick(child, item)"
+            >
               {{ child.name }}
             </div>
             <!-- 三级菜单 -->
             <div v-if="child.children?.length && child.open" class="vertical-sidebar__third-menu">
-              <div v-for="grand in child.children" :key="grand.id" class="vertical-sidebar__third-menu-item"
-                :class="{ active: grand.active }" @click.stop="handleGrandClick(grand, child, item)">
+              <div
+                v-for="grand in child.children" :key="grand.id" class="vertical-sidebar__third-menu-item"
+                :class="{ active: grand.active }" @click.stop="handleGrandClick(grand, child, item)"
+              >
                 {{ grand.name }}
               </div>
             </div>

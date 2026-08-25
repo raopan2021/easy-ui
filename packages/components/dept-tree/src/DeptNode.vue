@@ -30,8 +30,10 @@ const {
   <div class="dept-node" :class="{ 'dept-node--selected': isSelected, 'dept-node--leaf': !hasChildren }">
     <div class="dept-node__row" :style="{ ...nodeStyle, paddingLeft: `${depth * 24 + 20}px` }" @click="handleClick">
       <!-- 展开/折叠图标 -->
-      <span v-if="hasChildren" class="dept-node__toggle" :class="{ 'dept-node__toggle--expanded': isExpanded }"
-        @click.stop="handleToggle">
+      <span
+        v-if="hasChildren" class="dept-node__toggle" :class="{ 'dept-node__toggle--expanded': isExpanded }"
+        @click.stop="handleToggle"
+      >
         <EasyIcon name="el:ArrowRight" />
       </span>
       <span v-else class="dept-node__toggle-placeholder" />
@@ -47,10 +49,12 @@ const {
 
     <!-- 子节点 -->
     <div v-if="hasChildren && isExpanded" class="dept-node__children">
-      <DeptNode v-for="child in nodeChildren" :key="String(child[nodeKey.id])" :node="child" :node-key="nodeKey"
+      <DeptNode
+        v-for="child in nodeChildren" :key="String(child[nodeKey.id])" :node="child" :node-key="nodeKey"
         :node-style="nodeStyle" :highlight-current="highlightCurrent" :expand-all="expandAll"
         :default-expand-level="defaultExpandLevel" :selected-id="selectedId" :expanded-set="expandedSet"
-        :depth="depth + 1" @select="$emit('select', $event)" @toggle="(node, expanded) => $emit('toggle', node, expanded)" />
+        :depth="depth + 1" @select="$emit('select', $event)" @toggle="(node, expanded) => $emit('toggle', node, expanded)"
+      />
     </div>
   </div>
 </template>

@@ -273,12 +273,18 @@ onMounted(() => fetchData())
     </div>
 
     <div class="search-bar">
-      <EasyInput v-model="searchForm.keyword" placeholder="搜索岗位名称/编码" clearable style="width: 220px"
-        @keyup.enter="handleSearch" @clear="handleSearch" />
-      <EasySelect v-model="searchForm.deptId" placeholder="所属部门" clearable :options="deptOptions" label-key="name"
-        value-key="id" style="width: 180px" @change="handleSearch" />
-      <EasySelect v-model="searchForm.status" placeholder="状态" clearable
-        :options="[{ label: '启用', value: 1 }, { label: '禁用', value: 0 }]" style="width: 120px" @change="handleSearch" />
+      <EasyInput
+        v-model="searchForm.keyword" placeholder="搜索岗位名称/编码" clearable style="width: 220px"
+        @keyup.enter="handleSearch" @clear="handleSearch"
+      />
+      <EasySelect
+        v-model="searchForm.deptId" placeholder="所属部门" clearable :options="deptOptions" label-key="name"
+        value-key="id" style="width: 180px" @change="handleSearch"
+      />
+      <EasySelect
+        v-model="searchForm.status" placeholder="状态" clearable
+        :options="[{ label: '启用', value: 1 }, { label: '禁用', value: 0 }]" style="width: 120px" @change="handleSearch"
+      />
       <EasyButton type="primary" @click="handleSearch">
         <el-icon><Search /></el-icon>查询
       </EasyButton>
@@ -296,11 +302,13 @@ onMounted(() => fetchData())
       </EasyButton>
     </div>
 
-    <EasyTable v-loading="loading" :data="tableData" :columns="columns" selection-mode="multiple" stripe border
+    <EasyTable
+      v-loading="loading" :data="tableData" :columns="columns" selection-mode="multiple" stripe border
       :pagination="true" :total="pagination.total" :page="pagination.page" :page-size="pagination.pageSize"
       :page-size-options="[10, 20, 50, 100]" action-label="操作" :action-width="160" action-fixed="right"
       @selection-change="handleSelectionChange" @page-change="(p: number) => { pagination.page = p; fetchData() }"
-      @page-size-change="(s: number) => { pagination.pageSize = s; fetchData() }">
+      @page-size-change="(s: number) => { pagination.pageSize = s; fetchData() }"
+    >
       <template #col-status="{ row }">
         <EasySwitch :model-value="row.status === 1" @change="(val: boolean) => handleToggleStatus(row, val)" />
       </template>
@@ -318,8 +326,10 @@ onMounted(() => fetchData())
       </template>
     </EasyTable>
 
-    <el-dialog v-model="dialog.visible" :title="dialog.isEdit ? '编辑岗位' : '新增岗位'" width="480px"
-      :close-on-click-modal="false" @close="handleDialogClose">
+    <el-dialog
+      v-model="dialog.visible" :title="dialog.isEdit ? '编辑岗位' : '新增岗位'" width="480px"
+      :close-on-click-modal="false" @close="handleDialogClose"
+    >
       <el-form ref="formRef" :model="dialog.form" :rules="formRules" label-width="90px">
         <el-form-item label="岗位名称" prop="name">
           <EasyInput v-model="dialog.form.name" placeholder="如: 高级前端工程师" maxlength="30" />
@@ -328,8 +338,10 @@ onMounted(() => fetchData())
           <EasyInput v-model="dialog.form.code" placeholder="如: senior_fe" maxlength="30" />
         </el-form-item>
         <el-form-item label="所属部门" prop="deptId">
-          <EasySelect v-model="dialog.form.deptId" placeholder="请选择部门" :options="deptOptions" label-key="name"
-            value-key="id" style="width: 100%" />
+          <EasySelect
+            v-model="dialog.form.deptId" placeholder="请选择部门" :options="deptOptions" label-key="name"
+            value-key="id" style="width: 100%"
+          />
         </el-form-item>
         <el-form-item label="备注" prop="remark">
           <EasyInput v-model="dialog.form.remark" type="textarea" :rows="2" placeholder="岗位职责描述（选填）" />

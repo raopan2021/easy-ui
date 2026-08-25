@@ -1,5 +1,4 @@
 import antfu from '@antfu/eslint-config'
-import { attributesFillRule } from './eslint-rules/attributes-fill'
 
 export default antfu({
   vue: true,
@@ -23,23 +22,6 @@ export default antfu({
     'vue/custom-event-name-casing': 'off',
     'vue/no-use-v-if-with-v-for': 'warn',
     'vue/no-mutating-props': 'warn',
-    // 紧凑填充式格式化：取消强制"每属性一行"的规则
-    'vue/first-attribute-linebreak': 'off',
-    'vue/html-indent': 'off',
-    'vue/html-closing-bracket-newline': 'off',
-  },
-}, {
-  // 本地格式化规则：把多行开标签属性合并为紧凑填充式
-  files: ['**/*.vue'],
-  plugins: {
-    local: {
-      rules: {
-        'attributes-fill': attributesFillRule,
-      },
-    },
-  },
-  rules: {
-    'local/attributes-fill': 'error',
   },
 }, {
   // demo 页面：console/alert 属于演示行为，其余规则不放松

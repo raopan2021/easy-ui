@@ -103,8 +103,10 @@ watch(
             </RouterView>
           </main>
           <!-- 右侧目录（仅文档组件页自动生成） -->
-          <DocToc v-if="hasToc" :items="tocItems" :active-id="activeId" :scrolled="scrolled" @select="scrollTo"
-            @back-top="scrollToTop" />
+          <DocToc
+            v-if="hasToc" :items="tocItems" :active-id="activeId" :scrolled="scrolled" @select="scrollTo"
+            @back-top="scrollToTop"
+          />
         </div>
       </div>
     </div>

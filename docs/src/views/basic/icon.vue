@@ -190,8 +190,10 @@ function copyIconName(name: string) {
               <span>简单方式：直接使用 @/ 路径（推荐）</span>
             </div>
             <div class="icon-showcase__item">
-              <EasyIcon name="https://img2.baidu.com/it/u=3879244448,1206251298&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
-                :size="32" />
+              <EasyIcon
+                name="https://img2.baidu.com/it/u=3879244448,1206251298&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
+                :size="32"
+              />
               <span>网络图片</span>
             </div>
           </div>
@@ -254,8 +256,10 @@ import imgPng from '@/assets/icon/img/img.png?url'
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="icon-grid icon-grid--all">
-            <div v-for="icon in allEpIcons" :key="icon" class="icon-grid__item icon-grid__item--interactive"
-              :title="`点击复制：el:${icon}`" @click="copyIconName(icon)">
+            <div
+              v-for="icon in allEpIcons" :key="icon" class="icon-grid__item icon-grid__item--interactive"
+              :title="`点击复制：el:${icon}`" @click="copyIconName(icon)"
+            >
               <EasyIcon :name="`el:${icon}`" :size="20" />
               <span class="icon-grid__label">{{ icon }}</span>
             </div>

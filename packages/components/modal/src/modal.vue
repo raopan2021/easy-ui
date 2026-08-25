@@ -40,8 +40,10 @@ const { modalRef, handleMaskClick, handleConfirm, handleCancel, handleClose } = 
 <template>
   <Teleport to="body">
     <Transition name="easy-modal-fade">
-      <div v-if="modelValue" class="easy-modal-mask" :class="{ 'easy-modal-mask--transparent': !showMask }"
-        :style="maskStyle" @click.self="handleMaskClick">
+      <div
+        v-if="modelValue" class="easy-modal-mask" :class="{ 'easy-modal-mask--transparent': !showMask }"
+        :style="maskStyle" @click.self="handleMaskClick"
+      >
         <Transition :name="`easy-modal-${transition}`" appear>
           <div v-if="modelValue" ref="modalRef" class="easy-modal" :class="modalClass" :style="modalStyle">
             <!-- 头部 -->
@@ -52,8 +54,10 @@ const { modalRef, handleMaskClick, handleConfirm, handleCancel, handleClose } = 
                 </slot>
               </div>
               <button v-if="showClose" class="easy-modal__close" @click="handleClose">
-                <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round">
+                <svg
+                  viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round"
+                >
                   <line x1="6" y1="6" x2="18" y2="18" />
                   <line x1="18" y1="6" x2="6" y2="18" />
                 </svg>

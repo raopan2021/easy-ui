@@ -259,8 +259,10 @@ onMounted(() => {
                   <p>甲方代表（签字）：</p>
                   <p>&nbsp;</p>
                   <div class="signature-area">
-                    <div v-for="(sig, idx) in signatures" :key="idx" class="signature-item"
-                      :style="{ left: `${sig.x}px`, top: `${sig.y}px` }" @mousedown.stop="startDragSig($event, idx)">
+                    <div
+                      v-for="(sig, idx) in signatures" :key="idx" class="signature-item"
+                      :style="{ left: `${sig.x}px`, top: `${sig.y}px` }" @mousedown.stop="startDragSig($event, idx)"
+                    >
                       <img v-if="sig.type === 'stamp'" :src="sig.data" alt="印章" class="signature-stamp">
                       <canvas v-else class="signature-canvas-small" :width="160" :height="60" />
                       <EasyButton class="signature-item__del" size="small" circle link @click.stop="removeSig(idx)">
@@ -288,9 +290,11 @@ onMounted(() => {
             <div class="sign-panel">
               <EasyTabs model-value="handwrite">
                 <EasyTabPane label="手写签名" name="handwrite">
-                  <canvas ref="drawCanvasRef" :width="300" :height="150" class="draw-canvas" @mousedown="startDraw"
+                  <canvas
+                    ref="drawCanvasRef" :width="300" :height="150" class="draw-canvas" @mousedown="startDraw"
                     @mousemove="onDraw" @mouseup="stopDraw" @mouseleave="stopDraw" @touchstart.prevent="startDrawTouch"
-                    @touchmove.prevent="onDrawTouch" @touchend="stopDraw" />
+                    @touchmove.prevent="onDrawTouch" @touchend="stopDraw"
+                  />
                   <div class="draw-actions">
                     <EasyButton size="small" @click="clearCanvas">
                       清空

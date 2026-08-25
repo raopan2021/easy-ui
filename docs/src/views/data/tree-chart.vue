@@ -941,8 +941,10 @@ const treeData: TreeChartNode[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyTreeChart :data="basicData" background-color="#1a1a2e" :show-grid="true" grid-color="#3a3a5e"
-            :height="300" />
+          <EasyTreeChart
+            :data="basicData" background-color="#1a1a2e" :show-grid="true" grid-color="#3a3a5e"
+            :height="300"
+          />
         </div>
         <EasyDocCode
           code="<EasyTreeChart

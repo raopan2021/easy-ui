@@ -668,8 +668,10 @@ const columns = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch; gap: 12px">
-          <EasyTable :columns="basicColumns" :data="basicData" show-index selectable stripe
-            @selection-change="handleSelectionChange" />
+          <EasyTable
+            :columns="basicColumns" :data="basicData" show-index selectable stripe
+            @selection-change="handleSelectionChange"
+          />
           <div v-if="selectedRows.length" class="selection-hint">
             已选 {{ selectedRows.length }} 行：{{ selectedRows.map((r) => r.name).join('、') }}
           </div>
@@ -698,8 +700,10 @@ const columns = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch; gap: 12px">
-          <EasyTable :columns="basicColumns" :data="basicData" show-index selectable selection-mode="single" stripe
-            @selection-change="handleSingleSelection" />
+          <EasyTable
+            :columns="basicColumns" :data="basicData" show-index selectable selection-mode="single" stripe
+            @selection-change="handleSingleSelection"
+          />
           <div v-if="singleSelectedRow" class="selection-hint">
             已选：{{ singleSelectedRow.name }}，部门：{{ singleSelectedRow.dept }}
           </div>
@@ -845,22 +849,28 @@ const columns = [
             <p class="size-label">
               右侧分页（默认）
             </p>
-            <EasyTable :columns="paginationColumns" :data="bigData" stripe :page-size="10"
-              @page-change="handlePageChange" @page-size-change="handlePageSizeChange" />
+            <EasyTable
+              :columns="paginationColumns" :data="bigData" stripe :page-size="10"
+              @page-change="handlePageChange" @page-size-change="handlePageSizeChange"
+            />
           </div>
           <div>
             <p class="size-label">
               居中分页
             </p>
-            <EasyTable :columns="paginationColumns" :data="bigData" stripe pagination-position="center" :page-size="10"
-              @page-change="handlePageChange" @page-size-change="handlePageSizeChange" />
+            <EasyTable
+              :columns="paginationColumns" :data="bigData" stripe pagination-position="center" :page-size="10"
+              @page-change="handlePageChange" @page-size-change="handlePageSizeChange"
+            />
           </div>
           <div>
             <p class="size-label">
               左侧分页 + 隐藏每页条数选择
             </p>
-            <EasyTable :columns="paginationColumns" :data="bigData" stripe pagination-position="left" :page-size="10"
-              :show-page-size="false" @page-change="handlePageChange" />
+            <EasyTable
+              :columns="paginationColumns" :data="bigData" stripe pagination-position="left" :page-size="10"
+              :show-page-size="false" @page-change="handlePageChange"
+            />
           </div>
           <div v-if="currentPageInfo" class="pagination-hint">
             当前页：{{ currentPageInfo }}
@@ -924,8 +934,10 @@ async function handleServerPageSizeChange(pageSize: number) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <EasyTable :columns="basicColumns" :data="bigData.slice(0, 15)" :max-height="280" stripe show-summary
-            summary-label="平均年龄" show-index />
+          <EasyTable
+            :columns="basicColumns" :data="bigData.slice(0, 15)" :max-height="280" stripe show-summary
+            summary-label="平均年龄" show-index
+          />
         </div>
         <EasyDocCode
           code="<easy-table
@@ -1054,8 +1066,10 @@ async function handleServerPageSizeChange(pageSize: number) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <EasyTable title="员工信息表" :columns="basicColumns" :data="basicData" stripe show-refresh show-export
-            show-column-settings @refresh="handleRefresh" @export="handleExport" />
+          <EasyTable
+            title="员工信息表" :columns="basicColumns" :data="basicData" stripe show-refresh show-export
+            show-column-settings @refresh="handleRefresh" @export="handleExport"
+          />
         </div>
         <EasyDocCode
           code="<easy-table
@@ -1095,8 +1109,10 @@ function handleExport() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <EasyTable title="员工信息表" :columns="columnSettingsColumns" :data="basicData" stripe show-column-settings
-            @column-order-change="handleColumnOrderChange" />
+          <EasyTable
+            title="员工信息表" :columns="columnSettingsColumns" :data="basicData" stripe show-column-settings
+            @column-order-change="handleColumnOrderChange"
+          />
         </div>
         <EasyDocCode
           code="<easy-table
@@ -1136,8 +1152,10 @@ function handleColumnOrderChange(newColumns: TableColumn[]) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch; gap: 12px">
-          <EasyTable ref="expandTableRef" :columns="expandColumns" :data="expandData" stripe border :expandable="true"
-            :default-expanded-rows="[0]" @expand-change="handleExpandChange">
+          <EasyTable
+            ref="expandTableRef" :columns="expandColumns" :data="expandData" stripe border :expandable="true"
+            :default-expanded-rows="[0]" @expand-change="handleExpandChange"
+          >
             <template #expand="{ row }">
               <div class="expand-children">
                 <div v-if="row.children?.length" class="children-header">
@@ -1184,8 +1202,10 @@ function handleColumnOrderChange(newColumns: TableColumn[]) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch; gap: 12px">
-          <EasyTable ref="treeTableRef" :columns="treeColumns" :data="treeData" stripe border :tree="true"
-            :tree-indent-size="20" :default-expand-all="true" @tree-expand="handleTreeExpand" />
+          <EasyTable
+            ref="treeTableRef" :columns="treeColumns" :data="treeData" stripe border :tree="true"
+            :tree-indent-size="20" :default-expand-all="true" @tree-expand="handleTreeExpand"
+          />
           <div v-if="treeExpandInfo" class="tree-hint">
             {{ treeExpandInfo }}
           </div>
@@ -1239,9 +1259,11 @@ function handleTreeExpand(row, expanded) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch; gap: 12px">
-          <EasyTable ref="lazyTableRef" :columns="lazyColumns" :data="lazyData" stripe border show-index :tree="true"
+          <EasyTable
+            ref="lazyTableRef" :columns="lazyColumns" :data="lazyData" stripe border show-index :tree="true"
             :lazy="true" :load="handleLazyLoad" tree-children-key="children" row-key="id"
-            @tree-expand="handleLazyTreeExpand" />
+            @tree-expand="handleLazyTreeExpand"
+          />
           <div v-if="lazyExpandInfo" class="tree-hint">
             {{ lazyExpandInfo }}
           </div>
@@ -1318,8 +1340,10 @@ const columns = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch; max-width: 100%">
           <div style="width: 100%; overflow-x: auto">
-            <EasyTable :columns="scrollColumns" :data="enhancedBigData.slice(0, 10)" stripe border show-summary
-              summary-label="合计" show-column-settings :page-size="10" />
+            <EasyTable
+              :columns="scrollColumns" :data="enhancedBigData.slice(0, 10)" stripe border show-summary
+              summary-label="合计" show-column-settings :page-size="10"
+            />
           </div>
           <p style="font-size: 13px; color: var(--el-text-color-secondary); margin-top: 12px">
             💡 提示：点击右上角"列设置"按钮可控制列的显示/隐藏，横向滚动查看更多列
@@ -1376,8 +1400,10 @@ const columns = [
             <p class="size-label">
               操作列固定在右侧
             </p>
-            <EasyTable :columns="actionFixedColumns" :data="enhancedBigData.slice(0, 8)" stripe border
-              action-fixed="right" :action-width="140" :page-size="8">
+            <EasyTable
+              :columns="actionFixedColumns" :data="enhancedBigData.slice(0, 8)" stripe border
+              action-fixed="right" :action-width="140" :page-size="8"
+            >
               <template #action="{ row }">
                 <div class="action-btns">
                   <button class="action-btn action-btn--edit" @click.stop="handleEdit(row)">
@@ -1424,8 +1450,10 @@ const columns = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: stretch">
-          <EasyTable :columns="summaryColumns" :data="summaryData" show-summary summary-label="合计" border
-            :pagination="false" />
+          <EasyTable
+            :columns="summaryColumns" :data="summaryData" show-summary summary-label="合计" border
+            :pagination="false"
+          />
         </div>
         <EasyDocCode
           code="<easy-table

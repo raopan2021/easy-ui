@@ -25,8 +25,10 @@ const { isActuallyDisabled, isChecked, select } = useRadio(props, emit)
     ]"
     @click.stop="select"
   >
-    <input class="easy-radio__original" type="radio" :name="name" :value="label" :disabled="isActuallyDisabled"
-      :checked="isChecked" @change.stop>
+    <input
+      class="easy-radio__original" type="radio" :name="name" :value="label" :disabled="isActuallyDisabled"
+      :checked="isChecked" @change.stop
+    >
     <span class="easy-radio__inner">
       <span class="easy-radio__dot" :class="{ 'is-show': isChecked }" />
     </span>

@@ -322,10 +322,12 @@ onMounted(() => fetchData())
     </div>
 
     <!-- 数据表格 -->
-    <EasyTable v-loading="loading" :data="tableData" :columns="columns" stripe border :pagination="true" :total="total"
+    <EasyTable
+      v-loading="loading" :data="tableData" :columns="columns" stripe border :pagination="true" :total="total"
       :page="page" :page-size="pageSize" :page-size-options="[10, 20, 50]" action-label="操作" :action-width="240"
       action-fixed="right" @page-change="(p: number) => { page.value = p; fetchData() }"
-      @page-size-change="(s: number) => { pageSize.value = s; fetchData() }">
+      @page-size-change="(s: number) => { pageSize.value = s; fetchData() }"
+    >
       <template #col-status="{ row }">
         <EasyTag :type="row.status === 1 ? 'success' : 'info'" size="small">
           {{ row.status === 1 ? '启用' : '禁用' }}
@@ -349,8 +351,10 @@ onMounted(() => fetchData())
     </EasyTable>
 
     <!-- 新增 / 编辑弹窗 -->
-    <el-dialog v-model="dialog.visible" :title="dialog.isEdit ? '编辑角色' : '新增角色'" width="500px"
-      :close-on-click-modal="false" @close="handleDialogClose">
+    <el-dialog
+      v-model="dialog.visible" :title="dialog.isEdit ? '编辑角色' : '新增角色'" width="500px"
+      :close-on-click-modal="false" @close="handleDialogClose"
+    >
       <el-form ref="formRef" :model="dialog.form" :rules="formRules" label-width="90px">
         <el-form-item label="角色名称" prop="name">
           <EasyInput v-model="dialog.form.name" placeholder="请输入角色名称" />
@@ -383,10 +387,14 @@ onMounted(() => fetchData())
     </el-dialog>
 
     <!-- 分配权限弹窗 -->
-    <el-dialog v-model="permDialog.visible" :title="`分配权限 — ${permDialog.roleName}`" width="500px"
-      :close-on-click-modal="false">
-      <el-tree ref="treeRef" :data="menuTree" show-checkbox node-key="id" :default-checked-keys="permDialog.checkedKeys"
-        :props="{ label: 'name', children: 'children' }" default-expand-all style="max-height: 400px; overflow: auto" />
+    <el-dialog
+      v-model="permDialog.visible" :title="`分配权限 — ${permDialog.roleName}`" width="500px"
+      :close-on-click-modal="false"
+    >
+      <el-tree
+        ref="treeRef" :data="menuTree" show-checkbox node-key="id" :default-checked-keys="permDialog.checkedKeys"
+        :props="{ label: 'name', children: 'children' }" default-expand-all style="max-height: 400px; overflow: auto"
+      />
       <template #footer>
         <EasyButton @click="permDialog.visible = false">
           取消

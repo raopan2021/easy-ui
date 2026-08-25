@@ -64,8 +64,10 @@ const disabledRange = ref({
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyDateRangePicker v-model:start="dateRange.start" v-model:end="dateRange.end" start-placeholder="开始日期"
-            end-placeholder="结束日期" />
+          <EasyDateRangePicker
+            v-model:start="dateRange.start" v-model:end="dateRange.end" start-placeholder="开始日期"
+            end-placeholder="结束日期"
+          />
           <div class="doc-result">
             选中值：{{ dateRange.start }} 至 {{ dateRange.end }}
           </div>
@@ -102,8 +104,10 @@ const dateRange = ref({
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyDateTimeRangePicker v-model:start="dateTimeRange.start" v-model:end="dateTimeRange.end"
-            :show-seconds="true" start-placeholder="开始时间" end-placeholder="结束时间" />
+          <EasyDateTimeRangePicker
+            v-model:start="dateTimeRange.start" v-model:end="dateTimeRange.end"
+            :show-seconds="true" start-placeholder="开始时间" end-placeholder="结束时间"
+          />
           <div class="doc-result">
             选中值：{{ dateTimeRange.start }} 至 {{ dateTimeRange.end }}
           </div>
@@ -141,8 +145,10 @@ const dateTimeRange = ref({
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyTimeRangePicker v-model:start="timeRange.start" v-model:end="timeRange.end" start-placeholder="开始时间"
-            end-placeholder="结束时间" />
+          <EasyTimeRangePicker
+            v-model:start="timeRange.start" v-model:end="timeRange.end" start-placeholder="开始时间"
+            end-placeholder="结束时间"
+          />
           <div class="doc-result">
             选中值：{{ timeRange.start }} 至 {{ timeRange.end }}
           </div>
@@ -186,8 +192,10 @@ const timeRange = ref({
             </div>
             <div class="size-item">
               <span class="size-label">Default</span>
-              <EasyDateRangePicker v-model:start="sizeRange.defaultStart" v-model:end="sizeRange.defaultEnd"
-                size="default" />
+              <EasyDateRangePicker
+                v-model:start="sizeRange.defaultStart" v-model:end="sizeRange.defaultEnd"
+                size="default"
+              />
             </div>
             <div class="size-item">
               <span class="size-label">Small</span>

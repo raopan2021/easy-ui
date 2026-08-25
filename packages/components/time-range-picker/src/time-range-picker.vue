@@ -34,8 +34,10 @@ export type { TimeRangePickerEmits, TimeRangePickerProps } from './time-range-pi
   <div class="easy-time-range-picker" :class="[`easy-time-range-picker--${size}`, { 'is-disabled': disabled }]">
     <!-- 开始时间选择器 -->
     <div class="easy-time-range-picker__start">
-      <EasyTimePicker :model-value="start" :placeholder="startPlaceholder || '开始时间'" :disabled="disabled"
-        :readonly="readonly" :clearable="clearable" :format="format" :size="size" @update:model-value="handleStartChange" />
+      <EasyTimePicker
+        :model-value="start" :placeholder="startPlaceholder || '开始时间'" :disabled="disabled"
+        :readonly="readonly" :clearable="clearable" :format="format" :size="size" @update:model-value="handleStartChange"
+      />
     </div>
 
     <!-- 分隔符 -->
@@ -43,8 +45,10 @@ export type { TimeRangePickerEmits, TimeRangePickerProps } from './time-range-pi
 
     <!-- 结束时间选择器 -->
     <div class="easy-time-range-picker__end">
-      <EasyTimePicker :model-value="end" :placeholder="endPlaceholder || '结束时间'" :disabled="disabled"
-        :readonly="readonly" :clearable="clearable" :format="format" :size="size" @update:model-value="handleEndChange" />
+      <EasyTimePicker
+        :model-value="end" :placeholder="endPlaceholder || '结束时间'" :disabled="disabled"
+        :readonly="readonly" :clearable="clearable" :format="format" :size="size" @update:model-value="handleEndChange"
+      />
     </div>
   </div>
 </template>

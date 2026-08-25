@@ -30,8 +30,10 @@ defineExpose({ show })
 
     <!-- 关闭按钮 -->
     <span v-if="closable" class="easy-tag__close" @click.stop="handleClose">
-      <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5"
-        stroke-linecap="round">
+      <svg
+        viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round"
+      >
         <line x1="18" y1="6" x2="6" y2="18" />
         <line x1="6" y1="6" x2="18" y2="18" />
       </svg>

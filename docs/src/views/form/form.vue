@@ -229,8 +229,10 @@ function resetSimplest() {
                 <EasyRate v-model="fullForm.satisfaction" show-text />
               </EasyFormItem>
               <EasyFormItem label="备注">
-                <EasyInput v-model="fullForm.remark" type="textarea" placeholder="请输入备注信息" :maxlength="200"
-                  show-word-limit />
+                <EasyInput
+                  v-model="fullForm.remark" type="textarea" placeholder="请输入备注信息" :maxlength="200"
+                  show-word-limit
+                />
               </EasyFormItem>
               <EasyFormItem>
                 <div style="display: flex; gap: 8px">

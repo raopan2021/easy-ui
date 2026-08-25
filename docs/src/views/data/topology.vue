@@ -437,10 +437,14 @@ onMounted(() => {
               </el-radio-button>
             </el-radio-group>
           </div>
-          <canvas ref="canvasRef" :width="canvasWidth" :height="600" class="topo-canvas" @mousemove="onMouseMove"
-            @mouseleave="tooltipNode = null" @mousedown="onMouseDown" @mouseup="onMouseUp" @wheel.prevent="onWheel" />
-          <div v-if="tooltipNode" class="topo-tooltip"
-            :style="{ left: `${tooltipNode.x}px`, top: `${tooltipNode.y}px` }">
+          <canvas
+            ref="canvasRef" :width="canvasWidth" :height="600" class="topo-canvas" @mousemove="onMouseMove"
+            @mouseleave="tooltipNode = null" @mousedown="onMouseDown" @mouseup="onMouseUp" @wheel.prevent="onWheel"
+          />
+          <div
+            v-if="tooltipNode" class="topo-tooltip"
+            :style="{ left: `${tooltipNode.x}px`, top: `${tooltipNode.y}px` }"
+          >
             <div class="topo-tooltip__name">
               {{ tooltipNode.name }}
             </div>

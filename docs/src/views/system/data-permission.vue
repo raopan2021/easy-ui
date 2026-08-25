@@ -255,13 +255,19 @@ onMounted(() => fetchData())
     </div>
 
     <div class="search-bar">
-      <EasyInput v-model="searchForm.keyword" placeholder="搜索规则名称/数据表" clearable style="width: 240px"
-        @keyup.enter="handleSearch" @clear="handleSearch" />
-      <EasySelect v-model="searchForm.scope" placeholder="适用范围" clearable
+      <EasyInput
+        v-model="searchForm.keyword" placeholder="搜索规则名称/数据表" clearable style="width: 240px"
+        @keyup.enter="handleSearch" @clear="handleSearch"
+      />
+      <EasySelect
+        v-model="searchForm.scope" placeholder="适用范围" clearable
         :options="[{ label: '全部', value: 'all' }, { label: '部门', value: 'dept' }, { label: '个人', value: 'self' }]"
-        style="width: 140px" @change="handleSearch" />
-      <EasySelect v-model="searchForm.status" placeholder="状态" clearable
-        :options="[{ label: '启用', value: 1 }, { label: '禁用', value: 0 }]" style="width: 120px" @change="handleSearch" />
+        style="width: 140px" @change="handleSearch"
+      />
+      <EasySelect
+        v-model="searchForm.status" placeholder="状态" clearable
+        :options="[{ label: '启用', value: 1 }, { label: '禁用', value: 0 }]" style="width: 120px" @change="handleSearch"
+      />
       <EasyButton type="primary" @click="handleSearch">
         <el-icon><Search /></el-icon>查询
       </EasyButton>
@@ -279,11 +285,13 @@ onMounted(() => fetchData())
       </EasyButton>
     </div>
 
-    <EasyTable v-loading="loading" :data="tableData" :columns="columns" selection-mode="multiple" stripe border
+    <EasyTable
+      v-loading="loading" :data="tableData" :columns="columns" selection-mode="multiple" stripe border
       :pagination="true" :total="pagination.total" :page="pagination.page" :page-size="pagination.pageSize"
       :page-size-options="[10, 20, 50, 100]" action-label="操作" :action-width="160" action-fixed="right"
       @selection-change="handleSelectionChange" @page-change="(p: number) => { pagination.page = p; fetchData() }"
-      @page-size-change="(s: number) => { pagination.pageSize = s; fetchData() }">
+      @page-size-change="(s: number) => { pagination.pageSize = s; fetchData() }"
+    >
       <template #col-scope="{ row }">
         <EasyTag :type="scopeMap[row.scope]?.tag" size="small">
           {{ scopeMap[row.scope]?.label }}
@@ -311,8 +319,10 @@ onMounted(() => fetchData())
       </template>
     </EasyTable>
 
-    <el-dialog v-model="dialog.visible" :title="dialog.isEdit ? '编辑规则' : '新增规则'" width="560px"
-      :close-on-click-modal="false" @close="handleDialogClose">
+    <el-dialog
+      v-model="dialog.visible" :title="dialog.isEdit ? '编辑规则' : '新增规则'" width="560px"
+      :close-on-click-modal="false" @close="handleDialogClose"
+    >
       <el-form ref="formRef" :model="dialog.form" :rules="formRules" label-width="100px">
         <el-form-item label="规则名称" prop="name">
           <EasyInput v-model="dialog.form.name" placeholder="请输入规则名称" maxlength="30" />
@@ -334,8 +344,10 @@ onMounted(() => fetchData())
           <EasySelect v-model="dialog.form.tableName" placeholder="请选择" :options="tableOptions" style="width: 100%" />
         </el-form-item>
         <el-form-item label="过滤条件" prop="filterExpr">
-          <EasyInput v-model="dialog.form.filterExpr" type="textarea" :rows="3"
-            placeholder="如: dept_id = #{user.deptId}" />
+          <EasyInput
+            v-model="dialog.form.filterExpr" type="textarea" :rows="3"
+            placeholder="如: dept_id = #{user.deptId}"
+          />
         </el-form-item>
         <el-form-item label="状态" prop="status">
           <EasySwitch v-model="dialog.form.status" :active-value="1" :inactive-value="0" />

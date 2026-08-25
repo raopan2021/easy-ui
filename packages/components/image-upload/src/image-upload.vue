@@ -68,21 +68,29 @@ defineExpose({
     <div class="easy-upload__list">
       <!-- 已上传图片 -->
       <TransitionGroup name="easy-upload-fade">
-        <div v-for="(item, index) in fileList" :key="item.uid" class="easy-upload__item"
-          :class="[`easy-upload__item--${item.status}`]" :style="itemStyle">
+        <div
+          v-for="(item, index) in fileList" :key="item.uid" class="easy-upload__item"
+          :class="[`easy-upload__item--${item.status}`]" :style="itemStyle"
+        >
           <!-- 预览图 -->
-          <img v-if="item.url" :src="item.url" :alt="item.name" class="easy-upload__img" :style="{ objectFit: fit }"
-            @click="handlePreview(index)">
+          <img
+            v-if="item.url" :src="item.url" :alt="item.name" class="easy-upload__img" :style="{ objectFit: fit }"
+            @click="handlePreview(index)"
+          >
 
           <!-- 上传进度 -->
           <div v-if="item.status === 'uploading'" class="easy-upload__progress">
             <div class="easy-upload__progress-ring">
               <svg viewBox="0 0 36 36" class="progress-svg">
-                <circle class="progress-track" cx="18" cy="18" r="14" fill="none" stroke="rgba(255,255,255,0.3)"
-                  stroke-width="3" />
-                <circle class="progress-fill" cx="18" cy="18" r="14" fill="none" stroke="#fff" stroke-width="3"
+                <circle
+                  class="progress-track" cx="18" cy="18" r="14" fill="none" stroke="rgba(255,255,255,0.3)"
+                  stroke-width="3"
+                />
+                <circle
+                  class="progress-fill" cx="18" cy="18" r="14" fill="none" stroke="#fff" stroke-width="3"
                   stroke-linecap="round" :stroke-dasharray="`${(item.percent || 0) * 0.88} 88`"
-                  transform="rotate(-90 18 18)" />
+                  transform="rotate(-90 18 18)"
+                />
               </svg>
               <span class="progress-text">{{ item.percent || 0 }}%</span>
             </div>
@@ -101,8 +109,10 @@ defineExpose({
           <!-- 操作遮罩（hover 显示） -->
           <div v-if="!disabled && item.status !== 'uploading'" class="easy-upload__actions">
             <!-- 预览 -->
-            <span v-if="item.url && previewable" class="easy-upload__action" title="预览"
-              @click.stop="handlePreview(index)">
+            <span
+              v-if="item.url && previewable" class="easy-upload__action" title="预览"
+              @click.stop="handlePreview(index)"
+            >
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                 <circle cx="12" cy="12" r="3" />
@@ -129,9 +139,11 @@ defineExpose({
       </TransitionGroup>
 
       <!-- 上传触发区域 -->
-      <div v-if="!disabled && !isMaxReached" class="easy-upload__trigger" :class="{ 'is-dragover': isDragover }"
+      <div
+        v-if="!disabled && !isMaxReached" class="easy-upload__trigger" :class="{ 'is-dragover': isDragover }"
         :style="itemStyle" @click="handleTriggerClick" @dragover.prevent="isDragover = true"
-        @dragleave.prevent="isDragover = false" @drop.prevent="handleDrop">
+        @dragleave.prevent="isDragover = false" @drop.prevent="handleDrop"
+      >
         <slot name="trigger">
           <div class="easy-upload__trigger-inner">
             <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -144,8 +156,10 @@ defineExpose({
       </div>
 
       <!-- 隐藏的 input -->
-      <input ref="inputRef" type="file" :accept="accept" :multiple="multiple && (limit === undefined || limit > 1)"
-        class="easy-upload__input" @change="handleInputChange">
+      <input
+        ref="inputRef" type="file" :accept="accept" :multiple="multiple && (limit === undefined || limit > 1)"
+        class="easy-upload__input" @change="handleInputChange"
+      >
     </div>
 
     <!-- 提示文字 -->
@@ -158,8 +172,10 @@ defineExpose({
     <!-- 图片预览弹窗 -->
     <Teleport to="body">
       <Transition name="easy-upload-preview">
-        <div v-if="previewVisible" class="easy-upload-preview-modal" @click.self="previewVisible = false"
-          @wheel.prevent="handlePreviewWheel">
+        <div
+          v-if="previewVisible" class="easy-upload-preview-modal" @click.self="previewVisible = false"
+          @wheel.prevent="handlePreviewWheel"
+        >
           <!-- 关闭 -->
           <button class="easy-upload-preview__close" @click="previewVisible = false">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -169,8 +185,10 @@ defineExpose({
           </button>
 
           <!-- 上一张 -->
-          <button v-if="previewUrlList.length > 1" class="easy-upload-preview__arrow easy-upload-preview__arrow--prev"
-            @click="previewPrev">
+          <button
+            v-if="previewUrlList.length > 1" class="easy-upload-preview__arrow easy-upload-preview__arrow--prev"
+            @click="previewPrev"
+          >
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
               <polyline points="15 18 9 12 15 6" />
             </svg>
@@ -178,13 +196,17 @@ defineExpose({
 
           <!-- 图片 -->
           <div class="easy-upload-preview__body" @mousedown="handlePreviewDragStart">
-            <img :src="previewUrlList[previewIndex]" :style="previewImgStyle" class="easy-upload-preview__img"
-              draggable="false">
+            <img
+              :src="previewUrlList[previewIndex]" :style="previewImgStyle" class="easy-upload-preview__img"
+              draggable="false"
+            >
           </div>
 
           <!-- 下一张 -->
-          <button v-if="previewUrlList.length > 1" class="easy-upload-preview__arrow easy-upload-preview__arrow--next"
-            @click="previewNext">
+          <button
+            v-if="previewUrlList.length > 1" class="easy-upload-preview__arrow easy-upload-preview__arrow--next"
+            @click="previewNext"
+          >
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
               <polyline points="9 18 15 12 9 6" />
             </svg>

@@ -50,8 +50,10 @@ export type { FormEmits, FormProps } from './form'
 </script>
 
 <template>
-  <form class="easy-form"
-    :class="[`easy-form--${size}`, { 'is-inline': inline, 'is-label-top': labelPosition === 'top' }]" @submit.prevent>
+  <form
+    class="easy-form"
+    :class="[`easy-form--${size}`, { 'is-inline': inline, 'is-label-top': labelPosition === 'top' }]" @submit.prevent
+  >
     <slot />
   </form>
 </template>

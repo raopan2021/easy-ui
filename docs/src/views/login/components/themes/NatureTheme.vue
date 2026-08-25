@@ -40,12 +40,16 @@ function handleSubmit() {
       <div class="bg-gradient" />
       <div class="bg-waves">
         <svg class="wave" viewBox="0 0 1440 200" preserveAspectRatio="none">
-          <path d="M0,100 C360,180 720,20 1080,100 C1260,140 1380,80 1440,100 L1440,200 L0,200 Z"
-            fill="rgba(255,255,255,0.06)" />
+          <path
+            d="M0,100 C360,180 720,20 1080,100 C1260,140 1380,80 1440,100 L1440,200 L0,200 Z"
+            fill="rgba(255,255,255,0.06)"
+          />
         </svg>
         <svg class="wave wave--2" viewBox="0 0 1440 200" preserveAspectRatio="none">
-          <path d="M0,120 C240,60 480,160 720,100 C960,40 1200,140 1440,80 L1440,200 L0,200 Z"
-            fill="rgba(255,255,255,0.04)" />
+          <path
+            d="M0,120 C240,60 480,160 720,100 C960,40 1200,140 1440,80 L1440,200 L0,200 Z"
+            fill="rgba(255,255,255,0.04)"
+          />
         </svg>
       </div>
       <span v-for="i in 6" :key="i" class="float-circle" :class="`float-circle--${i}`" />
@@ -111,16 +115,22 @@ function handleSubmit() {
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                 <path d="M7 11V7a5 5 0 0 1 10 0v4" />
               </svg>
-              <input v-model="form.password" :type="showPwd ? 'text' : 'password'" class="nf-input nf-input--pwd"
-                placeholder="请输入密码" autocomplete="current-password">
+              <input
+                v-model="form.password" :type="showPwd ? 'text' : 'password'" class="nf-input nf-input--pwd"
+                placeholder="请输入密码" autocomplete="current-password"
+              >
               <button type="button" class="nf-toggle" @click="showPwd = !showPwd">
-                <svg v-if="!showPwd" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16"
-                  height="16">
+                <svg
+                  v-if="!showPwd" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16"
+                  height="16"
+                >
                   <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                   <circle cx="12" cy="12" r="3" />
                 </svg>
-                <svg v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16"
-                  height="16">
+                <svg
+                  v-else viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16"
+                  height="16"
+                >
                   <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
                   <line x1="1" y1="1" x2="23" y2="23" />
                 </svg>
@@ -147,8 +157,10 @@ function handleSubmit() {
             <template v-else>
               <span class="nf-btn-text">立即登录</span>
               <span class="nf-btn-arrow">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-                  stroke-linejoin="round">
+                <svg
+                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
                   <line x1="5" y1="12" x2="19" y2="12" />
                   <polyline points="12 5 19 12 12 19" />
                 </svg>

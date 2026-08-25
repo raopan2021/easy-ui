@@ -83,10 +83,14 @@ defineExpose({
         <div v-if="showPenSize" class="easy-signature__pen-size">
           <span class="easy-signature__pen-label">粗细</span>
           <div class="easy-signature__pen-options">
-            <button v-for="size in penSizes" :key="size" class="easy-signature__pen-btn"
-              :class="{ 'is-active': currentPenSize === size }" :title="`${size}px`" @click="setPenSize(size)">
-              <span class="easy-signature__pen-dot"
-                :style="{ width: `${Math.max(size, 4)}px`, height: `${Math.max(size, 4)}px` }" />
+            <button
+              v-for="size in penSizes" :key="size" class="easy-signature__pen-btn"
+              :class="{ 'is-active': currentPenSize === size }" :title="`${size}px`" @click="setPenSize(size)"
+            >
+              <span
+                class="easy-signature__pen-dot"
+                :style="{ width: `${Math.max(size, 4)}px`, height: `${Math.max(size, 4)}px` }"
+              />
             </button>
           </div>
         </div>
@@ -94,17 +98,21 @@ defineExpose({
         <div v-if="showPenColor" class="easy-signature__pen-color">
           <span class="easy-signature__pen-label">颜色</span>
           <div class="easy-signature__pen-options">
-            <button v-for="color in penColors" :key="color" class="easy-signature__color-btn"
+            <button
+              v-for="color in penColors" :key="color" class="easy-signature__color-btn"
               :class="{ 'is-active': currentPenColor === color }" :style="{ backgroundColor: color }"
-              @click="setPenColor(color)" />
+              @click="setPenColor(color)"
+            />
           </div>
         </div>
       </div>
       <div class="easy-signature__toolbar-right">
         <!-- 撤销 -->
         <button v-if="showUndo" class="easy-signature__tool-btn" :disabled="!canUndo" title="撤销" @click="undo">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
+          <svg
+            viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"
+          >
             <polyline points="1 4 1 10 7 10" />
             <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
           </svg>
@@ -112,8 +120,10 @@ defineExpose({
         </button>
         <!-- 清空 -->
         <button v-if="showClear" class="easy-signature__tool-btn" :disabled="!hasContent" title="清空" @click="clear">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
+          <svg
+            viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"
+          >
             <polyline points="3 6 5 6 21 6" />
             <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
           </svg>
@@ -121,10 +131,14 @@ defineExpose({
         </button>
         <!-- 确认 -->
         <slot name="toolbar-right">
-          <button v-if="showConfirm" class="easy-signature__tool-btn easy-signature__tool-btn--primary"
-            :disabled="!hasContent" title="确认签名" @click="confirm">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
+          <button
+            v-if="showConfirm" class="easy-signature__tool-btn easy-signature__tool-btn--primary"
+            :disabled="!hasContent" title="确认签名" @click="confirm"
+          >
+            <svg
+              viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"
+            >
               <polyline points="20 6 9 17 4 12" />
             </svg>
             <span v-if="toolbarText">确认</span>
@@ -142,10 +156,12 @@ defineExpose({
           <span class="easy-signature__placeholder-text">{{ placeholder }}</span>
         </slot>
       </div>
-      <canvas ref="canvasRef" class="easy-signature__canvas"
+      <canvas
+        ref="canvasRef" class="easy-signature__canvas"
         :style="canvasBgColor ? { backgroundColor: canvasBgColor } : {}" @mousedown="onPointerDown"
         @mousemove="onPointerMove" @mouseup="onPointerUp" @mouseleave="onPointerUp" @touchstart.prevent="onTouchStart"
-        @touchmove.prevent="onTouchMove" @touchend="onPointerUp" />
+        @touchmove.prevent="onTouchMove" @touchend="onPointerUp"
+      />
     </div>
   </div>
 </template>

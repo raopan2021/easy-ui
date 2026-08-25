@@ -58,11 +58,13 @@ export type { RichTextEmits, RichTextProps } from './richtext'
     </div>
 
     <div class="easy-richtext__body">
-      <Editor :model-value="modelValue" :default-config="editorConfig" mode="default"
+      <Editor
+        :model-value="modelValue" :default-config="editorConfig" mode="default"
         :style="{ height: `${height}px`, minHeight: `${minHeight}px` }"
         @update:model-value="(v: string) => emit('update:modelValue', v)" @on-created="handleCreated"
         @on-change="handleChange" @on-focus="(e: IDomEditor) => emit('focus', e)"
-        @on-blur="(e: IDomEditor) => emit('blur', e)" @on-destroyed="handleDestroyed" />
+        @on-blur="(e: IDomEditor) => emit('blur', e)" @on-destroyed="handleDestroyed"
+      />
     </div>
   </div>
 </template>
