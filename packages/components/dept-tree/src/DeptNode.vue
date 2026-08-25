@@ -1,26 +1,9 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import type { DeptNodeEmits, DeptNodeProps } from './types'
 
-interface TreeNode {
-  id?: string | number
-  label?: string
-  children?: TreeNode[]
-  [key: string]: unknown
-}
+import { useDeptNode } from './use-dept-node'
 
-interface Props {
-  node: TreeNode
-  nodeKey: { id: string, pid?: string, label?: string, children?: string }
-  nodeStyle?: Record<string, string>
-  highlightCurrent?: boolean
-  expandAll?: boolean
-  defaultExpandLevel?: number
-  selectedId?: string | number | null
-  expandedSet: Set<string>
-  depth?: number
-}
-
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<DeptNodeProps>(), {
   nodeStyle: () => ({}),
   highlightCurrent: false,
   expandAll: false,
@@ -29,56 +12,26 @@ const props = withDefaults(defineProps<Props>(), {
   depth: 0,
 })
 
-const emit = defineEmits<{
-  select: [node: TreeNode]
-  toggle: [node: TreeNode, expanded: boolean]
-}>()
+const emit = defineEmits<DeptNodeEmits>()
 
-// 节点标识
-const nodeId = computed(() => String(props.node[props.nodeKey.id]))
-const nodeLabel = computed(() => (props.node[props.nodeKey.label || 'label'] as string) || '')
-const nodeChildren = computed(() => (props.node[props.nodeKey.children || 'children'] as TreeNode[]) || [])
-const hasChildren = computed(() => nodeChildren.value.length > 0)
-
-// 选中状态
-const isSelected = computed(() => props.selectedId === props.node[props.nodeKey.id])
-
-// 根据默认展开层级判断
-const shouldAutoExpand = computed(() => {
-  if (props.expandAll)
-    return true
-  if (props.defaultExpandLevel <= 0)
-    return true
-  return props.depth < props.defaultExpandLevel
-})
-
-// 展开状态 - 优先使用 expandedSet，否则使用默认展开逻辑
-const isExpanded = computed(() => {
-  return props.expandedSet.has(nodeId.value) || shouldAutoExpand.value
-})
-
-// 点击选中
-function handleClick() {
-  emit('select', props.node)
-}
-
-// 点击展开/折叠
-function handleToggle() {
-  const expanded = !isExpanded.value
-  emit('toggle', props.node, expanded)
-}
+// ──── 节点字段取值 / 选中态 / 展开态 / 交互（抽离到 composable）────
+const {
+  nodeLabel,
+  nodeChildren,
+  hasChildren,
+  isSelected,
+  isExpanded,
+  handleClick,
+  handleToggle,
+} = useDeptNode(props, emit)
 </script>
 
 <template>
   <div class="dept-node" :class="{ 'dept-node--selected': isSelected, 'dept-node--leaf': !hasChildren }">
     <div class="dept-node__row" :style="{ ...nodeStyle, paddingLeft: `${depth * 24 + 20}px` }" @click="handleClick">
       <!-- 展开/折叠图标 -->
-      <span
-        v-if="hasChildren"
-        class="dept-node__toggle"
-        :class="{ 'dept-node__toggle--expanded': isExpanded }"
-        @click.stop="handleToggle"
-      >
+      <span v-if="hasChildren" class="dept-node__toggle" :class="{ 'dept-node__toggle--expanded': isExpanded }"
+        @click.stop="handleToggle">
         <EasyIcon name="el:ArrowRight" />
       </span>
       <span v-else class="dept-node__toggle-placeholder" />
@@ -94,25 +47,15 @@ function handleToggle() {
 
     <!-- 子节点 -->
     <div v-if="hasChildren && isExpanded" class="dept-node__children">
-      <DeptNode
-        v-for="child in nodeChildren"
-        :key="String(child[nodeKey.id])"
-        :node="child"
-        :node-key="nodeKey"
-        :node-style="nodeStyle"
-        :highlight-current="highlightCurrent"
-        :expand-all="expandAll"
-        :default-expand-level="defaultExpandLevel"
-        :selected-id="selectedId"
-        :expanded-set="expandedSet"
-        :depth="depth + 1"
-        @select="$emit('select', $event)"
-        @toggle="(node, expanded) => $emit('toggle', node, expanded)"
-      />
+      <DeptNode v-for="child in nodeChildren" :key="String(child[nodeKey.id])" :node="child" :node-key="nodeKey"
+        :node-style="nodeStyle" :highlight-current="highlightCurrent" :expand-all="expandAll"
+        :default-expand-level="defaultExpandLevel" :selected-id="selectedId" :expanded-set="expandedSet"
+        :depth="depth + 1" @select="$emit('select', $event)" @toggle="(node, expanded) => $emit('toggle', node, expanded)" />
     </div>
   </div>
 </template>
 
+<!-- 组件样式（非 scoped，与 dept-tree 共享同一份类名作用域，保持内联） -->
 <style lang="scss">
 @use './index.scss';
 </style>

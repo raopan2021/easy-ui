@@ -1,0 +1,15 @@
+.easy-timeline {
+  &.easy-timeline--vertical {
+    padding-left: 0;
+  }
+
+  &.easy-timeline--horizontal {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+
+    :deep(.easy-timeline-item) {
+      flex: 1;
+    }
+  }
+}

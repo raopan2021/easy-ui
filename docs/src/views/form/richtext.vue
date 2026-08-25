@@ -54,9 +54,7 @@ function onChange(value: string) {
         <div class="doc-preview__body">
           <EasyRichText v-model="html2" :height="200" :min-height="150" />
         </div>
-        <EasyDocCode
-          code="<EasyRichText v-model=&quot;html&quot; :height=&quot;200&quot; :min-height=&quot;150&quot; />"
-        />
+        <EasyDocCode code="<EasyRichText v-model=&quot;html&quot; :height=&quot;200&quot; :min-height=&quot;150&quot; />" />
       </div>
     </section>
 
@@ -72,9 +70,7 @@ function onChange(value: string) {
         <div class="doc-preview__body">
           <EasyRichText v-model="readHtml" readonly :height="180" />
         </div>
-        <EasyDocCode
-          code="<EasyRichText v-model=&quot;html&quot; readonly :height=&quot;180&quot; />"
-        />
+        <EasyDocCode code="<EasyRichText v-model=&quot;html&quot; readonly :height=&quot;180&quot; />" />
       </div>
     </section>
 

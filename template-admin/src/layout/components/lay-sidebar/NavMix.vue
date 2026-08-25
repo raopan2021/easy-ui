@@ -7,7 +7,6 @@ import { useNav } from '@/layout/hooks/useNav'
 import { findRouteByPath, getParentPaths } from '@/router/utils'
 import { usePermissionStoreHook } from '@/store/modules/permission'
 import { hideLoading, showLoading } from '@/utils/xly'
-import LayNotice from '../lay-notice/index.vue'
 import LaySearch from '../lay-search/index.vue'
 import LaySidebarExtraIcon from '../lay-sidebar/components/SidebarExtraIcon.vue'
 
@@ -64,31 +63,14 @@ watch(
 </script>
 
 <template>
-  <div
-    v-if="device !== 'mobile'"
-    class="horizontal-header"
-  >
-    <el-menu
-      ref="menuRef"
-      router
-      mode="horizontal"
-      popper-class="pure-scrollbar"
-      class="horizontal-header-menu"
-      :default-active="defaultActive"
-    >
-      <el-menu-item
-        v-for="route in usePermissionStoreHook().wholeMenus"
-        :key="route.path"
-        :index="resolvePath(route) || route.redirect"
-      >
+  <div v-if="device !== 'mobile'" class="horizontal-header">
+    <el-menu ref="menuRef" router mode="horizontal" popper-class="pure-scrollbar" class="horizontal-header-menu"
+      :default-active="defaultActive">
+      <el-menu-item v-for="route in usePermissionStoreHook().wholeMenus" :key="route.path"
+        :index="resolvePath(route) || route.redirect">
         <template #title>
-          <div
-            v-if="toRaw(route.meta.icon)"
-            class="sub-menu-icon" :class="[route.meta.icon]"
-          >
-            <component
-              :is="useRenderIcon(route.meta && toRaw(route.meta.icon))"
-            />
+          <div v-if="toRaw(route.meta.icon)" class="sub-menu-icon" :class="[route.meta.icon]">
+            <component :is="useRenderIcon(route.meta && toRaw(route.meta.icon))" />
           </div>
           <div :style="getDivStyle">
             <span class="select-none">
@@ -115,21 +97,13 @@ watch(
         <template #dropdown>
           <el-dropdown-menu class="logout">
             <el-dropdown-item @click="logout">
-              <SvgIcon
-                name="logout"
-                :size="16"
-                style="margin: 5px"
-              />
+              <SvgIcon name="logout" :size="16" style="margin: 5px" />
               退出系统
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-      <span
-        class="set-icon navbar-bg-hover"
-        title="打开系统配置"
-        @click="onPanel"
-      >
+      <span class="set-icon navbar-bg-hover" title="打开系统配置" @click="onPanel">
         <PureIcon :icon="Setting" :size="20" />
       </span>
     </div>

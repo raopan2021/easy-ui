@@ -127,12 +127,7 @@ const selectMulti = ref<(string | number)[]>([])
                 <EasyInput v-model="basicForm.phone" placeholder="请输入手机号" maxlength="11" clearable />
               </EasyFormItem>
               <EasyFormItem label="部门" prop="department">
-                <EasySelect
-                  v-model="basicForm.department"
-                  :options="departmentOptions"
-                  placeholder="请选择部门"
-                  clearable
-                />
+                <EasySelect v-model="basicForm.department" :options="departmentOptions" placeholder="请选择部门" clearable />
               </EasyFormItem>
               <EasyFormItem>
                 <div class="form-demo-actions">

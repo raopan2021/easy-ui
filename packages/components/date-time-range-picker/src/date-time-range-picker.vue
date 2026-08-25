@@ -1,30 +1,8 @@
 <script setup lang="ts">
-import EasyDateTimePicker from '../../date-time-picker'
+import type { DateTimeRangePickerEmits, DateTimeRangePickerProps } from './date-time-range-picker'
 
-export interface DateTimeRangePickerProps {
-  /** 开始时间值 */
-  start?: string
-  /** 结束时间值 */
-  end?: string
-  /** 占位符 */
-  startPlaceholder?: string
-  /** 结束占位符 */
-  endPlaceholder?: string
-  /** 是否禁用 */
-  disabled?: boolean
-  /** 是否只读 */
-  readonly?: boolean
-  /** 是否可清空 */
-  clearable?: boolean
-  /** 日期格式 */
-  format?: string
-  /** 是否显示秒 */
-  showSeconds?: boolean
-  /** 分隔符 */
-  separator?: string
-  /** 组件尺寸 */
-  size?: 'large' | 'default' | 'small'
-}
+import EasyDateTimePicker from '../../date-time-picker'
+import { useDateTimeRangePicker } from './use-date-time-range-picker'
 
 defineOptions({
   name: 'EasyDateTimeRangePicker',
@@ -44,40 +22,22 @@ const props = withDefaults(defineProps<DateTimeRangePickerProps>(), {
   size: 'default',
 })
 
-const emit = defineEmits<{
-  (e: 'update:start', value: string): void
-  (e: 'update:end', value: string): void
-  (e: 'change', value: { start: string, end: string }): void
-}>()
+const emit = defineEmits<DateTimeRangePickerEmits>()
 
-// 处理开始时间变化
-function handleStartChange(value: string) {
-  emit('update:start', value)
-  emit('change', { start: value, end: props.end })
-}
+// 开始 / 结束时间变化逻辑抽离到 composable
+const { handleStartChange, handleEndChange } = useDateTimeRangePicker(props, emit)
 
-// 处理结束时间变化
-function handleEndChange(value: string) {
-  emit('update:end', value)
-  emit('change', { start: props.start, end: value })
-}
+// 保持对外类型导出兼容（原定义在 date-time-range-picker.ts）
+export type { DateTimeRangePickerEmits, DateTimeRangePickerProps } from './date-time-range-picker'
 </script>
 
 <template>
   <div class="easy-date-time-range-picker" :class="[`easy-date-time-range-picker--${size}`, { 'is-disabled': disabled }]">
     <!-- 开始日期时间选择器 -->
     <div class="easy-date-time-range-picker__start">
-      <EasyDateTimePicker
-        :model-value="start"
-        :placeholder="startPlaceholder || '开始时间'"
-        :disabled="disabled"
-        :readonly="readonly"
-        :clearable="clearable"
-        :format="format"
-        :show-seconds="showSeconds"
-        :size="size"
-        @update:model-value="handleStartChange"
-      />
+      <EasyDateTimePicker :model-value="start" :placeholder="startPlaceholder || '开始时间'" :disabled="disabled"
+        :readonly="readonly" :clearable="clearable" :format="format" :show-seconds="showSeconds" :size="size"
+        @update:model-value="handleStartChange" />
     </div>
 
     <!-- 分隔符 -->
@@ -85,81 +45,12 @@ function handleEndChange(value: string) {
 
     <!-- 结束日期时间选择器 -->
     <div class="easy-date-time-range-picker__end">
-      <EasyDateTimePicker
-        :model-value="end"
-        :placeholder="endPlaceholder || '结束时间'"
-        :disabled="disabled"
-        :readonly="readonly"
-        :clearable="clearable"
-        :format="format"
-        :show-seconds="showSeconds"
-        :size="size"
-        @update:model-value="handleEndChange"
-      />
+      <EasyDateTimePicker :model-value="end" :placeholder="endPlaceholder || '结束时间'" :disabled="disabled"
+        :readonly="readonly" :clearable="clearable" :format="format" :show-seconds="showSeconds" :size="size"
+        @update:model-value="handleEndChange" />
     </div>
   </div>
 </template>
 
-<style scoped lang="scss">
-.easy-date-time-range-picker {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-
-  &.is-disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-
-  .easy-date-time-range-picker__separator {
-    color: var(--el-text-color-placeholder);
-    font-size: 14px;
-    flex-shrink: 0;
-    user-select: none;
-  }
-
-  .easy-date-time-range-picker__start,
-  .easy-date-time-range-picker__end {
-    flex: 1;
-    min-width: 0;
-  }
-
-  // 尺寸变体
-  &.easy-date-time-range-picker--large {
-    :deep(.easy-date-time-picker) {
-      .easy-date-time-picker__wrapper {
-        height: 40px;
-        padding: 0 15px;
-      }
-      .easy-date-time-picker__input {
-        font-size: 14px;
-      }
-    }
-  }
-
-  &.easy-date-time-range-picker--default {
-    :deep(.easy-date-time-picker) {
-      .easy-date-time-picker__wrapper {
-        height: 32px;
-        padding: 0 12px;
-      }
-      .easy-date-time-picker__input {
-        font-size: 14px;
-      }
-    }
-  }
-
-  &.easy-date-time-range-picker--small {
-    :deep(.easy-date-time-picker) {
-      .easy-date-time-picker__wrapper {
-        height: 28px;
-        padding: 0 10px;
-      }
-      .easy-date-time-picker__input {
-        font-size: 13px;
-      }
-    }
-  }
-}
-</style>
+<!-- 组件核心样式（scoped，独立维护在 date-time-range-picker-style.scss） -->
+<style scoped src="./date-time-range-picker-style.scss" lang="scss"></style>

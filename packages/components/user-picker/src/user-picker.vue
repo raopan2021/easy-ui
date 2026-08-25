@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import type { UserPickerEmits, UserPickerProps } from './types'
+import { useUserPicker } from './use-user-picker'
+
+// 保持对外类型导出兼容（原定义在 user-picker.vue）
+export type { FetchUsersOptions, UserItem, UserPickerEmits, UserPickerProps } from './types'
 
 defineOptions({ name: 'EasyUserPicker' })
 
@@ -18,260 +22,33 @@ const props = withDefaults(defineProps<UserPickerProps>(), {
   returnType: 'array',
 })
 
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: number | string | number[] | string[] | null): void
-  (e: 'change', value: number | string | number[] | string[] | null): void
-  (e: 'pick'): void
-}>()
+const emit = defineEmits<UserPickerEmits>()
 
-export interface UserItem {
-  [key: string]: any
-}
+// ──── 核心逻辑（数据加载 / 选择 / 搜索 / 弹窗 / 值回传）────
+const {
+  visible,
+  searchText,
+  tempSelected,
+  loading,
+  valueKey,
+  nameKey,
+  avatarKey,
+  extraKey,
+  selectedUsers,
+  filteredUsers,
+  isSelected,
+  isDisabled,
+  getInitials,
+  handleOpen,
+  handleClose,
+  handleSelect,
+  handleRemove,
+  handleConfirm,
+  handleSearch,
+  clear,
+} = useUserPicker(props, emit)
 
-export interface FetchUsersOptions {
-  keyword?: string
-}
-
-export interface UserPickerProps {
-  /** 绑定值 */
-  modelValue?: number | string | number[] | string[] | null
-  /** 是否多选 */
-  multiple?: boolean
-  /** 最大选择数量（多选模式） */
-  max?: number
-  /** 禁用 */
-  disabled?: boolean
-  /** 占位文字 */
-  placeholder?: string
-  /** 是否显示额外信息 */
-  showExtra?: boolean
-  /** 值字段名 */
-  valueKey?: string
-  /** 名称字段名 */
-  nameKey?: string
-  /** 头像字段名 */
-  avatarKey?: string
-  /** 额外信息字段名 */
-  extraKey?: string
-  /** 禁用判断函数 */
-  isDisabled?: (user: UserItem) => boolean
-  /** 多选时返回值类型：array 返回数组，string 返回逗号拼接字符串 */
-  returnType?: 'array' | 'string'
-}
-
-// 模拟用户数据（用于演示，二开时请修改 getMockUsers 函数）
-const mockUsers: UserItem[] = [
-  { id: 1, name: '张三', department: '技术部', avatar: '' },
-  { id: 2, name: '李四', department: '产品部', avatar: '' },
-  { id: 3, name: '王五', department: '设计部', avatar: '' },
-  { id: 4, name: '赵六', department: '市场部', avatar: '' },
-  { id: 5, name: '钱七', department: '运营部', avatar: '' },
-  { id: 6, name: '孙八', department: '技术部', avatar: '' },
-  { id: 7, name: '周九', department: '产品部', avatar: '' },
-  { id: 8, name: '吴十', department: '设计部', avatar: '' },
-]
-
-const visible = ref(false)
-const searchText = ref('')
-const tempSelected = ref<UserItem[]>([])
-const userList = ref<UserItem[]>([])
-const loading = ref(false)
-
-/**
- * 获取用户数据（默认使用模拟数据）
- * 二开时请将此函数替换为你的真实接口调用
- * @param keyword 搜索关键词
- * @returns 用户列表
- */
-async function getMockUsers(keyword?: string): Promise<UserItem[]> {
-  // 模拟延迟
-  await new Promise(resolve => setTimeout(resolve, 300))
-
-  // 默认过滤逻辑
-  if (keyword) {
-    const kw = keyword.toLowerCase()
-    return mockUsers.filter(u => u.name.toLowerCase().includes(kw) || u.department.toLowerCase().includes(kw))
-  }
-  return [...mockUsers]
-}
-
-// 组件挂载时加载数据
-onMounted(async () => {
-  await loadUsers()
-})
-
-// 根据 modelValue 解析为数组
-function parseModelValue(val: any): (number | string)[] {
-  if (val === null || val === undefined)
-    return []
-  if (Array.isArray(val))
-    return val.map(v => String(v))
-  // 单选模式：可能是单个值，也可能是逗号拼接的字符串
-  if (typeof val === 'string' && val.includes(',')) {
-    return val.split(',').filter(Boolean)
-  }
-  return [String(val)]
-}
-
-// 根据 modelValue 反查出用户对象列表
-const selectedUsers = computed(() => {
-  const values = parseModelValue(props.modelValue)
-  if (values.length === 0)
-    return []
-
-  // 构建 valueKey -> user 的映射
-  const valueMap = new Map<string, UserItem>()
-  userList.value.forEach((user) => {
-    valueMap.set(String(user[props.valueKey]), user)
-  })
-
-  return values.map(v => valueMap.get(String(v))).filter((u): u is UserItem => !!u)
-})
-
-// 过滤后的用户列表
-const filteredUsers = computed(() => {
-  if (!searchText.value)
-    return userList.value
-  const keyword = searchText.value.toLowerCase()
-  return userList.value.filter((user) => {
-    const name = String(user[props.nameKey] || '').toLowerCase()
-    const extra = String(user[props.extraKey] || '').toLowerCase()
-    return name.includes(keyword) || extra.includes(keyword)
-  })
-})
-
-// 判断用户是否已选
-function isSelected(user: UserItem): boolean {
-  const value = user[props.valueKey]
-  return tempSelected.value.some(u => u[props.valueKey] === value)
-}
-
-// 判断用户是否禁用
-function isDisabled(user: UserItem): boolean {
-  return props.isDisabled(user)
-}
-
-// 获取姓名首字母
-function getInitials(user: UserItem): string {
-  const name = String(user[props.nameKey] || '')
-  if (!name)
-    return '?'
-  const match = name.match(/^[a-z]/i)
-  if (match)
-    return match[0].toUpperCase()
-  return name.slice(0, 2)
-}
-
-// 加载用户数据
-async function loadUsers(keyword?: string) {
-  loading.value = true
-  try {
-    userList.value = await getMockUsers(keyword)
-  }
-  finally {
-    loading.value = false
-  }
-}
-
-// 打开弹窗
-function handleOpen() {
-  if (props.disabled)
-    return
-  visible.value = true
-  tempSelected.value = [...selectedUsers.value]
-  searchText.value = ''
-}
-
-// 关闭弹窗
-function handleClose() {
-  visible.value = false
-}
-
-// 选择用户
-function handleSelect(user: UserItem) {
-  if (isDisabled(user))
-    return
-
-  const value = user[props.valueKey]
-  const index = tempSelected.value.findIndex(u => u[props.valueKey] === value)
-
-  if (props.multiple) {
-    if (index > -1) {
-      tempSelected.value.splice(index, 1)
-    }
-    else {
-      if (tempSelected.value.length < props.max) {
-        tempSelected.value.push(user)
-      }
-    }
-  }
-  else {
-    tempSelected.value = [user]
-  }
-}
-
-// 移除用户
-function handleRemove(user: UserItem) {
-  if (props.disabled)
-    return
-
-  const value = user[props.valueKey]
-
-  if (props.multiple) {
-    const currentValues = parseModelValue(props.modelValue)
-    const idx = currentValues.findIndex(v => String(v) === String(value))
-    if (idx > -1) {
-      currentValues.splice(idx, 1)
-      emitValue(currentValues as any)
-    }
-  }
-  else {
-    emitValue(null)
-  }
-}
-
-// 确认选择
-function handleConfirm() {
-  // 从 tempSelected 提取 valueKey 值
-  const values = tempSelected.value.map(u => u[props.valueKey])
-
-  if (props.multiple) {
-    emitValue(values)
-  }
-  else {
-    emitValue(values[0] || null)
-  }
-
-  emit('pick')
-  handleClose()
-}
-
-// 发送值
-function emitValue(value: number | string | number[] | string[] | null) {
-  let emitVal = value
-
-  // 多选且 returnType 为 string 时，转换为逗号拼接字符串
-  if (props.multiple && Array.isArray(value) && props.returnType === 'string') {
-    emitVal = value.join(',')
-  }
-
-  emit('update:modelValue', emitVal)
-  emit('change', emitVal)
-}
-
-// 搜索处理
-async function handleSearch() {
-  await loadUsers(searchText.value)
-}
-
-// 清空
-function clear() {
-  const empty = props.multiple ? [] : null
-  emit('update:modelValue', empty)
-  emit('change', empty)
-}
-
-// 暴露方法
+// 暴露方法（通过 ref 调用）
 defineExpose({
   open: handleOpen,
   close: handleClose,
@@ -344,16 +121,8 @@ defineExpose({
           <div class="easy-user-picker__list">
             <div v-if="loading" class="easy-user-picker__loading">
               <svg class="easy-user-picker__spinner" width="24" height="24" viewBox="0 0 24 24">
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-dasharray="60"
-                  stroke-dashoffset="20"
-                />
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="60"
+                  stroke-dashoffset="20" />
               </svg>
               <span>加载中...</span>
             </div>
@@ -370,13 +139,8 @@ defineExpose({
               >
                 <div class="easy-user-picker__item-check">
                   <svg v-if="isSelected(user)" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path
-                      d="M3 7L6 10L11 4"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
+                    <path d="M3 7L6 10L11 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" />
                   </svg>
                 </div>
                 <img v-if="user[avatarKey]" :src="user[avatarKey]" class="easy-user-picker__item-avatar">

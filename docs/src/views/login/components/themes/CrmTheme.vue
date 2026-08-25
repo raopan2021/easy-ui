@@ -55,14 +55,8 @@ const handleLogin = () => formRef.value?.validate(valid => valid && emit('submit
             <el-input v-model="form.username" placeholder="请输入账号" size="large" :prefix-icon="User" />
           </el-form-item>
           <el-form-item prop="password">
-            <el-input
-              v-model="form.password"
-              type="password"
-              placeholder="请输入密码"
-              size="large"
-              :prefix-icon="Lock"
-              show-password
-            />
+            <el-input v-model="form.password" type="password" placeholder="请输入密码" size="large" :prefix-icon="Lock"
+              show-password />
           </el-form-item>
           <el-form-item>
             <el-checkbox v-model="form.remember">

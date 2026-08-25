@@ -187,14 +187,8 @@ function onError(error: Error) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyQrcode
-            content="https://ease-ui.com"
-            :size="200"
-            logo="/logo.png"
-            :logo-size="40"
-            :logo-radius="8"
-            logo-background-color="#ffffff"
-          />
+          <EasyQrcode content="https://ease-ui.com" :size="200" logo="/logo.png" :logo-size="40" :logo-radius="8"
+            logo-background-color="#ffffff" />
         </div>
         <EasyDocCode
           code="<EasyQrcode
@@ -221,13 +215,8 @@ function onError(error: Error) {
         <div class="doc-preview__body">
           <div class="qrcode-interactive">
             <div class="qrcode-interactive__left">
-              <EasyInput
-                v-model="dynamicContent"
-                type="textarea"
-                :rows="3"
-                placeholder="请输入要生成二维码的内容"
-                style="margin-bottom: 16px"
-              />
+              <EasyInput v-model="dynamicContent" type="textarea" :rows="3" placeholder="请输入要生成二维码的内容"
+                style="margin-bottom: 16px" />
               <div class="qrcode-interactive__controls">
                 <EasyButton type="primary" @click="handleDownload">
                   下载二维码

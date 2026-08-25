@@ -310,34 +310,20 @@ function removeTagByValue(list: string[], tag: string) {
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 16px">
           <div class="tag-row">
-            <EasyTag
-              v-for="tag in closableTags1"
-              :key="tag.label"
-              :type="tag.type"
-              closable
-              @close="removeTag(closableTags1, tag)"
-            >
+            <EasyTag v-for="tag in closableTags1" :key="tag.label" :type="tag.type" closable
+              @close="removeTag(closableTags1, tag)">
               {{ tag.label }}
             </EasyTag>
             <span v-if="closableTags1.length === 0" class="empty-hint">所有标签已关闭，刷新页面重置</span>
           </div>
           <div class="tag-row">
-            <EasyTag
-              v-for="tag in closableTags2"
-              :key="tag.label"
-              :type="tag.type"
-              effect="plain"
-              round
-              closable
-              @close="removeTag(closableTags2, tag)"
-            >
+            <EasyTag v-for="tag in closableTags2" :key="tag.label" :type="tag.type" effect="plain" round closable
+              @close="removeTag(closableTags2, tag)">
               {{ tag.label }}
             </EasyTag>
           </div>
         </div>
-        <EasyDocCode
-          code="<easy-tag type=&quot;primary&quot; closable @close=&quot;handleClose&quot;>可关闭</easy-tag>"
-        />
+        <EasyDocCode code="<easy-tag type=&quot;primary&quot; closable @close=&quot;handleClose&quot;>可关闭</easy-tag>" />
       </div>
     </section>
 
@@ -352,14 +338,9 @@ function removeTagByValue(list: string[], tag: string) {
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 16px">
           <div class="tag-row">
-            <EasyTag
-              v-for="tag in clickableTags"
-              :key="tag.label"
+            <EasyTag v-for="tag in clickableTags" :key="tag.label"
               :type="selectedTag === tag.label ? tag.type : 'default'"
-              :effect="selectedTag === tag.label ? 'dark' : 'light'"
-              clickable
-              @click="selectedTag = tag.label"
-            >
+              :effect="selectedTag === tag.label ? 'dark' : 'light'" clickable @click="selectedTag = tag.label">
               {{ tag.label }}
             </EasyTag>
           </div>
@@ -367,9 +348,7 @@ function removeTagByValue(list: string[], tag: string) {
             已选中：<strong>{{ selectedTag }}</strong>
           </div>
         </div>
-        <EasyDocCode
-          code="<easy-tag type=&quot;primary&quot; clickable @click=&quot;handleClick&quot;>点击我</easy-tag>"
-        />
+        <EasyDocCode code="<easy-tag type=&quot;primary&quot; clickable @click=&quot;handleClick&quot;>点击我</easy-tag>" />
       </div>
     </section>
 
@@ -484,25 +463,13 @@ function removeTagByValue(list: string[], tag: string) {
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div class="tag-row" style="flex-wrap: wrap">
-            <EasyTag
-              v-for="tag in dynamicTags"
-              :key="tag"
-              type="primary"
-              effect="plain"
-              closable
-              @close="removeTagByValue(dynamicTags, tag)"
-            >
+            <EasyTag v-for="tag in dynamicTags" :key="tag" type="primary" effect="plain" closable
+              @close="removeTagByValue(dynamicTags, tag)">
               {{ tag }}
             </EasyTag>
             <div v-if="inputVisible" class="tag-input-wrap">
-              <input
-                ref="inputRef"
-                v-model="inputValue"
-                class="tag-input"
-                placeholder="回车确认"
-                @keyup.enter="addTag"
-                @blur="addTag"
-              >
+              <input ref="inputRef" v-model="inputValue" class="tag-input" placeholder="回车确认" @keyup.enter="addTag"
+                @blur="addTag">
             </div>
             <EasyTag v-else type="primary" effect="plain" clickable @click="showInput">
               + 新增标签

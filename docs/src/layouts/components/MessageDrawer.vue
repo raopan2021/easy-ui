@@ -288,24 +288,12 @@ function handleClear() {
 </script>
 
 <template>
-  <EasyDrawer
-    v-model="drawerVisible"
-    title="消息通知"
-    direction="right"
-    :show-header="true"
-    :show-close="true"
-    :show-mask="true"
-    :close-on-click-modal="true"
-  >
+  <EasyDrawer v-model="drawerVisible" title="消息通知" direction="right" :show-header="true" :show-close="true"
+    :show-mask="true" :close-on-click-modal="true">
     <!-- 分类标签 -->
     <div class="message-tabs">
-      <button
-        v-for="tab in tabs"
-        :key="tab.key"
-        class="message-tab"
-        :class="{ 'is-active': activeTab === tab.key }"
-        @click="activeTab = tab.key"
-      >
+      <button v-for="tab in tabs" :key="tab.key" class="message-tab" :class="{ 'is-active': activeTab === tab.key }"
+        @click="activeTab = tab.key">
         {{ tab.label }}
         <span v-if="tab.count > 0" class="message-tab__count">{{ tab.count }}</span>
       </button>
@@ -314,36 +302,17 @@ function handleClear() {
     <!-- 消息列表 -->
     <div class="message-list">
       <template v-if="filteredMessages.length > 0">
-        <div
-          v-for="msg in filteredMessages"
-          :key="msg.id"
-          class="message-item"
-          :class="{ 'is-unread': !msg.isRead }"
-          @click="handleReadMessage(msg)"
-        >
+        <div v-for="msg in filteredMessages" :key="msg.id" class="message-item" :class="{ 'is-unread': !msg.isRead }"
+          @click="handleReadMessage(msg)">
           <div class="message-item__icon" :class="`message-item__icon--${msg.type}`">
-            <svg
-              v-if="msg.type === 'system'"
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
+            <svg v-if="msg.type === 'system'" viewBox="0 0 24 24" width="18" height="18" fill="none"
+              stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="10" />
               <line x1="12" y1="8" x2="12" y2="12" />
               <line x1="12" y1="16" x2="12.01" y2="16" />
             </svg>
-            <svg
-              v-else-if="msg.type === 'notice'"
-              viewBox="0 0 24 24"
-              width="18"
-              height="18"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
+            <svg v-else-if="msg.type === 'notice'" viewBox="0 0 24 24" width="18" height="18" fill="none"
+              stroke="currentColor" stroke-width="2">
               <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
               <path d="M13.73 21a2 2 0 0 1-3.46 0" />
             </svg>
@@ -367,15 +336,8 @@ function handleClear() {
         </div>
       </template>
       <div v-else class="message-empty">
-        <svg
-          viewBox="0 0 24 24"
-          width="48"
-          height="48"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.5"
-          opacity="0.3"
-        >
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5"
+          opacity="0.3">
           <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
           <path d="M13.73 21a2 2 0 0 1-3.46 0" />
         </svg>

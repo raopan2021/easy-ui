@@ -1,0 +1,274 @@
+@use '../../../easy-ui/src/styles/tokens' as *;
+
+$radius: 6px;
+$transition: all 0.15s ease;
+
+.easy-worktab {
+  display: flex;
+  align-items: center;
+  height: 46px;
+  background: var(--el-bg-color);
+  border-bottom: 1px solid $border-light;
+  padding: 0 8px;
+  flex-shrink: 0;
+  gap: 0;
+}
+
+.worktab-scroll {
+  flex: 1;
+  overflow: hidden;
+  min-width: 0;
+  height: 100%;
+}
+
+.worktab-list {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  gap: 8px;
+  padding: 0 4px;
+  white-space: nowrap;
+}
+
+// 滚动按钮
+.worktab-scroll-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--el-text-color-placeholder);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: $transition;
+
+  &:hover {
+    background: var(--el-fill-color-light);
+    color: var(--el-text-color-primary);
+  }
+
+  &:active {
+    transform: scale(0.92);
+  }
+}
+
+// 标签项 — 独立卡片样式
+.worktab-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 10px 0 10px;
+  border: 1px solid $border-light;
+  border-radius: $radius;
+  font-size: 13px;
+  color: var(--el-text-color-secondary);
+  cursor: pointer;
+  user-select: none;
+  transition: $transition;
+  background: var(--el-bg-color);
+  flex-shrink: 0;
+  max-width: 160px;
+
+  .worktab-item__title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100px;
+    line-height: 1;
+  }
+
+  .worktab-item__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    flex-shrink: 0;
+    opacity: 0;
+    transition: $transition;
+    padding: 0;
+    margin-left: 2px;
+
+    &:hover {
+      background: #fee2e2;
+      color: var(--el-color-danger);
+    }
+  }
+
+  // 悬浮态
+  &:hover:not(.is-active) {
+    border-color: var(--el-border-color);
+    color: var(--el-text-color-primary);
+
+    .worktab-item__close {
+      opacity: 0.6;
+    }
+  }
+
+  // 激活态 — 蓝色边框 + 蓝色文字
+  &.is-active {
+    background: $white;
+    color: $brand-blue;
+    font-weight: 500;
+    border-color: $brand-blue;
+    box-shadow: 0 0 0 1px $primary-bg-strong;
+
+    .worktab-item__close {
+      opacity: 0.5;
+      color: var(--el-text-color-placeholder);
+
+      &:hover {
+        opacity: 1;
+        background: #fee2e2;
+        color: var(--el-color-danger);
+      }
+    }
+  }
+
+  // 固定标签
+  &.is-affix {
+    padding-right: 10px;
+  }
+}
+
+// 悬停/激活时显示关闭按钮
+.worktab-item:hover .worktab-item__close,
+.worktab-item.is-active .worktab-item__close {
+  opacity: 0.5;
+}
+
+// 分隔线
+.worktab-divider {
+  width: 1px;
+  height: 18px;
+  background: $border-light;
+  margin: 0 8px;
+  flex-shrink: 0;
+}
+
+// 操作按钮
+.worktab-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--el-text-color-placeholder);
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    background: var(--el-fill-color-light);
+    color: var(--el-text-color-primary);
+  }
+
+  &:active {
+    transform: scale(0.92);
+  }
+}
+
+// 标签动画
+.tab-fade-enter-active {
+  transition: all 0.18s ease;
+}
+.tab-fade-leave-active {
+  transition: all 0.12s ease;
+}
+.tab-fade-enter-from {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+.tab-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+// 右键菜单遮罩
+.worktab-ctx-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2999;
+}
+
+// 右键菜单
+.worktab-ctx {
+  position: fixed;
+  z-index: 3000;
+  min-width: 146px;
+  padding: 5px;
+  background: var(--el-bg-color);
+  border: 1px solid $border-light;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  .worktab-ctx__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 32px;
+    padding: 0 10px;
+    font-size: 13px;
+    color: var(--el-text-color-secondary);
+    cursor: pointer;
+    border-radius: 5px;
+    transition: $transition;
+    white-space: nowrap;
+
+    svg {
+      color: var(--el-text-color-placeholder);
+      flex-shrink: 0;
+      transition: $transition;
+    }
+
+    &:hover:not(.is-disabled) {
+      background: $brand-blue-light;
+      color: $brand-blue;
+
+      svg {
+        color: $brand-blue;
+      }
+    }
+
+    &.is-disabled {
+      color: var(--el-text-color-placeholder);
+      cursor: not-allowed;
+      svg {
+        color: var(--el-text-color-placeholder);
+      }
+    }
+  }
+
+  .worktab-ctx__divider {
+    height: 1px;
+    background: $border-light;
+    margin: 4px 6px;
+  }
+}
+
+.ctx-fade-enter-active {
+  transition: all 0.1s ease;
+}
+.ctx-fade-leave-active {
+  transition: all 0.08s ease;
+}
+.ctx-fade-enter-from {
+  opacity: 0;
+  transform: scale(0.95) translateY(-3px);
+}
+.ctx-fade-leave-to {
+  opacity: 0;
+  transform: scale(0.95);
+}

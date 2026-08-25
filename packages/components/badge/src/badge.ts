@@ -1,53 +1,58 @@
-import type { ExtractPropTypes } from 'vue'
+/**
+ * Badge 徽标组件 - 类型、命令式 API 与颜色映射。
+ *
+ * 组件展示逻辑（是否渲染 / 显示值 / 背景色）已抽离到 use-badge.ts，
+ * 本文件保留 BadgeProps 类型与全局命令式 API（open / close / closeAll）。
+ */
 
-import { buildProps, definePropType } from '../../../utils'
-
+/** 命令式 open 的可选配置 */
 export interface BadgeOptions {
+  /** 显示值 */
   value?: number | string
+  /** 徽标位置 */
   position?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left'
+  /** 预设类型（决定默认颜色） */
   type?: 'primary' | 'success' | 'warning' | 'danger' | 'info'
+  /** 自定义颜色（优先级高于 type） */
   color?: string
+  /** 最大值 */
   max?: number
+  /** 是否显示值为 0 的徽标 */
   showZero?: boolean
+  /** 是否圆形徽标 */
   circle?: boolean
 }
 
+/** 命令式 API 返回的实例句柄 */
 export interface BadgeInstance {
+  /** 关闭并移除徽标 */
   close: () => void
+  /** 动态更新显示值 */
   setValue: (value: number | string) => void
 }
 
-export const badgeProps = buildProps({
-  value: {
-    type: definePropType<number | string>([Number, String]),
-    default: undefined,
-  },
-  max: {
-    type: Number,
-    default: 99,
-  },
-  overflowText: {
-    type: String,
-    default: '+',
-  },
-  type: {
-    type: String,
-    default: 'danger',
-  },
-  position: {
-    type: String,
-    default: 'top-right',
-  },
-  showZero: Boolean,
-  color: String,
-  circle: Boolean,
-} as const)
+/** 徽标组件 props（全部可选，默认值在 badge.vue 的 withDefaults 中提供） */
+export interface BadgeProps {
+  /** 显示值（数字或字符串），undefined / null / 空串时不渲染 */
+  value?: number | string
+  /** 最大值，超过显示 max + overflowText */
+  max?: number
+  /** 超出最大值时的后缀文本 */
+  overflowText?: string
+  /** 预设类型（决定默认颜色） */
+  type?: 'primary' | 'success' | 'warning' | 'danger' | 'info'
+  /** 徽标位置 */
+  position?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left'
+  /** 是否显示值为 0 的徽标 */
+  showZero?: boolean
+  /** 自定义颜色（优先级高于 type） */
+  color?: string
+  /** 是否圆形徽标 */
+  circle?: boolean
+}
 
-export type BadgeProps = ExtractPropTypes<typeof badgeProps>
-
-// ──── Imperative API ────
-
-const colorMap: Record<string, string> = {
+/** 类型 → 颜色映射（命令式 open 与组件展示共用，避免重复定义） */
+export const colorMap: Record<string, string> = {
   primary: '#409eff',
   success: '#67c23a',
   warning: '#e6a23c',
@@ -55,8 +60,10 @@ const colorMap: Record<string, string> = {
   info: '#909399',
 }
 
+/** 记录每个宿主元素对应的包裹层与徽标节点，便于命令式关闭 */
 const badgeMap = new Map<HTMLElement, { wrapper: HTMLElement, badge: HTMLElement }>()
 
+/** 关闭并移除指定宿主元素上的徽标 */
 export function close(el: HTMLElement): void {
   const item = badgeMap.get(el)
   if (item) {
@@ -69,6 +76,7 @@ export function close(el: HTMLElement): void {
   }
 }
 
+/** 在宿主元素上命令式创建徽标，返回可操作的实例句柄 */
 export function open(el: HTMLElement, options: BadgeOptions = {}): BadgeInstance {
   if (badgeMap.has(el)) {
     close(el)
@@ -188,10 +196,12 @@ export function open(el: HTMLElement, options: BadgeOptions = {}): BadgeInstance
   }
 }
 
+/** 关闭所有命令式创建的徽标 */
 export function closeAll(): void {
   badgeMap.forEach((_, el) => close(el))
 }
 
+/** 统一对外暴露的命令式徽标 API */
 export const easyBadge = {
   open,
   close,

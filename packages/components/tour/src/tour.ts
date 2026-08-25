@@ -1,5 +1,5 @@
 /* eslint-disable ts/no-use-before-define */
-import type { TourProps, TourStep } from './tour.vue'
+import type { TourProps, TourStep } from './types'
 import { createApp, h, nextTick, ref } from 'vue'
 import EasyTourComp from './tour.vue'
 

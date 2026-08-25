@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import type { ListEmits, ListProps } from './types'
 import EasyEmpty from '../../empty'
+
 import EasyLoading from '../../loading'
+import { useList } from './use-list'
 
 defineOptions({ name: 'EasyList' })
 
@@ -22,60 +25,18 @@ const props = withDefaults(defineProps<ListProps>(), {
   footer: '',
 })
 
-const emit = defineEmits<{
-  (e: 'item-click', item: any, index: number): void
-}>()
+const emit = defineEmits<ListEmits>()
 
-export interface ListProps {
-  /** 数据源 */
-  list?: any[]
-  /** 主字段名（默认 title） */
-  title?: string
-  /** 描述字段名 */
-  description?: string
-  /** 头像字段名或固定值 */
-  avatar?: string
-  /** 额外内容字段名 */
-  extra?: string
-  /** 唯一标识字段名（默认 id） */
-  rowKey?: string
-  /** 是否显示边框 */
-  bordered?: boolean
-  /** 是否显示空状态组件 */
-  showEmpty?: boolean
-  /** 空状态文字 */
-  emptyText?: string
-  /** 加载状态 */
-  loading?: boolean
-  /** 悬停效果 */
-  hoverable?: boolean
-  /** 指针样式（cursor: pointer） */
-  clickable?: boolean
-  /** 最大高度 */
-  maxHeight?: string
-  /** 头部内容 */
-  header?: string
-  /** 底部内容 */
-  footer?: string
-}
+// 将原来内联的 key 解析 / 字段取值 / 点击上报 / 图片判定逻辑抽离到 composable
+const {
+  getKey,
+  getFieldValue,
+  handleItemClick,
+  isImageUrl,
+} = useList(props, emit)
 
-function getKey(item: any, index: number): string | number {
-  return item[props.rowKey] ?? index
-}
-
-function getFieldValue(item: any, field: string): string {
-  return item?.[field] ?? ''
-}
-
-function handleItemClick(item: any, index: number) {
-  emit('item-click', item, index)
-}
-
-function isImageUrl(url: string): boolean {
-  if (!url)
-    return false
-  return /\.(?:jpg|jpeg|png|gif|webp|svg|bmp)$/i.test(url) || url.startsWith('http')
-}
+// 保持对外类型导出兼容（原定义在 list.vue，现统一维护在 ./types）
+export type { ListEmits, ListProps } from './types'
 </script>
 
 <template>
@@ -150,130 +111,5 @@ function isImageUrl(url: string): boolean {
   </div>
 </template>
 
-<style scoped lang="scss">
-.easy-list {
-  width: 100%;
-
-  &.easy-list--bordered {
-    border: 1px solid #f2f3f7;
-    border-radius: 8px;
-    overflow: hidden;
-  }
-}
-
-.easy-list__header {
-  padding: 12px 16px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--el-text-color-primary);
-  background: var(--el-fill-color-light);
-  border-bottom: 1px solid #f2f3f7;
-}
-
-.easy-list__body {
-  overflow-y: auto;
-}
-
-.easy-list__loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 32px;
-  color: var(--el-text-color-secondary);
-  font-size: 14px;
-}
-
-.easy-list__empty {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 32px;
-  color: var(--el-text-color-secondary);
-  font-size: 14px;
-}
-
-.easy-list__content {
-  // 默认列表样式
-}
-
-.easy-list__item {
-  display: flex;
-  align-items: center;
-  padding: 12px 16px;
-  border-bottom: 1px solid #f2f3f7;
-  transition: background-color 0.2s;
-
-  &:last-child {
-    border-bottom: none;
-  }
-
-  &.easy-list__item--hoverable:hover {
-    background: var(--el-fill-color-light);
-  }
-
-  &.easy-list__item--clickable {
-    cursor: pointer;
-  }
-}
-
-.easy-list__item-avatar {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-right: 12px;
-  background: var(--el-fill-color-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  color: var(--el-text-color-secondary);
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
-.easy-list__item-content {
-  flex: 1;
-  min-width: 0;
-}
-
-.easy-list__item-title {
-  font-size: 14px;
-  color: var(--el-text-color-primary);
-  line-height: 1.5;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.easy-list__item-desc {
-  font-size: 13px;
-  color: var(--el-text-color-secondary);
-  line-height: 1.5;
-  margin-top: 4px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.easy-list__item-extra {
-  flex-shrink: 0;
-  margin-left: 12px;
-  color: var(--el-text-color-secondary);
-  font-size: 13px;
-}
-
-.easy-list__footer {
-  padding: 12px 16px;
-  font-size: 14px;
-  color: var(--el-text-color-secondary);
-  background: var(--el-fill-color-light);
-  border-top: 1px solid #f2f3f7;
-}
-</style>
+<!-- 组件核心样式（scoped，独立维护在 list-style.scss） -->
+<style scoped src="./list-style.scss" lang="scss"></style>

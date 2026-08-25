@@ -1,0 +1,32 @@
+.easy-form {
+  width: 100%;
+
+  &.easy-form--large {
+    .easy-form-item__label {
+      font-size: 15px;
+    }
+  }
+
+  &.easy-form--default {
+    .easy-form-item__label {
+      font-size: 14px;
+    }
+  }
+
+  &.easy-form--small {
+    .easy-form-item__label {
+      font-size: 13px;
+    }
+  }
+
+  &.is-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+
+    :deep(.easy-form-item) {
+      margin-right: 16px;
+      margin-bottom: 20px;
+    }
+  }
+}

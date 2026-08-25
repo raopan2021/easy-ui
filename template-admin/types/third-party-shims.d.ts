@@ -12,24 +12,24 @@
  * 请先安装对应依赖并移除本文件中对应的声明。
  */
 
-declare module "jsbarcode";
-declare module "markdown-it";
-declare module "cropperjs" {
-  const Cropper: any;
-  export type Cropper = any;
-  export default Cropper;
+declare module 'jsbarcode';
+declare module 'markdown-it';
+declare module 'cropperjs' {
+  const Cropper: any
+  export type Cropper = any
+  export default Cropper
 }
-declare module "@logicflow/core";
-declare module "@logicflow/core/lib/style/index.css";
-declare module "@logicflow/extension";
-declare module "@logicflow/extension/lib/style/index.css";
-declare module "@logicflow/extension/lib/materials/curved-edge";
-declare module "@vue-office/docx/lib/v3/vue-office-docx.mjs";
-declare module "@vue-office/excel/lib/v3/vue-office-excel.mjs";
-declare module "@vue-office/pdf/lib/v3/vue-office-pdf.mjs";
-declare module "pptx-preview" {
-  export const init: any;
+declare module '@logicflow/core';
+declare module '@logicflow/core/lib/style/index.css';
+declare module '@logicflow/extension';
+declare module '@logicflow/extension/lib/style/index.css';
+declare module '@logicflow/extension/lib/materials/curved-edge';
+declare module '@vue-office/docx/lib/v3/vue-office-docx.mjs';
+declare module '@vue-office/excel/lib/v3/vue-office-excel.mjs';
+declare module '@vue-office/pdf/lib/v3/vue-office-pdf.mjs';
+declare module 'pptx-preview' {
+  export const init: any
 }
-declare module "pptx-preview/dist/index" {
-  export type PPTXPreviewer = any;
+declare module 'pptx-preview/dist/index' {
+  export type PPTXPreviewer = any
 }

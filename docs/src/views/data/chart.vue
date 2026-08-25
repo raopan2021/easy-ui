@@ -351,15 +351,8 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <EasyCard shadow="never" :bordered="true">
-            <EasyChart
-              type="line"
-              title="月度访问量"
-              subtitle="2025年全年数据统计"
-              :labels="monthLabels"
-              :series="lineSeries"
-              :height="300"
-              :show-label="true"
-            />
+            <EasyChart type="line" title="月度访问量" subtitle="2025年全年数据统计" :labels="monthLabels" :series="lineSeries"
+              :height="300" :show-label="true" />
           </EasyCard>
         </div>
         <EasyDocCode
@@ -390,14 +383,8 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <EasyCard shadow="never" :bordered="true">
-            <EasyChart
-              type="line"
-              title="股价走势"
-              :labels="weekLabels"
-              :series="stockSeries"
-              :area-fill="false"
-              :height="260"
-            />
+            <EasyChart type="line" title="股价走势" :labels="weekLabels" :series="stockSeries" :area-fill="false"
+              :height="260" />
           </EasyCard>
         </div>
         <EasyDocCode
@@ -427,15 +414,8 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <EasyCard shadow="never" :bordered="true">
-            <EasyChart
-              type="line"
-              title="用户增长"
-              :labels="dayLabels"
-              :series="singleSeries"
-              :colors="['#8b5cf6']"
-              :height="240"
-              legend-position="top"
-            />
+            <EasyChart type="line" title="用户增长" :labels="dayLabels" :series="singleSeries" :colors="['#8b5cf6']"
+              :height="240" legend-position="top" />
           </EasyCard>
         </div>
         <EasyDocCode
@@ -465,39 +445,17 @@ function onDrill(payload: {
         <div class="doc-preview__body">
           <div class="chart-row">
             <EasyCard shadow="never" :bordered="true" class="chart-col">
-              <EasyChart
-                type="line"
-                title="直线（默认）"
-                :labels="smoothLabels"
-                :series="smoothSeries"
-                :area-fill="false"
-                :show-dots="false"
-                :height="220"
-              />
+              <EasyChart type="line" title="直线（默认）" :labels="smoothLabels" :series="smoothSeries" :area-fill="false"
+                :show-dots="false" :height="220" />
             </EasyCard>
             <EasyCard shadow="never" :bordered="true" class="chart-col">
-              <EasyChart
-                type="line"
-                title="平滑曲线"
-                :labels="smoothLabels"
-                :series="smoothSeries"
-                :smooth="true"
-                :area-fill="false"
-                :show-dots="false"
-                :height="220"
-              />
+              <EasyChart type="line" title="平滑曲线" :labels="smoothLabels" :series="smoothSeries" :smooth="true"
+                :area-fill="false" :show-dots="false" :height="220" />
             </EasyCard>
           </div>
           <EasyCard shadow="never" :bordered="true" style="margin-top: 16px">
-            <EasyChart
-              type="line"
-              title="平滑面积图"
-              :labels="smoothLabels"
-              :series="smoothSeries"
-              :show-dots="false"
-              :smooth="true"
-              :height="240"
-            />
+            <EasyChart type="line" title="平滑面积图" :labels="smoothLabels" :series="smoothSeries" :show-dots="false"
+              :smooth="true" :height="240" />
           </EasyCard>
         </div>
         <EasyDocCode
@@ -546,25 +504,12 @@ function onDrill(payload: {
         <div class="doc-preview__body">
           <div class="chart-row">
             <EasyCard shadow="never" :bordered="true" class="chart-col">
-              <EasyChart
-                type="line"
-                title="显示数据点（默认）"
-                :labels="smoothLabels"
-                :series="smoothSeries"
-                :area-fill="false"
-                :height="220"
-              />
+              <EasyChart type="line" title="显示数据点（默认）" :labels="smoothLabels" :series="smoothSeries" :area-fill="false"
+                :height="220" />
             </EasyCard>
             <EasyCard shadow="never" :bordered="true" class="chart-col">
-              <EasyChart
-                type="line"
-                title="隐藏数据点"
-                :labels="smoothLabels"
-                :series="smoothSeries"
-                :area-fill="false"
-                :show-dots="false"
-                :height="220"
-              />
+              <EasyChart type="line" title="隐藏数据点" :labels="smoothLabels" :series="smoothSeries" :area-fill="false"
+                :show-dots="false" :height="220" />
             </EasyCard>
           </div>
         </div>
@@ -600,15 +545,8 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <EasyCard shadow="never" :bordered="true">
-            <EasyChart
-              type="bar"
-              title="季度销售额"
-              subtitle="按产品线统计（万元）"
-              :labels="quarterLabels"
-              :series="barSeries"
-              :height="300"
-              :show-label="true"
-            />
+            <EasyChart type="bar" title="季度销售额" subtitle="按产品线统计（万元）" :labels="quarterLabels" :series="barSeries"
+              :height="300" :show-label="true" />
           </EasyCard>
         </div>
         <EasyDocCode
@@ -640,15 +578,8 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <EasyCard shadow="never" :bordered="true">
-            <EasyChart
-              type="bar"
-              title="各城市 GMV（亿元）"
-              :labels="cityLabels"
-              :series="citySeries"
-              :colors="['#10b981']"
-              :bar-radius="6"
-              :height="260"
-            />
+            <EasyChart type="bar" title="各城市 GMV（亿元）" :labels="cityLabels" :series="citySeries" :colors="['#10b981']"
+              :bar-radius="6" :height="260" />
           </EasyCard>
         </div>
         <EasyDocCode
@@ -678,16 +609,8 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <EasyCard shadow="never" :bordered="true">
-            <EasyChart
-              type="bar"
-              title="各产品季度销售额"
-              subtitle="单柱自定义颜色示例"
-              :labels="quarterLabels"
-              :series="coloredBarSeries"
-              :height="280"
-              :show-label="true"
-              :bar-radius="6"
-            />
+            <EasyChart type="bar" title="各产品季度销售额" subtitle="单柱自定义颜色示例" :labels="quarterLabels"
+              :series="coloredBarSeries" :height="280" :show-label="true" :bar-radius="6" />
           </EasyCard>
         </div>
         <EasyDocCode
@@ -728,16 +651,8 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <EasyCard shadow="never" :bordered="true">
-            <EasyChart
-              type="stack"
-              title="各渠道月度销售额"
-              subtitle="Q1 – Q2 多渠道堆叠对比"
-              :labels="stackLabels"
-              :series="stackSeries"
-              :height="300"
-              :show-label="true"
-              :bar-radius="4"
-            />
+            <EasyChart type="stack" title="各渠道月度销售额" subtitle="Q1 – Q2 多渠道堆叠对比" :labels="stackLabels"
+              :series="stackSeries" :height="300" :show-label="true" :bar-radius="4" />
           </EasyCard>
         </div>
         <EasyDocCode
@@ -770,15 +685,8 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <EasyCard shadow="never" :bordered="true">
-            <EasyChart
-              type="stack"
-              title="统一每层颜色"
-              :labels="stackLabels"
-              :series="stackSeriesColored"
-              :height="280"
-              :bar-radius="4"
-              :show-label="true"
-            />
+            <EasyChart type="stack" title="统一每层颜色" :labels="stackLabels" :series="stackSeriesColored" :height="280"
+              :bar-radius="4" :show-label="true" />
           </EasyCard>
         </div>
         <EasyDocCode
@@ -811,16 +719,8 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <EasyCard shadow="never" :bordered="true">
-            <EasyChart
-              type="stack"
-              title="单独设置某柱某层颜色"
-              subtitle="第3根柱子高亮所有层"
-              :labels="stackLabels"
-              :series="stackSeries"
-              :stack-colors="stackHighlightColors"
-              :height="280"
-              :bar-radius="4"
-            />
+            <EasyChart type="stack" title="单独设置某柱某层颜色" subtitle="第3根柱子高亮所有层" :labels="stackLabels" :series="stackSeries"
+              :stack-colors="stackHighlightColors" :height="280" :bar-radius="4" />
           </EasyCard>
         </div>
         <EasyDocCode
@@ -864,27 +764,12 @@ function onDrill(payload: {
         <div class="doc-preview__body">
           <div class="chart-row">
             <EasyCard shadow="never" :bordered="true" class="chart-col">
-              <EasyChart
-                type="line"
-                title="用户增长（含标签）"
-                :labels="dayLabels"
-                :series="singleSeries"
-                :colors="['#8b5cf6']"
-                :show-label="true"
-                :height="240"
-              />
+              <EasyChart type="line" title="用户增长（含标签）" :labels="dayLabels" :series="singleSeries" :colors="['#8b5cf6']"
+                :show-label="true" :height="240" />
             </EasyCard>
             <EasyCard shadow="never" :bordered="true" class="chart-col">
-              <EasyChart
-                type="bar"
-                title="各城市 GMV（含标签）"
-                :labels="cityLabels"
-                :series="citySeries"
-                :colors="['#10b981']"
-                :bar-radius="6"
-                :show-label="true"
-                :height="240"
-              />
+              <EasyChart type="bar" title="各城市 GMV（含标签）" :labels="cityLabels" :series="citySeries" :colors="['#10b981']"
+                :bar-radius="6" :show-label="true" :height="240" />
             </EasyCard>
           </div>
         </div>
@@ -921,14 +806,8 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <EasyCard shadow="never" :bordered="true">
-            <EasyChart
-              type="mixed"
-              title="销售额与增长率"
-              subtitle="柱状：销售额（万元）  折线：环比增长率（%）"
-              :labels="mixedLabels"
-              :series="mixedSeries"
-              :height="320"
-            />
+            <EasyChart type="mixed" title="销售额与增长率" subtitle="柱状：销售额（万元）  折线：环比增长率（%）" :labels="mixedLabels"
+              :series="mixedSeries" :height="320" />
           </EasyCard>
         </div>
         <EasyDocCode
@@ -960,22 +839,10 @@ function onDrill(payload: {
         <div class="doc-preview__body">
           <div class="chart-row">
             <EasyCard shadow="never" :bordered="true" class="chart-col">
-              <EasyChart
-                type="mixed"
-                title="月度访问量 & 转化率"
-                :labels="mixedLabels"
-                :series="mixedSeries2"
-                :height="300"
-              />
+              <EasyChart type="mixed" title="月度访问量 & 转化率" :labels="mixedLabels" :series="mixedSeries2" :height="300" />
             </EasyCard>
             <EasyCard shadow="never" :bordered="true" class="chart-col">
-              <EasyChart
-                type="mixed"
-                title="收入 & 费用率（多折线）"
-                :labels="mixedLabels"
-                :series="mixedSeries3"
-                :height="300"
-              />
+              <EasyChart type="mixed" title="收入 & 费用率（多折线）" :labels="mixedLabels" :series="mixedSeries3" :height="300" />
             </EasyCard>
           </div>
         </div>
@@ -1024,35 +891,19 @@ function onDrill(payload: {
           <div class="chart-row">
             <!-- 方式一：serie.color 统一着色 -->
             <EasyCard shadow="never" :bordered="true" class="chart-col">
-              <EasyChart
-                type="mixed"
-                title="serie.color 统一着色"
-                :labels="mixedLabels"
-                :series="mixedColorSeries1"
-                :height="280"
-              />
+              <EasyChart type="mixed" title="serie.color 统一着色" :labels="mixedLabels" :series="mixedColorSeries1"
+                :height="280" />
             </EasyCard>
             <!-- 方式二：serie.colors 逐柱着色 -->
             <EasyCard shadow="never" :bordered="true" class="chart-col">
-              <EasyChart
-                type="mixed"
-                title="serie.colors 逐柱着色"
-                :labels="mixedLabels"
-                :series="mixedColorSeries2"
-                :height="280"
-              />
+              <EasyChart type="mixed" title="serie.colors 逐柱着色" :labels="mixedLabels" :series="mixedColorSeries2"
+                :height="280" />
             </EasyCard>
           </div>
           <!-- 方式三：:colors 全局调色盘 -->
           <EasyCard shadow="never" :bordered="true" style="margin-top: 12px">
-            <EasyChart
-              type="mixed"
-              title=":colors 全局调色盘（按系列顺序：柱1/柱2/折线）"
-              :labels="mixedLabels"
-              :series="mixedColorSeries3"
-              :colors="['#6366f1', '#a78bfa', '#f59e0b']"
-              :height="280"
-            />
+            <EasyChart type="mixed" title=":colors 全局调色盘（按系列顺序：柱1/柱2/折线）" :labels="mixedLabels"
+              :series="mixedColorSeries3" :colors="['#6366f1', '#a78bfa', '#f59e0b']" :height="280" />
           </EasyCard>
         </div>
         <EasyDocCode
@@ -1137,14 +988,8 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <EasyCard shadow="never" :bordered="true">
-            <EasyChart
-              type="pie"
-              title="预算分配"
-              :data="budgetPieData"
-              :colors="['#6366f1', '#f59e0b', '#10b981', '#ef4444']"
-              :height="280"
-              :show-label="true"
-            />
+            <EasyChart type="pie" title="预算分配" :data="budgetPieData"
+              :colors="['#6366f1', '#f59e0b', '#10b981', '#ef4444']" :height="280" :show-label="true" />
           </EasyCard>
         </div>
         <EasyDocCode
@@ -1209,25 +1054,11 @@ function onDrill(payload: {
         <div class="doc-preview__body">
           <div class="chart-row">
             <EasyCard shadow="never" :bordered="true" class="chart-col">
-              <EasyChart
-                type="donut"
-                title="任务完成率"
-                :data="taskData"
-                donut-label="已完成"
-                donut-value="72%"
-                :height="280"
-              />
+              <EasyChart type="donut" title="任务完成率" :data="taskData" donut-label="已完成" donut-value="72%" :height="280" />
             </EasyCard>
             <EasyCard shadow="never" :bordered="true" class="chart-col">
-              <EasyChart
-                type="donut"
-                title="预算使用情况"
-                :data="budgetData"
-                donut-label="已使用"
-                donut-value="¥18.6w"
-                :height="280"
-                :colors="['#ef4444', '#f59e0b', '#10b981', '#3b82f6']"
-              />
+              <EasyChart type="donut" title="预算使用情况" :data="budgetData" donut-label="已使用" donut-value="¥18.6w"
+                :height="280" :colors="['#ef4444', '#f59e0b', '#10b981', '#3b82f6']" />
             </EasyCard>
           </div>
         </div>
@@ -1263,15 +1094,8 @@ function onDrill(payload: {
               <EasyChart type="pie" title="流量来源（含标签）" :data="pieData" :show-label="true" :height="280" />
             </EasyCard>
             <EasyCard shadow="never" :bordered="true" class="chart-col">
-              <EasyChart
-                type="donut"
-                title="任务完成率（含标签）"
-                :data="taskData"
-                donut-label="已完成"
-                donut-value="72%"
-                :show-label="true"
-                :height="280"
-              />
+              <EasyChart type="donut" title="任务完成率（含标签）" :data="taskData" donut-label="已完成" donut-value="72%"
+                :show-label="true" :height="280" />
             </EasyCard>
           </div>
         </div>
@@ -1306,14 +1130,8 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <EasyCard shadow="never" :bordered="true">
-            <EasyChart
-              type="bar"
-              title="收入报表（元）"
-              :labels="monthLabels"
-              :series="revenueSeries"
-              :formatter="currencyFormatter"
-              :height="280"
-            />
+            <EasyChart type="bar" title="收入报表（元）" :labels="monthLabels" :series="revenueSeries"
+              :formatter="currencyFormatter" :height="280" />
           </EasyCard>
         </div>
         <EasyDocCode
@@ -1340,25 +1158,12 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <EasyCard shadow="never" :bordered="true" style="margin-bottom: 16px">
-            <EasyChart
-              type="line"
-              title="全年每日访问量（365 天）"
-              subtitle="拖拽或滚轮横向平移"
-              :labels="dailyLabels"
-              :series="dailySeries"
-              :min-item-width="50"
-              :height="300"
-            />
+            <EasyChart type="line" title="全年每日访问量（365 天）" subtitle="拖拽或滚轮横向平移" :labels="dailyLabels"
+              :series="dailySeries" :min-item-width="50" :height="300" />
           </EasyCard>
           <EasyCard shadow="never" :bordered="true">
-            <EasyChart
-              type="bar"
-              title="60 周销售数据"
-              :labels="weeklyLabels"
-              :series="weeklySeries"
-              :min-item-width="40"
-              :height="280"
-            />
+            <EasyChart type="bar" title="60 周销售数据" :labels="weeklyLabels" :series="weeklySeries" :min-item-width="40"
+              :height="280" />
           </EasyCard>
         </div>
         <EasyDocCode
@@ -1397,30 +1202,14 @@ function onDrill(payload: {
         <div class="doc-preview__body">
           <div class="chart-row">
             <EasyCard shadow="never" :bordered="true" class="chart-col">
-              <EasyChart
-                type="line"
-                title="日活用户"
-                :labels="dayLabels"
-                :series="[{ name: 'DAU', data: [8200, 9100, 8700, 10200, 9800, 11000, 10500] }]"
-                :show-legend="false"
-                :show-grid="false"
-                :show-download="false"
-                :colors="['#3b82f6']"
-                :height="200"
-              />
+              <EasyChart type="line" title="日活用户" :labels="dayLabels"
+                :series="[{ name: 'DAU', data: [8200, 9100, 8700, 10200, 9800, 11000, 10500] }]" :show-legend="false"
+                :show-grid="false" :show-download="false" :colors="['#3b82f6']" :height="200" />
             </EasyCard>
             <EasyCard shadow="never" :bordered="true" class="chart-col">
-              <EasyChart
-                type="bar"
-                title="本周订单"
-                :labels="dayLabels"
-                :series="[{ name: '订单数', data: [32, 48, 41, 55, 62, 58, 70] }]"
-                :show-legend="false"
-                :show-grid="false"
-                :show-download="false"
-                :colors="['#f59e0b']"
-                :height="200"
-              />
+              <EasyChart type="bar" title="本周订单" :labels="dayLabels"
+                :series="[{ name: '订单数', data: [32, 48, 41, 55, 62, 58, 70] }]" :show-legend="false" :show-grid="false"
+                :show-download="false" :colors="['#f59e0b']" :height="200" />
             </EasyCard>
           </div>
         </div>
@@ -1449,13 +1238,7 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <EasyCard shadow="never" :bordered="true">
-            <EasyChart
-              type="funnel"
-              title="注册转化漏斗"
-              subtitle="从曝光到付款各环节转化"
-              :data="funnelData"
-              :height="380"
-            />
+            <EasyChart type="funnel" title="注册转化漏斗" subtitle="从曝光到付款各环节转化" :data="funnelData" :height="380" />
           </EasyCard>
         </div>
         <EasyDocCode
@@ -1487,13 +1270,8 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <EasyCard shadow="never" :bordered="true">
-            <EasyChart
-              type="funnel"
-              title="销售流程漏斗"
-              :data="salesFunnelData"
-              :colors="['#6366f1', '#8b5cf6', '#a78bfa', '#c4b5fd', '#ddd6fe']"
-              :height="380"
-            />
+            <EasyChart type="funnel" title="销售流程漏斗" :data="salesFunnelData"
+              :colors="['#6366f1', '#8b5cf6', '#a78bfa', '#c4b5fd', '#ddd6fe']" :height="380" />
           </EasyCard>
         </div>
         <EasyDocCode
@@ -1558,15 +1336,8 @@ function onDrill(payload: {
       <div class="doc-preview">
         <div class="doc-preview__body">
           <EasyCard shadow="never" :bordered="true">
-            <EasyChart
-              type="hbar"
-              title="各品类销售额"
-              subtitle="单位：万元"
-              :labels="hbarLabels"
-              :series="hbarSeries"
-              :height="360"
-              :formatter="wanFormatter"
-            />
+            <EasyChart type="hbar" title="各品类销售额" subtitle="单位：万元" :labels="hbarLabels" :series="hbarSeries"
+              :height="360" :formatter="wanFormatter" />
           </EasyCard>
         </div>
         <EasyDocCode
@@ -1597,25 +1368,12 @@ function onDrill(payload: {
         <div class="doc-preview__body">
           <div class="chart-row">
             <EasyCard shadow="never" :bordered="true" class="chart-col">
-              <EasyChart
-                type="hbar"
-                title="城市销售额（全局色）"
-                :labels="hbarColorLabels"
-                :series="hbarColorSeries"
-                :colors="['#6366f1', '#f59e0b']"
-                :height="320"
-                :formatter="wanFormatter"
-              />
+              <EasyChart type="hbar" title="城市销售额（全局色）" :labels="hbarColorLabels" :series="hbarColorSeries"
+                :colors="['#6366f1', '#f59e0b']" :height="320" :formatter="wanFormatter" />
             </EasyCard>
             <EasyCard shadow="never" :bordered="true" class="chart-col">
-              <EasyChart
-                type="hbar"
-                title="品类销售（每柱独立色）"
-                :labels="hbarLabels.slice(0, 6)"
-                :series="hbarItemColorSeries"
-                :height="320"
-                :formatter="wanFormatter"
-              />
+              <EasyChart type="hbar" title="品类销售（每柱独立色）" :labels="hbarLabels.slice(0, 6)" :series="hbarItemColorSeries"
+                :height="320" :formatter="wanFormatter" />
             </EasyCard>
           </div>
         </div>
@@ -1672,28 +1430,12 @@ function onDrill(payload: {
         <div class="doc-preview__body">
           <div class="chart-row">
             <EasyCard shadow="never" :bordered="true" class="chart-col">
-              <EasyChart
-                type="gauge"
-                title="CPU 使用率"
-                :gauge-value="72"
-                :gauge-min="0"
-                :gauge-max="100"
-                gauge-unit="%"
-                :colors="['#10b981', '#f59e0b', '#ef4444']"
-                :height="260"
-              />
+              <EasyChart type="gauge" title="CPU 使用率" :gauge-value="72" :gauge-min="0" :gauge-max="100" gauge-unit="%"
+                :colors="['#10b981', '#f59e0b', '#ef4444']" :height="260" />
             </EasyCard>
             <EasyCard shadow="never" :bordered="true" class="chart-col">
-              <EasyChart
-                type="gauge"
-                title="今日完成进度"
-                :gauge-value="6820"
-                :gauge-min="0"
-                :gauge-max="10000"
-                gauge-unit=" 单"
-                :colors="['#3b82f6', '#6366f1']"
-                :height="260"
-              />
+              <EasyChart type="gauge" title="今日完成进度" :gauge-value="6820" :gauge-min="0" :gauge-max="10000"
+                gauge-unit=" 单" :colors="['#3b82f6', '#6366f1']" :height="260" />
             </EasyCard>
           </div>
         </div>
@@ -1732,14 +1474,8 @@ function onDrill(payload: {
             <code>{{ drillLog }}</code>
           </div>
           <EasyCard shadow="never" :bordered="true">
-            <EasyChart
-              type="bar"
-              title="点击柱子触发下钻"
-              :labels="quarterLabels"
-              :series="barSeries"
-              :height="260"
-              @drill="onDrill"
-            />
+            <EasyChart type="bar" title="点击柱子触发下钻" :labels="quarterLabels" :series="barSeries" :height="260"
+              @drill="onDrill" />
           </EasyCard>
         </div>
         <EasyDocCode

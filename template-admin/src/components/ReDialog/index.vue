@@ -107,27 +107,14 @@ function handleClose(
 </script>
 
 <template>
-  <el-dialog
-    v-for="(options, index) in dialogStore"
-    :key="index"
-    v-bind="options"
-    v-model="options.visible"
-    class="pure-dialog"
-    :fullscreen="fullscreen ? true : options?.fullscreen ? true : false"
-    @closed="handleClose(options, index)"
-    @opened="eventsCallBack('open', options, index)"
+  <el-dialog v-for="(options, index) in dialogStore" :key="index" v-bind="options" v-model="options.visible"
+    class="pure-dialog" :fullscreen="fullscreen ? true : options?.fullscreen ? true : false"
+    @closed="handleClose(options, index)" @opened="eventsCallBack('open', options, index)"
     @open-auto-focus="eventsCallBack('openAutoFocus', options, index)"
-    @close-auto-focus="eventsCallBack('closeAutoFocus', options, index)"
-  >
+    @close-auto-focus="eventsCallBack('closeAutoFocus', options, index)">
     <!-- header -->
-    <template
-      v-if="options?.fullscreenIcon || options?.headerRenderer"
-      #header="{ close, titleId, titleClass }"
-    >
-      <div
-        v-if="options?.fullscreenIcon"
-        class="flex items-center justify-between"
-      >
+    <template v-if="options?.fullscreenIcon || options?.headerRenderer" #header="{ close, titleId, titleClass }">
+      <div v-if="options?.fullscreenIcon" class="flex items-center justify-between">
         <span :id="titleId" :class="titleClass">{{ options?.title }}</span>
         <i
           v-if="!options?.fullscreen"
@@ -153,16 +140,10 @@ function handleClose(
           />
         </i>
       </div>
-      <component
-        :is="options?.headerRenderer({ close, titleId, titleClass })"
-        v-else
-      />
+      <component :is="options?.headerRenderer({ close, titleId, titleClass })" v-else />
     </template>
-    <component
-      v-bind="options?.props"
-      :is="options.contentRenderer({ options, index })"
-      @close="args => handleClose(options, index, args)"
-    />
+    <component v-bind="options?.props" :is="options.contentRenderer({ options, index })"
+      @close="args => handleClose(options, index, args)" />
     <!-- footer -->
     <template v-if="!options?.hideFooter" #footer>
       <template v-if="options?.footerRenderer">

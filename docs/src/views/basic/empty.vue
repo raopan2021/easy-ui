@@ -198,11 +198,8 @@ function handleApply() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body" style="gap: 64px">
-          <EasyEmpty
-            image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg"
-            :image-size="120"
-            description="使用自定义图片"
-          />
+          <EasyEmpty image="https://gw.alipayobjects.com/zos/antfincdn/ZHrcdLPrvN/empty.svg" :image-size="120"
+            description="使用自定义图片" />
           <EasyEmpty description="使用插槽自定义图片区域">
             <template #image>
               <div class="custom-image-slot">

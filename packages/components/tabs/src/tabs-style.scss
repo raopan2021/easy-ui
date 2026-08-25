@@ -1,0 +1,240 @@
+@use '../../../easy-ui/src/styles/tokens' as *;
+
+/* ========== 设计令牌 ========== */
+$radius: 8px;
+$radius-sm: 6px;
+$transition: all 0.2s ease;
+
+/* ========== 尺寸变量 ========== */
+$size-large-height: 44px;
+$size-large-font: 15px;
+$size-large-padding: 0 20px;
+$size-large-gap: 32px;
+
+$size-default-height: 38px;
+$size-default-font: 14px;
+$size-default-padding: 0 16px;
+$size-default-gap: 24px;
+
+$size-small-height: 32px;
+$size-small-font: 13px;
+$size-small-padding: 0 12px;
+$size-small-gap: 16px;
+
+/* ========== 基础布局 ========== */
+.easy-tabs {
+  display: flex;
+  flex-direction: column;
+
+  &.easy-tabs--bottom {
+    flex-direction: column-reverse;
+  }
+}
+
+/* ========== 头部 ========== */
+.easy-tabs__header {
+  flex-shrink: 0;
+
+  &.is-sticky {
+    position: sticky;
+    z-index: 10;
+    background-color: var(--el-bg-color);
+  }
+}
+
+.easy-tabs__nav-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* ========== 导航滚动区域 ========== */
+.easy-tabs__nav-scroll {
+  overflow: hidden;
+  flex: 1;
+
+  .easy-tabs--segment & {
+    overflow: visible;
+  }
+}
+
+.easy-tabs__nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease;
+  white-space: nowrap;
+}
+
+/* ========== 滚动按钮 ========== */
+.easy-tabs__nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--el-text-color-regular);
+  transition: $transition;
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+
+  &:hover {
+    color: var(--el-text-color-primary);
+    background-color: var(--el-fill-color-light);
+  }
+}
+
+.easy-tabs__nav-btn--prev {
+  margin-right: 4px;
+}
+
+.easy-tabs__nav-btn--next {
+  margin-left: 4px;
+}
+
+/* ========== 选项卡项 ========== */
+.easy-tabs__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: $size-default-padding;
+  height: $size-default-height;
+  font-size: $size-default-font;
+  color: var(--el-text-color-secondary);
+  cursor: pointer;
+  transition: $transition;
+  user-select: none;
+  white-space: nowrap;
+  position: relative;
+  font-weight: 500;
+  flex-shrink: 0;
+
+  .easy-tabs--large & {
+    padding: $size-large-padding;
+    height: $size-large-height;
+    font-size: $size-large-font;
+  }
+
+  .easy-tabs--small & {
+    padding: $size-small-padding;
+    height: $size-small-height;
+    font-size: $size-small-font;
+  }
+
+  &:hover:not(.is-active):not(.is-disabled) {
+    color: var(--el-color-primary);
+  }
+
+  &.is-disabled {
+    color: var(--el-text-color-disabled);
+    cursor: not-allowed;
+  }
+}
+
+/* ========== Line 类型 ========== */
+.easy-tabs--line {
+  .easy-tabs__nav {
+    gap: $size-default-gap;
+    border-bottom: 1px solid var(--el-border-color);
+
+    .easy-tabs--large & {
+      gap: $size-large-gap;
+    }
+    .easy-tabs--small & {
+      gap: $size-small-gap;
+    }
+  }
+
+  .easy-tabs__item.is-active {
+    color: var(--el-color-primary);
+  }
+
+  .easy-tabs__active-bar {
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    border-radius: 1px;
+    transition:
+      left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+      width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
+      background-color 0.2s ease;
+    z-index: 1;
+  }
+}
+
+/* ========== Card 类型 ========== */
+.easy-tabs--card {
+  .easy-tabs__nav {
+    border-bottom: 1px solid var(--el-border-color);
+    gap: 4px;
+  }
+
+  .easy-tabs__item {
+    padding: 0 20px;
+    border: 1px solid transparent;
+    border-bottom: none;
+    border-radius: $radius-sm $radius-sm 0 0;
+
+    .easy-tabs--large & {
+      padding: 0 24px;
+    }
+    .easy-tabs--small & {
+      padding: 0 14px;
+    }
+
+    &.is-active {
+      background-color: var(--el-bg-color);
+      border-color: var(--el-border-color);
+      color: var(--el-color-primary);
+    }
+
+    &:hover:not(.is-active):not(.is-disabled) {
+      background-color: $bg-card;
+    }
+  }
+}
+
+/* ========== Segment 类型 ========== */
+.easy-tabs--segment {
+  .easy-tabs__nav {
+    display: inline-flex;
+    gap: 2px;
+    padding: 3px;
+    background-color: $bg-segment;
+    border-radius: $radius;
+  }
+
+  .easy-tabs__item {
+    border-radius: $radius-sm;
+    justify-content: center;
+    color: var(--el-text-color-secondary);
+
+    &.is-active {
+      background-color: var(--el-bg-color);
+      color: var(--el-color-primary);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    &:hover:not(.is-active):not(.is-disabled) {
+      color: var(--el-text-color-primary);
+    }
+  }
+}
+
+/* ========== 图标 ========== */
+.easy-tabs__item-icon {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1em;
+}
+
+/* ========== 内容区域 ========== */
+.easy-tabs__content {
+  flex: 1;
+  padding: 16px 0;
+  overflow: hidden;
+}

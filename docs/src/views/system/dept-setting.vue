@@ -311,14 +311,8 @@ onMounted(() => fetchData())
     </div>
 
     <div class="search-bar">
-      <EasyInput
-        v-model="searchForm.keyword"
-        placeholder="搜索部门名称/编码"
-        clearable
-        style="width: 240px"
-        @keyup.enter="handleSearch"
-        @clear="handleSearch"
-      />
+      <EasyInput v-model="searchForm.keyword" placeholder="搜索部门名称/编码" clearable style="width: 240px"
+        @keyup.enter="handleSearch" @clear="handleSearch" />
       <EasyButton type="primary" @click="handleSearch">
         <el-icon><Search /></el-icon>查询
       </EasyButton>
@@ -339,16 +333,8 @@ onMounted(() => fetchData())
       </EasyButton>
     </div>
 
-    <el-table
-      ref="tableRef"
-      v-loading="loading"
-      :data="treeData"
-      row-key="id"
-      stripe
-      border
-      default-expand-all
-      :tree-props="{ children: 'children' }"
-    >
+    <el-table ref="tableRef" v-loading="loading" :data="treeData" row-key="id" stripe border default-expand-all
+      :tree-props="{ children: 'children' }">
       <el-table-column prop="name" label="部门名称" min-width="180">
         <template #default="{ row }">
           <el-icon :size="16" style="margin-right: 6px; vertical-align: middle; color: var(--el-color-primary)">
@@ -387,13 +373,8 @@ onMounted(() => fetchData())
       </el-table-column>
     </el-table>
 
-    <el-dialog
-      v-model="dialog.visible"
-      :title="dialogTitle"
-      width="520px"
-      :close-on-click-modal="false"
-      @close="handleDialogClose"
-    >
+    <el-dialog v-model="dialog.visible" :title="dialogTitle" width="520px" :close-on-click-modal="false"
+      @close="handleDialogClose">
       <el-form ref="formRef" :model="dialog.form" :rules="formRules" label-width="100px">
         <el-form-item label="部门名称" prop="name">
           <EasyInput v-model="dialog.form.name" placeholder="请输入部门名称" maxlength="20" />
@@ -405,15 +386,9 @@ onMounted(() => fetchData())
           <EasyInput v-model="dialog.form.leader" placeholder="请输入负责人姓名" maxlength="20" />
         </el-form-item>
         <el-form-item label="上级部门" prop="parentId">
-          <el-tree-select
-            v-model="dialog.form.parentId"
-            :data="parentOptions"
-            :props="{ label: 'name', value: 'id', children: 'children' }"
-            placeholder="请选择（空为根部门）"
-            check-strictly
-            clearable
-            style="width: 100%"
-          />
+          <el-tree-select v-model="dialog.form.parentId" :data="parentOptions"
+            :props="{ label: 'name', value: 'id', children: 'children' }" placeholder="请选择（空为根部门）" check-strictly
+            clearable style="width: 100%" />
         </el-form-item>
         <el-form-item label="排序号" prop="sort">
           <el-input-number v-model="dialog.form.sort" :min="0" :max="999" style="width: 140px" />

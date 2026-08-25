@@ -87,16 +87,8 @@ const directiveOptions = {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyWatermark
-            :content="['XLY Admin', new Date().toLocaleDateString()]"
-            :font-size="13"
-            font-color="rgba(79, 110, 247, 0.12)"
-            :rotate="-15"
-            :gap-x="120"
-            :gap-y="100"
-            :width="120"
-            :height="80"
-          >
+          <EasyWatermark :content="['XLY Admin', new Date().toLocaleDateString()]" :font-size="13"
+            font-color="rgba(79, 110, 247, 0.12)" :rotate="-15" :gap-x="120" :gap-y="100" :width="120" :height="80">
             <div class="watermark-demo-box">
               <p>多行水印常用于展示公司名称 + 日期、部门 + 人员等信息。</p>
               <p>日期会随当前时间动态变化。</p>
@@ -124,58 +116,29 @@ const directiveOptions = {
         <div class="doc-preview__body watermark-style-group">
           <div class="watermark-style-item">
             <span class="watermark-style-item__label">浅色大字</span>
-            <EasyWatermark
-              content="浅色水印"
-              font-color="rgba(0, 0, 0, 0.06)"
-              :font-size="20"
-              :width="160"
-              :height="160"
-              :gap-x="60"
-              :gap-y="60"
-            >
+            <EasyWatermark content="浅色水印" font-color="rgba(0, 0, 0, 0.06)" :font-size="20" :width="160" :height="160"
+              :gap-x="60" :gap-y="60">
               <div class="watermark-demo-box watermark-demo-box--sm" />
             </EasyWatermark>
           </div>
           <div class="watermark-style-item">
             <span class="watermark-style-item__label">深色小字</span>
-            <EasyWatermark
-              content="深色水印"
-              font-color="rgba(0, 0, 0, 0.25)"
-              :font-size="12"
-              :width="80"
-              :height="80"
-              :gap-x="60"
-              :gap-y="60"
-            >
+            <EasyWatermark content="深色水印" font-color="rgba(0, 0, 0, 0.25)" :font-size="12" :width="80" :height="80"
+              :gap-x="60" :gap-y="60">
               <div class="watermark-demo-box watermark-demo-box--sm" />
             </EasyWatermark>
           </div>
           <div class="watermark-style-item">
             <span class="watermark-style-item__label">彩色水印</span>
-            <EasyWatermark
-              content="彩色水印"
-              font-color="rgba(245, 108, 108, 0.15)"
-              :font-size="16"
-              :width="100"
-              :height="100"
-              :gap-x="80"
-              :gap-y="80"
-            >
+            <EasyWatermark content="彩色水印" font-color="rgba(245, 108, 108, 0.15)" :font-size="16" :width="100"
+              :height="100" :gap-x="80" :gap-y="80">
               <div class="watermark-demo-box watermark-demo-box--sm" />
             </EasyWatermark>
           </div>
           <div class="watermark-style-item">
             <span class="watermark-style-item__label">垂直排列</span>
-            <EasyWatermark
-              content="垂直水印"
-              :rotate="-90"
-              font-color="rgba(0, 0, 0, 0.1)"
-              :font-size="14"
-              :width="40"
-              :height="120"
-              :gap-x="60"
-              :gap-y="60"
-            >
+            <EasyWatermark content="垂直水印" :rotate="-90" font-color="rgba(0, 0, 0, 0.1)" :font-size="14" :width="40"
+              :height="120" :gap-x="60" :gap-y="60">
               <div class="watermark-demo-box watermark-demo-box--sm" />
             </EasyWatermark>
           </div>
@@ -218,16 +181,8 @@ const directiveOptions = {
               切换颜色
             </EasyButton>
           </div>
-          <EasyWatermark
-            v-if="showDynamic"
-            :content="dynamicContent"
-            :font-color="dynamicColor"
-            :font-size="16"
-            :gap-x="90"
-            :gap-y="90"
-            :width="110"
-            :height="110"
-          >
+          <EasyWatermark v-if="showDynamic" :content="dynamicContent" :font-color="dynamicColor" :font-size="16"
+            :gap-x="90" :gap-y="90" :width="110" :height="110">
             <div class="watermark-demo-box">
               <p>水印内容、颜色等属性均可动态修改。</p>
               <p>点击上方按钮试试效果。</p>

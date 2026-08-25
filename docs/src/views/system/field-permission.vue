@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { FormInstance, FormRules } from 'element-plus'
 import type { TableColumn } from '@raopan/easy-ui'
+import type { FormInstance, FormRules } from 'element-plus'
 import { Delete, Plus, RefreshRight, Search } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { onMounted, reactive, ref } from 'vue'
@@ -273,30 +273,13 @@ onMounted(() => fetchData())
     </div>
 
     <div class="search-bar">
-      <EasyInput
-        v-model="searchForm.keyword"
-        placeholder="搜索字段名"
-        clearable
-        style="width: 200px"
-        @keyup.enter="handleSearch"
-        @clear="handleSearch"
-      />
-      <EasySelect
-        v-model="searchForm.tableName"
-        placeholder="数据表"
-        clearable
-        :options="tableOptions"
-        style="width: 180px"
-        @change="handleSearch"
-      />
-      <EasySelect
-        v-model="searchForm.permType"
-        placeholder="权限类型"
-        clearable
+      <EasyInput v-model="searchForm.keyword" placeholder="搜索字段名" clearable style="width: 200px"
+        @keyup.enter="handleSearch" @clear="handleSearch" />
+      <EasySelect v-model="searchForm.tableName" placeholder="数据表" clearable :options="tableOptions"
+        style="width: 180px" @change="handleSearch" />
+      <EasySelect v-model="searchForm.permType" placeholder="权限类型" clearable
         :options="[{ label: '可见', value: 'visible' }, { label: '可编辑', value: 'editable' }, { label: '隐藏', value: 'hidden' }]"
-        style="width: 130px"
-        @change="handleSearch"
-      />
+        style="width: 130px" @change="handleSearch" />
       <EasyButton type="primary" @click="handleSearch">
         <el-icon><Search /></el-icon>查询
       </EasyButton>
@@ -314,25 +297,11 @@ onMounted(() => fetchData())
       </EasyButton>
     </div>
 
-    <EasyTable
-      v-loading="loading"
-      :data="tableData"
-      :columns="columns"
-      selection-mode="multiple"
-      stripe
-      border
-      :pagination="true"
-      :total="pagination.total"
-      :page="pagination.page"
-      :page-size="pagination.pageSize"
-      :page-size-options="[10, 20, 50, 100]"
-      action-label="操作"
-      :action-width="160"
-      action-fixed="right"
-      @selection-change="handleSelectionChange"
-      @page-change="(p: number) => { pagination.page = p; fetchData() }"
-      @page-size-change="(s: number) => { pagination.pageSize = s; fetchData() }"
-    >
+    <EasyTable v-loading="loading" :data="tableData" :columns="columns" selection-mode="multiple" stripe border
+      :pagination="true" :total="pagination.total" :page="pagination.page" :page-size="pagination.pageSize"
+      :page-size-options="[10, 20, 50, 100]" action-label="操作" :action-width="160" action-fixed="right"
+      @selection-change="handleSelectionChange" @page-change="(p: number) => { pagination.page = p; fetchData() }"
+      @page-size-change="(s: number) => { pagination.pageSize = s; fetchData() }">
       <template #col-permType="{ row }">
         <EasyTag :type="permTypeMap[row.permType]?.tag" size="small">
           {{ permTypeMap[row.permType]?.label || row.permType }}
@@ -355,13 +324,8 @@ onMounted(() => fetchData())
       </template>
     </EasyTable>
 
-    <el-dialog
-      v-model="dialog.visible"
-      :title="dialog.isEdit ? '编辑字段权限' : '新增字段权限'"
-      width="500px"
-      :close-on-click-modal="false"
-      @close="handleDialogClose"
-    >
+    <el-dialog v-model="dialog.visible" :title="dialog.isEdit ? '编辑字段权限' : '新增字段权限'" width="500px"
+      :close-on-click-modal="false" @close="handleDialogClose">
       <el-form ref="formRef" :model="dialog.form" :rules="formRules" label-width="90px">
         <el-form-item label="数据表" prop="tableName">
           <EasySelect v-model="dialog.form.tableName" placeholder="请选择" :options="tableOptions" style="width: 100%" />

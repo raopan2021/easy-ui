@@ -1,0 +1,81 @@
+/* ====== 弹出面板容器 ====== */
+.edge-tooltip {
+  background: var(--el-bg-color);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.08),
+    0 3px 6px rgba(0, 0, 0, 0.06),
+    0 0 1px rgba(0, 0, 0, 0.1);
+  padding: 6px;
+  z-index: 1000;
+  min-width: 180px;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Segoe UI', Roboto, sans-serif;
+  animation: tooltipFadeIn 0.18s ease-out;
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ====== 菜单项 ====== */
+.tooltip-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.15s ease;
+  user-select: none;
+}
+
+.tooltip-item:hover {
+  background: var(--el-fill-color-light);
+}
+
+.tooltip-item:active {
+  background: var(--el-fill-color);
+}
+
+/* ====== 图标 ====== */
+.tooltip-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-right: 10px;
+  border-radius: 8px;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.tooltip-item:hover .tooltip-icon {
+  transform: scale(1.1);
+}
+
+/* ====== 文本区 ====== */
+.tooltip-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.tooltip-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--el-text-color-primary);
+  line-height: 22px;
+}
+
+.tooltip-desc {
+  font-size: 12px;
+  color: var(--el-text-color-placeholder);
+  line-height: 18px;
+}

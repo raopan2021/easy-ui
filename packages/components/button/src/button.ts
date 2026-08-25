@@ -43,6 +43,7 @@ export const buttonEmits = {
   click: (event: MouseEvent) => event instanceof MouseEvent,
 }
 
+/** 组件事件（defineEmits 与内部 composable 共用） */
 export interface ButtonEmits {
-  click: [event: MouseEvent]
+  (e: 'click', event: MouseEvent): void
 }

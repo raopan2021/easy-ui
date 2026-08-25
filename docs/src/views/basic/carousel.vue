@@ -401,9 +401,7 @@ const images = [
             <EasyCarousel :items="basicImages" :interval="0" arrow="always" />
           </div>
         </div>
-        <EasyDocCode
-          code="<EasyCarousel :items=&quot;images&quot; :interval=&quot;0&quot; arrow=&quot;always&quot; />"
-        />
+        <EasyDocCode code="<EasyCarousel :items=&quot;images&quot; :interval=&quot;0&quot; arrow=&quot;always&quot; />" />
       </div>
     </section>
 
@@ -421,9 +419,7 @@ const images = [
             <EasyCarousel :items="basicImages" :loop="false" :interval="0" arrow="always" />
           </div>
         </div>
-        <EasyDocCode
-          code="<EasyCarousel :items=&quot;images&quot; :loop=&quot;false&quot; :interval=&quot;0&quot; arrow=&quot;always&quot; />"
-        />
+        <EasyDocCode code="<EasyCarousel :items=&quot;images&quot; :loop=&quot;false&quot; :interval=&quot;0&quot; arrow=&quot;always&quot; />" />
       </div>
     </section>
 

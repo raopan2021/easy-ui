@@ -238,7 +238,7 @@ export function creditCode(message = '请输入正确的统一社会信用代码
       for (let i = 0; i < 8; i++) {
         orgSum += orgWeights[i] * orgChars.indexOf(code[8 + i])
       }
-      let orgKey = 11 - (orgSum % 11)
+      const orgKey = 11 - (orgSum % 11)
       // 校验码映射：10→X，11→0，其余为数字本身
       const orgCheck = orgKey === 10 ? 'X' : orgKey === 11 ? '0' : String(orgKey)
       if (orgCheck !== code[16])

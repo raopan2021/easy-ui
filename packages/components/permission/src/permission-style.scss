@@ -1,0 +1,136 @@
+.easy-permission {
+  width: 100%;
+}
+
+.permission-header {
+  margin-bottom: 12px;
+}
+
+.permission-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--el-bg-color);
+}
+
+.permission-table.is-bordered {
+  border: 1px solid #ebeef5;
+  border-radius: 4px;
+}
+
+.permission-table th,
+.permission-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid #ebeef5;
+  border-right: 1px solid #ebeef5;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.permission-table th {
+  background: #fafafa;
+  font-weight: 500;
+  color: #606266;
+  font-size: 13px;
+}
+
+.permission-table tbody tr:hover {
+  background: #f5f7fa;
+}
+
+/* 父级列：根据内容自适应宽度 */
+.cell-module,
+.cell-page,
+.cell-l3,
+.cell-l4 {
+  width: auto;
+  white-space: nowrap;
+}
+
+.cell-module {
+  background: #fafafa;
+}
+
+/* 操作列（三级最后一级占满，四五级自适应） */
+.cell-action {
+  width: auto;
+  white-space: nowrap;
+}
+
+/* 功能列（四级最后一级占满，五级自适应） */
+.cell-l4 {
+  width: auto;
+  white-space: nowrap;
+}
+
+/* 数据列（五级最后一级占满） */
+.cell-l5 {
+  width: 100%;
+  min-width: 200px;
+}
+
+/* 二级：页面列占满 */
+:deep(.max-level-2) .cell-page {
+  width: 100%;
+}
+
+/* 三级：操作列占满 */
+:deep(.max-level-3) .cell-action {
+  width: 100%;
+}
+
+/* 四级：功能列占满 */
+:deep(.max-level-4) .cell-l4 {
+  width: 100%;
+}
+
+.item-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+/* 选中数据展示 */
+.selected-info {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: #fafafa;
+  border-radius: 4px;
+}
+
+.selected-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.selected-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #303133;
+}
+
+.selected-count {
+  font-size: 12px;
+  color: #909399;
+}
+
+.selected-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+::deep(.el-checkbox) {
+  margin-right: 0;
+}
+
+::deep(.el-checkbox__label) {
+  padding-left: 8px;
+  font-size: 13px;
+  color: #303133;
+}
+
+::deep(.el-tag) {
+  border-radius: 3px;
+}

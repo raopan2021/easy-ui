@@ -16,7 +16,7 @@
  * ```
  */
 import type { App, Directive } from 'vue'
-import type { WatermarkOptions } from './watermark.vue'
+import type { WatermarkOptions } from './types'
 
 function createWatermarkOverlay(el: HTMLElement, options: WatermarkOptions): HTMLCanvasElement {
   // 确保容器有定位

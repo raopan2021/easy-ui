@@ -256,12 +256,8 @@ const teamMembers = ref([
       <div class="doc-preview">
         <div class="doc-preview__body">
           <div class="avatar-group">
-            <div
-              v-for="(user, index) in users"
-              :key="user.id"
-              class="avatar-group__item"
-              :style="{ zIndex: users.length - index }"
-            >
+            <div v-for="(user, index) in users" :key="user.id" class="avatar-group__item"
+              :style="{ zIndex: users.length - index }">
               <EasyAvatar :src="user.avatar" :size="40" :title="user.name" />
             </div>
             <div class="avatar-group__more" :style="{ zIndex: 0 }">

@@ -102,30 +102,18 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div
-    class="sidebar-container" :class="[showLogo ? 'has-logo' : 'no-logo']" @mouseenter.prevent="onSidebarEnter()"
-    @mouseleave.prevent="onSidebarLeave()"
-  >
+  <div class="sidebar-container" :class="[showLogo ? 'has-logo' : 'no-logo']" @mouseenter.prevent="onSidebarEnter()"
+    @mouseleave.prevent="onSidebarLeave()">
     <LaySidebarLogo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper" :class="[device === 'mobile' ? 'mobile' : 'pc']">
-      <el-menu
-        unique-opened mode="vertical" popper-class="pure-scrollbar" class="outer-most select-none"
-        :collapse="isCollapse" :collapse-transition="false" :popper-effect="tooltipEffect"
-        :default-active="defaultActive"
-      >
-        <LaySidebarItem
-          v-for="routes in menuData" :key="routes.path" :item="routes" :base-path="routes.path"
-          class="outer-most select-none"
-        />
+      <el-menu unique-opened mode="vertical" popper-class="pure-scrollbar" class="outer-most select-none"
+        :collapse="isCollapse" :collapse-transition="false" :popper-effect="tooltipEffect" :default-active="defaultActive">
+        <LaySidebarItem v-for="routes in menuData" :key="routes.path" :item="routes" :base-path="routes.path"
+          class="outer-most select-none" />
       </el-menu>
     </el-scrollbar>
-    <LaySidebarCenterCollapse
-      v-if="device !== 'mobile' && (isShow || isCollapse)" :is-active="pureApp.sidebar.opened"
-      @toggle-click="toggleSideBar"
-    />
-    <LaySidebarLeftCollapse
-      v-if="device !== 'mobile'" :is-active="pureApp.sidebar.opened"
-      @toggle-click="toggleSideBar"
-    />
+    <LaySidebarCenterCollapse v-if="device !== 'mobile' && (isShow || isCollapse)" :is-active="pureApp.sidebar.opened"
+      @toggle-click="toggleSideBar" />
+    <LaySidebarLeftCollapse v-if="device !== 'mobile'" :is-active="pureApp.sidebar.opened" @toggle-click="toggleSideBar" />
   </div>
 </template>

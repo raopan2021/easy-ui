@@ -2,40 +2,48 @@ import type { ExtractPropTypes } from 'vue'
 
 import { buildProps, definePropType } from '../../../utils'
 
+/** 列对齐方式 */
+export type TableAlign = 'left' | 'center' | 'right'
+
+/** 排序顺序：'asc' 升序 | 'desc' 降序 | null 不排序 */
+export type SortOrder = 'asc' | 'desc' | null
+
+/** 分页位置 */
+export type PaginationPosition = 'left' | 'center' | 'right'
+
+/** 列配置项（核心数据契约，组件内部与外部消费共用） */
 export interface TableColumn {
-  /** 字段名 */
+  /** 列唯一标识，也是数据字段的 key */
   prop: string
   /** 列标题 */
   name?: string
-  /** 列宽 */
-  width?: string | number
-  /** 最小宽度 */
-  minWidth?: string | number
-  /** 对齐方式 */
-  align?: 'left' | 'center' | 'right'
+  /** 列宽度（数字按 px 处理，字符串原样作为 CSS 宽度值） */
+  width?: number | string
+  /** 最小宽度（数字按 px 处理，字符串原样作为 CSS 最小宽度值） */
+  minWidth?: number | string
+  /** 文字对齐方式 */
+  align?: TableAlign
   /** 是否可排序 */
   sortable?: boolean
-  /** 是否超长省略 */
+  /** 超出文字是否省略（启用后鼠标悬浮显示完整内容 tooltip） */
   ellipsis?: boolean
-  /** 自定义格式化函数 */
-  formatter?: (row: any, column: TableColumn, cellValue: any, index: number) => any
-  /** 是否可见 */
+  /** 自定义格式化函数：(row, value) => 显示文本 */
+  formatter?: (row: Record<string, any>, value: any) => string
+  /** 是否显示该列 */
   visible?: boolean
-  /** 是否固定列 */
-  fixed?: boolean
-  /** 是否可拖拽 */
+  /** 列固定位置：'left' | 'right' | undefined（用于横向滚动时固定列） */
+  fixed?: 'left' | 'right'
+  /** 是否可拖动排序（列设置面板内） */
   drag?: boolean
-  /** 前缀内容 */
+  /** 列内容前缀 */
   prefix?: string
-  /** 后缀内容 */
+  /** 列内容后缀 */
   suffix?: string
-  /** 是否参与合计 */
-  summary?: boolean
-  /** 合计自定义文本 */
+  /** 合计方式：'sum' 求和 | 'avg' 平均值 | false 不参与合计（默认不参与） */
+  summary?: 'sum' | 'avg' | false
+  /** 合计行该列显示的自定义文字（优先于 summary 计算值） */
   summaryText?: string
 }
-
-export type PaginationPosition = 'left' | 'center' | 'right'
 
 export const tableProps = buildProps({
   data: {
@@ -62,10 +70,14 @@ export const tableProps = buildProps({
   stripe: Boolean,
   border: Boolean,
   selectable: Boolean,
-  showIndex: Boolean,
+  // 序号列默认开启（重构前的默认值即为 true，还原该行为）
+  showIndex: {
+    type: Boolean,
+    default: true,
+  },
   indexLabel: {
     type: String,
-    default: '序号',
+    default: '#',
   },
   actionLabel: {
     type: String,
@@ -129,7 +141,7 @@ export const tableProps = buildProps({
   },
   treeIndentSize: {
     type: Number,
-    default: 18,
+    default: 24,
   },
   lazy: Boolean,
   load: {
@@ -167,26 +179,28 @@ export const tableProps = buildProps({
 export type TableProps = ExtractPropTypes<typeof tableProps>
 
 export const tableEmits = {
-  'selection-change': (_rows: any[]) => true,
-  'row-click': (_row: any, _column: TableColumn) => true,
-  'sort-change': (_prop: string, _order: 'ascending' | 'descending') => true,
+  'selection-change': (_rows: Record<string, any>[]) => true,
+  'row-click': (_row: Record<string, any>, _index: number) => true,
+  'sort-change': (_key: string, _order: SortOrder) => true,
   'page-change': (_page: number) => true,
   'page-size-change': (_size: number) => true,
   'column-order-change': (_columns: TableColumn[]) => true,
   'refresh': () => true,
   'export': () => true,
-  'expand-change': (_row: any, _expanded: boolean) => true,
-  'tree-expand': (_row: any, _expanded: boolean) => true,
+  'expand-change': (_row: Record<string, any>, _expanded: boolean) => true,
+  'tree-expand': (_row: Record<string, any>, _expanded: boolean) => true,
 }
+
+/** 组件事件（defineEmits 与内部 composable 共用，采用「可调用接口」形式） */
 export interface TableEmits {
-  'selection-change': [rows: any[]]
-  'row-click': [row: any, column: TableColumn]
-  'sort-change': [prop: string, order: 'ascending' | 'descending']
-  'page-change': [page: number]
-  'page-size-change': [size: number]
-  'column-order-change': [columns: TableColumn[]]
-  'refresh': []
-  'export': []
-  'expand-change': [row: any, expanded: boolean]
-  'tree-expand': [row: any, expanded: boolean]
+  (e: 'selection-change', rows: Record<string, any>[]): void
+  (e: 'row-click', row: Record<string, any>, index: number): void
+  (e: 'sort-change', key: string, order: SortOrder): void
+  (e: 'page-change', page: number): void
+  (e: 'page-size-change', size: number): void
+  (e: 'column-order-change', columns: TableColumn[]): void
+  (e: 'refresh'): void
+  (e: 'export'): void
+  (e: 'expand-change', row: Record<string, any>, expanded: boolean): void
+  (e: 'tree-expand', row: Record<string, any>, expanded: boolean): void
 }

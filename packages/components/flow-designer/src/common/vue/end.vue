@@ -1,23 +1,18 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import type { EndProps } from './end-types'
+
 import EasyForm, { EasyFormItem } from '../../../../form'
 import EasyInput from '../../../../input'
+import { useEnd } from './use-end'
 
-const props = defineProps({
-  modelValue: {
-    type: Object,
-    default() {
-      return {}
-    },
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
+const props = withDefaults(defineProps<EndProps>(), {
+  modelValue: () => ({}),
+  disabled: false,
 })
 
-const form = ref(props.modelValue)
-const formRef = ref()
+const { form, formRef } = useEnd(props)
+
+export type { EndProps } from './end-types'
 </script>
 
 <template>
@@ -30,8 +25,4 @@ const formRef = ref()
   </div>
 </template>
 
-<style scoped lang="scss">
-.endForm {
-  padding: 15px;
-}
-</style>
+<style scoped src="./end-style.scss" lang="scss"></style>

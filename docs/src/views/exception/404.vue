@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -41,15 +40,8 @@ function goBack() {
           <rect x="290" y="215" width="18" height="18" rx="2" fill="#c4cded" />
           <rect x="320" y="215" width="18" height="18" rx="2" fill="#c4cded" />
           <!-- 404 数字 -->
-          <text
-            x="140"
-            y="180"
-            font-family="Arial Black, sans-serif"
-            font-size="100"
-            font-weight="900"
-            fill="#4f6ef7"
-            opacity="0.9"
-          >
+          <text x="140" y="180" font-family="Arial Black, sans-serif" font-size="100" font-weight="900" fill="#4f6ef7"
+            opacity="0.9">
             404
           </text>
           <!-- 问号 -->

@@ -33,12 +33,8 @@ function toggleClick() {
     class="center-collapse"
     @click="toggleClick"
   >
-    <PureIcon
-      :icon="ArrowLeft"
-      :size="16"
-      class="dark:text-white"
-      :style="{ transform: isActive ? 'none' : 'rotateY(180deg)' }"
-    />
+    <PureIcon :icon="ArrowLeft" :size="16" class="dark:text-white"
+      :style="{ transform: isActive ? 'none' : 'rotateY(180deg)' }" />
   </div>
 </template>
 

@@ -25,6 +25,12 @@ if (typeof globalThis.MutationObserver === 'undefined') {
   vi.stubGlobal('MutationObserver', MutationObserverMock)
 }
 
+// scrollIntoView：jsdom 未实现（tour 组件滚动目标到可视区域需要），补 no-op polyfill
+// 避免组件异步调用 scrollIntoView 时产生未处理的 Promise 拒绝
+if (typeof window !== 'undefined' && !window.HTMLElement.prototype.scrollIntoView) {
+  window.HTMLElement.prototype.scrollIntoView = () => {}
+}
+
 // matchMedia：useDark / usePreferredDark 等 @vueuse/core 钩子依赖它
 if (typeof window !== 'undefined' && !window.matchMedia) {
   Object.defineProperty(window, 'matchMedia', {

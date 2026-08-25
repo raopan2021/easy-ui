@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import type { LoadingEmits, LoadingProps } from './types'
+
+import { useLoadingStyle } from './use-loading-style'
+import { useLoadingVisibility } from './use-loading-visibility'
+
+// 保持对外类型导出兼容（原内联 interface 已提取到 types.ts，loading.ts 依赖此导出）
+export type { LoadingProps } from './types'
 
 defineOptions({
   name: 'EasyLoading',
@@ -23,175 +29,26 @@ const props = withDefaults(defineProps<LoadingProps>(), {
   progress: 0,
 })
 
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: boolean): void
-}>()
+const emit = defineEmits<LoadingEmits>()
 
-export interface LoadingProps {
-  /** 是否显示加载 */
-  modelValue?: boolean
-  /** 加载类型: spinner-旋转点 | wave-波浪 | pulse-脉冲 | ring-环形进度 | default-双点 */
-  type?: 'spinner' | 'wave' | 'wave1' | 'pulse' | 'ring' | 'default'
-  /** 加载文本 */
-  text?: string
-  /** 是否显示遮罩 */
-  mask?: boolean
-  /** 遮罩颜色 */
-  maskColor?: string
-  /** 加载颜色 */
-  color?: string
-  /** 背景颜色 */
-  backgroundColor?: string
-  /** 文本颜色 */
-  textColor?: string
-  /** 大小: small-24px | medium-32px | large-48px | 自定义数字 */
-  size?: 'small' | 'medium' | 'large' | number
-  /** 是否全屏 */
-  fullscreen?: boolean
-  /** 是否锁定滚动 */
-  lock?: boolean
-  /** 是否容器内全屏（相对于父容器） */
-  containerFullscreen?: boolean
-  /** 是否在遮罩层上显示（用于弹窗等场景） */
-  overlayMode?: boolean
-  /** 自定义类名 */
-  customClass?: string
-  /** 环形进度百分比 (0-100) */
-  progress?: number
-}
+// ──── 可见性 / 滚动锁（含 modelValue ↔ visible 双向同步）────
+const { visible } = useLoadingVisibility(props, emit)
 
-// 响应式数据
-const visible = ref(props.modelValue)
-const bodyOverflow = ref('')
+// ──── 样式 / 尺寸派生 ────
+const {
+  wrapperClasses,
+  wrapperStyle,
+  contentStyle,
+  maskStyle,
+  spinnerClasses,
+  spinnerStyle,
+  circumference,
+  progressOffset,
+  getDotStyle,
+  getWaveStyle,
+} = useLoadingStyle(props, visible)
 
-// 计算属性
-const wrapperClasses = computed(() => [
-  'easy-loading',
-  `easy-loading--${props.type}`,
-  `easy-loading--${getSizeClass()}`,
-  {
-    'is-fullscreen': props.fullscreen,
-    'is-container-fullscreen': props.containerFullscreen,
-    'is-overlay-mode': props.overlayMode,
-    'is-lock': props.lock,
-    'is-visible': visible.value,
-  },
-  props.customClass,
-])
-
-const wrapperStyle = computed(() => ({
-  zIndex: props.fullscreen ? 9999 : props.containerFullscreen ? 1000 : undefined,
-}))
-
-const contentStyle = computed(() => ({
-  color: props.textColor,
-}))
-
-const maskStyle = computed(() => ({
-  backgroundColor: props.maskColor,
-}))
-
-const spinnerClasses = computed(() => ['easy-loading-spinner', `spinner--${props.type}`])
-
-const spinnerStyle = computed(() => {
-  const size = getSizeValue()
-  return {
-    'width': typeof size === 'number' ? `${size}px` : size,
-    'height': typeof size === 'number' ? `${size}px` : size,
-    '--spinner-color': props.color,
-    '--spinner-bg-color': props.backgroundColor,
-  } as Record<string, string | number>
-})
-
-const circumference = computed(() => 2 * Math.PI * 20)
-const progressOffset = computed(() => {
-  const progress = Math.max(0, Math.min(100, props.progress))
-  return circumference.value * (1 - progress / 100)
-})
-
-// 方法
-function getSizeClass(): string {
-  if (typeof props.size === 'string') {
-    return props.size
-  }
-  if (props.size <= 20)
-    return 'small'
-  if (props.size <= 40)
-    return 'medium'
-  return 'large'
-}
-
-function getSizeValue(): number {
-  if (typeof props.size === 'number') {
-    return props.size
-  }
-  const sizes = { small: 24, medium: 32, large: 48 }
-  return sizes[props.size] || sizes.medium
-}
-
-function getDotStyle(index: number) {
-  return {
-    animationDelay: `${(index - 1) * 0.1}s`,
-    backgroundColor: props.color,
-  }
-}
-
-function getWaveStyle(index: number) {
-  return {
-    animationDelay: `${(index - 1) * 0.1}s`,
-    backgroundColor: props.color,
-  }
-}
-
-function lockScroll() {
-  if (props.lock && props.fullscreen) {
-    bodyOverflow.value = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-  }
-}
-
-function unlockScroll() {
-  if (props.lock && props.fullscreen) {
-    document.body.style.overflow = bodyOverflow.value
-  }
-}
-
-// 监听器
-watch(
-  () => props.modelValue,
-  (val) => {
-    visible.value = val
-    if (val) {
-      lockScroll()
-    }
-    else {
-      unlockScroll()
-    }
-  },
-)
-
-watch(visible, (val) => {
-  emit('update:modelValue', val)
-  if (val) {
-    lockScroll()
-  }
-  else {
-    unlockScroll()
-  }
-})
-
-// 生命周期
-onMounted(() => {
-  if (props.modelValue) {
-    lockScroll()
-  }
-})
-
-onUnmounted(() => {
-  unlockScroll()
-})
-
-// 暴露方法
+// ──── 暴露方法（直接操作内部 visible）────
 defineExpose({
   show: () => {
     visible.value = true
@@ -218,12 +75,8 @@ defineExpose({
         <template v-if="type === 'wave1'">
           <div class="wave1-container">
             <div class="wave1-spinner">
-              <div
-                v-for="i in 5"
-                :key="i"
-                class="wave1-bar"
-                :style="{ animationDelay: `${i * 0.1}s`, backgroundColor: color }"
-              />
+              <div v-for="i in 5" :key="i" class="wave1-bar"
+                :style="{ animationDelay: `${i * 0.1}s`, backgroundColor: color }" />
             </div>
           </div>
         </template>
@@ -252,18 +105,8 @@ defineExpose({
           <div class="ring-container">
             <svg class="ring-svg" viewBox="0 0 50 50">
               <circle class="ring-bg" cx="25" cy="25" r="20" :stroke="backgroundColor" stroke-width="4" fill="none" />
-              <circle
-                class="ring-progress"
-                cx="25"
-                cy="25"
-                r="20"
-                :stroke="color"
-                stroke-width="4"
-                fill="none"
-                stroke-linecap="round"
-                :stroke-dasharray="circumference"
-                :stroke-dashoffset="progressOffset"
-              />
+              <circle class="ring-progress" cx="25" cy="25" r="20" :stroke="color" stroke-width="4" fill="none"
+                stroke-linecap="round" :stroke-dasharray="circumference" :stroke-dashoffset="progressOffset" />
             </svg>
           </div>
         </template>
@@ -290,324 +133,5 @@ defineExpose({
   </div>
 </template>
 
-<style scoped lang="scss">
-.easy-loading-wrapper {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  &.is-fullscreen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 9999;
-  }
-
-  &.is-container-fullscreen {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1000;
-  }
-
-  &.is-overlay-mode {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2000;
-  }
-
-  &.is-lock {
-    touch-action: none;
-  }
-}
-
-.easy-loading-mask {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 1;
-  transition: opacity 0.3s ease;
-  backdrop-filter: blur(1px);
-}
-
-.easy-loading-content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  z-index: 1;
-  background: var(--el-bg-color-overlay, rgba(255, 255, 255, 0.9));
-  backdrop-filter: blur(10px);
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid var(--el-border-color-lighter, rgba(226, 232, 240, 0.8));
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-html.dark {
-  .easy-loading-content {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  }
-}
-
-// 旋转圆圈动画
-.spinner-circle {
-  position: relative;
-  width: 100%;
-  height: 100%;
-
-  .spinner-dot {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 20%;
-    height: 20%;
-    background-color: var(--spinner-color);
-    border-radius: 50%;
-    transform-origin: 0 250%;
-    animation: spinner-rotate 1s linear infinite;
-  }
-}
-
-@keyframes spinner-rotate {
-  0% {
-    opacity: 1;
-    transform: rotate(0deg);
-  }
-
-  100% {
-    opacity: 0.2;
-    transform: rotate(360deg);
-  }
-}
-
-// 波浪动画
-.wave-container {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  height: 100%;
-  gap: 2px;
-
-  .wave-bar {
-    width: 4px;
-    height: 100%;
-    background-color: var(--spinner-color);
-    border-radius: 2px;
-    animation: wave 1.2s ease-in-out infinite;
-  }
-}
-
-@keyframes wave {
-  0%,
-  40%,
-  100% {
-    transform: scaleY(0.4);
-  }
-
-  20% {
-    transform: scaleY(1);
-  }
-}
-
-// wave1 竖条波浪效果（参照 easy-table__loading）
-// 去除 easy-loading-content 的卡片装饰，保持与 easy-table__loading 一致的干净外观
-.easy-loading--wave1 {
-  .easy-loading-content {
-    background: transparent;
-    backdrop-filter: none;
-    padding: 0;
-    border-radius: 0;
-    border: none;
-    box-shadow: none;
-    gap: 16px;
-  }
-
-  .easy-loading-text {
-    font-size: 14px;
-    color: var(--el-text-color-secondary);
-  }
-}
-
-.wave1-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-
-  .wave1-spinner {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .wave1-bar {
-    width: 4px;
-    height: 28px;
-    border-radius: 2px;
-    background: var(--spinner-color);
-    animation: wave1-anim 1s ease-in-out infinite;
-    opacity: 0.6;
-  }
-
-  .wave1-text {
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.4;
-  }
-
-  @keyframes wave1-anim {
-    0%,
-    100% {
-      transform: scaleY(0.4);
-      opacity: 0.4;
-    }
-
-    50% {
-      transform: scaleY(1);
-      opacity: 1;
-    }
-  }
-}
-
-// 脉冲动画
-.pulse-circle {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: var(--spinner-color);
-  animation: pulse 1s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-
-  100% {
-    transform: scale(1);
-    opacity: 0;
-  }
-}
-
-// 环形进度
-.ring-container {
-  width: 100%;
-  height: 100%;
-
-  .ring-svg {
-    width: 100%;
-    height: 100%;
-    transform: rotate(-90deg);
-  }
-
-  .ring-bg {
-    stroke: var(--spinner-bg-color);
-  }
-
-  .ring-progress {
-    transition: stroke-dashoffset 0.3s ease;
-  }
-}
-
-// 默认双点动画
-.default-spinner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-
-  .dot1,
-  .dot2 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 25%;
-    height: 25%;
-    background-color: var(--spinner-color);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    animation: bounce 2s infinite ease-in-out;
-  }
-
-  .dot2 {
-    animation-delay: -1s;
-  }
-}
-
-@keyframes bounce {
-  0%,
-  100% {
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0.5;
-  }
-
-  50% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
-}
-
-// 文本样式
-.easy-loading-text {
-  font-size: 14px;
-  font-weight: 500;
-  text-align: center;
-  line-height: 1.4;
-  max-width: 200px;
-  word-break: break-word;
-}
-
-// 尺寸变体
-.easy-loading--small {
-  .easy-loading-spinner {
-    width: 24px;
-    height: 24px;
-  }
-
-  .easy-loading-text {
-    font-size: 12px;
-  }
-}
-
-.easy-loading--medium {
-  .easy-loading-spinner {
-    width: 32px;
-    height: 32px;
-  }
-}
-
-.easy-loading--large {
-  .easy-loading-spinner {
-    width: 48px;
-    height: 48px;
-  }
-
-  .easy-loading-text {
-    font-size: 16px;
-  }
-}
-
-// 过渡动画
-.easy-loading-wrapper {
-  transition: opacity 0.3s ease;
-
-  &:not(.is-visible) {
-    opacity: 0;
-    pointer-events: none;
-  }
-}
-</style>
+<!-- 组件核心样式（scoped，独立维护在 loading-style.scss，含 html.dark 暗色覆盖） -->
+<style scoped src="./loading-style.scss" lang="scss"></style>

@@ -614,13 +614,7 @@ const data = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <easy-permission
-            v-model="values.custom"
-            :data="dataCustom"
-            id-key="code"
-            label-key="name"
-            children-key="sub"
-          />
+          <easy-permission v-model="values.custom" :data="dataCustom" id-key="code" label-key="name" children-key="sub" />
         </div>
         <EasyDocCode
           code="const data = [
@@ -719,21 +713,13 @@ const data = [
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 16px">
           <div>
             <span class="doc-preview__label">简单配置（status=2 禁用）：</span>
-            <easy-permission
-              v-model="values.fieldDisabled"
-              :data="dataFieldDisabled"
-              disabled-field="status"
-              :disabled-value="2"
-            />
+            <easy-permission v-model="values.fieldDisabled" :data="dataFieldDisabled" disabled-field="status"
+              :disabled-value="2" />
           </div>
           <div>
             <span class="doc-preview__label">简单配置（type in [1,2] 禁用）：</span>
-            <easy-permission
-              v-model="values.fieldDisabled2"
-              :data="dataFieldDisabled2"
-              disabled-field="type"
-              :disabled-value="[1, 2]"
-            />
+            <easy-permission v-model="values.fieldDisabled2" :data="dataFieldDisabled2" disabled-field="type"
+              :disabled-value="[1, 2]" />
           </div>
           <div>
             <span class="doc-preview__label">函数判断（复杂逻辑）：</span>
@@ -796,9 +782,7 @@ const checkDisabled = (item, level) => {
         <div class="doc-preview__body">
           <easy-permission v-model="values.noborder" :data="dataLevel3" :bordered="false" />
         </div>
-        <EasyDocCode
-          code="<easy-permission v-model=&quot;selected&quot; :data=&quot;data&quot; :bordered=&quot;false&quot; />"
-        />
+        <EasyDocCode code="<easy-permission v-model=&quot;selected&quot; :data=&quot;data&quot; :bordered=&quot;false&quot; />" />
       </div>
     </section>
 

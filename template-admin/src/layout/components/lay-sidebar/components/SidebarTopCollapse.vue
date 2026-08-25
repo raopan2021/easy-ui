@@ -19,15 +19,8 @@ function toggleClick() {
 </script>
 
 <template>
-  <div
-    class="px-3 mr-1 navbar-bg-hover"
-    :title="isActive ? '点击折叠' : '点击展开'"
-    @click="toggleClick"
-  >
-    <PureIcon
-      :icon="isActive ? MenuFold : MenuUnfold"
-      :size="20"
-      class="inline-block! align-middle hover:text-primary dark:hover:text-white!"
-    />
+  <div class="px-3 mr-1 navbar-bg-hover" :title="isActive ? '点击折叠' : '点击展开'" @click="toggleClick">
+    <PureIcon :icon="isActive ? MenuFold : MenuUnfold" :size="20"
+      class="inline-block! align-middle hover:text-primary dark:hover:text-white!" />
   </div>
 </template>

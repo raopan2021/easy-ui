@@ -1,0 +1,49 @@
+.easy-richtext {
+  width: 100%;
+  border: 1px solid var(--el-border-color);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--el-bg-color);
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-color: var(--el-border-color-hover);
+  }
+
+  &:focus-within {
+    border-color: var(--el-color-primary);
+  }
+
+  &.is-disabled,
+  &.is-readonly {
+    cursor: not-allowed;
+  }
+
+  &.is-no-toolbar {
+    border: none;
+    border-radius: 0;
+  }
+
+  .easy-richtext__toolbar {
+    border-bottom: 1px solid var(--el-border-color-lighter);
+    background: var(--el-fill-color-blank);
+    z-index: 1;
+
+    :deep(.w-e-toolbar) {
+      border: none;
+      background: transparent;
+    }
+  }
+
+  .easy-richtext__body {
+    :deep(.w-e-text-container) {
+      background: var(--el-bg-color);
+    }
+
+    // 内容区文字颜色跟随主题（wangEditor 默认写死浅色，dark 下需覆盖）
+    :deep(.w-e-scroll),
+    :deep(.w-e-scroll .w-e-text-placeholder) {
+      color: var(--el-text-color-regular);
+    }
+  }
+}

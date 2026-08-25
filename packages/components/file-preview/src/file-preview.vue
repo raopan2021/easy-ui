@@ -1,11 +1,19 @@
 <script setup lang="ts">
+import type { FieldNames, FileInputType } from './types'
+
 import VueOfficeDocx from '@vue-office/docx/lib/v3/vue-office-docx.mjs'
 import VueOfficeExcel from '@vue-office/excel/lib/v3/vue-office-excel.mjs'
 import VueOfficePdf from '@vue-office/pdf/lib/v3/vue-office-pdf.mjs'
-import { init as initPptxPreview } from 'pptx-preview'
-import { computed, defineComponent, h, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+
+import { formatSize, getExt, getFileType } from './file-utils'
+import { FileIcon, getFileIcon } from './use-file-icons'
+import { useFilePreview } from './use-file-preview'
+
 import '@vue-office/docx/lib/v3/index.css'
 import '@vue-office/excel/lib/v3/index.css'
+
+// 保持对外类型导出兼容（原定义在 file-preview.vue）
+export type { FieldNames, FileInputType, FileItem } from './types'
 
 defineOptions({ name: 'EasyFilePreview' })
 
@@ -19,412 +27,34 @@ const props = withDefaults(
     fieldNames: () => ({ name: 'name', url: 'url', size: 'size' }),
   },
 )
-// ==================== 类型定义 ====================
-export interface FileItem {
-  name: string
-  url: string
-  size?: number | string
-}
-export interface FieldNames {
-  name?: string
-  url?: string
-  size?: string
-}
-type FileInputType = string | FileItem | Record<string, any>
 
-// ==================== 文件规范化 ====================
-const normalizedFiles = computed<FileItem[]>(() => {
-  const { name: nf = 'name', url: uf = 'url', size: sf = 'size' } = props.fieldNames ?? {}
-  const raw = props.files
-  if (!raw)
-    return []
-  if (typeof raw === 'string') {
-    return raw
-      .split(',')
-      .map(s => s.trim())
-      .filter(Boolean)
-      .map(url => ({ name: getFileName(url), url, size: undefined }))
-  }
-  if (Array.isArray(raw)) {
-    if (raw.length === 0)
-      return []
-    return raw.map((item) => {
-      if (typeof item === 'string')
-        return { name: getFileName(item), url: item, size: undefined }
-      const url = String((item as any)[uf] ?? '')
-      return { name: String((item as any)[nf] ?? getFileName(url)), url, size: (item as any)[sf] }
-    })
-  }
-  if (typeof raw === 'object') {
-    const url = String((raw as any)[uf] ?? '')
-    return [{ name: String((raw as any)[nf] ?? getFileName(url)), url, size: (raw as any)[sf] }]
-  }
-  return []
-})
-
-// ==================== 弹窗状态 ====================
-const visible = ref(false)
-const currentIndex = ref(0)
-const loading = ref(false)
-const loadingText = ref('加载中...')
-const officeSrc = ref<string | ArrayBuffer | Blob>('')
-const officeError = ref('')
-const pptContainerRef = ref<HTMLElement | null>(null)
-let pptPreviewer: ReturnType<typeof initPptxPreview> | null = null
-
-const currentFile = computed(() => normalizedFiles.value[currentIndex.value])
-const currentType = computed(() => getFileType(currentFile.value?.url ?? ''))
-const currentIcon = computed(() => getFileIconComponent(currentFile.value?.url ?? ''))
-
-function cleanupResources() {
-  officeSrc.value = ''
-  officeError.value = ''
-  if (pptPreviewer) {
-    pptPreviewer.destroy()
-    pptPreviewer = null
-  }
-  if (pptContainerRef.value)
-    pptContainerRef.value.innerHTML = ''
-}
-
-async function openPreview(file: FileItem) {
-  const idx = normalizedFiles.value.findIndex(f => f.url === file.url)
-  currentIndex.value = idx >= 0 ? idx : 0
-  cleanupResources()
-  loading.value = true
-  loadingText.value = '加载中...'
-  visible.value = true
-  await nextTick()
-  await loadFileContent()
-}
-
-function closePreview() {
-  visible.value = false
-}
-
-async function navigate(dir: 1 | -1) {
-  const next = currentIndex.value + dir
-  if (next < 0 || next >= normalizedFiles.value.length)
-    return
-  currentIndex.value = next
-  cleanupResources()
-  loading.value = true
-  loadingText.value = '加载中...'
-  await loadFileContent()
-}
-
-async function loadFileContent() {
-  const url = currentFile.value?.url
-  if (!url) {
-    loading.value = false
-    return
-  }
-  const type = currentType.value
-
-  // vue-office 支持 pdf/word/excel，直接传 URL 即可
-  if (type === 'pdf' || type === 'word' || type === 'excel') {
-    const typeLabel = type === 'pdf' ? 'PDF' : type === 'word' ? 'Word' : 'Excel'
-    loadingText.value = `正在加载 ${typeLabel} 文档...`
-    try {
-      officeSrc.value = url
-    }
-    catch (e: any) {
-      officeError.value = e.message || '文件加载失败'
-    }
-  }
-  else if (type === 'ppt') {
-    loadingText.value = '正在加载 PPT 文档...'
-    try {
-      // 需要先等 DOM 就绪（pptContainerRef 存在）
-      await nextTick()
-      const container = pptContainerRef.value
-      if (!container) {
-        console.error('[FilePreview] PPT 容器 ref 为 null')
-        throw new Error('PPT 渲染容器未就绪')
-      }
-
-      // 先 init，再 fetch + preview
-      if (pptPreviewer) {
-        pptPreviewer.destroy()
-        pptPreviewer = null
-      }
-      pptPreviewer = initPptxPreview(container, { mode: 'list', width: 960 })
-
-      const res = await fetch(url)
-      if (!res.ok)
-        throw new Error(`HTTP ${res.status}`)
-      const buffer = await res.arrayBuffer()
-      console.warn('[FilePreview] PPT ArrayBuffer loaded:', buffer.byteLength, 'bytes')
-      await pptPreviewer.preview(buffer)
-      console.warn(
-        '[FilePreview] PPT preview() done, wrapper children:',
-        container.querySelectorAll('.pptx-preview-wrapper').length,
-        container.innerHTML.length,
-      )
-    }
-    catch (e: any) {
-      console.error('[FilePreview] PPT 渲染失败:', e)
-      officeError.value = typeof e === 'string' ? e : e?.message || 'PPT 加载失败'
-    }
-  }
-
-  loading.value = false
-}
-
-function onRendered() {
-  loading.value = false
-}
-
-function onError(e: any) {
-  loading.value = false
-  officeError.value = typeof e === 'string' ? e : e?.message || '文件渲染失败'
-}
-
-// ==================== 基础工具 ====================
-function getExt(url: string): string {
-  const clean = url.split('?')[0].split('#')[0]
-  const parts = clean.split('.')
-  return parts.length > 1 ? parts[parts.length - 1].toLowerCase() : ''
-}
-
-function getFileName(url: string): string {
-  const clean = url.split('?')[0].split('#')[0]
-  return decodeURIComponent(clean.split('/').pop() || '未知文件')
-}
-
-const EXT_MAP: Record<string, string> = {
-  pdf: 'pdf',
-  doc: 'word',
-  docx: 'word',
-  xls: 'excel',
-  xlsx: 'excel',
-  ppt: 'ppt',
-  pptx: 'ppt',
-  jpg: 'image',
-  jpeg: 'image',
-  png: 'image',
-  gif: 'image',
-  webp: 'image',
-  bmp: 'image',
-  svg: 'image',
-  mp4: 'video',
-  webm: 'video',
-  ogg: 'video',
-  mov: 'video',
-  avi: 'video',
-}
-
-function getFileType(url: string): string {
-  return EXT_MAP[getExt(url)] ?? 'file'
-}
-
-function formatSize(size: number | string | undefined): string {
-  if (size === undefined || size === null || size === '')
-    return ''
-  const n = typeof size === 'string' ? parseFloat(size) : size
-  if (isNaN(n))
-    return String(size)
-  if (n < 1)
-    return `${(n * 1024).toFixed(0)} B`
-  if (n < 1024)
-    return `${n.toFixed(1)} KB`
-  if (n < 1024 * 1024)
-    return `${(n / 1024).toFixed(1)} MB`
-  return `${(n / 1024 / 1024).toFixed(1)} GB`
-}
-
-// ==================== ESC / 清理 ====================
-watch(visible, (val) => {
-  if (!val)
-    return
-  const handler = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      closePreview()
-      window.removeEventListener('keydown', handler)
-    }
-  }
-  window.addEventListener('keydown', handler)
-  watch(
-    visible,
-    (v) => {
-      if (!v)
-        window.removeEventListener('keydown', handler)
-    },
-    { once: true },
-  )
-})
-watch(visible, (v) => {
-  if (!v)
-    cleanupResources()
-})
-onBeforeUnmount(() => cleanupResources())
-
-// ==================== 图标组件 ====================
-const PdfIcon = defineComponent({
-  render: () =>
-    h(
-      'svg',
-      {
-        'viewBox': '0 0 24 24',
-        'fill': 'none',
-        'stroke': 'currentColor',
-        'stroke-width': '1.5',
-        'stroke-linecap': 'round',
-        'stroke-linejoin': 'round',
-      },
-      [
-        h('path', { d: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z' }),
-        h('polyline', { points: '14 2 14 8 20 8' }),
-        h('path', { d: 'M9 13h2a1 1 0 0 1 0 2H9v-4h2a1 1 0 0 1 0 2' }),
-        h('path', { d: 'M14 13v4' }),
-        h('path', { d: 'M17 13h-1.5a1.5 1.5 0 0 0 0 3H17' }),
-      ],
-    ),
-})
-const WordIcon = defineComponent({
-  render: () =>
-    h(
-      'svg',
-      {
-        'viewBox': '0 0 24 24',
-        'fill': 'none',
-        'stroke': 'currentColor',
-        'stroke-width': '1.5',
-        'stroke-linecap': 'round',
-        'stroke-linejoin': 'round',
-      },
-      [
-        h('path', { d: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z' }),
-        h('polyline', { points: '14 2 14 8 20 8' }),
-        h('path', { d: 'M8 13l2 6 2-4 2 4 2-6' }),
-      ],
-    ),
-})
-const ExcelIcon = defineComponent({
-  render: () =>
-    h(
-      'svg',
-      {
-        'viewBox': '0 0 24 24',
-        'fill': 'none',
-        'stroke': 'currentColor',
-        'stroke-width': '1.5',
-        'stroke-linecap': 'round',
-        'stroke-linejoin': 'round',
-      },
-      [
-        h('path', { d: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z' }),
-        h('polyline', { points: '14 2 14 8 20 8' }),
-        h('line', { x1: '9', y1: '12', x2: '15', y2: '18' }),
-        h('line', { x1: '15', y1: '12', x2: '9', y2: '18' }),
-      ],
-    ),
-})
-const PptIcon = defineComponent({
-  render: () =>
-    h(
-      'svg',
-      {
-        'viewBox': '0 0 24 24',
-        'fill': 'none',
-        'stroke': 'currentColor',
-        'stroke-width': '1.5',
-        'stroke-linecap': 'round',
-        'stroke-linejoin': 'round',
-      },
-      [
-        h('path', { d: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z' }),
-        h('polyline', { points: '14 2 14 8 20 8' }),
-        h('rect', { x: '8', y: '12', width: '8', height: '5', rx: '1' }),
-        h('line', { x1: '12', y1: '12', x2: '12', y2: '10' }),
-      ],
-    ),
-})
-const ImageIcon = defineComponent({
-  render: () =>
-    h(
-      'svg',
-      {
-        'viewBox': '0 0 24 24',
-        'fill': 'none',
-        'stroke': 'currentColor',
-        'stroke-width': '1.5',
-        'stroke-linecap': 'round',
-        'stroke-linejoin': 'round',
-      },
-      [
-        h('rect', { x: '3', y: '3', width: '18', height: '18', rx: '2', ry: '2' }),
-        h('circle', { cx: '8.5', cy: '8.5', r: '1.5' }),
-        h('polyline', { points: '21 15 16 10 5 21' }),
-      ],
-    ),
-})
-const VideoIcon = defineComponent({
-  render: () =>
-    h(
-      'svg',
-      {
-        'viewBox': '0 0 24 24',
-        'fill': 'none',
-        'stroke': 'currentColor',
-        'stroke-width': '1.5',
-        'stroke-linecap': 'round',
-        'stroke-linejoin': 'round',
-      },
-      [
-        h('polygon', { points: '23 7 16 12 23 17 23 7' }),
-        h('rect', { x: '1', y: '5', width: '15', height: '14', rx: '2', ry: '2' }),
-      ],
-    ),
-})
-const FileIcon = defineComponent({
-  render: () =>
-    h(
-      'svg',
-      {
-        'viewBox': '0 0 24 24',
-        'fill': 'none',
-        'stroke': 'currentColor',
-        'stroke-width': '1.5',
-        'stroke-linecap': 'round',
-        'stroke-linejoin': 'round',
-      },
-      [
-        h('path', { d: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z' }),
-        h('polyline', { points: '14 2 14 8 20 8' }),
-        h('line', { x1: '16', y1: '13', x2: '8', y2: '13' }),
-        h('line', { x1: '16', y1: '17', x2: '8', y2: '17' }),
-        h('polyline', { points: '10 9 9 9 8 9' }),
-      ],
-    ),
-})
-const ICON_MAP: Record<string, any> = {
-  pdf: PdfIcon,
-  word: WordIcon,
-  excel: ExcelIcon,
-  ppt: PptIcon,
-  image: ImageIcon,
-  video: VideoIcon,
-  file: FileIcon,
-}
-function getFileIcon(url: string) {
-  return ICON_MAP[getFileType(url)] ?? FileIcon
-}
-function getFileIconComponent(url: string) {
-  return ICON_MAP[getFileType(url)] ?? FileIcon
-}
+// ──── 核心逻辑（文件规范化 / 弹窗 / 内容加载 / 资源清理 / ESC 关闭）────
+const {
+  normalizedFiles,
+  visible,
+  currentIndex,
+  loading,
+  loadingText,
+  officeSrc,
+  officeError,
+  pptContainerRef,
+  currentFile,
+  currentType,
+  currentIcon,
+  openPreview,
+  closePreview,
+  navigate,
+  onRendered,
+  onError,
+} = useFilePreview(props)
 </script>
 
 <template>
   <div class="easy-file-preview">
     <!-- 文件列表 -->
     <div class="easy-file-preview__list">
-      <div
-        v-for="(file, index) in normalizedFiles"
-        :key="index"
-        class="easy-file-preview__item"
-        @click="openPreview(file)"
-      >
+      <div v-for="(file, index) in normalizedFiles" :key="index" class="easy-file-preview__item"
+        @click="openPreview(file)">
         <div class="easy-file-preview__icon" :class="`easy-file-preview__icon--${getFileType(file.url)}`">
           <component :is="getFileIcon(file.url)" />
         </div>
@@ -433,31 +63,16 @@ function getFileIconComponent(url: string) {
           <span v-if="file.size" class="easy-file-preview__size">{{ formatSize(file.size) }}</span>
         </div>
         <button class="easy-file-preview__btn" title="预览">
-          <svg
-            viewBox="0 0 24 24"
-            width="16"
-            height="16"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
             <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
             <circle cx="12" cy="12" r="3" />
           </svg>
         </button>
       </div>
       <div v-if="normalizedFiles.length === 0" class="easy-file-preview__empty">
-        <svg
-          viewBox="0 0 24 24"
-          width="32"
-          height="32"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.5"
-          stroke-linecap="round"
-        >
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
           <polyline points="14 2 14 8 20 8" />
         </svg>
@@ -485,78 +100,39 @@ function getFileIconComponent(url: string) {
                 <div class="easy-fp-header__actions">
                   <div v-if="normalizedFiles.length > 1" class="easy-fp-nav">
                     <button class="easy-fp-nav__btn" :disabled="currentIndex <= 0" title="上一个" @click="navigate(-1)">
-                      <svg
-                        viewBox="0 0 24 24"
-                        width="16"
-                        height="16"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                      >
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round">
                         <polyline points="15 18 9 12 15 6" />
                       </svg>
                     </button>
                     <span class="easy-fp-nav__text">{{ currentIndex + 1 }} / {{ normalizedFiles.length }}</span>
-                    <button
-                      class="easy-fp-nav__btn"
-                      :disabled="currentIndex >= normalizedFiles.length - 1"
-                      title="下一个"
-                      @click="navigate(1)"
-                    >
-                      <svg
-                        viewBox="0 0 24 24"
-                        width="16"
-                        height="16"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                      >
+                    <button class="easy-fp-nav__btn" :disabled="currentIndex >= normalizedFiles.length - 1" title="下一个"
+                      @click="navigate(1)">
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round">
                         <polyline points="9 18 15 12 9 6" />
                       </svg>
                     </button>
                   </div>
                   <a class="easy-fp-action-btn" :href="currentFile?.url" :download="currentFile?.name" title="下载">
-                    <svg
-                      viewBox="0 0 24 24"
-                      width="16"
-                      height="16"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    >
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round">
                       <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                       <polyline points="7 10 12 15 17 10" />
                       <line x1="12" y1="15" x2="12" y2="3" />
                     </svg>
                   </a>
                   <a class="easy-fp-action-btn" :href="currentFile?.url" target="_blank" title="在新标签页打开">
-                    <svg
-                      viewBox="0 0 24 24"
-                      width="16"
-                      height="16"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    >
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round">
                       <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                       <polyline points="15 3 21 3 21 9" />
                       <line x1="10" y1="14" x2="21" y2="3" />
                     </svg>
                   </a>
                   <button class="easy-fp-action-btn easy-fp-close" title="关闭" @click="closePreview">
-                    <svg
-                      viewBox="0 0 24 24"
-                      width="16"
-                      height="16"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    >
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke-linecap="round">
                       <line x1="18" y1="6" x2="6" y2="18" />
                       <line x1="6" y1="6" x2="18" y2="18" />
                     </svg>
@@ -579,22 +155,12 @@ function getFileIconComponent(url: string) {
 
                 <!-- Word（vue-office/docx） -->
                 <template v-else-if="currentType === 'word' && !officeError">
-                  <VueOfficeDocx
-                    :src="officeSrc"
-                    class="easy-fp-office-viewer"
-                    @rendered="onRendered"
-                    @error="onError"
-                  />
+                  <VueOfficeDocx :src="officeSrc" class="easy-fp-office-viewer" @rendered="onRendered" @error="onError" />
                 </template>
 
                 <!-- Excel（vue-office/excel） -->
                 <template v-else-if="currentType === 'excel' && !officeError">
-                  <VueOfficeExcel
-                    :src="officeSrc"
-                    class="easy-fp-office-viewer"
-                    @rendered="onRendered"
-                    @error="onError"
-                  />
+                  <VueOfficeExcel :src="officeSrc" class="easy-fp-office-viewer" @rendered="onRendered" @error="onError" />
                 </template>
 
                 <!-- Office 错误提示 -->
@@ -611,15 +177,8 @@ function getFileIconComponent(url: string) {
                     </p>
                     <div class="easy-fp-unsupported__actions">
                       <a class="easy-fp-btn easy-fp-btn--primary" :href="currentFile?.url" :download="currentFile?.name">
-                        <svg
-                          viewBox="0 0 24 24"
-                          width="14"
-                          height="14"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                        >
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+                          stroke-width="2" stroke-linecap="round">
                           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                           <polyline points="7 10 12 15 17 10" />
                           <line x1="12" y1="15" x2="12" y2="3" />
@@ -631,11 +190,8 @@ function getFileIconComponent(url: string) {
                 </template>
 
                 <!-- PPT（pptx-preview） -->
-                <div
-                  v-else-if="currentType === 'ppt' && !officeError"
-                  ref="pptContainerRef"
-                  class="easy-fp-ppt-container"
-                />
+                <div v-else-if="currentType === 'ppt' && !officeError" ref="pptContainerRef"
+                  class="easy-fp-ppt-container" />
 
                 <!-- PPT 错误提示 -->
                 <template v-else-if="currentType === 'ppt' && officeError">
@@ -651,15 +207,8 @@ function getFileIconComponent(url: string) {
                     </p>
                     <div class="easy-fp-unsupported__actions">
                       <a class="easy-fp-btn easy-fp-btn--primary" :href="currentFile?.url" :download="currentFile?.name">
-                        <svg
-                          viewBox="0 0 24 24"
-                          width="14"
-                          height="14"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                        >
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
+                          stroke-width="2" stroke-linecap="round">
                           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                           <polyline points="7 10 12 15 17 10" />
                           <line x1="12" y1="15" x2="12" y2="3" />
@@ -697,15 +246,8 @@ function getFileIconComponent(url: string) {
                       文件类型：<code>{{ getExt(currentFile?.url ?? '') }}</code>
                     </p>
                     <a class="easy-fp-btn easy-fp-btn--primary" :href="currentFile?.url" :download="currentFile?.name">
-                      <svg
-                        viewBox="0 0 24 24"
-                        width="14"
-                        height="14"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                      >
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                         <polyline points="7 10 12 15 17 10" />
                         <line x1="12" y1="15" x2="12" y2="3" />

@@ -5,11 +5,11 @@ import { RouterView, useRoute } from 'vue-router'
 import menuData from '@/data/menu.json'
 import { useMenuLayoutStore } from '@/stores/menuLayout'
 import { useTabsStore } from '@/stores/tabs'
-import { useDocToc } from './composables/useDocToc'
 import DocToc from './components/DocToc.vue'
 import FixedSidebar from './components/FixedSidebar.vue'
 import HeaderLayout from './components/HeaderLayout.vue'
 import VerticalSidebar from './components/VerticalSidebar.vue'
+import { useDocToc } from './composables/useDocToc'
 
 const route = useRoute()
 const tabsStore = useTabsStore()
@@ -87,11 +87,7 @@ watch(
     <!-- 主体区域 -->
     <div class="layout-body" :class="{ 'layout-body--horizontal': menuLayoutStore.currentLayout === 'horizontal' }">
       <!-- 左侧菜单 -->
-      <component
-        :is="currentMenuComponent"
-        v-if="menuLayoutStore.currentLayout !== 'horizontal'"
-        class="layout-sidebar"
-      />
+      <component :is="currentMenuComponent" v-if="menuLayoutStore.currentLayout !== 'horizontal'" class="layout-sidebar" />
       <!-- 右侧内容 -->
       <div class="layout-main" :class="{ 'layout-main--horizontal': menuLayoutStore.currentLayout === 'horizontal' }">
         <!-- 标签页 -->
@@ -107,14 +103,8 @@ watch(
             </RouterView>
           </main>
           <!-- 右侧目录（仅文档组件页自动生成） -->
-          <DocToc
-            v-if="hasToc"
-            :items="tocItems"
-            :active-id="activeId"
-            :scrolled="scrolled"
-            @select="scrollTo"
-            @back-top="scrollToTop"
-          />
+          <DocToc v-if="hasToc" :items="tocItems" :active-id="activeId" :scrolled="scrolled" @select="scrollTo"
+            @back-top="scrollToTop" />
         </div>
       </div>
     </div>

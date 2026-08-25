@@ -1,0 +1,61 @@
+.easy-time-range-picker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+
+  &.is-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .easy-time-range-picker__separator {
+    color: var(--el-text-color-placeholder);
+    font-size: 14px;
+    flex-shrink: 0;
+    user-select: none;
+  }
+
+  .easy-time-range-picker__start,
+  .easy-time-range-picker__end {
+    flex: 1;
+    min-width: 0;
+  }
+
+  // 尺寸变体
+  &.easy-time-range-picker--large {
+    :deep(.easy-time-picker) {
+      .easy-time-picker__wrapper {
+        height: 40px;
+        padding: 0 15px;
+      }
+      .easy-time-picker__input {
+        font-size: 14px;
+      }
+    }
+  }
+
+  &.easy-time-range-picker--default {
+    :deep(.easy-time-picker) {
+      .easy-time-picker__wrapper {
+        height: 32px;
+        padding: 0 12px;
+      }
+      .easy-time-picker__input {
+        font-size: 14px;
+      }
+    }
+  }
+
+  &.easy-time-range-picker--small {
+    :deep(.easy-time-picker) {
+      .easy-time-picker__wrapper {
+        height: 28px;
+        padding: 0 10px;
+      }
+      .easy-time-picker__input {
+        font-size: 13px;
+      }
+    }
+  }
+}

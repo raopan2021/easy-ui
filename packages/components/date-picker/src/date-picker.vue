@@ -1,7 +1,11 @@
 <script setup lang="ts">
-/* eslint-disable ts/no-use-before-define */
+import type { DatePickerEmits, DatePickerProps } from './types'
+
 import { ArrowLeft, ArrowRight, Calendar, Close } from '@element-plus/icons-vue'
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { useDatePicker } from './use-date-picker'
+
+// 保持对外类型导出兼容（原定义在 date-picker.vue）
+export type { DatePickerEmits, DatePickerProps } from './types'
 
 defineOptions({ name: 'EasyDatePicker' })
 
@@ -16,286 +20,51 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   size: 'default',
 })
 
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void
-  (e: 'change', value: string): void
-}>()
+const emit = defineEmits<DatePickerEmits>()
 
-export interface DatePickerProps {
-  modelValue?: string
-  type?: 'date' | 'month' | 'year'
-  placeholder?: string
-  disabled?: boolean
-  readonly?: boolean
-  clearable?: boolean
-  format?: string
-  size?: 'large' | 'default' | 'small'
-}
-
-const inputRef = ref<HTMLInputElement | null>(null)
-const wrapperRef = ref<HTMLElement | null>(null)
-const panelRef = ref<HTMLElement | null>(null)
-const focusing = ref(false)
-const hovering = ref(false)
-const panelVisible = ref(false)
-const yearMode = ref(false)
-const tick = ref(0)
-
-// 面板当前显示的年月
-const now = new Date()
-const panelYear = ref(now.getFullYear())
-const panelMonth = ref(now.getMonth())
-const currentYear = now.getFullYear()
-const currentMonth = now.getMonth()
-
-const weekdays = ['日', '一', '二', '三', '四', '五', '六']
-const months = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
-
-// 从 modelValue 解析选中日期
-const selectedDate = computed(() => {
-  if (!props.modelValue)
-    return null
-  const d = new Date(props.modelValue)
-  return isNaN(d.getTime()) ? null : d
-})
-
-const displayValue = computed(() => {
-  if (!selectedDate.value)
-    return ''
-  return formatDate(selectedDate.value)
-})
-
-const panelTitle = computed(() => {
-  if (yearMode.value)
-    return `${yearRangeStart.value} - ${yearRangeStart.value + 11}`
-  if (props.type === 'month')
-    return `${panelYear.value}`
-  return `${panelYear.value} 年 ${panelMonth.value + 1} 月`
-})
-
-// 年份范围
-const yearRangeStart = computed(() => {
-  const start = Math.floor(panelYear.value / 10) * 10
-  return start
-})
-
-const yearRange = computed(() => {
-  const start = yearRangeStart.value
-  return Array.from({ length: 12 }, (_, i) => start + i)
-})
-
-// 生成日历天
-const calendarDays = computed(() => {
-  const year = panelYear.value
-  const month = panelMonth.value
-  const firstDay = new Date(year, month, 1)
-  const lastDay = new Date(year, month + 1, 0)
-  const startWeekday = firstDay.getDay()
-  const daysInMonth = lastDay.getDate()
-
-  // 上月补齐
-  const prevLastDay = new Date(year, month, 0).getDate()
-  const days: Array<{ date: number, isCurrentMonth: boolean, isToday: boolean, fullDate: string }> = []
-
-  for (let i = startWeekday - 1; i >= 0; i--) {
-    days.push({ date: prevLastDay - i, isCurrentMonth: false, isToday: false, fullDate: '' })
-  }
-
-  for (let i = 1; i <= daysInMonth; i++) {
-    const d = new Date(year, month, i)
-    days.push({
-      date: i,
-      isCurrentMonth: true,
-      isToday: d.toDateString() === now.toDateString(),
-      fullDate: `${year}-${String(month + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`,
-    })
-  }
-
-  // 下月补齐到 6 行
-  const remaining = 42 - days.length
-  for (let i = 1; i <= remaining; i++) {
-    days.push({ date: i, isCurrentMonth: false, isToday: false, fullDate: '' })
-  }
-
-  return days
-})
-
-// 面板定位
-const panelStyle = computed(() => {
-  // 依赖 tick，确保每次打开面板时重新计算位置
-  // eslint-disable-next-line ts/no-unused-expressions
-  tick.value
-  if (!wrapperRef.value)
-    return {}
-  const rect = wrapperRef.value.getBoundingClientRect()
-  return {
-    top: `${rect.bottom + 4}px`,
-    left: `${rect.left}px`,
-  }
-})
-
-function formatDate(date: Date): string {
-  const y = date.getFullYear()
-  const m = String(date.getMonth() + 1).padStart(2, '0')
-  const d = String(date.getDate()).padStart(2, '0')
-  return props.format.replace('YYYY', String(y)).replace('MM', m).replace('DD', d)
-}
-
-function openPicker() {
-  if (props.disabled || props.readonly)
-    return
-  if (selectedDate.value) {
-    panelYear.value = selectedDate.value.getFullYear()
-    panelMonth.value = selectedDate.value.getMonth()
-  }
-  if (props.type === 'year') {
-    yearMode.value = true
-  }
-  tick.value++
-  panelVisible.value = true
-}
-
-function closePicker() {
-  panelVisible.value = false
-  yearMode.value = false
-}
-
-function prevMonth() {
-  if (props.type === 'year' || yearMode.value) {
-    panelYear.value -= 10
-  }
-  else {
-    panelMonth.value--
-    if (panelMonth.value < 0) {
-      panelMonth.value = 11
-      panelYear.value--
-    }
-  }
-}
-
-function nextMonth() {
-  if (props.type === 'year' || yearMode.value) {
-    panelYear.value += 10
-  }
-  else {
-    panelMonth.value++
-    if (panelMonth.value > 11) {
-      panelMonth.value = 0
-      panelYear.value++
-    }
-  }
-}
-
-function toggleYearMode() {
-  yearMode.value = !yearMode.value
-}
-
-function selectYear(year: number) {
-  panelYear.value = year
-  if (props.type === 'year') {
-    emit('update:modelValue', String(year))
-    emit('change', String(year))
-    closePicker()
-  }
-  else {
-    yearMode.value = false
-  }
-}
-
-function selectMonth(month: number) {
-  panelMonth.value = month
-  if (props.type?.startsWith('month')) {
-    const val = `${panelYear.value}-${String(month + 1).padStart(2, '0')}`
-    emit('update:modelValue', val)
-    emit('change', val)
-    closePicker()
-  }
-}
-
-function selectDay(day: { date: number, isCurrentMonth: boolean, fullDate: string }) {
-  if (!day.isCurrentMonth)
-    return
-  emit('update:modelValue', day.fullDate)
-  emit('change', day.fullDate)
-  closePicker()
-}
-
-function isSelectedDate(day: { fullDate: string }) {
-  if (!day.fullDate || !props.modelValue)
-    return false
-  return day.fullDate === props.modelValue
-}
-
-function isYearSelected(year: number) {
-  return props.modelValue === String(year)
-}
-
-function isMonthSelected(month: number) {
-  return props.modelValue === `${panelYear.value}-${String(month + 1).padStart(2, '0')}`
-}
-
-function isRangeStart(_day: unknown) {
-  return false
-}
-function isRangeEnd(_day: unknown) {
-  return false
-}
-function isInRange(_day: unknown) {
-  return false
-}
-
-function clear() {
-  emit('update:modelValue', '')
-  emit('change', '')
-}
-
-function handleFocus() {
-  focusing.value = true
-}
-function handleBlur() {
-  focusing.value = false
-}
-
-function handleClickOutside(e: MouseEvent) {
-  if (!panelVisible.value)
-    return
-  const target = e.target as HTMLElement
-  if (wrapperRef.value?.contains(target))
-    return
-  if (panelRef.value?.contains(target))
-    return
-  closePicker()
-}
-
-function handleScrollClose(e: Event) {
-  if (!panelVisible.value)
-    return
-  // 排除面板内部的滚动（如年份列表滚动不应关闭面板）
-  const target = e.target as HTMLElement
-  if (panelRef.value?.contains(target))
-    return
-  closePicker()
-}
-
-onMounted(() => {
-  document.addEventListener('mousedown', handleClickOutside)
-  window.addEventListener('scroll', handleScrollClose, true)
-})
-onBeforeUnmount(() => {
-  document.removeEventListener('mousedown', handleClickOutside)
-  window.removeEventListener('scroll', handleScrollClose, true)
-})
+// ──── 核心逻辑（日历/年/月面板 / 选择回调 / 外部事件 / 生命周期）────
+const {
+  inputRef,
+  wrapperRef,
+  panelRef,
+  focusing,
+  hovering,
+  panelVisible,
+  yearMode,
+  panelYear,
+  currentYear,
+  currentMonth,
+  weekdays,
+  months,
+  displayValue,
+  panelTitle,
+  yearRange,
+  calendarDays,
+  panelStyle,
+  openPicker,
+  prevMonth,
+  nextMonth,
+  toggleYearMode,
+  selectYear,
+  selectMonth,
+  selectDay,
+  isSelectedDate,
+  isYearSelected,
+  isMonthSelected,
+  isRangeStart,
+  isRangeEnd,
+  isInRange,
+  clear,
+  handleFocus,
+  handleBlur,
+} = useDatePicker(props, emit)
 </script>
 
 <template>
   <div class="easy-date-picker" :class="[`easy-date-picker--${size}`, { 'is-disabled': disabled }]">
-    <div
-      ref="wrapperRef"
-      class="easy-date-picker__wrapper"
-      :class="{ 'is-focus': focusing, 'is-hover': hovering && !disabled }"
-      @mouseenter="hovering = true"
-      @mouseleave="hovering = false"
-    >
+    <div ref="wrapperRef" class="easy-date-picker__wrapper"
+      :class="{ 'is-focus': focusing, 'is-hover': hovering && !disabled }" @mouseenter="hovering = true"
+      @mouseleave="hovering = false">
       <!-- 前缀图标 -->
       <span class="easy-date-picker__prefix">
         <slot name="prefix">
@@ -304,17 +73,8 @@ onBeforeUnmount(() => {
       </span>
 
       <!-- 日期输入 -->
-      <input
-        ref="inputRef"
-        class="easy-date-picker__input"
-        :value="displayValue"
-        :placeholder="placeholder"
-        :disabled="disabled"
-        :readonly="readonly"
-        @focus="handleFocus"
-        @blur="handleBlur"
-        @click="openPicker"
-      >
+      <input ref="inputRef" class="easy-date-picker__input" :value="displayValue" :placeholder="placeholder"
+        :disabled="disabled" :readonly="readonly" @focus="handleFocus" @blur="handleBlur" @click="openPicker">
 
       <!-- 清除 -->
       <span v-if="clearable && modelValue && !disabled" class="easy-date-picker__clear" @click.stop="clear">
@@ -331,11 +91,8 @@ onBeforeUnmount(() => {
             <el-icon class="easy-date-panel__nav" @click="prevMonth">
               <ArrowLeft />
             </el-icon>
-            <span
-              class="easy-date-panel__title"
-              :class="{ 'is-title-clickable': type !== 'year' }"
-              @click="toggleYearMode"
-            >{{ panelTitle }}</span>
+            <span class="easy-date-panel__title" :class="{ 'is-title-clickable': type !== 'year' }"
+              @click="toggleYearMode">{{ panelTitle }}</span>
             <el-icon class="easy-date-panel__nav" @click="nextMonth">
               <ArrowRight />
             </el-icon>

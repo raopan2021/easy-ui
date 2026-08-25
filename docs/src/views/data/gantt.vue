@@ -704,13 +704,7 @@ function handleTaskClick(task) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body gantt-full-demo">
-          <EasyGantt
-            :data="fullData"
-            title="软件开发项目"
-            sidebar-width="260"
-            :row-height="42"
-            @task-click="handleTaskClick"
-          />
+          <EasyGantt :data="fullData" title="软件开发项目" sidebar-width="260" :row-height="42" @task-click="handleTaskClick" />
         </div>
         <EasyDocCode
           code="<template>

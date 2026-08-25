@@ -30,17 +30,9 @@ const getLabel = computed(
     </span>
     <template #dropdown>
       <el-dropdown-menu>
-        <el-tabs
-          v-model="activeKey"
-          :stretch="true"
-          class="dropdown-tabs"
-          :style="{ width: notices.length === 0 ? '200px' : '330px' }"
-        >
-          <el-empty
-            v-if="notices.length === 0"
-            description="暂无消息"
-            :image-size="60"
-          />
+        <el-tabs v-model="activeKey" :stretch="true" class="dropdown-tabs"
+          :style="{ width: notices.length === 0 ? '200px' : '330px' }">
+          <el-empty v-if="notices.length === 0" description="暂无消息" :image-size="60" />
           <span v-else>
             <template v-for="item in notices" :key="item.key">
               <el-tab-pane :label="getLabel(item)" :name="`${item.key}`">

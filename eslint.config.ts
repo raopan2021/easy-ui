@@ -1,4 +1,5 @@
 import antfu from '@antfu/eslint-config'
+import { attributesFillRule } from './eslint-rules/attributes-fill'
 
 export default antfu({
   vue: true,
@@ -6,7 +7,9 @@ export default antfu({
   stylistic: { indent: 2, quotes: 'single' },
   formatters: { css: true, html: true, markdown: 'prettier' },
 }, {
-  ignores: ['pnpm-workspace.yaml', '.npmrc', '**/README.md'],
+  // template-admin 是独立 workspace（pure-admin 模板），有自己的工具链，
+  // 由根 eslint 检查会误报大量模板遗留问题，豁免。
+  ignores: ['pnpm-workspace.yaml', '.npmrc', '**/README.md', '.workbuddy/**', '.codebuddy/**', 'template-admin/**'],
 }, {
   // 全局 TS/JS 规则
   rules: {
@@ -20,6 +23,23 @@ export default antfu({
     'vue/custom-event-name-casing': 'off',
     'vue/no-use-v-if-with-v-for': 'warn',
     'vue/no-mutating-props': 'warn',
+    // 紧凑填充式格式化：取消强制"每属性一行"的规则
+    'vue/first-attribute-linebreak': 'off',
+    'vue/html-indent': 'off',
+    'vue/html-closing-bracket-newline': 'off',
+  },
+}, {
+  // 本地格式化规则：把多行开标签属性合并为紧凑填充式
+  files: ['**/*.vue'],
+  plugins: {
+    local: {
+      rules: {
+        'attributes-fill': attributesFillRule,
+      },
+    },
+  },
+  rules: {
+    'local/attributes-fill': 'error',
   },
 }, {
   // demo 页面：console/alert 属于演示行为，其余规则不放松
@@ -47,5 +67,12 @@ export default antfu({
   files: ['docs/build/**/*.ts'],
   rules: {
     'no-console': 'off',
+  },
+}, {
+  // easy-ui 是发布到 npm 的库：dependencies 必须用真实版本，
+  // catalog 协议在 pnpm publish 后无法被消费方解析
+  files: ['packages/easy-ui/package.json'],
+  rules: {
+    'pnpm/json-enforce-catalog': 'off',
   },
 })

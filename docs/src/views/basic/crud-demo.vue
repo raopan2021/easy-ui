@@ -331,37 +331,15 @@ onMounted(() => {
 <template>
   <div class="crud-demo">
     <!-- 搜索区域 -->
-    <EasySearchForm
-      ref="searchFormRef"
-      :items="searchItems"
-      :model-value="searchData"
-      :show-expand-button="false"
-      @search="handleSearch"
-      @reset="handleReset"
-    />
+    <EasySearchForm ref="searchFormRef" :items="searchItems" :model-value="searchData" :show-expand-button="false"
+      @search="handleSearch" @reset="handleReset" />
 
     <!-- 表格区域 -->
-    <EasyTable
-      ref="tableRef"
-      :data="tableData"
-      :columns="tableColumns"
-      :loading="tableLoading"
-      :total="total"
-      :page="pagination.page"
-      :page-size="pagination.pageSize"
-      :show-index="true"
-      :selectable="true"
-      show-refresh
-      show-export
-      show-column-settings
-      selection-mode="multiple"
-      pagination-position="right"
-      style="margin-top: 20px"
-      @refresh="handleRefresh"
-      @selection-change="handleSelectionChange"
-      @page-change="handlePageChange"
-      @page-size-change="handlePageSizeChange"
-    >
+    <EasyTable ref="tableRef" :data="tableData" :columns="tableColumns" :loading="tableLoading" :total="total"
+      :page="pagination.page" :page-size="pagination.pageSize" :show-index="true" :selectable="true" show-refresh
+      show-export show-column-settings selection-mode="multiple" pagination-position="right" style="margin-top: 20px"
+      @refresh="handleRefresh" @selection-change="handleSelectionChange" @page-change="handlePageChange"
+      @page-size-change="handlePageSizeChange">
       <template #toolbar>
         <EasyButton type="primary" size="small" @click="openAddModal">
           新增
@@ -391,13 +369,8 @@ onMounted(() => {
     </EasyTable>
 
     <!-- 新增/编辑弹窗 -->
-    <EasyModal
-      v-model="formModal.visible"
-      :title="formModal.isEdit ? '编辑用户' : '新增用户'"
-      width="520px"
-      @confirm="handleFormSubmit"
-      @cancel="formModal.visible = false"
-    >
+    <EasyModal v-model="formModal.visible" :title="formModal.isEdit ? '编辑用户' : '新增用户'" width="520px"
+      @confirm="handleFormSubmit" @cancel="formModal.visible = false">
       <EasyForm ref="formRef" :model="formData" :rules="formRules" label-width="80px">
         <EasyFormItem label="用户名" prop="name">
           <EasyInput v-model="formData.name" placeholder="请输入用户名" />
@@ -421,13 +394,8 @@ onMounted(() => {
     </EasyModal>
 
     <!-- 查看详情弹窗 -->
-    <EasyModal
-      v-model="viewModal.visible"
-      title="用户详情"
-      width="50%"
-      :show-confirm="false"
-      @cancel="viewModal.visible = false"
-    >
+    <EasyModal v-model="viewModal.visible" title="用户详情" width="50%" :show-confirm="false"
+      @cancel="viewModal.visible = false">
       <EasyDescriptions :column="2" border>
         <EasyDescriptionsItem label="用户ID">
           {{ viewData.id }}
@@ -459,13 +427,8 @@ onMounted(() => {
     </EasyModal>
 
     <!-- 删除确认弹窗 -->
-    <EasyModal
-      v-model="deleteModal.visible"
-      title="确认删除"
-      width="400px"
-      @confirm="confirmDelete"
-      @cancel="deleteModal.visible = false"
-    >
+    <EasyModal v-model="deleteModal.visible" title="确认删除" width="400px" @confirm="confirmDelete"
+      @cancel="deleteModal.visible = false">
       <div class="delete-tip">
         <EasyIcon name="el:WarningFilled" color="#ef4444" :size="24" />
         <p>

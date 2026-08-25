@@ -66,9 +66,7 @@ const extraUsers = ref<(number | string)[]>([])
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(multiUsers) }}</code>
         </div>
-        <EasyDocCode
-          code="<EasyUserPicker v-model=&quot;userIds&quot; multiple placeholder=&quot;请选择用户&quot; />"
-        />
+        <EasyDocCode code="<EasyUserPicker v-model=&quot;userIds&quot; multiple placeholder=&quot;请选择用户&quot; />" />
       </div>
     </section>
 
@@ -88,9 +86,7 @@ const extraUsers = ref<(number | string)[]>([])
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(maxUsers) }}</code>
         </div>
-        <EasyDocCode
-          code="<EasyUserPicker v-model=&quot;userIds&quot; multiple :max=&quot;3&quot; placeholder=&quot;最多选择3个用户&quot; />"
-        />
+        <EasyDocCode code="<EasyUserPicker v-model=&quot;userIds&quot; multiple :max=&quot;3&quot; placeholder=&quot;最多选择3个用户&quot; />" />
       </div>
     </section>
 
@@ -110,9 +106,7 @@ const extraUsers = ref<(number | string)[]>([])
           <span class="doc-value__label">v-model:</span>
           <code>{{ JSON.stringify(stringUsers) }}</code>
         </div>
-        <EasyDocCode
-          code="<EasyUserPicker v-model=&quot;userIdsStr&quot; multiple return-type=&quot;string&quot; placeholder=&quot;返回逗号字符串&quot; />"
-        />
+        <EasyDocCode code="<EasyUserPicker v-model=&quot;userIdsStr&quot; multiple return-type=&quot;string&quot; placeholder=&quot;返回逗号字符串&quot; />" />
       </div>
     </section>
 

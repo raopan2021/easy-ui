@@ -1,0 +1,10 @@
+.easy-radio-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+
+  &.is-disabled {
+    cursor: not-allowed;
+  }
+}

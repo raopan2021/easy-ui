@@ -90,6 +90,7 @@ export const inputProps = buildProps({
 
 export type InputProps = ExtractPropTypes<typeof inputProps>
 
+/** 运行时事件校验器（与 InputEmits 事件名保持一致） */
 export const inputEmits = {
   'update:modelValue': (value: string) => typeof value === 'string',
   'input': (value: string) => typeof value === 'string',
@@ -99,12 +100,18 @@ export const inputEmits = {
   'clear': () => true,
   'keydown': (event: KeyboardEvent) => event instanceof KeyboardEvent,
 }
+
+/**
+ * 组件事件（defineEmits 与内部 composable 共用）。
+ *
+ * 采用可调用签名形式，便于把 emit 函数按 `emit: InputEmits` 直接传入 composable。
+ */
 export interface InputEmits {
-  'update:modelValue': [value: string]
-  'input': [value: string]
-  'change': [value: string]
-  'focus': [event: FocusEvent]
-  'blur': [event: FocusEvent]
-  'clear': []
-  'keydown': [event: KeyboardEvent]
+  (e: 'update:modelValue', value: string): void
+  (e: 'input', value: string): void
+  (e: 'change', value: string): void
+  (e: 'focus', event: FocusEvent): void
+  (e: 'blur', event: FocusEvent): void
+  (e: 'clear'): void
+  (e: 'keydown', event: KeyboardEvent): void
 }

@@ -886,12 +886,7 @@ const treeData: TreeChartNode[] = [
             <span class="click-tag">toggle-expand</span>
             <code>{{ expandLog }}</code>
           </div>
-          <EasyTreeChart
-            :data="basicData"
-            :expanded-keys="controlledKeys"
-            :height="300"
-            @toggle-expand="onToggleExpand"
-          />
+          <EasyTreeChart :data="basicData" :expanded-keys="controlledKeys" :height="300" @toggle-expand="onToggleExpand" />
         </div>
         <EasyDocCode
           code="<EasyTreeChart
@@ -946,13 +941,8 @@ const treeData: TreeChartNode[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyTreeChart
-            :data="basicData"
-            background-color="#1a1a2e"
-            :show-grid="true"
-            grid-color="#3a3a5e"
-            :height="300"
-          />
+          <EasyTreeChart :data="basicData" background-color="#1a1a2e" :show-grid="true" grid-color="#3a3a5e"
+            :height="300" />
         </div>
         <EasyDocCode
           code="<EasyTreeChart

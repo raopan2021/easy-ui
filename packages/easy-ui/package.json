@@ -1,10 +1,15 @@
 {
   "name": "@raopan/easy-ui",
-  "version": "1.1.0",
   "type": "module",
+  "version": "1.1.2",
   "description": "Vue 3 企业级组件库，基于 Element Plus 扩展",
-  "license": "MIT",
   "author": "莫名 (1447455287@qq.com)",
+  "license": "MIT",
+  "homepage": "https://github.com/raopan2021/easy-ui#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raopan2021/easy-ui.git"
+  },
   "keywords": [
     "vue",
     "vue3",
@@ -13,14 +18,6 @@
     "easy-ui",
     "ui"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/raopan2021/easy-ui.git"
-  },
-  "homepage": "https://github.com/raopan2021/easy-ui#readme",
-  "engines": {
-    "node": ">=18"
-  },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
@@ -61,22 +58,22 @@
   "module": "./dist/index.mjs",
   "types": "./dist/easy-ui/src/index.d.ts",
   "files": [
-    "dist",
+    "LICENSE",
     "README.md",
-    "LICENSE"
+    "dist"
   ],
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
-    "build": "vite build && pnpm build:types",
+    "build": "vp build && pnpm build:types",
     "build:types": "vue-tsc -p tsconfig.lib.json",
-    "dev": "vite build --watch",
+    "dev": "vp build --watch",
     "type-check": "vue-tsc --noEmit -p tsconfig.json",
     "prepublishOnly": "pnpm build"
   },
   "peerDependencies": {
     "@element-plus/icons-vue": "^2.3.2",
-    "element-plus": "^2.13.6",
-    "vue": "^3.5.29",
-    "vue-router": "^5.0.3",
     "@logicflow/core": "^2.1.11",
     "@logicflow/extension": "^2.1.15",
     "@vue-office/docx": "^1.6.3",
@@ -86,8 +83,9 @@
     "@wangeditor/editor-for-vue": "^5.1.12",
     "cropperjs": "1.6.2",
     "crypto-js": "^4.2.0",
-    "echarts": "^6.0.0",
     "docx": "^9.5.0",
+    "echarts": "^6.0.0",
+    "element-plus": "^2.13.6",
     "highlight.js": "^11.11.1",
     "html2canvas": "^1.4.1",
     "html2pdf.js": "^0.12.0",
@@ -98,7 +96,9 @@
     "pdf-lib": "^1.17.1",
     "pdfjs-dist": "2.16.105",
     "pptx-preview": "^1.0.7",
-    "qrcode": "^1.5.4"
+    "qrcode": "^1.5.4",
+    "vue": "^3.5.29",
+    "vue-router": "^5.0.3"
   },
   "peerDependenciesMeta": {
     "@logicflow/core": {
@@ -174,17 +174,18 @@
     "pinia": "^3.0.4"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.7",
-    "@vue/tsconfig": "^0.8.1",
-    "docx": "^9.5.0",
-    "highlight.js": "^11.11.1",
-    "html2canvas": "^1.4.1",
-    "html2pdf.js": "^0.12.0",
-    "markdown-it": "^14.1.1",
-    "mermaid": "^11.14.0",
-    "sass-embedded": "^1.98.0",
-    "typescript": "~5.9.3",
-    "vite": "^8.1.3",
-    "vue-tsc": "^3.2.5"
+    "@vitejs/plugin-vue": "catalog:",
+    "@vue/tsconfig": "catalog:",
+    "docx": "catalog:",
+    "highlight.js": "catalog:",
+    "html2canvas": "catalog:",
+    "html2pdf.js": "catalog:",
+    "markdown-it": "catalog:",
+    "mermaid": "catalog:",
+    "sass-embedded": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vite-plus": "catalog:",
+    "vue-tsc": "catalog:"
   }
 }

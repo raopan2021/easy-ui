@@ -86,14 +86,9 @@ function handleTimeUpdate(time: number) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyVideo
-            src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
+          <EasyVideo src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
             poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
-            :height="480"
-            :danmaku="danmakuList"
-            :show-poster="true"
-            @danmaku-send="handleDanmakuSend"
-          />
+            :height="480" :danmaku="danmakuList" :show-poster="true" @danmaku-send="handleDanmakuSend" />
         </div>
         <EasyDocCode
           code="const danmakuList = [
@@ -123,22 +118,13 @@ function handleTimeUpdate(time: number) {
           <div class="video-row">
             <div class="video-item">
               <span class="video-label">自动播放（静音）</span>
-              <EasyVideo
-                src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
-                :autoplay="true"
-                :muted="true"
-                :show-poster="false"
-                :height="180"
-              />
+              <EasyVideo src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4" :autoplay="true"
+                :muted="true" :show-poster="false" :height="180" />
             </div>
             <div class="video-item">
               <span class="video-label">不自动播放</span>
-              <EasyVideo
-                src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
-                :autoplay="false"
-                :show-poster="false"
-                :height="180"
-              />
+              <EasyVideo src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4" :autoplay="false"
+                :show-poster="false" :height="180" />
             </div>
           </div>
         </div>
@@ -166,27 +152,19 @@ function handleTimeUpdate(time: number) {
           <div class="video-row">
             <div class="video-item">
               <span class="video-label">自定义封面图</span>
-              <EasyVideo
-                src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
+              <EasyVideo src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
                 poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
-                :height="180"
-              />
+                :height="180" />
             </div>
             <div class="video-item">
               <span class="video-label">自动捕获第一帧（无poster）</span>
-              <EasyVideo
-                src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
-                :show-poster="true"
-                :height="180"
-              />
+              <EasyVideo src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
+                :show-poster="true" :height="180" />
             </div>
             <div class="video-item">
               <span class="video-label">隐藏封面图</span>
-              <EasyVideo
-                src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
-                :show-poster="false"
-                :height="180"
-              />
+              <EasyVideo src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
+                :show-poster="false" :height="180" />
             </div>
           </div>
         </div>
@@ -216,21 +194,15 @@ function handleTimeUpdate(time: number) {
           <div class="video-row">
             <div class="video-item">
               <span class="video-label">小尺寸 320x180</span>
-              <EasyVideo
-                src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
+              <EasyVideo src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
                 poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
-                :width="320"
-                :height="180"
-              />
+                :width="320" :height="180" />
             </div>
             <div class="video-item">
               <span class="video-label">大尺寸 640x360</span>
-              <EasyVideo
-                src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
+              <EasyVideo src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
                 poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
-                :width="640"
-                :height="360"
-              />
+                :width="640" :height="360" />
             </div>
           </div>
         </div>
@@ -254,30 +226,21 @@ function handleTimeUpdate(time: number) {
           <div class="video-row">
             <div class="video-item">
               <span class="video-label">隐藏速度控制</span>
-              <EasyVideo
-                src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
+              <EasyVideo src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
                 poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
-                :show-speed="false"
-                :height="180"
-              />
+                :show-speed="false" :height="180" />
             </div>
             <div class="video-item">
               <span class="video-label">隐藏音量控制</span>
-              <EasyVideo
-                src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
+              <EasyVideo src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
                 poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
-                :show-volume="false"
-                :height="180"
-              />
+                :show-volume="false" :height="180" />
             </div>
             <div class="video-item">
               <span class="video-label">隐藏全屏按钮</span>
-              <EasyVideo
-                src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
+              <EasyVideo src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
                 poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
-                :show-fullscreen="false"
-                :height="180"
-              />
+                :show-fullscreen="false" :height="180" />
             </div>
           </div>
         </div>
@@ -299,12 +262,9 @@ function handleTimeUpdate(time: number) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyVideo
-            src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
+          <EasyVideo src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
             poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
-            :loop="true"
-            :height="280"
-          />
+            :loop="true" :height="280" />
         </div>
         <EasyDocCode code="<EasyVideo src=&quot;...&quot; :loop=&quot;true&quot; />" />
       </div>
@@ -320,12 +280,9 @@ function handleTimeUpdate(time: number) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyVideo
-            src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
+          <EasyVideo src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
             poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
-            :playback-rates="[0.5, 1, 2, 3]"
-            :height="280"
-          />
+            :playback-rates="[0.5, 1, 2, 3]" :height="280" />
         </div>
         <EasyDocCode code="<EasyVideo src=&quot;...&quot; :playback-rates=&quot;[0.5, 1, 2, 3]&quot; />" />
       </div>
@@ -342,16 +299,9 @@ function handleTimeUpdate(time: number) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyVideo
-            ref="videoRef"
-            src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
+          <EasyVideo ref="videoRef" src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
             poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
-            :height="280"
-            @play="handlePlay"
-            @pause="handlePause"
-            @ended="handleEnded"
-            @timeupdate="handleTimeUpdate"
-          />
+            :height="280" @play="handlePlay" @pause="handlePause" @ended="handleEnded" @timeupdate="handleTimeUpdate" />
         </div>
         <EasyDocCode
           code="<EasyVideo
@@ -383,13 +333,9 @@ const handleTimeUpdate = (time) => console.log('当前时间:', time)
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyVideo
-            src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
+          <EasyVideo src="https://media.zlongame.com/media/pictures/cn/7jiemt/img/pc/video/1.mp4"
             poster="https://media.zlongame.com/media/pictures/cn/7jiemt/file-business/pc_banner/ZZzZZKrp1904803141292003328b8112.jpg"
-            :height="280"
-            :danmaku="danmakuList"
-            :danmaku-enabled="false"
-          />
+            :height="280" :danmaku="danmakuList" :danmaku-enabled="false" />
         </div>
         <EasyDocCode
           code="<EasyVideo

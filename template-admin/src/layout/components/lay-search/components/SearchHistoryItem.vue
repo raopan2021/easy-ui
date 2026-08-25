@@ -28,19 +28,9 @@ function handleDelete(item) {
   <span class="history-item-title">
     {{ item.meta?.title }}
   </span>
-  <PureIcon
-    v-show="item.type === 'history'"
-    :icon="StarIcon"
-    :size="18"
-    class="mr-2 hover:text-[#d7d5d4]"
-    @click.stop="handleCollect(item)"
-  />
-  <PureIcon
-    :icon="CloseIcon"
-    :size="18"
-    class="hover:text-[#d7d5d4] cursor-pointer"
-    @click.stop="handleDelete(item)"
-  />
+  <PureIcon v-show="item.type === 'history'" :icon="StarIcon" :size="18" class="mr-2 hover:text-[#d7d5d4]"
+    @click.stop="handleCollect(item)" />
+  <PureIcon :icon="CloseIcon" :size="18" class="hover:text-[#d7d5d4] cursor-pointer" @click.stop="handleDelete(item)" />
 </template>
 
 <style lang="scss" scoped>

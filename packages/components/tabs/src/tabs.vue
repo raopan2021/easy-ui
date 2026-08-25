@@ -1,151 +1,32 @@
 <script setup lang="ts">
-import type { TabPaneInfo, TabsEmits } from './tabs'
-
-import { computed, nextTick, onMounted, onUpdated, provide, ref, watch } from 'vue'
+import type { TabsEmits } from './tabs'
 
 import { tabsProps } from './tabs'
+import { useTabsNav } from './use-tabs-nav'
+import { useTabsPanes } from './use-tabs-panes'
 
 defineOptions({ name: 'EasyTabs' })
 
 const props = defineProps(tabsProps)
 const emit = defineEmits<TabsEmits>()
 
-// 选项卡面板注册/注销机制
-let uidSeed = 0
-const panes = ref<TabPaneInfo[]>([])
+// ──── 面板注册表 + provide 上下文 ────
+const { panes } = useTabsPanes(props)
 
-/** 子组件 TabPane 调用此方法注册自己 */
-function registerPane(pane: Omit<TabPaneInfo, 'uid'>) {
-  uidSeed++
-  const uid = uidSeed
-  panes.value.push({ uid, ...pane })
-}
-
-/** 子组件 TabPane 调用此方法注销自己 */
-function unregisterPane(name: string | number) {
-  const idx = panes.value.findIndex(p => p.name === name)
-  if (idx > -1)
-    panes.value.splice(idx, 1)
-}
-
-// provide 给子组件使用
-provide('easyTabsContext', {
-  activeName: computed(() => props.modelValue),
-  registerPane,
-  unregisterPane,
-})
-
-// 导航相关 ref
-const navScrollRef = ref<HTMLDivElement>()
-const navRef = ref<HTMLDivElement>()
-const scrollOffset = ref(0)
-const canScrollRight = ref(false)
-const itemRefs: Record<number, HTMLElement> = {}
-
-// 样式计算
-const tabsClass = computed(() => [
-  `easy-tabs--${props.type}`,
-  `easy-tabs--${props.size}`,
-  `easy-tabs--${props.tabPosition}`,
-])
-
-const activeBarStyle = computed(() => {
-  if (props.type !== 'line')
-    return { display: 'none' }
-  return {
-    backgroundColor: props.activeColor,
-  }
-})
-
-const scrollStep = 200
-
-function setItemRef(el: any, uid: number) {
-  if (el) {
-    itemRefs[uid] = el as HTMLElement
-  }
-}
-
-function handleTabClick(pane: TabPaneInfo) {
-  if (pane.disabled)
-    return
-  if (pane.name !== props.modelValue) {
-    emit('update:modelValue', pane.name)
-    emit('tab-change', pane.name)
-  }
-  emit('tab-click', pane)
-}
-
-function handleWheel(e: WheelEvent) {
-  if (!props.scrollable)
-    return
-  const delta = e.deltaY || e.deltaX
-  scrollBy(Math.abs(delta) > 40 ? (delta > 0 ? scrollStep : -scrollStep) : delta)
-}
-
-function scrollBy(offset: number) {
-  const el = navScrollRef.value
-  if (!el)
-    return
-  const maxOffset = Math.max(0, el.scrollWidth - el.clientWidth)
-  scrollOffset.value = Math.min(maxOffset, Math.max(0, scrollOffset.value + offset))
-  updateScrollState()
-}
-
-function updateScrollState() {
-  const el = navScrollRef.value
-  if (!el)
-    return
-  canScrollRight.value = scrollOffset.value < el.scrollWidth - el.clientWidth
-}
-
-/** 更新活动指示条（line 类型） */
-function updateActiveBar() {
-  if (props.type !== 'line' || !navRef.value)
-    return
-  const activeIdx = panes.value.findIndex(p => p.name === props.modelValue)
-  if (activeIdx === -1)
-    return
-
-  const bar = navRef.value.querySelector('.easy-tabs__active-bar') as HTMLElement
-  const item = itemRefs[panes.value[activeIdx]!.uid]
-  if (!bar || !item)
-    return
-
-  const navRect = navRef.value.getBoundingClientRect()
-  const itemRect = item.getBoundingClientRect()
-
-  bar.style.left = `${itemRect.left - navRect.left + scrollOffset.value}px`
-  bar.style.width = `${itemRect.width}px`
-}
-
-function refreshLayout() {
-  nextTick(() => {
-    updateScrollState()
-    updateActiveBar()
-  })
-}
-
-onMounted(() => {
-  refreshLayout()
-})
-
-onUpdated(() => {
-  refreshLayout()
-})
-
-watch(
-  () => props.modelValue,
-  () => {
-    refreshLayout()
-  },
-)
-
-watch(
-  () => props.type,
-  () => {
-    refreshLayout()
-  },
-)
+// ──── 导航 / 滚动 / 活动指示条 ────
+const {
+  navScrollRef,
+  navRef,
+  scrollOffset,
+  canScrollRight,
+  scrollStep,
+  tabsClass,
+  activeBarStyle,
+  setItemRef,
+  handleTabClick,
+  handleWheel,
+  scrollBy,
+} = useTabsNav(props, emit, panes)
 </script>
 
 <template>
@@ -154,20 +35,10 @@ watch(
     <div class="easy-tabs__header" :class="{ 'is-sticky': sticky }" :style="sticky ? { top: stickyTop } : undefined">
       <div class="easy-tabs__nav-wrap">
         <!-- 左滚动按钮 -->
-        <span
-          v-if="scrollable && scrollOffset > 0"
-          class="easy-tabs__nav-btn easy-tabs__nav-btn--prev"
-          @click="scrollBy(-scrollStep)"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            width="1em"
-            height="1em"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-          >
+        <span v-if="scrollable && scrollOffset > 0" class="easy-tabs__nav-btn easy-tabs__nav-btn--prev"
+          @click="scrollBy(-scrollStep)">
+          <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round">
             <polyline points="15 18 9 12 15 6" />
           </svg>
         </span>
@@ -196,20 +67,10 @@ watch(
         </div>
 
         <!-- 右滚动按钮 -->
-        <span
-          v-if="scrollable && canScrollRight"
-          class="easy-tabs__nav-btn easy-tabs__nav-btn--next"
-          @click="scrollBy(scrollStep)"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            width="1em"
-            height="1em"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-          >
+        <span v-if="scrollable && canScrollRight" class="easy-tabs__nav-btn easy-tabs__nav-btn--next"
+          @click="scrollBy(scrollStep)">
+          <svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round">
             <polyline points="9 18 15 12 9 6" />
           </svg>
         </span>
@@ -223,249 +84,10 @@ watch(
   </div>
 </template>
 
-<style scoped lang="scss">
-@use '../../../easy-ui/src/styles/tokens' as *;
+<!-- 组件核心样式（scoped，独立维护在 tabs-style.scss） -->
+<style scoped src="./tabs-style.scss" lang="scss"></style>
 
-/* ========== 设计令牌 ========== */
-$radius: 8px;
-$radius-sm: 6px;
-$transition: all 0.2s ease;
-
-/* ========== 尺寸变量 ========== */
-$size-large-height: 44px;
-$size-large-font: 15px;
-$size-large-padding: 0 20px;
-$size-large-gap: 32px;
-
-$size-default-height: 38px;
-$size-default-font: 14px;
-$size-default-padding: 0 16px;
-$size-default-gap: 24px;
-
-$size-small-height: 32px;
-$size-small-font: 13px;
-$size-small-padding: 0 12px;
-$size-small-gap: 16px;
-
-/* ========== 基础布局 ========== */
-.easy-tabs {
-  display: flex;
-  flex-direction: column;
-
-  &.easy-tabs--bottom {
-    flex-direction: column-reverse;
-  }
-}
-
-/* ========== 头部 ========== */
-.easy-tabs__header {
-  flex-shrink: 0;
-
-  &.is-sticky {
-    position: sticky;
-    z-index: 10;
-    background-color: var(--el-bg-color);
-  }
-}
-
-.easy-tabs__nav-wrap {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-/* ========== 导航滚动区域 ========== */
-.easy-tabs__nav-scroll {
-  overflow: hidden;
-  flex: 1;
-
-  .easy-tabs--segment & {
-    overflow: visible;
-  }
-}
-
-.easy-tabs__nav {
-  position: relative;
-  display: flex;
-  align-items: center;
-  transition: transform 0.3s ease;
-  white-space: nowrap;
-}
-
-/* ========== 滚动按钮 ========== */
-.easy-tabs__nav-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  cursor: pointer;
-  color: var(--el-text-color-regular);
-  transition: $transition;
-  flex-shrink: 0;
-  border: none;
-  background: transparent;
-  font-size: 16px;
-
-  &:hover {
-    color: var(--el-text-color-primary);
-    background-color: var(--el-fill-color-light);
-  }
-}
-
-.easy-tabs__nav-btn--prev {
-  margin-right: 4px;
-}
-
-.easy-tabs__nav-btn--next {
-  margin-left: 4px;
-}
-
-/* ========== 选项卡项 ========== */
-.easy-tabs__item {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: $size-default-padding;
-  height: $size-default-height;
-  font-size: $size-default-font;
-  color: var(--el-text-color-secondary);
-  cursor: pointer;
-  transition: $transition;
-  user-select: none;
-  white-space: nowrap;
-  position: relative;
-  font-weight: 500;
-  flex-shrink: 0;
-
-  .easy-tabs--large & {
-    padding: $size-large-padding;
-    height: $size-large-height;
-    font-size: $size-large-font;
-  }
-
-  .easy-tabs--small & {
-    padding: $size-small-padding;
-    height: $size-small-height;
-    font-size: $size-small-font;
-  }
-
-  &:hover:not(.is-active):not(.is-disabled) {
-    color: var(--el-color-primary);
-  }
-
-  &.is-disabled {
-    color: var(--el-text-color-disabled);
-    cursor: not-allowed;
-  }
-}
-
-/* ========== Line 类型 ========== */
-.easy-tabs--line {
-  .easy-tabs__nav {
-    gap: $size-default-gap;
-    border-bottom: 1px solid var(--el-border-color);
-
-    .easy-tabs--large & {
-      gap: $size-large-gap;
-    }
-    .easy-tabs--small & {
-      gap: $size-small-gap;
-    }
-  }
-
-  .easy-tabs__item.is-active {
-    color: var(--el-color-primary);
-  }
-
-  .easy-tabs__active-bar {
-    position: absolute;
-    bottom: 0;
-    height: 2px;
-    border-radius: 1px;
-    transition:
-      left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
-      width 0.3s cubic-bezier(0.645, 0.045, 0.355, 1),
-      background-color 0.2s ease;
-    z-index: 1;
-  }
-}
-
-/* ========== Card 类型 ========== */
-.easy-tabs--card {
-  .easy-tabs__nav {
-    border-bottom: 1px solid var(--el-border-color);
-    gap: 4px;
-  }
-
-  .easy-tabs__item {
-    padding: 0 20px;
-    border: 1px solid transparent;
-    border-bottom: none;
-    border-radius: $radius-sm $radius-sm 0 0;
-
-    .easy-tabs--large & {
-      padding: 0 24px;
-    }
-    .easy-tabs--small & {
-      padding: 0 14px;
-    }
-
-    &.is-active {
-      background-color: var(--el-bg-color);
-      border-color: var(--el-border-color);
-      color: var(--el-color-primary);
-    }
-
-    &:hover:not(.is-active):not(.is-disabled) {
-      background-color: $bg-card;
-    }
-  }
-}
-
-/* ========== Segment 类型 ========== */
-.easy-tabs--segment {
-  .easy-tabs__nav {
-    display: inline-flex;
-    gap: 2px;
-    padding: 3px;
-    background-color: $bg-segment;
-    border-radius: $radius;
-  }
-
-  .easy-tabs__item {
-    border-radius: $radius-sm;
-    justify-content: center;
-    color: var(--el-text-color-secondary);
-
-    &.is-active {
-      background-color: var(--el-bg-color);
-      color: var(--el-color-primary);
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-    }
-
-    &:hover:not(.is-active):not(.is-disabled) {
-      color: var(--el-text-color-primary);
-    }
-  }
-}
-
-/* ========== 图标 ========== */
-.easy-tabs__item-icon {
-  display: inline-flex;
-  align-items: center;
-  font-size: 1em;
-}
-
-/* ========== 内容区域 ========== */
-.easy-tabs__content {
-  flex: 1;
-  padding: 16px 0;
-  overflow: hidden;
-}
-</style>
-
+<!-- 暗色模式覆盖（非 scoped，全局 html.dark 作用域） -->
 <style lang="scss">
 /* ========== Dark Mode ========== */
 html.dark .easy-tabs__nav {

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import { EasyButton } from '@raopan/easy-ui'
 import { ref } from 'vue'
 

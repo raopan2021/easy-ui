@@ -1,0 +1,24 @@
+.easy-input-range {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+
+  &.is-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .easy-input-range__separator {
+    color: var(--el-text-color-placeholder);
+    font-size: 14px;
+    flex-shrink: 0;
+    user-select: none;
+  }
+
+  .easy-input-range__start,
+  .easy-input-range__end {
+    flex: 1;
+    min-width: 0;
+  }
+}

@@ -1,0 +1,59 @@
+.easy-search-form {
+  width: 100%;
+  background: var(--el-bg-color);
+  border-radius: 8px;
+  border: 1px solid #e2e4ed;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: var(--el-border-color);
+  }
+}
+
+.search-form-body {
+  padding: 16px 20px;
+
+  :deep(.search-grid-form) {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    align-items: flex-end;
+
+    .easy-form-item {
+      width: auto !important;
+      min-width: 250px !important;
+      margin-right: 0 !important;
+      margin-bottom: 0;
+    }
+  }
+
+  .search-actions {
+    width: auto;
+
+    :deep(.easy-form-item__label) {
+      display: none;
+    }
+
+    :deep(.easy-form-item__content) {
+      .easy-form-item__control {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      // 测量时强制单行、不收缩，得到内容自然宽度
+      .easy-form-item__control.is-measuring {
+        flex-wrap: nowrap;
+
+        > * {
+          flex-shrink: 0;
+        }
+      }
+
+      .action-divider {
+        display: none;
+      }
+    }
+  }
+}

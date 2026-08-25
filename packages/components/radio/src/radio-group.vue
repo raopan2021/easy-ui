@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import type { RadioGroupEmits, RadioGroupProps } from './radio'
+
 import { computed, provide } from 'vue'
+import { RADIO_GROUP_KEY } from './radio'
 
 defineOptions({ name: 'EasyRadioGroup' })
 
@@ -10,23 +13,9 @@ const props = withDefaults(defineProps<RadioGroupProps>(), {
   name: '',
 })
 
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: string | number | boolean): void
-  (e: 'change', value: string | number | boolean): void
-}>()
+const emit = defineEmits<RadioGroupEmits>()
 
-export interface RadioGroupProps {
-  /** 绑定值 */
-  modelValue?: string | number | boolean
-  /** 是否禁用 */
-  disabled?: boolean
-  /** 尺寸 */
-  size?: 'large' | 'default' | 'small'
-  /** 原生 name 属性 */
-  name?: string
-}
-
-provide('easyRadioGroup', {
+provide(RADIO_GROUP_KEY, {
   modelValue: computed(() => props.modelValue),
   disabled: computed(() => props.disabled),
   size: computed(() => props.size),
@@ -43,15 +32,5 @@ provide('easyRadioGroup', {
   </div>
 </template>
 
-<style scoped lang="scss">
-.easy-radio-group {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  align-items: center;
-
-  &.is-disabled {
-    cursor: not-allowed;
-  }
-}
-</style>
+<!-- 组件核心样式（scoped，独立维护在 radio-group-style.scss） -->
+<style scoped src="./radio-group-style.scss" lang="scss"></style>

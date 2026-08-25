@@ -1,0 +1,61 @@
+.easy-date-range-picker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+
+  &.is-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .easy-date-range-picker__separator {
+    color: var(--el-text-color-placeholder);
+    font-size: 14px;
+    flex-shrink: 0;
+    user-select: none;
+  }
+
+  .easy-date-range-picker__start,
+  .easy-date-range-picker__end {
+    flex: 1;
+    min-width: 0;
+  }
+
+  // 尺寸变体
+  &.easy-date-range-picker--large {
+    :deep(.easy-date-picker) {
+      .easy-date-picker__wrapper {
+        height: 40px;
+        padding: 0 15px;
+      }
+      .easy-date-picker__input {
+        font-size: 14px;
+      }
+    }
+  }
+
+  &.easy-date-range-picker--default {
+    :deep(.easy-date-picker) {
+      .easy-date-picker__wrapper {
+        height: 32px;
+        padding: 0 12px;
+      }
+      .easy-date-picker__input {
+        font-size: 14px;
+      }
+    }
+  }
+
+  &.easy-date-range-picker--small {
+    :deep(.easy-date-picker) {
+      .easy-date-picker__wrapper {
+        height: 28px;
+        padding: 0 10px;
+      }
+      .easy-date-picker__input {
+        font-size: 13px;
+      }
+    }
+  }
+}

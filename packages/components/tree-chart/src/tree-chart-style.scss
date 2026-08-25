@@ -1,0 +1,165 @@
+.easy-tree-Chart {
+  display: flex;
+  flex-direction: column;
+  width: v-bind('props.width');
+  height: v-bind('props.height');
+  max-width: v-bind('typeof props.width === "number" ? `${props.width}px` : props.width');
+  max-height: v-bind('typeof props.height === "number" ? `${props.height}px` : props.height');
+  background: var(--el-bg-color);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+// 工具栏
+.easy-tree-Chart__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--el-border-color-lighter);
+  background: var(--el-bg-color-overlay);
+  flex-shrink: 0;
+  gap: 8px;
+}
+
+.easy-tree-Chart__toolbar-left,
+.easy-tree-Chart__toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.easy-tree-Chart__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--el-text-color-regular);
+  cursor: pointer;
+  transition: all 0.15s;
+
+  &:hover {
+    background: var(--el-fill-color-light);
+    color: var(--el-text-color-primary);
+  }
+
+  &.is-active {
+    background: var(--el-color-primary);
+    color: var(--el-color-white);
+
+    &:hover {
+      background: var(--el-color-primary);
+      color: var(--el-color-white);
+    }
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.easy-tree-Chart__zoom-text {
+  min-width: 48px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--el-text-color-regular);
+  font-variant-numeric: tabular-nums;
+}
+
+.easy-tree-Chart__divider {
+  width: 1px;
+  height: 20px;
+  background: var(--el-border-color);
+  margin: 0 4px;
+}
+
+// 画布容器
+.easy-tree-Chart__canvas-wrapper {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  cursor: grab;
+
+  &.is-panning {
+    cursor: grabbing;
+  }
+}
+
+.easy-tree-Chart__canvas {
+  position: relative;
+  width: max-content;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.easy-tree-Chart__lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.easy-tree-Chart__root {
+  position: relative;
+  padding: 40px;
+  z-index: 1;
+  min-width: 100%;
+  min-height: 100%;
+
+  &.easy-tree-Chart__root--horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
+
+  &.easy-tree-Chart__root--vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+  }
+}
+
+// 多棵树容器
+.easy-tree-Chart__tree-wrapper {
+  &.easy-tree-Chart__tree-wrapper--horizontal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+  }
+
+  &.easy-tree-Chart__tree-wrapper--vertical {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+  }
+}
+
+// 空状态
+.easy-tree-Chart__empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--el-text-color-placeholder);
+  font-size: 14px;
+  pointer-events: none;
+
+  svg {
+    opacity: 0.4;
+  }
+}

@@ -205,9 +205,219 @@ settings:
 
 catalogs:
   default:
+    '@commitlint/cli':
+      specifier: ^20.1.0
+      version: 20.5.3
+    '@commitlint/config-conventional':
+      specifier: ^20.0.0
+      version: 20.5.3
+    '@commitlint/types':
+      specifier: ^20.0.0
+      version: 20.5.0
+    '@element-plus/icons-vue':
+      specifier: ^2.3.2
+      version: 2.3.2
+    '@pureadmin/utils':
+      specifier: ^2.6.4
+      version: 2.6.4
+    '@tailwindcss/vite':
+      specifier: ^4.3.2
+      version: 4.3.3
+    '@types/js-cookie':
+      specifier: ^3.0.6
+      version: 3.0.6
+    '@types/node':
+      specifier: ^20.19.23
+      version: 20.19.43
+    '@types/nprogress':
+      specifier: ^0.2.3
+      version: 0.2.3
+    '@types/path-browserify':
+      specifier: ^1.0.3
+      version: 1.0.3
+    '@types/qs':
+      specifier: ^6.14.0
+      version: 6.15.1
+    '@types/sortablejs':
+      specifier: ^1.15.9
+      version: 1.15.9
+    '@vitejs/plugin-vue':
+      specifier: ^6.0.7
+      version: 6.0.8
+    '@vitejs/plugin-vue-jsx':
+      specifier: ^5.1.6
+      version: 5.1.6
+    '@vueuse/core':
+      specifier: ^14.3.0
+      version: 14.4.0
+    '@vueuse/motion':
+      specifier: ^3.0.3
+      version: 3.0.3
+    animate.css:
+      specifier: ^4.1.1
+      version: 4.1.1
+    axios:
+      specifier: ^1.18.1
+      version: 1.19.0
+    boxen:
+      specifier: ^8.0.1
+      version: 8.0.1
+    code-inspector-plugin:
+      specifier: ^1.2.10
+      version: 1.6.6
+    cropperjs:
+      specifier: ^1.6.2
+      version: 1.6.3
+    cross-env:
+      specifier: ^10.1.0
+      version: 10.1.0
+    dayjs:
+      specifier: ^1.11.21
+      version: 1.11.23
+    docx:
+      specifier: ^9.5.0
+      version: 9.7.1
+    element-plus:
+      specifier: ^2.14.2
+      version: 2.14.4
+    esbuild:
+      specifier: ^0.28.2
+      version: 0.28.2
+    eslint-plugin-prettier:
+      specifier: ^5.5.4
+      version: 5.5.6
+    gradient-string:
+      specifier: ^3.0.0
+      version: 3.0.0
+    highlight.js:
+      specifier: ^11.12.0
+      version: 11.12.0
+    html2canvas:
+      specifier: ^1.4.1
+      version: 1.4.1
+    html2pdf.js:
+      specifier: ^0.12.0
+      version: 0.12.0
+    js-cookie:
+      specifier: ^3.0.8
+      version: 3.0.8
+    jsbarcode:
+      specifier: ^3.12.3
+      version: 3.12.3
+    lightningcss:
+      specifier: ^1.32.0
+      version: 1.33.0
+    localforage:
+      specifier: ^1.10.0
+      version: 1.10.0
+    markdown-it:
+      specifier: ^15.0.0
+      version: 15.0.0
+    mermaid:
+      specifier: ^11.14.0
+      version: 11.17.0
+    mitt:
+      specifier: ^3.0.1
+      version: 3.0.1
+    nprogress:
+      specifier: ^0.2.0
+      version: 0.2.0
+    path-browserify:
+      specifier: ^1.0.1
+      version: 1.0.1
+    pinia:
+      specifier: ^4.0.3
+      version: 4.0.3
+    pinyin-pro:
+      specifier: ^3.28.1
+      version: 3.29.3
+    postcss:
+      specifier: ^8.5.6
+      version: 8.5.26
+    postcss-html:
+      specifier: ^1.8.0
+      version: 1.8.1
+    postcss-scss:
+      specifier: ^4.0.9
+      version: 4.0.9
+    prettier:
+      specifier: ^3.6.2
+      version: 3.9.6
+    qrcode:
+      specifier: ^1.5.4
+      version: 1.5.4
+    qs:
+      specifier: ^6.15.3
+      version: 6.15.3
+    responsive-storage:
+      specifier: ^2.2.0
+      version: 2.2.0
+    sass-embedded:
+      specifier: ^1.100.0
+      version: 1.102.0
+    sortablejs:
+      specifier: ^1.15.7
+      version: 1.15.7
+    stylelint:
+      specifier: ^16.25.0
+      version: 16.26.1
+    stylelint-config-recess-order:
+      specifier: ^7.4.0
+      version: 7.8.0
+    stylelint-config-recommended-vue:
+      specifier: ^1.6.1
+      version: 1.6.1
+    stylelint-config-standard-scss:
+      specifier: ^14.0.0
+      version: 14.0.0
+    stylelint-prettier:
+      specifier: ^5.0.3
+      version: 5.0.3
+    tailwindcss:
+      specifier: ^4.3.2
+      version: 4.3.3
+    tippy.js:
+      specifier: ^6.3.7
+      version: 6.3.7
+    typescript:
+      specifier: ^6.0.3
+      version: 6.0.3
+    unplugin-auto-import:
+      specifier: ^21.0.0
+      version: 21.1.0
+    unplugin-vue-components:
+      specifier: ^32.1.0
+      version: 32.1.0
+    vite-plugin-compression:
+      specifier: ^0.5.1
+      version: 0.5.1
+    vite-plugin-router-warn:
+      specifier: ^2.0.0
+      version: 2.0.0
     vite-plus:
       specifier: 0.2.9
       version: 0.2.9
+    vite-svg-loader:
+      specifier: ^5.1.0
+      version: 5.1.1
+    vue:
+      specifier: ^3.5.39
+      version: 3.5.41
+    vue-eslint-parser:
+      specifier: ^10.2.0
+      version: 10.4.1
+    vue-router:
+      specifier: ^5.2.0
+      version: 5.2.0
+    vue-tippy:
+      specifier: ^6.7.1
+      version: 6.7.1
+    vue-tsc:
+      specifier: ^3.1.2
+      version: 3.3.10
+    vue-types:
+      specifier: ^7.0.0
+      version: 7.0.0
 
 overrides:
   vite: npm:@voidzero-dev/vite-plus-core@0.2.9
@@ -217,224 +427,224 @@ importers:
   .:
     dependencies:
       '@element-plus/icons-vue':
-        specifier: ^2.3.2
+        specifier: 'catalog:'
         version: 2.3.2(vue@3.5.41(typescript@6.0.3))
       '@pureadmin/utils':
-        specifier: ^2.6.4
+        specifier: 'catalog:'
         version: 2.6.4(vue@3.5.41(typescript@6.0.3))
       '@raopan/easy-ui':
         specifier: file:../packages/easy-ui
-        version: file:../packages/easy-ui(@element-plus/icons-vue@2.3.2(vue@3.5.41(typescript@6.0.3)))(cropperjs@1.6.2)(debug@4.4.3(supports-color@8.1.1))(docx@9.7.1)(element-plus@2.14.4(vue@3.5.41(typescript@6.0.3)))(highlight.js@11.12.0)(html2canvas@1.4.1)(html2pdf.js@0.12.0)(jsbarcode@3.12.3)(jszip@3.10.1)(markdown-it@15.0.0)(mermaid@11.17.0)(qrcode@1.5.4)(supports-color@8.1.1)(typescript@6.0.3)(vue-router@5.2.0(@voidzero-dev/vite-plus-core@0.2.9(@types/node@20.19.43)(esbuild@0.28.2)(jiti@2.7.0)(sass-embedded@1.102.0)(sass@1.102.0)(typescript@6.0.3)(yaml@2.9.0))(@vue/compiler-sfc@3.5.41)(esbuild@0.28.2)(pinia@4.0.3(@vue/devtools-api@8.2.1)(typescript@6.0.3)(vue@3.5.41(typescript@6.0.3)))(vue@3.5.41(typescript@6.0.3)))(vue@3.5.41(typescript@6.0.3))
+        version: file:../packages/easy-ui(@element-plus/icons-vue@2.3.2(vue@3.5.41(typescript@6.0.3)))(cropperjs@1.6.3)(debug@4.4.3(supports-color@8.1.1))(docx@9.7.1)(element-plus@2.14.4(vue@3.5.41(typescript@6.0.3)))(highlight.js@11.12.0)(html2canvas@1.4.1)(html2pdf.js@0.12.0)(jsbarcode@3.12.3)(jszip@3.10.1)(markdown-it@15.0.0)(mermaid@11.17.0)(qrcode@1.5.4)(supports-color@8.1.1)(typescript@6.0.3)(vue-router@5.2.0(@voidzero-dev/vite-plus-core@0.2.9(@types/node@20.19.43)(esbuild@0.28.2)(jiti@2.7.0)(sass-embedded@1.102.0)(sass@1.102.0)(typescript@6.0.3)(yaml@2.9.0))(@vue/compiler-sfc@3.5.41)(esbuild@0.28.2)(pinia@4.0.3(@vue/devtools-api@8.2.1)(typescript@6.0.3)(vue@3.5.41(typescript@6.0.3)))(vue@3.5.41(typescript@6.0.3)))(vue@3.5.41(typescript@6.0.3))
       '@vueuse/core':
-        specifier: ^14.3.0
+        specifier: 'catalog:'
         version: 14.4.0(vue@3.5.41(typescript@6.0.3))
       '@vueuse/motion':
-        specifier: ^3.0.3
+        specifier: 'catalog:'
         version: 3.0.3(vue@3.5.41(typescript@6.0.3))
       animate.css:
-        specifier: ^4.1.1
+        specifier: 'catalog:'
         version: 4.1.1
       axios:
-        specifier: ^1.18.1
+        specifier: 'catalog:'
         version: 1.19.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
       cropperjs:
-        specifier: ^1.6.2
-        version: 1.6.2
+        specifier: 'catalog:'
+        version: 1.6.3
       dayjs:
-        specifier: ^1.11.21
+        specifier: 'catalog:'
         version: 1.11.23
       docx:
-        specifier: ^9.5.0
+        specifier: 'catalog:'
         version: 9.7.1
       element-plus:
-        specifier: ^2.14.2
+        specifier: 'catalog:'
         version: 2.14.4(vue@3.5.41(typescript@6.0.3))
       highlight.js:
-        specifier: ^11.12.0
+        specifier: 'catalog:'
         version: 11.12.0
       html2canvas:
-        specifier: ^1.4.1
+        specifier: 'catalog:'
         version: 1.4.1
       html2pdf.js:
-        specifier: ^0.12.0
+        specifier: 'catalog:'
         version: 0.12.0
       js-cookie:
-        specifier: ^3.0.8
+        specifier: 'catalog:'
         version: 3.0.8
       jsbarcode:
-        specifier: ^3.12.3
+        specifier: 'catalog:'
         version: 3.12.3
       localforage:
-        specifier: ^1.10.0
+        specifier: 'catalog:'
         version: 1.10.0
       markdown-it:
-        specifier: ^15.0.0
+        specifier: 'catalog:'
         version: 15.0.0
       mermaid:
-        specifier: ^11.14.0
+        specifier: 'catalog:'
         version: 11.17.0
       mitt:
-        specifier: ^3.0.1
+        specifier: 'catalog:'
         version: 3.0.1
       nprogress:
-        specifier: ^0.2.0
+        specifier: 'catalog:'
         version: 0.2.0
       path-browserify:
-        specifier: ^1.0.1
+        specifier: 'catalog:'
         version: 1.0.1
       pinia:
-        specifier: ^4.0.3
+        specifier: 'catalog:'
         version: 4.0.3(@vue/devtools-api@8.2.1)(typescript@6.0.3)(vue@3.5.41(typescript@6.0.3))
       pinyin-pro:
-        specifier: ^3.28.1
+        specifier: 'catalog:'
         version: 3.29.3
       qrcode:
-        specifier: ^1.5.4
+        specifier: 'catalog:'
         version: 1.5.4
       qs:
-        specifier: ^6.15.3
+        specifier: 'catalog:'
         version: 6.15.3
       responsive-storage:
-        specifier: ^2.2.0
+        specifier: 'catalog:'
         version: 2.2.0
       sortablejs:
-        specifier: ^1.15.7
+        specifier: 'catalog:'
         version: 1.15.7
       tippy.js:
-        specifier: ^6.3.7
+        specifier: 'catalog:'
         version: 6.3.7
       vue:
-        specifier: ^3.5.39
+        specifier: 'catalog:'
         version: 3.5.41(typescript@6.0.3)
       vue-router:
-        specifier: ^5.2.0
+        specifier: 'catalog:'
         version: 5.2.0(@voidzero-dev/vite-plus-core@0.2.9(@types/node@20.19.43)(esbuild@0.28.2)(jiti@2.7.0)(sass-embedded@1.102.0)(sass@1.102.0)(typescript@6.0.3)(yaml@2.9.0))(@vue/compiler-sfc@3.5.41)(esbuild@0.28.2)(pinia@4.0.3(@vue/devtools-api@8.2.1)(typescript@6.0.3)(vue@3.5.41(typescript@6.0.3)))(vue@3.5.41(typescript@6.0.3))
       vue-tippy:
-        specifier: ^6.7.1
+        specifier: 'catalog:'
         version: 6.7.1(vue@3.5.41(typescript@6.0.3))
       vue-types:
-        specifier: ^7.0.0
+        specifier: 'catalog:'
         version: 7.0.0(vue@3.5.41(typescript@6.0.3))
     devDependencies:
       '@commitlint/cli':
-        specifier: ^20.1.0
+        specifier: 'catalog:'
         version: 20.5.3(@types/node@20.19.43)(conventional-commits-parser@6.4.0)(typescript@6.0.3)
       '@commitlint/config-conventional':
-        specifier: ^20.0.0
+        specifier: 'catalog:'
         version: 20.5.3
       '@commitlint/types':
-        specifier: ^20.0.0
+        specifier: 'catalog:'
         version: 20.5.0
       '@tailwindcss/vite':
-        specifier: ^4.3.2
+        specifier: 'catalog:'
         version: 4.3.3(@voidzero-dev/vite-plus-core@0.2.9(@types/node@20.19.43)(esbuild@0.28.2)(jiti@2.7.0)(sass-embedded@1.102.0)(sass@1.102.0)(typescript@6.0.3)(yaml@2.9.0))
       '@types/js-cookie':
-        specifier: ^3.0.6
+        specifier: 'catalog:'
         version: 3.0.6
       '@types/node':
-        specifier: ^20.19.23
+        specifier: 'catalog:'
         version: 20.19.43
       '@types/nprogress':
-        specifier: ^0.2.3
+        specifier: 'catalog:'
         version: 0.2.3
       '@types/path-browserify':
-        specifier: ^1.0.3
+        specifier: 'catalog:'
         version: 1.0.3
       '@types/qs':
-        specifier: ^6.14.0
+        specifier: 'catalog:'
         version: 6.15.1
       '@types/sortablejs':
-        specifier: ^1.15.9
+        specifier: 'catalog:'
         version: 1.15.9
       '@vitejs/plugin-vue':
-        specifier: ^6.0.7
+        specifier: 'catalog:'
         version: 6.0.8(@voidzero-dev/vite-plus-core@0.2.9(@types/node@20.19.43)(esbuild@0.28.2)(jiti@2.7.0)(sass-embedded@1.102.0)(sass@1.102.0)(typescript@6.0.3)(yaml@2.9.0))(vue@3.5.41(typescript@6.0.3))
       '@vitejs/plugin-vue-jsx':
-        specifier: ^5.1.6
+        specifier: 'catalog:'
         version: 5.1.6(@voidzero-dev/vite-plus-core@0.2.9(@types/node@20.19.43)(esbuild@0.28.2)(jiti@2.7.0)(sass-embedded@1.102.0)(sass@1.102.0)(typescript@6.0.3)(yaml@2.9.0))(supports-color@8.1.1)(vue@3.5.41(typescript@6.0.3))
       boxen:
-        specifier: ^8.0.1
+        specifier: 'catalog:'
         version: 8.0.1
       code-inspector-plugin:
-        specifier: ^1.2.10
+        specifier: 'catalog:'
         version: 1.6.6(supports-color@8.1.1)
       cross-env:
-        specifier: ^10.1.0
+        specifier: 'catalog:'
         version: 10.1.0
       esbuild:
-        specifier: ^0.28.2
+        specifier: 'catalog:'
         version: 0.28.2
       eslint-plugin-prettier:
-        specifier: ^5.5.4
+        specifier: 'catalog:'
         version: 5.5.6(eslint@10.8.1(jiti@2.7.0)(supports-color@8.1.1))(prettier@3.9.6)
       gradient-string:
-        specifier: ^3.0.0
+        specifier: 'catalog:'
         version: 3.0.0
       lightningcss:
-        specifier: ^1.32.0
+        specifier: 'catalog:'
         version: 1.33.0
       postcss:
-        specifier: ^8.5.6
+        specifier: 'catalog:'
         version: 8.5.26
       postcss-html:
-        specifier: ^1.8.0
+        specifier: 'catalog:'
         version: 1.8.1
       postcss-scss:
-        specifier: ^4.0.9
+        specifier: 'catalog:'
         version: 4.0.9(postcss@8.5.26)
       prettier:
-        specifier: ^3.6.2
+        specifier: 'catalog:'
         version: 3.9.6
       sass-embedded:
-        specifier: ^1.100.0
+        specifier: 'catalog:'
         version: 1.102.0
       stylelint:
-        specifier: ^16.25.0
+        specifier: 'catalog:'
         version: 16.26.1(supports-color@8.1.1)(typescript@6.0.3)
       stylelint-config-recess-order:
-        specifier: ^7.4.0
+        specifier: 'catalog:'
         version: 7.8.0(stylelint-order@8.1.1(stylelint@16.26.1(supports-color@8.1.1)(typescript@6.0.3)))(stylelint@16.26.1(supports-color@8.1.1)(typescript@6.0.3))
       stylelint-config-recommended-vue:
-        specifier: ^1.6.1
+        specifier: 'catalog:'
         version: 1.6.1(postcss-html@1.8.1)(stylelint@16.26.1(supports-color@8.1.1)(typescript@6.0.3))
       stylelint-config-standard-scss:
-        specifier: ^14.0.0
+        specifier: 'catalog:'
         version: 14.0.0(postcss@8.5.26)(stylelint@16.26.1(supports-color@8.1.1)(typescript@6.0.3))
       stylelint-prettier:
-        specifier: ^5.0.3
+        specifier: 'catalog:'
         version: 5.0.3(prettier@3.9.6)(stylelint@16.26.1(supports-color@8.1.1)(typescript@6.0.3))
       tailwindcss:
-        specifier: ^4.3.2
+        specifier: 'catalog:'
         version: 4.3.3
       typescript:
-        specifier: ^6.0.3
+        specifier: 'catalog:'
         version: 6.0.3
       unplugin-auto-import:
-        specifier: ^21.0.0
+        specifier: 'catalog:'
         version: 21.1.0(@voidzero-dev/vite-plus-core@0.2.9(@types/node@20.19.43)(esbuild@0.28.2)(jiti@2.7.0)(sass-embedded@1.102.0)(sass@1.102.0)(typescript@6.0.3)(yaml@2.9.0))(@vueuse/core@14.4.0(vue@3.5.41(typescript@6.0.3)))(esbuild@0.28.2)
       unplugin-vue-components:
-        specifier: ^32.1.0
+        specifier: 'catalog:'
         version: 32.1.0(@voidzero-dev/vite-plus-core@0.2.9(@types/node@20.19.43)(esbuild@0.28.2)(jiti@2.7.0)(sass-embedded@1.102.0)(sass@1.102.0)(typescript@6.0.3)(yaml@2.9.0))(esbuild@0.28.2)(vue@3.5.41(typescript@6.0.3))
       vite:
         specifier: npm:@voidzero-dev/vite-plus-core@0.2.9
         version: '@voidzero-dev/vite-plus-core@0.2.9(@types/node@20.19.43)(esbuild@0.28.2)(jiti@2.7.0)(sass-embedded@1.102.0)(sass@1.102.0)(typescript@6.0.3)(yaml@2.9.0)'
       vite-plugin-compression:
-        specifier: ^0.5.1
+        specifier: 'catalog:'
         version: 0.5.1(@voidzero-dev/vite-plus-core@0.2.9(@types/node@20.19.43)(esbuild@0.28.2)(jiti@2.7.0)(sass-embedded@1.102.0)(sass@1.102.0)(typescript@6.0.3)(yaml@2.9.0))(supports-color@8.1.1)
       vite-plugin-router-warn:
-        specifier: ^2.0.0
+        specifier: 'catalog:'
         version: 2.0.0
       vite-plus:
         specifier: 'catalog:'
         version: 0.2.9(@types/node@20.19.43)(@voidzero-dev/vite-plus-core@0.2.9(@types/node@20.19.43)(esbuild@0.28.2)(jiti@2.7.0)(sass-embedded@1.102.0)(sass@1.102.0)(typescript@6.0.3)(yaml@2.9.0))(esbuild@0.28.2)(jiti@2.7.0)(sass-embedded@1.102.0)(sass@1.102.0)(typescript@6.0.3)(yaml@2.9.0)
       vite-svg-loader:
-        specifier: ^5.1.0
+        specifier: 'catalog:'
         version: 5.1.1(supports-color@8.1.1)(vue@3.5.41(typescript@6.0.3))
       vue-eslint-parser:
-        specifier: ^10.2.0
+        specifier: 'catalog:'
         version: 10.4.1(eslint@10.8.1(jiti@2.7.0)(supports-color@8.1.1))(supports-color@8.1.1)
       vue-tsc:
-        specifier: ^3.1.2
+        specifier: 'catalog:'
         version: 3.3.10(typescript@6.0.3)
 
 packages:
@@ -2555,8 +2765,8 @@ packages:
       typescript:
         optional: true
 
-  cropperjs@1.6.2:
-    resolution: {integrity: sha512-nhymn9GdnV3CqiEHJVai54TULFAE3VshJTXSqSJKa8yXAKyBKDWdhHarnlIPrshJ0WMFTGuFvG02YjLXfPiuOA==}
+  cropperjs@1.6.3:
+    resolution: {integrity: sha512-BRb0PRIzjbfM5n+i6L2D85pSbXI/w6cnnwb9W9cRKgAmbiP+OjDeq+Irhd86IujZDXm/7JWECfscllFIdrlmfw==}
 
   cross-env@10.1.0:
     resolution: {integrity: sha512-GsYosgnACZTADcmEyJctkJIoqAhHjttw7RsFrVoJNXbsWWqaq6Ym+7kZjq6mS45O0jij6vtiReppKQEtqWy6Dw==}
@@ -3310,8 +3520,8 @@ packages:
     resolution: {integrity: sha512-+Pgi+vMuUNkJyExiMBt5IlFoMyKnr5zhJ4Uspz58WOhBF5QoIZkFyNHIbBAtHwzVAgk5RtndVNsDRN61/mmDqg==}
     engines: {node: '>=12'}
 
-  is-plain-object@5.0.0:
-    resolution: {integrity: sha512-VRSzKkbMm5jMDoKLbltAkFQ5Qr7VDiTFGXxYFXXowVj387GeGNOCsOH6Msy00SGZ3Fp84b1Naa1psqgcCIEP5Q==}
+  is-plain-object@5.1.0:
+    resolution: {integrity: sha512-bUi/yjmtKYcRVUtWRGr0UA6xEFh2I6zWUwMrUXB3s7bmYCaZ8a+0ZsTRkrawh/mzlSD1Y0Ph8bp/U+TvBpWDNw==}
     engines: {node: '>=0.10.0'}
 
   isarray@1.0.0:
@@ -5483,7 +5693,7 @@ snapshots:
     dependencies:
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 20.19.43
+      '@types/node': 25.9.5
       '@types/yargs': 16.0.11
       chalk: 4.0.0
 
@@ -5779,7 +5989,7 @@ snapshots:
     optionalDependencies:
       vue: 3.5.41(typescript@6.0.3)
 
-  '@raopan/easy-ui@file:../packages/easy-ui(@element-plus/icons-vue@2.3.2(vue@3.5.41(typescript@6.0.3)))(cropperjs@1.6.2)(debug@4.4.3(supports-color@8.1.1))(docx@9.7.1)(element-plus@2.14.4(vue@3.5.41(typescript@6.0.3)))(highlight.js@11.12.0)(html2canvas@1.4.1)(html2pdf.js@0.12.0)(jsbarcode@3.12.3)(jszip@3.10.1)(markdown-it@15.0.0)(mermaid@11.17.0)(qrcode@1.5.4)(supports-color@8.1.1)(typescript@6.0.3)(vue-router@5.2.0(@voidzero-dev/vite-plus-core@0.2.9(@types/node@20.19.43)(esbuild@0.28.2)(jiti@2.7.0)(sass-embedded@1.102.0)(sass@1.102.0)(typescript@6.0.3)(yaml@2.9.0))(@vue/compiler-sfc@3.5.41)(esbuild@0.28.2)(pinia@4.0.3(@vue/devtools-api@8.2.1)(typescript@6.0.3)(vue@3.5.41(typescript@6.0.3)))(vue@3.5.41(typescript@6.0.3)))(vue@3.5.41(typescript@6.0.3))':
+  '@raopan/easy-ui@file:../packages/easy-ui(@element-plus/icons-vue@2.3.2(vue@3.5.41(typescript@6.0.3)))(cropperjs@1.6.3)(debug@4.4.3(supports-color@8.1.1))(docx@9.7.1)(element-plus@2.14.4(vue@3.5.41(typescript@6.0.3)))(highlight.js@11.12.0)(html2canvas@1.4.1)(html2pdf.js@0.12.0)(jsbarcode@3.12.3)(jszip@3.10.1)(markdown-it@15.0.0)(mermaid@11.17.0)(qrcode@1.5.4)(supports-color@8.1.1)(typescript@6.0.3)(vue-router@5.2.0(@voidzero-dev/vite-plus-core@0.2.9(@types/node@20.19.43)(esbuild@0.28.2)(jiti@2.7.0)(sass-embedded@1.102.0)(sass@1.102.0)(typescript@6.0.3)(yaml@2.9.0))(@vue/compiler-sfc@3.5.41)(esbuild@0.28.2)(pinia@4.0.3(@vue/devtools-api@8.2.1)(typescript@6.0.3)(vue@3.5.41(typescript@6.0.3)))(vue@3.5.41(typescript@6.0.3)))(vue@3.5.41(typescript@6.0.3))':
     dependencies:
       '@element-plus/icons-vue': 2.3.2(vue@3.5.41(typescript@6.0.3))
       '@vueuse/core': 14.4.0(vue@3.5.41(typescript@6.0.3))
@@ -5789,7 +5999,7 @@ snapshots:
       vue: 3.5.41(typescript@6.0.3)
       vue-router: 5.2.0(@voidzero-dev/vite-plus-core@0.2.9(@types/node@20.19.43)(esbuild@0.28.2)(jiti@2.7.0)(sass-embedded@1.102.0)(sass@1.102.0)(typescript@6.0.3)(yaml@2.9.0))(@vue/compiler-sfc@3.5.41)(esbuild@0.28.2)(pinia@4.0.3(@vue/devtools-api@8.2.1)(typescript@6.0.3)(vue@3.5.41(typescript@6.0.3)))(vue@3.5.41(typescript@6.0.3))
     optionalDependencies:
-      cropperjs: 1.6.2
+      cropperjs: 1.6.3
       docx: 9.7.1
       highlight.js: 11.12.0
       html2canvas: 1.4.1
@@ -6836,7 +7046,7 @@ snapshots:
     optionalDependencies:
       typescript: 6.0.3
 
-  cropperjs@1.6.2: {}
+  cropperjs@1.6.3: {}
 
   cross-env@10.1.0:
     dependencies:
@@ -7633,7 +7843,7 @@ snapshots:
 
   is-plain-obj@4.1.0: {}
 
-  is-plain-object@5.0.0: {}
+  is-plain-object@5.1.0: {}
 
   isarray@1.0.0: {}
 
@@ -8665,7 +8875,7 @@ snapshots:
   stylelint-scss@6.14.0(stylelint@16.26.1(supports-color@8.1.1)(typescript@6.0.3)):
     dependencies:
       css-tree: 3.2.1
-      is-plain-object: 5.0.0
+      is-plain-object: 5.1.0
       known-css-properties: 0.37.0
       mdn-data: 2.33.0
       postcss-media-query-parser: 0.2.3
@@ -8697,7 +8907,7 @@ snapshots:
       html-tags: 3.3.1
       ignore: 7.0.6
       imurmurhash: 0.1.4
-      is-plain-object: 5.0.0
+      is-plain-object: 5.1.0
       known-css-properties: 0.37.0
       mathml-tag-names: 2.1.3
       meow: 13.2.0

@@ -1,0 +1,159 @@
+/* ========== 时间线项 ========== */
+.easy-timeline-item {
+  position: relative;
+  padding-bottom: 24px;
+
+  &.easy-timeline-item--vertical {
+    display: flex;
+    flex-direction: row;
+
+    .easy-timeline-item__content {
+      flex: 1;
+      margin-left: 16px;
+      padding-top: 2px;
+    }
+  }
+
+  &.easy-timeline-item--horizontal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+
+    .easy-timeline-item__content {
+      margin-top: 12px;
+      text-align: center;
+    }
+  }
+
+  &.easy-timeline-item--wait {
+    .easy-timeline-item__node--wait {
+      background-color: var(--el-bg-color);
+      border-color: var(--el-text-color-placeholder);
+      color: var(--el-text-color-placeholder);
+    }
+  }
+
+  &.easy-timeline-item--process {
+    .easy-timeline-item__node--process {
+      background-color: var(--el-color-primary);
+      border-color: var(--el-color-primary);
+      color: var(--el-color-white);
+      box-shadow: 0 0 0 4px rgba(79, 110, 247, 0.2);
+    }
+  }
+
+  &.easy-timeline-item--finish {
+    .easy-timeline-item__node--finish {
+      background-color: var(--el-color-success);
+      border-color: var(--el-color-success);
+      color: var(--el-color-white);
+    }
+  }
+
+  &.easy-timeline-item--error {
+    .easy-timeline-item__node--error {
+      background-color: var(--el-color-danger);
+      border-color: var(--el-color-danger);
+      color: var(--el-color-white);
+    }
+  }
+}
+
+/* ========== 连接线 ========== */
+.easy-timeline-item__line {
+  position: absolute;
+  background-color: var(--el-text-color-placeholder);
+
+  .easy-timeline-item--vertical & {
+    left: 11px;
+    top: 24px;
+    bottom: 0;
+    width: 2px;
+  }
+
+  .easy-timeline-item--horizontal & {
+    top: 11px;
+    left: 24px;
+    right: 0;
+    height: 2px;
+  }
+
+  .easy-timeline-item--wait & {
+    background-color: var(--el-text-color-placeholder);
+  }
+
+  .easy-timeline-item--process & {
+    background: linear-gradient(to bottom, var(--el-color-primary), var(--el-text-color-placeholder));
+  }
+
+  .easy-timeline-item--finish & {
+    background-color: var(--el-color-success);
+  }
+
+  .easy-timeline-item--error & {
+    background-color: var(--el-color-danger);
+  }
+}
+
+/* ========== 节点 ========== */
+.easy-timeline-item__node {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid;
+  background-color: var(--el-bg-color);
+  flex-shrink: 0;
+  z-index: 1;
+  transition: all 0.3s ease;
+
+  &.easy-timeline-item__node--wait {
+    background-color: var(--el-bg-color);
+    border-color: var(--el-text-color-placeholder);
+    color: var(--el-text-color-placeholder);
+  }
+
+  &.easy-timeline-item__node--process {
+    background-color: var(--el-color-primary);
+    border-color: var(--el-color-primary);
+    color: #fff;
+  }
+
+  &.easy-timeline-item__node--finish {
+    background-color: var(--el-color-success);
+    border-color: var(--el-color-success);
+    color: #fff;
+  }
+
+  &.easy-timeline-item__node--error {
+    background-color: var(--el-color-danger);
+    border-color: var(--el-color-danger);
+    color: #fff;
+  }
+}
+
+/* ========== 内容区域 ========== */
+.easy-timeline-item__content {
+  min-width: 0;
+}
+
+.easy-timeline-item__timestamp {
+  font-size: 13px;
+  color: var(--el-text-color-placeholder);
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.easy-timeline-item__body {
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+  line-height: 1.6;
+
+  p {
+    margin: 0;
+  }
+}

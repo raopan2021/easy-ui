@@ -289,14 +289,8 @@ const formData = ref({
         />
       </div>
 
-      <EasyDrawer
-        v-model="noMaskVisible"
-        title="固定面板"
-        direction="left"
-        :show-mask="false"
-        :show-footer="false"
-        :size="260"
-      >
+      <EasyDrawer v-model="noMaskVisible" title="固定面板" direction="left" :show-mask="false" :show-footer="false"
+        :size="260">
         <div class="fixed-panel">
           <div class="fixed-panel__nav">
             <div class="fixed-panel__nav-item active">
@@ -408,14 +402,8 @@ function handleAfterClose() {
         />
       </div>
 
-      <EasyDrawer
-        v-model="eventVisible"
-        title="事件监听"
-        @open="handleOpen"
-        @opened="handleOpened"
-        @close="handleClose"
-        @after-close="handleAfterClose"
-      >
+      <EasyDrawer v-model="eventVisible" title="事件监听" @open="handleOpen" @opened="handleOpened" @close="handleClose"
+        @after-close="handleAfterClose">
         <p>请打开浏览器控制台，查看事件触发日志。</p>
         <div class="event-log">
           <div v-for="(log, index) in eventLogs" :key="index" class="event-log__item">
@@ -502,23 +490,15 @@ function handleAfterClose() {
           </div>
           <div class="demo-form__item">
             <label class="demo-form__label">部门</label>
-            <EasySelect
-              v-model="formData.department"
-              placeholder="请选择部门"
-              size="default"
+            <EasySelect v-model="formData.department" placeholder="请选择部门" size="default"
               :options="[{ label: '产品研发部', value: 'product' }, { label: '市场营销部', value: 'marketing' }, { label: '人力资源部', value: 'hr' }]"
-              style="width: 100%"
-            />
+              style="width: 100%" />
           </div>
           <div class="demo-form__item">
             <label class="demo-form__label">角色</label>
-            <EasySelect
-              v-model="formData.role"
-              placeholder="请选择角色"
-              size="default"
+            <EasySelect v-model="formData.role" placeholder="请选择角色" size="default"
               :options="[{ label: '管理员', value: 'admin' }, { label: '编辑者', value: 'editor' }, { label: '查看者', value: 'viewer' }]"
-              style="width: 100%"
-            />
+              style="width: 100%" />
           </div>
           <div class="demo-form__item">
             <label class="demo-form__label">备注</label>
@@ -538,14 +518,8 @@ function handleAfterClose() {
       </EasyDrawer>
 
       <!-- 确认抽屉 -->
-      <EasyDrawer
-        v-model="confirmVisible"
-        title="操作确认"
-        direction="bottom"
-        :size="320"
-        :show-header="false"
-        :show-footer="false"
-      >
+      <EasyDrawer v-model="confirmVisible" title="操作确认" direction="bottom" :size="320" :show-header="false"
+        :show-footer="false">
         <div class="confirm-content">
           <div class="confirm-icon">
             <el-icon color="#f56c6c" :size="40">

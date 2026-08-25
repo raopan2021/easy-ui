@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { FormInstance, FormRules } from 'element-plus'
 import type { TableColumn } from '@raopan/easy-ui'
+import type { FormInstance, FormRules } from 'element-plus'
 import { Delete, Plus } from '@element-plus/icons-vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { onMounted, reactive, ref } from 'vue'
@@ -314,29 +314,12 @@ onMounted(() => {
 
     <!-- 搜索栏 -->
     <div class="search-bar">
-      <EasyInput
-        v-model="searchForm.keyword"
-        placeholder="搜索用户名 / 手机号 / 邮箱"
-        clearable
-        style="width: 260px"
-        @keyup.enter="handleSearch"
-      />
-      <EasySelect
-        v-model="searchForm.status"
-        placeholder="用户状态"
-        clearable
-        :options="[{ label: '启用', value: 1 }, { label: '禁用', value: 0 }]"
-        style="width: 140px"
-      />
-      <EasySelect
-        v-model="searchForm.deptId"
-        placeholder="所属部门"
-        clearable
-        :options="deptOptions"
-        label-key="name"
-        value-key="id"
-        style="width: 160px"
-      />
+      <EasyInput v-model="searchForm.keyword" placeholder="搜索用户名 / 手机号 / 邮箱" clearable style="width: 260px"
+        @keyup.enter="handleSearch" />
+      <EasySelect v-model="searchForm.status" placeholder="用户状态" clearable
+        :options="[{ label: '启用', value: 1 }, { label: '禁用', value: 0 }]" style="width: 140px" />
+      <EasySelect v-model="searchForm.deptId" placeholder="所属部门" clearable :options="deptOptions" label-key="name"
+        value-key="id" style="width: 160px" />
       <EasyButton type="primary" @click="handleSearch">
         查询
       </EasyButton>
@@ -356,33 +339,14 @@ onMounted(() => {
     </div>
 
     <!-- 数据表格 -->
-    <EasyTable
-      ref="tableRef"
-      v-loading="loading"
-      :data="tableData"
-      :columns="columns"
-      selection-mode="multiple"
-      stripe
-      border
-      :pagination="true"
-      :total="pagination.total"
-      :page="pagination.page"
-      :page-size="pagination.pageSize"
-      :page-size-options="[10, 20, 50, 100]"
-      action-label="操作"
-      :action-width="200"
-      action-fixed="right"
-      @selection-change="handleSelectionChange"
-      @page-change="(p: number) => { pagination.page = p; fetchData() }"
-      @page-size-change="(s: number) => { pagination.pageSize = s; fetchData() }"
-    >
+    <EasyTable ref="tableRef" v-loading="loading" :data="tableData" :columns="columns" selection-mode="multiple" stripe
+      border :pagination="true" :total="pagination.total" :page="pagination.page" :page-size="pagination.pageSize"
+      :page-size-options="[10, 20, 50, 100]" action-label="操作" :action-width="200" action-fixed="right"
+      @selection-change="handleSelectionChange" @page-change="(p: number) => { pagination.page = p; fetchData() }"
+      @page-size-change="(s: number) => { pagination.pageSize = s; fetchData() }">
       <template #col-status="{ row }">
-        <EasySwitch
-          :model-value="row.status === 1"
-          active-text="启"
-          inactive-text="禁"
-          @change="(val: boolean) => handleToggleStatus(row, val)"
-        />
+        <EasySwitch :model-value="row.status === 1" active-text="启" inactive-text="禁"
+          @change="(val: boolean) => handleToggleStatus(row, val)" />
       </template>
       <template #action="{ row }">
         <EasyButton link type="primary" size="small" @click="handleEdit(row)">
@@ -402,13 +366,8 @@ onMounted(() => {
     </EasyTable>
 
     <!-- 新增 / 编辑 弹窗 -->
-    <el-dialog
-      v-model="dialog.visible"
-      :title="dialog.isEdit ? '编辑用户' : '新增用户'"
-      width="550px"
-      :close-on-click-modal="false"
-      @close="handleDialogClose"
-    >
+    <el-dialog v-model="dialog.visible" :title="dialog.isEdit ? '编辑用户' : '新增用户'" width="550px"
+      :close-on-click-modal="false" @close="handleDialogClose">
       <el-form ref="formRef" :model="dialog.form" :rules="formRules" label-width="90px">
         <el-form-item label="用户名" prop="username">
           <EasyInput v-model="dialog.form.username" placeholder="请输入用户名" :disabled="dialog.isEdit" />
@@ -426,14 +385,8 @@ onMounted(() => {
           <EasyInput v-model="dialog.form.email" placeholder="请输入邮箱" />
         </el-form-item>
         <el-form-item label="所属部门" prop="deptId">
-          <EasySelect
-            v-model="dialog.form.deptId"
-            placeholder="请选择部门"
-            :options="deptOptions"
-            label-key="name"
-            value-key="id"
-            style="width: 100%"
-          />
+          <EasySelect v-model="dialog.form.deptId" placeholder="请选择部门" :options="deptOptions" label-key="name"
+            value-key="id" style="width: 100%" />
         </el-form-item>
         <el-form-item label="状态" prop="status">
           <EasyRadioGroup v-model="dialog.form.status">

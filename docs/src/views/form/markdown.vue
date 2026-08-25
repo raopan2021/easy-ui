@@ -95,13 +95,7 @@ function onSave(value: string) {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyMarkdown
-            v-model="md1"
-            :height="420"
-            line-numbers
-            code-block-line-numbers
-            @save="onSave"
-          />
+          <EasyMarkdown v-model="md1" :height="420" line-numbers code-block-line-numbers @save="onSave" />
         </div>
         <EasyDocCode
           code="<EasyMarkdown

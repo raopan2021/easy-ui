@@ -1,0 +1,12 @@
+.easy-steps {
+  display: flex;
+  width: 100%;
+}
+
+.easy-steps--horizontal {
+  flex-direction: row;
+}
+
+.easy-steps--vertical {
+  flex-direction: column;
+}

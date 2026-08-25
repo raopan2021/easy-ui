@@ -1,0 +1,230 @@
+@use '../../../easy-ui/src/styles/tokens' as *;
+
+/* ========== 设计令牌 ========== */
+
+$radius-base: 8px;
+
+/* ========== 图片组件 ========== */
+.easy-image {
+  &.easy-image--single {
+    .easy-image__single {
+      width: 120px;
+      height: 120px;
+      border-radius: $radius-base;
+      overflow: hidden;
+      cursor: pointer;
+    }
+  }
+
+  &.easy-image--grid {
+    // 使用 flex 布局，不再需要 grid
+  }
+}
+
+.easy-image__single {
+  position: relative;
+}
+
+.easy-image__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  .easy-image__item {
+    position: relative;
+    width: var(--image-width, 120px);
+    height: var(--image-height, 120px);
+    border-radius: $radius-base;
+    overflow: hidden;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+}
+
+.easy-image__item {
+  &:hover {
+    .easy-image__img {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.easy-image__img {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+  display: block;
+}
+
+.easy-image__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.3);
+  color: $white;
+  opacity: 0;
+  transition: opacity 0.3s;
+
+  .easy-image__single:hover &,
+  .easy-image__item:hover & {
+    opacity: 1;
+  }
+}
+
+.easy-image__mask {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  color: $white;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* ========== 预览弹窗 ========== */
+.easy-image-preview {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: $mask-heavy;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0;
+  line-height: 0;
+
+  .easy-image-preview__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+
+    .easy-button {
+      color: $white;
+      padding: 8px;
+
+      &:hover {
+        color: var(--el-color-primary);
+        background: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+
+  .easy-image-preview__container {
+    display: block !important;
+    grid-template-columns: unset !important;
+    max-width: calc(100% - 140px) !important;
+    max-height: calc(100vh - 180px) !important;
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  .easy-image-preview__img {
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain;
+    user-select: none;
+  }
+
+  .easy-image-preview__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $white;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    transition: all 0.3s;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.5);
+      color: $white;
+    }
+
+    &.easy-image-preview__arrow--left {
+      left: 20px;
+    }
+
+    &.easy-image-preview__arrow--right {
+      right: 20px;
+    }
+  }
+
+  .easy-image-preview__footer {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .easy-image-preview__indicators {
+    display: flex;
+    gap: 8px;
+  }
+
+  .easy-image-preview__indicator {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover,
+    &.is-active {
+      background: $white;
+      transform: scale(1.2);
+    }
+  }
+
+  .easy-image-preview__info {
+    color: $white;
+    font-size: 14px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+  }
+
+  .easy-image-preview__toolbar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 16px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 24px;
+
+    .easy-button {
+      color: $white;
+      padding: 8px;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+
+      &:hover {
+        color: var(--el-color-primary);
+        background: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+}

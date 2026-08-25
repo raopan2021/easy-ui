@@ -24,7 +24,7 @@ export interface TocItem {
  */
 export function useDocToc(
   contentRef: Ref<HTMLElement | undefined>,
-  options: { scanSelector?: string; titleSelector?: string } = {},
+  options: { scanSelector?: string, titleSelector?: string } = {},
 ) {
   const {
     scanSelector = '.doc-section',

@@ -54,9 +54,7 @@ const val6 = ref('')
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ val2 || '未选择' }}</span>
         </div>
       </div>
-      <EasyDocCode
-        code="<EasyDatePicker v-model=&quot;value&quot; type=&quot;month&quot; placeholder=&quot;请选择月份&quot; />"
-      />
+      <EasyDocCode code="<EasyDatePicker v-model=&quot;value&quot; type=&quot;month&quot; placeholder=&quot;请选择月份&quot; />" />
     </section>
 
     <section class="doc-section">
@@ -74,9 +72,7 @@ const val6 = ref('')
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ val3 || '未选择' }}</span>
         </div>
       </div>
-      <EasyDocCode
-        code="<EasyDatePicker v-model=&quot;value&quot; type=&quot;year&quot; placeholder=&quot;请选择年份&quot; />"
-      />
+      <EasyDocCode code="<EasyDatePicker v-model=&quot;value&quot; type=&quot;year&quot; placeholder=&quot;请选择年份&quot; />" />
     </section>
 
     <section class="doc-section">

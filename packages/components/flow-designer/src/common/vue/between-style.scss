@@ -1,0 +1,27 @@
+.placeholder {
+  color: var(--el-text-color-placeholder);
+  font-size: 12px;
+}
+
+.tabPane {
+  padding: 15px;
+}
+
+.betweenForm {
+  border-top: 0;
+}
+
+:deep(.listenerItem) {
+  display: inline-block;
+  width: 100%;
+
+  .el-form-item__label {
+    float: none;
+    display: inline-block;
+    text-align: left;
+  }
+
+  .el-form-item__content {
+    margin-left: 0 !important;
+  }
+}

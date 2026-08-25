@@ -1,88 +1,43 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import type { AvatarEmits, AvatarProps } from './avatar'
 
-import { avatarEmits, avatarProps } from './avatar'
+import { useAvatar } from './use-avatar'
 
-defineOptions({ name: 'EasyAvatar' })
-
-const props = defineProps(avatarProps)
-const emit = defineEmits(avatarEmits)
-
-const hasLoadError = ref(false)
-const isShowText = ref(false)
-
-const avatarClass = computed(() => [
-  `easy-avatar--${props.size}`,
-  `easy-avatar--${props.shape}`,
-  props.customClass,
-])
-
-const avatarStyle = computed(() => {
-  const style: Record<string, string> = {}
-
-  // 尺寸处理
-  if (typeof props.size === 'number') {
-    style.width = `${props.size}px`
-    style.height = `${props.size}px`
-    style.fontSize = `${props.size / 2}px`
-  }
-  else if (typeof props.size === 'string' && !['small', 'default', 'large'].includes(props.size)) {
-    style.width = props.size
-    style.height = props.size
-  }
-
-  // 背景色
-  if (props.color) {
-    style.backgroundColor = props.color
-  }
-
-  // 图片填充模式
-  style.objectFit = props.fit
-
-  return style
+defineOptions({
+  name: 'EasyAvatar',
+  // 透传非 prop 的 attribute 到根节点（原第二个 <script> 块的 inheritAttrs: false）
+  inheritAttrs: false,
 })
 
-function handleClick(e: MouseEvent) {
-  emit('click', e)
-}
+const props = withDefaults(defineProps<AvatarProps>(), {
+  alt: '',
+  size: 'default',
+  shape: 'circle',
+  color: '',
+  fit: 'cover',
+  customClass: '',
+})
 
-function handleError(e: Event) {
-  hasLoadError.value = true
-  emit('error', e)
-}
-</script>
+const emit = defineEmits<AvatarEmits>()
 
-<script lang="ts">
-export default {
-  inheritAttrs: false,
-}
+// 头像展示 + 事件逻辑抽离到 composable
+const { hasLoadError, isShowText, avatarClass, avatarStyle, handleClick, handleError } = useAvatar(props, emit)
+
+// 保持对外类型导出兼容（原定义在 avatar.ts）
+export type { AvatarEmits, AvatarProps } from './avatar'
 </script>
 
 <template>
   <div class="easy-avatar" :class="avatarClass" :style="avatarStyle" @click="handleClick">
-    <img
-      v-if="(src || srcSet) && !hasLoadError"
-      class="easy-avatar__image"
-      :src="src"
-      :srcset="srcSet"
-      :alt="alt"
-      @error="handleError"
-    >
+    <img v-if="(src || srcSet) && !hasLoadError" class="easy-avatar__image" :src="src" :srcset="srcSet" :alt="alt"
+      @error="handleError">
     <span v-else-if="isShowText" class="easy-avatar__text">
       <slot />
     </span>
     <span v-else class="easy-avatar__icon">
       <slot name="icon">
-        <svg
-          viewBox="0 0 24 24"
-          width="100%"
-          height="100%"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="1.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
+        <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="1.5"
+          stroke-linecap="round" stroke-linejoin="round">
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
           <circle cx="12" cy="7" r="4" />
         </svg>
@@ -91,92 +46,5 @@ export default {
   </div>
 </template>
 
-<style scoped lang="scss">
-/* ========== 设计令牌 ========== */
-
-/* ========== 基础头像 ========== */
-.easy-avatar {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  overflow: hidden;
-  background-color: var(--el-fill-color-light);
-  color: var(--el-text-color-regular);
-  flex-shrink: 0;
-  user-select: none;
-  cursor: pointer;
-
-  &:hover {
-    .easy-avatar__image {
-      transform: scale(1.05);
-    }
-  }
-}
-
-.easy-avatar--small {
-  width: 32px;
-  height: 32px;
-  font-size: 12px;
-  border-radius: 4px;
-}
-
-.easy-avatar--default {
-  width: 40px;
-  height: 40px;
-  font-size: 14px;
-  border-radius: 6px;
-}
-
-.easy-avatar--large {
-  width: 56px;
-  height: 56px;
-  font-size: 18px;
-  border-radius: 8px;
-}
-
-.easy-avatar--circle {
-  border-radius: 50% !important;
-
-  &.easy-avatar--small {
-    border-radius: 16px !important;
-  }
-}
-
-.easy-avatar--square {
-  border-radius: 6px;
-}
-
-/* ========== 头像图片 ========== */
-.easy-avatar__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-/* ========== 头像文字 ========== */
-.easy-avatar__text {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: inherit;
-  font-weight: 500;
-  color: inherit;
-  line-height: 1;
-}
-
-/* ========== 头像图标 ========== */
-.easy-avatar__icon {
-  width: 60%;
-  height: 60%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--el-text-color-regular);
-  opacity: 0.7;
-}
-</style>
+<!-- 组件核心样式（scoped，独立维护在 avatar-style.scss） -->
+<style scoped src="./avatar-style.scss" lang="scss"></style>

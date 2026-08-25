@@ -1,0 +1,219 @@
+@use 'sass:color';
+
+/* ========== 设计令牌 ========== */
+$radius: 8px;
+$transition: all 0.2s ease;
+
+/* ========== 签名板主体 ========== */
+.easy-signature {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--el-border-color);
+  background: var(--el-bg-color);
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: $transition;
+
+  &.is-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &.is-toolbar-hidden {
+    border: none;
+  }
+}
+
+/* ========== 工具栏 ========== */
+.easy-signature__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--el-border-color-light);
+  background: var(--el-bg-color-overlay);
+  gap: 8px;
+  min-height: 40px;
+}
+
+.easy-signature__toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.easy-signature__toolbar-center {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  justify-content: center;
+}
+
+.easy-signature__toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* ========== 画笔选项 ========== */
+.easy-signature__pen-size,
+.easy-signature__pen-color {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.easy-signature__pen-label {
+  font-size: 12px;
+  color: var(--el-text-color-placeholder);
+  white-space: nowrap;
+}
+
+.easy-signature__pen-options {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.easy-signature__pen-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    background: var(--el-fill-color-light);
+  }
+
+  &.is-active {
+    background: rgba(var(--el-color-primary), 0.1);
+    border-color: var(--el-color-primary);
+  }
+}
+
+.easy-signature__pen-dot {
+  display: block;
+  border-radius: 50%;
+  background: var(--el-text-color-primary);
+}
+
+.easy-signature__color-btn {
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: $transition;
+  padding: 0;
+
+  &:hover {
+    transform: scale(1.15);
+  }
+
+  &.is-active {
+    border-color: var(--el-color-primary);
+    box-shadow: 0 0 0 2px rgba(var(--el-color-primary), 0.2);
+  }
+}
+
+/* ========== 工具按钮 ========== */
+.easy-signature__tool-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border: 1px solid var(--el-border-color);
+  border-radius: 6px;
+  background: var(--el-bg-color);
+  color: var(--el-text-color-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  transition: $transition;
+  white-space: nowrap;
+
+  &:hover:not(:disabled) {
+    border-color: var(--el-color-primary);
+    color: var(--el-color-primary);
+    background: rgba(var(--el-color-primary), 0.04);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &.easy-signature__tool-btn--primary {
+    background: var(--el-color-primary);
+    border-color: var(--el-color-primary);
+    color: var(--el-color-white);
+
+    &:hover:not(:disabled) {
+      background: var(--el-color-primary);
+      border-color: var(--el-color-primary);
+      color: var(--el-color-white);
+    }
+
+    &:disabled {
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)),
+        linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), var(--el-color-primary);
+      border-color:
+        linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)),
+        linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), var(--el-color-primary);
+      color: var(--el-color-white);
+    }
+  }
+}
+
+/* ========== Dark Mode ========== */
+.easy-signature {
+  html.dark & {
+    .easy-signature__tool-btn:hover:not(:disabled) {
+      background: rgba(79, 110, 247, 0.1);
+    }
+  }
+}
+
+/* ========== 画布区域 ========== */
+.easy-signature__canvas-wrap {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+
+.easy-signature__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  touch-action: none;
+  background: var(--el-bg-color);
+}
+
+/* ========== 占位提示 ========== */
+.easy-signature__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  pointer-events: none;
+  color: var(--el-text-color-placeholder);
+  transition: opacity 0.3s;
+}
+
+.easy-signature__placeholder-text {
+  font-size: 14px;
+  user-select: none;
+}

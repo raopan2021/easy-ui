@@ -55,3 +55,18 @@ export function downloadFile(url: string, name?: string): void {
   a.click()
   a.remove()
 }
+
+/**
+ * 格式化文件大小（字节为单位，B/KB/MB/GB/TB 自适应）
+ * @param bytes - 文件大小（字节）
+ * @returns 格式化后的字符串，如 "2.5 MB"
+ */
+export function formatFileSize(bytes: number | undefined | null): string {
+  if (bytes === undefined || bytes === null || bytes === 0)
+    return '0 B'
+  const k = 1024
+  if (bytes < k)
+    return `${bytes} B`
+  const i = Math.floor(Math.log(bytes) / Math.log(k))
+  return `${(bytes / k ** i).toFixed(i > 1 ? 1 : 0)} ${['B', 'KB', 'MB', 'GB', 'TB'][i]}`
+}

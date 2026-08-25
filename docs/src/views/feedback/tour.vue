@@ -350,9 +350,7 @@ easy.$tour({
             开始引导
           </button>
         </div>
-        <EasyDocCode
-          code="<EasyTour v-model=&quot;visible&quot; :mask=&quot;false&quot; :steps=&quot;steps&quot; />"
-        />
+        <EasyDocCode code="<EasyTour v-model=&quot;visible&quot; :mask=&quot;false&quot; :steps=&quot;steps&quot; />" />
       </div>
     </section>
 

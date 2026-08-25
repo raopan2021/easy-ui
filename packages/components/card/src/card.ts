@@ -1,7 +1,12 @@
-import type { ExtractPropTypes } from 'vue'
-
 import { buildProps, definePropType } from '../../../utils'
 
+/**
+ * 卡片运行时 props 定义。
+ *
+ * 组件内部已改用泛型 `defineProps<CardProps>()`（类型见 ./types），
+ * 此处保留运行时 props 主要用于需要运行时 prop 定义的兼容场景，
+ * 并对外保持 `cardProps` 导出不变。
+ */
 export const cardProps = buildProps({
   title: {
     type: String,
@@ -58,4 +63,5 @@ export const cardProps = buildProps({
   },
 } as const)
 
-export type CardProps = ExtractPropTypes<typeof cardProps>
+// 保持对外类型导出兼容（类型定义统一维护在 ./types）
+export type { CardEmits, CardProps } from './types'

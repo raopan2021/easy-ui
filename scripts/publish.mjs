@@ -235,15 +235,15 @@ async function ask(question) {
   return (lines.shift() || '').trim()
 }
 
-// 交互式选择升级级别（patch / minor / major / 自定义），回车默认 minor
+// 交互式选择升级级别（patch / minor / major / 自定义），回车默认 patch
 // 返回 { level, version }：version 仅在自定义模式有值
 async function promptVersionLevel(oldVersion) {
   console.log(`\n当前版本 ${oldVersion}，请选择升级级别：`)
-  console.log(`  1. patch  → ${bump(oldVersion, 'patch')}（修复 / 小优化）`)
-  console.log(`  2. minor  → ${bump(oldVersion, 'minor')}（新增功能，默认推荐）`)
+  console.log(`  1. patch  → ${bump(oldVersion, 'patch')}（修复 / 小优化，默认推荐）`)
+  console.log(`  2. minor  → ${bump(oldVersion, 'minor')}（新增功能）`)
   console.log(`  3. major  → ${bump(oldVersion, 'major')}（不兼容变更）`)
   console.log('  4. 自定义 → 手动输入 x.y.z')
-  const answer = (await ask('请输入 [1-4]，回车默认 2: ')) || '2'
+  const answer = (await ask('请输入 [1-4]，回车默认 1: ')) || '1'
   if (!['1', '2', '3', '4'].includes(answer)) {
     console.error(`[publish] ✖ 无效选择: ${answer}`)
     process.exit(1)

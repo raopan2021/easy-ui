@@ -1,27 +1,32 @@
 <script setup lang="ts">
-import type { SwitchEmits } from './switch'
+import type { SwitchEmits, SwitchProps } from './switch'
 
-import { computed } from 'vue'
+import { useSwitch } from './use-switch'
 
-import { switchProps } from './switch'
-
-defineOptions({ name: 'EasySwitch' })
-
-const props = defineProps(switchProps)
-const emit = defineEmits<SwitchEmits>()
-
-const isChecked = computed(() => {
-  return props.modelValue === props.activeValue
+defineOptions({
+  name: 'EasySwitch',
 })
 
-function handleClick() {
-  if (props.disabled || props.loading)
-    return
+const props = withDefaults(defineProps<SwitchProps>(), {
+  modelValue: false,
+  activeValue: true,
+  inactiveValue: false,
+  disabled: false,
+  size: 'default',
+  activeColor: '#4f6ef7',
+  inactiveColor: '#e2e4ed',
+  activeText: '',
+  inactiveText: '',
+  loading: false,
+})
 
-  const newValue = isChecked.value ? props.inactiveValue : props.activeValue
-  emit('update:modelValue', newValue)
-  emit('change', newValue)
-}
+const emit = defineEmits<SwitchEmits>()
+
+// 开关选中态与切换逻辑抽离到 composable
+const { isChecked, handleClick } = useSwitch(props, emit)
+
+// 保持对外类型导出兼容（原定义在 switch.ts）
+export type { SwitchEmits, SwitchProps } from './switch'
 </script>
 
 <template>
@@ -52,153 +57,5 @@ function handleClick() {
   </div>
 </template>
 
-<style scoped lang="scss">
-@use 'sass:map';
-
-$easy-switch-width: (
-  'large': 48px,
-  'default': 40px,
-  'small': 32px,
-);
-
-$easy-switch-height: (
-  'large': 24px,
-  'default': 20px,
-  'small': 16px,
-);
-
-$easy-switch-dot-size: (
-  'large': 18px,
-  'default': 16px,
-  'small': 12px,
-);
-
-$easy-switch-dot-offset: (
-  'large': 3px,
-  'default': 2px,
-  'small': 2px,
-);
-
-.easy-switch {
-  display: inline-flex;
-  align-items: center;
-  cursor: pointer;
-  white-space: nowrap;
-  user-select: none;
-
-  &.is-disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
-
-  &.is-loading {
-    cursor: wait;
-  }
-}
-
-.easy-switch__core {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  width: map.get($easy-switch-width, 'default');
-  height: map.get($easy-switch-height, 'default');
-  border-radius: 100px;
-  background: #e2e4ed;
-  transition: all 0.3s ease;
-  flex-shrink: 0;
-  cursor: pointer;
-
-  .easy-switch--large & {
-    width: map.get($easy-switch-width, 'large');
-    height: map.get($easy-switch-height, 'large');
-  }
-
-  .easy-switch--small & {
-    width: map.get($easy-switch-width, 'small');
-    height: map.get($easy-switch-height, 'small');
-  }
-}
-
-.easy-switch__dot {
-  position: absolute;
-  width: map.get($easy-switch-dot-size, 'default');
-  height: map.get($easy-switch-dot-size, 'default');
-  border-radius: 50%;
-  background: var(--el-bg-color);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s ease;
-  left: map.get($easy-switch-dot-offset, 'default');
-
-  .easy-switch--large & {
-    width: map.get($easy-switch-dot-size, 'large');
-    height: map.get($easy-switch-dot-size, 'large');
-    left: map.get($easy-switch-dot-offset, 'large');
-  }
-
-  .easy-switch--small & {
-    width: map.get($easy-switch-dot-size, 'small');
-    height: map.get($easy-switch-dot-size, 'small');
-    left: map.get($easy-switch-dot-offset, 'small');
-  }
-}
-
-.easy-switch__loading {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 14px;
-  height: 14px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-top-color: var(--el-color-white);
-  border-radius: 50%;
-  animation: switch-loading 0.8s linear infinite;
-}
-
-@keyframes switch-loading {
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
-
-.easy-switch__text {
-  margin-left: 8px;
-  font-size: 14px;
-  line-height: 1;
-  transition: all 0.3s ease;
-
-  .easy-switch--large & {
-    font-size: 15px;
-  }
-
-  .easy-switch--small & {
-    font-size: 13px;
-    margin-left: 6px;
-  }
-}
-
-// 选中状态 - 颜色现在通过内联样式控制
-
-.easy-switch.is-checked .easy-switch__dot {
-  left: calc(100% - #{map.get($easy-switch-dot-size, 'default')} - #{map.get($easy-switch-dot-offset, 'default')});
-
-  .easy-switch--large & {
-    left: calc(100% - #{map.get($easy-switch-dot-size, 'large')} - #{map.get($easy-switch-dot-offset, 'large')});
-  }
-
-  .easy-switch--small & {
-    left: calc(100% - #{map.get($easy-switch-dot-size, 'small')} - #{map.get($easy-switch-dot-offset, 'small')});
-  }
-}
-
-// 悬停效果
-.easy-switch:not(.is-disabled):not(.is-loading):hover {
-  .easy-switch__core {
-    box-shadow: 0 0 0 3px rgba(79, 110, 247, 0.1);
-  }
-
-  &.is-checked .easy-switch__core {
-    box-shadow: 0 0 0 3px rgba(79, 110, 247, 0.2);
-  }
-}
-</style>
+<!-- 组件核心样式（scoped，独立维护在 switch-style.scss） -->
+<style scoped src="./switch-style.scss" lang="scss"></style>

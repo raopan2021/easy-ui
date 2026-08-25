@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import type { DeptTreeEmits, DeptTreeProps } from './types'
+
 import DeptNode from './DeptNode.vue'
+import { useDeptTree } from './use-dept-tree'
 
 defineOptions({ name: 'EasyDeptTree' })
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<DeptTreeProps>(), {
   data: () => [],
   nodeKey: () => ({ id: 'id', pid: 'pid', label: 'label', children: 'children' }),
   nodeStyle: () => ({}),
@@ -16,122 +18,13 @@ const props = withDefaults(defineProps<Props>(), {
   loading: false,
 })
 
-const emit = defineEmits<{
-  select: [node: TreeNode]
-  toggle: [node: TreeNode, expanded: boolean]
-}>()
+const emit = defineEmits<DeptTreeEmits>()
 
-export interface TreeNode {
-  id?: string | number
-  pid?: string | number
-  label?: string
-  children?: TreeNode[]
-  [key: string]: unknown
-}
+// ──── 树结构归一化 + 选中 / 展开状态（抽离到 composable）────
+const { treeData, selectedId, expandedSet, handleSelect, handleToggle } = useDeptTree(props, emit)
 
-export interface NodeKey {
-  id: string
-  pid?: string
-  label?: string
-  children?: string
-}
-
-export interface Props {
-  data?: TreeNode[] | null
-  nodeKey?: NodeKey
-  nodeStyle?: Record<string, string>
-  highlightCurrent?: boolean
-  expandAll?: boolean
-  defaultExpandLevel?: number
-  selectedId?: string | number | null
-  emptyText?: string
-  loading?: boolean
-}
-
-// 将平铺数据转换为树结构
-const treeData = computed(() => {
-  if (!props.data || props.data.length === 0)
-    return []
-
-  // 检查数据格式：如果有 pid 字段则是平铺数据，否则直接返回
-  const firstItem = props.data[0]
-  if (firstItem[props.nodeKey.pid || 'pid'] !== undefined) {
-    return buildTree(props.data, props.nodeKey)
-  }
-
-  return props.data as TreeNode[]
-})
-
-// 构建树结构
-function buildTree(list: TreeNode[], nodeKey: NodeKey): TreeNode[] {
-  const idKey = nodeKey.id
-  const pidKey = nodeKey.pid || 'pid'
-  const childrenKey = nodeKey.children || 'children'
-
-  const map = new Map<string | number, TreeNode>()
-  const roots: TreeNode[] = []
-
-  // 建立映射
-  list.forEach((item) => {
-    const id = item[idKey] as string | number | undefined
-    if (id !== undefined) {
-      map.set(id, { ...item, [childrenKey]: item[childrenKey] || [] })
-    }
-  })
-
-  // 构建树
-  list.forEach((item) => {
-    const id = item[idKey] as string | number | undefined
-    const pid = item[pidKey] as string | number | undefined
-
-    if (pid === undefined || pid === null || pid === '') {
-      roots.push(map.get(id as string | number)!)
-    }
-    else {
-      const parent = map.get(pid as string | number)
-      if (parent) {
-        ;(parent[childrenKey] as TreeNode[]).push(map.get(id as string | number)!)
-      }
-      else {
-        roots.push(map.get(id as string | number)!)
-      }
-    }
-  })
-
-  return roots
-}
-
-// 选中的节点
-const selectedId = ref<string | number | null>(props.selectedId)
-
-// 展开状态集合
-const expandedSet = ref(new Set<string>())
-
-watch(
-  () => props.selectedId,
-  (val) => {
-    selectedId.value = val
-  },
-)
-
-// 处理选中
-function handleSelect(node: TreeNode) {
-  const id = node[props.nodeKey.id] as string | number | undefined
-  selectedId.value = id ?? null
-  emit('select', node)
-}
-
-// 处理展开/折叠
-function handleToggle(node: TreeNode, expanded: boolean) {
-  const id = String(node[props.nodeKey.id])
-  if (expanded) {
-    expandedSet.value.add(id)
-  }
-  else {
-    expandedSet.value.delete(id)
-  }
-  emit('toggle', node, expanded)
-}
+// 保持对外类型导出兼容（原定义在 dept-tree.vue）
+export type { DeptTreeEmits, DeptTreeProps, NodeKey, Props, TreeNode } from './types'
 </script>
 
 <template>
@@ -144,24 +37,15 @@ function handleToggle(node: TreeNode, expanded: boolean) {
       {{ emptyText }}
     </div>
     <div v-else class="easy-dept-tree__content">
-      <DeptNode
-        v-for="node in treeData"
-        :key="String(node[nodeKey.id])"
-        :node="node"
-        :node-key="nodeKey"
-        :node-style="nodeStyle"
-        :highlight-current="highlightCurrent"
-        :expand-all="expandAll"
-        :default-expand-level="defaultExpandLevel"
-        :selected-id="selectedId"
-        :expanded-set="expandedSet"
-        @select="handleSelect"
-        @toggle="handleToggle"
-      />
+      <DeptNode v-for="node in treeData" :key="String(node[nodeKey.id])" :node="node" :node-key="nodeKey"
+        :node-style="nodeStyle" :highlight-current="highlightCurrent" :expand-all="expandAll"
+        :default-expand-level="defaultExpandLevel" :selected-id="selectedId" :expanded-set="expandedSet"
+        @select="handleSelect" @toggle="handleToggle" />
     </div>
   </div>
 </template>
 
+<!-- 组件样式（非 scoped，节点为递归子组件需共享同一份类名作用域，保持内联） -->
 <style lang="scss">
 @use './index.scss';
 </style>

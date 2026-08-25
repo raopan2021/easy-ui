@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import { EasyTag, EasyTimeline, EasyTimelineItem } from '@raopan/easy-ui'
 </script>
 

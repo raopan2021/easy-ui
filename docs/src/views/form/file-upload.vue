@@ -182,9 +182,7 @@ function handleExceed(files, limit) {
         <div class="doc-preview__body">
           <EasyUpload v-model="valueDrag" trigger-text="点击或拖拽上传" />
         </div>
-        <EasyDocCode
-          code="{{ `<EasyUpload v-model=&quot;files&quot; trigger-text=&quot;点击或拖拽上传&quot; />` }}"
-        />
+        <EasyDocCode code="{{ `<EasyUpload v-model=&quot;files&quot; trigger-text=&quot;点击或拖拽上传&quot; />` }}" />
       </div>
     </section>
 
@@ -375,13 +373,8 @@ const NETWORK_CONFIG = {
           </div>
           <div class="demo-form-row">
             <label class="demo-form-label">附件 <span class="required">*</span></label>
-            <EasyUpload
-              v-model="docForm.attachments"
-              :limit="5"
-              accept-types="pdf,doc,docx,xls,xlsx,ppt,pptx"
-              :max-size="5120"
-              tip="最多上传 5 个附件，单个不超过 5MB"
-            />
+            <EasyUpload v-model="docForm.attachments" :limit="5" accept-types="pdf,doc,docx,xls,xlsx,ppt,pptx"
+              :max-size="5120" tip="最多上传 5 个附件，单个不超过 5MB" />
           </div>
           <div class="demo-form-actions">
             <EasyButton type="primary" @click="handleDocSubmit">

@@ -105,10 +105,8 @@ function handleCancel() {
 </script>
 
 <template>
-  <EasyModal
-    :model-value="visible" title="修改密码" width="480px" :confirm-loading="submitLoading"
-    @update:model-value="emit('update:visible', $event)" @confirm="handleConfirm" @cancel="handleCancel"
-  >
+  <EasyModal :model-value="visible" title="修改密码" width="480px" :confirm-loading="submitLoading"
+    @update:model-value="emit('update:visible', $event)" @confirm="handleConfirm" @cancel="handleCancel">
     <EasyForm ref="formRef" :model="formData" :rules="formRules" label-width="110px">
       <EasyFormItem label="原密码" prop="oldPw">
         <EasyInput v-model="formData.oldPw" type="password" placeholder="请输入原密码" :maxlength="20" />

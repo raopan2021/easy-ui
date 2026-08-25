@@ -295,13 +295,8 @@ onUnmounted(() => removeMatchMedia)
         整体风格
       </p>
       <div @pointerdown="recordPos">
-        <Segmented
-          resize
-          class="select-none"
-          :model-value="overallStyle === 'system' ? 2 : dataTheme ? 1 : 0"
-          :options="themeOptions"
-          @change="handleThemeChange"
-        />
+        <Segmented resize class="select-none" :model-value="overallStyle === 'system' ? 2 : dataTheme ? 1 : 0"
+          :options="themeOptions" @change="handleThemeChange" />
       </div>
 
       <p class="mt-5!" :class="[pClass]">
@@ -350,44 +345,18 @@ onUnmounted(() => removeMatchMedia)
 
       <span v-if="useAppStoreHook().getViewportWidth > 1280">
         <p class="mt-5!" :class="[pClass]">页宽</p>
-        <Segmented
-          resize
-          class="mb-2 select-none"
-          :model-value="isNumber(settings.stretch) ? 1 : 0"
-          :options="stretchTypeOptions"
-          @change="stretchTypeChange"
-        />
-        <el-input-number
-          v-if="isNumber(settings.stretch)"
-          v-model="settings.stretch as number"
-          :min="1280"
-          :max="1600"
-          controls-position="right"
-          @change="value => setStretch(value)"
-        />
-        <button
-          v-else
-          v-ripple="{ class: 'text-gray-300' }"
+        <Segmented resize class="mb-2 select-none" :model-value="isNumber(settings.stretch) ? 1 : 0"
+          :options="stretchTypeOptions" @change="stretchTypeChange" />
+        <el-input-number v-if="isNumber(settings.stretch)" v-model="settings.stretch as number" :min="1280" :max="1600"
+          controls-position="right" @change="value => setStretch(value)" />
+        <button v-else v-ripple="{ class: 'text-gray-300' }"
           class="bg-transparent flex-c w-full h-20 rounded-md border border-[var(--pure-border-color)]"
-          @click="setStretch(!settings.stretch)"
-        >
-          <div
-            class="flex-bc transition-all duration-300"
-            :class="[settings.stretch ? 'w-[24%]' : 'w-[50%]']"
-            style="color: var(--el-color-primary)"
-          >
-            <PureIcon
-              :icon="settings.stretch ? RightArrow : LeftArrow"
-              :size="20"
-            />
-            <div
-              class="grow border-0 border-b border-dashed"
-              style="border-color: var(--el-color-primary)"
-            />
-            <PureIcon
-              :icon="settings.stretch ? LeftArrow : RightArrow"
-              :size="20"
-            />
+          @click="setStretch(!settings.stretch)">
+          <div class="flex-bc transition-all duration-300" :class="[settings.stretch ? 'w-[24%]' : 'w-[50%]']"
+            style="color: var(--el-color-primary)">
+            <PureIcon :icon="settings.stretch ? RightArrow : LeftArrow" :size="20" />
+            <div class="grow border-0 border-b border-dashed" style="border-color: var(--el-color-primary)" />
+            <PureIcon :icon="settings.stretch ? LeftArrow : RightArrow" :size="20" />
           </div>
         </button>
       </span>
@@ -395,13 +364,8 @@ onUnmounted(() => removeMatchMedia)
       <p class="mt-4!" :class="[pClass]">
         页签风格
       </p>
-      <Segmented
-        resize
-        class="select-none"
-        :model-value="markValue === 'smart' ? 0 : markValue === 'card' ? 1 : 2"
-        :options="markOptions"
-        @change="onChange"
-      />
+      <Segmented resize class="select-none" :model-value="markValue === 'smart' ? 0 : markValue === 'card' ? 1 : 2"
+        :options="markOptions" @change="onChange" />
 
       <p class="mt-5! font-medium text-sm dark:text-white">
         界面显示
@@ -410,75 +374,40 @@ onUnmounted(() => removeMatchMedia)
         <li>
           <label class="setting-item">
             <span class="dark:text-white">灰色模式</span>
-            <el-switch
-              v-model="settings.greyVal"
-              inline-prompt
-              active-text="开"
-              inactive-text="关"
-              @change="greyChange"
-            />
+            <el-switch v-model="settings.greyVal" inline-prompt active-text="开" inactive-text="关" @change="greyChange" />
           </label>
         </li>
         <li>
           <label class="setting-item">
             <span class="dark:text-white">色弱模式</span>
-            <el-switch
-              v-model="settings.weakVal"
-              inline-prompt
-              active-text="开"
-              inactive-text="关"
-              @change="weekChange"
-            />
+            <el-switch v-model="settings.weakVal" inline-prompt active-text="开" inactive-text="关" @change="weekChange" />
           </label>
         </li>
         <li>
           <label class="setting-item">
             <span class="dark:text-white">隐藏标签页</span>
-            <el-switch
-              v-model="settings.tabsVal"
-              inline-prompt
-              active-text="开"
-              inactive-text="关"
-              @change="tagsChange"
-            />
+            <el-switch v-model="settings.tabsVal" inline-prompt active-text="开" inactive-text="关" @change="tagsChange" />
           </label>
         </li>
         <li>
           <label class="setting-item">
             <span class="dark:text-white">隐藏页脚</span>
-            <el-switch
-              v-model="settings.hideFooter"
-              inline-prompt
-              active-text="开"
-              inactive-text="关"
-              @change="hideFooterChange"
-            />
+            <el-switch v-model="settings.hideFooter" inline-prompt active-text="开" inactive-text="关"
+              @change="hideFooterChange" />
           </label>
         </li>
         <li>
           <label class="setting-item">
             <span class="dark:text-white">Logo</span>
-            <el-switch
-              v-model="logoVal"
-              inline-prompt
-              :active-value="true"
-              :inactive-value="false"
-              active-text="开"
-              inactive-text="关"
-              @change="logoChange"
-            />
+            <el-switch v-model="logoVal" inline-prompt :active-value="true" :inactive-value="false" active-text="开"
+              inactive-text="关" @change="logoChange" />
           </label>
         </li>
         <li>
           <label class="setting-item">
             <span class="dark:text-white">页签持久化</span>
-            <el-switch
-              v-model="settings.multiTagsCache"
-              inline-prompt
-              active-text="开"
-              inactive-text="关"
-              @change="multiTagsCacheChange"
-            />
+            <el-switch v-model="settings.multiTagsCache" inline-prompt active-text="开" inactive-text="关"
+              @change="multiTagsCacheChange" />
           </label>
         </li>
       </ul>

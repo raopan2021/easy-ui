@@ -282,25 +282,11 @@ onMounted(() => {
           </EasyButton>
         </div>
         <div class="dict-panel-search">
-          <EasyInput
-            v-model="typeSearch.keyword"
-            placeholder="搜索类型"
-            size="small"
-            clearable
-            @keyup.enter="fetchTypeData"
-            @clear="fetchTypeData"
-          />
+          <EasyInput v-model="typeSearch.keyword" placeholder="搜索类型" size="small" clearable @keyup.enter="fetchTypeData"
+            @clear="fetchTypeData" />
         </div>
-        <el-table
-          v-loading="typeLoading"
-          :data="typeData"
-          stripe
-          highlight-current-row
-          size="small"
-          max-height="calc(100vh - 360px)"
-          @row-click="handleTypeSelect"
-          @current-change="handleTypeCurrentChange"
-        >
+        <el-table v-loading="typeLoading" :data="typeData" stripe highlight-current-row size="small"
+          max-height="calc(100vh - 360px)" @row-click="handleTypeSelect" @current-change="handleTypeCurrentChange">
           <el-table-column prop="name" label="名称" min-width="100" />
           <el-table-column prop="code" label="编码" width="110" />
           <el-table-column prop="status" label="状态" width="60">
@@ -345,14 +331,8 @@ onMounted(() => {
           </EasyButton>
         </div>
         <div class="dict-panel-search">
-          <EasyInput
-            v-model="dataSearch.keyword"
-            placeholder="搜索标签/值"
-            size="small"
-            clearable
-            @keyup.enter="fetchDataData"
-            @clear="fetchDataData"
-          />
+          <EasyInput v-model="dataSearch.keyword" placeholder="搜索标签/值" size="small" clearable
+            @keyup.enter="fetchDataData" @clear="fetchDataData" />
         </div>
         <div v-if="!selectedType" class="dict-empty-hint">
           <el-empty description="请选择左侧字典类型" :image-size="80" />
@@ -394,29 +374,17 @@ onMounted(() => {
           </el-table>
 
           <div class="pagination-wrap">
-            <el-pagination
-              v-model:current-page="dataPagination.page"
-              v-model:page-size="dataPagination.pageSize"
-              :total="dataPagination.total"
-              :page-sizes="[10, 20, 50]"
-              layout="total, sizes, prev, pager, next"
-              small
-              @size-change="fetchDataData"
-              @current-change="fetchDataData"
-            />
+            <el-pagination v-model:current-page="dataPagination.page" v-model:page-size="dataPagination.pageSize"
+              :total="dataPagination.total" :page-sizes="[10, 20, 50]" layout="total, sizes, prev, pager, next" small
+              @size-change="fetchDataData" @current-change="fetchDataData" />
           </div>
         </template>
       </div>
     </div>
 
     <!-- 字典类型弹窗 -->
-    <el-dialog
-      v-model="typeDialog.visible"
-      :title="typeDialog.isEdit ? '编辑字典类型' : '新增字典类型'"
-      width="440px"
-      :close-on-click-modal="false"
-      @close="handleTypeDialogClose"
-    >
+    <el-dialog v-model="typeDialog.visible" :title="typeDialog.isEdit ? '编辑字典类型' : '新增字典类型'" width="440px"
+      :close-on-click-modal="false" @close="handleTypeDialogClose">
       <el-form ref="typeFormRef" :model="typeDialog.form" :rules="typeFormRules" label-width="80px">
         <el-form-item label="类型名称" prop="name">
           <EasyInput v-model="typeDialog.form.name" placeholder="如: 用户性别" maxlength="20" />
@@ -439,13 +407,8 @@ onMounted(() => {
     </el-dialog>
 
     <!-- 字典数据弹窗 -->
-    <el-dialog
-      v-model="dataDialog.visible"
-      :title="dataDialog.isEdit ? '编辑字典数据' : '新增字典数据'"
-      width="460px"
-      :close-on-click-modal="false"
-      @close="handleDataDialogClose"
-    >
+    <el-dialog v-model="dataDialog.visible" :title="dataDialog.isEdit ? '编辑字典数据' : '新增字典数据'" width="460px"
+      :close-on-click-modal="false" @close="handleDataDialogClose">
       <el-form ref="dataFormRef" :model="dataDialog.form" :rules="dataFormRules" label-width="90px">
         <el-form-item label="字典标签" prop="label">
           <EasyInput v-model="dataDialog.form.label" placeholder="如: 男" maxlength="20" />

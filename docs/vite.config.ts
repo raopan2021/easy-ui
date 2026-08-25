@@ -6,10 +6,10 @@ import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Components from 'unplugin-vue-components/vite'
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vite-plus'
+import { easyComponentResolver } from '../packages/easy-ui/src/utils/easyComponentResolver.ts'
 import { configCompressPlugin } from './build/compress.ts'
 import { viteBuildInfo } from './build/info.ts'
-import { easyComponentResolver } from '../packages/easy-ui/src/utils/easyComponentResolver.ts'
 
 // 压缩策略由环境变量 VITE_COMPRESSION 控制（默认 gzip），见 build/compress.ts
 const VITE_COMPRESSION = (process.env.VITE_COMPRESSION || 'gzip') as ViteCompression

@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import type { Component, CSSProperties } from 'vue'
-import * as EpIcons from '@element-plus/icons-vue'
-import { computed, markRaw } from 'vue'
-import { getSvgContent } from './svg-map'
+import type { EasyIconEmits, EasyIconProps } from './types'
+
+import { useIcon } from './use-icon'
 
 defineOptions({ name: 'EasyIcon' })
 
@@ -14,143 +13,27 @@ const props = withDefaults(defineProps<EasyIconProps>(), {
   alt: '',
 })
 
-const emit = defineEmits<{
-  (e: 'click', event: MouseEvent): void
-}>()
+const emit = defineEmits<EasyIconEmits>()
 
-export interface EasyIconProps {
-  /**
-   * 图标名称，通过前缀区分类型：
-   * - `el:Search` / `el:arrow-down` → Element Plus 图标
-   * - `svg:edit` / `svg:dashboard` → assets/icon/svg/ 下的 SVG 文件
-   * - `@/assets/icon/img/img.png` / `@/assets/logo.png` → 支持 Vite 别名路径的图片
-   * - 无前缀或以 http(s):// 开头：图片 URL（.png/.jpg/.webp 等）
-   */
-  name: string
-  /** 图标大小，单位 px */
-  size?: number | string
-  /** 图标颜色 */
-  color?: string
-  /** 自定义 CSS 类名 */
-  iconClass?: string
-  /** 是否可点击（添加 cursor:pointer 和 hover 效果） */
-  clickable?: boolean
-  /** 图片 alt 文本 */
-  alt?: string
-}
+// 将原来内联的解析 / 映射 / 样式逻辑抽离到 composable
+const {
+  mode,
+  epComponent,
+  svgContent,
+  resolvedImageSrc,
+  rootStyle,
+  handleClick,
+  handleImageLoad,
+  handleImageError,
+} = useIcon(props, emit)
 
-type IconMode = 'element' | 'svg' | 'image'
-
-/** 解析前缀和实际名称 */
-const parsed = computed(() => {
-  const n = props.name.trim()
-  if (n.startsWith('el:')) {
-    return { type: 'element' as IconMode, value: n.slice(3) }
-  }
-  if (n.startsWith('svg:')) {
-    return { type: 'svg' as IconMode, value: n.slice(4) }
-  }
-  // 无前缀：图片 URL
-  return { type: 'image' as IconMode, value: n }
-})
-
-const mode = computed<IconMode>(() => parsed.value.type)
-
-/** Element Plus 图标映射（避免重复导入） */
-const epIconsMap = markRaw(EpIcons) as Record<string, Component>
-
-/** 动态解析 Element Plus 图标组件 */
-const epComponent = computed<Component | null>(() => {
-  if (mode.value !== 'element')
-    return null
-  const name = parsed.value.value
-  // 将 kebab-case 转为 PascalCase：arrow-down → ArrowDown
-  const pascalName = name.replace(/(?:^|-)(\w)/g, (_, c: string) => c.toUpperCase())
-  return epIconsMap[pascalName] || epIconsMap[name] || null
-})
-
-/** SVG 内容 */
-const svgContent = computed(() => {
-  if (mode.value !== 'svg')
-    return ''
-  return getSvgContent(parsed.value.value) || ''
-})
-
-/** 解析图片路径 */
-const resolvedImageSrc = computed<string>(() => {
-  const src = parsed.value.value
-  console.warn('[EasyIcon] Original src:', src)
-
-  // http(s):// 开头的网络图片，直接使用
-  if (src.startsWith('http://') || src.startsWith('https://')) {
-    console.warn('[EasyIcon] Using as network URL')
-    return src
-  }
-
-  // @/ 开头的 Vite 别名路径，使用 new URL() 解析
-  if (src.startsWith('@/')) {
-    try {
-      // 将 @/ 替换为 /src/，new URL 需要绝对路径
-      const absolutePath = src.replace(/^@\//, '/src/')
-      console.warn('[EasyIcon] Converting @/ path:', absolutePath, 'from', import.meta.url)
-      const result = new URL(absolutePath, import.meta.url).href
-      console.warn('[EasyIcon] Resolved to:', result)
-      return result
-    }
-    catch (error) {
-      console.error('[EasyIcon] Failed to resolve @/ path:', src, error)
-      return src
-    }
-  }
-
-  // 相对路径和其他情况，直接使用
-  console.warn('[EasyIcon] Using as-is (relative path)')
-  return src
-})
-
-/** 根元素样式 */
-const rootStyle = computed<CSSProperties>(() => {
-  const style: CSSProperties = {}
-  if (props.color) {
-    style.color = props.color
-  }
-  return style
-})
-
-function handleClick(event: MouseEvent) {
-  if (props.clickable) {
-    emit('click', event)
-  }
-}
-
-function handleImageLoad(event: Event) {
-  const img = event.target as HTMLImageElement
-  console.warn('[EasyIcon] Image loaded successfully:', props.name, '→', img.src)
-}
-
-function handleImageError(event: Event) {
-  const img = event.target as HTMLImageElement
-  console.error(
-    '[EasyIcon] Failed to load image:',
-    props.name,
-    '\n尝试加载的 URL:',
-    img.src,
-    '\n支持的用法：',
-    '- 网络图片: <EasyIcon name="https://example.com/icon.png" />',
-    '- Vite 别名: <EasyIcon name="@/assets/icon/img.png" />',
-    '- import URL: import imgUrl from "@/assets/icon.png?url"',
-  )
-  img.style.display = 'none'
-}
+// 保持对外类型导出兼容（原定义在 icon.vue，现统一维护在 ./types）
+export type { EasyIconEmits, EasyIconProps } from './types'
 </script>
 
 <template>
-  <i
-    class="easy-icon"
-    :class="[iconClass, { 'easy-icon--clickable': clickable }]"
-    :style="rootStyle"
-    @click="handleClick"
-  >
+  <i class="easy-icon" :class="[iconClass, { 'easy-icon--clickable': clickable }]" :style="rootStyle"
+    @click="handleClick">
     <!-- Element Plus 图标 (el:xxx) -->
     <el-icon v-if="mode === 'element'" :size="size" :color="color">
       <component :is="epComponent" />
@@ -185,47 +68,5 @@ function handleImageError(event: Event) {
   </i>
 </template>
 
-<style scoped lang="scss">
-.easy-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  vertical-align: middle;
-  line-height: 0;
-  font-size: inherit;
-  color: inherit;
-
-  &.easy-icon--clickable {
-    cursor: pointer;
-    transition: opacity 0.2s ease;
-
-    &:hover {
-      opacity: 0.7;
-    }
-
-    &:active {
-      opacity: 0.5;
-    }
-  }
-}
-
-.easy-icon__svg {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-
-  :deep(svg) {
-    width: 100%;
-    height: 100%;
-    fill: currentColor;
-  }
-}
-
-.easy-icon__img {
-  display: inline-block;
-  object-fit: contain;
-  vertical-align: -0.15em;
-  flex-shrink: 0;
-}
-</style>
+<!-- 组件核心样式（scoped，独立维护在 icon-style.scss） -->
+<style scoped src="./icon-style.scss" lang="scss"></style>

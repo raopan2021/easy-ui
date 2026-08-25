@@ -276,21 +276,12 @@ const options = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 400px">
-            <EasyCascader
-              v-model="val3"
-              :options="areaOptions"
-              placeholder="可多选"
-              multiple
-              :max-tag-count="2"
-              clearable
-            />
+            <EasyCascader v-model="val3" :options="areaOptions" placeholder="可多选" multiple :max-tag-count="2" clearable />
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ JSON.stringify(val3) }}</span>
         </div>
       </div>
-      <EasyDocCode
-        code="<EasyCascader v-model=&quot;value&quot; :options=&quot;options&quot; multiple :max-tag-count=&quot;2&quot; />"
-      />
+      <EasyDocCode code="<EasyCascader v-model=&quot;value&quot; :options=&quot;options&quot; multiple :max-tag-count=&quot;2&quot; />" />
     </section>
 
     <section class="doc-section">
@@ -306,39 +297,20 @@ const options = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 400px">
-            <EasyCascader
-              v-model="val10"
-              :options="areaOptions"
-              placeholder="返回二维数组（默认）"
-              multiple
-              value-type="array"
-              clearable
-            />
+            <EasyCascader v-model="val10" :options="areaOptions" placeholder="返回二维数组（默认）" multiple value-type="array"
+              clearable />
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值（二维数组）：{{ JSON.stringify(val10) }}</span>
 
           <div style="width: 400px">
-            <EasyCascader
-              v-model="val11"
-              :options="areaOptions"
-              placeholder="返回字符串（逗号分隔）"
-              multiple
-              value-type="string"
-              clearable
-            />
+            <EasyCascader v-model="val11" :options="areaOptions" placeholder="返回字符串（逗号分隔）" multiple value-type="string"
+              clearable />
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值（字符串）：{{ val11 }}</span>
 
           <div style="width: 400px">
-            <EasyCascader
-              v-model="val12"
-              :options="areaOptions"
-              placeholder="自定义分隔符（分号）"
-              multiple
-              value-type="string"
-              separator=";"
-              clearable
-            />
+            <EasyCascader v-model="val12" :options="areaOptions" placeholder="自定义分隔符（分号）" multiple value-type="string"
+              separator=";" clearable />
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值（分号分隔）：{{ val12 }}</span>
         </div>
@@ -440,22 +412,13 @@ const value = ref(&quot;zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu&quot;)
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <EasyCascader
-              v-model="val7"
-              :options="areaOptions"
-              placeholder="可选中任意层级"
-              check-strictly
-              clearable
-              filterable
-              multiple
-            />
+            <EasyCascader v-model="val7" :options="areaOptions" placeholder="可选中任意层级" check-strictly clearable
+              filterable multiple />
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ JSON.stringify(val7) }}</span>
         </div>
       </div>
-      <EasyDocCode
-        code="<EasyCascader v-model=&quot;value&quot; :options=&quot;options&quot; check-strictly clearable filterable multiple/>"
-      />
+      <EasyDocCode code="<EasyCascader v-model=&quot;value&quot; :options=&quot;options&quot; check-strictly clearable filterable multiple/>" />
     </section>
 
     <section class="doc-section">
@@ -469,15 +432,8 @@ const value = ref(&quot;zhejiang/hangzhou/xihu,jiangsu/nanjing/xuanwu&quot;)
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <EasyCascader
-              v-model="val8"
-              :options="customFieldOptions"
-              value-key="id"
-              label-key="name"
-              children-key="subList"
-              placeholder="自定义字段名"
-              clearable
-            />
+            <EasyCascader v-model="val8" :options="customFieldOptions" value-key="id" label-key="name"
+              children-key="subList" placeholder="自定义字段名" clearable />
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ JSON.stringify(val8) }}</span>
         </div>
@@ -518,16 +474,8 @@ const options = [
       <div class="doc-preview">
         <div class="doc-preview__body" style="flex-direction: column; align-items: flex-start; gap: 12px">
           <div style="width: 300px">
-            <EasyCascader
-              ref="remoteCascaderRef"
-              v-model="val9"
-              :options="[]"
-              placeholder="远程搜索地区..."
-              filterable
-              remote
-              :remote-method="remoteCascaderSearch"
-              clearable
-            />
+            <EasyCascader ref="remoteCascaderRef" v-model="val9" :options="[]" placeholder="远程搜索地区..." filterable remote
+              :remote-method="remoteCascaderSearch" clearable />
           </div>
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">选中值：{{ JSON.stringify(val9) }}</span>
         </div>

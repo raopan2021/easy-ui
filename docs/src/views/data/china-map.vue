@@ -211,15 +211,8 @@ const multiYearData: MapDataSet[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyChinaMap
-            title="2025年各省份 GDP 总量"
-            subtitle="单位：亿元"
-            :data="gdpData"
-            :height="680"
-            value-label="GDP"
-            legend-title="GDP（亿元）"
-            @click="handleClick"
-          />
+          <EasyChinaMap title="2025年各省份 GDP 总量" subtitle="单位：亿元" :data="gdpData" :height="680" value-label="GDP"
+            legend-title="GDP（亿元）" @click="handleClick" />
         </div>
         <EasyDocCode
           code="<EasyChinaMap
@@ -263,15 +256,8 @@ const multiYearData: MapDataSet[] = [
       </h3>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyChinaMap
-            title="省份 GDP 对比"
-            subtitle="单位：亿元 | Tooltip 同时展示所有年份数据"
-            :data="multiYearData"
-            :height="420"
-            tooltip-mode="compare"
-            value-label="GDP"
-            legend-title="GDP（亿元）"
-          />
+          <EasyChinaMap title="省份 GDP 对比" subtitle="单位：亿元 | Tooltip 同时展示所有年份数据" :data="multiYearData" :height="420"
+            tooltip-mode="compare" value-label="GDP" legend-title="GDP（亿元）" />
         </div>
         <EasyDocCode
           code="<EasyChinaMap
@@ -287,15 +273,8 @@ const multiYearData: MapDataSet[] = [
       </h3>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyChinaMap
-            title="省份 GDP 切换"
-            subtitle="单位：亿元 | 点击 Tab 切换数据集"
-            :data="multiYearData"
-            :height="420"
-            tooltip-mode="switch"
-            value-label="GDP"
-            legend-title="GDP（亿元）"
-          />
+          <EasyChinaMap title="省份 GDP 切换" subtitle="单位：亿元 | 点击 Tab 切换数据集" :data="multiYearData" :height="420"
+            tooltip-mode="switch" value-label="GDP" legend-title="GDP（亿元）" />
         </div>
         <EasyDocCode
           code="<EasyChinaMap
@@ -344,25 +323,16 @@ const multiYearData: MapDataSet[] = [
         <div class="doc-preview__body">
           <div class="mode-switch">
             <span class="mode-switch__label">标签模式：</span>
-            <button
-              class="mode-switch__btn"
-              :class="{ 'is-active': labelMode === 'short' }"
-              @click="labelMode = 'short'"
-            >
+            <button class="mode-switch__btn" :class="{ 'is-active': labelMode === 'short' }"
+              @click="labelMode = 'short'">
               简称
             </button>
             <button class="mode-switch__btn" :class="{ 'is-active': labelMode === 'full' }" @click="labelMode = 'full'">
               全称
             </button>
           </div>
-          <EasyChinaMap
-            :title="labelMode === 'short' ? '简称模式 — 简洁清晰' : '全称模式 — 信息完整'"
-            :data="gdpData"
-            :height="420"
-            :label-mode="labelMode"
-            value-label="GDP"
-            legend-title="GDP（亿元）"
-          />
+          <EasyChinaMap :title="labelMode === 'short' ? '简称模式 — 简洁清晰' : '全称模式 — 信息完整'" :data="gdpData" :height="420"
+            :label-mode="labelMode" value-label="GDP" legend-title="GDP（亿元）" />
         </div>
         <EasyDocCode
           code="<EasyChinaMap
@@ -387,26 +357,12 @@ const multiYearData: MapDataSet[] = [
         <div class="doc-preview__body">
           <div class="map-row">
             <div class="map-item">
-              <EasyChinaMap
-                title="绿色系 — 用户覆盖率"
-                :data="coverageData"
-                :height="320"
-                :color-range="['#d1fae5', '#065f46']"
-                empty-color="#f1f5f9"
-                value-label="覆盖率"
-                legend-title="覆盖率（%）"
-              />
+              <EasyChinaMap title="绿色系 — 用户覆盖率" :data="coverageData" :height="320" :color-range="['#d1fae5', '#065f46']"
+                empty-color="#f1f5f9" value-label="覆盖率" legend-title="覆盖率（%）" />
             </div>
             <div class="map-item">
-              <EasyChinaMap
-                title="橙红系 — 投诉数量"
-                :data="complaintData"
-                :height="320"
-                :color-range="['#fef3c7', '#b45309']"
-                empty-color="#f1f5f9"
-                value-label="投诉量"
-                legend-title="投诉数（件）"
-              />
+              <EasyChinaMap title="橙红系 — 投诉数量" :data="complaintData" :height="320" :color-range="['#fef3c7', '#b45309']"
+                empty-color="#f1f5f9" value-label="投诉量" legend-title="投诉数（件）" />
             </div>
           </div>
         </div>
@@ -437,18 +393,9 @@ const multiYearData: MapDataSet[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyChinaMap
-            title="各省份活跃用户分布"
-            subtitle="气泡大小代表活跃用户量"
-            :data="userCountData"
-            :height="460"
-            :show-bubble="true"
-            bubble-color="#6366f1"
-            :color-range="['#ede9fe', '#ede9fe']"
-            empty-color="#f1f5f9"
-            value-label="活跃用户"
-            legend-title="活跃用户（万）"
-          />
+          <EasyChinaMap title="各省份活跃用户分布" subtitle="气泡大小代表活跃用户量" :data="userCountData" :height="460" :show-bubble="true"
+            bubble-color="#6366f1" :color-range="['#ede9fe', '#ede9fe']" empty-color="#f1f5f9" value-label="活跃用户"
+            legend-title="活跃用户（万）" />
         </div>
         <EasyDocCode
           code="<EasyChinaMap
@@ -472,15 +419,8 @@ const multiYearData: MapDataSet[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyChinaMap
-            title="极简风格"
-            :data="gdpData"
-            :height="400"
-            :show-label="false"
-            :color-range="['#e0e7ff', '#4338ca']"
-            value-label="数值"
-            legend-title="数值"
-          />
+          <EasyChinaMap title="极简风格" :data="gdpData" :height="400" :show-label="false"
+            :color-range="['#e0e7ff', '#4338ca']" value-label="数值" legend-title="数值" />
         </div>
         <EasyDocCode
           code="<EasyChinaMap
@@ -503,15 +443,8 @@ const multiYearData: MapDataSet[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyChinaMap
-            title="支持缩放平移"
-            subtitle="滚轮缩放 / 拖拽平移 / 左下角按钮"
-            :data="gdpData"
-            :height="420"
-            value-label="GDP"
-            legend-title="GDP（亿元）"
-            @click="handleClick"
-          />
+          <EasyChinaMap title="支持缩放平移" subtitle="滚轮缩放 / 拖拽平移 / 左下角按钮" :data="gdpData" :height="420" value-label="GDP"
+            legend-title="GDP（亿元）" @click="handleClick" />
         </div>
         <EasyDocCode
           code="<EasyChinaMap
@@ -536,14 +469,8 @@ const multiYearData: MapDataSet[] = [
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body">
-          <EasyChinaMap
-            title="全国地图底图"
-            :data="[]"
-            :height="380"
-            empty-color="#dbeafe"
-            stroke-color="#93c5fd"
-            :show-legend="false"
-          />
+          <EasyChinaMap title="全国地图底图" :data="[]" :height="380" empty-color="#dbeafe" stroke-color="#93c5fd"
+            :show-legend="false" />
         </div>
         <EasyDocCode
           code="<EasyChinaMap

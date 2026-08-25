@@ -62,7 +62,7 @@ export const tabsEmits = {
   'tab-change': (_value: string | number) => true,
 }
 export interface TabsEmits {
-  'update:modelValue': [value: string | number]
-  'tab-click': [pane: TabPaneInfo]
-  'tab-change': [value: string | number]
+  (e: 'update:modelValue', value: string | number): void
+  (e: 'tab-click', pane: TabPaneInfo): void
+  (e: 'tab-change', value: string | number): void
 }

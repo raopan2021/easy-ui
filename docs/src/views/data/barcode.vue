@@ -202,13 +202,8 @@ function onError(error: Error) {
         <div class="doc-preview__body">
           <div class="barcode-interactive">
             <div class="barcode-interactive__left">
-              <EasyInput
-                v-model="dynamicContent"
-                type="textarea"
-                :rows="3"
-                placeholder="请输入要生成条码的内容"
-                style="margin-bottom: 16px"
-              />
+              <EasyInput v-model="dynamicContent" type="textarea" :rows="3" placeholder="请输入要生成条码的内容"
+                style="margin-bottom: 16px" />
               <div class="barcode-interactive__controls">
                 <EasyButton type="primary" @click="handleDownloadSVG">
                   下载 SVG

@@ -4,31 +4,86 @@
 
 ---
 
-## [1.2.3] - 2026-08-21
+## [1.1.2] - 2026-08-25
 
 ### ✨ 新增
 
+- 新增md下载pdf
 - 新增富文本、md组件，优化水印
 - 文档添加目录
 - 系统添加dark切换
+
 ### 🐛 修复
 
+- 调整端口、修复CI 部署失败
 - refactor: 还原 doc 至 src/ 并修复 easy-ui 组件库样式与构建
 - refactor: 统一 xly 前缀为 easy 并修复组件运行时问题
+- 修复组件 composable 化遗留的 50+ 处 TS 类型错误（Props 可选字段兜底、`Date` 算术、`Array.from().fill()` 类型、`isNaN`/`parseFloat` 等）
+
 ### 🎨 优化
 
+- 优化md滚动条问题
 - search-form优化
 - dark切换优化
+- ESLint 全量清理：修复 chart/markdown 规则错误，豁免 `.workbuddy` / `.codebuddy` 工作记忆目录与 `template-admin` 独立 workspace
+
 ### ♻️ 重构
 
 - refactor: 组件库迁移收尾 — 全面切换 Easy* 命名并移除旧 xly-* 目录
 - 重构：组件迁移至 packages/easy-ui 包 + antfu ESLint 接入
+- 组件拆分重构：所有组件 composable 化，规范拆分为 `use-*.ts` composable + `types.ts` + 纯函数模块，主 `.vue` 精简为编排层
+
+### 📝 文档
+
+- docs + admin 双 SPA 共用一个 Pages 站点时需要 hash，修复github404页面问题
+
 ### 🛠 工程化
 
 - ci: 对齐 CI pnpm 版本到 11（lockfileVersion 9.0 兼容）
+- 构建工具升级：Vite 8 → VitePlus（`@voidzero-dev/vite-plus-core@0.2.9`，`vp` CLI 驱动，workspace catalog + overrides 统一管理，产物含 rolldown-runtime）
+
+---
+
+## [1.1.1] - 2026-08-24
+
+### ✨ 新增
+
+- 新增md下载pdf
+- 新增富文本、md组件，优化水印
+- 文档添加目录
+- 系统添加dark切换
+
+### 🐛 修复
+
+- 调整端口、修复CI 部署失败
+- refactor: 还原 doc 至 src/ 并修复 easy-ui 组件库样式与构建
+- refactor: 统一 xly 前缀为 easy 并修复组件运行时问题
+
+### 🎨 优化
+
+- 优化md滚动条问题、github404页面问题
+- search-form优化
+- dark切换优化
+
+### ♻️ 重构
+
+- refactor: 组件库迁移收尾 — 全面切换 Easy* 命名并移除旧 xly-* 目录
+- 重构：组件迁移至 packages/easy-ui 包 + antfu ESLint 接入
+
+### 📝 文档
+
+- docs + admin 双 SPA 共用一个 Pages 站点时需要 hash
+
+### 🛠 工程化
+
+- ci: 对齐 CI pnpm 版本到 11（lockfileVersion 9.0 兼容）
+- 构建工具升级：Vite 8 → VitePlus（`@voidzero-dev/vite-plus-core@0.2.9`，`vp` CLI 驱动，workspace catalog + overrides 统一管理）
 - 组件样式
+
 ### 🔧 其他
 
+- md组件升级
+- 调整部署github
 - 组件导出使用
 - code复制展开
 - 组件更新
@@ -36,102 +91,7 @@
 - 初始化
 
 ---
-## [1.2.2] - 2026-08-21
 
-### ✨ 新增
-
-- 新增富文本、md组件，优化水印
-- 文档添加目录
-- 系统添加dark切换
-### 🐛 修复
-
-- refactor: 还原 doc 至 src/ 并修复 easy-ui 组件库样式与构建
-- refactor: 统一 xly 前缀为 easy 并修复组件运行时问题
-### 🎨 优化
-
-- search-form优化
-- dark切换优化
-### ♻️ 重构
-
-- refactor: 组件库迁移收尾 — 全面切换 Easy* 命名并移除旧 xly-* 目录
-- 重构：组件迁移至 packages/easy-ui 包 + antfu ESLint 接入
-### 🛠 工程化
-
-- ci: 对齐 CI pnpm 版本到 11（lockfileVersion 9.0 兼容）
-- 组件样式
-### 🔧 其他
-
-- 组件导出使用
-- code复制展开
-- 组件更新
-- 依赖问题
-- 初始化
-
----
-## [1.2.1] - 2026-08-21
-
-### ✨ 新增
-
-- 新增富文本、md组件，优化水印
-- 文档添加目录
-- 系统添加dark切换
-### 🐛 修复
-
-- refactor: 还原 doc 至 src/ 并修复 easy-ui 组件库样式与构建
-- refactor: 统一 xly 前缀为 easy 并修复组件运行时问题
-### 🎨 优化
-
-- search-form优化
-- dark切换优化
-### ♻️ 重构
-
-- refactor: 组件库迁移收尾 — 全面切换 Easy* 命名并移除旧 xly-* 目录
-- 重构：组件迁移至 packages/easy-ui 包 + antfu ESLint 接入
-### 🛠 工程化
-
-- ci: 对齐 CI pnpm 版本到 11（lockfileVersion 9.0 兼容）
-- 组件样式
-### 🔧 其他
-
-- 组件导出使用
-- code复制展开
-- 组件更新
-- 依赖问题
-- 初始化
-
----
-## [1.2.0] - 2026-08-21
-
-### ✨ 新增
-
-- 新增富文本、md组件，优化水印
-- 文档添加目录
-- 系统添加dark切换
-### 🐛 修复
-
-- refactor: 还原 doc 至 src/ 并修复 easy-ui 组件库样式与构建
-- refactor: 统一 xly 前缀为 easy 并修复组件运行时问题
-### 🎨 优化
-
-- search-form优化
-- dark切换优化
-### ♻️ 重构
-
-- refactor: 组件库迁移收尾 — 全面切换 Easy* 命名并移除旧 xly-* 目录
-- 重构：组件迁移至 packages/easy-ui 包 + antfu ESLint 接入
-### 🛠 工程化
-
-- ci: 对齐 CI pnpm 版本到 11（lockfileVersion 9.0 兼容）
-- 组件样式
-### 🔧 其他
-
-- 组件导出使用
-- code复制展开
-- 组件更新
-- 依赖问题
-- 初始化
-
----
 ## [1.1.0] - 2026-08-21
 
 ### ✨ 新增组件
@@ -162,15 +122,15 @@
 
 基于 Element Plus 深度扩展的 `Easy*` 前缀组件，覆盖企业级中后台常见场景：
 
-| 类别 | 组件 |
-| --- | --- |
-| **基础组件** | `EasyAvatar` `EasyBadge` `EasyButton` `EasyCard` `EasyCarousel` `EasyCol` `EasyRow` `EasyDivider` `EasyEmpty` `EasyIcon` `EasyImage` `EasyInput` `EasyList` `EasyProgress` `EasyRadio` `EasyRate` `EasySelect` `EasySteps` `EasySwitch` `EasyTag` `EasyTimeline` |
-| **表单组件** | `EasyCascader` `EasyDatePicker` `EasyDateRangePicker` `EasyDateTimePicker` `EasyDateTimeRangePicker` `EasyForm` `EasySearchForm` `EasySuperForm` `EasyTimePicker` `EasyTimeRangePicker` `EasyInputRange` `EasyDictSelect` `EasyDictTag` |
-| **数据展示** | `EasyDescriptions` `EasyStatistic` `EasyInfoCard` `EasyTable` `EasyTreeChart` |
-| **弹层反馈** | `EasyDrawer` `EasyDropdown` `EasyModal` `EasyTabs` `EasyLoading` `EasyMessage` `EasyMsgbox` `EasyTour` |
-| **业务扩展** | `EasyChat`（聊天）`EasyGantt`（甘特图）`EasyChart`（图表）`EasyChinaMap`（中国地图）`EasyDeptTree`（部门树）`EasyPermission`（权限）`EasyUserPicker`（用户选择）`EasyWorktab`（工作台页签）`EasyWatermark`（水印） |
-| **高级工具** | `EasySignature`（签名）`EasyImageCropper`（图片裁剪）`EasyFileUpload`（文件上传）`EasyImageUpload`（图片上传）`EasyBarcode`（条形码）`EasyQrcode`（二维码）`EasyDocCode`（文档编码）`EasyJsonViewer`（JSON 查看器） |
-| **独立子入口** | `EasyFilePreview`（文档/Office 在线预览）`EasyFlowDesigner`（流程设计器） |
+| 类别           | 组件                                                                                                                                                                                                                                                             |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **基础组件**   | `EasyAvatar` `EasyBadge` `EasyButton` `EasyCard` `EasyCarousel` `EasyCol` `EasyRow` `EasyDivider` `EasyEmpty` `EasyIcon` `EasyImage` `EasyInput` `EasyList` `EasyProgress` `EasyRadio` `EasyRate` `EasySelect` `EasySteps` `EasySwitch` `EasyTag` `EasyTimeline` |
+| **表单组件**   | `EasyCascader` `EasyDatePicker` `EasyDateRangePicker` `EasyDateTimePicker` `EasyDateTimeRangePicker` `EasyForm` `EasySearchForm` `EasySuperForm` `EasyTimePicker` `EasyTimeRangePicker` `EasyInputRange` `EasyDictSelect` `EasyDictTag`                          |
+| **数据展示**   | `EasyDescriptions` `EasyStatistic` `EasyInfoCard` `EasyTable` `EasyTreeChart`                                                                                                                                                                                    |
+| **弹层反馈**   | `EasyDrawer` `EasyDropdown` `EasyModal` `EasyTabs` `EasyLoading` `EasyMessage` `EasyMsgbox` `EasyTour`                                                                                                                                                           |
+| **业务扩展**   | `EasyChat`（聊天）`EasyGantt`（甘特图）`EasyChart`（图表）`EasyChinaMap`（中国地图）`EasyDeptTree`（部门树）`EasyPermission`（权限）`EasyUserPicker`（用户选择）`EasyWorktab`（工作台页签）`EasyWatermark`（水印）                                               |
+| **高级工具**   | `EasySignature`（签名）`EasyImageCropper`（图片裁剪）`EasyFileUpload`（文件上传）`EasyImageUpload`（图片上传）`EasyBarcode`（条形码）`EasyQrcode`（二维码）`EasyDocCode`（文档编码）`EasyJsonViewer`（JSON 查看器）                                              |
+| **独立子入口** | `EasyFilePreview`（文档/Office 在线预览）`EasyFlowDesigner`（流程设计器）                                                                                                                                                                                        |
 
 ### ⭐ 核心特性
 

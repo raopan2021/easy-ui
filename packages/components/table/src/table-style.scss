@@ -1,0 +1,1126 @@
+@use '../../../easy-ui/src/styles/tokens' as *;
+
+/* ========== 设计令牌 ========== */
+$radius-sm: 4px;
+$radius-md: 6px;
+$radius-lg: 8px;
+$shadow-sm: 0 6px 18px rgba(16, 24, 40, 0.04);
+$shadow-md: 0 12px 28px rgba(16, 24, 40, 0.08);
+$shadow-sticky: 10px 0 24px rgba(15, 23, 42, 0.06);
+$transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+/* ========== 容器 ========== */
+.easy-table {
+  background: var(--el-bg-color);
+  border-radius: $radius-lg;
+  border: 1px solid $border-strong;
+  box-shadow: $shadow-sm;
+  font-size: 13px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+  letter-spacing: 0;
+  line-height: 1.5;
+  overflow: hidden;
+  position: relative;
+
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+
+  &.easy-table--border {
+    .easy-table__th,
+    .easy-table__td {
+      border-right: 1px solid $border-strong;
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+
+  &.easy-table--compact {
+    .easy-table__th,
+    .easy-table__td {
+      padding: 10px 14px;
+      font-size: 13px;
+    }
+  }
+
+  &.easy-table--loading {
+    opacity: 0.72;
+    pointer-events: none;
+  }
+}
+
+/* ========== 工具栏 ========== */
+.easy-table__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: $white;
+  border-bottom: 1px solid var(--el-border-color);
+}
+
+.easy-table__toolbar-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.easy-table__toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.easy-table__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  letter-spacing: 0;
+}
+
+/* ========== 容器 ========== */
+.easy-table__container {
+  position: relative;
+  overflow-x: auto;
+  overflow-y: auto;
+  background: var(--el-bg-color);
+  scrollbar-width: thin;
+  scrollbar-color: var(--el-border-color-darker) transparent;
+  min-height: 200px;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #c7d1df;
+    border-radius: 999px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+/* ========== 表格主体 ========== */
+.easy-table__inner {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* ========== 表头 ========== */
+.easy-table__thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.easy-table__th {
+  padding: 12px 14px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  background: $bg-header;
+  border-bottom: 1px solid $border-strong;
+  border-right: none;
+  white-space: nowrap;
+  user-select: none;
+  text-transform: none;
+  line-height: 1.5;
+  letter-spacing: 0;
+  position: relative;
+  box-shadow: none;
+
+  &:last-child {
+    border-right: none;
+  }
+
+  &.easy-table__th--center {
+    text-align: center;
+  }
+
+  &.easy-table__th--right {
+    text-align: right;
+  }
+
+  &.easy-table__th--selection,
+  &.easy-table__th--index,
+  &.easy-table__th--expand,
+  &.easy-table__th--tree-expand {
+    width: 48px;
+    text-align: center;
+    color: var(--el-text-color-secondary);
+  }
+
+  &.easy-table__th--action {
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  &.is-sortable {
+    cursor: pointer;
+    transition: $transition;
+
+    &:hover {
+      color: var(--el-color-primary);
+      background: var(--el-fill-color-light);
+    }
+  }
+
+  &.is-sorted {
+    color: var(--el-color-primary);
+    background: #f5f9ff;
+  }
+}
+
+.easy-table__th-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ========== 排序图标 ========== */
+.easy-table__sort-icons {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0;
+  margin-left: 4px;
+}
+
+.easy-table__sort-icon {
+  display: block;
+  color: var(--el-text-color-disabled);
+  font-size: 8px;
+  line-height: 1;
+  transition: $transition;
+
+  &.is-active {
+    color: var(--el-color-primary);
+  }
+}
+
+/* ========== 行 ========== */
+.easy-table__tr {
+  transition: $transition;
+  cursor: default;
+
+  &.is-stripe {
+    > .easy-table__td {
+      background: $bg-stripe;
+    }
+  }
+
+  &.is-selected {
+    > .easy-table__td {
+      background: $bg-selected !important;
+    }
+  }
+
+  &.is-clickable {
+    cursor: pointer;
+  }
+}
+
+.easy-table--highlight .easy-table__tbody .easy-table__tr:hover > .easy-table__td {
+  background: var(--el-fill-color-light);
+}
+
+/* ========== 单元格 ========== */
+.easy-table__td {
+  padding: 12px 14px;
+  color: var(--el-text-color-regular);
+  border-bottom: 1px solid var(--el-border-color);
+  border-right: none;
+  vertical-align: middle;
+  line-height: 1.5;
+  font-weight: 400;
+  transition: $transition;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  background: var(--el-bg-color);
+
+  &:last-child {
+    border-right: none;
+  }
+
+  &.easy-table__td--center {
+    text-align: center;
+  }
+
+  &.easy-table__td--right {
+    text-align: right;
+  }
+
+  &.easy-table__td--selection,
+  &.easy-table__td--index,
+  &.easy-table__td--expand {
+    text-align: center;
+    color: var(--el-text-color-secondary);
+    font-size: 13px;
+    width: 48px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &.easy-table__td--action {
+    text-align: center;
+    white-space: nowrap;
+  }
+}
+
+.easy-table__cell-text {
+  &.is-ellipsis {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* ========== 复选框 ========== */
+.easy-table__checkbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  width: 18px;
+  height: 18px;
+
+  input[type='checkbox'] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .easy-table__checkbox-inner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 6px;
+    background: var(--el-bg-color);
+    transition: $transition;
+    position: relative;
+    box-shadow: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: none;
+      left: 5px;
+      top: 2px;
+      width: 5px;
+      height: 9px;
+      border: 2px solid #fff;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg);
+    }
+  }
+
+  input:checked ~ .easy-table__checkbox-inner {
+    background: var(--el-color-primary);
+    border-color: var(--el-color-primary);
+
+    &::after {
+      display: block;
+    }
+  }
+
+  input:indeterminate ~ .easy-table__checkbox-inner {
+    background: var(--el-color-primary);
+    border-color: var(--el-color-primary);
+
+    &::after {
+      display: block;
+      top: 7px;
+      left: 3px;
+      width: 10px;
+      height: 0;
+      transform: none;
+      border-width: 2px 0 0 0;
+    }
+  }
+
+  &:hover .easy-table__checkbox-inner {
+    border-color: var(--el-color-primary);
+  }
+}
+
+/* 单选按钮 */
+.easy-table__radio {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
+  .easy-table__radio-inner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 50%;
+    background: var(--el-bg-color);
+    transition: $transition;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: none;
+      left: 50%;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--el-bg-color);
+      transform: translate(-50%, -50%);
+    }
+
+    &.is-checked {
+      background: var(--el-color-primary);
+      border-color: var(--el-color-primary);
+
+      &::after {
+        display: block;
+      }
+    }
+  }
+
+  &:hover .easy-table__radio-inner {
+    border-color: var(--el-color-primary);
+  }
+}
+
+/* ========== 加载状态 ========== */
+.easy-table__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 0;
+  color: var(--el-text-color-secondary);
+}
+
+.easy-table__loading-spinner {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.easy-table__loading-bar {
+  width: 4px;
+  height: 28px;
+  border-radius: 2px;
+  background: var(--el-color-primary);
+  animation: easy-loading-wave 1s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+.easy-table__loading-text {
+  font-size: 14px;
+  color: var(--el-text-color-secondary);
+}
+
+@keyframes easy-loading-wave {
+  0%,
+  100% {
+    transform: scaleY(0.4);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+/* ========== 空 / 加载状态 ========== */
+.easy-table__empty {
+  position: sticky;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+// 加载时已有数据 → 绝对定位覆盖，隐藏旧数据
+.easy-table__loading-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(2px);
+}
+
+.easy-table__empty-icon {
+  width: 120px;
+  height: 90px;
+  opacity: 0.38;
+}
+
+.easy-table__empty-text {
+  color: var(--el-text-color-secondary);
+  font-size: 14px;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* ========== 分页 ========== */
+.easy-table__pagination {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 20px 24px;
+  background: var(--el-bg-color);
+  border-top: 1px solid var(--el-border-color);
+
+  &.easy-table__pagination--left {
+    justify-content: flex-start;
+  }
+
+  &.easy-table__pagination--center {
+    justify-content: center;
+  }
+
+  &.easy-table__pagination--right {
+    justify-content: flex-end;
+  }
+}
+
+.easy-table__pagination-total {
+  font-size: 13px;
+  color: var(--el-text-color-secondary);
+  font-weight: 500;
+  white-space: nowrap;
+  padding-right: 4px;
+}
+
+.easy-table__pagination-pages {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.easy-table__page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: $radius-sm;
+  border: 1px solid var(--el-border-color);
+  background: var(--el-bg-color);
+  color: var(--el-text-color-regular);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: $transition;
+  user-select: none;
+  box-shadow: none;
+
+  &:hover:not(:disabled):not(.is-current):not(.is-ellipsis) {
+    border-color: var(--el-color-primary);
+    color: var(--el-color-primary);
+    background: rgba(79, 110, 247, 0.1);
+  }
+
+  &.easy-table__page-btn--prev,
+  &.easy-table__page-btn--next {
+    padding: 0 12px;
+  }
+
+  &.is-current {
+    background: var(--el-color-primary);
+    border-color: var(--el-color-primary);
+    color: var(--el-color-white);
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(79, 110, 247, 0.28);
+  }
+
+  &.is-ellipsis {
+    border: none;
+    background: transparent;
+    cursor: default;
+    color: var(--el-text-color-secondary);
+    font-size: 18px;
+    letter-spacing: 3px;
+    font-weight: 600;
+    min-width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1 !important;
+    padding: 0 2px;
+  }
+
+  &:disabled:not(.is-ellipsis) {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+.easy-table__page-size-select {
+  width: 100px;
+  min-width: 100px;
+}
+
+.easy-table__pagination-jump {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--el-text-color-regular);
+  margin-left: 16px;
+}
+
+.easy-table__pagination-input {
+  width: 50px;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--el-border-color);
+  border-radius: $radius-sm;
+  font-size: 14px;
+  color: var(--el-text-color-regular);
+  text-align: center;
+  outline: none;
+  transition: $transition;
+  font-weight: 500;
+  background: var(--el-bg-color);
+
+  &:hover,
+  &:focus {
+    border-color: var(--el-color-primary);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(94, 106, 210, 0.1);
+  }
+}
+
+.easy-table__pagination-go {
+  height: 36px;
+  padding: 0 16px;
+  border: 1px solid var(--el-border-color);
+  border-radius: $radius-sm;
+  background: var(--el-bg-color);
+  color: var(--el-text-color-regular);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    border-color: var(--el-color-primary);
+    color: var(--el-color-primary);
+    background: $primary-bg;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+/* ========== 列设置 ========== */
+
+.easy-table__column-settings-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.24);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: easy-fade-in 0.2s ease;
+}
+
+@keyframes easy-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.easy-table__column-settings-panel {
+  background: var(--el-bg-color);
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
+  width: 400px;
+  max-width: 90vw;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  animation: easy-slide-up 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid $border-strong;
+}
+
+@keyframes easy-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.easy-table__column-settings-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--el-border-color);
+  background: var(--el-bg-color);
+
+  h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--el-text-color-primary);
+  }
+}
+
+.easy-table__column-settings-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  color: var(--el-text-color-secondary);
+  cursor: pointer;
+  border-radius: $radius-sm;
+  transition: $transition;
+
+  &:hover {
+    background: var(--el-fill-color-light);
+    color: var(--el-text-color-regular);
+  }
+}
+
+.easy-table__column-settings-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 24px;
+  background: var(--el-bg-color);
+}
+
+.easy-table__column-settings-item {
+  padding: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: $transition;
+  border-radius: $radius-sm;
+
+  &:hover:not(.is-disabled) {
+    background: var(--el-fill-color-light);
+  }
+
+  &.is-dragging {
+    opacity: 0.5;
+  }
+
+  &.is-drag-over {
+    background: $primary-bg;
+  }
+
+  &.is-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.easy-table__column-settings-drag-handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--el-text-color-disabled);
+  cursor: move;
+  transition: $transition;
+
+  &:hover:not(.is-disabled) {
+    color: var(--el-color-primary);
+  }
+
+  &:active:not(.is-disabled) {
+    cursor: grabbing;
+  }
+
+  &.is-disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+}
+
+.easy-table__column-settings-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--el-text-color-regular);
+  user-select: none;
+  flex: 1;
+
+  input[type='checkbox'] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--el-color-primary);
+    cursor: pointer;
+  }
+
+  span {
+    flex: 1;
+  }
+}
+
+.easy-table__column-settings-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--el-border-color);
+}
+
+.easy-table__column-settings-btn--reset,
+.easy-table__column-settings-btn--confirm {
+  padding: 8px 20px;
+  border-radius: $radius-md;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: $transition;
+  border: 1px solid transparent;
+}
+
+.easy-table__column-settings-btn--reset {
+  background: var(--el-bg-color);
+  color: var(--el-text-color-regular);
+  border-color: var(--el-border-color);
+
+  &:hover {
+    border-color: var(--el-color-primary);
+    color: var(--el-color-primary);
+  }
+}
+
+.easy-table__column-settings-btn--confirm {
+  background: var(--el-color-primary);
+  color: #fff;
+  box-shadow: 0 6px 14px rgba(79, 110, 247, 0.2);
+
+  &:hover {
+    background: $brand-blue-dark;
+  }
+}
+
+/* ========== 列固定 ========== */
+.easy-table__th--fixed,
+.easy-table__td--fixed {
+  position: sticky;
+  z-index: 1;
+}
+
+.easy-table__th--fixed {
+  background: $bg-header;
+}
+
+.easy-table__td--fixed {
+  background: var(--el-bg-color);
+}
+
+.easy-table__th--fixed,
+.easy-table__td--fixed {
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--el-border-color);
+  }
+
+  &.easy-table__th--fixed-left,
+  &.easy-table__td--fixed-left {
+    // left 值由 JS 动态计算注入（fixedOffsets），支持多列 fixed-left 依次排列
+    box-shadow: 8px 0 14px rgba(16, 24, 40, 0.06);
+
+    &::after {
+      right: -1px;
+    }
+  }
+
+  &.easy-table__th--fixed-right,
+  &.easy-table__td--fixed-right {
+    // right 值由 JS 动态计算注入（fixedOffsets），支持多列 fixed-right 依次排列
+    box-shadow: -8px 0 14px rgba(16, 24, 40, 0.06);
+
+    &::after {
+      left: -1px;
+    }
+  }
+}
+
+.easy-table__th--fixed {
+  z-index: 3;
+}
+
+/* ========== 合计行 ========== */
+.easy-table__tfoot {
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
+}
+
+.easy-table__summary-row {
+  background: var(--easy-table-summary-bg, #{$bg-header});
+  border-top: 1px solid $border-strong;
+
+  .easy-table__td {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--el-text-color-primary);
+    padding: 12px 16px;
+    white-space: nowrap;
+  }
+
+  // 合计行中的固定列也需要 sticky + 正确背景色（覆盖默认 #fff）
+  .easy-table__td--fixed {
+    background: var(--easy-table-summary-bg, #{$bg-header});
+    z-index: 2;
+  }
+}
+
+.easy-table__td--summary-label {
+  color: var(--el-text-color-secondary);
+  font-weight: 600;
+  text-align: center;
+}
+
+.easy-table__td--summary-placeholder {
+  // 占位单元格，不显示内容
+}
+
+// 合计行的选择列：禁止一切交互，光标改为默认
+.easy-table__td--no-select {
+  pointer-events: none;
+  cursor: default;
+  user-select: none;
+}
+
+.easy-table__summary-title {
+  color: var(--el-text-color-secondary);
+  font-weight: 500;
+}
+
+.easy-table__summary-sep {
+  color: var(--el-text-color-secondary);
+  margin: 0 2px;
+}
+
+// 合计行类型标签：区分"合计"和"均值"
+.easy-table__summary-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 3px 7px;
+  border-radius: 999px;
+  margin-right: 5px;
+  vertical-align: middle;
+
+  &.easy-table__summary-badge--sum {
+    color: #1677ff;
+    background: #e6f0ff;
+  }
+
+  &.easy-table__summary-badge--avg {
+    color: #07a35a;
+    background: #e6f9f0;
+  }
+}
+
+/* ========== Ellipsis Tooltip ========== */
+.easy-table__tooltip {
+  position: fixed;
+  z-index: 9999;
+  max-width: 320px;
+  padding: 8px 12px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #fff;
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(4px);
+  border-radius: 8px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.22);
+  white-space: pre-wrap;
+  word-break: break-all;
+  pointer-events: none;
+  transform: translate(12px, -50%);
+
+  // 右侧溢出时翻转到左侧
+  &.easy-tooltip-fade-enter-active,
+  &.easy-tooltip-fade-leave-active {
+    transition: opacity 0.15s ease;
+  }
+
+  &.easy-tooltip-fade-enter-from,
+  &.easy-tooltip-fade-leave-to {
+    opacity: 0;
+  }
+}
+
+/* ========== 展开图标 ========== */
+.easy-table__expand-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  color: var(--el-text-color-secondary);
+  transition: all 0.25s ease;
+  cursor: pointer;
+
+  svg {
+    transition: transform 0.25s ease;
+    transform: rotate(0deg);
+  }
+
+  &:hover {
+    color: var(--el-color-primary);
+    background: $primary-bg;
+  }
+
+  &.is-expanded {
+    svg {
+      transform: rotate(90deg);
+    }
+  }
+}
+
+/* ========== 树形数据 ========== */
+.easy-table__td--tree-expand {
+  width: 32px;
+  padding: 0 8px;
+  text-align: center;
+}
+
+.easy-table__td--tree-first {
+  display: flex;
+  align-items: center;
+}
+
+.easy-table__tree-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 8px;
+  color: var(--el-text-color-secondary);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  svg {
+    transition: transform 0.2s ease;
+    transform: rotate(0deg);
+  }
+
+  &:hover {
+    color: var(--el-color-primary);
+    background: $primary-bg;
+  }
+
+  &.is-expanded svg {
+    transform: rotate(90deg);
+  }
+
+  &.is-loading {
+    pointer-events: none;
+  }
+}
+
+.easy-table__loading-icon {
+  animation: easy-rotate 1s linear infinite;
+}
+
+@keyframes easy-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.easy-table__tree-indent {
+  display: inline-block;
+  width: 0;
+  height: 1px;
+  flex-shrink: 0;
+}
+
+// 树形节点行样式
+.easy-table__tr.is-tree-node {
+  &:hover > td {
+    background: var(--el-fill-color-light);
+  }
+}
+
+/* ========== 展开行 ========== */
+.easy-table__expand-row {
+  background: var(--el-fill-color-light);
+
+  td {
+    padding: 0 !important;
+    border-bottom: 1px solid var(--el-border-color);
+  }
+
+  &:hover > td {
+    background: var(--el-fill-color-light);
+  }
+}
+
+.easy-table__expand-cell {
+  padding: 16px 20px;
+  transition: all 0.3s ease;
+  background: var(--el-fill-color-light);
+
+  // Element Plus 风格的展开内容容器
+  > :deep(*:first-child) {
+    margin: 0;
+  }
+}

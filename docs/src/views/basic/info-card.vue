@@ -34,30 +34,12 @@ function handleClick() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body info-card-demo">
-          <EasyInfoCard
-            :image="demoImage"
-            icon="el:WarningFilled"
-            title="人员闯入"
-            :description="['1号门口', '2024-05-20 14:32:21']"
-            status="未处理"
-            status-type="danger"
-          />
-          <EasyInfoCard
-            :image="demoImage2"
-            icon="el:MapLocation"
-            title="区域入侵"
-            :description="['周界东侧', '2024-05-20 14:31:02']"
-            status="未处理"
-            status-type="danger"
-          />
-          <EasyInfoCard
-            :image="demoImage3"
-            icon="el:FirstAidKit"
-            title="安全帽未戴"
-            :description="['生产车间1', '2024-05-20 14:30:11']"
-            status="处理中"
-            status-type="warning"
-          />
+          <EasyInfoCard :image="demoImage" icon="el:WarningFilled" title="人员闯入"
+            :description="['1号门口', '2024-05-20 14:32:21']" status="未处理" status-type="danger" />
+          <EasyInfoCard :image="demoImage2" icon="el:MapLocation" title="区域入侵"
+            :description="['周界东侧', '2024-05-20 14:31:02']" status="未处理" status-type="danger" />
+          <EasyInfoCard :image="demoImage3" icon="el:FirstAidKit" title="安全帽未戴"
+            :description="['生产车间1', '2024-05-20 14:30:11']" status="处理中" status-type="warning" />
         </div>
         <EasyDocCode
           code="<EasyInfoCard
@@ -82,40 +64,15 @@ function handleClick() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body info-card-demo-light">
-          <EasyInfoCard
-            :image="demoImage"
-            icon="el:WarningFilled"
-            title="人员闯入"
-            :description="['1号门口', '2024-05-20 14:32:21']"
-            status="未处理"
-            status-type="danger"
-            background-color="#ffffff"
-            text-color="#1a1a2e"
-            description-color="#6b7280"
-            :bordered="true"
-          />
-          <EasyInfoCard
-            :image="demoImage2"
-            icon="el:MapLocation"
-            title="区域入侵"
-            :description="['周界东侧', '2024-05-20 14:31:02']"
-            status="处理中"
-            status-type="warning"
-            background-color="#f8fafc"
-            text-color="#1e293b"
-            description-color="#64748b"
-          />
-          <EasyInfoCard
-            :image="demoImage3"
-            icon="el:FirstAidKit"
-            title="安全帽未戴"
-            :description="['生产车间1', '2024-05-20 14:30:11']"
-            status="已处理"
-            status-type="success"
-            background-color="#ffffff"
-            text-color="#1a1a2e"
-            description-color="#6b7280"
-          />
+          <EasyInfoCard :image="demoImage" icon="el:WarningFilled" title="人员闯入"
+            :description="['1号门口', '2024-05-20 14:32:21']" status="未处理" status-type="danger" background-color="#ffffff"
+            text-color="#1a1a2e" description-color="#6b7280" :bordered="true" />
+          <EasyInfoCard :image="demoImage2" icon="el:MapLocation" title="区域入侵"
+            :description="['周界东侧', '2024-05-20 14:31:02']" status="处理中" status-type="warning" background-color="#f8fafc"
+            text-color="#1e293b" description-color="#64748b" />
+          <EasyInfoCard :image="demoImage3" icon="el:FirstAidKit" title="安全帽未戴"
+            :description="['生产车间1', '2024-05-20 14:30:11']" status="已处理" status-type="success" background-color="#ffffff"
+            text-color="#1a1a2e" description-color="#6b7280" />
         </div>
         <EasyDocCode
           code="<EasyInfoCard
@@ -139,33 +96,13 @@ function handleClick() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body info-card-demo">
-          <EasyInfoCard
-            :image="demoImage"
-            icon="el:WarningFilled"
-            title="人员闯入"
-            :description="['1号门口', '2024-05-20 14:32:21']"
-            status="未处理"
-            status-type="danger"
-            background-color="#0f172a"
-            text-color="#e2e8f0"
-            title-color="#f8fafc"
-            description-color="#94a3b8"
-            status-background-color="rgba(239, 68, 68, 0.2)"
-            status-text-color="#fca5a5"
-          />
-          <EasyInfoCard
-            icon="el:Notification"
-            title="系统通知"
-            :description="['服务器将于今晚 02:00 进行维护', '预计耗时 30 分钟']"
-            status="重要"
-            status-type="primary"
-            background-color="#1e3a5f"
-            text-color="#bfdbfe"
-            title-color="#ffffff"
-            description-color="#93c5fd"
-            status-background-color="rgba(59, 130, 246, 0.25)"
-            status-text-color="#93c5fd"
-          />
+          <EasyInfoCard :image="demoImage" icon="el:WarningFilled" title="人员闯入"
+            :description="['1号门口', '2024-05-20 14:32:21']" status="未处理" status-type="danger" background-color="#0f172a"
+            text-color="#e2e8f0" title-color="#f8fafc" description-color="#94a3b8"
+            status-background-color="rgba(239, 68, 68, 0.2)" status-text-color="#fca5a5" />
+          <EasyInfoCard icon="el:Notification" title="系统通知" :description="['服务器将于今晚 02:00 进行维护', '预计耗时 30 分钟']"
+            status="重要" status-type="primary" background-color="#1e3a5f" text-color="#bfdbfe" title-color="#ffffff"
+            description-color="#93c5fd" status-background-color="rgba(59, 130, 246, 0.25)" status-text-color="#93c5fd" />
         </div>
         <EasyDocCode
           code="<EasyInfoCard
@@ -191,16 +128,9 @@ function handleClick() {
       </p>
       <div class="doc-preview">
         <div class="doc-preview__body info-card-demo">
-          <EasyInfoCard
-            :image="demoImage"
-            icon="el:WarningFilled"
-            title="人员闯入"
-            :description="['1号门口', '2024-05-20 14:32:21']"
-            status="未处理"
-            status-type="danger"
-            clickable
-            @click="handleClick"
-          />
+          <EasyInfoCard :image="demoImage" icon="el:WarningFilled" title="人员闯入"
+            :description="['1号门口', '2024-05-20 14:32:21']" status="未处理" status-type="danger" clickable
+            @click="handleClick" />
         </div>
         <EasyDocCode code="<EasyInfoCard clickable @click=&quot;handleClick&quot; .../>" />
       </div>

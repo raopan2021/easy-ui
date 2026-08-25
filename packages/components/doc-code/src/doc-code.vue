@@ -1,128 +1,27 @@
 <script setup lang="ts">
-import hljs from 'highlight.js'
-import { computed, onMounted, ref, watch } from 'vue'
+import type { DocCodeProps } from './types'
 
-const props = withDefaults(
-  defineProps<{
-    code: string
-    lang?: string
-    collapseHeight?: number
-  }>(),
-  {
-    lang: 'auto',
-    collapseHeight: 100,
-  },
-)
+import { useDocCode } from './use-doc-code'
 
-const bodyRef = ref<HTMLElement | null>(null)
-const expanded = ref(false)
-const copied = ref(false)
-const needsCollapse = ref(false)
-const collapsed = ref(true)
-
-/** 语言映射：显示名 → highlight.js 语言名 */
-const langMap: Record<string, string> = {
-  html: 'xml',
-  vue: 'xml',
-  xml: 'xml',
-  js: 'javascript',
-  javascript: 'javascript',
-  ts: 'javascript',
-  typescript: 'javascript',
-  bash: 'bash',
-  shell: 'bash',
-  css: 'css',
-  json: 'json',
-}
-
-/** 含 HTML 标签 → Vue 模板 */
-function isVueTemplate(code: string): boolean {
-  return /<\/?[a-z][\w-]*[\s/>]/i.test(code)
-}
-
-const highlightResult = computed(() => {
-  if (!props.code)
-    return null
-  try {
-    if (props.lang && props.lang !== 'auto') {
-      const hljsLang = langMap[props.lang] || props.lang
-      return { value: hljs.highlight(props.code, { language: hljsLang, ignoreIllegals: true }).value, lang: props.lang }
-    }
-    if (isVueTemplate(props.code)) {
-      return { value: hljs.highlight(props.code, { language: 'xml', ignoreIllegals: true }).value, lang: 'vue' }
-    }
-    // 兜底用 highlightAuto
-    const auto = hljs.highlightAuto(props.code)
-    return { value: auto.value, lang: auto.language || 'text' }
-  }
-  catch (e) {
-    console.warn('[DocCode] highlight failed, falling back to plain text:', e)
-    return null
-  }
+const props = withDefaults(defineProps<DocCodeProps>(), {
+  lang: 'auto',
+  collapseHeight: 100,
 })
 
-const highlighted = computed(() => {
-  if (highlightResult.value)
-    return highlightResult.value.value
-  // 兜底：纯文本（HTML 转义）
-  return props.code.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-})
+const {
+  bodyRef,
+  expanded,
+  copied,
+  needsCollapse,
+  collapsed,
+  effectiveLang,
+  handleCopy,
+  bodyStyle,
+  wrappedHtml,
+} = useDocCode(props)
 
-const effectiveLang = computed(() => {
-  if (props.lang && props.lang !== 'auto')
-    return props.lang
-  return highlightResult.value?.lang || 'text'
-})
-
-const wrappedHtml = computed(() => `<pre><code>${highlighted.value}</code></pre>`)
-
-function checkCollapse() {
-  if (bodyRef.value) {
-    needsCollapse.value = bodyRef.value.scrollHeight > props.collapseHeight
-  }
-}
-
-const bodyStyle = computed(() => {
-  if (!needsCollapse.value || expanded.value)
-    return {}
-  return { maxHeight: `${props.collapseHeight}px`, overflow: 'hidden' }
-})
-
-async function handleCopy() {
-  try {
-    await navigator.clipboard.writeText(props.code)
-    copied.value = true
-    setTimeout(() => {
-      copied.value = false
-    }, 2000)
-  }
-  catch {
-    const textarea = document.createElement('textarea')
-    textarea.value = props.code
-    textarea.style.position = 'fixed'
-    textarea.style.opacity = '0'
-    document.body.appendChild(textarea)
-    textarea.select()
-    document.execCommand('copy')
-    document.body.removeChild(textarea)
-    copied.value = true
-    setTimeout(() => {
-      copied.value = false
-    }, 2000)
-  }
-}
-
-onMounted(() => {
-  checkCollapse()
-})
-
-watch(
-  () => props.code,
-  () => {
-    expanded.value = false
-    setTimeout(checkCollapse, 0)
-  },
-)
+// 保持对外类型导出兼容
+export type { DocCodeProps } from './types'
 </script>
 
 <template>
@@ -143,6 +42,7 @@ watch(
   </div>
 </template>
 
+<!-- 非 scoped 全局样式：含 highlight.js 主题（基于 Element Plus CSS 变量），必须全局生效，故保持内联 -->
 <style lang="scss">
 .doc-code {
   position: relative;

@@ -221,7 +221,7 @@ export function randomCreditCode() {
   for (let i = 0; i < 8; i++) {
     orgSum += orgWeights[i] * CREDIT_CODE_CHARS.indexOf(orgBody[i])
   }
-  let orgKey = 11 - (orgSum % 11)
+  const orgKey = 11 - (orgSum % 11)
   const orgCheck = orgKey === 10 ? 'X' : orgKey === 11 ? '0' : String(orgKey)
 
   // 第18位：统一社会信用代码校验码（GB/T 17710）

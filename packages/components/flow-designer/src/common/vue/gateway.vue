@@ -1,39 +1,20 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import type { GatewayEmits, GatewayProps } from './gateway-types'
+
 import EasyForm, { EasyFormItem } from '../../../../form'
 import EasyInput from '../../../../input'
+import { useGateway } from './use-gateway'
 
-const props = defineProps({
-  modelValue: {
-    type: Object,
-    default() {
-      return {}
-    },
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
+const props = withDefaults(defineProps<GatewayProps>(), {
+  modelValue: () => ({}),
+  disabled: false,
 })
 
-const emit = defineEmits(['change'])
+const emit = defineEmits<GatewayEmits>()
 
-const form = ref(props.modelValue)
-const formRef = ref()
-const nodeInput = ref()
+const { form, formRef, nodeInput, nodeNameChange } = useGateway(props, emit)
 
-watch(
-  () => form,
-  (n) => {
-    if (n)
-      emit('change', n)
-  },
-  { deep: true },
-)
-
-function nodeNameChange() {
-  nodeInput.value?.focus?.()
-}
+export type { GatewayEmits, GatewayProps } from './gateway-types'
 </script>
 
 <template>
@@ -49,8 +30,4 @@ function nodeNameChange() {
   </div>
 </template>
 
-<style scoped lang="scss">
-.gatewayForm {
-  padding: 15px;
-}
-</style>
+<style scoped src="./gateway-style.scss" lang="scss"></style>

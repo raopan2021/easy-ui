@@ -1,47 +1,28 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import type { BadgeProps } from './badge'
 
-import { badgeProps } from './badge'
+import { useBadge } from './use-badge'
 
-defineOptions({ name: 'EasyBadge' })
-
-const props = defineProps(badgeProps)
-
-const shouldShow = computed(() => {
-  const v = props.value
-  if (v === undefined || v === null)
-    return false
-  if (!props.showZero && (v === 0 || v === '0'))
-    return false
-  if (v === '')
-    return false
-  return true
+defineOptions({
+  name: 'EasyBadge',
 })
 
-const finalValue = computed(() => {
-  const num = Number(props.value)
-  if (!Number.isNaN(num)) {
-    if (num > props.max)
-      return props.max + props.overflowText
-    return num
-  }
-  return props.value
+const props = withDefaults(defineProps<BadgeProps>(), {
+  value: undefined,
+  max: 99,
+  overflowText: '+',
+  type: 'danger',
+  position: 'top-right',
+  showZero: false,
+  color: '',
+  circle: false,
 })
 
-const badgeColor = computed(() => {
-  const colorMap: Record<string, string> = {
-    primary: '#409eff',
-    success: '#67c23a',
-    warning: '#e6a23c',
-    danger: '#f56c6c',
-    info: '#909399',
-  }
-  return props.color || colorMap[props.type] || colorMap.danger
-})
+// 徽标展示逻辑抽离到 composable
+const { shouldShow, finalValue, textStyle } = useBadge(props)
 
-const textStyle = computed(() => ({
-  backgroundColor: badgeColor.value,
-}))
+// 保持对外类型导出兼容（原定义在 badge.ts）
+export type { BadgeProps } from './badge'
 </script>
 
 <template>
@@ -53,6 +34,7 @@ const textStyle = computed(() => ({
   </span>
 </template>
 
+<!-- 非 scoped 样式（全局 .easy-badge 作用域，按规则保持内联） -->
 <style>
 .easy-badge {
   display: inline-flex;

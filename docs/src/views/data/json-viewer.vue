@@ -403,9 +403,7 @@ const pageData = ref({
         <div class="doc-preview__body">
           <EasyJsonViewer :data="nullPointerErrorData" :depth="2" theme="dark" />
         </div>
-        <EasyDocCode
-          code="<EasyJsonViewer :data=&quot;nullPointerErrorData&quot; :depth=&quot;2&quot; theme=&quot;dark&quot; />"
-        />
+        <EasyDocCode code="<EasyJsonViewer :data=&quot;nullPointerErrorData&quot; :depth=&quot;2&quot; theme=&quot;dark&quot; />" />
       </div>
 
       <!-- 分页数据 -->

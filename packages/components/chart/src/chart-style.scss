@@ -1,0 +1,418 @@
+.easy-chart {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--el-bg-color);
+  box-sizing: border-box;
+  user-select: none;
+
+  // legend 在左/右时，整体改为横向排列
+  &.legend-left,
+  &.legend-right {
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    // 标题栏独占一行
+    .easy-chart__header {
+      flex: 0 0 100%;
+      order: -2;
+    }
+  }
+  &.legend-right .easy-chart__legend {
+    order: 1;
+  }
+  &.legend-left .easy-chart__legend {
+    order: -1;
+  }
+}
+
+// 标题
+.easy-chart__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 18px;
+  flex-shrink: 0;
+  min-height: 8px;
+
+  &.has-content {
+    padding: 14px 18px 4px;
+  }
+}
+.easy-chart__header-left {
+  flex: 1;
+  min-width: 0;
+}
+.easy-chart__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  line-height: 1.4;
+}
+.easy-chart__subtitle {
+  font-size: 12px;
+  color: var(--el-text-color-secondary);
+  margin-top: 2px;
+}
+
+// 下载按钮
+.easy-chart__download {
+  position: relative;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+.easy-chart__download-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--el-border-color);
+  border-radius: 6px;
+  background: var(--el-bg-color);
+  color: var(--el-text-color-secondary);
+  cursor: pointer;
+  transition: all 0.18s;
+  padding: 0;
+  outline: none;
+
+  &:hover {
+    background: var(--el-fill-color-light);
+    color: var(--el-text-color-primary);
+    border-color: var(--el-border-color-darker); // darken(var(--el-border-color), 5%) → var(--el-border-color)=#e4e4e7
+  }
+  &:active {
+    background: #ebebee;
+    transform: scale(0.95);
+  }
+}
+.easy-chart__download-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: var(--el-bg-color);
+  border: 1px solid var(--el-border-color);
+  border-radius: 8px;
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.1),
+    0 2px 6px rgba(0, 0, 0, 0.06);
+  z-index: 200;
+  overflow: hidden;
+  min-width: 130px;
+  animation: menu-in 0.15s ease;
+
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
+.easy-chart__download-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  font-size: 13px;
+  color: var(--el-text-color-regular);
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+
+  &:hover {
+    background: var(--el-fill-color-light);
+    color: var(--el-text-color-primary);
+  }
+  &:active {
+    background: #ebebee;
+  }
+  svg {
+    flex-shrink: 0;
+    color: var(--el-text-color-secondary);
+  }
+  &:not(:last-child) {
+    border-bottom: 1px solid #f4f5f7;
+  }
+}
+
+// 图例
+.easy-chart__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 6px 18px;
+  flex-shrink: 0;
+
+  &.easy-chart__legend--top {
+    order: -1;
+    padding-bottom: 4px;
+  }
+  &.easy-chart__legend--bottom {
+    padding-top: 4px;
+  }
+  &.easy-chart__legend--left {
+    flex-direction: column;
+    padding: 14px 0 14px 8px;
+    width: 120px;
+    flex-shrink: 0;
+  }
+  &.easy-chart__legend--right {
+    flex-direction: column;
+    padding: 14px 8px 14px 0;
+    width: 120px;
+    flex-shrink: 0;
+  }
+}
+.easy-chart__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  &.is-hidden {
+    opacity: 0.35;
+  }
+}
+.easy-chart__legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.easy-chart__legend-label {
+  font-size: 12px;
+  color: var(--el-text-color-secondary);
+  white-space: nowrap;
+}
+
+// 绘图区
+.easy-chart__body {
+  flex: 1;
+  position: relative;
+  min-height: 0;
+  min-width: 0; // 横向布局时 flex:1 需要 min-width:0 才能正确收缩
+  overflow: hidden;
+}
+
+.easy-chart__svg {
+  display: block;
+  overflow: visible;
+}
+
+// 网格线
+.easy-chart__grid-line {
+  stroke: #f1f1f4;
+  stroke-width: 1;
+}
+
+// 坐标轴
+.easy-chart__axis-line {
+  stroke: var(--el-border-color);
+  stroke-width: 1;
+}
+.easy-chart__axis-text {
+  font-size: 11px;
+  fill: var(--el-text-color-secondary);
+}
+
+// 折线
+.easy-chart__line {
+  transition: d 0.3s ease;
+}
+.easy-chart__point {
+  cursor: pointer;
+  transition:
+    r 0.15s,
+    fill 0.15s;
+}
+
+// 数据标签（折线/柱状图）
+.easy-chart__data-label {
+  font-size: 11px;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+// 饼图/环形图切片标签
+.easy-chart__pie-label {
+  font-size: 11px;
+  font-weight: 700;
+  fill: #fff;
+  pointer-events: none;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+// 柱子
+.easy-chart__bar {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+// 饼图
+.easy-chart__pie-slice {
+  cursor: pointer;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.2s;
+}
+
+// 触发竖线
+.easy-chart__tooltip-line {
+  stroke: var(--el-text-color-placeholder);
+  stroke-width: 1;
+  stroke-dasharray: 4 3;
+  pointer-events: none;
+}
+
+// Tooltip
+.easy-chart__tooltip {
+  position: absolute;
+  background: rgba(30, 30, 40, 0.92);
+  color: var(--el-color-white);
+  padding: 8px 12px;
+  border-radius: 8px;
+  pointer-events: none;
+  font-size: 12px;
+  line-height: 1.6;
+  min-width: 120px;
+  max-width: 200px;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(4px);
+  animation: tooltip-in 0.15s ease;
+
+  @keyframes tooltip-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+.easy-chart__tooltip-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+}
+.easy-chart__tooltip-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.easy-chart__tooltip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.easy-chart__tooltip-name {
+  flex: 1;
+  color: rgba(255, 255, 255, 0.85);
+}
+.easy-chart__tooltip-val {
+  font-weight: 600;
+  color: var(--el-color-white);
+}
+
+// 环形中心文字
+.easy-chart__donut-label {
+  font-size: 12px;
+  fill: var(--el-text-color-secondary);
+  y: -10px;
+}
+.easy-chart__donut-value {
+  font-size: 18px;
+  font-weight: 700;
+  fill: var(--el-text-color-primary);
+  y: 8px;
+}
+
+// 空状态
+.easy-chart__empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--el-text-color-secondary);
+  font-size: 13px;
+}
+
+// 漏斗图
+.easy-chart__funnel-item {
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.easy-chart__funnel-label {
+  font-size: 13px;
+  font-weight: 600;
+  fill: #fff;
+  pointer-events: none;
+}
+.easy-chart__funnel-value {
+  font-size: 11px;
+  fill: rgba(255, 255, 255, 0.85);
+  pointer-events: none;
+}
+
+// 横向滚动
+.easy-chart__body {
+  &.is-scrollable {
+    .easy-chart__svg {
+      cursor: grab;
+    }
+  }
+  &.is-dragging {
+    .easy-chart__svg {
+      cursor: grabbing;
+    }
+  }
+}
+
+.easy-chart__scrollbar-track {
+  fill: #f1f1f4;
+}
+.easy-chart__scrollbar-thumb {
+  fill: #c4c4cc;
+  cursor: pointer;
+  transition: fill 0.15s;
+
+  &:hover {
+    fill: var(--el-text-color-placeholder);
+  }
+}
+
+// 横向柱状图
+.easy-chart__hbar-val {
+  font-size: 11px;
+  fill: var(--el-text-color-secondary);
+}
+.easy-chart__hbar-hover {
+  fill: #f4f5f7;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.easy-chart__gauge-progress {
+  transition: d 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.easy-chart__gauge-needle {
+  transition: d 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.easy-chart__gauge-val {
+  font-size: 22px;
+  font-weight: 700;
+  fill: var(--el-text-color-primary);
+}

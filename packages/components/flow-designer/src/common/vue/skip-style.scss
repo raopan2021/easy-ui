@@ -1,0 +1,36 @@
+.skipForm {
+  padding: 15px;
+}
+
+.placeholder {
+  color: var(--el-text-color-placeholder);
+  font-size: 12px;
+}
+
+.conditionRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+
+  .conditionName {
+    width: 30%;
+  }
+
+  .conditionType {
+    width: 25%;
+
+    &.is-spel {
+      width: 18%;
+    }
+  }
+
+  .conditionValue {
+    flex: 1;
+    min-width: 0;
+
+    &.is-spel {
+      flex: 2;
+    }
+  }
+}

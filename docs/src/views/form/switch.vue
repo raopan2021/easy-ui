@@ -102,9 +102,7 @@ const value11 = ref(false)
           <span style="font-size: 13px; color: var(--el-text-color-secondary)">当前值：{{ value5 }}</span>
         </div>
       </div>
-      <EasyDocCode
-        code="<EasySwitch v-model=&quot;value&quot; active-value=&quot;yes&quot; inactive-value=&quot;no&quot; />"
-      />
+      <EasyDocCode code="<EasySwitch v-model=&quot;value&quot; active-value=&quot;yes&quot; inactive-value=&quot;no&quot; />" />
     </section>
 
     <!-- 禁用状态 -->

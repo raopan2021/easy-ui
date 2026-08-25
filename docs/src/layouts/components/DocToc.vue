@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import type { TocItem } from '../composables/useDocToc'
 
 defineProps<{
@@ -26,28 +25,16 @@ function indentClass(level: number): string {
       目录
     </div>
     <ul class="doc-toc__list">
-      <li
-        v-for="item in items"
-        :key="item.id"
-        class="doc-toc__item"
-        :class="[indentClass(item.level), { 'is-active': item.id === activeId }]"
-      >
-        <a
-          href="javascript:;"
-          class="doc-toc__link"
-          @click.prevent="emit('select', item.id)"
-        >
+      <li v-for="item in items" :key="item.id" class="doc-toc__item"
+        :class="[indentClass(item.level), { 'is-active': item.id === activeId }]">
+        <a href="javascript:;" class="doc-toc__link" @click.prevent="emit('select', item.id)">
           {{ item.label }}
         </a>
       </li>
     </ul>
 
     <!-- 回到顶部 -->
-    <button
-      class="doc-toc__back-top"
-      :class="{ 'is-visible': scrolled }"
-      @click="emit('back-top')"
-    >
+    <button class="doc-toc__back-top" :class="{ 'is-visible': scrolled }" @click="emit('back-top')">
       <EasyIcon class="doc-toc__back-top-icon" name="el:Top" />
       <span>回到顶部</span>
     </button>

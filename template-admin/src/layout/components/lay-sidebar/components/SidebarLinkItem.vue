@@ -22,10 +22,7 @@ function getLinkProps(item: menuType) {
 </script>
 
 <template>
-  <component
-    :is="isExternalLink ? 'a' : 'router-link'"
-    v-bind="getLinkProps(to)"
-  >
+  <component :is="isExternalLink ? 'a' : 'router-link'" v-bind="getLinkProps(to)">
     <slot />
   </component>
 </template>

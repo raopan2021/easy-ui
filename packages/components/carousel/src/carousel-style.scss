@@ -1,0 +1,417 @@
+@use '../../../easy-ui/src/styles/tokens' as *;
+
+/* ========== 设计令牌 ========== */
+
+$transition: all 0.3s ease;
+
+.easy-carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--el-fill-color-light);
+
+  html.dark & {
+    background: var(--el-fill-color-lighter);
+  }
+}
+
+.easy-carousel--vertical {
+  .easy-carousel__container {
+    height: 300px;
+  }
+}
+
+/* ========== 容器 ========== */
+.easy-carousel__container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+}
+
+.easy-carousel__track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.easy-carousel__item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.easy-carousel__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.easy-carousel__custom-item {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: var(--el-color-white);
+  background: linear-gradient(135deg, var(--el-color-primary) 0%, var(--el-color-primary) 100%);
+}
+
+/* ========== 标题 ========== */
+.easy-carousel__title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 8;
+  padding: 48px 20px 16px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55) 0%, transparent 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.easy-carousel__title-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--el-color-white);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  line-height: 1.4;
+}
+
+.easy-carousel__counter {
+  flex-shrink: 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 2px 10px;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+}
+
+/* ========== 3D 模式 ========== */
+.easy-carousel--3d {
+  .easy-carousel__container {
+    height: 260px;
+    perspective: 1200px;
+  }
+}
+
+.easy-carousel__perspective {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+}
+
+.easy-carousel__3d-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.easy-carousel__3d-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+
+  &.is-active {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  }
+
+  html.dark & {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+
+    &.is-active {
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
+    }
+  }
+
+  img {
+    border-radius: 12px;
+  }
+}
+
+/* ========== 箭头 ========== */
+.easy-carousel__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: var(--el-fill-color-light);
+  color: var(--el-color-white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: $transition;
+  opacity: 1;
+  backdrop-filter: blur(4px);
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  &:hover {
+    background: var(--el-fill-color-light);
+  }
+
+  &.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.easy-carousel__arrow--left {
+  left: 12px;
+}
+.easy-carousel__arrow--right {
+  right: 12px;
+}
+
+/* 垂直模式箭头位置调整 */
+.easy-carousel--vertical {
+  .easy-carousel__arrow {
+    top: auto;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &.easy-carousel__arrow--left {
+      top: 12px;
+      transform: translateX(-50%);
+    }
+    &.easy-carousel__arrow--right {
+      bottom: 12px;
+      top: auto;
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* ========== 指示器 ========== */
+.easy-carousel__dots {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  gap: 8px;
+}
+
+.easy-carousel__dots--bottom {
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.easy-carousel__dots--left {
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  flex-direction: column;
+}
+
+.easy-carousel__dots--right {
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  flex-direction: column;
+}
+
+// 有标题时指示器上移
+.easy-carousel__title ~ .easy-carousel__dots--bottom {
+  bottom: 52px;
+}
+
+.easy-carousel__dot {
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: $transition;
+}
+
+.easy-carousel__dot--dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: $white-dim;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+
+  html.dark & {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+  }
+
+  &.is-active {
+    background: $white;
+    box-shadow: 0 0 8px rgba(79, 110, 247, 0.08);
+    transform: scale(1.2);
+  }
+}
+
+.easy-carousel__dot--line {
+  width: 24px;
+  height: 4px;
+  border-radius: 2px;
+  background: $white-dim;
+  overflow: hidden;
+
+  .easy-carousel__dot-inner {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border-radius: 2px;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  &.is-active {
+    background: rgba(255, 255, 255, 0.3);
+    .easy-carousel__dot-inner {
+      background: $white;
+      transform: scaleX(1);
+    }
+  }
+}
+
+/* ========== 数字指示器 ========== */
+.easy-carousel__dots--number {
+  gap: 0;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  padding: 4px;
+
+  html.dark & {
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.easy-carousel__number {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--el-color-white);
+  font-size: 14px;
+  user-select: none;
+}
+
+.easy-carousel__number-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--el-color-white);
+  cursor: pointer;
+  transition: $transition;
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+}
+
+.easy-carousel__number-current {
+  font-size: 16px;
+  min-width: 24px;
+  text-align: center;
+}
+
+.easy-carousel__number-sep {
+  opacity: 0.5;
+  font-weight: 400;
+}
+
+.easy-carousel__number-total {
+  font-size: 13px;
+  opacity: 0.6;
+  min-width: 24px;
+  text-align: center;
+}
+
+/* ========== 过渡动画 - 水平 ========== */
+.easy-slide-forward-enter-active,
+.easy-slide-forward-leave-active,
+.easy-slide-backward-enter-active,
+.easy-slide-backward-leave-active {
+  transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.easy-slide-forward-enter-from {
+  transform: translateX(100%);
+  opacity: 0.5;
+}
+.easy-slide-forward-leave-to {
+  transform: translateX(-100%);
+  opacity: 0.5;
+}
+.easy-slide-backward-enter-from {
+  transform: translateX(-100%);
+  opacity: 0.5;
+}
+.easy-slide-backward-leave-to {
+  transform: translateX(100%);
+  opacity: 0.5;
+}
+
+/* ========== 过渡动画 - 垂直 ========== */
+.easy-slide-v-forward-enter-active,
+.easy-slide-v-forward-leave-active,
+.easy-slide-v-backward-enter-active,
+.easy-slide-v-backward-leave-active {
+  transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.easy-slide-v-forward-enter-from {
+  transform: translateY(100%);
+  opacity: 0.5;
+}
+.easy-slide-v-forward-leave-to {
+  transform: translateY(-100%);
+  opacity: 0.5;
+}
+.easy-slide-v-backward-enter-from {
+  transform: translateY(-100%);
+  opacity: 0.5;
+}
+.easy-slide-v-backward-leave-to {
+  transform: translateY(100%);
+  opacity: 0.5;
+}

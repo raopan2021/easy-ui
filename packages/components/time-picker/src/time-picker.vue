@@ -1,6 +1,11 @@
 <script setup lang="ts">
+import type { TimePickerEmits, TimePickerProps } from './types'
+
 import { Clock, Close } from '@element-plus/icons-vue'
-import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+import { useTimePicker } from './use-time-picker'
+
+// 保持对外类型导出兼容（原定义在 time-picker.vue）
+export type { TimePickerEmits, TimePickerProps } from './types'
 
 defineOptions({ name: 'EasyTimePicker' })
 
@@ -14,308 +19,50 @@ const props = withDefaults(defineProps<TimePickerProps>(), {
   size: 'default',
 })
 
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void
-  (e: 'change', value: string): void
-}>()
+const emit = defineEmits<TimePickerEmits>()
 
-export interface TimePickerProps {
-  modelValue?: string
-  placeholder?: string
-  disabled?: boolean
-  readonly?: boolean
-  clearable?: boolean
-  showSeconds?: boolean
-  size?: 'large' | 'default' | 'small'
-}
-
-const inputRef = ref<HTMLInputElement | null>(null)
-const wrapperRef = ref<HTMLElement | null>(null)
-const panelRef = ref<HTMLElement | null>(null)
-const hoursListRef = ref<HTMLElement | null>(null)
-const minutesListRef = ref<HTMLElement | null>(null)
-const secondsListRef = ref<HTMLElement | null>(null)
-const hoursInputRef = ref<HTMLInputElement | null>(null)
-const minutesInputRef = ref<HTMLInputElement | null>(null)
-const secondsInputRef = ref<HTMLInputElement | null>(null)
-const focusing = ref(false)
-const hovering = ref(false)
-const panelVisible = ref(false)
-const tick = ref(0)
-
-// 面板临时值
-const panelHours = ref(0)
-const panelMinutes = ref(0)
-const panelSeconds = ref(0)
-
-const ITEM_HEIGHT = 32
-const VISIBLE_ITEMS = 7
-const SCROLL_OFFSET = Math.floor(VISIBLE_ITEMS / 2) // = 3
-
-function parseTime(val: string) {
-  if (!val)
-    return { h: 0, m: 0, s: 0 }
-  const parts = val.split(':').map(Number)
-  return {
-    h: isNaN(parts[0]) ? 0 : Math.max(0, Math.min(23, parts[0])),
-    m: isNaN(parts[1]) ? 0 : Math.max(0, Math.min(59, parts[1])),
-    s: isNaN(parts[2]) ? 0 : Math.max(0, Math.min(59, parts[2])),
-  }
-}
-
-const displayValue = computed(() => props.modelValue)
-
-const panelStyle = computed(() => {
-  // eslint-disable-next-line ts/no-unused-expressions
-  tick.value
-  if (!wrapperRef.value)
-    return {}
-  const rect = wrapperRef.value.getBoundingClientRect()
-  return {
-    top: `${rect.bottom + 4}px`,
-    left: `${rect.left}px`,
-  }
-})
-
-function scrollToValue(listEl: HTMLElement | null, value: number) {
-  if (!listEl)
-    return
-  listEl.scrollTop = (value - SCROLL_OFFSET) * ITEM_HEIGHT
-}
-
-function openPanel() {
-  if (props.disabled || props.readonly)
-    return
-  const parsed = parseTime(props.modelValue)
-  panelHours.value = parsed.h
-  panelMinutes.value = parsed.m
-  panelSeconds.value = parsed.s
-  tick.value++
-  panelVisible.value = true
-  nextTick(() => {
-    syncInputsFromValues()
-    scrollToAllLists()
-  })
-}
-
-function closePanel() {
-  panelVisible.value = false
-}
-
-function scrollToAllLists() {
-  scrollToValue(hoursListRef.value, panelHours.value)
-  scrollToValue(minutesListRef.value, panelMinutes.value)
-  scrollToValue(secondsListRef.value, panelSeconds.value)
-}
-
-function formatOutput(): string {
-  const hh = String(panelHours.value).padStart(2, '0')
-  const mm = String(panelMinutes.value).padStart(2, '0')
-  if (props.showSeconds)
-    return `${hh}:${mm}:${String(panelSeconds.value).padStart(2, '0')}`
-  return `${hh}:${mm}`
-}
-
-function setNow() {
-  const now = new Date()
-  panelHours.value = now.getHours()
-  panelMinutes.value = now.getMinutes()
-  panelSeconds.value = now.getSeconds()
-  nextTick(() => {
-    syncInputsFromValues()
-    scrollToAllLists()
-  })
-}
-
-function confirm() {
-  const val = formatOutput()
-  emit('update:modelValue', val)
-  emit('change', val)
-  closePanel()
-}
-
-function selectHour(h: number) {
-  panelHours.value = h
-  scrollToValue(hoursListRef.value, h)
-  syncInputsFromValues()
-}
-
-function selectMinute(m: number) {
-  panelMinutes.value = m
-  scrollToValue(minutesListRef.value, m)
-  syncInputsFromValues()
-}
-
-function selectSecond(s: number) {
-  panelSeconds.value = s
-  scrollToValue(secondsListRef.value, s)
-  syncInputsFromValues()
-}
-
-function onScroll(e: Event, unit: 'hours' | 'minutes' | 'seconds') {
-  const el = e.target as HTMLElement
-  const value = Math.round(el.scrollTop / ITEM_HEIGHT) + SCROLL_OFFSET
-  if (unit === 'hours')
-    panelHours.value = Math.max(0, Math.min(23, value))
-  else if (unit === 'minutes')
-    panelMinutes.value = Math.max(0, Math.min(59, value))
-  else panelSeconds.value = Math.max(0, Math.min(59, value))
-  syncInputsFromValues()
-}
-
-// ========== 面板内分段输入框 ==========
-
-function getInputRef(unit: 'hours' | 'minutes' | 'seconds') {
-  if (unit === 'hours')
-    return hoursInputRef
-  if (unit === 'minutes')
-    return minutesInputRef
-  return secondsInputRef
-}
-
-function getUnitMax(unit: 'hours' | 'minutes' | 'seconds') {
-  return unit === 'hours' ? 23 : 59
-}
-
-/** 将面板值同步到所有输入框 DOM */
-function syncInputsFromValues() {
-  const hh = hoursInputRef.value
-  const mm = minutesInputRef.value
-  const ss = secondsInputRef.value
-  if (hh)
-    hh.value = String(panelHours.value).padStart(2, '0')
-  if (mm)
-    mm.value = String(panelMinutes.value).padStart(2, '0')
-  if (ss)
-    ss.value = String(panelSeconds.value).padStart(2, '0')
-}
-
-/** 输入事件：只过滤非数字、限制2位，不干预光标 */
-function onTimeInput(e: Event, unit: 'hours' | 'minutes' | 'seconds') {
-  const el = e.target as HTMLInputElement
-  const raw = el.value.replace(/\D/g, '').slice(0, 2)
-
-  // 只在内容真的被过滤时才重写（避免干扰正常输入和光标位置）
-  if (raw !== el.value) {
-    el.value = raw
-  }
-
-  const max = getUnitMax(unit)
-  const num = raw.length > 0 ? parseInt(raw, 10) : 0
-  const val = isNaN(num) ? 0 : Math.max(0, Math.min(max, num))
-
-  if (unit === 'hours')
-    panelHours.value = val
-  else if (unit === 'minutes')
-    panelMinutes.value = val
-  else panelSeconds.value = val
-  scrollToAllLists()
-}
-
-/** blur 时格式化（补零、限制范围） */
-function onTimeBlur(e: Event, unit: 'hours' | 'minutes' | 'seconds') {
-  const el = e.target as HTMLInputElement
-  const max = getUnitMax(unit)
-  const num = parseInt(el.value, 10)
-  if (isNaN(num) || el.value.trim() === '') {
-    el.value = '00'
-  }
-  else {
-    el.value = String(Math.max(0, Math.min(max, num))).padStart(2, '0')
-  }
-  // blur 时将最终值同步到面板
-  const val = parseInt(el.value, 10)
-  if (unit === 'hours')
-    panelHours.value = val
-  else if (unit === 'minutes')
-    panelMinutes.value = val
-  else panelSeconds.value = val
-}
-
-/** 上下键调整数值 */
-function adjustInput(unit: 'hours' | 'minutes' | 'seconds', delta: number) {
-  const max = getUnitMax(unit) + 1
-  if (unit === 'hours')
-    panelHours.value = (panelHours.value + delta + max) % max
-  else if (unit === 'minutes')
-    panelMinutes.value = (panelMinutes.value + delta + max) % max
-  else panelSeconds.value = (panelSeconds.value + delta + max) % max
-  syncInputsFromValues()
-  scrollToAllLists()
-}
-
-/** Enter 键跳转到下一个输入框 */
-function focusNextInput(unit: 'hours' | 'minutes' | 'seconds') {
-  const targetRef = getInputRef(unit)
-  nextTick(() => {
-    if (targetRef.value)
-      targetRef.value.focus()
-  })
-}
-
-// ========== 外部事件 ==========
-function handlePanelMouseDown(e: MouseEvent) {
-  const target = e.target as HTMLElement
-  const isInput = target.closest('.easy-time-panel__input-area')
-  if (!isInput) {
-    e.preventDefault()
-  }
-}
-
-function clear() {
-  emit('update:modelValue', '')
-  emit('change', '')
-}
-
-function handleFocus() {
-  focusing.value = true
-}
-function handleBlur() {
-  focusing.value = false
-}
-
-function handleClickOutside(e: MouseEvent) {
-  if (!panelVisible.value)
-    return
-  const active = document.activeElement as HTMLElement | null
-  if (active && panelRef.value?.contains(active))
-    return
-  const target = e.target as HTMLElement
-  if (wrapperRef.value?.contains(target))
-    return
-  if (panelRef.value?.contains(target))
-    return
-  closePanel()
-}
-
-function handleScrollClose(e: Event) {
-  if (!panelVisible.value)
-    return
-  const target = e.target as HTMLElement
-  if (panelRef.value?.contains(target))
-    return
-  closePanel()
-}
-
-onMounted(() => {
-  document.addEventListener('mousedown', handleClickOutside)
-  window.addEventListener('scroll', handleScrollClose, true)
-})
-onBeforeUnmount(() => {
-  document.removeEventListener('mousedown', handleClickOutside)
-  window.removeEventListener('scroll', handleScrollClose, true)
-})
+// ──── 核心逻辑（时间解析 / 滚动选择 / 分段输入 / 面板 / 外部事件 / 生命周期）────
+const {
+  inputRef,
+  wrapperRef,
+  panelRef,
+  hoursListRef,
+  minutesListRef,
+  secondsListRef,
+  hoursInputRef,
+  minutesInputRef,
+  secondsInputRef,
+  focusing,
+  hovering,
+  panelVisible,
+  panelHours,
+  panelMinutes,
+  panelSeconds,
+  displayValue,
+  panelStyle,
+  openPanel,
+  setNow,
+  confirm,
+  clear,
+  selectHour,
+  selectMinute,
+  selectSecond,
+  onScroll,
+  onTimeInput,
+  onTimeBlur,
+  adjustInput,
+  focusNextInput,
+  handleFocus,
+  handleBlur,
+  handlePanelMouseDown,
+} = useTimePicker(props, emit)
 </script>
 
 <template>
   <div class="easy-time-picker" :class="[`easy-time-picker--${size}`, { 'is-disabled': disabled }]">
-    <div
-      ref="wrapperRef"
-      class="easy-time-picker__wrapper"
-      :class="{ 'is-focus': focusing, 'is-hover': hovering && !disabled }"
-      @mouseenter="hovering = true"
-      @mouseleave="hovering = false"
-    >
+    <div ref="wrapperRef" class="easy-time-picker__wrapper"
+      :class="{ 'is-focus': focusing, 'is-hover': hovering && !disabled }" @mouseenter="hovering = true"
+      @mouseleave="hovering = false">
       <!-- 前缀图标 -->
       <span class="easy-time-picker__prefix">
         <slot name="prefix">
@@ -324,17 +71,8 @@ onBeforeUnmount(() => {
       </span>
 
       <!-- 时间输入（只读，点击打开弹窗） -->
-      <input
-        ref="inputRef"
-        class="easy-time-picker__input"
-        :value="displayValue"
-        :placeholder="placeholder"
-        :disabled="disabled"
-        :readonly="true"
-        @focus="handleFocus"
-        @blur="handleBlur"
-        @click="openPanel"
-      >
+      <input ref="inputRef" class="easy-time-picker__input" :value="displayValue" :placeholder="placeholder"
+        :disabled="disabled" :readonly="true" @focus="handleFocus" @blur="handleBlur" @click="openPanel">
 
       <!-- 清除 -->
       <span v-if="clearable && modelValue && !disabled" class="easy-time-picker__clear" @click.stop="clear">
@@ -345,49 +83,25 @@ onBeforeUnmount(() => {
     <!-- 时间面板 -->
     <Teleport to="body">
       <Transition name="easy-time-picker-fade">
-        <div
-          v-if="panelVisible"
-          ref="panelRef"
-          class="easy-time-picker__panel"
-          :style="panelStyle"
-          @mousedown="handlePanelMouseDown"
-        >
+        <div v-if="panelVisible" ref="panelRef" class="easy-time-picker__panel" :style="panelStyle"
+          @mousedown="handlePanelMouseDown">
           <!-- 手动输入区 -->
           <div class="easy-time-panel__input-area">
-            <input
-              ref="hoursInputRef"
-              class="easy-time-panel__time-input"
-              maxlength="2"
-              :value="String(panelHours).padStart(2, '0')"
-              @input="onTimeInput($event, 'hours')"
-              @blur="onTimeBlur($event, 'hours')"
-              @keydown.down.prevent="adjustInput('hours', 1)"
-              @keydown.up.prevent="adjustInput('hours', -1)"
-              @keydown.enter.prevent="focusNextInput('minutes')"
-            >
+            <input ref="hoursInputRef" class="easy-time-panel__time-input" maxlength="2"
+              :value="String(panelHours).padStart(2, '0')" @input="onTimeInput($event, 'hours')"
+              @blur="onTimeBlur($event, 'hours')" @keydown.down.prevent="adjustInput('hours', 1)"
+              @keydown.up.prevent="adjustInput('hours', -1)" @keydown.enter.prevent="focusNextInput('minutes')">
             <span class="easy-time-panel__input-sep">:</span>
-            <input
-              ref="minutesInputRef"
-              class="easy-time-panel__time-input"
-              maxlength="2"
-              @input="onTimeInput($event, 'minutes')"
-              @blur="onTimeBlur($event, 'minutes')"
-              @keydown.down.prevent="adjustInput('minutes', 1)"
-              @keydown.up.prevent="adjustInput('minutes', -1)"
-              @keydown.enter.prevent="showSeconds ? focusNextInput('seconds') : confirm()"
-            >
+            <input ref="minutesInputRef" class="easy-time-panel__time-input" maxlength="2"
+              @input="onTimeInput($event, 'minutes')" @blur="onTimeBlur($event, 'minutes')"
+              @keydown.down.prevent="adjustInput('minutes', 1)" @keydown.up.prevent="adjustInput('minutes', -1)"
+              @keydown.enter.prevent="showSeconds ? focusNextInput('seconds') : confirm()">
             <template v-if="showSeconds">
               <span class="easy-time-panel__input-sep">:</span>
-              <input
-                ref="secondsInputRef"
-                class="easy-time-panel__time-input"
-                maxlength="2"
-                @input="onTimeInput($event, 'seconds')"
-                @blur="onTimeBlur($event, 'seconds')"
-                @keydown.down.prevent="adjustInput('seconds', 1)"
-                @keydown.up.prevent="adjustInput('seconds', -1)"
-                @keydown.enter.prevent="confirm"
-              >
+              <input ref="secondsInputRef" class="easy-time-panel__time-input" maxlength="2"
+                @input="onTimeInput($event, 'seconds')" @blur="onTimeBlur($event, 'seconds')"
+                @keydown.down.prevent="adjustInput('seconds', 1)" @keydown.up.prevent="adjustInput('seconds', -1)"
+                @keydown.enter.prevent="confirm">
             </template>
           </div>
 
@@ -397,13 +111,8 @@ onBeforeUnmount(() => {
             <div class="easy-time-panel__column">
               <div class="easy-time-panel__list-wrap">
                 <div ref="hoursListRef" class="easy-time-panel__list" @scroll.passive="onScroll($event, 'hours')">
-                  <div
-                    v-for="h in 24"
-                    :key="h - 1"
-                    class="easy-time-panel__item"
-                    :class="{ 'is-selected': h - 1 === panelHours }"
-                    @click="selectHour(h - 1)"
-                  >
+                  <div v-for="h in 24" :key="h - 1" class="easy-time-panel__item"
+                    :class="{ 'is-selected': h - 1 === panelHours }" @click="selectHour(h - 1)">
                     {{ String(h - 1).padStart(2, '0') }}
                   </div>
                 </div>
@@ -416,13 +125,8 @@ onBeforeUnmount(() => {
             <div class="easy-time-panel__column">
               <div class="easy-time-panel__list-wrap">
                 <div ref="minutesListRef" class="easy-time-panel__list" @scroll.passive="onScroll($event, 'minutes')">
-                  <div
-                    v-for="m in 60"
-                    :key="m - 1"
-                    class="easy-time-panel__item"
-                    :class="{ 'is-selected': m - 1 === panelMinutes }"
-                    @click="selectMinute(m - 1)"
-                  >
+                  <div v-for="m in 60" :key="m - 1" class="easy-time-panel__item"
+                    :class="{ 'is-selected': m - 1 === panelMinutes }" @click="selectMinute(m - 1)">
                     {{ String(m - 1).padStart(2, '0') }}
                   </div>
                 </div>
@@ -435,13 +139,8 @@ onBeforeUnmount(() => {
               <div class="easy-time-panel__column">
                 <div class="easy-time-panel__list-wrap">
                   <div ref="secondsListRef" class="easy-time-panel__list" @scroll.passive="onScroll($event, 'seconds')">
-                    <div
-                      v-for="s in 60"
-                      :key="s - 1"
-                      class="easy-time-panel__item"
-                      :class="{ 'is-selected': s - 1 === panelSeconds }"
-                      @click="selectSecond(s - 1)"
-                    >
+                    <div v-for="s in 60" :key="s - 1" class="easy-time-panel__item"
+                      :class="{ 'is-selected': s - 1 === panelSeconds }" @click="selectSecond(s - 1)">
                       {{ String(s - 1).padStart(2, '0') }}
                     </div>
                   </div>

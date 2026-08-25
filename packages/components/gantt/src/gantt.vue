@@ -1,5 +1,8 @@
 <script setup>
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { nextTick, onMounted, ref, watch } from 'vue'
+import { useGanttData } from './use-gantt-data'
+import { useGanttLinks } from './use-gantt-links'
+import { useGanttTimeline } from './use-gantt-timeline'
 
 defineOptions({ name: 'EasyGantt' })
 
@@ -34,7 +37,6 @@ const views = [
 ]
 
 const currentView = ref(props.defaultView)
-const scale = ref(1)
 const rootRef = ref(null)
 const timelineRef = ref(null)
 const timelineBodyRef = ref(null)
@@ -46,523 +48,29 @@ const tooltipX = ref(0)
 const tooltipY = ref(0)
 const tooltipData = ref(null)
 
-const dateRange = computed(() => {
-  if (props.data.length === 0) {
-    const today = new Date()
-    return {
-      start: new Date(today.getFullYear(), today.getMonth(), 1),
-      end: new Date(today.getFullYear(), today.getMonth() + 2, 0),
-    }
-  }
-  let minDate = null
-  let maxDate = null
-  const findDates = (tasks) => {
-    tasks.forEach((task) => {
-      if (task.startDate) {
-        const start = parseDate(task.startDate)
-        if (!minDate || start < minDate)
-          minDate = start
-      }
-      if (task.endDate) {
-        const end = parseDate(task.endDate)
-        if (!maxDate || end > maxDate)
-          maxDate = end
-      }
-      if (task.children)
-        findDates(task.children)
-    })
-  }
-  findDates(props.data)
-  if (!minDate || !maxDate) {
-    const today = new Date()
-    return {
-      start: new Date(today.getFullYear(), today.getMonth(), 1),
-      end: new Date(today.getFullYear(), today.getMonth() + 2, 0),
-    }
-  }
-  const start = new Date(minDate)
-  start.setDate(start.getDate() - 7)
-  const end = new Date(maxDate)
-  end.setDate(end.getDate() + 14)
-  return { start, end }
+// ──── 数据派生（日期范围 / 时间轴 / 扁平任务 / 今日红线 / 缩放）────
+const {
+  scale,
+  parseDate,
+  dateRange,
+  timelineWidth,
+  getTimeX,
+  flatTasks,
+  todayX,
+  getTaskById,
+  toggleTask,
+} = useGanttData(props, emit)
+
+// ──── 时间轴表头（按视图生成两级单元格）────
+const { timelineHeaders } = useGanttTimeline(props, currentView, { getTimeX, dateRange, scale })
+
+// ──── 依赖连线（路径规划 / 里程碑 / 颜色）────
+const { getDependencyPath, getMilestonePoints, getDepColor, clearCornerUsage } = useGanttLinks(props, {
+  flatTasks,
+  getTimeX,
+  parseDate,
 })
 
-const timelineWidth = computed(() => {
-  const days = Math.ceil((dateRange.value.end - dateRange.value.start) / (1000 * 60 * 60 * 24))
-  return days * props.dayWidth
-})
-
-function parseDate(dateStr) {
-  if (!dateStr)
-    return new Date()
-  if (dateStr instanceof Date)
-    return dateStr
-  if (typeof dateStr !== 'string')
-    return new Date()
-  const parts = dateStr.match(/(\d{4})[-/](\d{1,2})[-/](\d{1,2})/)
-  if (parts)
-    return new Date(parseInt(parts[1]), parseInt(parts[2]) - 1, parseInt(parts[3]))
-  return new Date(dateStr)
-}
-
-function getTimeX(date) {
-  const diff = Math.ceil((date - dateRange.value.start) / (1000 * 60 * 60 * 24))
-  return diff * props.dayWidth * scale.value
-}
-
-const timelineHeaders = computed(() => {
-  const headers = []
-  const { start, end } = dateRange.value
-  const current = new Date(start)
-
-  if (currentView.value === 'day') {
-    let currentYear = null
-    let currentMonth = null
-    while (current <= end) {
-      const y = current.getFullYear()
-      const m = current.getMonth()
-      if (y !== currentYear) {
-        currentYear = y
-        headers.push({ year: y, yearLabel: `${y}年`, cells: [] })
-      }
-      if (m !== currentMonth || headers[headers.length - 1].year !== y) {
-        currentMonth = m
-        headers[headers.length - 1].cells.push({
-          label: `${m + 1}月`,
-          x: getTimeX(new Date(y, m, 1)),
-          y: 0,
-          width: getTimeX(new Date(y, m + 1, 1)) - getTimeX(new Date(y, m, 1)),
-          height: 30,
-          isWeekend: false,
-        })
-      }
-      current.setDate(current.getDate() + 1)
-    }
-    const days = []
-    const dayCurrent = new Date(start)
-    while (dayCurrent <= end) {
-      const isWeekend = dayCurrent.getDay() === 0 || dayCurrent.getDay() === 6
-      days.push({
-        label: dayCurrent.getDate().toString(),
-        x: getTimeX(dayCurrent),
-        y: 30,
-        width: props.dayWidth * scale.value,
-        height: 30,
-        isWeekend,
-      })
-      dayCurrent.setDate(dayCurrent.getDate() + 1)
-    }
-    return [
-      { year: headers[0]?.year, yearLabel: headers[0]?.yearLabel, cells: headers.flatMap(h => h.cells) },
-      { cells: days },
-    ]
-  }
-
-  if (currentView.value === 'week') {
-    let currentYear = null
-    let currentMonth = null
-    let weekNum = 0
-    while (current <= end) {
-      const y = current.getFullYear()
-      const m = current.getMonth()
-      if (y !== currentYear) {
-        currentYear = y
-        headers.push({ year: y, yearLabel: `${y}年`, cells: [] })
-      }
-      if (m !== currentMonth || headers[headers.length - 1].year !== y) {
-        currentMonth = m
-        headers[headers.length - 1].cells.push({
-          label: `${y}年${m + 1}月`,
-          x: getTimeX(new Date(y, m, 1)),
-          y: 0,
-          width: getTimeX(new Date(y, m + 1, 1)) - getTimeX(new Date(y, m, 1)),
-          height: 30,
-          isWeekend: false,
-        })
-      }
-      headers[headers.length - 1].cells.push({
-        label: `第${++weekNum}周`,
-        x: getTimeX(current),
-        y: 30,
-        width: 7 * props.dayWidth * scale.value,
-        height: 30,
-        isWeekend: false,
-      })
-      current.setDate(current.getDate() + 7)
-    }
-    return headers
-  }
-
-  if (currentView.value === 'month') {
-    let currentYear = null
-    while (current <= end) {
-      const y = current.getFullYear()
-      const m = current.getMonth()
-      if (y !== currentYear) {
-        currentYear = y
-        headers.push({ year: y, yearLabel: `${y}年`, cells: [] })
-      }
-      // 单层结构：直接显示"2026年4月"
-      headers[headers.length - 1].cells.push({
-        label: `${y}年${m + 1}月`,
-        x: getTimeX(new Date(y, m, 1)),
-        y: 0,
-        width: getTimeX(new Date(y, m + 1, 1)) - getTimeX(new Date(y, m, 1)),
-        height: 30,
-        isWeekend: false,
-      })
-      current.setMonth(current.getMonth() + 1)
-    }
-    return headers
-  }
-  return []
-})
-
-const flatTasks = computed(() => {
-  const result = []
-  const flatten = (tasks, level = 0) => {
-    tasks.forEach((task) => {
-      result.push({ ...task, level, expanded: task.expanded !== false, collapsed: task.expanded === false })
-      if (task.children && task.children.length > 0 && result[result.length - 1].expanded)
-        flatten(task.children, level + 1)
-    })
-  }
-  flatten(props.data)
-  return result
-})
-
-const todayX = computed(() => {
-  if (!props.showToday)
-    return -1
-  const today = new Date()
-  if (today < dateRange.value.start || today > dateRange.value.end)
-    return -1
-  return getTimeX(today)
-})
-
-function getTaskById(id) {
-  const findTask = (tasks) => {
-    for (const task of tasks) {
-      if (task.id === id)
-        return task
-      if (task.children) {
-        const found = findTask(task.children)
-        if (found)
-          return found
-      }
-    }
-    return null
-  }
-  return findTask(props.data)
-}
-
-// 依赖线颜色数组
-const depColors = ['#4f6ef7', '#f7c94f', '#4fe07c', '#f74f6e', '#9f4ff7', '#4fd1f7', '#f74f9f', '#4ff7c9']
-
-// 根据依赖 ID 获取颜色
-function getDepColor(depId) {
-  const str = String(depId)
-  const hash = str.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0)
-  return depColors[hash % depColors.length]
-}
-
-// ─────────────────────────────────────────────────
-//  角使用记录
-// ─────────────────────────────────────────────────
-const cornerUsage = new Map()
-
-function useCorner(taskId, corner) {
-  if (!cornerUsage.has(taskId))
-    cornerUsage.set(taskId, new Set())
-  cornerUsage.get(taskId).add(corner)
-}
-
-function getUnusedCorners(taskId) {
-  const all = ['tl', 'tr', 'bl', 'br']
-  const used = cornerUsage.get(taskId)
-  return used ? all.filter(c => !used.has(c)) : [...all]
-}
-
-// ─────────────────────────────────────────────────
-//  几何辅助
-// ─────────────────────────────────────────────────
-
-// 获取 bar 真实像素矩形（不含行空白），用于碰撞检测
-// 向内收缩 1px，避免"恰好在边框上"被判为穿柱
-function getBarRect(taskIndex) {
-  const task = flatTasks.value[taskIndex]
-  if (!task || !task.startDate)
-    return null
-
-  if (task.isMilestone) {
-    const cx = getTimeX(parseDate(task.startDate))
-    const cy = taskIndex * props.rowHeight + props.rowHeight / 2
-    return { x1: cx - 9, x2: cx + 9, y1: cy - 9, y2: cy + 9 }
-  }
-
-  if (!task.endDate)
-    return null
-
-  const x1 = getTimeX(parseDate(task.startDate)) + 1 // 向内 1px
-  const x2 = getTimeX(parseDate(task.endDate)) - 1
-  const rawTop = taskIndex * props.rowHeight + (props.rowHeight - props.barHeight) / 2
-  const y1 = rawTop + 1
-  const y2 = rawTop + props.barHeight - 1
-
-  return { x1, x2, y1, y2 }
-}
-
-// 获取四角坐标（角点正好在边框外 1px，避免连线一出发就触碰边框）
-function getTaskCorners(taskIndex) {
-  const task = flatTasks.value[taskIndex]
-  if (!task || !task.startDate)
-    return null
-
-  if (task.isMilestone) {
-    const x = getTimeX(parseDate(task.startDate))
-    const cy = taskIndex * props.rowHeight + props.rowHeight / 2
-    // 里程碑上下各 10px，左右取同一 x（菱形顶底）
-    return {
-      tl: { x: x - 1, y: cy - 10 },
-      tr: { x: x + 1, y: cy - 10 },
-      bl: { x: x - 1, y: cy + 10 },
-      br: { x: x + 1, y: cy + 10 },
-    }
-  }
-
-  if (!task.endDate)
-    return null
-
-  const startX = getTimeX(parseDate(task.startDate))
-  const endX = getTimeX(parseDate(task.endDate))
-  const rawTop = taskIndex * props.rowHeight + (props.rowHeight - props.barHeight) / 2
-  const topY = rawTop // bar 顶边
-  const bottomY = rawTop + props.barHeight // bar 底边
-
-  // 角点往外偏移 1px，让线不贴边框
-  return {
-    tl: { x: startX - 1, y: topY },
-    tr: { x: endX + 1, y: topY },
-    bl: { x: startX - 1, y: bottomY },
-    br: { x: endX + 1, y: bottomY },
-  }
-}
-
-// 检测一条正交线段是否穿过矩形（严格，边框也算）
-// eps: 允许的浮点误差（角点外偏 1px 后，端点不再在边框上）
-function segmentHitsRect(x1, y1, x2, y2, rect, eps = 0.5) {
-  if (!rect)
-    return false
-
-  // 水平线段
-  if (Math.abs(y1 - y2) < 0.01) {
-    const lx = Math.min(x1, x2)
-    const rx = Math.max(x1, x2)
-    // y 在矩形内
-    if (y1 > rect.y1 - eps && y1 < rect.y2 + eps) {
-      // x 范围有实质重叠（允许端点恰好落在边框外 eps 内）
-      if (rx > rect.x1 + eps && lx < rect.x2 - eps)
-        return true
-    }
-    return false
-  }
-
-  // 垂直线段
-  if (Math.abs(x1 - x2) < 0.01) {
-    const ty = Math.min(y1, y2)
-    const by = Math.max(y1, y2)
-    if (x1 > rect.x1 - eps && x1 < rect.x2 + eps) {
-      if (by > rect.y1 + eps && ty < rect.y2 - eps)
-        return true
-    }
-    return false
-  }
-
-  return false
-}
-
-// 检查折线路径是否穿过任意非排除柱子
-function pathHitsAnyBar(points, excludeIds) {
-  for (let i = 0; i < points.length - 1; i++) {
-    const p1 = points[i]
-    const p2 = points[i + 1]
-    for (let j = 0; j < flatTasks.value.length; j++) {
-      if (excludeIds.includes(flatTasks.value[j].id))
-        continue
-      const rect = getBarRect(j)
-      if (!rect)
-        continue
-      if (segmentHitsRect(p1.x, p1.y, p2.x, p2.y, rect))
-        return true
-    }
-  }
-  return false
-}
-
-function manhattanLen(pts) {
-  let s = 0
-  for (let i = 0; i < pts.length - 1; i++) {
-    s += Math.abs(pts[i].x - pts[i + 1].x) + Math.abs(pts[i].y - pts[i + 1].y)
-  }
-  return s
-}
-
-// ─────────────────────────────────────────────────
-//  路径候选生成
-//  策略：以"不穿任何柱子"为硬约束，生成多条候选路径，
-//  选代价（路径长度）最小的；全部失败则逐步加大绕行距离
-// ─────────────────────────────────────────────────
-
-/**
- * 从 start 到 end 生成一条 Z 形路径，途经中间 midX 纵向转折。
- * start/end 角点已外偏 1px，不会贴边框。
- */
-function makePath(start, end, midX) {
-  // 直接三折：start.x→midX 水平, midX 纵向, midX→end.x 水平
-  return [
-    { x: start.x, y: start.y },
-    { x: midX, y: start.y },
-    { x: midX, y: end.y },
-    { x: end.x, y: end.y },
-  ]
-}
-
-/**
- * 针对两个任务生成多条候选路径：
- *  - 右绕：midX = max(depEndX, taskEndX) + gap
- *  - 左绕：midX = min(depStartX, taskStartX) - gap
- *  gap 从 20 开始，如果穿柱则逐步增大
- */
-function candidatePaths(sc, ec, startCorners, endCorners, depStartX, depEndX, taskStartX, taskEndX) {
-  const s = startCorners[sc]
-  const e = endCorners[ec]
-  const rightBase = Math.max(depEndX, taskEndX)
-  const leftBase = Math.min(depStartX, taskStartX)
-
-  const paths = []
-
-  // 右绕候选（gap 20 / 50 / 100）
-  for (const gap of [20, 50, 100]) {
-    paths.push(makePath(s, e, rightBase + gap))
-  }
-  // 左绕候选
-  for (const gap of [20, 50, 100]) {
-    paths.push(makePath(s, e, leftBase - gap))
-  }
-
-  return paths
-}
-
-// ─────────────────────────────────────────────────
-//  clearCornerUsage 供模板调用（保持兼容）
-// ─────────────────────────────────────────────────
-function clearCornerUsage() {
-  // 模板中每个任务的 dependencies 渲染前会调用此函数
-  // 这里只清空当前渲染任务关联的角，不清全局，
-  // 全局在 getDependencyPaths 收集时自己管理。
-  // 此函数留空即可，全局重置由 resetCornerUsage 在计算属性中完成。
-}
-
-// ─────────────────────────────────────────────────
-//  主函数：生成依赖连线 SVG path 字符串
-// ─────────────────────────────────────────────────
-function getDependencyPath(task, depTask, taskIndex) {
-  if (!depTask || !depTask.endDate || !task.startDate)
-    return ''
-
-  const depTaskIndex = flatTasks.value.findIndex(t => t.id === depTask.id)
-  if (depTaskIndex === -1)
-    return ''
-
-  const startCorners = getTaskCorners(depTaskIndex)
-  const endCorners = getTaskCorners(taskIndex)
-  if (!startCorners || !endCorners)
-    return ''
-
-  const depStartX = getTimeX(parseDate(depTask.startDate))
-  const depEndX = getTimeX(parseDate(depTask.endDate))
-  const taskStartX = getTimeX(parseDate(task.startDate))
-  const taskEndX = getTimeX(parseDate(task.endDate))
-
-  const excludeIds = [depTask.id, task.id]
-
-  // 候选起点/终点角（优先未使用）
-  const startUnused = getUnusedCorners(depTask.id)
-  const endUnused = getUnusedCorners(task.id)
-  const startCandidates = startUnused.length > 0 ? startUnused : ['tl', 'tr', 'bl', 'br']
-  const endCandidates = endUnused.length > 0 ? endUnused : ['tl', 'tr', 'bl', 'br']
-
-  let bestPath = null
-  let bestSC = null
-  let bestEC = null
-  let bestCost = Infinity
-
-  for (const sc of startCandidates) {
-    for (const ec of endCandidates) {
-      const candidates = candidatePaths(sc, ec, startCorners, endCorners, depStartX, depEndX, taskStartX, taskEndX)
-      for (const pts of candidates) {
-        if (!pathHitsAnyBar(pts, excludeIds)) {
-          const cost = manhattanLen(pts)
-          if (cost < bestCost) {
-            bestCost = cost
-            bestPath = pts
-            bestSC = sc
-            bestEC = ec
-          }
-        }
-      }
-    }
-  }
-
-  // 极端 fallback：超大绕行（200px），必有一条不穿柱子
-  if (!bestPath) {
-    const rightFar = Math.max(depEndX, taskEndX) + 200
-    const leftFar = Math.min(depStartX, taskStartX) - 200
-    const sc = startCandidates[0]
-    const ec = endCandidates[0]
-    const s = startCorners[sc]
-    const e = endCorners[ec]
-    for (const midX of [rightFar, leftFar]) {
-      const pts = makePath(s, e, midX)
-      if (!pathHitsAnyBar(pts, excludeIds)) {
-        bestPath = pts
-        bestSC = sc
-        bestEC = ec
-        break
-      }
-    }
-    // 若仍为空（理论不会），强制用右绕
-    if (!bestPath) {
-      bestPath = makePath(s, e, rightFar)
-      bestSC = sc
-      bestEC = ec
-    }
-  }
-
-  // 记录已使用的角
-  useCorner(depTask.id, bestSC)
-  useCorner(task.id, bestEC)
-
-  // 转为 SVG path
-  let d = `M ${bestPath[0].x} ${bestPath[0].y}`
-  for (let i = 1; i < bestPath.length; i++) {
-    d += ` L ${bestPath[i].x} ${bestPath[i].y}`
-  }
-  return d
-}
-
-function getMilestonePoints(taskIndex) {
-  const task = flatTasks.value[taskIndex]
-  const x = getTimeX(parseDate(task?.startDate))
-  const y = taskIndex * props.rowHeight + props.rowHeight / 2
-  const size = 10
-  return `${x},${y - size} ${x + size},${y} ${x},${y + size} ${x - size},${y}`
-}
-
-function toggleTask(task) {
-  task.expanded = !task.expanded
-  emit('change', flatTasks.value)
-}
 function getColumnStyle(col, index, task = null) {
   const style = {}
   // 第一列特殊处理：带层级缩进
@@ -698,12 +206,8 @@ watch(
       </div>
       <div class="easy-gantt__actions">
         <div v-if="showViewSwitch" class="easy-gantt__view-switch">
-          <button
-            v-for="view in views"
-            :key="view.value"
-            :class="{ 'is-active': currentView === view.value }"
-            @click="currentView = view.value"
-          >
+          <button v-for="view in views" :key="view.value" :class="{ 'is-active': currentView === view.value }"
+            @click="currentView = view.value">
             {{ view.label }}
           </button>
         </div>
@@ -730,19 +234,12 @@ watch(
 
     <div class="easy-gantt__body">
       <!-- 左侧任务列表 -->
-      <div
-        class="easy-gantt__sidebar"
-        :class="{ 'is-auto': sidebarWidth === 'auto' }"
-        :style="sidebarWidth !== 'auto' ? { width: `${sidebarWidth}px` } : {}"
-      >
+      <div class="easy-gantt__sidebar" :class="{ 'is-auto': sidebarWidth === 'auto' }"
+        :style="sidebarWidth !== 'auto' ? { width: `${sidebarWidth}px` } : {}">
         <!-- 多列表头 -->
         <div class="easy-gantt__sidebar-header">
-          <div
-            v-for="(col, ci) in columns"
-            :key="ci"
-            class="easy-gantt__sidebar-header-cell"
-            :style="getHeaderColumnStyle(col, ci)"
-          >
+          <div v-for="(col, ci) in columns" :key="ci" class="easy-gantt__sidebar-header-cell"
+            :style="getHeaderColumnStyle(col, ci)">
             {{ col.label }}
           </div>
         </div>
@@ -761,20 +258,12 @@ watch(
             :style="{ height: `${rowHeight}px` }"
           >
             <!-- 遍历渲染每列 -->
-            <div
-              v-for="(col, ci) in columns"
-              :key="ci"
-              class="easy-gantt__task-cell"
-              :class="{ 'is-first': ci === 0 }"
-              :style="getColumnStyle(col, ci, task)"
-            >
+            <div v-for="(col, ci) in columns" :key="ci" class="easy-gantt__task-cell" :class="{ 'is-first': ci === 0 }"
+              :style="getColumnStyle(col, ci, task)">
               <!-- 第一列特殊处理：包含展开按钮和图标 -->
               <template v-if="ci === 0">
-                <button
-                  v-if="task.children && task.children.length > 0"
-                  class="easy-gantt__toggle"
-                  @click="toggleTask(task)"
-                >
+                <button v-if="task.children && task.children.length > 0" class="easy-gantt__toggle"
+                  @click="toggleTask(task)">
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
                     <polyline v-if="task.expanded" points="6 9 12 15 18 9" />
                     <polyline v-else points="9 18 15 12 9 6" />
@@ -784,9 +273,7 @@ watch(
                 <span class="easy-gantt__task-icon">
                   <template v-if="task.isMilestone">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-                      <polygon
-                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
-                      />
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                     </svg>
                   </template>
                   <template v-else-if="task.isGroup">
@@ -828,43 +315,22 @@ watch(
             <rect x="0" y="0" :width="timelineWidth * scale" :height="headerHeight" fill="var(--el-fill-color-lighter)" />
             <!-- 年/月/周 头部 -->
             <g v-for="(header, hi) in timelineHeaders" :key="`h${hi}`">
-              <text
-                v-if="header.yearLabel"
-                :x="getTimeX(parseDate(header.year)) + 8"
-                y="22"
-                class="easy-gantt__header-year"
-              >
+              <text v-if="header.yearLabel" :x="getTimeX(parseDate(header.year)) + 8" y="22"
+                class="easy-gantt__header-year">
                 {{ header.yearLabel }}
               </text>
               <g v-for="(cell, ci) in header.cells" :key="`c${hi}-${ci}`">
-                <rect
-                  :x="cell.x"
-                  :y="cell.y"
-                  :width="cell.width - 1"
-                  :height="cell.height - 1"
-                  class="easy-gantt__header-cell"
-                  :class="{ 'is-weekend': cell.isWeekend }"
-                />
-                <text
-                  :x="cell.x + cell.width / 2"
-                  :y="cell.y + cell.height / 2"
-                  class="easy-gantt__header-text"
-                  text-anchor="middle"
-                  dominant-baseline="middle"
-                >
+                <rect :x="cell.x" :y="cell.y" :width="cell.width - 1" :height="cell.height - 1"
+                  class="easy-gantt__header-cell" :class="{ 'is-weekend': cell.isWeekend }" />
+                <text :x="cell.x + cell.width / 2" :y="cell.y + cell.height / 2" class="easy-gantt__header-text"
+                  text-anchor="middle" dominant-baseline="middle">
                   {{ cell.label }}
                 </text>
               </g>
             </g>
             <!-- 头部底部边框 -->
-            <line
-              x1="0"
-              :y1="headerHeight"
-              :x2="timelineWidth * scale"
-              :y2="headerHeight"
-              stroke="var(--el-border-color)"
-              stroke-width="1"
-            />
+            <line x1="0" :y1="headerHeight" :x2="timelineWidth * scale" :y2="headerHeight"
+              stroke="var(--el-border-color)" stroke-width="1" />
             <!-- 今日红线头部 -->
             <g v-if="todayX >= 0">
               <line :x1="todayX" :y1="0" :x2="todayX" :y2="headerHeight" class="easy-gantt__today-line" />
@@ -886,14 +352,8 @@ watch(
             <!-- 任务条 -->
             <g v-for="(task, ti) in flatTasks" :key="`t${task.id}`">
               <!-- 行背景 -->
-              <rect
-                :x="0"
-                :y="ti * rowHeight"
-                :width="timelineWidth * scale"
-                :height="rowHeight"
-                class="easy-gantt__row-bg"
-                :class="{ 'is-even': ti % 2 === 0 }"
-              />
+              <rect :x="0" :y="ti * rowHeight" :width="timelineWidth * scale" :height="rowHeight"
+                class="easy-gantt__row-bg" :class="{ 'is-even': ti % 2 === 0 }" />
 
               <!-- 任务条 -->
               <g v-if="!task.isMilestone && task.startDate && task.endDate">
@@ -940,88 +400,50 @@ watch(
                   class="easy-gantt__bar-progress"
                 />
                 <!-- 进度文字 -->
-                <text
-                  v-if="task.progress !== undefined && task.progress > 0"
-                  :x="getTimeX(parseDate(task.startDate)) + 10"
-                  :y="ti * rowHeight + rowHeight / 2"
-                  class="easy-gantt__bar-progress-text"
-                  dominant-baseline="middle"
-                >
+                <text v-if="task.progress !== undefined && task.progress > 0"
+                  :x="getTimeX(parseDate(task.startDate)) + 10" :y="ti * rowHeight + rowHeight / 2"
+                  class="easy-gantt__bar-progress-text" dominant-baseline="middle">
                   {{ task.progress }}%
                 </text>
                 <!-- 依赖箭头 -->
                 <g v-if="task.dependencies && task.dependencies.length > 0">
                   <!-- 渲染前清空角使用记录 -->
-                  <path
-                    v-for="(depId, di) in (clearCornerUsage(), task.dependencies)"
-                    :key="`${depId}-${di}`"
-                    :d="getDependencyPath(task, getTaskById(depId), ti)"
-                    :stroke="getDepColor(depId)"
-                    fill="none"
-                    stroke-width="1.5"
-                    marker-end="url(#body-arrowhead)"
-                  />
+                  <path v-for="(depId, di) in (clearCornerUsage(), task.dependencies)" :key="`${depId}-${di}`"
+                    :d="getDependencyPath(task, getTaskById(depId), ti)" :stroke="getDepColor(depId)" fill="none"
+                    stroke-width="1.5" marker-end="url(#body-arrowhead)" />
                 </g>
               </g>
 
               <!-- 里程碑 -->
               <g v-if="task.isMilestone && task.startDate">
-                <polygon
-                  :points="getMilestonePoints(ti)"
-                  class="easy-gantt__milestone"
-                  :class="task.colorClass || 'is-default'"
-                  @click="handleBarClick(task)"
-                  @mouseenter="(e) => showTooltip(e, task)"
-                  @mouseleave="hideTooltip"
-                />
+                <polygon :points="getMilestonePoints(ti)" class="easy-gantt__milestone"
+                  :class="task.colorClass || 'is-default'" @click="handleBarClick(task)"
+                  @mouseenter="(e) => showTooltip(e, task)" @mouseleave="hideTooltip" />
               </g>
 
               <!-- 行底部边框 -->
-              <line
-                :x1="0"
-                :y1="(ti + 1) * rowHeight"
-                :x2="timelineWidth * scale"
-                :y2="(ti + 1) * rowHeight"
-                class="easy-gantt__row-border"
-              />
+              <line :x1="0" :y1="(ti + 1) * rowHeight" :x2="timelineWidth * scale" :y2="(ti + 1) * rowHeight"
+                class="easy-gantt__row-border" />
             </g>
 
             <!-- 今日红线 - 内容区 -->
             <g v-if="todayX >= 0">
-              <line
-                :x1="todayX"
-                :y1="0"
-                :x2="todayX"
-                :y2="flatTasks.length * rowHeight"
-                class="easy-gantt__today-line"
-              />
+              <line :x1="todayX" :y1="0" :x2="todayX" :y2="flatTasks.length * rowHeight" class="easy-gantt__today-line" />
             </g>
           </svg>
         </div>
 
         <!-- Tooltip -->
         <Transition name="easy-gantt-fade">
-          <div
-            v-if="tooltipVisible"
-            class="easy-gantt__tooltip"
-            :style="{ left: `${tooltipX}px`, top: `${tooltipY}px` }"
-          >
+          <div v-if="tooltipVisible" class="easy-gantt__tooltip"
+            :style="{ left: `${tooltipX}px`, top: `${tooltipY}px` }">
             <div class="easy-gantt__tooltip-header">
               <span class="easy-gantt__tooltip-icon" :class="tooltipData?.colorClass || 'is-default'">
                 <svg v-if="tooltipData?.isMilestone" width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                  <polygon
-                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
-                  />
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                 </svg>
-                <svg
-                  v-else
-                  width="12"
-                  height="12"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
+                <svg v-else width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2">
                   <rect x="3" y="3" width="18" height="18" rx="2" />
                 </svg>
               </span>

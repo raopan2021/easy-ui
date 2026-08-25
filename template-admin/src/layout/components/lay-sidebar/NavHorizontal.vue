@@ -6,7 +6,6 @@ import { useNav } from '@/layout/hooks/useNav'
 import { usePermissionStoreHook } from '@/store/modules/permission'
 import { emitter } from '@/utils/mitt'
 import { hideLoading, showLoading } from '@/utils/xly'
-import LayNotice from '../lay-notice/index.vue'
 import LaySearch from '../lay-search/index.vue'
 import LaySidebarFullScreen from '../lay-sidebar/components/SidebarFullScreen.vue'
 
@@ -57,26 +56,15 @@ onMounted(() => {
 </script>
 
 <template>
-  <div
-    class="horizontal-header"
-  >
+  <div class="horizontal-header">
     <div v-if="showLogo" class="horizontal-header-left" @click="backTopMenu">
       <img :src="getLogo()" alt="logo" width="32" height="32">
       <span>{{ title }}</span>
     </div>
-    <el-menu
-      ref="menuRef"
-      mode="horizontal"
-      popper-class="pure-scrollbar"
-      class="horizontal-header-menu"
-      :default-active="defaultActive"
-    >
-      <LaySidebarItem
-        v-for="route in usePermissionStoreHook().wholeMenus"
-        :key="route.path"
-        :item="route"
-        :base-path="route.path"
-      />
+    <el-menu ref="menuRef" mode="horizontal" popper-class="pure-scrollbar" class="horizontal-header-menu"
+      :default-active="defaultActive">
+      <LaySidebarItem v-for="route in usePermissionStoreHook().wholeMenus" :key="route.path" :item="route"
+        :base-path="route.path" />
     </el-menu>
     <div class="horizontal-header-right">
       <!-- 菜单搜索 -->
@@ -94,21 +82,13 @@ onMounted(() => {
         <template #dropdown>
           <el-dropdown-menu class="logout">
             <el-dropdown-item @click="logout">
-              <SvgIcon
-                name="logout"
-                :size="16"
-                style="margin: 5px"
-              />
+              <SvgIcon name="logout" :size="16" style="margin: 5px" />
               退出系统
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-      <span
-        class="set-icon navbar-bg-hover"
-        title="打开系统配置"
-        @click="onPanel"
-      >
+      <span class="set-icon navbar-bg-hover" title="打开系统配置" @click="onPanel">
         <PureIcon :icon="Setting" :size="20" />
       </span>
     </div>

@@ -58,44 +58,23 @@ function handleSelect(key: MenuLayout) {
 </script>
 
 <template>
-  <EasyDrawer
-    v-model="drawerVisible"
-    title="切换布局风格"
-    direction="right"
-    size="360px"
-    :show-header="true"
-    :show-close="true"
-    :show-mask="true"
-    :close-on-click-modal="true"
-  >
+  <EasyDrawer v-model="drawerVisible" title="切换布局风格" direction="right" size="360px" :show-header="true"
+    :show-close="true" :show-mask="true" :close-on-click-modal="true">
     <div class="layout-selector">
-      <div
-        v-for="layout in layouts"
-        :key="layout.key"
-        class="layout-item"
-        :class="{ active: currentLayout === layout.key }"
-        @click="handleSelect(layout.key)"
-      >
+      <div v-for="layout in layouts" :key="layout.key" class="layout-item"
+        :class="{ active: currentLayout === layout.key }" @click="handleSelect(layout.key)">
         <div class="layout-item__preview">
           <div class="layout-item__icon" :style="{ background: layout.bgColor }">
             <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect width="32" height="32" rx="6" :fill="layout.primaryColor" />
-              <path
-                d="M8 16C8 11.582 11.582 8 16 8C20.418 8 24 11.582 24 16"
-                stroke="#fff"
-                stroke-width="2.5"
-                stroke-linecap="round"
-              />
+              <path d="M8 16C8 11.582 11.582 8 16 8C20.418 8 24 11.582 24 16" stroke="#fff" stroke-width="2.5"
+                stroke-linecap="round" />
               <circle cx="16" cy="18" r="4" fill="#fff" />
             </svg>
           </div>
           <div class="layout-item__menu" :style="{ background: layout.menuBg }">
-            <div
-              v-for="i in 3"
-              :key="i"
-              class="layout-item__menu-line"
-              :class="{ active: currentLayout === layout.key && i === 1 }"
-            />
+            <div v-for="i in 3" :key="i" class="layout-item__menu-line"
+              :class="{ active: currentLayout === layout.key && i === 1 }" />
           </div>
         </div>
         <div class="layout-item__info">

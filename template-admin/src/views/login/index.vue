@@ -136,10 +136,8 @@ useEventListener(document, 'keydown', ({ code }) => {
   <div class="login-page">
     <!-- 主题切换 -->
     <div class="theme-switch flex-c absolute right-5 top-3" @pointerdown="recordPos">
-      <el-switch
-        :model-value="dataTheme" inline-prompt :active-icon="dayIcon" :inactive-icon="darkIcon"
-        @change="onThemeChange"
-      />
+      <el-switch :model-value="dataTheme" inline-prompt :active-icon="dayIcon" :inactive-icon="darkIcon"
+        @change="onThemeChange" />
     </div>
 
     <div class="login-box">
@@ -165,10 +163,8 @@ useEventListener(document, 'keydown', ({ code }) => {
 
           <Motion :delay="150">
             <el-form-item prop="password">
-              <el-input
-                v-model="ruleForm.password" clearable show-password placeholder="密码"
-                :prefix-icon="useRenderIcon(Lock)"
-              />
+              <el-input v-model="ruleForm.password" clearable show-password placeholder="密码"
+                :prefix-icon="useRenderIcon(Lock)" />
             </el-form-item>
           </Motion>
 
@@ -176,15 +172,11 @@ useEventListener(document, 'keydown', ({ code }) => {
             <el-form-item prop="validateCode">
               <div class="flex w-full gap-2">
                 <el-input v-model="ruleForm.validateCode" placeholder="验证码" class="flex-1" />
-                <img
-                  v-if="captchaImg" :src="captchaImg" class="h-10 cursor-pointer rounded" @click="getCaptcha"
-                  @error="captchaImg = ''"
-                >
-                <div
-                  v-else
+                <img v-if="captchaImg" :src="captchaImg" class="h-10 cursor-pointer rounded" @click="getCaptcha"
+                  @error="captchaImg = ''">
+                <div v-else
                   class="flex h-10 w-auto p-3 cursor-pointer items-center justify-center rounded bg-gray-100 text-xs text-gray-400 dark:bg-gray-700"
-                  @click="getCaptcha"
-                >
+                  @click="getCaptcha">
                   加载失败，点击重试
                 </div>
               </div>
@@ -192,10 +184,8 @@ useEventListener(document, 'keydown', ({ code }) => {
           </Motion>
 
           <Motion :delay="250">
-            <el-button
-              class="w-full mt-4!" size="default" type="primary" :loading="loading" :disabled="disabled"
-              @click="onLogin(ruleFormRef)"
-            >
+            <el-button class="w-full mt-4!" size="default" type="primary" :loading="loading" :disabled="disabled"
+              @click="onLogin(ruleFormRef)">
               登录
             </el-button>
           </Motion>

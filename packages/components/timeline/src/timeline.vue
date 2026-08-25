@@ -1,35 +1,22 @@
 <script setup lang="ts">
-import { computed, provide, ref, useSlots } from 'vue'
+import type { TimelineProps } from './types'
 
-import { timelineProps } from './timeline'
+import { useTimeline } from './use-timeline'
+
+// 保持对外类型导出兼容（原定义在 timeline.ts，现转发自 types.ts）
+export type { TimelineProps } from './types'
 
 defineOptions({
   name: 'EasyTimeline',
 })
 
-const props = defineProps(timelineProps)
-
-const slots = useSlots()
-
-// 计算子节点数量
-const items = computed(() => {
-  if (!slots.default)
-    return []
-  return slots.default().filter((vnode) => {
-    return vnode.component?.type?.name === 'EasyTimelineItem'
-  })
+const props = withDefaults(defineProps<TimelineProps>(), {
+  direction: 'vertical',
+  reverse: false,
+  customClass: '',
 })
 
-const itemCount = computed(() => items.value.length)
-
-// 提供时间线上下文给子组件
-const timelineContext = ref({
-  direction: computed(() => props.direction),
-  reverse: computed(() => props.reverse),
-  itemCount,
-})
-
-provide('easy-timeline', timelineContext)
+useTimeline(props)
 </script>
 
 <template>
@@ -38,20 +25,5 @@ provide('easy-timeline', timelineContext)
   </div>
 </template>
 
-<style scoped lang="scss">
-.easy-timeline {
-  &.easy-timeline--vertical {
-    padding-left: 0;
-  }
-
-  &.easy-timeline--horizontal {
-    display: flex;
-    align-items: flex-start;
-    width: 100%;
-
-    :deep(.easy-timeline-item) {
-      flex: 1;
-    }
-  }
-}
-</style>
+<!-- 组件核心样式（scoped，独立维护在 timeline-style.scss） -->
+<style scoped src="./timeline-style.scss" lang="scss"></style>

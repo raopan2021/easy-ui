@@ -1,29 +1,19 @@
 <script setup lang="ts">
+import type { UploadEmits, UploadProps } from './types'
+
 import { View } from '@element-plus/icons-vue'
-import { computed, h, ref, watch } from 'vue'
-import { downloadFile, previewFile } from '../../../easy-ui/src/utils/file'
-import { EasyMsg } from '../../message'
+import { ref } from 'vue'
 
-// ============================================================
-// 🧪 Mock 接口区（组件库演示用，未接入真实后端）
-// 接入业务系统时，将以下三个函数替换为真实接口调用即可，
-// 函数签名保持不变，networkUpload / handleRemove 逻辑无需改动。
-// ============================================================
+import { formatFileSize } from '../../../easy-ui/src/utils/file'
+import { getFileIcon } from './use-file-icons'
+import { useUploadCore } from './use-upload-core'
 
-/** 上传响应结构（与 RESPONSE_URL_PATH 对应） */
-interface MockUploadResponse {
-  retCode: number
-  data: {
-    filePath: string
-    fileName: string
-    fileSize: number
-    fileMd5: string
-  }
-}
+// 保持对外类型导出兼容（原定义在 file-upload.vue）
+export type { UploadEmits, UploadFileItem, UploadProps, UploadStatus, UploadValueMode } from './types'
 
 defineOptions({ name: 'EasyUpload' })
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<UploadProps>(), {
   modelValue: () => [],
   valueMode: 'array',
   multiple: true,
@@ -36,689 +26,29 @@ const props = withDefaults(defineProps<Props>(), {
   autoNetworkUpload: true,
 })
 
-// ============================================================
-// Emits 定义
-// ============================================================
-
-const emit = defineEmits<{
-  /** v-model 更新 */
-  'update:modelValue': [value: UploadFileItem[] | string]
-  /** 文件列表变化 */
-  'change': [fileList: UploadFileItem[]]
-  /** 删除文件 */
-  'remove': [file: UploadFileItem, fileList: UploadFileItem[]]
-  /** 单文件上传成功 */
-  'success': [file: UploadFileItem]
-  /** 单文件上传失败 */
-  'error': [error: Error, file: UploadFileItem]
-  /** 超出数量限制 */
-  'exceed': [files: File[], limit: number]
-  /** 校验失败 */
-  'validate-error': [msg: string, file: File]
-}>()
-
-/**
- * 【Mock】上传文件：本地生成预览地址并模拟上传进度
- * @param file - 待上传文件
- * @param onProgress - 进度回调（0-100）
- */
-function uploadFileApi(file: File, onProgress?: (percent: number) => void): Promise<MockUploadResponse> {
-  return new Promise((resolve) => {
-    let percent = 0
-    const timer = setInterval(() => {
-      percent += Math.random() * 30
-      if (percent >= 100) {
-        percent = 100
-        clearInterval(timer)
-        onProgress?.(100)
-        resolve({
-          retCode: 0,
-          data: {
-            // 本地对象 URL，可在浏览器直接预览
-            filePath: URL.createObjectURL(file),
-            fileName: file.name,
-            fileSize: file.size,
-            fileMd5: `mock-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-          },
-        })
-      }
-      else {
-        onProgress?.(Math.round(percent))
-      }
-    }, 200)
-  })
-}
-
-/**
- * 【Mock】删除服务器文件：模拟网络延迟后成功
- * @param _url - 文件地址（mock 忽略）
- */
-function deleteFileApi(_url: string): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, 200))
-}
-
-/**
- * 【Mock】删除档案记录：模拟网络延迟后成功
- * @param _id - 档案 id（mock 忽略）
- */
-function deleteArchiveAndFile(_id: string): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, 200))
-}
-
-// ============================================================
-// 🔧 上传配置区（修改这里自定义上传逻辑）
-// ============================================================
-
-/**
- * 如何从响应中提取文件 URL？
- * 支持点号分隔路径（自动兼容）：
- * - 'url'           → response: { url: '...' }
- * - 'data'          → response: { data: '...' }
- * - 'data.url'      → response: { data: { url: '...' } }
- * - 'data.filePath' → response: { data: { filePath: '...' } }
- */
-const RESPONSE_URL_PATH = 'data.filePath'
-
-// ============================================================
-// 类型定义
-// ============================================================
-
-/** 文件上传状态 */
-export type UploadStatus = 'ready' | 'uploading' | 'success' | 'error'
-
-/** v-model 返回值模式 */
-export type UploadValueMode = 'array' | 'string'
-
-/**
- * 上传文件对象
- * @property id - 文件唯一标识
- * @property name - 文件名称
- * @property url - 文件地址
- * @property size - 文件大小（单位 KB）
- * @property status - 上传状态
- * @property percent - 上传进度
- * @property raw - 原始文件对象
- */
-export interface UploadFileItem {
-  /** 文件唯一标识 */
-  id: string
-  /** 文件名称 */
-  name: string
-  /** 文件地址 */
-  url: string
-  /** 文件大小（字节） */
-  size?: number
-  /** 上传状态 */
-  status?: UploadStatus
-  /** 上传进度 0-100 */
-  percent?: number
-  /** 原始文件对象 */
-  raw?: File
-  /** 刚上传成功（触发闪烁动画，动画结束后自动清除） */
-  justUploaded?: boolean
-}
-
-// ============================================================
-// Props 定义
-// ============================================================
-
-export interface Props {
-  /** v-model 绑定值，支持对象数组或 JSON 字符串 */
-  modelValue?: UploadFileItem[] | string
-  /** 返回值模式：array 返回对象数组，string 返回 JSON 字符串 */
-  valueMode?: UploadValueMode
-  /** 最多上传数量 */
-  limit?: number
-  /** 是否支持多选 */
-  multiple?: boolean
-  /** 原生 accept 属性（文件选择框筛选） */
-  accept?: string
-  /** 是否禁用 */
-  disabled?: boolean
-  /** 是否支持下载 */
-  downloadable?: boolean
-  /** 提示文字 */
-  tip?: string
-  /** 触发区域文字 */
-  triggerText?: string
-  /** 列表方向 */
-  listType?: 'horizontal' | 'vertical'
-
-  // ===== 内置校验配置（无需写 JS） =====
-  /** 允许的文件后缀或 MIME 类型，逗号拼接，如 "pdf,doc,docx" */
-  acceptTypes?: string
-  /** 单文件最大尺寸（KB），如 2048 表示 2MB */
-  maxSize?: number
-  /** 单文件最小尺寸（KB），默认 0 */
-  minSize?: number
-
-  /** 自动使用接口上传 */
-  autoNetworkUpload?: boolean
-}
-
-// ============================================================
-// 内部状态
-// ============================================================
+const emit = defineEmits<UploadEmits>()
 
 /** 文件输入框引用 */
 const inputRef = ref<HTMLInputElement>()
-/** 是否正在拖拽 */
-const isDragover = ref(false)
-/** 内部文件列表 */
-const fileList = ref<UploadFileItem[]>([])
 
-/** 是否达到上传上限 */
-const isMaxReached = computed(() => {
-  if (props.limit === undefined)
-    return false
-  return fileList.value.filter(f => f.status !== 'error').length >= props.limit
-})
+// ──── 核心逻辑（文件列表 / 校验 / 上传 / 删除 / 预览 / 下载 / modelValue 同步）────
+const {
+  isDragover,
+  fileList,
+  isMaxReached,
+  handleTriggerClick,
+  handleInputChange,
+  handleDrop,
+  handleRemove,
+  handlePreview,
+  handleDownload,
+  open,
+  clear,
+  getFileList,
+} = useUploadCore(props, emit, inputRef)
 
-// ============================================================
-// 文件图标
-// ============================================================
-
-/**
- * 根据文件类型获取对应的 SVG 图标组件
- * @param item - 上传文件项
- * @returns SVG 组件
- */
-function getFileIcon(item: UploadFileItem) {
-  const type = item.raw?.type || ''
-  const name = item.name || ''
-  const ext = name.split('.').pop()?.toLowerCase() || ''
-
-  // 图标配置映射表
-  const iconMap: Record<string, { stroke: string, paths: any[] }> = {
-    // 图片
-    image: {
-      stroke: '#52c41a',
-      paths: [
-        h('rect', { x: '3', y: '3', width: '18', height: '18', rx: '2', ry: '2' }),
-        h('circle', { cx: '8.5', cy: '8.5', r: '1.5' }),
-        h('polyline', { points: '21 15 16 10 5 21' }),
-      ],
-    },
-    // PDF
-    pdf: {
-      stroke: '#ff4d4f',
-      paths: [
-        h('path', { d: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z' }),
-        h('polyline', { points: '14 2 14 8 20 8' }),
-        h('path', { d: 'M9 15h6M9 11h6' }),
-      ],
-    },
-    // Word
-    word: {
-      stroke: '#1890ff',
-      paths: [
-        h('path', { d: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z' }),
-        h('polyline', { points: '14 2 14 8 20 8' }),
-        h('path', { d: 'M8 13h2M8 17h2M14 13h2M14 17h2' }),
-      ],
-    },
-    // Excel
-    excel: {
-      stroke: '#52c41a',
-      paths: [
-        h('path', { d: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z' }),
-        h('polyline', { points: '14 2 14 8 20 8' }),
-        h('path', { d: 'M8 13h8M8 17h5' }),
-      ],
-    },
-    // PPT
-    ppt: {
-      stroke: '#fa8c16',
-      paths: [
-        h('path', { d: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z' }),
-        h('polyline', { points: '14 2 14 8 20 8' }),
-        h('path', { d: 'M10 12v4M14 12v1' }),
-      ],
-    },
-    // 压缩包
-    zip: {
-      stroke: '#722ed1',
-      paths: [h('path', { d: 'M21 8v13H3V8M1 3h22v5H1z' }), h('path', { d: 'M10 12h4' })],
-    },
-    // 视频
-    video: {
-      stroke: '#eb2f96',
-      paths: [
-        h('polygon', { points: '23 7 16 12 23 17 23 7' }),
-        h('rect', { x: '1', y: '5', width: '15', height: '14', rx: '2', ry: '2' }),
-      ],
-    },
-    // 音频
-    audio: {
-      stroke: '#13c2c2',
-      paths: [
-        h('path', { d: 'M9 18V5l12-2v13' }),
-        h('circle', { cx: '6', cy: '18', r: '3' }),
-        h('circle', { cx: '18', cy: '16', r: '3' }),
-      ],
-    },
-    // 文本
-    text: {
-      stroke: '#8c8c8c',
-      paths: [
-        h('path', { d: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z' }),
-        h('polyline', { points: '14 2 14 8 20 8' }),
-        h('line', { x1: '16', y1: '13', x2: '8', y2: '13' }),
-        h('line', { x1: '16', y1: '17', x2: '8', y2: '17' }),
-      ],
-    },
-    // 默认文件
-    default: {
-      stroke: '#8c8c8c',
-      paths: [
-        h('path', { d: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z' }),
-        h('polyline', { points: '14 2 14 8 20 8' }),
-      ],
-    },
-  }
-
-  // 根据文件类型选择对应图标
-  let icon = iconMap.default
-  if (type.startsWith('image/') || ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg'].includes(ext)) {
-    icon = iconMap.image
-  }
-  else if (type === 'application/pdf' || ext === 'pdf') {
-    icon = iconMap.pdf
-  }
-  else if (type === 'application/msword' || ['doc', 'docx'].includes(ext)) {
-    icon = iconMap.word
-  }
-  else if (type === 'application/vnd.ms-excel' || ['xls', 'xlsx'].includes(ext)) {
-    icon = iconMap.excel
-  }
-  else if (type === 'application/vnd.ms-powerpoint' || ['ppt', 'pptx'].includes(ext)) {
-    icon = iconMap.ppt
-  }
-  else if (['zip', 'rar', '7z', 'tar', 'gz'].includes(ext)) {
-    icon = iconMap.zip
-  }
-  else if (type.startsWith('video/') || ['mp4', 'avi', 'mov', 'wmv', 'flv'].includes(ext)) {
-    icon = iconMap.video
-  }
-  else if (type.startsWith('audio/') || ['mp3', 'wav', 'flac', 'aac', 'ogg'].includes(ext)) {
-    icon = iconMap.audio
-  }
-  else if (type.startsWith('text/') || ext === 'txt') {
-    icon = iconMap.text
-  }
-
-  return h(
-    'svg',
-    {
-      'viewBox': '0 0 24 24',
-      'width': '36',
-      'height': '36',
-      'fill': 'none',
-      'stroke': icon.stroke,
-      'stroke-width': '1.5',
-    },
-    icon.paths,
-  )
-}
-
-// ============================================================
-// 工具函数
-// ============================================================
-
-/**
- * 格式化文件大小（字节为单位）
- * @param bytes - 文件大小（字节）
- * @returns 格式化后的字符串，如 "2.5 MB"
- */
-function formatFileSize(bytes: number | undefined): string {
-  if (bytes === undefined || bytes === 0)
-    return '0 B'
-  const k = 1024
-  if (bytes < k)
-    return `${bytes} B`
-  const i = Math.floor(Math.log(bytes) / Math.log(k))
-  return `${(bytes / k ** i).toFixed(i > 1 ? 1 : 0)} ${['B', 'KB', 'MB', 'GB', 'TB'][i]}`
-}
-
-// ============================================================
-// 内置校验
-// ============================================================
-
-/**
- * 内置文件校验
- * @param file - 待校验的文件
- * @returns 错误信息字符串，null 表示校验通过
- */
-function validateFile(file: File): string | null {
-  // 校验文件类型
-  if (props.acceptTypes) {
-    const allowed = props.acceptTypes.split(',').map(t => t.trim().toLowerCase())
-    const ext = file.name.split('.').pop()?.toLowerCase() || ''
-    const mimeMatch = allowed.some(t => t === file.type.toLowerCase())
-    const extMatch = allowed.some(t => t === ext || t === `.${ext}`)
-    if (!mimeMatch && !extMatch) {
-      return `不支持 ${ext || file.type} 格式`
-    }
-  }
-  // 校验最小尺寸（转换为 KB）
-  const sizeKB = file.size / 1024
-  if (props.minSize && sizeKB < props.minSize) {
-    return `文件不能小于 ${formatFileSize(props.minSize * 1024)}`
-  }
-  // 校验最大尺寸（转换为 KB）
-  if (props.maxSize && sizeKB > props.maxSize) {
-    return `文件不能超过 ${formatFileSize(props.maxSize * 1024)}`
-  }
-  return null
-}
-
-// ============================================================
-// modelValue 同步
-// ============================================================
-
-/**
- * 判断文件项是否为有效项
- * - 自动上传模式：必须有 url（已上传到服务器）
- * - 非自动上传模式：必须有 id（仅本地暂存，等待父组件处理 raw 文件）
- * @param f - 文件项
- */
-function isValidItem(f: UploadFileItem): boolean {
-  return props.autoNetworkUpload ? Boolean(f.url) : Boolean(f.id)
-}
-
-/**
- * 将外部 modelValue 解析为对象数组
- * @param val - 外部传入的值
- * @returns 解析后的对象数组
- */
-function parseModelValue(val: UploadFileItem[] | string | undefined): UploadFileItem[] {
-  if (!val)
-    return []
-  // 数组直接返回
-  if (Array.isArray(val))
-    return val.filter(isValidItem)
-  // JSON 字符串解析
-  try {
-    const parsed = JSON.parse(val)
-    return Array.isArray(parsed) ? parsed.filter(isValidItem) : []
-  }
-  catch {
-    return []
-  }
-}
-
-/**
- * 将内部文件列表序列化为 modelValue 格式
- * @param items - 文件列表
- * @returns 序列化后的值
- */
-function serializeValue(items: UploadFileItem[]): UploadFileItem[] | string {
-  const successItems = items.filter(f => f.status !== 'error' && isValidItem(f))
-  if (props.valueMode === 'string') {
-    return JSON.stringify(successItems)
-  }
-  return successItems
-}
-
-// 监听外部值变化 → 同步到 fileList
-watch(
-  () => props.modelValue,
-  (val) => {
-    const items = parseModelValue(val)
-    // 比较 ID 列表（保持原始顺序），避免不必要的更新
-    const currentIds = fileList.value.filter(f => f.status === 'success' && isValidItem(f)).map(f => f.id)
-    const newIds = items.map(f => f.id)
-    const isSame = currentIds.length === newIds.length && currentIds.every((id, i) => id === newIds[i])
-    if (isSame)
-      return
-
-    fileList.value = items.map(item => ({
-      ...item,
-      status: 'success' as UploadStatus,
-    }))
-  },
-  { immediate: true },
-)
-
-/**
- * 向外 emit 更新
- */
-function emitUpdate() {
-  const successItems = fileList.value.filter(f => f.status === 'success' && isValidItem(f))
-  emit('update:modelValue', serializeValue(successItems))
-  emit('change', [...fileList.value])
-}
-
-// ============================================================
-// 触发选文件
-// ============================================================
-
-/** 触发文件选择 */
-function handleTriggerClick() {
-  if (props.disabled)
-    return
-  inputRef.value?.click()
-}
-
-/** 处理 input 选文件 */
-function handleInputChange(e: Event) {
-  const input = e.target as HTMLInputElement
-  const files = Array.from(input.files || [])
-  if (!files.length)
-    return
-  input.value = '' // 重置，以便重复选同一文件
-  processFiles(files)
-}
-
-/** 处理拖拽 */
-function handleDrop(e: DragEvent) {
-  isDragover.value = false
-  if (props.disabled)
-    return
-  const files = Array.from(e.dataTransfer?.files || [])
-  processFiles(files)
-}
-
-// ============================================================
-// 文件处理
-// ============================================================
-
-/**
- * 处理文件列表
- * @param files - 文件列表
- */
-async function processFiles(files: File[]) {
-  // 检查上限
-  if (props.limit !== undefined) {
-    const currentValid = fileList.value.filter(f => f.status !== 'error').length
-    const allowed = props.limit - currentValid
-    if (allowed <= 0) {
-      emit('exceed', files, props.limit)
-      return
-    }
-    if (files.length > allowed) {
-      emit('exceed', files.slice(allowed), props.limit)
-      files = files.slice(0, allowed)
-    }
-  }
-
-  // 逐个上传
-  for (const file of files) {
-    await uploadFile(file)
-  }
-}
-
-/**
- * 上传单个文件
- * @param file - 文件对象
- */
-async function uploadFile(file: File) {
-  // 内置校验
-  const validateError = validateFile(file)
-  if (validateError) {
-    EasyMsg.warning(validateError)
-    emit('validate-error', validateError, file)
-    return
-  }
-
-  // 生成唯一 ID
-  const id = `upload-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
-  const uploadItem: UploadFileItem = {
-    id,
-    name: file.name,
-    url: '',
-    size: file.size, // 字节
-    status: 'uploading',
-    percent: 0,
-    raw: file,
-  }
-  fileList.value.push(uploadItem)
-
-  const item = fileList.value.find(f => f.id === id)!
-
-  // 非自动上传模式：仅本地暂存，直接标记为成功，保留 raw 供父组件处理
-  if (!props.autoNetworkUpload) {
-    item.status = 'success'
-    item.percent = 100
-    EasyMsg.success(`${item.name} 添加成功`)
-    emit('success', { ...item })
-    emitUpdate()
-    return
-  }
-
-  networkUpload({ file, item })
-}
-
-/**
- *  网络上传（mode = 'network' 时使用） 以下为示例，可根据实际开发中后端接口和代码风格修改上传逻辑
- * @param opts - 上传参数
- */
-async function networkUpload(opts: { file: File, item: UploadFileItem }) {
-  const { file, item } = opts
-  const responseUrlPath = RESPONSE_URL_PATH
-
-  try {
-    const response = await uploadFileApi(file, (percent) => {
-      item.percent = percent
-    })
-
-    // 业务状态码检查
-    if (response.retCode !== undefined && response.retCode !== 0) {
-      throw new Error(`上传失败(retCode=${response.retCode})`)
-    }
-
-    // 从响应中提取 URL（支持点号分隔路径，如 'data.filePath'）
-    let fileUrl: any = response
-    for (const key of responseUrlPath.split('.')) {
-      fileUrl = fileUrl?.[key]
-    }
-
-    if (!fileUrl)
-      throw new Error('响应中未找到文件地址')
-
-    // 提取嵌套的 data 对象（兼容 { retCode, data: { ... } } 结构）
-    const fileData: Record<string, any> = (response as any).data || response
-
-    // 更新文件信息
-    item.url = fileUrl
-    item.name = fileData.fileName || fileData.name || item.name
-    item.size = fileData.fileSize ?? fileData.size ?? item.size
-    if (fileData.fileMd5)
-      (item as any).fileMd5 = fileData.fileMd5
-    item.status = 'success'
-    item.percent = 100
-    item.justUploaded = true
-
-    EasyMsg.success(`${item.name} 上传成功`)
-    emit('success', { ...item })
-    emitUpdate()
-  }
-  catch (error) {
-    item.status = 'error'
-    EasyMsg.danger(`${item.name} 上传失败`)
-    emit('error', error as Error, { ...item })
-  }
-}
-
-// ============================================================
-// 删除文件
-// ============================================================
-
-/**
- * 删除文件
- * @param index - 文件索引
- */
-async function handleRemove(index: number) {
-  const item = fileList.value[index]
-  if (!item)
-    return
-
-  // 1. 删除服务器上的文件（始终调用）
-  if (item.url) {
-    try {
-      await deleteFileApi(item.url)
-
-      // 2. 删除档案记录（id 不以 "upload" 开头时调用，说明是已保存到项目的附件）
-      if (item.id && !item.id.startsWith('upload')) {
-        try {
-          await deleteArchiveAndFile(item.id)
-        }
-        catch {
-          // 删除失败不阻塞本地移除
-        }
-      }
-
-      // 3. 删除本地页面文件
-      const removed = fileList.value.splice(index, 1)[0]
-      EasyMsg.success(`${removed.name} 已删除`)
-      emit('remove', removed, [...fileList.value])
-      emitUpdate()
-    }
-    catch {
-      EasyMsg.danger(`${item.name} 删除失败`)
-    }
-  }
-}
-
-// ============================================================
-// 预览文件
-// ============================================================
-
-/**
- * 预览文件
- * @param item - 文件项
- */
-async function handlePreview(item: UploadFileItem) {
-  await previewFile(item.url, item.name)
-}
-
-// ============================================================
-// 下载文件
-// ============================================================
-
-/**
- * 下载文件
- * @param item - 文件项
- */
-function handleDownload(item: UploadFileItem) {
-  downloadFile(item.url, item.name)
-}
-
-// ============================================================
-// 暴露方法（通过 ref 调用）
-// ============================================================
-
-defineExpose({
-  /** 手动触发选文件 */
-  open: handleTriggerClick,
-  /** 清空所有文件 */
-  clear: () => {
-    fileList.value = []
-    emitUpdate()
-  },
-  /** 获取文件列表 */
-  getFileList: () => [...fileList.value],
-})
+// ──── 暴露方法（通过 ref 调用）────
+defineExpose({ open, clear, getFileList })
 </script>
 
 <template>
@@ -731,15 +61,9 @@ defineExpose({
       <!-- ----------------------------------------
            上传按钮（放在最上面）
       ---------------------------------------- -->
-      <div
-        v-if="!disabled && !isMaxReached"
-        class="easy-upload__trigger"
-        :class="{ 'is-dragover': isDragover }"
-        @click="handleTriggerClick"
-        @dragover.prevent="isDragover = true"
-        @dragleave.prevent="isDragover = false"
-        @drop.prevent="handleDrop"
-      >
+      <div v-if="!disabled && !isMaxReached" class="easy-upload__trigger" :class="{ 'is-dragover': isDragover }"
+        @click="handleTriggerClick" @dragover.prevent="isDragover = true" @dragleave.prevent="isDragover = false"
+        @drop.prevent="handleDrop">
         <!-- 自定义触发区域插槽 -->
         <slot name="trigger">
           <div class="easy-upload__trigger-inner">
@@ -764,13 +88,9 @@ defineExpose({
            已上传文件列表
       ---------------------------------------- -->
       <TransitionGroup name="easy-upload-fade">
-        <div
-          v-for="(item, index) in fileList"
-          :key="item.id"
-          class="easy-upload__item"
+        <div v-for="(item, index) in fileList" :key="item.id" class="easy-upload__item"
           :class="[`easy-upload__item--${item.status}`, { 'easy-upload__item--just-uploaded': item.justUploaded }]"
-          @animationend="item.justUploaded = false"
-        >
+          @animationend="item.justUploaded = false">
           <!-- 文件图标 -->
           <div class="easy-upload__file-icon">
             <component :is="getFileIcon(item)" />
@@ -795,23 +115,15 @@ defineExpose({
           <!-- 操作按钮 -->
           <div v-if="item.status !== 'uploading'" class="easy-upload__actions">
             <!-- 预览 -->
-            <button
-              v-if="item.url && downloadable"
-              class="easy-upload__btn easy-upload__btn--preview"
-              title="预览"
-              @click.stop="handlePreview(item)"
-            >
+            <button v-if="item.url && downloadable" class="easy-upload__btn easy-upload__btn--preview" title="预览"
+              @click.stop="handlePreview(item)">
               <el-icon>
                 <View />
               </el-icon>
             </button>
             <!-- 下载 -->
-            <button
-              v-if="item.url && downloadable"
-              class="easy-upload__btn easy-upload__btn--download"
-              title="下载"
-              @click.stop="handleDownload(item)"
-            >
+            <button v-if="item.url && downloadable" class="easy-upload__btn easy-upload__btn--download" title="下载"
+              @click.stop="handleDownload(item)">
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                 <polyline points="7 10 12 15 17 10" />
@@ -819,12 +131,8 @@ defineExpose({
               </svg>
             </button>
             <!-- 删除 -->
-            <button
-              v-if="!disabled"
-              class="easy-upload__btn easy-upload__btn--delete"
-              title="删除"
-              @click.stop="handleRemove(index)"
-            >
+            <button v-if="!disabled" class="easy-upload__btn easy-upload__btn--delete" title="删除"
+              @click.stop="handleRemove(index)">
               <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="3 6 5 6 21 6" />
                 <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
@@ -864,14 +172,8 @@ defineExpose({
     </div>
 
     <!-- 隐藏的文件输入框 -->
-    <input
-      ref="inputRef"
-      type="file"
-      :accept="accept"
-      :multiple="multiple && (limit === undefined || limit > 1)"
-      class="easy-upload__input"
-      @change="handleInputChange"
-    >
+    <input ref="inputRef" type="file" :accept="accept" :multiple="multiple && (limit === undefined || limit > 1)"
+      class="easy-upload__input" @change="handleInputChange">
   </div>
 </template>
 

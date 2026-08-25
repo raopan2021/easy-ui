@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import JsBarcode from 'jsbarcode'
-import { nextTick, onMounted, ref, watch } from 'vue'
+import type { BarcodeEmits, BarcodeProps } from './types'
+
+import { useBarcode } from './use-barcode'
 
 defineOptions({ name: 'EasyBarcode' })
 
-const props = withDefaults(defineProps<BarcodeOptions>(), {
+const props = withDefaults(defineProps<BarcodeProps>(), {
   content: '',
   format: 'CODE128',
   width: 2,
@@ -18,160 +19,30 @@ const props = withDefaults(defineProps<BarcodeOptions>(), {
   lineColor: '#000000',
 })
 
-const emit = defineEmits<{
-  /** 生成完成时触发 */
-  (e: 'generated', svgElement: SVGElement): void
-  /** 生成失败时触发 */
-  (e: 'error', error: Error): void
-}>()
+const emit = defineEmits<BarcodeEmits>()
 
-export interface BarcodeOptions {
-  /** 条码内容 */
-  content?: string
-  /** 条码格式，支持：CODE39, CODE128, EAN13, EAN8, UPC, CODE93, ITF14, MSI, POSTNET 等 */
-  format?: string
-  /** 条码宽度（单个条的宽度），单位 px，默认 2 */
-  width?: number
-  /** 条码高度，单位 px，默认 100 */
-  height?: number
-  /** 是否显示文本内容，默认 true */
-  displayValue?: boolean
-  /** 文本字体，默认 'Courier New' */
-  font?: string
-  /** 文本字体大小，默认 20 */
-  fontSize?: number
-  /** 文本对齐方式，默认 'center' */
-  textAlign?: 'left' | 'center' | 'right'
-  /** 文本距离条的距离，单位 px，默认 10 */
-  margin?: number
-  /** 背景色，默认 #ffffff */
-  background?: string
-  /** 条的颜色，默认 #000000 */
-  lineColor?: string
-}
-
-const svgRef = ref<SVGElement | null>(null)
-
-/** 绘制条码 */
-function drawBarcode(): void {
-  if (!svgRef.value || !props.content)
-    return
-
-  try {
-    // 清空旧的条码内容，防止重复叠加
-    const svgEl = svgRef.value
-    while (svgEl.firstChild) {
-      svgEl.removeChild(svgEl.firstChild)
-    }
-
-    // 使用 JsBarcode 绘制（会自动设置 SVG 的 width/height 属性和 viewBox）
-    JsBarcode(svgEl, props.content, {
-      format: props.format,
-      width: props.width,
-      height: props.height,
-      displayValue: props.displayValue,
-      font: props.font,
-      fontSize: props.fontSize,
-      textAlign: props.textAlign as 'left' | 'center' | 'right',
-      margin: props.margin,
-      background: props.background,
-      lineColor: props.lineColor,
-    })
-
-    // 让 SVG 按属性宽高显示（style 覆盖，防止被 scoped 样式影响）
-    const w = svgEl.getAttribute('width')
-    const heightAttr = svgEl.getAttribute('height')
-    if (w && heightAttr) {
-      svgEl.style.cssText = `width:${w}px;height:${heightAttr}px;background:${props.background};display:block`
-    }
-
-    // 触发完成事件
-    emit('generated', svgEl)
-  }
-  catch (error) {
-    emit('error', error as Error)
-  }
-}
+const {
+  svgRef,
+  getSvgElement,
+  toSVGString,
+  downloadSVG,
+  downloadPNG,
+} = useBarcode(props, emit)
 
 /** 暴露的方法 */
 defineExpose({
   /** 获取 SVG 元素 */
-  getSvgElement(): SVGElement | null {
-    return svgRef.value
-  },
+  getSvgElement,
   /** 获取 SVG 字符串 */
-  toSVGString(): string {
-    return svgRef.value?.outerHTML || ''
-  },
+  toSVGString,
   /** 下载为 SVG 文件 */
-  downloadSVG(filename = 'barcode.svg'): void {
-    const svg = svgRef.value
-    if (!svg)
-      return
-    const svgData = new XMLSerializer().serializeToString(svg)
-    const blob = new Blob([svgData], { type: 'image/svg+xml' })
-    const url = URL.createObjectURL(blob)
-    const link = document.createElement('a')
-    link.download = filename
-    link.href = url
-    link.click()
-    URL.revokeObjectURL(url)
-  },
+  downloadSVG,
   /** 下载为 PNG 图片 */
-  downloadPNG(filename = 'barcode.png', scale = 2): void {
-    const svg = svgRef.value
-    if (!svg)
-      return
-
-    const canvas = document.createElement('canvas')
-    const ctx = canvas.getContext('2d')
-    if (!ctx)
-      return
-
-    const svgData = new XMLSerializer().serializeToString(svg)
-    const img = new Image()
-    img.onload = () => {
-      canvas.width = img.width * scale
-      canvas.height = img.height * scale
-      ctx.fillStyle = props.background
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-      const pngUrl = canvas.toDataURL('image/png')
-      const link = document.createElement('a')
-      link.download = filename
-      link.href = pngUrl
-      link.click()
-    }
-    img.src = `data:image/svg+xml;base64,${btoa(unescape(encodeURIComponent(svgData)))}`
-  },
+  downloadPNG,
 })
 
-// 监听属性变化
-watch(
-  () => [
-    props.content,
-    props.format,
-    props.width,
-    props.height,
-    props.displayValue,
-    props.font,
-    props.fontSize,
-    props.textAlign,
-    props.margin,
-    props.background,
-    props.lineColor,
-  ],
-  async () => {
-    await nextTick()
-    drawBarcode()
-  },
-  { deep: true },
-)
-
-onMounted(async () => {
-  await nextTick()
-  drawBarcode()
-})
+// 保持对外类型导出兼容（原定义在 barcode.vue）
+export type { BarcodeEmits, BarcodeOptions, BarcodeProps } from './types'
 </script>
 
 <template>
@@ -185,30 +56,5 @@ onMounted(async () => {
   </div>
 </template>
 
-<style scoped lang="scss">
-.easy-barcode {
-  position: relative;
-  display: inline-block;
-
-  .easy-barcode__svg {
-    display: block;
-    /*SVG 由 JS 动态设置 width/height 属性，scoped 样式不再覆盖 */
-  }
-
-  .easy-barcode__placeholder {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--el-fill-color-light);
-    color: var(--el-text-color-placeholder);
-    font-size: 14px;
-    border: 1px dashed var(--el-border-color);
-    border-radius: 4px;
-  }
-}
-</style>
+<!-- 组件核心样式（scoped，独立维护在 barcode-style.scss） -->
+<style scoped src="./barcode-style.scss" lang="scss"></style>

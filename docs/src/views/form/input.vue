@@ -62,9 +62,7 @@ const textarea4 = ref('')
           <EasyInput v-model="pwd" type="password" placeholder="请输入密码" />
         </div>
       </div>
-      <EasyDocCode
-        code="<EasyInput v-model=&quot;password&quot; type=&quot;password&quot; placeholder=&quot;请输入密码&quot; />"
-      />
+      <EasyDocCode code="<EasyInput v-model=&quot;password&quot; type=&quot;password&quot; placeholder=&quot;请输入密码&quot; />" />
     </section>
 
     <section class="doc-section">
@@ -130,9 +128,7 @@ const textarea4 = ref('')
           <EasyInput v-model="val6" placeholder="最多20字" :maxlength="20" show-word-limit />
         </div>
       </div>
-      <EasyDocCode
-        code="<EasyInput v-model=&quot;value&quot; placeholder=&quot;最多20字&quot; :maxlength=&quot;20&quot; show-word-limit />"
-      />
+      <EasyDocCode code="<EasyInput v-model=&quot;value&quot; placeholder=&quot;最多20字&quot; :maxlength=&quot;20&quot; show-word-limit />" />
     </section>
 
     <section class="doc-section">
@@ -169,14 +165,7 @@ const textarea4 = ref('')
           <EasyInput v-model="textarea1" type="textarea" :rows="2" placeholder="默认 2 行" />
           <EasyInput v-model="textarea2" type="textarea" :rows="4" placeholder="4 行" />
           <EasyInput v-model="textarea3" type="textarea" :rows="3" placeholder="禁止调整大小" resize="none" />
-          <EasyInput
-            v-model="textarea4"
-            type="textarea"
-            :rows="2"
-            :maxlength="100"
-            show-word-limit
-            placeholder="带字数统计"
-          />
+          <EasyInput v-model="textarea4" type="textarea" :rows="2" :maxlength="100" show-word-limit placeholder="带字数统计" />
         </div>
       </div>
       <EasyDocCode

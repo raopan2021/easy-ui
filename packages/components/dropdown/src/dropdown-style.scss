@@ -1,0 +1,26 @@
+.easy-dropdown {
+  display: inline-block;
+}
+
+.easy-dropdown__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text-color, #606266);
+  transition: color 0.2s;
+  user-select: none;
+}
+
+.easy-dropdown__trigger:hover {
+  color: var(--primary-color, #4f6ef7);
+}
+
+.easy-dropdown__arrow {
+  transition: transform 0.25s ease;
+}
+
+.easy-dropdown__arrow.is-open {
+  transform: rotate(180deg);
+}

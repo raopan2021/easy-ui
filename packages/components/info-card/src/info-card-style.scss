@@ -1,0 +1,176 @@
+/* ========== 设计令牌 ========== */
+@use '../../../easy-ui/src/styles/tokens' as *;
+
+$radius: 10px;
+$radius-image: 6px;
+
+/* ========== 卡片主体 ========== */
+.easy-info-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 16px;
+  background: $bg-dark;
+  color: var(--el-text-color-primary);
+  box-sizing: border-box;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: $radius;
+
+  /* 边框 */
+  &.is-bordered {
+    border: 1px solid var(--el-border-color);
+  }
+
+  /* 可点击 */
+  &.is-clickable {
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+/* ========== 左侧图片 ========== */
+.easy-info-card__image {
+  flex-shrink: 0;
+  width: 80px;
+  height: 60px;
+  border-radius: $radius-image;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+/* ========== 中间内容区 ========== */
+.easy-info-card__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ========== 标题行 ========== */
+.easy-info-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.easy-info-card__title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+
+.easy-info-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--el-text-color-primary);
+}
+
+.easy-info-card__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ========== 状态标签 ========== */
+.easy-info-card__status {
+  flex-shrink: 0;
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 4px;
+  white-space: nowrap;
+  line-height: 1.4;
+
+  &.easy-info-card__status--default {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--el-text-color-secondary);
+  }
+
+  &.easy-info-card__status--primary {
+    background: $blue-bg;
+    color: #60a5fa;
+  }
+
+  &.easy-info-card__status--success {
+    background: $green-bg;
+    color: #34d399;
+  }
+
+  &.easy-info-card__status--warning {
+    background: $orange-bg;
+    color: #fbbf24;
+  }
+
+  &.easy-info-card__status--danger {
+    background: $red-bg;
+    color: #f87171;
+  }
+}
+
+/* ========== 描述信息 ========== */
+.easy-info-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.easy-info-card__desc-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--el-text-color-secondary);
+  line-height: 1.4;
+}
+
+.easy-info-card__desc-icon {
+  flex-shrink: 0;
+  color: var(--el-text-color-placeholder);
+}
+
+.easy-info-card__desc-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--el-text-color-placeholder);
+  flex-shrink: 0;
+}
+
+.easy-info-card__desc-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ========== 右侧操作区 ========== */
+.easy-info-card__action {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}

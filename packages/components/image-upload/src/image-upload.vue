@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import type { ImageUploadEmits, ImageUploadProps } from './types'
+import { useImageUpload } from './use-image-upload'
+
+// 保持对外类型导出兼容（原定义在 image-upload.vue）
+export type { ImageUploadEmits, ImageUploadProps, UploadFile, UploadStatus, UploadValueMode } from './types'
 
 defineOptions({ name: 'EasyUpload' })
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<ImageUploadProps>(), {
   modelValue: () => [],
   valueMode: 'array',
   multiple: true,
@@ -16,498 +20,45 @@ const props = withDefaults(defineProps<Props>(), {
   minSize: 0,
 })
 
-const emit = defineEmits<{
-  'update:modelValue': [value: string[] | string]
-  'change': [fileList: UploadFile[]]
-  'remove': [file: UploadFile, fileList: UploadFile[]]
-  'success': [url: string, file: UploadFile]
-  'error': [error: Error, file: UploadFile]
-  'exceed': [files: File[], limit: number]
-  'validate-error': [msg: string, file: File]
-}>()
+const emit = defineEmits<ImageUploadEmits>()
 
-// ===================== 🔧 上传配置区（修改这里自定义上传逻辑） =====================
+// ──── 核心逻辑（内置校验 / modelValue 同步 / 本地上传 / 删除 / 预览）────
+const {
+  inputRef,
+  isDragover,
+  fileList,
+  isMaxReached,
+  itemStyle,
+  handleTriggerClick,
+  handleInputChange,
+  handleDrop,
+  handleRemove,
+  previewVisible,
+  previewIndex,
+  previewUrlList,
+  previewImgStyle,
+  handlePreview,
+  handlePreviewWheel,
+  handlePreviewDragStart,
+  previewPrev,
+  previewNext,
+  previewZoomIn,
+  previewZoomOut,
+  previewRotateLeft,
+  previewRotateRight,
+  previewReset,
+  clearFileList,
+  getFileList,
+} = useImageUpload(props, emit)
 
-/**
- * 上传模式：
- * - local：本地上传（base64，纯前端预览，无需后端接口）
- * - network：网络上传（需要后端接口）
- */
-const UPLOAD_MODE: 'local' | 'network' = 'local'
-
-/**
- * 网络上传配置（mode = 'network' 时生效）
- * ⚠️ 修改这里的配置来自定义你的上传接口  此配置仅为参考示例，请根据实际业务需求进行修改
- */
-const NETWORK_CONFIG = {
-  /** 上传接口地址 */
-  url: '/api/upload/image',
-  /** 请求方法 */
-  method: 'POST' as const,
-  /** 上传字段名（FormData 的 key） */
-  fieldName: 'file',
-  /** 请求头 */
-  headers: {
-    // 'Authorization': 'Bearer xxx',
-  },
-  /** 额外表单参数 */
-  data: {
-    // 'scene': 'avatar',
-  },
-  /**
-   * 如何从响应中提取图片 URL？
-   * 支持三种路径写法（自动兼容）：
-   * - 'url'          → response: { url: '...' }
-   * - 'data'         → response: { data: '...' }
-   * - 'data.url'     → response: { data: { url: '...' } }
-   */
-  responseUrlPath: 'data',
-}
-
-// ===================== 类型定义 =====================
-
-export type UploadStatus = 'ready' | 'uploading' | 'success' | 'error'
-export type UploadValueMode = 'array' | 'string'
-
-export interface UploadFile {
-  uid: string
-  name: string
-  url?: string
-  status: UploadStatus
-  percent?: number
-  raw?: File
-}
-
-export interface Props {
-  /** v-model 绑定值，支持字符串数组或逗号拼接字符串 */
-  modelValue?: string[] | string
-  /** 返回值模式：array 返回数组，string 返回逗号拼接（每项 encodeURIComponent 编码） */
-  valueMode?: UploadValueMode
-  /** 最多上传数量 */
-  limit?: number
-  /** 是否支持多选 */
-  multiple?: boolean
-  /** 原生 accept 属性（文件选择框筛选） */
-  accept?: string
-  /** 图片填充方式 */
-  fit?: 'fill' | 'contain' | 'cover' | 'none' | 'scale-down'
-  /** 缩略图尺寸（px） */
-  size?: number
-  /** 是否禁用 */
-  disabled?: boolean
-  /** 是否支持预览 */
-  previewable?: boolean
-  /** 提示文字 */
-  tip?: string
-  /** 触发区域文字 */
-  triggerText?: string
-
-  // ===== 内置校验配置（无需写 JS） =====
-  /** 允许的文件后缀或 MIME 类型，逗号拼接，如 "jpg,png,gif" 或 "image/jpeg,image/png" */
-  acceptTypes?: string
-  /** 单文件最大尺寸（MB），不设置则不限制 */
-  maxSize?: number
-  /** 单文件最小尺寸（MB），默认 0 */
-  minSize?: number
-}
-
-// ===================== 内部状态 =====================
-
-const inputRef = ref<HTMLInputElement>()
-const isDragover = ref(false)
-
-// 内部文件列表
-const fileList = ref<UploadFile[]>([])
-
-// 是否达到上传上限
-const isMaxReached = computed(() => {
-  if (props.limit === undefined)
-    return false
-  return fileList.value.filter(f => f.status !== 'error').length >= props.limit
-})
-
-// ===================== 内置校验 =====================
-
-/** 内置校验：返回错误信息字符串，null 表示校验通过 */
-function validateFile(file: File): string | null {
-  // 校验文件类型
-  if (props.acceptTypes) {
-    const allowed = props.acceptTypes.split(',').map(t => t.trim().toLowerCase())
-    const ext = file.name.split('.').pop()?.toLowerCase() || ''
-    const mimeMatch = allowed.some(t => t === file.type.toLowerCase())
-    const extMatch = allowed.some(t => t === ext || t === `.${ext}`)
-    if (!mimeMatch && !extMatch) {
-      return `不支持 ${ext || file.type} 格式，请上传 ${props.acceptTypes} 格式`
-    }
-  }
-  // 校验最小尺寸
-  if (props.minSize && file.size < props.minSize * 1024 * 1024) {
-    return `文件大小不能小于 ${props.minSize}MB`
-  }
-  // 校验最大尺寸
-  if (props.maxSize && file.size > props.maxSize * 1024 * 1024) {
-    return `文件大小不能超过 ${props.maxSize}MB`
-  }
-  return null
-}
-
-// 缩略图尺寸样式
-const itemStyle = computed(() => ({
-  width: `${props.size}px`,
-  height: `${props.size}px`,
-}))
-
-// ===================== modelValue 同步 =====================
-
-/**
- * 将外部 modelValue 解析为 url 数组。
- * string 模式：每项经过 encodeURIComponent 编码后用逗号拼接，
- * 解析时 split(',') 再逐项 decodeURIComponent 还原。
- * base64 中的逗号被编码为 %2C，不会干扰分隔。
- * 普通 http URL 无 % 字符，decode 后原样还原，兼容旧数据。
- */
-function parseModelValue(val: string[] | string | undefined): string[] {
-  if (!val)
-    return []
-  if (Array.isArray(val))
-    return val.filter(Boolean)
-  return val
-    .split(',')
-    .map((s) => {
-      try {
-        return decodeURIComponent(s.trim())
-      }
-      catch {
-        return s.trim()
-      }
-    })
-    .filter(Boolean)
-}
-
-/** 将内部 url 数组序列化为 modelValue 格式 */
-function serializeUrls(urls: string[]): string[] | string {
-  if (props.valueMode === 'string')
-    return urls.map(u => encodeURIComponent(u)).join(',')
-  return urls
-}
-
-// 监听外部值变化 → 同步到 fileList（仅同步已有 URL）
-watch(
-  () => props.modelValue,
-  (val) => {
-    const urls = parseModelValue(val)
-    // 只有当外部值与内部不一致时才同步（避免循环更新）
-    const currentUrls = fileList.value.filter(f => f.url && f.status === 'success').map(f => f.url!)
-    const isSame = urls.length === currentUrls.length && urls.every((u, i) => u === currentUrls[i])
-    if (isSame)
-      return
-
-    fileList.value = urls.map((url, i) => ({
-      uid: `init-${i}-${url}`,
-      name: url.split('/').pop() || `image-${i}`,
-      url,
-      status: 'success' as UploadStatus,
-    }))
-  },
-  { immediate: true },
-)
-
-/** 向外 emit 更新 */
-function emitUpdate() {
-  const successUrls = fileList.value.filter(f => f.status === 'success' && f.url).map(f => f.url!)
-  emit('update:modelValue', serializeUrls(successUrls))
-  emit('change', [...fileList.value])
-}
-
-// ===================== 触发选文件 =====================
-
-function handleTriggerClick() {
-  if (props.disabled)
-    return
-  inputRef.value?.click()
-}
-
-// 处理 input 选文件
-function handleInputChange(e: Event) {
-  const input = e.target as HTMLInputElement
-  const files = Array.from(input.files || [])
-  if (!files.length)
-    return
-  input.value = '' // 重置，以便重复选同一文件
-  processFiles(files)
-}
-
-// 处理拖拽
-function handleDrop(e: DragEvent) {
-  isDragover.value = false
-  if (props.disabled)
-    return
-  const files = Array.from(e.dataTransfer?.files || []).filter(f => f.type.startsWith('image/'))
-  processFiles(files)
-}
-
-// ===================== 文件处理 =====================
-
-async function processFiles(files: File[]) {
-  // 检查上限
-  if (props.limit !== undefined) {
-    const currentValid = fileList.value.filter(f => f.status !== 'error').length
-    const allowed = props.limit - currentValid
-    if (allowed <= 0) {
-      emit('exceed', files, props.limit)
-      return
-    }
-    if (files.length > allowed) {
-      emit('exceed', files.slice(allowed), props.limit)
-      files = files.slice(0, allowed)
-    }
-  }
-
-  for (const file of files) {
-    await uploadFile(file)
-  }
-}
-
-async function uploadFile(file: File) {
-  // 内置校验
-  const validateError = validateFile(file)
-  if (validateError) {
-    emit('validate-error', validateError, file)
-    return
-  }
-
-  const uid = `upload-${Date.now()}-${Math.random().toString(36).slice(2)}`
-  const uploadItem: UploadFile = {
-    uid,
-    name: file.name,
-    status: 'uploading',
-    percent: 0,
-    raw: file,
-  }
-  fileList.value.push(uploadItem)
-
-  const item = fileList.value.find(f => f.uid === uid)!
-
-  // 根据 mode 选择上传方式
-  if (UPLOAD_MODE === 'network') {
-    networkUpload({ file, item })
-  }
-  else {
-    defaultLocalUpload({ file, item })
-  }
-}
-
-/** 网络上传（mode = 'network' 时使用） 以下为示例，可根据实际开发中后端接口和代码风格修改上传逻辑 */
-async function networkUpload(opts: { file: File, item: UploadFile }) {
-  const { file, item } = opts
-  const { url, method, fieldName, headers, data, responseUrlPath } = NETWORK_CONFIG
-
-  const formData = new FormData()
-  formData.append(fieldName, file)
-  // 添加额外参数
-  Object.entries(data).forEach(([key, value]) => {
-    formData.append(key, value as string | Blob)
-  })
-
-  try {
-    const res = await fetch(url, {
-      method,
-      headers,
-      body: formData,
-    })
-
-    if (!res.ok)
-      throw new Error(`上传失败: ${res.status}`)
-
-    const response = await res.json()
-
-    // 从响应中提取 URL（兼容三种写法）
-    let imageUrl: string
-    if (responseUrlPath === 'url') {
-      imageUrl = response.url
-    }
-    else if (responseUrlPath === 'data') {
-      imageUrl = response.data
-    }
-    else if (responseUrlPath === 'data.url') {
-      imageUrl = response.data?.url
-    }
-    else {
-      imageUrl = (response as any)[responseUrlPath]
-    }
-
-    if (!imageUrl)
-      throw new Error('响应中未找到图片地址')
-
-    item.url = imageUrl
-    item.status = 'success'
-    item.percent = 100
-    emit('success', imageUrl, { ...item })
-    emitUpdate()
-  }
-  catch (error) {
-    item.status = 'error'
-    emit('error', error as Error, { ...item })
-  }
-}
-
-/** 默认本地上传：模拟进度 + FileReader 读取 base64 */
-function defaultLocalUpload(opts: { file: File, item: UploadFile }) {
-  const { file, item } = opts
-  // 模拟进度
-  let progress = 0
-  const timer = setInterval(() => {
-    progress += Math.random() * 30
-    if (progress >= 90) {
-      clearInterval(timer)
-      item.percent = 90
-    }
-    else {
-      item.percent = Math.floor(progress)
-    }
-  }, 80)
-
-  const reader = new FileReader()
-  reader.onload = (e) => {
-    clearInterval(timer)
-    item.url = e.target?.result as string
-    item.status = 'success'
-    item.percent = 100
-    emit('success', item.url, { ...item })
-    emitUpdate()
-  }
-  reader.onerror = () => {
-    clearInterval(timer)
-    item.status = 'error'
-    emit('error', new Error('读取文件失败'), { ...item })
-  }
-  reader.readAsDataURL(file)
-}
-
-// ===================== 删除 =====================
-
-function handleRemove(index: number) {
-  const removed = fileList.value.splice(index, 1)[0]
-  emit('remove', removed, [...fileList.value])
-  emitUpdate()
-}
-
-// ===================== 预览 =====================
-
-const previewVisible = ref(false)
-const previewIndex = ref(0)
-const previewScale = ref(1)
-const previewRotation = ref(0)
-const previewPos = ref({ x: 0, y: 0 })
-const previewDragOffset = ref({ x: 0, y: 0 })
-const previewIsDragging = ref(false)
-
-const previewUrlList = computed(() => fileList.value.filter(f => f.status === 'success' && f.url).map(f => f.url!))
-
-const previewImgStyle = computed(() => ({
-  transform: `translate(${previewPos.value.x + previewDragOffset.value.x}px, ${previewPos.value.y + previewDragOffset.value.y}px) scale(${previewScale.value}) rotate(${previewRotation.value}deg)`,
-  transition: previewIsDragging.value ? 'none' : 'transform 0.25s ease',
-  cursor: previewScale.value > 1 ? (previewIsDragging.value ? 'grabbing' : 'grab') : 'default',
-}))
-
-function handlePreview(index: number) {
-  if (!props.previewable)
-    return
-  // 映射到 success 图片的索引
-  const successItems = fileList.value.filter(f => f.status === 'success' && f.url)
-  const successIndex = successItems.findIndex((_, i) => {
-    const allIndex = fileList.value.indexOf(successItems[i])
-    return allIndex === index
-  })
-  previewIndex.value = Math.max(0, successIndex)
-  previewReset()
-  previewVisible.value = true
-}
-
-function previewPrev() {
-  previewIndex.value = previewIndex.value > 0 ? previewIndex.value - 1 : previewUrlList.value.length - 1
-  previewReset()
-}
-
-function previewNext() {
-  previewIndex.value = previewIndex.value < previewUrlList.value.length - 1 ? previewIndex.value + 1 : 0
-  previewReset()
-}
-
-function previewZoomIn() {
-  previewScale.value = Math.min(previewScale.value + 0.25, 5)
-}
-function previewZoomOut() {
-  previewScale.value = Math.max(previewScale.value - 0.25, 0.2)
-}
-function previewRotateLeft() {
-  previewRotation.value -= 90
-}
-function previewRotateRight() {
-  previewRotation.value += 90
-}
-function previewReset() {
-  previewScale.value = 1
-  previewRotation.value = 0
-  previewPos.value = { x: 0, y: 0 }
-  previewDragOffset.value = { x: 0, y: 0 }
-}
-
-function handlePreviewWheel(e: WheelEvent) {
-  e.deltaY < 0 ? previewZoomIn() : previewZoomOut()
-}
-
-function handlePreviewDragStart(e: MouseEvent) {
-  if (previewScale.value <= 1)
-    return
-  previewIsDragging.value = true
-  const startX = e.clientX
-  const startY = e.clientY
-  const onMove = (me: MouseEvent) => {
-    previewDragOffset.value = { x: me.clientX - startX, y: me.clientY - startY }
-  }
-  const onUp = () => {
-    previewIsDragging.value = false
-    previewPos.value = {
-      x: previewPos.value.x + previewDragOffset.value.x,
-      y: previewPos.value.y + previewDragOffset.value.y,
-    }
-    previewDragOffset.value = { x: 0, y: 0 }
-    document.removeEventListener('mousemove', onMove)
-    document.removeEventListener('mouseup', onUp)
-  }
-  document.addEventListener('mousemove', onMove)
-  document.addEventListener('mouseup', onUp)
-}
-
-// ESC 关闭预览
-watch(previewVisible, (val) => {
-  const onKeydown = (e: KeyboardEvent) => {
-    if (e.key === 'Escape')
-      previewVisible.value = false
-  }
-  if (val) {
-    document.addEventListener('keydown', onKeydown)
-    document.body.style.overflow = 'hidden'
-  }
-  else {
-    document.removeEventListener('keydown', onKeydown)
-    document.body.style.overflow = ''
-  }
-})
-
-// ===================== 暴露方法 =====================
-
+// 暴露方法（通过 ref 调用）
 defineExpose({
   /** 手动触发选文件 */
   open: handleTriggerClick,
   /** 清空所有文件 */
-  clear: () => {
-    fileList.value = []
-    emitUpdate()
-  },
+  clear: clearFileList,
   /** 获取文件列表 */
-  getFileList: () => [...fileList.value],
+  getFileList,
 })
 </script>
 
@@ -517,48 +68,21 @@ defineExpose({
     <div class="easy-upload__list">
       <!-- 已上传图片 -->
       <TransitionGroup name="easy-upload-fade">
-        <div
-          v-for="(item, index) in fileList"
-          :key="item.uid"
-          class="easy-upload__item"
-          :class="[`easy-upload__item--${item.status}`]"
-          :style="itemStyle"
-        >
+        <div v-for="(item, index) in fileList" :key="item.uid" class="easy-upload__item"
+          :class="[`easy-upload__item--${item.status}`]" :style="itemStyle">
           <!-- 预览图 -->
-          <img
-            v-if="item.url"
-            :src="item.url"
-            :alt="item.name"
-            class="easy-upload__img"
-            :style="{ objectFit: fit }"
-            @click="handlePreview(index)"
-          >
+          <img v-if="item.url" :src="item.url" :alt="item.name" class="easy-upload__img" :style="{ objectFit: fit }"
+            @click="handlePreview(index)">
 
           <!-- 上传进度 -->
           <div v-if="item.status === 'uploading'" class="easy-upload__progress">
             <div class="easy-upload__progress-ring">
               <svg viewBox="0 0 36 36" class="progress-svg">
-                <circle
-                  class="progress-track"
-                  cx="18"
-                  cy="18"
-                  r="14"
-                  fill="none"
-                  stroke="rgba(255,255,255,0.3)"
-                  stroke-width="3"
-                />
-                <circle
-                  class="progress-fill"
-                  cx="18"
-                  cy="18"
-                  r="14"
-                  fill="none"
-                  stroke="#fff"
-                  stroke-width="3"
-                  stroke-linecap="round"
-                  :stroke-dasharray="`${(item.percent || 0) * 0.88} 88`"
-                  transform="rotate(-90 18 18)"
-                />
+                <circle class="progress-track" cx="18" cy="18" r="14" fill="none" stroke="rgba(255,255,255,0.3)"
+                  stroke-width="3" />
+                <circle class="progress-fill" cx="18" cy="18" r="14" fill="none" stroke="#fff" stroke-width="3"
+                  stroke-linecap="round" :stroke-dasharray="`${(item.percent || 0) * 0.88} 88`"
+                  transform="rotate(-90 18 18)" />
               </svg>
               <span class="progress-text">{{ item.percent || 0 }}%</span>
             </div>
@@ -577,12 +101,8 @@ defineExpose({
           <!-- 操作遮罩（hover 显示） -->
           <div v-if="!disabled && item.status !== 'uploading'" class="easy-upload__actions">
             <!-- 预览 -->
-            <span
-              v-if="item.url && previewable"
-              class="easy-upload__action"
-              title="预览"
-              @click.stop="handlePreview(index)"
-            >
+            <span v-if="item.url && previewable" class="easy-upload__action" title="预览"
+              @click.stop="handlePreview(index)">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                 <circle cx="12" cy="12" r="3" />
@@ -609,16 +129,9 @@ defineExpose({
       </TransitionGroup>
 
       <!-- 上传触发区域 -->
-      <div
-        v-if="!disabled && !isMaxReached"
-        class="easy-upload__trigger"
-        :class="{ 'is-dragover': isDragover }"
-        :style="itemStyle"
-        @click="handleTriggerClick"
-        @dragover.prevent="isDragover = true"
-        @dragleave.prevent="isDragover = false"
-        @drop.prevent="handleDrop"
-      >
+      <div v-if="!disabled && !isMaxReached" class="easy-upload__trigger" :class="{ 'is-dragover': isDragover }"
+        :style="itemStyle" @click="handleTriggerClick" @dragover.prevent="isDragover = true"
+        @dragleave.prevent="isDragover = false" @drop.prevent="handleDrop">
         <slot name="trigger">
           <div class="easy-upload__trigger-inner">
             <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -631,14 +144,8 @@ defineExpose({
       </div>
 
       <!-- 隐藏的 input -->
-      <input
-        ref="inputRef"
-        type="file"
-        :accept="accept"
-        :multiple="multiple && (limit === undefined || limit > 1)"
-        class="easy-upload__input"
-        @change="handleInputChange"
-      >
+      <input ref="inputRef" type="file" :accept="accept" :multiple="multiple && (limit === undefined || limit > 1)"
+        class="easy-upload__input" @change="handleInputChange">
     </div>
 
     <!-- 提示文字 -->
@@ -651,12 +158,8 @@ defineExpose({
     <!-- 图片预览弹窗 -->
     <Teleport to="body">
       <Transition name="easy-upload-preview">
-        <div
-          v-if="previewVisible"
-          class="easy-upload-preview-modal"
-          @click.self="previewVisible = false"
-          @wheel.prevent="handlePreviewWheel"
-        >
+        <div v-if="previewVisible" class="easy-upload-preview-modal" @click.self="previewVisible = false"
+          @wheel.prevent="handlePreviewWheel">
           <!-- 关闭 -->
           <button class="easy-upload-preview__close" @click="previewVisible = false">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -666,11 +169,8 @@ defineExpose({
           </button>
 
           <!-- 上一张 -->
-          <button
-            v-if="previewUrlList.length > 1"
-            class="easy-upload-preview__arrow easy-upload-preview__arrow--prev"
-            @click="previewPrev"
-          >
+          <button v-if="previewUrlList.length > 1" class="easy-upload-preview__arrow easy-upload-preview__arrow--prev"
+            @click="previewPrev">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
               <polyline points="15 18 9 12 15 6" />
             </svg>
@@ -678,20 +178,13 @@ defineExpose({
 
           <!-- 图片 -->
           <div class="easy-upload-preview__body" @mousedown="handlePreviewDragStart">
-            <img
-              :src="previewUrlList[previewIndex]"
-              :style="previewImgStyle"
-              class="easy-upload-preview__img"
-              draggable="false"
-            >
+            <img :src="previewUrlList[previewIndex]" :style="previewImgStyle" class="easy-upload-preview__img"
+              draggable="false">
           </div>
 
           <!-- 下一张 -->
-          <button
-            v-if="previewUrlList.length > 1"
-            class="easy-upload-preview__arrow easy-upload-preview__arrow--next"
-            @click="previewNext"
-          >
+          <button v-if="previewUrlList.length > 1" class="easy-upload-preview__arrow easy-upload-preview__arrow--next"
+            @click="previewNext">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5">
               <polyline points="9 18 15 12 9 6" />
             </svg>

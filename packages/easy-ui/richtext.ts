@@ -7,6 +7,9 @@ import type { App } from 'vue'
 import ElementPlus from 'element-plus'
 import { setupEasy } from './src/utils/easy'
 
+// ──── 自动导入解析器 ────
+import { easyComponentResolver as _easyUiResolver } from './src/utils/easyComponentResolver'
+
 // ──── 组件 ────
 export * from '../components/richtext'
 
@@ -25,9 +28,6 @@ export type {
   TourInstance,
   TourOptions,
 } from './src/utils/easy'
-
-// ──── 自动导入解析器 ────
-import { easyComponentResolver as _easyUiResolver } from './src/utils/easyComponentResolver'
 export const EasyUiResolver = _easyUiResolver
 
 // ──── 默认安装（app.use） ────

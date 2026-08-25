@@ -1,0 +1,198 @@
+@use '../../../easy-ui/src/styles/tokens' as *;
+
+/* ====================================================
+   复用 easy-tag 核心样式（独立副本，避免跨组件依赖）
+==================================================== */
+$radius: 6px;
+$radius-round: 100px;
+$transition: all 0.2s ease;
+
+.easy-dict-tag__single,
+.easy-dict-tag__multiple {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+/* 加载占位点 */
+.easy-dict-tag__loading {
+  display: inline-flex;
+  align-items: center;
+}
+.easy-dict-tag__dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #c0c4cc;
+  animation: easy-dict-blink 1s ease-in-out infinite;
+}
+@keyframes easy-dict-blink {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 降级显示（未匹配到字典项时直接显示值） */
+.easy-dict-tag__fallback {
+  font-size: 13px;
+  color: $text-regular;
+}
+
+/* ====================================================
+   Tag 基础样式（独立于 easy-tag 组件）
+==================================================== */
+.easy-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 10px;
+  height: 28px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  border-radius: $radius;
+  border: 1px solid transparent;
+  transition: $transition;
+  white-space: nowrap;
+  vertical-align: middle;
+  box-sizing: border-box;
+  user-select: none;
+
+  &.is-round {
+    border-radius: $radius-round;
+  }
+
+  &.easy-tag--large {
+    height: 34px;
+    font-size: 14px;
+    padding: 0 14px;
+    gap: 5px;
+  }
+  &.easy-tag--small {
+    height: 22px;
+    font-size: 12px;
+    padding: 0 7px;
+    gap: 3px;
+  }
+
+  /* --- default --- */
+  &.easy-tag--default {
+    &.easy-tag--light {
+      color: var(--el-text-color-regular);
+      background-color: var(--el-fill-color-light);
+      border-color: var(--el-border-color);
+    }
+    &.easy-tag--plain {
+      color: var(--el-text-color-regular);
+      background-color: transparent;
+      border-color: var(--el-border-color);
+    }
+    &.easy-tag--dark {
+      color: #fff;
+      background-color: #909399;
+      border-color: #909399;
+    }
+  }
+  /* --- primary --- */
+  &.easy-tag--primary {
+    &.easy-tag--light {
+      color: var(--el-color-primary);
+      background-color: $primary-bg-strong;
+      border-color: $primary-border;
+    }
+    &.easy-tag--plain {
+      color: var(--el-color-primary);
+      background-color: transparent;
+      border-color: var(--el-color-primary);
+    }
+    &.easy-tag--dark {
+      color: #fff;
+      background-color: var(--el-color-primary);
+      border-color: var(--el-color-primary);
+    }
+  }
+  /* --- success --- */
+  &.easy-tag--success {
+    &.easy-tag--light {
+      color: var(--el-color-success);
+      background-color: $success-bg;
+      border-color: $success-border;
+    }
+    &.easy-tag--plain {
+      color: var(--el-color-success);
+      background-color: transparent;
+      border-color: var(--el-color-success);
+    }
+    &.easy-tag--dark {
+      color: #fff;
+      background-color: var(--el-color-success);
+      border-color: var(--el-color-success);
+    }
+  }
+  /* --- warning --- */
+  &.easy-tag--warning {
+    &.easy-tag--light {
+      color: var(--el-color-warning);
+      background-color: $warning-bg;
+      border-color: $warning-border;
+    }
+    &.easy-tag--plain {
+      color: var(--el-color-warning);
+      background-color: transparent;
+      border-color: var(--el-color-warning);
+    }
+    &.easy-tag--dark {
+      color: #fff;
+      background-color: var(--el-color-warning);
+      border-color: var(--el-color-warning);
+    }
+  }
+  /* --- danger --- */
+  &.easy-tag--danger {
+    &.easy-tag--light {
+      color: var(--el-color-danger);
+      background-color: rgba(255, 59, 48, 0.1);
+      border-color: rgba(255, 59, 48, 0.25);
+    }
+    &.easy-tag--plain {
+      color: var(--el-color-danger);
+      background-color: transparent;
+      border-color: var(--el-color-danger);
+    }
+    &.easy-tag--dark {
+      color: #fff;
+      background-color: var(--el-color-danger);
+      border-color: var(--el-color-danger);
+    }
+  }
+  /* --- info --- */
+  &.easy-tag--info {
+    &.easy-tag--light {
+      color: var(--el-color-info);
+      background-color: $info-bg;
+      border-color: $info-border;
+    }
+    &.easy-tag--plain {
+      color: var(--el-color-info);
+      background-color: transparent;
+      border-color: var(--el-color-info);
+    }
+    &.easy-tag--dark {
+      color: #fff;
+      background-color: var(--el-color-info);
+      border-color: var(--el-color-info);
+    }
+  }
+}
+
+.easy-tag__text {
+  line-height: 1;
+}

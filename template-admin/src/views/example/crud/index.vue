@@ -228,31 +228,14 @@ onMounted(fetchTableData)
 <template>
   <div class="crud-example">
     <!-- 搜索区域 -->
-    <EasySearchForm
-      :items="searchItems"
-      :model-value="searchData"
-      :show-expand-button="false"
-      @search="handleSearch"
-      @reset="handleReset"
-    />
+    <EasySearchForm :items="searchItems" :model-value="searchData" :show-expand-button="false" @search="handleSearch"
+      @reset="handleReset" />
 
     <!-- 表格区域 -->
-    <EasyTable
-      :data="tableData"
-      :columns="tableColumns"
-      :loading="tableLoading"
-      :total="total"
-      :page="pagination.page"
-      :page-size="pagination.pageSize"
-      show-index
-      show-refresh
-      show-page-size
-      pagination-position="right"
-      style="margin-top: 16px"
-      @refresh="fetchTableData"
-      @page-change="handlePageChange"
-      @page-size-change="handlePageSizeChange"
-    >
+    <EasyTable :data="tableData" :columns="tableColumns" :loading="tableLoading" :total="total" :page="pagination.page"
+      :page-size="pagination.pageSize" show-index show-refresh show-page-size pagination-position="right"
+      style="margin-top: 16px" @refresh="fetchTableData" @page-change="handlePageChange"
+      @page-size-change="handlePageSizeChange">
       <template #toolbar>
         <EasyButton type="primary" size="small" @click="openAddModal">
           新增
@@ -278,14 +261,8 @@ onMounted(fetchTableData)
     </EasyTable>
 
     <!-- 新增/编辑弹窗 -->
-    <EasyModal
-      v-model="formModal.visible"
-      :title="formModal.isEdit ? '编辑用户' : '新增用户'"
-      width="520px"
-      :confirm-loading="formModal.loading"
-      @confirm="handleFormSubmit"
-      @cancel="formModal.visible = false"
-    >
+    <EasyModal v-model="formModal.visible" :title="formModal.isEdit ? '编辑用户' : '新增用户'" width="520px"
+      :confirm-loading="formModal.loading" @confirm="handleFormSubmit" @cancel="formModal.visible = false">
       <EasyForm ref="formRef" :model="formData" :rules="formRules" label-width="80px">
         <EasyFormItem label="用户名" prop="name">
           <EasyInput v-model="formData.name" placeholder="请输入用户名" />

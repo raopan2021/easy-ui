@@ -96,13 +96,8 @@ watch(
 
 <template>
   <aside class="sidebar">
-    <el-menu
-      :default-active="activeMenu"
-      :default-openeds="openedMenus"
-      unique-opened
-      class="sidebar-menu"
-      @select="handleSelect"
-    >
+    <el-menu :default-active="activeMenu" :default-openeds="openedMenus" unique-opened class="sidebar-menu"
+      @select="handleSelect">
       <template v-for="item in menuList" :key="item.id">
         <!-- 根级叶子节点（首页等） -->
         <el-menu-item v-if="!item.children?.length" :index="item.path || item.id">

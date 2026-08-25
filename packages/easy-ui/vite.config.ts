@@ -1,4 +1,4 @@
-import type { Plugin } from 'vite'
+import type { Plugin } from 'vite-plus'
 import { readdir, stat } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -12,7 +12,7 @@ import gradient from 'gradient-string'
  * - dist/index.mjs（主入口 ESM）+ dist/index.css（全量样式）
  * - dist/file-preview.mjs / dist/flow-designer.mjs（重型组件独立子入口）
  */
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vite-plus'
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
@@ -118,7 +118,7 @@ const external = [
  *   `Unknown file extension ".css"`（vite 加载 config 时即触发）。
  */
 function isExternal(id: string): boolean {
-  if (/\.(css|scss|sass|less|svg|png|jpe?g|gif|webp|woff2?)$/.test(id))
+  if (/\.(?:css|scss|sass|less|svg|png|jpe?g|gif|webp|woff2?)$/.test(id))
     return false
   return external.includes(id)
     || /^@logicflow\//.test(id)

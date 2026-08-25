@@ -205,7 +205,7 @@ function handleDelete(item) {
 /** 收藏历史记录 */
 function handleCollect(item) {
   let searchHistoryList = getStorageItem(LOCALEHISTORYKEY)
-  let searchCollectList = getStorageItem(LOCALECOLLECTKEY)
+  const searchCollectList = getStorageItem(LOCALECOLLECTKEY)
   searchHistoryList = searchHistoryList.filter(
     historyItem => historyItem.path !== item.path,
   )
@@ -238,7 +238,7 @@ function saveHistory() {
 
 /** 更新存储的搜索记录 */
 function updateHistory() {
-  let searchHistoryList = getStorageItem(LOCALEHISTORYKEY)
+  const searchHistoryList = getStorageItem(LOCALEHISTORYKEY)
   const historyIndex = searchHistoryList.findIndex(
     item => item.path === historyPath.value,
   )
@@ -290,42 +290,18 @@ onKeyStroke('ArrowDown', handleDown)
     @opened="inputRef.focus()"
     @closed="inputRef.blur()"
   >
-    <el-input
-      ref="inputRef"
-      v-model="keyword"
-      size="large"
-      clearable
-      placeholder="搜索菜单（支持拼音搜索）"
-      @input="handleSearch"
-    >
+    <el-input ref="inputRef" v-model="keyword" size="large" clearable placeholder="搜索菜单（支持拼音搜索）" @input="handleSearch">
       <template #prefix>
-        <PureIcon
-          :icon="SearchIcon"
-          :size="24"
-          class="text-primary"
-        />
+        <PureIcon :icon="SearchIcon" :size="24" class="text-primary" />
       </template>
     </el-input>
     <div class="search-content">
       <el-scrollbar ref="scrollbarRef" max-height="calc(90vh - 140px)">
         <el-empty v-if="showEmpty" description="暂无搜索结果" />
-        <SearchHistory
-          v-if="showSearchHistory"
-          ref="historyRef"
-          v-model:value="historyPath"
-          :options="historyOptions"
-          @click="handleEnter"
-          @delete="handleDelete"
-          @collect="handleCollect"
-          @drag="handleDrag"
-        />
-        <SearchResult
-          v-if="showSearchResult"
-          ref="resultRef"
-          v-model:value="activePath"
-          :options="resultOptions"
-          @click="handleEnter"
-        />
+        <SearchHistory v-if="showSearchHistory" ref="historyRef" v-model:value="historyPath" :options="historyOptions"
+          @click="handleEnter" @delete="handleDelete" @collect="handleCollect" @drag="handleDrag" />
+        <SearchResult v-if="showSearchResult" ref="resultRef" v-model:value="activePath" :options="resultOptions"
+          @click="handleEnter" />
       </el-scrollbar>
     </div>
     <template #footer>

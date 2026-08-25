@@ -117,10 +117,8 @@ function resolvePath(routePath) {
         && (!onlyOneChild.children || onlyOneChild.noShowingChildren)
     " :to="item"
   >
-    <el-menu-item
-      :index="resolvePath(onlyOneChild.path)" :class="{ 'submenu-title-noDropdown': !isNest }"
-      :style="getNoDropdownStyle" v-bind="attrs"
-    >
+    <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{ 'submenu-title-noDropdown': !isNest }"
+      :style="getNoDropdownStyle" v-bind="attrs">
       <div v-if="toRaw(item.meta.icon)" class="sub-menu-icon" :style="getSubMenuIconStyle">
         <component
           :is="useRenderIcon(
@@ -185,9 +183,7 @@ function resolvePath(routePath) {
       <SidebarExtraIcon v-if="!isCollapse" :extra-icon="item.meta.extraIcon" />
     </template>
 
-    <sidebar-item
-      v-for="child in item.children" :key="child.path" :is-nest="true" :item="child"
-      :base-path="resolvePath(child.path)" class="nest-menu"
-    />
+    <sidebar-item v-for="child in item.children" :key="child.path" :is-nest="true" :item="child"
+      :base-path="resolvePath(child.path)" class="nest-menu" />
   </el-sub-menu>
 </template>

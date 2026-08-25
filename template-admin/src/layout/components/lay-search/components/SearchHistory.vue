@@ -150,11 +150,8 @@ defineExpose({ handleScroll })
       <div :style="titleStyle">
         搜索历史
       </div>
-      <div
-        v-for="(item, index) in historyList" :key="item.path" :ref="`historyItemRef${index}`"
-        class="history-item dark:bg-[#1d1d1d]" :style="itemStyle(item)" @click="handleTo"
-        @mouseenter="handleMouse(item)"
-      >
+      <div v-for="(item, index) in historyList" :key="item.path" :ref="`historyItemRef${index}`"
+        class="history-item dark:bg-[#1d1d1d]" :style="itemStyle(item)" @click="handleTo" @mouseenter="handleMouse(item)">
         <SearchHistoryItem :item="item" @delete-item="handleDelete" @collect-item="handleCollect" />
       </div>
     </template>
@@ -163,11 +160,9 @@ defineExpose({ handleScroll })
         {{ `收藏${collectList.length > 1 ? "（可拖拽排序）" : ""}` }}
       </div>
       <div class="collect-container">
-        <div
-          v-for="(item, index) in collectList" :key="item.path"
-          :ref="`historyItemRef${index + historyList.length}`" class="history-item dark:bg-[#1d1d1d]"
-          :style="itemStyle(item)" @click="handleTo" @mouseenter="handleMouse(item)"
-        >
+        <div v-for="(item, index) in collectList" :key="item.path" :ref="`historyItemRef${index + historyList.length}`"
+          class="history-item dark:bg-[#1d1d1d]" :style="itemStyle(item)" @click="handleTo"
+          @mouseenter="handleMouse(item)">
           <SearchHistoryItem :item="item" @delete-item="handleDelete" />
         </div>
       </div>

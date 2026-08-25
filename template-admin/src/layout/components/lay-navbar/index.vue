@@ -29,17 +29,10 @@ const { bool: modifyPasswordVisible, setTrue: openModifyPassword } = useBoolean(
 
 <template>
   <div class="navbar bg-[#fff] shadow-xs shadow-[rgba(0,21,41,0.08)]">
-    <LaySidebarTopCollapse
-      v-if="device === 'mobile'"
-      class="hamburger-container"
-      :is-active="pureApp.sidebar.opened"
-      @toggle-click="toggleSideBar"
-    />
+    <LaySidebarTopCollapse v-if="device === 'mobile'" class="hamburger-container" :is-active="pureApp.sidebar.opened"
+      @toggle-click="toggleSideBar" />
 
-    <LaySidebarBreadCrumb
-      v-if="layout !== 'mix' && device !== 'mobile'"
-      class="breadcrumb-container"
-    />
+    <LaySidebarBreadCrumb v-if="layout !== 'mix' && device !== 'mobile'" class="breadcrumb-container" />
 
     <LayNavMix v-if="layout === 'mix'" />
 
@@ -53,13 +46,8 @@ const { bool: modifyPasswordVisible, setTrue: openModifyPassword } = useBoolean(
       <!-- 退出登录 -->
       <el-dropdown trigger="click">
         <span class="el-dropdown-link navbar-bg-hover select-none">
-          <img
-            :src="userAvatar"
-            :style="avatarsStyle"
-            :alt="username ? `${username}的头像` : '用户头像'"
-            width="22"
-            height="22"
-          >
+          <img :src="userAvatar" :style="avatarsStyle" :alt="username ? `${username}的头像` : '用户头像'" width="22"
+            height="22">
           <p v-if="username" class="dark:text-white">{{ username }}</p>
         </span>
         <template #dropdown>
@@ -71,21 +59,13 @@ const { bool: modifyPasswordVisible, setTrue: openModifyPassword } = useBoolean(
               修改密码
             </el-dropdown-item>
             <el-dropdown-item @click="logout">
-              <SvgIcon
-                name="logout"
-                :size="16"
-                style="margin-right: 5px"
-              />
+              <SvgIcon name="logout" :size="16" style="margin-right: 5px" />
               退出系统
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
-      <span
-        class="set-icon navbar-bg-hover"
-        title="打开系统配置"
-        @click="onPanel"
-      >
+      <span class="set-icon navbar-bg-hover" title="打开系统配置" @click="onPanel">
         <PureIcon :icon="Setting" :size="20" />
       </span>
 
