@@ -7,7 +7,6 @@ import { ElMessage } from 'element-plus'
 
 // 菜单配置类型
 export interface MenuItem {
-  id: string
   name: string
   key: string
   icon?: string
@@ -116,8 +115,8 @@ export function resolveComponent(component: string): (() => Promise<Component>) 
  */
 export function flattenMenu(data: MenuItem[]): MenuItem[] {
   return data.map(item => ({
-    id: item.id,
     name: item.name,
+    key: item.key || item.path || '',
     icon: item.icon,
     path: item.path,
     active: false,

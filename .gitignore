@@ -44,3 +44,4 @@ t.json
 *.timestamp-*-*.mjs
 
 .codebuddy
+.workbuddy

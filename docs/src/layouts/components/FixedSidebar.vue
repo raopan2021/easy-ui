@@ -16,8 +16,8 @@ const activeMenu = ref('')
 const openedMenus = ref<string[]>([])
 
 /**
- * 递归查找从根到 targetPath 的祖先 id 链
- * 返回所有需要展开的 sub-menu id 列表
+ * 递归查找从根到 targetPath 的祖先 key 链
+ * 返回所有需要展开的 sub-menu key 列表
  */
 function findAncestors(items: MenuItem[], targetPath: string, ancestors: string[] = []): string[] | null {
   for (const item of items) {
@@ -25,7 +25,7 @@ function findAncestors(items: MenuItem[], targetPath: string, ancestors: string[
       return ancestors
     }
     if (item.children?.length) {
-      const result = findAncestors(item.children, targetPath, [...ancestors, item.id])
+      const result = findAncestors(item.children, targetPath, [...ancestors, item.key])
       if (result !== null)
         return result
     }
@@ -40,10 +40,10 @@ function updateActiveByPath(path: string) {
   openedMenus.value = [...(findAncestors(menuList.value, path) ?? [])]
 }
 
-/** 根据 index（path 或 id）递归查找 MenuItem */
+/** 根据 index（path 或 key）递归查找 MenuItem */
 function findItemByIndex(items: MenuItem[], index: string): MenuItem | null {
   for (const item of items) {
-    if (item.path === index || item.id === index)
+    if (item.path === index || item.key === index)
       return item
     if (item.children?.length) {
       const found = findItemByIndex(item.children, index)

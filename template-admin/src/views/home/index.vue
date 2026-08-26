@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import {
+  Brush,
+  Cpu,
   DataLine,
   Document,
   EditPen,
   Grid,
   List,
-  Setting,
+  Lock,
+  MagicStick,
+  Picture,
   Switch,
 } from '@element-plus/icons-vue'
 /**
@@ -72,25 +76,39 @@ const cards = [
     route: '/example/markdown',
   },
   {
-    title: '菜单配置',
-    desc: '路由模块位于 src/router/modules',
-    icon: Grid,
+    title: '图片压缩',
+    desc: '基于 compressorjs 的批量压缩与前后对比预览',
+    icon: Picture,
     color: '#e6a23c',
-    route: '',
+    route: '/example/image-compressor',
+  },
+]
+
+// ==================== 项目介绍 ====================
+const introList = [
+  {
+    title: '开箱即用',
+    desc: '内置 CRUD、搜索表单、登录鉴权、多标签页等后台高频模块，省去重复搭建，直接聚焦业务。',
+    icon: MagicStick,
+    color: '#409eff',
   },
   {
-    title: 'API Mock',
-    desc: '接口示例位于 src/api/example',
-    icon: DataLine,
+    title: '丰富组件',
+    desc: '集成 EasyUI 扩展组件库与 Element Plus，覆盖表格、表单、业务组件等大量开箱即用的场景。',
+    icon: Cpu,
+    color: '#67c23a',
+  },
+  {
+    title: '主题定制',
+    desc: '内置暗黑模式与布局配置面板，支持配色、菜单风格等一键切换，轻松适配不同品牌。',
+    icon: Brush,
+    color: '#e6a23c',
+  },
+  {
+    title: '权限控制',
+    desc: '基于角色的菜单与按钮级权限管理，配合动态路由实现按需加载，保障系统安全。',
+    icon: Lock,
     color: '#f56c6c',
-    route: '',
-  },
-  {
-    title: '系统设置',
-    desc: '点击右上角齿轮打开布局配置',
-    icon: Setting,
-    color: '#909399',
-    route: '',
   },
 ]
 
@@ -99,7 +117,7 @@ const stackList = [
   { name: 'Vue 3', desc: 'Composition API + <script setup>', icon: Document },
   { name: 'TypeScript', desc: '类型安全的开发体验', icon: Switch },
   { name: 'Element Plus', desc: '基础 UI 组件库', icon: Grid },
-  { name: 'EasyUI', desc: '扩展组件库（表格/搜索表单等）', icon: DataLine },
+  { name: 'EasyUI', desc: '扩展组件库（表格/搜索表单/markdown/富文本/图片压缩等）', icon: DataLine },
 ]
 </script>
 
@@ -135,6 +153,31 @@ const stackList = [
         </div>
         <div class="card-desc">
           {{ card.desc }}
+        </div>
+      </div>
+    </div>
+
+    <!-- 项目介绍 -->
+    <div class="section-title">
+      项目介绍
+    </div>
+    <p class="intro-desc">
+      EasyUI Admin 是一套基于 Vue 3 + TypeScript + Element Plus 的中后台管理模板，主打"少写样板、多写业务"。
+      它把中后台开发中最常见的列表、表单、权限、布局等能力预置为标准化模块，并深度集成 EasyUI 扩展组件库，
+      让你在最短时间内搭建出结构清晰、风格统一、可维护的管理系统。无论是内部工具、SaaS 后台还是数据看板，都能以它为底座快速演进。
+    </p>
+    <div class="intro">
+      <div v-for="item in introList" :key="item.title" class="intro-item">
+        <el-icon :size="22" :color="item.color">
+          <component :is="item.icon" />
+        </el-icon>
+        <div>
+          <div class="intro-name">
+            {{ item.title }}
+          </div>
+          <div class="intro-text">
+            {{ item.desc }}
+          </div>
         </div>
       </div>
     </div>
@@ -213,7 +256,7 @@ const stackList = [
 
   .cards {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 16px;
 
     .card {
@@ -242,6 +285,48 @@ const stackList = [
         font-size: 13px;
         color: var(--app-text-secondary);
         line-height: 1.5;
+      }
+    }
+  }
+
+  .intro-desc {
+    margin: 0 0 16px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--app-text-secondary);
+  }
+
+  .intro {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+
+    .intro-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 18px 20px;
+      border-radius: 10px;
+      background: var(--app-card-bg);
+      box-shadow: var(--app-card-shadow-sm);
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--app-card-shadow-lg);
+      }
+
+      .intro-name {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--app-text-primary);
+        margin-bottom: 4px;
+      }
+
+      .intro-text {
+        font-size: 13px;
+        color: var(--app-text-secondary);
+        line-height: 1.6;
       }
     }
   }

@@ -75,6 +75,9 @@ catalogs:
     boxen:
       specifier: ^8.0.1
       version: 8.0.1
+    compressorjs:
+      specifier: ^1.3.0
+      version: 1.3.0
     cropperjs:
       specifier: 1.6.2
       version: 1.6.2
@@ -257,6 +260,9 @@ importers:
       boxen:
         specifier: 'catalog:'
         version: 8.0.1
+      compressorjs:
+        specifier: 'catalog:'
+        version: 1.3.0
       cropperjs:
         specifier: 'catalog:'
         version: 1.6.2
@@ -599,6 +605,9 @@ importers:
       axios:
         specifier: ^1.4.0
         version: 1.19.0(debug@4.4.3(supports-color@8.1.1))(supports-color@8.1.1)
+      compressorjs:
+        specifier: ^1.3.0
+        version: 1.3.0
       cropperjs:
         specifier: 1.6.2
         version: 1.6.2
@@ -2990,6 +2999,9 @@ packages:
   birpc@4.0.0:
     resolution: {integrity: sha512-LShSxJP0KTmd101b6DRyGBj57LZxSDYWKitQNW/mi8GRMvZb078Uf9+pveax1DrVL89vm7mWe+TovdI/UDOuPw==}
 
+  blueimp-canvas-to-blob@3.29.0:
+    resolution: {integrity: sha512-0pcSSGxC0QxT+yVkivxIqW0Y4VlO2XSDPofBAqoJ1qJxgH9eiUDLv50Rixij2cDuEfx4M6DpD9UGZpRhT5Q8qg==}
+
   boolbase@1.0.0:
     resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
 
@@ -3113,6 +3125,9 @@ packages:
   comment-parser@1.4.7:
     resolution: {integrity: sha512-0h+uSNtQGW3D98eQt3jJ8L06Fves8hncB4V/PKdw/Qb8Hnk19VaKuTr55UNRYiSoVa7WwrFls+rh3ux9agmkeQ==}
     engines: {node: '>= 12.0.0'}
+
+  compressorjs@1.3.0:
+    resolution: {integrity: sha512-TsvzkRgDm/6mIRUdxJbrTH7kfSW3oJzOw8b1xU60fziQSosTML5TczpO6Z4H1LGF0yRmTotk6r5UNhuRxEwA1A==}
 
   compute-scroll-into-view@1.0.20:
     resolution: {integrity: sha512-UCB0ioiyj8CRjtrvaceBLqqhZCVP+1B8+NWQhmdsm0VXOJtobBCf1dBQmebCCo34qZmUwZfIH2MZLqNHazrfjg==}
@@ -4052,6 +4067,10 @@ packages:
   internmap@2.0.3:
     resolution: {integrity: sha512-5Hh7Y1wQbvY5ooGgPbDaL5iYLAPzMTUrjMulskHLH6wnv/A+1q5rgEaiuqEjB+oxGXIVZs1FF+R/KPN3ZSQYYg==}
     engines: {node: '>=12'}
+
+  is-blob@2.1.0:
+    resolution: {integrity: sha512-SZ/fTft5eUhQM6oF/ZaASFDEdbFVe89Imltn9uZr03wdKMcWNVYSMjQPFtg05QuNkt5l5c135ElvXEQG0rk4tw==}
+    engines: {node: '>=6'}
 
   is-builtin-module@5.0.0:
     resolution: {integrity: sha512-f4RqJKBUe5rQkJ2eJEJBXSticB3hGbN9j0yxxMQFqIW89Jp9WYFtzfTcRlstDKVUTRzSOTLKRfO9vIztenwtxA==}
@@ -8052,6 +8071,8 @@ snapshots:
 
   birpc@4.0.0: {}
 
+  blueimp-canvas-to-blob@3.29.0: {}
+
   boolbase@1.0.0: {}
 
   boxen@8.0.1:
@@ -8164,6 +8185,11 @@ snapshots:
   commander@8.3.0: {}
 
   comment-parser@1.4.7: {}
+
+  compressorjs@1.3.0:
+    dependencies:
+      blueimp-canvas-to-blob: 3.29.0
+      is-blob: 2.1.0
 
   compute-scroll-into-view@1.0.20: {}
 
@@ -9234,6 +9260,8 @@ snapshots:
   internmap@1.0.1: {}
 
   internmap@2.0.3: {}
+
+  is-blob@2.1.0: {}
 
   is-builtin-module@5.0.0:
     dependencies:

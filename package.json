@@ -49,6 +49,7 @@
     "@wangeditor/editor-for-vue": "catalog:",
     "axios": "catalog:",
     "boxen": "catalog:",
+    "compressorjs": "catalog:",
     "cropperjs": "catalog:",
     "crypto-js": "catalog:",
     "docx": "catalog:",

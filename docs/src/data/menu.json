@@ -1,6 +1,5 @@
 [
   {
-    "id": "1",
     "name": "首页",
     "key": "home",
     "icon": "HomeFilled",
@@ -8,104 +7,89 @@
     "component": "home/home"
   },
   {
-    "id": "2",
     "name": "基础组件",
     "key": "basic",
     "icon": "Grid",
     "children": [
       {
-        "id": "2-1",
         "name": "按钮 Button",
         "key": "button",
         "path": "/basic/button",
         "component": "basic/button"
       },
       {
-        "id": "2-2",
         "name": "图标 Icon",
         "key": "icon",
         "path": "/basic/icon",
         "component": "basic/icon"
       },
       {
-        "id": "2-3",
         "name": "标签 Tag",
         "key": "tag",
         "path": "/basic/tag",
         "component": "basic/tag"
       },
       {
-        "id": "2-4",
         "name": "分割线 Divider",
         "key": "divider",
         "path": "/basic/divider",
         "component": "basic/divider"
       },
       {
-        "id": "2-5",
         "name": "头像 Avatar",
         "key": "avatar",
         "path": "/basic/avatar",
         "component": "basic/avatar"
       },
       {
-        "id": "2-6",
         "name": "卡片 Card",
         "key": "card",
         "path": "/basic/card",
         "component": "basic/card"
       },
       {
-        "id": "2-7",
         "name": "信息卡片 InfoCard",
         "key": "info-card",
         "path": "/basic/info-card",
         "component": "basic/info-card"
       },
       {
-        "id": "2-8",
         "name": "水印 Watermark",
         "key": "watermark",
         "path": "/basic/watermark",
         "component": "basic/watermark"
       },
       {
-        "id": "2-9",
         "name": "轮播 Carousel",
         "key": "carousel",
         "path": "/basic/carousel",
         "component": "basic/carousel"
       },
       {
-        "id": "2-10",
         "name": "空状态 Empty",
         "key": "empty",
         "path": "/basic/empty",
         "component": "basic/empty"
       },
       {
-        "id": "2-11",
         "name": "徽标 Badge",
         "key": "badge",
         "path": "/basic/badge",
         "component": "basic/badge"
       },
       {
-        "id": "2-12",
         "name": "列表 List",
         "key": "list",
         "path": "/basic/list",
         "component": "basic/list"
       },
       {
-        "id": "2-13",
         "name": "CRUD 完整示例",
         "key": "crud-demo",
         "path": "/basic/crud-demo",
         "component": "basic/crud-demo"
       },
       {
-        "id": "2-14",
         "name": "菜单使用指南",
         "key": "menu-doc",
         "path": "/basic/menu-doc",
@@ -114,146 +98,125 @@
     ]
   },
   {
-    "id": "6",
     "name": "数据展示",
     "key": "data",
     "icon": "DataAnalysis",
     "children": [
       {
-        "id": "6-1",
         "name": "表格 Table",
         "key": "table",
         "path": "/data/table",
         "component": "data/table"
       },
       {
-        "id": "6-2",
         "name": "图表 Chart",
         "key": "chart",
         "path": "/data/chart",
         "component": "data/chart"
       },
       {
-        "id": "6-3",
         "name": "统计数值 Statistic",
         "key": "statistic",
         "path": "/data/statistic",
         "component": "data/statistic"
       },
       {
-        "id": "6-4",
         "name": "描述列表 Descriptions",
         "key": "descriptions",
         "path": "/data/descriptions",
         "component": "data/descriptions"
       },
       {
-        "id": "6-5",
         "name": "图片 Image",
         "key": "image",
         "path": "/data/image",
         "component": "data/image"
       },
       {
-        "id": "6-6",
         "name": "时间线 Timeline",
         "key": "timeline",
         "path": "/data/timeline",
         "component": "data/timeline"
       },
       {
-        "id": "6-7",
         "name": "视频 Video",
         "key": "video",
         "path": "/data/video",
         "component": "data/video"
       },
       {
-        "id": "6-8",
         "name": "中国地图 ChinaMap",
         "key": "china-map",
         "path": "/data/china-map",
         "component": "data/china-map"
       },
       {
-        "id": "6-9",
         "name": "文件预览 FilePreview",
         "key": "file-preview",
         "path": "/data/file-preview",
         "component": "data/file-preview"
       },
       {
-        "id": "6-10",
         "name": "JSON 查看器 JsonViewer",
         "key": "json-viewer",
         "path": "/data/json-viewer",
         "component": "data/json-viewer"
       },
       {
-        "id": "6-11",
         "name": "部门树 DeptTree",
         "key": "dept-tree",
         "path": "/data/dept-tree",
         "component": "data/dept-tree"
       },
       {
-        "id": "6-12",
         "name": "思维导图 TreeChart",
         "key": "tree-chat",
         "path": "/data/tree-chart",
         "component": "data/tree-chart"
       },
       {
-        "id": "6-13",
         "name": "甘特图 Gantt",
         "key": "gantt",
         "path": "/data/gantt",
         "component": "data/gantt"
       },
       {
-        "id": "6-14",
         "name": "拓扑图 Topology",
         "key": "topology",
         "path": "/data/topology",
         "component": "data/topology"
       },
       {
-        "id": "6-15",
         "name": "日历视图 Calendar",
         "key": "calendar",
         "path": "/data/calendar",
         "component": "data/calendar"
       },
       {
-        "id": "6-16",
         "name": "PDF 签名 PdfSign",
         "key": "pdf-sign",
         "path": "/data/pdf-sign",
         "component": "data/pdf-sign"
       },
       {
-        "id": "6-17",
         "name": "流程设计 FlowDesign",
         "key": "flow-design",
         "path": "/data/flow-design",
         "component": "data/flow-design"
       },
       {
-        "id": "6-18",
         "name": "二维码 Qrcode",
         "key": "qrcode",
         "path": "/data/qrcode",
         "component": "data/qrcode"
       },
       {
-        "id": "6-19",
         "name": "条码 Barcode",
         "key": "barcode",
         "path": "/data/barcode",
         "component": "data/barcode"
       },
       {
-        "id": "6-20",
         "name": "图片裁剪 ImageCropper",
         "key": "image-cropper",
         "path": "/data/image-cropper",
@@ -262,27 +225,23 @@
     ]
   },
   {
-    "id": "7",
     "name": "导航组件",
     "key": "nav",
     "icon": "Guide",
     "children": [
       {
-        "id": "7-1",
         "name": "选项卡 Tabs",
         "key": "tabs",
         "path": "/nav/tabs",
         "component": "nav/tabs"
       },
       {
-        "id": "7-2",
         "name": "步骤条 Steps",
         "key": "steps",
         "path": "/nav/steps",
         "component": "nav/steps"
       },
       {
-        "id": "7-3",
         "name": "下拉菜单 Dropdown",
         "key": "dropdown",
         "path": "/nav/dropdown",
@@ -291,139 +250,119 @@
     ]
   },
   {
-    "id": "4",
     "name": "表单组件",
     "key": "form",
     "icon": "Document",
     "children": [
       {
-        "id": "4-1",
         "name": "输入框 Input",
         "key": "input",
         "path": "/form/input",
         "component": "form/input"
       },
       {
-        "id": "4-2",
         "name": "下拉选择 Select",
         "key": "select",
         "path": "/form/select",
         "component": "form/select"
       },
       {
-        "id": "4-3",
         "name": "单选框 Radio",
         "key": "radio",
         "path": "/form/radio",
         "component": "form/radio"
       },
       {
-        "id": "4-4",
         "name": "级联选择 Cascader",
         "key": "cascader",
         "path": "/form/cascader",
         "component": "form/cascader"
       },
       {
-        "id": "4-5",
         "name": "评分 Rate",
         "key": "rate",
         "path": "/form/rate",
         "component": "form/rate"
       },
       {
-        "id": "4-6",
         "name": "开关 Switch",
         "key": "switch",
         "path": "/form/switch",
         "component": "form/switch"
       },
       {
-        "id": "4-7",
         "name": "日期选择 DatePicker",
         "key": "date-picker",
         "path": "/form/date-picker",
         "component": "form/date-picker"
       },
       {
-        "id": "4-8",
         "name": "时间选择 TimePicker",
         "key": "time-picker",
         "path": "/form/time-picker",
         "component": "form/time-picker"
       },
       {
-        "id": "4-9",
         "name": "日期时间 DateTimePicker",
         "key": "date-time-picker",
         "path": "/form/date-time-picker",
         "component": "form/date-time-picker"
       },
       {
-        "id": "4-10",
         "name": "搜索组件 SearchForm",
         "key": "search-form",
         "path": "/form/searchForm",
         "component": "form/search-form"
       },
       {
-        "id": "4-11",
         "name": "范围选择器 RangePicker",
         "key": "range-picker",
         "path": "/form/range-picker",
         "component": "form/range-picker"
       },
       {
-        "id": "4-12",
         "name": "图片上传 Upload",
         "key": "image-upload",
         "path": "/form/image-upload",
         "component": "form/image-upload"
       },
       {
-        "id": "4-13",
         "name": "文件上传 FileUpload",
         "key": "file-upload",
         "path": "/form/file-upload",
         "component": "form/file-upload"
       },
       {
-        "id": "4-14",
         "name": "字典选择 DictSelect",
         "key": "dict-select",
         "path": "/form/dict-select",
         "component": "form/dict-select"
       },
       {
-        "id": "4-15",
         "name": "表单 Form",
         "key": "form",
         "path": "/form/form",
         "component": "form/form"
       },
       {
-        "id": "4-16",
         "name": "快速表单 SuperForm",
         "key": "super-form",
         "path": "/form/super-form",
         "component": "form/super-form"
       },
       {
-        "id": "4-17",
         "name": "签名板 Signature",
         "key": "signature",
         "path": "/form/signature",
         "component": "form/signature"
       },
       {
-        "id": "4-18",
         "name": "富文本 RichText",
         "key": "richtext",
         "path": "/form/richtext",
         "component": "form/richtext"
       },
       {
-        "id": "4-19",
         "name": "Markdown 编辑器",
         "key": "markdown",
         "path": "/form/markdown",
@@ -432,55 +371,47 @@
     ]
   },
   {
-    "id": "3",
     "name": "反馈组件",
     "key": "feedback",
     "icon": "Bell",
     "children": [
       {
-        "id": "3-1",
         "name": "弹窗 Modal",
         "key": "modal",
         "path": "/feedback/modal",
         "component": "feedback/modal"
       },
       {
-        "id": "3-2",
         "name": "抽屉 Drawer",
         "key": "drawer",
         "path": "/feedback/drawer",
         "component": "feedback/drawer"
       },
       {
-        "id": "3-3",
         "name": "加载 Loading",
         "key": "loading",
         "path": "/feedback/loading",
         "component": "feedback/loading"
       },
       {
-        "id": "3-4",
         "name": "消息提示 Message",
         "key": "message",
         "path": "/feedback/message",
         "component": "feedback/message"
       },
       {
-        "id": "3-5",
         "name": "消息弹出框 MsgBox",
         "key": "msgbox",
         "path": "/feedback/msgbox",
         "component": "feedback/msgbox"
       },
       {
-        "id": "3-6",
         "name": "操作引导 Tour",
         "key": "tour",
         "path": "/feedback/tour",
         "component": "feedback/tour"
       },
       {
-        "id": "3-7",
         "name": "进度条 Progress",
         "key": "progress",
         "path": "/feedback/progress",
@@ -489,20 +420,17 @@
     ]
   },
   {
-    "id": "5",
     "name": "布局组件",
     "key": "layout",
     "icon": "SetUp",
     "children": [
       {
-        "id": "5-1",
         "name": "栅格布局 Layout",
         "key": "grid",
         "path": "/layout/grid",
         "component": "layout/grid"
       },
       {
-        "id": "5-2",
         "name": "多标签页 WorkTab",
         "key": "worktab",
         "path": "/layout/worktab",
@@ -511,34 +439,35 @@
     ]
   },
   {
-    "id": "8",
     "name": "业务组件",
     "key": "business",
     "icon": "Briefcase",
     "children": [
       {
-        "id": "8-1",
         "name": "权限 Permission",
         "key": "permission",
         "path": "/business/permission",
         "component": "business/permission"
       },
       {
-        "id": "8-2",
         "name": "聊天组件 Chat",
         "key": "chat",
         "path": "/business/chat",
         "component": "business/chat"
       },
       {
-        "id": "8-3",
+        "name": "图片压缩 ImageCompressor",
+        "key": "image-compressor",
+        "path": "/basic/image-compressor",
+        "component": "basic/image-compressor"
+      },
+      {
         "name": "用户选择器 UserPicker",
         "key": "user-picker",
         "path": "/business/user-picker",
         "component": "business/user-picker"
       },
       {
-        "id": "8-4",
         "name": "字典标签 DictTag",
         "key": "dict-tag",
         "path": "/business/dict-tag",
@@ -547,46 +476,39 @@
     ]
   },
   {
-    "id": "9",
     "name": "菜单演示",
     "key": "system",
     "icon": "Tools",
     "children": [
       {
-        "id": "9-1",
         "name": "用户管理",
         "key": "user",
         "path": "/system/user",
         "component": "system/user"
       },
       {
-        "id": "9-2",
         "name": "角色管理",
         "key": "role",
         "path": "/system/role",
         "component": "system/role"
       },
       {
-        "id": "9-3",
         "name": "菜单权限",
         "key": "menu-permission",
         "children": [
           {
-            "id": "9-3-1",
             "name": "功能权限",
             "key": "func-permission",
             "path": "/system/menu-permission/func",
             "component": "system/func-permission"
           },
           {
-            "id": "9-3-2",
             "name": "数据权限",
             "key": "data-permission",
             "path": "/system/menu-permission/data",
             "component": "system/data-permission"
           },
           {
-            "id": "9-3-3",
             "name": "字段权限",
             "key": "field-permission",
             "path": "/system/menu-permission/field",
@@ -595,26 +517,22 @@
         ]
       },
       {
-        "id": "9-4",
         "name": "机构管理",
         "key": "org-management",
         "children": [
           {
-            "id": "9-4-1",
             "name": "部门设置",
             "key": "dept-setting",
             "path": "/system/org-management/dept",
             "component": "system/dept-setting"
           },
           {
-            "id": "9-4-2",
             "name": "岗位设置",
             "key": "post-setting",
             "path": "/system/org-management/post",
             "component": "system/post-setting"
           },
           {
-            "id": "9-4-3",
             "name": "人员管理",
             "key": "person-management",
             "path": "/system/org-management/person",
@@ -623,19 +541,16 @@
         ]
       },
       {
-        "id": "9-5",
         "name": "系统参数",
         "key": "system-param",
         "children": [
           {
-            "id": "9-5-1",
             "name": "参数配置",
             "key": "param-config",
             "path": "/system/system-param/config",
             "component": "system/param-config"
           },
           {
-            "id": "9-5-2",
             "name": "字典管理",
             "key": "dict-management",
             "path": "/system/system-param/dict",
@@ -644,7 +559,6 @@
         ]
       },
       {
-        "id": "9-6",
         "name": "操作日志",
         "key": "oper-log",
         "path": "/system/oper-log",
