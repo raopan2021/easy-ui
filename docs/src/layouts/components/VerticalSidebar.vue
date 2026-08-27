@@ -71,7 +71,7 @@ function handleGrandClick(grand: MenuItem, child: MenuItem, parent: MenuItem) {
 <template>
   <aside class="vertical-sidebar">
     <div class="vertical-sidebar__menu">
-      <div v-for="item in menuList" :key="item.id" class="vertical-sidebar__item">
+      <div v-for="item in menuList" :key="item.key" class="vertical-sidebar__item">
         <!-- 主菜单 -->
         <div
           class="vertical-sidebar__main" :class="{ active: item.active, expanded: item.open }"
@@ -84,7 +84,7 @@ function handleGrandClick(grand: MenuItem, child: MenuItem, parent: MenuItem) {
 
         <!-- 子菜单 -->
         <div v-if="item.children?.length && item.open" class="vertical-sidebar__submenu">
-          <template v-for="child in item.children" :key="child.id">
+          <template v-for="child in item.children" :key="child.key">
             <!-- 有三级菜单 -->
             <div
               v-if="child.children?.length" class="vertical-sidebar__submenu-parent"
@@ -103,7 +103,7 @@ function handleGrandClick(grand: MenuItem, child: MenuItem, parent: MenuItem) {
             <!-- 三级菜单 -->
             <div v-if="child.children?.length && child.open" class="vertical-sidebar__third-menu">
               <div
-                v-for="grand in child.children" :key="grand.id" class="vertical-sidebar__third-menu-item"
+                v-for="grand in child.children" :key="grand.key" class="vertical-sidebar__third-menu-item"
                 :class="{ active: grand.active }" @click.stop="handleGrandClick(grand, child, item)"
               >
                 {{ grand.name }}

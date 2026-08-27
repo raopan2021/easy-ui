@@ -64,7 +64,7 @@ function handleGrandClick(grand: MenuItem, _child: MenuItem) {
 <template>
   <nav class="horizontal-menu">
     <div
-      v-for="item in menuList" :key="item.id" class="horizontal-menu__item" :class="{ active: item.active }"
+      v-for="item in menuList" :key="item.key" class="horizontal-menu__item" :class="{ active: item.active }"
       @click="handleMenuClick(item)" @mouseenter="hoveredItem = item" @mouseleave="hoveredItem = null"
     >
       <EasyIcon v-if="item.icon" class="horizontal-menu__icon" :name="`el:${item.icon}`" />
@@ -74,7 +74,7 @@ function handleGrandClick(grand: MenuItem, _child: MenuItem) {
       <!-- 下拉子菜单 -->
       <Transition name="dropdown">
         <div v-if="item.children?.length && hoveredItem === item" class="horizontal-menu__dropdown" @click.stop>
-          <template v-for="child in item.children" :key="child.id">
+          <template v-for="child in item.children" :key="child.key">
             <!-- 有三级菜单 -->
             <div
               v-if="child.children?.length"
@@ -86,7 +86,7 @@ function handleGrandClick(grand: MenuItem, _child: MenuItem) {
               <!-- 三级菜单 -->
               <div v-if="child.children?.length && hoveredChild === child" class="horizontal-menu__third-dropdown">
                 <div
-                  v-for="grand in child.children" :key="grand.id" class="horizontal-menu__dropdown-item"
+                  v-for="grand in child.children" :key="grand.key" class="horizontal-menu__dropdown-item"
                   :class="{ active: grand.active }" @click.stop="handleGrandClick(grand, child)"
                 >
                   {{ grand.name }}

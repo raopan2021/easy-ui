@@ -100,32 +100,32 @@ watch(
       :default-active="activeMenu" :default-openeds="openedMenus" unique-opened class="sidebar-menu"
       @select="handleSelect"
     >
-      <template v-for="item in menuList" :key="item.id">
+      <template v-for="item in menuList" :key="item.key">
         <!-- 根级叶子节点（首页等） -->
-        <el-menu-item v-if="!item.children?.length" :index="item.path || item.id">
+        <el-menu-item v-if="!item.children?.length" :index="item.path || item.key">
           <EasyIcon v-if="item.icon" :name="`el:${item.icon}`" class="fixed-sidebar__menu-icon" />
           <span>{{ item.name }}</span>
         </el-menu-item>
 
         <!-- 根级分组 -->
-        <el-sub-menu v-else :index="item.id">
+        <el-sub-menu v-else :index="item.key">
           <template #title>
             <EasyIcon v-if="item.icon" :name="`el:${item.icon}`" class="fixed-sidebar__menu-icon" />
             <span>{{ item.name }}</span>
           </template>
 
-          <template v-for="child in item.children" :key="child.id">
+          <template v-for="child in item.children" :key="child.key">
             <!-- 二级叶子 -->
-            <el-menu-item v-if="!child.children?.length" :index="child.path || child.id">
+            <el-menu-item v-if="!child.children?.length" :index="child.path || child.key">
               {{ child.name }}
             </el-menu-item>
 
             <!-- 二级分组（含三级菜单） -->
-            <el-sub-menu v-else :index="child.id">
+            <el-sub-menu v-else :index="child.key">
               <template #title>
                 {{ child.name }}
               </template>
-              <el-menu-item v-for="grand in child.children" :key="grand.id" :index="grand.path || grand.id">
+              <el-menu-item v-for="grand in child.children" :key="grand.key" :index="grand.path || grand.key">
                 {{ grand.name }}
               </el-menu-item>
             </el-sub-menu>

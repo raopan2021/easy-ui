@@ -1,6 +1,5 @@
 export interface MenuItem {
-  id: string
-  key?: string // 用于badge动态更新的唯一标识符
+  key: string // 唯一标识符，菜单渲染、路由匹配、badge 动态更新均依赖此字段（menu.json 中无 id 字段，key 即唯一标识）
   name: string
   icon?: string
   path?: string
