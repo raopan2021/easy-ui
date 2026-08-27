@@ -2,8 +2,10 @@
 # 使其脱离根 monorepo 的 pnpm-workspace.yaml，成为可独立 pnpm install 的分发包。
 allowBuilds:
   esbuild: true
-  node-pty: set this to true or false
   vue-demi: true
+  "@parcel/watcher": true
+  core-js: true
+  node-pty: true
 
 shellEmulator: true
 
